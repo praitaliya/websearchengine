@@ -1,0 +1,3405 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:35:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Elasticsearch Quick Guide</title>
+<meta name="description" content="Elasticsearch Quick Guide - Learn Elasticsearch in simple and easy steps starting from Basic Concepts, Installation, Populate Elasticsearch, Migration between Versions, API Conventions, Document APIs, Search APIs, Aggregations, Index APIs, Cluster APIs, Query DSL, Mapping, Analysis, Modules, Testing." />
+<meta name="keywords" content="Elasticsearch tutorial, Beginners, Basic Concepts, Installation, Populate Elasticsearch, Migration between Versions, API Conventions, Document APIs, Search APIs, Aggregations, Index APIs, Cluster APIs, Query DSL, Mapping, Analysis, Modules, Testing." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #74b73f url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #74b73f !important;}
+.submenu-item{ border-bottom: 2px solid #74b73f !important; border-top: 2px solid #74b73f !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/elasticsearch/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/elasticsearch/images/elastic-search-mini-logo.jpg" alt="Elasticsearch Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Elasticsearch Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/index.htm">Elasticsearch - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_basic_concepts.htm">Elasticsearch - Basic Concepts</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_installation.htm">Elasticsearch - Installation</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_populate.htm">Elasticsearch - Populate</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_migrations_between_versions.htm">Migration between Versions</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_api_conventions.htm">Elasticsearch - API Conventions</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_document_apis.htm">Elasticsearch - Document APIs</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_search_apis.htm">Elasticsearch - Search APIs</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_aggregations.htm">Elasticsearch - Aggregations</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_index_apis.htm">Elasticsearch - Index APIs</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_cluster_apis.htm">Elasticsearch - Cluster APIs</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_query_dsl.htm">Elasticsearch - Query DSL</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_mapping.htm">Elasticsearch - Mapping</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_analysis.htm">Elasticsearch - Analysis</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_modules.htm">Elasticsearch - Modules</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_testing.htm">Elasticsearch - Testing</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Elasticsearch Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm">Elasticsearch - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_useful_resources.htm">Elasticsearch - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_discussion.htm">Elasticsearch - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Elasticsearch - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_testing.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Elasticsearch - Basic Concepts</h1>
+<p>Elasticsearch is an Apache Lucene-based search server. It was developed by Shay Banon and published in 2010. It is now maintained by Elasticsearch BV. Its latest version is 2.1.0.</p>
+<p>Elasticsearch is a real-time distributed and open source full-text search and analytics engine. It is accessible from RESTful web service interface and uses schema less JSON (JavaScript Object Notation) documents to store data. It is built on Java programming language, which enables Elasticsearch to run on different platforms. It enables users to explore very large amount of data at very high speed.</p>
+<h2>Elasticsearch – General Features</h2>
+<p>The general features of Elasticsearch are as follows &minus;</p>
+<ul class="list">
+<li><p>Elasticsearch is scalable up to petabytes of structured and unstructured data.</p></li>
+<li><p>Elasticsearch can be used as a replacement of document stores like MongoDB and RavenDB.</p></li>
+<li><p>Elasticsearch uses denormalization to improve the search performance.</p></li>
+<li><p>Elasticsearch is one of the popular enterprise search engines, which is currently being used by many big organizations like Wikipedia, The Guardian, StackOverflow, GitHub etc.</p></li>
+<li><p>Elasticsearch is open source and available under the Apache license version 2.0.</p></li>
+</ul>
+<h2>Elasticsearch – Key Concepts</h2>
+<p>The key concepts of Elasticsearch are as follows &minus;</p>
+<ul class="list">
+<li><p><b>Node</b> &minus; It refers to a single running instance of Elasticsearch. Single physical and virtual server accommodates multiple nodes depending upon the capabilities of their physical resources like RAM, storage and processing power.</p></li>
+<li><p><b>Cluster</b> &minus; It is a collection of one or more nodes. Cluster provides collective indexing and search capabilities across all the nodes for entire data.</p></li>
+<li><p><b>Index</b> &minus; It is a collection of different type of documents and document properties. Index also uses the concept of shards to improve the performance. For example, a set of document contains data of a social networking application.</p></li>
+<li><p><b>Type/Mapping</b> &minus; It is a collection of documents sharing a set of common fields present in the same index. For example, an Index contains data of a social networking application, and then there can be a specific type for user profile data, another type for messaging data and another for comments data.</p></li>
+<li><p><b>Document</b> &minus; It is a collection of fields in a specific manner defined in JSON format. Every document belongs to a type and resides inside an index. Every document is associated with a unique identifier, called the UID.</p></li>
+<li><p><b>Shard</b> &minus; Indexes are horizontally subdivided into shards. This means each shard contains all the properties of document, but contains less number of JSON objects than index. The horizontal separation makes shard an independent node, which can be store in any node. Primary shard is the original horizontal part of an index and then these primary shards are replicated into replica shards.</p></li>
+<li><p><b>Replicas</b> &minus; Elasticsearch allows a user to create replicas of their indexes and shards. Replication not only helps in increasing the availability of data in case of failure, but also improves the performance of searching by carrying out a parallel search operation in these replicas.</p></li>
+</ul>
+<h2>Elasticsearch – Advantages</h2>
+<ul class="list">
+<li><p>Elasticsearch is developed on Java, which makes it compatible on almost every platform.</p></li>
+<li><p>Elasticsearch is real time, in other words after one second the added document is searchable in this engine.</p></li>
+<li><p>Elasticsearch is distributed, which makes it easy to scale and integrate in any big organization.</p></li>
+<li><p>Creating full backups are easy by using the concept of gateway, which is present in Elasticsearch.</p></li>
+<li><p>Handling multi-tenancy is very easy in Elasticsearch when compared to Apache Solr.</p></li>
+<li><p>Elasticsearch uses JSON objects as responses, which makes it possible to invoke the Elasticsearch server with a large number of different programming languages.</p></li>
+<li><p>Elasticsearch supports almost every document type except those that do not support text rendering.</p></li>
+</ul>
+<h2>Elasticsearch – Disadvantages</h2>
+<ul class="list">
+<li><p>Elasticsearch does not have multi-language support in terms of handling request and response data (only possible in JSON) unlike in Apache Solr, where it is possible in CSV, XML and JSON formats.</p></li>
+<li><p>Elasticsearch also have a problem of Split brain situations, but in rare cases.</p></li>
+</ul>
+<h2>Comparison between Elasticsearch and RDBMS</h2>
+<p>In Elasticsearch, index is a collection of type just as database is a collection of tables in RDBMS (Relation Database Management System). Every table is a collection of rows just as every mapping is a collection of JSON objects Elasticsearch.</p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th width="50%;" style="text-align:center;">Elasticsearch</th>
+<th style="text-align:center;">RDBMS</th>
+</tr>
+<tr>
+<td>Index</td>
+<td>Database</td>
+</tr>
+<tr>
+<td>Shard</td>
+<td>Shard</td>
+</tr>
+<tr>
+<td>Mapping</td>
+<td>Table</td>
+</tr>
+<tr>
+<td>Field</td>
+<td>Field</td>
+</tr>
+<tr>
+<td>JSON Object</td>
+<td>Tuple</td>
+</tr>
+</table>
+<h1>Elasticsearch - Installation</h1>
+<p>The steps for installation of Elasticsearch are as follows &minus;</p>
+<p><b>Step 1</b> &minus; Check the minimum version of your java in installed your computer, it should be java 7 or more updated version. You can check by doing the following &minus;</p>
+<p>In Windows Operating System (OS) (using command prompt) &minus;</p>
+<pre class="result notranslate">
+&gt; java -version
+</pre>
+<p>In UNIX OS (Using Terminal) &minus;</p>
+<pre class="result notranslate">
+$ echo $JAVA_HOME
+</pre>
+<p><b>Step 2</b> &minus; Download Elasticsearch from <a target="_blank" rel="nofollow" href="https://www.elastic.co/downloads/elasticsearch">www.elastic.co</a></p>
+<ul class="list">
+<li>For windows OS download ZIP file.</li>
+<li>For UNIX OS download TAR file.</li>
+<li>For Debian OS download DEB file.</li>
+<li>For Red Hat and other Linux distributions download RPN file.</li>
+<li>APT and Yum utilities can also be used to install Elasticsearch in many Linux distributions.</li>
+</ul>
+<p><b>Step 3</b> &minus; Installation process for Elasticsearch is very easy and described below for different OS &minus;</p>
+<ul class="list">
+<li><p><b>Windows OS</b> &minus; Unzip the zip package and the Elasticsearch is installed.</p></li>
+<li><p><b>UNIX OS</b> &minus; Extract tar file in any location and the Elasticsearch is installed.</p></li>
+</ul>
+<pre class="result notranslate">
+$tar –xvf elasticsearch-2.1.0.tar.gz
+</pre>
+<ul class="list">
+<li><p><b>Using APT utility for Linux OS</b> &minus;</p></li>
+<ul class="list">
+<li><p>Download and install the Public Signing Key &minus;</p></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+$ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+</pre>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p>Save the repository definition &minus;</p></li></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+$ echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc
+   /apt/sources.list.d/elasticsearch-2.x.list
+</pre>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p>Run update &minus;</p></li></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+$ sudo apt-get update
+</pre>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p>Now you can install by using the following command &minus;</p></li></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+$ sudo apt-get install elasticsearch
+</pre>
+<ul class="list">
+<li><p><b>Using YUM utility for Debian Linux OS</b> &minus;</p></li>
+<ul class="list">
+<li><p>Download and install the Public Signing Key &minus;</p></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+$ rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+</pre>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p>ADD the below text in the file with .repo suffix in your “/etc/yum.repos.d/” directory. For example, <b>elasticsearch.repo</b></p></li></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+[elasticsearch-2.x]
+name = Elasticsearch repository for2.x packages
+baseurl = http://packages.elastic.co/elasticsearch/2.x/centos
+gpgcheck = 1
+gpgkey = http://packages.elastic.co/GPG-KEY-elasticsearch
+enabled = 1
+</pre>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p>You can now install Elasticsearch by using the following command &minus;</p></li></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+$ yum install elasticsearch
+</pre>
+<p><b>Step 4</b> &minus; Go to the Elasticsearch home directory and inside the bin folder. Run the elasticsearch.bat file in case of windows or you can do the same using command prompt and through terminal in case of UNIX rum Elasticsearch file.</p>
+<p><b>In Windows</b> &minus;</p>
+<pre class="result notranslate">
+&gt; cd elasticsearch-2.1.0/bin
+&gt; elasticsearch
+</pre>
+<p><b>In Linux</b> &minus;</p>
+<pre class="result notranslate">
+$ cd elasticsearch-2.1.0/bin
+$ ./elasticsearch
+</pre>
+<p><b>Note</b> &minus; in case of windows, you might get error stating JAVA_HOME is not set, please set it in environment variables to “C:\Program Files\Java\jre1.8.0_31” or the location where you installed java.</p>
+<p><b>Step 5</b> &minus; Default port for Elasticsearch web interface is 9200 or you can change it by changing http.port inside elasticsearch.yml file present in bin directory. You can check if the server is up and running by browsing <b>http://localhost:9200</b>. It will return a JSON object, which contains the information about the installed Elasticsearch in the following way &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "name" : "Brain-Child",
+   "cluster_name" : "elasticsearch", "version" : {
+      "number" : "2.1.0",
+      "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
+      "build_timestamp" : "2015-11-18T22:40:03Z",
+      "build_snapshot" : false,
+      "lucene_version" : "5.3.1"
+   },
+   "tagline" : "You Know, for Search"
+}
+</pre>
+<p><b>Step 6</b> &minus; You can install fiddler2 from <a target="_blank" rel="nofollow" href="https://www.telerik.com/download/fiddler">www.telerik.com</a> as a front end for your Elasticsearch.</p>
+<ul class="list">
+<li><p>In the configure window of fiddler2, you can hit the address of Elasticsearch adding an index and if you want, then the type/mapping also using HTTP POST method, for example &minus;</p></li>
+</ul>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p><b>Address bar</b></p></li></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+http://localhost:9200/schools/school
+</pre>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p><b>Request body</b> &minus; You can add JSON object, which will get store into that index.</p>
+</ul>
+</ul>
+<ul class="list">
+<li><p>You can use the same for searching anything by just adding “_search” keyword at the end of URL and sent a query in request body for example &minus;</p></li>
+</ul>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p><b>Address bar</b></p></li></li>
+</ul>
+</ul>
+<pre class="result notranslate">
+POST http://localhost:9200/city/schools/_search
+</pre>
+<ul class="list">
+<ul class="list">
+<li>
+<li><p><b>Request body</b></p>
+<p>{
+   "query":{
+      "match_all":{}
+   }
+}</p>
+<p>This query will return everything from that index, which belongs to that particular type.</p>
+</li></li>
+</ul>
+</ul>
+<ul class="list">
+<li><p>You can delete a particular index or type by just putting the URL of the same in address bar and hit it with HTTP DELETE method.</p></li>
+</ul>
+<h1>Elasticsearch - Populate</h1>
+<p>In this section, we will add some index, mapping and data to Elasticsearch. This data will be used in the examples explained in this tutorial.</p>
+<h2>Create Index</h2>
+<pre class="result notranslate">
+POST http://localhost:9200/schools
+</pre>
+<h3>Request Body</h3>
+<p>It can contain index specific settings, but for now, it is empty for default settings.</p>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged": true}
+</pre>
+<p>(This means index is created)</p>
+<h2>Create Mapping and Add data</h2>
+<p>Elasticsearch will auto-create the mapping according to the data provided in request body, we will use its bulk functionality to add more than one JSON object in this index.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_bulk
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "index":{
+      "_index":"schools", "_type":"school", "_id":"1"
+   }
+}
+{
+   "name":"Central School", "description":"CBSE Affiliation", "street":"Nagan",
+   "city":"paprola", "state":"HP", "zip":"176115", "location":[31.8955385, 76.8380405],
+   "fees":2000, "tags":["Senior Secondary", "beautiful campus"], "rating":"3.5"
+}
+{
+   "index":{
+      "_index":"schools", "_type":"school", "_id":"2"
+   }
+}
+{
+   "name":"Saint Paul School", "description":"ICSE 
+   Afiliation", "street":"Dawarka", "city":"Delhi", "state":"Delhi", "zip":"110075",
+   "location":[28.5733056, 77.0122136], "fees":5000,
+   "tags":["Good Faculty", "Great Sports"], "rating":"4.5"
+}
+{
+   "index":{"_index":"schools", "_type":"school", "_id":"3"}
+}
+{
+   "name":"Crescent School", "description":"State Board Affiliation", "street":"Tonk Road", 
+   "city":"Jaipur", "state":"RJ", "zip":"176114","location":[26.8535922, 75.7923988],
+   "fees":2500, "tags":["Well equipped labs"], "rating":"4.5"
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":328, "errors":false,"items":[
+      {
+         "index":{
+            "_index":"schools", "_type":"school", "_id":"1", "_version":1, "_shards":{
+               "total":2, "successful":1, "failed":0
+            }, "status":201
+         }
+      },
+		
+      {
+         "index":{
+            "_index":"schools", "_type":"school", "_id":"2", "_version":1, "_shards":{
+               "total":2, "successful":1, "failed":0
+            }, "status":201
+         }
+      },
+		
+      {
+         "index":{
+            "_index":"schools", "_type":"school", "_id":"3", "_version":1, "_shards":{
+               "total":2, "successful":1, "failed":0
+            }, "status":201
+         }
+      }
+   ]
+}
+</pre>
+<h2>Add another Index</h2>
+<h3>Create Index</h3>
+<pre class="result notranslate">
+POST http://localhost:9200/schools_gov
+</pre>
+<h3>Request Body</h3>
+<p>It can contain index specific settings, but for now it’s empty for default settings.</p>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged": true} (This means index is created)
+</pre>
+<h2>Create Mapping and Add Data</h2>
+<pre class="result notranslate">
+POST http://localhost:9200/schools_gov/_bulk
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "index":{
+      "_index":"schools_gov", "_type":"school", "_id":"1"
+   }
+}
+{
+   "name":"Model School", "description":"CBSE Affiliation", "street":"silk city",
+   "city":"Hyderabad", "state":"AP", "zip":"500030", "location":[17.3903703, 78.4752129],
+   "fees":200, "tags":["Senior Secondary", "beautiful campus"], "rating":"3"
+}
+{
+   "index":{
+      "_index":"schools_gov", "_type":"school", "_id":"2"
+   }
+}
+{
+   "name":"Government School", "description":"State Board Affiliation",
+   "street":"Hinjewadi", "city":"Pune", "state":"MH", "zip":"411057",
+   "location": [18.599752, 73.6821995], "fees":500, "tags":["Great Sports"], "rating":"4"
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":179, "errors":false, "items":[
+      {
+        "index":{
+           "_index":"schools_gov", "_type":"school", "_id":"1", "_version":1, "_shards":{
+              "total":2, "successful":1, "failed":0
+            }, "status":201
+         }
+      },
+		
+      {
+         "index":{
+            "_index":"schools_gov", "_type":"school", "_id":"2", "_version":1, "_shards":{
+               "total":2, "successful":1, "failed":0
+            }, "status":201
+         }
+      }
+   ]
+}
+</pre>
+<h1>Migration between Versions</h1>
+<p>In any system or software, when we are upgrading to newer version, we need to follow a few steps to maintain the application settings, configurations, data and other things. These steps are required to make the application stable in new system or to maintain the integrity of data (prevent data from getting corrupt).</p>
+<p>The following are the steps to upgrade Elasticsearch &minus;</p>
+<ul class="list">
+<li>Read breaking changes docs from <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking-changes.html" rel="nofollow" target="_blank">https://www.elastic.co/</a></li>
+<li>Test the upgraded version in your non production environments like in UAT, E2E, SIT or DEV environment.</li>
+<li>Rollback to previous Elasticsearch version is not possible without data backup. A data backup is recommended before upgrading to a higher version.</li>
+<li>We can upgrade using full cluster restart or rolling upgrade. Rolling upgrade is for new versions (for 2.x and newer). There is no service outage, when you are using rolling upgrade method for migration.</li>
+</ul>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center;">Old Version</th>
+<th style="text-align:center;">New Version</th>
+<th style="text-align:center;">Upgrading Method</th>
+</tr>
+<tr>
+<td>0.90.x</td>
+<td>2.x</td>
+<td>Full cluster restart</td>
+</tr>
+<tr>
+<td>1.x</td>
+<td>2.x</td>
+<td>Full cluster restart</td>
+</tr>
+<tr>
+<td>2.x</td>
+<td>2.y</td>
+<td>Rolling upgrade (y &gt; x)</td>
+</tr>
+</table>
+<ul class="list">
+<li>Take data backup before migration and follow the instructions to carry out the backup process. The snapshot and restore module can be used to take backup. This module can be used to take a snapshot of index or full cluster and can be stored in remote repository.</li>
+</ul>
+<h2>Snapshot and Restore Module</h2>
+<p>Before starting the backup process, a snapshot repository needs to be registered in Elasticsearch.</p>
+<pre class="prettyprint notranslate">
+PUT /_snapshot/backup1
+{
+   "type": "fs", "settings": {
+      ... repository settings ...
+   }
+}
+</pre>
+<p><b>Note</b> &minus; The above text is a HTTP PUT request to <b>http://localhost:9200/_snapshot/backup1</b> (there can be an IP address of the remote server instead of the localhost). Rest of the text is request body. You can do this easily using fiddler2 and other web tools in Windows.</p>
+<p>We use shared file system (type: fs) for backup; it needs to be registered in every master and data nodes. We just need to add the path.repo variable having path of backup repository as a value.</p>
+<p>After we add the repository path, we need to restart the nodes and then registration can be carried out by executing the following command &minus;</p>
+<pre class="prettyprint notranslate">
+PUT http://localhost:9200/_snapshot/backup1
+{
+   "type": "fs", "settings": {
+      "location": "/mount/backups/backup1", "compress": true
+   }
+}
+</pre>
+<h2>Full Cluster Restart</h2>
+<p>This upgrade process includes the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Disable shard allocation process and turn off the node.</p>
+<pre class="prettyprint notranslate">
+PUT http://localhost:9200/_cluster/settings
+{
+   "persistent": {
+      "cluster.routing.allocation.enable": "none"
+   }
+}
+</pre>
+<p>In case of upgrading 0.90.x to 1.x use the following request &minus;</p>
+<pre class="prettyprint notranslate">
+PUT http://localhost:9200/_cluster/settings
+{
+   "persistent": {
+      "cluster.routing.allocation.disable_allocation": false,
+      "cluster.routing.allocation.enable": "none"
+   }
+}
+</pre>
+<p><b>Step 2</b> &minus; Make a synched flush to Elasticsearch &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/_flush/synced
+</pre>
+<p><b>Step 3</b> &minus; On all nodes, kill all the elastic services.</p>
+<p><b>Step 4</b> &minus; Do the following on every node &minus;</p>
+<ul class="list">
+<li><p><b>In Debian or Red Hat Node</b> &minus; rmp or dpkg can be used to upgrade the node by installing new packages. Do not overwrite config files.</p></li>
+<li><p><b>In Windows (zip file) or UNIX (tar file)</b> &minus; Extract the new version without overwriting the config directory. You can copy the files from old installation or can change path.conf or path.data.</p></li>
+</ul>
+<p><b>Step 5</b> &minus; Initiate the nodes again starting with the master node (nodes with node.master set to true and node.data set to false) in the cluster. Wait for some time to establish a cluster. You can check by monitoring the logs or using the following request &minus;</p>
+<pre class="result notranslate">
+GET _cat/health or http://localhost:9200/_cat/health
+GET _cat/nodes or http://localhost:9200/_cat/health
+</pre>
+<p><b>Step 6</b> &minus; Monitor the progress of formation of cluster by using <b>GET _cat/health</b> request and wait for the yellow in response, the response will be something like this &minus;</p>
+<pre class="result notranslate">
+1451295971 17:46:11 elasticsearch yellow 1 1 5 5 0 0 5 0 - 50.0%
+</pre>
+<p><b>Step 7</b> &minus; Enable the shard allocation process, which was disabled in Step 1, by using the following request &minus;</p>
+<pre class="prettyprint notranslate">
+PUT http://localhost:9200/_cluster/settings
+{
+   "persistent": {
+      "cluster.routing.allocation.enable": "all"
+   }
+}
+</pre>
+<p>In case of upgrading 0.90.x to 1.x, use the following request &minus;</p>
+<pre class="prettyprint notranslate">
+PUT http://localhost:9200/_cluster/settings
+{
+   "persistent": {
+      "cluster.routing.allocation.disable_allocation": true,
+      "cluster.routing.allocation.enable": "all"
+   }
+}
+</pre>
+<h2>Rolling Upgrades</h2>
+<p>It is same like Full cluster restart, except Step 3. Here, you stop one node and upgrade. After upgrading, restart the node and repeat these for the all nodes. After enabling the shard allocation process, it can be monitored by the following request &minus;</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_cat/recovery
+</pre>
+<h1>Elasticsearch - API Conventions</h1>
+<p>Application Programming Interface (API) in web is a group of function calls or other programming instructions to access the software component in that particular web application. For example, Facebook API helps a developer to create applications by accessing data or other functionalities from Facebook; it can be date of birth or status update.</p>
+<p>Elasticsearch provides a REST API, which is accessed by JSON over HTTP. Elasticsearch uses the following conventions &minus;</p>
+<h2>Multiple Indices</h2>
+<p>Most of the operations, mainly searching and other operations, in APIs are for one or more than one indices. This helps the user to search in multiple places or all the available data by just executing a query once. Many different notations are used to perform operations in multiple indices. We will discuss a few of them here in this section.</p>
+<h2>Comma Separated Notation</h2>
+<pre class="result notranslate">
+POST http://localhost:9200/index1,index2,index3/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"any_string"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<p>JSON objects from index1, index2, index3 having any_string in it.</p>
+<h2>_all keyword for all indices</h2>
+<pre class="result notranslate">
+POST http://localhost:9200/_all/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"any_string"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<p>JSON objects from all indices and having any_string in it.</p>
+<h2>Wildcards ( * , + , – )</h2>
+<pre class="result notranslate">
+POST http://localhost:9200/school*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"CBSE"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<p>JSON objects from all indices which start with school having CBSE in it.</p>
+<p>Alternatively, you can use the following code as well &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/school*,-schools_gov /_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"CBSE"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<p>JSON objects from all indices which start with “school” but not from schools_gov and having CBSE in it.</p>
+<p>There are also some <b>URL query string parameters</b> &minus;</p>
+<ul class="list">
+<li><p><b>ignore_unavailable</b> &minus; No error will occur or operation will not be stopped, if the one or more index present in URL does not exist. For example, schools index exist but book_shops does not exist &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+POST http://localhost:9200/school*,book_shops/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"CBSE"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "error":{
+      "root_cause":[{
+         "type":"index_not_found_exception", "reason":"no such index",
+         "resource.type":"index_or_alias", "resource.id":"book_shops", 
+         "index":"book_shops"
+      }],
+		
+      "type":"index_not_found_exception", "reason":"no such index",
+      "resource.type":"index_or_alias", "resource.id":"book_shops", 
+      "index":"book_shops"
+		
+   },"status":404
+}
+</pre>
+<p>Take a look at the following code &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/school*,book_shops/_search?ignore_unavailable = true
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"CBSE"
+      }
+   }
+}
+</pre>
+<h3>Response (no error)</h3>
+<p>JSON objects from all indices which start with school having CBSE in it.</p>
+<h2>allow_no_indices</h2>
+<p><b>true</b> value of this parameter will prevent error, if a URL with wildcard results in no indices.</p>
+<p>For example, there is no index that starts with schools_pri &minus;</p>
+<pre class="result notranslate">
+POST
+http://localhost:9200/schools_pri*/_search?allow_no_indices = true
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "match_all":{}
+   }
+}
+</pre>
+<h3>Response (No errors)</h3>
+<pre class="prettyprint notranslate">
+{
+   "took":1,"timed_out": false, "_shards":{"total":0, "successful":0, "failed":0}, 
+   "hits":{"total":0, "max_score":0.0, "hits":[]}
+}
+</pre>
+<h2>expand_wildcards</h2>
+<p>This parameter decides whether the wildcards need to be expanded to open indices or closed indices or both. The value of this parameter can be open and closed or none and all.</p>
+<p>For example, close index schools &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_close
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged":true}
+</pre>
+<p>Take a look at the following code &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/school*/_search?expand_wildcards = closed
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "match_all":{}
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "error":{
+      "root_cause":[{
+         "type":"index_closed_exception", "reason":"closed", "index":"schools"
+      }],
+		
+      "type":"index_closed_exception", "reason":"closed", "index":"schools"
+   }, "status":403
+}
+</pre>
+<h2>Date Math Support in Index Names</h2>
+<p>Elasticsearch offers a functionality to search indices according to date and time. We need to specify date and time in a specific format. For example, accountdetail-2015.12.30, index will store the bank account details of 30th December 2015. Mathematic operations can be performed to get details for a particular date or a range of date and time.</p>
+<p>Format for date math index name &minus;</p>
+<pre class="result notranslate">
+&lt;static_name{date_math_expr{date_format|time_zone}}&gt;
+http://localhost:9200/&lt;accountdetail-{now-2d{YYYY.MM.dd|utc}}&gt;/_search
+</pre>
+<p>static_name is a part of expression which remains same in every date math index like account detail. date_math_expr contains the mathematical expression that determines the date and time dynamically like now-2d. date_format contains the format in which the date is written in index like YYYY.MM.dd. If today’s date is 30th December 2015, then &lt;accountdetail-{now-2d{YYYY.MM.dd}}&gt; will return accountdetail-2015.12.28.</p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center; width:50%;">Expression</th>
+<th style="text-align:center;">Resolves to</th>
+</tr>
+<tr>
+<td>&lt;accountdetail-{now-d}&gt;</td>
+<td>accountdetail-2015.12.29</td>
+</tr>
+<tr>
+<td>&lt;accountdetail-{now-M}&gt;</td>
+<td>accountdetail-2015.11.30</td>
+</tr>
+<td>&lt;accountdetail-{now{YYYY.MM}}&gt;</td>
+<td>accountdetail-2015.12</td>
+</table>
+<p>We will now see some of the common options available in Elasticsearch that can be used to get the response in a specified format.</p>
+<h2>Pretty Results</h2>
+<p>We can get response in a well-formatted JSON object by just appending a URL query parameter, i.e., pretty = true.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_search?pretty = true
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "match_all":{}
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+……………………..
+{
+   "_index" : "schools", "_type" : "school", "_id" : "1", "_score" : 1.0,
+   "_source":{
+      "name":"Central School", "description":"CBSE Affiliation", 
+      "street":"Nagan", "city":"paprola", "state":"HP", "zip":"176115",
+      "location": [31.8955385, 76.8380405], "fees":2000, 
+      "tags":["Senior Secondary", "beautiful campus"], "rating":"3.5"
+   }
+	
+}	
+………………….
+</pre>
+<h2>Human Readable Output</h2>
+<p>This option can change the statistical responses either into human readable form (If human = true) or computer readable form (if human = false). For example, if human = true then distance_kilometer = 20KM and if human = false then distance_meter = 20000, when response needs to be used by another computer program.</p>
+<h2>Response Filtering</h2>
+<p>We can filter the response to less fields by adding them in the field_path parameter. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_search?filter_path = hits.total
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "match_all":{}
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"hits":{"total":3}}
+</pre>
+<h1>Elasticsearch - Document APIs</h1>
+<p>Elasticsearch provides single document APIs and multi-document APIs, where the API call is targeting single document and multiple documents respectively.</p>
+<h2>Index API</h2>
+<p>It helps to add or updates the JSON document in an index when a request is made to that respective index with specific mapping. For example, the below request will add the JSON object to index schools and under school mapping.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/school/4
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "name":"City School", "description":"ICSE", "street":"West End", "city":"Meerut", 
+   "state":"UP", "zip":"250002", "location":[28.9926174, 77.692485], "fees":3500, 
+   "tags":["fully computerized"], "rating":"4.5"
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "_index":"schools", "_type":"school", "_id":"4", "_version":1,
+   "_shards":{"total":2, "successful":1,"failed":0}, "created":true
+}
+</pre>
+<h2>Automatic Index Creation</h2>
+<p>When a request is made to add JSON object to a particular index and if that index does not exist then this API automatically creates that index and also the underlying mapping for that particular JSON object. This functionality can be disabled by changing the values of following parameters to false, which are present in elasticsearch.yml file.</p>
+<pre class="result notranslate">
+action.auto_create_index:false
+index.mapper.dynamic:false
+</pre>
+<p>You can also restrict the auto creation of index, where only index name with specific patterns are allowed by changing the value of the following parameter &minus;</p>
+<pre class="result notranslate">
+action.auto_create_index:+acc*,-bank*
+</pre>
+<p>(where + indicates <b>allowed</b> and – indicates <b>not allowed</b>)</p>
+<h2>Versioning</h2>
+<p>Elasticsearch also provides version control facility. We can use a version query parameter to specify the version of a particular document. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/school/1?version = 1
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "name":"Central School", "description":"CBSE Affiliation", "street":"Nagan",
+   "city":"paprola", "state":"HP", "zip":"176115", "location":[31.8955385, 76.8380405],
+   "fees":2200, "tags":["Senior Secondary", "beautiful campus"], "rating":"3.3"
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "_index":"schools", "_type":"school", "_id":"1", "_version":2,
+   "_shards":{"total":2, "successful":1,"failed":0}, "created":false
+}
+</pre>
+<p>There are two most important types of versioning; internal versioning is the default version that starts with 1 and increments with each update, deletes included. The version number can be set externally. To enable this functionality, we need to set version_type to external.</p>
+<p>Versioning is a real-time process and it is not affected by the real time search operations.</p>
+<h2>Operation Type</h2>
+<p>The operation type is used to force a create operation, this helps to avoid the overwriting of existing document.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/tutorials/chapter/1?op_type = create
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "Text":"this is chapter one"
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "_index":"tutorials", "_type":"chapter", "_id":"1", "_version":1,
+   "_shards":{"total":2, "successful":1, "failed":0}, "created":true
+}
+</pre>
+<h2>Automatic ID generation</h2>
+<p>When ID is not specified in index operation, then Elasticsearch automatically generates id for that document.</p>
+<h2>Parents and Children</h2>
+<p>You can define the parent of any document by passing the id of parent document in parent URL query parameter.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/tutorials/article/1?parent = 1
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "Text":"This is article 1 of chapter 1"
+}
+</pre>
+<p><b>Note</b> &minus; If you get exception while executing this example, please recreate the index by adding the following in the index.</p>
+<pre class="prettyprint notranslate">
+{
+   "mappings": {
+      "chapter": {},
+      "article": {
+         "_parent": {
+            "type": "chapter"
+         }
+      }
+   }
+}
+</pre>
+<h2>Timeout</h2>
+<p>By default, the index operation will wait on the primary shard to become available for up to 1 minute before failing and responding with an error. This timeout value can be changed explicitly by passing a value to timeout parameter.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/tutorials/chapter/2?timeout = 3m
+</pre>
+<h3>Request Body</h3>
+<pre class="result notranslate">
+{
+   "Text":"This is chapter 2 waiting for primary shard for 3 minutes"
+}
+</pre>
+<h2>Get API</h2>
+<p>API helps to extract type JSON object by performing a get request for a particular document. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools/school/1
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "_index":"schools", "_type":"school", "_id":"1", "_version":2,
+   "found":true, "_source":{
+      "name":"Central School", "description":"CBSE Affiliation", 
+      "street":"Nagan", "city":"paprola", "state":"HP", "zip":"176115",
+      "location":[31.8955385,76.8380405], "fees":2200, 
+      "tags":["Senior Secondary", "beautiful campus"], "rating":"3.3"
+   }
+}
+</pre>
+<ul class="list">
+<li><p>This operation is real time and does not get affected by the refresh rate of Index.</p></li>
+<li><p>You can also specify the version, then Elasticsearch will fetch that version of document only.</p></li>
+<li><p>You can also specify the _all in the request, so that the Elasticsearch can search for that document id in every type and it will return the first matched document.</p></li>
+<li><p>You can also specify the fields you want in your result from that particular document.</p></li>
+</ul>
+<pre class="result notranslate">
+GET http://localhost:9200/schools/school/1?fields = name,fees
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+……………………..
+"fields":{
+   "name":["Central School"], "fees":[2200]
+}
+……………………..
+</pre>
+<ul class="list">
+<li>You can also fetch the source part in your result by just adding _source part in your get request.</li>
+</ul>
+<pre class="result notranslate">
+GET http://localhost:9200/schools/school/1/_source
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "name":"Central School", "description":"CBSE Afiliation", "street":"Nagan",
+   "city":"paprola", "state":"HP", "zip":"176115", "location":[31.8955385, 76.8380405],
+   "fees":2200, "tags":["Senior Secondary", "beatiful campus"], "rating":"3.3"
+}
+</pre>
+<p>You can also refresh the shard before doing get operation by set refresh parameter to true.</p>
+<h2>Delete API</h2>
+<p>You can delete a particular index, mapping or a document by sending a HTTP DELETE request to Elasticsearch. For example,</p>
+<pre class="result notranslate">
+DELETE http://localhost:9200/schools/school/4
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "found":true, "_index":"schools", "_type":"school", "_id":"4", "_version":2,
+   "_shards":{"total":2, "successful":1, "failed":0}
+}
+</pre>
+<ul class="list">
+<li><p>Version of the document can be specified to delete that particular version.</p></li>
+<li><p>Routing parameter can be specified to delete the document from a particular user and the operation fails if the document does not belong to that particular user.</p></li>
+<li><p>In this operation, you can specify refresh and timeout option same like GET API.</p></li>
+</ul>
+<h2>Update API</h2>
+<p>Script is used for performing this operation and versioning is used to make sure that no updates have happened during the get and re-index. For example, update the fees of school using script &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools_gov/school/1/_update
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "script":{
+      "inline": "ctx._source.fees+ = inc", "params":{
+         "inc": 500
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "_index":"schools_gov", "_type":"school", "_id":"1", "_version":2,
+   "_shards":{"total":2, "successful":1, "failed":0}
+}
+</pre>
+<p><b>Note</b> &minus; If you get script exception, it is recommended to add the following lines in elastcisearch.yml</p>
+<pre class="result notranslate">
+script.inline: on
+script.indexed: on
+</pre>
+<p>You can check the update by sending get request to the updated document.</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools_gov/school/1
+</pre>
+<h2>Multi Get API</h2>
+<p>It possesses same functionality like GET API, but this get request can return more than one document. We use a doc array to specify the index, type and id of all the documents that need to be extracted.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/_mget
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "docs":[
+      {
+         "_index": "schools", "_type": "school", "_id": "1"
+      },
+		
+      {
+         "_index":"schools_gev", "_type":"school", "_id": "2"
+      }
+   ]
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "docs":[
+      {
+         "_index":"schools", "_type":"school", "_id":"1",
+         "_version":1, "found":true, "_source":{
+            "name":"Central School", "description":"CBSE Afiliation",
+            "street":"Nagan", "city":"paprola", "state":"HP", "zip":"176115",
+            "location":[31.8955385,76.8380405], "fees":2000, 
+            "tags":["Senior Secondary", "beatiful campus"], "rating":"3.5"
+         }
+      },
+		
+      {
+         "_index":"schools_gev", "_type":"school", "_id":"2", "error":{
+			
+            "root_cause":[{
+               "type":"index_not_found_exception", "reason":"no such index", 
+               "index":"schools_gev"
+            }],
+				
+            "type":"index_not_found_exception", "reason":"no such index", 
+            "index":"schools_gev"
+         }
+      }
+   ]
+}
+</pre>
+<h2>Bulk API</h2>
+<p>This API is used to upload or delete the JSON objects in bulk by making multiple index/delete operations in a single request. We need to add “_bulk” keyword to call this API. The example of this API is already performed in populate Elasticsearch article. All other functionalities are same as of GET API.</p>
+<h1>Elasticsearch - Search APIs</h1>
+<p>This API is used to search content in Elasticsearch. Either a user can search by sending a get request with query string as a parameter or a query in the message body of post request. Mainly all the search APIS are multi-index, multi-type.</p>
+<h2>Multi-Index</h2>
+<p>Elasticsearch allows us to search for the documents present in all the indices or in some specific indices. For example, if we need to search all the documents with a name that contains central.</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_search?q = name:central
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":78, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{
+      "total":1, "max_score":0.19178301, "hits":[{
+         "_index":"schools", "_type":"school", "_id":"1", "_score":0.19178301,
+         "_source":{
+            "name":"Central School", "description":"CBSE Affiliation", 
+            "street":"Nagan", "city":"paprola", "state":"HP", "zip":"176115",
+            "location":[31.8955385, 76.8380405], "fees":2000, 
+            "tags":["Senior Secondary", "beautiful campus"], "rating":"3.5"
+         }
+      }]
+   }
+}
+</pre>
+<p>Or, we can search for the same in schools, schools_gov indices &minus;</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools,schools_gov/_search?q = name:model
+</pre>
+<h2>Multi-Type</h2>
+<p>We can also search all the documents in an index across all types or in some specified type. For example,</p>
+<pre class="result notranslate">
+Get http://localhost:9200/schools/_search?q = tags:sports
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":16, "timed_out":false, "_shards":{"total":5, "successful":5, "failed":0},
+   "hits":{
+      "total":1, "max_score":0.5, "hits":[{
+         "_index":"schools", "_type":"school", "_id":"2", "_score":0.5,
+         "_source":{
+            "name":"Saint Paul School", "description":"ICSE Afiliation", 
+            "street":"Dawarka", "city":"Delhi", "state":"Delhi", "zip":"110075", 
+            "location":[28.5733056, 77.0122136], "fees":5000, 
+            "tags":["Good Faculty", "Great Sports"], "rating":"4.5"
+         }
+      }]
+   }
+}
+</pre>
+<h2>URI Search</h2>
+<p>Many parameters can be passed in a search operation using Uniform Resource Identifier &minus;</p> 
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;";>Parameter &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>Q</b></p>
+<p>This parameter is used to specify query string.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>lenient</b></p>
+<p>Format based errors can be ignored by just setting this parameter to true. It is false by default.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>fields</b></p>
+<p>This parameter helps us to get response from selective fields.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>sort</b></p>
+<p>We can get sorted result by using this parameter, the possible values for this parameter is fieldName, fieldName:asc/fieldname:desc</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>timeout</b></p>
+<p>We can restrict the search time by using this parameter and response only contains the hits in that specified time. By default, there is no timeout.</p></td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>terminate_after</b></p>
+<p>We can restrict the response to a specified number of documents for each shard, upon reaching which the query will terminate early. By default, there is no terminate_after.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>from</b></p>
+<p>The starting from index of the hits to return. Defaults to 0.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>size</b></p>
+<p>It denotes the number of hits to return. Defaults to 10.</p></td></tr>
+</table>
+<h2>Request Body Search</h2>
+<p>We can also specify query using query DSL in request body and there are many examples already given in previous chapters like &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"up"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+……………………………………………….
+{
+   "_source":{
+      "name":"City School", "description":"ICSE", "street":"West End",
+      "city":"Meerut", "state":"UP", "zip":"250002", "location":[28.9926174, 77.692485],
+      "fees":3500, "tags":["Well equipped labs"],"rating":"4.5"
+   }
+}
+……………………………………………….
+</pre>
+<h1>Elasticsearch - Aggregations</h1>
+<p>This framework collects all the data selected by the search query. This framework consists of many building blocks, which help in building complex summaries of the data. The basic structure of aggregation is presented below &minus;</p>
+<pre class="prettyprint notranslate">
+"aggregations" : {
+   "&lt;aggregation_name&gt;" : {
+      "&lt;aggregation_type&gt;" : {
+         &lt;aggregation_body&gt;
+      }
+		
+      [,"meta" : { [&lt;meta_data_body&gt;] } ]?
+      [,"aggregations" : { [&lt;sub_aggregation&gt;]+ } ]?
+   }
+}
+</pre>
+<p>There are different types of aggregations, each with its own purpose &minus;</p>
+<h2>Metrics Aggregations</h2>
+<p>These aggregations help in computing matrices from the field’s values of the aggregated documents and sometime some values can be generated from scripts.</p>
+<p>Numeric matrices are either <b>single-valued</b> like <b>average aggregation</b> or <b>multi-valued</b> like <b>stats</b>.</p>
+<h2>Avg Aggregation</h2>
+<p>This aggregation is used to get the average of any numeric field present in the aggregated documents. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aggs":{
+      "avg_fees":{"avg":{"field":"fees"}}
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":44, "timed_out":false, "_shards":{"total":5, "successful":5, "failed":0},
+   "hits":{
+      "total":3, "max_score":1.0, "hits":[
+         {
+            "_index":"schools", "_type":"school", "_id":"2", "_score":1.0,
+            "_source":{
+               "name":"Saint Paul School", "description":"ICSE Affiliation",
+               "street":"Dawarka", "city":"Delhi", "state":"Delhi", 
+               "zip":"110075", "location":[28.5733056, 77.0122136], "fees":5000, 
+               "tags":["Good Faculty", "Great Sports"], "rating":"4.5"
+            }
+         },
+			
+         {
+            "_index":"schools", "_type":"school", "_id":"1", "_score":1.0,
+            "_source":{
+               "name":"Central School", "description":"CBSE Affiliation",
+               "street":"Nagan", "city":"paprola", "state":"HP", "zip":"176115",
+               "location":[31.8955385, 76.8380405], "fees":2200, 
+               "tags":["Senior Secondary", "beautiful campus"], "rating":"3.3"
+            }
+         },
+			
+         {
+            "_index":"schools", "_type":"school", "_id":"3", "_score":1.0,
+            "_source":{
+               "name":"Crescent School", "description":"State Board Affiliation",
+               "street":"Tonk Road", "city":"Jaipur", "state":"RJ", 
+               "zip":"176114", "location":[26.8535922, 75.7923988], "fees":2500, 
+               "tags":["Well equipped labs"], "rating":"4.5"
+            }
+         }
+      ]
+   }, "aggregations":{"avg_fees":{"value":3233.3333333333335}}
+}
+</pre>
+<p>If the value is not present in one or more aggregated documents, it gets ignored by default. You can add a missing field in the aggregation for treating missing value as default.</p>
+<pre class="prettyprint notranslate">
+{
+   "aggs":{
+      "avg_fees":{
+         "avg":{
+            "field":"fees"
+            "missing":0
+         }
+      }
+   }
+}
+</pre>
+<h2>Cardinality Aggregation</h2>
+<p>This aggregation gives the count of distinct values of a particular field. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aggs":{
+      "distinct_name_count":{"cardinality":{"field":"name"}}
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+{
+   "name":"Government School", "description":"State Board Afiliation",
+   "street":"Hinjewadi", "city":"Pune", "state":"MH", "zip":"411057",
+   "location":[18.599752, 73.6821995], "fees":500, "tags":["Great Sports"], 
+   "rating":"4"
+},
+
+{
+   "_index":"schools_gov", "_type": "school", "_id":"1", "_score":1.0,
+   "_source":{
+      "name":"Model School", "description":"CBSE Affiliation", "street":"silk city",
+      "city":"Hyderabad", "state":"AP", "zip":"500030", 
+      "location":[17.3903703, 78.4752129], "fees":700, 
+      "tags":["Senior Secondary", "beautiful campus"], "rating":"3"
+   }
+}, "aggregations":{"disticnt_name_count":{"value":3}}
+………………………………………………
+</pre>
+<p><b>Note</b> &minus; The value of cardinality is 3 because there are three distinct values in name — Government, School and Model.</p>
+<h2>Extended Stats Aggregation</h2>
+<p>This aggregation generates all the statistics about a specific numerical field in aggregated documents. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/school/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aggs" : {
+      "fees_stats" : { "extended_stats" : { "field" : "fees" } }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+{
+   "aggregations":{
+      "fees_stats":{
+         "count":3, "min":2200.0, "max":5000.0, 
+         "avg":3233.3333333333335, "sum":9700.0,
+         "sum_of_squares":3.609E7, "variance":1575555.555555556, 
+         "std_deviation":1255.2113589175156,
+				
+         "std_deviation_bounds":{
+            "upper":5743.756051168364, "lower":722.9106154983024
+         }
+      }
+   }
+}
+………………………………………………
+</pre>
+<h2>Max Aggregation</h2>
+<p>This aggregation finds the max value of a specific numeric field in aggregated documents. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aggs" : {
+      "max_fees" : { "max" : { "field" : "fees" } }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+{
+   aggregations":{"max_fees":{"value":5000.0}}
+}
+………………………………………………
+</pre>
+<h2>Min Aggregation</h2>
+<p>This aggregation finds the max value of a specific numeric field in aggregated documents. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aggs" : {
+      "min_fees" : { "min" : { "field" : "fees" } }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+"aggregations":{"min_fees":{"value":500.0}}
+………………………………………………
+</pre>
+<h2>Sum Aggregation</h2>
+<p>This aggregation calculates the sum of a specific numeric field in aggregated documents. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aggs" : {
+      "total_fees" : { "sum" : { "field" : "fees" } }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+"aggregations":{"total_fees":{"value":10900.0}}
+………………………………………………
+</pre>
+<p>There are some other metrics aggregations which are used in special cases like geo bounds aggregation and geo centroid aggregation for the purpose of geo location.</p>
+<h2>Bucket Aggregations</h2>
+<p>These aggregations contain many buckets for different types of aggregations having a criterion, which determines whether a document belongs to that bucket or not. The bucket aggregations have been described below &minus;</p>
+<h3>Children Aggregation</h3>
+<p>This bucket aggregation makes a collection of documents, which are mapped to parent bucket. A type parameter is used to define the parent index. For example, we have a brand and its different models, and then the model type will have the following _parent field &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "model" : {
+      "_parent" : {
+         "type" : "brand"
+      }
+   }
+}
+</pre>
+<p>There are many other special bucket aggregations, which are useful in many other cases, those are &minus;</p>
+<ul class="list">
+<li>Date Histogram Aggregation</li>
+<li>Date Range Aggregation</li>
+<li>Filter Aggregation</li>
+<li>Filters Aggregation</li>
+<li>Geo Distance Aggregation</li>
+<li>GeoHash grid Aggregation</li>
+<li>Global Aggregation</li>
+<li>Histogram Aggregation</li>
+<li>IPv4 Range Aggregation</li>
+<li>Missing Aggregation</li>
+<li>Nested Aggregation</li>
+<li>Range Aggregation</li>
+<li>Reverse nested Aggregation</li>
+<li>Sampler Aggregation</li>
+<li>Significant Terms Aggregation</li>
+<li>Terms Aggregation</li>
+</ul>
+<h2>Aggregation Metadata</h2>
+<p>You can add some data about the aggregation at the time of request by using meta tag and can get that in response. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/school*/report/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aggs" : {
+      "min_fees" : { "avg" : { "field" : "fees" } ,
+         "meta" :{
+            "dsc" :"Lowest Fees"
+         }
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+{
+   "aggregations":{"min_fees":{"meta":{"dsc":"Lowest Fees"}, "value":2180.0}}
+}
+………………………………………………
+</pre>
+<h1>Elasticsearch - Index APIs</h1>
+<p>These APIs are responsible for managing all the aspects of index like settings, aliases, mappings, index templates.</p>
+<h2>Create Index</h2>
+<p>This API helps you to create index. Index can be created automatically when a user is passing JSON objects to any index or it can be created before that. To create an index, you just need to send a post request with settings, mappings and aliases or just a simple request without body. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/colleges
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged":true}
+</pre>
+<p>Or, with some settings –</p>
+<pre class="result notranslate">
+POST http://localhost:9200/colleges
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "settings" : {
+      "index" : {
+         "number_of_shards" : 5, "number_of_replicas" : 3
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged":true}
+</pre>
+<p>Or with mapping –</p>
+<pre class="result notranslate">
+POST http://localhost:9200/colleges
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "settings" : {
+      "number_of_shards" : 3
+   },
+   "mappings" : {
+      "type1" : {
+         "_source" : { "enabled" : false }, "properties" : {
+            "college_name" : { "type" : "string" }, "college type" : {"type":"string"}
+         }
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged":true}
+</pre>
+<p>Or, with alias –</p>
+<pre class="result notranslate">
+POST http://localhost:9200/colleges
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "aliases" : {
+      "alias_1" : {}, "alias_2" : {
+         "filter" : {
+            "term" : {"user" : "manu" }
+         },
+         "routing" : "manu"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged":true}
+</pre>
+<h2>Delete Index</h2>
+<p>This API helps you to delete any index. You just need to pass a delete request with the URL of that particular Index. For example,</p>
+<pre class="result notranslate">
+DELETE http://localhost:9200/colleges
+</pre>
+<p>You can delete all indices by just using _all,*.</p>
+<h2>Get Index</h2>
+<p>This API can be called by just sending get request to one or more than one indices. This returns the information about index.</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "schools":{
+      "aliases":{}, "mappings":{
+         "school":{
+            "properties":{
+               "city":{"type":"string"}, "description":{"type":"string"},
+                  "fees":{"type":"long"}, "location":{"type":"double"},
+                  "name":{"type":"string"}, "rating":{"type":"string"},
+                  "state":{"type":"string"}, "street":{"type":"string"},
+                  "tags":{"type":"string"}, "zip":{"type":"string"}
+            }
+         }
+      },
+      "settings":{
+         "index":{
+            "creation_date":"1454409831535", "number_of_shards":"5",
+               "number_of_replicas":"1", "uuid":"iKdjTtXQSMCW4xZMhpsOVA",
+               "version":{"created":"2010199"}
+         }
+      },
+      "warmers":{}
+   }
+}
+</pre>
+<p>You can get the information of all the indices by using _all or *.</p>
+<h2>Index Exist</h2>
+<p>Existence of an index can be determined by just sending a get request to that index. If the HTTP response is 200, it exists; if it is 404, it does not exist.</p>
+<h2>Open / Close Index API</h2>
+<p>It’s very easy to close or open one or more index by just adding _close or _open in post to request to that index. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_close
+</pre>
+<p><b>Or</b></p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_open
+</pre>
+<h2>Index Aliases</h2>
+<p>This API helps to give an alias to any index by using _aliases keyword. Single alias can be mapped to more than one and alias cannot have the same name as index. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/_aliases
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "actions" : [
+      { "add" : { "index" : "schools", "alias" : "schools_pri" } }
+   ]
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged":true}
+</pre>
+<p>Then,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools_pri
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+{"schools":{"aliases":{"schools_pri":{}},"}}
+………………………………………………
+</pre>
+<h2>Index Settings</h2>
+<p>You can get the index settings by just appending _settings keyword at the end of URL. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools/_settings
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "schools":{
+      "settings":{
+         "index":{
+            "creation_date":"1454409831535", "number_of_shards":"5", 
+               "number_of_replicas":"1", "uuid":"iKdjTtXQSMCW4xZMhpsOVA", 
+               "version":{"created":"2010199"}
+        }
+      }
+   }
+}
+</pre>
+<h2>Analyze</h2>
+<p>This API helps to analyze the text and send the tokens with offset value and data type. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/_analyze
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "analyzer" : "standard",
+   "text" : "you are reading this at tutorials point"
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "tokens":[
+      {"token":"you", "start_offset":0, "end_offset":3, "type":"&lt;ALPHANUM&gt;", "position":0},
+         {"token":"are", "start_offset":4, "end_offset":7, "type":"&lt;ALPHANUM&gt;", "position":1},
+         {"token":"reading", "start_offset":8, "end_offset":15, "type":"&lt;ALPHANUM&gt;", "position":2},
+         {"token":"this", "start_offset":16, "end_offset":20, "type":"&lt;ALPHANUM&gt;", "position":3},
+         {"token":"at", "start_offset":21, "end_offset":23, "type":"&lt;ALPHANUM&gt;", "position":4},
+         {"token":"tutorials", "start_offset":24, "end_offset":33, "type":"&lt;ALPHANUM&gt;", "position":5},
+         {"token":"point", "start_offset":34, "end_offset":39, "type":"&lt;ALPHANUM&gt;", "position":6}
+   ]
+}
+</pre>
+<p>You can also analyze a text with any index, and then the text will be analyzed according to the analyzer associated with that index.</p>
+<h2>Index Templates</h2>
+<p>You can also create index templates with mappings, which can be applied to new indices. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/_template/template_a
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "template" : "tu*", 
+      "settings" : {
+         "number_of_shards" : 3
+   },
+   "mappings" : {
+      "chapter" : {
+         "_source" : { "enabled" : false }
+      }
+   }
+}
+</pre>
+<p>Any index that starts with “tu” will have the same settings as template_a.</p>
+<h2>Index Stats</h2>
+<p>This API helps you to extract statistics about a particular index. You just need to send a get request with the index URL and _stats keyword at the end.</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools/_stats
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+{"_shards":{"total":10, "successful":5, "failed":0}, "_all":{"primaries":{"docs":{
+   "count":3, "deleted":0}}}, "store":{"size_in_bytes":16653, "throttle_time_in_millis":0},
+………………………………………………
+</pre>
+<h2>Flush</h2>
+<p>This API helps to clean the data from index memory and migrate it to index storage and also cleans internal transaction log. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools/_flush
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"_shards":{"total":10, "successful":5, "failed":0}}
+</pre>
+<h2>Refresh</h2>
+<p>Refresh is scheduled by default in Elasticsearch, but you can refresh one or more indices explicitly by using _refresh. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/schools/_refresh
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"_shards":{"total":10, "successful":5, "failed":0}}
+</pre>
+<h1>Elasticsearch - Cluster APIs</h1>
+<p>This API is used for getting information about cluster and its nodes and making changes in them. For calling this API, we need to specify the node name, address or _local. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_nodes/_local
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+{
+   "cluster_name":"elasticsearch", "nodes":{
+      "Vy3KxqcHQdm4cIM22U1ewA":{
+         "name":"Red Guardian", "transport_address":"127.0.0.1:9300", 
+         "host":"127.0.0.1", "ip":"127.0.0.1", "version":"2.1.1", 
+         "build":"40e2c53", "http_address":"127.0.0.1:9200",
+      }
+   }
+}
+………………………………………………
+</pre>
+<p><b>Or</b></p>
+<pre class="result notranslate">
+Get http://localhost:9200/_nodes/127.0.0.1
+</pre>
+<h3>Response</h3>
+<p>Same as in the above example.</p>
+<h2>Cluster Health</h2>
+<p>This API is used to get the status on the health of the cluster by appending health keyword. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_cluster/health
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "cluster_name":"elasticsearch", "status":"yellow", "timed_out":false,
+   "number_of_nodes":1, "number_of_data_nodes":1, "active_primary_shards":23,
+   "active_shards":23, "relocating_shards":0, "initializing_shards":0,
+   "unassigned_shards":23, "delayed_unassigned_shards":0, "number_of_pending_tasks":0,
+   "number_of_in_flight_fetch":0, "task_max_waiting_in_queue_millis":0,
+   "active_shards_percent_as_number":50.0
+}
+</pre>
+<h2>Cluster State</h2>
+<p>This API is used to get state information about a cluster by appending ‘state’ keyword URL. The state information contains version, master node, other nodes, routing table, metadata and blocks. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_cluster/state 10. Elasticsearch — Cluster APIs
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+
+{
+   "cluster_name":"elasticsearch", "version":27, "state_uuid":"B3P7uHGKQUGsSsiX2rGYUQ",
+   "master_node":"Vy3KxqcHQdm4cIM22U1ewA",
+	
+}
+………………………………………………
+</pre>
+<h2>Cluster Stats</h2>
+<p>This API helps to retrieve statistics about cluster by using ‘stats’ keyword. This API returns shard number, store size, memory usage, number of nodes, roles, OS, and file system. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_cluster/stats
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+
+{
+   "timestamp":1454496710020, "cluster_name":"elasticsearch", "status":"yellow",
+   "indices":{
+      "count":5, "shards":{
+         "total":23, "primaries":23, "replication":0.0,"
+      }
+   }
+
+}
+………………………………………………
+</pre>
+<h2>Pending Cluster Tasks</h2>
+<p>This API is used for monitoring pending tasks in any cluster. Tasks are like create index, update mapping, allocate shard, fail shard etc. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_cluster/pending_tasks
+</pre>
+<h2>Cluster Reroute</h2>
+<p>This API is used for moving shard from one node to another or to cancel any allocation or allocate any unassigned shard. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/_cluster/reroute
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "commands" : [ 
+      {
+         "move" :
+         {
+            "index" : "schools", "shard" : 2,
+            "from_node" : "nodea", "to_node" : "nodeb"
+         }
+      },
+		
+      {
+         "allocate" : {
+            "index" : "test", "shard" : 1, "node" : "nodec"
+         }
+      }
+   ]
+}
+</pre>
+<h2>Cluster Update Settings</h2>
+<p>This API allows you to update the settings of a cluster by using settings keyword. There are two types of settings — persistent (applied across restarts) and transient (do not survive a full cluster restart).</p>
+<h2>Node Stats</h2>
+<p>This API is used to retrieve the statistics of one more nodes of the cluster. Node stats are almost the same as cluster. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_nodes/stats
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+
+{
+   "cluster_name":"elasticsearch", "nodes":{
+      "Vy3KxqcHQdm4cIM22U1ewA":{
+         "timestamp":1454497097572, "name":"Red Guardian", 
+         "transport_address":"127.0.0.1:9300", "host":"127.0.0.1", "ip":["127.0.0.1:9300",
+      }
+   }
+
+}
+………………………………………………
+</pre>
+<h2>Nodes hot_threads</h2>
+<p>This API helps you to retrieve information about the current hot threads on each node in cluster. For example,</p>
+<pre class="result notranslate">
+GET http://localhost:9200/_nodes/hot_threads
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+………………………………………………
+::: {Red Guardian} {Vy3KxqcHQdm4cIM22U1ewA} {127.0.0.1}{127.0.0.1:9300}Hot threads at 
+   2016-02-03T10:59:48.856Z, interval = 500ms, busiestThreads = 3, 
+   ignoreIdleThreads = true:0.0% (0s out of 500ms) cpu usage by thread 'Attach Listener'
+      unique snapshot
+      unique snapshot
+………………………………………………
+</pre>
+<h1>Elasticsearch - Query DSL</h1>
+<p>In Elasticsearch, searching is carried out by using query based on JSON. Query is made up of two clauses &minus;</p>
+<ul class="list">
+<li><p><b>Leaf Query Clauses</b> &minus; These clauses are match, term or range, which look for a specific value in specific field.</p></li>
+<li><p><b>Compound Query Clauses</b> &minus; These queries are a combination of leaf query clauses and other compound queries to extract the desired information.</p></li>
+</ul>
+<p>Elasticsearch supports a large number of queries. A query starts with a query key word and then has conditions and filters inside in the form of JSON object. The different types of queries have been described below &minus;</p>
+<h2>Match All Query</h2>
+<p>This is the most basic query; it returns all the content and with the score of 1.0 for every object. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "match_all":{}
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":1, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{
+      "total":5, "max_score":1.0, "hits":[
+         {
+            "_index":"schools", "_type":"school", "_id":"2", "_score":1.0,
+            "_source":{
+               "name":"Saint Paul School", "description":"ICSE Affiliation",
+               "street":"Dawarka", "city":"Delhi", "state":"Delhi", 
+               "zip":"110075", "location":[28.5733056, 77.0122136], "fees":5000, 
+               "tags":["Good Faculty", "Great Sports"], "rating":"4.5"
+            }
+         },
+				
+         {
+            "_index":"schools_gov", "_type":"school", "_id":"2", "_score":1.0,
+            "_source":{
+               "name":"Government School", "description":"State Board Affiliation",
+               "street":"Hinjewadi", "city":"Pune", "state":"MH", "zip":"411057",
+               "location":[18.599752, 73.6821995], "fees":500, "tags":["Great Sports"],
+               "rating":"4"
+            }
+         },
+				
+         {
+            "_index":"schools", "_type":"school", "_id":"1", "_score":1.0,
+            "_source":{
+               "name":"Central School", "description":"CBSE Affiliation",
+               "street":"Nagan", "city":"paprola", "state":"HP", 
+               "zip":"176115", "location":[31.8955385, 76.8380405], 
+               "fees":2200, "tags":["Senior Secondary", "beautiful campus"], 
+               "rating":"3.3"
+            }
+         },
+				
+         {
+            "_index":"schools_gov", "_type":"school", "_id":"1", "_score":1.0,
+            "_source":{
+               "name":"Model School", "description":"CBSE Affiliation",
+               "street":"silk city", "city":"Hyderabad", "state":"AP", 
+               "zip":"500030", "location":[17.3903703, 78.4752129], "fees":700, 
+               "tags":["Senior Secondary", "beautiful campus"], "rating":"3"
+            }
+         },
+				
+         {
+            "_index":"schools", "_type":"school", "_id":"3", "_score":1.0,
+            "_source":{
+               "name":"Crescent School", "description":"State Board Affiliation",
+               "street":"Tonk Road", "city":"Jaipur", "state":"RJ", "zip":"176114",
+               "location":[26.8535922, 75.7923988], "fees":2500, 
+               "tags":["Well equipped labs"], "rating":"4.5"
+            }
+         }
+      ]
+   }
+}
+</pre>
+<h2>Full Text Queries</h2>
+<p>These queries are used to search a full body of text like a chapter or a news article. This query works according to the analyzer associated with that particular index or document. In this section, we will discuss the different types of full text queries.</p>
+<h2>Match query</h2>
+<p>This query matches a text or phrase with the values of one or more fields. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "match" : {
+         "city":"pune"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":1, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{
+      "total":1, "max_score":0.30685282, "hits":[{
+         "_index":"schools_gov", "_type":"school", "_id":"2", "_score":0.30685282, 
+         "_source":{
+            "name":"Government School", "description":"State Board Afiliation",
+            "street":"Hinjewadi", "city":"Pune", "state":"MH", "zip":"411057",
+            "location":[18.599752, 73.6821995], "fees":500, 
+            "tags":["Great Sports"], "rating":"4"
+         }
+      }]
+   }
+}
+</pre>
+<h2>multi_match query</h2>
+<p>This query matches a text or phrase with more than one field. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "multi_match" : {
+         "query": "hyderabad",
+         "fields": [ "city", "state" ]
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":16, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{
+      "total":1, "max_score":0.09415865, "hits":[{
+         "_index":"schools_gov", "_type":"school", "_id":"1", "_score":0.09415865,
+         "_source":{
+            "name":"Model School", " description":"CBSE Affiliation", 
+            "street":"silk city", "city":"Hyderabad", "state":"AP", 
+            "zip":"500030", "location":[17.3903703, 78.4752129], "fees":700, 
+            "tags":["Senior Secondary", "beautiful campus"], "rating":"3"
+         }
+      }]
+   }
+}
+</pre>
+<h2>Query String Query</h2>
+<p>This query uses query parser and query_string keyword. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "query_string":{
+         "query":"good faculty"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":16, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0}, 
+   "hits":{
+      "total":1, "max_score":0.09492774, "hits":[{
+         "_index":"schools", "_type":"school", "_id":"2", "_score":0.09492774, 
+         "_source":{
+            "name":"Saint Paul School", "description":"ICSE Affiliation",
+            "street":"Dawarka", "city":"Delhi", "state":"Delhi",
+            "zip":"110075", "location":[28.5733056, 77.0122136],
+            "fees":5000, "tags":["Good Faculty", "Great Sports"],
+            "rating":"4.5" 
+         }
+      }]
+   }
+}
+</pre>
+<h2>Term Level Queries</h2>
+<p>These queries mainly deal with structured data like numbers, dates and emuns. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "term":{"zip":"176115"}
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":1, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{
+      "total":1, "max_score":0.30685282, "hits":[{
+         "_index":"schools", "_type":"school", "_id":"1", "_score":0.30685282,
+         "_source":{
+            "name":"Central School", "description":"CBSE Affiliation",
+            "street":"Nagan", "city":"paprola", "state":"HP", "zip":"176115",
+            "location":[31.8955385, 76.8380405], "fees":2200, 
+            "tags":["Senior Secondary", "beautiful campus"], "rating":"3.3"
+         }
+      }]
+   }
+}
+</pre>
+<h2>Range Query</h2>
+<p>This query is used to find the objects having values between the ranges of values. For this, we need to use operators like &minus;</p>
+<ul class="list">
+<li><p><b>gte</b> &minus; greater than equal to</p></li>
+<li><p><b>gt</b> &minus; greater-than</p></li>
+<li><p><b>lte</b> &minus; less-than equal to</p></li>
+<li><p><b>lt</b> &minus; less-than</p></li>
+</ul>
+<p>For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "range":{
+         "rating":{
+            "gte":3.5
+         }
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":31, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{
+      "total":3, "max_score":1.0, "hits":[
+         {
+            "_index":"schools", "_type":"school", "_id":"2", "_score":1.0,
+            "_source":{
+               "name":"Saint Paul School", "description":"ICSE Affiliation",
+               "street":"Dawarka", "city":"Delhi", "state":"Delhi", 
+               "zip":"110075", "location":[28.5733056, 77.0122136], "fees":5000, 
+               "tags":["Good Faculty", "Great Sports"], "rating":"4.5"
+            }
+         }, 
+		
+         {
+            "_index":"schools_gov", "_type":"school", "_id":"2", "_score":1.0, 
+            "_source":{
+               "name":"Government School", "description":"State Board Affiliation",
+               "street":"Hinjewadi", "city":"Pune", "state":"MH", "zip":"411057",
+               "location":[18.599752, 73.6821995] "fees":500, 
+               "tags":["Great Sports"], "rating":"4"
+            }
+         },
+			
+         {
+            "_index":"schools", "_type":"school", "_id":"3", "_score":1.0,
+            "_source":{
+               "name":"Crescent School", "description":"State Board Affiliation",
+               "street":"Tonk Road", "city":"Jaipur", "state":"RJ", "zip":"176114", 
+               "location":[26.8535922, 75.7923988], "fees":2500,
+               "tags":["Well equipped labs"], "rating":"4.5"
+            }
+         }
+      ]
+   }
+}
+</pre>
+<p>Other types of term level queries are &minus;</p>
+<ul class="list">
+<li><p><b>Exists query</b> &minus; If a certain field has non null value.</p></li>
+<li><p><b>Missing query</b> &minus; This is completely opposite to exists query, this query searches for objects without specific fields or fields having null value.</p></li>
+<li><p><b>Wildcard or regexp query</b> &minus; This query uses regular expressions to find patterns in the objects.</p></li>
+</ul>
+<p><b>Type query</b> &minus; documents with specific type. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "type" : {
+         "value" : "school"
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<p>All the school JSON objects present in the specified indices.</p>
+<h2>Compound Queries</h2>
+<p>These queries are a collection of different queries merged with each other by using Boolean operators like and, or, not or for different indices or having function calls etc. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "filtered":{
+         "query":{
+            "match":{
+               "state":"UP"
+            }
+         },
+			
+         "filter":{
+            "range":{
+               "rating":{
+                  "gte":4.0
+               }
+            }
+         }
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":16, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{"total":0, "max_score":null, "hits":[]}
+}
+</pre>
+<h2>Joining Queries</h2>
+<p>These queries are used where more than one mapping or document is included. There are two types of joining queries &minus;</p>
+<h3>Nested Query</h3>
+<p>These queries deal with nested mapping (you will read more about it in the next chapter).</p>
+<h3>has_child and has_parent queries</h3>
+<p>These queries are used to retrieve child or parent of the document, which got match in the query. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/tutorials/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":
+   {
+      "has_child" : {
+         "type" : "article", "query" : {
+            "match" : {
+               "Text" : "This is article 1 of chapter 1"
+            }
+         }
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":21, "timed_out":false, "_shards":{"total":5, "successful":5, "failed":0},
+   "hits":{
+      "total":1, "max_score":1.0, "hits":[{
+         "_index":"tutorials", "_type":"chapter", "_id":"1", "_score":1.0,
+         "_source":{
+            "Text":"this is chapter one"
+         }
+      }]
+   }
+}
+</pre>
+<h2>Geo Queries</h2>
+<p>These queries deal with geo locations and geo points. These queries help to find out schools or any other geographical object near to any location. You need to use geo point data type. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/schools*/_search
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "query":{
+      "filtered":{
+         "filter":{
+            "geo_distance":{
+               "distance":"100km",
+               "location":[32.052098, 76.649294]
+            }
+         }
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "took":6, "timed_out":false, "_shards":{"total":10, "successful":10, "failed":0},
+   "hits":{
+      "total":2, "max_score":1.0, "hits":[
+         {
+            "_index":"schools", "_type":"school", "_id":"2", "_score":1.0,
+            "_source":{
+               "name":"Saint Paul School", "description":"ICSE Affiliation",
+               "street":"Dawarka", "city":"Delhi", "state":"Delhi", "zip":"110075",
+               "location":[28.5733056, 77.0122136], "fees":5000,
+               "tags":["Good Faculty", "Great Sports"], "rating":"4.5"
+            }
+         },
+		
+         {
+            "_index":"schools", "_type":"school", "_id":"1", "_score":1.0,
+            "_source":{
+               "name":"Central School", "description":"CBSE Affiliation",
+               "street":"Nagan", "city":"paprola", "state":"HP", "zip":"176115",
+               "location":[31.8955385, 76.8380405], "fees":2000,
+               "tags":["Senior Secondary", "beautiful campus"], "rating":"3.5"
+            }
+         }
+      ]
+   }
+}
+</pre>
+<p><b>Note</b> &minus; If you get an exception while performing the above example, please add the following mapping to your index.</p>
+<pre class="prettyprint notranslate">
+{
+   "mappings":{
+      "school":{
+         "_all":{
+            "enabled":true
+         },
+			
+         "properties":{
+            "location":{
+               "type":"geo_point"
+            }
+         }
+      }
+   }
+}
+</pre>
+<h1>Elasticsearch - Mapping</h1>
+<p>Mapping is the outline of the documents stored in an index. It defines the data type like geo_point or string and format of the fields present in the documents and rules to control the mapping of dynamically added fields. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/bankaccountdetails
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "mappings":{
+      "report":{
+         "_all":{
+            "enabled":true
+         },
+			
+         "properties":{
+            "name":{ "type":"string"}, "date":{ "type":"date"},
+            "balance":{ "type":"double"}, "liability":{ "type":"double"}
+         }
+      }
+   }
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{"acknowledged":true}
+</pre>
+<h2>Field Data Types</h2>
+<p>Elasticsearch supports a number of different datatypes for the fields in a document. The following data types are used to store fields in Elasticsearch &minus;</p>
+<h3>Core Data Types</h3>
+<p>These are the basic data types supported by almost all the systems like integer, long, double, short, byte, double, float, string, date, Boolean and binary.</p>
+<h3>Complex Data Types</h3>
+<p>These data types are a combination of core data types. Like array, JSON object and nested data type. Following is the example of nested data type &minus;</p>
+<pre class="result notranslate">
+POST http://localhost:9200/tabletennis/team/1
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "group" : "players",
+   "user" : [
+      {
+         "first" : "dave", "last" : "jones"
+      },
+		
+      {
+         "first" : "kevin", "last" : "morris"
+      }
+		
+   ]
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "_index":"tabletennis", "_type":"team", "_id":"1", "_version":1, 
+   "_shards":{"total":2, "successful":1, "failed":0}, "created":true
+}
+</pre>
+<h3>Geo Data Types</h3>
+<p>These data types are used for defining geographic properties. For instance, geo_point is used for defining longitude and latitude, and geo_shape for defining different geometric shapes like rectangle.</p>
+<h3>Specialized Data Types</h3>
+<p>These data types are used for special purposes like IPv4 (“ip”) accepts IP address, completion data type is used to support auto-complete suggestions and token_count for counting the number of tokens in a string.</p>
+<h2>Mapping Types</h2>
+<p>Each index has one or more mapping types, which are used to divide the documents of an index into logical groups. Mapping can be different from each other on the basis of the following parameters &minus;</p>
+<h3>Meta-Fields</h3>
+<p>These fields provide information about the mappings and the other objects associated with it. Like _index, _type, _id, and _source fields.</p>
+<h3>Fields</h3>
+<p>Different mapping contains different number of fields and fields with different data types.</p>
+<h2>Dynamic Mapping</h2>
+<p>Elasticsearch provides a user-friendly mechanism for the automatic creation of mapping. A user can post the data directly to any undefined mapping and Elasticsearch will automatically create the mapping, which is called dynamic mapping. For example,</p>
+<pre class="result notranslate">
+POST http://localhost:9200/accountdetails/tansferreport
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "from_acc":"7056443341", "to_acc":"7032460534",
+   "date":"11/1/2016", "amount":10000
+}
+</pre>
+<h3>Response</h3>
+<pre class="result notranslate">
+{
+   "_index":"accountdetails", "_type":"tansferreport",
+   "_id":"AVI3FeH0icjGpNBI4ake", "_version":1,
+   "_shards":{"total":2, "successful":1, "failed":0},
+   "created":true
+}
+</pre>
+<h2>Mapping Parameters</h2>
+<p>The mapping parameters define the structure of mapping, information about fields and about storage and how the mapped data will be analyzed at the time of searching. These are the following mapping parameters &minus;</p>
+<ul class="list">
+<li>analyzer</li>
+<li>boost</li>
+<li>coerce</li>
+<li>copy_to</li>
+<li>doc_values</li>
+<li>dynamic</li>
+<li>enabled</li>
+<li>fielddata</li>
+<li>geohash</li>
+<li>geohash_precision</li>
+<li>geohash_prefix</li>
+<li>format</li>
+<li>ignore_above</li>
+<li>ignore_malformed</li>
+<li>include_in_all</li>
+<li>index_options</li>
+<li>lat_lon</li>
+<li>index</li>
+<li>fields</li>
+<li>norms</li>
+<li>null_value</li>
+<li>position_increment_gap</li>
+<li>properties</li>
+<li>search_analyzer</li>
+<li>similarity</li>
+<li>store</li>
+<li>term_vector</li>
+</ul>
+<h1>Elasticsearch - Analysis</h1>
+<p>When a query is processed during a search operation , the content in any index is analyzed by analysis module. This module consists of analyzer, tokenizer, tokenfilters and charfilters. If no analyzer is defined, then by default the built in analyzers, token, filters and tokenizers get registered with analysis module. For example.</p>
+<pre class="result notranslate">
+POST http://localhost:9200/pictures
+</pre>
+<h3>Request Body</h3>
+<pre class="prettyprint notranslate">
+{
+   "settings": {
+      "analysis": {
+         "analyzer": {
+            "index_analyzer": {
+               "tokenizer": "standard", "filter": [
+                  "standard", "my_delimiter", "lowercase", "stop", 
+                     "asciifolding", "porter_stem"
+               ]
+            },
+				
+            "search_analyzer": {
+               "tokenizer": "standard", "filter": [
+                  "standard", "lowercase", "stop", "asciifolding", "porter_stem"
+               ]
+            }
+         },
+			
+         "filter": {
+            "my_delimiter": {
+               "type": "word_delimiter",
+               "generate_word_parts": true,
+               "catenate_words": true,
+               "catenate_numbers": true,
+               "catenate_all": true,
+               "split_on_case_change": true,
+               "preserve_original": true,
+               "split_on_numerics": true,
+               "stem_english_possessive": true
+            }
+         }
+      }
+   }
+}
+</pre>
+<h2>Analyzers</h2>
+<p>An analyzer consists of a tokenizer and optional token filters. These analyzers are registered in analysis module with logical names, which can be referenced either in mapping definitions or in some APIs. There are a number of default analyzers as follows &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Analyzer &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>Standard analyzer (standard)</b></p>
+<p>stopwords and max_token_length setting can be set for this analyzer. By default, stopwords list is empty and max_token_length is 255.</p>
+</td>
+</tr> 
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td>
+<p><b>Simple analyzer (simple)</b></p>
+<p>This analyzer is composed of lowercase tokenizer.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td>
+<p><b>Whitespace analyzer (whitespace)</b></p>
+<p>This analyzer is composed of whitespace tokenizer.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td>
+<p><b>Stop analyzer (stop)</b></p>
+<p>stopwords and stopwords_path can be configured. By default stopwords initialized to English stop words and stopwords_path contains path to a text file with stop words.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td>
+<p><b>Keyword analyzer (keyword)</b></p>
+<p>This analyzer tokenizes an entire stream as a single token. It can be used for zip code.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td>
+<p><b>Pattern analyzer (pattern)</b></p>
+<p>This analyzer mainly deals with regular expressions. Settings like lowercase, pattern, flags, stopwords can be set in this analyzer.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td>
+<p><b>Language analyzer</b></p>
+<p>This analyzer deals with languages like hindi, arabic, ducth etc.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td>
+<p><b>Snowball analyzer (snowball)</b></p>
+<p>This analyzer uses the standard tokenizer, with standard filter, lowercase filter, stop filter, and snowball filter.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td>
+<p><b>Custom analyzer (custom)</b></p>
+<p>This analyzer is used to create customized analyzer with a tokenizer with optional token filters and char filters. Settings like tokenizer, filter, char_filter and position_increment_gap can be configured in this analyzer.</p>
+</td>
+</tr>
+</table>
+<h2>Tokenizers</h2>
+<p>Tokenizers are used for generating tokens from a text in Elasticsearch. Text can be broken down into tokens by taking whitespace or other punctuations into account. Elasticsearch has plenty of built-in tokenizers, which can be used in custom analyzer.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Tokenizer &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>Standard tokenizer (standard)</b></p>
+<p>This is built on grammar based tokenizer and max_token_length can be configured for this tokenizer.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>Edge NGram tokenizer (edgeNGram)</b></p>
+<p>Settings like min_gram, max_gram, token_chars can be set for this tokenizer.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>Keyword tokenizer (keyword)</b></p>
+<p>This generates entire input as an output and buffer_size can be set for this.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>Letter tokenizer (letter)</b></p>
+<p>This captures the whole word until a non-letter is encountered.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>Lowercase tokenizer (lowercase)</b></p>
+<p>This works the same as the letter tokenizer, but after creating tokens, it changes them to lower case.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>NGram Tokenizer (nGram)</b></p>
+<p>Settings like min_gram (default value is 1), max_gram (default value is 2) and token_chars can be set for this tokenizer.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>Whitespace tokenizer (whitespace)</b></p>
+<p>This divides text on the basis of whitespaces.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>Pattern tokenizer (pattern)</b></p>
+<p>This uses regular expressions as a token separator. Pattern, flags and group settings can be set for this tokenizer.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>UAX Email URL Tokenizer (uax_url_email)</b></p>
+<p>This works same lie standard tokenizer but it treats email and URL as single token.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>Path hierarchy tokenizer (path_hierarchy)</b></p>
+<p>This tokenizer generated all the possible paths present in the input directory path. Settings available for this tokenizer are delimiter (defaults to /), replacement, buffer_size (defaults to 1024), reverse (defaults to false) and skip (defaults to 0).</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>Classic tokenizer (classic)</b></p>
+<p>This works on the basis of grammar based tokens. max_token_length can be set for this tokenizer.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>Thai tokenizer (thai)</b></p>
+<p>This tokenizer is used for Thai language and uses built-in Thai segmentation algorithm.</p></td>
+</tr>
+</table>
+<h2>Token Filters</h2>
+<p>Token filters receive input from tokenizers and then these filters can modify, delete or add text in that input. Elasticsearch offers plenty of built-in token filters. Most of them have already been explained in previous sections.</p>
+<h2>Character Filters</h2>
+<p>These filters process the text before tokenizers. Character filters look for special characters or html tags or specified pattern and then either delete then or change them to appropriate words like ‘&’ to and, delete html markup tags. Here is an example of analyzer with synonym specified in synonym.txt &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "settings":{
+      "index":{
+         "analysis":{
+            "analyzer":{
+               "synonym":{
+                  "tokenizer":"whitespace", "filter":["synonym"]
+               }
+            },
+				
+            "filter":{
+               "synonym":{
+                  "type":"synonym", "synonyms_path":"synonym.txt", "ignore_case":"true"
+               }
+            }
+         }
+      }
+   }
+}
+</pre>
+<h1>Elasticsearch - Modules</h1>
+<p>Elasticsearch is composed of a number of modules, which are responsible for its functionality. These modules have the following two types of settings &minus;</p>
+<ul class="list">
+<li><p><b>Static Settings</b> &minus; These settings need to be configured in config (elasticsearch.yml) file before starting Elasticsearch. You need to update all the concern nodes in the cluster to reflect the changes by these settings.</p></li>
+<li><p><b>Dynamic Settings</b> &minus; These settings can be set on live Elasticsearch.</p></li>
+</ul>
+<p>We will discuss the different modules of Elasticsearch in the following sections of this chapter.</p>
+<h2>Cluster-Level Routing and Shard Allocation</h2>
+<p>Cluster level settings decide the allocation of shards to different nodes and reallocation of shards to rebalance cluster. These are the following settings to control shard allocation &minus;</p>
+<h3>Cluster-Level Shard Allocation</h3>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting</th>
+<th style="text-align:center;">Possible value</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td rowspan="5" style="text-align:center; vertical-align:middle;">cluster.routing.allocation.enable
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">all</td>
+<td>This default value allows shard allocation for all kinds of shards.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">primaries</td>
+<td>This allows shard allocation only for primary shards.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">new_primaries</td>
+<td>This allows shard allocation only for primary shards for new indices.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">none</td>
+<td>This does not allow any shard allocations.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">cluster.routing.allocation .node_concurrent_recoveries</td>
+<td style="text-align:center; vertical-align:middle;">Numeric value (by default 2)</td>
+<td>This restricts the number of concurrent shard recovery.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">cluster.routing.allocation .node_initial_primaries_recoveries</td>
+<td style="text-align:center; vertical-align:middle;">Numeric value (by default 4)</td>
+<td>This restricts the number of parallel initial primary recoveries.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">cluster.routing.allocation .same_shard.host</td>
+<td style="vertical-align:middle;">Boolean value (by default false)</td>
+<td>This restricts the allocation of more than one replica of the same shard in the same physical node.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">indices.recovery.concurrent _streams</td>
+<td style="text-align:center; vertical-align:middle;">Numeric value (by default 3)</td>
+<td>This controls the number of open network streams per node at the time of shard recovery from peer shards.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">indices.recovery.concurrent _small_file_streams</td>
+<td style="text-align:center; vertical-align:middle;">Numeric value (by default 2)</td>
+<td>This controls the number of open streams per node for small files having size less than 5mb at the time of shard recovery.</td>
+</tr>
+<tr>
+<td rowspan="5" style="text-align:center; vertical-align:middle;">cluster.routing.rebalance.enable
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">all</td>
+<td>This default value allows balancing for all kinds of shards.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">primaries</td>
+<td>This allows shard balancing only for primary shards.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">replicas</td>
+<td>This allows shard balancing only for replica shards.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">none</td>
+<td>This does not allow any kind of shard balancing.</td>
+</tr>
+<tr>
+<td rowspan="4" style="text-align:center; vertical-align:middle;">cluster.routing.allocation .allow_rebalance
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">always</td>
+<td>This default value always allows rebalancing.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">indices_primaries _active</td>
+<td>This allows rebalancing when all primary shards in cluster are allocated.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Indices_all_active</td>
+<td>This allows rebalancing when all the primary and replica shards are allocated.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">cluster.routing.allocation.cluster _concurrent_rebalance</td>
+<td style="text-align:center; vertical-align:middle;">Numeric value (by default 2)</td>
+<td>This restricts the number of concurrent shard balancing in cluster.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">cluster.routing.allocation .balance.shard</td>
+<td style="text-align:center; vertical-align:middle;">Float value (by default 0.45f)</td>
+<td>This defines the weight factor for shards allocated on every node.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">cluster.routing.allocation .balance.index</td>
+<td style="text-align:center; vertical-align:middle;">Float value (by default 0.55f)</td>
+<td>This defines the ratio of the number of shards per index allocated on a specific node.</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">cluster.routing.allocation .balance.threshold</td>
+<td style="text-align:center; vertical-align:middle;">Non negative float value (by default 1.0f)</td>
+<td>This is the minimum optimization value of operations that should be performed.</td>
+</tr>
+</table>
+<h3>Disk-based Shard Allocation</h3>
+<table class="table table-bordered">
+<tr>
+<th style="width:35%; text-align:center;">Setting</th>
+<th style="width:25%; text-align:center;">Possible value</th>
+<th style="width:40%; text-align:center;">Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">cluster.routing.allocation .disk.threshold_enabled</td>
+<td>Boolean value (by default true)</td>
+<td>This enables and disables disk allocation decider.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">cluster.routing.allocation .disk.watermark.low</td>
+<td style="vertical-align:middle;">String value (by default 85%)</td>
+<td>This denotes maximum usage of disk; after this point, no other shard can be allocated to that disk.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">cluster.routing.allocation .disk.watermark.high</td>
+<td style="vertical-align:middle;">String value (by default 90%)</td>
+<td>This denotes the maximum usage at the time of allocation; if this point is reached at the time of allocation, then Elasticsearch will allocate that shard to another disk.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">cluster.info.update.interval</td>
+<td>String value (by default 30s)</td>
+<td>This is the interval between disk usages checkups.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">cluster.routing.allocation .disk.include_relocations</td>
+<td style="vertical-align:middle;">Boolean value (by default true)</td>
+<td>This decides whether to consider the shards currently being allocated, while calculating disk usage.</td>
+</tr>
+</table>
+<h2>Discovery</h2>
+<p>This module helps a cluster to discover and maintain the state of all the nodes in it. The state of cluster changes when a node is added or deleted from a cluster. The cluster name setting is used to create logical difference between different clusters. There are some modules which help you to use the APIs provided by cloud vendors and those are &minus;</p>
+<ul class="list">
+<li>Azure discovery</li>
+<li>EC2 discovery</li>
+<li>Google compute engine discovery</li>
+<li>Zen discovery</li>
+</ul>
+<h2>Gateway</h2>
+<p>This module maintains the cluster state and the shard data across full cluster restarts. Following are the static settings of this module &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting</th>
+<th style="width:15%; text-align:center; vertical-align:middle;">Possible value</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td style="vertical-align:middle;">gateway.expected_ nodes</td>
+<td style="vertical-align:middle;">numeric value (by default 0)</td>
+<td>The number of nodes that are expected to be in the cluster for the recovery of local shards.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">gateway.expected_ master_nodes</td>
+<td style="vertical-align:middle;">numeric value (by default 0)</td>
+<td>The number of master nodes that are expected to be in the cluster before start recovery.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">gateway.expected_ data_nodes</td>
+<td style="vertical-align:middle;">numeric value (by default 0)</td>
+<td>The number of data nodes expected in the cluster before start recovery.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">gateway.recover_ after_time</td>
+<td style="vertical-align:middle;">String value (by default 5m)</td>
+<td>This specifies the time for which the recovery process will wait to start regardless of the number of nodes joined in the cluster.
+<ul class="list">
+<li>gateway.recover_ after_nodes</li>
+<li>gateway.recover_after_ master_nodes</li>
+<li>gateway.recover_after_ data_nodes</li>
+</td>
+</tr>
+</table>
+<h2>HTTP</h2>
+<p>This module manages the communication between HTTP client and Elasticsearch APIs. This module can be disabled by changing the value of http.enabled to false. The following are the settings (configured in elasticsearch.yml) to control this module &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Setting &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>http.port</b></p>
+<p>This is a port to access Elasticsearch and it ranges from 9200-9300.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>http.publish_port</b></p>
+<p>This port is for http clients and is also useful in case of firewall.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>http.bind_host</b></p>
+<p>This is a host address for http service.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>http.publish_host</b></p>
+<p>This is a host address for http client.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>http.max_content_length</b></p>
+<p>This is the maximum size of content in an http request. Its default value is 100mb.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>http.max_initial_line_length</b></p>
+<p>This is the maximum size of URL and its default value is 4kb.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>http.max_header_size</b></p>
+<p>This is the maximum http header size and its default value is 8kb.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>http.compression</b></p>
+<p>This enables or disables support for compression and its default value is false.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>http.pipelinig</b></p>
+<p>This enables or disables HTTP pipelining.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>http.pipelining.max_events</b></p>
+<p>This restricts the number of events to be queued before closing an HTTP request.</p></td>
+</tr>
+</table>
+<h2>Indices</h2>
+<p>This module maintains the settings, which are set globally for every index. The following settings are mainly related to memory usage &minus;</p>
+<h3>Circuit Breaker</h3>
+<p>This is used for preventing operation from causing an OutOfMemroyError. The setting mainly restricts the JVM heap size. For example, indices.breaker.total.limit setting, which defaults to 70% of JVM heap.</p>
+<h3>Fielddata Cache</h3>
+<p>This is used mainly when aggregating on a field. It is recommended to have enough memory to allocate it. The amount of memory used for the field data cache can be controlled using indices.fielddata.cache.size setting.</p>
+<h3>Node Query Cache</h3>
+<p>This memory is used for caching the query results. This cache uses Least Recently Used (LRU) eviction policy. Indices.queries.cahce.size setting controls the memory size of this cache.</p>
+<h3>Indexing Buffer</h3>
+<p>This buffer stores the newly created documents in the index and flushes them when the buffer is full. Setting like indices.memory.index_buffer_size control the amount of heap allocated for this buffer.</p>
+<h3>Shard Request Cache</h3>
+<p>This cache is used to store local search data for every shard. Cache can be enabled during the creation of index or can be disabled by sending URL parameter.</p>
+<pre class="result notranslate">
+Disable cache - ?request_cache = true
+Enable cache "index.requests.cache.enable": true
+</pre>
+<h3>Indices Recovery</h3>
+<p>It controls the resources during recovery process. The following are the settings &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting</th>
+<th style="text-align:center;">Default value</th>
+</tr>
+<tr>
+<td>indices.recovery.concurrent_streams</td>
+<td style="text-align:center;">3</td>
+</tr>
+<tr>
+<td>indices.recovery.concurrent_small_file_streams</td>
+<td style="text-align:center;">2</td>
+</tr>
+<tr>
+<td>indices.recovery.file_chunk_size</td>
+<td style="text-align:center;">512kb</td>
+</tr>
+<tr>
+<td>indices.recovery.translog_ops</td>
+<td style="text-align:center;">1000</td>
+</tr>
+<tr>
+<td>indices.recovery.translog_size</td>
+<td style="text-align:center;">512kb</td>
+</tr>
+<tr>
+<td>indices.recovery.compress</td>
+<td style="text-align:center;">true</td>
+</tr>
+<tr>
+<td>indices.recovery.max_bytes_per_sec</td>
+<td style="text-align:center;">40mb</td>
+</tr>
+</table>
+<h3>TTL Interval</h3>
+<p>Time to Live (TTL) interval defines the time of a document, after which the document gets deleted. The following are the dynamic settings for controlling this process &minus;</p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center;">Setting</th>
+<th style="text-align:center;">Default value</th>
+</tr>
+<tr>
+<td>indices.ttl.interval</td>
+<td>60s</td>
+</tr> 
+<tr>
+<td>indices.ttl.bulk_size</td>
+<td>1000</td>
+</tr> 
+</table>
+<h2>Node</h2>
+<p>Each node has an option to be data node or not. You can change this property by changing <b>node.data</b> setting. Setting the value as <b>false</b> defines that the node is not a data node.</p>
+<h1>Elasticsearch - Testing</h1>
+<p>Elasticsearch provides a jar file, which can be added to any java IDE and can be used to test the code which is related to Elasticsearch. A range of tests can be performed by using the framework provided by Elasticsearch &minus;</p>
+<ul class="list">
+<li>Unit testing</li>
+<li>Integration testing</li>
+<li>Randomized testing</li>
+</ul>
+<p>To start with testing, you need to add the Elasticsearch testing dependency to your program. You can use maven for this purpose and can add the following in pom.xml.</p>
+<pre class="result notranslate">
+&lt;dependency&gt;
+   &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
+   &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
+   &lt;version&gt;2.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+<p>EsSetup has been initialized to start and stop Elasticsearch node and also to create indices.</p>
+<p>EsSetup esSetup = new EsSetup();</p>
+<p>esSetup.execute() function with createIndex will create the indices, you need to specify the settings, type and data.</p>
+<h2>Unit Testing</h2>
+<p>Unit test is carried out by using JUnit and Elasticsearch test framework. Node and indices can be created using Elasticsearch classes and in test method can be used to perform the testing. ESTestCase and ESTokenStreamTestCase classes are used for this testing.</p>
+<h2>Integration Testing</h2>
+<p>Integration testing uses multiple nodes in a cluster. ESIntegTestCase class is used for this testing. There are various methods which make the job of preparing a test case easier.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>refresh()</b></p>
+<p>All the indices in a cluster are refreshed</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>ensureGreen()</b></p>
+<p>Ensures a green health cluster state</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>ensureYellow()</b></p>
+<p>Ensures a yellow health cluster state</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>createIndex(name)</b></p>
+<p>Create index with the name passed to this method</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>flush()</b></p>
+<p>All indices in cluster are flushed</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>flushAndRefresh()</b></p>
+<p>flush() and refresh()</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>indexExists(name)</b></p>
+<p>Verifies the existence of specified index</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>clusterService()</b></p>
+<p>Returns the cluster service java class</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>cluster()</b></p>
+<p>Returns the test cluster class</p></td>
+</tr>
+</table>
+<h3>Test Cluster Methods</h3>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">1</td>
+<td>
+<p><b>ensureAtLeastNumNodes(n)</b></p>
+<p>Ensures minimum number of nodes up in a cluster is more than or equal to specified number.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">2</td>
+<td>
+<p><b>ensureAtMostNumNodes(n)</b></p>
+<p>Ensures maximum number of nodes up in a cluster is less than or equal to specified number.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">3</td>
+<td>
+<p><b>stopRandomNode()</b></p>
+<p>To stop a random node in a cluster</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">4</td>
+<td>
+<p><b>stopCurrentMasterNode()</b></p>
+<p>To stop the master node</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">5</td>
+<td>
+<p><b>stopRandomNonMaster()</b></p>
+<p>To stop a random node in a cluster, which is not a master node</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">6</td>
+<td>
+<p><b>buildNode()</b></p>
+<p>Create a new node</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">7</td>
+<td>
+<p><b>startNode(settings)</b></p>
+<p>Start a new node</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:centre;">8</td>
+<td>
+<p><b>nodeSettings()</b></p>
+<p>Override this method for changing node settings</p></td>
+</tr>
+</table>
+<h3>Accessing Clients</h3>
+<p>Client is used to access different nodes in a cluster and carry out some action. ESIntegTestCase.client() method is used for getting a random client. Elasticsearch offers other methods also to access client and those methods can be accessed using ESIntegTestCase.internalCluster() method.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:center;">1</td>
+<td><p><b>iterator()</b></p>
+<p>This helps you to access all the available clients.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:center;">2</td>
+<td><p><b>masterClient()</b></p>
+<p>This returns a client, which is communicating with master node.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:center;">3</td>
+<td><p><b>nonMasterClient()</b></p>
+<p>This returns a client, which is not communicating with master node.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:center;">4</td>
+<td><p><b>clientNodeClient()</b></p>
+<p>This returns a client currently up on client node.</p></td>
+</tr>
+</table>
+<h2>Randomized Testing</h2>
+<p>This testing is used to test the user’s code with every possible data, so that there will be no failure in future with any type of data. Random data is the best option to carry out this testing.</p>
+<h3>Generating Random Data</h3>
+<p>In this testing, the Random class is instantiated by the instance provided by RandomizedTest and offers many methods for getting different types of data.</p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center;">Method</th>
+<th style="text-align:center;">Return value</th>
+</tr>
+<tr>
+<td>getRandom()</td>
+<td>Instance of random class</td>
+</tr>
+<tr>
+<td>randomBoolean()</td>
+<td>Random boolean</td>
+</tr>
+<tr>
+<td>randomByte()</td>
+<td>Random byte</td>
+</tr>
+<tr>
+<td>randomShort()</td>
+<td>Random short</td>
+</tr>
+<tr>
+<td>randomInt()</td>
+<td>Random integer</td>
+</tr>
+<tr>
+<td>randomLong()</td>
+<td>Random long</td>
+</tr>
+<tr>
+<td>randomFloat()</td>
+<td>Random float</td>
+</tr>
+<tr>
+<td>randomDouble()</td>
+<td>Random double</td>
+</tr>
+<tr>
+<td>randomLocale()</td>
+<td>Random locale</td>
+</tr>
+<tr>
+<td>randomTimeZone()</td>
+<td>Random time zone</td>
+</tr>
+<tr>
+<td>randomFrom()</td>
+<td>Random element from array</td>
+</tr>
+</table>
+<h2>Assertions</h2>
+<p>ElasticsearchAssertions and ElasticsearchGeoAssertions classes contain assertions, which are used for performing some common checks at the time of testing. For example,</p>
+<pre class="prettyprint notranslate">
+SearchResponse seearchResponse = client().prepareSearch();
+assertHitCount(searchResponse, 6);
+assertFirstHit(searchResponse, hasId("6"));
+assertSearchHits(searchResponse, "1", "2", "3", "4",”5”,”6”);
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_testing.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/elasticsearch/elasticsearch_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/elasticsearch/elasticsearch_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:35:12 GMT -->
+</html>

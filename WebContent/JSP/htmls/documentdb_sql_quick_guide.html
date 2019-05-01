@@ -1,0 +1,3699 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:28:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>DocumentDB SQL Quick Guide</title>
+<meta name="description" content="DocumentDB SQL Quick Guide - Learn DocumentDB SQL in simple and easy steps starting from Overview, Select Clause, From Clause, Where Clause, Operators, Between Keyword, In Keyword, Value Keyword, Order By Clause, Iteration, Joins, Aliasing, Array Creation, Scalar Expressions, Parameterized SQL, Built-in Function, Linq to SQL Translation, JavaScript Integration, User-Defined Functions, Composite SQL Queries." /> 
+<meta name="keywords" content="DocumentDB SQL, Tutorial Learning, Beginners, Overview, Select Clause, From Clause, Where Clause, Operators, Between Keyword, In Keyword, Value Keyword, Order By Clause, Iteration, Joins, Aliasing, Array Creation, Scalar Expressions, Parameterized SQL, Built-in Function, Linq to SQL Translation, JavaScript Integration, User-Defined Functions, Composite SQL Queries." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #faa40e url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #faa40e !important;}
+.submenu-item{ border-bottom: 2px solid #faa40e !important; border-top: 2px solid #faa40e !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/documentdb-sql-mini-logo.jpg" alt="DocumentDB SQL Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">DocumentDB SQL Tutorial</li>
+<li><a href="index.html">DocumentDB SQL - Home</a></li>
+<li><a href="documentdb_sql_overview.html">DocumentDB SQL - Overview</a></li>
+<li><a href="documentdb_sql_select_clause.html">DocumentDB SQL - Select Clause</a></li>
+<li><a href="documentdb_sql_from_clause.html">DocumentDB SQL - From Clause</a></li>
+<li><a href="documentdb_sql_where_clause.html">DocumentDB SQL - Where Clause</a></li>
+<li><a href="documentdb_sql_operators.html">DocumentDB SQL - Operators</a></li>
+<li><a href="documentdb_sql_between_keyword.html">DocumentDB - Between Keyword</a></li>
+<li><a href="documentdb_sql_in_keyword.html">DocumentDB SQL - In Keyword</a></li>
+<li><a href="documentdb_sql_value_keyword.html">DocumentDB SQL - Value Keyword</a></li>
+<li><a href="documentdb_sql_order_by_clause.html">DocumentDB SQL - Order By Clause</a></li>
+<li><a href="documentdb_sql_iteration.html">DocumentDB SQL - Iteration</a></li>
+<li><a href="documentdb_sql_joins.html">DocumentDB SQL - Joins</a></li>
+<li><a href="documentdb_sql_aliasing.html">DocumentDB SQL - Aliasing</a></li>
+<li><a href="documentdb_sql_array_creation.html">DocumentDB SQL - Array Creation</a></li>
+<li><a href="documentdb_sql_scalar_expressions.html">DocumentDB - Scalar Expressions</a></li>
+<li><a href="documentdb_sql_parameterized.html">DocumentDB SQL - Parameterized</a></li>
+<li><a href="documentdb_sql_builtin_function.html">DocumentDB SQL - Built-in Function</a></li>
+<li><a href="documentdb_sql_linq_to_sql_translation.html">Linq to SQL Translation</a></li>
+<li><a href="documentdb_sql_javascript_integration.html">JavaScript Integration</a></li>
+<li><a href="documentdb_sql_user_defined_functions.html">User-Defined Functions</a></li>
+<li><a href="documentdb_sql_composite_sql_queries.html">Composite SQL Queries</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">DocumentDB SQL Useful Resources</li>
+<li><a href="documentdb_sql_quick_guide.html">DocumentDB SQL - Quick Guide</a></li>
+<li><a href="documentdb_sql_useful_resources.html">DocumentDB SQL - Useful Resources</a></li>
+<li><a href="documentdb_sql_discussion.html">DocumentDB SQL - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>DocumentDB SQL - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="documentdb_sql_composite_sql_queries.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="documentdb_sql_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>DocumentDB SQL - Overview</h1>
+<p>DocumentDB is Microsoft's newest NoSQL document database platform that runs on Azure. In this tutorial, we will learn all about querying documents using the special version of SQL supported by DocumentDB.</p>
+<h2>NoSQL Document Database</h2>
+<p>DocumentDB is Microsoft's newest NoSQL document database, however, when we say NoSQL document database, what precisely do we mean by NoSQL, and document database?</p>
+<ul class="list">
+<li><p>SQL means Structured Query Language which is a traditional query language of relational databases. SQL is often equated with relational databases.</p></li>
+<li><p>It is really more helpful to think of a NoSQL database as a non-relational database, so NoSQL really means non-relational.</p></li>
+</ul>
+<p>There are different types of NoSQL databases which include key value stores such as &minus;</p>
+<ul class="list">
+<li>Azure Table Storage</li>
+<li>Column-based stores, like Cassandra</li>
+<li>Graph databases, like NEO4</li>
+<li>Document databases, like MongoDB and Azure DocumentDB</li>
+</ul>
+<h2>Why SQL Syntax?</h2>
+<p>This can sound strange at first, but in DocumentDB which is a NoSQL database, we query using SQL. As mentioned above, this is a special version of SQL rooted in JSON and JavaScript semantics.</p>
+<ul class="list">
+<li><p>SQL is just a language, but it's also a very popular language that's rich and expressive. Thus, it definitely seems like a good idea to use some dialect of SQL rather than come up with a whole new way of expressing queries that we would need to learn if you wanted to get documents out of your database.</p></li>
+<li><p>SQL is designed for relational databases, and DocumentDB is a non-relational document database. DocumentDB team has actually adapted the SQL syntax for the non-relational world of document databases, and this is what is meant by rooting SQL in JSON and JavaScript.</p></li>
+<li><p>The language still reads as familiar SQL, but the semantics are all based on schemafree JSON documents rather than relational tables. In DocumentDB, we will be working with JavaScript data types rather than SQL data types. We will be familiar with SELECT, FROM, WHERE, and so on, but with JavaScript types, which are limited to numbers and strings, objects, arrays, Boolean, and null are far fewer than the wide range of SQL data types.</p></li>
+<li><p>Similarly, expressions are evaluated as JavaScript expressions rather than some form of T-SQL. For example, in a world of denormalized data, we're not dealing with the rows and columns, but schema-free documents with hierarchal structures that contain nested arrays and objects.</p></li>
+</ul>
+<h2>How does SQL Work?</h2> 
+<p>The DocumentDB team has answered this question in several innovative ways. Few of them are listed as follows &minus;</p>
+<ul class="list">
+<li><p>First, assuming you've not changed the default behavior to automatically index every property in a document, you can use dotted notation in your queries to navigate a path to any property no matter how deeply nested it may be within the document.</p></li>
+<li><p>You can also perform an intra-document join in which nested array elements are joined with their parent element within a document in a manner very similar to the way a join is performed between two tables in the relational world.</p></li>
+<li><p>Your queries can return documents from the database as it is, or you can project any custom JSON shape you want based on as much or as little of the document data that you want.</p></li>
+<li><p>SQL in DocumentDB supports many of the common operators including &minus;</p>
+<ul class="list">
+<li><p>Arithmetic and bitwise operations</p></li>
+<li><p>AND and OR logic</p></li>
+<li><p>Equality and range comparisons</p></li>
+<li><p>String concatenation</p></li>
+</ul>
+</li>
+<li><p>The query language also supports a host of built-in functions.</p></li>
+</ul>
+<h1>DocumentDB SQL - Select Clause</h1>
+<p>The Azure portal has a Query Explorer that lets us run any SQL query against our DocumentDB database. We will use the Query Explorer to demonstrate the many different capabilities and features of the query language starting with the simplest possible query.</p>
+<p><b>Step 1</b> &minus; Open the Azure Portal, and in the database blade, click the Query Explorer blade.</p>
+<img src="images/query_explorer_blade.jpg" alt="Query Explorer Blade" />
+<p>Remember that queries run within the scope of a collection, and so the Query Explorer lets us choose the collection in this dropdown. We will leave it set to our Families collection that contains the three documents. Let’s consider these three documents in this example.</p>
+<p>Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily",
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7, 
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+			
+      } 
+   ],
+	
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+	
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6, 
+		
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      }, 
+	
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3, 
+		
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ]
+		
+      } 
+   ], 
+	
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false
+} 
+</pre>
+<p>The Query Explorer opens up with this simple query SELECT * FROM c, which simply retrieves all documents from the collection. Although it is simple, it's still quite different than the equivalent query in a relational database.</p>
+<p><b>Step 2</b> &minus; In relational databases, SELECT * means return all columns while in DocumentDB. It means that you want each document in your result to be returned exactly as it's stored in the database.</p>
+<p>But when you select specific properties and expressions instead of simply issuing a SELECT *, then you are projecting a new shape that you want for each document in the result.</p>
+<p><b>Step 3</b> &minus; Click ‘Run’ to execute query and open the Results blade.</p>
+<img src="images/open_results_blade.jpg" alt="Open Results Blade" />
+<p>As can be seen the WakefieldFamily, the SmithFamily, and the AndersonFamily are retrieved.</p>
+<p>Following are the three documents which are retrieved as a result of the <b>SELECT * FROM c</b> query.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "id": "WakefieldFamily",
+      "parents": [ 
+         { 
+            "familyName": "Wakefield", 
+            "givenName": "Robin" 
+         }, 
+		
+         { 
+            "familyName": "Miller", 
+            "givenName": "Ben" 
+         } 
+      ],
+	  
+      "children": [ 
+         { 
+            "familyName": "Merriam", 
+            "givenName": "Jesse", 
+            "gender": "female", 
+            "grade": 6, 
+			
+            "pets": [ 
+               { 
+                  "givenName": "Charlie Brown", 
+                  "type": "Dog" 
+               },
+			
+               { 
+                  "givenName": "Tiger", 
+                  "type": "Cat" 
+               },
+			
+               { 
+                  "givenName": "Princess", 
+                  "type": "Cat" 
+               } 
+            ] 
+         }, 
+		
+         { 
+            "familyName": "Miller", 
+            "givenName": "Lisa", 
+            "gender": "female", 
+            "grade": 3, 
+			
+            "pets": [ 
+               { 
+                  "givenName": "Jake",
+                  "type": "Snake" 
+               } 
+            ] 
+         } 
+      ], 
+		
+      "location": { 
+         "state": "NY", 
+         "county": "Manhattan", 
+         "city": "NY" 
+      }, 
+		
+      "isRegistered": false, 
+      "_rid": "Ic8LAJFujgECAAAAAAAAAA==", 
+      "_ts": 1450541623, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgECAAAAAAAAAA==/", 
+      "_etag": "\"00000500-0000-0000-0000-567582370000\"", 
+      "_attachments": "attachments/" 
+   }, 
+	
+   { 
+      "id": "SmithFamily", 
+      "parents": [ 
+         { 
+            "familyName": "Smith", 
+            "givenName": "James" 
+         }, 
+		
+         { 
+            "familyName": "Curtis", 
+            "givenName": "Helen" 
+         } 
+      ], 
+		
+      "children": [ 
+         { 
+            "givenName": "Michelle", 
+            "gender": "female", 
+            "grade": 1 
+         }, 
+		
+         { 
+            "givenName": "John", 
+            "gender": "male", 
+            "grade": 7,
+			
+            "pets": [ 
+               { 
+                  "givenName": "Tweetie", 
+                  "type": "Bird" 
+               } 
+            ] 
+         } 
+      ],
+		
+      "location": { 
+         "state": "NY", 
+         "county": "Queens", 
+         "city": "Forest Hills" 
+      }, 
+		
+      "isRegistered": true, 
+      "_rid": "Ic8LAJFujgEDAAAAAAAAAA==", 
+      "_ts": 1450541623, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgEDAAAAAAAAAA==/", 
+      "_etag": "\"00000600-0000-0000-0000-567582370000\"", 
+      "_attachments": "attachments/" 
+   }, 
+	
+   { 
+      "id": "AndersenFamily", 
+      "lastName": "Andersen", 
+		
+      "parents": [ 
+         { 
+            "firstName": "Thomas", 
+            "relationship": "father" 
+         },
+		
+         { 
+            "firstName": "Mary Kay", 
+            "relationship": "mother" 
+         } 
+      ], 
+		
+      "children": [ 
+         { 
+            "firstName": "Henriette Thaulow", 
+            "gender": "female", 
+            "grade": 5, 
+			
+            "pets": [  
+               "givenName": "Fluffy", 
+               "type": "Rabbit" 
+            ] 
+         } 
+      ],
+		
+      "location": { 
+         "state": "WA", 
+         "county": "King", 
+         "city": "Seattle" 
+      },
+		
+      "isRegistered": true, 
+      "_rid": "Ic8LAJFujgEEAAAAAAAAAA==", 
+      "_ts": 1450541624, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgEEAAAAAAAAAA==/", 
+      "_etag": "\"00000700-0000-0000-0000-567582380000\"", 
+      "_attachments": "attachments/" 
+   }
+]	
+</pre>
+<p>However, these results also include the system-generated properties that are all prefixed with the underscore character.</p>
+<h1>DocumentDB SQL - From Clause</h1>
+<p>In this chapter, we will cover the FROM clause, which works nothing like a standard FROM clause in regular SQL.</p>
+<p>Queries always run within the context of a specific collection and cannot join across documents within the collection, which makes us wonder why we need a FROM clause. In fact, we don't, but if we don't include it, then we won't be querying documents in the collection.</p>
+<p>The purpose of this clause is to specify the data source upon which the query must operate. Commonly the whole collection is the source, but one can specify a subset of the collection instead. The FROM &lt;from_specification&gt; clause is optional unless the source is filtered or projected later in the query.</p>
+<p>Let’s take a look at the same example again. Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen",
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ], 
+	
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      }, 
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ], 
+	
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   }, 
+	
+   "isRegistered": true 
+} 
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	 
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6, 
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      }, 
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ], 
+	
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+} 
+</pre>
+<img src="images/wakefield_family.jpg" alt="WakefieldFamily" />
+<p>In the above query, “<b>SELECT * FROM c</b>” indicates that the entire Families collection is the source over which to enumerate.</p>
+<h2>Sub-documents</h2>
+<p>The source can also be reduced to a smaller subset. When we want to retrieve only a subtree in each document, the sub-root could then become the source, as shown in the following example.</p>
+<img src="images/sub_documents.jpg" alt="Sub-documents" />
+<p>When we run the following query &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT * FROM Families.parents
+</pre>
+<p>The following sub-documents will be retrieved.</p>
+<pre class="result notranslate">
+[ 
+   [ 
+      { 
+         "familyName": "Wakefield", 
+         "givenName": "Robin" 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Ben" 
+      } 
+   ],
+	
+   [ 
+      { 
+         "familyName": "Smith", 
+         "givenName": "James"
+      },
+		
+      { 
+         "familyName": "Curtis", 
+         "givenName": "Helen" 
+      } 
+   ],
+	
+   [ 
+      { 
+         "firstName": "Thomas", 
+         "relationship": "father" 
+      },
+		
+      { 
+         "firstName": "Mary Kay", 
+         "relationship": "mother" 
+      } 
+   ] 
+]
+</pre>
+<p>As a result of this query, we can see that only the parents sub-documents are retrieved.</p>
+<h1>DocumentDB SQL - Where Clause</h1>
+<p>In this chapter, we will cover the WHERE clause, which is also optional like FROM clause. It is used to specify a condition while fetching the data in the form of JSON documents provided by the source. Any JSON document must evaluate the specified conditions to be "true" to be considered for the result. If the given condition is satisfied, only then it returns specific data in the form of JSON document(s). We can use WHERE clause to filter the records and fetch only necessary records.</p>
+<p>We will consider the same three documents in this example. Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+	
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+	
+   "children": [  
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+	
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+	
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ], 
+
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6, 
+			
+         "pets": [
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3, 
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+	
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+}
+</pre>
+<p>Let’s take a look at a simple example in which WHERE clause is used.</p>
+<img src="images/where_clause.jpg" alt="WHERE Clause" />
+<p>In this query, in WHERE clause, the (WHERE f.id = "WakefieldFamily") condition is specified.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM f  
+WHERE f.id = "WakefieldFamily"
+</pre>
+<p>When the above query is executed, it will return the complete JSON document for WakefieldFamily as shown in the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "id": "WakefieldFamily", 
+		
+      "parents": [ 
+         { 
+            "familyName": "Wakefield", 
+            "givenName": "Robin" 
+         },
+			
+         { 
+            "familyName": "Miller", 
+            "givenName": "Ben" 
+         } 
+      ],
+		
+      "children": [ 
+         { 
+            "familyName": "Merriam", 
+            "givenName": "Jesse", 
+            "gender": "female", 
+            "grade": 6,
+				
+            "pets": [ 
+               { 
+                  "givenName": "Charlie Brown", 
+                  "type": "Dog" 
+               }, 
+					
+               { 
+                  "givenName": "Tiger", 
+                  "type": "Cat" 
+               }, 
+					
+               { 
+                  "givenName": "Princess", 
+                  "type": "Cat" 
+               } 
+            ] 
+         }, 
+			
+         { 
+            "familyName": "Miller", 
+            "givenName": "Lisa", 
+            "gender": "female", 
+            "grade": 3, 
+				
+            "pets": [ 
+               { 
+                  "givenName": "Jake", 
+                  "type": "Snake" 
+               }
+            ]
+				
+         } 
+      ],
+		
+      "location": { 
+         "state": "NY", 
+         "county": "Manhattan", 
+         "city": "NY" 
+      },
+		
+      "isRegistered": false, 
+      "_rid": "Ic8LAJFujgECAAAAAAAAAA==", 
+      "_ts": 1450541623, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgECAAAAAAAAAA==/", 
+      "_etag": "\"00000500-0000-0000-0000-567582370000\"", 
+      "_attachments": "attachments/" 
+   } 
+]	  
+</pre>
+<h1>DocumentDB SQL - Operators</h1>
+<p>An operator is a reserved word or a character used primarily in an SQL WHERE clause to perform operation(s), such as comparisons and arithmetic operations. DocumentDB SQL also supports a variety of scalar expressions. The most commonly used are <b>binary and unary expressions</b>.</p>
+<p>The following SQL operators are currently supported and can be used in queries.</p>
+<h2>SQL Comparison Operators</h2>
+<p>Following is a list of all the comparison operators available in DocumentDB SQL grammar.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Operators &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>=</b></p>
+<p>Checks if the values of two operands are equal or not. If yes, then condition becomes true.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>!=</b></p>
+<p>Checks if the values of two operands are equal or not. If values are not equal then condition becomes true.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>&lt;&gt;</b></p>
+<p>Checks if the values of two operands are equal or not. If values are not equal then condition becomes true.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>&gt;</b></p>
+<p>Checks if the value of left operand is greater than the value of right operand. If yes, then condition becomes true.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>&lt;</b></p>
+<p>Checks if the value of left operand is less than the value of right operand. If yes, then condition becomes true.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>&gt;=</b></p>
+<p>Checks if the value of left operand is greater than or equal to the value of right operand. If yes, then condition becomes true.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>&lt;=</b></p>
+<p>Checks if the value of left operand is less than or equal to the value of right operand. If yes, then condition becomes true.</p></td>
+</tr>
+</table>
+<h2>SQL Logical Operators</h2>
+<p>Following is a list of all the logical operators available in DocumentDB SQL grammar.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Operators &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>AND</b></p>
+<p>The AND operator allows the existence of multiple conditions in an SQL statement's WHERE clause.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>BETWEEN</b></p>
+<p>The BETWEEN operator is used to search for values that are within a set of values, given the minimum value and the maximum value.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>IN</b></p>
+<p>The IN operator is used to compare a value to a list of literal values that have been specified.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>OR</b></p>
+<p>The OR operator is used to combine multiple conditions in an SQL statement's WHERE clause.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>NOT</b></p>
+<p>The NOT operator reverses the meaning of the logical operator with which it is used. For example, NOT EXISTS, NOT BETWEEN, NOT IN, etc. This is a negate operator.</p></td>
+</tr>
+</table>
+<h2>SQL Arithmetic Operators</h2>
+<p>Following is a list of all the arithmetic operators available in DocumentDB SQL grammar.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Operators &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>+</b></p>
+<p><b>Addition</b> &minus; Adds values on either side of the operator.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>-</b></p>
+<p><b>Subtraction</b> &minus; Subtracts the right hand operand from the left hand operand.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>*</b></p>
+<p><b>Multiplication</b> &minus; Multiplies values on either side of the operator.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>/</b></p>
+<p><b>Division</b> &minus; Divides the left hand operand by the right hand operand.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>%</b></p>
+<p><b>Modulus</b> &minus; Divides the left hand operand by the right hand operand and returns the remainder.</p></td>
+</tr>
+</table>
+<p>We will consider the same documents in this example as well. Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+	
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+	
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male",
+         "grade": 7, 
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+	
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+	
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+	
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3, 
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+	
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+}
+</pre>
+<p>Let’s take a look at a simple example in which a comparison operator is used in WHERE clause.</p>
+<img src="images/comparison_operator.jpg" alt="Comparison Operator" />
+<p>In this query, in WHERE clause, the (WHERE f.id = "WakefieldFamily") condition is specified, and it will retrieve the document whose id is equal to WakefieldFamily.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM f  
+WHERE f.id = "WakefieldFamily"
+</pre>
+<p>When the above query is executed, it will return the complete JSON document for WakefieldFamily as shown in the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "id": "WakefieldFamily", 
+      "parents": [ 
+         { 
+            "familyName": "Wakefield", 
+            "givenName": "Robin" 
+         },
+			
+         { 
+            "familyName": "Miller", 
+            "givenName": "Ben" 
+         } 
+      ],
+		
+      "children": [ 
+         { 
+            "familyName": "Merriam", 
+            "givenName": "Jesse", 
+            "gender": "female", 
+            "grade": 6,
+				
+            "pets": [ 
+               { 
+                  "givenName": "Charlie Brown", 
+                  "type": "Dog" 
+               }, 
+					
+               { 
+                  "givenName": "Tiger", 
+                  "type": "Cat" 
+               },
+					
+               { 
+                  "givenName": "Princess", 
+                  "type": "Cat" 
+               } 
+            ]
+				
+         },
+			
+         { 
+            "familyName": "Miller", 
+            "givenName": "Lisa", 
+            "gender": "female", 
+            "grade": 3, 
+				
+            "pets": [ 
+               { 
+                  "givenName": "Jake", 
+                  "type": "Snake" 
+               } 
+            ] 
+         } 
+      ],
+		
+      "location": { 
+         "state": "NY", 
+         "county": "Manhattan", 
+         "city": "NY" 
+      }, 
+		
+      "isRegistered": false, 
+      "_rid": "Ic8LAJFujgECAAAAAAAAAA==", 
+      "_ts": 1450541623, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgECAAAAAAAAAA==/", 
+      "_etag": "\"00000500-0000-0000-0000-567582370000\"", 
+      "_attachments": "attachments/" 
+   } 
+] 		 
+</pre>
+<p>Let’s take a look at another example in which the query will retrieve the children data whose grade is greater than 5.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM Families.children[0] c 
+WHERE (c.grade &gt; 5)
+</pre>
+<p>When the above query is executed, it will retrieve the following sub document as shown in the output.</p>
+<pre class="result notranslate">
+[
+   {
+      "familyName": "Merriam", 
+      "givenName": "Jesse", 
+      "gender": "female", 
+      "grade": 6, 
+		
+      "pets": [
+         { 
+            "givenName": "Charlie Brown", 
+            "type": "Dog" 
+         }, 
+			
+         { 
+            "givenName": "Tiger", 
+            "type": "Cat" 
+         }, 
+			
+         { 
+            "givenName": "Princess", 
+            "type": "Cat" 
+         } 
+      ] 
+   } 
+]
+</pre>
+<h1>DocumentDB SQL - Between Keyword</h1>
+<p>The BETWEEN keyword is used to express queries against ranges of values like in SQL. BETWEEN can be used against strings or numbers. The main difference between using BETWEEN in DocumentDB and ANSI SQL is that you can express range queries against properties of mixed types.</p>
+<p>For example, in some document it is possible that you might have "grade" as a number and in other documents it might be strings. In these cases, a comparison between two different types of results is "undefined", and the document will be skipped.</p>
+<p>Let us consider the three documents from the previous example. Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+	
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+} 
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" }
+   ],
+	
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      }, 
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+	
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   }, 
+	
+   "isRegistered": true 
+} 
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+	
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3, 
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+	
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+} 
+</pre>
+<p>Let’s take a look at an example, where the query returns all family documents in which the first child's grade is between 1-5 (both inclusive).</p>
+<img src="images/returns_family_documents.jpg" alt="Returns Family Documents" />
+<p>Following is the query in which BETWEEN keyword is used and then AND logical operator.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM Families.children[0] c 
+WHERE c.grade BETWEEN 1 AND 5
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "givenName": "Michelle", 
+      "gender": "female", 
+      "grade": 1 
+   }, 
+	
+   { 
+      "firstName": "Henriette Thaulow", 
+      "gender": "female", 
+      "grade": 5, 
+		
+      "pets": [ 
+         { 
+            "givenName": "Fluffy",
+            "type": "Rabbit" 
+         } 
+      ] 
+   } 
+]
+</pre>
+<p>To display the grades outside the range of the previous example, use NOT BETWEEN as shown in the following query.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM Families.children[0] c 
+WHERE c.grade NOT BETWEEN 1 AND 5
+</pre>
+<p>When this query is executed. It produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "familyName": "Merriam", 
+      "givenName": "Jesse", 
+      "gender": "female", 
+      "grade": 6, 
+		
+      "pets": [ 
+         { 
+            "givenName": "Charlie Brown", 
+            "type": "Dog" 
+         }, 
+			
+         { 
+            "givenName": "Tiger", 
+            "type": "Cat" 
+         },
+			
+         {
+            "givenName": "Princess", 
+            "type": "Cat" 
+         } 
+      ] 
+   }
+]
+</pre>
+<h1>DocumentDB SQL - In Keyword</h1>
+<p>The IN keyword can be used to check whether a specified value matches any value in a list. The IN operator allows you to specify multiple values in a WHERE clause. IN is equivalent to chaining multiple OR clauses.</p>
+<p>The similar three documents are considered as done in earlier examples. Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen",
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ], 
+	
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+	
+   "children": [ 
+      {
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+	
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6, 
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" },
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      }, 
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+}
+</pre>
+<p>Let’s take a look at a simple example.</p>
+<img src="images/in_keyword.jpg" alt="In KeyWord" />
+<p>Following is the query which will retrieve the data whose familyName is either “Smith” or Wakefield.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM Families.parents[0] f 
+WHERE f.familyName IN ('Smith', 'Wakefield')
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "familyName": "Wakefield", 
+      "givenName": "Robin" 
+   }, 
+	
+   { 
+      "familyName": "Smith", 
+      "givenName": "James" 
+   } 
+]
+</pre>
+<p>Let’s consider another simple example in which all family documents will be retrieved where the id is one of "SmithFamily" or "AndersenFamily". Following is the query.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM Families  
+WHERE Families.id IN ('SmithFamily', 'AndersenFamily')
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "id": "SmithFamily", 
+      "parents": [ 
+         { 
+            "familyName": "Smith", 
+            "givenName": "James" 
+         }, 
+			
+         { 
+            "familyName": "Curtis", 
+            "givenName": "Helen"
+         } 
+      ], 
+	  
+      "children": [ 
+         { 
+            "givenName": "Michelle", 
+            "gender": "female", 
+            "grade": 1 
+         },
+			
+         { 
+            "givenName": "John", 
+            "gender": "male", 
+            "grade": 7,
+				
+            "pets": [ 
+               { 
+                  "givenName": "Tweetie", 
+                  "type": "Bird" 
+               }  
+            ] 
+         } 
+      ], 
+	  
+      "location": { 
+         "state": "NY", 
+         "county": "Queens", 
+         "city": "Forest Hills" 
+      },
+	  
+      "isRegistered": true, 
+      "_rid": "Ic8LAJFujgEDAAAAAAAAAA==", 
+      "_ts": 1450541623, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgEDAAAAAAAAAA==/", 
+      "_etag": "\"00000600-0000-0000-0000-567582370000\"", 
+      "_attachments": "attachments/" 
+   },
+	
+   { 
+      "id": "AndersenFamily", 
+      "lastName": "Andersen", 
+		
+      "parents": [ 
+         { 
+            "firstName": "Thomas", 
+            "relationship": "father"
+         },
+			
+         { 
+            "firstName": "Mary Kay", 
+            "relationship": "mother" 
+         } 
+      ],
+	  
+      "children": [ 
+         { 
+            "firstName": "Henriette Thaulow", 
+            "gender": "female", 
+            "grade": 5,
+				
+            "pets": [ 
+               { 
+                  "givenName": "Fluffy", 
+                  "type": "Rabbit" 
+               } 
+            ] 
+         } 
+      ],
+	  
+      "location": {      
+         "state": "WA", 
+         "county": "King", 
+         "city": "Seattle"    
+      },
+	  
+      "isRegistered": true, 
+      "_rid": "Ic8LAJFujgEEAAAAAAAAAA==", 
+      "_ts": 1450541624, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgEEAAAAAAAAAA==/", 
+      "_etag": "\"00000700-0000-0000-0000-567582380000\"", 
+      "_attachments": "attachments/" 
+   }
+] 		 
+</pre>
+<h1>DocumentDB SQL - Value Keyword</h1>
+<p>When you know you're only returning a single value, then the VALUE keyword can help produce a leaner result set by avoiding the overhead of creating a full-blown object. The VALUE keyword provides a way to return JSON value.</p>
+<p>Let’s take a look at a simple example.</p>
+<img src="images/value_keyword.jpg" alt="Value KeyWord" />
+<p>Following is the query with VALUE keyword.</p>
+<pre class="prettyprint notranslate">
+SELECT VALUE "Hello World, this is DocumentDB SQL Tutorial"
+</pre>
+<p>When this query is executed, it returns the scalar "Hello World, this is DocumentDB SQL Tutorial".</p>
+<pre class="result notranslate">
+[ 
+   "Hello World, this is DocumentDB SQL Tutorial" 
+]
+</pre>
+<p>In another example, let’s consider the three documents from the previous examples.</p> 
+<p>Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+   
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male",
+         "grade": 7, 
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily",
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female",
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ], 
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+}	  
+</pre>
+<p>Following is the query.</p>
+<pre class="prettyprint notranslate">
+SELECT VALUE f.location 
+FROM Families f
+</pre>
+<p>When this query is executed, it return the returns the address without the location label.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "state": "NY", 
+      "county": "Manhattan", 
+      "city": "NY" 
+   }, 
+	
+   { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+	
+   { 
+      "state": "WA", 
+      "county": "King", 
+      "city": "Seattle" 
+   } 
+] 
+</pre>
+<p>If we now specify the same query without VALUE Keyword, then it will return the address with location label. Following is the query.</p>
+<pre class="prettyprint notranslate">
+SELECT f.location 
+FROM Families f
+</pre>
+<p>When this query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "location": { 
+         "state": "NY", 
+         "county": "Manhattan", 
+         "city": "NY" 
+      } 
+   }, 
+	
+   { 
+      "location": { 
+         "state": "NY", 
+         "county": "Queens", 
+         "city": "Forest Hills" 
+      } 
+   },
+	
+   { 
+      "location": { 
+         "state": "WA", 
+         "county": "King", 
+         "city": "Seattle" 
+      } 
+   } 
+]
+</pre>
+<h1>DocumentDB SQL - Order By Clause</h1>
+<p>Microsoft Azure DocumentDB supports querying documents using SQL over JSON documents. You can sort documents in the collection on numbers and strings using an ORDER BY clause in your query. The clause can include an optional ASC/DESC argument to specify the order in which results must be retrieved.</p>
+<p>We will consider the same documents as in the previous examples.</p>
+<p>Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+   
+   "children": [ 
+      {
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+} 
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" },
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+} 
+</pre>
+<p>Let’s take a look at a simple example.</p>
+<img src="images/order_by_clause.jpg" alt="Order By Clause" />
+<p>Following is the query which contains the ORDER BY keyword.</p>
+<pre class="prettyprint notranslate">
+SELECT  f.id, f.children[0].givenName,f.children[0].grade  
+FROM Families f  
+ORDER BY f.children[0].grade
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "id": "SmithFamily", 
+      "givenName": "Michelle", 
+      "grade": 1 
+   },
+	
+   { 
+      "id": "AndersenFamily", 
+      "grade": 5 
+   },
+	
+   { 
+      "id": "WakefieldFamily", 
+      "givenName": "Jesse", 
+      "grade": 6 
+   } 
+] 
+</pre>
+<p>Let’s consider another simple example.</p>
+<img src="images/order_by_clauses.jpg" alt="Order By Clauses" />
+<p>Following is the query which contains the ORDER BY keyword and DESC optional keyword.</p>
+<pre class="prettyprint notranslate">
+SELECT f.id, f.parents[0].familyName 
+FROM Families f  
+ORDER BY f.parents[0].familyName DESC
+</pre>
+<p>When the above query is executed, it will produce the following output.</p>
+<pre class="result notranslate">
+[ 
+   {
+      "id": "WakefieldFamily", 
+      "familyName": "Wakefield" 
+   },
+	
+   { 
+      "id": "SmithFamily", 
+      "familyName": "Smith" 
+   },
+	
+   {
+      "id": "AndersenFamily" 
+   }
+]
+</pre>
+<h1>DocumentDB SQL - Iteration</h1>
+<p>In DocumentDB SQL, Microsoft has added a new construct which can be used with IN keyword to provide support for iterating over JSON arrays. The support for iteration is provided in the FROM clause.</p>
+<p>We will consider similar three documents from the previous examples again.</p>
+<p>Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+   
+   "children": [ 
+      {
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily",
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" },
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+}
+</pre>
+<p>Let’s take a look at a simple example without IN keyword in FROM clause.</p>
+<img src="images/iteration.jpg" alt="Iteration" />
+<p>Following is the query which will return all the parents from the Families collection.</p>
+<pre class="prettyprint notranslate">
+SELECT *  
+FROM Families.parents
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   [ 
+      { 
+         "familyName": "Wakefield", 
+         "givenName": "Robin" 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Ben" 
+      } 
+   ], 
+	
+   [ 
+      { 
+         "familyName": "Smith", 
+         "givenName": "James" 
+      },
+		
+      { 
+         "familyName": "Curtis", 
+         "givenName": "Helen" 
+      } 
+   ], 
+	
+   [ 
+      { 
+         "firstName": "Thomas", 
+         "relationship": "father" 
+      },
+		
+      {
+         "firstName": "Mary Kay", 
+         "relationship": "mother" 
+      } 
+   ] 
+] 
+</pre>
+<p>As can be seen in the above output, the parents of each family is displayed in a separate JSON array.</p>
+<p>Let’s take a look at the same example, however this time we will use the IN keyword in FROM clause.</p>
+<img src="images/iterations.jpg" alt="Iterations" />
+<p>Following is the query which contains the IN keyword.</p>
+<pre class="prettyprint notranslate">
+SELECT *  
+FROM c IN Families.parents
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "familyName": "Wakefield", 
+      "givenName": "Robin" 
+   }, 
+	
+   { 
+      "familyName": "Miller", 
+      "givenName": "Ben" 
+   },
+	
+   { 
+      "familyName": "Smith", 
+      "givenName": "James" 
+   },
+	
+   { 
+      "familyName": "Curtis", 
+      "givenName": "Helen" 
+   },
+	
+   { 
+      "firstName": "Thomas", 
+      "relationship": "father" 
+   },
+	
+   { 
+      "firstName": "Mary Kay", 
+      "relationship": "mother" 
+   }
+	
+   { 
+      "id": "WakefieldFamily", 
+      "givenName": "Jesse", 
+      "grade": 6 
+   } 
+] 
+</pre>
+<p>In the above example, it can be seen that with iteration, the query that performs iteration over parents in the collection has different output array. Hence, all the parents from each family are added into a single array.</p>
+<h1>DocumentDB SQL - Joins</h1>
+<p>In relational databases, the Joins clause is used to combine records from two or more tables in a database, and the need to join across tables is very important while designing normalized schemas. Since DocumentDB deals with the denormalized data model of schema-free documents, the JOIN in DocumentDB SQL is the logical equivalent of a "selfjoin".</p>
+<p>Let’s consider the three documents as in the previous examples.</p>
+<p>Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ], 
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+   
+   "children": [ 
+      {
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+} 
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" },
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ], 
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+} 
+</pre>
+<p>Let’s take a look at an example to understand how the JOIN clause works.</p>
+<img src="images/sql_join.jpg" alt="SQL Join" />
+<p>Following is the query which will join the root to children subdocument.</p>
+<pre class="prettyprint notranslate">
+SELECT f.id 
+FROM Families f 
+JOIN c IN f.children
+</pre>
+<p>When the above query is executed, it will produce the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "id": "WakefieldFamily" 
+   },
+	
+   { 
+      "id": "WakefieldFamily" 
+   },
+	
+   { 
+      "id": "SmithFamily" 
+   },
+	
+   { 
+      "id": "SmithFamily" 
+   },
+	
+   { 
+      "id": "AndersenFamily" 
+   } 
+]
+</pre>
+<p>In the above example, the join is between the document root and the children sub-root which makes a cross-product between two JSON objects. Following are certain points to note &minus;</p>
+<ul class="list">
+<li><p>In the FROM clause, the JOIN clause is an iterator.</p></li>
+<li><p>The first two documents WakefieldFamily and SmithFamily contain two children, hence the result set also contains the cross-product which produces a separate object for each child.</p></li>
+<li><p>The third document AndersenFamily contains only one children, hence there is only a single object corresponding to this document.</p></li>
+</ul>
+<p>Let’s take a look at the same example, however this time we retrieve the child name as well for better understanding of JOIN clause.</p>
+<img src="images/sql_joins.jpg" alt="SQL Joins" />
+<p>Following is the query which will join the root to children subdocument.</p>
+<pre class="prettyprint notranslate">
+SELECT  
+   f.id AS familyName, 
+   c.givenName AS childGivenName, 
+   c.firstName AS childFirstName 
+FROM Families f  
+JOIN c IN f.children
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "familyName": "WakefieldFamily", 
+      "childGivenName": "Jesse" 
+   },
+	
+   { 
+      "familyName": "WakefieldFamily", 
+      "childGivenName": "Lisa" 
+   },
+	
+   { 
+      "familyName": "SmithFamily", 
+      "childGivenName": "Michelle" 
+   },
+	
+   { 
+      "familyName": "SmithFamily", 
+      "childGivenName": "John" 
+   },
+	
+   { 
+      "familyName": "AndersenFamily", 
+      "childFirstName": "Henriette Thaulow" 
+   } 
+] 
+</pre>
+<h1>DocumentDB SQL - Aliasing</h1>
+<p>In relational databases, SQL aliases are used to temporarily rename a table or a column heading. Similarly, in DocumentDB, aliases are used to temporarily rename a JSON document, sub-document, object or any field.</p>
+<p>The renaming is a temporary change and the actual document does not change. Basically, aliases are created to make field/document names more readable. For aliasing, AS keyword is used which is optional.</p>
+<p>Let’s consider three similar documents from the ones used in previous examples.</p>
+<p>Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily",
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" }
+   ],
+   
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3, 
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+} 
+</pre>
+<p>Let’s take a look at an example to discuss the aliases.</p>
+<img src="images/aliase.jpg" alt="Aliase" />
+<p>Following is the query which will join the root to children subdocument. We have aliases such as f.id AS familyName, c.givenName AS childGivenName, and c.firstName AS childFirstName.</p>
+<pre class="prettyprint notranslate">
+SELECT  
+   f.id AS familyName, 
+   c.givenName AS childGivenName, 
+   c.firstName AS childFirstName 
+FROM Families f  
+JOIN c IN f.children
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "familyName": "WakefieldFamily", 
+      "childGivenName": "Jesse" 
+   },
+	
+   { 
+      "familyName": "WakefieldFamily",
+	  "childGivenName": "Lisa" 
+   },
+	
+   { 
+      "familyName": "SmithFamily", 
+      "childGivenName": "Michelle" 
+   },
+	
+   { 
+      "familyName": "SmithFamily", 
+      "childGivenName": "John" 
+   },
+	
+   { 
+      "familyName": "AndersenFamily", 
+      "childFirstName": "Henriette Thaulow" 
+   } 
+]
+</pre>
+<p>The above output shows that the filed names are changed, but it is a temporary change and the original documents are not modified.</p>
+<h1>DocumentDB SQL - Array Creation</h1>
+<p>In DocumentDB SQL, Microsoft has added a key feature with the help of which we can easily create an array. It means when we run a query, then as a result it will create an array of collection similar to JSON object as a result of query.</p>
+<p>Let’s consider the same documents as in the previous examples.</p>
+<p>Following is the <b>AndersenFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen",
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ], 
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+} 
+</pre>
+<p>Following is the <b>SmithFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+   
+   "children": [ 
+      {
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      },
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ], 
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+}
+</pre>
+<p>Following is the <b>WakefieldFamily</b> document.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" }
+         ]
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ], 
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+}
+</pre>
+<p>Let’s take a look at an example.</p>
+<img src="images/array_creation.jpg" alt="Array Creation" />
+<p>Following is the query which will return the family name and address of each family.</p>
+<pre class="prettyprint notranslate">
+SELECT f.id AS FamilyName, 
+[f.location.city, f.location.county, f.location.state] AS Address 
+FROM Families f
+</pre>
+<p>As can be seen city, county and state fields are enclosed in square brackets, which will create an array and this array is named Address. When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "FamilyName": "WakefieldFamily", 
+      "Address": [ 
+         "NY", 
+         "Manhattan", 
+         "NY" 
+      ] 
+   },
+	
+   { 
+      "FamilyName": "SmithFamily", 
+      "Address": [
+         "Forest Hills", 
+         "Queens", 
+         "NY" 
+      ] 
+   },
+	
+   { 
+      "FamilyName": "AndersenFamily", 
+      "Address": [ 
+         "Seattle", 
+         "King", 
+         "WA" 
+      ] 
+   } 
+]
+</pre>
+<p>The city, county, and state information are added in the Address array in the above output.</p>
+<h1>DocumentDB SQL - Scalar Expressions</h1>
+<p>In DocumentDB SQL, the SELECT clause also supports scalar expressions like constants, arithmetic expressions, logical expressions, etc. Normally, scalar queries are rarely used, because they don't actually query documents in the collection, they just evaluate expressions. But it's still helpful to use scalar expression queries to learn the basics, how to use expressions and shape JSON in a query, and these concepts apply directly to the actual queries you'll be running against documents in a collection.</p>
+<p>Let’s take a look at an example which contains multiple scalar queries.</p>
+<img src="images/scalar_queries.jpg" alt="Scalar Queries" />
+<p>In the Query Explorer, select just the text to be executed and click ‘Run’. Let's run this first one.</p>
+<pre class="prettyprint notranslate">
+SELECT "Hello"
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "$1": "Hello" 
+   } 
+]
+</pre>
+<p>This output may look a bit confusing, so let's break it down.</p>
+<ul class="list">
+<li><p>First, as we saw in the last demo, query results are always contained in square brackets because they are returned as a JSON array, even results from scalar expression queries like this one that only returns a single document.</p></li>
+<li><p>We have an array with one document in it, and that document has a single property in it for the single expression in the SELECT statement.</p></li>
+<li><p>The SELECT statement doesn't provide a name for this property, thus DocumentDB auto generates one using $1.</p></li>
+<li><p>This is usually not what we want, which is why we can use AS to alias the expression in the query, which sets the property name in the generated document the way you'd like it to be, word, in this example.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+SELECT "Hello" AS word
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "word": "Hello" 
+   } 
+]
+</pre>
+<p>Similarly, following is another simple query.</p>
+<pre class="prettyprint notranslate">
+SELECT ((2 + 11 % 7)-2)/3
+</pre>
+<p>The query retrieves the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "$1": 1.3333333333333333 
+   } 
+]
+</pre>
+<p>Let’s take a look at another example of shaping nested arrays and embedded objects.</p>
+<pre class="result notranslate">
+SELECT 
+   { 
+      "words1": 
+         ["Hello", "World"], 
+      "words2": 
+         ["How", "Are", "You?"] 
+   } AS allWords
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "allWords": { 
+         "words1": [ 
+            "Hello", 
+            "World" 
+         ],
+			
+         "words2": [ 
+            "How", 
+            "Are", 
+            "You?" 
+         ] 
+      } 
+   } 
+]
+</pre>
+<h1>DocumentDB SQL - Parameterized</h1>
+<p>In relational databases, a parameterized query is a query in which placeholders are used for parameters and the parameter values are supplied at execution time. DocumentDB also supports parameterized queries, and parameters in parameterized query can be expressed with the familiar @ notation. The most important reason to use parameterized queries is to avoid SQL injection attacks. It can also provide robust handling and escaping of user input.</p>
+<p>Let’s take a look at an example where we will be using the .Net SDK. Following is the code which will delete the collection.</p>
+<pre class="prettyprint notranslate">
+private async static Task DeleteCollection(DocumentClient client, string collectionId) { 
+   Console.WriteLine(); 
+   Console.WriteLine("&gt;&gt;&gt; Delete Collection {0} in {1} &lt;&lt;&lt;", 
+   collectionId, _database.Id);  
+   var query = new SqlQuerySpec { 
+      QueryText = "SELECT * FROM c WHERE c.id = @id", 
+      Parameters = new SqlParameterCollection { new SqlParameter { Name = 
+         "@id", Value = collectionId } } 
+   };
+   
+   DocumentCollection collection = client.CreateDocumentCollectionQuery(database.SelfLink, 
+      query).AsEnumerable().First();  
+		
+   await client.DeleteDocumentCollectionAsync(collection.SelfLink);  
+	
+   Console.WriteLine("Deleted collection {0} from database {1}", 
+      collectionId, _database.Id); 
+}
+</pre>
+<p>The construction of a parameterized query is as follows.</p>
+<pre class="prettyprint notranslate">
+var query = new SqlQuerySpec { 
+   QueryText = "SELECT * FROM c WHERE c.id = @id",
+   Parameters = new SqlParameterCollection { new SqlParameter { Name = 
+      "@id", Value = collectionId } } 
+};
+</pre>
+<p>We are not hardcoding the collectionId so this method can be used to delete any collection. We can use ‘@’ symbol to prefix parameter names, similar to SQL Server.</p>
+<p>In the above example, we are querying for a specific collection by Id where the Id parameter is defined in this SqlParameterCollection assigned to the parameter's property of this SqlQuerySpec. The SDK then does the work of constructing the final query string for DocumentDB with the collectionId embedded inside of it. We run the query and then use its SelfLink to delete the collection.</p>
+<p>Following is the CreateDocumentClient task implementation.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() { 
+   // Create a new instance of the DocumentClient 
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) { 
+      database = client.CreateDatabaseQuery("SELECT * FROM 
+         c WHERE c.id = 'earthquake'").AsEnumerable().First(); 
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink, 
+         "SELECT * FROM c WHERE c.id = 'myfirstdb'").AsEnumerable().First();
+			
+      await DeleteCollection(client, "MyCollection1"); 
+      await DeleteCollection(client, "MyCollection2"); 
+   } 
+}
+</pre>
+<p>When the code is executed, it produces the following output.</p>
+<pre class="result notranslate">
+**** Delete Collection MyCollection1 in mydb **** 
+Deleted collection MyCollection1 from database myfirstdb 
+ 
+**** Delete Collection MyCollection2 in mydb **** 
+Deleted collection MyCollection2 from database myfirstdb
+</pre>
+<p>Let’s take a look at another example. We can write a query that takes last name and address state as parameters, and then executes it for various values of lastname and location.state based on the user input.</p>
+<pre class="prettyprint notranslate">
+SELECT *  
+FROM Families f 
+WHERE f.lastName = @lastName AND f.location.state = @addressState
+</pre>
+<p>This request can then be sent to DocumentDB as a parameterized JSON query as shown in the following code.</p>
+<pre class="result notranslate">
+{       
+   "query": "SELECT * FROM Families f WHERE f.lastName = @lastName AND 
+      f.location.state = @addressState", 
+		
+   "parameters": [           
+      {"name": "@lastName", "value": "Wakefield"},          
+      {"name": "@addressState", "value": "NY"},            
+   ]  
+}
+</pre>
+<h1>DocumentDB SQL - Built-in Function</h1>
+<p>DocumentDB supports a host of built-in functions for common operations that can be used inside queries. There are a bunch of functions for performing mathematical calculations, and also type checking functions that are extremely useful while working with varying schemas. These functions can test if a certain property exists and if it does whether it's a number or a string, Boolean or object.</p>
+<p>We also get these handy functions for parsing and manipulating strings, as well as several functions for working with arrays allowing you to do things like concatenate arrays and test to see if an array contains a particular element.</p>
+<p>Following are the different types of built-in functions &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Built-in Functions &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="documentdb_sql_mathematical_functions.html">Mathematical Functions</a>
+<p>The mathematical functions perform a calculation, usually based on input values that are provided as arguments, and return a numeric value.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="documentdb_sql_type_checking_functions.html">Type Checking Functions</a>
+<p>The type checking functions allow you to check the type of an expression within SQL queries.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="documentdb_sql_string_functions.html">String Functions</a>
+<p>The string functions perform an operation on a string input value and return a string, numeric or Boolean value.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="documentdb_sql_array_functions.html">Array Functions</a>
+<p>The array functions perform an operation on an array input value and return in the form of numeric, Boolean or array value.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="documentdb_sql_spatial_functions.html">Spatial Functions</a>
+<p>DocumentDB also supports the Open Geospatial Consortium (OGC) built-in functions for geospatial querying.</p></td>
+</tr>
+</table>
+<h1>DocumentDB SQL - Linq to SQL Translation</h1>
+<p>In DocumentDB, we actually use SQL to query documents. If we are doing .NET development, there is also a LINQ provider that can be used and which can generate appropriate SQL from a LINQ query.</p>
+<h2>Supported Data Types</h2>
+<p>In DocumentDB, all JSON primitive types are supported in the LINQ provider included with the DocumentDB .NET SDK which are as follows &minus;</p>
+<ul class="list">
+<li>Numeric</li>
+<li>Boolean</li>
+<li>String</li>
+<li>Null</li>
+</ul>
+<h2>Supported Expression</h2>
+<p>The following scalar expressions are supported in the LINQ provider included with the DocumentDB .NET SDK.</p>
+<ul class="list">
+<li><p><b>Constant Values</b> &minus; Includes constant values of the primitive data types.</p></li>
+<li><p><b>Property/Array Index Expressions</b> &minus; Expressions refer to the property of an object or an array element.</p></li> 
+<li><p><b>Arithmetic Expressions</b> &minus; Includes common arithmetic expressions on numerical and Boolean values.</p></li>  
+<li><p><b>String Comparison Expression</b> &minus; Includes comparing a string value to some constant string value.</p></li>  
+<li><p><b>Object/Array Creation Expression</b> &minus; Returns an object of compound value type or anonymous type or an array of such objects. These values can be nested.</p></li>
+</ul>
+<h2>Supported LINQ Operators</h2>
+<p>Here is a list of supported LINQ operators in the LINQ provider included with the DocumentDB .NET SDK.</p>
+<ul class="list">
+<li><p><b>Select</b> &minus; Projections translate to the SQL SELECT including object construction.</p></li>
+<li><p><b>Where</b> &minus; Filters translate to the SQL WHERE, and support translation between &amp;&amp; , || and ! to the SQL operators.</p></li>
+<li><p><b>SelectMany</b> &minus; Allows unwinding of arrays to the SQL JOIN clause. Can be used to chain/nest expressions to filter array elements.</p></li>
+<li><p><b>OrderBy and OrderByDescending</b> &minus; Translates to ORDER BY ascending/descending.</p></li>
+<li><p><b>CompareTo</b> &minus; Translates to range comparisons. Commonly used for strings since they’re not comparable in .NET.</p></li>
+<li><p><b>Take</b> &minus; Translates to the SQL TOP for limiting results from a query.</p></li>
+<li><p><b>Math Functions</b> &minus; Supports translation from .NET’s Abs, Acos, Asin, Atan, Ceiling, Cos, Exp, Floor, Log, Log10, Pow, Round, Sign, Sin, Sqrt, Tan, Truncate to the equivalent SQL built-in functions.</p></li>
+<li><p><b>String Functions</b> &minus; Supports translation from .NET’s Concat, Contains, EndsWith, IndexOf, Count, ToLower, TrimStart, Replace, Reverse, TrimEnd, StartsWith, SubString, ToUpper to the equivalent SQL built-in functions.</p></li>
+<li><p><b>Array Functions</b> &minus; Supports translation from .NET’s Concat, Contains, and Count to the equivalent SQL built-in functions.</p></li>
+<li><p><b>Geospatial Extension Functions</b> &minus; Supports translation from stub methods Distance, Within, IsValid, and IsValidDetailed to the equivalent SQL built-in functions.</p></li>
+<li><p><b>User-Defined Extension Function</b> &minus; Supports translation from the stub method UserDefinedFunctionProvider.Invoke to the corresponding user-defined function.</p></li>
+<li><p><b>Miscellaneous</b> &minus; Supports translation of coalesce and conditional operators. Can translate Contains to String CONTAINS, ARRAY_CONTAINS or the SQL IN depending on context.</p></li>
+</ul>
+<p>Let’s take a look at an example where we will be using the .Net SDK. Following are the three documents which we will be consider for this example.</p>
+<h3>New Customer 1</h3>
+<pre class="result notranslate">
+{ 
+   "name": "New Customer 1", 
+   "address": { 
+      "addressType": "Main Office", 
+      "addressLine1": "123 Main Street", 
+		
+      "location": { 
+         "city": "Brooklyn", 
+         "stateProvinceName": "New York" 
+      },
+	  
+      "postalCode": "11229", 
+      "countryRegionName": "United States" 
+   }, 
+}
+</pre>
+<h3>New Customer 2</h3>
+<pre class="result notranslate">
+{ 
+   "name": "New Customer 2", 
+	
+   "address": {
+      "addressType": "Main Office", 
+      "addressLine1": "678 Main Street", 
+		
+      "location": { 
+         "city": "London", 
+         "stateProvinceName": " London " 
+      }, 
+	  
+      "postalCode": "11229", 
+      "countryRegionName": "United Kingdom" 
+   }, 
+}
+</pre>
+<h3>New Customer 3</h3>
+<pre class="result notranslate">
+{ 
+   "name": "New Customer 3", 
+	
+   "address": { 
+      "addressType": "Main Office", 
+      "addressLine1": "12 Main Street", 
+		
+      "location": { 
+         "city": "Brooklyn", 
+         "stateProvinceName": "New York" 
+      },
+	  
+      "postalCode": "11229", 
+      "countryRegionName": "United States" 
+   },
+}
+</pre>
+<p>Following is the code in which we query using LINQ. We've defined a LINQ query in <b>q</b>, but it won't execute until we run .ToList on it.</p>
+<pre class="prettyprint notranslate">
+private static void QueryDocumentsWithLinq(DocumentClient client) { 
+   Console.WriteLine(); 
+   Console.WriteLine("**** Query Documents (LINQ) ****"); 
+   Console.WriteLine();  
+   Console.WriteLine("Quering for US customers (LINQ)"); 
+   var q = 
+      from d in client.CreateDocumentQuery&lt;Customer&gt;(collection.DocumentsLink) 
+      where d.Address.CountryRegionName == "United States" 
+		
+   select new { 
+      Id = d.Id, 
+      Name = d.Name, 
+      City = d.Address.Location.City 
+   };
+   
+   var documents = q.ToList();  
+   Console.WriteLine("Found {0} US customers", documents.Count); 
+	
+   foreach (var document in documents) { 
+      var d = document as dynamic; 
+      Console.WriteLine(" Id: {0}; Name: {1}; City: {2}", d.Id, d.Name, d.City); 
+   }
+   
+   Console.WriteLine(); 
+}
+</pre>
+<p>The SDK will convert our LINQ query into SQL syntax for DocumentDB, generating a SELECT and WHERE clause based on our LINQ syntax.</p>
+<p>Let’s call the above queries from the CreateDocumentClient task.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() { 
+   // Create a new instance of the DocumentClient 
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) { 
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id = 
+         'myfirstdb'").AsEnumerable().First(); 
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink, 
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();  
+      QueryDocumentsWithLinq(client); 
+   } 
+}
+</pre>
+<p>When the above code is executed, it produces the following output.</p>
+<pre class="result notranslate">
+**** Query Documents (LINQ) **** 
+ 
+Quering for US customers (LINQ) 
+Found 2 US customers 
+   Id: 7e9ad4fa-c432-4d1a-b120-58fd7113609f; Name: New Customer 1; City: Brooklyn 
+   Id: 34e9873a-94c8-4720-9146-d63fb7840fad; Name: New Customer 1; City: Brooklyn 
+</pre>
+<h1>DocumentDB SQL - JavaScript Integration</h1>
+<p>These days JavaScript is everywhere, and not just in browsers. DocumentDB embraces JavaScript as a sort of modern day T-SQL and supports the transactional execution of JavaScript logic natively, right inside the database engine. DocumentDB provides a programming model for executing JavaScript-based application logic directly on the collections in terms of stored procedures and triggers.</p>
+<p>Let’s take a look at an example where we create a simple store procedure. Following are the steps &minus;</p>
+<p><b>Step 1</b> &minus; Create a new console applications.</p>
+<p><b>Step 2</b> &minus; Add in the .NET SDK from NuGet. We are using the .NET SDK here, which means that we'll be writing some C# code to create, execute, and then delete our stored procedure, but the stored procedure itself gets written in JavaScript.</p>
+<p><b>Step 3</b> &minus; Right-click on the project in Solution explorer.</p>
+<p><b>Step 4</b> &minus; Add a new JavaScript file for the stored procedure and call it HelloWorldStoreProce.js</p>
+<img src="images/js_stored_procedure.jpg" alt="JavaScript Stored Procedure" />
+<p>Every stored procedure is just a JavaScript function so we'll create a new function and naturally we'll also name this function <b>HelloWorldStoreProce</b>. It doesn't matter if we give the function a name at all. DocumentDB will only refer to this stored procedure by the Id that we provide when we create it.</p>
+<pre class="prettyprint notranslate">
+function HelloWorldStoreProce() { 
+   var context = getContext(); 
+   var response = context.getResponse(); 
+   response.setBody('Hello, and welcome to DocumentDB!'); 
+}
+</pre>
+<p>All the stored procedure does is obtain the response object from the context and call its <b>setBody</b> method to return a string to the caller. In C# code, we will create the stored procedure, execute it, and then delete it.</p>
+<p>Stored procedures are scoped per collection, therefore we will need the SelfLink of the collection to create the stored procedure.</p>
+<p><b>Step 5</b> &minus; First query for the <b>myfirstdb</b> database and then for the <b>MyCollection</b> collection.</p>
+<p>Creating a stored procedure is just like creating any other resource in DocumentDB.</p>
+<pre class="prettyprint notranslate">
+private async static Task SimpleStoredProcDemo() {  
+   var endpoint = "https://azuredocdbdemo.documents.azure.com:443/"; 
+   var masterKey = 
+      "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+	  
+   using (var client = new DocumentClient(new Uri(endpoint), masterKey)) { 
+      // Get database 
+      Database database = client 
+         .CreateDatabaseQuery("SELECT * FROM c WHERE c.id = 'myfirstdb'") 
+         .AsEnumerable() 
+         .First();
+			
+      // Get collection 
+      DocumentCollection collection = client 
+         .CreateDocumentCollectionQuery(database.CollectionsLink, "SELECT * FROM 
+         c WHERE c.id = 'MyCollection'") 
+         .AsEnumerable() 
+         .First();
+			
+      // Create stored procedure 
+      var sprocBody = File.ReadAllText(@"..\..\HelloWorldStoreProce.js"); 
+		
+      var sprocDefinition = new StoredProcedure { 
+         Id = "HelloWorldStoreProce", 
+         Body = sprocBody 
+      };
+	  
+      StoredProcedure sproc = await client.
+         CreateStoredProcedureAsync(collection.SelfLink, sprocDefinition); 
+      Console.WriteLine("Created stored procedure {0} ({1})", 
+         sproc.Id, sproc.ResourceId);
+				  
+      // Execute stored procedure 
+      var result = await client.ExecuteStoredProcedureAsync<string>(sproc.SelfLink); 
+      Console.WriteLine("Executed stored procedure; response = {0}", result.Response);
+	  
+      // Delete stored procedure 
+      await client.DeleteStoredProcedureAsync(sproc.SelfLink); 
+      Console.WriteLine("Deleted stored procedure {0} ({1})", 
+         sproc.Id, sproc.ResourceId); 
+   }  
+} 
+</pre>
+<p><b>Step 6</b> &minus; First create a definition object with the Id for the new resource and then call one of the Create methods on the <b>DocumentClient</b> object. In the case of a stored procedure, the definition includes the Id and the actual JavaScript code that you want to ship over to the server.</p>
+<p><b>Step 7</b> &minus; Call <b>File.ReadAllText</b> to extract the stored procedure code out of the JS file.</p>
+<p><b>Step 8</b> &minus; Assign the stored procedure code to the body property of the definition object.</p>
+<p>As far as DocumentDB is concerned, the Id we specify here, in the definition, is the name of the stored procedure, regardless of what we actually name the JavaScript function.</p>
+<p>Nevertheless when creating stored procedures and other server-side objects, it is recommended that we name JavaScript functions and that those function names do match the Id that we have set in the definition for DocumentDB.</p>
+<p><b>Step 9</b> &minus; Call <b>CreateStoredProcedureAsync</b>, passing in the <b>SelfLink</b> for the <b>MyCollection</b> collection and the stored procedure definition. This creates the stored procedure and <b>ResourceId</b> that DocumentDB assigned to it.</p>
+<p><b>Step 10</b> &minus; Call the stored procedure. <b>ExecuteStoredProcedureAsync</b> takes a type parameter that you set to the expected data type of the value returned by the stored procedure, which you can specify simply as an object if you want a dynamic object returned. That is an object whose properties will be bound at run-time.</p>
+<p>In this example we know that our stored procedure is just returning a string and so we call <b>ExecuteStoredProcedureAsync&lt;string&gt;</b>.</p> 
+<p>Following is the complete implementation of Program.cs file.</p>
+<pre class="prettyprint notranslate">
+using Microsoft.Azure.Documents; 
+using Microsoft.Azure.Documents.Client; 
+using Microsoft.Azure.Documents.Linq; 
+
+using System; 
+using System.Collections.Generic; 
+using System.Diagnostics; 
+using System.IO; 
+
+using System.Linq; 
+using System.Text; 
+using System.Threading.Tasks; 
+ 
+namespace DocumentDBStoreProce { 
+   class Program { 
+      private static void Main(string[] args) { 
+         Task.Run(async () => { 
+            await SimpleStoredProcDemo(); 
+         }).Wait(); 
+      } 
+	  
+      private async static Task SimpleStoredProcDemo() {  
+         var endpoint = "https://azuredocdbdemo.documents.azure.com:443/"; 
+         var masterKey = 
+            "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";  
+				
+         using (var client = new DocumentClient(new Uri(endpoint), masterKey)) { 
+            // Get database 
+            Database database = client 
+               .CreateDatabaseQuery("SELECT * FROM c WHERE c.id = 'myfirstdb'")
+               .AsEnumerable() 
+               .First(); 
+					
+            // Get collection 
+            DocumentCollection collection = client 
+               .CreateDocumentCollectionQuery(database.CollectionsLink, 
+               "SELECT * FROM c WHERE c.id = 'MyCollection'") 
+               .AsEnumerable() 
+               .First();
+					 
+            // Create stored procedure 
+            var sprocBody = File.ReadAllText(@"..\..\HelloWorldStoreProce.js"); 
+				
+            var sprocDefinition = new StoredProcedure { 
+               Id = "HelloWorldStoreProce", 
+               Body = sprocBody 
+            };
+			
+            StoredProcedure sproc = await client
+               .CreateStoredProcedureAsync(collection.SelfLink, sprocDefinition);
+					
+            Console.WriteLine("Created stored procedure {0} ({1})", sproc
+               .Id, sproc.ResourceId);
+					 
+            // Execute stored procedure 
+            var result = await client
+               .ExecuteStoredProcedureAsync&lt;string&gt;(sproc.SelfLink); 
+            Console.WriteLine("Executed stored procedure; response = {0}", 
+               result.Response);
+					
+            // Delete stored procedure 
+            await client.DeleteStoredProcedureAsync(sproc.SelfLink); 
+            Console.WriteLine("Deleted stored procedure {0} ({1})", 
+               sproc.Id, sproc.ResourceId); 
+         } 
+      } 
+   } 
+} 					
+</pre>
+<p>When the above code is executed, it produces the following output.</p>
+<pre class="result notranslate">
+Created stored procedure HelloWorldStoreProce (Ic8LAMEUVgACAAAAAAAAgA==)
+
+Executed stored procedure; response = Hello, and welcome to DocumentDB!	 
+</pre>
+<p>As seen in the above output, the response property has the “Hello, and welcome to DocumentDB!” returned by our stored procedure.</p>
+<h1>DocumentDB SQL - User-Defined Functions</h1>
+<p>DocumentDB SQL provides support for User-Defined Functions (UDFs). UDFs are just another kind of JavaScript functions you can write and these work pretty much as you'd expect. You can create UDFs to extend the query language with custom business logic that you can reference in your queries.</p>
+<p>The DocumentDB SQL syntax is extended to support custom application logic using these UDFs. UDFs can be registered with DocumentDB and then be referenced as part of a SQL query.</p>
+<p>Let’s consider the following three documents for this example.</p>
+<p><b>AndersenFamily</b> document is as follows.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p><b>SmithFamily</b> document is as follows.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" }
+   ], 
+	
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      }, 
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7,
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      }
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+} 
+</pre>
+<p><b>WakefieldFamily</b> document is as follows.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+} 
+</pre>
+<p>Let’s take a look at an example where we will create some simple UDFs.</p>
+<p>Following is the implementation of <b>CreateUserDefinedFunctions</b>.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreateUserDefinedFunctions(DocumentClient client) { 
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create User Defined Functions ****"); 
+   Console.WriteLine();  
+	
+   await CreateUserDefinedFunction(client, "udfRegEx");  
+}
+</pre>
+<p>We have a udfRegEx, and in CreateUserDefinedFunction we get its JavaScript code from our local file. We construct the definition object for the new UDF, and call CreateUserDefinedFunctionAsync with the collection's SelfLink and the udfDefinition object as shown in the following code.</p>
+<pre class="prettyprint notranslate">
+private async static Task&lt;UserDefinedFunction&gt;
+CreateUserDefinedFunction(DocumentClient client, string udfId) { 
+   var udfBody = File.ReadAllText(@"..\..\Server\" + udfId + ".js"); 
+	
+   var udfDefinition = new UserDefinedFunction { 
+      Id = udfId, 
+      Body = udfBody 
+   }; 
+   
+   var result = await client
+      .CreateUserDefinedFunctionAsync(_collection.SelfLink, udfDefinition); 
+   var udf = result.Resource; 
+	
+   Console.WriteLine("Created user defined function {0}; RID: {1}", 
+      udf.Id, udf.ResourceId);  
+		
+   return udf; 
+}
+</pre>
+<p>We get back the new UDF from the resource property of the result and return it back up to the caller. To display the existing UDF, following is the implementation of <b>ViewUserDefinedFunctions</b>. We call <b>CreateUserDefinedFunctionQuery</b> and loop through them as usual.</p>
+<pre class="prettyprint notranslate">
+private static void ViewUserDefinedFunctions(DocumentClient client) { 
+   Console.WriteLine(); 
+   Console.WriteLine("**** View UDFs ****"); 
+   Console.WriteLine(); 
+	
+   var udfs = client  
+      .CreateUserDefinedFunctionQuery(_collection.UserDefinedFunctionsLink) 
+      .ToList();  
+		
+   foreach (var udf in udfs) { 
+      Console.WriteLine("User defined function {0}; RID: {1}", udf.Id, udf.ResourceId); 
+   }
+}
+</pre>
+<p>DocumentDB SQL doesn't provide built-in functions to search for substrings or for regular expressions, hence the following little one-liner fills that gap which is a JavaScript function.</p>
+<pre class="prettyprint notranslate">
+function udfRegEx(input, regex) { 
+   return input.match(regex); 
+}
+</pre>
+<p>Given the input string in the first parameter, use JavaScript's built-in regular expression support passing in the pattern matching string in the second parameter into .<b>match</b>. We can run a substring query to find all stores with the word Andersen in their <b>lastName</b> property.</p>
+<pre class="prettyprint notranslate">
+private static void Execute_udfRegEx(DocumentClient client) { 
+   var sql = "SELECT c.name FROM c WHERE udf.udfRegEx(c.lastName, 'Andersen') != null";
+	
+   Console.WriteLine(); 
+   Console.WriteLine("Querying for Andersen"); 
+	
+   var documents = client.CreateDocumentQuery(_collection.SelfLink, sql).ToList();  
+   Console.WriteLine("Found {0} Andersen:", documents.Count); 
+	
+   foreach (var document in documents) { 
+      Console.WriteLine("Id: {0}, Name: {1}", document.id, document.lastName); 
+   } 
+}
+</pre>
+<p>Note that we must qualify every UDF reference with the prefix <b>udf</b>. We just passed the SQL along to <b>CreateDocumentQuery</b> like any ordinary query. Finally, let’s call the above queries from the <b>CreateDocumentClient</b> task</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() { 
+   // Create a new instance of the DocumentClient 
+	
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)){ 
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE 
+         c.id = 'myfirstdb'").AsEnumerable().First();
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink, 
+         "SELECT * FROM c WHERE c.id = 'Families'").AsEnumerable().First();
+			 
+      await CreateUserDefinedFunctions(client);
+   
+      ViewUserDefinedFunctions(client);
+   
+      Execute_udfRegEx(client); 
+   } 
+}
+</pre>
+<p>When the above code is executed, it produces the following output.</p>
+<pre class="result notranslate">
+**** Create User Defined Functions ****  
+Created user defined function udfRegEx; RID: kV5oANVXnwAlAAAAAAAAYA==  
+**** View UDFs ****  
+User defined function udfRegEx; RID: kV5oANVXnwAlAAAAAAAAYA==  
+Querying for Andersen 
+Found 1 Andersen: 
+ Id: AndersenFamily, Name: Andersen
+</pre>
+<h1>DocumentDB SQL - Composite SQL Queries</h1>
+<p><b>Composite Query</b> enables you to combine data from existing queries and then apply filters, aggregates, and so on before presenting the report results, which show the combined data set. Composite Query retrieves multiple levels of related information on existing queries and presents the combined data as a single and flattened query result.</p>
+<p>Using Composite Query, you also have the option to &minus;</p>
+<ul class="list">
+<li><p>Select the SQL pruning option to remove tables and fields that are not needed based on users’ attribute selections.</p></li>
+<li><p>Set the ORDER BY and GROUP BY clauses.</p></li>
+<li><p>Set the WHERE clause as a filter over the result set of a composite query.</p></li>
+</ul>
+<p>The above operators can be composed to form more powerful queries. Since DocumentDB supports nested collections, the composition can either be concatenated or nested.</p>
+<p>Let’s consider the following documents for this example.</p>
+<p><b>AndersenFamily</b> document is as follows.</p>
+<pre class="result notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship":  "father" }, 
+      { "firstName": "Mary Kay", "relationship":  "mother" } 
+   ],
+   
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type":  "Rabbit" } ] 
+      } 
+   ],
+   
+   "location": { "state": "WA", "county": "King", "city": "Seattle" }, 
+   "isRegistered": true 
+}
+</pre>
+<p><b>SmithFamily</b> document is as follows.</p>
+<pre class="result notranslate">
+{ 
+   "id": "SmithFamily", 
+	
+   "parents": [ 
+      { "familyName": "Smith", "givenName": "James" }, 
+      { "familyName": "Curtis", "givenName": "Helen" } 
+   ],
+   
+   "children": [ 
+      { 
+         "givenName": "Michelle", 
+         "gender": "female", 
+         "grade": 1 
+      }, 
+		
+      { 
+         "givenName": "John", 
+         "gender": "male", 
+         "grade": 7, 
+			
+         "pets": [ 
+            { "givenName": "Tweetie", "type": "Bird" } 
+         ] 
+      } 
+   ],
+   
+   "location": { 
+      "state": "NY", 
+      "county": "Queens", 
+      "city": "Forest Hills" 
+   },
+   
+   "isRegistered": true 
+} 
+</pre>
+<p><b>WakefieldFamily</b> document is as follows.</p>
+<pre class="result notranslate">
+{ 
+   "id": "WakefieldFamily", 
+	
+   "parents": [ 
+      { "familyName": "Wakefield", "givenName": "Robin" }, 
+      { "familyName": "Miller", "givenName": "Ben" } 
+   ],
+   
+   "children": [ 
+      { 
+         "familyName": "Merriam", 
+         "givenName": "Jesse", 
+         "gender": "female", 
+         "grade": 6,
+			
+         "pets": [ 
+            { "givenName": "Charlie Brown", "type": "Dog" }, 
+            { "givenName": "Tiger", "type": "Cat" }, 
+            { "givenName": "Princess", "type": "Cat" } 
+         ] 
+      },
+		
+      { 
+         "familyName": "Miller", 
+         "givenName": "Lisa", 
+         "gender": "female", 
+         "grade": 3,
+			
+         "pets": [ 
+            { "givenName": "Jake", "type": "Snake" } 
+         ] 
+      } 
+   ],
+   
+   "location": { "state": "NY", "county": "Manhattan", "city": "NY" }, 
+   "isRegistered": false 
+} 
+</pre>
+<p>Let’s take a look at an example of concatenated query.</p>
+<img src="images/concatenated_query.jpg" alt="Concatenated Query" />
+<p>Following is the query which will retrieve the id and location of the family where the first child <b>givenName</b> is Michelle.</p>
+<pre class="prettyprint notranslate">
+SELECT f.id,f.location 
+FROM Families f 
+WHERE f.children[0].givenName = "Michelle"
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[
+   { 
+      "id": "SmithFamily", 
+      "location": { 
+         "state": "NY", 
+         "county": "Queens", 
+         "city": "Forest Hills" 
+      }
+   }
+]
+</pre>
+<p>Let’s consider another example of concatenated query.</p>
+<img src="images/concatenated_queries.jpg" alt="Concatenated Queries" />
+<p>Following is the query which will return all the documents where the first child grade greater than 3.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM Families f 
+WHERE ({grade: f.children[0].grade}.grade > 3)
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "id": "WakefieldFamily", 
+      "parents": [ 
+         { 
+            "familyName": "Wakefield", 
+            "givenName": "Robin" 
+         },
+		
+         { 
+            "familyName": "Miller", 
+            "givenName": "Ben"
+         } 
+      ],
+	  
+      "children": [ 
+         { 
+            "familyName": "Merriam", 
+            "givenName": "Jesse", 
+            "gender": "female", 
+            "grade": 6,
+				
+            "pets": [ 
+               { 
+                  "givenName": "Charlie Brown", 
+                  "type": "Dog" 
+               },
+				
+               { 
+                  "givenName": "Tiger", 
+                  "type": "Cat" 
+               },
+				
+               { 
+                  "givenName": "Princess", 
+                  "type": "Cat" 
+               } 
+            ] 
+         }, 
+			
+         { 
+            "familyName": "Miller", 
+            "givenName": "Lisa", 
+            "gender": "female", 
+            "grade": 3,
+				
+            "pets": [ 
+               { 
+                  "givenName": "Jake", 
+                  "type": "Snake" 
+               } 
+            ] 
+         } 
+      ],
+	  
+      "location": { 
+         "state": "NY", 
+         "county": "Manhattan",
+         "city": "NY" 
+      },
+	  
+      "isRegistered": false, 
+      "_rid": "Ic8LAJFujgECAAAAAAAAAA==", 
+      "_ts": 1450541623, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgECAAAAAAAAAA==/", 
+      "_etag": "\"00000500-0000-0000-0000-567582370000\"", 
+      "_attachments": "attachments/" 
+   },
+	
+   { 
+      "id": "AndersenFamily", 
+      "lastName": "Andersen",
+		
+      "parents": [ 
+         { 
+            "firstName": "Thomas", 
+            "relationship": "father" 
+         },
+			
+         { 
+            "firstName": "Mary Kay", 
+            "relationship": "mother" 
+         } 
+      ],
+	  
+      "children": [ 
+         { 
+            "firstName": "Henriette Thaulow", 
+            "gender": "female", 
+            "grade": 5,
+				
+            "pets": [ 
+               { 
+                  "givenName": "Fluffy", 
+                  "type": "Rabbit" 
+               } 
+            ] 
+         } 
+      ],
+	  
+      "location": { 
+         "state": "WA", 
+         "county": "King", 
+         "city": "Seattle"
+      },
+   
+      "isRegistered": true, 
+      "_rid": "Ic8LAJFujgEEAAAAAAAAAA==", 
+      "_ts": 1450541624, 
+      "_self": "dbs/Ic8LAA==/colls/Ic8LAJFujgE=/docs/Ic8LAJFujgEEAAAAAAAAAA==/", 
+      "_etag": "\"00000700-0000-0000-0000-567582380000\"", 
+      "_attachments": "attachments/" 
+   } 
+]	  
+</pre>
+<p>Let’s take a look at an <b>example</b> of nested queries.</p>
+<img src="images/nested_queries.jpg" alt="Nested Queries" />
+<p>Following is the query which will iterate all the parents and then return the document where <b>familyName</b> is Smith.</p>
+<pre class="prettyprint notranslate">
+SELECT * 
+FROM p IN Families.parents 
+WHERE p.familyName = "Smith"
+</pre>
+<p>When the above query is executed, it produces the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "familyName": "Smith", 
+      "givenName": "James" 
+   } 
+]
+</pre>
+<p>Let’s consider <b>another example</b> of nested query.</p>
+<img src="images/nested_query.jpg" alt="Nested Query" />
+<p>Following is the query which will return all the <b>familyName</b>.</p>
+<pre class="prettyprint notranslate">
+SELECT VALUE p.familyName
+FROM Families f 
+JOIN p IN f.parents
+</pre>
+<p>When the above query is executed, it produces he following output.</p>
+<pre class="result notranslate">
+[ 
+   "Wakefield", 
+   "Miller", 
+   "Smith", 
+   "Curtis" 
+]
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="documentdb_sql_composite_sql_queries.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="documentdb_sql_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/documentdb_sql/documentdb_sql_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:28:33 GMT -->
+</html>

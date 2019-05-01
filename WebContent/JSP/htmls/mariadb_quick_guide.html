@@ -1,0 +1,2795 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:29:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>MariaDB Quick Guide</title>
+<meta name="description" content="MariaDB Quick Guide - Learn MariaDB in simple and easy steps starting from basic to advanced concepts with examples including Introduction, Installation, Administration, PHP Syntax, Connection, Create Database, Drop Database, Select Database, Data Types, Create Tables, Drop Tables, Insert Query, Select Query, Where Clause, Update Query, Delete Query, Like Clause, Order By Clause, Join, Null Values, Regular Expression, Transactions, Alter Command, Indexes and Statistics Tables, Temporary Tables, Table Coning, Sequences, Managing Duplicates, SQL Injection Protection, Backup Methods, Backup Loading Methods, Useful Functions." />
+<meta name="keywords" content="MariaDB, Tutorial, Introduction, Installation, Administration, PHP Syntax, Connection, Create Database, Drop Database, Select Database, Data Types, Create Tables, Drop Tables, Insert Query, Select Query, Where Clause, Update Query, Delete Query, Like Clause, Order By Clause, Join, Null Values, Regular Expression, Transactions, Alter Command, Indexes and Statistics Tables, Temporary Tables, Table Coning, Sequences, Managing Duplicates, SQL Injection Protection, Backup Methods, Backup Loading Methods, Useful Functions." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #1a6460 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #1a6460 !important;}
+.submenu-item{ border-bottom: 2px solid #1a6460 !important; border-top: 2px solid #1a6460 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/mariadb-mini-logo.jpg" alt="MariaDB Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">MariaDB Tutorial</li>
+<li><a href="index.html">MariaDB - Home</a></li>
+<li><a href="mariadb_introduction.html">MariaDB - Introduction</a></li>
+<li><a href="mariadb_installation.html">MariaDB - Installation</a></li>
+<li><a href="mariadb_administration.html">MariaDB - Administration</a></li>
+<li><a href="mariadb_php_syntax.html">MariaDB - PHP Syntax</a></li>
+<li><a href="mariadb_connection.html">MariaDB - Connection</a></li>
+<li><a href="mariadb_create_database.html">MariaDB - Create Database</a></li>
+<li><a href="mariadb_drop_database.html">MariaDB - Drop Database</a></li>
+<li><a href="mariadb_select_database.html">MariaDB - Select Database</a></li>
+<li><a href="mariadb_data_types.html">MariaDB - Data Types</a></li>
+<li><a href="mariadb_create_tables.html">MariaDB - Create Tables</a></li>
+<li><a href="mariadb_drop_tables.html">MariaDB - Drop Tables</a></li>
+<li><a href="mariadb_insert_query.html">MariaDB - Insert Query</a></li>
+<li><a href="mariadb_select_query.html">MariaDB - Select Query</a></li>
+<li><a href="mariadb_where_clause.html">MariaDB - Where Clause</a></li>
+<li><a href="mariadb_update_query.html">MariaDB - Update Query</a></li>
+<li><a href="mariadb_delete_query.html">MariaDB - Delete Query</a></li>
+<li><a href="mariadb_like_clause.html">MariaDB - Like Clause</a></li>
+<li><a href="mariadb_order_by_clause.html">MariaDB - Order By Clause</a></li>
+<li><a href="mariadb_join.html">MariaDB - Join</a></li>
+<li><a href="mariadb_null_values.html">MariaDB - Null Values</a></li>
+<li><a href="mariadb_regular_expression.html">MariaDB - Regular Expression</a></li>
+<li><a href="mariadb_transactions.html">MariaDB - Transactions</a></li>
+<li><a href="mariadb_alter_command.html">MariaDB - Alter Command</a></li>
+<li><a href="mariadb_indexes_statistics_tables.html">Indexes &amp; Statistics Tables</a></li>
+<li><a href="mariadb_temporary_tables.html">MariaDB - Temporary Tables</a></li>
+<li><a href="mariadb_table_cloning.html">MariaDB - Table Cloning</a></li>
+<li><a href="mariadb_sequences.html">MariaDB - Sequences</a></li>
+<li><a href="mariadb_managing_duplicates.html">MariaDB - Managing Duplicates</a></li>
+<li><a href="mariadb_sql_injection_protection.html">MariaDB - SQL Injection Protection</a></li>
+<li><a href="mariadb_backup_methods.html">MariaDB - Backup Methods</a></li>
+<li><a href="mariadb_backup_loading_methods.html">MariaDB - Backup Loading Methods</a></li>
+<li><a href="mariadb_useful_functions.html">MariaDB - Useful Functions</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">MariaDB Useful Resources</li>
+<li><a href="mariadb_quick_guide.html">MariaDB - Quick Guide</a></li>
+<li><a href="mariadb_useful_resources.html">MariaDB - Useful Resources</a></li>
+<li><a href="mariadb_discussion.html">MariaDB - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>MariaDB - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="mariadb_useful_functions.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="mariadb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>MariaDB - Introduction</h1>
+<p>A database application exists separate from the main application and stores data collections. Every database employs one or multiple APIs for the creation, access, management, search, and replication of the data it contains.</p>
+<p>Databases also use non-relational data sources such as objects or files. However, databases prove the best option for large datasets, which would suffer from slow retrieval and writing with other data sources.</p>
+<p>Relational database management systems, or RDBMS, store data in various tables.Relationships between these tables are established using primary keys and foreign keys.</p>
+<p>RDBMS offers the following features &minus;</p>
+<ul class="list">
+<li><p>They enable you to implement a data source with tables, columns, and indices.</p></li>
+<li><p>They ensure the integrity of references across rows of multiple tables.</p></li>
+<li><p>They automatically update indices.</p></li>
+<li><p>They interpret SQL queries and operations in manipulating or sourcing data from tables.</p></li>
+</ul>
+<h2>RDBMS Terminology</h2>
+<p>Before we begin our discussion of MariaDB, let us review a few terms related to databases.</p>
+<ul class="list">
+<li><p><b>Database</b> &minus; A database is a data source consisting of tables holding related data.</p></li>
+<li><p><b>Table</b> &minus; A table, meaning a spreadsheet, is a matrix containing data.</p></li>
+<li><p><b>Column</b> &minus; A column, meaning data element, is a structure holding data of one type; for example, shipping dates.</p></li>
+<li><p><b>Row</b> &minus; A row is a structure grouping related data; for example, data for a customer. It is also known as a tuple, entry, or record.</p></li>
+<li><p><b>Redundancy</b> &minus; This term refers to storing data twice in order to accelerate the system.</p></li>
+<li><p><b>Primary Key</b> &minus; This refers to a unique, identifying value. This value cannot appear twice within a table, and there is only one row associated with it.</p></li>
+<li><p><b>Foreign Key</b> &minus; A foreign key serves as a link between two tables.</p></li>
+<li><p><b>Compound Key</b> &minus; A compound key, or composite key, is a key that refers to multiple columns. It refers to multiple columns due to a column lacking a unique quality.</p></li>
+<li><p><b>Index</b> &minus; An index is virtually identical to the index of a book.</p></li>
+<li><p><b>Referential Integrity</b> &minus; This term refers to ensuring all foreign key values point to existing rows.</p></li>
+</ul>
+<h2>MARIA Database</h2>
+<p>MariaDB is a popular fork of MySQL created by MySQL's original developers. It grew out of concerns related to MySQL's acquisition by Oracle. It offers support for both small data processing tasks and enterprise needs. It aims to be a drop-in replacement for MySQL requiring only a simple uninstall of MySQL and an install of MariaDB. MariaDB offers the same features of MySQL and much more.</p>
+<h3>Key Features of MariaDB</h3>
+<p>The important features of MariaDB are &minus;</p>
+<ul class="list">
+<li><p>All of MariaDB is under GPL, LGPL, or BSD.</p></li>
+<li><p>MariaDB includes a wide selection of storage engines, including high-performance storage engines, for working with other RDBMS data sources.</p></li>
+<li><p>MariaDB uses a standard and popular querying language.</p></li>
+<li><p>MariaDB runs on a number of operating systems and supports a wide variety of programming languages.</p></li>
+<li><p>MariaDB offers support for PHP, one of the most popular web development languages.</p></li>
+<li><p>MariaDB offers Galera cluster technology.</p></li>
+<li><p>MariaDB also offers many operations and commands unavailable in MySQL, and eliminates/replaces features impacting performance negatively.</p></li>
+</ul>
+<h3>Getting Started</h3>
+<p>Before you begin this tutorial, make sure you have some basic knowledge of PHP and HTML, specifically material discussed in our PHP and HTML tutorials.</p>
+<p>This guide focuses on use of MariaDB in a PHP environment, so our examples will be most useful for PHP developers.</p>
+<p>We strongly recommend reviewing our PHP Tutorial if you lack familiarity or need to review.</p>
+<h1>MariaDB - Installation</h1>
+<p>All downloads for MariaDB are located in the <a target="_blank" rel="nofollow" href="https://downloads.mariadb.org/" />Download</a> section of the official MariaDB foundation website. Click the link to the version you would like, and a list of downloads for multiple operating systems, architectures, and installation file types is displayed.</p>
+<h2>Installing on LINUX/UNIX</h2>
+<p>If you have intimate knowledge of Linux/Unix systems, simply download source to build your install. Our recommended way of installing is to utilize distribution packages. MariaDB offers packages for the following Linux/Unix distributions &minus;</p>
+<ul class="list">
+<li>RedHat/CentOS/Fedora</li>
+<li>Debian/Ubuntu</li>
+</ul>
+<p>The following distributions include a MariaDB package in their repositories &minus;</p>
+<ul class="list">
+<li>openSUSE</li>
+<li>Arch Linux</li>
+<li>Mageia</li>
+<li>Mint</li>
+<li>Slackware</li>
+</ul>
+<p>Follow these steps to install in an Ubuntu environment &minus;</p>
+<p><b>Step 1</b> &minus; Login as a root user.</p>
+<p><b>Step 2</b> &minus; Navigate to the directory containing the MariaDB package.</p>
+<p><b>Step 3</b> &minus; Import the GnuPG signing key with the following code &minus;</p>
+<pre class="result notranslate">
+sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+</pre>
+<p></p>
+<p><b>Step 4</b> &minus; Add MariaDB to the <b>sources.list</b> file. Open the file, and add the following code &minus;</p>
+<pre class="result notranslate">
+sudo add-apt-repository 'deb http://ftp.osuosl.org/pub/mariadb/repo/5.5/ubuntuprecise main'
+</pre>
+<p></p>
+<p><b>Step 5</b> &minus; Refresh the system with the following &minus;</p>
+<pre class="result notranslate">
+sudo apt-get update
+</pre>
+<p></p>
+<p><b>Step 6</b> &minus; Install MariaDB with the following &minus;</p>
+<pre class="result notranslate">
+sudo apt-get install mariadb-server
+</pre>
+<h2>Installing on Windows</h2>
+<p>After locating and downloading an automated install file (MSI), simply double click the file to start the installation. The installation wizard will walk you through every step of installation and any necessary settings.</p>
+<p>Test the installation by starting it from the command prompt. Navigate to the location of the installation, typically in the directory, and type the following at the prompt &minus;</p>
+<pre class="result notranslate">
+mysqld.exe --console
+</pre>
+<p></p>
+<p>If the installation is successful, you will see messages related to startup. If this does not appear, you may have permission issues. Ensure that your user account can access the application. Graphical clients are available for MariaDB administration in the Windows environment. If you find the command line uncomfortable or cumbersome, be sure to experiment with them.</p>
+<h2>Testing the Installation</h2>
+<p>Perform a few simple tasks to confirm the functioning and installation of MariaDB.</p>
+<p><b>Use the Admin Utility to Get Server Status</b></p>
+<p>View the server version with the mysqladmin binary.</p>
+<pre class="result notranslate">
+[root@host]# mysqladmin --version
+</pre>
+<p></p>
+<p>It should display the version, distribution, operating system, and architecture. If you do not see the output of that type, examine your installation for issues.</p>
+<p><b>Execute Simple Commands with a Client</b></p>
+<p>Bring up the command prompt for MariaDB. This should connect you to MariaDB and allow execution of commands. Enter a simple command as follows &minus;</p>
+<pre class="result notranslate">
+mysql&gt; SHOW DATABASES;
+</pre>
+<h2>Post- Installation</h2>
+<p>After successful installation of MariaDB, set a root password. A fresh install will have a blank password. Enter the following to set the new password &minus;</p>
+<pre class="result notranslate">
+mysqladmin -u root password "[enter your password here]";
+</pre>
+<p></p>
+<p>Enter the following to connect to the server with your new credentials &minus;</p>
+<pre class="result notranslate">
+mysql -u root -p
+Enter password:*******
+</pre>
+<h2>Upgrading on Windows</h2>
+<p>If you already have MySQL installed on your Windows system, and want to upgrade to MariaDB; do not uninstall MySQL and install MariaDB. This will cause a conflict with the existing database. You must instead install MariaDB, and then use the upgrade wizard in the Windows installation file.</p>
+<p>The options of your MySQL my.cnf file should work with MariaDB. However, MariaDB has many features, which are not found in MySQL.</p>
+<p>Consider the following conflicts in your my.cnf file &minus;</p>
+<ul class="list">
+<li><p>MariaDB uses Aria storage engine by default for temporary files. If you have a lot of temporary files, modify key buffer size if you do not use MyISAM tables.</p></li>
+<li><p>If your applications connect/disconnect frequently, alter the thread cache size.</p></li>
+<li><p>If you use over 100 connections, use the thread pool.</p></li>
+</ul>
+<h3>Compatibility</h3>
+<p>MySQL and MariaDB are essentially identical. However, there are enough differences to create issues in upgradation. Review more of these key differences in the <a target="_blank" rel="nofollow" href="https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-compatibility/" />MariaDB
+Knowledge Base.</a></p>
+<h1>MariaDB - Administration</h1>
+<p>Before attempting to run MariaDB, first determine its current state, running or shutdown. There are three options for starting and stopping MariaDB &minus;</p>
+<ul class="list">
+<li>Run mysqld (the MariaDB binary).</li>
+<li>Run the mysqld_safe startup script.</li>
+<li>Run the mysql.server startup script.</li>
+</ul>
+<p>If you installed MariaDB in a non-standard location, you may have to edit location information in the script files. Stop MariaDB by simply adding a “stop” parameter with the script.</p>
+<p>If you would like to start it automatically under Linux, add startup scripts to your <b>init</b> system. Each distribution has a different procedure. Refer to your system documentation.</p>
+<h2>Creating a User Account</h2>
+<p>Create a new user account with the following code &minus;</p>
+<pre class="result notranslate">
+'newusername'@'localhost' IDENTIFIED BY 'userpassword';
+</pre>
+<p></p>
+<p>This code adds a row to the user table with no privileges. You also have the option to use a hash value for the password. Grant the user privileges with the following code &minus;</p>
+<pre class="result notranslate">
+GRANT SELECT, INSERT, UPDATE, DELETE ON database1 TO 'newusername'@'localhost';
+</pre>
+<p></p>
+<p>Other privileges include just about every command or operation possible in MariaDB. After creating a user, execute a “FLUSH PRIVILEGES” command in order to refresh grant tables. This allows the user account to be used.</p>
+<h2>The Configuration File</h2>
+<p>After a build on Unix/Linux, the configuration file “/etc/my.conf” should be edited to appear as follow &minus;</p>
+<pre class="prettyprint notranslate">
+# Example mysql config file.
+# You can copy this to one of:
+# /etc/my.cnf to set global options,
+# /mysql-data-dir/my.cnf to get server specific options or
+# ~/my.cnf for user specific options.
+
+#
+
+# One can use all long options that the program supports.
+# Run the program with --help to get a list of available options
+
+# This will be passed to all mysql clients
+[client]
+#password = my_password
+#port = 3306
+#socket = /tmp/mysql.sock
+
+# Here is entries for some specific programs
+# The following values assume you have at least 32M ram
+
+# The MySQL server
+[mysqld]
+#port = 3306
+#socket = /tmp/mysql.sock
+temp-pool
+
+# The following three entries caused mysqld 10.0.1-MariaDB (and possibly other
+   versions) to abort...
+# skip-locking
+# set-variable = key_buffer = 16M
+# set-variable = thread_cache = 4
+
+loose-innodb_data_file_path = ibdata1:1000M
+loose-mutex-deadlock-detector
+gdb
+
+######### Fix the two following paths
+
+# Where you want to have your database
+data = /path/to/data/dir
+
+# Where you have your mysql/MariaDB source + sql/share/english
+language = /path/to/src/dir/sql/share/english
+
+[mysqldump]
+quick
+MariaDB
+8
+set-variable = max_allowed_packet=16M
+[mysql]
+no-auto-rehash
+
+[myisamchk]
+set-variable = key_buffer = 128M
+</pre>
+<p>Edit the lines “data= ” and “language= ” to match your environment.</p>
+<p>After file modification, navigate to the source directory and execute the following &minus;</p>
+<pre class="result notranslate">
+./scripts/mysql_install_db --srcdir = $PWD --datadir = /path/to/data/dir --
+   user = $LOGNAME
+</pre>
+<p>Omit the “$PWD” variable if you added datadir to the configuration file. Ensure “$LOGNAME” is used when running version 10.0.1 of MariaDB.</p>
+<h2>Administration Commands</h2>
+<p>Review the following list of important commands you will regularly use when working with MariaDB &minus;</p>
+<ul class="list">
+<li><p><b>USE [database name]</b> &minus; Sets the current default database.</p></li>
+<li><p><b>SHOW DATABASES</b> &minus; Lists the databases currently on the server.</p></li>
+<li><p><b>SHOW TABLES</b> &minus; Lists all non-temporary tables.</p></li>
+<li><p><b>SHOW COLUMNS FROM [table name]</b> &minus; Provides column information pertaining to the specified table.</p></li>
+<li><p><b>SHOW INDEX FROM TABLENAME [table name]</b> &minus; Provides table index information relating to the specified table.</p></li>
+<li><p><b>SHOW TABLE STATUS LIKE [table name]\G –</b> &minus; Provides tables with information about non-temporary tables, and the pattern that appears after the LIKE clause is used to fetch table names.</p></li>
+</ul>
+<h1>MariaDB - PHP Syntax</h1>
+<p>MariaDB partners well with a wide variety of programming languages and frameworks such as PHP, C#, JavaScript, Ruby on Rails, Django, and more. PHP remains the most popular of all available languages due to its simplicity and historical footprint. This guide will focus on PHP partnered with MariaDB.</p>
+<p>PHP provides a selection of functions for working with the MySQL database. These functions perform tasks like accessing it or performing operations, and they are fully compatible with MariaDB. Simply call these functions as you would call any other PHP function.</p>
+<p>The PHP functions you will use for MariaDB conform to the following format &minus;</p>
+<pre class="result notranslate">
+mysql_function(value,value,...);
+</pre>
+<p></p>
+<p>The second part of the function specifies its action. Two of the functions used in this guide are as follows &minus;</p>
+<pre class="result notranslate">
+mysqli_connect($connect);
+mysqli_query($connect,"SQL statement");
+</pre>
+<p></p>
+<p>The following example demonstrates the general syntax of a PHP call to a MariaDB function &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;PHP and MariaDB&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;?php
+         $retval = mysql_function(value, [value,...]);
+      
+         if( !$retval ) {
+            die ( "Error: Error message here" );
+         }
+         // MariaDB or PHP Statements
+      ?&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>In the next section, we will examine essential MariaDB tasks, using PHP functions.</p>
+<h1>MariaDB - Connection</h1>
+<p>One way to establish a connection with MariaDB consists of using the mysql binary at the command prompt.</p>
+<h2>MYSQL Binary</h2>
+<p>Review an example given below.</p>
+<pre class="result notranslate">
+[root@host]# mysql -u root -p
+
+Enter password:******
+</pre>
+<p>The code given above connects to MariaDB and provides a command prompt for executing SQL commands. After entering the code, a welcome message should appear indicating a successful connection, with the version number displayed.</p>
+<pre class="result notranslate">
+Welcome to the MariaDB monitor. Commands end with ; or \g. 
+Your MariaDB connection id is 122323232 
+Server version: 5.5.40-MariaDB-log
+  
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.  
+mysql&gt; 
+</pre> 
+<p>The example uses root access, but any user with privileges can of course access the MariaDB prompt and perform operations.</p>
+<p>Disconnect from MariaDB through the <b>exit</b> command as follows &minus;</p>
+<pre class="result notranslate">
+mysql&gt; exit
+</pre>
+<h2>PHP Connection Script</h2>
+<p>Another way to connect to and disconnect from MariaDB consists of employing a PHP script. PHP provides the <b>mysql_connect()</b> function for opening a database connection. It uses five optional parameters, and returns a MariaDB link identifier after a successful connection, or a false on unsuccessful connection. It also provides the <b>mysql_close()</b> function for closing database connections, which uses a single parameter.</p>
+<h3>Syntax</h3>
+<p>Review the following PHP connection script syntax &minus;</p>
+<pre class="result notranslate">
+connection mysql_connect(server,user,passwd,new_link,client_flag);
+</pre>
+<p></p>
+<p>The description of the parameters is given below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>server</b></p>
+<p>This optional parameter specifies the host name running the database server. Its default value is “localhost:.3036.”</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>user</b></p>
+<p>This optional parameter specifies the username accessing the database. Its default value is the owner of the server.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>passwd</b></p>
+<p>This optional parameter specifies the user's password. Its default value is blank.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>new_link</b></p>
+<p>This optional parameter specifies that on a second call to <b>mysql_connect()</b> with identical arguments, rather than a new connection, the identifier of the current connection will be returned.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>client flags</b></p>
+<p>This optional parameter uses a combination of the following constant values &minus;</p>
+<ul class="list">
+<li><p>MYSQL_CLIENT_SSL &minus; It uses ssl encryption.</p></li>
+<li><p>MYSQL_CLIENT_COMPRESS &minus; It uses compression protocol.</p></li>
+<li><p>MYSQL_CLIENT_IGNORE_SPACE &minus; It permits space after function names.</p></li>
+<li><p>MYSQL_CLIENT_INTERACTIVE &minus; It permits interactive timeout seconds of inactivity prior to closing the connection.</p></li>
+</ul>
+</td>
+</tr>
+</table>
+<p>Review the PHP disconnection script syntax given below &minus;</p>
+<pre class="result notranslate">
+bool mysql_close ( resource $link_identifier );
+</pre>
+<p></p>
+<p>If you omit the resource, the most recent opened resource will close. It returns a value of true on a successful close, or false.</p>
+<p>Try the following example code to connect with a MariaDB server &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Connect to MariaDB Server&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;?php
+         $dbhost = 'localhost:3036';
+         $dbuser = 'guest1';
+         $dbpass = 'guest1a';
+         $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+      
+         if(! $conn ) {
+            die('Could not connect: ' . mysql_error());
+         }
+         
+         echo 'Connected successfully';
+         mysql_close($conn);
+      ?&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>On successful connection, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Connected successfully
+</pre>
+<h1>MariaDB - Create Database</h1>
+<p>Creation or deletion of databases in MariaDB requires privileges typically only given to root users or admins. Under these accounts, you have two options for creating a database &minus; the mysqladmin binary and a PHP script.</p>
+<h2>mysqladmin binary</h2>
+<p>The following example demonstrates the use of the mysqladmin binary in creating a database with the name <b>Products</b> &minus;</p>
+<pre class="result notranslate">
+[root@host]# mysqladmin -u root -p create PRODUCTS
+Enter password:******
+</pre>
+<h2>PHP Create Database Script</h2>
+<p>PHP employs the <b>mysql_query</b> function in creating a MariaDB database. The function uses two parameters, one optional, and returns either a value of “true” when successful, or “false” when not.</p>
+<h3>Syntax</h3>
+<p>Review the following <b>create database script</b> syntax &minus;</p>
+<pre class="result notranslate">
+bool mysql_query( sql, connection );
+</pre>
+<p></p>
+<p>The description of the parameters is given below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>sql</b></p>
+<p>This required parameter consists of the SQL query needed to perform the operation.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>connection</b></p>
+<p>When not specified, this optional parameter uses the most recent connection used.</p>
+</td>
+</tr>
+</table>
+<p>Try the following example code for creating a database &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Create a MariaDB Database&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;?php
+         $dbhost = 'localhost:3036';
+         $dbuser = 'root';
+         $dbpass = 'rootpassword';
+         $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+      
+         if(! $conn ) {
+            die('Could not connect: ' . mysql_error());
+         }
+
+         echo 'Connected successfully&lt;br /&gt;';
+         $sql = 'CREATE DATABASE PRODUCTS';
+         $retval = mysql_query( $sql, $conn );
+      
+         if(! $retval ) {
+            die('Could not create database: ' . mysql_error());
+         }
+
+         echo "Database PRODUCTS created successfully\n";
+         mysql_close($conn);
+      ?&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>On successful deletion, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Database PRODUCTS created successfully 
+mysql&gt; SHOW DATABASES; 
++-----------------------+ 
+| Database              | 
++-----------------------+ 
+| PRODUCTS              | 
++-----------------------+  
+</pre>
+<h1>MariaDB - Drop Database</h1>
+<p>Creation or deletion of databases in MariaDB requires privileges, typically, only given to root users or admins. Under these accounts, you have two options for deleting a database: the mysqladmin binary and a PHP script.</p>
+<p>Note that deleted databases are irrecoverable, so exercise care in performing this operation. Furthermore, PHP scripts used for deletion do <b><u>not</u></b> prompt you with a confirmation before the deletion.</p>
+<h2>mysqladmin binary</h2>
+<p>The following example demonstrates how to use the mysqladmin binary to delete an existing database &minus;</p>
+<pre class="result notranslate">
+[root@host]# mysqladmin -u root -p drop PRODUCTS
+Enter password:******
+mysql&gt; DROP PRODUCTS
+ERROR 1008 (HY000): Can't drop database 'PRODUCTS'; database doesn't exist
+</pre>
+<h2>PHP Drop Database Script</h2>
+<p>PHP employs the <b>mysql_query</b> function in deleting MariaDB databases. The function uses two parameters, one optional, and returns either a value of “true” when successful, or “false” when not.</p>
+<h3>Syntax</h3>
+<p>Review the following drop database script syntax &minus;</p>
+<pre class="result notranslate">
+bool mysql_query( sql, connection );
+</pre>
+<p>The description of the parameters is given below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>sql</b></p>
+<p>This required parameter consists of the SQL query needed to perform the operation.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>connection</b></p>
+<p>When not specified, this optional parameter uses the most recent connection used.</p>
+</td>
+</tr>
+</table>
+<p>Try the following example code for deleting a database &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Delete a MariaDB Database&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;?php
+         $dbhost = 'localhost:3036';
+         $dbuser = 'root';
+         $dbpass = 'rootpassword';
+         $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+      
+         if(! $conn ) {
+            die('Could not connect: ' . mysql_error());
+         }
+         echo 'Connected successfully&lt;br /&gt;';
+         
+         $sql = 'DROP DATABASE PRODUCTS';
+         $retval = mysql_query( $sql, $conn );
+         
+         if(! $retval ){
+            die('Could not delete database: ' . mysql_error());
+         }
+
+         echo "Database PRODUCTS deleted successfully\n";
+         mysql_close($conn);
+      ?&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>On successful deletion, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Database PRODUCTS deleted successfully 
+</pre>
+<h1>MariaDB - Select Database</h1>
+<p>After connecting to MariaDB, you must select a database to work with because many databases may exist. There are two ways to perform this task: from the command prompt or through a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>In choosing a database at the command prompt, simply utilize the SQL command <b>‘use’</b> &minus;</p>
+<pre class="result notranslate">
+[root@host]# mysql -u root -p
+
+Enter password:******
+
+mysql&gt; use PRODUCTS;
+
+Database changed
+
+mysql&gt; SELECT database();  
++-------------------------+ 
+| Database                | 
++-------------------------+ 
+| PRODUCTS                | 
++-------------------------+ 
+</pre>
+<p>Once you select a database, all subsequent commands will operate on the chosen database.</p>
+<p><b>Note</b> &minus; All names (e.g., database, table, fields) are case sensitive. Ensure commands conform to the proper case.</p>
+<h2>PHP Select Database Script</h2>
+<p>PHP provides the <b>mysql_select_db</b> function for database selection. The function uses two parameters, one optional, and returns a value of “true” on successful selection, or false on failure.</p>
+<h3>Syntax</h3>
+<p>Review the following select database script syntax.</p>
+<pre class="result notranslate">
+bool mysql_select_db( db_name, connection );
+</pre>
+<p></p>
+<p>The description of the parameters is given below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>db_name</b></p>
+<p>This required parameter specifies the name of the database to use.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>connection</b></p>
+<p>When not specified, this optional parameter uses the most recent connection used.</p>
+</td>
+</tr>
+</table>
+<p>Try the following example code for selecting a database &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Select a MariaDB Database&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;?php
+         $dbhost = 'localhost:3036';
+         $dbuser = 'guest1';
+         $dbpass = 'guest1a';
+         $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+      
+         if(! $conn ) {
+            die('Could not connect: ' . mysql_error());
+         }
+         echo 'Connected successfully';
+         
+         mysql_select_db( 'PRODUCTS' );
+         mysql_close($conn);
+      ?&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>On successful selection, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Connected successfully 
+</pre>
+<h1>MariaDB - Data Types</h1>
+<p>Good field definitions are essential for the optimization of your database. The ideal approach requires that you exclusively use a field of the type and size needed. For example, if you will only use a field, five-characters wide, do not define a field, 20-characters wide. Field (or column) types are also known as data types given the data types stored within the field.</p>
+<p>MariaDB data types can be categorized as numeric, date and time, and string values.</p>
+<h2>Numeric Data Types</h2>
+<p>The numeric data types supported by MariaDB are as follows &minus;</p>
+<ul class="list">
+<li><p><b>TINYINT</b> &minus; This data type represents small integers falling within the signed range of -128 to 127, and the unsigned range of 0 to 255.</p></li>
+<li><p><b>BOOLEAN</b> &minus; This data type associates a value 0 with “false,” and a value 1 with “true.”</p></li>
+<li><p><b>SMALLINT</b> &minus; This data type represents integers within the signed range of -32768 to 32768, and the unsigned range of 0 to 65535.</p></li>
+<li><p><b>MEDIUMINT</b> &minus; This data type represents integers in the signed range of -8388608 to 8388607, and the unsigned range of 0 to 16777215.</p></li>
+<li><p><b>INT(also INTEGER)</b> &minus; This data type represents an integer of normal size. When marked as unsigned, the range spans 0 to 4294967295. When signed (the default setting), the range spans -2147483648 to 2147483647. When a column is set to ZEROFILL( an unsigned state), all its values are prepended by zeros to place M digits in the INT value.</p></li>
+<li><p><b>BIGINT</b> &minus; This data type represents integers within the signed range of 9223372036854775808 to 9223372036854775807, and the unsigned range of 0 to 18446744073709551615.</p></li>
+<li><p><b>DECIMAL</b>( also DEC, NUMERIC, FIXED)&minus; This data type represents precise fixed-point numbers, with M specifying its digits and D specifying the digits after the decimal. The M value does not add “-” or the decimal point. If D is set to 0, no decimal or fraction part appears and the value will be rounded to the nearest DECIMAL on INSERT. The maximum permitted digits is 65, and the maximum for decimals is 30. Default value for M on omission is 10, and 0 for D on omission.</p></li>
+<li><p><b>FLOAT</b> &minus; This data type represents a small, floating-point number of the value 0 or a number within the following ranges &minus;</p>
+<ul class="list">
+<li><p>-3.402823466E+38 to -1.175494351E-38</p></li>
+<li><p>1.175494351E-38 to 3.402823466E+38</p></li>
+</ul>
+</li>
+<li><p><b>DOUBLE</b> (also <b>REAL</b> and <b>DOUBLE PRECISION)</b> &minus; This data type represents normal-size, floating-point numbers of the value 0 or within the following ranges &minus;</p>
+<ul class="list">
+<li><p>-1.7976931348623157E+308 to -2.2250738585072014E-308</p></li>
+<li><p>2.2250738585072014E-308 to 1.7976931348623157E+308</p></li>
+</ul>
+</li>
+<li><p><b>BIT</b> &minus; This data type represents bit fields with M specifying the number of bits per value. On omission of M, the default is 1. Bit values can be applied with “ b’[value]’” in which value represents bit value in 0s and 1s. Zero-padding occurs automatically from the left for full length; for example, “10” becomes “0010.”</p></li>
+</ul>
+<h2>Date and Time Data Types</h2>
+<p>The date and time data types supported by MariaDB are as follows &minus;</p>
+<ul class="list">
+<li><p><b>DATE</b> &minus; This data type represents a date range of “1000-01-01” to “9999-12-31,” and uses the “YYYY-MM-DD” date format.</p></li>
+<li><p><b>TIME</b> &minus; This data type represents a time range of “-838:59:59.999999” to “838:59:59.999999.”</p></li>
+<li><p><b>DATETIME</b> &minus; This data type represents the range “1000-01-01 00:00:00.000000” to “9999-12-31 23:59:59.999999.” It uses the “YYYY-MM-DD HH:MM:SS” format.</p></li>
+<li><p><b>TIMESTAMP</b> &minus; This data type represents a timestamp of the “YYYY-MM-DD HH:MM:DD” format. It mainly finds use in detailing the time of database modifications, e.g., insertion or update.</p></li>
+<li><p><b>YEAR</b> &minus; This data type represents a year in 4-digit format. The four-digit format allows values in the range of 1901 to 2155, and 0000.</p></li>
+</ul>
+<h2>String DataTypes</h2>
+<p>The string type values supported by MariaDB are as follows &minus;</p>
+<ul class="list">
+<li><p><b>String literals</b> &minus; This data type represents character sequences enclosed by quotes.</p></li>
+<li><p><b>CHAR</b> &minus; This data type represents a right-padded, fixed-length string containing spaces of specified length. M represents column length of characters in a range of 0 to 255, its default value is 1.</p></li>
+<li><p><b>VARCHAR</b> &minus; This data type represents a variable-length string, with an M range (maximum column length) of 0 to 65535.</p></li>
+<li><p><b>BINARY</b> &minus; This data type represents binary byte strings, with M as the column length in bytes.</p></li>
+<li><p><b>VARBINARY</b> &minus; This data type represents binary byte strings of variable length, with M as column length.</p></li>
+<li><p><b>TINYBLOB</b> &minus; This data type represents a blob column with a maximum length of 255 (28 - 1) bytes. In storage, each uses a one-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>BLOB</b> &minus; This data type represents a blob column with a maximum length of 65,535 (216 - 1) bytes. In storage, each uses a two-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>MEDIUMBLOB</b> &minus; This data type represents a blob column with a maximum length of 16,777,215 (22<sup>4</sup> - 1) bytes. In storage, each uses a three-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>LONGBLOB</b> &minus; This data type represents a blob column with a maximum length of 4,294,967,295(2<sup>32</sup> - 1) bytes. In storage, each uses a four-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>TINYTEXT</b> &minus; This data type represents a text column with a maximum length of 255 (2<sup>8</sup> - 1) characters. In storage, each uses a one-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>TEXT</b> &minus; This data type represents a text column with a maximum length of 65,535 (2<sup>16</sup> - 1) characters. In storage, each uses a two-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>MEDIUMTEXT</b> &minus; This data type represents a text column with a maximum length of 16,777,215 (2<sup>24</sup> - 1) characters. In storage, each uses a three-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>LONGTEXT</b> &minus; This data type represents a text column with a maximum length of 4,294,967,295 or 4GB (2<sup>32</sup> - 1) characters. In storage, each uses a four-byte length prefix indicating the byte quantity in the value.</p></li>
+<li><p><b>ENUM</b> &minus; This data type represents a string object having only a single value from a list.</p></li>
+<li><p><b>SET</b> &minus; This data type represents a string object having zero or more values from a list, with a maximum of 64 members. SET values present internally as integer values.</p></li>
+</ul>
+<h1>MariaDB - Create Tables</h1>
+<p>In this chapter, we will learn how to create tables. Before creating a table, first determine its name, field names, and field definitions.</p>
+<p>Following is the general syntax for table creation &minus;</p>
+<pre class="result notranslate">
+CREATE TABLE table_name (column_name column_type);
+</pre>
+<p>Review the command applied to creating a table in the PRODUCTS database &minus;</p>
+<pre class="result notranslate">
+databaseproducts_ tbl(
+   product_id INT NOT NULL AUTO_INCREMENT,
+   product_name VARCHAR(100) NOT NULL,
+   product_manufacturer VARCHAR(40) NOT NULL,
+   submission_date DATE,
+   PRIMARY KEY ( product_id )
+);
+</pre>
+<p>The above example uses “NOT NULL” as a field attribute to avoid errors caused by a null value. The attribute “AUTO_INCREMENT” instructs MariaDB to add the next available value to the ID field. The keyword primary key defines a column as the <b>primary key</b>. Multiple columns separated by commas can define a primary key.</p>
+<p>The two main methods for creating tables are using the command prompt and a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>Utilize the CREATE TABLE command to perform the task as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+root@host# mysql -u root -p
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+mysql&gt; CREATE TABLE products_tbl(
+   -&gt; product_id INT NOT NULL AUTO_INCREMENT,
+   -&gt; product_name VARCHAR(100) NOT NULL,
+   -&gt; product_manufacturer VARCHAR(40) NOT NULL,
+   -&gt; submission_date DATE,
+   -&gt; PRIMARY KEY ( product_id )
+   -&gt; );
+mysql&gt; SHOW TABLES;
++------------------------+
+| PRODUCTS               |
++------------------------+
+| products_tbl           |
++------------------------+
+</pre>
+<p>Ensure all commands are terminated with a semicolon.</p>
+<h2>PHP Create Table Script</h2>
+<p>PHP provides <b>mysql_query()</b> for table creation. Its second argument contains the necessary SQL command &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Create a MariaDB Table&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;?php
+         $dbhost = 'localhost:3036';
+         $dbuser = 'root';
+         $dbpass = 'rootpassword';
+         $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+      
+         if(! $conn ){
+            die('Could not connect: ' . mysql_error());
+         }
+         echo 'Connected successfully&lt;br /&gt;';
+         
+         $sql = "CREATE TABLE products_tbl( ".
+            "product_id INT NOT NULL AUTO_INCREMENT, ".
+            "product_name VARCHAR(100) NOT NULL, ".
+            "product_manufacturer VARCHAR(40) NOT NULL, ".
+            "submission_date DATE, ".
+            "PRIMARY KEY ( product_id )); ";
+      
+         mysql_select_db( 'PRODUCTS' );
+         $retval = mysql_query( $sql, $conn );
+      
+         if(! $retval ) {
+            die('Could not create table: ' . mysql_error());
+         }
+         echo "Table created successfully\n";
+         
+         mysql_close($conn);
+      ?&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>On successful table creation, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Table created successfully
+</pre>
+<h1>MariaDB - Drop Tables</h1>
+<p>In this chapter, we will learn to delete tables.</p>
+<p>Table deletion is very easy, but remember all deleted tables are irrecoverable. The general syntax for table deletion is as follows &minus;</p>
+<pre class="result notranslate">
+DROP TABLE table_name ;
+</pre>
+<p></p>
+<p>Two options exist for performing a table drop: use the command prompt or a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, simply use the <b>DROP TABLE</b> SQL command &minus;</p>
+<pre class="result notranslate">
+root@host# mysql -u root -p
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+mysql&gt; DROP TABLE products_tbl
+
+mysql&gt; SELECT * from products_tbl
+ERROR 1146 (42S02): Table 'products_tbl' doesn't exist
+</pre>
+<h2>PHP Drop Table Script</h2>
+<p>PHP provides <b>mysql_query()</b> for dropping tables. Simply pass its second argument the appropriate SQL command &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Create a MariaDB Table&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;?php
+         $dbhost = 'localhost:3036';
+         $dbuser = 'root';
+         $dbpass = 'rootpassword';
+         $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+         
+         if(! $conn ) {
+            die('Could not connect: ' . mysql_error());
+         }
+         echo 'Connected successfully&lt;br /&gt;';
+         
+         $sql = "DROP TABLE products_tbl";
+         mysql_select_db( 'PRODUCTS' );
+         $retval = mysql_query( $sql, $conn );
+      
+         if(! $retval ) {
+            die('Could not delete table: ' . mysql_error());
+         }
+         echo "Table deleted successfully\n";
+         
+         mysql_close($conn);
+      ?&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>On successful table deletion, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Table deleted successfully
+</pre>
+<h1>MariaDB - Insert Query</h1>
+<p>In this chapter, we will learn how to insert data in a table.</p>
+<p>Inserting data into a table requires the INSERT command. The general syntax of the command is INSERT followed by the table name, fields, and values.</p>
+<p>Review its general syntax given below &minus;</p>
+<pre class="prettyprint notranslate">
+INSERT INTO tablename (field,field2,...) VALUES (value, value2,...);
+</pre>
+<p>The statement requires the use of single or double quotes for string values. Other options for the statement include “INSERT...SET” statements, “INSERT...SELECT” statements, and several other options.</p>
+<p><b>Note</b> &minus; The VALUES() function that appears within the statement, only applies to INSERT statements and returns NULL if used elsewhere.</p>
+<p>Two options exist for performing the operation: use the command line or use a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the prompt, there are many ways to perform a select operation. A standard statement is given below &minus;</p>
+<pre class="result notranslate">
+belowmysql&gt;
+INSERT INTO products_tbl (ID_number, Nomenclature) VALUES (12345,
+“Orbitron 4000”);
+mysql&gt; SHOW COLUMNS FROM products_tbl;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| ID_number   | int(5)      |      |     |         |       |
+| Nomenclature| char(13)    |      |     |         |       |
++-------------+-------------+------+-----+---------+-------+
+</pre>
+<p>You can insert multiple rows &minus;</p>
+<pre class="result notranslate">
+INSERT INTO products VALUES (1, “first row”), (2, “second row”);
+</pre>
+<p>You can also employ the SET clause &minus;</p>
+<pre class="result notranslate">
+INSERT INTO products SELECT * FROM inventory WHERE status = 'available';
+</pre>
+<h2>PHP Insertion Script</h2>
+<p>Employ the same “INSERT INTO...” statement within a PHP function to perform the operation. You will use the <b>mysql_query()</b> function once again.</p>
+<p>Review the example given below &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   if(isset($_POST['add'])) {
+      $dbhost = 'localhost:3036';
+      $dbuser = 'root';
+      $dbpass = 'rootpassword';
+      $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+
+      if(! $conn ) {
+         die('Could not connect: ' . mysql_error());
+      }
+
+      if(! get_magic_quotes_gpc() ) {
+         $product_name = addslashes ($_POST['product_name']);
+         $product_manufacturer = addslashes ($_POST['product_name']);
+      } else {
+         $product_name = $_POST['product_name'];
+         $product_manufacturer = $_POST['product_manufacturer'];
+      }
+      $ship_date = $_POST['ship_date'];
+      $sql = "INSERT INTO products_tbl ".
+         "(product_name,product_manufacturer, ship_date) ".
+         "VALUES"."('$product_name','$product_manufacturer','$ship_date')";
+
+      mysql_select_db('PRODUCTS');
+      $retval = mysql_query( $sql, $conn );
+      
+      if(! $retval ) {
+         die('Could not enter data: ' . mysql_error());
+      }
+
+      echo "Entered data successfully\n";
+      mysql_close($conn);
+   }
+?&gt;
+</pre>
+<p>On successful data insertion, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Entered data successfully
+</pre>
+<p>You will also collaborate validation statements with insert statements such as checking to ensure correct data entry. MariaDB includes a number of options for this purpose, some of which are automatic.</p>
+<h1>MariaDB - Select Query</h1>
+<p>In this chapter, we will learn how to select data from a table.</p>
+<p>SELECT statements retrieve selected rows. They can include UNION statements, an ordering clause, a LIMIT clause, a WHERE clause, a GROUP BY...HAVING clause, and subqueries.</p>
+<p>Review the following general syntax &minus;</p>
+<pre class="result notranslate">
+SELECT field, field2,... FROM table_name, table_name2,... WHERE...
+</pre>
+<p>A SELECT statement provides multiple options for specifying the table used &minus;</p>
+<ul class="list">
+<li><p>database_name.table_name</p></li>
+<li><p>table_name.column_name</p></li>
+<li><p>database_name.table_name.column_name</p></li>
+</ul>
+<p>All select statements must contain one or more <b>select expressions</b>. Select expressions consist of one of the following options &minus;</p>
+<ul class="list">
+<li><p>A column name.</p></li>
+<li><p>An expression employing operators and functions.</p></li>
+<li><p>The specification “table_name.*” to select all columns within the given table.</p></li>
+<li><p>The character “*” to select all columns from all tables specified in the FROM clause.</p></li>
+</ul>
+<p>The command prompt or a PHP script can be employed in executing a select statement.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, execute statements as follows &minus;</p>
+<pre class="result notranslate">
+root@host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+mysql&gt; SELECT * from products_tbl
++-------------+---------------+
+| ID_number   | Nomenclature  |
++-------------+---------------+
+| 12345       | Orbitron 4000 |
++-------------+---------------+
+</pre>
+<h2>PHP Select Script</h2>
+<p>Employ the same SELECT statement(s) within a PHP function to perform the operation. You will use the <b>mysql_query()</b> function once again. Review an example given below &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = 'localhost:3036';
+   $dbuser = 'root';
+   $dbpass = 'rootpassword';
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+
+   $sql = 'SELECT product_id, product_name,product_manufacturer, ship_date 
+      FROM products_tbl';
+
+   mysql_select_db('PRODUCTS');
+   $retval = mysql_query( $sql, $conn );
+   
+   if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+
+   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+      echo "Product ID :{$row['product_id']} &lt;br&gt; ".
+         "Name: {$row['product_name']} &lt;br&gt; ".
+         "Manufacturer: {$row['product_manufacturer']} &lt;br&gt; ".
+         "Ship Date : {$row['ship_date']} &lt;br&gt;".
+         "--------------------------------&lt;br&gt;";
+   }
+
+   echo "Fetched data successfully\n";
+   mysql_close($conn);
+?&gt;
+</pre>
+<p>On successful data retrieval, you will see the following output &minus;</p>
+<pre class="result notranslate">
+Product ID: 12345
+Nomenclature: Orbitron 4000
+Manufacturer: XYZ Corp
+Ship Date: 01/01/17
+----------------------------------------------
+Product ID: 12346
+Nomenclature: Orbitron 3000
+Manufacturer: XYZ Corp
+Ship Date: 01/02/17
+----------------------------------------------
+mysql&gt; Fetched data successfully
+</pre>
+<p>Best practices suggest releasing cursor memory after every SELECT statement. PHP provides the <b>mysql_free_result()</b> function for this purpose. Review its use as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = 'localhost:3036';
+   $dbuser = 'root';
+   $dbpass = 'rootpassword';
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+
+   $sql = 'SELECT product_id, product_name, product_manufacturer, ship_date
+      FROM products_tbl';
+
+   mysql_select_db('PRODUCTS');
+   $retval = mysql_query( $sql, $conn );
+
+   if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+
+   while($row = mysql_fetch_array($retval, MYSQL_NUM)) {
+      echo "Product ID :{$row[0]} &lt;br&gt; ".
+         "Name: {$row[1]} &lt;br&gt; ".
+         "Manufacturer: {$row[2]} &lt;br&gt; ".
+         "Ship Date : {$row[3]} &lt;br&gt; ".
+         "--------------------------------&lt;br&gt;";
+   }
+
+   mysql_free_result($retval);
+   echo "Fetched data successfully\n";
+   mysql_close($conn);
+?&gt;
+</pre>
+<h1>MariaDB - Where Clause</h1>
+<p><b>WHERE</b> clauses filter various statements such as SELECT, UPDATE, DELETE, and INSERT. They present criteria used to specify action. They typically appear after a table name in a statement, and their condition follows. The WHERE clause essentially functions like an if statement.</p>
+<p>Review the general syntax of WHERE clause given below &minus;</p>
+<pre class="result notranslate">
+[COMMAND] field,field2,... FROM table_name,table_name2,... WHERE [CONDITION]
+</pre>
+<p>Note the following qualities of the WHERE clause &minus;</p>
+<ul class="list">
+<li><p>It is optional.</p></li>
+<li><p>It allows any condition to be specified.</p></li>
+<li><p>It allows for the specification of multiple conditions through using an AND or OR
+operator.</p></li>
+<li><p>Case sensitivity only applies to statements using LIKE comparisons.</p></li>
+</ul>
+<p>The WHERE clause permits the use of the following operators &minus;</p>
+<table align="center" style="text-align:center; width:50%"  class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operator</th>
+</tr>
+<tr>
+<td>= !=</td>
+</tr>
+<tr>
+<td>&gt; &lt;</td>
+</tr>
+<tr>
+<td>&gt;= &lt;=</td>
+</tr>
+</table>
+<p>WHERE clauses can be utilized at the command prompt or within a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, simply use a standard command &minus;</p>
+<pre class="result notranslate">
+root@host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+mysql&gt; SELECT * from products_tbl WHERE product_manufacturer = 'XYZ Corp';
++-------------+----------------+----------------------+
+| ID_number   | Nomenclature   | product_manufacturer |
++-------------+----------------+----------------------+
+| 12345       | Orbitron 4000  | XYZ Corp             |
++-------------+----------------+----------------------+
+| 12346       | Orbitron 3000  | XYZ Corp             |
++-------------+----------------+----------------------+
+| 12347       | Orbitron 1000  | XYZ Corp             |
++-------------+----------------+----------------------+
+</pre>
+<p>Review an example using the <b>AND</b> condition &minus;</p>
+<pre class="result notranslate">
+SELECT *
+FROM products_tbl
+WHERE product_name = 'Bun Janshu 3000';
+AND product_id &lt;= 344;
+</pre>
+<p>This example combines both AND and OR conditions</p>
+<pre class="result notranslate">
+SELECT *
+FROM products_tbl
+WHERE (product_name = 'Bun Janshu 3000' AND product_id &lt; 344)
+OR (product_name = 'Bun Janshu 3000');
+</pre>
+<h2>PHP Scripts Using Where Clause</h2>
+<p>Employ the <b>mysql_query()</b> function in operations using a WHERE clause &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = 'localhost:3036';
+   $dbuser = 'root';
+   $dbpass = 'rootpassword';
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+
+   $sql = 'SELECT product_id, product_name, product_manufacturer, ship_date
+      FROM products_tbl
+      WHERE product_manufacturer = "XYZ Corp"';
+   
+   mysql_select_db('PRODUCTS');
+   $retval = mysql_query( $sql, $conn );
+   
+   if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+
+   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+      echo "Product ID :{$row['product_id']} &lt;br&gt; ".
+         "Name: {$row['product_name']} &lt;br&gt; ".
+         "Manufacturer: {$row['product_manufacturer']} &lt;br&gt; ".
+         "Ship Date: {$row['ship_date']} &lt;br&gt; ".
+         "--------------------------------&lt;br&gt;";
+   }
+
+   echo "Fetched data successfully\n";
+   mysql_close($conn);
+?&gt;
+</pre>
+<p>On successful data retrieval, you will see the following output &minus;</p>
+<pre class="result noranslate">
+Product ID: 12345
+Nomenclature: Orbitron 4000
+Manufacturer: XYZ Corp
+Ship Date: 01/01/17
+----------------------------------------------
+Product ID: 12346
+Nomenclature: Orbitron 3000
+Manufacturer: XYZ Corp
+Ship Date: 01/02/17
+----------------------------------------------
+Product ID: 12347
+Nomenclature: Orbitron 1000
+Manufacturer: XYZ Corp
+Ship Date: 01/02/17
+----------------------------------------------
+mysql&gt; Fetched data successfully
+</pre>
+<h1>MariaDB - Update Query</h1>
+<p>The <b>UPDATE</b> command modifies existing fields by changing values. It uses the SET clause to specify columns for modification, and to specify the new values assigned. These values can be either an expression or the default value of the field. Setting a default value requires using the DEFAULT keyword. The command can also employ a WHERE clause to specify conditions for an update and/or an ORDER BY clause to update in a certain order.</p>
+<p>Review the following general syntax &minus;</p>
+<pre class="result notranslate">
+UPDATE table_name SET field=new_value, field2=new_value2,...
+[WHERE ...]
+</pre>
+<p>Execute an UPDATE command from either the command prompt or using a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, simply use a standard commandroot &minus;</p>
+<pre class="result notranslate">
+root@host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+mysql&gt; UPDATE products_tbl
+   SET nomenclature = 'Fiber Blaster 300Z'
+      WHERE ID_number = 112;
+mysql&gt; SELECT * from products_tbl WHERE ID_number='112';
++-------------+---------------------+----------------------+
+| ID_number   | Nomenclature        | product_manufacturer |
++-------------+---------------------+----------------------+
+| 112         | Fiber Blaster 300Z  | XYZ Corp             |
++-------------+---------------------+----------------------+      
+</pre>
+<h2>PHP Update Query Script</h2>
+<p>Employ the <b>mysql_query()</b> function in UPDATE command statements &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = ‘localhost:3036’;
+   $dbuser = ‘root’;
+   $dbpass = ‘rootpassword’;
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+
+   if(! $conn ) {
+      die(‘Could not connect: ‘ . mysql_error());
+   }
+
+   $sql = ‘UPDATE products_tbl
+      SET product_name = ”Fiber Blaster 300z”
+      WHERE product_id = 112’;
+
+   mysql_select_db(‘PRODUCTS’);
+   $retval = mysql_query( $sql, $conn );
+
+   if(! $retval ) {
+      die(‘Could not update data: ‘ . mysql_error());
+   }
+
+   echo “Updated data successfully\n”;
+   mysql_close($conn);
+?&gt;
+</pre>
+<p>On successful data update, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Updated data successfully
+</pre>
+<h1>MariaDB - Delete Query</h1>
+<p>The DELETE command deletes table rows from the specified table, and returns the quantity deleted. Access the quantity deleted with the ROW_COUNT() function. A WHERE clause specifies rows, and in its absence, all rows are deleted. A LIMIT clause controls the number of rows deleted.</p>
+<p>In a DELETE statement for multiple rows, it deletes only those rows satisfying a condition; and LIMIT and WHERE clauses are not permitted. DELETE statements allow deleting rows from tables in different databases, but do not allow deleting from a table and then selecting from the same table within a subquery.</p>
+<p>Review the following DELETE syntax &minus;</p>
+<pre class="result notranslate">
+DELETE FROM table_name [WHERE …]
+</pre>
+<p>Execute a DELETE command from either the command prompt or using a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, simply use a standard command &minus;</p>
+<pre class="result notranslate">
+root@host# mysql –u root –p password;
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+mysql&gt; DELETE FROM products_tbl WHERE product_id=133;
+mysql&gt; SELECT * from products_tbl WHERE ID_number='133';
+ERROR 1032 (HY000): Can't find record in 'products_tbl'
+</pre>
+<h2>PHP Delete Query Script</h2>
+<p>Use the <b>mysql_query()</b> function in DELETE command statements &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = 'localhost:3036';
+   $dbuser = 'root';
+   $dbpass = 'rootpassword';
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+
+   $sql = 'DELETE FROM products_tbl WHERE product_id = 261';
+   mysql_select_db('PRODUCTS');
+   $retval = mysql_query( $sql, $conn );
+
+   if(! $retval ) {
+      die('Could not delete data: ' . mysql_error());
+   }
+
+   echo "Deleted data successfully\n";
+   mysql_close($conn);
+?&gt;
+</pre>
+<p>On successful data deletion, you will see the following output &minus;</p>
+<pre class="result notranslate">
+mysql&gt; Deleted data successfully
+mysql&gt; SELECT * from products_tbl WHERE ID_number='261';
+ERROR 1032 (HY000): Can't find record in 'products_tbl'
+</pre>
+<h1>MariaDB - Like Clause</h1>
+<p>The WHERE clause provides a way to retrieve data when an operation uses an exact match. In situations requiring multiple results with shared characteristics, the <b>LIKE</b> clause accommodates broad pattern matching.</p>
+<p>A LIKE clause tests for a pattern match, returning a true or false. The patterns used for comparison accept the following wildcard characters: “%”, which matches numbers of characters (0 or more); and “_”, which matches a single character. The “_” wildcard character only matches characters within its set, meaning it will ignore latin characters when using another set. The matches are case-insensitive by default requiring additional settings for case sensitivity.</p>
+<p>A NOT LIKE clause allows for testing the opposite condition, much like the <b>not</b> operator.</p>
+<p>If the statement expression or pattern evaluate to NULL, the result is NULL.</p>
+<p>Review the general LIKE clause syntax given below &minus;</p>
+<pre class="result notranslate">
+SELECT field, field2,... FROM table_name, table_name2,...
+WHERE field LIKE condition
+</pre>
+<p>Employ a LIKE clause either at the command prompt or within a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, simply use a standard command &minus;</p>
+<pre class="result notranslate">
+root@host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use TUTORIALS;
+Database changed
+mysql&gt; SELECT * from products_tbl
+   WHERE product_manufacturer LIKE 'XYZ%';
++-------------+----------------+----------------------+
+| ID_number   | Nomenclature   | product_manufacturer |
++-------------+----------------+----------------------+
+| 12345       | Orbitron 4000  | XYZ Corp             |
++-------------+----------------+----------------------+
+| 12346       | Orbitron 3000  | XYZ Corp             |
++-------------+----------------+----------------------+
+| 12347       | Orbitron 1000  | XYZ Corp             |
++-------------+----------------+----------------------+
+</pre>
+<h2>PHP Script Using Like Clause</h2>
+<p>Use the <b>mysql_query()</b> function in statements employing the LIKE clause</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = 'localhost:3036';
+   $dbuser = 'root';
+   $dbpass = 'rootpassword';
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+
+   $sql = 'SELECT product_id, product_name, product_manufacturer, ship_date
+      FROM products_tbl WHERE product_manufacturer LIKE "xyz%"';
+   
+   mysql_select_db('PRODUCTS');
+   $retval = mysql_query( $sql, $conn );
+   
+   if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+
+   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+      echo "Product ID:{$row['product_id']} &lt;br&gt; ".
+         "Name: {$row['product_name']} &lt;br&gt; ".
+         "Manufacturer: {$row['product_manufacturer']} &lt;br&gt; ".
+         "Ship Date: {$row['ship_date']} &lt;br&gt; ".
+         "--------------------------------&lt;br&gt;";
+   }
+   
+   echo "Fetched data successfully\n";
+   mysql_close($conn);
+?&gt;
+</pre>
+<p>On successful data retrieval, you will see the following output &minus;</p>
+<pre class="result notranslate">
+Product ID: 12345
+Nomenclature: Orbitron 4000
+Manufacturer: XYZ Corp
+Ship Date: 01/01/17
+----------------------------------------------
+Product ID: 12346
+Nomenclature: Orbitron 3000
+Manufacturer: XYZ Corp
+Ship Date: 01/02/17
+----------------------------------------------
+Product ID: 12347
+Nomenclature: Orbitron 1000
+Manufacturer: XYZ Corp
+Ship Date: 01/02/17
+----------------------------------------------
+mysql&gt; Fetched data successfully
+</pre>
+<h1>MariaDB - Order By Clause</h1>
+<p>The <b>ORDER BY</b> clause, as mentioned in previous discussions, sorts the results of a statement. It specifies the order of the data operated on, and includes the option to sort in ascending (ASC) or descending (DESC) order. On omission of order specification, the default order is ascending.</p>
+<p>ORDER BY clauses appear in a wide variety of statements such as DELETE and UPDATE. They always appear at the end of a statement, not in a subquery or before a set function, because they operate on the final resulting table. You also cannot use an integer to identify a column.</p>
+<p>Review the general syntax of the ORDER BY clause given below &minus;</p>
+<pre class="result notranslate">
+SELECT field, field2,... [or column] FROM table_name, table_name2,...
+ORDER BY field, field2,... ASC[or DESC]
+</pre>
+<p>Use an ORDER BY clause either at the command prompt or within a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, simply use a standard command &minus;</p>
+<pre class="result notranslate">
+root@ host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+
+mysql&gt; SELECT * from products_tbl ORDER BY product_manufacturer ASC
++-------------+----------------+----------------------+
+| ID_number   | Nomenclature   | product_manufacturer |
++-------------+----------------+----------------------+
+| 56789       | SuperBlast 400 | LMN Corp             |
++-------------+----------------+----------------------+
+| 67891       | Zoomzoom 5000  | QFT Corp             |
++-------------+----------------+----------------------+
+| 12347       | Orbitron 1000  | XYZ Corp             |
++-------------+----------------+----------------------+
+</pre>
+<h2>PHP Script Using Order By Clause</h2>
+<p>Utilize the <b>mysql_query()</b> function, once again, in statements employing the ORDER BY clause &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = 'localhost:3036';
+   $dbuser = 'root';
+   $dbpass = 'rootpassword';
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+
+   $sql = 'SELECT product_id, product_name, product_manufacturer, ship_date 
+      FROM products_tbl ORDER BY product_manufacturer DESC';
+
+   mysql_select_db('PRODUCTS');
+   $retval = mysql_query( $sql, $conn );
+
+   if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+
+   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+      echo "Product ID :{$row['product_id']} &lt;br&gt; ".
+         "Name: {$row['product_name']} &lt;br&gt; ".
+         "Manufacturer: {$row['product_manufacturer']} &lt;br&gt; ".
+         "Ship Date : {$row['ship_date']} &lt;br&gt; ".
+         "--------------------------------&lt;br&gt;";
+   }
+
+   echo "Fetched data successfully\n";
+   mysql_close($conn);
+?&gt;
+</pre>
+<p>On successful data retrieval, you will see the following output &minus;</p>
+<pre class="result notranslate">
+Product ID: 12347
+Nomenclature: Orbitron 1000
+Manufacturer: XYZ Corp
+Ship Date: 01/01/17
+----------------------------------------------
+Product ID: 67891
+Nomenclature: Zoomzoom 5000
+Manufacturer: QFT Corp
+Ship Date: 01/01/17
+----------------------------------------------
+Product ID: 56789
+Nomenclature: SuperBlast 400
+Manufacturer: LMN Corp
+Ship Date: 01/04/17
+----------------------------------------------
+mysql&gt; Fetched data successfully
+</pre>
+<h1>MariaDB - Join</h1>
+<p>In previous discussions and examples, we examined retrieving from a single table, or retrieving multiple values from multiple sources. Most real-world data operations are much more complex, requiring aggregation, comparison, and retrieval from multiple tables.</p>
+<p><b>JOINs</b> allow merging of two or more tables into a single object. They are employed through SELECT, UPDATE, and DELETE statements.</p>
+<p>Review the general syntax of a statement employing a JOIN as shown below &minus;</p>
+<pre class="result notranslate">
+SELECT column
+FROM table_name1
+INNER JOIN table_name2
+ON table_name1.column = table_name2.column;
+</pre>
+<p>Note the old syntax for JOINS used implicit joins and no keywords. It is possible to use a WHERE clause to achieve a join, but keywords work best for readability, maintenance, and best practices.</p>
+<p>JOINs come in many forms such as a left join, right join, or inner join. Various join types offer different types of aggregation based on shared values or characteristics.</p>
+<p>Employ a JOIN either at the command prompt or with a PHP script.</p>
+<h2>The Command Prompt</h2>
+<p>At the command prompt, simply use a standard statement &minus;</p>
+<pre class="prettyprint notranslate">
+root@host# mysql -u root -p password;
+Enter password:*******
+mysql&gt; use PRODUCTS;
+Database changed
+
+mysql&gt; SELECT products.ID_number, products.Nomenclature, inventory.inventory_ct
+   FROM products
+   INNER JOIN inventory
+   ON products.ID_numbeer = inventory.ID_number;
++-------------+----------------+-----------------+
+| ID_number   | Nomenclature   | Inventory Count |
++-------------+----------------+-----------------+
+| 12345       | Orbitron 4000  | 150             |
++-------------+----------------+-----------------+
+| 12346       | Orbitron 3000  | 200             |
++-------------+----------------+-----------------+
+| 12347       | Orbitron 1000  | 0               |
++-------------+----------------+-----------------+
+</pre>
+<h2>PHP Script Using JOIN</h2>
+<p>Use the <b>mysql_query()</b> function to perform a join operation &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   $dbhost = 'localhost:3036';
+   $dbuser = 'root';
+   $dbpass = 'rootpassword';
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+
+   $sql = 'SELECT a.product_id, a.product_manufacturer, b.product_count   
+      FROM products_tbl a, pcount_tbl b 
+      WHERE a.product_manufacturer = b.product_manufacturer';
+
+   mysql_select_db('PRODUCTS');
+   $retval = mysql_query( $sql, $conn );
+
+   if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+
+   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+      echo "Manufacturer:{$row['product_manufacturer']} &lt;br&gt ".
+         "Count: {$row['product_count']} &lt;br&gt ".
+         "Product ID: {$row['product_id']} &lt;br&gt ".
+         "--------------------------------&lt;br&gt";
+   }
+
+   echo "Fetched data successfully\n";
+   mysql_close($conn);
+?&gt;
+</pre>
+<p>On successful data retrieval, you will see the following output &minus;</p>
+<pre class="result notranslate">
+ID Number: 12345
+Nomenclature: Orbitron 4000
+Inventory Count: 150
+--------------------------------------
+ID Number: 12346
+Nomenclature: Orbitron 3000
+Inventory Count: 200
+--------------------------------------
+ID Number: 12347
+Nomenclature: Orbitron 1000
+Inventory Count: 0
+--------------------------------------
+mysql&gt; Fetched data successfully
+</pre>
+<h1>MariaDB - Null Values</h1>
+<p>When working with NULL values, remember they are unknown values. They are not empty strings or zero, which are valid values. In table creation, column specifications allow for setting them to accept null values, or reject them. Simply utilize a NULL or NOT NULL clause. This has applications in cases of missing record information like an ID number.</p>
+<p>User-defined variables have a value of NULL until explicit assignment. Stored routine parameters and local variables allow setting a value of NULL. When a local variable has no default value, it has a value of NULL.</p>
+<p>NULL is case-insensitive, and has the following aliases &minus;</p>
+<ul class="list">
+<li>UNKNOWN (a boolean value)</li>
+<li>\N</li>
+</ul>
+<h2>NULL Operators</h2>
+<p>Standard comparison operators cannot be used with NULL (e.g., =, &gt;, &gt;=, &lt;=, &lt;, or !=) because all comparisons with a NULL value return NULL, not true or false. Comparisons with NULL or possibly containing it must use the “&lt;=&gt;” (NULL-SAFE) operator.</p>
+<p>Other available operators are &minus;</p>
+<ul class="list">
+<li><p>IS NULL &minus; It tests for a NULL value.</li>
+<li><p>IS NOT NULL &minus; It confirms the absence of a NULL value.</li>
+<li><p>ISNULL &minus; It returns a value of 1 on discovery of a NULL value, and 0 in its absence.</li>
+<li><p>COALESCE &minus; It returns the first non-NULL value of a list, or it returns a NULL value in the absence of one.</p></li>
+</ul>
+<h2>Sorting NULL Values</h2>
+<p>In sorting operations, NULL values have the lowest value, so DESC order results in NULL values at the bottom. MariaDB allows for setting a higher value for NULL values.</p>
+<p>There are two ways to do this as shown below &minus;</p>
+<pre class="result notranslate">
+SELECT column1 FROM product_tbl ORDER BY ISNULL(column1), column1;
+</pre>
+<p>The other way &minus;</p>
+<pre class="result notranslate">
+SELECT column1 FROM product_tbl ORDER BY IF(column1 IS NULL, 0, 1), column1 DESC;
+</pre>
+<h2>NULL Functions</h2>
+<p>Functions generally output NULL when any parameters are NULL. However, there are functions specifically designed for managing NULL values. They are &minus;</p>
+<ul class="list">
+<li><p><b>IFNULL()</b> &minus; If the first expression is not NULL it returns it. When it evaluates to NULL, it returns the second expression.</p></li>
+<li><p><b>NULLIF()</b> &minus; It returns NULL when the compared expressions are equal, if not, it returns the first expression.</p></li>
+</ul>
+<p>Functions like SUM and AVG ignore NULL values.</p>
+<h2>Inserting NULL Values</h2>
+<p>On insertion of a NULL value in a column declared NOT NULL, an error occurs. In default SQL mode, a NOT NULL column will instead insert a default value based on data type.</p>
+<p>When a field is a TIMESTAMP, AUTO_INCREMENT, or virtual column, MariaDB manages NULL values differently. Insertion in an AUTO_INCREMENT column causes the next number in the sequence to insert in its place. In a TIMESTAMP field, MariaDB assigns the current timestamp instead. In virtual columns, a topic discussed later in this tutorial, the default value is assigned.</p>
+<p>UNIQUE indices can hold many NULL values, however, primary keys cannot be NULL.</p>
+<h3>NULL Values and the Alter Command</h3>
+<p>When you use the ALTER command to modify a column, in the absence of NULL specifications, MariaDB automatically assigns values.</p>
+<h1>MariaDB - Regular Expression</h1>
+<p>Beyond the pattern matching available from LIKE clauses, MariaDB offers regular expression-based matching through the REGEXP operator. The operator performs pattern matching for a string expression based on a given pattern.</p>
+<p>MariaDB 10.0.5 introduced PCRE Regular Expressions, which dramatically increases the scope of matching into areas like recursive patterns, look-ahead assertions, and more.</p>
+<p>Review the use of standard REGEXP operator syntax given below &minus;</p>
+<pre class="result notranslate">
+SELECT column FROM table_name WHERE column REGEXP '[PATTERN]';
+</pre>
+<p>REGEXP returns 1 for a pattern match or 0 in the absence of one.</p>
+<p>An option for the opposite exists in the form of NOT REGEXP. MariaDB also offers synonyms for REGEXP and NOT REGEXP, RLIKE and NOT RLIKE, which were created for compatibility reasons.</p>
+<p>The pattern compared can be a literal string or something else such as a table column. In strings, it uses C escape syntax, so double any “\” characters. REGEXP is also case-insensitive, with the exception of binary strings.</p>
+<p>A table of possible patterns, which can be used are given below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Pattern &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>^</b></p>
+<p>It matches the start of the string.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>$</b></p>
+<p>It matches the string's end.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>.</b></p>
+<p>It matches a single character.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>[...]</b></p>
+<p>It matches any character in the brackets.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>[^...]</b></p>
+<p>It matches any character not listed in the brackets.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>p1|p2|p3</b></p>
+<p>It matches any of the patterns.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>*</b></p>
+<p>It matches 0 or more instances of the preceding element.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<p><b>+</b></p>
+<p>It matches 1 or more instances of the preceding element.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<p><b>{n}</b></p>
+<p>It matches n instances of the preceding element.</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<p><b>{m,n}</b></p>
+<p>It matches m to n instances of the preceding element.</p>
+</td>
+</tr>
+</table>
+<p>Review the pattern matching examples given below &minus;</p>
+<p>Products starting with “pr” &minus;</p>
+<pre class="result notranslate">
+SELECT name FROM product_tbl WHERE name REGEXP '^pr';
+</pre>
+<p>Products ending with “na” &minus;</p>
+<pre class="result notranslate">
+SELECT name FROM product_tbl WHERE name REGEXP 'na$';
+</pre>
+<p>Products starting with a vowel &minus;</p>
+<pre class="result notranslate">
+SELECT name FROM product_tbl WHERE name REGEXP '^[aeiou]';
+</pre>
+<h1>MariaDB - Transactions</h1>
+<p>Transactions are sequential group operations. They function as a single unit, and do not terminate until all operations within the group execute successfully. A single failure in the group causes the entire transaction to fail, and causes it to have no impact on the database.</p>
+<p>Transactions conform to ACID (Atomicity, Consistency, Isolation, and Durability) &minus;</p>
+<ul class="list">
+<li><p><b>Atomicity</b> &minus; It ensures the success of all operations by aborting on failures and rolling back changes.</p></li>
+<li><p><b>Consistency</b> &minus; It ensures the database applies changes on a successful transaction.</p></li>
+<li><p><b>Isolation</b> &minus; It enables independent transactions operation of transactions.</p></li>
+<li><p><b>Durability</b> &minus; It ensures the persistence of a successful transaction in the event of system failure.</p></li>
+</ul>
+<p>At the head of a transaction statement is the START TRANSACTION statement followed by COMMIT and ROLLBACK statements &minus;</p>
+<ul class="list">
+<li><p>START TRANSACTION begins the transaction.</p></li>
+<li><p>COMMIT saves changes to data.</p></li>
+<li><p>ROLLBACK ends the transaction, destroying any changes.</p></li>
+</ul>
+<p>On a successful transaction, COMMIT acts. On a failure, ROLLBACK acts.</p>
+<p><b>Note</b> &minus; Some statements cause an implicit commit, and they also cause an error when used within transactions. Examples of such statements include, but are not limited to CREATE, ALTER, and DROP.</p>
+<p>MariaDB transactions also include options like SAVEPOINT and LOCK TABLES. SAVEPOINT sets a restore point to utilize with ROLLBACK. LOCK TABLES allows controlling access to tables during sessions to prevent modifications during certain time periods.</p>
+<p>The AUTOCOMMIT variable provides control over transactions. A setting of 1 forces all operations to be considered successful transactions, and a setting of 0 causes persistence of changes to only occur on an explicit COMMIT statement.</p>
+<h2>Structure of a Transaction</h2>
+<p>The general structure of a transaction statement consists of beginning with START TRANSACTION. The next step is inserting one or more commands/operations, inserting statements that check for errors, inserting ROLLBACK statements to manage any errors discovered and finally inserting a COMMIT statement to apply changes on successful operations.</p>
+<p>Review the example given below &minus;</p>
+<pre class="result notranslate">
+START TRANSACTION;
+SELECT name FROM products WHERE manufacturer = 'XYZ Corp';
+UPDATE spring_products SET item = name;
+COMMIT;
+</pre>
+<h1>MariaDB - Alter Command</h1>
+<p>The ALTER command provides a way to change an existing table's structure, meaning modifications like removing or adding columns, modifying indices, changing data types, or changing names. ALTER also waits to apply changes when a metadata lock is active.</p>
+<h2>Using ALTER to Modify Columns</h2>
+<p>ALTER paired with DROP removes an existing column. However, it fails if the column is the only remaining column.</p>
+<p>Review the example given below &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl DROP version_num;
+</pre>
+<p>Use an ALTER...ADD statement to add columns &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl ADD discontinued CHAR(1);
+</pre>
+<p>Use the keywords FIRST and AFTER to specify placement of the column &minus;</p>
+<pre class="result notranslate">
+ALTER TABLE products_tbl ADD discontinued CHAR(1) FIRST;
+ALTER TABLE products_tbl ADD discontinued CHAR(1) AFTER quantity;
+</pre>
+<p>Note the FIRST and AFTER keywords only apply to ALTER...ADD statements. Furthermore, you must drop a table and then add it in order to reposition it.</p>
+<p>Change a column definition or name by using the MODIFY or CHANGE clause in an ALTER statement. The clauses have similar effects, but utilize substantially different syntax.</p>
+<p>Review a CHANGE example given below &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl CHANGE discontinued status CHAR(4);
+</pre>
+<p>In a statement using CHANGE, specify the original column and then the new column that will replace it. Review a MODIFY example below &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl MODIFY discontinued CHAR(4);
+</pre>
+<p>The ALTER command also allows for changing default values. Review an example &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl ALTER discontinued SET DEFAULT N;
+</pre>
+<p>You can also use it to remove default constraints by pairing it with a DROP clause &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl ALTER discontinued DROP DEFAULT;
+</pre>
+<h2>Using ALTER to Modify Tables</h2>
+<p>Change table type with the TYPE clause &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl TYPE = INNODB;
+</pre>
+<p>Rename a table with the RENAME keyword &minus;</p>
+<pre class="result notranslate">
+mysql&gt; ALTER TABLE products_tbl RENAME TO products2016_tbl;
+</pre>
+<h1>MariaDB - Indexes &amp; Statistics Tables</h1>
+<p>Indexes are tools for accelerating record retrieval. An index spawns an entry for each value within an indexed column.</p>
+<p>There are four types of indexes &minus;</p>
+<ul class="list">
+<li><p><b>Primary</b> (one record represents all records)</p></li>
+<li><p><b>Unique</b> (one record represents multiple records)</p></li>
+<li><p><b>Plain</b></p></li>
+<li><p><b>Full-Text</b> (permits many options in text searches).</p></li>
+</ul>
+<p>The terms “key” and “index” are identical in this usage.</p>
+<p>Indexes associate with one or more columns, and support rapid searches and efficient record organization. When creating an index, consider which columns are frequently used in your queries. Then create one or multiple indexes on them. In addition, view indexes as essentially tables of primary keys.</p>
+<p>Though indexes accelerate searches or SELECT statements, they make insertions and updates drag due to performing the operations on both the tables and the indexes.</p>
+<h2>Create an Index</h2>
+<p>You can create an index through a CREATE TABLE...INDEX statement or a CREATE INDEX statement. The best option supporting readability, maintenance, and best practices is CREATE INDEX.</p>
+<p>Review the general syntax of Index given below &minus;</p>
+<pre class="result notranslate">
+CREATE [UNIQUE or FULLTEXT or...] INDEX index_name ON table_name column;
+</pre>
+<p>Review an example of its use &minus;</p>
+<pre class="result notranslate">
+CREATE UNIQUE INDEX top_sellers ON products_tbl product;
+</pre>
+<h2>Drop an Index</h2>
+<p>You can drop an index with DROP INDEX or ALTER TABLE...DROP. The best option supporting readability, maintenance, and best practices is DROP INDEX.</p>
+<p>Review the general syntax of Drop Index given below &minus;</p>
+<pre class="result notranslate">
+DROP INDEX index_name ON table_name;
+</pre>
+<p>Review an example of its use &minus;</p>
+<pre class="result notranslate">
+DROP INDEX top_sellers ON product_tbl;
+</pre>
+<h2>Rename an Index</h2>
+<p>Rename an index with the ALTER TABLE statement. Review its general syntax given below &minus;</p>
+<pre class="result notranslate">
+ALTER TABLE table_name DROP INDEX index_name, ADD INDEX new_index_name;
+</pre>
+<p>Review an example of its use &minus;</p>
+<pre class="result notranslate">
+ALTER TABLE products_tbl DROP INDEX top_sellers, ADD INDEX top_2016sellers;
+</pre>
+<h2>Managing Indexes</h2>
+<p>You will need to examine and track all indexes. Use SHOW INDEX to list all existing indexes associated with a given table. You can set the format of the displayed content by using an option such as “\G”, which specifies a vertical format.</p>
+<p>Review the following example &minus;</p>
+<pre class="result notranslate">
+mysql &gt; SHOW INDEX FROM products_tbl\G
+</pre>
+<h2>Table Statistics</h2>
+<p>Indexes are used heavily to optimize queries given the faster access to records, and the statistics provided. However, many users find index maintenance cumbersome. MariaDB 10.0 made storage engine independent statistics tables available, which calculate data statistics for every table in every storage engine, and even statistics for columns that are not indexed.</p>
+<h1>MariaDB - Temporary Tables</h1>
+<p>Some operations can benefit from temporary tables due to speed or disposable data. The life of a temporary table ends at the termination of a session whether you employ them from the command prompt, with a PHP script, or through a client program. It also does not appear in the system in a typical fashion. The SHOW TABLES command will not reveal a list containing temporary tables.</p>
+<h2>Create a Temporary Table</h2>
+<p>The TEMPORARY keyword within a CREATE TABLE statement spawns a temporary table. Review an example given below &minus;</p>
+<pre class="result notranslate">
+mysql&gt;CREATE TEMPORARY TABLE order (
+   item_name VARCHAR(50) NOT NULL
+      , price DECIMAL(7,2) NOT NULL DEFAULT 0.00
+      , quantity INT UNSIGNED NOT NULL DEFAULT 0
+);
+</pre>
+<p>In creating a temporary table, you can clone existing tables, meaning all their general characteristics, with the LIKE clause. The CREATE TABLE statement used to spawn the temporary table will not commit transactions as a result of the TEMPORARY keyword.</p>
+<p>Though temporary tables stand apart from non-temporary and drop at the end of a session, they may have certain conflicts &minus;</p>
+<ul class="list">
+<li><p>They sometimes conflict with ghost temporary tables from expired sessions.</p></li>
+<li><p>They sometimes conflict with shadow names of non-temporary tables.</p></li>
+</ul>
+<p><b>Note</b> &minus; Temporary tables are permitted to have the same name as an existing non-temporary table because MariaDB views it as a difference reference.</p>
+<h2>Administration</h2>
+<p>MariaDB requires granting privileges to users for creating temporary tables. Utilize a GRANT statement to give this privilege to non-admin users.</p>
+<pre class="result notranslate">
+GRANT CREATE TEMPORARY TABLES ON orders TO 'machine122'@'localhost';
+</pre>
+<h2>Drop a Temporary Table</h2>
+<p>Though temporary tables are essentially removed at the end of sessions, you have the option to delete them. Dropping a temporary table requires the use of the TEMPORARY keyword, and best practices suggest dropping temporary tables before any non-temporary.</p>
+<pre class="result notranslate">
+mysql&gt; DROP TABLE order;
+</pre>
+<h1>MariaDB - Table Cloning</h1>
+<p>Some situations require producing an exact copy of an existing table. The CREATE...SELECT statement cannot produce this output because it neglects things like indexes and default values.</p>
+<p>The procedure for a duplicating a table is as follows &minus;</p>
+<ul class="list">
+<li><p>Utilize SHOW CREATE TABLE to produce a CREATE TABLE statement that details the entire structure of the source table.</p></li>
+<li><p>Edit the statement to give the table a new name, and execute it.</p></li>
+<li><p>Use an INSERT INTO...SELECT statement if you also need the table data copied.</p></li>
+</ul>
+<pre class="result notranslate">
+mysql&gt; INSERT INTO inventory_copy_tbl (
+   product_id,product_name,product_manufacturer,ship_date)
+   
+   SELECT product_id,product_name,product_manufacturer,ship_date,
+   FROM inventory_tbl;
+</pre>
+<p>Another method for creating a duplicate uses a CREATE TABLE AS statement. The statement copies all columns, column definitions, and populates the copy with the source table's data.</p>
+<p>Review its syntax given below &minus;</p>
+<pre class="result notranslate">
+CREATE TABLE clone_tbl AS
+   SELECT columns
+   FROM original_tbl
+   WHERE conditions];
+</pre>
+<p>Review an example of its use below &minus;</p>
+<pre class="result notranslate">
+CREATE TABLE products_copy_tbl AS
+   SELECT *
+   FROM products_tbl;
+</pre>
+<h1>MariaDB - Sequences</h1>
+<p>In version 10.0.3, MariaDB introduced a storage engine known as sequence. Its ad hoc generates an integer sequence for operations, and then it terminates. The sequence contains positive integers in descending or ascending order, and uses a starting, ending, and increment value.</p>
+<p>It does not allow use in multiple queries, only in its original query because of its virtual (not written to disk) nature. However, sequence tables can be converted to standard tables through an ALTER command. If a converted table is deleted, the sequence table still exists. Sequences also cannot produce negative numbers or rotate at the minimum/maximum.</p>
+<h2>Installating the Sequence Engine</h2>
+<p>Using sequences requires installing the sequence engine, which MariaDB distributes as a plugin rather than binary. Install it with the following command &minus;</p>
+<pre class="result notranslate">
+INSTALL SONAME "ha_sequence";
+</pre>
+<p>After installation, verify it &minus;</p>
+<pre class="result notranslate">
+SHOW ENGINES\G
+</pre>
+<p>Remember that after engine installation, you cannot create a standard table with a name that uses sequence syntax, but you can create a temporary table with a sequence-syntax name.</p>
+<h2>Creating Sequence</h2>
+<p>There are two methods of sequence creation &minus;</p>
+<ul class="list">
+<li><p>Create a table and use the AUTO_INCREMENT attribute to define a column as auto-increment.</p></li>
+<li><p>Use an existing database and use a sequence SELECT query to produce a sequence. The query uses seq_ [FROM] _to_[TO] or seq_[FROM]_to_[TO]_step_STEP syntax.</p></li>
+</ul>
+<p>Best practices prefer the use of the second method. Review an example of a sequence creation given below &minus;</p>
+<pre class="result notranslate">
+SELECT * FROM seq_77_to_99;
+</pre>
+<p>Sequences have many uses &minus;</p>
+<ul class="list">
+<li><p>Locate missing values within a column to protect against related issues in operations &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+SELECT myseq.seq FROM seq_22_to_28 myseq LEFT JOIN table1 t ON myseq.seq
+   = x.y WHERE x.y IS NULL;
+</pre>
+<ul class="list">
+<li><p>Construct a combination of values &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+SELECT x1.seq, x2.seq FROM seq_5_to_9 x1 JOIN seq_5_to_9 x2 ORDER BY 5, 6;
+</pre>
+<ul class="list">
+<li><p>Find multiples of a number &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+SELECT seq FROM seq_3_to_100_step_4;
+</pre>
+<ul class="list">
+<li>Construct a date sequence for use in applications like booking systems.</li>
+<li>Construct a time sequence.</li>
+</ul>
+<h1>MariaDB - Managing Duplicates</h1>
+<p>MariaDB, as discussed in earlier lessons, allows duplicate records and tables in some situations. Some of these duplicates are not in fact duplicates due to distinct data or object types, or as a result of unique lifespan or storage of the operation object. These duplicates also typically pose no problems.</p>
+<p>In some situations, duplicates do cause problems, and they often appear due to implicit actions or the lenient policy of a MariaDB command. There are ways to control this issue, find duplicates, delete duplicates, and prevent duplicate creation.</p>
+<h2>Strategies and Tools</h2>
+<p>There are four key ways to manage duplicates &minus;</p>
+<ul class="list">
+<li><p>Fish for them with JOIN, and delete them with a temporary table.</p></li>
+<li><p>Use INSERT...ON DUPLICATE KEY UPDATE to update on discovery of a duplicate.</p></li>
+<li><p>Use DISTINCT to prune the results of a SELECT statement and remove duplicates.</p></li>
+<li><p>Use INSERT IGNORE to stop insertion of duplicates.</p></li>
+</ul>
+<h3>Using Join with a Temporary Table</h3>
+<p>Simply perform a semi-join like an inner join, and then remove the duplicates found with a temporary table.</p>
+<h2>Using INSERT</h2>
+<p>When INSERT...ON DUPLICATE KEY UPDATE discovers a duplicate unique or primary key, it performs an update. On discovery of multiple unique keys, it updates only the first. Hence, do not use it on tables with multiple unique indices.</p>
+<p>Review the following example, which reveals what happens in a table containing indexed values on insertion into a populated field &minus;</p>
+<pre class="result notranslate">
+INSERT INTO add_dupl VALUES (1,'Apple');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+</pre>
+<p><b>Note</b> &minus; If it finds no key, an INSERT...ON DUPLICATE KEY UPDATE statement executes like a normal insert statement.</p>
+<h2>Using DISTINCT</h2>
+<p>DISTINCT clauses remove duplicates from results. The general syntax for a DISTINCT clause is as follows &minus;</p>
+<pre class="result notranslate">
+SELECT DISTINCT fields
+FROM table
+[WHERE conditions];
+</pre>
+<p><b>Note</b> &minus; The results of a statement with a DISTINCT clause &minus;</p>
+<ul class="list">
+<li><p>When using one expression, it returns unique values for it.</p></li>
+<li><p>When using multiple expressions, it returns unique combinations.</p></li>
+<li><p>It does not ignore NULL values; thus, results also contain NULLs as unique values.</p></li>
+</ul>
+<p>Review the following statement using a DISTINCT clause for a single expression &minus;</p>
+<pre class="result notranslate">
+SELECT DISTINCT product_id
+FROM products
+WHERE product_name = 'DustBlaster 5000';
+</pre>
+<p>Review the following example using multiple expressions &minus;</p>
+<pre class="result notranslate">
+SELECT DISTINCT product_name, product_id
+FROM products
+WHERE product_id &lt; 30
+</pre>
+<h2>Using INSERT IGNORE</h2>
+<p>An INSERT IGNORE statement instructs MariaDB to cancel insertion on discovery of a duplicate record. Review an example of its use given below &minus;</p>
+<pre class="result notranslate">
+mysql&gt; INSERT IGNORE INTO customer_tbl (LN, FN)
+   VALUES( 'Lex', 'Luther');
+</pre>
+<p>Also, note the logic behind duplicates. Some tables require duplicates based on the nature of that table data. Accommodate that need in your strategy for managing duplicate records.</p>
+<h1>MariaDB - SQL Injection Protection</h1>
+<p>The simple act of accepting user input opens the door to exploits. The problem stems primarily from the logical management of data, but luckily, it is fairly easy to avoid these major flaws.</p>
+<p>Opportunities for SQL injection typically occur on users entering data like a name, and the code logic failing to analyze this input. The Code, instead, allows an attacker to insert a MariaDB statement, which will run on the database.</p>
+<p>Always consider data entered by users, suspect and are in need of strong validation prior to any processing. Perform this validation through pattern matching. For example, if the expected input is a username, restrict entered characters to alphanumeric chars and underscores, and to a certain length. Review an example given below &minus;</p>
+<pre class="prettyprint notranslate">
+if(check_match("/^\w{8,20}$/", $_GET['user_name'], $matches)) {
+   $result = mysql_query("SELECT * FROM system_users WHERE user_name = $matches[0]");
+} else {
+   echo "Invalid username";
+}
+</pre>
+<p>Also, utilize the REGEXP operator and LIKE clauses in creating input constraints.</p>
+<p>Consider all types of necessary explicit control of input such as &minus;</p>
+<ul class="list">
+<li><p>Control the escape characters used.</p></li>
+<li><p>Control the specific appropriate data types for input. Limit input to the necessary data type and size.</p></li>
+<li><p>Control the syntax of entered data. Do not allow anything outside of the needed pattern.</p></li>
+<li><p>Control the terms permitted. Blacklist SQL keywords.</p></li>
+</ul>
+<p>You may not know the dangers of injection attacks, or may consider them insignificant, but they top the list of security concerns. Furthermore, consider the effect of these two entries &minus;</p>
+<pre class="result notranslate">
+1=1
+-or-
+*
+</pre>
+<p>Code allowing either of those to be entered along with the right command may result in revealing all user data on the database or deleting all data on the database, and neither injection is particularly clever. In some cases, attackers do not even spend time examining holes; they perform blind attacks with simple input.</p>
+<p>Also, consider the pattern matching and regular expression tools provided by any programming/scripting language paired with MariaDB, which provide more control, and sometimes better control.</p>
+<h1>MariaDB - Backup Methods</h1>
+<p>Data serves as the foundation of business and operations, and with various possible threats (e.g., attackers, system failures, bad upgrades, and maintenance errors) out there, backups remain critical. These backups take many forms, and many options exist for creating them with an even wider set of options within those processes. The important things to remember are the database type, the critical information, and the structure involved. This information determines your best option.</p>
+<h3>OPTIONS</h3>
+<p>The main options for backups include logical backups and physical backups. Logical backups hold SQL statements for restoring data. Physical backups contain copies of data.</p>
+<ul class="list">
+<li><p><b>Logical backups</b> offer the flexibility of restoring data on another machine with a different configuration in contrast to physical backups, which are often limited to the same machine and database type. Logical backups occur at database and table level, and physical occur at directory and file level.</p></li>
+<li><p><b>Physical backups</b> are smaller in size than logical, and also take less time to perform and restore. Physical backups also include log and configuration files, but logical backups do not.</p></li>
+</ul>
+<h2>Backup Tools</h2>
+<p>The main tool used for MariaDB backups is <b>mysqldump</b>. It offers logical backups and flexibility. It also proves an excellent option for small databases. <b>Mysqldump</b> dumps data into SQL, CSV, XML, and many other formats. Its output does not retain stored procedures, views, and events without explicit instruction.</p>
+<p>There are three options for <b>mysqldump</b> backups &minus;</p>
+<ul class="list">
+<li><p><b>Raw data</b> &minus; Dump a table as a raw data file through the --tab option, which also specifies the destination of the file &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+$ mysqldump -u root -p --no-create-info \
+   --tab=/tmp PRODUCTS products_tbl
+</pre>
+<ul class="list">
+<li><p><b>Data/Definitions export</b> &minus; This option allows a single or multiple tables to be exported to a file, and supports backing up all existing databases on the host machine. Examine an example of exporting contents or definitions to a file</p></li>
+</ul>
+<pre class="result notranslate">
+$ mysqldump -u root -p PRODUCTS products_tbl &gt; export_file.txt
+</pre>
+<ul class="list">
+<li><p><b>Transfer</b> &minus; You can also output databases and tables to another host</p></li>
+</ul>
+<pre class="result notranslate">
+$ mysqldump -u root -p database_name \
+   | mysql -h other-host.com database_name
+</pre>
+<h2>Using THE SELECT...INTO OUTFILE Statement</h2>
+<p>Another option for exporting data employs the SELECT...INTO OUTFILE statement. This simple option outputs the table into a simple formatted text file &minus;</p>
+<pre class="result notranslate">
+mysql&gt; SELECT * FROM products_tbl
+   -&gt; INTO OUTFILE '/tmp/products.txt';
+</pre>
+<p>Its attributes allow formatting the file to your preferred specifications.</p>
+<p>Note the following qualities of this statement &minus;</p>
+<ul class="list">
+<li><p>The file name must specify your desired location for the output.</p></li>
+<li><p>You need MariaDB file privileges to execute the statement.</p></li>
+<li><p>The output file name must be unique.</p></li>
+<li><p>You need login credentials on the host.</p></li>
+<li><p>In a UNIX environment, the output file is world readable, but its server ownership affects your ability to delete it. Ensure you have privileges.</p></li>
+</ul>
+<h2>Using CONNECT in Backups</h2>
+<p>The CONNECT handler allows exporting of data. This proves useful primarily in situations when the SELECT...INTO OUTFILE operation does not support the file format.</p>
+<p>Review the following example &minus;</p>
+<pre class="result notranslate">
+create table products
+engine = CONNECT table_type = XML file_name = 'products.htm' header = yes
+option_list = 'name=TABLE,coltype = HTML,attribute = border=1;cellpadding = 5'
+
+select plugin_name handler, plugin_version version, plugin_author
+author, plugin_description description, plugin_maturity maturity
+from information_schema.plugins where plugin_type = 'STORAGE ENGINE';
+</pre>
+<h2>Other Tools</h2>
+<p>Other options for backups are as follows &minus;</p>
+<ul class="list">
+<li><p><b>XtraBackup</b> &minus; This option targets XtraDB/InnoDB databases and works with any storage engine. Learn more about this tool from Percona's official site.</p></li>
+<li><p><b>Snapshots</b> &minus; Some filesystems allow snapshots. The process consists of flushing the tables with read lock, mounting the snapshot, unlocking the tables, copying the snapshot, and then unmounting the snapshot.</p></li>
+<li><p><b>LVM</b> &minus; This popular method employs a Perl script. It gets a read lock on every table and flushes caches to disk. Then it gets a snapshot and unlocks the tables. Consult the official <b>mylvmbackup</b> website for more information.</p></li>
+<li><p><b>TokuBackup</b> &minus; This solution provided by Percona provides hot backups taking into account the problems and limitations of InnoDB backup options. It produces a transactional sound copy of files while applications continue to manipulate them.Consult the Percona website for more information..</p></li>
+</ul>
+<h3>INNODB Considerations</h3>
+<p>InnoDB uses a buffer pool for performance enhancement. In a backup, configure InnoDB
+to avoid copying an entire table into the buffer pool because logical backups typically perform full table scans.</p>
+<h1>MariaDB - Backup Loading Methods</h1>
+<p>In this chapter, we will learn about various backup loading methods. Restoring a database from a backup is a simple and sometimes terribly long process.</p>
+<p>There are three options in loading data: the LOAD DATA statement, mysqlimport, and a simple mysqldump restore.</p>
+<h2>Using LOAD DATA</h2>
+<p>The LOAD DATA statement functions as a bulk loader. Review an example of its use that loads a text file &minus;</p>
+<pre class="result notranslate">
+mysql&gt; LOAD DATA LOCAL INFILE 'products_copy.txt' INTO TABLE empty_tbl;
+</pre>
+<p>Note the following qualities of a LOAD DATA statement &minus;</p>
+<ul class="list">
+<li><p>Use the LOCAL keyword to prevent MariaDB from performing a deep search of the host, and use a very specific path.</p></li>
+<li><p>The statement assumes a format consisting of lines terminated by linefeeds (newlines) and data values separated by tabs.</p></li>
+<li><p>Use the FIELDS clause to explicitly specify formatting of fields on a line. Use the LINES clause to specify line ending. Review an example below.</p></li>
+</ul>
+<pre class="result notranslate">
+mysql&gt; LOAD DATA LOCAL INFILE 'products_copy.txt' INTO TABLE empty_tbl
+   FIELDS TERMINATED BY '|'
+   LINES TERMINATED BY '\n';
+</pre>
+<ul class="list">
+<li><p>The statement assumes columns within the datafile use the same order of the table. If you need to set a different order, you can load the file as follows &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+mysql&gt; LOAD DATA LOCAL INFILE 'products_copy.txt' INTO TABLE empty_tbl (c, b, a);
+</pre>
+<h2>Using MYSQLIMPORT</h2>
+<p>The mysqlimport tool acts as a LOAD DATA wrapper allowing the same operations from the command line.</p>
+<p>Load data as follows &minus;</p>
+<pre class="result notranslate">
+$ mysqlimport -u root -p --local database_name source_file.txt
+</pre>
+<p>Specify formatting as follows &minus;</p>
+<pre class="result notranslate">
+$ mysqlimport -u root -p --local --fields-terminated-by="|" \
+   --lines-terminated-by="\n" database_name source_file.txt
+</pre>
+<p>Use the --<b>columns</b> option to specify column order &minus;</p>
+<pre class="result notranslate">
+$ mysqlimport -u root -p --local --columns=c,b,a \
+   database_name source_file.txt
+</pre>
+<h2>Using MYSQLDUMP</h2>
+<p>Restoring with <b>mysqldump</b> requires this simple statement for loading the dump file back into the host &minus;</p>
+<pre class="result notranslate">
+shell&gt; mysql database_name &lt; source_file.sql
+</pre>
+<h3>SPECIAL CHARACTERS AND QUOTES</h3>
+<p>In a LOAD DATA statement, quotes and special characters may not be interpreted correctly. The statement assumes unquoted values and treats backslashes as escape characters. Use the FIELDS clause to specify formatting. Point to quotes with “ENCLOSED BY,” which causes the stripping of quotes from data values. Change escapes with “ESCAPED BY.”</p>
+<h1>MariaDB - Useful Functions</h1>
+<p>This chapter contains a list of the most frequently used functions, offering definitions, explanations, and examples.</p>
+<h2>MariaDB Aggregate Functions</h2>
+<p>Most frequently used aggregate functions are given below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>COUNT</b></p>
+<p>It counts the number of records.</p>
+<p><b>Example</b> &minus; SELECT COUNT(*) FROM customer_table;</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>MIN</b></p>
+<p>It reveals the minimum value of a set of records.</p>
+<p><b>Example</b> &minus; SELECT organization, MIN(account) FROM contracts GROUP BY organization;</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>MAX</b></p>
+<p>It reveals the maximum value of a set of records.</p>
+<p><b>Example</b> &minus; SELECT organization, MAX(account_size) FROM contracts GROUP BY organization;</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>AVG</b></p>
+<p>It calculates the average value of a set of records.</p>
+<p><b>Example</b> &minus; SELECT AVG(account_size) FROM contracts;</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>SUM</b></p>
+<p>It calculates the sum of a set of records.</p>
+<p><b>Example</b> &minus; SELECT SUM(account_size) FROM contracts;</p>
+</td>
+</tr>
+</table>
+<h2>MariaDB Age Calculation</h2>
+<p>The <b>TIMESTAMPDIFF</b> function provides a way to calculate age &minus;</p>
+<pre class="result notranslate">
+SELECT CURDATE() AS today;
+SELECT ID, DOB, TIMESTAMPDIFF(YEAR,DOB,'2015-07-01') AS age FROM officer_info;
+</pre>
+<h2>MariaDB String Concatenation</h2>
+<p>The <b>CONCAT</b> function returns the resulting string after a concatenation operation. You can utilize one or more arguments. Review its syntax given below &minus;</p>
+<pre class="result notranslate">
+SELECT CONCAT(item, item,...);
+</pre>
+<p>Review thefollowing example &minus;</p>
+<pre class="result notranslate">
+SELECT CONCAT('Ram', 'bu', 'tan');
+Output:Rambutan
+</pre>
+<h2>MariaDB Date/Time Functions</h2>
+<p>Given below are important date functions &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>CURDATE()</b></p>
+<p>It returns the date in yyyy-mm-dd or yyyymmdd format.</p>
+<p><b>Example</b> &minus; SELECT CURDATE();</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>DATE()</b></p>
+<p>It returns the date in multiple formats.</p>
+<p><b>Example</b> &minus;CREATE TABLE product_release_tbl (x DATE);</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>CURTIME()</b></p>
+<p>It returns the time in HH:MM:SS or HHMMSS.uuuuuu format.</p>
+<p><b>Example</b> &minus; SELECT CURTIME();</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>DATE_SUB()</b></p>
+<p>It adds or subtracts a number of days from the specified date.</p>
+<p><b>Example</b> &minus; SELECT DATE_SUB('2016-02-08', INTERVAL 60 DAY);</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>DATEDIFF()</b></p>
+<p>It determines the days between two dates.</p>
+<p><b>Example</b> &minus; SELECT DATEDIFF('2016-01-01 23:59:59','2016-01-03');</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>DATE ADD()</b></p>
+<p>It adds or subtracts any unit of time to/from the date and time.</p>
+<p><b>Example</b> &minus; SELECT DATE_ADD('2016-01-04 23:59:59', INTERVAL 22 SECOND);</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>EXTRACT()</b></p>
+<p>It extracts a unit from the date.</p>
+<p><b>Example</b> &minus; SELECT EXTRACT(YEAR FROM '2016-01-08');</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<p><b>NOW()</b></p>
+<p>It returns the current date and time in either yyyy-mm-dd hh:mm:ss or yyyymmddhhmmss.uuuuuu format.</p>
+<p><b>Example</b> &minus; SELECT NOW();</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<p><b>DATE FORMAT()</b></p>
+<p>It formats the date in accordance with the specified format string.</p>
+<p><b>Example</b> &minus; SELECT DATE_FORMAT('2016-01-09 20:20:00', '%W %M %Y');</p>
+</td>
+</tr>
+</table>
+<p>Following are some important time functions &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>HOUR()</b></p>
+<p>It returns the hour of the time, or the hours elapsed.</p>
+<p><b>Example</b> &minus; SELECT HOUR('19:17:09');</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>LOCALTIME()</b></p>
+<p>It functions exactly like NOW().</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>MICROSECOND()</b></p>
+<p>It returns the microseconds of the time.</p>
+<p><b>Example</b> &minus; SELECT MICROSECOND('16:30:00.543876');</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>MINUTE()</b></p>
+<p>It returns the minutes of the time.</p>
+<p><b>Example</b> &minus; SELECT MINUTE('2016-05-22 17:22:01');</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>SECOND()</b></p>
+<p>It returns the seconds of the date.</p>
+<p><b>Example</b> &minus; SELECT SECOND('2016-03-12 16:30:04.000001');</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>TIME_FORMAT()</b></p>
+<p>It formats the time in accordance with the specified format string.</p>
+<p><b>Example</b> &minus; SELECT TIME_FORMAT('22:02:20', '%H %k %h %I %l');</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>TIMESTAMP()</b></p>
+<p>It provides a timestamp for an activity in the format yyyy-mm-dd hh:mm:dd.</p>
+<p><b>Example</b> &minus; CREATE TABLE orders_ (ID INT, tmst TIMESTAMP);</p>
+</td>
+</tr>
+</table>
+<h2>MariaDB Numeric Functions</h2>
+<p>Given below are some important numeric functions in MariaDB &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>TRUNCATE()</b></p>
+<p>It returns a truncated number to decimal place specification.</p>
+<p><b>Example</b> &minus; SELECT TRUNCATE(101.222, 1);</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>COS()</b></p>
+<p>It returns the cosine of x radians.</p>
+<p><b>Example</b> &minus; SELECT COS(PI());</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>CEILING()</b></p>
+<p>It returns the smallest integer not below x.</p>
+<p><b>Example</b> &minus; SELECT CEILING(2.11);</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>DEGREES()</b></p>
+<p>It converts radians to degrees.</p>
+<p><b>Example</b> &minus; SELECT DEGREES(PI());</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>DIV()</b></p>
+<p>It performs integer division.</p>
+<p><b>Example</b> &minus; SELECT 100 DIV 4;</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>EXP()</b></p>
+<p>It returns e to the power of x.</p>
+<p><b>Example</b> &minus; SELECT EXP(2);</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>FLOOR()</b></p>
+<p>It returns the largest integer not above x.</p>
+<p><b>Example</b> &minus; SELECT FLOOR(2.01);</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<p><b>LN()</b></p>
+<p>It returns the natural logarithm of x.</p>
+<p><b>Example</b> &minus; SELECT LN(3);</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<p><b>LOG()</b></p>
+<p>It returns the natural logarithm or the logarithm to a given base.</p>
+<p><b>Example</b> &minus; SELECT LOG(3);</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<p><b>SQRT()</b></p>
+<p>It returns the square root.</p>
+<p><b>Example</b> &minus; SELECT SQRT(16);</p>
+</td>
+</tr>
+</table>
+<h2>MariaDB String Functions</h2>
+<p>Important string functions are given below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>INSTR()</b></p>
+<p>It returns the position of the first instance of a substring.</p>
+<p><b>Example</b> &minus; SELECT INSTR('rambutan', 'tan');</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>RIGHT()</b></p>
+<p>It returns the rightmost string characters.</p>
+<p><b>Example</b> &minus; SELECT RIGHT('rambutan', 3);</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>LENGTH()</b></p>
+<p>It returns the byte length of a string.</p>
+<p><b>Example</b> &minus; SELECT LENGTH('rambutan');</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>LOCATE()</b></p>
+<p>It returns the position of the first instance of a substring.</p>
+<p><b>Example</b> &minus; SELECT LOCATE('tan', 'rambutan');</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>INSERT()</b></p>
+<p>It returns a string, with a specified substring at a certain position, that was modified.</p>
+<p><b>Example</b> &minus; SELECT INSERT('ramputan', 4, 1, 'b');</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>LEFT()</b></p>
+<p>It returns the leftmost characters.</p>
+<p><b>Example</b> &minus; SELECT LEFT('rambutan', 3);</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>UPPER()</b></p>
+<p>It changes characters to uppercase.</p>
+<p><b>Example</b> &minus; SELECT UPPER(lastname);</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<p><b>LOWER()</b></p>
+<p>It changes characters to lowercase.</p>
+<p><b>Example</b> &minus; SELECT LOWER(lastname);</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<p><b>STRCMP()</b></p>
+<p>It compares strings and returns 0 when they are equal.</p>
+<p><b>Example</b> &minus; SELECT STRCMP('egg', 'cheese');</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<p><b>REPLACE()</b></p>
+<p>It returns a string after replacing characters.</p>
+<p><b>Example</b> &minus; SELECT REPLACE('sully', 'l', 'n');</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td>
+<p><b>REVERSE()</b></p>
+<p>It reverses characters in a string.</p>
+<p><b>Example</b> &minus; SELECT REVERSE('racecar');</p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td>
+<p><b>REPEAT()</b></p>
+<p>It returns a string repeating given characters x times.</p>
+<p><b>Example</b> &minus; SELECT REPEAT('ha ', 10);</p>
+</td>
+</tr>
+<tr>
+<td>13</td>
+<td>
+<p><b>SUBSTRING()</b></p>
+<p>It returns a substring from a string, starting at position x.</p>
+<p><b>Example</b> &minus; SELECT SUBSTRING('rambutan',3);</p>
+</td>
+</tr>
+<tr>
+<td>14</td>
+<td>
+<p><b>TRIM()</b></p>
+<p>It removes trailing/leading characters from a string.</p>
+<p><b>Example</b> &minus; SELECT TRIM(LEADING '_' FROM '_rambutan');</p>
+</td>
+</tr>
+</table>
+<hr />
+<div class="pre-btn">
+<a href="mariadb_useful_functions.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="mariadb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/mariadb/mariadb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:29:49 GMT -->
+</html>

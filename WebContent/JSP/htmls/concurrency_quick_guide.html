@@ -1,0 +1,4389 @@
+<!doctype html> 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 14:51:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Concurrency Quick Guide</title>
+<meta name="description" content="Concurrency Quick Guide - Learning Concurrency in simple and easy steps. A beginner's tutorial containing complete knowledge of Overview, Environment Setup, Major Operations, Interthread Communication, Synchronization, Deadlock, ThreadLocal, ThreadLocalRandom, Lock, ReadWriteLock, Condition, AtomicInteger, AtomicLong, AtomicBoolean, AtomicReference, AtomicIntegerArray, AtomicLongArray, AtomicReferenceArray, Executor, ExecutorService, ScheduledExecutorService, newFixedThreadPool, newCachedThreadPool, newScheduledThreadPool, newSingleThreadExecutor, ThreadPoolExecutor, ScheduledThreadPoolExecutor, Futures and Callables, Fork-Join framework, BlockingQueue, ConcurrentMap, ConcurrentNavigableMap" />
+<meta name="keywords" content="Overview, Environment Setup, Major Operations, Interthread Communication, Synchronization, Deadlock, ThreadLocal, ThreadLocalRandom, Lock, ReadWriteLock, Condition, AtomicInteger, AtomicLong, AtomicBoolean, AtomicReference, AtomicIntegerArray, AtomicLongArray, AtomicReferenceArray, Executor, ExecutorService, ScheduledExecutorService, newFixedThreadPool, newCachedThreadPool, newScheduledThreadPool, newSingleThreadExecutor, ThreadPoolExecutor, ScheduledThreadPoolExecutor, Futures and Callables, Fork-Join framework, BlockingQueue, ConcurrentMap, ConcurrentNavigableMap" />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+pre.prettyprint.tryit {min-height:37px; background: #eee url(images/try-it.jpg) top right no-repeat !important}select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #2b85ba url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #2b85ba !important;}
+.submenu-item{ border-bottom: 2px solid #2b85ba !important; border-top: 2px solid #2b85ba !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/java_concurrency-mini-logo.jpg" alt="Java Concurrency Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Java Concurrency Tutorial</li>
+<li><a target="_top" href="index.html">Concurrency - Home</a></li>
+<li><a target="_top" href="concurrency_overview.html">Concurrency - Overview</a></li>
+<li><a target="_top" href="concurrency_environment.html">Concurrency - Environment Setup</a></li>
+<li><a target="_top" href="concurrency_major_operations.html">Concurrency - Major Operations</a></li>
+<li><a target="_top" href="concurrency_interthread_communication.html">Concurrency - Interthread Communication</a></li>
+<li><a target="_top" href="concurrency_synchronization.html">Concurrency - Synchronization</a></li>
+<li><a target="_top" href="concurrency_deadlock.html">Concurrency - Deadlock</a></li>
+<li class="heading">Utility Class Examples</li>
+<li><a target="_top" href="concurrency_threadlocal.html">Concurrency - ThreadLocal</a></li>
+<li><a target="_top" href="concurrency_threadlocalrandom.html">Concurrency - ThreadLocalRandom</a></li>
+<li class="heading">Lock Examples</li>
+<li><a target="_top" href="concurrency_lock.html">Concurrency - Lock</a></li>
+<li><a target="_top" href="concurrency_readwritelock.html">Concurrency - ReadWriteLock</a></li>
+<li><a target="_top" href="concurrency_condition.html">Concurrency - Condition</a></li>
+<li class="heading">Atomic Variable Examples</li>
+<li><a target="_top" href="concurrency_atomic_integer.html">Concurrency - AtomicInteger</a></li>
+<li><a target="_top" href="concurrency_atomiclong.html">Concurrency - AtomicLong</a></li>
+<li><a target="_top" href="concurrency_atomicboolean.html">Concurrency - AtomicBoolean</a></li>
+<li><a target="_top" href="concurrency_atomicreference.html">Concurrency - AtomicReference</a></li>
+<li><a target="_top" href="concurrency_atomicintegerarray.html">Concurrency - AtomicIntegerArray</a></li>
+<li><a target="_top" href="concurrency_atomiclongarray.html">Concurrency - AtomicLongArray</a></li>
+<li><a target="_top" href="concurrency_atomicreferencearray.html">Concurrency - AtomicReferenceArray</a></li>
+<li class="heading">Executor Examples</li>
+<li><a target="_top" href="concurrency_executor.html">Concurrency - Executor</a></li>
+<li><a target="_top" href="concurrency_executorservice.html">Concurrency - ExecutorService</a></li>
+<li><a target="_top" href="concurrency_scheduledexecutorservice.html">Concurrency - ScheduledExecutorService</a></li>
+<li class="heading">Thread Pool Examples</li>
+<li><a target="_top" href="concurrency_newfixedthreadpool.html">Concurrency - newFixedThreadPool</a></li>
+<li><a target="_top" href="concurrency_newcachedthreadpool.html">Concurrency - newCachedThreadPool</a></li>
+<li><a target="_top" href="concurrency_newscheduledthreadpool.html">Concurrency - newScheduledThreadPool</a></li>
+<li><a target="_top" href="concurrency_newsinglethreadexecutor.html">Concurrency - newSingleThreadExecutor</a></li>
+<li><a target="_top" href="concurrency_threadpoolexecutor.html">Concurrency - ThreadPoolExecutor</a></li>
+<li><a target="_top" href="concurrency_scheduledthreadpoolexecutor.html">Concurrency - ScheduledThreadPoolExecutor</a></li>
+<li class="heading">Advanced Examples</li>
+<li><a target="_top" href="concurrency_future_callables.html">Concurrency - Futures and Callables</a></li>
+<li><a target="_top" href="concurrency_fork_join.html">Concurrency - Fork-Join framework</a></li>
+<li class="heading">Concurrent Collections</li>
+<li><a target="_top" href="concurrency_blockingqueue.html">Concurrency - BlockingQueue</a></li>
+<li><a target="_top" href="concurrency_concurrentmap.html">Concurrency - ConcurrentMap</a></li>
+<li><a target="_top" href="concurrency_concurrentnavigablemap.html">Concurrency - ConcurrentNavigableMap</a></li>
+<li class="heading">Concurrency Useful Resources</li>
+<li><a href="concurrency_quick_guide.html">Concurrency - Quick Guide</a></li>
+<li><a href="concurrency_useful_resources.html">Concurrency - Useful Resources</a></li>
+<li><a href="concurrency_discussion.html">Concurrency - Discussion</a></li>
+</ul></aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Concurrency - Quick Guide</h1>
+<hr>
+<div class="topgooglead">
+<div class="topadtag">Advertisements</div>
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<ins class="adsbygoogle top_ad_slot"
+     style="display:inline-block;"
+     data-ad-client="ca-pub-7133395778201029"
+     data-ad-slot="2813390526">
+</ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<hr>
+<div class="pre-btn">
+<a href="concurrency_concurrentnavigablemap.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="concurrency_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Concurrency - Overview</h1>
+<p>Java is a <i>multi-threaded programming language</i> which means we can develop multi-threaded program using Java. A multi-threaded program contains two or more parts that can run concurrently and each part can handle a different task at the same time making optimal use of the available resources specially when your computer has multiple CPUs.</p>
+<p>By definition, multitasking is when multiple processes share common processing resources such as a CPU. Multi-threading extends the idea of multitasking into applications where you can subdivide specific operations within a single application into individual threads. Each of the threads can run in parallel. The OS divides processing time not only among different applications, but also among each thread within an application.</p>
+<p>Multi-threading enables you to write in a way where multiple activities can proceed concurrently in the same program.</p>
+<h2>Life Cycle of a Thread</h2>
+<p>A thread goes through various stages in its life cycle. For example, a thread is born, started, runs, and then dies. The following diagram shows the complete life cycle of a thread.</p>
+<img src="../java/images/Thread_Life_Cycle.jpg" alt="Java Thread" />
+<p>Following are the stages of the life cycle &minus;</p>
+<ul class="list">
+<li><p><b>New</b> &minus; A new thread begins its life cycle in the new state. It remains in this state until the program starts the thread. It is also referred to as a <b>born thread</b>.</p></li>
+<li><p><b>Runnable</b> &minus; After a newly born thread is started, the thread becomes runnable. A thread in this state is considered to be executing its task.</p></li>
+<li><p><b>Waiting</b> &minus; Sometimes, a thread transitions to the waiting state while the thread waits for another thread to perform a task. A thread transitions back to the runnable state only when another thread signals the waiting thread to continue executing.</p></li>
+<li><p><b>Timed Waiting</b> &minus; A runnable thread can enter the timed waiting state for a specified interval of time. A thread in this state transitions back to the runnable state when that time interval expires or when the event it is waiting for occurs.</p></li>
+<li><p><b>Terminated (Dead)</b> &minus; A runnable thread enters the terminated state when it completes its task or otherwise terminates.</p></li>
+</ul>
+<h2>Thread Priorities</h2>
+<p>Every Java thread has a priority that helps the operating system determine the order in which threads are scheduled.</p>
+<p>Java thread priorities are in the range between MIN_PRIORITY (a constant of 1) and MAX_PRIORITY (a constant of 10). By default, every thread is given priority NORM_PRIORITY (a constant of 5).</p>
+<p>Threads with higher priority are more important to a program and should be allocated processor time before lower-priority threads. However, thread priorities cannot guarantee the order in which threads execute and are very much platform dependent.</p>
+<h2>Create a Thread by Implementing a Runnable Interface</h2>
+<p>If your class is intended to be executed as a thread then you can achieve this by implementing a <b>Runnable</b> interface. You will need to follow three basic steps &minus;</p>
+<h3>Step 1</h3>
+<p>As a first step, you need to implement a run() method provided by a <b>Runnable</b> interface. This method provides an entry point for the thread and you will put your complete business logic inside this method. Following is a simple syntax of the run() method &minus;</p>
+<pre class="result notranslate">
+public void run( )
+</pre>
+<h3>Step 2</h3>
+<p>As a second step, you will instantiate a <b>Thread</b> object using the following constructor &minus;</p>
+<pre class="result notranslate">
+Thread(Runnable threadObj, String threadName);
+</pre>
+<p>Where, <i>threadObj</i> is an instance of a class that implements the <b>Runnable</b> interface and <b>threadName</b> is the name given to the new thread.</p>
+<h3>Step 3</h3>
+<p>Once a Thread object is created, you can start it by calling <b>start()</b> method, which executes a call to run( ) method. Following is a simple syntax of start() method &minus;</p>
+<pre class="result notranslate">
+void start();
+</pre>
+<h3>Example</h3>
+<p>Here is an example that creates a new thread and starts running it &minus;</p>
+<pre class="prettyprint notranslate tryit">
+class RunnableDemo implements Runnable {
+   private Thread t;
+   private String threadName;
+   
+   RunnableDemo( String name) {
+      threadName = name;
+      System.out.println("Creating " +  threadName );
+   }
+   
+   public void run() {
+      System.out.println("Running " +  threadName );
+      try {
+         for(int i = 4; i &gt; 0; i--) {
+            System.out.println("Thread: " + threadName + ", " + i);
+            // Let the thread sleep for a while.
+            Thread.sleep(50);
+         }
+      }catch (InterruptedException e) {
+         System.out.println("Thread " +  threadName + " interrupted.");
+      }
+      System.out.println("Thread " +  threadName + " exiting.");
+   }
+   
+   public void start () {
+      System.out.println("Starting " +  threadName );
+      if (t == null) {
+         t = new Thread (this, threadName);
+         t.start ();
+      }
+   }
+}
+
+public class TestThread {
+
+   public static void main(String args[]) {
+      RunnableDemo R1 = new RunnableDemo( "Thread-1");
+      R1.start();
+      
+      RunnableDemo R2 = new RunnableDemo( "Thread-2");
+      R2.start();
+   }   
+}
+</pre>
+<p>This will produce the following result &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Creating Thread-1
+Starting Thread-1
+Creating Thread-2
+Starting Thread-2
+Running Thread-1
+Thread: Thread-1, 4
+Running Thread-2
+Thread: Thread-2, 4
+Thread: Thread-1, 3
+Thread: Thread-2, 3
+Thread: Thread-1, 2
+Thread: Thread-2, 2
+Thread: Thread-1, 1
+Thread: Thread-2, 1
+Thread Thread-1 exiting.
+Thread Thread-2 exiting.
+</pre>
+<h2>Create a Thread by Extending a Thread Class</h2>
+<p>The second way to create a thread is to create a new class that extends <b>Thread</b> class using the following two simple steps. This approach provides more flexibility in handling multiple threads created using available methods in Thread class.</p>
+<h3>Step 1</h3>
+<p>You will need to override <b>run( )</b> method available in Thread class. This method provides an entry point for the thread and you will put your complete business logic inside this method. Following is a simple syntax of run() method &minus;</p>
+<pre class="result notranslate">
+public void run( )
+</pre>
+<h3>Step 2</h3>
+<p>Once Thread object is created, you can start it by calling <b>start()</b> method, which executes a call to run( ) method. Following is a simple syntax of start() method &minus;</p>
+<pre class="result notranslate">
+void start( );
+</pre>
+<h3>Example</h3>
+<p>Here is the preceding program rewritten to extend the Thread &minus;</p>
+<pre class="prettyprint notranslate tryit">
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+   
+   ThreadDemo( String name) {
+      threadName = name;
+      System.out.println("Creating " +  threadName );
+   }
+   
+   public void run() {
+      System.out.println("Running " +  threadName );
+      try {
+         for(int i = 4; i &gt; 0; i--) {
+            System.out.println("Thread: " + threadName + ", " + i);
+            // Let the thread sleep for a while.
+            Thread.sleep(50);
+         }
+      }catch (InterruptedException e) {
+         System.out.println("Thread " +  threadName + " interrupted.");
+      }
+      System.out.println("Thread " +  threadName + " exiting.");
+   }
+   
+   public void start () {
+      System.out.println("Starting " +  threadName );
+      if (t == null) {
+         t = new Thread (this, threadName);
+         t.start ();
+      }
+   }
+}
+
+public class TestThread {
+
+   public static void main(String args[]) {
+      ThreadDemo T1 = new ThreadDemo( "Thread-1");
+      T1.start();
+      
+      ThreadDemo T2 = new ThreadDemo( "Thread-2");
+      T2.start();
+   }   
+}
+</pre>
+<p>This will produce the following result &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Creating Thread-1
+Starting Thread-1
+Creating Thread-2
+Starting Thread-2
+Running Thread-1
+Thread: Thread-1, 4
+Running Thread-2
+Thread: Thread-2, 4
+Thread: Thread-1, 3
+Thread: Thread-2, 3
+Thread: Thread-1, 2
+Thread: Thread-2, 2
+Thread: Thread-1, 1
+Thread: Thread-2, 1
+Thread Thread-1 exiting.
+Thread Thread-2 exiting.
+</pre>
+<h1>Concurrency - Environment Setup</h1>
+<p>In this chapter, we will discuss on the different aspects of setting up a congenial environment for Java.</p>
+<blockquote>
+<h2>Try it Option Online</h2>
+<p>We have set up the Java Programming environment online, so that you can compile and execute all the available examples online. It gives you confidence in what you are reading and enables you to verify the programs with different options. Feel free to modify any example and execute it online.</p>
+<p>Try the following example using our online compiler available at <a href="../codingground.html">CodingGround</a></p>
+<pre class="prettyprint notranslate tryit">
+public class MyFirstJavaProgram {
+
+   public static void main(String []args) {
+      System.out.println("Hello World");
+   }
+} 
+</pre>
+<p>For most of the examples given in this tutorial, you will find a Try it option in our website code sections at the top right corner that will take you to the online compiler. So just make use of it and enjoy your learning.</p>
+</blockquote>
+<h2>Local Environment Setup</h2>
+<p>If you are still willing to set up your environment for Java programming language, then this section guides you on how to download and set up Java on your machine. Following are the steps to set up the environment.</p>
+<p>Java SE is freely available from the link <a rel="nofollow" target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Download Java</a>. You can download a version based on your operating system.</p>
+<p>Follow the instructions to download Java and run the <b>.exe</b> to install Java on your machine. Once you installed Java on your machine, you will need to set environment variables to point to correct installation directories &minus;</p>
+<h3>Setting Up the Path for Windows</h3>
+<p>Assuming you have installed Java in <i>c:\Program Files\java\jdk</i> directory &minus;</p>
+<ul class="list">
+<li><p>Right-click on 'My Computer' and select 'Properties'.</p></li>
+<li><p>Click the 'Environment variables' button under the 'Advanced' tab.</p></li>
+<li><p>Now, alter the 'Path' variable so that it also contains the path to the Java executable. Example, if the path is currently set to 'C:\WINDOWS\SYSTEM32', then change your path to read 'C:\WINDOWS\SYSTEM32;c:\Program Files\java\jdk\bin'.</p></li>
+</ul>
+<h3>Setting Up the Path for Linux, UNIX, Solaris, FreeBSD</h3>
+<p>Environment variable PATH should be set to point to where the Java binaries have been installed. Refer to your shell documentation, if you have trouble doing this.</p>
+<p>Example, if you use <i>bash</i> as your shell, then you would add the following line to the end of your '.bashrc: export PATH = /path/to/java:$PATH'</p>
+<h2>Popular Java Editors</h2>
+<p>To write your Java programs, you will need a text editor. There are even more sophisticated IDEs available in the market. But for now, you can consider one of the following &minus;</p>
+<ul class="list">
+<li><p><b>Notepad</b> &minus; On Windows machine, you can use any simple text editor like Notepad (Recommended for this tutorial), TextPad.</p></li>
+<li><p><b>Netbeans</b> &minus; A Java IDE that is open-source and free which can be downloaded from <a  target="_blank" rel="nofollow" href="https://www.netbeans.org/index.html">https://www.netbeans.org/index.html</a>.</p></li>
+<li><p><b>Eclipse</b> &minus; A Java IDE developed by the eclipse open-source community and can be downloaded from <a target="_blank" rel="nofollow" href="https://www.eclipse.org/">https://www.eclipse.org/</a>.</p></li>
+</ul>
+<h1>Concurrency - Major Operations</h1>
+<p>Core Java provides complete control over multithreaded program. You can develop a multithreaded program which can be suspended, resumed, or stopped completely based on your requirements. There are various static methods which you can use on thread objects to control their behavior. Following table lists down those methods &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public void suspend()</b></p>
+<p>This method puts a thread in the suspended state and can be resumed using resume() method.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public void stop()</b></p>
+<p>This method stops a thread completely.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public void resume()</b></p>
+<p>This method resumes a thread, which was suspended using suspend() method.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public void wait()</b></p>
+<p>Causes the current thread to wait until another thread invokes the notify().</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public void notify()</b></p>
+<p>Wakes up a single thread that is waiting on this object's monitor.</p>
+</td>
+</tr>
+</table>
+<p>Be aware that the latest versions of Java has deprecated the usage of suspend( ), resume( ), and stop( ) methods and so you need to use available alternatives.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+class RunnableDemo implements Runnable {
+   public Thread t;
+   private String threadName;
+   boolean suspended = false;
+
+   RunnableDemo( String name) {
+      threadName = name;
+      System.out.println("Creating " +  threadName );
+   }
+   
+   public void run() {
+      System.out.println("Running " +  threadName );
+      try {
+         for(int i = 10; i &gt; 0; i--) {
+            System.out.println("Thread: " + threadName + ", " + i);
+            // Let the thread sleep for a while.
+            Thread.sleep(300);
+            synchronized(this) {
+               while(suspended) {
+                  wait();
+               }
+            }
+         }
+      }catch (InterruptedException e) {
+         System.out.println("Thread " +  threadName + " interrupted.");
+      }
+      System.out.println("Thread " +  threadName + " exiting.");
+   }
+
+   public void start () {
+      System.out.println("Starting " +  threadName );
+      if (t == null) {
+         t = new Thread (this, threadName);
+         t.start ();
+      }
+   }
+   
+   void suspend() {
+      suspended = true;
+   }
+   
+   synchronized void resume() {
+      suspended = false;
+      notify();
+   }
+}
+
+public class TestThread {
+
+   public static void main(String args[]) {
+
+      RunnableDemo R1 = new RunnableDemo( "Thread-1");
+      R1.start();
+
+      RunnableDemo R2 = new RunnableDemo( "Thread-2");
+      R2.start();
+
+      try {
+         Thread.sleep(1000);
+         R1.suspend();
+         System.out.println("Suspending First Thread");
+         Thread.sleep(1000);
+         R1.resume();
+         System.out.println("Resuming First Thread");
+         
+         R2.suspend();
+         System.out.println("Suspending thread Two");
+         Thread.sleep(1000);
+         R2.resume();
+         System.out.println("Resuming thread Two");
+      }catch (InterruptedException e) {
+         System.out.println("Main thread Interrupted");
+      }try {
+         System.out.println("Waiting for threads to finish.");
+         R1.t.join();
+         R2.t.join();
+      }catch (InterruptedException e) {
+         System.out.println("Main thread Interrupted");
+      }
+      System.out.println("Main thread exiting.");
+   }
+}
+</pre>
+<p>The above program produces the following output &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Creating Thread-1
+Starting Thread-1
+Creating Thread-2
+Starting Thread-2
+Running Thread-1
+Thread: Thread-1, 10
+Running Thread-2
+Thread: Thread-2, 10
+Thread: Thread-1, 9
+Thread: Thread-2, 9
+Thread: Thread-1, 8
+Thread: Thread-2, 8
+Thread: Thread-1, 7
+Thread: Thread-2, 7
+Suspending First Thread
+Thread: Thread-2, 6
+Thread: Thread-2, 5
+Thread: Thread-2, 4
+Resuming First Thread
+Suspending thread Two
+Thread: Thread-1, 6
+Thread: Thread-1, 5
+Thread: Thread-1, 4
+Thread: Thread-1, 3
+Resuming thread Two
+Thread: Thread-2, 3
+Waiting for threads to finish.
+Thread: Thread-1, 2
+Thread: Thread-2, 2
+Thread: Thread-1, 1
+Thread: Thread-2, 1
+Thread Thread-1 exiting.
+Thread Thread-2 exiting.
+Main thread exiting.
+</pre>
+<h1>Concurrency - Interthread Communication</h1>
+<p>If you are aware of interprocess communication then it will be easy for you to understand interthread communication. Interthread communication is important when you develop an application where two or more threads exchange some information.</p>
+<p>There are three simple methods and a little trick which makes thread communication possible. All the three methods are listed below &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public void wait()</b></p>
+<p>Causes the current thread to wait until another thread invokes the notify().</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public void notify()</b></p>
+<p>Wakes up a single thread that is waiting on this object's monitor.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public void notifyAll()</b></p>
+<p>Wakes up all the threads that called wait( ) on the same object.</p>
+</td>
+</tr>
+</table>
+<p>These methods have been implemented as <b>final</b> methods in Object, so they are available in all the classes. All three methods can be called only from within a <b>synchronized</b> context.</p>
+<h3>Example</h3>
+<p>This examples shows how two threads can communicate using <b>wait()</b> and <b>notify()</b> method. You can create a complex system using the same concept.</p>
+<pre class="prettyprint notranslate tryit">
+class Chat {
+   boolean flag = false;
+
+   public synchronized void Question(String msg) {
+      if (flag) {
+         try {
+            wait();
+         }catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+      System.out.println(msg);
+      flag = true;
+      notify();
+   }
+
+   public synchronized void Answer(String msg) {
+      if (!flag) {
+         try {
+            wait();
+         }catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+
+      System.out.println(msg);
+      flag = false;
+      notify();
+   }
+}
+
+class T1 implements Runnable {
+   Chat m;
+   String[] s1 = { "Hi", "How are you ?", "I am also doing fine!" };
+
+   public T1(Chat m1) {
+      this.m = m1;
+      new Thread(this, "Question").start();
+   }
+
+   public void run() {
+      for (int i = 0; i &lt; s1.length; i++) {
+         m.Question(s1[i]);
+      }
+   }
+}
+
+class T2 implements Runnable {
+   Chat m;
+   String[] s2 = { "Hi", "I am good, what about you?", "Great!" };
+
+   public T2(Chat m2) {
+      this.m = m2;
+      new Thread(this, "Answer").start();
+   }
+
+   public void run() {
+      for (int i = 0; i &lt; s2.length; i++) {
+         m.Answer(s2[i]);
+      }
+   }
+}
+public class TestThread {
+   public static void main(String[] args) {
+      Chat m = new Chat();
+      new T1(m);
+      new T2(m);
+   }
+}
+</pre>
+<p>When the above program is complied and executed, it produces the following result &minus;</p>
+<pre class="result notranslate">
+Hi
+Hi
+How are you ?
+I am good, what about you?
+I am also doing fine!
+Great!
+</pre>
+<p>Above example has been taken and then modified from [https://stackoverflow.com/questions/2170520/inter-thread-communication-in-java]</p>
+<h1>Concurrency - Synchronization</h1>
+<h2>Multithreading Example with Synchronization</h2>
+<p>Here is the same example which prints counter value in sequence and every time we run it, it produces the same result.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+class PrintDemo {
+   public void printCount() {
+      try {
+         for(int i = 5; i &gt; 0; i--) {
+            System.out.println("Counter   ---   "  + i );
+         }
+      }catch (Exception e) {
+         System.out.println("Thread  interrupted.");
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+   PrintDemo  PD;
+
+   ThreadDemo( String name,  PrintDemo pd) {
+      threadName = name;
+      PD = pd;
+   }
+   
+   public void run() {
+      synchronized(PD) {
+         PD.printCount();
+      }
+      System.out.println("Thread " +  threadName + " exiting.");
+   }
+
+   public void start () {
+      System.out.println("Starting " +  threadName );
+      if (t == null) {
+         t = new Thread (this, threadName);
+         t.start ();
+      }
+   }
+}
+
+public class TestThread {
+
+   public static void main(String args[]) {
+      PrintDemo PD = new PrintDemo();
+
+      ThreadDemo T1 = new ThreadDemo( "Thread - 1 ", PD );
+      ThreadDemo T2 = new ThreadDemo( "Thread - 2 ", PD );
+
+      T1.start();
+      T2.start();
+
+      // wait for threads to end
+      try {
+         T1.join();
+         T2.join();
+      }catch( Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}
+</pre>
+<p>This produces the same result every time you run this program &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Starting Thread - 1
+Starting Thread - 2
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 1  exiting.
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 2  exiting.
+</pre>
+<h1>Concurrency - Deadlock</h1>
+<p>Deadlock describes a situation where two or more threads are blocked forever, waiting for each other. Deadlock occurs when multiple threads need the same locks but obtain them in different order. A Java multithreaded program may suffer from the deadlock condition because the <b>synchronized</b> keyword causes the executing thread to block while waiting for the lock, or monitor, associated with the specified object. Here is an example.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+public class TestThread {
+   public static Object Lock1 = new Object();
+   public static Object Lock2 = new Object();
+   
+   public static void main(String args[]) {
+      ThreadDemo1 T1 = new ThreadDemo1();
+      ThreadDemo2 T2 = new ThreadDemo2();
+      T1.start();
+      T2.start();
+   }
+   
+   private static class ThreadDemo1 extends Thread {
+      public void run() {
+         synchronized (Lock1) {
+            System.out.println("Thread 1: Holding lock 1...");
+            
+            try { Thread.sleep(10); }
+            catch (InterruptedException e) {}
+            System.out.println("Thread 1: Waiting for lock 2...");
+            
+            synchronized (Lock2) {
+               System.out.println("Thread 1: Holding lock 1 &amp; 2...");
+            }
+         }
+      }
+   }
+   private static class ThreadDemo2 extends Thread {
+      public void run() {
+         synchronized (Lock2) {
+            System.out.println("Thread 2: Holding lock 2...");
+            
+            try { Thread.sleep(10); }
+            catch (InterruptedException e) {}
+            System.out.println("Thread 2: Waiting for lock 1...");
+            
+            synchronized (Lock1) {
+               System.out.println("Thread 2: Holding lock 1 &amp; 2...");
+            }
+         }
+      }
+   } 
+}
+</pre>
+<p>When you compile and execute the above program, you find a deadlock situation and following is the output produced by the program &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+Thread 1: Holding lock 1...
+Thread 2: Holding lock 2...
+Thread 1: Waiting for lock 2...
+Thread 2: Waiting for lock 1...
+</pre>
+<p>The above program will hang forever because neither of the threads in position to proceed and waiting for each other to release the lock, so you can come out of the program by pressing CTRL&plus;C.</p>
+<h2>Deadlock Solution Example</h2>
+<p>Let's change the order of the lock and run of the same program to see if both the threads still wait for each other &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+public class TestThread {
+   public static Object Lock1 = new Object();
+   public static Object Lock2 = new Object();
+   
+   public static void main(String args[]) {
+      ThreadDemo1 T1 = new ThreadDemo1();
+      ThreadDemo2 T2 = new ThreadDemo2();
+      T1.start();
+      T2.start();
+   }
+   
+   private static class ThreadDemo1 extends Thread {
+      public void run() {
+         synchronized (Lock1) {
+            System.out.println("Thread 1: Holding lock 1...");
+            
+            try {
+               Thread.sleep(10);
+            }catch (InterruptedException e) {}
+            System.out.println("Thread 1: Waiting for lock 2...");
+            
+            synchronized (Lock2) {
+               System.out.println("Thread 1: Holding lock 1 &amp; 2...");
+            }
+         }
+      }
+   }
+   private static class ThreadDemo2 extends Thread {
+      public void run() {
+         synchronized (Lock1) {
+            System.out.println("Thread 2: Holding lock 1...");
+           
+            try {
+               Thread.sleep(10);
+            }catch (InterruptedException e) {}
+            System.out.println("Thread 2: Waiting for lock 2...");
+            
+            synchronized (Lock2) {
+               System.out.println("Thread 2: Holding lock 1 &amp; 2...");
+            }
+         }
+      }
+   } 
+}
+</pre>
+<p>So just changing the order of the locks prevent the program in going into a deadlock situation and completes with the following result &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Thread 1: Holding lock 1...
+Thread 1: Waiting for lock 2...
+Thread 1: Holding lock 1 & 2...
+Thread 2: Holding lock 1...
+Thread 2: Waiting for lock 2...
+Thread 2: Holding lock 1 & 2...
+</pre>
+<p>The above example is to just make the concept clear, however, it is a complex concept and you should deep dive into it before you develop your applications to deal with deadlock situations.</p>
+<h1>Concurrency - ThreadLocal Class</h1>
+<p>The ThreadLocal class is used to create thread local variables which can only be read and written by the same thread. For example, if two threads are accessing code having reference to same threadLocal variable then each thread will not see any modification to threadLocal variable done by other thread.</p>
+<h2>ThreadLocal Methods</h2>
+<p>Following is the list of important methods available in the ThreadLocal class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public T get()</b></p>
+<p>Returns the value in the current thread's copy of this thread-local variable.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>protected T initialValue()</b></p>
+<p>Returns the current thread's "initial value" for this thread-local variable.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public void remove()</b></p>
+<p>Removes the current thread's value for this thread-local variable.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public void set(T value)</b></p>
+<p>Sets the current thread's copy of this thread-local variable to the specified value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+The following TestThread program demonstrates some of these methods of the ThreadLocal class. Here we've used two counter variable, one is normal variable and another one is ThreadLocal.</p>
+<pre class="prettyprint notranslate tryit">
+class RunnableDemo implements Runnable {
+   int counter;
+   ThreadLocal&lt;Integer&gt; threadLocalCounter = new ThreadLocal&lt;Integer&gt;();
+
+   public void run() {     
+      counter++;
+      if(threadLocalCounter.get() != null){
+         threadLocalCounter.set(threadLocalCounter.get().intValue() + 1);
+      }else{
+         threadLocalCounter.set(0);
+      }
+      System.out.println("Counter: " + counter);
+      System.out.println("threadLocalCounter: " + threadLocalCounter.get());
+   }
+}
+
+public class TestThread {
+
+   public static void main(String args[]) {
+      RunnableDemo commonInstance = new RunnableDemo();
+
+      Thread t1 = new Thread( commonInstance);
+      Thread t2 = new Thread( commonInstance);
+      Thread t3 = new Thread( commonInstance);
+      Thread t4 = new Thread( commonInstance);
+
+      t1.start();
+      t2.start();
+      t3.start();
+      t4.start();
+
+      // wait for threads to end
+      try {
+         t1.join();
+         t2.join();
+         t3.join();
+         t4.join();
+      }catch( Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Counter: 1
+threadLocalCounter: 0
+Counter: 2
+threadLocalCounter: 0
+Counter: 4
+Counter: 3
+threadLocalCounter: 0
+threadLocalCounter: 0
+</pre>
+<p>You can see the value of counter is increased by each thread, but threadLocalCounter remains 0 for each thread.</p>
+<h1>Concurrency - ThreadLocalRandom Class</h1>
+<p>A java.util.concurrent.ThreadLocalRandom is a utility class introduced from jdk 1.7 onwards and is useful when multiple threads or ForkJoinTasks are required to generate random numbers. It improves performance and have less contention than Math.random() method.</p>
+<h2>ThreadLocalRandom Methods</h2>
+<p>Following is the list of important methods available in the ThreadLocalRandom class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public static ThreadLocalRandom current()</b></p>
+<p>Returns the current thread's ThreadLocalRandom.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>protected int next(int bits)</b></p>
+<p>Generates the next pseudorandom number.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public double nextDouble(double n)</b></p>
+<p>Returns a pseudorandom, uniformly distributed double value between 0 (inclusive) and the specified value (exclusive).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public double nextDouble(double least, double bound)</b></p>
+<p>Returns a pseudorandom, uniformly distributed value between the given least value (inclusive) and bound (exclusive).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public int nextInt(int least, int bound)</b></p>
+<p>Returns a pseudorandom, uniformly distributed value between the given least value (inclusive) and bound (exclusive).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public long nextLong(long n)</b></p>
+<p>Returns a pseudorandom, uniformly distributed value between 0 (inclusive) and the specified value (exclusive).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public long nextLong(long least, long bound)</b></p>
+<p>Returns a pseudorandom, uniformly distributed value between the given least value (inclusive) and bound (exclusive).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>public void setSeed(long seed)</b></p>
+<p>Throws UnsupportedOperationException.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+The following TestThread program demonstrates some of these methods of the Lock interface. Here we've used lock() to acquire the lock and unlock() to release the lock.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.Random;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class TestThread {
+  
+   public static void main(final String[] arguments) {
+      System.out.println("Random Integer: " + new Random().nextInt());  
+      System.out.println("Seeded Random Integer: " + new Random(15).nextInt());  
+      System.out.println("Thread Local Random Integer: " + ThreadLocalRandom.current().nextInt());  
+      final ThreadLocalRandom random = ThreadLocalRandom.current();  
+      random.setSeed(15);  //exception will come as seeding is not allowed in ThreadLocalRandom.
+      System.out.println( "Seeded Thread Local Random Integer: " + random.nextInt());  
+   }
+}
+
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Random Integer: 1566889198
+Seeded Random Integer: -1159716814
+Thread Local Random Integer: 358693993
+Exception in thread "main" java.lang.UnsupportedOperationException
+        at java.util.concurrent.ThreadLocalRandom.setSeed(Unknown Source)
+        at TestThread.main(TestThread.java:21)
+</pre>
+<p>Here we've used ThreadLocalRandom and Random classes to get random numbers.</p>
+<h1>Concurrency - Lock Interface</h1>
+<p>A java.util.concurrent.locks.Lock interface is used to as a thread synchronization mechanism similar to synchronized blocks. New Locking mechanism is more flexible and provides more options than a synchronized block. Main differences between a Lock and a synchronized block are following:</p>
+<ul class="list">
+<li><p><b>Guarantee of sequence</b> - Synchronized block does not provide any guarantee of sequence in which waiting thread will be given access. Lock interface handles it.</p></li>
+<li><p><b>No timeout</b> Synchronized block has no option of timeout if lock is not granted. Lock interface provides such option.</p></li>
+<li><p><b>Single method</b> Synchronized block must be fully contained within a single method whereas a lock interface's methods lock() and unlock() can be called in different methods.</p></li>
+</ul>
+<h2>Lock Methods</h2>
+<p>Following is the list of important methods available in the Lock class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public void lock()</b></p>
+<p>Acquires the lock.</p>
+</td> 
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public void lockInterruptibly()</b></p>
+<p>Acquires the lock unless the current thread is interrupted.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public Condition newCondition()</b></p>
+<p>Returns a new Condition instance that is bound to this Lock instance.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public boolean tryLock()</b></p>
+<p>Acquires the lock only if it is free at the time of invocation.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public boolean tryLock()</b></p>
+<p>Acquires the lock only if it is free at the time of invocation.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public boolean tryLock(long time, TimeUnit unit)</b></p>
+<p>Acquires the lock if it is free within the given waiting time and the current thread has not been interrupted.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public void unlock()</b></p>
+<p>Releases the lock.</p>
+</td> 
+</tr>
+</table>
+<h2>Example</h2>
+The following TestThread program demonstrates some of these methods of the Lock interface. Here we've used lock() to acquire the lock and unlock() to release the lock.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class PrintDemo {
+
+   private final Lock queueLock = new ReentrantLock();
+
+   public void print() {
+      queueLock.lock();
+      try {
+         Long duration = (long) (Math.random() * 10000);
+         System.out.println(Thread.currentThread().getName() 
+            + "  Time Taken " + (duration / 1000) + " seconds.");
+         Thread.sleep(duration);
+      } catch (InterruptedException e) {
+         e.printStackTrace();
+      } finally {
+         System.out.printf("%s printed the document successfully.\n", Thread.currentThread().getName());
+         queueLock.unlock();
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   PrintDemo  printDemo;
+
+   ThreadDemo( String name,  PrintDemo printDemo) {
+      super(name);
+      this.printDemo = printDemo;
+   }   
+
+   @Override
+   public void run() {
+      System.out.printf("%s starts printing a document\n", Thread.currentThread().getName());
+      printDemo.print();
+   }
+}
+
+public class TestThread {
+
+   public static void main(String args[]) {
+      PrintDemo PD = new PrintDemo();
+
+      ThreadDemo t1 = new ThreadDemo( "Thread - 1 ", PD );
+      ThreadDemo t2 = new ThreadDemo( "Thread - 2 ", PD );
+      ThreadDemo t3 = new ThreadDemo( "Thread - 3 ", PD );
+      ThreadDemo t4 = new ThreadDemo( "Thread - 4 ", PD );
+
+      t1.start();
+      t2.start();
+      t3.start();
+      t4.start();
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Thread - 1  starts printing a document
+Thread - 4  starts printing a document
+Thread - 3  starts printing a document
+Thread - 2  starts printing a document
+Thread - 1   Time Taken 4 seconds.
+Thread - 1  printed the document successfully.
+Thread - 4   Time Taken 3 seconds.
+Thread - 4  printed the document successfully.
+Thread - 3   Time Taken 5 seconds.
+Thread - 3  printed the document successfully.
+Thread - 2   Time Taken 4 seconds.
+Thread - 2  printed the document successfully.
+</pre>
+<p>We've use ReentrantLock class as an implementation of Lock interface here. ReentrantLock class allows a thread to lock a method even if it already have the lock on other method.</p>
+<h1>Concurrency - ReadWriteLock Interface</h1>
+<p>A java.util.concurrent.locks.ReadWriteLock interface allows multiple threads to read at a time but only one thread can write at a time. 
+<ul class="list">
+<li><p><b>Read Lock</b> - If no thread has locked the ReadWriteLock for writing then multiple thread can access the read lock.</p></li>
+<li><p><b>Write Lock</b> - If no thread is reading or writing, then one thread can access the write lock.</p></li>
+</ul>
+<h2>Lock Methods</h2>
+<p>Following is the list of important methods available in the Lock class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public Lock readLock()</b></p>
+<p>Returns the lock used for reading.</p>
+</td> 
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public Lock writeLock()</b></p>
+<p>Returns the lock used for writing.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+The following TestThread program demonstrates these methods of the ReadWriteLock interface. Here we've used readlock() to acquire the read-lock and writeLock() to acquire the write-lock.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class TestThread {
+
+   private static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+
+   private static String message = "a";
+
+   public static void main(String[] args) throws InterruptedException{
+      Thread t1 = new Thread(new WriterA());
+      t1.setName("Writer A");
+      Thread t2 = new Thread(new WriterB());
+      t2.setName("Writer B");
+      Thread t3 = new Thread(new Reader());
+      t3.setName("Reader");
+      t1.start();
+      t2.start();
+      t3.start();
+      t1.join();
+      t2.join();
+      t3.join();
+   }
+
+   static class Reader implements Runnable {
+
+      public void run() {
+         if(lock.isWriteLocked()) {
+            System.out.println("Write Lock Present.");
+         }   
+         lock.readLock().lock();
+         try {
+            Long duration = (long) (Math.random() * 10000);
+            System.out.println(Thread.currentThread().getName() 
+               + "  Time Taken " + (duration / 1000) + " seconds.");
+            Thread.sleep(duration);
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         } finally {
+            System.out.println(Thread.currentThread().getName() +": "+ message );
+            lock.readLock().unlock();
+         }
+      }
+   }
+
+   static class WriterA implements Runnable {
+
+      public void run() {
+         lock.writeLock().lock();
+         try {
+            Long duration = (long) (Math.random() * 10000);
+            System.out.println(Thread.currentThread().getName() 
+               + "  Time Taken " + (duration / 1000) + " seconds.");
+            Thread.sleep(duration);
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         } finally {
+            message = message.concat("a");
+            lock.writeLock().unlock();
+         }
+      }
+   }
+
+   static class WriterB implements Runnable {
+
+      public void run() {
+         lock.writeLock().lock();
+         try {
+            Long duration = (long) (Math.random() * 10000);
+            System.out.println(Thread.currentThread().getName() 
+               + "  Time Taken " + (duration / 1000) + " seconds.");
+            Thread.sleep(duration);
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         } finally {
+            message = message.concat("b");
+            lock.writeLock().unlock();
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Writer A  Time Taken 6 seconds.
+Write Lock Present.
+Writer B  Time Taken 2 seconds.
+Reader  Time Taken 0 seconds.
+Reader: aab
+</pre>
+<h1>Concurrency - Condition Interface</h1>
+<p>A java.util.concurrent.locks.Condition interface provides a thread ability to suspend its execution, until the given condition is true. A Condition object is necessarily bound to a Lock and to be obtained using the newCondition() method.</p>
+<h2>Condition Methods</h2>
+<p>Following is the list of important methods available in the Condition class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public void await()</b></p>
+<p>Causes the current thread to wait until it is signalled or interrupted.</p>
+</td> 
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public boolean await(long time, TimeUnit unit)</b></p>
+<p>Causes the current thread to wait until it is signalled or interrupted, or the specified waiting time elapses.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public long awaitNanos(long nanosTimeout)</b></p>
+<p>Causes the current thread to wait until it is signalled or interrupted, or the specified waiting time elapses.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public long awaitUninterruptibly()</b></p>
+<p>Causes the current thread to wait until it is signalled.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public long awaitUntil()</b></p>
+<p>Causes the current thread to wait until it is signalled or interrupted, or the specified deadline elapses.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public void signal()</b></p>
+<p>Wakes up one waiting thread.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public void signalAll()</b></p>
+<p>Wakes up all waiting threads.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+The following TestThread program demonstrates these methods of the Condition interface. Here we've used signal() to notify and await() to suspend the thread.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class TestThread {
+
+   public static void main(String[] args) throws InterruptedException{
+      ItemQueue itemQueue = new ItemQueue(10);
+
+      //Create a producer and a consumer.
+      Thread producer = new Producer(itemQueue);
+      Thread consumer = new Consumer(itemQueue);
+
+      //Start both threads.
+      producer.start();
+      consumer.start();
+
+      //Wait for both threads to terminate.
+      producer.join();
+      consumer.join();
+   }
+
+   static class ItemQueue {
+
+      private Object[] items = null;
+      private int current = 0;
+      private int placeIndex = 0;
+      private int removeIndex = 0;
+
+      private final Lock lock;
+      private final Condition isEmpty;
+      private final Condition isFull;
+
+      public ItemQueue(int capacity) {
+         this.items = new Object[capacity];
+         lock = new ReentrantLock();
+         isEmpty = lock.newCondition();
+         isFull = lock.newCondition();
+      }
+
+      public void add(Object item) throws InterruptedException {
+         lock.lock();
+         while(current &gt;= items.length)
+            isFull.await();
+
+         items[placeIndex] = item;
+
+         placeIndex = (placeIndex + 1) % items.length;
+
+         ++current;
+
+         //Notify the consumer that there is data available.
+         isEmpty.signal();
+
+         lock.unlock();
+      }
+
+      public Object remove() throws InterruptedException {
+         Object item = null;
+
+         lock.lock();
+         while(current &lt;= 0){
+            isEmpty.await();
+         }
+         item = items[removeIndex];
+
+         removeIndex = (removeIndex + 1) % items.length;
+
+         --current;
+
+         //Notify the producer that there is space available.
+         isFull.signal();
+         lock.unlock();
+
+         return item;
+      }
+
+      public boolean isEmpty(){
+         return (items.length == 0);
+      }
+   }
+
+   static class Producer extends Thread {
+
+      private final ItemQueue queue;
+      public Producer(ItemQueue queue) {
+         this.queue = queue;
+      }
+
+      @Override
+      public void run() {
+         String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+
+         try {
+            for(String number: numbers){
+               queue.add(number);
+               System.out.println("[Producer]: " + number);
+            }
+            queue.add(null);
+         }
+         catch (InterruptedException ex) {
+            ex.printStackTrace();
+         } 
+      }
+   }
+
+   static class Consumer extends Thread {
+
+      private final ItemQueue queue;
+      public Consumer(ItemQueue queue) {
+         this.queue = queue;
+      }
+
+      @Override
+      public void run() {
+         try {
+            do {
+               Object number = queue.remove();
+               System.out.println("[Consumer]: " + number);
+               if(number == null){
+                  return;
+               }
+            } while(!queue.isEmpty());
+         }
+         catch (InterruptedException ex) {
+            ex.printStackTrace();
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+[Producer]: 1
+[Consumer]: 1
+[Producer]: 2
+[Consumer]: 2
+[Producer]: 3
+[Consumer]: 3
+[Producer]: 4
+[Consumer]: 4
+[Producer]: 5
+[Producer]: 6
+[Consumer]: 5
+[Producer]: 7
+[Consumer]: 6
+[Consumer]: 7
+[Producer]: 8
+[Consumer]: 8
+[Producer]: 9
+[Consumer]: 9
+[Producer]: 10
+[Consumer]: 10
+[Producer]: 11
+[Consumer]: 11
+[Producer]: 12
+[Consumer]: 12
+[Consumer]: null
+</pre>
+<h1>Concurrency - AtomicInteger Class</h1>
+<p>A java.util.concurrent.atomic.AtomicInteger class provides operations on underlying int value that can be read and written atomically, and also contains advanced atomic operations. AtomicInteger supports atomic operations on underlying int variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features.</p>
+<h2>AtomicInteger Methods</h2>
+<p>Following is the list of important methods available in the AtomicInteger class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public int addAndGet(int delta)</b></p>
+<p>Atomically adds the given value to the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public boolean compareAndSet(int expect, int update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value is same as the expected value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public int decrementAndGet()</b></p>
+<p>Atomically decrements by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public double doubleValue()</b></p>
+<p>Returns the value of the specified number as a double.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public float floatValue()</b></p>
+<p>Returns the value of the specified number as a float.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public int get()</b></p>
+<p>Gets the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public int getAndAdd(int delta)</b></p>
+<p>Atomiclly adds the given value to the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>public int getAndDecrement()</b></p>
+<p>Atomically decrements by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>public int getAndIncrement()</b></p>
+<p>
+Atomically increments by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>public int getAndSet(int newValue)</b></p>
+<p>Atomically sets to the given value and returns the old value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>public int incrementAndGet()</b></p>
+<p>Atomically increments by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>public int intValue()</b></p>
+<p>Returns the value of the specified number as an int.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">13</td>
+<td><p><b>public void  lazySet(int newValue)</b></p>
+<p>Eventually sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">14</td>
+<td><p><b>public long  longValue()</b></p>
+<p>Returns the value of the specified number as a long.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">15</td>
+<td><p><b>public void  set(int newValue)</b></p>
+<p>Sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">16</td>
+<td><p><b>public String toString()</b></p>
+<p>Returns the String representation of the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">17</td>
+<td><p><b>public boolean weakCompareAndSet(int expect, int update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value is same as the expected value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows a unsafe implementation of counter in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+public class TestThread {
+
+   static class Counter {
+      private int c = 0;
+
+      public void increment() {
+         c++;
+      }
+
+      public int value() {
+         return c;
+      }
+   }
+   public static void main(final String[] arguments) throws InterruptedException {
+      final Counter counter = new Counter();
+      //1000 threads
+      for(int i = 0; i &lt; 1000 ; i++) {
+         new Thread(new Runnable() {
+            public void run() {
+               counter.increment();
+            }
+         }).start(); 
+      }  
+      Thread.sleep(6000);
+   
+
+      System.out.println("Final number (should be 1000): " + counter.value());
+   }  
+}
+</pre>
+<p>This may produce the following result depending upon computer's speed and thread interleaving.</p>
+<h2>Output</h2>
+<pre class="result">
+Final number (should be 1000): 997
+</pre>
+<h2>Example</h2>
+The following TestThread program shows a safe implementation of counter using AtomicInteger in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class TestThread {
+
+   static class Counter {
+      private AtomicInteger c = new AtomicInteger(0);
+
+      public void increment() {
+         c.getAndIncrement();
+      }
+
+      public int value() {
+         return c.get();
+      }
+   }
+   public static void main(final String[] arguments) throws InterruptedException {
+      final Counter counter = new Counter();
+      //1000 threads
+      for(int i = 0; i &lt; 1000 ; i++) {
+         new Thread(new Runnable() {
+            public void run() {
+               counter.increment();
+            }
+         }).start(); 
+      }  
+      Thread.sleep(6000);
+   
+
+      System.out.println("Final number (should be 1000): " + counter.value());
+   }  
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Final number (should be 1000): 1000
+</pre>
+<h1>Concurrency - AtomicLong Class</h1>
+<p>A java.util.concurrent.atomic.AtomicLong class provides operations on underlying long value that can be read and written atomically, and also contains advanced atomic operations. AtomicLong supports atomic operations on underlying long variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features.</p>
+<h2>AtomicLong Methods</h2>
+<p>Following is the list of important methods available in the AtomicLong class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public long addAndGet(long delta)</b></p>
+<p>Atomically adds the given value to the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public boolean compareAndSet(long expect, long update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value is same as the expected value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public long decrementAndGet()</b></p>
+<p>Atomically decrements by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public double doubleValue()</b></p>
+<p>Returns the value of the specified number as a double.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public float floatValue()</b></p>
+<p>Returns the value of the specified number as a float.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public long get()</b></p>
+<p>Gets the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public long getAndAdd(long delta)</b></p>
+<p>Atomiclly adds the given value to the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>public long getAndDecrement()</b></p>
+<p>Atomically decrements by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>public long getAndIncrement()</b></p>
+<p>
+Atomically increments by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>public long getAndSet(long newValue)</b></p>
+<p>Atomically sets to the given value and returns the old value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>public long incrementAndGet()</b></p>
+<p>Atomically increments by one the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>public int intValue()</b></p>
+<p>Returns the value of the specified number as an int.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">13</td>
+<td><p><b>public void lazySet(long newValue)</b></p>
+<p>Eventually sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">14</td>
+<td><p><b>public long longValue()</b></p>
+<p>Returns the value of the specified number as a long.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">15</td>
+<td><p><b>public void set(long newValue)</b></p>
+<p>Sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">16</td>
+<td><p><b>public String toString()</b></p>
+<p>Returns the String representation of the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">17</td>
+<td><p><b>public boolean weakCompareAndSet(long expect, long update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value is same as the expected value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows a safe implementation of counter using AtomicLong in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.atomic.AtomicLong;
+
+public class TestThread {
+
+   static class Counter {
+      private AtomicLong c = new AtomicLong(0);
+
+      public void increment() {
+         c.getAndIncrement();
+      }
+
+      public long value() {
+         return c.get();
+      }
+   }
+   public static void main(final String[] arguments) throws InterruptedException {
+      final Counter counter = new Counter();
+      //1000 threads
+      for(int i = 0; i &lt; 1000 ; i++) {
+         new Thread(new Runnable() {
+            public void run() {
+               counter.increment();
+            }
+         }).start();	
+      }  
+      Thread.sleep(6000);			   		  
+
+      System.out.println("Final number (should be 1000): " + counter.value());
+   }  
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Final number (should be 1000): 1000
+</pre>
+<h1>Concurrency - AtomicBoolean Class</h1>
+<p>A java.util.concurrent.atomic.AtomicBoolean class provides operations on underlying boolean value that can be read and written atomically, and also contains advanced atomic operations. AtomicBoolean supports atomic operations on underlying boolean variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features.</p>
+<h2>AtomicBoolean Methods</h2>
+<p>Following is the list of important methods available in the AtomicBoolean class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public boolean compareAndSet(boolean expect, boolean update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public boolean get()</b></p>
+<p>Returns the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public boolean getAndSet(boolean newValue)</b></p>
+<p>Atomically sets to the given value and returns the previous value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public void lazySet(boolean newValue)</b></p>
+<p>Eventually sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public void set(boolean newValue)</b></p>
+<p>Unconditionally sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public String	toString()</b></p>
+<p>Returns the String representation of the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public boolean weakCompareAndSet(boolean expect, boolean update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of AtomicBoolean variable in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      final AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+      new Thread("Thread 1") {
+         public void run() {
+            while(true){
+               System.out.println(Thread.currentThread().getName() 
+                  +" Waiting for Thread 2 to set Atomic variable to true. Current value is "
+                  + atomicBoolean.get());
+               if(atomicBoolean.compareAndSet(true, false)) {
+                  System.out.println("Done!");
+                  break;
+               }
+            }};
+      }.start();
+
+      new Thread("Thread 2") {
+         public void run() {
+            System.out.println(Thread.currentThread().getName() + ", Atomic Variable: " +atomicBoolean.get()); 
+            System.out.println(Thread.currentThread().getName() +" is setting the variable to true ");
+            atomicBoolean.set(true);
+            System.out.println(Thread.currentThread().getName() + ", Atomic Variable: " +atomicBoolean.get()); 
+         };
+      }.start();
+   }  
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Thread 1 Waiting for Thread 2 to set Atomic variable to true. Current value is false
+Thread 1 Waiting for Thread 2 to set Atomic variable to true. Current value is false
+Thread 1 Waiting for Thread 2 to set Atomic variable to true. Current value is false
+Thread 2, Atomic Variable: false
+Thread 1 Waiting for Thread 2 to set Atomic variable to true. Current value is false
+Thread 2 is setting the variable to true
+Thread 2, Atomic Variable: true
+Thread 1 Waiting for Thread 2 to set Atomic variable to true. Current value is false
+Done!
+</pre>
+<h1>Concurrency - AtomicReference Class</h1>
+<p>A java.util.concurrent.atomic.AtomicReference class provides operations on underlying object reference that can be read and written atomically, and also contains advanced atomic operations. AtomicReference supports atomic operations on underlying object reference variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features.</p>
+<h2>AtomicReference Methods</h2>
+<p>Following is the list of important methods available in the AtomicReference class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public boolean compareAndSet(V expect, V update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public boolean get()</b></p>
+<p>Returns the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public boolean getAndSet(V newValue)</b></p>
+<p>Atomically sets to the given value and returns the previous value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public void lazySet(V newValue)</b></p>
+<p>Eventually sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public void set(V newValue)</b></p>
+<p>Unconditionally sets to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public String	toString()</b></p>
+<p>Returns the String representation of the current value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public boolean weakCompareAndSet(V expect, V update)</b></p>
+<p>Atomically sets the value to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of AtomicReference variable in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.atomic.AtomicReference;
+
+public class TestThread {
+
+   private static String message = "hello";
+   private static AtomicReference&lt;String&gt; atomicReference;
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      atomicReference = new AtomicReference&lt;String&gt;(message);
+      new Thread("Thread 1") {
+         public void run() {
+            atomicReference.compareAndSet(message, "Thread 1");
+            message = message.concat("-Thread 1!");
+         };
+      }.start();
+
+      System.out.println("Message is: " + message);
+      System.out.println("Atomic Reference of Message is: " + atomicReference.get());
+   }  
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Message is: hello
+Atomic Reference of Message is: Thread 1
+</pre>
+<h1>Concurrency - AtomicIntegerArray Class</h1>
+<p>A java.util.concurrent.atomic.AtomicIntegerArray class provides operations on underlying int array that can be read and written atomically, and also contains advanced atomic operations. AtomicIntegerArray supports atomic operations on underlying int array variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features.</p>
+<h2>AtomicIntegerArray Methods</h2>
+<p>Following is the list of important methods available in the AtomicIntegerArray class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public int addAndGet(int i, int delta)
+<p>Atomically adds the given value to the element at index i.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public boolean compareAndSet(int i, int expect, int update)</b></p>
+<p>Atomically sets the element at position i to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public int decrementAndGet(int i)</b></p>
+<p>Atomically decrements by one the element at index i.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public int get(int i)</b></p>
+<p>Gets the current value at position i.
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public int getAndAdd(int i, int delta)</b></p>
+<p>Atomically adds the given value to the element at index i.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public int getAndDecrement(int i)</b></p>
+<p>Atomically decrements by one the element at index i.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public int getAndIncrement(int i)</b></p>
+<p>Atomically increments by one the element at index i.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>public int getAndSet(int i, int newValue)</b></p>
+<p>Atomically sets the element at position i to the given value and returns the old value.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>public int incrementAndGet(int i)</b></p>
+<p>Atomically increments by one the element at index i.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>public void lazySet(int i, int newValue)</b></p>
+<p>Eventually sets the element at position i to the given value.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>public int length()</b></p>
+<p>Returns the length of the array.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>public void set(int i, int newValue)</b></p>
+<p>Sets the element at position i to the given value.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">13</td>
+<td><p><b>public String toString()</b></p>
+<p>Returns the String representation of the current values of array.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">14</td>
+<td><p><b>public boolean weakCompareAndSet(int i, int expect, int update)</b></p>
+<p>Atomically sets the element at position i to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of AtomicIntegerArray variable in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.atomic.AtomicIntegerArray;
+
+public class TestThread {
+
+   private static AtomicIntegerArray atomicIntegerArray = new AtomicIntegerArray(10);
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      for (int i=0; i&lt;atomicIntegerArray.length(); i++) {
+         atomicIntegerArray.set(i, 1);
+      }
+
+      Thread t1 = new Thread(new Increment());
+      Thread t2 = new Thread(new Compare());
+      t1.start();
+      t2.start();
+
+      t1.join();
+      t2.join();
+
+      System.out.println("Values: ");
+      for (int i=0; i&lt;atomicIntegerArray.length(); i++) {
+         System.out.print(atomicIntegerArray.get(i) + " ");
+      }
+   }  
+
+   static class Increment implements Runnable {
+
+      public void run() {
+         for(int i=0; i&lt;atomicIntegerArray.length(); i++) {
+            int add = atomicIntegerArray.incrementAndGet(i);
+            System.out.println("Thread " + Thread.currentThread().getId() 
+               + ", index " +i + ", value: "+ add);
+         }
+      }
+   }
+
+   static class Compare implements Runnable {
+
+      public void run() {
+         for(int i=0; i&lt;atomicIntegerArray.length(); i++) {
+            boolean swapped = atomicIntegerArray.compareAndSet(i, 2, 3);
+            if(swapped){
+               System.out.println("Thread " + Thread.currentThread().getId()
+                  + ", index " +i + ", value: 3");
+            }
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Thread 10, index 0, value: 2
+Thread 10, index 1, value: 2
+Thread 10, index 2, value: 2
+Thread 11, index 0, value: 3
+Thread 10, index 3, value: 2
+Thread 11, index 1, value: 3
+Thread 11, index 2, value: 3
+Thread 10, index 4, value: 2
+Thread 11, index 3, value: 3
+Thread 10, index 5, value: 2
+Thread 10, index 6, value: 2
+Thread 11, index 4, value: 3
+Thread 10, index 7, value: 2
+Thread 11, index 5, value: 3
+Thread 10, index 8, value: 2
+Thread 11, index 6, value: 3
+Thread 10, index 9, value: 2
+Thread 11, index 7, value: 3
+Thread 11, index 8, value: 3
+Thread 11, index 9, value: 3
+Values:
+3 3 3 3 3 3 3 3 3 3
+</pre>
+<h1>Concurrency - AtomicLongArray Class</h1>
+<p>A java.util.concurrent.atomic.AtomicLongArray class provides operations on underlying long array that can be read and written atomically, and also contains advanced atomic operations. AtomicLongArray supports atomic operations on underlying long array variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features.</p>
+<h2>AtomicLongArray Methods</h2>
+<p>Following is the list of important methods available in the AtomicLongArray class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public long addAndGet(int i, long delta)
+<p>Atomically adds the given value to the element at index i.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public boolean compareAndSet(int i, long expect, long update)</b></p>
+<p>Atomically sets the element at position i to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public long decrementAndGet(int i)</b></p>
+<p>Atomically decrements by one the element at index i.</p>
+</td>
+</tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public long get(int i)</b></p>
+<p>Gets the current value at position i.
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public long getAndAdd(int i, long delta)</b></p>
+<p>Atomically adds the given value to the element at index i.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public long getAndDecrement(int i)</b></p>
+<p>Atomically decrements by one the element at index i.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public long getAndIncrement(int i)</b></p>
+<p>Atomically increments by one the element at index i.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>public long getAndSet(int i, long newValue)</b></p>
+<p>Atomically sets the element at position i to the given value and returns the old value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>public long incrementAndGet(int i)</b></p>
+<p>Atomically increments by one the element at index i.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>public void lazySet(int i, long newValue)</b></p>
+<p>Eventually sets the element at position i to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>public int length()</b></p>
+<p>Returns the length of the array.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>public void set(int i, long newValue)</b></p>
+<p>Sets the element at position i to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">13</td>
+<td><p><b>public String toString()</b></p>
+<p>Returns the String representation of the current values of array.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">14</td>
+<td><p><b>public boolean weakCompareAndSet(int i, long expect, long update)</b></p>
+<p>Atomically sets the element at position i to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of AtomicIntegerArray variable in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.atomic.AtomicLongArray;
+
+public class TestThread {
+
+   private static AtomicLongArray atomicLongArray = new AtomicLongArray(10);
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      for (int i=0; i&lt;atomicLongArray.length(); i++) {
+         atomicLongArray.set(i, 1);
+      }
+
+      Thread t1 = new Thread(new Increment());
+      Thread t2 = new Thread(new Compare());
+      t1.start();
+      t2.start();
+
+      t1.join();
+      t2.join();
+
+      System.out.println("Values: ");
+      for (int i=0; i&lt;atomicLongArray.length(); i++) {
+         System.out.print(atomicLongArray.get(i) + " ");
+      }
+   }  
+
+   static class Increment implements Runnable {
+
+      public void run() {
+         for(int i=0; i&lt;atomicLongArray.length(); i++) {
+            long add = atomicLongArray.incrementAndGet(i);
+            System.out.println("Thread " + Thread.currentThread().getId() 
+               + ", index " +i + ", value: "+ add);
+         }
+      }
+   }
+
+   static class Compare implements Runnable {
+
+      public void run() {
+         for(int i=0; i&lt;atomicLongArray.length(); i++) {
+            boolean swapped = atomicLongArray.compareAndSet(i, 2, 3);
+            if(swapped){
+               System.out.println("Thread " + Thread.currentThread().getId()
+                  + ", index " +i + ", value: 3");
+            }
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Thread 9, index 0, value: 2
+Thread 10, index 0, value: 3
+Thread 9, index 1, value: 2
+Thread 9, index 2, value: 2
+Thread 9, index 3, value: 2
+Thread 9, index 4, value: 2
+Thread 10, index 1, value: 3
+Thread 9, index 5, value: 2
+Thread 10, index 2, value: 3
+Thread 9, index 6, value: 2
+Thread 10, index 3, value: 3
+Thread 9, index 7, value: 2
+Thread 10, index 4, value: 3
+Thread 9, index 8, value: 2
+Thread 9, index 9, value: 2
+Thread 10, index 5, value: 3
+Thread 10, index 6, value: 3
+Thread 10, index 7, value: 3
+Thread 10, index 8, value: 3
+Thread 10, index 9, value: 3
+Values: 
+3 3 3 3 3 3 3 3 3 3
+</pre>
+<h1>Concurrency - AtomicReferenceArray Class</h1>
+<p>A java.util.concurrent.atomic.AtomicReferenceArray class provides operations on underlying reference array that can be read and written atomically, and also contains advanced atomic operations. AtomicReferenceArray supports atomic operations on underlying reference array variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features.</p>
+<h2>AtomicReferenceArray Methods</h2>
+<p>Following is the list of important methods available in the AtomicReferenceArray class.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public boolean compareAndSet(int i, E expect, E update)</b></p>
+<p>Atomically sets the element at position i to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public E get(int i)</b></p>
+<p>Gets the current value at position i.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public E getAndSet(int i, E newValue)</b></p>
+<p>Atomically sets the element at position i to the given value and returns the old value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public void lazySet(int i, E newValue)</b></p>
+<p>Eventually sets the element at position i to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public int length()</b></p>
+<p>Returns the length of the array.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public void set(int i, E newValue)</b></p>
+<p>Sets the element at position i to the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public String toString()</b></p>
+<p>Returns the String representation of the current values of array.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>public boolean weakCompareAndSet(int i, E expect, E update)</b></p>
+<p>Atomically sets the element at position i to the given updated value if the current value == the expected value.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of AtomicReferenceArray variable in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.atomic.AtomicReferenceArray;
+
+public class TestThread {
+  
+   private static String[] source = new String[10];
+   private static AtomicReferenceArray&lt;String&gt; atomicReferenceArray 
+      = new AtomicReferenceArray&lt;String&gt;(source);
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      for (int i=0; i&lt;atomicReferenceArray.length(); i++) {
+         atomicReferenceArray.set(i, "item-2");
+      }
+
+      Thread t1 = new Thread(new Increment());
+      Thread t2 = new Thread(new Compare());
+      t1.start();
+      t2.start();
+
+      t1.join();
+      t2.join();		
+   }  
+
+   static class Increment implements Runnable {
+      public void run() {
+         for(int i=0; i&lt;atomicReferenceArray.length(); i++) {
+            String add = atomicReferenceArray.getAndSet(i,"item-"+ (i+1));
+            System.out.println("Thread " + Thread.currentThread().getId() 
+               + ", index " +i + ", value: "+ add);
+         }
+      }
+   }
+
+   static class Compare implements Runnable {
+      public void run() {
+         for(int i=0; i&lt;atomicReferenceArray.length(); i++) {
+            System.out.println("Thread " + Thread.currentThread().getId() 
+               + ", index " +i + ", value: "+ atomicReferenceArray.get(i));
+            boolean swapped = atomicReferenceArray.compareAndSet(i, "item-2", "updated-item-2");
+            System.out.println("Item swapped: " + swapped);
+            if(swapped){
+               System.out.println("Thread " + Thread.currentThread().getId() 
+                  + ", index " +i + ", updated-item-2");
+            }
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Thread 9, index 0, value: item-2
+Thread 10, index 0, value: item-1
+Item swapped: false
+Thread 10, index 1, value: item-2
+Item swapped: true
+Thread 9, index 1, value: updated-item-2
+Thread 10, index 1, updated-item-2
+Thread 10, index 2, value: item-3
+Item swapped: false
+Thread 10, index 3, value: item-2
+Item swapped: true
+Thread 10, index 3, updated-item-2
+Thread 10, index 4, value: item-2
+Item swapped: true
+Thread 10, index 4, updated-item-2
+Thread 10, index 5, value: item-2
+Item swapped: true
+Thread 10, index 5, updated-item-2
+Thread 10, index 6, value: item-2
+Thread 9, index 2, value: item-2
+Item swapped: true
+Thread 9, index 3, value: updated-item-2
+Thread 10, index 6, updated-item-2
+Thread 10, index 7, value: item-2
+Thread 9, index 4, value: updated-item-2
+Item swapped: true
+Thread 9, index 5, value: updated-item-2
+Thread 10, index 7, updated-item-2
+Thread 9, index 6, value: updated-item-2
+Thread 10, index 8, value: item-2
+Thread 9, index 7, value: updated-item-2
+Item swapped: true
+Thread 9, index 8, value: updated-item-2
+Thread 10, index 8, updated-item-2
+Thread 9, index 9, value: item-2
+Thread 10, index 9, value: item-10
+Item swapped: false
+</pre>
+<h1>Concurrency - Executor Interface</h1>
+<p>A java.util.concurrent.Executor interface is a simple interface to support launching new tasks.</p>
+<h2>ExecutorService Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>void execute(Runnable command)</b></p>
+<p>Executes the given command at some time in the future.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of Executor interface in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+	
+   public static void main(final String[] arguments) throws InterruptedException {
+      Executor executor = Executors.newCachedThreadPool();
+      executor.execute(new Task());
+      ThreadPoolExecutor pool = (ThreadPoolExecutor)executor;
+      pool.shutdown();
+   }  
+
+   static class Task implements Runnable {
+      public void run() {
+         try {
+            Long duration = (long) (Math.random() * 5);
+            System.out.println("Running Task!");
+            TimeUnit.SECONDS.sleep(duration);
+            System.out.println("Task Completed");
+         } 
+         catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Running Task!
+Task Completed
+</pre>
+<h1>Concurrency - ExecutorService Interface</h1>
+<p>A java.util.concurrent.ExecutorService interface is a subinterface of Executor interface, and adds features to manage the lifecycle, both of the individual tasks and of the executor itself.</p>
+<h2>ExecutorService Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>boolean awaitTermination(long timeout, TimeUnit unit)</b></p>
+<p>Blocks until all tasks have completed execution after a shutdown request, or the timeout occurs, or the current thread is interrupted, whichever happens first.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>&lt;T&gt; List&lt;Future&lt;T&gt;&gt;	invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</b></p>
+<p>Executes the given tasks, returning a list of Futures holding their status and results when all complete.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>&lt;T&gt; List&lt;Future&lt;T&gt;&gt;	invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, long timeout, TimeUnit unit)</b></p>
+<p>Executes the given tasks, returning a list of Futures holding their status and results when all complete or the timeout expires, whichever happens first.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>&lt;T&gt; T invokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</b></p>
+<p>Executes the given tasks, returning the result of one that has completed successfully (i.e., without throwing an exception), if any do.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>&lt;T&gt; T invokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, long timeout, TimeUnit unit)</b></p>
+Executes the given tasks, returning the result of one that has completed successfully (i.e., without throwing an exception), if any do before the given timeout elapses.
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>boolean isShutdown()</b></p>
+<p>Returns true if this executor has been shut down.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>boolean isTerminated()</b></p>
+<p>Returns true if all tasks have completed following shut down.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>void shutdown()</b></p>
+<p>Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>List&lt;Runnable&gt; shutdownNow()</b></p>
+<p>Attempts to stop all actively executing tasks, halts the processing of waiting tasks, and returns a list of the tasks that were awaiting execution.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>&lt;T&gt; Future&lt;T&gt;	submit(Callable&lt;T&gt; task)</b></p>
+<p>Submits a value-returning task for execution and returns a Future representing the pending results of the task.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>Future&lt;?&gt; submit(Runnable task)</b></p>
+<p>Submits a Runnable task for execution and returns a Future representing that task.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>&lt;T&gt; Future&lt;T&gt;	submit(Runnable task, T result)</b></p>
+<p>Submits a Runnable task for execution and returns a Future representing that task.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of ExecutorService interface in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException {
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+
+      try {
+         executor.submit(new Task());
+         System.out.println("Shutdown executor");
+         executor.shutdown();
+         executor.awaitTermination(5, TimeUnit.SECONDS);
+      }
+      catch (InterruptedException e) {
+         System.err.println("tasks interrupted");
+      }
+      finally {
+         if (!executor.isTerminated()) {
+            System.err.println("cancel non-finished tasks");
+         }
+         executor.shutdownNow();
+         System.out.println("shutdown finished");
+      }
+   }
+
+   static class Task implements Runnable {
+      public void run() {
+         try {
+            Long duration = (long) (Math.random() * 20);
+            System.out.println("Running Task!");
+            TimeUnit.SECONDS.sleep(duration);
+         } 
+         catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+   }	   
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Shutdown executor
+Running Task!
+shutdown finished
+cancel non-finished tasks
+java.lang.InterruptedException: sleep interrupted
+	at java.lang.Thread.sleep(Native Method)
+	at java.lang.Thread.sleep(Thread.java:302)
+	at java.util.concurrent.TimeUnit.sleep(TimeUnit.java:328)
+	at TestThread$Task.run(TestThread.java:39)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:439)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
+	at java.lang.Thread.run(Thread.java:662)
+</pre>
+<h1>Concurrency - ScheduledExecutorService Interface</h1>
+<p>A java.util.concurrent.ScheduledExecutorService interface is a subinterface of ExecutorService interface, and supports future and/or periodic execution of tasks.</p>
+<h2>ScheduledExecutorService Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b><V> ScheduledFuture<V> schedule(Callable<V> callable, long delay, TimeUnit unit)</b></p>
+<p>Creates and executes a ScheduledFuture that becomes enabled after the given delay.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>ScheduledFuture&lt;?&gt; schedule(Runnable command, long delay, TimeUnit unit)</b></p>
+<p>Creates and executes a one-shot action that becomes enabled after the given delay.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>ScheduledFuture&lt;?&gt; scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)</b></p>
+<p>Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given period; that is executions will commence after initialDelay then initialDelay+period, then initialDelay + 2 * period, and so on.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>ScheduledFuture&lt;?&gt; scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit)</b></p>
+<p>Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given delay between the termination of one execution and the commencement of the next.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of ScheduledExecutorService interface in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+      final ScheduledFuture&lt;?&gt; beepHandler = 
+         scheduler.scheduleAtFixedRate(new BeepTask(), 2, 2, TimeUnit.SECONDS);
+
+      scheduler.schedule(new Runnable() {
+         @Override
+         public void run() {
+            beepHandler.cancel(true);
+            scheduler.shutdown();			
+         }
+      }, 10, TimeUnit.SECONDS);
+   }  
+
+   static class BeepTask implements Runnable {
+      public void run() {
+         System.out.println("beep");      
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+beep
+beep
+beep
+beep
+beep
+</pre>
+<h1>Concurrency - newFixedThreadPool Method</h1>
+<p>A fixed thread pool can be obtainted by calling the static newFixedThreadPool() method of Executors class.</p>
+<h2>Syntax</h2>
+<pre class="prettyprint notranslate">
+ExecutorService fixedPool = Executors.newFixedThreadPool(2);
+</pre>
+<p>where</p>
+<ul class="list">
+<li><p>Maximum 2 threads will be active to process tasks.</p></li>
+<li><p>If more than 2 threads are submitted then they are held in a queue until threads become available.</p></li>
+<li><p>A new thread is created to take its place if a thread terminates due to failure during execution shutdown on executor is not yet called.</p></li>
+<li><p>Any thread exists till the pool is shutdown.</p></li>
+</ul>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of newFixedThreadPool method in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+	
+   public static void main(final String[] arguments) throws InterruptedException {
+      ExecutorService executor = Executors.newFixedThreadPool(2);
+
+      // Cast the object to its class type
+      ThreadPoolExecutor pool = (ThreadPoolExecutor) executor;
+
+      //Stats before tasks execution
+      System.out.println("Core threads: " + pool.getCorePoolSize());
+      System.out.println("Largest executions: "
+         + pool.getLargestPoolSize());
+      System.out.println("Maximum allowed threads: "
+         + pool.getMaximumPoolSize());
+      System.out.println("Current threads in pool: "
+         + pool.getPoolSize());
+      System.out.println("Currently executing threads: "
+         + pool.getActiveCount());
+      System.out.println("Total number of threads(ever scheduled): "
+         + pool.getTaskCount());
+
+      executor.submit(new Task());
+      executor.submit(new Task());
+
+      //Stats after tasks execution
+      System.out.println("Core threads: " + pool.getCorePoolSize());
+      System.out.println("Largest executions: "
+         + pool.getLargestPoolSize());
+      System.out.println("Maximum allowed threads: "
+         + pool.getMaximumPoolSize());
+      System.out.println("Current threads in pool: "
+         + pool.getPoolSize());
+      System.out.println("Currently executing threads: "
+         + pool.getActiveCount());
+      System.out.println("Total number of threads(ever scheduled): "
+         + pool.getTaskCount());
+
+      executor.shutdown();
+   }  
+
+   static class Task implements Runnable {
+
+      public void run() {
+         try {
+            Long duration = (long) (Math.random() * 5);
+            System.out.println("Running Task! Thread Name: " + Thread.currentThread().getName());
+               TimeUnit.SECONDS.sleep(duration);
+            System.out.println("Task Completed! Thread Name: "+ Thread.currentThread().getName());
+         } 
+         catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Core threads: 2
+Largest executions: 0
+Maximum allowed threads: 2
+Current threads in pool: 0
+Currently executing threads: 0
+Total number of threads(ever scheduled): 0
+Core threads: 2
+Largest executions: 2
+Maximum allowed threads: 2
+Current threads in pool: 2
+Currently executing threads: 1
+Total number of threads(ever scheduled): 1
+Running Task! Thread Name: pool-1-thread-1
+Running Task! Thread Name: pool-1-thread-2
+Task Completed! Thread Name: pool-1-thread-1
+Task Completed! Thread Name: pool-1-thread-2
+</pre>
+<h1>Concurrency - newCachedThreadPool Method</h1>
+<p>A cached thread pool can be obtainted by calling the static newCachedThreadPool() method of Executors class.</p>
+<h2>Syntax</h2>
+<pre class="prettyprint notranslate">
+ExecutorService executor = Executors.newCachedThreadPool();
+</pre>
+<p>where</p>
+<ul class="list">
+<li><p>newCachedThreadPool method creates an executor having an expandable thread pool.</p></li>
+<li><p>Such an executor is suitable for applications that launch many short-lived tasks.</p></li>
+</ul>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of newCachedThreadPool method in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+	
+   public static void main(final String[] arguments) throws InterruptedException {
+      ExecutorService executor = Executors.newCachedThreadPool();
+
+      // Cast the object to its class type
+      ThreadPoolExecutor pool = (ThreadPoolExecutor) executor;
+
+      //Stats before tasks execution
+      System.out.println("Core threads: " + pool.getCorePoolSize());
+      System.out.println("Largest executions: "
+         + pool.getLargestPoolSize());
+      System.out.println("Maximum allowed threads: "
+         + pool.getMaximumPoolSize());
+      System.out.println("Current threads in pool: "
+         + pool.getPoolSize());
+      System.out.println("Currently executing threads: "
+         + pool.getActiveCount());
+      System.out.println("Total number of threads(ever scheduled): "
+         + pool.getTaskCount());
+
+      executor.submit(new Task());
+      executor.submit(new Task());
+
+      //Stats after tasks execution
+      System.out.println("Core threads: " + pool.getCorePoolSize());
+      System.out.println("Largest executions: "
+         + pool.getLargestPoolSize());
+      System.out.println("Maximum allowed threads: "
+         + pool.getMaximumPoolSize());
+      System.out.println("Current threads in pool: "
+         + pool.getPoolSize());
+      System.out.println("Currently executing threads: "
+         + pool.getActiveCount());
+      System.out.println("Total number of threads(ever scheduled): "
+         + pool.getTaskCount());
+
+      executor.shutdown();
+   }  
+
+   static class Task implements Runnable {
+
+      public void run() {
+         try {
+            Long duration = (long) (Math.random() * 5);
+            System.out.println("Running Task! Thread Name: " + Thread.currentThread().getName());
+               TimeUnit.SECONDS.sleep(duration);
+            System.out.println("Task Completed! Thread Name: "+ Thread.currentThread().getName());
+         } 
+         catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Core threads: 0
+Largest executions: 0
+Maximum allowed threads: 2147483647
+Current threads in pool: 0
+Currently executing threads: 0
+Total number of threads(ever scheduled): 0
+Core threads: 0
+Largest executions: 2
+Maximum allowed threads: 2147483647
+Current threads in pool: 2
+Currently executing threads: 2
+Total number of threads(ever scheduled): 2
+Running Task! Thread Name: pool-1-thread-1
+Running Task! Thread Name: pool-1-thread-2
+Task Completed! Thread Name: pool-1-thread-2
+Task Completed! Thread Name: pool-1-thread-1
+</pre>
+<h1>Concurrency - newScheduledThreadPool Method</h1>
+<p>A scheduled thread pool can be obtainted by calling the static newScheduledThreadPool() method of Executors class.</p>
+<h2>Syntax</h2>
+<pre class="prettyprint notranslate">
+ExecutorService executor = Executors.newScheduledThreadPool(1);
+</pre>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of newScheduledThreadPool method in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+      final ScheduledFuture&lt;?&gt; beepHandler = 
+         scheduler.scheduleAtFixedRate(new BeepTask(), 2, 2, TimeUnit.SECONDS);
+
+      scheduler.schedule(new Runnable() {
+         @Override
+         public void run() {
+            beepHandler.cancel(true);'
+            scheduler.shutdown();			
+         }
+      }, 10, TimeUnit.SECONDS);
+   }  
+
+   static class BeepTask implements Runnable {
+      public void run() {
+         System.out.println("beep");      
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+beep
+beep
+beep
+beep
+beep
+</pre>
+<h1>Concurrency - newSingleThreadExecutor Method</h1>
+<p>A single thread pool can be obtainted by calling the static newSingleThreadExecutor() method of Executors class.</p>
+<h2>Syntax</h2>
+<pre class="prettyprint notranslate">
+ExecutorService executor = Executors.newSingleThreadExecutor();
+</pre>
+<p>Where newSingleThreadExecutor method creates an executor that executes a single task at a time.</p>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of newSingleThreadExecutor method in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException {
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+
+      try {
+         executor.submit(new Task());
+         System.out.println("Shutdown executor");
+         executor.shutdown();
+         executor.awaitTermination(5, TimeUnit.SECONDS);
+      }
+      catch (InterruptedException e) {
+         System.err.println("tasks interrupted");
+      }
+      finally {
+         if (!executor.isTerminated()) {
+            System.err.println("cancel non-finished tasks");
+         }
+         executor.shutdownNow();
+         System.out.println("shutdown finished");
+      }
+   }
+
+   static class Task implements Runnable {
+      public void run() {
+         try {
+            Long duration = (long) (Math.random() * 20);
+            System.out.println("Running Task!");
+            TimeUnit.SECONDS.sleep(duration);
+         } 
+         catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+   }	   
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Shutdown executor
+Running Task!
+shutdown finished
+cancel non-finished tasks
+java.lang.InterruptedException: sleep interrupted
+	at java.lang.Thread.sleep(Native Method)
+	at java.lang.Thread.sleep(Thread.java:302)
+	at java.util.concurrent.TimeUnit.sleep(TimeUnit.java:328)
+	at TestThread$Task.run(TestThread.java:39)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:439)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
+	at java.lang.Thread.run(Thread.java:662)
+</pre>
+<h1>Concurrency - ThreadPoolExecutor Class</h1>
+<p>java.util.concurrent.ThreadPoolExecutor is an ExecutorService to execute each submitted task using one of possibly several pooled threads, normally configured using Executors factory methods. It also provides various utility methods to check current threads statistics and control them.</p>
+<h2>ThreadPoolExecutor Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>protected void afterExecute(Runnable r, Throwable t)</b></p>
+<p>Method invoked upon completion of execution of the given Runnable.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>void allowCoreThreadTimeOut(boolean value)</b></p>
+<p>Sets the policy governing whether core threads may time out and terminate if no tasks arrive within the keep-alive time, being replaced if needed when new tasks arrive.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>boolean	allowsCoreThreadTimeOut()</b></p>
+<p>Returns true if this pool allows core threads to time out and terminate if no tasks arrive within the keepAlive time, being replaced if needed when new tasks arrive.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>boolean	awaitTermination(long timeout, TimeUnit unit)</b></p>
+<p>Blocks until all tasks have completed execution after a shutdown request, or the timeout occurs, or the current thread is interrupted, whichever happens first.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>protected void beforeExecute(Thread t, Runnable r)</b></p>
+<p>Method invoked prior to executing the given Runnable in the given thread.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>void execute(Runnable command)</b></p>
+<p>Executes the given task sometime in the future.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>protected void finalize()</b></p>
+<p>Invokes shutdown when this executor is no longer referenced and it has no threads.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>int	getActiveCount()</b></p>
+<p>Returns the approximate number of threads that are actively executing tasks.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>long getCompletedTaskCount()</b></p>
+<p>Returns the approximate total number of tasks that have completed execution.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>int	getCorePoolSize()</b></p>
+<p>Returns the core number of threads.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>long	getKeepAliveTime(TimeUnit unit)</b></p>
+<p>Returns the thread keep-alive time, which is the amount of time that threads in excess of the core pool size may remain idle before being terminated.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>int	getLargestPoolSize()</b></p>
+<p>Returns the largest number of threads that have ever simultaneously been in the pool.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">13</td>
+<td><p><b>int	getMaximumPoolSize()</b></p>
+<p>Returns the maximum allowed number of threads.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">14</td>
+<td><p><b>int	getPoolSize()</b></p>
+<p>Returns the current number of threads in the pool.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">15</td>
+<td><p><b>BlockingQueue<Runnable> getQueue()</b></p>
+<p>Returns the task queue used by this executor.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">15</td>
+<td><p><b>RejectedExecutionHandler getRejectedExecutionHandler()</b></p>
+<p>Returns the current handler for unexecutable tasks.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">16</td>
+<td><p><b>long getTaskCount()</b></p>
+<p>Returns the approximate total number of tasks that have ever been scheduled for execution.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">17</td>
+<td><p><b>ThreadFactory getThreadFactory()</b></p>
+<p>Returns the thread factory used to create new threads.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">18</td>
+<td><p><b>boolean	isShutdown()</b></p>
+<p>Returns true if this executor has been shut down.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">19</td>
+<td><p><b>boolean	isTerminated()</b></p>
+<p>Returns true if all tasks have completed following shut down.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">20</td>
+<td><p><b>boolean	isTerminating()</b></p>
+<p>Returns true if this executor is in the process of terminating after shutdown() or shutdownNow() but has not completely terminated.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">21</td>
+<td><p><b>int	prestartAllCoreThreads()</b></p>
+<p>Starts all core threads, causing them to idly wait for work.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">22</td>
+<td><p><b>boolean	prestartCoreThread()</b></p>
+<p>Starts a core thread, causing it to idly wait for work.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">23</td>
+<td><p><b>void purge()</b></p>
+<p>Tries to remove from the work queue all Future tasks that have been cancelled.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">24</td>
+<td><p><b>boolean	remove(Runnable task)</b></p>
+<p>Removes this task from the executor's internal queue if it is present, thus causing it not to be run if it has not already started.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">25</td>
+<td><p><b>void setCorePoolSize(int corePoolSize)</b></p>
+<p>Sets the core number of threads.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">26</td>
+<td><p><b>void setKeepAliveTime(long time, TimeUnit unit)</b></p>
+<p>Sets the time limit for which threads may remain idle before being terminated.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">27</td>
+<td><p><b>void setMaximumPoolSize(int maximumPoolSize)</b></p>
+<p>Sets the maximum allowed number of threads.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">28</td>
+<td><p><b>void setRejectedExecutionHandler(RejectedExecutionHandler handler)</b></p>
+<p>Sets a new handler for unexecutable tasks.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">29</td>
+<td><p><b>void setThreadFactory(ThreadFactory threadFactory)</b></p>
+<p>Sets the thread factory used to create new threads.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">30</td>
+<td><p><b>void shutdown()</b></p>
+<p>Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">31</td>
+<td><p><b>List<Runnable> shutdownNow()</b></p>
+<p>Attempts to stop all actively executing tasks, halts the processing of waiting tasks, and returns a list of the tasks that were awaiting execution.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">32</td>
+<td><p><b>protected void terminated()</b></p>
+<p>Method invoked when the Executor has terminated.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">33</td>
+<td><p><b>String toString()</b></p>
+<p>Returns a string identifying this pool, as well as its state, including indications of run state and estimated worker and task counts.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of ThreadPoolExecutor interface in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+	
+   public static void main(final String[] arguments) throws InterruptedException {
+      ThreadPoolExecutor executor = (ThreadPoolExecutor)Executors.newCachedThreadPool();
+
+      //Stats before tasks execution
+      System.out.println("Core threads: " + executor.getCorePoolSize());
+      System.out.println("Largest executions: "
+         + executor.getLargestPoolSize());
+      System.out.println("Maximum allowed threads: "
+         + executor.getMaximumPoolSize());
+      System.out.println("Current threads in pool: "
+         + executor.getPoolSize());
+      System.out.println("Currently executing threads: "
+         + executor.getActiveCount());
+      System.out.println("Total number of threads(ever scheduled): "
+         + executor.getTaskCount());
+
+      executor.submit(new Task());
+      executor.submit(new Task());
+
+      //Stats after tasks execution
+      System.out.println("Core threads: " + executor.getCorePoolSize());
+      System.out.println("Largest executions: "
+         + executor.getLargestPoolSize());
+      System.out.println("Maximum allowed threads: "
+         + executor.getMaximumPoolSize());
+      System.out.println("Current threads in pool: "
+         + executor.getPoolSize());
+      System.out.println("Currently executing threads: "
+         + executor.getActiveCount());
+      System.out.println("Total number of threads(ever scheduled): "
+         + executor.getTaskCount());
+
+      executor.shutdown();
+   }  
+
+   static class Task implements Runnable {
+
+      public void run() {
+         try {
+            Long duration = (long) (Math.random() * 5);
+            System.out.println("Running Task! Thread Name: " + Thread.currentThread().getName());
+               TimeUnit.SECONDS.sleep(duration);
+            System.out.println("Task Completed! Thread Name: "+ Thread.currentThread().getName());
+         } 
+         catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Core threads: 0
+Largest executions: 0
+Maximum allowed threads: 2147483647
+Current threads in pool: 0
+Currently executing threads: 0
+Total number of threads(ever scheduled): 0
+Core threads: 0
+Largest executions: 2
+Maximum allowed threads: 2147483647
+Current threads in pool: 2
+Currently executing threads: 2
+Total number of threads(ever scheduled): 2
+Running Task! Thread Name: pool-1-thread-1
+Running Task! Thread Name: pool-1-thread-2
+Task Completed! Thread Name: pool-1-thread-2
+Task Completed! Thread Name: pool-1-thread-1
+</pre>
+<h1>Concurrency - ScheduledThreadPoolExecutor Class</h1>
+<p>java.util.concurrent.ScheduledThreadPoolExecutor is a subclass of ThreadPoolExecutor and can additionally schedule commands to run after a given delay, or to execute periodically.</p>
+<h2>ScheduledThreadPoolExecutor Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>protected &lt;V&gt; RunnableScheduledFuture&lt;V&gt; decorateTask(Callable&lt;V&gt; callable, RunnableScheduledFuture&lt;V&gt; task)</b></p>
+<p>Modifies or replaces the task used to execute a callable.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>protected &lt;V&gt; RunnableScheduledFuture&lt;V&gt; decorateTask(Runnable runnable, RunnableScheduledFuture&lt;V&gt; task)</b></p>
+<p>Modifies or replaces the task used to execute a runnable.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>void execute(Runnable command)</b></p>
+<p>Executes command with zero required delay.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>boolean getContinueExistingPeriodicTasksAfterShutdownPolicy()</b></p>
+<p>Gets the policy on whether to continue executing existing periodic tasks even when this executor has been shutdown.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>boolean getExecuteExistingDelayedTasksAfterShutdownPolicy()</b></p>
+<p>Gets the policy on whether to execute existing delayed tasks even when this executor has been shutdown.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>BlockingQueue&lt;Runnable&gt; getQueue()</b></p>
+<p>Returns the task queue used by this executor.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>boolean getRemoveOnCancelPolicy()</b></p>
+<p>Gets the policy on whether cancelled tasks should be immediately removed from the work queue at time of cancellation.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>&lt;V&gt; ScheduledFuture&lt;V&gt; schedule(Callable&lt;V&gt; callable, long delay, TimeUnit unit)</b></p>
+<p>Creates and executes a ScheduledFuture that becomes enabled after the given delay.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>ScheduledFuture&lt;?&gt; schedule(Runnable command, long delay, TimeUnit unit)</b></p>
+<p>Creates and executes a one-shot action that becomes enabled after the given delay.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>ScheduledFuture&lt;?&gt; scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)</b></p>
+<p>Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given period; that is executions will commence after initialDelay then initialDelay+period, then initialDelay + 2 * period, and so on.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>ScheduledFuture&lt;?&gt; scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit)</b></p>
+<p>Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given delay between the termination of one execution and the commencement of the next.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>void setContinueExistingPeriodicTasksAfterShutdownPolicy(boolean value)</b></p>
+<p>Sets the policy on whether to continue executing existing periodic tasks even when this executor has been shutdown.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">13</td>
+<td><p><b>void setExecuteExistingDelayedTasksAfterShutdownPolicy(boolean value)</b></p>
+<p>Sets the policy on whether to execute existing delayed tasks even when this executor has been shutdown.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">14</td>
+<td><p><b>void setRemoveOnCancelPolicy(boolean value)</b></p>
+<p>Sets the policy on whether cancelled tasks should be immediately removed from the work queue at time of cancellation.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">15</td>
+<td><p><b>void shutdown()</b></p>
+<p>Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">16</td>
+<td><p><b>List&lt;Runnable&gt; shutdownNow()</b></p>
+<p>Attempts to stop all actively executing tasks, halts the processing of waiting tasks, and returns a list of the tasks that were awaiting execution.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">17</td>
+<td><p><b>&lt;T&gt; Future&lt;T&gt;	submit(Callable&lt;T&gt; task)</b></p>
+<p>Submits a value-returning task for execution and returns a Future representing the pending results of the task.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">18</td>
+<td><p><b>Future&lt;?&gt; submit(Runnable task)</b></p>
+<p>Submits a Runnable task for execution and returns a Future representing that task.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">19</td>
+<td><p><b>&lt;T&gt; Future&lt;T&gt;	submit(Runnable task, T result)</b></p>
+<p>Submits a Runnable task for execution and returns a Future representing that task.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of ScheduledThreadPoolExecutor interface in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      final ScheduledThreadPoolExecutor scheduler = (ScheduledThreadPoolExecutor)Executors.newScheduledThreadPool(1);
+
+      final ScheduledFuture&lt;?&gt; beepHandler = 
+         scheduler.scheduleAtFixedRate(new BeepTask(), 2, 2, TimeUnit.SECONDS);
+
+      scheduler.schedule(new Runnable() {
+         @Override
+         public void run() {
+            beepHandler.cancel(true);
+            scheduler.shutdown();			
+         }
+      }, 10, TimeUnit.SECONDS);
+   }  
+
+   static class BeepTask implements Runnable {
+      public void run() {
+         System.out.println("beep");      
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+beep
+beep
+beep
+beep
+beep
+</pre>
+<h1>Concurrency - Futures and Callables</h1>
+<p>java.util.concurrent.Callable object can return the computed result done by a thread in contrast to runnable interface which can only run the thread. The Callable object returns Future object which provides methods to monitor the progress of a task being executed by a thread. Future object can be used to check the status of a Callable and then retrieve the result from the Callable once the thread is done. It also provides timeout functionality.</p>
+<h2>Syntax</h2>
+<pre class="prettyprint notranslate">
+//submit the callable using ThreadExecutor
+//and get the result as a Future object
+Future<Long> result10 = executor.submit(new FactorialService(10));
+ 
+//get the result using get method of the Future object
+//get method waits till the thread execution and then return the result of the execution. 
+Long factorial10 = result10.get();
+</pre>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of Futures and Callables in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException, ExecutionException {
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+
+      System.out.println("Factorial Service called for 10!");
+      Future&lt;Long&gt; result10 = executor.submit(new FactorialService(10));
+
+      System.out.println("Factorial Service called for 20!");
+      Future&lt;Long&gt; result20 = executor.submit(new FactorialService(20));
+
+      Long factorial10 = result10.get();
+      System.out.println("10! = " + factorial10);
+
+      Long factorial20 = result20.get();
+      System.out.println("20! = " + factorial20);
+
+      executor.shutdown();
+   }  
+
+   static class FactorialService implements Callable&lt;Long&gt;{
+      private int number;
+      public FactorialService(int number) {
+         this.number = number;
+      }
+
+      @Override
+      public Long call() throws Exception {
+         return factorial();
+      }
+
+      private Long factorial() throws InterruptedException{
+         long result = 1; 
+         while (number != 0) { 
+            result = number * result; 
+            number--; 
+            Thread.sleep(100); 
+         } 
+         return result;	
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Factorial Service called for 10!
+Factorial Service called for 20!
+10! = 3628800
+20! = 2432902008176640000
+</pre>
+<h1>Concurrency - Fork-Join framework</h1>
+<p>The fork-join framework allows to break a certain task on several workers and then wait for the result to combine them.  It leverages multi-processor machine's capacity to great extent. Following are the core concepts and objects used in fork-join framework.</p>
+<h2>Fork</h2>
+<p>Fork is a process in which a task splits itself into smaller and independent sub-tasks which can be executed concurrently.</p>
+<h3>Syntax</h3>
+<pre class="prettyprint notranslate">
+Sum left  = new Sum(array, low, mid);
+left.fork();
+</pre>
+<p>Here Sum is a subclass of RecursiveTask and left.fork() spilts the task into sub-tasks.</p>
+<h2>Join</h2>
+<p>Join is a process in which a task join all the results of sub-tasks once the subtasks have finished executing, otherwise it keeps waiting.</p>
+<h3>Syntax</h3>
+<pre class="prettyprint notranslate">
+left.join();
+</pre>
+<p>Here left is an object of Sum class.</p>
+<h2>ForkJoinPool</h2>
+<p>it is a special thread pool designed to work with fork-and-join task splitting.</p>
+<h3>Syntax</h3>
+<pre class="prettyprint notranslate">
+ForkJoinPool forkJoinPool = new ForkJoinPool(4);
+</pre>
+<p>Here a new ForkJoinPool with a parallelism level of 4 CPUs.</p>
+<h2>RecursiveAction</h2>
+<p>RecursiveAction represents a task which does not return any value.</p>
+<h3>Syntax</h3>
+<pre class="prettyprint notranslate">
+class Writer extends RecursiveAction {
+   @Override
+   protected void compute() { }
+}
+</pre>
+<h2>RecursiveTask</h2>
+<p>RecursiveTask represents a task which returns a value.</p>
+<h3>Syntax</h3>
+<pre class="prettyprint notranslate">
+class Sum extends RecursiveTask<Long> {
+   @Override
+   protected Long compute() { return null; }
+}
+</pre>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of Fork-Join framework in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveTask;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException, ExecutionException {
+      int nThreads = Runtime.getRuntime().availableProcessors();
+      System.out.println(nThreads);
+      
+      int[] numbers = new int[1000]; 
+
+      for(int i=0; i&lt; numbers.length; i++){
+         numbers[i] = i;
+      }
+
+      ForkJoinPool forkJoinPool = new ForkJoinPool(nThreads);
+      Long result = forkJoinPool.invoke(new Sum(numbers,0,numbers.length));
+      System.out.println(result);
+   }  
+
+   static class Sum extends RecursiveTask&lt;Long&gt; {
+
+      int low;
+      int high;
+      int[] array;
+
+      Sum(int[] array, int low, int high) {
+         this.array = array;
+         this.low   = low;
+         this.high  = high;
+      }
+
+      protected Long compute() {
+         if(high - low &lt;= 10) {
+            long sum = 0;
+            for(int i=low; i &lt; high; ++i) 
+               sum += array[i];
+               return sum;
+         } else {	    	
+            int mid = low + (high - low) / 2;
+            Sum left  = new Sum(array, low, mid);
+            Sum right = new Sum(array, mid, high);
+            left.fork();
+            long rightResult = right.compute();
+            long leftResult  = left.join();
+            return leftResult + rightResult;
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+4
+499500
+</pre>
+<h1>Concurrency - BlockingQueue Interface</h1>
+<p>A java.util.concurrent.BlockingQueue interface is a subinterface of Queue interface, and additionally supports operations such as waiting for the queue to become non-empty before retrieving an element, and wait for space to become available in the queue before storing an element.</p>
+<h2>BlockingQueue Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>boolean add(E e)</b></p>
+<p>Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and throwing an IllegalStateException if no space is currently available.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>boolean contains(Object o)</b></p>
+<p>Returns true if this queue contains the specified element.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>int drainTo(Collection&lt;? super E&gt; c)</b></p>
+<p>Removes all available elements from this queue and adds them to the given collection.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>int drainTo(Collection&lt;? super E&gt; c, int maxElements)</b></p>
+<p>Removes at most the given number of available elements from this queue and adds them to the given collection.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>boolean offer(E e)</b></p>
+<p>Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and false if no space is currently available.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>boolean offer(E e, long timeout, TimeUnit unit)</b></p>
+<p>Inserts the specified element into this queue, waiting up to the specified wait time if necessary for space to become available.
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>E poll(long timeout, TimeUnit unit)</b></p>
+<p>Retrieves and removes the head of this queue, waiting up to the specified wait time if necessary for an element to become available.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>void put(E e)</b></p>
+<p>Inserts the specified element into this queue, waiting if necessary for space to become available.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>int remainingCapacity()</b></p>
+<p>Returns the number of additional elements that this queue can ideally (in the absence of memory or resource constraints) accept without blocking, or Integer.MAX_VALUE if there is no intrinsic limit.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>boolean remove(Object o)</b></p>
+<p>Removes a single instance of the specified element from this queue, if it is present.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>E take()</b></p>
+<p>Retrieves and removes the head of this queue, waiting if necessary until an element becomes available.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of BlockingQueue interface in thread based environment.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class TestThread {
+
+   public static void main(final String[] arguments) throws InterruptedException {
+      BlockingQueue&lt;Integer&gt; queue = new ArrayBlockingQueue&lt;Integer&gt;(10);
+
+      Producer producer = new Producer(queue);
+      Consumer consumer = new Consumer(queue);
+
+      new Thread(producer).start();
+      new Thread(consumer).start();
+
+      Thread.sleep(4000);
+   }  
+
+
+   static class Producer implements Runnable {
+
+      private BlockingQueue&lt;Integer&gt; queue;
+
+      public Producer(BlockingQueue queue){
+         this.queue = queue;
+      }
+
+      @Override
+      public void run() {
+         Random random = new Random();
+
+         try {
+            int result = random.nextInt(100);
+            Thread.sleep(1000);
+            queue.put(result);
+            System.out.println("Added: " + result);
+            result = random.nextInt(100);
+            Thread.sleep(1000);
+            queue.put(result);
+            System.out.println("Added: " + result);
+            result = random.nextInt(100);
+            Thread.sleep(1000);
+            queue.put(result);
+            System.out.println("Added: " + result);
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }	   
+   }
+
+   static class Consumer implements Runnable {
+
+      private BlockingQueue&lt;Integer&gt; queue;
+
+      public Consumer(BlockingQueue queue){
+         this.queue = queue;
+      }
+      
+      @Override
+      public void run() {
+         try {
+            System.out.println("Removed: " + queue.take());
+            System.out.println("Removed: " + queue.take());
+            System.out.println("Removed: " + queue.take());
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+   }
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Added: 73
+Removed: 73
+Added: 19
+Removed: 19
+Added: 47
+Removed: 47
+</pre>
+<h1>Concurrency - ConcurrentMap Interface</h1>
+<p>A java.util.concurrent.ConcurrentMap interface is a subinterface of Map interface, supports atomic operations on underlying map variable. It have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. This interface ensures thread safety and atomicity guarantees.</p>
+<h2>ConcurrentMap Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>default V compute(K key, BiFunction&lt;? super K,? super V,? extends V&gt; remappingFunction)</b></p>
+<p>Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>default V computeIfAbsent(K key, Function&lt;? super K,? extends V&gt; mappingFunction)</b></p>
+<p>If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>default V computeIfPresent(K key, BiFunction&lt;? super K,? super V,? extends V&gt; remappingFunction)</b></p>
+<p>If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>default void forEach(BiConsumer&lt;? super K,? super V&gt; action)</b></p>
+<p>Performs the given action for each entry in this map until all entries have been processed or the action throws an exception.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>default V getOrDefault(Object key, V defaultValue)</b></p>
+<p>Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>default V merge(K key, V value, BiFunction&lt;? super V,? super V,? extends V&gt; remappingFunction)</b></p>
+<p>If the specified key is not already associated with a value or is associated with null, associates it with the given non-null value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>V putIfAbsent(K key, V value)</b></p>
+<p>If the specified key is not already associated with a value, associate it with the given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>boolean	remove(Object key, Object value)</b></p>
+<p>Removes the entry for a key only if currently mapped to a given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>V replace(K key, V value)</b></p>
+<p>Replaces the entry for a key only if currently mapped to some value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>boolean replace(K key, V oldValue, V newValue)</b></p>
+<p>Replaces the entry for a key only if currently mapped to a given value.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>default void replaceAll(BiFunction&lt;? super K,? super V,? extends V&gt; function)</b></p>
+<p>Replaces each entry's value with the result of invoking the given function on that entry until all entries have been processed or the function throws an exception.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of ConcurrentMap vs HashMap.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class TestThread {
+
+   public static void main(final String[] arguments){
+
+      Map&lt;String,String&gt; map = new ConcurrentHashMap&lt;String, String&gt;();
+
+      map.put("1", "One");
+      map.put("2", "Two");
+      map.put("3", "Three");
+      map.put("5", "Five");
+      map.put("6", "Six");
+
+      System.out.println("Initial ConcurrentHashMap: "+map);
+      Iterator&lt;String&gt; iterator = map.keySet().iterator();
+
+      try{ 
+         while(iterator.hasNext()){
+            String key = iterator.next();
+            if(key.equals("3")) {
+               map.put("4", "Four");
+            }
+         }
+      }catch(ConcurrentModificationException cme){
+         cme.printStackTrace();
+      }
+      System.out.println("ConcurrentHashMap after modification: "+map);
+
+      map = new HashMap&lt;String, String&gt;();
+
+      map.put("1", "One");
+      map.put("2", "Two");
+      map.put("3", "Three");
+      map.put("5", "Five");
+      map.put("6", "Six");
+
+      System.out.println("Initial HashMap: "+map);
+      iterator = map.keySet().iterator();
+
+      try{
+         while(iterator.hasNext()){
+            String key = iterator.next();
+            if(key.equals("3")) { 
+               map.put("4", "Four");
+            }
+         }
+         System.out.println("HashMap after modification: "+map);
+      }catch(ConcurrentModificationException cme){
+         cme.printStackTrace();
+      }
+   }  
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Initial ConcurrentHashMap: {1=One, 2=Two, 3=Three, 5=Five, 6=Six}
+ConcurrentHashMap after modification: {1=One, 2=Two, 3=Three, 4=Four, 5=Five, 6=Six}
+Initial HashMap: {1=One, 2=Two, 3=Three, 5=Five, 6=Six}
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextNode(Unknown Source)
+	at java.util.HashMap$KeyIterator.next(Unknown Source)
+	at TestThread.main(TestThread.java:48)
+</pre>
+<h1>Concurrency - ConcurrentNavigableMap Interface</h1>
+<p>A java.util.concurrent.ConcurrentNavigableMap interface is a subinterface of ConcurrentMap interface, and supports NavigableMap operations, and recursively so for its navigable sub-maps, and approximate matches.</p>
+<h2>ConcurrentMap Methods</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>NavigableSet&lt;K&gt; descendingKeySet()</b></p>
+<p>Returns a reverse order NavigableSet view of the keys contained in this map.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>ConcurrentNavigableMap&lt;K,V&gt; descendingMap()</b></p>
+<p>Returns a reverse order view of the mappings contained in this map.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>ConcurrentNavigableMap&lt;K,V&gt; headMap(K toKey)</b></p>
+<p>Returns a view of the portion of this map whose keys are strictly less than toKey.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>ConcurrentNavigableMap&lt;K,V&gt; headMap(K toKey, boolean inclusive)</b></p>
+<p>Returns a view of the portion of this map whose keys are less than (or equal to, if inclusive is true) toKey.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>NavigableSet&lt;K&gt; keySet()</b></p>
+<p>Returns a NavigableSet view of the keys contained in this map.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>NavigableSet&lt;K&gt; navigableKeySet()</b></p>
+<p>Returns a NavigableSet view of the keys contained in this map.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>ConcurrentNavigableMap&lt;K,V&gt; subMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive)</b></p>
+<p>Returns a view of the portion of this map whose keys range from fromKey to toKey.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>ConcurrentNavigableMap&lt;K,V&gt; subMap(K fromKey, K toKey)</b></p>
+<p>Returns a view of the portion of this map whose keys range from fromKey, inclusive, to toKey, exclusive.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>ConcurrentNavigableMap&lt;K,V&gt; tailMap(K fromKey)</b></p>
+<p>Returns a view of the portion of this map whose keys are greater than or equal to fromKey.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>ConcurrentNavigableMap&lt;K,V&gt; tailMap(K fromKey, boolean inclusive)</b></p>
+<p>Returns a view of the portion of this map whose keys are greater than (or equal to, if inclusive is true) fromKey.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>The following TestThread program shows usage of ConcurrentNavigableMap.</p>
+<pre class="prettyprint notranslate tryit">
+import java.util.concurrent.ConcurrentNavigableMap;
+import java.util.concurrent.ConcurrentSkipListMap;
+
+public class TestThread {
+
+   public static void main(final String[] arguments){
+
+      ConcurrentNavigableMap&lt;String,String&gt; map = new ConcurrentSkipListMap&lt;String, String&gt;();
+
+      map.put("1", "One");
+      map.put("2", "Two");
+      map.put("3", "Three");
+      map.put("5", "Five");
+      map.put("6", "Six");
+
+      System.out.println("Initial ConcurrentHashMap: "+map);
+      System.out.println("HeadMap(\"2\") of ConcurrentHashMap: "+map.headMap("2"));
+      System.out.println("TailMap(\"2\") of ConcurrentHashMap: "+map.tailMap("2"));
+      System.out.println("SubMap(\"2\", \"4\") of ConcurrentHashMap: "+map.subMap("2","4"));
+   }  
+}
+</pre>
+<p>This will produce the following result.</p>
+<h2>Output</h2>
+<pre class="result">
+Initial ConcurrentHashMap: {1=One, 2=Two, 3=Three, 5=Five, 6=Six}
+HeadMap("2") of ConcurrentHashMap: {1=One}
+TailMap("2") of ConcurrentHashMap: {2=Two, 3=Three, 5=Five, 6=Six}
+SubMap("2", "4") of ConcurrentHashMap: {2=Two, 3=Three}
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="concurrency_concurrentnavigablemap.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div><div class="print-btn">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="concurrency_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr>
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="text/javascript" src="../theme/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+   var tryit = new $.TryIt('try_java8.html');
+   tryit.compile();
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Concurrency Quick Guide",
+    "name": "Concurrency Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/java/images/Thread_Life_Cycle.jpg",
+        "width": 1332,
+        "height": 635
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "August 15 2017 02:44:32.",
+    "dateModified": "August 15 2017 02:34:06.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Java is a multi-threaded programming language which means we can develop multi-threaded program using Java. A multi-threaded program contains two or more parts that can run concurrently and each part can handle a different task at the same time making opt..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Java Concurrency",
+                "@id": "https://www.tutorialspoint.com/java_concurrency"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": null
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/java_concurrency/concurrency_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 14:51:46 GMT -->
+</html>

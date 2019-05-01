@@ -1,0 +1,2797 @@
+<!doctype html> 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/chef/chef_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 14:40:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Chef Quick Guide</title>
+<meta name="description" content="Chef Quick Guide - Learn Chef in simple and easy steps starting from basic to advanced concepts with examples including Overview, Architecture, Version Control System Setup, Workstation, Client, Test Kitchen, Knife, Solo Setup, Cookbooks, Cookbook Dependencies, Environment Variable, Roles, Chef Client as Daemon, Shell, Testing Cookbooks, Foodcritic, Chefspec, Testing Cookbook with Test Kitchen, Nodes, Client Run, Dynamically Configuring Recipes, Templates, Plain Ruby with Chef DSL, Ruby Gems with Recipes, Libraries, Definition, Data Bags, Scripts for Data Bags, Cross Platform Cookbooks, Resources, Lightweight Resource Provider, Blueprints, Files and Packages, Community Cookbooks." />
+<meta name="keywords" content="Chef, Tutorial, Learning, Overview, Architecture, Version Control System Setup, Workstation, Client, Test Kitchen, Knife, Solo Setup, Cookbooks, Cookbook Dependencies, Environment Variable, Roles, Chef Client as Daemon, Shell, Testing Cookbooks, Foodcritic, Chefspec, Testing Cookbook with Test Kitchen, Nodes, Client Run, Dynamically Configuring Recipes, Templates, Plain Ruby with Chef DSL, Ruby Gems with Recipes, Libraries, Definition, Data Bags, Scripts for Data Bags, Cross Platform Cookbooks, Resources, Lightweight Resource Provider, Blueprints, Files and Packages, Community Cookbooks." /> 
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #f28b20 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #f28b20 !important;}
+.submenu-item{ border-bottom: 2px solid #f28b20 !important; border-top: 2px solid #f28b20 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/chef-mini-logo.jpg" alt="Chef Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Chef Tutorial</li>
+<li><a href="index.html">Chef - Home</a></li>
+<li><a href="chef_overview.html">Chef - Overview</a></li>
+<li><a href="chef_architecture.html">Chef - Architecture</a></li>
+<li><a href="chef_version_control_system_setup.html">Chef - Version Control System Setup</a></li>
+<li><a href="chef_workstation_setup.html">Chef - Workstation Setup</a></li>
+<li><a href="chef_client_setup.html">Chef - Client Setup</a></li>
+<li><a href="chef_test_kitchen_setup.html">Chef - Test Kitchen Setup</a></li>
+<li><a href="chef_knife_setup.html">Chef - Knife Setup</a></li>
+<li><a href="chef_solo_setup.html">Chef - Solo Setup</a></li>
+<li><a href="chef_cookbooks.html">Chef - Cookbooks</a></li>
+<li><a href="chef_cookbook_dependencies.html">Chef - Cookbook Dependencies</a></li>
+<li><a href="chef_roles.html">Chef - Roles</a></li>
+<li><a href="chef_environment.html">Chef - Environment</a></li>
+<li><a href="chef_client_as_daemon.html">Chef - Chef-Client as Daemon</a></li>
+<li><a href="chef_shell.html">Chef - Chef-Shell</a></li>
+<li><a href="chef_testing_cookbooks.html">Chef - Testing Cookbooks</a></li>
+<li><a href="chef_foodcritic.html">Chef - Foodcritic</a></li>
+<li><a href="chef_spec.html">Chef - ChefSpec</a></li>
+<li><a href="chef_testing_cookbook_with_test_kitchen.html">Testing Cookbook with Test Kitchen</a></li>
+<li><a href="chef_nodes.html">Chef - Nodes</a></li>
+<li><a href="chef_client_run.html">Chef - Chef-Client Run</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Advanced Chef</li>
+<li><a href="chef_dynamically_configuring_recipes.html">Dynamically Configuring Recipes</a></li>
+<li><a href="chef_templates.html">Chef - Templates</a></li>
+<li><a href="chef_plain_ruby_with_dsl.html">Chef - Plain Ruby with Chef DSL</a></li>
+<li><a href="chef_ruby_gems_with_recipes.html">Chef - Ruby Gems with Recipes</a></li>
+<li><a href="chef_libraries.html">Chef - Libraries</a></li>
+<li><a href="chef_definition.html">Chef - Definition</a></li>
+<li><a href="chef_environment_variable.html">Chef - Environment Variable</a></li>
+<li><a href="chef_data_bags.html">Chef - Data Bags</a></li>
+<li><a href="chef_scripts_for_data_bags.html">Chef - Scripts for Data Bags</a></li>
+<li><a href="chef_cross_platform_cookbooks.html">Chef - Cross-Platform Cookbooks</a></li>
+<li><a href="chef_resources.html">Chef - Resources</a></li>
+<li><a href="chef_lightweight_resource_provider.html">Lightweight Resource Provider</a></li>
+<li><a href="chef_blueprints.html">Chef - Blueprints</a></li>
+<li><a href="chef_files_and_packages.html">Chef - Files &amp; Packages</a></li>
+<li><a href="chef_community_cookbooks.html">Chef - Community Cookbooks</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Chef Useful Resources</li>
+<li><a href="chef_quick_guide.html">Chef - Quick Guide</a></li>
+<li><a href="chef_useful_resources.html">Chef - Useful Resources</a></li>
+<li><a href="chef_discussion.html">Chef - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Chef - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="chef_community_cookbooks.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="chef_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Chef - Overview</h1>
+<p>Chef is an open source technology developed by Opscode. Adam Jacob, co-founder of Opscode is known as the founder of Chef. This technology uses Ruby encoding to develop basic building blocks like recipe and cookbooks. Chef is used in infrastructure automation and helps in reducing manual and repetitive tasks for infrastructure management.</p>
+<p>Chef have got its own convention for different building blocks, which are required to manage and automate infrastructure.</p>
+<h2>Why Chef?</h2>
+<p>Chef is a configuration management technology used to automate the infrastructure provisioning. It is developed on the basis of Ruby DSL language. It is used to streamline the task of configuration and managing the company’s server. It has the capability to get integrated with any of the cloud technology.</p>
+<p>In DevOps, we use Chef to deploy and manage servers and applications in-house and on the cloud.</p>
+<h2>Features of Chef</h2>
+<p>Following are the most prominent features of Chef &minus;</p>
+<ul class="list">
+<li><p>Chef uses popular Ruby language to create a domain-specific language.</p></li>
+<li><p>Chef does not make assumptions on the current status of a node. It uses its mechanisms to get the current status of machine.</p></li>
+<li><p>Chef is ideal for deploying and managing the cloud server, storage, and software.</p></li>
+</ul>
+<h2>Advantages of Chef</h2>
+<p>Chef offers the following advantages &minus;</p>
+<ul class="list">
+<li><p><b>Lower barrier for entry</b> &minus; As Chef uses native Ruby language for configuration, a standard configuration language it can be easily picked up by anyone having some development experience.</p></li>
+<li><p><b>Excellent integration with cloud</b> &minus; Using the knife utility, it can be easily integrated with any of the cloud technologies. It is the best tool for an organization that wishes to distribute its infrastructure on multi-cloud environment.</p></li>
+</ul>
+<h2>Disadvantages of Chef</h2>
+<p>Some of the major drawbacks of Chef are as follows &minus;</p>
+<ul class="list">
+<li><p>One of the huge disadvantages of Chef is the way cookbooks are controlled. It needs constant babying so that people who are working should not mess up with others cookbooks.</p></li>
+<li><p>Only Chef solo is available.</p></li>
+<li><p>In the current situation, it is only a good fit for AWS cloud.</p></li>
+<li><p>It is not very easy to learn if the person is not familiar with Ruby.</p></li>
+<li><p>Documentation is still lacking.</p></li>
+</ul>
+<h2>Key Building Blocks of Chef</h2>
+<h3>Recipe</h3>
+<p>It can be defined as a collection of attributes which are used to manage the infrastructure. These attributes which are present in the recipe are used to change the existing state or setting a particular infrastructure node. They are loaded during Chef client run and comparted with the existing attribute of the node (machine). It then gets to the status which is defined in the node resource of the recipe. It is the main workhorse of the cookbook.</p>
+<h3>Cookbook</h3>
+<p>A cookbook is a collection of recipes. They are the basic building blocks which get uploaded to Chef server. When Chef run takes place, it ensures that the recipes present inside it gets a given infrastructure to the desired state as listed in the recipe.</p>
+<h3>Resource</h3>
+<p>It is the basic component of a recipe used to manage the infrastructure with different kind of states. There can be multiple resources in a recipe, which will help in configuring and managing the infrastructure. For example &minus;</p>
+<ul class="list">
+<li><p><b>package</b> &minus; Manages the packages on a node</p></li>
+<li><p><b>service</b> &minus; Manages the services on a node</p></li>
+<li><p><b>user</b> &minus; Manages the users on the node</p></li>
+<li><p><b>group</b> &minus; Manages groups</p></li>
+<li><p><b>template</b> &minus; Manages the files with embedded Ruby template</p></li>
+<li><p><b>cookbook_file</b> &minus; Transfers the files from the files subdirectory in the cookbook to a location on the node</p></li>
+<li><p><b>file</b> &minus; Manages the contents of a file on the node</p></li>
+<li><p><b>directory</b> &minus; Manages the directories on the node</p></li>
+<li><p><b>execute</b> &minus; Executes a command on the node</p></li>
+<li><p><b>cron</b> &minus; Edits an existing cron file on the node</p></li>
+</ul>
+<h3>Attribute</h3>
+<p>They are basically settings. They can be thought of as a key value pair of anything which one wants to use in the cookbook. There are several different kinds of attributes that can be applied, with a different level of precedence over the final settings that the node operates under.</p>
+<h3>File</h3>
+<p>It’s a subdirectory within the cookbook that contains any static file which will be placed on the nodes that uses the cookbooks. A recipe then can be declared as a resource that moves the files from that directory to the final node.</p>
+<h3>Templates</h3>
+<p>They are similar to files, but they are not static. Template files end with the .ebr extension, which means they contain embedded Ruby. They are mainly used to substitute an attribute value into the files to create the final file version that will be placed on the node.</p>
+<h3>Metadata.rb</h3>
+<p>It is used to manage the metadata about the package. This includes details like the name and details of the package. It also includes things such as dependency information that tells which cookbooks this cookbook needs to operate. This allows the Chef server to build the run-list of the node correctly and ensures that all of the pieces are transferred correctly.</p>
+<h3>Default Cookbook Structure</h3>
+<pre class="result notranslate">
+C:\chef\cookbooks\nginx&gt;tree 
+Folder PATH listing for volume Local Disk 
+Volume serial number is BE8B-6427 
+C: ├───attributes 
+├───definitions 
+├───files 
+│   └───default 
+├───libraries 
+├───providers 
+├───recipes 
+├───resources 
+└───templates 
+    └───default 
+</pre>
+<h2>Chef − Related Technologies</h2>
+<p>Following is the list of Chef related technologies.</p>
+<h3>Puppet</h3>
+<p>Puppet provides a standard way of delivering and operating software, no matter where it runs. It is an automated administrative engine for Linux, Unix, and Windows system that performs administrative tasks based on centralized specification.</p>
+<p>The primary <b>features of Puppet</b> are as follows &minus;</p>
+<ul class="list">
+<li>Implementing new systems with a uniform configuration.</li>
+<li>Updating the systems and upgrading the security and software packages.</li>  
+<li>Incorporating new features and adding dexterous capabilities.</li>
+<li>Customizing configurations for ensuring the availability of data sources.</li>  
+<li>Optimizing the available resources and minimizing the cost.</li>
+<li>Simplifying the roles and enabling the team to focus on core and productive issues.</li>  
+<li>Getting a bird’s eye view of the available infrastructure.</li>
+</ul>
+<h3>Ansible</h3>
+<p>Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy. Avoid writing scripts or custom code to deploy and update your applications — automate in a language that approaches plain English, using SSH, with no agents to install on remote systems.</p>
+<p>The primary <b>features of Ansible</b> are as follows &minus;</p>
+<ul class="list">
+<li>Simple and easy to learn</li>
+<li>Written in Python</li>
+<li>Agentless</li>
+<li>YAML-based Playbooks</li>
+<li>Ansible galaxy</li>
+</ul>
+<h3>SaltStack</h3>
+<p>SaltStack is used for data-driven configuration. It is a new approach of infrastructure management built on dynamic communication bus. It is used for data-driven orchestration, remote execution for any infrastructure, and configuration management for any app stack.</p>
+<h3>Fabric</h3>
+<p><b>Fabric</b> is a Python-based programming language, which is developed as an API of Python which needs to be imported in Python code in order to configure and manage an infrastructure.</p>
+<h1>Chef - Architecture</h1>
+<p>Chef works on a three-tier client server model wherein the working units such as cookbooks are developed on the Chef workstation. From the command line utilities such as knife, they are uploaded to the Chef server and all the nodes which are present in the architecture are registered with the Chef server.</p>
+<img src="images/chef_server.jpg" alt="Chef Server" />
+<p>In order to get the working Chef infrastructure in place, we need to set up multiple things in sequence.</p>
+<p>In the above setup, we have the following components.</p>
+<h2>Chef Workstation</h2>
+<p>This is the location where all the configurations are developed. Chef workstation is installed on the local machine. Detailed configuration structure is discussed in the later chapters of this tutorial.</p>
+<h2>Chef Server</h2>
+<p>This works as a centralized working unit of Chef setup, where all the configuration files are uploaded post development. There are different kinds of Chef server, some are hosted Chef server whereas some are built-in premise.</p>
+<h2>Chef Nodes</h2>
+<p>They are the actual machines which are going to be managed by the Chef server. All the nodes can have different kinds of setup as per requirement. Chef client is the key component of all the nodes, which helps in setting up the communication between the Chef server and Chef node. The other components of Chef node is Ohai, which helps in getting the current state of any node at a given point of time.</p>
+<h1>Chef - Version Control System Setup</h1>
+<p>Using Version Control system is a fundamental part of infrastructure automation. There are multiple kinds of version control system such as SVN, CVS, and GIT. Due to the popularity of GIT among the Chef community, we will use the GIT setup.</p>
+<p><b>Note</b> &minus; Don’t think of building an infrastructure as a code without a version control system.</p>
+<h2>On Windows</h2>
+<p><b>Step 1</b> &minus; Download the Windows installer from <a target="_blank" rel="nofollow" href="https://git-scm.com/">www.git-scm.org</a> and follow the installation steps.</p>
+<p><b>Step 2</b> &minus; Sign up for a central repository on GitHub.</p>
+<p><b>Step 3</b> &minus; Upload the ssh key to the GitHub account, so that one can interact with it easily. For details on ssh key visit the following link <a target="_blank" rel="nofollow" href="https://help.github.com/articles/connecting-to-github-with-ssh/">https://help.github.com/articles/generatingssh-keys</a>.</p>
+<p><b>Step 4</b> &minus;  Finally create a repo on the github account by visiting <b>https://github.com/new</b> with the name of chef-repo.</p>
+<p>Before actually starting to write a cookbook, one can set up an initial GIT repository on the development box and clone the empty repository provided by Opscode.</p>
+<p><b>Step 1</b> &minus; Download Opscode Chef repository empty structure.</p>
+<pre class="result notranslate">
+$ wget https://github.com/opscode/chef-repo/tarball/master
+</pre>
+<p><b>Step 2</b> &minus; Extract the tar ball.</p>
+<pre class="result notranslate">
+$ tar –xvf master
+</pre>
+<p><b>Step 3</b> &minus; Rename the directory.</p>
+<pre class="result notranslate">
+$ mv opscode-chef-repo-2c42c6a/ chef-repo
+</pre>
+<p><b>Step 4</b> &minus; Change the current working directory to chef repo.</p>
+<pre class="result notranslate">
+$ cd chef-repo 
+</pre>
+<p><b>Step 5</b> &minus; Initialize a fresh get repo.</p>
+<pre class="result notranslate">
+$ git init. 
+</pre>
+<p><b>Step 6</b> &minus; Connect to your repo on the git hub.</p>
+<pre class="result notranslate">
+$ git remote add origin git@github.com:vipin022/chef- 
+</pre>
+<p><b>Step 7</b> &minus;  Push the local repo to github.</p>
+<pre class="result notranslate">
+$ git add. 
+$ git commit –m “empty repo structure added” 
+$ git push –u origin maste
+</pre>
+<p>By using the above procedure, you will get an empty chef repo in place. You can then start working on developing the recipes and cookbooks. Once done, you can push the changes to the GitHub.</p>
+<h1>Chef - Workstation Setup</h1>
+<p>Chef follows the concept of client-server architecture, hence in order to start working with Chef one needs to set up Chef on the workstation and develop the configuration locally. Later it can be uploaded to Chef server to make them working on the Chef nodes, which needs to be configured.</p>
+<p>Opscode provides a fully packaged version, which does not have any external prerequisites. This fully packaged Chef is called the <b>omnibus installer</b>.</p>
+<h2>On Windows Machine</h2>
+<p><b>Step 1</b> &minus; Download the setup .msi file of chefDK on the machine.</p>
+<p><b>Step 2</b> &minus; Follow the installation steps and install it on the target location.</p>
+<p>The setup will look as shown in the following screenshot.</p>
+<img src="images/window_setup.jpg" alt="Window Setup" />
+<h3>ChefDK Path Variable</h3>
+<pre class="result notranslate">
+$ echo $PATH 
+/c/opscode/chef/bin:/c/opscode/chefdk/bin: 
+</pre>
+<h2>On Linux Machine</h2>
+<p>In order to set up on the Linux machine, we need to first get curl on the machine.</p>
+<p><b>Step 1</b> &minus; Once curl is installed on the machine, we need to install Chef on the workstation using Opscode’s omnibus Chef installer.</p>
+<pre class="result notranslate">
+$ curl –L https://www.opscode.com/chef/install.sh | sudo bash 
+</pre>
+<p><b>Step 2</b> &minus; Install Ruby on the machine.</p>
+<p><b>Step 3</b> &minus; Add Ruby to path variable.</p>
+<pre class="result notranslate">
+$ echo ‘export PATH = ”/opt/chef/embedded/bin:$PATH”’ &Gt; ~/.bash_profile && 
+source ~/.bash_profile 
+</pre>
+<p>The Omnibus Chef will install Ruby and all the required Ruby gems into <b>/opt/chef/embedded</b> by adding <b>/opt/chef/embedded/bin</b> directory to the .bash_profile file.</p>
+<p>If Ruby is already installed, then install the Chef Ruby gem on the machine by running the following command.</p>
+<pre class="result notranslate">
+$ gem install chef 
+</pre>
+<h1>Chef - Client Setup</h1>
+<p>In order to make Chef node communicate with Chef server, you need to set up Chef client on the node.</p>
+<h2>Chef Client</h2>
+<p>This is one of the key components of Chef node, which retrieves the cookbooks from the Chef server and executes them on the node. It is also known as the Chef provisioner.</p>
+<p>Here, we will use Vagrant to manage VM. Vagrant can also be configured with the provisioner such as Shell script, Chef and Puppet to get VM into a desired state. In our case, we will use Vagrant to manage VMs using VirtualBox and Chef client as a provisioner.</p>
+<p><b>Step 1</b> &minus; Download and install VirtualBox from <a target="_blank" rel="nofollow" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/downlod</a></p>
+<p><b>Step 2</b> &minus; Download and install Vagrant at <b>http://downloads.vagrantup.com</b> <!-- <a target="_blank" rel="nofollow" href="http://downloads.vagrantup.com">--></a></p>
+<p><b>Step 3</b> &minus; Install Vagrant Omnibus plugin to enable Vagrant to install Chef client on the VM.</p>
+<pre class="result notranslate">
+$ vagrant plugin install vagrant-omnibus 
+</pre>
+<h2>Creating and Booting Virtual</h2>
+<p><b>Step 1</b> &minus; We can download the required Vagrant box from the Opscode vagrant repo. Download the opscode-ubuntu-12.04 box from the following URL <a target="_blank" rel="nofollow" href="http://www.vagrantbox.es/">https://opscode-vmbento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box</a></p>
+<p><b>Step 2</b> &minus; Once you have the Vagrant file, download the path you need to edit the Vagrant file.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl Vagrantfile 
+Vagrant.configure("2") do |config| 
+   config.vm.box = "opscode-ubuntu-12.04" 
+   config.vm.box_url = https://opscode-vm-bento.s3.amazonaws.com/ 
+   vagrant/opscode_ubuntu-12.04_provisionerless.box 
+   config.omnibus.chef_version = :latest  
+   config.vm.provision :chef_client do |chef| 
+      chef.provisioning_path = "/etc/chef" 
+      chef.chef_server_url = "https://api.opscode.com/ 
+      organizations/&lt;YOUR_ORG&gt;" 
+      chef.validation_key_path = "/.chef/&lt;YOUR_ORG&gt;-validator.pem"
+      chef.validation_client_name = "&lt;YOUR_ORG&gt;-validator" 
+      chef.node_name = "server" 
+   end 
+end 
+</pre>
+<p>In the above program, you need to update the &lt;YOUR_ORG&gt; name with the correct or required organization name.</p>
+<p><b>Step 3</b> &minus; Next step after the configuration is, to get the vagrant box up. For this, you need to move to the location where Vagrant box is located and run the following command.</p>
+<pre class="result notranslate">
+$ vagrant up
+</pre>
+<p><b>Step 4</b> &minus; Once the machine is up, you can login to the machine using the following command.</p>
+<pre class="result notranslate">
+$ vagrant ssh
+</pre>
+<p>In the above command, vagrantfile is written in a Ruby Domain Specific Language (DSL) for configuring the vagrant virtual machine.</p>
+<p>In the vagrant file, we have the config object. Vagrant will use this config object to configure the VM.</p>
+<pre class="result notranslate">
+Vagrant.configure("2") do |config| 
+……. 
+End
+</pre>
+<p>Inside the config block, you will tell vagrant which VM image to use, in order to boot the node.</p>
+<pre class="prettyprint notranslate">
+config.vm.box = "opscode-ubuntu-12.04" 
+config.vm.box_url = https://opscode-vm-bento.s3.amazonaws.com/ 
+   vagrant/opscode_ubuntu-12.04_provisionerless.box
+</pre>
+<p>In the next step, you will tell Vagrant to download the omnibus plugin.</p>
+<pre class="result notranslate">
+config.omnibus.chef_version = :latest
+</pre>
+<p>After selecting the VM box to boot, configure how to provision the box using Chef.</p>
+<pre class="result notranslate">
+config.vm.provision :chef_client do |chef| 
+….. 
+End 
+</pre>
+<p>Inside this, you need to set up instruction on how to hook up the virtual node to the Chef server. You need to tell Vagrant where you need to store all the Chef stuff on the node.</p>
+<pre class="result notranslate">
+chef.provisioning_path = "/etc/chef" 
+</pre>
+<h1>Chef - Test Kitchen Setup</h1>
+<p>Test Kitchen is Chef’s integrated testing framework. It enables writing test recipes, which will run on the VMs once they are instantiated and converged using the cookbook. The test recipes run on that VM and can verify if everything works as expected.</p>
+<p><b>ChefSpec</b> is something which only simulates a Chef run. Test kitchen boots up real node and runs Chef on it.</p>
+<p><b>Step 1</b> &minus; Install test kitchen Ruby gem and test kitchen vagrant gem to enable test kitchen to use vagrant for spinning up test.</p>
+<pre class="result notranslate">
+$ gem install kitchen 
+$ gem install kitchen-vagrant 
+</pre>
+<p><b>Step 2</b> &minus; Set up test kitchen. This can be done by creating <b>.kitchen.yml</b> in the cookbook directory.</p>
+<pre class="prettyprint notranslate">
+driver_plugin: vagrant 
+driver_config: 
+   require_chef_omnibus: true 
+platforms: 
+   - name: ubuntu-12.04 
+   driver_config: 
+      box: opscode-ubuntu-12.04 
+      box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ 
+      ubuntu-12.04_provisionerless.box 
+suites: 
+   - name: default 
+run_list: 
+   - recipe[minitest-handler] 
+   - recipe[my_cookbook_test] 
+attributes: { my_cookbook: { greeting: 'Ohai, Minitest!'} } 
+</pre>
+<p>In the above code, one part defines that vagrant needs to spin up the VMs and it defines that you want Omnibus to install Chef on the target node.</p>
+<p>The second part defines which platform you want to test the cookbooks. Vagrant will always create and destroy new instances. You do not have to fear about the side effects with vagrant VMs you spin up using Vagrant file.</p>
+<p>Test kitchen can be considered as a temporary environment that helps to run and test cookbooks in a temporary environment that is similar to production. With test kitchen on, one can make sure that the given piece of code is working, before it is actually getting deployed on to testing, preproduction, and production environment. This feature of test kitchen is followed by many organizations as a set before putting the cookbooks in an actual working environment.</p>
+<h2>Test Kitchen Workflow</h2>
+<p>Following are the steps involved in Test Kitchen Workflow.</p>
+<img src="images/kitchen_workflow.jpg" alt="Kitchen Workflow" />
+<h2>Creating a Cookbook Using Chef</h2>
+<p>Use the following code to create a cookbook.</p>
+<pre class="prettyprint notranslate">
+$ chef generate cookbook motd_rhel 
+Installing Cookbook Gems: 
+
+Compiling Cookbooks... 
+Recipe: code_generator::cookbook
+   * directory[C:/chef/cookbooks/motd_rhel] action create
+      - create new directory C:/chef/cookbooks/motd_rhel
+   
+   * template[C:/chef/cookbooks/motd_rhel/metadata.rb] action create_if_missing
+      - create new file C:/chef/cookbooks/motd_rhel/metadata.rb
+      - update content in file C:/chef/cookbooks/motd_rhel/metadata.rb from none to 
+      d6fcc2 (diff output suppressed by config)
+   
+   * template[C:/chef/cookbooks/motd_rhel/README.md] action create_if_missing
+      - create new file C:/chef/cookbooks/motd_rhel/README.md
+      - update content in file C:/chef/cookbooks/motd_rhel/README.md from none to 50deab
+         (diff output suppressed by config)
+   
+   * cookbook_file[C:/chef/cookbooks/motd_rhel/chefignore] action create
+      - create new file C:/chef/cookbooks/motd_rhel/chefignore
+      - update content in file C:/chef/cookbooks/motd_rhel/chefignore from none to 15fac5
+         (diff output suppressed by config)
+   
+   * cookbook_file[C:/chef/cookbooks/motd_rhel/Berksfile] action create_if_missing
+      - create new file C:/chef/cookbooks/motd_rhel/Berksfile
+      - update content in file C:/chef/cookbooks/motd_rhel/Berksfile from none to 9f08dc
+         (diff output suppressed by config)
+   
+   * template[C:/chef/cookbooks/motd_rhel/.kitchen.yml] action create_if_missing
+      - create new file C:/chef/cookbooks/motd_rhel/.kitchen.yml
+      - update content in file C:/chef/cookbooks/motd_rhel/.kitchen.yml
+         from none to 49b92b (diff output suppressed by config)
+   
+   * directory[C:/chef/cookbooks/motd_rhel/test/integration/default/serverspec]
+      action create 
+      - create new directory 
+         C:/chef/cookbooks/motd_rhel/test/integration/default/serverspec
+   
+   * directory[C:/chef/cookbooks/motd_rhel/test/integration/helpers/serverspec]
+      action create 
+      - create new directory 
+         C:/chef/cookbooks/motd_rhel/test/integration/helpers/serverspec
+   
+   * cookbook_file
+      [C:/chef/cookbooks/motd_rhel/test/integration/helpers/serverspec/spec_helper.rb]
+      action create_if_missing
+      - create new file 
+         C:/chef/cookbooks/motd_rhel/test/integration/helpers/serverspec/spec_helper.rb
+      - update content in file
+         C:/chef/cookbooks/motd_rhel/test/integration/helpers/serverspec/spec_helper.rb
+            from none to d85df4 (diff output suppressed by config)
+   
+   * template
+      [C:/chef/cookbooks/motd_rhel/test/integration/default/serverspec/defaul t_spec.rb]
+      action create_if_missing
+      - create new file
+         C:/chef/cookbooks/motd_rhel/test/integration/default/serverspec/default_spec.rb
+      - update content in file
+         C:/chef/cookbooks/motd_rhel/test/integration/default/serverspec/default_spec.rb
+            from none to 3fbdbd (diff output suppressed by config)
+   
+   * directory[C:/chef/cookbooks/motd_rhel/spec/unit/recipes] action create
+      - create new directory C:/chef/cookbooks/motd_rhel/spec/unit/recipes
+   
+   * cookbook_file
+      [C:/chef/cookbooks/motd_rhel/spec/spec_helper.rb] action create_if_missing
+      - create new file C:/chef/cookbooks/motd_rhel/spec/spec_helper.rb
+      - update content in file
+         C:/chef/cookbooks/motd_rhel/spec/spec_helper.rb from none to 587075
+            (diff output suppressed by config)
+   
+   * template
+      [C:/chef/cookbooks/motd_rhel/spec/unit/recipes/default_spec.rb]
+      action create_if_missing
+      - create new file C:/chef/cookbooks/motd_rhel/spec/unit/recipes/default_spec.rb
+      - update content in file
+         C:/chef/cookbooks/motd_rhel/spec/unit/recipes/default_spec.rb
+            from none to ff3b17 (diff output suppressed by config)
+   
+   * directory[C:/chef/cookbooks/motd_rhel/recipes] action create
+      - create new directory C:/chef/cookbooks/motd_rhel/recipes
+   
+   * template[C:/chef/cookbooks/motd_rhel/recipes/default.rb] action create_if_missing
+      - create new file C:/chef/cookbooks/motd_rhel/recipes/default.rb
+      - update content in file
+         C:/chef/cookbooks/motd_rhel/recipes/default.rb from none to c4b029
+            (diff output suppressed by config) 
+   
+   * execute[initialize-git] action run 
+      - execute git init . 
+   
+   * cookbook_file[C:/chef/cookbooks/motd_rhel/.gitignore] action create
+      - create new file C:/chef/cookbooks/motd_rhel/.gitignore
+      - update content in file C:/chef/cookbooks/motd_rhel/.gitignore from none to 33d469
+         (diff output suppressed by config)
+   
+   * execute[git-add-new-files] action run
+      - execute git add .
+   
+   * execute[git-commit-new-files] action run 
+      - execute git commit -m "Add generated cookbook content" 
+</pre>
+<p>Following is the Created Cookbook Structure as an output of the above code.</p>
+<img src="images/structure.jpg" alt="Structure" />
+<h2>Test Kitchen Configuration File</h2>
+<h3>.kitchen.yaml file</h3>
+<pre class="prettyprint notranslate">
+driver: 
+   name: vagrant 
+provisioner: 
+   name: chef_zero 
+# verifier: 
+# name: inspec 
+# format: doc 
+platforms: 
+   - name: ubuntu-14.04 
+suites: 
+   - name: default 
+   run_list: 
+      - recipe[motd_rhel::default] 
+   attributes: 
+</pre>
+<p><b>Drivers</b> &minus; It specifies the software which manages the machine.</p>
+<p><b>Provisioner</b> &minus; It provides specification on how Chef runs. We are using chef_zero because it enables to mimic a Chef server environment on the local machine. This allows to work with node attributes and Chef server specifications.</p>
+<p><b>Platform</b> &minus; This specifies the target operating system.</p>
+<p><b>Suites</b> &minus; It defines what one wants to apply on the virtual environment. Here, you define multiple definition. It is the location where you define the run list, which specifies which recipe to run and in which sequence we need to run.</p>
+<h2>Running the Commands in Sequence</h2>
+<h3>Kitchen List</h3>
+<pre class="result notranslate">
+$ kitchen list 
+Instance  Driver  Provisioner Verifier   Transport Last Action 
+ubuntu-1404 Vagrant ChefZero   Busser       Ssh   &lt;Not Created&gt; 
+</pre>
+<h3>Kitchen Create</h3>
+<pre class="result notranslate">
+$ kitchen create
+-----&gt; Starting Kitchen (v1.4.2)
+-----&gt; Creating &lt;default-centos-72&gt;...
+      Bringing machine 'default' up with 'virtualbox' provider...
+      ==&gt; default: Box 'opscode-centos-7.2' could not be found.
+         Attempting to find and install...
+      default: Box Provider: virtualbox
+      default: Box Version: &gt;= 0
+      ==&gt; default: Box file was not detected as metadata. Adding it directly...
+         ==&gt; default: Adding box 'opscode-centos-7.2' (v0) for provider: virtualbox
+         default: Downloading:
+            https://opscode-vmbento.s3.amazonaws.com/vagrant/virtualbox/
+            opscode_centos-7.1_chefprovisionerless.box[...]
+         Vagrant instance &lt;default-centos-72&gt; created.
+         Finished creating &lt;default-centos-72&gt; (3m12.01s).
+         -----&gt; Kitchen is finished. (3m12.60s)
+</pre>
+<h3>Kitchen Converge</h3>
+<pre class="result notranslate">
+$ kitchen converge 
+-----&gt; Converging &lt;default-centos-72&gt;...        
+      Preparing files for transfer        
+      Preparing dna.json        
+      Resolving cookbook dependencies with Berkshelf 4.0.1...
+      Removing non-cookbook files before transfer       
+      Preparing validation.pem        
+      Preparing client.rb 
+-----&gt; Chef Omnibus   installation detected (install only if missing)        
+      Transferring files to &lt;default-centos-72&gt;       
+      Starting Chef Client, version 12.6.0        
+      resolving cookbooks for run list: ["motd_rhel::default"]
+      Synchronizing Cookbooks: - motd_rhel (0.1.0)       
+      Compiling Cookbooks...       Converging 1 resources        
+      Recipe: motd_rhel::default        (up to date)         
+      Running handlers:       Running handlers complete       
+      Chef Client finished, 0/1 resources updated in 01 seconds        
+      Finished converging &lt;default-centos-72&gt; (0m3.57s). 
+      -----&gt; Kitchen is finished. (0m4.55s) 
+</pre>
+<h3>Testing Setup</h3>
+<p>Kitchen login is used to test if the testing VM is provisioned correctly.</p>
+<pre class="result notranslate">
+$ kitchen login 
+Last login: Thu Jan 30 19:02:14 2017 from 10.0.2.2 
+hostname:  default-centos-72 
+fqdn:      default-centos-72 
+memory:    244180kBcpu count: 1 
+</pre>
+<h3>Finally Exit</h3>
+<pre class="result notranslate">
+$ exit 
+Logout 
+Connection to 127.0.0.1 closed. 
+</pre>
+<h3>Destroying Setup</h3>
+<pre class="result notranslate">
+$ Kitchen destroy 
+-----&gt; Starting Kitchen (v1.4.2) 
+-----&gt; Destroying &lt;default-centos-72&gt;...       
+   ==&gt; default: Forcing shutdown of VM...        
+   ==&gt; default: Destroying VM and associated drives...        
+   Vagrant instance &lt;default-centos-72&gt; destroyed.        
+   Finished destroying &lt;default-centos-72&gt; (0m4.94s). 
+-----&gt; Kitchen is finished. (0m5.93s) 
+</pre>
+<h1>Chef - Knife Setup</h1>
+<p>Knife is Chef’s command-line tool to interact with the Chef server. One uses it for uploading cookbooks and managing other aspects of Chef. It provides an interface between the chefDK (Repo) on the local machine and the Chef server. It helps in managing &minus;</p>
+<ul class="list">
+<li>Chef nodes</li>
+<li>Cookbook</li>
+<li>Recipe</li>
+<li>Environments</li>
+<li>Cloud Resources</li>
+<li>Cloud Provisioning</li>
+<li>Installation on Chef client on Chef nodes</li>
+</ul>
+<p>Knife provides a set of commands to manage Chef infrastructure.</p>
+<h2>Bootstrap Commands</h2>
+<ul class="list">
+<li>knife bootstrap [SSH_USER@]FQDN (options)</li>
+</ul>
+<h2>Client Commands</h2>
+<ul class="list">
+<li>knife client bulk delete REGEX (options)</li>
+<li>knife client create CLIENTNAME (options)</li>
+<li>knife client delete CLIENT (options)</li>
+<li>knife client edit CLIENT (options)</li>
+<li>Usage: C:/opscode/chef/bin/knife (options)</li>
+<li>knife client key delete CLIENT KEYNAME (options)</li>
+<li>knife client key edit CLIENT KEYNAME (options)</li>
+<li>knife client key list CLIENT (options)</li>
+<li>knife client key show CLIENT KEYNAME (options)</li>
+<li>knife client list (options)</li>
+<li>knife client reregister CLIENT (options)</li>
+<li>knife client show CLIENT (options)</li>
+</ul>
+<h2>Configure Commands</h2>
+<ul class="list">
+<li>knife configure (options)</li>
+<li>knife configure client DIRECTORY</li>
+</ul>
+<h2>Cookbook Commands</h2>
+<ul class="list">
+<li>knife cookbook bulk delete REGEX (options)</li>
+<li>knife cookbook create COOKBOOK (options)</li>
+<li>knife cookbook delete COOKBOOK VERSION (options)</li>
+<li>knife cookbook download COOKBOOK [VERSION] (options)</li>
+<li>knife cookbook list (options)</li>
+<li>knife cookbook metadata COOKBOOK (options)</li>
+<li>knife cookbook metadata from FILE (options)</li>
+<li>knife cookbook show COOKBOOK [VERSION] [PART] [FILENAME] (options)</li>
+<li>knife cookbook test [COOKBOOKS...] (options)</li>
+<li>knife cookbook upload [COOKBOOKS...] (options)</li>
+</ul>
+<h2>Cookbook Site Commands</h2>
+<ul class="list">
+<li>knife cookbook site download COOKBOOK [VERSION] (options)</li>
+<li>knife cookbook site install COOKBOOK [VERSION] (options)</li>
+<li>knife cookbook site list (options)</li>
+<li>knife cookbook site search QUERY (options)</li>
+<li>knife cookbook site share COOKBOOK [CATEGORY] (options)</li>
+<li>knife cookbook site show COOKBOOK [VERSION] (options)</li>
+<li>knife cookbook site unshare COOKBOOK</li>
+</ul>
+<h2>Data Bag Commands</h2>
+<ul class="list">
+<li>knife data bag create BAG [ITEM] (options)</li>
+<li>knife data bag delete BAG [ITEM] (options)</li>
+<li>knife data bag edit BAG ITEM (options)</li>
+<li>knife data bag from file BAG FILE|FOLDER [FILE|FOLDER..] (options)</li>
+<li>knife data bag list (options)</li>
+<li>knife data bag show BAG [ITEM] (options)</li>
+</ul>
+<h2>Environment Commands</h2>
+<ul class="list">
+<li>knife environment compare [ENVIRONMENT..] (options)</li>
+<li>knife environment create ENVIRONMENT (options)</li>
+<li>knife environment delete ENVIRONMENT (options)</li>
+<li>knife environment edit ENVIRONMENT (options)</li>
+<li>knife environment from file FILE [FILE..] (options)</li>
+<li>knife environment list (options)</li>
+<li>knife environment show ENVIRONMENT (options)</li> 
+</ul>
+<h2>Exec Commands</h2>
+<ul class="list">
+<li>knife exec [SCRIPT] (options)</li>
+</ul>
+<h2>Help Commands</h2>
+<ul class="list">
+<li>knife help [list|TOPIC]</li>
+</ul>
+<h2>Index Commands</h2>
+<ul class="list">
+<li>knife index rebuild (options)</li>
+</ul>
+<h2>Node Commands</h2>
+<ul class="list">
+<li>knife node bulk delete REGEX (options)</li>
+<li>knife node create NODE (options)</li>
+<li>knife node delete NODE (options)</li>
+<li>knife node edit NODE (options)</li>
+<li>knife node environment set NODE ENVIRONMENT</li>
+<li>knife node from file FILE (options)</li>
+<li>knife node list (options)</li>
+<li>knife node run_list add [NODE] [ENTRY[,ENTRY]] (options)</li>
+<li>knife node run_list remove [NODE] [ENTRY[,ENTRY]] (options)</li>
+<li>knife node run_list set NODE ENTRIES (options)</li>
+<li>knife node show NODE (options)</li>
+</ul>
+<h2>OSC Commands</h2>
+<ul class="list">
+<li>knife osc_user create USER (options)</li>
+<li>knife osc_user delete USER (options)</li>
+<li>knife osc_user edit USER (options)</li>
+<li>knife osc_user list (options)</li>
+<li>knife osc_user reregister USER (options)</li>
+<li>knife osc_user show USER (options)</li>
+</ul>
+<h2>Path-Based Commands</h2>
+<ul class="list">
+<li>knife delete [PATTERN1 ... PATTERNn]</li>
+<li>knife deps PATTERN1 [PATTERNn]</li>
+<li>knife diff PATTERNS</li>
+<li>knife download PATTERNS</li>
+<li>knife edit [PATTERN1 ... PATTERNn]</li>
+<li>knife list [-dfR1p] [PATTERN1 ... PATTERNn]</li>
+<li>knife show [PATTERN1 ... PATTERNn]</li>
+<li>knife upload PATTERNS</li>
+<li>knife xargs [COMMAND]</li>
+</ul>
+<h2>Raw Commands</h2>
+<ul class="list">
+<li>knife raw REQUEST_PATH</li>
+</ul>
+<h2>Recipe Commands</h2>
+<ul class="list">
+<li>knife recipe list [PATTERN]</li>
+</ul>
+<h2>Role Commands</h2>
+<ul class="list">
+<li>knife role bulk delete REGEX (options)</li>
+<li>knife role create ROLE (options)</li>
+<li>knife role delete ROLE (options)</li>
+<li>knife role edit ROLE (options)</li>
+<li>knife role env_run_list add [ROLE] [ENVIRONMENT] [ENTRY[,ENTRY]] (options)</li>
+<li>knife role env_run_list clear [ROLE] [ENVIRONMENT]</li>
+<li>knife role env_run_list remove [ROLE] [ENVIRONMENT] [ENTRIES]</li>
+<li>knife role env_run_list replace [ROLE] [ENVIRONMENT] [OLD_ENTRY] [NEW_ENTRY]</li>
+<li>knife role env_run_list set [ROLE] [ENVIRONMENT] [ENTRIES]</li>
+<li>knife role from file FILE [FILE..] (options)</li>
+<li>knife role list (options)</li>
+<li>knife role run_list add [ROLE] [ENTRY[,ENTRY]] (options)</li>
+<li>knife role run_list clear [ROLE]</li>
+<li>knife role run_list remove [ROLE] [ENTRY]</li>
+<li>knife role run_list replace [ROLE] [OLD_ENTRY] [NEW_ENTRY]</li>
+<li>knife role run_list set [ROLE] [ENTRIES]</li>
+<li>knife role show ROLE (options)</li>
+</ul>
+<h2>Serve Commands</h2>
+<ul class="list">
+<li>knife serve (options)</li>
+</ul>
+<h2>SSH Commands</h2>
+<ul class="list">
+<li>knife ssh QUERY COMMAND (options)</li> 
+</ul>
+<h2>SSL Commands</h2>
+<ul class="list">
+<li>knife ssl check [URL] (options)</li>
+<li>knife ssl fetch [URL] (options)</li>
+</ul>
+<h2>Status Commands</h2>
+<ul class="list">
+<li>knife status QUERY (options)</li>
+</ul>
+<h2>Tag Commands</h2>
+<ul class="list">
+<li>knife tag create NODE TAG ...</li>
+<li>knife tag delete NODE TAG ...</li>
+<li>knife tag list NODE</li>
+</ul>
+<h2>User Commands</h2>
+<ul class="list">
+<li>knife user create USERNAME DISPLAY_NAME FIRST_NAME LAST_NAME EMAIL PASSWORD (options)</li>
+<li>knife user delete USER (options)</li>
+<li>knife user edit USER (options)</li>
+<li>knife user key create USER (options)</li>
+<li>knife user key delete USER KEYNAME (options)</li>
+<li>knife user key edit USER KEYNAME (options)</li>
+<li>knife user key list USER (options)</li>
+<li>knife user key show USER KEYNAME (options)</li>
+<li>knife user list (options)</li>
+<li>knife user reregister USER (options)</li>
+<li>knife user show USER (options)</li>
+</ul>
+<h2>Knife Setup</h2>
+<p>In order to set up knife, one needs to move to <b>.chef</b> directory and create a <b>knife.rb</b> inside the chef repo, which tells knife about the configuration details. This will have a couple up details.</p>
+<pre class="prettyprint notranslate">
+current_dir = File.dirname(__FILE__) 
+log_level                :info 
+log_location             STDOUT 
+node_name                'node_name' 
+client_key               "#{current_dir}/USER.pem" 
+validation_client_name   'ORG_NAME-validator' 
+validation_key           "#{current_dir}/ORGANIZATION-validator.pem" 
+chef_server_url          'https://api.chef.io/organizations/ORG_NAME' 
+cache_type               'BasicFile' 
+cache_options( :path =>  "#{ENV['HOME']}/.chef/checksums" ) 
+cookbook_path            ["#{current_dir}/../cookbooks"] 
+</pre>
+<p>In the above code, we are using the hosted Chef server which uses the following two keys.</p>
+<pre class="prettyprint notranslate">
+validation_client_name   'ORG_NAME-validator' 
+validation_key           "#{current_dir}/ORGANIZATION-validator.pem" 
+</pre>
+<p>Here, knife.rb tells knife which organization to use and where to find the private key. It tells knife where to find the users’ private key.</p>
+<pre class="result notranslate">
+client_key               "#{current_dir}/USER.pem" 
+</pre>
+<p>The following line of code tells knife we are using the hosted server.</p>
+<pre class="prettyprint notranslate">
+chef_server_url        'https://api.chef.io/organizations/ORG_NAME' 
+</pre>
+<p>Using the knife.rb file, the validator knife can now connect to your organization’s hosted Opscode.</p>
+<h1>Chef - Solo Setup</h1>
+<p>Chef-Solo is an open source tool that runs locally and allows to provision guest machines using Chef cookbooks without the complication of any Chef client and server configuration. It helps to execute cookbooks on a self-created server.</p>
+<p>Before running Chef-Solo on the local machine, one needs to install the following two files on the local machine.</p>
+<ul class="list">
+<li><p><b>Solo.rb</b> &minus; This file tells Chef about where to find cookbooks, roles, and data bags.</p></li>
+<li><p><b>Node.json</b> &minus; This file sets the run list and any node-specific attribute, if required.</p></li>
+</ul>
+<h2>solo.rb Configuration</h2>
+<p>Following are the steps to configure solo.rb.</p>
+<p><b>Step 1</b> &minus; Create a solo.rb file inside the chef repo.</p>
+<pre class="prettyprint notranslate">
+current_dir       = File.expand_path(File.dirname(__FILE__)) 
+file_cache_path   "#{current_dir}" 
+cookbook_path     "#{current_dir}/cookbooks" 
+role_path         "#{current_dir}/roles" 
+data_bag_path     "#{current_dir}/data_bags" 
+</pre>
+<p><b>Step 2</b> &minus; Add the file to git repo.</p>
+<pre class="result notranslate">
+$ git add solo.rb 
+</pre>
+<p><b>Step 3</b> &minus; Create a node.json file inside the chef repo with the following content.</p>
+<pre class="prettyprint notranslate">
+{ 
+   "run_list": [ "recipe[ntp]" ] 
+} 
+</pre>
+<p><b>Step 4</b> &minus; Get the ntp cookbook inside the chef repo using knife.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook site install ntp 
+Installing ntp to /Users/mma/work/chef-repo/cookbooks 
+…TRUNCATED OUTPUT… 
+Cookbook ntp version 1.3.0 successfully installed 
+</pre>
+<p><b>Step 5</b> &minus; Add the node.json file to Git.</p>
+<pre class="result notranslate">
+$ git add node.json 
+</pre>
+<p><b>Step 6</b> &minus; Commit and push the files to git repo.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ git commit -m "initial setup for Chef Solo" 
+vipin@laptop:~/chef-repo $ git push 
+Counting objects: 4, done. 
+Delta compression using up to 4 threads. 
+...TRUNCATED OUTPUT... 
+To git@github.com:mmarschall/chef-repo.git 
+b930647..5bcfab6 master -&gt; master 
+</pre>
+<h2>Running the Cookbook on the Node</h2>
+<p><b>Step 1</b> &minus; Login to the node where one wants to provision the Chef-Solo.</p>
+<p><b>Step 2</b> &minus; Clone the Chef repo on the machine.</p>
+<pre class="result notranslate">
+$ git clone $URL_PATH 
+</pre>
+<p><b>Step 3</b> &minus; cd to the chef repo.</p>
+<pre class="result notranslate">
+$ cd chef-repo 
+</pre>
+<p>Finally, run the Chef-Solo to converge the node &minus;</p>
+<pre class="result notranslate">
+$ sudo chef-solo -c solo.rb -j node.json 
+[2017-20-08T22:54:13+01:00] INFO: *** Chef 11.0.0 *** 
+[2017-20-08T22:54:13+01:00] INFO: Setting the run_list to 
+["recipe[ntp]"] from JSON 
+...TRUNCATED OUTPUT... 
+[2012-12-08T22:54:16+01:00] INFO: Chef Run complete in 2.388374 
+seconds 
+[2012-12-08T22:54:16+01:00] INFO: Running report handlers 
+</pre>
+<p><b>solo.rb</b> configures Chef-Solo to look for its cookbooks, roles, and data bags inside the current directory: the Chef repository.</p>
+<p><b>Chef-Solo</b> takes its node configuration from a JSON file. In our example, we called it node.json. If you're going to manage multiple servers, you'll need a separate file for each node. Then, Chef-Solo just executes a Chef run based on the configuration data found in solo.rb and node.json.</p>
+<h1>Chef - Cookbooks</h1>
+<p>Cookbooks are fundamental working units of Chef, which consists of all the details related to working units, having the capability to modify configuration and the state of any system configured as a node on Chef infrastructure. Cookbooks can perform multiple tasks. Cookbooks contain values about the desired state of node. This is achieved in Chef by using the desired external libraries.</p>
+<h2>Key Components of a Cookbook</h2>
+<ul class="list">
+<li>Recipes</li>
+<li>Metadata</li>
+<li>Attributes</li>
+<li>Resources</li>
+<li>Templates</li>
+<li>Libraries </li>
+<li>Anything else that helps to create a system</li>
+</ul>
+<h2>Creating a Cookbook</h2>
+<p>There are two ways to dynamically create a cookbook.</p>
+<ul class="list">
+<li>Using chef command</li> 
+<li>Using knife utility</li>
+</ul>
+<h2>Using Chef Command</h2>
+<p>To create an empty cookbook using Chef command, run the following command.</p>
+<pre class="prettyprint notranslate">
+C:\Users\vipinkumarm&gt;chef generate cookbook &lt;Cookbook Name&gt; 
+C:\Users\vipinkumarm&gt;chef generate cookbook VTest
+Installing Cookbook Gems:
+
+Compiling Cookbooks...
+Recipe: code_generator::cookbook
+   * directory[C:/Users/vipinkumarm/VTest] action create
+      - create new directory C:/Users/vipinkumarm/VTest
+   
+   * template[C:/Users/vipinkumarm/VTest/metadata.rb] action create_if_missing
+      - create new file C:/Users/vipinkumarm/VTest/metadata.rb
+      - update content in file C:/Users/vipinkumarm/VTest/metadata.rb 
+         from none to 4b9435 (diff output suppressed by config)
+
+   * template[C:/Users/vipinkumarm/VTest/README.md] action create_if_missing
+      - create new file C:/Users/vipinkumarm/VTest/README.md
+      - update content in file C:/Users/vipinkumarm/VTest/README.md 
+         from none to 482077 (diff output suppressed by config)
+
+   * cookbook_file[C:/Users/vipinkumarm/VTest/chefignore] action create
+      - create new file C:/Users/vipinkumarm/VTest/chefignore
+      - update content in file C:/Users/vipinkumarm/VTest/chefignore 
+         from none to 15fac5 (diff output suppressed by config)
+   
+   * cookbook_file[C:/Users/vipinkumarm/VTest/Berksfile] action create_if_missing
+      - create new file C:/Users/vipinkumarm/VTest/Berksfile
+      - update content in file C:/Users/vipinkumarm/VTest/Berksfile 
+         from none to 9f08dc (diff output suppressed by config)
+
+   * template[C:/Users/vipinkumarm/VTest/.kitchen.yml] action create_if_missing
+      - create new file C:/Users/vipinkumarm/VTest/.kitchen.yml
+      - update content in file C:/Users/vipinkumarm/VTest/.kitchen.yml 
+         from none to 93c5bd (diff output suppressed by config)
+
+   * directory[C:/Users/vipinkumarm/VTest/test/integration/default/serverspec]
+      action create
+      - create new directory
+         C:/Users/vipinkumarm/VTest/test/integration/default/serverspec
+   
+   * directory[C:/Users/vipinkumarm/VTest/test/integration/helpers/serverspec]
+      action create
+      - create new directory
+         C:/Users/vipinkumarm/VTest/test/integration/helpers/serverspec
+   
+   * cookbook_file
+      [C:/Users/vipinkumarm/VTest/test/integration/helpers/serverspec/sp ec_helper.rb]
+      action create_if_missing
+      - create new file
+         C:/Users/vipinkumarm/VTest/test/integration/helpers/serverspec/spec_helper.rb
+      - update content in file
+         C:/Users/vipinkumarm/VTest/test/integration/helpers/serverspec/spec_helper.rb
+         from none to d85df4 (diff output suppressed by config)
+   
+   * template
+      [C:/Users/vipinkumarm/VTest/test/integration/default/serverspec/default _spec.rb]
+      action create_if_missing
+      - create new file
+         C:/Users/vipinkumarm/VTest/test/integration/default/serverspec/default_spec.rb
+      - update content in file
+         C:/Users/vipinkumarm/VTest/test/integration/default/serverspec/default_spec.rb
+         from none to 758b94 (diff output suppressed by config)
+   
+   * directory[C:/Users/vipinkumarm/VTest/spec/unit/recipes] action create
+      - create new directory C:/Users/vipinkumarm/VTest/spec/unit/recipes
+   
+   * cookbook_file[C:/Users/vipinkumarm/VTest/spec/spec_helper.rb]
+      action create_if_missing
+      - create new file C:/Users/vipinkumarm/VTest/spec/spec_helper.rb
+      - update content in file C:/Users/vipinkumarm/VTest/spec/spec_helper.rb
+         from none to 587075 (diff output suppressed by config)
+
+   * template[C:/Users/vipinkumarm/VTest/spec/unit/recipes/default_spec.rb]
+      action create_if_missing
+      - create new file C:/Users/vipinkumarm/VTest/spec/unit/recipes/default_spec.rb
+      - update content in file 
+         C:/Users/vipinkumarm/VTest/spec/unit/recipes/default_spec.rb
+         from none to 779503 (diff output suppressed by config)
+      - create new file C:/Users/vipinkumarm/VTest/recipes/default.rb
+      - update content in file C:/Users/vipinkumarm/VTest/recipes/default.rb
+         from none to 8cc381 (diff output suppressed by config)
+
+   * cookbook_file[C:/Users/vipinkumarm/VTest/.gitignore] action create
+      - create new file C:/Users/vipinkumarm/VTest/.gitignore
+      - update content in file C:/Users/vipinkumarm/VTest/.gitignore from none to 33d469
+         (diff output suppressed by config)
+</pre>
+<p>The cookbook structure with the name VTest will be created in the directory and following will be the structure for the same.</p>
+<img src="images/vtest.jpg" alt="VTest" />
+<h2>Using Knife Utility</h2>
+<p>Use the following command to create a cookbook using knife utility.</p>
+<pre class="result notranslate">
+C:\Users\vipinkumarm\VTest&gt;knife cookbook create VTest2 
+WARNING: No knife configuration file found 
+** Creating cookbook VTest2 in C:/chef/cookbooks 
+** Creating README for cookbook: VTest2 
+** Creating CHANGELOG for cookbook: VTest2 
+** Creating metadata for cookbook: VTest2 
+</pre>
+<p>Following will be the structure of the cookbook.</p>
+<img src="images/cookbook.jpg" alt="Cookbook" />
+<h1>Chef - Cookbook Dependencies</h1>
+<p>The features of defining cookbook dependencies help in managing cookbook. This feature is used when we want to use the functionality of one cookbook in other cookbooks.</p>
+<p>For example, if one wants to compile C code then one needs to make sure that all the dependencies required to compile are installed. In order to do so, there might be separate cookbook which can perform such a function.</p>
+<p>When we are using chef-server, we need to know such dependencies in cookbooks which should be decelerated in the cookbooks metadata file. This file is located at the top on the cookbook directory structure. It provides hints to the Chef server which helps in deploying cookbooks on the correct node.</p>
+<h2>Features of metadata.rb File</h2>
+<ul class="list">
+<li><p>Located at the top in the cookbook directory structure.</p></li>
+<li><p>Compiled when the cookbook is uploaded to Chef server using knife command.</p></li>
+<li><p>Compiled with knife cookbook metadata subcommand.</p></li>
+<li><p>Created automatically when the knife cookbook create command is run.</p></li>
+</ul>
+<h2>Configuration of metadata.rb</h2>
+<p>Following is the default content of a metadata file.</p>
+<img src="images/metadata.jpg" alt="Metadata" />
+<p></p>
+<img src="images/default_content.jpg" alt="Default Content" />
+<h1>Chef - Roles</h1>
+<p>Roles in Chef are a logical way of grouping nodes. Typical cases are to have roles for web servers, database servers, and so on. One can set custom run list for all the nodes and override attribute value within roles.</p>
+<h2>Create a Role</h2>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl roles/web_servers.rb 
+name "web_servers" 
+description "This role contains nodes, which act as web servers" 
+run_list "recipe[ntp]" 
+default_attributes 'ntp' =&gt; { 
+   'ntpdate' =&gt; { 
+      'disable' =&gt; true 
+   } 
+}
+</pre>
+<p>Once we have the role created, we need to upload to the Chef server.</p>
+<h2>Upload Role to Chef Server</h2>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife role from file web_servers.rb 
+</pre>
+<p>Now, we need to assign a role to a node called server.</p>
+<h2>Assign a Role to Node</h2>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ knife node edit server 
+"run_list": [ 
+   "role[web_servers]" 
+] 
+Saving updated run_list on node server 
+</pre>
+<h2>Run the Chef-Client</h2>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-07-25T13:28:24+00:00] INFO: Run List is [role[web_servers]] 
+[2013-07-25T13:28:24+00:00] INFO: Run List expands to [ntp] 
+...TRUNCATED OUTPUT... 
+</pre>
+<h2>How It Works</h2>
+<ul class="list">
+<li><p>Define a role in a Ruby file inside the roles folder of Chef repository.</p></li> 
+<li><p>A role consists of a name and a description attribute.</p></li>
+<li><p>A role consists of role-specific run list and role-specific attribute settings.</p></li>
+<li><p>Every node that has a role in its run list will have the role’s run list exacted into its own.</p></li>  
+<li><p>All the recipes in the role’s run list will be executed on the node.</p></li>
+<li><p>The role will be uploaded to Chef server using the knife role from file command.</p></li> 
+<li><p>The role will be added to the node run list.</p></li>  
+<li><p>Running Chef client on a node having the role in its run list will execute all the recipes listed in the role.</p></li>
+</ul>
+<h1>Chef - Environment</h1>
+<p>Chef helps in performing environment specific configuration. It is always a good idea to have a separate environment for development, testing, and production.</p>
+<p>Chef enables grouping nodes into separate environments to support an ordered development flow.</p>
+<h2>Creating an Environment</h2>
+<p>Creation of environment on the fly can be done using the knife utility. Following command will open a Shell’s default editor, so that one can modify the environment definition.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ knife environment create book { 
+   "name": "book", 
+   "description": "", 
+   "cookbook_versions": { 
+   }, 
+   "json_class": "Chef::Environment", 
+   "chef_type": "environment", 
+   "default_attributes": { 
+   }, 
+   "override_attributes": { 
+   } 
+} 
+Created book 
+</pre>
+<h2>Testing a Created Environment</h2>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife environment list 
+_default 
+book 
+</pre>
+<h2>List Node for All Environments</h2>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife node list 
+my_server 
+</pre>
+<h2>_default Environment</h2>
+<p>Each organization will always start with at least a single environment called default environment, which is always available to the Chef server. A default environment cannot be modified in anyway. Any kind of changes can only be accommodated in the custom environment that we create.</p>
+<h2>Environment Attributes</h2>
+<p>An attribute can be defined in an environment and then used to override the default settings in the node. When the Chef client run takes place, then these attributes are compared with the default attributes that are already present in the node. When the environment attributes take precedence over the default attributes, Chef client will apply these settings and values when the Chef client run takes place on each node.</p>
+<p>An environment attribute can only be either default_attribute or override_attribute. It cannot be a normal attribute.  One can use default_attribute or override_attribute methods.</p>
+<h2>Attribute Type</h2>
+<p><b>Default</b> &minus; A default attribute is always reset at the start of every Chef client run and have the lowest attribute precedence.</p>
+<p><b>Override</b> &minus; An override attribute is always reset at the start of every Chef client run and has a higher attribute precedence than default, force_default and normal. An override attribute is most often defined in the recipe but can also be specified in an attribute file for a role or for an environment.</p>
+<h2>Order of Applying an Attribute</h2>
+<img src="images/order_attribute.jpg" alt="Order Attribute" />
+<h1>Chef - Chef-Client as Daemon</h1>
+<p>Running Chef-Client as daemon helps in knowing the state of all the nodes at any point of time. This help in running the Chef-Client at any point of time.</p>
+<h2>Pre-requisites</h2>
+<p>The node should be registered with Chef server and it should be running Chef-Client without any error.</p>
+<h2>Chef-Client in Daemon Mode</h2>
+<p>Start Chef-Client in daemon mode, running every 30 minutes.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client -i 1800 
+</pre>
+<p>In the above code, – <b>i</b> enables to run the Chef-Client in daemon mode on the required node and 1800 seconds define that the Chef-Client daemon should run in every 30 minutes.</p>
+<h2>Validating Daemon Run</h2>
+<p>Validate that the Chef-Client is running as a daemon.</p>
+<pre class="result notranslate">
+user@server:~$ ps auxw | grep chef-client 
+</pre>
+<p>The above command will grep the running daemon process of Chef-Client.</p>
+<h2>Other Ways</h2>
+<p>Instead of running Chef-Client as a daemon, we can run the same as a <b>cron job</b>.</p>
+<pre class="result notranslate">
+user@server:~$ subl /etc/cron.d/chef_client 
+PATH=/usr/local/bin:/usr/bin:/bin 
+# m h dom mon dow user command 
+*/15 * * * * root chef-client -l warn | grep -v 'retrying [1234]/5 in' 
+</pre>
+<p>The above cron job will run after every 15 minutes.</p>
+<h1>Chef - Chef-Shell</h1>
+<p>Writing Chef cookbooks is always hard. It makes it even harder because of long feedback cycle of uploading them to the Chef server, provisioning a vagrant VM, checking how they failed there, rinsing and repeating. It would be easier if we could try to test some pieces or recipes before we do all this heavy lifting at once.</p>
+<p>Chef comes with Chef-Shell, which is essentially an interactive Ruby session with Chef. In the Chef-Shell, we can create &minus;</p>
+<ul class="list">
+<li>Attributes</li>
+<li>Write Recipes</li> 
+<li>Initializing Chef runs</li> 
+</ul>
+<p>It is used to evaluate parts of recipes on the fly, before uploading them to Chef server and execute complete cookbooks on the node.</p>
+<h2>Running Shell</h2>
+<p><b>Step 1</b> &minus; Run Chef-Shell in a standalone mode.</p>
+<pre class="result notranslate">
+mma@laptop:~/chef-repo $ chef-shell 
+loading configuration: none (standalone chef-shell session) 
+Session type: standalone 
+Loading...[2017-01-12T20:48:01+01:00] INFO: Run List is [] 
+[2017-01-12T20:48:01+01:00] INFO: Run List expands to [] 
+done. 
+This is chef-shell, the Chef Shell. 
+Chef Version: 11.0.0 
+http://www.opscode.com/chef 
+http://wiki.opscode.com/display/chef/Home 
+run `help' for help, `exit' or ^D to quit. 
+Ohai2u mma@laptop!  
+chef &gt; 
+</pre>
+<p><b>Step 2</b> &minus; Switch to attribute mode in the Chef-Shell</p>
+<ul class="list">
+<li><p><b>chef &gt; attributes_mode</b></p></li>
+</ul>
+<p><b>Step 3</b> &minus; Setting attribute value.</p>
+<ul class="list">
+<li><p><b>chef:attributes &gt; set[:title] = "Chef Cookbook"</b></p>
+<ul class="list">
+<li><p>"Chef Cookbook"</p></li>
+</ul>
+</li>
+<li><p><b>chef:attributes &gt; quit</b></p>
+<ul class="list">
+<li><p>:attributes</p></li>
+</ul>
+</li>
+<li><p><b>chef &gt;</b></p></li>
+</ul>
+<p><b>Step 4</b> &minus; Switch to recipe mode.</p>
+<ul class="list">
+<li><p><b>chef &gt; recipe_mode</b></p></li>
+</ul>
+<p><b>Step 5</b> &minus; Create a file resource.</p>
+<pre class="result notranslate">
+chef:recipe &gt; file "/tmp/book.txt" do 
+chef:recipe &gt; content node.title 
+chef:recipe ?&gt; end  
+
+=&gt; &lt;file[/tmp/book.txt] @name: "/tmp/book.txt" @noop: nil @ 
+before: nil @params: {} @provider: Chef::Provider::File @allowed_ 
+actions: [:nothing, :create, :delete, :touch, :create_if_missing] 
+@action: "create" @updated: false @updated_by_last_action: false 
+@supports: {} @ignore_failure: false @retries: 0 @retry_delay: 
+2 @source_line: "(irb#1):1:in `irb_binding'" @elapsed_time: 0 @ 
+resource_name: :file @path: "/tmp/book.txt" @backup: 5 @diff: nil 
+@cookbook_name: nil @recipe_name: nil @content: "Chef Cookbook"&gt;   
+
+chef:recipe &gt; 
+</pre>
+<p><b>Step 6</b> &minus; Commence Chef run to create the file with the given content.</p>
+<ul class="list">
+<li><p><b>chef:recipe &gt; run_chef</b></p></li>
+</ul>
+<pre class="result notranslate">
+[2017-01-12T21:07:49+01:00] INFO: Processing file[/tmp/book.txt] 
+action create ((irb#1) line 1) 
+--- /var/folders/1r/_35fx24d0y5g08qs131c33nw0000gn/T/cheftempfile20121212- 
+11348-dwp1zs 2012-12-12 21:07:49.000000000 
++0100 
++++ /var/folders/1r/_35fx24d0y5g08qs131c33nw0000gn/T/chefdiff20121212- 
+11348-hdzcp1 2012-12-12 21:07:49.000000000 +0100 
+@@ -0,0 +1 @@ 
++Chef Cookbook 
+\ No newline at end of file 
+[2017-01-12T21:07:49+01:00] INFO: entered create 
+[2017-01-12T21:07:49+01:00] INFO: file[/tmp/book.txt] created file 
+/tmp/book.txt 
+</pre>
+<h2>How it Works</h2>
+<ul class="list">
+<li><p>Chef-Shell starts with an Interactive Ruby (IRB) session enhanced with some specific features.</p></li>   
+<li><p>It offers modes such as attributes_mode and interactive_mode.</p></li>
+<li><p>It helps in writing commands, which are written inside a recipe or cookbook.</p></li> 
+<li><p>It runs everything in an interactive mode.</p></li>
+</ul>
+<p>We can run Chef-Shell in three different modes: <b>Standalone mode, Client mode</b>, and <b>Solo mode</b>.</p>
+<ul class="list">
+<li><p><b>Standalone mode</b> &minus; It is the default mode. No cookbooks are loaded, and the run-list is empty.</p></li> 
+<li><p><b>Client mode</b> &minus; Here, the chef-shell acts as a chef-client.</p></li> 
+<li><p><b>Solo mode</b> &minus; Here, the chef-shell acts as a chef-solo client.</p></li>
+</ul>
+<h1>Chef - Testing Cookbooks</h1>
+<p>In case the cookbook is directly deployed and run on the production server, there are high chances that the cookbook can break up in production. The best way to prevent this from happening is, testing the cookbook in the setup environment.</p>
+<p>Following are the steps for testing.</p>
+<p><b>Step 1</b> &minus; Install the cookbook using the following command.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook site install &lt;cookbook name&gt; 
+</pre>
+<p><b>Step 2</b> &minus; Run the knife cookbook test commands on the working cookbook.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook test VTest  
+checking ntp 
+Running syntax check on ntp 
+Validating ruby files 
+Validating templates
+</pre>
+<p><b>Step 3</b> &minus; Break something in the cookbook and test again.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/VTest/recipes/default.rb 
+... 
+[ node['ntp']['varlibdir'] 
+node['ntp']['statsdir'] ].each do |ntpdir| 
+   directory ntpdir do 
+      owner node['ntp']['var_owner'] 
+      group node['ntp']['var_group'] 
+      mode 0755 
+   end 
+end
+</pre>
+<p><b>Step 4</b> &minus; Run the knife test command again.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook test ntp 
+checking ntp 
+Running syntax check on ntp 
+Validating ruby files 
+FATAL: Cookbook file recipes/default.rb has a ruby syntax error: 
+FATAL: cookbooks/ntp/recipes/default.rb:25: syntax error, 
+unexpected tIDENTIFIER, expecting ']' 
+FATAL: node['ntp']['statsdir'] ].each do |ntpdir| 
+FATAL: ^ 
+FATAL: cookbooks/ntp/recipes/default.rb:25: syntax error, 
+unexpected ']', expecting $end 
+FATAL: node['ntp']['statsdir'] ].each do |ntpdir| 
+FATAL: 
+</pre>
+<h2>Working Method</h2>
+<p>Knife cookbook test executes a Ruby syntax check on all the Ruby files within the cookbook as well as all ERB templates. It loops through Ruby files and runs Ruby <b>–c</b> against each of them. Ruby <b>–c</b> checks the syntax of the script and quits without running it.</p>
+<p>After going through all the Ruby files, knife cookbook test goes through all ERB templates and pipes, the redundant version created by <b>–x</b> through Ruby <b>–c</b>.</p>
+<h2>Limitations</h2>
+<p>Knife cookbook test does only a simple syntax check on the Ruby files and ERB templates. We can go ahead fully test driven by using ChefSpec and test kitchen.</p>
+<h1>Chef - Foodcritic</h1>
+<p>Writing good cookbooks without any issue is quite a difficult task. But there are ways which can help in identifying the pitfalls. Flagging in Chef Cookbook is possible. Foodcritic is one of the best way of archiving it, which tries to identify possible issues with the logic and style of cookbooks.</p>
+<h2>Foodcritic Setup</h2>
+<p><b>Step 1</b> &minus; Add Foodcritic gem.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ subl Gemfile 
+source 'https://rubygems.org' 
+gem 'foodcritic', '~&gt;2.2.0'
+</pre>
+<p><b>Step 2</b> &minus; Install the gem.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ bundle install 
+Fetching gem metadata from https://rubygems.org/ 
+...TRUNCATED OUTPUT... 
+Installing foodcritic (2.2.0) 
+</pre>
+<h2>Foodcritic Gem</h2>
+<p><b>Step 1</b> &minus; Run Foodcritic on the cookbook.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ foodcritic ./cookbooks/&lt;Cookbook Name&gt; 
+FC002: Avoid string interpolation where not required: ./cookbooks/ 
+mysql/attributes/server.rb:220 
+...TRUNCATED OUTPUT... 
+FC024: Consider adding platform equivalents: ./cookbooks/&lt;Cookbook Name&gt;/ 
+recipes/server.rb:132 
+</pre>
+<p><b>Step 2</b> &minus; Generate a detailed report.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ foodcritic -C ./cookbooks/mysql 
+cookbooks/&lt;cookbook Name&gt;/attributes/server.rb 
+FC002: Avoid string interpolation where not required 
+[...] 
+85| default['&lt;Cookbook Name&gt;']['conf_dir'] = "#{mysql['basedir']}" 
+[...] 
+cookbooks/&lt;Cookbook Name&gt;/recipes/client.rb 
+FC007: Ensure recipe dependencies are reflected in cookbook 
+metadata 
+40| end 
+41|when "mac_os_x" 
+42| include_recipe 'homebrew' 
+43|end 
+44|
+</pre>
+<h2>Working Method</h2>
+<p>Foodcritic defines a set of rules and checks recipe agents, each one of them. It comes with multiple rules concerning various areas: styles, connectedness, attributes, string, probability, search, services, files, metadata, and so on.</p>
+<h1>Chef - ChefSpec</h1>
+<p><b>Test Driven Development (TDD)</b> is a way to write unit test before writing any actual recipe code. The test should be real and should validate what a recipe does. It should actually fail as there was no recipe developed. Once the recipe is developed, the test should pass.</p>
+<p>ChefSpec is built on the popular RSpec framework and offers a tailored syntax for testing Chef recipe.</p>
+<h2>Creating ChefSpec</h2>
+<p><b>Step 1</b> &minus; Create a gem file containing the chefSpec gem.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ subl Gemfile 
+source 'https://rubygems.org' 
+gem 'chefspec' 
+</pre>
+<p><b>Step 2</b> &minus; Install the gem.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ bundler install 
+Fetching gem metadata from https://rubygems.org/ 
+...TRUNCATED OUTPUT... 
+Installing chefspec (1.3.1) 
+Using bundler (1.3.5) 
+Your bundle is complete! 
+</pre>
+<p><b>Step 3</b> &minus; Create a spec directory.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ mkdir cookbooks/&lt;Cookbook Name&gt;/spec 
+</pre>
+<p><b>Step 4</b> &minus; Create a Spec</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl  
+cookbooks/my_cookbook/spec/default_spec.rb  
+require 'chefspec'  
+describe 'my_cookbook::default' do  
+   let(:chef_run) {  
+      ChefSpec::ChefRunner.new(  
+         platform:'ubuntu', version:'12.04'  
+      ).converge(described_recipe)  
+   }  
+
+   it 'creates a greetings file, containing the platform  
+   name' do  
+      expect(chef_run).to  
+      create_file_with_content('/tmp/greeting.txt','Hello! ubuntu!')  
+   end  
+end 
+</pre>
+<p><b>Step 5</b> &minus; Validate ChefSpec.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ rspec cookbooks/&lt;Cookbook Name&gt;/spec/default_spec.rb 
+F 
+Failures: 
+1) &lt;CookBook Name&gt; ::default creates a greetings file, containing the platform name 
+Failure/Error: expect(chef_run.converge(described_recipe)).to 
+create_file_with_content('/tmp/greeting.txt','Hello! ubuntu!') 
+File content: 
+does not match expected: 
+Hello! ubuntu! 
+# ./cookbooks/my_cookbook/spec/default_spec.rb:11:in `block 
+(2 levels) in &lt;top (required)&gt;' 
+Finished in 0.11152 seconds 
+1 example, 1 failure  
+
+Failed examples: 
+rspec ./cookbooks/my_cookbook/spec/default_spec.rb:10 # my_ 
+cookbook::default creates a greetings file, containing the 
+platform name 
+</pre>
+<p><b>Step 6</b> &minus; Edit Cookbooks default recipe.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/&lt;Cookbook Name&gt;/recipes/default.rb 
+template '/tmp/greeting.txt' do 
+   variables greeting: 'Hello!' 
+end 
+</pre>
+<p><b>Step 7</b> &minus; Create a template file.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/&lt; Cookbook Name&gt;/recipes/default.rb 
+&lt;%= @greeting %&gt; &lt;%= node['platform'] %&gt;! 
+</pre>
+<p><b>Step 8</b> &minus; Run the rspec again.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ rspec cookbooks/&lt;Cookbook Name&gt;/spec/default_spec.rb 
+. 
+Finished in 0.10142 seconds 
+1 example, 0 failures 
+</pre>
+<h2>How It Works</h2>
+<p>In order to make it work, we need to first set up the base infrastructure for using RSpec with Chef. Then we need to ChefSpec Ruby gem and the cookbook needs a directory called spec where all the tests will be saved.</p>
+<h1>Chef - Testing Cookbook with Test Kitchen</h1>
+<p>Test kitchen is Chef’s integration testing framework. It enables writing tests, which run after VM is instantiated and converged using the cookbook. The tests run on VM and can verify that everything works as expected.</p>
+<p>This is node contract to ChefSpec, which only simulates a Chef run. Test Kitchen boots up a real node and runs Chef on it.</p>
+<h2>Setting Up</h2>
+<p>In order to do this, we need to have Vagrant installed on the machine which helps in managing a virtual machine. Then we need to have bookshelf installed and hooked with Vagrant in order to manage cookbook dependencies.</p>
+<p><b>Step 1</b> &minus; Edit default recipe in the cookbook.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/&lt;Cookbook Name&gt;/recipes/default.rb 
+file "/tmp/greeting.txt" do 
+   content node['my_cookbook']['greeting'] 
+end
+</pre>
+<p><b>Step 2</b> &minus; Edit cookbook attributes.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/&lt;Cookbook Name&gt;/attributes/default.rb 
+default['my_cookbook']['greeting'] = "Ohai, Chefs!"
+</pre>
+<p><b>Step 3</b> &minus; Edit gem file to install the necessary Ruby gems.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ subl Gemfile 
+gem 'test-kitchen', '~&gt; 2.0.0.alpha.7' 
+gem 'kitchen-vagrant' 
+</pre>
+<p><b>Step 4</b> &minus; Install the necessary Ruby gem.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ bundle install 
+...TRUNCATED OUTPUT... 
+Installing test-kitchen (1.0.0.alpha.7) 
+Installing kitchen-vagrant (0.10.0) ...TRUNCATED OUTPUT... 
+</pre>
+<p><b>Step 5</b> &minus; Create .kitchen.yml file in the cookbook.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo/cookbooks/my_cookbook $ subl .kitchen.yml 
+--- 
+driver_plugin: vagrant 
+driver_config: 
+   require_chef_omnibus: true  
+platforms: 
+   - name: ubuntu-12.04 
+  driver_config: 
+      box: opscode-ubuntu-12.04 
+      box_url: 
+         https://opscode-vm.s3.amazonaws.com/vagrant/
+            opscode_ubuntu12.04_provisionerless.box  
+suites: 
+   - name: default 
+   run_list: 
+      - recipe[minitest-handler] 
+      - recipe[my_cookbook_test] 
+attributes: { my_cookbook: { greeting: 'Ohai, Minitest!'} } 
+</pre>
+<p><b>Step 6</b> &minus; Create a test directory inside the cookbook.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo/cookbooks/&lt;Cookbook Name&gt;$ mkdir test 
+</pre>
+<p><b>Step 7</b> &minus; Create a test cookbook for integration testing.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo/cookbooks/&lt;Cookbook Name&gt;/test $ knife 
+cookbook create my_cookbook_test 
+** Creating cookbook my_cookbook_test 
+** Creating README for cookbook: my_cookbook_test 
+** Creating CHANGELOG for cookbook: my_cookbook_test 
+** Creating metadata for cookbook: my_cookbook_test 
+</pre>
+<p><b>Step 8</b> &minus; Edit test cookbooks default recipe.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo/cookbooks/my_cookbook $ subl 
+test/cookbooks/my_cookbook_test/recipes/default.rb 
+include_recipe 'my_cookbook::default'
+</pre>
+<p><b>Step 9</b> &minus; Create Minitest Spec inside the cookbook.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo/cookbooks/my_cookbook $ mkdir -p 
+   test/cookbooks/my_cookbook_test/files/default/tests/minitest  
+
+vipin@laptop:~/chef-repo/cookbooks/my_cookbook $ subl 
+   test/cookbooks/my_cookbook_test/files/default/tests/minitest/default_test.rb  
+
+require 'minitest/spec'  
+describe_recipe 'my_cookbook::default' do 
+   describe "greeting file" do 
+      it "creates the greeting file" do 
+         file("/tmp/greeting.txt").must_exist 
+      end 
+       
+      it "contains what's stored in the 'greeting' node 
+         attribute" do 
+         file('/tmp/greeting.txt').must_include 'Ohai, Minitest!' 
+      end 
+end
+</pre>
+<p><b>Step 10</b> &minus; Edit your main cookbook's Berksfile.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo/cookbooks/my_cookbook $ subl Berksfile 
+site :opscode 
+metadata 
+cookbook "apt" 
+cookbook "minitest-handler" 
+cookbook "my_cookbook_test", path: 
+"./test/cookbooks/my_cookbook_test" 
+</pre>
+<h2>Testing the Setup</h2>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo/cookbooks/my_cookbook $ kitchen test 
+-----> Starting Kitchen (v1.0.0.alpha.7) 
+...TRUNCATED OUTPUT... 
+-----> Converging &lt;default-ubuntu-1204&gt; 
+-----> Installing Chef Omnibus (true) 
+...TRUNCATED OUTPUT... 
+Starting Chef Client, version 11.4.4 
+[2013-06-29T18:33:57+00:00] INFO: *** Chef 11.4.4 *** 
+[2013-06-29T18:33:58+00:00] INFO: Setting the run_list to 
+["recipe[minitest-handler]", "recipe[my_cookbook_test]"] 
+from JSON 
+...TRUNCATED OUTPUT... 
+# Running tests: 
+recipe::my_cookbook::default::greeting 
+file#test_0001_creates the greeting file = 0.00 s = . 
+recipe::my_cookbook::default::greeting 
+file#test_0002_contains what's stored in the 'greeting' 
+node attribute = 0.00 s = . 
+Finished tests in 0.011190s, 178.7277 tests/s, 178.7277 
+assertions/s. 
+2 tests, 2 assertions, 0 failures, 0 errors, 0 skips 
+...TRUNCATED OUTPUT...  
+-----> Kitchen is finished. (2m5.69s) 
+</pre>
+<h1>Chef - Nodes</h1>
+<p><b>Knife preflight</b> shows details about all the nodes which uses a certain cookbook before uploading it to Chef server.</p>
+<h2>Getting Started</h2>
+<p>In order to get started, we need to have knife-preflight gem installed.</p>
+<p><b>Step 1</b> &minus; Define the path in the gem file.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ subl Gemfile 
+source 'https://rubygems.org' 
+gem 'knife-preflight' 
+</pre>
+<p><b>Step 2</b> &minus; Run bundler to install knife-preflight gem.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ bundle install 
+Fetching gem metadata from https://rubygems.org/ 
+...TRUNCATED OUTPUT... 
+Installing knife-preflight (0.1.6)
+</pre>
+<h2>Working Method</h2>
+<p>Run knife-preflight on the given cookbook.</p>
+<p>We can run the preflight command to find out which nodes and roles have the given cookbook in their expanded run lists.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife preflight ntp 
+Searching for nodes containing ntp OR ntp::default in their 
+expanded run_list... 
+2 Nodes found 
+www-staging.example.com 
+cms-staging.example.com 
+Searching for roles containing ntp OR ntp::default in their 
+expanded run_list... 
+3 Roles found 
+your_cms_role 
+your_www_role 
+your_app_role 
+Found 6 nodes and 3 roles using the specified search 
+criteria 
+</pre>
+<p>There are multiple ways for a cookbook to get executed on the node.</p>
+<ul class="list">
+<li><p>You can assign the cookbook directly to a node by adding it to the node's run list.</p></li>
+<li><p>You can add a cookbook to the role and add the role to the node's run list.</p></li>
+<li><p>You can add the role to the run list of another role and add that other role to the node's run list.</p></li>
+<li><p>A cookbook can be a dependency of another used cookbook.</p></li>
+</ul>
+<p>No matter how a cookbook ends up in a node's run list, the knife preflight command will catch it as Chef stores all expanded lists of roles and recipes in node attributes. The knife preflight command issues a search for exactly those node attributes.</p>
+<h1>Chef - Chef-Client Run</h1>
+<p>In order to test Chef-Client run, we need to have Chef-Client configured to use the hosted Chef or own hosted server.</p>
+<h2>Running Chef-Client in Debug Mode</h2>
+<pre class="result notranslate">
+vipin@server:~$ sudo chef-client -l debug 
+…TRUNCATED OUTPUT… 
+Hashed Path:A+WOcvvGu160cBO7IFKLYPhh9fI= 
+X-Ops-Content-Hash:2jmj7l5rSw0yVb/vlWAYkK/YBwk= 
+X-Ops-Timestamp:2012-12-27T11:14:07Z 
+X-Ops-UserId:vagrant' 
+Header hash: {"X-Ops-Sign"=&gt;"algorithm=sha1;version=1.0;", 
+"X-Ops-Userid"=&gt;"vagrant", "X-Ops-Timestamp"=&gt;"2012-12- 
+27T11:14:07Z", "X-Ops-Content- 
+Hash"=&gt;"2jmj7l5rSw0yVb/vlWAYkK/YBwk=", "X-Ops- 
+Authorization- 
+1"=&gt;"HQmTt9U/ 
+LJJVAJXWtyOu3GW8FbybxAIKp4rhiw9O9O3wtGYVHyVGuoilWDao", 
+"X-Ops-Authorization- 
+2"=&gt;"2/uUBPWX+YAN0g1/ 
+fD2854QAU2aUcnSaVM0cPNNrldoOocmA0U5HXkBJTKok", 
+"X-Ops-Authorization- 
+3"=&gt;"6EXPrEJg5T+ 
+ddWd5qHAN6zMqYc3untb41t+eBpigGHPhtn1LLInMkPeIYwBm", 
+"X-Ops-Authorization- 
+4"=&gt;"B0Fwbwz2HVP3wEsYdBGu7yOatq7fZBXHfIpeOi0kn/ 
+Vn0P7HrucnOpONmMgU", "X-Ops-Authorization- 
+5"=&gt;"RBmmbetFSKCYsdg2v2mW/ 
+ifLIVemhsHyOQjffPYPpNIB3U2n7vji37NxRnBY", 
+"X-Ops-Authorization- 
+6"=&gt;"Pb3VM7FmY60xKvWfZyahM8y8WVV9xPWsD1vngihjFw=="} 
+[2012-12-27T11:14:07+00:00] DEBUG: Sending HTTP Request via 
+GET to api.opscode.com:443/organizations/agilewebops/ 
+nodes/vagrant
+[2012-12-27T11:14:09+00:00] DEBUG: ---- HTTP Status and 
+Header Data: ---- 
+[2012-12-27T11:14:09+00:00] DEBUG: HTTP 1.1 200 OK 
+[2012-12-27T11:14:09+00:00] DEBUG: server: nginx/1.0.5 
+[2012-12-27T11:14:09+00:00] DEBUG: date: Thu, 27 Dec 2012 
+</pre>
+<h2>Inspecting the Result of the Last Chef-Client Run</h2>
+<p>In order to check the last Chef-Client run especially failure issues when we are developing a new cookbook, we need to know what exactly went wrong. Even though Chef prints everything in stdout, one might want to see the debug log again.</p>
+<p>If we want to test, we need to have a broken cookbook which is failing on compilation.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+================================================================== 
+============== 
+Recipe Compile Error in /srv/chef/file_store/cookbooks/my_ 
+cookbook/recipes/default.rb 
+================================================================== 
+============== 
+NoMethodError 
+------------- 
+undefined method `each' for nil:NilClass 
+Cookbook Trace: 
+--------------- 
+/srv/chef/file_store/cookbooks/my_cookbook/recipes/default. 
+rb:9:in `from_file' 
+Relevant File Content: 
+---------------------- 
+/srv/chef/file_store/cookbooks/my_cookbook/recipes/default.rb: 
+2: # Cookbook Name:: my_cookbook 
+3: # Recipe:: default 
+4: # 
+5: # Copyright 2013, YOUR_COMPANY_NAME 
+6: # 
+7: # All rights reserved - Do Not Redistribute 
+8: # 
+9&Gt; nil.each {}  
+10: 
+</pre>
+<p>For more details, we can look into the stacktrace.</p>
+<pre class="result notranslate">
+user@server:~$ less /srv/chef/file_store/chef-stacktrace.out 
+Generated at 2013-07-21 18:34:05 +0000 
+NoMethodError: undefined method `each' for nil:NilClass 
+/srv/chef/file_store/cookbooks/my_cookbook/recipes/default.rb:9:in 
+`from_file' 
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.4/lib/chef/ 
+mixin/from_file.rb:30:in `instance_eval' 
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.4/lib/chef/ 
+mixin/from_file.rb:30:in `from_file' 
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.4/lib/chef/ 
+cookbook_version.rb:346:in `load_recipe' 
+</pre>
+<h1>Chef - Dynamically Configuring Recipes</h1>
+<p>Attributes are the key components for dynamically configuring cookbooks. Attributes enable the authors to make the cookbook configurable. By overriding default values set in cookbooks, the user can inject their own values.</p>
+<p><b>Step 1</b> &minus; Create a default file for cookbook attributes and add a default attribute to it.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/my_cookbook/attributes/default.rb 
+default['my_cookbook']['message'] = 'hello world!'
+</pre>
+<p><b>Step 2</b> &minus; Define the attribute inside the recipe.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/&lt;Cookbook Name&gt;/recipes/default.rb 
+message = node['my_cookbook']['message'] 
+Chef::Log.info("** Saying what I was told to say: #{message}") 
+</pre>
+<p><b>Step 3</b> &minus; Uploading the modified cookbook.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload my_cookbook 
+Uploading my_cookbook [0.1.0]
+</pre>
+<p><b>Step 4</b> &minus; Running Chef-Client of the defined node.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-01-13T20:48:21+00:00] INFO: ** Saying what I was told to 
+say: hello world! 
+...TRUNCATED OUTPUT... 
+</pre>
+<h2>Working Method</h2>
+<p>Chef loads all attributes from the attribute file before it executes them. The attributes are stored with the node object. One can access all the attributes stored with the node object within recipes and retrieve their current values.</p>
+<p>Chef has a restricted structure starting from the default being the lowest, then comes normal (which is aliased with the set) and then overrides. The attribute level set in the recipe has precedence over the same level set in an attribute file.</p>
+<h2>Overriding Attribute at the Node and Environment Level</h2>
+<p>Attribute defined in roles or environment have the highest precedence.</p>
+<p><b>Step 1</b> &minus; Create a role.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl roles/german_hosts.rb 
+name "german_hosts" 
+description "This Role contains hosts, which should print out 
+their messages in German" 
+run_list "recipe[my_cookbook]" 
+default_attributes "my_cookbook" =&gt; { "message" =&gt; "Hallo Welt!" } 
+</pre>
+<p><b>Step 2</b> &minus; Upload the role to Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife role from file german_hosts.rb 
+Updated Role german_hosts! 
+</pre>
+<p><b>Step 3</b> &minus; Assign the role to a node.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ knife node edit server 
+"run_list": [ 
+   "role[german_hosts]" 
+] 
+Saving updated run_list on node server 
+</pre>
+<p><b>Step 4</b> &minus; Run the Chef-Client.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-01-13T20:49:49+00:00] INFO: ** Saying what I was told to 
+say: Hallo Welt! 
+...TRUNCATED OUTPUT...
+</pre>
+<h1>Chef - Templates</h1>
+<p>In Infrastructure, <b>configuration management</b> is all about how well one configures the hosts. In general, all the configurations are done using the configuration files. Chef uses templates to be able to fill the configuration file with dynamic values.</p>
+<p>Chef provides templates as a resource which can be used in the recipe. Configuration files’ dynamic values can be retrieved from data bags, attributes or even calculate them by passing them into the template.</p>
+<h2>How to Use It?</h2>
+<p><b>Step 1</b> &minus; Add the template to the recipe.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/&lt;Cookbook Name&gt;/recipes/default.rb  
+template '/tmp/message' do 
+   source 'Test.erb' 
+   variables( 
+      hi: 'Tesing', 
+      world: 'Welt', 
+      from: node['fqdn'] 
+   ) 
+end 
+</pre>
+<p><b>Step 2</b> &minus; Add <b>ERB</b> Template file.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/&lt;Cookbook Name&gt;/templates/default/test.erb 
+&lt;%- 4.times do %&gt; 
+&lt;%= @hi %&gt;, &lt;%= @world %&gt; from &lt;%= @from %&gt;! 
+&lt;%- end %&gt;
+</pre>
+<p><b>Step 3</b> &minus; Upload the modified cookbook to Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload &lt;Cookbook Name&gt; 
+Uploading my_cookbook [0.1.0] 
+Run Chef Client on your node: 
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2017-01-14T20:41:21+00:00] INFO: Processing template[/tmp/ 
+message] action create (my_cookbook::default line 9) 
+[2017-01-14T20:41:22+00:00] INFO: template[/tmp/message] updated 
+content
+</pre>
+<p><b>Step 4</b> &minus; Validate the content of the uploaded file.</p>
+<pre class="result notranslate">
+user@server:~$ sudo cat /tmp/message 
+Hallo, Welt from vagrant.vm! 
+Hallo, Welt from vagrant.vm! 
+Hallo, Welt from vagrant.vm! 
+Hallo, Welt from vagrant.vm! 
+</pre>
+<h2>Workflow</h2>
+<p>Chef uses Erubis as its template language. It allows embedding pure Ruby code inside special symbols in the templates.</p>
+<ul class="list">
+<li><p>&lt;%= %&gt; is used if you want to print the value of a variable or Ruby expression into the generated file.</p></li>
+<li><p>&lt;%- %&gt; is used if you want to embed Ruby logic into your template file. We use it to loop our expression four times.</p></li>
+</ul>
+<h1>Chef - Plain Ruby with Chef DSL</h1>
+<p>In Chef, if one needs to create simple recipes one can use resources available in Chef, such as templates, remote_file, and services. However as the recipes become elaborate, one needs advanced techniques, such as conditional statements to execute parts of the recipe on condition. This is the power of mixing plain Ruby with Chef Domain Specific Language (DSL).</p>
+<h2>How to Use It?</h2>
+<p>Start Chef Shell on any of the node in the client mode to be able to access the Chef server.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-shell --client 
+loading configuration: /etc/chef/client.rb 
+Session type: client 
+...TRUNCATED OUTPUT... 
+run `help' for help, `exit' or ^D to quit. 
+Ohai2u user@server! 
+Chef&gt; 
+</pre>
+<h2>Basic Conditions with Chef DSL</h2>
+<p>Sort nodes by name using plain Ruby.</p>
+<pre class="result notranslate">
+chef &gt; nodes.sort! {|a,b| a.name &lt;=&gt; b.name } 
+=&gt; [node[alice],node[server]] 
+</pre>
+<p>Loop through the nodes, printing their operating system.</p>
+<pre class="prettyprint notranslate">
+chef &gt; nodes.each do |n| 
+   chef &gt; puts n['os'] 
+   chef ?&gt; 
+end  
+linux 
+windows 
+=&gt; [node[server], node[alice]] 
+</pre>
+<p>Install multiple Ruby gems using an array, a loop, and string expansion to construct the gem names.</p>
+<pre class="prettyprint notranslate">
+chef &gt; %w{ec2 essentials}.each do |gem| 
+   chef &gt; gem_package "knife-#{gem}" 
+   chef ?&gt; end   =&gt; ["ec2", "essentials"] 
+</pre>
+<h2>Working Method</h2>
+<p>Chef recipes are Ruby files, which gets evaluated in the context of Chef run. They can contain plain Ruby code such as if statement and loops as well as Chef DSL elements such as resources.</p>
+<p>Inside the recipe, one can simply declare Ruby variables and assign values to it.</p>
+<h1>Chef - Ruby Gems with Recipes</h1>
+<p>Recipes are the key building blocks of cookbook which is basically Ruby code. It is possible to use all of the Ruby language features inside the Chef recipe. Most of the time Ruby build in functionality is enough but sometimes one might need to use additional Ruby gems. For example, if one needs to access MySQL database from the recipe itself.</p>
+<p>Chef recipe has the capability to get the required Ruby gems in order to use them inside the very same recipe.</p>
+<h2>Using iptable Gem in the Given Recipe</h2>
+<p><b>Step 1</b> &minus; Edit the default recipe of the cookbook and install the gem to be used inside the recipe.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl 
+cookbooks/my_cookbook/recipes/default.rb 
+chef_gem 'ipaddress' 
+require 'ipaddress' 
+ip = IPAddress("192.168.0.1/24") 
+Chef::Log.info("Netmask of #{ip}: #{ip.netmask}")
+</pre>
+<p><b>Step 2</b> &minus; Upload the modified cookbook to the Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload my_cookbook 
+Uploading my_cookbook [0.1.0] 
+</pre>
+<p><b>Step 3</b> &minus; Running Chef client to see the output.</p>
+<pre class="result notranslate">
+user@server $ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-01-18T14:02:02+00:00] INFO: Netmask of 192.168.0.1: 
+255.255.255.0 
+...TRUNCATED OUTPUT...
+</pre>
+<h2>Working Method</h2>
+<p>Chef run steps consist of the compilation phase, where it compiles all the resources and an execution phase where Chef runs the resource providers to converge the node to the desired state. If one needs any particular Ruby gem inside the cookbook, one needs to install the gem during the complication phase.</p>
+<p>The chef_gem resource will exactly do the same, and in Chef, Omnibus is the only way to work. Its main function is to make gems available to Chef itself.</p>
+<h1>Chef - Libraries</h1>
+<p>Libraries in Chef provides a place to encapsulate compiled logic so that the cookbook recipes remain neat and clean.</p>
+<h2>Creating the Library</h2>
+<p><b>Step 1</b> &minus; Create a helper method in cookbook’s library.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/my_cookbook/libraries/ipaddress.rb 
+class Chef::Recipe 
+def netmask(ipaddress) 
+IPAddress(ipaddress).netmask 
+end 
+end
+</pre>
+<p><b>Step 2</b> &minus; Use the helper method.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/my_cookbook/recipes/default.rb 
+ip = '10.10.0.0/24' 
+mask = netmask(ip) # here we use the library method 
+Chef::Log.info("Netmask of #{ip}: #{mask}") 
+</pre>
+<p><b>Step 3</b> &minus; Upload the modified cookbook to the Chef Server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload my_cookbook 
+Uploading my_cookbook [0.1.0] 
+</pre>
+<h2>Testing the Library</h2>
+<pre class="result notranslate">
+user@server $ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-01-18T14:38:26+00:00] INFO: Netmask of 10.10.0.0/24: 
+255.255.255.0 
+...TRUNCATED OUTPUT... 
+</pre>
+<h2>Working Method</h2>
+<p>Chef library code can open the chef::Recipe class and add new methods as done in Step 1. This step is not the cleanest but the simplest way of doing it.</p>
+<pre class="result notranslate">
+class Chef::Recipe 
+def netmask(ipaddress) 
+... 
+end 
+end
+</pre>
+<h2>Best Practices</h2>
+<p>Once we open the chef::recipe class, there are changes that it gets polluted. As a best practice, it is always a better way to introduce a new sub class inside the library and define a method as class method. This avoids pulling the chef::recipe namespace.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/my_cookbook/libraries/ipaddress.rb 
+class Chef::Recipe::IPAddress 
+def self.netmask(ipaddress) 
+IPAddress(ipaddress).netmask 
+end 
+end 
+</pre>
+<p>We can use the method inside the recipe like</p>
+<pre class="result notranslate">
+IPAddress.netmask(ip) 
+</pre>
+<h1>Chef - Definition</h1>
+<p>Definition can be defined as a logical method of grouping resources, which are used again and again. In this flow, we group the resources and give them a name to regain readability of defined cookbooks.</p>
+<p>In order to do this, we should have a recipe. In this case, we are using test_cookbook and a run list of nodes, which includes the cookbook.</p>
+<h2>Creating a Definition</h2>
+<p><b>Step 1</b> &minus; Create a new definition file in the cookbooks definition folder.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/test_cookbook/definitions/ 
+capistrano_deploy_dirs.rb 
+define :capistrano_deploy_dirs, :deploy_to =&gt; '' do 
+   directory "#{params[:deploy_to]}/releases" 
+   directory "#{params[:deploy_to]}/shared" 
+   directory "#{params[:deploy_to]}/shared/system" 
+end
+</pre>
+<p><b>Step 2</b> &minus; Use a definition inside the cookbooks default recipe.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/test_cookbook/recipes/default.rb 
+capistrano_deploy_dirs do 
+   deploy_to "/srv" 
+end 
+</pre>
+<p><b>Step 3</b> &minus; Upload the cookbook to the chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload test_cookbook 
+Uploading test_cookbook [0.1.0] 
+</pre>
+<p><b>Step 4</b> &minus; Run the Chef client on the desired node.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repuser@server $ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-01-18T16:31:11+00:00] INFO: Processing directory[/srv/ 
+releases] action create (my_cookbook::default line 2) 
+[2013-01-18T16:31:11+00:00] INFO: directory[/srv/releases] created 
+directory /srv/releases 
+[2013-01-18T16:31:11+00:00] INFO: Processing directory[/srv/ 
+shared] action create (my_cookbook::default line 3) 
+[2013-01-18T16:31:11+00:00] INFO: directory[/srv/shared] created 
+directory /srv/shared 
+[2013-01-18T16:31:11+00:00] INFO: Processing directory[/srv/ 
+shared/system] action create (my_cookbook::default line 4) 
+[2013-01-18T16:31:11+00:00] INFO: directory[/srv/shared/system] 
+</pre>
+<p>Definition in cookbooks are like micros, which group the resources and give them a name. A definition has a name by which one can tell them from which can be called inside the recipe and it has a list of perimeters.</p>
+<p>In the definition, we have parameters which in our code looks like the following.</p>
+<pre class="prettyprint notranslate">
+….. 
+directory "#{params[:deploy_to]}/releases" 
+directory "#{params[:deploy_to]}/shared" 
+directory "#{params[:deploy_to]}/shared/system” 
+…… 
+</pre>
+<p>It can be used inside the default recipe as follows.</p>
+<pre class="prettyprint notranslate">
+capistrano_deploy_dirs do 
+   deploy_to "/srv"` 
+end 
+</pre>
+<h1>Chef - Environment Variable</h1>
+<p>Environment variable is a key way to make Chef recipe run on any particular node successfully. There are multiple ways of doing it, either manually setting them up or by using a Shell script. Setting them via recipe is what we need to perform here.</p>
+<p>To do this, we need to have a cookbook here we would use test_cookbook and a run list which contains test_cookbook.</p>
+<h2>Setting Environment Variable Using Chef Recipe</h2>
+<p><b>Step 1</b> &minus; Update the default recipe of cookbook with an environment variable.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/test_cookbook/recipes/default.rb  
+ENV['MESSAGE'] = 'Testing environment variable update with chef !'  
+execute 'print value of environment variable $MESSAGE' do 
+   command 'echo $MESSAGE &gt; /tmp/message' 
+end
+</pre>
+<p><b>Step 2</b> &minus; Upload the updated cookbook to the server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload test_cookbook 
+Uploading my_cookbook [0.1.0] 
+</pre>
+<p><b>Step 3</b> &minus; Running the Chef client to create a temp file.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-01-25T15:01:57+00:00] INFO: Processing execute[print 
+value of environment variable $MESSAGE] action run 
+(my_cookbook::default line 11) 
+[2013-01-25T15:01:57+00:00] INFO: execute[print value of 
+environment variable $MESSAGE] ran successfully 
+...TRUNCATED OUTPUT... 
+</pre>
+<h2>Validating Variable</h2>
+<pre class="result notranslate">
+user@server:~$ cat /tmp/message 
+Hello from Chef
+</pre>
+<h2>Working Method</h2>
+<p>Ruby exposes the current environment variable via ENV <b>–a</b> hash to read and modify the environment variable.</p>
+<h2>Execute Resource</h2>
+<p>We can use execute resource to do the same inside the Chef default recipe of cookbook.</p>
+<pre class="prettyprint notranslate">
+mma@laptop:~/chef-repo $ subl cookbooks/test_cookbook/recipes/default.rb  
+execute 'print value of environment variable $MESSAGE' do 
+   command 'echo $MESSAGE &gt; /tmp/message' 
+   environment 'MESSAGE' =&gt; 'Hello from the execute resource' 
+end 
+</pre>
+<p><b>Note</b> &minus; Setting an environment variable using ENV will make that variable available during the whole Chef run. In contrast, passing it to the execute resource will only make it available for that one command executed by the resource.</p>
+<h1>Chef - Data Bugs</h1>
+<p>Chef data bags can be defined as an arbitrary collection of data which one can use with cookbooks. Using data bags is very helpful when one does not wish to hardcode attributes in recipes nor to store attributes in cookbooks.</p>
+<h2>Working Method</h2>
+<p>In the following setup, we are trying to communicate to http endpoint URL. For this, we need to create a data bag, which will hold the endpoint URL detail and use it in our recipe.</p>
+<p><b>Step 1</b> &minus; Create a directory for our data bag.</p>
+<pre class="result notranslate">
+mma@laptop:~/chef-repo $ mkdir data_bags/hooks
+</pre>
+<p><b>Step 2</b> &minus; Create a data bag item for request bin. One needs to make sure one is using a defined requestBin URL.</p>
+<pre class="prettyprint notranslate">
+vipi@laptop:~/chef-repo $ subl data_bags/hooks/request_bin.json { 
+   "id": "request_bin", 
+   "url": "http://requestb.in/1abd0kf1" 
+}
+</pre>
+<p><b>Step 3</b> &minus; Create a data bag on the Chef server</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife data bag create hooks 
+Created data_bag[hooks] 
+</pre>
+<p><b>Step 4</b> &minus; Upload the data bag to the Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife data bag from file hooks requestbin.json 
+Updated data_bag_item[hooks::RequestBin]
+</pre>
+<p><b>Step 5</b> &minus; Update the default recipe of the cookbook to receive the required cookbook from a data bag.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/my_cookbook/recipes/default.rb 
+hook = data_bag_item('hooks', 'request_bin') 
+http_request 'callback' do 
+   url hook['url'] 
+end 
+</pre>
+<p><b>Step 6</b> &minus; Upload the modified cookbook to the Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload my_cookbook 
+Uploading my_cookbook [0.1.0] 
+</pre>
+<p><b>Step 7</b> &minus; Run the Chef client on the node to check if the http request bin gets executed.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-02-22T20:37:35+00:00] INFO: http_request[callback] 
+GET to http://requestb.in/1abd0kf1 successful 
+...TRUNCATED OUTPUT...
+</pre>
+<h2>How it Works</h2>
+<p>Data bag is a named collection of structure data entries. One needs to define data entry and call the data bag item in JSON file. One can also search for data bag item from within the recipes to use the data stored in the data bags.</p>
+<p>We created a data bag called hooks. A data bag is a directory within Chef repository. We used knife to create it on the server.</p>
+<h1>Chef - Scripts for Data Bugs</h1>
+<p>In certain conditions, it is not possible to put the server under the full control of Chef. In such cases, one might need to access values in Chef data bags from scripts. In order to do this, one needs to store data bag values in a JSON file and let the added script access those values.</p>
+<p>For this, one needs to have a cookbook. In our case we would use test_cookbook as earlier and should have the run list of the node including test_cookbook definition in it.</p>
+<h2>Working Method</h2>
+<p><b>Step 1</b> &minus; Create a data bag.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ mkdir data_bags/servers 
+vipin@laptop:~/chef-repo $ knife data bag create servers 
+Created data_bag[servers] 
+</pre>
+<p><b>Step 2</b> &minus; Create a data bag item.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl data_bags/servers/Storage.json { 
+   "id": "storage", 
+   "host": "10.0.0.12" 
+} 
+</pre>
+<p><b>Step 3</b> &minus; Update the data bag item.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl data_bags/servers/Storage.json { 
+   "id": "storage", 
+   "host": "10.0.0.12" 
+} 
+</pre>
+<h2>Using in Cookbook</h2>
+<p><b>Step 1</b> &minus; Need to create a JSON file containing data bag values using the above cookbook so that external scripts can access those values.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/test_cookbook/recipes/default.rb 
+file "/etc/backup_config.json" do 
+   owner "root"
+   group "root" 
+   mode 0644 
+   content data_bag_item('servers', 'backup')['host'].to_json 
+end
+</pre>
+<p><b>Step 2</b> &minus; Upload test_cookbook to Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload test_cookbook 
+Uploading my_cookbook [0.1.0] 
+</pre>
+<p><b>Step 3</b> &minus; Run the Chef client on the node.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-03-14T20:30:33+00:00] INFO: Processing 
+file[/etc/backup_config.json] action create 
+(my_cookbook::default line 9) 
+[2013-03-14T20:30:34+00:00] INFO: entered create 
+[2013-03-14T20:30:34+00:00] INFO: 
+file[/etc/backup_config.json] owner changed to 0 
+[2013-03-14T20:30:34+00:00] INFO: 
+file[/etc/backup_config.json] group changed to 0 
+[2013-03-14T20:30:34+00:00] INFO: 
+file[/etc/backup_config.json] mode changed to 644 
+[2013-03-14T20:30:34+00:00] INFO: 
+file[/etc/backup_config.json] created file 
+/etc/backup_config.json 
+...TRUNCATED OUTPUT... 
+</pre>
+<p><b>Step 4</b> &minus; Validating the content of the generated JSON file.</p>
+<pre class="result notranslate">
+user@server:~$ cat /etc/backup_config.json 
+"10.0.0.12" 
+</pre>
+<h2>Workflow of Scripts</h2>
+<p>In the above command, the file resource that we have used which creates JSON file inside the <b>/etc</b> directory is defined in the default cookbook. It gets the file content directly from the data bag using the data_bag_item method. We access the host values from the data bag item and convert it to JSON. The file resource uses the JSON-converted values as its content and writes it to the disk.</p>
+<h1>Chef - Cross-Platform for Cookbooks</h1>
+<p>Cross-Platform cookbooks are those cookbooks which adopt an underlying environment on which it is going to run. Chef provides a host of features, which helps in writing crossplatform cookbooks capable of running on any OS, on which it is going to get deployed. This helps a developer to write a completely operational cookbook.</p>
+<p>In order to do this, we need to have a cookbook. In our case it will be test_cookbook and a run list which will have the cookbook definition in it.</p>
+<h2>Working Method</h2>
+<p>Retrieving the nodes platform detail and executing the conditional logic in our cookbook depends on the platform. In our case, we will test it for Ubuntu.</p>
+<p><b>Step 1</b> &minus; Log a message if the node is Ubuntu.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/test_cookbook/recipes/default.rb 
+Log.info("Running on ubuntu") if node.platform['ubuntu'] 
+</pre>
+<p><b>Step 2</b> &minus; Upload the cookbook to Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/test_cookbook/recipes/default.rb 
+Uploading my_cookbook [0.1.0] 
+Uploaded 1 cookbook. 
+</pre>
+<p><b>Step 3</b> &minus; Run the Chef client on the node.</p>
+<pre class="result notranslate">
+user@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+[2013-03-03T20:07:39+00:00] INFO: Running on Ubuntu 
+...TRUNCATED OUTPUT...
+</pre>
+<p>Alternatively, if one is not interested in a specific platform but only needs to know which declarative one is using, the following statement can be used.</p>
+<pre class="prettyprint notranslate">
+Log.info("Running on a debian derivative") if 
+platform_family?('debian')
+</pre>
+<p>Uploading the modified cookbook and running Chef client on Ubuntu node will show the following result.</p>
+<pre class="result notranslate">
+[2013-03-03T20:16:14+00:00] INFO: Running on a debian 
+derivative 
+</pre>
+<h2>Workflow of Scripts</h2>
+<p>In the above command, Ohai will discover the current status of the node’s operating system and store it as a platform attribute with the node object.</p>
+<pre class="result notranslate">
+node['platform'] 
+</pre>
+<p>Or, you can use method style syntax &minus;</p>
+<pre class="result notranslate">
+node.platform 
+</pre>
+<h2>Setting Platform Specific Values</h2>
+<p>In order to set platform specific values chef offers convenience methods value_for_platform and value_for_platform_family. They can be used to avoid complex case statement and use a simple hash instead.</p>
+<h2>Example cookbook</h2>
+<pre class="prettyprint notranslate">
+execute "start-runsvdir" do 
+   command value_for_platform( 
+      "debian" =&gt; { "default" =&gt; "runsvdir-start" }, 
+      "ubuntu" =&gt; { "default" =&gt; "start runsvdir" }, 
+      "gentoo" =&gt; { "default" =&gt; "/etc/init.d/runit-start start" } 
+   ) 
+   action :nothing 
+end 
+</pre>
+<p>In the above example, the command is OS specific as defined.</p>
+<ul class="list">
+<li>For Debian, "runsvdir-start" will work</li>
+<li>For Ubuntu, "start runsvdir" will work</li>
+<li>For Gentoo, "/etc/init.d/runit-start" will work</li>
+</ul>
+<h1>Chef - Resources</h1>
+<p>Chef resource represents a piece of the operating system at its desired state. It is a statement of configuration policy that describes the desired state of a node to which one wants to take the current configuration to using resource providers. It helps in knowing the current status of the target machine using the Ohai mechanism of Chef. It also helps in defining the steps required to perform to get the target machine to that state. The resources are grouped in recipes which describes the working configuration.</p>
+<p>In case of Chef, chef::Platform maps the providers and platform versions of each node. At the beginning of every Chef-client run, Chef server collects the details of any machines current state. Later, Chef server uses those values to identify the correct provider.</p>
+<h3>Resource Syntax</h3>
+<pre class="prettyprint notranslate">
+type 'name' do 
+   attribute 'value' 
+   action :type_of_action 
+end
+</pre>
+<p>In the above syntax, ‘type’ is the resource type and ‘name’ is the name that we are going to use. In the ‘do’ and ‘end’ block, we have the attribute of that resource and the action that we need to take for that particular resource.</p>
+<p>Every resource that we use in the recipe has its own set of actions, which is defined inside the ‘do’ and ‘end’ block.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+type 'name' do 
+   attribute 'value' 
+   action :type_of_action 
+end 
+</pre>
+<p>All resources share a common set of functionality, actions, properties, conditional execution, notification, and relevant path of action.</p>
+<table class="table table-bordered">
+<tr>
+<td style="text-align:center;">Actions</td>
+<td>The <b>:nothing</b> action can be used with any resource or custom resource.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Properties</td>
+<td>The ignore_failure, provider, retries, retry_delay, and supports properties can be used with any resource or custom resources.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Guards</td>
+<td>The not_if and only_if conditional executions can be used to put additional guards around certain resources, so that they are only run when the condition is met.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Guard Interpreters</td>
+<td>Evaluates a string command using a <b>script</b>-based resource: <b>bash, csh, perl, powershell_script, python,</b> or <b>ruby</b>.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Notifications</td>
+<td>The notifies and subscribes notifications can be used with any resource.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Relative Paths</td>
+<td>The #{ENV['HOME']} relative path can be used with any resource.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Windows File Security</td>
+<td>The <b>template, file, remote_file, cookbook_file, directory,</b> and <b>remote_directory</b> resources support the use of inheritance and access control lists (ACLs) within recipes.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Run in Compile Phase</td>
+<td>Sometimes a resource needs to be run before every other resource or after all resources have been added to the resource collection.</td>
+</tr>
+</table>
+<h2>Available Resources</h2>
+<h3>apt_package</h3>
+<p>Use the <b>apt_package</b> resource to manage packages for the Debian and Ubuntu platforms.</p>
+<h3>Bash</h3>
+<p>Use the <b>bash</b> resource to execute scripts using the Bash interpreter. This resource may also use any of the actions and properties that are available to the <b>execute</b> resource. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.</p>
+<h3>Batch</h3>
+<p>Use the <b>batch</b> resource to execute a batch script using the cmd.exe interpreter. The <b>batch</b> resource creates and executes a temporary file (similar to how the <b>script</b> resource behaves), rather than running the command inline.</p>
+<p>This resource inherits actions (:run and :nothing) and properties (creates, cwd, environment, group, path, timeout, and user) from the <b>execute</b> resource. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use <b>not_if</b> and <b>only_if</b> to guard this resource for idempotence.</p>
+<h3>bff_package</h3>
+<p>Use the <b>bff_package</b> resource to manage packages for the AIX platform using the <b>installp</b> utility. When a package is installed from a local file, it must be added to the node using the <b>remote_file</b> or <b>cookbook_file resources</b>.</p>
+<h3>chef_gem</h3>
+<p>Use the <b>chef_gem</b> resource to install a gem only for the instance of Ruby that is dedicated to the Chef-Client. When a gem is installed from a local file, it must be added to the node using the <b>remote_file</b> or <b>cookbook_file</b> resources.</p>
+<p>The <b>chef_gem</b> resource works with all of the same properties and options as the <b>gem_package</b> resource, but does not accept the gem_binary property because it always uses the CurrentGemEnvironment under which the Chef-Client is running. In addition to performing actions similar to the <b>gem_package</b> resource, the <b>chef_gem</b> resource does the above.</p>
+<h3>cookbook_file</h3>
+<p>Use the <b>cookbook_file</b> resource to transfer files from a sub-directory of COOKBOOK_NAME/files/ to a specified path located on a host that is running the ChefClient.</p>
+<p>The file is selected according to file specificity, which allows different source files to be used based on the hostname, host platform (operating system, distro, or as appropriate), or platform version. Files that are located in the COOKBOOK_NAME/files/default subdirectory may be used on any platform.</p>
+<h3>Cron</h3>
+<p>Use the cron resource to manage cron entries for time-based job scheduling. Properties for a schedule will default to &ast; if not provided. The cron resource requires access to a crontab program, typically cron.</p>
+<h3>Csh</h3>
+<p>Use the csh resource to execute scripts using the csh interpreter. This resource may also use any of the actions and properties that are available to the execute resource.</p>
+<p>Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.</p>
+<h3>Deploy</h3>
+<p>Use the <b>deploy</b> resource to manage and control deployments. This is a popular resource, but is also complex, having the most properties, multiple providers, the added complexity of callbacks, plus four attributes that support layout modifications from within a recipe.</p>
+<h3>Directory</h3>
+<p>Use the <b>directory</b> resource to manage a directory, which is a hierarchy of folders that comprises all of the information stored on a computer. The root directory is the top-level, under which the rest of the directory is organized.</p>
+<p>The <b>directory</b> resource uses the name property to specify the path to a location in a directory. Typically, permission to access that location in the directory is required.</p>
+<h3>dpkg_package</h3>
+<p>Use the <b>dpkg_package</b> resource to manage packages for the <b>dpkg</b> platform. When a package is installed from a local file, it must be added to the node using the <b>remote_file</b> or <b>cookbook_file</b> resources.</p>
+<h3>easy_install_package</h3>
+<p>Use the <b>easy_install_package</b> resource to manage packages for the Python platform.</p>
+<h3>Env</h3>
+<p>Use the <b>env</b> resource to manage environment keys in Microsoft Windows. After an environment key is set, Microsoft Windows must be restarted before the environment key is available to the Task Scheduler.</p>
+<h3>erl_call</h3>
+<p>Use the <b>erl_call</b> resource to connect to a node located within a distributed Erlang system. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.</p>
+<h3>Execute</h3>
+<p>Use the <b>execute</b> resource to execute a single command. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use <b>not_if</b> and <b>only_if</b> to guard this resource for idempotence.</p>
+<h3>File</h3>
+<p>Use the <b>file</b> resource to manage the files directly on a node.</p>
+<h3>freebsd_package</h3>
+<p>Use the <b>freebsd_package</b> resource to manage packages for the FreeBSD platform.</p>
+<h3>gem_package</h3>
+<p>Use the <b>gem_package</b> resource to manage gem packages that are only included in recipes. When a package is installed from a local file, it must be added to the node using the <b>remote_file</b> or <b>cookbook_file</b> resources.</p>
+<h3>Git</h3>
+<p>Use the <b>git</b> resource to manage source control resources that exist in a git repository. git version 1.6.5 (or higher) is required to use all of the functionality in the git resource.</p>
+<h3>Group</h3>
+<p>Use the <b>group</b> resource to manage a local group.</p>
+<h3>homebrew_package</h3>
+<p>Use the <b>homebrew_package</b> resource to manage packages for the Mac OS X platform.</p>
+<h3>http_request</h3>
+<p>Use the <b>http_request</b> resource to send an HTTP request (GET, PUT, POST, DELETE, HEAD, or OPTIONS) with an arbitrary message. This resource is often useful when custom callbacks are necessary.</p>
+<h3>Ifconfig</h3>
+<p>Use the <b>ifconfig</b> resource to manage interfaces.</p>
+<h3>ips_package</h3>
+<p>Use the <b>ips_package</b> resource to manage packages (using Image Packaging System (IPS)) on the Solaris 11 platform.</p>
+<h3>Ksh</h3>  
+<p>Use the <b>ksh</b> resource to execute scripts using the Korn shell (ksh) interpreter. This resource may also use any of the actions and properties that are available to the execute resource.</p>
+<p>Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.</p>
+<h3>Link</h3>  
+<p>Use the <b>link</b> resource to create symbolic or hard links.</p>
+<h3>Log</h3>  
+<p>Use the <b>log</b> resource to create log entries. The log resource behaves like any other resource: built into the resource collection during the compile phase, and then run during the execution phase. (To create a log entry that is not built into the resource collection, use Chef::Log instead of the log resource)</p>
+<h3>macports_package</h3> 
+<p>Use the macports_package resource to manage packages for the Mac OS X platform.</p>
+<h3>Mdadm</h3>  
+<p>Use the <b>mdadm</b> resource to manage RAID devices in a Linux environment using the mdadm utility. The mdadm provider will create and assemble an array, but it will not create the config file that is used to persist the array upon reboot.</p>
+<p>If the config file is required, it must be done by specifying a template with the correct array layout, and then by using the mount provider to create a file systems table (fstab) entry.</p>
+<h3>Mount</h3>  
+<p>Use the mount resource to manage a mounted file system.</p>
+<h3>Ohai</h3> 
+<p>Use the <b>ohai</b> resource to reload the Ohai configuration on a node. This allows recipes that change system attributes (like a recipe that adds a user) to refer to those attributes later on during the chef-client run.</p>
+<h3>Package</h3>  
+<p>Use the <b>package</b> resource to manage packages. When the package is installed from a local file (such as with RubyGems, dpkg, or RPM Package Manager), the file must be added to the node using the remote_file or cookbook_file resources.</p>
+<h3>pacman_package</h3>  
+<p>Use the <b>pacman_package</b> resource to manage packages (using pacman) on the Arch Linux platform.</p>
+<h3>powershell_script</h3> 
+<p>Use the <b>powershell_script</b> resource to execute a script using the Windows PowerShell interpreter, much like how the script and script-based resources—bash, csh, perl, python, and ruby—are used. The powershell_script is specific to the Microsoft Windows platform and the Windows PowerShell interpreter.</p>
+<h3>Python</h3>  
+<p>Use the <b>python</b> resource to execute scripts using the Python interpreter. This resource may also use any of the actions and properties that are available to the execute resource.</p>
+<p>Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.</p>
+<h3>Reboot</h3>  
+<p>Use the <b>reboot</b> resource to reboot a node, a necessary step with some installations on certain platforms. This resource is supported for use on the Microsoft Windows, Mac OS X, and Linux platforms.</p>
+<h3>registry_key</h3>  
+<p>Use the <b>registry_key</b> resource to create and delete registry keys in Microsoft Windows.</p>
+<h3>remote_directory</h3>  
+<p>Use the <b>remote_directory</b> resource to incrementally transfer a directory from a cookbook to a node. The directory that is copied from the cookbook should be located under COOKBOOK_NAME/files/default/REMOTE_DIRECTORY.</p>
+<p>The remote_directory resource will obey file specificity.</p>
+<h3>remote_file</h3>  
+<p>Use the <b>remote_file</b> resource to transfer a file from a remote location using file specificity. This resource is similar to the file resource.</p>
+<h3>Route</h3> 
+<p>Use the route resource to manage the system routing table in a Linux environment.</p>
+<h3>rpm_package</h3>  
+<p>Use the <b>rpm_package</b> resource to manage packages for the RPM Package Manager platform.</p>
+<h3>Ruby</h3>  
+<p>Use the <b>ruby</b> resource to execute scripts using the Ruby interpreter. This resource may also use any of the actions and properties that are available to the execute resource.</p> 
+<p>Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.</p>
+<h3>ruby_block</h3>  
+<p>Use the <b>ruby_block</b> resource to execute Ruby code during a Chef-Client run. Ruby code in the ruby_block resource is evaluated with other resources during convergence, whereas Ruby code outside of a ruby_block resource is evaluated before other resources, as the recipe is compiled.</p>
+<h3>Script</h3>  
+<p>Use the script resource to execute scripts using a specified interpreter, such as Bash, csh, Perl, Python, or Ruby. This resource may also use any of the actions and properties that are available to the execute resource.</p>
+<p>Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.</p>
+<h3>Service</h3>  
+<p>Use the <b>service</b> resource to manage a service.</p>
+<h3>smart_os_package</h3>  
+<p>Use the <b>smartos_package</b> resource to manage packages for the SmartOS platform.</p>
+<h3>solaris_package</h3>  
+<p>The <b>solaris_package</b> resource is used to manage packages for the Solaris platform.</p>
+<h3>Subversion</h3>  
+<p>Use the <b>subversion</b> resource to manage source control resources that exist in a Subversion repository.</p>
+<h3>Template</h3>  
+<p>Use the <b>template</b> resource to manage the contents of a file using an Embedded Ruby (ERB) template by transferring files from a sub-directory of COOKBOOK_NAME/templates/ to a specified path located on a host that is running the Chef-Client. This resource includes actions and properties from the file resource. Template files managed by the template resource follow the same file specificity rules as the remote_file and file resources.</p>
+<h3>User</h3>  
+<p>Use the <b>user</b> resource to add users, update existing users, remove users, and to lock/unlock user passwords.</p>
+<h3>windows_package</h3>  
+<p>Use the <b>windows_package</b> resource to manage Microsoft Installer Package (MSI) packages for the Microsoft Windows platform.</p>
+<h3>windows_service</h3>  
+<p>Use the <b>windows_service</b> resource to manage a service on the Microsoft Windows platform.</p>
+<h3>yum_package</h3>  
+<p>Use the <b>yum_package</b> resource to install, upgrade, and remove packages with Yum for the Red Hat and CentOS platforms. The yum_package resource is able to resolve provides data for packages much like Yum can do when it is run from the command line. This allows a variety of options for installing packages, like minimum versions, virtual provides, and library names.</p>
+<h1>Chef - Lightweight Resource Provider</h1>
+<p><b>Lightweight resource provider (LWRP)</b> provides an option of extending the list of available resources by extending it features and allows Chef user to create custom resources.</p>
+<p>By creating custom resources one can simply write cookbooks because one can own enriched custom resources using Chef DSL which helps in making the recipe code more expressive.</p>
+<p>In Chef community, many of the custom resources are implemented using LWRPs. There are many working examples of LWRP such as <b>iptables_rules</b> and <b>apt_repository</b>.</p>
+<h2>Working Method</h2>
+<p>Make sure one has cookbook name Testing_resource and a run_list of node which contains Testing_resource cookbook.</p>
+<h2>Building LWRP</h2>
+<p><b>Step 1</b> &minus; Create a custom resource in Testing_resource cookbook.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/Testing_resource/resources/default.rb 
+actions :create, :remove 
+attribute :title, kind_of: String, default: "World" 
+attribute :path, kind_of: String, default: "/tmp/greeting.txt" 
+</pre>
+<p><b>Step 2</b> &minus; Create a provider for resources in Tesing_resource cookbook.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/Testing_resource/provider/default.rb 
+action :create do 
+   log "Adding '#{new_resource.name}' greeting as #{new_resource. 
+      path}" 
+   file new_resource.path do 
+      content "#{new_resource.name}, #{new_resource.title}!" 
+      action :create 
+end  
+action :remove do 
+   Chef::Log.info "Removing '#{new_resource.name}' greeting #{new_resource.path}" 
+   file new_resource.path do 
+      action :delete 
+   end 
+end 
+</pre>
+<p><b>Step 3</b> &minus; Use a new resource by editing Testing_resource default recipe.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/Tesing_resource/recipes/default.rb 
+greeting "Ohai" do 
+   title "Chef" 
+   action :create 
+end 
+</pre>
+<p><b>Step 4</b> &minus; Upload the modified cookbook to Chef server.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ knife cookbook upload greeting 
+Uploading greeting [0.1.0] 
+</pre>
+<p><b>Step 5</b> &minus; Run Chef-Client on the node.</p>
+<pre class="result notranslate">
+vipin@server:~$ sudo chef-client 
+...TRUNCATED OUTPUT... 
+2013-06-28T21:32:54+00:00] INFO: Processing greeting[Ohai] action 
+create (greeting::default line 9) 
+[2013-06-28T21:32:54+00:00] INFO: Adding 'Ohai' greeting as /tmp/ 
+greeting.txt 
+[2013-06-28T21:32:54+00:00] INFO: Processing file[/tmp/greeting. 
+txt] action create (/srv/chef/file_store/cookbooks/greeting/ 
+providers/default.rb line 7) 
+[2013-06-28T21:32:54+00:00] INFO: entered create 
+[2013-06-28T21:32:54+00:00] INFO: file[/tmp/greeting.txt] created 
+file /tmp/greeting.txt 
+...TRUNCATED OUTPUT... 
+</pre>
+<p><b>Step 6</b> &minus; Validate the content of the generated file.</p>
+<pre class="result notranslate">
+user@server:~$ cat /tmp/greeting.txt 
+Ohai, Chef! 
+</pre>
+<h2>Workflow Scripts</h2>
+<p>LWRPs live in cookbooks. A custom resource lives inside the cookbooks, and will be available under the cookbook name. In the workflow, first we define the definitions and then pass the attributes to the resources which is going to be used in the cookbook. Finally, we use those actions and attributes in our recipe.</p>
+<h1>Chef - Blueprints</h1>
+<p>In Chef, blueprints are the tools to find out and record exactly what is present on the server. Blueprints record all the things required such as directors, packages, configuration files, and so on. Blueprints have the capability to split server information in various formats. One of them is Chef recipe. This helps to configure unique server using Chef.</p>
+<h2>Woring Method</h2>
+<p>We need to have Python and Git installed on the node where we need to run the blueprint.</p>
+<p><b>Step 1</b> &minus; Install the blueprint.</p>
+<pre class="result notranslate">
+vipin@server:~$ pip install blueprint 
+</pre>
+<p><b>Step 2</b> &minus; Create a blueprint.</p>
+<pre class="result notranslate">
+user@server:~$ sudo blueprint create internal-cookbook 
+# [blueprint] using cached blueprintignore(5) rules 
+# [blueprint] searching for Python packages 
+# [blueprint] searching for PEAR/PECL packages 
+# [blueprint] searching for Yum packages 
+# [blueprint] searching for Ruby gems 
+# [blueprint] searching for npm packages 
+# [blueprint] searching for software built from source 
+# [blueprint] searching for configuration files 
+# [blueprint] /etc/ssl/certs/AC_Ra\xc3\xadz_Certic\xc3\ 
+xa1mara_S.A..pem not UTF-8 - skipping it 
+# [blueprint] /etc/ssl/certs/NetLock_Arany_=Class_Gold=_F\xc5\ 
+x91tan\xc3\xbas\xc3\xadtv\xc3\xa1ny.pem not UTF-8 - skipping it 
+# [blueprint] /etc/ssl/certs/EBG_Elektronik_Sertifika_Hizmet_Sa\ 
+xc4\x9flay\xc4\xb1c\xc4\xb1s\xc4\xb1.pem not UTF-8 - skipping it 
+# [blueprint] /etc/ssl/certs/Certinomis_-_Autorit\xc3\xa9_Racine. 
+pem not UTF-8 - skipping it 
+# [blueprint] /etc/ssl/certs/T\xc3\x9cB\xc4\xb0TAK_UEKAE_K\xc3\ 
+xb6k_Sertifika_Hizmet_Sa\xc4\x9flay\xc4\xb1c\xc4\xb1s\xc4\xb1_-_S\ 
+xc3\xbcr\xc3\xbcm_3.pem not UTF-8 - skipping it 
+# [blueprint] searching for APT packages 
+# [blueprint] searching for service dependencies
+</pre>
+<p><b>Step 3</b> &minus; Create a cookbook from the blueprint.</p>
+<pre class="result notranslate">
+user@server:~$ blueprint show -C internal-cookbook my-server/recipes/default.rb
+</pre>
+<p><b>Step 4</b> &minus; Validate the content of the generated file.</p>
+<pre class="result notranslate">
+user@server:~$ cat internal-cookbook /recipes/default.rb 
+# 
+# Automatically generated by blueprint(7). Edit at your own risk. 
+# 
+cookbook_file('/tmp/96468fd1cc36927a027045b223c61065de6bc575.tar') 
+do 
+   backup false 
+   group 'root' 
+   mode '0644' 
+   owner 'root' 
+   source 'tmp/96468fd1cc36927a027045b223c61065de6bc575.tar' 
+end 
+execute('/tmp/96468fd1cc36927a027045b223c61065de6bc575.tar') do 
+   command 'tar xf "/tmp/96468fd1cc36927a027045b223c61065de6bc575.tar"' 
+   cwd '/usr/local' 
+end 
+directory('/etc/apt/apt.conf.d') do 
+...TRUNCATED OUTPUT... 
+service('ssh') do 
+   action [:enable, :start] 
+   subscribes :restart, resources('cookbook_file[/etc/default/ 
+      keyboard]', 'cookbook_file[/etc/default/console-setup]', 
+      'cookbook_file[/etc/default/ntfs-3g]', 'package[openssh-server]', 
+      'execute[96468fd1cc36927a027045b223c61065de6bc575.tar]') 
+end
+</pre>
+<h2>Workflow Script</h2>
+<p>Blueprint is a Python package that finds out all the relevant configuration data of the server and stores it in a Git repo. Each blueprint has its own name.</p>
+<p>One can ask the blueprint to show the content of its Git repo in various formants.</p>
+<pre class="result notranslate">
+user@server:~$ ls -l internal-cookbook / 
+total 8 
+drwxrwxr-x 3 vagrant vagrant 4096 Jun 28 06:01 files 
+-rw-rw-r-- 1 vagrant vagrant 0 Jun 28 06:01 metadata.rb 
+drwxrwxr-x 2 vagrant vagrant 4096 Jun 28 06:01 recipes 
+</pre>
+<h2>Blueprints Show Commands</h2>
+<pre class="result notranslate">
+user@server:~$ blueprint show-packages my-server 
+...TRUNCATED OUTPUT... 
+apt wireless-regdb 2011.04.28-1ubuntu3 
+apt zlib1g-dev 1:1.2.3.4.dfsg-3ubuntu4 
+python2.7 distribute 0.6.45 
+python2.7 pip 1.3.1 
+pip blueprint 3.4.2 
+pip virtualenv 1.9.1 
+</pre>
+<p>The preceding command shows all kinds of installed packages. Other show commands are as follows &minus;</p>
+<ul class="list">
+<li>show-files</li>
+<li>show-services</li>
+<li>show-sources</li>
+</ul>
+<h1>Chef - Files &amp; Packages</h1>
+<p>In Chef, creating configuration files and moving packages are the key components. There are multiple ways how Chef manages the same. There are multiple ways how Chef supports in dealing with the files and software packages.</p>
+<h2>Installing Packages from Third-Party Repo</h2>
+<p><b>Step 1</b> &minus; Edit the default recipe of the cookbook.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/test_cookbook/recipes/default.rb 
+include_recipe "apt" 
+apt_repository "s3tools" do 
+   uri "http://s3tools.org/repo/deb-all" 
+   components ["stable/"] 
+   key "http://s3tools.org/repo/deb-all/stable/s3tools.key" 
+   action :add 
+end 
+package "s3cmd"
+</pre>
+<p><b>Step 2</b> &minus; Edit the metadata to add dependency on the apt cookbook.</p>
+<pre class="result notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/my_cookbook/metadata.rb 
+... 
+depends "apt"
+</pre>
+<p><b>Step 3</b> &minus; Upload the modified cookbook to the Chef server.</p>
+<p><b>Step 4</b> &minus; Validate that the package you are trying to install, is not yet installed.</p>
+<p><b>Step 5</b> &minus; Validate the default repo.</p>
+<p><b>Step 6</b> &minus; Run Chef-Client on the node.</p>
+<p><b>Step 7</b> &minus; Validate that the required package is installed.</p>
+<h2>Installing Software from Source</h2>
+<p>If one needs to install a piece of software that is not available as a package for a given platform, one needs to compile it oneself. In Chef, we can do this by using the script resource.</p>
+<p><b>Step 1</b> &minus; Edit the default recipe.</p>
+<pre class="prettyprint notranslate">
+vipin@laptop:~/chef-repo $ subl cookbooks/my_cookbook/recipes/ 
+default.rb 
+version = "1.3.9" 
+bash "install_nginx_from_source" do 
+   cwd Chef::Config['file_cache_path'] 
+   code &Lt;-EOH 
+      wget http://nginx.org/download/nginx-#{version}.tar.gz 
+      tar zxf nginx-#{version}.tar.gz && 
+      cd nginx-#{version} && 
+      ./configure && make && make install 
+   EOH 
+</pre>
+<p><b>Step 2</b> &minus; Upload the modified cookbook to the Chef server.</p>
+<p><b>Step 3</b> &minus; Run the Chef-Client on the node.</p>
+<p><b>Step 4</b> &minus; Validate that the nginx is installed.</p>
+<h1>Chef - Community Cookbooks</h1>
+<p>Community cookbooks are similar to any other cookbook. The only reason it is called community cookbook is because anyone who knows to write cookbooks can join this community and upload their cookbooks to the centralized hub. These cookbooks are available for free and anyone can download and use it. In order to use these community cookbooks, one needs to download them, modify them as per the requirement, and upload them to their respective Chef server.</p>
+<p>One needs to have knife configured on their system in order to update, upload, and download the cookbooks. Interact with cookbooks using the knife cookbook commands. With knife cookbook, you can create, delete, show, list, download, and upload cookbooks. Read the knife cookbook commands documentation for more information in Chapter 7.</p>
+<p>Following is the link of community cookbooks: <a target="_blank" rel="nofollow" href="https://supermarket.chef.io/cookbooks-directory">https://supermarket.chef.io/cookbooksdirectory</a></p>
+<img src="images/community.jpg" alt="Community" />
+<hr />
+<div class="pre-btn">
+<a href="chef_community_cookbooks.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="chef_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/chef/chef_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/chef/chef_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/chef/chef_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/chef/chef_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/chef/chef_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/chef/chef_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/chef/chef_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 14:40:10 GMT -->
+</html>

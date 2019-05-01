@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Virtualization 2.0 Quick Guide</title>
+<meta name="description" content="Virtualization 2.0 Quick Guide - Learn Virtualization 2.0 in simple and easy steps starting from basic to advanced concepts with examples including Overview, Pros and Cons, Common Uses, Hardware, Microsoft Hyper-V, VMware Workstation Player, VirtualBox, Openstack, Preparing the Infrastructure, Troubleshooting, Backing Up, Restoring and Migrating VM." />
+<meta name="keywords" content="Virtualization 2.0, Tutorial, Learning, Overview, Pros and Cons, Common Uses, Hardware, Microsoft Hyper-V, VMware Workstation Player, VirtualBox, Openstack, Preparing the Infrastructure, Troubleshooting, Backing Up, Restoring and Migrating VM." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #036db0 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #036db0 !important;}
+.submenu-item{ border-bottom: 2px solid #036db0 !important; border-top: 2px solid #036db0 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/virtualization2.0/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtualization-mini-logo.jpg" alt="Virtualization 2.0 Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Virtualization 2.0 Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/index.htm">Virtualization 2.0 - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_overview.htm">Virtualization 2.0 - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_pros_and_cons.htm">Virtualization 2.0 - Pros and Cons</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_common_uses.htm">Virtualization 2.0 - Common Uses</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_hardware.htm">Virtualization 2.0 - Hardware</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_microsoft_hyperv.htm">Virtualization 2.0 - Microsoft HyperV</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_vmware_workstation_player.htm">VMware Workstation Player</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_virtualbox.htm">Virtualization 2.0 - VirtualBox</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_openstack.htm">Virtualization 2.0 - Openstack</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_preparing_the_infrastructure.htm">Preparing the Infrastructure</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_troubleshooting.htm">Virtualization 2.0 - Troubleshooting</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_backing_up_restoring_migrating_vm.htm">Backing Up, Restoring &amp; Migrating VM</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Virtualization 2.0 Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm">Virtualization 2.0 - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_useful_resources.htm">Virtualization 2.0 - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_discussion.htm">Virtualization 2.0 - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Virtualization 2.0 - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_backing_up_restoring_migrating_vm.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Virtualization 2.0 - Overview</h1>
+<p>Virtualization is a technology that helps us to install different Operating Systems on a hardware. They are completely separated and independent from each other. In Wikipedia, you can find the definition as – “In computing, virtualization is a broad term that refers to the abstraction of computer resources.</p>
+<p>Virtualization hides the physical characteristics of computing resources from their users, their applications or end users. This includes making a single physical resource (such as a server, an operating system, an application or a storage device) appear to function as multiple virtual resources. It can also include making multiple physical resources (such as storage devices or servers) appear as a single virtual resource...”</p>
+<p>Virtualization is often &minus;</p>
+<ul class="list">
+<li>The creation of many virtual resources from one physical resource.</li>
+<li>The creation of one virtual resource from one or more physical resource.</li>
+</ul>
+<h2>Types of Virtualization</h2>
+<p>Today the term virtualization is widely applied to a number of concepts, some of which are described below &minus;</p>
+<ul class="list">
+<li>Server Virtualization</li>
+<li>Client &amp; Desktop Virtualization</li>
+<li>Services and Applications Virtualization</li>
+<li>Network Virtualization</li>
+<li>Storage Virtualization</li> 
+</ul>
+<p>Let us now discuss each of these in detail.</p>
+<h3>Server Virtualization</h3>
+<p>It is virtualizing your server infrastructure where you do not have to use any more physical servers for different purposes.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/server.jpg" alt="Server" />
+<h3>Client &amp; Desktop Virtualization</h3>
+<p>This is similar to server virtualization, but this time is on the user’s site where you virtualize their desktops. We change their desktops with thin clients and by utilizing the datacenter resources.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/client.jpg" alt="Client" />
+<h3>Services and Applications Virtualization</h3>
+<p>The virtualization technology isolates applications from the underlying operating system and from other applications, in order to increase compatibility and manageability. For example – Docker can be used for that purpose.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/applications.jpg" alt="Applications" />
+<h3>Network Virtualization</h3>
+<p>It is a part of virtualization infrastructure, which is used especially if you are going to visualize your servers. It helps you in creating multiple switching, Vlans, NAT-ing, etc.</p>
+<p>The following illustration shows the VMware schema &minus;</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/network.jpg" alt="Network" />
+<h3>Storage Virtualization</h3>
+<p>This is widely used in datacenters where you have a big storage and it helps you to create, delete, allocated storage to different hardware. This allocation is done through network connection. The leader on storage is SAN. A schematic illustration is given below &minus;</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/storage.jpg" alt="Storage" />
+<h2>Understanding Different Types of Hypervisors</h2>
+<p>A hypervisor is a thin software layer that intercepts operating system calls to the hardware. It is also called as the <b>Virtual Machine Monitor</b> (VMM). It creates a virtual platform on the host computer, on top of which multiple guest operating systems are executed and monitored.</p>
+<p>Hypervisors are two types &minus;</p>
+<ul class="list">
+<li>Native of Bare Metal Hypervisor and</li>
+<li>Hosted Hypervisor</li>
+</ul>
+<p>Let us now discuss both of these in detail.</p>
+<h3>Native or Bare Metal Hypervisor</h3>
+<p>Native hypervisors are software systems that run directly on the host's hardware to control the hardware and to monitor the <b>Guest Operating Systems</b>. The guest operating system runs on a separate level above the hypervisor. All of them have a Virtual Machine Manager.</p>
+<p>Examples of this virtual machine architecture are <b>Oracle VM, Microsoft Hyper-V, VMWare ESX</b> and <b>Xen</b>.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/bare_metal.jpg" alt="Bare Metal" />
+<h3>Hosted Hypervisor</h3>
+<p>Hosted hypervisors are designed to run within a traditional operating system. In other words, a hosted hypervisor adds a distinct software layer on top of the host operating system. While, the guest operating system becomes a third software level above the hardware.</p>
+<p>A well-known example of a hosted hypervisor is <b>Oracle VM VirtualBox</b>. Others include <b>VMWare Server and Workstation, Microsoft Virtual PC, KVM, QEMU</b> and <b>Parallels</b>.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/hosted.jpg" alt="Hosted" />
+<h2>Understanding Local Virtualization and Cloud</h2>
+<p>Virtualization is one of the fundamental technologies that makes cloud-computing work. However, virtualization is not cloud computing. Cloud computing is a service that different providers offer to you based on some costs.</p>
+<p>In enterprise networks, virtualization and cloud computing are often used together to build a public or private cloud infrastructure. In small businesses, each technology will be deployed separately to gain measurable benefits. In different ways, virtualization and cloud computing can help you keep your equipment spending to a minimum and get the best possible use from the equipment you already have.</p>
+<p>As mentioned before, virtualization software allows one physical server to run several individual computing environments. In practice, it is like getting multiple servers for each physical server you buy. This technology is fundamental to cloud computing. Cloud providers have large data centers full of servers to power their cloud offerings, but they are not able to devote a single server to each customer. Thus, they virtually partition the data on the server, enabling each client to work with a separate “virtual” instance (which can be a private network, servers farm, etc.) of the same software.</p>
+<p>Small businesses are most likely to adopt cloud computing by subscribing to a cloud-based service. The largest providers of cloud computing are <b>Microsoft with Azure</b> and <b>Amazon</b>.</p>
+<p>The following illustration is provided by Microsoft where you can understand how utilizing extra infrastructure for your business without the need to spend extra money helps. You can have the on-premises base infrastructure, while on cloud you can have all your services, which are based on Virtualized technology.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtual_network.jpg" alt="Virtual Network" />
+<h1>Virtualization 2.0 - Pros and Cons</h1>
+<p>In this chapter, we will discuss some of the most common advantages and disadvantages of Virtualization.</p>
+<h2>Advantages of Virtualization</h2>
+<p>Following are some of the most recognized advantages of Virtualization, which are explained in detail.</p>
+<h3>Using Virtualization for Efficient Hardware Utilization</h3>
+<p>Virtualization decreases costs by reducing the need for physical hardware systems. Virtual machines use efficient hardware, which lowers the quantities of hardware, associated maintenance costs and reduces the power along with cooling the demand. You can allocate memory, space and CPU in just a second, making you more self-independent from hardware vendors.</p>
+<h3>Using Virtualization to Increase Availability</h3>
+<p>Virtualization platforms offer a number of advanced features that are not found on physical servers, which increase uptime and availability. Although the vendor feature names may be different, they usually offer capabilities such as live migration, storage migration, fault tolerance, high availability and distributed resource scheduling. These technologies keep virtual machines chugging along or give them the ability to recover from unplanned outages.</p>
+<p>The ability to move a virtual machine from one server to another is perhaps one of the greatest single benefits of virtualization with far reaching uses. As the technology continues to mature to the point where it can do long-distance migrations, such as being able to move a virtual machine from one data center to another no matter the network latency involved.</p>
+<h3>Disaster Recovery</h3>
+<p>Disaster recovery is very easy when your servers are virtualized. With up-to-date snapshots of your virtual machines, you can quickly get back up and running. An organization can more easily create an affordable replication site. If a disaster strikes in the data center or server room itself, you can always move those virtual machines elsewhere into a cloud provider. Having that level of flexibility means your disaster recovery plan will be easier to enact and will have a 99% success rate.</p>
+<h3>Save Energy</h3>
+<p>Moving physical servers to virtual machines and consolidating them onto far fewer physical servers’ means lowering monthly power and cooling costs in the data center. It reduces carbon footprint and helps to clean up the air we breathe. Consumers want to see companies reducing their output of pollution and taking responsibility.</p>
+<h3>Deploying Servers too fast</h3>
+<p>You can quickly clone an image, master template or existing virtual machine to get a server up and running within minutes. You do not have to fill out purchase orders, wait for shipping and receiving and then rack, stack, and cable a physical machine only to spend additional hours waiting for the operating system and applications to complete their installations. With virtual backup tools like Veeam, redeploying images will be so fast that your end users will hardly notice there was an issue.</p>
+<h3>Save Space in your Server Room or Datacenter</h3>
+<p>Imagine a simple example: you have two racks with 30 physical servers and 4 switches. By virtualizing your servers, it will help you to reduce half the space used by the physical servers. The result can be two physical servers in a rack with one switch, where each physical server holds 15 virtualized servers.</p>
+<h3>Testing and setting up Lab Environment</h3>
+<p>While you are testing or installing something on your servers and it crashes, do not panic, as there is no data loss. Just revert to a previous snapshot and you can move forward as if the mistake did not even happen. You can also isolate these testing environments from end users while still keeping them online. When you have completely done your work, deploy it in live.</p>
+<h3>Shifting all your Local Infrastructure to Cloud in a day</h3>
+<p>If you decide to shift your entire virtualized infrastructure into a cloud provider, you can do it in a day. All the hypervisors offer you tools to export your virtual servers.</p>
+<h3>Possibility to Divide Services</h3>
+<p>If you have a single server, holding different applications this can increase the possibility of the services to crash with each other and increasing the fail rate of the server. If you virtualize this server, you can put applications in separated environments from each other as we have discussed previously.</p>
+<h2>Disadvantages of Virtualization</h2>
+<p>Although you cannot find many disadvantages for virtualization, we will discuss a few prominent ones as follows &minus;</p>
+<h3>Extra Costs</h3>
+<p>Maybe you have to invest in the virtualization software and possibly additional hardware might be required to make the virtualization possible. This depends on your existing network. Many businesses have sufficient capacity to accommodate the virtualization without requiring much cash. If you have an infrastructure that is more than five years old, you have to consider an initial renewal budget.</p>
+<h3>Software Licensing</h3>
+<p>This is becoming less of a problem as more software vendors adapt to the increased adoption of virtualization. However, it is important to check with your vendors to understand how they view software use in a virtualized environment.</p>
+<h3>Learn the new Infrastructure</h3>
+<p>Implementing and managing a virtualized environment will require IT staff with expertise in virtualization. On the user side, a typical virtual environment will operate similarly to the non-virtual environment. There are some applications that do not adapt well to the virtualized environment.</p>
+<h1>Virtualization 2.0 - Common Uses</h1>
+<p>There are several types of uses in virtualization, but the most commonly used are <b>Server Virtualization</b> and <b>Client Desktops Virtualization</b>. We have already discussed their advantages in the previous chapter and why are they used widely.</p>
+<h2>Virtualizing Desktop Computers</h2>
+<p>Client virtualization also called as VDI runs the entire desktop environment within a centralized server. All processing is done within the server. Client devices are typically thin clients that serve as an end node to connect I/O peripherals such as keyboard, mouse, a display, audio connectors and even USB ports over the LAN.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtual_desktop.jpg" alt="Virtual Desktop" />
+<p>As discussed earlier, a thin client hardware is a computer terminal, which provides I/O for a keyboard, mouse, monitor, jacks for sound peripherals, and open ports for USB devices.</p>
+<p>For example – Printer, Flash Drive, Web Cam, Card Reader, Smartphone, etc. Some thin clients include legacy serial and/or parallel ports to support older devices such as Receipt Printers, Scales, Time Clocks, etc. Thin client software typically consists of a GUI (graphical user interface), Cloud Access Agents (for e.g. RDP, ICA, PCoIP), a local web browser, terminal emulations (in some cases) and a basic set of local utilities.</p>
+<p>The largest producers of thin clients are HP, Dell and IBM.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/clients.jpg" alt="Clients" />
+<h2>Running a Specific Program Solution</h2>
+<p>One of the best software known for Desktop Virtualization is <a target="_blank" rel="nofollow" href="https://www.citrix.com/products/xenapp-xendesktop/">XenApp &amp; XenDesktop</a>. Deliver Windows, Linux, Web and SaaS applications or full virtual desktops to workers on any device and anywhere.</p>
+<p>More information can be found on <a target="_blank" rel="nofollow" href="https://www.citrix.com/products/xenapp-xendesktop/">https://www.citrix.com/products/xenapp-xendesktop/</a></p>
+<p>Another major provider is VMware with its platform called <b>VMware Horizon 7</b>. To purchase and understand all their features and specifications, click on the following link <a target="_blank" rel="nofollow" href="https://www.vmware.com/products/horizon.html">https://www.vmware.com/products/horizon.html</a></p>
+<p>Microsoft is another provider with a combination of Remote desktop services along with <b>Hyper-V</b>. For any further Information on this, click on the following link <a target="_blank" rel="nofollow" href="https://technet.microsoft.com/en-us/windowsserver/ee236407.aspx">https://technet.microsoft.com/en-us/windowsserver/ee236407.aspx</a></p>
+<h2>Setting up Test and Development Environments</h2>
+<p>One of the most powerful features of a virtualized environment is the possibility to create labs for different approaches in a minute, especially in software development and then to import the same infrastructure in production.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/setting_test.jpg" alt="Setting Test" />
+<p>Regarding the test environment, it brings cross-platform functionality to your dev-test environment and uses your preferred coding language to build natively. It tests your applications on the devices and platforms you use today: from Linux, Windows to iOS and Android.</p>
+<p>All the features mentioned in the above can be done through private cloud or public cloud. It depends on what we would like to use as per the requirement. You should take into consideration the human resources with which you have to manage this cloud and the budget that you want to spend.</p>
+<h1>Virtualization 2.0 - Hardware</h1>
+<p>In this chapter, we will discuss various components of hardware such as CPU, Memory, Storage and Networking.</p>
+<h2>Understanding Virtual CPU</h2>
+<p>When we install a hypervisor, each physical CPU is abstracted into virtual CPUs. This divides the available CPU cycles for each core and allows multiple VMs to "time share" a given physical processor core. Generally talking, the hypervisor typically assigns one workload per vCPU (per core). If the workloads on a server need more CPU cycles, it is better to deploy fewer VMs on a particular virtual CPU.</p>
+<p>Let us consider the following example to understand the logic of virtual CPU.</p>
+<p>I have a physical server with two processors (CPU 1 and CPU 2) and each of them has four physical cores. In total, we have 2 * 4 = 8 physical cores.</p>
+<p>Based on some calculations our hypervisor provided for each physical core, we can get 5-10 vCPUs.</p>
+<p>In total, we will have [8 physical cores * (5 to 10 vCPUs)] 40-80 vCPUs, which means that we can assign a maximum of 80 vCPUs to virtual machines.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/cpu.jpg" alt="CPU" />
+<h2>Understanding Virtual Memory</h2>
+<p>Virtual Memory in simple words is the RAM of the machine. The memory resource settings for a virtual machine determines how much of the host's memory is allocated to the virtual machine. The virtual hardware memory size determines how much memory is available to applications that run in the virtual machine.</p>
+<p>A virtual machine cannot benefit from more memory resources than its configured virtual hardware memory size. The <b>ESXi hosts</b> limit the memory resource use to the maximum amount useful for the virtual machine, so that you can accept the default of unlimited memory resources.</p>
+<p>You can add, change, and configure virtual machine memory resources or options to enhance virtual machine performance. You can set most of the memory parameters while creating the virtual machine or it can also be done after the <b>Guest Operating System</b> is installed. Most of the hypervisors require to power off the virtual machine before changing the settings.</p>
+<p>In the following schematic illustration, you can see that the total physical memory is divided between two virtual machines.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/vm.jpg" alt="VM" />
+<h2>Understanding Virtual Storage</h2>
+<p>Storage virtualization is the pooling of physical storage (Data cluster) from multiple network storage devices into what appears to be a single storage device that is managed from a central console. We cannot assign more storage to virtual machines that data cluster offers physically.</p>
+<p>You will see these extensions on the end of a file. Of all the files used as part of a virtual machine, different hypervisors like to use different file types. Some of the more common are <b>VDI, VHDX, VMDK</b> and <b>HDD</b>.</p>
+<p>In the following example, we have a data cluster of 12 TB in total and four virtual machines to which we have allocated storage to each of them. In total, the maximum storage allocated to them is 12 TB.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtual_storage.jpg" alt="Virtual Storage" />
+<h2>Understanding Virtual Networking</h2>
+<p>We will discuss this with a simple example as to how virtual networking done.</p>
+<p>We have Virtual Machine 1, 2, 3 and 4 running on the same host. They would like to send the network traffic back and forth. This is done by virtual networking cards as shown in the following illustration (vNIC), which connects virtually with a virtual switch (vSwitch) that is created by the hypervisor.</p>
+<p>This virtual switch communicates with a physical card of the server (pNIC), which is connected with a physical switch (pSwitch) and then communicates with the rest of the network equipment.</p>
+<p>Please see the following schematically done up scenario.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/networking.jpg" alt="Networking" />
+<h1>Virtualization 2.0 - Microsoft Hyper-V</h1>
+<p>In this chapter, we will discuss Microsoft Hyper-V along with its various modules.</p>
+<h2>Installing Hyper-V in Windows Server 2012</h2>
+<p>Microsoft Hyper-V, known as Windows Server Virtualization, is a native (bare) hypervisor. It can create virtual machines on x86-64 systems running Windows OS, starting with Windows 8. Hyper-V supersedes <b>Windows Virtual PC</b> as the hardware virtualization component of the client editions of Windows NT. A server computer running Hyper-V can be configured to expose individual virtual machines to one or more networks.</p>
+<p>Hyper-V was first released alongside Windows Server 2008 and Windows 7 and has been available without charge for all the Windows Server versions and some client operating systems since that time.</p>
+<p>Let us see how to install a Hyper-V role in a Windows Server 2012 by following the steps given below.</p>
+<p><b>Step 1</b> &minus; To Install Hyper-V role go to “Server Manager” &rarr; Manage &rarr; Add Roles and Features.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/manage.jpg" alt="Manage" />
+<p><b>Step 2</b> &minus; Click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/before_begin.jpg" alt="Before Begin" />
+<p><b>Step 3</b> &minus; Select “Role-based or feature-based installation” option &rarr; click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/role_based.jpg" alt="Role Based" />
+<p><b>Step 4</b> &minus; We will locally install the Hyper-V role as such “Select a server from the server pool” &rarr; click “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/server_selection.jpg" alt="Server Selection" />
+<p><b>Step 5</b> &minus; From the Roles lists, check the “Hyper-V” Server role &rarr; click on Add Features on the popup window &rarr; click “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/hyperv.jpg" alt="Hyper-V" />
+<p><b>Step 6</b> &minus; Click “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_next.jpg" alt="Click Next" />
+<p><b>Step 7</b> &minus; Choose your server’s physical network adapters that will take part in the virtualization and responsible for network switching &rarr; click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/switching.jpg" alt="Switching" />
+<p><b>Step 8</b> &minus; Under Migration, leave the default settings &rarr; click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/migration.jpg" alt="Migration" />
+<p><b>Step 9</b> &minus; Choose the path where you want to save the file &rarr; click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/path.jpg" alt="Path" />
+<p><b>Step 10</b> &minus; Click “Install” and wait for the installation bar to finish.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/install.jpg" alt="Install" />
+<h2>Installing Hyper-V in a windows 10 workstation</h2>
+<p>To install it in Windows 7, 8, 10 versions, you have to check if your computer supports virtualization. Following are the basic requirements &minus;</p>
+<ul class="list">
+<li>Windows 10 Pro or Enterprise 64-bit Operating System.</li>
+<li>A 64-bit processor with Second Level Address Translation (SLAT).</li>
+<li>4GB system RAM at minimum.</li> 
+<li>BIOS-level Hardware Virtualization support.</li> 
+</ul>
+<p>In my case, we have a laptop <b>HP Probook 450 G3</b>, which supports it.</p>
+<p>Before continuing with the installation, follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Ensure that hardware virtualization support is turned on in the BIOS settings as shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/bios.jpg" alt="BIOS" />
+<p><b>Step 2</b> &minus; Type in the search bar <b>“turn windows features on or off”</b> and click on that feature as shown below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/windows_on_off.jpg" alt="Windows On Off" />
+<p><b>Step 3</b> &minus; Select and enable Hyper-V.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/enable_hyperv.jpg" alt="Enable Hyper-V" />
+<h2>Creating a Virtual Machine with Hyper-V</h2>
+<p>In this section, we will learn how to create a virtual machine. To begin with, we have to open the Hyper-V manager and then follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to “Server Manager” &rarr; Click on “Hyper-V Manager”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/hyperv_manager.jpg" alt="Hyper-V Manager" />
+<p><b>Step 2</b> &minus; Click “New” on the left Panel or on the “Actions” button.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/actions.jpg" alt="Actions" />
+<p><b>Step 3</b> &minus; Double-click on “Virtual Machine…”</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtual_machine.jpg" alt="Virtual Machine" />
+<p><b>Step 4</b> &minus; A new table will open &rarr; Type Name of your new machine &rarr; click “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/window7.jpg" alt="Window 7" />
+<p><b>Step 5</b> &minus; A new table will be opened where you have to allocate the memory. Keep in mind you cannot choose more memory than you have physically.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/memory_allocation.jpg" alt="Memory Allocation" />
+<p><b>Step 6</b> &minus; In the “Connection” drop down box, choose your physical network adaptor &rarr; click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/connection.jpg" alt="Connection" />
+<p><b>Step 7</b> &minus; Now it is time to create a Virtual Hard disk, if you already have one, choose the second option.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/hard_disc.jpg" alt="Hard Disc" />
+<p><b>Step 8</b> &minus; Select the Image of ISO that has to be installed &rarr; click on “Finish”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/iso.jpg" alt="ISO" />
+<p><b>Step 9</b> &minus; After clicking on finish, you would get the following message as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/finish.jpg" alt="Finish" />
+<p><b>Step 10</b> &minus; To connect to the Virtual machine, Right Click on the created machine &rarr; click on “Connect…”</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/connect.jpg" alt="Connect" />
+<p><b>Step 11</b> &minus; After that, installation of your ISO will continue.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/iso_continue.jpg" alt="ISO Continue" />
+<h2>Setting up Networking with Hyper-V </h2>
+<p>The Hyper-V vSwitch is a software, layer-2 Ethernet network-traffic switch. It allows administrators to connect VMs to either physical or virtual networks. It is available by default within the Hyper-V Manager installation and contains extended capabilities for security and resource tracking.</p>
+<p>If you attempt to create a VM right after the set-up process, you will not be able to connect it to a network.</p>
+<p>To set up a network environment, you will need to select the <b>Virtual Switch Manager</b> in the right hand side panel of Hyper-V Manager as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtual_switch_manager.jpg" alt="Virtual Switch Manager" />
+<p>The Virtual Switch Manager helps configure the vSwitch and the Global Network Settings, which simply lets you change the default ‘MAC Address Range’, if you see any reason for that.</p>
+<p>Creation of the virtual switch is easy and there are three vSwitch types available, which are described below &minus;</p>
+<ul class="list">
+<li><p><b>External vSwitch</b> will link a physical NIC of the Hyper-V host with a virtual one and then give your VMs access outside of the host. This means that your physical network and internet (if your physical network is connected to internet).</p></li>
+<li><p><b>Internal vSwitch</b> should be used for building an independent virtual network, when you need to connect VMs to each other and to a hypervisor as well.</p></li>
+<li><p><b>Private vSwitch</b> will create a virtual network where all connected VMs will see each other, but not the Hyper-V host. This will completely isolate the VMs in that sandbox.</p></li> 
+</ul>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/external.jpg" alt="External" />
+<p>Here, we have selected “External” and then “Create Virtual Switch”. The table with the setting of the vSwitch will be open where we will fill the fields as shown below</p>
+<ul class="list">
+<li><p><b>Name</b> &minus; is the name that we will put to identify the vSwitch.</p></li> 
+<li><p><b>Notes</b> &minus; is the description for us, generally, we put friendly descriptions to be understood.</p></li> 
+<li><p><b>Connection Type</b> &minus; is external as explained earlier and selects a physical network card on my server.</p></li> 
+</ul>
+<p>Once all this is entered, Click on “OK”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/create_switch.jpg" alt="Create Switch" />
+<h2>Allocating Processors &amp; Memory to a VM using Hyper-V</h2>
+<p>In this section, we will see the task of allocating CPU, Memory and Disk Resources to the virtual machines that are running on a server. The key to allocating CPU or any other type of resource in Hyper-V is to remember that everything is relative.</p>
+<p>For example, Microsoft has released some guidelines for Virtualizing Exchange Server. One of the things that was listed was that the overall system requirements for Exchange Server are identical whether Exchange is being run on a virtual machine or on a dedicated server.</p>
+<p>To allocate one of the features mentioned above, we need to click on the “Settings…” tab in the right hand side panel.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/settings.jpg" alt="Settings" />
+<p>To allocate more memory to the selected virtual machine, click on the “Memory” tab on the left hand side of the screen. You will also have “Startup RAM”, where you can allocate as much ram as you have physically to a VM machine &rarr; Click on “Ok”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/memory_tab.jpg" alt="Memory Tab" />
+<p>To allocate more processors, click on the “Processor” tab on the left hand side of the panel. Then you can enter the number of virtual processors for your machine.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/processor.jpg" alt="Processor" />
+<p>If you need to expand, compress the capacity of the virtual hard disk. Click on the “IDE controller 0” on the left hand side panel &rarr; click on “Edit”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/ide.jpg" alt="IDE" />
+<p>Once all the above changes are done, Click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/changes.jpg" alt="Changes" />
+<p>Select one of the options based on your need (all of them have their respective descriptions) and then click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/choose_action.jpg" alt="Choose Action" />
+<p>Click on “Finish” and wait for the process to finish.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/finish_click.jpg" alt="Finish Click" />
+<h2>Using Checkpoints in Hyper-V</h2>
+<p>Checkpoints in Hyper-V are called snapshots and they help us to revert the machine in a desired state that we had in the past.</p>
+<p>To create a checkpoint we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Select the VM by clicking on it. On the left hand side panel, click on “Checkpoint”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/checkpoint.jpg" alt="Checkpoint" />
+<p><b>Step 2</b> &minus; The following checkpoint will be created with the respective date and time in the main Hyper-V manager console.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/console.jpg" alt="Console" />
+<h1>VMware Workstation Player</h1>
+<p>In this chapter, we will understand how to install the VMware Workstation Player and its usages.</p>
+<h2>Installing VMware Workstation Player</h2>
+<p>VMware workstation player is a “hosted hypervisor”, so you have to have a pre-installed OS before continuing to install it.</p>
+<p>VMware workstation player is free version and available for non-commercial, personal and home use. They also encourage students and non-profit organizations to benefit from this offering. To download the VMware workstation player, you can click on the following link <a rel="nofollow" target="_blank" href="https://www.vmware.com/products/player/playerpro-evaluation.html">https://www.vmware.com/products/player/playerpro-evaluation.html</a>. To install the VMware workstation player, follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Click on “Download Now” as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/download.jpg" alt="Download" />
+<p><b>Step 2</b> &minus; You will see that a file has been downloaded &rarr; double click on it.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/double_click.jpg" alt="Double click" />
+<p><b>Step 3</b> &minus; A Table will pop-up initializing the installation of VMware &rarr; Click “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/vmware.jpg" alt="VMware" />
+<p><b>Step 4</b> &minus; Check the box “I accept the terms in the license agreement” &rarr; Click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/agreement.jpg" alt="Agreement" />
+<p><b>Step 5</b> &minus; Once again, click on the “Next” button.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/next_button.jpg" alt="Next Button" />
+<p><b>Step 6</b> &minus; Leave the default values and click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/default.jpg" alt="Default" />
+<p><b>Step 7</b> &minus; Once again, click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/next.jpg" alt="Click Next" />
+<p><b>Step 8</b> &minus; Click on “Install”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_install.jpg" alt="Click Install" />
+<p><b>Step 9</b> &minus; An icon will be created on the desktop. Click on it and a table will pop–up, where you have two possibilities: If you want to use it as a non-commercial version, just enter your email address. If you want to use it as a commercial version, check the second option and enter your serial key.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/desktop_icon.jpg" alt="Desktop Icon" />
+<h2>Creating a VM with VMware Workstation</h2>
+<p>To create a virtual machine, we have to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Click on “Player” &rarr; File &rarr; New Virtual Machine.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/player.jpg" alt="Player" />
+<p><b>Step 2</b> &minus; A table will pop-up requesting you to find a “Boot disk”,  “Boot Image” or to install OS at a later stage.</p>
+<p>We will choose the second option and click on “Browse”. Then we have to click on the ISO image, which we want to install. Once all this is done, click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/browse.jpg" alt="Browse" />
+<p><b>Step 3</b> &minus; As I am installing windows server 2012, it will pop-up a table requesting to enter the serial key &rarr; click directly on “Next”, if you want to activate the noncommercial version for Windows.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/serial_key.jpg" alt="Serial Key" />
+<p><b>Step 4</b> &minus; After the above step is complete, a dialogue box opens. Click “Yes”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/dialogue_box.jpg" alt="Dialogue Box" />
+<p><b>Step 5</b> &minus; Click “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/wizard.jpg" alt="Wizard" />
+<p><b>Step 6</b> &minus; In the “Maximum size disk” box, enter the value of your virtual Hard disk, which in our case is 60GB. Then click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/maximum_size_disk.jpg" alt="Maximum Size Disk" />
+<p><b>Step 7</b> &minus; Click on “Finish”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_on_finish.jpg" alt="Click on Finish" />
+<h2>Setting up Networking with VMware Workstation</h2>
+<p>To set up the networking modes of a virtual machine in a VMware Workstation, we have to click on the “Edit virtual machine settings”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/edit.jpg" alt="Edit" />
+<p>A table will be opened with the settings of networking and on the left hand side panel of this table click on “Network Adaptor”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/network_adaptor.jpg" alt="Network Adaptor" />
+<p>On the left of this table, you can see the networking modes as shown in the following screnshots.</p>
+<p></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/modes.jpg" alt="Modes" />
+<p>If we want to limit the bandwidth usage of a virtual machine, click on “Advance” and set the incoming and outgoing bandwidths.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/advance.jpg" alt="Advance" />
+<h2>Allocating Processors &amp; Memory to a VM using VMware Workstation</h2>
+<p>To allocate memory to a virtual machine in a VMware Workstation, we have to click on “Edit virtual machine settings”. A table will be opened and we will have to click on “Memory”.</p>
+<p>On the left hand side panel, we have to enter the amount of memory manually or by moving the arrow up and down as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/memory.jpg" alt="Memory" />
+<p>If you click on “Processors”. On the left hand side panel, we have to enter the amount of vCPU as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/processors.jpg" alt="Processors" />
+<p><b>Note</b> &minus; If you put more vCPU-s than what the host supports, it will fail to power on the VM.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/vcpu.jpg" alt="vCPU" />
+<h2>Duplicating a VM Using VMware Workstation</h2>
+<p>To create duplicates of VM machines, we have to use the VMware Workstation Commercial Version.</p>
+<p>Let us see how to do it in practice by following the steps given below.</p>
+<p><b>Step 1</b> &minus; Open the VMware managing console and right click on a VM that you want to duplicate. Click on “Manage”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_manage.jpg" alt="Click Manage" />
+<p><b>Step 2</b> &minus; Click on “Clone…” and a wizard will be open.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/clone.jpg" alt="Clone" />
+<p><b>Step 3</b> &minus; Click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/clone_virtual.jpg" alt="Clone Virtual" />
+<p><b>Step 4</b> &minus; Click on “Create a Full Clone” and “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/full_clone.jpg" alt="Full Clone" />
+<p><b>Step 5</b> &minus; Put a name for the clone that will be created and “Finish”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/put_name.jpg" alt="Put Name" />
+<p>The following screenshots describe the process of cloning.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/cloning.jpg" alt="Cloning" />
+<p>Once the cloning process is complete, the following window will open.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/cloning_complete.jpg" alt="Cloning Complete" />
+<h1>Virtualization 2.0 - VirtualBox</h1>
+<p>In this chapter, we will understand what a VirtualBox is and discuss in detail the various components it has.</p>
+<h2>Installing VirtualBox</h2>
+<p>To start with, we will download VirtualBox and install it. We should follow the steps given below for the installation.</p>
+<p><b>Step 1</b> &minus; To download VirtualBox, click on the following link <a target="_blank" rel="nofollow" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a> Now, depending on your OS, select which version to install. In our case, it will be the first one (Windows host).</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtualbox.jpg" alt="VirtualBox" />
+<p><b>Step 2</b> &minus; Once the option is selected, click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/option.jpg" alt="Option" />
+<p><b>Step 3</b> &minus; You have the option asking where to install the application. We can leave it as default and click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/application_install.jpg" alt="Application Install" />
+<p><b>Step 4</b> &minus; Once the options are selected as shown in the following screenshot, click on Next.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/shortcut.jpg" alt="Shortcut" />
+<p><b>Step 5</b> &minus; A dialog box will come up asking whether to proceed with the installation. Click “Yes”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/proceed.jpg" alt="Proceed" />
+<p><b>Step 6</b> &minus; In the next step, click on “Install”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/ready_to_install.jpg" alt="Ready to Install" />
+<p><b>Step 7</b> &minus; Tick the start VirtualBox check box and click on “Finish”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/checkbox_finish.jpg" alt="Checkbox Finish" />
+<p><b>Step 8</b> &minus; VirtualBox application will now open as shown in the following screenshot. Now, we are ready to install the virtual machines.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/install_virtual_machines.jpg" alt="Install Virtual Machine" />
+<h2>Creating a VM with VirtualBox</h2>
+<p>To create a virtual machine with Oracle VirtualBox, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To begin with, click on the “Oracle VM VirtualBox” icon on the desktop as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/oral_vm.jpg" alt="Oral VM" />
+<p><b>Step 2</b> &minus; The next step is to click on “New” button, which is in the top left hand side of the screen.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/new_button.jpg" alt="New Button" />
+<p><b>Step 3</b> &minus; A table will pop-up requesting you the parameters for the virtual machine. These will be &minus;</p>
+<ul class="list">
+<li><p><b>Name</b> &minus; We have to put a friendly name for this Virtual Machine.</p></li>
+<li><p><b>Type</b> &minus; Enter the OS that is going to be installed on it.</p></li>
+<li><p><b>Version</b> &minus; Enter the specific version for that OS, which we have selected earlier.</p></li>
+</ul>
+<p>Once all the above parameters are filled, click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/table.jpg" alt="Table" />
+<p><b>Step 4</b> &minus; Select the amount of memory that you need to allocate in this VM &rarr; Click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/memory_amount.jpg" alt="Memory Amount" />
+<p><b>Step 5</b> &minus; Check one of the three options for the HDD and click on “Create”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/hdd.jpg" alt="HDD" />
+<p><b>Step 6</b> &minus; Select a file extension for your virtual HDD (It is recommended to use a common file extension that most of the hypervisors use like VHD) &rarr; click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/vdi.jpg" alt="VDI" />
+<p><b>Step 7</b> &minus; Choose whether you want the Virtual HDD as dynamic or fixed. This is based on your needs &rarr; Click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/dynamic.jpg" alt="Dynamic" />
+<p><b>Step 8</b> &minus; Put a name for your virtual HDD file and select the disk size for your VM &rarr; Click on “Create”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/hdd_file.jpg" alt="HDD File" />
+<p>All the above steps can be done in one shot by selecting the “Expert mode”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/expert_mode.jpg" alt="Expert Mode" />
+<p>The virtual machine created will be as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/virtual_machine_created.jpg" alt="Virtual Machine Created" />
+<h2>Setting up Networking with VirtualBox</h2>
+<p>There are two types of networking modes in VirtualBox, which are &minus;</p>
+<ul class="list">
+<li>Nat Networks and</li>
+<li>Host-only Networks.</li>
+</ul>
+<p>Both of these are explained in detail below.</p>
+<h3>Nat Networks</h3>
+<p>For setting up Nat Networks, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to Oracle VM VirtualBox Manager &rarr; Click on “Preferences…”</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/preferences.jpg" alt="Preferences" />
+<p><b>Step 2</b> &minus; Click on “Network” and  then on the left panel click on the “NAT Networks” tab.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/nat_networks.jpg" alt="NAT Networks" />
+<p><b>Step 3</b> &minus; Click on the “+” button, which is highlighted in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/plus.jpg" alt="Plus" />
+<p><b>Step 4</b> &minus; Here, we have to put the “Network Name” and the IP range for this network that will be NAT-ed, in order to have access to internet and to other networks.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/network_name.jpg" alt="Network Name" />
+<h3>Host-only Networks</h3>
+<p>For setting up Host-only Networks, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; If you click on the “Host-only Networks” tab, you can create networks that are isolated from the other networks. However, VM hosts communicate with each other and the Hypervisor machine. Click on the “+” sign.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/vm_hosts.jpg" alt="VM Hosts" />
+<p><b>Step 2</b> &minus; The host interface will continue to be created as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/host_interface.jpg" alt="Host Interface" />
+<p><b>Step 3</b> &minus; If you click on <img class="inline" src="https://www.tutorialspoint.com/virtualization2.0/images/virtualbox_host.jpg" alt="VirtualBox Host" /> button, you can edit the settings.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/edit_settings.jpg" alt="Edit Settings" />
+<p><b>Step 4</b> &minus; If you want your host machines to take “DHCP IP”, click on the “DHCP Server” tab and check the box “Enable Server” &rarr; Click “OK”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/dhcp.jpg" alt="DHCP" />
+<p><b>Step 5</b> &minus; In the “Adapter” tab, put the IP of the hypervisor.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/adapter.jpg" alt="Adapter" />
+<p>After all these preparations for setting up the network modes is complete. It is now time to assign a network to our VMs.</p>
+<p>To do this, Click on the VMs on the left side of the panel, then right click on the “Network” option and a table will be open.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/natnetwork.jpg" alt="NatNetwork" />
+<p>You can have up to four Ethernet adaptors per machine. The following image has four sections highlighted, which are explained below.</p>
+<ul class="list">
+<li><p>Check the box “Enable Network Adapter” to enable the vNIC on the VM and attach it to one network.</p></li>
+<li><p>You can have many networks created, so we have to select one of them in the “Name” dropdown box.</p></li>
+<li><p>In the adapter type dropdown-box, we have to select a physical NIC that the hypervisor has.</p></li>
+<li><p>Promiscuous Mode: Here, we can select “Deny”, if we do not want the VMs to communicate with each other.</p></li>
+</ul>
+<p>Once all the above parameters are completed. Click on “OK”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/parameters.jpg" alt="Parameters" />
+<h2>Allocating Processors &amp; Memory to a VM</h2>
+<p>To allocate processors and memory to a virtual machine using VirtualBox, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To allocate a processor and memory, you have to click on “Settings” after you have selected the VM.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_settings.jpg" alt="Click Settings" />
+<p><b>Step 2</b> &minus; Click on “System” on the left side tab, then click on the “Motherboard” tab. Move the arrow left or right to allocate the memory as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/system.jpg" alt="System" />
+<p><b>Step 3</b> &minus; To allocate processors, click on the “Processor” tab. Move the arrow left or right to allocate the number of processors as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/processor_tab.jpg" alt="Processor Tab" />
+<p><b>Step 4</b> &minus; After all those changes are done &rarr; click on “OK”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_ok.jpg" alt="Click Ok" />
+<h2>Duplicating a VM Using VirtualBox</h2>
+<p>To duplicate a virtual machine using VirtualBox, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To duplicate a VM that we created before, right click on the VM and select “Clone”. A wizard will open.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/clone_wizard.jpg" alt="Clone Wizard" />
+<p><b>Step 2</b> &minus; Write the name of the cloning machine and click on “Next”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/cloning_machine.jpg" alt="Cloning Machine" />
+<p><b>Step 3</b> &minus; Select one of the options and Click on “Clone”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_on_clone.jpg" alt="Click on Clone" />
+<p><b>Step 4</b> &minus; The newly created VM will be as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/newly_created_vm.jpg" alt="Newly Created VM" />
+<h2>Deleting a VM on VirtualBox</h2>
+<p>To delete a virtual machine on VirtualBox, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To start with, we have to right click on the VM that we want to delete and then click on “Remove”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/remove.jpg" alt="Remove" />
+<p><b>Step 2</b> &minus; To delete a virtual machine completely, select “Delete all files”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/delete.jpg" alt="Delete" />
+<h1>Virtualization 2.0 - Openstack</h1>
+<p>In this chapter, we will discuss regarding Openstack and its role in Virtualization.</p>
+<h2>Understanding Openstack</h2>
+<p>OpenStack is a software for building and managing cloud-computing platforms for public and private clouds. Openstack has one of the biggest communities. It is managed by the <a rel="nofollow" target="_blank" href="https://www.openstack.org/foundation/">OpenStack Foundation</a>, a non-profit organization that oversees both development and community building. Its official webpage is – <a rel="nofollow" target="_blank" href="https://www.openstack.org/">https://www.openstack.org/</a>.</p>
+<p>OpenStack is used to deploy virtual machines and other instances that handle different tasks for managing a cloud environment. OpenStack is considered as – Infrastructure as a Service (IaaS). Based on Openstack, please see the following schematic illustration, which describes how it is managed.</p>
+<p><b>Source</b> &minus; <a rel="nofollow" target="_blank" href="https://www.openstack.org/">https://www.openstack.org/</a></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/openstack.jpg" alt="Openstack" />
+<p>Openstack platform is managed by a web UI dashboard. It comprises of nine Core key components.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/openstack_platform.jpg" alt="Openstack Platform" />
+<p>These key concepts are described in detail as follows &minus;</p>
+<ul class="list">
+<li><p><b>Nova</b> is a computing engine. It is used for deploying and managing large numbers of virtual machines.</p></li>
+<li><p><b>Swift</b> is a storage system for objects and files.</p></li>
+<li><p><b>Cinder</b> is a block storage component. It accesses specific locations on a disk drive.</p></li>
+<li><p><b>Neutron</b> provides the networking capability.</p></li>
+<li><p><b>Horizon</b> is the dashboard of Openstack. It is the only graphical interface (WEB UI).</p></li>
+<li><p><b>Keystone</b> provides identity services. It is essentially a central list of all the users.</p></li>
+<li><p><b>Glance</b> provides image services to OpenStack. In this case, "images" refers to images (or virtual copies) of hard disks.</p></li>
+<li><p><b>Ceilometer</b> provides telemetry services, which allow the cloud to provide billing services to individual users of the cloud.</p></li>
+<li><p><b>Heat</b> allows developers to store the requirements of a cloud application in a file that defines what resources are necessary for that application.</p></li>
+</ul>
+<p>The release versions of Openstack are explained in the following illustration.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/versions.jpg" alt="Versions" />
+<h2>Installing Openstack</h2>
+<p>As Openstack is an open source platform, there are many ways to install and deploy it through different software distributions. Each one of them adds their own value to the cloud operating system.</p>
+<p>For a new system administrator, who wants to play with Openstack will get pre-installed ISO images of the Openstack platform. They can be downloaded from the following link <a target="_blank" rel="nofollow" href="https://docs.openstack.org/image-guide/obtain-images.html">https://docs.openstack.org/image-guide/obtain-images.html</a></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/installing_openstack.jpg" alt="Installing Openstack" />
+<p>To install them manually, the main distributors are &minus;</p>
+<ul class="list">
+<li><p><b>Ubuntu</b> &minus; <a rel="nofollow" target="_blank" href="https://www.ubuntu.com/cloud/openstack">https://www.ubuntu.com/cloud/openstack</a></p></li>
+<li><p><b>Red Hat</b> &minus; <a rel="nofollow" target="_blank" href="https://www.rdoproject.org/">https://www.rdoproject.org/</a></p></li>
+<li><p><b>Suse</b> &minus; <a rel="nofollow" target="_blank" href="https://www.suse.com/products/suse-openstack-cloud/">https://www.suse.com/products/suse-openstack-cloud/</a></p></li>
+</ul>
+<p>We must understand that Openstack is for enterprise environment and to install it we should have the following hardware requirements.</p>
+<h3>Installation Requirements</h3>
+<p>The installation requirements for Openstack are as follows &minus;</p>
+<ul class="list">
+<li><p>A minimum of 5 machines with the following roles &minus;</p>
+<ul class="list">
+<li><p>1 machine for the MAAS server.</p></li>
+<li><p>1 machine for the Autopilot.</p></li>
+<li><p>3 or more machines for the cloud &minus;</p>
+<ul class="list">
+<li><p>At least one must have 2 NICs.</p></li>
+<li><p>At least 3 must have 2 disks.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>A dedicated switch to create a private cloud LAN.</p></li>
+<li><p>Internet access through a router on that LAN.</p></li>
+</ul>
+<p>For this laboratory, we have a virtual machine and we will install <b>Devstack</b>. It is designed for installation on a single laptop, PC or VM. It includes the raw upstream code for development evaluation. It is supported on &minus;</p>
+<ul class="list">
+<li>Ubuntu 14.04/16.04</li>
+<li>Fedora 23/24</li>
+<li>CentOS/RHEL 7</li>
+<li>Debian and</li>
+<li>OpenSUSE</li>
+</ul>
+<p>The link for this version is – <a target ="_blank" rel="nofollow" href="https://docs.openstack.org/devstack/latest/#install-linux">https://docs.openstack.org/devstack/latest/#install-linux</a></p>
+<h2>Installing Openstack on Ubuntu 14.04</h2>
+<p>For installing Openstack on Ubuntu 14.04, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Download the installation script from the following link - <a target ="_blank" rel="nofollow" href="https://git.openstack.org/cgit/openstack-dev/devstack">https://git.openstack.org/cgit/openstack-dev/devstack</a></p>
+<p>Use this command – <b><i>git clone https://git.openstack.org/openstack-dev/devstack</i></b></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/command.jpg" alt="Command" />
+<p></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/connectivity_done.jpg" alt="Connectivity Done" />
+<p><b>Step 2</b> &minus; Browse the folder Devstack by keying in the following command – <b>$ cddevstack</b>.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/cddevstack.jpg" alt="cddevstack" />
+<p><b>Step 3</b> &minus; Execute the file <b>stack.sh</b> with the following command <b>./stack.sh</b> and installation process will continue as shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/stack.jpg" alt="Stack" />
+<p><b>Step 4</b> &minus; Enter your password.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/enter_password.jpg" alt="Enter Password" />
+<p><b>Step 5</b> &minus; Now it will take about 15-20 minutes to finish the installation process, while it downloads and installs all the libraries.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/libraries_download.jpg" alt="Libraries Download" />
+<p><b>Step 6</b> &minus; At the end of the installation, we will see the IP of the host, URL for managing it, username and password to administrate it.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/ip_host.jpg" alt="IP Host" />
+<p><b>Step 7</b> &minus; To sign in, you have to type in the browser: Host IP, username and password that we entered during the installation.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/host_ip.jpg" alt="Host IP" />
+<p><b>Step 8</b> &minus; In the main dashboard, you will see “Instances” overview.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/instances.jpg" alt="Instances" />
+<p><b>Step 9</b> &minus; To create new instances or in simple words to create Virtual machines click on “Instances”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/click_instances.jpg" alt="Click Instances" />
+<p><b>Step 10</b> &minus; Click on “Launch Instances”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/launch_instances.jpg" alt="Launch Instances" />
+<p><b>Step 11</b> &minus; Fill in all the fields as shown below.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/fields.jpg" alt="Fields" />
+<p><b>Step 12</b> &minus; We will see the instance created as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/instances_created.jpg" alt="Instances Created" />
+<h1>Preparing the Infrastructure</h1>
+<p>Virtualization, at least at the server level, has been in use for some time. Since, the concept has expanded to the User, Application, Network, Security, Storage, and of course to Desktop Virtualization (VDI) as well. Therefore, to roll out in all these concepts, we have to prepare an infrastructure before, which is divided in some key components.</p>
+<p>The First one is <b>Hypervisor</b> and we have discussed it in the earlier chapters. Some important specifications needed for this job are – Processors, Memory and Networking Modes, etc.</p>
+<h3>Networking - LAN and WAN Optimization</h3>
+<p>VDI can be very resource intensive – this includes traffic over the wire. Having a good <b>core-switching infrastructure</b> will help alleviate this pain by allowing the administrators to create certain rules and policies revolving around traffic flow.</p>
+<p>Setting up <b>QoS metrics</b> for VDI-specific traffic can help remove congestion and ensure that the right traffic has the proper amount of priority. As for the traffic that is leaving the data center, knowing where the user is located and optimizing their experience based on certain criteria, becomes very important.</p>
+<p>Another significant aspect is storage. Large organizations will have numerous storage controllers. At the same time, some smaller organizations will be using only one. Regardless of the amount of storage controllers available, they need to be sized properly for VDI.</p>
+<p>To prevent boot and processing storms, organizations must look at IOPS requirements for their images. To alleviate processing pains, administrators can look at <b>Flash Technologies</b> (<b>NetApp, Fusion-IO, XtremIO</b>) or <b>SSD Technologies</b> (<b>Violin, Nimbus</b>) to help offload that kind of workload. Furthermore, intermediary platforms like Atlantis ILIO run on top of a virtual machine that utilizes massive amounts of RAM as the key storage repository.</p>
+<h2>Understanding Different File Systems</h2>
+<p>File systems are varied depending on their functions. Some of the most common ones are listed below &minus;</p>
+<ul class="list">
+<li>Virtual Machine File System- VMFS</li>
+<li>Network File System- NFS</li>
+<li>New Technology File System- NTFS</li>
+<li>Raw Device Mapping- RDM</li>
+</ul>
+<p>Let us discuss each of these in detail.</p>
+<h3>Virtual Machine File System</h3>
+<p><b>VMFS</b> is a file system proprietary to VMware. It is a clustered file system and it can be mounted on multiple servers simultaneously. This helps every host to connect to the any file system at the same time, which is expected from a proprietary system preferred by VMware. Most of the VMware hypervisors will work with other file systems, but the default choice and the preferred choice is VMFS.</p>
+<h3>Network File System</h3>
+<p>NFS is a system that was originally developed by Sun, but is now an Open Standard system. Used commonly in the UNIX and Linux world. It is a distributed file system. It can be mounted on one server and the network will be used to share information to multiple machines.</p>
+<h3>New Technology File System</h3>
+<p>NTFS is the standard file structure for the Windows NT operating system. It is used for retrieving and storing files on the hard disk.</p>
+<h3>Raw Device Mapping</h3>
+<p>RDM helps any file in a virtual machine file system to act as a proxy for any raw device. It allows a VM to access as well as use the storage device.</p>
+<h2>Choosing Between Different Types of Storage</h2>
+<p>All the storage devices are divided into three categories, which are &minus;</p>
+<ul class="list">
+<li>Direct-Attached Storage</li>
+<li>Network-Attached Storage</li>
+<li>Storage-Area Network</li>
+</ul>
+<p>Let us understand each of these in detail.</p>
+<h3>Direct-Attached Storage</h3>
+<p>DAS is your local hard drive. We can have one or more local hard drives in every machine. It is mostly used for small-virtualized systems. This solution is appropriate for a small amount of guest machines. It is the cheapest and the easiest method of storage. You can connect an external hard drive too with this method, load any guest machines onto that external hard drive, and that is just a quick and easy way to get rolling.</p>
+<p>For example – A server that has local hard discs on it. That type of hypervisor can hold not more that 10-20 VM machines. A sample device can be a HP Server with eight local hard discs as shown in the following illustration.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/direct_attached.jpg" alt="Direct Attached" />
+<h3>Network-attached Storage</h3>
+<p>NAS is "Any server that shares its own storage with others on the network and acts as a file server in the simplest form". Network Attached Storage shares files over the network. Some of the most significant protocols used are <b>SMB, NFS, CIFS,</b> and <b>TCP/IP</b>. When you access files on a file server on your windows system, it is NAS</p>
+<p>NAS will be using an Ethernet connection for sharing files over the network. The NAS device will have an IP address and then will be accessible over the network through that IP address. Biggest providers of NAS are <b>QNAP</b> and <b>Lenovo</b>.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/network_attached.jpg" alt="Network Attached" />
+<p>The following illustration shows how NAS works.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/nas.jpg" alt="NAS" />
+<h3>Storage-area Network</h3>
+<p>SANs allow multiple servers to share a pool of storage; making it appear to the server as if it were local or directly attached storage. A dedicated networking standard, <b>Fibre Channel</b>, has been developed to allow blocks to be moved between servers and storage at high speed. It uses dedicated switches and a fiber-based cabling system, which separates it from the day-to-day traffic traversing the busy enterprise network. While the well-established SCSI protocol enables communication between the servers’ host bus adaptors and the disk system.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/fibre_channel.jpg" alt="Fibre Channel" />
+<p>The following illustration shows how a SAN switch operates.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/san.jpg" alt="SAN" />
+<h1>Virtualization 2.0 - Troubleshooting</h1>
+<p>In this chapter, we will discuss troubleshooting for network communication and for slow performance.</p>
+<h2>Troubleshooting Network Communication</h2>
+<p>In a virtual environment, to troubleshoot a network connectivity, we should follow some steps in order to find a resolution.</p>
+<h3>Network Communication Indications</h3>
+<p>Some of the symptoms that we have are as follows &minus;</p>
+<ul class="list">
+<li>You cannot connect to the Internet.</li>
+<li>There is no network connectivity to or from a single virtual machine.</li>
+<li>Virtual machines fail to connect to the network.</li>
+<li>Cannot get an IP.</li>
+<li>A TCP/IP connection fails to and from a single virtual machine.</li>
+</ul>
+<h3>Network Communication Errors</h3>
+<p>You can get the following errors as well &minus;</p>
+<ul class="list">
+<li>Destination Host Unreachable </li>
+<li>Network error</li>
+<li>Connection Refused </li>
+<li>Network cable is unplugged </li>
+<li>Ping request could not find host</li>
+<li>Please check the name and try again</li>
+<li>Unable to resolve target system name, etc.</li> 
+</ul>
+<h3>Network Communication Resolutions</h3>
+<p>The resolutions for the above symptoms and errors are as follows &minus;</p>
+<ul class="list">
+<li><p>Make sure that the <b>Port Group Name</b> is associated with the virtual machine's network adapter, which exists in the switch or in the Virtual Distributed Switch. Also, ensure that it is spelt correctly.</p></li>
+<li><p>Make sure that there are enough <b>storage capacities</b> in your virtual machine sometimes it affects the connectivity.</p></li>
+<li><p>Verify that the <b>virtual network adapter</b> is present and connected.</p></li>
+<li><p>Verify that the networking within the virtual machine's <b>guest operating system</b> is correct.</p></li>
+<li><p>Verify that the <b>TCP/IP</b> stack is functioning correctly.</p></li>
+<li><p>If this virtual machine was converted from a physical system, verify that there are no <b>hidden network adapters</b> present. Because it can have hidden static routes.</p></li>
+<li><p>Verify that the <b>vSwitch</b> has enough ports for the virtual machine.</p></li>
+<li><p>Verify that the virtual machine is configured with two <b>vNICs</b> to eliminate a NIC or a physical configuration issue.</p></li>
+<li><p>Confirm that your virtual machine's <b>firewall</b> is not blocking the Internet access.</p></li>
+<li><p>Confirm that your virtual machine's <b>anti-virus program</b> is not blocking the Internet access.</p></li>
+<li><p>Ensure that the <b>network adapter</b> is enabled.</p></li>
+<li><p>Shut down the virtual machine and then restart your <b>Host Machine</b>.</p></li>
+<li><p>Removing and re-adding <b>virtual network card adaptor</b>.</p></li>
+</ul>
+<h2>Troubleshooting Slow Performance</h2>
+<p>Check if your CPU load is high. You can click on “CPU”. This will show you the amount of CPU the VM is consuming. If it is very high, you may consider adding some more vCPUs. This should be done after ensuring that the physical host has more cores available than what you are going to configure inside the VM. We should also consider whether the applications inside the VM are actually able to utilize multiple vCPUs or not.</p>
+<h3>Check the Memory</h3>
+<p>Memory could be a serious limit on VM performance as well. If you do not configure enough memory, the VM will usually respond by starting to swap its memory pages to disk .If your virtual machine is using more than 2/3rd of the memory and then we should allocate more.</p>
+<h3>See Disk Alignment</h3>
+<p>For any pre-Windows 7, pre-Windows 2008 Server or older Linux based systems, your disks may be misaligned. Misalignment may cause quite a performance hit, especially when your storage underneath does not have many IOPS to spare.</p>
+<p>It is important to format the virtual disks to a specific format or block size according to the application needs. For example – The database of a Microsoft SQL 2005 server is generally put on an NTFS that has a block size of 64KB.</p>
+<p>If the virtual machine has a performance issue at some point in time, you need to check the virus scanner. Not only on the impacted virtual machine, but also on the other virtual machines as well.</p>
+<p>If you do a P2V – a virtual machine (meaning you convert a physical machine to a VM) and you do not “clean up” afterwards, there may be a lot of unused drivers and even applications.</p>
+<h1>Backing Up, Restoring and Migrating VM</h1>
+<p>In this chapter, we will discuss how to back up, restore and migrate a virtual machine.</p>
+<h2>Duplicating a VM</h2>
+<p>To duplicate or clone a machine means making an exact copy of it. Most of the hypervisors support this feature. By duplicating a machine, we copy down every detail, including the name of the machine and the different network addresses attached to the machine.</p>
+<p>Duplicating a machine and putting it in to function is not always the best option because a duplicate name or IP in network can be a problem. We make duplication generally for backup purposes.</p>
+<p>Most hypervisors can clone while the machine is turned off. If the hypervisor accepts to clone while it is on, it is recommend to turn it off, because the process can crash the machine. In practice, we have discussed “How cloning is done in VMware Workstation”, please refer to the previous chapters.</p>
+<h2>Backing Up and Recovering a VM</h2>
+<p>There are three methods for backing up virtual machines.</p>
+<h3>Method 1</h3>
+<p>The most common one is to install traditional backup software on the guest VM. If Windows OS is used on our VM, we can use “Backup and restore” to back up the machine, which is found in the “Control Panel”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/backup.jpg" alt="Backup" />
+<p>For Linux OS, we can use many open source tools depending on our needs, like “Bacula”, “rsync”, etc.</p>
+<h3>Method 2</h3>
+<p>Another strategy or method is to copy all of the files that define a VM. Therefore, we will have to go out and find all of the individual files that define our virtual machine and copy them to an alternate location. Some of these files are going to be large.</p>
+<p>Example: Here, we have created several VM machines with VirtualBox as shown in the following illustration. Their names are – “AC2”, “Kali2016.1”, “test”, “Windows 2012”.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/ac2.jpg" alt="AC2" />
+<p>To find the files that we have to copy or to backup, we have to right click on the VM machine. Go to “Storage” then move your mouse over the virtual HDD and it will show the full path where the VDI files are found.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/go_to_storage.jpg" alt="Go to Storage" />
+<p></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/logs.jpg" alt="Logs" />
+<p>We will save all these files to another location.</p>
+<h3>Method 3</h3>
+<p>The third option to backup and restore VM machines is to use third party software. One of the best is <b>VEEAM</b>, which can be found on the following URL - <a rel="nofollow" target="_blank" href="https://www.veeam.com/">https://www.veeam.com/</a></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/veeam.jpg" alt="VEEAM" />
+<h2>Converting a Physical Server into a Virtual Server</h2>
+<p>In this section, we will see how to convert a physical machine into a virtual machine. This is often called as <b>P2V</b> in many literatures.</p>
+<p>VMware puts out a product that is called <b>vCenter Converter</b>, which will convert from a physical machine specifically into a VMware virtual machine. The software can be downloaded from - <a rel="nofollow" target="_blank" href="https://www.vmware.com/products/converter.html">https://www.vmware.com/products/converter.html</a></p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/p2v.jpg" alt="P2V" />
+<p>Microsoft has a product called <b>Disk2vhd</b>, which will convert a physical hard drive into a VHD formatted virtual hard drive. It can be downloaded from the following link – <a rel="nofollow" target="_blank" href="https://technet.microsoft.com/en-us/sysinternals/ee656415.aspx">https://technet.microsoft.com/en-us/sysinternals/ee656415.aspx</a></p>
+<p>We just have to install the software on the physical server and click “Create” as shown in the screenshot below. A VHDX file will be created which could be imported in a Hypervisor.</p>
+<img src="https://www.tutorialspoint.com/virtualization2.0/images/disk2vhd.jpg" alt="Disk2vhd" />
+<p>Both of these products will convert machines, while the server is running and is free. All the vendors of hypervisors have some P2V tool and they are typically free. From the vendor’s point of view, they would very much like you to convert your physical machines into virtual machines that are optimized for their hypervisor.</p>
+<h2>Converting a Virtual Server into a Physical Server</h2>
+<p>To convert a virtual server to a physical server also commonly called as V2P is certainly less common than a P2V conversion. However sometimes, it is needed in development-based environments. It does happen where a product needs to be tested in the virtual server than to a physical server, or to clone a production machine and move it to test.</p>
+<p>Hypervisor vendors do not offer such a tool. However, you have to request the hardware vendor, if they could offer such tools.</p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_backing_up_restoring_migrating_vm.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/virtualization2.0/virtualization2.0_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/virtualization2.0/virtualization2.0_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:53 GMT -->
+</html>

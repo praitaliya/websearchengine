@@ -1,0 +1,3020 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/logstash/logstash_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Logstash Quick Guide</title>
+<meta name="description" content="Logstash Quick Guide - Learn Logstash in simple and easy steps starting from basic to advanced concepts with examples including Introduction, ELK Stack, Installation, Internal Architecture, Collecting Logs, Supported Inputs, Parsing the Logs, Filters, Transforming the Logs, Output Stage, Supported Outputs, Plugins, Monitoring APIs, Security and Monitoring." />
+<meta name="keywords" content="Logstash, Tutorial, Learning, Introduction, ELK Stack, Installation, Internal Architecture, Collecting Logs, Supported Inputs, Parsing the Logs, Filters, Transforming the Logs, Output Stage, Supported Outputs, Plugins, Monitoring APIs, Security and Monitoring." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #9e7b30 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #9e7b30 !important;}
+.submenu-item{ border-bottom: 2px solid #9e7b30 !important; border-top: 2px solid #9e7b30 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/logstash/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<style>
+.ts{
+  vertical-align:middle !important;
+  text-align:center !important;   
+}
+</style>
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/logstash/images/logstash-mini-logo.jpg" alt="Logstash Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Logstash Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/logstash/index.htm">Logstash - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_introduction.htm">Logstash - Introduction</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_elk_stack.htm">Logstash - ELK Stack</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_installation.htm">Logstash - Installation</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_internal_architecture.htm">Logstash - Internal Architecture</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Logstash Input Stage</li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_collecting_logs.htm">Logstash - Collecting Logs</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_supported_inputs.htm">Logstash - Supported Inputs</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Logstash Parse and Transform</li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_parsing_the_logs.htm">Logstash - Parsing the Logs</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_filters.htm">Logstash - Filters</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_transforming_the_logs.htm">Logstash - Transforming the Logs</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Logstash Output Stage</li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_output_stage.htm">Logstash - Output Stage</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_supported_outputs.htm">Logstash - Supported Outputs</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Logstash Advanced Topics</li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_plugins.htm">Logstash - Plugins</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_monitoring_apis.htm">Logstash - Monitoring APIs</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_security_and_monitoring.htm">Logstash - Security and Monitoring</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Logstash Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_quick_guide.htm">Logstash - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_useful_resources.htm">Logstash - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/logstash/logstash_discussion.htm">Logstash - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Logstash - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/logstash/logstash_security_and_monitoring.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/logstash/logstash_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Logstash - Introduction</h1>
+<p>Logstash is a tool based on the filter/pipes patterns for gathering, processing and generating the logs or events. It helps in centralizing and making real time analysis of logs and events from different sources.</p>
+<p>Logstash is written on JRuby programming language that runs on the JVM, hence you can run Logstash on different platforms. It collects different types of data like Logs, Packets, Events, Transactions, Timestamp Data, etc., from almost every type of source. The data source can be Social data, E-commerce, News articles, CRM, Game data, Web trends, Financial data, Internet of Things, Mobile devices, etc.</p>
+<h2>Logstash General Features</h2>
+<p>The general features of Logstash are as follows &minus;</p>
+<ul class="list">
+<li><p>Logstash can collect data from different sources and send to multiple destinations.</p></li>
+<li><p>Logstash can handle all types of logging data like Apache Logs, Windows Event Logs, Data over Network Protocols, Data from Standard Input and many more.</p></li>
+<li><p>Logstash can also handle http requests and response data.</p></li>
+<li><p>Logstash provides a variety of filters, which helps the user to find more meaning in the data by parsing and transforming it.</p></li>
+<li><p>Logstash can also be used for handling sensors data in internet of things.</p></li>
+<li><p>Logstash is open source and available under the Apache license version 2.0.</p></li>
+</ul>
+<h2>Logstash Key Concepts</h2>
+<p>The key concepts of Logstash are as follows &minus;</p>
+<h3>Event Object</h3>
+<p>It is the main object in Logstash, which encapsulates the data flow in the Logstash pipeline. Logstash uses this object to store the input data and add extra fields created during the filter stage.</p>
+<p>Logstash offers an Event API to developers to manipulate events. In this tutorial, this event is referred with various names like Logging Data Event, Log Event, Log Data, Input Log Data, Output Log Data, etc.</p>
+<h3>Pipeline</h3>
+<p>It comprises of data flow stages in Logstash from input to output. The input data is entered in the pipeline and is processed in the form of an event. Then sends to an output destination in the user or end system’s desirable format.</p>
+<h3>Input</h3>
+<p>This is the first stage in the Logstash pipeline, which is used to get the data in Logstash for further processing. Logstash offers various plugins to get data from different platforms. Some of the most commonly used plugins are – File, Syslog, Redis and Beats.</p>
+<h3>Filter</h3>
+<p>This is the middle stage of Logstash, where the actual processing of events take place. A developer can use pre-defined Regex Patterns by Logstash to create sequences for differentiating between the fields in the events and criteria for accepted input events.</p>
+<p>Logstash offers various plugins to help the developer to parse and transform the events into a desirable structure. Some of the most commonly used filter plugins are – Grok, Mutate, Drop, Clone and Geoip.</p>
+<h3>Output</h3>
+<p>This is the last stage in the Logstash pipeline, where the output events can be formatted into the structure required by the destination systems. Lastly, it sends the output event after complete processing to the destination by using plugins. Some of the most commonly used plugins are – Elasticsearch, File, Graphite, Statsd, etc.</p>
+<h3>Logstash Advantages</h3>
+<p>The following points explain the various advantages of Logstash.</p>
+<ul class="list">
+<li><p>Logstash offers regex pattern sequences to identify and parse the various fields in any input event.</p></li>
+<li><p>Logstash supports a variety of web servers and data sources for extracting logging data.</p></li>
+<li><p>Logstash provides multiple plugins to parse and transform the logging data into any user desirable format.</p></li>
+<li><p>Logstash is centralized, which makes it easy to process and collect data from different servers.</p></li>
+<li><p>Logstash supports many databases, network protocols and other services as a destination source for the logging events.</p></li>
+<li><p>Logstash uses the HTTP protocol, which enables the user to upgrade Elasticsearch versions without having to upgrade Logstash in a lock step.</p></li>
+</ul>
+<h3>Logstash Disadvantages</h3>
+<p>The following points explain the various disadvantages of Logstash.</p>
+<ul class="list">
+<li><p>Logstash uses http, which negatively affects the processing of the logging data.</p></li>
+<li><p>Working with Logstash can sometimes be a little complex, as it needs a good understanding and analysis of the input logging data.</p></li>
+<li><p>Filter plugins are not generic, so, the user may need to find the correct sequence of patterns to avoid error in parsing.</p></li>
+</ul>
+<p>In the next chapter, we will understand what the ELK Stack is and how it helps Logstash.</p>
+<h1>Logstash - ELK Stack</h1>
+<p>ELK stands for <b>Elasticsearch, Logstash,</b> and <b>Kibana</b>. In the ELK stack, Logstash extracts the logging data or other events from different input sources. It processes the events and later stores it in Elasticsearch. Kibana is a web interface, which accesses the logging data form Elasticsearch and visualizes it.</p>
+<img src="https://www.tutorialspoint.com/logstash/images/elk.jpg" alt="ELK" />
+<h2>Logstash and Elasticsearch</h2>
+<p>Logstash provides input and output Elasticsearch plugin to read and write log events to Elasticsearch. Elasticsearch as an output destination is also recommended by Elasticsearch Company because of its compatibility with Kibana. Logstash sends the data to Elasticsearch over the http protocol.</p>
+<p>Elasticsearch provides bulk upload facility, which helps to upload the data from different sources or Logstash instances to a centralized Elasticsearch engine. ELK has the following advantages over other DevOps Solutions &minus;</p>
+<ul class="list">
+<li><p>ELK stack is easier to manage and can be scaled for handling petabytes of events.</p></li>
+<li><p>ELK stack architecture is very flexible and it provides integration with Hadoop. Hadoop is mainly used for archive purposes. Logstash can be directly connected to Hadoop by using flume and Elasticsearch provides a connector named <b>es-hadoop</b> to connect with Hadoop.</p></li>
+<li><p>ELK ownership total cost is much lesser than its alternatives.</p></li>
+</ul>
+<h2>Logstash and Kibana</h2>
+<p>Kibana does not interact with Logstash directly but through a data source, which is Elasticsearch in the ELK stack. Logstash collects the data from every source and Elasticsearch analyzes it at a very fast speed, then Kibana provides the actionable insights on that data.</p>
+<p>Kibana is a web based visualization tool, which helps developers and others to analyze the variations in large amounts of events collected by Logstash in Elasticsearch engine. This visualization makes it easy to predict or to see the changes in trends of errors or other significant events of the input source.</p>
+<h1>Logstash - Installation</h1>
+<p>To install Logstash on the system, we should follow the steps given below &minus;</p>
+<p><b>Step 1</b> &minus; Check the version of your Java installed in your computer; it should be Java 8 because it is not compatible with Java 9. You can check this by &minus;</p>
+<p>In a Windows Operating System (OS) (using command prompt) &minus;</p>
+<pre class="result notranslate">
+&gt; java -version 
+</pre>
+<p>In UNIX OS (Using Terminal) &minus;</p>
+<pre class="result notranslate">
+$ echo $JAVA_HOME
+</pre>
+<p><b>Step 2</b> &minus; Download Logstash from &minus;</p>
+<p><a rel="nofollow" target="_blank" href="https://www.elastic.co/downloads/logstash">https://www.elastic.co/downloads/logstash</a>.</p>
+<ul class="list">
+<li><p>For Windows OS, download the ZIP file.</p></li>
+<li><p>For UNIX OS, download the TAR file.</p></li>
+<li><p>For Debian OS download the DEB file.</p></li>
+<li><p>For Red Hat and other Linux distributions, download the RPN file.</p></li>
+<li><p>APT and Yum utilities can also be used to install Logstash in many Linux distributions.</p></li>
+</ul>
+<p><b>Step 3</b> &minus; The installation process for Logstash is very easy. Let’s see how you can install Logstash on different platforms.</p>
+<p><b>Note</b> &minus; Do not put any whitespace or colon in the installation folder.</p>
+<ul class="list">
+<li><p><b>Windows OS</b> &minus; Unzip the zip package and the Logstash is installed.</p></li>
+<li><p><b>UNIX OS</b> &minus; Extract the tar file in any location and the Logstash is installed.</p></li>
+</ul>
+<pre class="result notranslate">
+$tar –xvf logstash-5.0.2.tar.gz
+</pre>
+<p><b>Using APT utility for Linux OS &minus;</b></p>
+<ul class="list">
+<li>Download and install the Public Signing Key &minus;</li>
+</ul>
+<pre class="result notranslate">
+$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+</pre>
+<ul class="list">
+<li>Save the repository definition &minus;</li>
+</ul>
+<pre class="result notranslate">
+$ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo
+   tee -a /etc/apt/sources.list.d/elastic-5.x.list
+</pre>
+<ul class="list">
+<li>Run update &minus;</li>
+</ul>
+<pre class="result notranslate">
+$ sudo apt-get update
+</pre>
+<ul class="list">
+<li>Now you can install by using the following command &minus;</li>
+</ul>
+<pre class="result notranslate">
+$ sudo apt-get install logstash
+</pre>
+<p><b>Using YUM utility for Debian Linux OS</b> &minus;</p>
+<ul class="list">
+<li>Download and install the Public Signing Key &minus;</li>
+</ul>
+<pre class="result notranslate">
+$ rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+</pre>
+<ul class="list">
+<li><p>Add the following text in the file with the .repo suffix in your o	“/etc/yum.repos.d/” directory. For example, <b>logstash.repo</b></p></li>
+</ul>
+<pre class="prettyprint notranslate">
+[logstash-5.x]
+name = Elastic repository for 5.x packages
+baseurl = https://artifacts.elastic.co/packages/5.x/yum
+gpgcheck = 1
+gpgkey = https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled = 1
+autorefresh = 1
+type = rpm-md
+</pre>
+<ul class="list">
+<li>You can now install Logstash by using the following command &minus;</li>
+</ul>
+<pre class="result notranslate">
+$ sudo yum install logstash
+</pre>
+<p><b>Step 4</b> &minus; Go to the Logstash home directory. Inside the bin folder, run the <b>elasticsearch.bat</b> file in case of windows or you can do the same using the command prompt and through the terminal. In UNIX, run the Logstash file.</p>
+<p>We need to specify the input source, output source and optional filters. For verifying the installation, you can run it with the basic configuration by using a standard input stream (stdin) as the input source and a standard output stream (stdout) as the output source. You can specify the configuration in the command line also by using <b>–e</b> option.</p>
+<p><b>In Windows &minus;</b></p>
+<pre class="result notranslate">
+&gt; cd logstash-5.0.1/bin
+&gt; Logstash -e 'input { stdin { } } output { stdout {} }'
+</pre>
+<p><b>In Linux &minus;</b></p>
+<pre class="result notranslate">
+$ cd logstash-5.0.1/bin
+$ ./logstash -e 'input { stdin { } } output { stdout {} }'
+</pre>
+<p><b>Note</b> &minus; in case of windows, you might get an error stating JAVA_HOME is not set. For this, please set it in environment variables to “C:\Program Files\Java\jre1.8.0_111” or the location where you installed java.</p>
+<p><b>Step 5</b> &minus; Default ports for Logstash web interface are 9600 to 9700 are defined in the <b>logstash-5.0.1\config\logstash.yml</b> as the <b>http.port</b> and it will pick up the first available port in the given range.</p>
+<p>We can check if the Logstash server is up and running by browsing <b>http://localhost:9600</b> or if the port is different and then please check the command prompt or terminal. We can see the assigned port as “Successfully started Logstash API endpoint {:port &rArr; 9600}. It will return a JSON object, which contains the information about the installed Logstash in the following way &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "host":"manu-PC", 
+   "version":"5.0.1",
+   "http_address":"127.0.0.1:9600",
+   "build_date":"2016-11-11T22:28:04+00:00",
+   "build_sha":"2d8d6263dd09417793f2a0c6d5ee702063b5fada",
+   "build_snapshot":false
+}
+</pre>
+<h1>Logstash - Internal Architecture</h1>
+<p>In this chapter, we will discuss regarding the internal architecture and the different components of Logstash.</p>
+<h2>Logstash Service Architecture</h2> 
+<p>Logstash processes logs from different servers and data sources and it behaves as the shipper. The shippers are used to collect the logs and these are installed in every input source. Brokers like <b>Redis, Kafka</b> or <b>RabbitMQ</b> are buffers to hold the data for indexers, there may be more than one brokers as failed over instances.</p>
+<p>Indexers like <b>Lucene</b> are used to index the logs for better search performance and then the output is stored in Elasticsearch or other output destination. The data in output storage is available for Kibana and other visualization software.</p>
+<img class="raligned" src="https://www.tutorialspoint.com/logstash/images/logstash_service_architecture.jpg" alt="Logstash Service Architecture" />
+<h2>Logstash Internal Architecture</h2>
+<p>The Logstash pipeline consists of three components <b>Input, Filters</b> and <b>Output</b>. The input part is responsible to specify and access the input data source such as the log folder of the <b>Apache Tomcat Server</b>.</p>
+<img class="raligned" src="https://www.tutorialspoint.com/logstash/images/logstash_internal_architecture.jpg" alt="Logstash Internal Architecture" />
+<h3>Example to Explain the Logstash Pipeline</h3>
+<p>The Logstash configuration file contains the details about the three components of Logstash. In this case, we are creating a file name called <b>Logstash.conf</b>.</p>
+<p>The following configuration captures data from an input log “inlog.log” and writes it to an output log “outlog.log” without any filters.</p>
+<h3>Logstash.conf</h3>
+<p>The Logstash configuration file just copies the data from the <b>inlog.log</b> file using the input plugin and flushes the log data to <b>outlog.log</b> file using the output plugin.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/inlog.log"
+   }
+}
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/outlog.log"
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>Logstash uses <b>–f</b> option to specify the config file.</p>
+<pre class="result notranslate">
+C:\logstash\bin> logstash –f logstash.conf
+</pre>
+<h3>inlog.log</h3>
+<p>The following code block shows the input log data.</p>
+<pre class="result notranslate">
+Hello tutorialspoint.com
+</pre>
+<h3>outlog.log</h3>
+<p>The Logstash output contains the input data in message field. Logstash also adds other fields to the output like Timestamp, Path of the Input Source, Version, Host and Tags.</p>
+<pre class="prettyprint notranslate">
+{
+   "path":"C:/tpwork/logstash/bin/log/inlog1.log",
+   "@timestamp":"2016-12-13T02:28:38.763Z",
+   "@version":"1", "host":"Dell-PC",
+   "message":" Hello tutorialspoint.com", "tags":[]
+}
+</pre>
+<p>As you can, the output of Logstash contains more than the data supplied through the input log. The output contains the Source Path, Timestamp, Version, Hostname and Tag, which are used to represent the extra messages like errors.</p>
+<p>We can use filters to process the data and make its useful for our needs. In the next example, we are using filter to get the data, which restricts the output to only data with a verb like GET or POST followed by a <b>Unique Resource Identifier</b>.</p>
+<h3>Logstash.conf</h3>
+<p>In this Logstash configuration, we add a filter named <b>grok</b> to filter out the input data. The input log event, which matches the pattern sequence input log, only get to the output destination with error. Logstash adds a tag named "_grokparsefailure" in the output events, which does not match the grok filter pattern sequence.</p>
+<p>Logstash offers many inbuilt regex patterns for parsing popular server logs like Apache. The pattern used here expects a verb like get, post, etc., followed by a uniform resource identifier.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/inlog2.log"
+   }
+}
+filter {
+   grok {
+      match =&gt; {"message" =&gt; "%{WORD:verb} %{URIPATHPARAM:uri}"}
+   }
+}
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/outlog2.log"
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+C:\logstash\bin> logstash –f  Logstash.conf
+</pre>
+<h3>inlog2.log</h3>
+<p>Our input file contains two events separated by default delimiter, i.e., new line delimiter. The first event matches the pattern specified in GROk and the second one does not.</p>
+<pre class="result notranslate">
+GET /tutorialspoint/Logstash
+Input 1234
+</pre>
+<h3>outlog2.log</h3>
+<p>We can see that the second output event contains "_grokparsefailure" tag, because it does not match the grok filter pattern. The user can also remove these unmatched events in output by using the <b>‘if’</b> condition in the output plugin.</p>
+<pre class="prettyprint notranslate">
+{
+   "path":"C:/tpwork/logstash/bin/log/inlog2.log",
+   "@timestamp":"2016-12-13T02:47:10.352Z","@version":"1","host":"Dell-PC","verb":"GET",
+   "message":"GET /tutorialspoint/logstash", "uri":"/tutorialspoint/logstash", "tags":[]
+}
+{
+   "path":"C:/tpwork/logstash/bin/log/inlog2.log",
+   "@timestamp":"2016-12-13T02:48:12.418Z", "@version":"1", "host":"Dell-PC",
+   "message":"t 1234\r", "tags":["_grokparsefailure"]
+}
+</pre>
+<h1>Logstash - Collecting Logs</h1>
+<p>Logs from different servers or data sources are collected using shippers. A shipper is an instance of Logstash installed in the server, which accesses the server logs and sends to specific output location.</p> 
+<p>It mainly sends the output to the Elasticsearch for storage. Logstash takes input from the following sources &minus;</p>
+<ul class="list">
+<li>STDIN</li>
+<li>Syslog</li>
+<li>Files</li>
+<li>TCP/UDP</li>
+<li>Microsoft windows Eventlogs</li>
+<li>Websocket</li>
+<li>Zeromq</li>
+<li>Customized extensions</li>
+</ul>
+<h2>Collecting Logs Using Apache Tomcat 7 Server</h2>
+<p>In this example, we are collecting logs of Apache Tomcat 7 Server installed in windows using the file input plugin and sending them to the other log.</p>
+<h3>logstash.conf</h3>
+<p>Here, Logstash is configured to access the access log of Apache Tomcat 7 installed locally. A regex pattern is used in path setting of the file plugin to get the data from the log file. This contains “access” in its name and it adds an apache type, which helps in differentiating the apache events from the other in a centralized destination source. Finally, the output events will be shown in the output.log.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/*access*"
+      type =&gt; "apache"
+   }
+} 
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/output.log"
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+C:\logstash\bin&gt; logstash –f  Logstash.conf
+</pre>
+<h3>Apache Tomcat Log</h3>
+<p>Access the Apache Tomcat Server and its web apps (<b>http://localhost:8080</b>) to generate logs. The updated data in the logs are read by Logstash in real time and stashed in output.log as specified in configuration file.</p>
+<p>Apache Tomcat generates a new access log file according to date and logs the access events there. In our case, it was localhost_access_log.2016-12-24.txt in the <b>logs</b> directory of Apache Tomcat.</p>
+<pre class="result notranslate">
+0:0:0:0:0:0:0:1 - - [
+   25/Dec/2016:18:37:00 +0800] "GET / HTTP/1.1" 200 11418
+0:0:0:0:0:0:0:1 - munish [
+   25/Dec/2016:18:37:02 +0800] "GET /manager/html HTTP/1.1" 200 17472
+0:0:0:0:0:0:0:1 - - [
+   25/Dec/2016:18:37:08 +0800] "GET /docs/ HTTP/1.1" 200 19373
+0:0:0:0:0:0:0:1 - - [
+   25/Dec/2016:18:37:10 +0800] "GET /docs/introduction.html HTTP/1.1" 200 15399
+</pre>
+<h3>output.log</h3>
+<p>You can see in the output events, a type field is added and the event is present in the message field.</p>
+<pre class="prettyprint notranslate">
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   localhost_access_log.2016-12-25.txt",
+   "@timestamp":"2016-12-25T10:37:00.363Z","@version":"1","host":"Dell-PC",
+   "message":"0:0:0:0:0:0:0:1 - - [25/Dec/2016:18:37:00 +0800] \"GET /
+   HTTP/1.1\" 200 11418\r","type":"apache","tags":[]
+}
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   localhost_access_log.2016-12-25.txt","@timestamp":"2016-12-25T10:37:10.407Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"0:0:0:0:0:0:0:1 - munish [25/Dec/2016:18:37:02 +0800] \"GET /
+   manager/html HTTP/1.1\" 200 17472\r","type":"apache","tags":[]
+}
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   localhost_access_log.2016-12-25.txt","@timestamp":"2016-12-25T10:37:10.407Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"0:0:0:0:0:0:0:1 - - [25/Dec/2016:18:37:08 +0800] \"GET /docs/
+   HTTP/1.1\" 200 19373\r","type":"apache","tags":[]
+}
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   localhost_access_log.2016-12-25.txt","@timestamp":"2016-12-25T10:37:20.436Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"0:0:0:0:0:0:0:1 - - [25/Dec/2016:18:37:10 +0800] \"GET /docs/
+   introduction.html HTTP/1.1\" 200 15399\r","type":"apache","tags":[]
+}
+</pre>
+<h2>Collecting Logs Using STDIN Plugin</h2>
+<p>In this section, we will discuss another example of collecting logs using the <b>STDIN Plugin</b>.</p>
+<h3>logstash.conf</h3>
+<p>It is a very simple example, where Logstash is reading the events entered by the user in a standard input. In our case, it is the command prompt, which stores the events in the output.log file.</p>
+<pre class="prettyprint notranslate">
+input {
+   stdin{}
+}
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/output.log"
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+C:\logstash\bin&gt; logstash –f  Logstash.conf
+</pre>
+<p>Write the following text in the command prompt &minus;</p>
+<p>The user entered the following two lines. Logstash separates the events by the delimiter setting and its value by default is ‘\n’. The user can change by changing the value of the delimiter in the file plugin.</p>
+<pre class="result notranslate">
+Tutorialspoint.com welcomes you
+Simply easy learning
+</pre>
+<h3>output.log</h3>
+<p>The following code block shows the output log data.</p>
+<pre class="prettyprint notranslate">
+{
+   "@timestamp":"2016-12-25T11:41:16.518Z","@version":"1","host":"Dell-PC",
+   "message":"tutrialspoint.com welcomes you\r","tags":[]
+}
+{
+   "@timestamp":"2016-12-25T11:41:53.396Z","@version":"1","host":"Dell-PC",
+   "message":"simply easy learning\r","tags":[]
+}
+</pre>
+<h1>Logstash - Supported Inputs</h1>
+<p>Logstash supports a huge range of logs from different sources. It is working with famous sources as explained below.</p>
+<h2>Collect Logs from Metrics</h2>
+<p>System events and other time activities are recorded in metrics. Logstash can access the log from system metrics and process them using filters. This helps to show the user the live feed of the events in a customized manner. Metrics are flushed according to the <b>flush_interval setting</b> of metrics filter and by default; it is set to 5 seconds.</p>
+<p>We are tracking the test metrics generated by Logstash, by gathering and analyzing the events running through Logstash and showing the live feed on the command prompt.</p>
+<h3>logstash.conf</h3>
+<p>This configuration contains a generator plugin, which is offered by Logstash for test metrics and set the type setting to “generated” for parsing. In the filtering phase, we are only processing the lines with a generated type by using the ‘if’ statement. Then, the metrics plugin counts the field specified in meter settings. The metrics plugin flushes the count after every 5 seconds specified in the <b>flush_interval</b>.</p>
+<p>Lastly, output the filter events to a standard output like command prompt using the <b>codec plugin</b> for formatting. The Codec plugin is using [<i>events</i>][<i>rate_1m</i>] value to output the per second events in a 1-minute sliding window.</p>
+<pre class="prettyprint notranslate">
+input {
+   generator {
+     	type =&gt; "generated"
+   }
+}
+filter {
+   if [type] == "generated" {
+      metrics {
+         meter =&gt; "events"
+         add_tag =&gt; "metric"
+      }
+   }
+}
+output {
+   # only emit events with the 'metric' tag
+   if "metric" in [tags] {
+      stdout {
+         codec =&gt; line { format =&gt; "rate: %{[events][rate_1m]}"
+      }
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+&gt;logsaths –f logstash.conf
+</pre>
+<h3>stdout (command prompt)</h3>
+<pre class="result notranslate">
+rate: 1308.4
+rate: 1308.4
+rate: 1368.654529135342
+rate: 1416.4796003951449
+rate: 1464.974293984808
+rate: 1523.3119444107458
+rate: 1564.1602979542715
+rate: 1610.6496496890895
+rate: 1645.2184750334154
+rate: 1688.7768007612485
+rate: 1714.652283095914
+rate: 1752.5150680019278
+rate: 1785.9432934744932
+rate: 1806.912181962126
+rate: 1836.0070454626025
+rate: 1849.5669494173826
+rate: 1871.3814756851832
+rate: 1883.3443123790712
+rate: 1906.4879113216743
+rate: 1925.9420717997118
+rate: 1934.166137658981
+rate: 1954.3176526556897
+rate: 1957.0107444542625
+</pre>
+<h2>Collect Logs from the Web Server</h2>
+<p>Web servers generate a large number of logs regarding user access and errors. Logstash helps to extract the logs from different servers using input plugins and stash them in a centralized location.</p>
+<p>We are extracting the data from the <b>stderr logs</b> of the local Apache Tomcat Server and stashing it in the output.log.</p>
+<h3>logstash.conf</h3>
+<p>This Logstash configuration file directs Logstash to read apache error logs and add a tag named “apache-error”. We can simply send it to the output.log using the file output plugin.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/Program Files/Apache Software Foundation/Tomcat 7.0 /logs/*stderr*"
+      type =&gt; "apache-error"  
+   }
+} 
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/output.log"
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+&gt;Logstash –f Logstash.conf
+</pre>
+<h3>Sample of Input log</h3>
+<p>This is the sample <b>stderr log</b>, which generates when the server events occur in Apache Tomcat.</p>
+<p>C:\Program Files\Apache Software Foundation\Tomcat 7.0\logs\ tomcat7-stderr.2016-12-25.log</p>
+<pre class="result notranslate">
+Dec 25, 2016 7:05:14 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-9999"]
+Dec 25, 2016 7:05:14 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+Dec 25, 2016 7:05:14 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 823 ms
+</pre>
+<h3>output.log</h3>
+<pre class="prettyprint notranslate">
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   tomcat7-stderr.2016-12-25.log","@timestamp":"2016-12-25T11:05:27.045Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"Dec 25, 2016 7:05:14 PM org.apache.coyote.AbstractProtocol start\r",
+   "type":"apache-error","tags":[]
+}
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   tomcat7-stderr.2016-12-25.log","@timestamp":"2016-12-25T11:05:27.045Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"INFO: Starting ProtocolHandler [
+      \"ajp-bio-8009\"]\r","type":"apache-error","tags":[]
+}
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   tomcat7-stderr.2016-12-25.log","@timestamp":"2016-12-25T11:05:27.045Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"Dec 25, 2016 7:05:14 PM org.apache.catalina.startup.Catalina start\r",
+   "type":"apache-error","tags":[]
+}
+{
+   "path":"C:/Program Files/Apache Software Foundation/Tomcat 7.0/logs/
+   tomcat7-stderr.2016-12-25.log","@timestamp":"2016-12-25T11:05:27.045Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"INFO: Server startup in 823 ms\r","type":"apache-error","tags":[]
+}
+</pre>
+<h3>Collect Logs from Data sources</h3>
+<p>To start with, let us understand how to Configure MySQL for logging. Add the following lines in <b>my.ini file</b> of the MySQL database server under [mysqld].</p>
+<p>In windows, it is present inside the installation directory of MySQL, which is in &minus;</p>
+<pre class="result notranslate">
+C:\wamp\bin\mysql\mysql5.7.11
+</pre>
+<p>In UNIX, you can find it in – /etc/mysql/my.cnf</p>
+<pre class="result notranslate">
+general_log_file   = "C:/wamp/logs/queries.log"
+general_log = 1
+</pre>
+<h3>logstash.conf</h3>
+<p>In this config file, file plugin is used to read the MySQL log and write it to the ouput.log.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/wamp/logs/queries.log"
+   }
+}
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/output.log"
+   }
+}
+</pre>
+<h3>queries.log</h3>
+<p>This is the log generated by queries executed in the MySQL database.</p>
+<pre class="result notranslate">
+2016-12-25T13:05:36.854619Z   2 Query		select * from test1_users
+2016-12-25T13:05:51.822475Z    2 Query	select count(*) from users
+2016-12-25T13:05:59.998942Z    2 Query         select count(*) from test1_users
+</pre>
+<h3>output.log</h3>
+<pre class="prettyprint notranslate">
+{
+   "path":"C:/wamp/logs/queries.log","@timestamp":"2016-12-25T13:05:37.905Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"2016-12-25T13:05:36.854619Z    2 Query\tselect * from test1_users",
+   "tags":[]
+}
+{
+   "path":"C:/wamp/logs/queries.log","@timestamp":"2016-12-25T13:05:51.938Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"2016-12-25T13:05:51.822475Z    2 Query\tselect count(*) from users",
+   "tags":[]
+}
+{
+   "path":"C:/wamp/logs/queries.log","@timestamp":"2016-12-25T13:06:00.950Z",
+   "@version":"1","host":"Dell-PC",
+   "message":"2016-12-25T13:05:59.998942Z    2 Query\tselect count(*) from test1_users",
+   "tags":[]
+}
+</pre>
+<h1>Logstash - Parsing the Logs</h1>
+<p>Logstash receives the logs using input plugins and then uses the filter plugins to parse and transform the data. The parsing and transformation of logs are performed according to the systems present in the output destination. Logstash parses the logging data and forwards only the required fields. Later, these fields are transformed into the destination system’s compatible and understandable form.</p>
+<h2>How to Parse the Logs?</h2>
+<p>Parsing of the logs is performed my using the <b>GROK</b> (Graphical Representation of Knowledge) patterns and you can find them in Github &minus;</p>
+<p><a rel="nofollow" target="_blank" href="https://github.com/elastic/logstash/tree/v1.4.2/patterns">https://github.com/elastic/logstash/tree/v1.4.2/patterns</a>.</p>
+<p>Logstash matches the data of logs with a specified GROK Pattern or a pattern sequence for parsing the logs like "%{COMBINEDAPACHELOG}", which is commonly used for apache logs. </p>
+<p>The parsed data is more structured and easy to search and for performing queries. Logstash searches for the specified GROK patterns in the input logs and extracts the matching lines from the logs. You can use GROK debugger to test your GROK patterns.</p>
+<p>The syntax for a GROK pattern is %{SYNTAX:SEMANTIC}. Logstash GROK filter is written in the following form &minus;</p>
+<h3>%{PATTERN:FieldName}</h3>
+<p>Here, PATTERN represents the GROK pattern and the fieldname is the name of the field, which represents the parsed data in the output.</p>
+<p>For example, using online GROK debugger <a rel="nofollow" target="_blank" href="https://grokdebug.herokuapp.com/">https://grokdebug.herokuapp.com/</a></p>
+<h3>Input</h3>
+<p>A sample error line in a log &minus;</p>
+<pre class="result notranslate">
+[Wed Dec 07 21:54:54.048805 2016] [:error] [pid 1234:tid 3456829102]
+   [client 192.168.1.1:25007] JSP Notice:  Undefined index: abc in
+   /home/manu/tpworks/tutorialspoint.com/index.jsp on line 11
+</pre>
+<h3>GROK Pattern Sequence</h3>
+<p>This GROK pattern sequence matches to the log event, which comprises of a timestamp followed by Log Level, Process Id, Transaction Id and an Error Message.</p>
+<pre class="result notranslate">
+\[(%{DAY:day} %{MONTH:month} %{MONTHDAY} %{TIME} %{YEAR})\] \[.*:%{LOGLEVEL:loglevel}\]
+   \[pid %{NUMBER:pid}:tid %{NUMBER:tid}\] \[client %{IP:clientip}:.*\]
+   %{GREEDYDATA:errormsg}
+</pre>
+<h3>output</h3>
+<p>The output is in JSON format.</p>
+<pre class="result notranslate">
+{
+   "day": [
+      "Wed"
+   ],
+   "month": [
+      "Dec"
+   ],
+   "loglevel": [
+      "error"
+   ],
+   "pid": [
+      "1234"
+   ],
+   "tid": [
+      "3456829102"
+   ],
+   "clientip": [
+      "192.168.1.1"
+   ],
+   "errormsg": [
+      "JSP Notice:  Undefined index: abc in
+      /home/manu/tpworks/tutorialspoint.com/index.jsp on line 11"
+   ]
+}
+</pre>
+<h1>Logstash - Filters</h1>
+<p>Logstash uses filters in the middle of the pipeline between input and output. The filters of Logstash measures manipulate and create events like <b>Apache-Access</b>. Many filter plugins used to manage the events in Logstash. Here, in an example of the <b>Logstash Aggregate Filter</b>, we are filtering the duration every SQL transaction in a database and computing the total time.</p>
+<h2>Installing the Aggregate Filter Plugin</h2>
+<p>Installing the Aggregate Filter Plugin using the Logstash-plugin utility. The Logstash-plugin is a batch file for windows in <b>bin folder</b> in Logstash.</p>
+<pre class="result notranslate">
+&gt;logstash-plugin install logstash-filter-aggregate
+</pre>
+<h3>logstash.conf</h3>
+<p>In this configuration, you can see three ‘if’ statements for <b>Initializing, Incrementing,</b> and <b>generating</b> the total duration of transaction, i.e., the <b>sql_duration</b>. The aggregate plugin is used to add the sql_duration, present in every event of the input log.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/input.log"
+   }
+} 
+filter {
+   grok {
+      match =&gt; [
+         "message", "%{LOGLEVEL:loglevel} - 
+            %{NOTSPACE:taskid} - %{NOTSPACE:logger} - 
+            %{WORD:label}( - %{INT:duration:int})?" 
+      ]
+   }
+   if [logger] == "TRANSACTION_START" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] = 0"
+         map_action =&gt; "create"
+      }
+   }
+   if [logger] == "SQL" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] ||= 0 ;
+            map['sql_duration'] += event.get('duration')"
+      }
+   }
+   if [logger] == "TRANSACTION_END" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "event.set('sql_duration', map['sql_duration'])"
+         end_of_task =&gt; true
+         timeout =&gt; 120
+      }
+   }
+}
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/output.log"    
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+&gt;logstash –f logstash.conf 
+</pre>
+<h3>input.log</h3>
+<p>The following code block shows the input log data.</p>
+<pre class="result notranslate">
+INFO - 48566 - TRANSACTION_START - start
+INFO - 48566 - SQL - transaction1 - 320
+INFO - 48566 - SQL - transaction1 - 200
+INFO - 48566 - TRANSACTION_END - end
+</pre>
+<h3>output.log</h3>
+<p>As specified in the configuration file, the last ‘if’ statement where the logger is – TRANSACTION_END, which prints the total transaction time or sql_duration. This has been highlighted in yellow color in the output.log.</p>
+<pre class="prettyprint notranslate">
+{
+   "path":"C:/tpwork/logstash/bin/log/input.log","@timestamp": "2016-12-22T19:04:37.214Z",
+   "loglevel":"INFO","logger":"TRANSACTION_START","@version": "1","host":"wcnlab-PC",
+   "message":"8566 - TRANSACTION_START - start\r","tags":[]
+}
+{
+   "duration":320,"path":"C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp":"2016-12-22T19:04:38.366Z","loglevel":"INFO","logger":"SQL",
+   "@version":"1","host":"wcnlab-PC","label":"transaction1",
+   "message":" INFO - 48566 - SQL - transaction1 - 320\r","taskid":"48566","tags":[]
+}
+{
+   "duration":200,"path":"C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp":"2016-12-22T19:04:38.373Z","loglevel":"INFO","logger":"SQL",
+   "@version":"1","host":"wcnlab-PC","label":"transaction1",
+   "message":" INFO - 48566 - SQL - transaction1 - 200\r","taskid":"48566","tags":[]
+}
+{
+   "sql_duration":520,"path":"C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp":"2016-12-22T19:04:38.380Z","loglevel":"INFO","logger":"TRANSACTION_END",
+   "@version":"1","host":"wcnlab-PC","label":"end",
+   "message":" INFO - 48566 - TRANSACTION_END - end\r","taskid":"48566","tags":[]
+}
+</pre>
+<h1>Logstash - Transforming the Logs</h1>
+<p>Logstash offers various plugins to transform the parsed log. These plugins can <b>Add, Delete,</b> and <b>Update</b> fields in the logs for better understanding and querying in the output systems.</p>
+<p>We are using the <b>Mutate Plugin</b> to add a field name user in every line of the input log.</p>
+<h2>Install the Mutate Filter Plugin</h2>
+<p>To install the mutate filter plugin; we can use the following command.</p>
+<pre class="result notranslate">
+&gt;Logstash-plugin install Logstash-filter-mutate
+</pre>
+<h3>logstash.conf</h3>
+<p>In this config file, the Mutate Plugin is added after the Aggregate Plugin to add a new field.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/input.log"
+   }
+} 
+filter {
+   grok {
+      match =&gt; [ "message", "%{LOGLEVEL:loglevel} -
+         %{NOTSPACE:taskid} - %{NOTSPACE:logger} -
+         %{WORD:label}( - %{INT:duration:int})?" ]
+   }
+   if [logger] == "TRANSACTION_START" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] = 0"
+         map_action =&gt; "create"
+      }
+   }
+   if [logger] == "SQL" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] ||= 0 ; 
+            map['sql_duration'] += event.get('duration')"
+      }
+   }
+   if [logger] == "TRANSACTION_END" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "event.set('sql_duration', map['sql_duration'])"
+         end_of_task =&gt; true
+         timeout =&gt; 120
+      }
+   }
+   mutate {
+      add_field =&gt; {"user" =&gt; "tutorialspoint.com"}
+   }
+}
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/output.log"
+   }
+}
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+&gt;logstash –f logstash.conf
+</pre>
+<h3>input.log</h3>
+<p>The following code block shows the input log data.</p>
+<pre class="result notranslate">
+INFO - 48566 - TRANSACTION_START - start
+INFO - 48566 - SQL - transaction1 - 320
+INFO - 48566 - SQL - transaction1 - 200
+INFO - 48566 - TRANSACTION_END - end
+</pre>
+<h3>output.log</h3>
+<p>You can see that there is a new field named “user” in the output events.</p>
+<pre class="prettyprint notranslate">
+{
+   "path":"C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp":"2016-12-25T19:55:37.383Z",
+   "@version":"1",
+   "host":"wcnlab-PC",
+   "message":"NFO - 48566 - TRANSACTION_START - start\r",
+   "user":"tutorialspoint.com","tags":["_grokparsefailure"]
+}
+{
+   "duration":320,"path":"C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp":"2016-12-25T19:55:37.383Z","loglevel":"INFO","logger":"SQL",
+   "@version":"1","host":"wcnlab-PC","label":"transaction1",
+   "message":" INFO - 48566 - SQL - transaction1 - 320\r",
+   "user":"tutorialspoint.com","taskid":"48566","tags":[]
+}
+{
+   "duration":200,"path":"C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp":"2016-12-25T19:55:37.399Z","loglevel":"INFO",
+   "logger":"SQL","@version":"1","host":"wcnlab-PC","label":"transaction1",
+   "message":" INFO - 48566 - SQL - transaction1 - 200\r",
+   "user":"tutorialspoint.com","taskid":"48566","tags":[]
+}
+{
+   "sql_duration":520,"path":"C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp":"2016-12-25T19:55:37.399Z","loglevel":"INFO",
+   "logger":"TRANSACTION_END","@version":"1","host":"wcnlab-PC","label":"end",
+   "message":" INFO - 48566 - TRANSACTION_END - end\r",
+   "user":"tutorialspoint.com","taskid":"48566","tags":[]
+}
+</pre>
+<h1>Logstash - Output Stage</h1>
+<p>Output is the last stage in Logstash pipeline, which send the filter data from input logs to a specified destination. Logstash offers multiple output plugins to stash the filtered log events to various different storage and searching engines.</p>
+<h2>Storing Logs</h2>
+<p>Logstash can store the filtered logs in a <b>File, Elasticsearch Engine, stdout, AWS CloudWatch,</b> etc. Network protocols like <b>TCP, UDP, Websocket</b> can also be used in Logstash for transferring the log events to remote storage systems.</p>
+<p>In ELK stack, users use the Elasticsearch engine to store the log events. Here, in the following example, we will generate log events for a local Elasticsearch engine.</p>
+<h2>Installing the Elasticsearch Output Plugin</h2>
+<p>We can install the Elasticsearch output plugin with the following command.</p>
+<pre class="result notranslate">
+&gt;logstash-plugin install Logstash-output-elasticsearch
+</pre>
+<h3>logstash.conf</h3>
+<p>This config file contains an Elasticsearch plugin, which stores the output event in Elasticsearch installed locally.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/input.log"
+   }
+} 
+filter {
+   grok {
+      match =&gt; [ "message", "%{LOGLEVEL:loglevel} -
+      %{NOTSPACE:taskid} - %{NOTSPACE:logger} -  
+      %{WORD:label}( - %{INT:duration:int})?" ]
+   }
+   if [logger] == "TRANSACTION_START" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] = 0"
+         map_action =&gt; "create"
+      }
+   }
+   if [logger] == "SQL" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] ||= 0 ;
+            map['sql_duration'] += event.get('duration')"
+      }
+   }
+   if [logger] == "TRANSACTION_END" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "event.set('sql_duration', map['sql_duration'])"
+         end_of_task =&gt; true
+         timeout =&gt; 120
+      }
+   }
+   mutate {
+      add_field =&gt; {"user" =&gt; "tutorialspoint.com"}
+   }
+}
+output {
+   elasticsearch {
+      hosts =&gt; ["127.0.0.1:9200"]
+   }
+}
+</pre>
+<h3>Input.log</h3>
+<p>The following code block shows the input log data.</p>
+<pre class="result notranslate">
+INFO - 48566 - TRANSACTION_START - start
+INFO - 48566 - SQL - transaction1 - 320
+INFO - 48566 - SQL - transaction1 - 200
+INFO - 48566 - TRANSACTION_END - end
+</pre>
+<h3>Start Elasticsearch at Localhost</h3>
+<p>To start Elasticsearch at the localhost, you should use the following command.</p>
+<pre class="result notranslate">
+C:\elasticsearch\bin&gt; elasticsearch
+</pre>
+<p>Once Elasticsearch is ready, you can check it by typing the following URL in your browser.</p>
+<p><b>http://localhost:9200/</b></p>
+<h3>Response</h3>
+<p>The following code block shows the response of Elasticsearch at localhost.</p>
+<pre class="result notranslate">
+{
+   "name" : "Doctor Dorcas",
+   "cluster_name" : "elasticsearch",
+   "version" : {
+      "number" : "2.1.1",
+      "build_hash" : "40e2c53a6b6c2972b3d13846e450e66f4375bd71",
+      "build_timestamp" : "2015-12-15T13:05:55Z",
+      "build_snapshot" : false,
+      "lucene_version" : "5.3.1"
+   },
+   "tagline" : "You Know, for Search"
+}
+</pre>
+<p><b>Note</b> &minus; For more information about Elasticsearch, you can click on the following link.</p>
+<p><a href="https://www.tutorialspoint.com/elasticsearch/index.htm">https://www.tutorialspoint.com/elasticsearch/index.html</a></p>
+<p>Now, run Logstash with the above-mentioned Logstash.conf</p>
+<pre class="result notranslate">
+&gt;Logstash –f Logstash.conf
+</pre>
+<p>After pasting the above-mentioned text in the output log, that text will be stored in Elasticsearch by Logstash. You can check the stored data by typing the following URL in the browser.</p>
+<p><b>http://localhost:9200/logstash-2017.01.01/_search?pretty</b></p>
+<h3>Response</h3>
+<p>It is the data in JSON format stored in index Logstash-2017.01.01.</p>
+<pre class="prettyprint notranslate">
+{
+   "took" : 20,
+   "timed_out" : false,
+   "_shards" : {
+      "total" : 5,
+      "successful" : 5,
+      "failed" : 0
+   },
+   "hits" : {
+      "total" : 10,
+      "max_score" : 1.0,
+      "hits" : [ {
+         "_index" : "logstash-2017.01.01",
+         "_type" : "logs",
+         "_id" : "AVlZ9vF8hshdrGm02KOs",
+         "_score" : 1.0,
+         "_source":{
+            "duration":200,"path":"C:/tpwork/logstash/bin/log/input.log", 
+            "@timestamp":"2017-01-01T12:17:49.140Z","loglevel":"INFO",
+            "logger":"SQL","@version":"1","host":"wcnlab-PC",
+            "label":"transaction1",
+            "message":" INFO - 48566 - SQL - transaction1 - 200\r",
+            "user":"tutorialspoint.com","taskid":"48566","tags":[]
+         }
+      },
+      {
+         "_index" : "logstash-2017.01.01",
+         "_type" : "logs",
+         "_id" : "AVlZ9vF8hshdrGm02KOt",
+         "_score" : 1.0,
+         "_source":{
+            "sql_duration":520,"path":"C:/tpwork/logstash/bin/log/input.log",
+            "@timestamp":"2017-01-01T12:17:49.145Z","loglevel":"INFO",
+            "logger":"TRANSACTION_END","@version":"1","host":"wcnlab-PC",
+            "label":"end",
+            "message":" INFO - 48566 - TRANSACTION_END - end\r",
+            "user":"tutorialspoint.com","taskid":"48566","tags":[]
+         }
+      }
+   }
+}
+</pre>
+<h1>Logstash - Supported Outputs</h1>
+<p>Logstash provides multiple Plugins to support various data stores or search engines. The output events of logs can be sent to an output file, standard output or a search engine like Elasticsearch. There are three types of supported outputs in Logstash, which are &minus;</p>
+<ul class="list">
+<li>Standard Output</li>
+<li>File Output</li>
+<li>Null Output </li>
+</ul>
+<p>Let us now discuss each of these in detail.</p>
+<h2>Standard Output (stdout)</h2>
+<p>It is used for generating the filtered log events as a data stream to the command line interface. Here is an example of generating the total duration of a database transaction to stdout.</p>
+<h3>logstash.conf</h3>
+<p>This config file contains a stdout output plugin to write the total sql_duration to a standard output.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/input.log"
+   }
+} 
+filter {
+   grok {
+      match =&gt; [
+         "message", "%{LOGLEVEL:loglevel} - %{NOTSPACE:taskid}
+            - %{NOTSPACE:logger} - %{WORD:label}( - %{INT:duration:int})?" 
+      ]
+   }
+   if [logger] == "TRANSACTION_START" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] = 0"
+         map_action =&gt; "create"
+      }
+   }
+   if [logger] == "SQL" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] ||= 0 ;
+            map['sql_duration'] += event.get('duration')"
+      }
+   }
+   if [logger] == "TRANSACTION_END" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "event.set('sql_duration', map['sql_duration'])"
+         end_of_task =&gt; true
+         timeout =&gt; 120
+      }
+   }
+}
+output {
+   if [logger] == "TRANSACTION_END" {
+      stdout {
+         codec =&gt; line{format =&gt; "%{sql_duration}"}
+      }
+   }
+}
+</pre>
+<p><b>Note</b> &minus; Please install the aggregate filter, if not installed already.</p>
+<pre class="result notranslate">
+&gt;logstash-plugin install Logstash-filter-aggregate
+</pre>
+<h3>Run Logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+&gt;logstash –f Logstash.conf
+</pre>
+<h3>Input.log</h3>
+<p>The following code block shows the input log data.</p>
+<pre class="result notranslate">
+INFO - 48566 - TRANSACTION_START - start
+INFO - 48566 - SQL - transaction1 - 320
+INFO - 48566 - SQL - transaction1 - 200
+INFO - 48566 - TRANSACTION_END – end
+</pre>
+<p><b>stdout</b> (it will be command prompt in windows or terminal in UNIX)</p>
+<p>This is the total sql_duration 320 + 200 = 520.</p>
+<pre class="result notranslate">
+520
+</pre>
+<h2>File Output</h2>
+<p>Logstash can also store the filter log events to an output file. We will use the above-mentioned example and store the output in a file instead of STDOUT.</p>
+<h3>logstash.conf</h3>
+<p>This Logstash config file direct Logstash to store the total sql_duration to an output log file.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/input1.log"
+   }
+} 
+filter {
+   grok {
+      match =&gt; [
+         "message", "%{LOGLEVEL:loglevel} - %{NOTSPACE:taskid} -
+            %{NOTSPACE:logger} - %{WORD:label}( - %{INT:duration:int})?" 
+      ]
+   }
+   if [logger] == "TRANSACTION_START" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] = 0"
+         map_action =&gt; "create"
+      }
+   }
+   if [logger] == "SQL" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "map['sql_duration'] ||= 0 ;
+            map['sql_duration'] += event.get('duration')"
+      }
+   }
+   if [logger] == "TRANSACTION_END" {
+      aggregate {
+         task_id =&gt; "%{taskid}"
+         code =&gt; "event.set('sql_duration', map['sql_duration'])"
+         end_of_task =&gt; true
+         timeout =&gt; 120
+      }
+   }
+}
+output {
+   if [logger] == "TRANSACTION_END" {
+      file {
+         path =&gt; "C:/tpwork/logstash/bin/log/output.log"
+         codec =&gt; line{format =&gt; "%{sql_duration}"}
+      }
+   }
+}
+</pre>
+<h3>Run logstash</h3>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+&gt;logstash –f Logstash.conf
+</pre>
+<h3>input.log</h3>
+<p>The following code block shows the input log data.</p>
+<pre class="result notranslate">
+INFO - 48566 - TRANSACTION_START - start
+INFO - 48566 - SQL - transaction1 - 320
+INFO - 48566 - SQL - transaction1 - 200
+INFO - 48566 - TRANSACTION_END – end
+</pre>
+<h3>output.log</h3>
+<p>The following code block shows the output log data.</p>
+<pre class="result notranslate">
+520
+</pre>
+<h2>Null Output</h2>
+<p>This is a special output plugin, which is used for analyzing the performance of input and filter Plugins.</p>
+<h1>Logstash - Plugins</h1>
+<p>Logstash offers various plugins for all three stages of its pipeline (Input, Filter and Output). These plugins help the user to capture logs from various sources like Web Servers, Databases, Over Network Protocols, etc.</p>
+<p>After capturing, Logstash can parse and transform the data into meaningful information as required by the user. Lastly, Logstash can send or store that meaningful information to various destination sources like Elasticsearch, AWS Cloudwatch, etc.</p>
+<h2>Input Plugins</h2>
+<p>Input plugins in Logstash helps the user to extract and receive logs from various sources. The syntax for using the input plugin is as follows &minus;</p>
+<pre class="result notranslate">
+Input {
+   Plugin name {
+      Setting 1……
+      Setting 2……..
+   }
+}
+</pre>
+<p>You can download input plugin by using the following command &minus;</p>
+<pre class="result notranslate">
+&gt;Logstash-plugin install Logstash-input-&lt;plugin name&gt;
+</pre>
+<p>The Logstash-plugin utility is present in the <b>bin folder</b> of the Logstash installation directory. The following table has a list of the input plugins offered by Logstash.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Plugin name &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>beats</b></p>
+<p>To get the logging data or events from elastic beats framework.</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>cloudwatch</b></p>
+<p>To extract events from CloudWatch, an API offer by Amazon Web Services. </p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>couchdb_changes</b></p>
+<p>Events from _chages URI of couchdb shipped using this plugin.</p></td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>drupal_dblog</b></p>
+<p>To extract drupal’s watchdog logging data with enabled DBLog.</p></td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>Elasticsearch</b></p>
+<p>To retrieve the results of queries performed in Elasticsearch cluster.</p></td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>eventlog</b></p>
+<p>To get the events from windows event log.</p></td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>exec</b></p>
+<p>To get shell command output as an input in Logstash.</p></td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>file</b></p>
+<p>To get the events from an input file. This is useful, when the Logstash is locally installed with the input source and have access to input source logs. </p></td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>generator</b></p>
+<p>It is used for testing purposes, which creates random events.</p></td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>github</b></p>
+<p>Captures events from GitHub webhook.</p></td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>graphite</b></p>
+<p>To get metrics data from graphite monitoring tool.</p></td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td><p><b>heartbeat</b></p>
+<p>It is also used for testing and it produces heartbeat like events</p></td>
+</tr>
+<tr>
+<td class="ts">13</td>
+<td><p><b>http</b></p>
+<p>To collect log events over two network protocols and those are http and https.</p></td>
+</tr>
+<tr>
+<td class="ts">14</td>
+<td><p><b>http_poller</b></p>
+<p>It is used to decode the HTTP API output to an event.</p></td>
+</tr>
+<tr>
+<td class="ts">15</td>
+<td><p><b>jdbc</b></p>
+<p>It converts the JDBC transactions to an event in Logstash.</p></td>
+</tr>
+<tr>
+<td class="ts">16</td>
+<td><p><b>jmx</b></p>
+<p>To extract the metrics from remote java applications using JMX.</p></td>
+</tr>
+<tr>
+<td class="ts">17</td>
+<td><p><b>log4j</b></p>
+<p>Capture events from socketAppender object of Log4j over TCP socket.</p></td>
+</tr>
+<tr>
+<td class="ts">18</td>
+<td><p><b>rss</b></p>
+<p>To the output of command line tools as an input event in Logstash.</p></td>
+</tr>
+<tr>
+<td class="ts">19</td>
+<td><p><b>tcp</b></p>
+<p>Captures events over TCP socket.</p></td>
+</tr>
+<tr>
+<td class="ts">20</td>
+<td><p><b>twitter</b></p>
+<p>Collect events from twitter streaming API.</p></td>
+</tr>
+<tr>
+<td class="ts">21</td>
+<td><p><b>unix</b></p>
+<p>Collect events over UNIX socket.</p></td>
+</tr>
+<tr>
+<td class="ts">22</td>
+<td><p><b>websocket</b></p>
+<p>Capture events over websocket protocol.</p></td>
+</tr>
+<tr>
+<td class="ts">23</td>
+<td><p><b>xmpp</b></p>
+<p>Reads events over Jabber/xmpp protocols.</p></td>
+</tr>
+</table>
+<h2>Plugin Settings</h2>
+<p>All the plugins have their specific settings, which helps to specify the important fields like Port, Path, etc., in a plugin. We will discuss the settings of some of the input plugins.</p>
+<h3>File</h3>
+<p>This input plugin is used to extract events directly from log or text files present in the input source. It works similar to the tail command in UNIX and save the last read cursor and read only the new appended data from the input file, but it can be changed by using star_position setting. Following are the settings of this input plugin.</p>
+<table class="table table-bordered">
+<tr>
+<th class="ts">Setting Name</th>
+<th style="text-align:center;">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">add_field</td>
+<td style="text-align:center;">{}</td>
+<td>Append a new field to the input event.</td>
+</tr>
+<tr>
+<td class="ts">close_older</td>
+<td class="ts">3600</td>
+<td>The files having last read time (in seconds) more than the specified in this plugin is closed.</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to decode the data before entering into the Logstash pipeline.</td>
+</tr>
+<tr>
+<td class="ts">delimiter</td>
+<td style="text-align:center;">“\n”</td>
+<td>It is used to specify a new line delimiter.</td>
+</tr>
+<tr>
+<td class="ts">discover_interval</td>
+<td class="ts">15</td>
+<td>It is the time interval (in seconds) between discovering new files in the specified path.</td>
+</tr>
+<tr>
+<td class="ts">enable_metric</td>
+<td class="ts">true</td>
+<td>It is used to enable or disable the reporting and collection of metric for the specified plugin.</td>
+</tr>
+<tr>
+<td class="ts">exclude</td>
+<td style="text-align:center;"></td>
+<td>It is used to specify the filename or patterns, which should be excluded from input plugin.</td>
+</tr>
+<tr>
+<td style="text-align:center;">Id</td>
+<td style="text-align:center;"></td>
+<td>To specify a unique identity for that plugin instance.</td>
+</tr>
+<tr>
+<td class="ts">max_open_files</td>
+<td style="text-align:center;"></td>
+<td>It specifies the maximum number of input files by Logstash at any time.</td>
+</tr>
+<tr>
+<td class="ts">path</td>
+<td style="text-align:center;"></td>
+<td>Specify the path of the files and it can contain the patterns for filename.</td>
+</tr>
+<tr>
+<td class="ts">start_position</td>
+<td class="ts">“end”</td>
+<td>You can change to “beginning”, if you want that; initially Logstash should start reading the files from the starting and not only the new log event.</td>
+</tr>
+<tr>
+<td class="ts">start_interval</td>
+<td class="ts">1</td>
+<td>It specifies the time interval in seconds, after which Logstash checks for the modified files.</td>
+</tr>
+<tr>
+<td class="ts">tags</td>
+<td style="text-align:center;"></td>
+<td>To add any additional information, like Logstash, it adds "_grokparsefailure" in tags, when any log event failed to comply with the specified grok filter.</td>
+</tr>
+<tr>
+<td class="ts">type</td>
+<td style="text-align:center;"></td>
+<td>This is a special field, which you can add to an input event and it is useful in filters and kibana.</td>
+</tr>
+</table>
+<h3>Elasticsearch</h3>
+<p>This particular plugin is used to read the search queries results in an Elasticsearch cluster. The following has the settings used in this plugin &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting Name</th>
+<th style="text-align:center; width:35%">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td class="ts">add_field</td>
+<td class="ts">{}</td>
+<td>Same as in file plugin, it is used to append a field in input event.</td>
+</tr>
+<tr>
+<td class="ts">ca_file</td>
+<td style="text-align:center;"></td>
+<td>It is used to specify the path of SSL certificate Authority file.</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to decode the input events from Elasticsearch before entering in the Logstash pipeline.</td>
+</tr>
+<tr>
+<td class="ts">docinfo</td>
+<td class="ts">“false”</td>
+<td>You can change it to true, if you want to extract the additional information like index, type and id from Elasticsearch engine.</td>
+</tr>
+<tr>
+<td class="ts">docinfo_fields</td>
+<td class="ts">["_index", "_type", "_id"]</td>
+<td>You can eliminate any field, which you do not want in your Logstash input.</td>
+</tr>
+<tr>
+<td class="ts">enable_metric</td>
+<td class="ts">true</td>
+<td>It is used to enable or disable the reporting and collection of metric for that plugin instance. </td>
+</tr>
+<tr>
+<td class="ts">hosts</td>
+<td style="text-align:center;"></td>
+<td>It is used to specify the addresses of all elasticsearch engines, which will be the input source of that Logstash instance. The syntax is host:port or IP:port.</td>
+</tr>
+<tr>
+<td class="ts">Id</td>
+<td style="text-align:center;"></td>
+<td>It is used to give a unique identity number to that specific input plugin instance.</td>
+</tr>
+<tr>
+<td class="ts">index</td>
+<td class="ts">"logstash-*"</td>
+<td>It is used to specify the index name or a pattern, which Logstash will monitor by Logstash for input.</td>
+</tr>
+<tr>
+<td style="text-align:center;">password</td>
+<td style="text-align:center;"></td>
+<td>For authentication purposes.</td>
+</tr>
+<tr>
+<td style="text-align:center;">query</td>
+<td style="text-align:center;">"{ \"sort\": [ \"_doc\" ] }"</td>
+<td>Query for the execution.</td>
+</tr>
+<tr>
+<td class="ts">ssl</td>
+<td class="ts">false</td>
+<td>Enable or disable secure socket layer.</td>
+</tr>
+<tr>
+<td class="ts">tags</td>
+<td style="text-align:center;"></td>
+<td>To add any additional information in input events.</td>
+</tr>
+<tr>
+<td class="ts">type</td>
+<td style="text-align:center;"></td>
+<td>It is used to classify the input forms so that it will be easy to search all the input events at later stages.</td>
+</tr>
+<tr>
+<td style="text-align:center;">user</td>
+<td style="text-align:center;"></td>
+<td>For authentic purposes.</td>
+</tr>
+</table>
+<h3>eventlog</h3>
+<p>This input plugin reads data from win32 API of windows servers. Followings are the settings of this plugin &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting Name</th>
+<th class="ts" style="width:35%">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td class="ts">add_field</td>
+<td class="ts">{}</td>
+<td>Same as in file plugin, it is used to append a field in input event</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to decode the input events from windows; before entering in the Logstash pipeline</td>
+</tr>
+<tr>
+<td class="ts">logfile</td>
+<td style="text-align:center;">["Application", "Security", "System"]</td>
+<td>Events required in the input log file</td>
+</tr>
+<tr>
+<td class="ts">interval</td>
+<td class="ts">1000</td>
+<td>It is in milliseconds and defines the interval between two consecutive checks of new event logs</td>
+</tr>
+<tr>
+<td class="ts">tags</td>
+<td style="text-align:center;"></td>
+<td>To add any additional information in input events</td>
+</tr>
+<tr>
+<td class="ts">type</td>
+<td style="text-align:center;"></td>
+<td>It is used to classify the input form a specific plugins to given type, so that it will be easy to search all the input events in later stages </td>
+</tr>
+</table>
+<h3>Twitter</h3>
+<p>This input plugin is used to collect the feed of twitter from its Streaming API. The following table describes the settings of this plugin.</p>
+<table class="table table-bordered">
+<tr>
+<th class="ts">Setting Name</th>
+<th style="text-align:center;">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td class="ts">add_field</td>
+<td style="text-align:center;">{}</td>
+<td>Same as in file plugin, it is used to append a field in input event</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to decode the input events from windows; before entering in the Logstash pipeline</td>
+</tr>
+<tr>
+<td class="ts">consumer_key</td>
+<td style="text-align:center;"></td>
+<td>It contains the twitter app’s consumer key. For more info, visit <a rel="nofollow" target="_blank" href="https://dev.twitter.com/apps/new">https://dev.twitter.com/apps/new</a></td>
+</tr>
+<tr>
+<td class="ts">consumer_secret</td>
+<td style="text-align:center;"></td>
+<td>It contains the twitter app’s consumer secret key. For more info, visit <a rel="nofollow" target="_blank" href="https://dev.twitter.com/apps/new">https://dev.twitter.com/apps/new</a></td>
+</tr>
+<tr>
+<td class="ts">enable_metric</td>
+<td class="ts">true</td>
+<td>It is used to enable or disable the reporting and collection of metric for that plugin instance </td>
+</tr>
+<tr>
+<td class="ts">follows</td>
+<td style="text-align:center;"></td>
+<td style="text-align:center;"><p>It specifies the user ids separated by commas and LogStash checks these users’ status in Twitter.</p>
+<p>For more info, visit</p>
+<p><a rel="nofollow" target="_blank" href="https://dev.twitter.com/streaming/overview/request-parameters#follow">https://dev.twitter.com</a></p></td>
+</tr>
+<tr>
+<td class="ts">full_tweet</td>
+<td class="ts">false</td>
+<td>You can change it to true, if you want Logstash to read the full object return from twitter API </td>
+</tr>
+<tr>
+<td class="ts">id</td>
+<td style="text-align:center;"></td>
+<td>It is used to give a unique identity number to that specific input plugin instance</td>
+</tr>
+<tr>
+<td class="ts">ignore_retweets</td>
+<td class="ts">False</td>
+<td>You can change set it true to ignore the retweets in the input twitter feed</td>
+</tr>
+<tr>
+<td class="ts">keywords</td>
+<td style="text-align:center;"></td>
+<td>It’s an array of keywords, which need to be tracked in the twitters input feed</td>
+</tr>
+<tr>
+<td class="ts">language</td>
+<td style="text-align:center;"></td>
+<td>It defines the language of the tweets needed by LogStash from input twitter feed. This is an array of identifier, which defines a specific language in twitter</td>
+</tr>
+<tr>
+<td class="ts">locations</td>
+<td style="text-align:center;"></td>
+<td>To filter out the tweets from input feed according to the location specified. This is an array, which contains longitude and latitude of the location  </td>
+</tr>
+<tr>
+<td class="ts">oauth_token</td>
+<td style="text-align:center;"></td>
+<td>It is a required filed, which contains user oauth token. For more information please visit the following link <a rel="nofollow" target="_blank" href="https://dev.twitter.com/apps">https://dev.twitter.com/apps</a></td>
+</tr>
+<tr>
+<td class="ts">oauth_token_secret</td>
+<td style="text-align:center;"></td>
+<td>It is a required filed, which contains user oauth secret token. For more information please visit the following link <a rel="nofollow" target="_blank" href="https://dev.twitter.com/apps">https://dev.twitter.com/apps</a></td>
+</tr>
+<tr>
+<td class="ts">tags</td>
+<td style="text-align:center;"></td>
+<td>To add any additional information in input events</td>
+</tr>
+<tr>
+<td class="ts">type</td>
+<td style="text-align:center;"></td>
+<td>It is used to classify the input form a specific plugins to given type, so that it will be easy to search all the input events in later stages </td>
+</tr>
+</table>
+<h3>TCP</h3>
+<p>TCP is used to get the events over the TCP socket; it can read from the user connections or server, which is specified in mode setting. The following table describes the settings of this plugin &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting Name</th>
+<th style="text-align:center;">Default Value</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td class="ts">add_field</td>
+<td class="ts">{}</td>
+<td>Same as in file plugin, it is used to append a field in input event</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to decode the input events from windows; before entering in the Logstash pipeline</td>
+</tr>
+<tr>
+<td class="ts">enable_metric</td>
+<td class="ts">true</td>
+<td>It is used to enable or disable the reporting and collection of metric for that plugin instance </td>
+</tr>
+<tr>
+<td style="text-align:center;">host</td>
+<td style="text-align:center;">“0.0.0.0”</td>
+<td>The address of the server OS the client depends upon</td>
+</tr>
+<tr>
+<td style="text-align:center;">id</td>
+<td style="text-align:center;"></td>
+<td>It contains the twitter app’s consumer key</td>
+</tr>
+<tr>
+<td style="text-align:center;">mode</td>
+<td style="text-align:center;">“server”</td>
+<td>It is used to specify the input source is server or client.</td>
+</tr>
+<tr>
+<td style="text-align:center;">port</td>
+<td style="text-align:center;"></td>
+<td>It defines the port number</td>
+</tr>
+<tr>
+<td style="text-align:center;">ssl_cert</td>
+<td style="text-align:center;"></td>
+<td>It is used to specify the path of SSL certificate</td>
+</tr>
+<tr>
+<td style="text-align:center;">ssl_enable</td>
+<td style="text-align:center;">false</td>
+<td>Enable or disable SSL</td>
+</tr>
+<tr>
+<td style="text-align:center;">ssl_key</td>
+<td style="text-align:center;"></td>
+<td>To specify the path of SSL key file</td>
+</tr>
+<tr>
+<td style="text-align:center;">tags</td>
+<td style="text-align:center;"></td>
+<td>To add any additional information in input events</td>
+</tr>
+<tr>
+<td class="ts">type</td>
+<td style="text-align:center;"></td>
+<td>It is used to classify the input form a specific plugins to given type, so that it will be easy to search all the input events in later stages </td>
+</tr>
+</table>
+<h2>Logstash – Output Plugins</h2>
+<p>Logstash supports various output sources and in different technologies like Database, File, Email, Standard Output, etc.</p>
+<p>The syntax for using the output plugin is as follows &minus;</p>
+<pre class="result notranslate">
+output {
+   Plugin name {
+      Setting 1……
+      Setting 2……..
+   }
+}
+</pre>
+<p>You can download the output plugin by using the following command &minus;</p>
+<pre class="result notranslate">
+&gt;logstash-plugin install logstash-output-&lt;plugin name&gt;
+</pre>
+<p>The <b>Logstash-plugin utility</b> is present in the bin folder of Logstash installation directory. The following table describes the output plugins offered by Logstash.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Plugin Name &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>CloudWatch</b></p>
+<p>This plugin is used to send aggregated metric data to CloudWatch of amazon web services.</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>csv</b></p>
+<p>It is used to write the output events in a comma-separated manner.</p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>Elasticsearch</b></p>
+<p>It is used to store the output logs in Elasticsearch index.</p></td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>email</b></p>
+<p>It is used to send a notification email, when the output is generated. User can add information about the output in email.</p></td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>exec</b></p>
+<p>It is used to a run a command, which match the output event.</p></td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>ganglia</b></p>
+<p>It writhe the metrics to gmond of Gangila.</p></td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>gelf</b></p>
+<p>It is used to produce output for Graylog2 in GELF format.</p></td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>google_bigquery</b></p>
+<p>It outputs the events to Google BigQuery.</p></td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>google_cloud_storage</b></p>
+<p>It store the output events to Google Cloud Storage.</p></td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>graphite</b></p>
+<p>It is used to store the output events to Graphite.</p></td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>graphtastic</b></p>
+<p>It is used to write the output metrics on Windows.</p></td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td><p><b>hipchat</b></p>
+<p>It is used to store the output log events to HipChat.</p></td>
+</tr>
+<tr>
+<td class="ts">13</td>
+<td><p><b>http</b></p>
+<p>It is used to send the output log events to http or https endpoints.</p></td>
+</tr>
+<tr>
+<td class="ts">14</td>
+<td><p><b>influxdb</b></p>
+<p>It is used to store the output event in InfluxDB.</p></td>
+</tr>
+<tr>
+<td class="ts">15</td>
+<td><p><b>irc</b></p>
+<p>It is used to write the output events to irc.</p></td>
+</tr>
+<tr>
+<td class="ts">16</td>
+<td><p><b>mongodb</b></p>
+<p>It stores the output data in MongoDB.</p></td>
+</tr>
+<tr>
+<td class="ts">17</td>
+<td><p><b>nagios</b></p>
+<p>It is used to notify Nagios with the passive check results.</p></td>
+</tr>
+<tr>
+<td class="ts">18</td>
+<td><p><b>nagios_nsca</b></p>
+<p>It is used to notify Nagios with the passive check results over NSCA protocol.</p></td>
+</tr>
+<tr>
+<td class="ts">19</td>
+<td><p><b>opentsdb</b></p>
+<p>It store the Logstash output events to OpenTSDB.</p></td>
+</tr>
+<tr>
+<td class="ts">20</td>
+<td><p><b>pipe</b></p>
+<p>It streams the output events to the standard input of another program.</p></td>
+</tr>
+<tr>
+<td class="ts">21</td>
+<td><p><b>rackspace</b></p>
+<p>It is used to send the output log events to Queue service of Rackspace Cloud.</p></td>
+</tr>
+<tr>
+<td class="ts">22</td>
+<td><p><b>redis</b></p>
+<p>It uses rpush command to send the output logging data to Redis queue.</p></td>
+</tr>
+<tr>
+<td class="ts">23</td>
+<td><p><b>riak</b></p>
+<p>It is used to store the output events to the Riak distributed key/value pair.</p></td>
+</tr>
+<tr>
+<td class="ts">24</td>
+<td><p><b>s3</b></p>
+<p>It store the output logging data to Amazon Simple Storage Service.</p></td>
+</tr>
+<tr>
+<td class="ts">25</td>
+<td><p><b>sns</b></p>
+<p>It is used to send the output events to Amazon’s Simple Notification Service. </p></td>
+</tr>
+<tr>
+<td class="ts">26</td>
+<td><p><b>solr_http</b></p>
+<p>It indexes and stores the output logging data in Solr.</p></td>
+</tr>
+<tr>
+<td class="ts">27</td>
+<td><p><b>sps</b></p>
+<p>It is used to ship the events to Simple Queue Service of AWS.</p></td>
+</tr>
+<tr>
+<td class="ts">28</td>
+<td><p><b>statsd</b></p>
+<p>It is used to ship the metrics data to statsd network daemon.</p></td>
+</tr>
+<tr>
+<td class="ts">29</td>
+<td><p><b>stdout</b></p>
+<p>It is used to show the output events on standard output of CLI like command prompt.</p></td>
+</tr>
+<tr>
+<td class="ts">30</td>
+<td><p><b>syslog</b></p>
+<p>It is used to ships the output events to syslog server.</p></td>
+</tr>
+<tr>
+<td class="ts">31</td>
+<td><p><b>tcp</b></p>
+<p>It is used to send the output events to TCP socket.</p></td>
+</tr>
+<tr>
+<td class="ts">32</td>
+<td><p><b>udp</b></p>
+<p>It is used to push the output events over UDP.</p></td>
+</tr>
+<tr>
+<td class="ts">33</td>
+<td><p><b>websocket</b></p>
+<p>It is used to push the output events over WebSocket protocol.</p></td>
+</tr>
+<tr>
+<td class="ts">34</td>
+<td><p><b>xmpp</b></p>
+<p>It is used to push the output events over XMPP protocol.</p></td>
+</tr>
+</table>
+<p>All the plugins have their specific settings, which helps to specify the important fields like Port, Path, etc., in a plugin. We will discuss the settings of some of the output plugins.</p>
+<h3>Elasticsearch</h3>
+<p>Elasticsearch output plugin enables Logstash to store the output in the specific clusters of Elasticsearch engine. This is one of the famous choices of users because it comes in the package of ELK Stack and therefore, provides end-to-end solutions for Devops. The following table describes the settings of this output plugin.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting Name</th>
+<th style="text-align:center;">Default Value</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td class="ts">action</td>
+<td class="ts">index</td>
+<td>It is used to define the action performed in Elasticsearch engine. Other values for this settings are delete, create, update, etc.</td>
+</tr>
+<tr>
+<td class="ts">cacert</td>
+<td style="text-align:center;"></td>
+<td>It contains the path of file with .cer or .pem for server’s certificate validation.</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to encode the output logging data before sending it to the destination source. </td>
+</tr>
+<tr>
+<td class="ts">doc_as_upset</td>
+<td class="ts">false</td>
+<td>This setting is used in case of update action. It creates a document in Elasticsearch engine, if the document id is not specified in output plugin.</td>
+</tr>
+<tr>
+<td class="ts">document_type</td>
+<td style="text-align:center;"></td>
+<td>It is used to store the same type of events in the same document type. If it is not specified, then the event type is used for the same.</td>
+</tr>
+<tr>
+<td class="ts">flush_size</td>
+<td class="ts">500</td>
+<td>This is used for improving the performance of bulk upload in Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">hosts</td>
+<td class="ts">[“127.0.0.1”]</td>
+<td>It is an array of destination addresses for output logging data</td>
+</tr>
+<tr>
+<td class="ts">idle_flush_time</td>
+<td class="ts">1</td>
+<td>It defines the time limit (second) between the two flushes, Logstash forces flush after the specified time limit in this setting</td>
+</tr>
+<tr>
+<td class="ts">index</td>
+<td style="text-align:center;">"logstash-%{+YYYY.MM.dd}"</td>
+<td>It is used to specify the index of Elasticsearch engine</td>
+</tr>
+<tr>
+<td class="ts">manage_temlpate</td>
+<td class="ts">true</td>
+<td>It is used to apply the default template in Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">parent</td>
+<td class="ts">nil</td>
+<td>It is used to specify the id of parent document in Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">password</td>
+<td style="text-align:center;"></td>
+<td>It is used to authenticate the request to a secure cluster in Elasticsearch </td>
+</tr>
+<tr>
+<td class="ts">path</td>
+<td style="text-align:center;"></td>
+<td>It is used to specify the HTTP path of Elasticsearch.</td>
+</tr>
+<tr>
+<td class="ts">pipeline</td>
+<td class="ts">nil</td>
+<td>It is used to set the ingest pipeline, user wish to execute for an event</td>
+</tr>
+<tr>
+<td style="text-align:center;">proxy</td>
+<td style="text-align:center;"></td>
+<td>It is used to specify HTTP proxy</td>
+</tr>
+<tr>
+<td class="ts">retry_initial_interval</td>
+<td class="ts">2</td>
+<td>It is used to set the initial time interval (seconds) between bulk retries. It get double after each retry until it reach to retry_max_interval</td>
+</tr>
+<tr>
+<td class="ts">retry_max_interval</td>
+<td class="ts">64</td>
+<td>It is used to set the maximum time interval for retry_initial_interval</td>
+</tr>
+<tr>
+<td class="ts">retry_on_conflict</td>
+<td class="ts">1</td>
+<td>It is the number of retries by Elasticsearch to update a document</td>
+</tr>
+<tr>
+<td class="ts">ssl</td>
+<td style="text-align:center;"></td>
+<td>To enable or disable SSL/TLS secured to Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">template</td>
+<td style="text-align:center;"></td>
+<td>It contains the path of the customized template in Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">template_name</td>
+<td class="ts">"logstash"</td>
+<td>This is used to name the template in Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">timeout</td>
+<td class="ts">60</td>
+<td>It is the timeout for network requests to Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">upsert</td>
+<td class="ts">“”</td>
+<td>It update the document or if the document_id does not exist, it creates a new document in Elasticsearch</td>
+</tr>
+<tr>
+<td class="ts">user</td>
+<td style="text-align:center;"></td>
+<td>It contains the user to authenticate the Logstash request in secure Elasticsearch cluster</td>
+</tr>
+</table>
+<h3>Email</h3>
+<p>The email output plugin is used to notify the user, when Logstash generates output. The following table describes the settings for this plugin.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting Name</th>
+<th class="ts">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">address</td>
+<td style="text-align:center;">“localhost”</td>
+<td>It is the address of mail server</td>
+</tr>
+<tr>
+<td class="ts">attachments</td>
+<td class="ts">[]</td>
+<td>It contains the names and locations of the attached files</td>
+</tr>
+<tr>
+<td class="ts">body</td>
+<td class="ts">“”</td>
+<td>It contains the body of email and should be plain text </td>
+</tr>
+<tr>
+<td class="ts">cc</td>
+<td style="text-align:center;"></td>
+<td>It contains the email addresses in comma separated manner for the cc of email</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to encode the output logging data before sending it to the destination source.</td>
+</tr>
+<tr>
+<td class="ts">contenttype</td>
+<td class="ts">"text/html; charset = UTF-8"</td>
+<td>It is used to content-type of the email</td>
+</tr>
+<tr>
+<td class="ts">debug</td>
+<td class="ts">false</td>
+<td>It is used to execute the mail relay in debug mode</td>
+</tr>
+<tr>
+<td class="ts">domain</td>
+<td class="ts">"localhost"</td>
+<td>It is used to set the domain to send the email messages</td>
+</tr>
+<tr>
+<td class="ts">from</td>
+<td class="ts">"logstash.alert@nowhere.com"</td>
+<td>It is used to specify the email address of the sender</td>
+</tr>
+<tr>
+<td class="ts">htmlbody</td>
+<td class="ts">“”</td>
+<td>It is used to specify the body of email in html format</td>
+</tr>
+<tr>
+<td class="ts">password</td>
+<td style="text-align:center;"></td>
+<td>It is used to authenticate with the mail server</td>
+</tr>
+<tr>
+<td class="ts">port</td>
+<td class="ts">25</td>
+<td>It is used to define the port to communicate with the mail server</td>
+</tr>
+<tr>
+<td class="ts">replyto</td>
+<td style="text-align:center;"></td>
+<td>It is used to specify the email id for reply-to field of email</td>
+</tr>
+<tr>
+<td class="ts">subject</td>
+<td class="ts">“”</td>
+<td>It contains the subject line of the email</td>
+</tr>
+<tr>
+<td class="ts">use_tls</td>
+<td class="ts">false</td>
+<td>Enable or disable TSL for the communication with the mail server</td>
+</tr>
+<tr>
+<td class="ts">username</td>
+<td style="text-align:center;"></td>
+<td>Is contains the username for the authentication with the server</td>
+</tr>
+<tr>
+<td class="ts">via</td>
+<td class="ts">“smtp”</td>
+<td>It defines the methods of sending email by Logstash</td>
+</tr>
+</table>
+<h3>Http</h3>
+<p>This setting is used to send the output events over http to the destination. This plugin has following settings &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th class="ts">Setting Name</th>
+<th style="text-align:center;">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td class="ts">automatic_retries</td>
+<td class="ts">1</td>
+<td>It is used to set the number of http request retries by logstash</td>
+</tr>
+<tr>
+<td class="ts">cacert</td>
+<td style="text-align:center;"></td>
+<td>It contains the path of file for server’s certificate validation</td>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to encode the output logging data before sending it to the destination source.</td>
+</tr>
+<tr>
+<td class="ts">content_type</td>
+<td class="ts"></td>
+<td>I specifies the content type of http request to the destination server</td>
+</tr>
+<tr>
+<td style="text-align:center;">cookies</td>
+<td style="text-align:center;">true</td>
+<td>It is used to enable or disable cookies</td>
+</tr>
+<tr>
+<td class="ts">format</td>
+<td class="ts">"json"</td>
+<td>It is used to set the format of http request body</td>
+</tr>
+<tr>
+<td style="text-align:center;">headers</td>
+<td style="text-align:center;"></td>
+<td>It contains the information of http header</td>
+</tr>
+<tr>
+<td class="ts">http_method</td>
+<td class="ts">“”</td>
+<td>It is used to specify the http method used in the request by logstash and the values can be "put", "post", "patch", "delete", "get", "head"</td>
+</tr>
+<tr>
+<td style="text-align:center;">request_timeout</td>
+<td style="text-align:center;">60</td>
+<td>It is used to authenticate with the mail server</td>
+</tr>
+<tr>
+<td class="ts">url</td>
+<td style="text-align:center;"></td>
+<td>It is a required setting for this plugin to specify the http or https endpoint</td>
+</tr>
+</table>
+<h3>stdout</h3>
+<p>The stdout output plugin is used to write the output events on the standard output of the command line interface. It is command prompt in windows and terminal in UNIX. This plugin has the following settings &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting Name</th>
+<th style="text-align:center;">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to encode the output logging data before sending it to the destination source. </td>
+</tr>
+<tr>
+<td style="text-align:center;">workers</td>
+<td style="text-align:center;">1</td>
+<td>It is used to specify number of workers for the output</td>
+</tr>
+</table>
+<h3>statsd</h3>
+<p>It is a network daemon used to send the matrices data over UDP to the destination backend services. It is command prompt in windows and terminal in UNIX. This plugin has following settings &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Setting Name</th>
+<th style="text-align:center;">Default Value</th>
+<th class="ts">Description</th>
+</tr>
+<tr>
+<td class="ts">codec</td>
+<td class="ts">“plain”</td>
+<td>It is used to encode the output logging data before sending it to the destination source.</td>
+</tr>
+<tr>
+<td style="text-align:center;">count</td>
+<td style="text-align:center;">{}</td>
+<td>It is used to define the count to be used in metrics</td>
+</tr>
+<tr>
+<td style="text-align:center;">decrement</td>
+<td style="text-align:center;">[]</td>
+<td>It is used to specify the decrement metric names</td>
+</tr>
+<tr>
+<td style="text-align:center;">host</td>
+<td style="text-align:center;">“localhost”</td>
+<td>It contains the address of statsd server</td>
+</tr>
+<tr>
+<td style="text-align:center;">increment</td>
+<td style="text-align:center;">[]</td>
+<td>It is used to specify the increment metric names</td>
+</tr>
+<tr>
+<td style="text-align:center;">port</td>
+<td style="text-align:center;">8125</td>
+<td>It contains the port of statsd server</td>
+</tr>
+<tr>
+<td style="text-align:center;">sample_rate</td>
+<td style="text-align:center;">1</td>
+<td>It is used specify the sample rate of metric</td>
+</tr>
+<tr>
+<td class="ts">sender</td>
+<td style="text-align:center;">“%{host}”</td>
+<td style="vertical-align:middle;">It specifies the name of the sender</td>
+</tr>
+<tr>
+<td style="text-align:center;">set</td>
+<td style="text-align:center;">{}</td>
+<td>It is used to specify a set metric</td>
+</tr>
+<tr>
+<td style="text-align:center;">timing</td>
+<td style="text-align:center;">{}</td>
+<td>It is used to specify a timing metric</td>
+</tr>
+<tr>
+<td class="ts">workers</td>
+<td class="ts">1</td>
+<td>It is used to specify number of workers for the output</td>
+</tr>
+</table>
+<h3>Filter Plugins</h3>
+<p>Logstash supports various filter plugins to parse and transform input logs to a more structured and easy to query format.</p>
+<p>The syntax for using the filter plugin is as follows &minus;</p>
+<pre class="result notranslate">
+filter {
+   Plugin name {
+      Setting 1……
+      Setting 2……..
+   }
+}
+</pre>
+<p>You can download the filter plugin by using the following command &minus;</p>
+<pre class="result notranslate">
+&gt;logstash-plugin install logstash-filter-&lt;plugin name&gt;
+</pre>
+<p>The Logstash-plugin utility is present in the bin folder of Logstash installation directory. The following table describes the output plugins offered by Logstash.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Plugin Name &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>aggregate</b></p>
+<p>This plugin collects or aggregate the data from various event of same type and process them in the final event</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>alter</b></p>
+<p>It allows user to alter the field of log events, which mutate filter do not handle</p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>anonymize</b></p>
+<p>It is used replace the values of fields with a consistent hash</p></td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>cipher</b></p>
+<p>It is used to encrypt the output events before storing them in destination source</p></td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>clone</b></p>
+<p>It is used to create duplicate of the output events in Logstash</p></td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>collate</b></p>
+<p>It merges the events from different logs by their time or count</p></td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>csv</b></p>
+<p>This plugin parse data from input logs according to the separator</p></td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>date</b></p>
+<p>It parse the dates from the fields in the event and set that as a timestamp for the event</p></td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>dissect</b></p>
+<p>This plugin helps user to extract fields from unstructured data and makes it easy for grok filter to parse them correctly</p></td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>drop</b></p>
+<p>It is used to drop all the events of same type or any other similarity</p></td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>elapsed</b></p>
+<p>It is used to compute the time between the start and end events</p></td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td><p><b>Elasticsearch</b></p>
+<p>It is used to copy the fields of previous log events present in Elasticsearch to the current one in Logstash</p></td>
+</tr>
+<tr>
+<td class="ts">13</td>
+<td><p><b>extractnumbers</b></p>
+<p>It is used to extract the number from strings in the log events</p></td>
+</tr>
+<tr>
+<td class="ts">14</td>
+<td><p><b>geoip</b></p>
+<p>It adds a field in the event, which contains the latitude and longitude of the location of the IP present in the log event</p></td>
+</tr>
+<tr>
+<td class="ts">15</td>
+<td><p><b>grok</b></p>
+<p>It is the commonly used filter plugin to parse the event to get the fields</p></td>
+</tr>
+<tr>
+<td class="ts">16</td>
+<td><p><b>i18n</b></p>
+<p>It deletes the special characters from a filed in the log event</p></td>
+</tr>
+<tr>
+<td class="ts">17</td>
+<td><p><b>json</b></p>
+<p>It is used to create a structured Json object in event or in a specific field of an event</p></td>
+</tr>
+<tr>
+<td class="ts">18</td>
+<td><p><b>kv</b></p>
+<p>This plugin is useful in paring key value pairs in the logging data</p></td>
+</tr>
+<tr>
+<td class="ts">19</td>
+<td><p><b>metrics</b></p>
+<p>It is used to aggregate metrics like counting time duration in each event</p></td>
+</tr>
+<tr>
+<td class="ts">20</td>
+<td><p><b>multiline</b></p>
+<p>It is also one of the commonly use filter plugin, which helps user in case of converting a multiline logging data to a single event.</p></td>
+</tr>
+<tr>
+<td class="ts">21</td>
+<td><p><b>mutate</b></p>
+<p>This plugin is used to rename, remove, replace, and modify fields in your events</p></td>
+</tr>
+<tr>
+<td class="ts">22</td>
+<td><p><b>range</b></p>
+<p>It used to check the numerical values of fields in events against an expected range and string’s length within a range.</p></td>
+</tr>
+<tr>
+<td class="ts">23</td>
+<td><p><b>ruby</b></p>
+<p>It is used to run arbitrary Ruby code</p></td>
+</tr>
+<tr>
+<td class="ts">24</td>
+<td><p><b>sleep</b></p>
+<p>This makes Logstash sleeps for a specified amount of time</p></td>
+</tr>
+<tr>
+<td class="ts">25</td>
+<td><p><b>split</b></p>
+<p>It is used to split a field of an event and placing all the split values in the clones of that event</p></td>
+</tr>
+<tr>
+<td class="ts">26</td>
+<td><p><b>xml</b></p>
+<p>It is used to create event by paring the XML data present in the logs</p></td>
+</tr>
+</table>
+<h2>Codec plugins</h2>
+<p>Codec Plugins can be a part of input or output plugins. These Plugins are used to change or format the logging data presentation. Logstash offers multiple codec Plugins and those are as follows &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Plugin Name &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>avro</b></p>
+<p>This plugin encode serialize Logstash events to avro datums or decode avro records to Logstash events</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>cloudfront</b></p>
+<p>This plugin reads the encoded data from AWS cloudfront</p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>cloudtrail</b></p>
+<p>This plugin is used to read the data from AWS cloudtrail</p></td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>collectd</b></p>
+<p>This reads data from the binary protocol called collected over UDP</p></td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>compress_spooler</b></p>
+<p>It is used to compress the log events in Logstash to spooled batches</p></td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>dots</b></p>
+<p>This is used performance tracking by setting a dot for every event to stdout</p></td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>es_bulk</b></p>
+<p>This is used to convert the bulk data from Elasticsearch into Logstash events including Elasticsearch metadata</p></td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>graphite</b></p>
+<p>This codec read data from graphite into events and change the event into graphite formatted records</p></td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>gzip_lines</b></p>
+<p>This plugin is used to handle gzip encoded data</p></td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>json</b></p>
+<p>This is used to convert a single element in Json array to a single Logstash event</p></td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>json_lines</b></p>
+<p>It is used to handle Json data with newline delimiter</p></td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td><p><b>line</b></p>
+<p>It plugin will read and write event in a single live, that means after newline delimiter there will be a new event</p></td>
+</tr>
+<tr>
+<td class="ts">13</td>
+<td><p><b>multiline</b></p>
+<p>It is used to convert multiline logging data into a single event</p></td>
+</tr>
+<tr>
+<td class="ts">14</td>
+<td><p><b>netflow</b></p>
+<p>This plugin is used to convert nertflow v5/v9 data to logstash events</p></td>
+</tr>
+<tr>
+<td class="ts">15</td>
+<td><p><b>nmap</b></p>
+<p>It parses the nmap result data into an XML format</p></td>
+</tr>
+<tr>
+<td class="ts">16</td>
+<td><p><b>plain</b></p>
+<p>This reads text without delimiters</p></td>
+</tr>
+<tr>
+<td class="ts">17</td>
+<td><p><b>rubydebug</b></p>
+<p>This plugin will write the output Logstash events using Ruby awesome print library</p></td>
+</tr>
+</table>
+<h2>Build Your Own Plugin</h2>
+<p>You can also create your own Plugins in Logstash, which suites your requirements. The Logstash-plugin utility is used to create custom Plugins. Here, we will create a filter plugin, which will add a custom message in the events.</p>
+<h3>Generate the Base Structure</h3>
+<p>A user can generate the necessary files by using the generate option of the logstash-plugin utility or it is also available on the GitHub.</p>
+<pre class="result notranslate">
+&gt;logstash-plugin generate --type filter --name myfilter --path c:/tpwork/logstash/lib
+</pre>
+<p>Here, <b>type</b> option is used to specify the plugin is either Input, Output or Filter. In this example, we are creating a filter plugin named <b>myfilter</b>. The path option is used to specify the path, where you want your plugin directory to be created. After executing the above mentioned command, you will see that a directory structure is created.</p>
+<h3>Develop the Plugin</h3>
+<p>You can find the code file of the plugin in the <b>\lib\logstash\filters</b> folder in the plugin directory. The file extension will be <b>.rb</b>.</p>
+<p>In our case, the code file was located inside the following path &minus;</p>
+<pre class="result notranslate">
+C:\tpwork\logstash\lib\logstash-filter-myfilter\lib\logstash\filters\myfilter.rb
+</pre>
+<p>We change the message to &minus; default &rArr; "Hi, You are learning this on tutorialspoint.com" and save the file.</p>
+<h3>Install the Plugin</h3>
+<p>To install this plugin, the Gemfile of Logstash need to be modified. You can find this file in the installation directory of Logstash. In our case, it will be in <b>C:\tpwork\logstash</b>. Edit this file using any text editor and add the following text in it.</p>
+<pre class="result notranslate">
+gem "logstash-filter-myfilter",:path =&gt; "C:/tpwork/logstash/lib/logstash-filter-myfilter"
+</pre>
+<p>In the above command, we specify the name of the plugin along with where we can find it for installation. Then, run the Logstash-plugin utility to install this plugin.</p>
+<pre class="result notranslate">
+&gt;logstash-plugin install --no-verify
+</pre>
+<h3>Testing</h3>
+<p>Here, we are adding <b>myfilter</b> in one of the previous examples &minus;</p>
+<p><b>logstash.conf</b></p>
+<p>This Logstash config file contains myfilter in the filter section after the grok filter plugin.</p>
+<pre class="prettyprint notranslate">
+input {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/input1.log"
+   } 
+}
+filter {
+   grok {
+      match =&gt; [
+         "message", "%{LOGLEVEL:loglevel} - %{NOTSPACE:taskid} -
+            %{NOTSPACE:logger} - %{WORD:label}( - %{INT:duration:int})?" ]
+   }
+   myfilter{}
+}
+output {
+   file {
+      path =&gt; "C:/tpwork/logstash/bin/log/output1.log"
+      codec =&gt; rubydebug
+   }
+}
+</pre>
+<p><b>Run logstash</b></p>
+<p>We can run Logstash by using the following command.</p>
+<pre class="result notranslate">
+&gt;logstash –f Logstash.conf
+</pre>
+<p><b>input.log</b></p>
+<p>The following code block shows the input log data.</p>
+<pre class="result notranslate">
+INFO - 48566 - TRANSACTION_START - start
+</pre>
+<p><b>output.log</b></p>
+<p>The following code block shows the output log data.</p>
+<pre class="prettyprint notranslate">
+{
+   "path" =&gt; "C:/tpwork/logstash/bin/log/input.log",
+   "@timestamp" =&gt; 2017-01-07T06:25:25.484Z,
+   "loglevel" =&gt; "INFO",
+   "logger" =&gt; "TRANSACTION_END",
+   "@version" =&gt; "1",
+   "host" =&gt; "Dell-PC",
+   "label" =&gt; "end",
+   "message" =&gt; "Hi, You are learning this on tutorialspoint.com",
+   "taskid" =&gt; "48566",
+   "tags" =&gt; []
+}
+</pre>
+<h3>Publish it on Logstash</h3>
+<p>A developer can also publish his/her custom plugin to Logstash by uploading it on the github and following the standardized steps defined by the Elasticsearch Company.</p>
+<p>Please refer the following URL for more information on publishing &minus;</p>
+<p><a rel="nofollow" target="_blank" href="https://www.elastic.co/guide/en/logstash/current/contributing-to-logstash.html">https://www.elastic.co/guide/en/logstash/current/contributing-to-logstash.html</a></p>
+<h1>Logstash - Monitoring APIs</h1>
+<p>Logstash offers APIs to monitor its performance. These monitoring APIs extract runtime metrics about Logstash.</p>
+<h2>Node Info API</h2>
+<p>This API is used to get the information about the nodes of Logstash. It returns the information of the OS, Logstash pipeline and JVM in JSON format.</p>
+<p>You can extract the information by sending a <b>get</b> request to Logstash using the following URL &minus;</p>
+<pre class="result notranslate">
+GET http://localhost:9600/_node?pretty
+</pre>
+<h3>Response</h3>
+<p>Following would be the response of the Node Info API.</p>
+<pre class="prettyprint notranslate">
+{
+   "host" : "Dell-PC",
+   "version" : "5.0.1",
+   "http_address" : "127.0.0.1:9600",
+   "pipeline" : {
+      "workers" : 4,
+      "batch_size" : 125,
+      "batch_delay" : 5,
+      "config_reload_automatic" : false,
+      "config_reload_interval" : 3
+   },
+   "os" : {
+      "name" : "Windows 7",
+      "arch" : "x86",
+      "version" : "6.1",
+      "available_processors" : 4
+   },
+   "jvm" : {
+      "pid" : 312,
+      "version" : "1.8.0_111",
+      "vm_name" : "Java HotSpot(TM) Client VM",
+      "vm_version" : "1.8.0_111",
+      "vm_vendor" : "Oracle Corporation",
+      "start_time_in_millis" : 1483770315412,
+      "mem" : {
+         "heap_init_in_bytes" : 16777216,
+         "heap_max_in_bytes" : 1046937600,
+         "non_heap_init_in_bytes" : 163840,
+         "non_heap_max_in_bytes" : 0
+      },
+      "gc_collectors" : [ "ParNew", "ConcurrentMarkSweep" ]
+   }
+}
+</pre>
+<p>You can also get the specific information of Pipeline, OS and JVM, by just adding their names in the URL.</p>
+<pre class="result notranslate">
+GET http://localhost:9600/_node/os?pretty
+GET http://localhost:9600/_node/pipeline?pretty
+GET http://localhost:9600/_node/jvm?pretty
+</pre>
+<h2>Plugins Info API</h2>
+<p>This API is used to get the information about the installed plugins in the Logstash. You can retrieve this information by sending a get request to the URL mentioned below &minus;</p>
+<pre class="result notranslate">
+GET http://localhost:9600/_node/plugins?pretty
+</pre>
+<h3>Response</h3>
+<p>Following would be the response of the Plugins Info API.</p>
+<pre class="prettyprint notranslate">
+{
+   "host" : "Dell-PC",
+   "version" : "5.0.1",
+   "http_address" : "127.0.0.1:9600",
+   "total" : 95,
+   "plugins" : [ {
+      "name" : "logstash-codec-collectd",
+      "version" : "3.0.2"
+   },
+   {
+      "name" : "logstash-codec-dots",
+      "version" : "3.0.2"
+   },
+   {
+      "name" : "logstash-codec-edn",
+      "version" : "3.0.2"
+   },
+   {
+      "name" : "logstash-codec-edn_lines",
+      "version" : "3.0.2"
+   },
+   ............
+}
+</pre>
+<h2>Node Stats API</h2>
+<p>This API is used to extract the statistics of the Logstash (Memory, Process, JVM, Pipeline) in JSON objects. You can retrieve this information by sending a get request to the URLS mentioned below &minus;</p>
+<pre class="result notranslate">
+GET http://localhost:9600/_node/stats/?pretty
+GET http://localhost:9600/_node/stats/process?pretty
+GET http://localhost:9600/_node/stats/jvm?pretty
+GET http://localhost:9600/_node/stats/pipeline?pretty
+</pre>
+<h2>Hot Threads API</h2>
+<p>This API retrieves the information about the hot threads in Logstash. Hot threads are the java threads, which has high CPU usage and run longer than then normal execution time. You can retrieve this information by sending a get request to the URL mentioned below &minus;</p>
+<pre class="result notranslate">
+GET http://localhost:9600/_node/hot_threads?pretty
+</pre>
+<p>A user can use the following URL to get the response in a form that is more readable.</p>
+<pre class="result notranslate">
+GET http://localhost:9600/_node/hot_threads?human = true
+</pre>
+<h1>Logstash - Security and Monitoring</h1>
+<p>In this chapter, we will discuss the security and monitoring aspects of Logstash.</p>
+<h2>Monitoring</h2>
+<p>Logstash is a very good tool to monitor the servers and services in production environments. Applications in production environment produces different kinds of log data like access Logs, Error Logs, etc. Logstash can count or analyze the number of errors, accesses or other events using filter plugins. This analysis and counting can be used for monitoring different servers and their services.</p>
+<p>Logstash offers plugins like <b>HTTP Poller</b> to monitor the website status monitoring. Here, we are monitoring a website named <b>mysite</b> hosted on a local Apache Tomcat Server.</p>
+<h3>logstash.conf</h3>
+<p>In this config file, the http_poller plugin is used to hit the site specified in the plugin after a time interval specified in interval setting. Finally, it writes the status of the site to a standard output.</p>
+<pre class="prettyprint notranslate">
+input {
+   http_poller {
+      urls =&gt; {
+         site =&gt; "http://localhost:8080/mysite"
+      }
+      request_timeout =&gt; 20
+      interval =&gt; 30
+      metadata_target =&gt; "http_poller_metadata"
+   }
+}
+output {
+   if [http_poller_metadata][code] == 200 {
+      stdout {
+         codec =&gt; line{format =&gt; "%{http_poller_metadata[response_message]}"}
+      }
+   }
+   if [http_poller_metadata][code] != 200 {
+      stdout {
+         codec =&gt; line{format =&gt; "down"}
+      }
+   }
+}
+</pre>
+<h3>Run logstash</h3>
+<p>We can run Logstash with the following command.</p>
+<pre class="result notranslate">
+&gt;logstash –f logstash.conf
+</pre>
+<h3>stdout</h3>
+<p>If the site is up, then the output will be &minus;</p>
+<pre class="result notranslate">
+Ok
+</pre>
+<p>If we stop the site by using the <b>Manager App</b> of Tomcat, the output will change to &minus;</p>
+<pre class="result notranslate">
+down
+</pre>
+<h2>Security</h2>
+<p>Logstash provides plenty of features for secure communication with external systems and supports authentication mechanism. All Logstash plugins support authentication and encryption over HTTP connections.</p>
+<h3>Security with HTTP protocol</h3>
+<p>There are settings like user and password for authentication purposes in various plugins offered by Logstash like in the Elasticsearch plugin.</p>
+<pre class="result notranslate">
+elasticsearch {
+   user =&gt; &lt;username&gt;
+   password =&gt; &lt;password&gt;
+}
+</pre>
+<p>The other authentication is <b>PKI (public key infrastructure)</b> for Elasticsearch. The developer needs to define two settings in the Elasticsearch output plugin to enable the PKI authentication.</p>
+<pre class="result notranslate">
+elasticsearch {
+   keystore =&gt; &lt;string_value&gt;
+   keystore_password =&gt; &lt;password&gt;
+}
+</pre>
+<p>In the HTTPS protocol, a developer can use the authority’s certificate for SSL/TLS.</p>
+<pre class="result notranslate">
+elasticsearch {
+   ssl =&gt; true
+   cacert =&gt; &lt;path to .pem file&gt;
+}
+</pre>
+<h3>Security with Transport Protocol</h3>
+<p>To use the transport protocol with Elasticsearch, users need to set protocol setting to transport. This avoids un-marshalling of JSON objects and leads to more efficiency.</p>
+<p>The basic authentication is same as performed in http protocol in Elasticsearch output protocol.</p>
+<pre class="result notranslate">
+elasticsearch {
+   protocol =&gt; “transport”
+   user =&gt; &lt;username&gt;
+   password =&gt; &lt;password&gt;
+}
+</pre>
+<p>The PKI authentication also needs the SSL sets to be true with other settings in the Elasticsearch output protocol &minus;</p>
+<pre class="result notranslate">
+elasticsearch {
+   protocol =&gt; “transport”
+   ssl =&gt; true
+   keystore =&gt; &lt;string_value&gt;
+   keystore_password =&gt; &lt;password&gt;
+}
+</pre>
+<p>Finally, the SSL security requires a little with more settings than other security methods in communication.</p>
+<pre class="result notranslate">
+elasticsearch {
+   ssl =&gt; true
+   ssl =&gt; true
+   keystore =&gt; &lt;string_value&gt;
+   keystore_password =&gt; &lt;password&gt;
+   truststore =&gt; <string_value>
+   truststore_password =&gt; &lt;password&gt;
+}
+</pre>
+<h3>Other Security Benefits from Logstash</h3>
+<p>Logstash can help input system sources to prevent against attacks like denial of service attacks. The monitoring of logs and analyzing the different events in those logs can help system administrators to check the variation in the incoming connections and errors. These analyses can help to see if the attack is happening or going to happen on the servers.</p>
+<p>Other products of the Elasticsearch Company such as <b>x-pack</b> and <b>filebeat</b> provides some functionality to communicate securely with Logstash.</p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/logstash/logstash_security_and_monitoring.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/logstash/logstash_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/logstash/logstash_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/logstash/logstash_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/logstash/logstash_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/logstash/logstash_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/logstash/logstash_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/logstash/logstash_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/logstash/logstash_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:32 GMT -->
+</html>

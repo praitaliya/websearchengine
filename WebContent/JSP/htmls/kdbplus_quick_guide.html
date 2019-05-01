@@ -1,0 +1,3464 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:10:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>KDB+ Quick Guide</title>
+<meta name="Description" content="KDB+ Quick Guide - Learn KDB+ in simple and easy steps using this beginner's tutorial containing basic to advanced knowledge starting from, Overview, Architecture, Q Programming Language, Type Casting, Temporal Data, Lists, Indexing, Dictionaries, Table, Verb and Adverbs, Joins, Functions, Built-in Functions, Queries, Inter-Process Communication, Message Handler (.Z Library), Attributes, Functional Queries, Table Arithmetic, Tables on Disk, Maintenance Functions." />
+<meta name="Keywords" content="KDB+, Tutorial, Learning, Beginners, Basics, Overview, Architecture, Q Programming Language, Type Casting, Temporal Data, Lists, Indexing, Dictionaries, Table, Verb and Adverbs, Joins, Functions, Built-in Functions, Queries, Inter-Process Communication, Message Handler (.Z Library), Attributes, Functional Queries, Table Arithmetic, Tables on Disk, Maintenance Functions." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #415464 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #415464 !important;}
+.submenu-item{ border-bottom: 2px solid #415464 !important; border-top: 2px solid #415464 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/kdbplus_mini_logo.jpg" alt="KDB+ Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">KDB+ Tutorial</li>
+<li><a href="index.html">KDB+ - Home</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">KDB+ Architecture</li>
+<li><a href="kdbplus_overview.html">KDB+ - Overview</a></li>
+<li><a href="kdbplus_architecture.html">KDB+ - Architecture</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Q Programming Language</li>
+<li><a href="q_programming_language.html">Q Programming Language</a></li>
+<li><a href="q_language_type_casting.html">Q Language - Type Casting</a></li>
+<li><a href="q_language_temporal_data.html">Q Language - Temporal Data</a></li>
+<li><a href="q_language_lists.html">Q Language - Lists</a></li>
+<li><a href="q_language_indexing.html">Q Language - Indexing</a></li>
+<li><a href="q_language_dictionaries.html">Q Language - Dictionaries</a></li>
+<li><a href="q_language_table.html">Q Language - Table</a></li>
+<li><a href="q_language_verb_adverbs.html">Q Language - Verb &amp; Adverbs</a></li>
+<li><a href="q_language_joins.html">Q Language - Joins</a></li>
+<li><a href="q_language_functions.html">Q Language - Functions</a></li>
+<li><a href="q_built_in_functions.html">Q Language - Built-in Functions</a></li>
+<li><a href="q_language_queries.html">Q Language - Queries</a></li>
+<li><a href="q_inter_process_communication.html">Q - Inter-Process Communication</a></li>
+<li><a href="q_language_message_handler.html">Q - Message Handler (.Z Library) </a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Q Advanced Topics</li>
+<li><a href="q_language_attributes.html">Q Language - Attributes</a></li>
+<li><a href="q_language_functional_queries.html">Q Language - Functional Queries</a></li>
+<li><a href="q_language_table_arithmetic.html">Q Language - Table Arithmetic</a></li>
+<li><a href="q_tables_on_disk.html">Q Language - Tables on Disk</a></li>
+<li><a href="q_language_maintenance_functions.html">Q Language - Maintenance Functions</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">KDB+ Useful Resources</li>
+<li><a href="kdbplus_quick_guide.html">KDB+ - Quick Guide</a></li>
+<li><a href="kdbplus_useful_resources.html">KDB+ - Useful Resources</a></li>
+<li><a href="kdbplus_discussion.html">KDB+ - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>KDB+ - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="q_language_maintenance_functions.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="kdbplus_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>KDB+ - Overview</h1>
+<p>This is a complete quide to <b>kdb+</b> from kx systems, aimed primarily at those learning independently. kdb+, introduced in 2003, is the new generation of the kdb database which is designed to capture, analyze, compare, and store data.</p>
+<p>A kdb+ system contains the following two components &minus;</p>
+<ul class="list">
+<li><p><b>KDB+</b> &minus; the database (k database plus)</p></li>
+<li><p><b>Q</b> &minus; the programming language for working with kdb+</p></li>
+</ul>
+<p>Both <b>kdb+</b> and <b>q</b> are written in <b>k programming language</b> (same as <b>q</b> but less readable).</p>
+<h2>Background</h2>
+<p>Kdb+/q originated as an obscure academic language but over the years, it has gradually improved its user friendliness.</p>
+<ul class="list">
+<li><p><b>APL</b> (1964, A Programming Language)</p></li>
+<li><p><b>A+</b> (1988, modified APL by Arthur Whitney)</p></li>
+<li><p><b>K</b> (1993, crisp version of A+, developed by A. Whitney)</p></li>
+<li><p><b>Kdb</b> (1998, in-memory column-based db)</p></li>
+<li><p><b>Kdb+/q</b> (2003, q language – more readable version of k)</p></li>
+</ul>
+<h2>Why and Where to Use KDB+</h2>
+<p>Why? &minus; If you need a single solution for real-time data with analytics, then you should consider kdb+. Kdb+ stores database as ordinary native files, so it does not have any special needs regarding hardware and storage architecture. It is worth pointing out that the database is just a set of files, so your administrative work won’t be difficult.</p>
+<p>Where to use KDB+<b>?</b> &minus; It’s easy to count which investment banks are NOT using kdb+ as most of them are using currently or planning to switch from conventional databases to kdb+. As the volume of data is increasing day by day, we need a system that can handle huge volumes of data. KDB+ fulfills this requirement. KDB+ not only stores an enormous amount of data but also analyzes it in real time.</p>
+<h2>Getting Started</h2>
+<p>With this much of background, let us now set forth and learn how to set up an environment for KDB+. We will start with how to download and install KDB+.</p>
+<h3>Downloading &amp; Installing KDB+</h3>
+<p>You can get the free 32-bit version of KDB+, with all the functionality of the 64- bit version from <a rel="nofollow" target="_blank" href="http://kx.com/software-download.php">http://kx.com/software-download.php</a></p>
+<p>Agree to the license agreement, select the operating system (available for all major operating system). For Windows operating system, the latest version is 3.2. Download the latest version. Once you unzip it, you will get the folder name <b>“windows”</b> and inside the windows folder, you will get another folder <b>“q”</b>. Copy the entire <b>q</b> folder onto your c:/ drive.</p>
+<p>Open the Run terminal, type the location where you store the <b>q</b> folder; it will be like “c:/q/w32/q.exe”. Once you hit Enter, you will get a new console as follows &minus;</p>
+<img src="images/kdbplus_console.jpg" alt="KDB+ Console" />
+<p>On the first line, you can see the version number which is 3.2 and the release date as 2015.03.05</p>
+<h3>Directory Layout</h3>
+<p>The trial/free version is generally installed in directories,</p>
+<p><b>For linux/Mac &minus;</b></p>
+<pre class="result notranslate">
+~/q       / main q directory (under the user’s home)
+~/q/l32   / location of linux 32-bit executable
+~/q/m32   / Location of mac 32-bit executable
+</pre>
+<p><b>For Windows &minus;</b></p>
+<pre class="result notranslate">
+c:/q          / Main q directory
+c:/q/w32/     / Location of windows 32-bit executable
+</pre>
+<p><b>Example Files &minus;</b></p>
+<p>Once you download kdb+, the directory structure in the Windows platform would appear as follows &minus;</p>
+<img src="images/kdbplus_example_files.jpg" alt="KDB+ Example Files" />
+<p>In the above directory structure, <b>trade.q</b> and <b>sp.q</b> are the example files which we can use as a reference point.</p>
+<h1>KDB+ - Architecture</h1>
+<p>Kdb+ is a high-performance, high-volume database designed from the outset to handle tremendous volumes of data. It is fully 64-bit, and has built-in multi-core processing and multi-threading. The same architecture is used for real-time and historical data. The database incorporates its own powerful query language, <b>q,</b> so analytics can be run directly on the data.</p>
+<p><b>kdb+tick</b> is an architecture which allows the capture, processing, and querying of real-time and historical data.</p>
+<h2>Kdb+/ tick Architecture</h2>
+<p>The following illustration provides a generalized outline of a typical Kdb+/tick architecture, followed by a brief explanation of the various components and the through-flow of data.</p>
+<img src="images/kdbplus_architecture.jpg" alt="KDB+ Architecture" />
+<ul class="list">
+<li><p>The <b>Data Feeds</b> are a time series data that are mostly provided by the data feed providers like Reuters, Bloomberg or directly from exchanges.</p></li>
+<li><p>To get the relevant data, the data from the data feed is parsed by the <b>feed handler</b>.</p></li>
+<li><p>Once the data is parsed by the feed handler, it goes to the <b>ticker-plant</b>.</p></li>
+<li><p>To recover data from any failure, the ticker-plant first updates/stores the new data to the log file and then updates its own tables.</p></li>
+<li><p>After updating the internal tables and the log files, the on-time loop data is continuously sent/published to the real-time database and all the chained subscribers who requested for data.</p></li>
+<li><p>At the end of a business day, the log file is deleted, a new one created and the real-time database is saved onto the historical database. Once all the data is saved onto the historical database, the real-time database purges its tables.</p></li>
+</ul>
+<h2>Components of Kdb+ Tick Architecture</h2>
+<h3>Data Feeds</h3>
+<p>Data Feeds can be any market or other time series data. Consider data feeds as the raw input to the feed-handler. Feeds can be directly from the exchange (live-streaming data), from the news/data providers like Thomson-Reuters, Bloomberg, or any other external agencies.</p>
+<h3>Feed Handler</h3>
+<p>A feed handler converts the data stream into a format suitable for writing to kdb+. It is connected to the data feed and it retrieves and converts the data from the feed-specific format into a Kdb+ message which is published to the ticker-plant process. Generally a feed handler is used to perform the following operations &minus;</p>
+<ul class="list">
+<li>Capture data according to a set of rules.</li>
+<li>Translate (/enrich) that data from one format to another.</li>
+<li>Catch the most recent values.</li>
+</ul>
+<h3>Ticker Plant</h3>
+<p>Ticker Plant is the most important component of KDB+ architecture. It is the ticker plant with which the real-time database or directly subscribers (clients) are connected to access the financial data. It operates in <b>publish and subscribe</b> mechanism. Once you obtain a subscription (license), a tick (routinely) publication from the publisher (ticker plant) is defined. It performs the following operations &minus;</p>
+<ul class="list">
+<li><p>Receives the data from the feed handler.</p></li>
+<li><p>Immediately after the ticker plant receives the data, it stores a copy as a log file and updates it once the ticker plant gets any update so that in case of any failure, we should not have any data loss.</p></li>
+<li><p>The clients (real-time subscriber) can directly subscribe to the ticker-plant.</p></li>
+<li><p>At the end of each business day, i.e., once the real-time database receives the last message, it stores all of today’s data onto the historical database and pushes the same to all the subscribers who have subscribed for today’s data. Then it resets all its tables. The log file is also deleted once the data is stored in the historical database or other directly linked subscriber to real time database (rtdb).</p></li>
+<li><p>As a result, the ticker-plant, the real-time database, and the historical database are operational on a 24/7 basis.</p></li>
+</ul>
+<p>Since the ticker-plant is a Kdb+ application, its tables can be queried using <b>q</b> like any other Kdb+ database. All ticker-plant clients should only have access to the database as subscribers.</p>
+<h3>Real-Time Database</h3>
+<p>A real-time database (rdb) stores today’s data. It is directly connected to the ticker plant. Typically it would be stored in memory during market hours (a day) and written out to the historical database (hdb) at the end of day. As the data (rdb data) is stored in memory, processing is extremely fast.</p>
+<p>As kdb+ recommends to have a RAM size that is four or more times the expected size of data per day, the query that runs on rdb is very fast and provides superior performance. Since a real-time database contains only today’s data, the date column (parameter) is not required.</p>
+<p>For example, we can have rdb queries like,</p>
+<pre class="result notranslate">
+select from trade where sym = `ibm
+
+OR
+
+select from trade where sym = `ibm, price > 100
+</pre>
+<h3>Historical Database</h3>
+<p>If we have to calculate the estimates of a company, we need to have its historical data available. A historical database (hdb) holds data of transactions done in the past. Each new day’s record would be added to the hdb at the end of day. Large tables in the hdb are either stored splayed (each column is stored in its own file) or they are stored partitioned by temporal data. Also some very large databases may be further partitioned using <b>par.txt</b> (file).</p>
+<p>These storage strategies (splayed, partitioned, etc.) are efficient while searching or accessing the data from a large table.</p>
+<p>A historical database can also be used for internal and external reporting purposes, i.e., for analytics. For example, suppose we want to get the company trades of IBM for a particular day from the trade (or any) table name, we need to write a query as follows &minus;</p>
+<pre class="result notranslate">
+thisday: 2014.10.12
+
+select from trade where date = thisday, sym =`ibm
+</pre>
+<p><b>Note</b> &minus; We will write all such queries once we get some overview of the <b>q</b> language.</p>
+<h1>Q Programming Language</h1>
+<p>Kdb+ comes with its built-in programming language that is known as <b>q</b>. It incorporates a superset of standard SQL which is extended for time-series analysis and offers many advantages over the standard version. Anyone familiar with SQL can learn <b>q</b> in a matter of days and be able to quickly write her own ad-hoc queries.</p>
+<h2>Starting the “q” Environment</h2>
+<p>To start using kdb+, you need to start the <b>q</b> session. There are three ways to start a <b>q</b> session &minus;</p>
+<ul class="list">
+<li><p>Simply type “c:/q/w32/q.exe” on your run terminal.</p></li>
+<li><p>Start the MS-DOS command terminal and type <b>q</b>.</p></li>
+<li><p>Copy the <b>q.exe</b> file onto “C:\Windows\System32” and on the run terminal, just type “q”.</p></li>
+</ul>
+<p>Here we are assuming that you are working on a Windows platform.</p>
+<h2>Data Types</h2>
+<p>The following table provides a list of supported data types &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Name</th>
+<th>Example</th>
+<th>Char</th>
+<th>Type</th>
+<th>Size</th>
+</tr>
+<tr>
+<td>boolean</td>
+<td>1b</td>
+<td>b</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>0xff</td>
+<td>x</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>short</td>
+<td>23h</td>
+<td>h</td>
+<td>5</td>
+<td>2</td>
+</tr>
+<tr>
+<td>int</td>
+<td>23i</td>
+<td>i</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr>
+<td>long</td>
+<td>23j</td>
+<td>j</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<td>real</td>
+<td>2.3e</td>
+<td>e</td>
+<td>8</td>
+<td>4</td>
+</tr>
+<tr>
+<td>float</td>
+<td>2.3f</td>
+<td>f</td>
+<td>9</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char</td>
+<td>“a”</td>
+<td>c</td>
+<td>10</td>
+<td>1</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>`ab</td>
+<td>s</td>
+<td>11</td>
+<td>*</td>
+</tr>
+<tr>
+<td>month</td>
+<td>2003.03m</td>
+<td>m</td>
+<td>13</td>
+<td>4</td>
+</tr>
+<tr>
+<td>date</td>
+<td>2015.03.17T18:01:40.134</td>
+<td>z</td>
+<td>15</td>
+<td>8</td>
+</tr>
+<tr>
+<td>minute</td>
+<td>08:31</td>
+<td>u</td>
+<td>17</td>
+<td>4</td>
+</tr>
+<tr>
+<td>second</td>
+<td>08:31:53</td>
+<td>v</td>
+<td>18</td>
+<td>4</td>
+</tr>
+<tr>
+<td>time</td>
+<td>18:03:18.521</td>
+<td>t</td>
+<td>19</td>
+<td>4</td>
+</tr>
+<tr>
+<td>enum</td>
+<td>`u$`b, where u:`a`b</td>
+<td>*</td>
+<td>20</td>
+<td>4</td>
+</tr>
+</table>
+<h2>Atom and List Formation</h2>
+<p>Atoms are single entities, e.g., a single number, a character or a symbol. In the above table (of different data types), all supported data types are atoms. A list is a sequence of atoms or other types including lists.</p>
+<p>Passing an atom of any type to the monadic (i.e. single argument function) type function will return a negative value, i.e., <b>–n</b>, whereas passing a simple list of those atoms to the type function will return a positive value <b>n</b>.</p>
+<h3>Example 1 – Atom and List Formation</h3>
+<pre class="result notranslate">
+/ Note that the comments begin with a slash “ / ” and cause the parser
+/ to ignore everything up to the end of the line.
+
+x: `mohan              / `mohan is a symbol, assigned to a variable x
+type x                 / let’s check the type of x
+-11h                   / -ve sign, because it’s single element.
+
+y: (`abc;`bca;`cab)    / list of three symbols, y is the variable name.
+
+type y
+11h                    / +ve sign, as it contain list of atoms (symbol).
+
+y1: (`abc`bca`cab)     / another way of writing y, please note NO semicolon
+
+y2: (`$”symbols may have interior blanks”)   / string to symbol conversion
+y[0]                   / return `abc
+y 0                    / same as y[0], also returns `abc
+y 0 2                  / returns `abc`cab, same as does y[0 2]
+
+z: (`abc; 10 20 30; (`a`b); 9.9 8.8 7.7)      / List of different types,
+z 2 0                  / returns (`a`b; `abc),
+z[2;0]                 / return `a. first element of z[2]
+
+x: “Hello World!”      / list of character, a string
+x 4 0                  / returns “oH” i.e. 4th and 0th(first)
+element
+</pre>
+<h1>Q Language - Type Casting</h1>
+<p>It is often required to change the data type of some data from one type to another. The standard casting function is the “$” <b>dyadic operator</b>.</p>
+<p>Three approaches are used to cast from one type to another (except for string) &minus;</p>
+<ul class="list">
+<li>Specify desired data type by its symbol name</li>
+<li>Specify desired data type by its character</li>
+<li>Specify desired data type by it short value.</li>
+</ul>
+<h2>Casting Integers to Floats</h2>
+<p>In the following example of casting integers to floats, all the three different ways of casting are equivalent &minus;</p>
+<pre class="result notranslate">
+q)a:9 18 27
+
+q)$[`float;a]     / Specify desired data type by its symbol name, 1<sup>st</sup> way
+9 18 27f
+
+q)$["f";a]        / Specify desired data type by its character, 2<sup>nd</sup> way
+9 18 27f
+
+q)$[9h;a]         / Specify desired data type by its short value, 3<sup>rd</sup> way
+9 18 27f
+</pre>
+<p>Check if all the three operations are equivalent,</p>
+<pre class="result notranslate">
+q)($[`float;a]~$["f";a]) and ($[`float;a] ~ $[9h;a])
+1b
+</pre>
+<h2>Casting Strings to Symbols</h2>
+<p>Casting string to symbols and vice versa works a bit differently. Let’s check it with an example &minus;</p>
+<pre class="result notranslate">
+q)b: ("Hello";"World";"HelloWorld")    / define a list of strings
+
+q)b
+"Hello"
+"World"
+"HelloWorld"
+
+q)c: `$b                               / this is how to cast strings to symbols
+
+q)c                                    / Now c is a list of symbols
+`Hello`World`HelloWorld
+</pre>
+<p>Attempting to cast strings to symbols using the keyed words `symbol or 11h will fail with the type error &minus;</p>
+<pre class="result notranslate">
+q)b
+"Hello"
+"World"
+"HelloWorld"
+
+q)`symbol$b
+'type
+
+q)11h$b
+'type
+</pre>
+<h2>Casting Strings to Non-Symbols</h2>
+<p>Casting strings to a data type other than symbol is accomplished as follows &minus;</p>
+<pre class="result notranslate">
+q)b:900               / b contain single atomic integer
+
+q)c:string b          / convert this integer atom to string “900”
+
+q)c
+"900"
+
+q)`int $ c            / converting string to integer will return the
+                      / ASCII equivalent of the character “9”, “0” and
+                      / “0” to produce the list of integer 57, 48 and
+                      / 48.
+57 48 48i
+
+q)6h $ c              / Same as above
+57 48 48i
+
+q)"i" $ c             / Same a above
+57 48 48i
+
+q)"I" $ c
+900i
+</pre>
+<p>So to cast an entire string (the list of characters) to a single atom of data type <b>x</b> requires us to specify the upper case letter representing data type <b>x</b> as the first argument to the <b>$</b> operator. If you specify the data type of <b>x</b> in any other way, it result in the cast being applied to each character of the string.</p>
+<h1>Q Language - Temporal Data</h1>
+<p>The <b>q</b> language has many different ways of representing and manipulating temporal data such as times and dates.</p>
+<h2>Date</h2>
+<p>A date in kdb+ is internally stored as the integer number of days since our reference date is 01Jan2000. A date after this date is internally stored as a positive number and a date before that is referenced as a negative number.</p>
+<p>By default, a date is written in the format “YYYY.MM.DD”</p>
+<pre class="result notranslate">
+q)x:2015.01.22      / This is how we write 22nd Jan 2015
+
+q)`int$x            / Number of days since 2000.01.01
+5500i
+
+q)`year$x           / Extracting year from the date
+2015i
+
+q)x.year            / Another way of extracting year
+2015i
+
+q)`mm$x             / Extracting month from the date
+1i
+
+q)x.mm              / Another way of extracting month
+1i
+
+q)`dd$x             / Extracting day from the date
+22i
+
+q)x.dd              / Another way of extracting day
+22i
+</pre>
+<p><b>Arithmetic and logical operations</b> can be performed directly on dates.</p>
+<pre class="result notranslate">
+q)x+1        / Add one day
+2015.01.23
+
+q)x-7        / Subtract 7 days
+2015.01.15
+</pre>
+<p>The 1st of January 2000 fell on a Saturday. Therefore any Saturday throughout the history or in the future when divided by 7, would yield a remainder of 0, Sunday gives 1, Monday yield 2.</p>
+<pre class="result notranslate">
+             Day               mod 7
+           Saturday              0
+           Sunday                1
+           Monday                2
+           Tuesday               3
+           Wednesday             4
+           Thursday              5
+           Friday                6
+</pre>
+<h2>Times</h2>
+<p>A time is internally stored as the integer number of milliseconds since the stroke of midnight. A time is written in the format HH:MM:SS.MSS</p>
+<pre class="result notranslate">
+q)tt1: 03:30:00.000     / tt1 store the time 03:30 AM
+
+q)tt1
+03:30:00.000
+
+q)`int$tt1              / Number of milliseconds in 3.5 hours
+12600000i
+
+q)`hh$tt1               / Extract the hour component from time
+3i
+
+q)tt1.hh
+3i
+
+q)`mm$tt1               / Extract the minute component from time
+30i
+
+q)tt1.mm
+30i
+
+q)`ss$tt1               / Extract the second component from time
+0i
+
+q)tt1.ss
+0i
+</pre>
+<p>As in case of dates, arithmetic can be performed directly on times.</p>
+<h2>Datetimes</h2>
+<p>A datetime is the combination of a date and a time, separated by ‘T’ as in the ISO standard format. A datetime value stores the fractional day count from midnight Jan 1, 2000.</p>
+<pre class="result notranslate">
+q)dt:2012.12.20T04:54:59:000      / 04:54.59 AM on 20thDec2012
+
+q)type dt
+-15h
+
+q)dt
+2012.12.20T04:54:59.000
+9
+q)`float$dt
+4737.205
+</pre>
+<p>The underlying fractional day count can be obtained by casting to float.</p>
+<h1>Q Language - Lists</h1>
+<p>Lists are the basic building blocks of <b>q language</b>, so a thorough understanding of lists is very important. A list is simply an ordered collection of atoms (atomic elements) and other lists (group of one or more atoms).</p>
+<h2>Types of List</h2>
+<p>A <b>general list</b> encloses its items within matching parentheses and separates them with semicolons. For example &minus;</p>
+<pre class="result notranslate">
+(9;8;7)   or   ("a"; "b"; "c")   or   (-10.0; 3.1415e; `abcd; "r")
+</pre>
+<p>If a list comprises of atoms of same type, it is known as a <b>uniform list</b>. Else, it is known as a <b>general list</b> (mixed type).</p>
+<h3>Count</h3>
+<p>We can obtain the number of items in a list through its count.</p>
+<pre class="result notranslate">
+q)l1:(-10.0;3.1415e;`abcd;"r")    / Assigning variable name to general list
+
+q)count l1                        / Calculating number of items in the list l1
+4
+</pre>
+<h3>Examples of simple List</h3>
+<pre class="result notranslate">
+q)h:(1h;2h;255h)                    / Simple Integer List
+
+q)h
+1 2 255h
+
+q)f:(123.4567;9876.543;98.7)        / Simple Floating Point List
+
+q)f
+123.4567 9876.543 98.7
+
+q)b:(0b;1b;0b;1b;1b)                / Simple Binary Lists
+
+q)b
+01011b
+
+q)symbols:(`Life;`Is;`Beautiful)    / Simple Symbols List
+
+q)symbols
+`Life`Is`Beautiful
+
+q)chars:("h";"e";"l";"l";"o";" ";"w";"o";"r";"l";"d") 
+                                    / Simple char lists and Strings.
+q)chars
+"hello world"
+</pre>
+<p><b>**Note &minus; A simple list of char is called a string.</b></p>
+<p>A list contains atoms or lists. <b>To create a single item list</b>, we use &minus;</p>
+<pre class="result notranslate">
+q)singleton:enlist 42
+
+q)singleton
+,42
+</pre>
+<p><b>To distinguish between an atom and the equivalent singleton</b>, examine the sign of their type.</p>
+<pre class="result notranslate">
+q)signum type 42
+-1i
+
+q)signum type enlist 42
+1i
+</pre>
+<h1>Q Language - Indexing</h1>
+<p>A list is ordered from left to right by the position of its items. The offset of an item from the beginning of the list is called its <b>index</b>. Thus, the first item has an index 0, the second item (if there is one) has an index 1, etc. A list of count <b>n</b> has index domain from <b>0</b> to <b>n–1</b>.</p>
+<h2>Index Notation</h2>
+<p>Given a list <b>L</b>, the item at index <b>i</b> is accessed by <b>L[i]</b>. Retrieving an item by its index is called <b>item indexing</b>. For example,</p>
+<pre class="result notranslate">
+q)L:(99;98.7e;`b;`abc;"z")
+
+q)L[0]
+99
+
+q)L[1]
+98.7e
+
+q)L[4]
+"z
+</pre>
+<h2>Indexed Assignment</h2>
+<p>Items in a list can also be assigned via item indexing. Thus,</p>
+<pre class="result notranslate">
+q)L1:9 8 7
+
+q)L1[2]:66      / Indexed assignment into a simple list
+                / enforces strict type matching.
+                
+q)L1
+9 8 66
+</pre>
+<h3>Lists from Variables</h3>
+<pre class="result notranslate">
+q)l1:(9;8;40;200)
+
+q)l2:(1 4 3; `abc`xyz)
+
+q)l:(l1;l2)               / combining the two list l1 and l2
+
+q)l
+9 8 40 200
+(1 4 3;`abc`xyz)
+</pre>
+<h2>Joining Lists</h2>
+<p>The most common operation on two lists is to join them together to form a larger list. More precisely, the join operator (,) appends its right operand to the end of the left operand and returns the result. It accepts an atom in either argument.</p>
+<pre class="result notranslate">
+q)1,2 3 4
+1 2 3 4
+
+q)1 2 3, 4.4 5.6     / If the arguments are not of uniform type,
+                     / the result is a general list.
+1
+2
+3
+4.4
+5.6
+</pre>
+<h2>Nesting</h2>
+<p>Data complexity is built by using lists as items of lists.</p>
+<h3>Depth</h3>
+<p>The number of levels of nesting for a list is called its depth. Atoms have a depth of 0 and simple lists have a depth of 1.</p>
+<pre class="result notranslate">
+q)l1:(9;8;(99;88))
+
+q)count l1
+3
+</pre>
+<p>Here is a list of depth 3 having two items &minus;</p>
+<pre class="result notranslate">
+q)l5
+9
+(90;180;900 1800 2700 3600)
+
+q)count l5
+2
+
+q)count l5[1]
+3
+</pre>
+<h3>Indexing at Depth</h3>
+<p>It is possible to index directly into the items of a nested list.</p>
+<p><b>Repeated Item Indexing</b></p>
+<p>Retrieving an item via a single index always retrieves an uppermost item from a nested list.</p>
+<pre class="result notranslate">
+q)L:(1;(100;200;(300;400;500;600)))
+
+q)L[0]
+1
+
+q)L[1]
+100
+200
+300 400 500 600
+</pre>
+<p>Since the result <b>L[1]</b> is itself a list, we can retrieve its elements using a single index.</p>
+<pre class="result notranslate">
+q)L[1][2]
+300 400 500 600
+</pre>
+<p>We can repeat single indexing once more to retrieve an item from the innermost nested list.</p>
+<pre class="result notranslate">
+q)L[1][2][0]
+300
+</pre>
+<p>You can read this as,</p>
+<p style="padding-left:8%;"><i>Get the item at index 1 from L, and from it retrieve the item at index 2, and from it retrieve the item at index 0.</i></p>
+<p><b>Notation for Indexing at Depth</b></p>
+<p>There is an alternate notation for repeated indexing into the constituents of a nested list. The last retrieval can also be written as,</p>
+<pre class="result notranslate">
+q)L[1;2;0]
+300
+</pre>
+<p>Assignment via index also works at depth.</p>
+<pre class="result notranslate">
+q)L[1;2;1]:900
+
+q)L
+1
+(100;200;300 900 500 600)
+</pre>
+<h2>Elided Indices</h2>
+<p><b>Eliding Indices for a General List</b></p>
+<pre class="result notranslate">
+q)L:((1 2 3; 4 5 6 7); (`a`b`c;`d`e`f`g;`0`1`2);("good";"morning"))
+
+q)L
+(1 2 3;4 5 6 7)
+(`a`b`c;`d`e`f`g;`0`1`2)
+("good";"morning")
+
+q)L[;1;]
+4 5 6 7
+`d`e`f`g
+"morning"
+
+q)L[;;2]
+3 6
+`c`f`2
+"or"
+</pre>
+<p><b>Interpret L[;1;] as,</b></p>
+<p style="padding-left:8%;">Retrieve all items in the second position of each list at the top level.</p>
+<p><b>Interpret L[;;2] as,</b></p>
+<p style="padding-left:8%;">Retrieve the items in the third position for each list at the second level.</p>
+<h1>Q Language - Dictionaries</h1>
+<p>Dictionaries are an extension of lists which provide the foundation for creating tables. In mathematical terms, dictionary creates the</p>
+<p style="padding-left:8%;">“domain &rarr;  Range” </p>
+<p>or in general (short) creates</p>
+<p style="padding-left:8%;">“key &rarr; value”</p>
+<p>relationship between elements.</p>
+<p>A dictionary is an ordered collection of key-value pairs that is roughly equivalent to a hash table. A dictionary is a mapping defined by an explicit I/O association between a domain list and a range list via positional correspondence. The creation of a dictionary uses the "xkey" primitive (!)</p>
+<pre class="result notranslate">
+                  ListOfDomain ! ListOfRange
+</pre>
+<p>The most basic dictionary maps a simple list to a simple list.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Input (I)</th>
+<th style="text-align:center;">Output (O)</th>
+</tr>
+<tr style="text-align:center;">
+<td>`Name</td>
+<td>`John</td>
+</tr>
+<tr style="text-align:center;">
+<td>`Age</td>
+<td>36</td>
+</tr>
+<tr style="text-align:center;">
+<td>`Sex</td>
+<td>“M”</td>
+</tr>
+<tr style="text-align:center;">
+<td>Weight</td>
+<td>60.3</td>
+</tr>
+</table>
+<pre class="result notranslate">
+q)d:`Name`Age`Sex`Weight!(`John;36;"M";60.3)   / Create a dictionary d
+
+q)d
+
+Name   | `John
+Age    | 36
+Sex    | "M"
+Weight | 60.3
+
+q)count d             / To get the number of rows in a dictionary.
+4
+
+q)key d               / The function key returns the domain
+`Name`Age`Sex`Weight
+
+q)value d             / The function value returns the range.
+
+`John
+36
+
+"M"
+60.3
+
+q)cols d             / The function cols also returns the domain.
+`Name`Age`Sex`Weight
+</pre>
+<h2>Lookup</h2>
+<p>Finding the dictionary output value corresponding to an input value is called <b>looking up</b> the input.</p>
+<pre class="result notranslate">
+q)d[`Name]       / Accessing the value of domain `Name
+`John
+
+q)d[`Name`Sex]   / extended item-wise to a simple list of keys
+`John
+"M"
+</pre>
+<h3>Lookup with Verb @</h3>
+<pre class="result notranslate">
+q)d1:`one`two`three!9 18 27
+
+q)d1[`two]
+18
+
+q)d1@`two
+18
+</pre>
+<h2>Operations on Dictionaries</h2>
+<h3>Amend and Upsert</h3>
+<p>As with lists, the items of a dictionary can be modified via indexed assignment.</p>
+<pre class="result notranslate">
+d:`Name`Age`Sex`Weight! (`John;36;"M";60.3)
+                                  / A dictionary d
+                                  
+q)d[`Age]:35                      / Assigning new value to key Age
+
+q)d 
+                              / New value assigned to key Age in d
+Name   | `John
+Age    | 35
+Sex    | "M"
+Weight | 60.3
+</pre>
+<p>Dictionaries can be extended via index assignment. </p>
+<pre class="result notranslate">
+q)d[`Height]:"182 Ft"
+
+q)d
+
+Name   | `John
+Age    | 35
+Sex    | "M"
+Weight | 60.3
+Height | "182 Ft"
+</pre>
+<h3>Reverse Lookup with Find (?)</h3>
+<p>The find (?) operator is used to perform reverse lookup by mapping a range of elements to its domain element.</p>
+<pre class="result notranslate">
+q)d2:`x`y`z!99 88 77
+
+q)d2?77
+`z
+</pre>
+<p>In case the elements of a list is not unique, the <b>find</b> returns the first item mapping to it from the domain list.</p>
+<h3>Removing Entries</h3>
+<p>To remove an entry from a dictionary, the <b>delete ( _ ) function</b> is used. The left operand of ( _ ) is the dictionary and the right operand is a key value.</p>
+<pre class="result notranslate">
+q)d2:`x`y`z!99 88 77
+
+q)d2 _`z
+
+x| 99
+y| 88
+</pre>
+<p>Whitespace is required to the left of _ if the first operand is a variable.</p>
+<pre class="result notranslate">
+q)`x`y _ d2           / Deleting multiple entries
+
+z| 77
+</pre>
+<h2>Column Dictionaries</h2>
+<p>Column dictionaries are the basics for creation of tables. Consider the following example &minus;</p>
+<pre class="result notranslate">
+q)scores: `name`id!(`John`Jenny`Jonathan;9 18 27)
+                              / Dictionary scores
+                              
+q)scores[`name]               / The values for the name column are
+`John`Jenny`Jonathan
+
+q)scores.name                 / Retrieving the values for a column in a
+                              / column dictionary using dot notation.
+`John`Jenny`Jonathan
+
+q)scores[`name][1]            / Values in row 1 of the name column
+`Jenny
+
+q)scores[`id][2]              / Values in row 2 of the id column is
+27
+</pre>
+<h2>Flipping a Dictionary</h2>
+<p>The net effect of flipping a column dictionary is simply reversing the order of the indices. This is logically equivalent to transposing the rows and columns.</p>
+<h3>Flip on a Column Dictionary</h3>
+<p>The transpose of a dictionary is obtained by applying the unary flip operator. Take a look at the following example &minus;</p>
+<pre class="result notranslate">
+q)scores
+
+name  | John Jenny Jonathan
+id    | 9   18   27
+
+q)flip scores
+
+  name     id
+---------------
+  John     9
+  Jenny    18
+ Jonathan  27
+</pre>
+<h3>Flip of a Flipped Column Dictionary</h3>
+<p>If you transpose a dictionary twice, you obtain the original dictionary,</p>
+<pre class="result notranslate">
+q)scores ~ flip flip scores
+1b
+</pre>
+<h1>Q Language - Table</h1>
+<p>Tables are at the heart of kdb+. A table is a collection of named columns implemented as a dictionary. <b>q tables</b> are column-oriented.</p>
+<h2>Creating Tables</h2>
+<p>Tables are created using the following syntax &minus;</p>
+<pre class="result notranslate">
+q)trade:([]time:();sym:();price:();size:())
+
+q)trade
+time sym price size
+-------------------
+</pre>
+<p>In the above example, we have not specified the type of each column. This will be set by the first insert into the table.</p>
+<p>Another way, we can specify column type on initialization &minus;</p>
+<pre class="result notranslate">
+q)trade:([]time:`time$();sym:`$();price:`float$();size:`int$())
+</pre>
+<p>Or we can also define non-empty tables &minus;</p>
+<pre class="result notranslate">
+q)trade:([]sym:(`a`b);price:(1 2))
+
+q)trade
+
+ sym   price
+-------------
+  a      1
+  b      2
+</pre>
+<p>If there are no columns within the square brackets as in the examples above, the table is <b>unkeyed</b>.</p>
+<p>To create a <b>keyed table</b>, we insert the column(s) for the key in the square brackets.</p>
+<pre class="result notranslate">
+q)trade:([sym:`$()]time:`time$();price:`float$();size:`int$())
+
+q)trade
+
+ sym   | time price size
+-----  | ---------------
+</pre>
+<p>One can also define the column types by setting the values to be null lists of various types &minus;</p>
+<pre class="result notranslate">
+q)trade:([]time:0#0Nt;sym:0#`;price:0#0n;size:0#0N)
+</pre>
+<h2>Getting Table Information</h2>
+<p>Let’s create a trade table &minus;</p>
+<pre class="result notranslate">
+trade: ([]sym:`ibm`msft`apple`samsung;mcap:2000 4000 9000 6000;ex:`nasdaq`nasdaq`DAX`Dow)
+
+q)cols trade                         / column names of a table
+`sym`mcap`ex
+
+q)trade.sym                          / Retrieves the value of column sym
+`ibm`msft`apple`samsung
+
+q)show meta trade                    / Get the meta data of a table trade.
+
+  c   | t f a
+----- | -----
+ Sym  | s
+ Mcap | j
+ ex   | s
+</pre>
+<h2>Primary Keys and Keyed Tables</h2>
+<h3>Keyed Table</h3>
+<p>A keyed table is a dictionary that maps each row in a table of unique keys to a corresponding row in a table of values. Let us take an example &minus;</p>
+<pre class="result notranslate">
+val:flip `name`id!(`John`Jenny`Jonathan;9 18 27)
+                          / a flip dictionary create table val
+id:flip (enlist `eid)!enlist 99 198 297
+                          / flip dictionary, having single column eid
+</pre>
+<p>Now create a simple keyed table containing eid as key,</p>
+<pre class="result notranslate">
+q)valid: id ! val
+
+q)valid                 / table name valid, having key as eid
+
+  eid |  name      id
+---   | ---------------
+  99  |  John      9
+  198 |  Jenny     18
+  297 |  Jonathan  27
+</pre>
+<h3>ForeignKeys</h3>
+<p>A <b>foreign key</b> defines a mapping from the rows of the table in which it is defined to the rows of the table with the corresponding <b>primary key</b>.</p>
+<p>Foreign keys provide <b>referential integrity</b>. In other words, an attempt to insert a foreign key value that is not in the primary key will fail.</p>
+<p>Consider the following examples. In the first example, we will define a foreign key explicitly on initialization. In the second example, we will use foreign key chasing which does not assume any prior relationship between the two tables.</p>
+<p><b>Example 1 &minus; Define foreign key on initialization</b></p>
+<pre class="result notranslate">
+q)sector:([sym:`SAMSUNG`HSBC`JPMC`APPLE]ex:`N`CME`DAQ`N;MC:1000 2000 3000 4000)
+
+q)tab:([]sym:`sector$`HSBC`APPLE`APPLE`APPLE`HSBC`JPMC;price:6?9f)
+
+q)show meta tab
+
+  c    | t f a
+------ | ----------
+ sym   | s sector
+ price | f
+
+q)show select from tab where sym.ex=`N
+
+  sym     price
+----------------
+ APPLE   4.65382
+ APPLE   4.643817
+ APPLE   3.659978
+</pre>
+<p><b>Example 2 &minus; no pre-defined relationship between tables</b></p>
+<pre class="result notranslate">
+sector: ([symb:`IBM`MSFT`HSBC]ex:`N`CME`N;MC:1000 2000 3000)
+tab:([]sym:`IBM`MSFT`MSFT`HSBC`HSBC;price:5?9f)
+</pre>
+<p>To use foreign key chasing, we must create a table to key into sector.</p>
+<pre class="result notranslate">
+q)show update mc:(sector([]symb:sym))[`MC] from tab
+
+  sym     price      mc
+--------------------------
+  IBM   7.065297    1000
+  MSFT  4.812387    2000
+  MSFT  6.400545    2000
+  HSBC  3.704373    3000
+  HSBC  4.438651    3000
+</pre>
+<p>General notation for a predefined foreign key &minus;</p>
+<p style="padding-left:5%;">select a.b from c <span style="padding-left:5%;"><i>where a is the foreign key (sym), b is a</i></span></p>
+<p style="padding-left:28%;"><i>field in the primary key table (ind), c is the</i></p>
+<p style="padding-left:28%;"><i>foreign key table (trade)</i></p>
+<h2>Manipulating Tables</h2>
+<p>Let’s create one trade table and check the result of different table expression &minus;</p>
+<pre class="result notranslate">
+q)trade:([]sym:5?`ibm`msft`hsbc`samsung;price:5?(303.00*3+1);size:5?(900*5);time:5?(.z.T-365))
+
+q)trade
+
+  sym        price   size   time
+-----------------------------------------
+ msft      743.8592  3162  02:32:17.036
+ msft      641.7307  2917  01:44:56.936
+ hsbc      838.2311  1492  00:25:23.210
+ samsung   278.3498  1983  00:29:38.945
+ ibm       838.6471  4006  07:24:26.842
+</pre>
+<p>Let us now take a look at the statements that are used to manipulate tables using <b>q</b> language.</p>
+<h3>Select</h3>
+<p>The syntax to use a <b>Select</b> statement is as follows &minus;</p>
+<pre class="result notranslate">
+select [columns] [by columns] from table [where clause]
+</pre>
+<p>Let us now take an example to demonstrate how to use Select statement &minus;</p>
+<pre class="result notranslate">
+q)/ select expression example
+
+q)select sym,price,size by time from trade where size &gt; 2000
+
+    time      |  sym    price     size
+------------- | -----------------------
+ 01:44:56.936 |  msft   641.7307  2917
+ 02:32:17.036 |  msft   743.8592  3162
+ 07:24:26.842 |  ibm    838.6471  4006
+</pre>
+<h3>Insert</h3>
+<p>The syntax to use an <b>Insert</b> statement is as follows &minus;</p>
+<pre class="result notranslate">
+`tablename insert (values)
+Insert[`tablename; values]
+</pre>
+<p>Let us now take an example to demonstrate how to use Insert statement &minus;</p>
+<pre class="result notranslate">
+q)/ Insert expression example
+
+q)`trade insert (`hsbc`apple;302.0 730.40;3020 3012;09:30:17.00409:15:00.000)
+5 6
+
+q)trade
+
+   sym    price     size    time
+------------------------------------------
+  msft    743.8592  3162   02:32:17.036
+  msft    641.7307  2917   01:44:56.936
+  hsbc    838.2311  1492   00:25:23.210
+ samsung  278.3498  1983   00:29:38.945
+  ibm     838.6471  4006   07:24:26.842
+  hsbc    302       3020   09:30:17.004
+  apple   730.4     3012   09:15:00.000
+
+q)/Insert another value
+
+q)insert[`trade;(`samsung;302.0; 3333;10:30:00.000]
+']
+
+q)insert[`trade;(`samsung;302.0; 3333;10:30:00.000)]
+,7
+
+q)trade
+
+   sym     price   size     time
+----------------------------------------
+  msft   743.8592  3162  02:32:17.036
+  msft   641.7307  2917  01:44:56.936
+  hsbc   838.2311  1492  00:25:23.210
+ samsung 278.3498  1983  00:29:38.945
+  ibm    838.6471  4006  07:24:26.842
+  hsbc   302       3020  09:30:17.004
+  apple  730.4     3012  09:15:00.000
+ samsung 302       3333  10:30:00.000
+</pre>
+<h3>Delete</h3>
+<p>The syntax to use a <b>Delete</b> statement is as follows &minus;</p>
+<pre class="result notranslate">
+delete columns from table
+delete from table where clause
+</pre>
+<p>Let us now take an example to demonstrate how to use Delete statement &minus;</p>
+<pre class="result notranslate">
+q)/Delete expression example
+
+q)delete price from trade
+
+   sym   size       time
+-------------------------------
+  msft   3162   02:32:17.036
+  msft   2917   01:44:56.936
+  hsbc   1492   00:25:23.210
+ samsung 1983   00:29:38.945
+  ibm    4006   07:24:26.842
+  hsbc   3020   09:30:17.004
+  apple  3012   09:15:00.000
+ samsung 3333   10:30:00.000
+
+q)delete from trade where price &gt; 3000
+
+   sym     price     size       time
+-------------------------------------------
+  msft    743.8592   3162    02:32:17.036
+  msft    641.7307   2917    01:44:56.936
+  hsbc    838.2311   1492    00:25:23.210
+ samsung  278.3498   1983    00:29:38.945
+  ibm     838.6471   4006    07:24:26.842
+  hsbc    302        3020    09:30:17.004
+  apple   730.4      3012    09:15:00.000
+ samsung  302        3333    10:30:00.000
+
+q)delete from trade where price &gt; 500
+
+  sym     price     size     time
+-----------------------------------------
+ samsung  278.3498  1983  00:29:38.945
+  hsbc    302       3020  09:30:17.004
+ samsung  302       3333  10:30:00.000
+</pre>
+<h3>Update</h3>
+<p>The syntax to use an <b>Update</b> statement is as follows &minus;</p>
+<pre class="result notranslate">
+update column: newValue from table where ….
+</pre>
+<p>Use the following syntax to update the format/datatype of a column using the cast function &minus;</p>
+<pre class="result notranslate">
+update column:newValue from `table where …
+</pre>
+<p>Let us now take an example to demonstrate how to use <b>Update</b> statement &minus;</p>
+<pre class="result notranslate">
+q)/Update expression example
+
+q)update size:9000 from trade where price &gt; 600
+
+  sym     price      size     time
+------------------------------------------
+  msft    743.8592   9000   02:32:17.036
+  msft    641.7307   9000   01:44:56.936
+  hsbc    838.2311   9000   00:25:23.210
+ samsung  278.3498   1983   00:29:38.945
+  ibm     838.6471   9000   07:24:26.842
+  hsbc    302        3020   09:30:17.004
+  apple   730.4      9000   09:15:00.000
+ samsung  302        3333   10:30:00.000
+
+q)/Update the datatype of a column using the cast function
+
+q)meta trade
+
+   c  |  t f a
+----- | --------
+  sym |  s
+ price|  f
+ size |  j
+ time |  t
+
+q)update size:`float$size from trade
+
+  sym     price     size      time
+------------------------------------------
+  msft    743.8592  3162    02:32:17.036
+  msft    641.7307  2917    01:44:56.936 
+  hsbc    838.2311  1492    00:25:23.210
+ samsung  278.3498  1983    00:29:38.945
+  ibm     838.6471  4006    07:24:26.842
+  hsbc    302       3020    09:30:17.004
+  apple   730.4     3012    09:15:00.000
+ samsung  302       3333    10:30:00.000
+
+q)/ Above statement will not update the size column datatype permanently
+
+q)meta trade
+
+   c   |  t f a
+------ | --------
+  sym  |   s
+ price |   f
+ size  |   j
+ time  |   t
+ 
+q)/to make changes in the trade table permanently, we have do
+
+q)update size:`float$size from `trade
+`trade
+
+q)meta trade
+
+   c   |  t f a
+------ | --------
+  sym  |   s
+ price |   f
+ size  |   f
+ time  |   t
+</pre>
+<h1>Q Language - Verb &amp; Adverbs</h1>
+<p>Kdb+ has nouns, verbs, and adverbs. All data objects and functions are <b>nouns</b>. <b>Verbs</b> enhance the readability by reducing the number of square brackets and parentheses in expressions. <b>Adverbs</b> modify dyadic (2 arguments) functions and verbs to produce new, related verbs. The functions produced by adverbs are called <b>derived functions</b> or <b>derived verbs</b>.</p>
+<h2>Each</h2>
+<p>The adverb <b>each</b>, denoted by ( ` ), modifies dyadic functions and verbs to apply to the items of lists instead of the lists themselves. Take a look at the following example &minus;</p>
+<pre class="result notranslate">
+q)1, (2 3 5)       / Join
+1 2 3 5
+
+q)1, '( 2 3 4)     / Join each
+1 2
+1 3
+1 4
+</pre>
+<p>There is a form of <b>Each</b> for monadic functions that uses the keyword “each”. For example,</p>
+<pre class="result notranslate">
+q)reverse ( 1 2 3; "abc")           /Reverse
+a b c
+1 2 3
+
+q)each [reverse] (1 2 3; "abc")     /Reverse-Each
+3 2 1
+c b a
+
+q)'[reverse] ( 1 2 3; "abc")
+3 2 1
+c b a
+</pre>
+<h2>Each-Left and Each-Right</h2>
+<p>There are two variants of Each for dyadic functions called <b>Each-Left</b> (\:) and <b>Each-Right</b> (/:). The following example explains how to use them.</p>
+<pre class="result notranslate">
+q)x: 9 18 27 36
+
+q)y:10 20 30 40
+
+q)x,y            / join
+9 18 27 36 10 20 30 40
+
+q)x,'y           / each
+
+9   10
+18  20
+27  30
+36  40
+
+q)x: 9 18 27 36
+
+q)y:10 20 30 40
+
+q)x,y            / join
+9 18 27 36 10 20 30 40
+
+q)x,'y           / each, will return a list of pairs
+
+9   10
+18  20
+27  30
+36  40
+
+q)x, \:y         / each left, returns a list of each element
+                 / from x with all of y
+					  
+9   10  20  30  40
+18  10  20  30  40
+27  10  20  30  40
+36  10  20  30  40
+
+q)x,/:y          / each right, returns a list of all the x with
+                 / each element of y
+					  
+9  18  27  36  10
+9  18  27  36  20
+9  18  27  36  30
+9  18  27  36  40
+
+q)1 _x           / drop the first element
+18 27 36
+
+q)-2_y           / drop the last two element
+10 20
+
+q)               / Combine each left and each right to be a
+                 / cross-product (cartesian product)
+                 
+q)x,/:\:y
+
+9   10  9   20  9   30  9   40
+18  10  18  20  18  30  18  40
+27  10  27  20  27  30  27  40
+36  10  36  20  36  30  36  40
+</pre>
+<h1>Q Language - Joins</h1>
+<p>In <b>q</b> language, we have different kinds of joins based on the input tables supplied and the kind of joined tables we desire. A join combines data from two tables. Besides foreign key chasing, there are four other ways to join tables &minus;</p>
+<ul class="list">
+<li>Simple join</li>
+<li>Asof join</li>
+<li>Left join</li>
+<li>Union join</li>
+</ul>
+<p>Here, in this chapter, we will discuss each of these joins in detail.</p>
+<h2>Simple Join</h2>
+<p>Simple join is the most basic type of join, performed with a comma ‘,’. In this case, the two tables have to be <b>type conformant</b>, i.e., both the tables have the same number of columns in the same order, and same key.</p>
+<pre class="result notranslate">
+table1,:table2 / table1 is assigned the value of table2
+</pre>
+<p>We can use comma-each join for tables with same length to join sideways. One of the tables can be keyed here,</p>
+<pre class="result notranslate">
+Table1, `Table2
+</pre>
+<h2>Asof Join (aj)</h2>
+<p>It is the most powerful join which is used to get the value of a field in one table asof the time in another table. Generally it is used to get the prevailing bid and ask at the time of each trade.</p>
+<h3>General format</h3>
+<pre class="result notranslate">
+aj[joinColumns;tbl1;tbl2]
+</pre>
+<p>For example,</p>
+<pre class="result notranslate">
+aj[`sym`time;trade;quote]
+</pre>
+<h3>Example</h3>
+<pre class="result notranslate">
+q)tab1:([]a:(1 2 3 4);b:(2 3 4 5);d:(6 7 8 9))
+
+q)tab2:([]a:(2 3 4);b:(3 4 5); c:( 4 5 6))
+
+q)show aj[`a`b;tab1;tab2]
+
+ a  b  d  c
+-------------
+ 1  2  6
+ 2  3  7  4
+ 3  4  8  5
+ 4  5  9  6
+</pre>
+<h2>Left Join(lj)</h2>
+<p>It’s a special case of aj where the second argument is a keyed table and the first argument contains the columns of the right argument’s key.</p>
+<h3>General format</h3>
+<pre class="result notranslate">
+table1 lj Keyed-table
+</pre>
+<h3>Example</h3>
+<pre class="result notranslate">
+q)/Left join- syntax table1 lj table2 or lj[table1;table2]
+
+q)tab1:([]a:(1 2 3 4);b:(2 3 4 5);d:(6 7 8 9))
+
+q)tab2:([a:(2 3 4);b:(3 4 5)]; c:( 4 5 6))
+
+q)show lj[tab1;tab2]
+
+ a  b  d  c
+-------------
+ 1  2  6
+ 2  3  7  4
+ 3  4  8  5
+ 4  5  9  6
+</pre>
+<h2>Union Join (uj)</h2>
+<p>It allows to create a union of two tables with distinct schemas. It is basically an extension to the simple join ( , )</p>
+<pre class="result notranslate">
+q)tab1:([]a:(1 2 3 4);b:(2 3 4 5);d:(6 7 8 9))
+
+q)tab2:([]a:(2 3 4);b:(3 4 5); c:( 4 5 6))
+
+q)show uj[tab1;tab2]
+
+ a  b  d  c
+------------
+ 1  2  6
+ 2  3  7
+ 3  4  8
+ 4  5  9
+ 2  3     4
+ 3  4     5
+ 4  5     6
+</pre>
+<p>If you are using uj on keyed tables, then the primary keys must match.</p>
+<h1>Q Language - Functions</h1>
+<h2>Types of Functions</h2>
+<p>Functions can be classified in a number of ways. Here we have classified them based on the number and type of argument they take and the result type. Functions can be,</p>
+<ul class="list">
+<li><p><b>Atomic</b> &minus; Where the arguments are atomic and produce atomic results</p></li>
+<li><p><b>Aggregate</b> &minus; atom from list</p></li>
+<li><p><b>Uniform (list from list)</b> &minus; Extended the concept of atom as they apply to lists. The count of the argument list equals the count of the result list.</p></li>
+<li><p><b>Other</b> &minus; if the function is not from the above category.</p></li>
+</ul>
+<p>Binary operations in mathematics are called <b>dyadic functions</b> in q; for example, “+”. Similarly unary operations are called <b>monadic functions</b>; for example, “abs” or “floor”.</p>
+<h2>Frequently Used Functions</h2>
+<p>There are quite a few functions used frequently in <b>q</b> programming. Here, in this section, we will see the usage of some popular functions &minus;</p>
+<h3>abs</h3>
+<pre class="result notranslate">
+q) abs -9.9 / Absolute value, Negates -ve number & leaves non -ve number
+9.9
+</pre>
+<h3>all</h3>
+<pre class="result notranslate">
+q) all 4 5 0 -4 / Logical AND (numeric min), returns the minimum value
+0b
+</pre>
+<h3>Max (&amp;), Min (|), and Not (!)</h3>
+<pre class="result notranslate">
+q) /And, Or, and Logical Negation
+
+q) 1b &amp; 1b        / And (Max)
+1b
+
+q) 1b|0b              / Or (Min)
+1b
+
+q) not 1b             /Logical Negate (Not)
+0b 
+</pre>
+<h3>asc</h3>
+<pre class="result notranslate">
+q)asc 1 3 5 7 -2 0 4    / Order list ascending, sorted list
+                        / in ascending order i
+s returned
+`s#-2 0 1 3 4 5 7
+
+q)/attr - gives the attributes of data, which describe how it's sorted.
+`s denotes fully sorted, `u denotes unique and `p and `g are used to 
+refer to lists with repetition, with `p standing for parted and `g for grouped
+</pre>
+<h3>avg</h3>
+<pre class="result notranslate">
+q)avg 3 4 5 6 7           / Return average of a list of numeric values
+5f
+
+q)/Create on trade table
+
+q)trade:([]time:3?(.z.Z-200);sym:3?(`ibm`msft`apple);price:3?99.0;size:3?100)
+</pre>
+<h3>by</h3>
+<pre class="result notranslate">
+q)/ by - Groups rows in a table at given sym
+
+q)select sum price by sym from trade    / find total price for each sym
+
+  sym  |   price
+------ | --------
+ apple | 140.2165
+  ibm  | 16.11385
+</pre>
+<h3>cols</h3>
+<pre class="result notranslate">
+q)cols trade / Lists columns of a table
+`time`sym`price`size
+</pre>
+<h3>count</h3>
+<pre class="result notranslate">
+q)count (til 9) / Count list, count the elements in a list and
+                / return a single int value 9
+</pre>
+<h3>port</h3>
+<pre class="result notranslate">
+q)\p 9999 / assign port number
+
+q)/csv - This command allows queries in a browser to be exported to
+   excel by prefixing the query, such as http://localhost:9999/.csv?select from trade where sym =`ibm
+</pre>
+<h3>cut</h3>
+<pre class="result notranslate">
+q)/ cut - Allows a table or list to be cut at a certain point
+
+q)(1 3 5) cut "abcdefghijkl"
+                            / the argument is split at 1st, 3rd and 5th letter.
+"bc"
+"de"
+"fghijkl"
+
+q)5 cut "abcdefghijkl"      / cut the right arg. Into 5 letters part
+                            / until its end.
+"abcde"
+"fghij"
+"kl"
+</pre>
+<h3>Delete</h3>
+<pre class="result notranslate">
+q)/delete - Delete rows/columns from a table
+
+q)delete price from trade
+
+          time              sym   size
+---------------------------------------
+  2009.06.18T06:04:42.919  apple   36
+  2009.11.14T12:42:34.653   ibm    12
+  2009.12.27T17:02:11.518  apple   97
+</pre>
+<h3>Distinct</h3>
+<pre class="result notranslate">
+q)/distinct - Returns the distinct element of a list
+
+q)distinct 1 2 3 2 3 4 5 2 1 3            / generate unique set of number
+1 2 3 4 5
+</pre>
+<h3>enlist</h3>
+<pre class="result notranslate">
+q)/enlist - Creates one-item list.
+
+q)enlist 37
+,37
+
+q)type 37           / -ve type value
+-7h
+
+q)type enlist 37    / +ve type value
+7h 
+</pre>
+<h3>Fill (^)</h3>
+<pre class="result notranslate">
+q)/fill - used with nulls. There are three functions for processing null values.
+
+The dyadic function named fill replaces null values in the right argument with the atomic left argument.
+
+q)100 ^ 3 4 0N 0N -5
+3 4 100 100 -5
+
+q)`Hello^`jack`herry``john`
+`jack`herry`Hello`john`Hello
+</pre>
+<h3>Fills</h3>
+<pre class="result notranslate">
+q)/fills - fills in nulls with the previous not null value.
+
+q)fills 1 0N 2 0N 0N 2 3 0N -5 0N
+1 1 2 2 2 2 3 3 -5 -5
+</pre>
+<h3>First</h3>
+<pre class="result notranslate">
+q)/first - returns the first atom of a list
+
+q)first 1 3 34 5 3
+1
+</pre>
+<h3>Flip</h3>
+<pre class="result notranslate">
+q)/flip - Monadic primitive that applies to lists and associations. It interchange the top two levels of its argument.
+
+q)trade
+
+       time                   sym      price   size
+------------------------------------------------------
+  2009.06.18T06:04:42.919    apple   72.05742   36
+  2009.11.14T12:42:34.653    ibm     16.11385   12
+  2009.12.27T17:02:11.518    apple   68.15909   97
+
+q)flip trade
+
+time | 2009.06.18T06:04:42.919 2009.11.14T12:42:34.653
+2009.12.27T17:02:11.518
+
+sym   |  apple         ibm         apple
+price | 72.05742     16.11385    68.15909
+size  | 36 12 97
+</pre>
+<h3>iasc</h3>
+<pre class="result notranslate">
+q)/iasc - Index ascending, return the indices of the ascended sorted list relative to the input list.
+
+q)iasc 5 4 0 3 4 9
+
+2 3 1 4 0 5
+</pre>
+<h3>Idesc</h3>
+<pre class="result notranslate">
+q)/idesc - Index desceding, return the descended sorted list relative to the input list
+
+q)idesc 0 1 3 4
+
+3 2 1 0
+</pre>
+<h3>in</h3>
+<pre class="result notranslate">
+q)/in - In a list, dyadic function used to query list (on the right-handside) about their contents.
+
+q)(2 4) in 1 2 3
+
+10b
+</pre>
+<h3>insert</h3>
+<pre class="result notranslate">
+q)/insert - Insert statement, upload new data into a table.
+
+q)insert[`trade;((.z.Z);`samsung;48.35;99)],3
+
+q)trade
+
+      time                  sym       price     size
+------------------------------------------------------
+ 2009.06.18T06:04:42.919   apple    72.05742     36
+ 2009.11.14T12:42:34.653    ibm     16.11385     12
+ 2009.12.27T17:02:11.518   apple    68.15909     97
+ 2015.04.06T10:03:36.738   samsung  48.35        99
+</pre>
+<h3>key</h3>
+<pre class="result notranslate">
+q)/key - three different functions i.e. generate +ve integer number, gives content of a directory or key of a table/dictionary.
+
+q)key 9
+
+0 1 2 3 4 5 6 7 8
+
+q)key `:c:
+`$RECYCLE.BIN`Config.Msi`Documents and Settings`Drivers`Geojit`hiberfil.sys`I..
+</pre>
+<h3>lower</h3>
+<pre class="result notranslate">
+q)/lower - Convert to lower case and floor
+
+q)lower ("JoHn";`HERRY`SYM)
+"john"
+`herry`sym
+</pre>
+<h3>Max and Min (i.e. | and &amp;)</h3>
+<pre class="result notranslate">
+q)/Max and Min / a|b and a&amp;b
+
+q)9|7
+9
+
+q)9&amp;5
+5
+</pre>
+<h3>null</h3>
+<pre class="result notranslate">
+q)/null - return 1b if the atom is a null else 0b from the argument list
+
+q)null 1 3 3 0N
+0001b
+</pre>
+<h3>Peach</h3>
+<pre class="result notranslate">
+q)/peach - Parallel each, allows process across slaves
+
+q)foo peach list1       / function foo applied across the slaves named in list1
+
+'list1
+
+q)foo:{x+27}
+
+q)list1:(0 1 2 3 4)
+
+q)foo peach list1       / function foo applied across the slaves named in list1
+27 28 29 30 31
+</pre>
+<h3>Prev</h3>
+<pre class="result notranslate">
+q)/prev - returns the previous element i.e. pushes list forwards
+
+q)prev 0 1 3 4 5 7
+
+0N 0 1 3 4 5
+</pre>
+<h3>Random( ?)</h3>
+<pre class="result notranslate">
+q)/random - syntax - n?list, gives random sequences of ints and floats
+
+q)9?5
+0 0 4 0 3 2 2 0 1
+
+q)3?9.9
+0.2426823 1.674133 3.901671
+</pre>
+<h3>Raze</h3>
+<pre class="result notranslate">
+q)/raze - Flattn a list of lists, removes a layer of indexing from a list of lists. for instance:
+
+q)raze (( 12 3 4; 30 0);("hello";7 8); 1 3 4)
+
+12 3 4
+30 0
+"hello"
+7 8
+1
+3
+4
+</pre>
+<h3>read0</h3>
+<pre class="result notranslate">
+q)/read0 - Read in a text file
+
+q)read0 `:c:/q/README.txt    / gives the contents of *.txt file
+</pre>
+<h3>read1</h3>
+<pre class="result notranslate">
+q)/read1 - Read in a q data file
+
+q)read1 `:c:/q/t1
+
+0xff016200630b000500000073796d0074696d6500707269636…
+</pre>
+<h3>reverse</h3>
+<pre class="result notranslate">
+q)/reverse - Reverse a list
+
+q)reverse 2 30 29 1 3 4
+
+4 3 1 29 30 2
+
+q)reverse "HelloWorld"
+
+"dlroWolleH"
+</pre>
+<h3>set</h3>
+<pre class="result notranslate">
+q)/set - set value of a variable
+
+q)`x set 9
+`x
+
+q)x
+9
+
+q)`:c:/q/test12 set trade
+
+`:c:/q/test12
+
+q)get `:c:/q/test12
+
+       time                   sym      price     size
+---------------------------------------------------------
+  2009.06.18T06:04:42.919    apple    72.05742    36
+  2009.11.14T12:42:34.653     ibm     16.11385    12
+  2009.12.27T17:02:11.518    apple    68.15909    97
+  2015.04.06T10:03:36.738    samsung  48.35       99
+  2015.04.06T10:03:47.540    samsung  48.35       99
+  2015.04.06T10:04:44.844    samsung  48.35       99
+</pre>
+<h3>ssr</h3>
+<pre class="result notranslate">
+q)/ssr - String search and replace, syntax - ssr["string";searchstring;replaced-with]
+
+q)ssr["HelloWorld";"o";"O"]
+
+"HellOWOrld"
+</pre>
+<h3>string</h3>
+<pre class="result notranslate">
+q)/string - converts to string, converts all types to a string format.
+
+q)string (1 2 3; `abc;"XYZ";0b)
+
+(,"1";,"2";,"3")
+"abc"
+
+(,"X";,"Y";,"Z")
+,"0"
+</pre>
+<h3>SV</h3>
+<pre class="result notranslate">
+q)/sv - Scalar from vector, performs different tasks dependent on its arguments.
+
+It evaluates the base representation of numbers, which allows us to calculate the number of seconds in a month or convert a length from feet and inches to centimeters.
+
+q)24 60 60 sv 11 30 49
+
+41449   / number of seconds elapsed in a day at 11:30:49
+</pre>
+<h3>system</h3>
+<pre class="result notranslate">
+q)/system - allows a system command to be sent,
+
+q)system "dir *.py"
+
+" Volume in drive C is New Volume"
+" Volume Serial Number is 8CD2-05B2"
+""
+
+" Directory of C:\\Users\\myaccount-raj"
+""
+
+"09/14/2014    06:32 PM     22 hello1.py"
+"                1 File(s)    22 bytes"
+</pre>
+<h3>tables</h3>
+<pre class="result notranslate">
+q)/tables - list all tables
+
+q)tables `
+
+`s#`tab1`tab2`trade
+</pre>
+<h3>Til</h3>
+<pre class="result notranslate">
+q)/til - Enumerate
+
+q)til 5
+
+0 1 2 3 4
+</pre>
+<h3>trim</h3>
+<pre class="result notranslate">
+q)/trim - Eliminate string spaces
+
+q)trim " John "
+
+"John"
+</pre>
+<h3>vs</h3>
+<pre class="result notranslate">
+q)/vs - Vector from scaler , produces a vector quantity from a scaler quantity
+
+q)"|" vs "20150204|msft|20.45"
+
+"20150204"
+"msft"
+"20.45"
+</pre>
+<h3>xasc</h3>
+<pre class="result notranslate">
+q)/xasc - Order table ascending, allows a table (right-hand argument) to be sorted such that (left-hand argument) is in ascending order
+
+q)`price xasc trade
+
+          time                 sym      price      size
+----------------------------------------------------------
+   2009.11.14T12:42:34.653     ibm     16.11385     12
+   2015.04.06T10:03:36.738   samsung   48.35        99
+   2015.04.06T10:03:47.540   samsung   48.35        99
+   2015.04.06T10:04:44.844   samsung   48.35        99
+   2009.12.27T17:02:11.518    apple    68.15909     97
+   2009.06.18T06:04:42.919    apple    72.05742     36
+</pre>
+<h3>xcol</h3>
+<pre class="result notranslate">
+q)/xcol - Renames columns of a table
+
+q)`timeNew`symNew xcol trade
+
+        timeNew                 symNew    price      size
+-------------------------------------------------------------
+   2009.06.18T06:04:42.919      apple    72.05742     36
+   2009.11.14T12:42:34.653       ibm     16.11385     12
+   2009.12.27T17:02:11.518      apple    68.15909     97
+   2015.04.06T10:03:36.738     samsung   48.35        99
+   2015.04.06T10:03:47.540     samsung   48.35        99
+   2015.04.06T10:04:44.844     samsung   48.35        99
+</pre>
+<h3>xcols</h3>
+<pre class="result notranslate">
+q)/xcols - Reorders the columns of a table,
+
+q)`size`price xcols trade
+
+  size    price           time                   sym
+-----------------------------------------------------------
+   36   72.05742   2009.06.18T06:04:42.919      apple 
+   12   16.11385   2009.11.14T12:42:34.653       ibm
+   97   68.15909   2009.12.27T17:02:11.518      apple
+   99   48.35      2015.04.06T10:03:36.738     samsung 
+   99   48.35      2015.04.06T10:03:47.540     samsung
+   99   48.35      2015.04.06T10:04:44.844     samsung
+</pre>
+<h3>xdesc</h3>
+<pre class="result notranslate">
+q)/xdesc - Order table descending, allows tables to be sorted such that the left-hand argument is in descending order.
+
+q)`price xdesc trade
+
+        time                   sym       price      size
+-----------------------------------------------------------
+   2009.06.18T06:04:42.919    apple    72.05742      36
+   2009.12.27T17:02:11.518    apple    68.15909      97
+   2015.04.06T10:03:36.738   samsung   48.35         99
+   2015.04.06T10:03:47.540   samsung   48.35         99
+   2015.04.06T10:04:44.844   samsung   48.35         99
+   2009.11.14T12:42:34.653     ibm     16.11385      12
+</pre>
+<h3>xgroup</h3>
+<pre class="result notranslate">
+q)/xgroup - Creates nested table
+
+q)`x xgroup ([]x:9 18 9 18 27 9 9;y:10 20 10 20 30 40)
+'length
+
+q)`x xgroup ([]x:9 18 9 18 27 9 9;y:10 20 10 20 30 40 10)
+
+  x  |    y
+---- | -----------
+  9  | 10 10 40 10
+  18 | 20 20
+  27 | ,30
+</pre>
+<h3>xkey</h3>
+<pre class="result notranslate">
+q)/xkey - Set key on table
+
+q)`sym xkey trade
+
+    sym   |      time                    price     size
+--------- | -----------------------------------------------
+   apple  | 2009.06.18T06:04:42.919    72.05742     36
+    ibm   | 2009.11.14T12:42:34.653    16.11385     12
+   apple  | 2009.12.27T17:02:11.518    68.15909     97
+  samsung | 2015.04.06T10:03:36.738    48.35        99
+  samsung | 2015.04.06T10:03:47.540    48.35        99
+  samsung | 2015.04.06T10:04:44.844    48.35        99
+</pre>
+<h2>System Commands</h2>
+<p>System commands control the <b>q</b> environment. They are of the following form &minus;</p>
+<pre class="result notranslate">
+\cmd [p]       where p may be optional
+</pre>
+<p>Some of the popular system commands have been discussed below &minus;</p>
+<h3>\a [ namespace] – List tables in the given namespace</h3>
+<pre class="result notranslate">
+q)/Tables in default namespace
+
+q)\a
+,`trade
+
+q)\a .o         / table in .o namespace.
+,`TI
+</pre>
+<h3>\b – View dependencies</h3>
+<pre class="result notranslate">
+q)/ views/dependencies
+
+q)a:: x+y      / global assingment
+
+q)b:: x+1
+
+q)\b
+`s#`a`b
+</pre>
+<h3>\B – Pending views / dependencies</h3>
+<pre class="result notranslate">
+q)/ Pending views/dependencies
+
+q)a::x+1     / a depends on x
+
+q)\B         / the dependency is pending
+' / the dependency is pending
+
+q)\B
+`s#`a`b
+
+q)\b
+`s#`a`b
+
+q)b
+29
+
+q)a
+29
+
+q)\B
+`symbol$()
+</pre>
+<h3>\cd – Change directory</h3>
+<pre class="result notranslate">
+q)/change directory, \cd [name]
+
+q)\cd
+"C:\\Users\\myaccount-raj"
+
+q)\cd ../new-account
+
+q)\cd
+"C:\\Users\\new-account"
+</pre>
+<h3>\d – sets current namespace</h3>
+<pre class="result notranslate">
+q)/ sets current namespace \d [namespace]
+
+q)\d             /default namespace
+'
+
+q)\d .o          /change to .o
+
+q.o)\d
+`.o
+
+q.o)\d .         / return to default
+
+q)key `          /lists namespaces other than .z
+`q`Q`h`j`o
+
+q)\d .john       /change to non-existent namespace
+
+q.john)\d
+`.john
+
+q.john)\d .
+
+q)\d
+`.
+</pre>
+<h3>\l – load file or directory from db</h3>
+<pre class="result notranslate">
+q)/ Load file or directory, \l
+
+q)\l test2.q / loading test2.q which is stored in current path.
+
+   ric      |     date      ex      openP    closeP    MCap
+----------- | -------------------------------------------------
+ JPMORGAN   | 2008.05.23  SENSEX  18.30185  17.16319  17876
+   HSBC     | 2002.05.21  NIFTY   2.696749  16.58846  26559
+ JPMORGAN   | 2006.09.07  NIFTY   14.15219  20.05624  14557
+   HSBC     | 2010.10.11  SENSEX  7.394497  25.45859  29366
+ JPMORGAN   | 2007.10.02  SENSEX  1.558085  25.61478  20390
+ 
+   ric     |    date       ex      openP     closeP    MCap
+---------- | ------------------------------------------------
+  INFOSYS  | 2003.10.30    DOW    21.2342   7.565652   2375
+ RELIANCE  | 2004.08.12    DOW    12.34132  17.68381   4201
+   SBIN    | 2008.02.14    DOW    1.830857  9.006485   15465
+  INFOSYS  | 2009.06.11  HENSENG  19.47664  12.05208   11143
+   SBIN    | 2010.07.05    DOW    18.55637  10.54082   15873
+</pre>
+<h3>\p – port number</h3>
+<pre class="result notranslate">
+q)/ assign port number, \p
+
+q)\p
+5001i
+
+q)\p 8888
+
+q)\p
+8888i
+</pre>
+<h3>\\ - Exit from q console</h3>
+<pre class="result notranslate">
+\\ - exit
+Exit form q.
+</pre>
+<h1>Q Language - Built-in Functions</h1>
+<p>The <b>q</b> programming language has a set of rich and powerful built-in functions. A built-in function can be of the following types &minus;</p>
+<ul class="list">
+<li><p><b>String function</b> &minus; Takes a string as input and returns a string.</p></li>
+<li><p><b>Aggregate function</b> &minus; Takes a list as input and returns an atom.</p></li>
+<li><p><b>Uniform function</b> &minus; Takes a list and returns a list of the same count.</p></li>
+<li><p><b>Mathematical function</b> &minus; Takes numeric argument and returns a numeric argument.</p></li>
+<li><p><b>Miscellaneous function</b> &minus; All functions other than above mentioned.</p></li>
+</ul>
+<h2>String Functions</h2>
+<h3>Like &minus; pattern matching</h3>
+<pre class="result notranslate">
+q)/like is a dyadic, performs pattern matching, return 1b on success else 0b
+
+q)"John" like "J??n"
+1b
+
+q)"John My Name" like "J*"
+1b
+</pre>
+<h3>ltrim &minus; removes leading blanks</h3>
+<pre class="result notranslate">
+q)/ ltrim - monadic ltrim takes string argument, removes leading blanks
+
+q)ltrim " Rick "
+"Rick "
+</pre>
+<h3>rtrim &minus; removes trailing blanks</h3>
+<pre class="result notranslate">
+q)/rtrim - takes string argument, returns the result of removing trailing blanks
+
+q)rtrim " Rick "
+" Rick"
+</pre>
+<h3>ss &minus; string search</h3>
+<pre class="result notranslate">
+q)/ss - string search, perform pattern matching, same as "like" but return the indices of the matches of the pattern in source.
+
+q)"Life is beautiful" ss "i"
+1 5 13
+</pre>
+<h3>trim &minus; removes leading and trailing blanks</h3>
+<pre class="result notranslate">
+q)/trim - takes string argument, returns the result of removing leading &amp; trailing blanks
+
+q)trim " John "
+"John"
+</pre>
+<h2>Mathematical Functions</h2>
+<h3>acos &minus; inverse of cos</h3>
+<pre class="result notranslate">
+q)/acos - inverse of cos, for input between -1 and 1, return float between 0 and pi
+
+q)acos 1
+0f
+
+q)acos -1
+3.141593
+
+q)acos 0
+1.570796
+</pre>
+<h3>cor &minus; gives correlation</h3>
+<pre class="result notranslate">
+q)/cor - the dyadic takes two numeric lists of same count, returns a correlation between the items of the two arguments
+
+q)27 18 18 9 0 cor 27 36 45 54 63
+-0.9707253
+</pre>
+<h3>cross &minus; Cartesian product</h3>
+<pre class="result notranslate">
+q)/cross - takes atoms or lists as arguments and returns their Cartesian product
+
+q)9 18 cross `x`y`z
+
+9 `x
+9 `y
+9 `z
+
+18 `x
+18 `y
+18 `z
+</pre>
+<h3>var &minus; variance</h3>
+<pre class="result notranslate">
+q)/var - monadic, takes a scaler or numeric list and returns a float equal to the mathematical variance of the items
+
+q)var 45
+0f
+
+q)var 9 18 27 36
+101.25
+</pre>
+<h3>wavg</h3>
+<pre class="result notranslate">
+q)/wavg - dyadic, takes two numeric lists of the same count and returns the average of the second argument weighted by the first argument.
+
+q)1 2 3 4 wavg 200 300 400 500
+400f
+</pre>
+<h2>Aggregate Functions</h2>
+<h3>all &minus; &amp; operation</h3>
+<pre class="result notranslate">
+q)/all - monadic, takes a scaler or list of numeric type and returns the result of &amp; applied across the items.
+
+q)all 0b
+0b
+
+q)all 9 18 27 36
+1b
+
+q)all 10 20 30
+1b
+</pre>
+<h3>Any &minus; | operation</h3>
+<pre class="result notranslate">
+q)/any - monadic, takes scaler or list of numeric type and the return the result of | applied across the items
+
+q)any 20 30 40 50
+1b
+
+q)any 20012.02.12 2013.03.11
+'20012.02.12
+</pre>
+<h3>prd &minus; arithmetic product</h3>
+<pre class="result notranslate">
+q)/prd - monadic, takes scaler, list, dictionary or table of numeric type and returns the arithmetic product.
+
+q)prd `x`y`z! 10 20 30
+6000
+
+q)prd ((1 2; 3 4);(10 20; 30 40))
+
+10 40
+90 160
+</pre>
+<h3>Sum &minus; arithmetic sum</h3>
+<pre class="result notranslate">
+q)/sum - monadic, takes a scaler, list,dictionary or table of numeric type and returns the arithmetic sum.
+
+q)sum 2 3 4 5 6
+20
+
+q)sum (1 2; 4 5)
+5 7
+</pre>
+<h2>Uniform Functions</h2>
+<h3>Deltas &minus; difference from its previous item.</h3>
+<pre class="result notranslate">
+q)/deltas -takes a scalar, list, dictionary or table and returns the difference of each item from its predecessor.
+
+q)deltas 2 3 5 7 9
+2 1 2 2 2
+
+q)deltas `x`y`z!9 18 27
+
+x | 9
+y | 9
+z | 9
+</pre>
+<h3>fills &minus; fills nulls value</h3>
+<pre class="result notranslate">
+q)/fills - takes scalar, list, dictionary or table of numeric type and returns a c copy of the source in which non-null items are propagated forward to fill nulls
+
+q)fills 1 0N 2 0N 4
+1 1 2 2 4
+
+q)fills `a`b`c`d! 10 0N 30 0N
+
+a | 10
+b | 10
+c | 30
+d | 30
+</pre>
+<h3>maxs &minus; cumulative maximum</h3>
+<pre class="result notranslate">
+q)/maxs - takes scalar, list, dictionary or table and returns the cumulative maximum of the source items.
+
+q)maxs 1 2 4 3 9 13 2
+1 2 4 4 9 13 13
+
+q)maxs `a`b`c`d!9 18 0 36
+
+a | 9
+b | 18
+c | 18
+d | 36
+</pre>
+<h2>Miscellaneous Functions</h2>
+<h3>Count &minus; return number of element</h3>
+<pre class="result notranslate">
+q)/count - returns the number of entities in its argument.
+
+q)count 10 30 30
+3
+
+q)count (til 9)
+9
+
+q)count ([]a:9 18 27;b:1.1 2.2 3.3)
+3
+</pre>
+<h3>Distinct &minus; return distinct entities</h3>
+<pre class="result notranslate">
+q)/distinct - monadic, returns the distinct entities in its argument
+
+q)distinct 1 2 3 4 2 3 4 5 6 9
+1 2 3 4 5 6 9
+</pre>
+<h3>Except &minus; element not present in second arg.</h3>
+<pre class="result notranslate">
+q)/except - takes a simple list (target) as its first argument and returns a list containing the items of target that are not in its second argument
+
+q)1 2 3 4 3 1 except 1
+2 3 4 3
+</pre>
+<h3>fill &minus; fill null with first argument</h3>
+<pre class="result notranslate">
+q)/fill (^) - takes an atom as its first argument and a list(target) as its second argument and return a list obtained by substituting the first argument for every occurrence of null in target
+
+q)42^ 9 18 0N 27 0N 36
+9 18 42 27 42 36
+
+q)";"^"Life is Beautiful"
+"Life;is;Beautiful"
+</pre>
+<h1>Q Language - Queries</h1>
+<p>Queries in <b>q</b> are shorter and simpler and extend the capabilities of sql. The main query expression is the ‘select expression’, which in its simplest form extracts sub-tables but it can also create new columns.</p>
+<p>The general form of a <b>Select expression</b> is as follows &minus;</p>
+<pre class="result notranslate">
+<b>Select</b> columns <b>by</b> columns <b>from</b> table where conditions
+</pre>
+<p><b>**Note &minus; by &amp; where</b> phrases are optional, only the ‘from expression’ is mandatory.</p>
+<p>In general, the syntax will be &minus;</p>
+<pre class="result notranslate">
+select [a] [by b] from t [where c]
+update [a] [by b] from t [where c]
+</pre>
+<p>The syntax of <b>q</b> expressions look quite similar to SQL, but <b>q</b> expressions are simple and powerful. An equivalent sql expression for the above <b>q</b> expression would be as follows &minus;</p>
+<pre class="result notranslate">
+select [b] [a] from t [where c] [group by b order by b]
+update t set [a] [where c]
+</pre>
+<p>All the clauses execute on the columns and therefore <b>q</b> can take advantage of order. As Sql queries are not based on order, they cannot take that advantage.</p>
+<p><b>q</b> relational queries are generally much smaller in size as compared to their corresponding sql. Ordered and functional queries do things that are difficult in sql.</p>
+<p>In a historical database, the ordering of the <b>where</b> clause is very important because it affects the performance of the query. The <b>partition</b> variable (date/month/day) always comes first followed by the sorted and indexed column (generally the sym column).</p>
+<p>For example,</p>
+<pre class="result notranslate">
+select from table where date in d, sym in s
+</pre>
+<p>is much faster than,</p>
+<pre class="result notranslate">
+select from table where sym in s, date in d
+</pre>
+<h2>Basics Queries</h2>
+<p>Let’s write a query script in notepad (as below), save (as *.q), and then load it.</p>
+<pre class="result notranslate">
+sym:asc`AIG`CITI`CSCO`IBM`MSFT;
+ex:"NASDAQ"
+dst:`$":c:/q/test/data/";           /database destination
+
+@[dst;`sym;:;sym];
+n:1000000;
+
+trade:([]sym:n?`sym;time:10:30:00.0+til
+n;price:n?3.3e;size:n?9;ex:n?ex);
+
+quote:([]sym:n?`sym;time:10:30:00.0+til
+n;bid:n?3.3e;ask:n?3.3e;bsize:n?9;asize:n?9;ex:n?ex);
+
+{@[;`sym;`p#]`sym xasc x}each`trade`quote;
+d:2014.08.07 2014.08.08 2014.08.09 2014.08.10 2014.08.11; /Date vector can also be changed by the user
+
+dt:{[d;t].[dst;(`$string d;t;`);:;value t]};
+d dt/:\:`trade`quote;
+
+Note: Once you run this query, two folders .i.e. "test" and "data" will be created under "c:/q/", and date partition data can be seen inside data folder.
+</pre>
+<h2>Queries with Constraints</h2>
+<p><b>* Denotes HDB query</b></p>
+<p><b>Select all IBM trades</b></p>
+<pre class="result notranslate">
+select from trade where sym in `IBM
+</pre>
+<p><b>*Select all IBM trades on a certain day</b></p>
+<pre class="result notranslate">
+thisday: 2014.08.11
+select from trade where date=thisday,sym=`IBM
+</pre>
+<p><b>Select all IBM trades with a price > 100</b></p>
+<pre class="result notranslate">
+select from trade where sym=`IBM, price > 100.0
+</pre>
+<p><b>Select all IBM trades with a price less than or equal to 100</b></p>
+<pre class="result notranslate">
+select from trade where sym=`IBM,not price > 100.0
+</pre>
+<p><b>*Select all IBM trades between 10.30 and 10.40, in the morning, on a certain date</b></p>
+<pre class="result notranslate">
+thisday: 2014.08.11
+select from trade where
+date = thisday, sym = `IBM, time > 10:30:00.000,time &lt; 10:40:00.000
+</pre>
+<p><b>Select all IBM trades in ascending order of price</b></p>
+<pre class="result notranslate">
+`price xasc select from trade where sym =`IBM
+</pre>
+<p><b>*Select all IBM trades in descending order of price in a certain time frame</b></p>
+<pre class="result notranslate">
+`price xdesc select from trade where date within 2014.08.07 2014.08.11, sym =`IBM
+</pre>
+<p><b>Composite sort &minus; sort ascending order by sym and then sort the result in descending order of price</b></p>
+<pre class="result notranslate">
+`sym xasc `price xdesc select from trade where date = 2014.08.07,size = 5
+</pre>
+<p><b>Select all IBM or MSFT trades</b></p>
+<pre class="result notranslate">
+select from trade where sym in `IBM`MSFT
+</pre>
+<p><b>*Calculate count of all symbols in ascending order within a certain time frame</b></p>
+<pre class="result notranslate">
+`numsym xasc select numsym: count i by sym from trade where date within 2014.08.07 2014.08.11
+</pre>
+<p><b>*Calculate count of all symbols in descending order within a certain time frame</b></p>
+<pre class="result notranslate">
+`numsym xdesc select numsym: count i by sym from trade where date within 2014.08.07 2014.08.11
+</pre>
+<p><b>* What is the maximum price of IBM stock within a certain time frame, and when does this first happen?</b></p>
+<pre class="result notranslate">
+select time,ask from quote where date within 2014.08.07 2014.08.11,
+sym =`IBM, ask = exec first ask from select max ask from quote where
+sym =`IBM
+</pre>
+<p><b>Select the last price for each sym in hourly buckets</b></p>
+<pre class="result notranslate">
+select last price by hour:time.hh, sym from trade
+</pre>
+<h2>Queries with Aggregations</h2>
+<p><b>* Calculate vwap (Volume Weighted Average Price) of all symbols</b></p>
+<pre class="result notranslate">
+select vwap:size wavg price by sym from trade
+</pre>
+<p><b>* Count the number of records (in millions) for a certain month</b></p>
+<pre class="result notranslate">
+(select trade:1e-6*count i by date.dd from trade where date.month=2014.08m) + select quote:1e-6*count i by date.dd from quote where date.month=2014.08m
+</pre>
+<p><b>* HLOC – Daily High, Low, Open and Close for CSCO in a certain month</b></p>
+<pre class="result notranslate">
+select high:max price,low:min price,open:first price,close:last price by date.dd from trade where date.month=2014.08m,sym =`CSCO
+</pre>
+<p><b>* Daily Vwap for CSCO in a certain month</b></p>
+<pre class="result notranslate">
+select vwap:size wavg price by date.dd from trade where date.month = 2014.08m ,sym = `CSCO
+</pre>
+<p><b>* Calculate the hourly mean, variance and standard deviation of the price for AIG</b></p>
+<pre class="result notranslate">
+select mean:avg price, variance:var price, stdDev:dev price by date, hour:time.hh from trade where sym = `AIG
+</pre>
+<p><b>Select the price range in hourly buckets</b></p>
+<pre class="result notranslate">
+select range:max[price] – min price by date,sym,hour:time.hh from trade
+</pre>
+<p><b>* Daily Spread (average bid-ask) for CSCO in a certain month</b></p>
+<pre class="result notranslate">
+select spread:avg bid-ask by date.dd from quote where date.month = 2014.08m, sym = `CSCO
+</pre>
+<p><b>* Daily Traded Values for all syms in a certain month</b></p>
+<pre class="result notranslate">
+select dtv:sum size by date,sym from trade where date.month = 2014.08m
+</pre>
+<p><b>Extract a 5 minute vwap for CSCO</b></p>
+<pre class="result notranslate">
+select size wavg price by 5 xbar time.minute from trade where sym = `CSCO
+</pre>
+<p><b>* Extract 10 minute bars for CSCO</b></p>
+<pre class="result notranslate">
+select high:max price,low:min price,close:last price by date, 10 xbar time.minute from trade where sym = `CSCO
+</pre>
+<p><b>* Find the times when the price exceeds 100 basis points (100e-4) over the last price for CSCO for a certain day</b></p>
+<pre class="result notranslate">
+select time from trade where date = 2014.08.11,sym = `CSCO,price > 1.01*last price
+</pre>
+<p><b>* Full Day Price and Volume for MSFT in 1 Minute Intervals for the last date in the database</b></p>
+<pre class="result notranslate">
+select last price,last size by time.minute from trade where date = last date, sym = `MSFT
+</pre>
+<h1>Q Language - Inter-Process Communication</h1>
+<p>KDB+ allows one process to communicate with another process through interprocess communication. Kdb+ processes can connect to any other kdb+ on the same computer, the same network, or even remotely. We just need to specify the port and then the clients can talk to that port. Any <b>q</b> process can communicate with any other <b>q</b> process as long as it is accessible on the network and is listening for connections.</p>
+<ul class="list">
+<li><p>a server process listens for connections and processes any requests</p></li>
+<li><p>a client process initiates the connection and sends commands to be executed</p></li>
+</ul>
+<p>Client and server can be on the same machine or on different machines. A process can be both a client and a server.</p>
+<p>A communication can be,</p>
+<ul class="list">
+<li><p><b>Synchronous</b> (wait for a result to be returned)</p></li>
+<li><p><b>Asynchronous</b> (no wait and no result returned)</p></li>
+</ul>
+<h2>Initialize Server</h2>
+<p>A <b>q</b> server is initialized by specifying the port to listen on,</p>
+<pre class="result notranslate">
+q –p 5001 / command line
+\p 5001   / session command
+</pre>
+<h2>Communication Handle</h2>
+<p>A communication handle is a symbol that starts with “:” and has the form &minus;</p>
+<pre class="result notranslate">
+`:[server]:port-number
+</pre>
+<h3>Example</h3>
+<pre class="result notranslate">
+`::5001              / server and client on same machine
+`:jack:5001          / server on machine jack
+`:192.168.0.156      / server on specific IP address
+`:www.myfx.com:5001  / server at <a href="../www.myfx.html">www.myfx.com</a>
+</pre>
+<p>To start the connection, we use the function “hopen” which returns an integer connection handle. This handle is used for all subsequent client requests. For example &minus;</p>
+<pre class="result notranslate">
+q)h:hopen `::5001
+
+q)h"til 5"
+0 1 2 3 4
+
+q)hclose h
+</pre>
+<h2>Synchronous and Asynchronous Messages</h2>
+<p>Once we have a handle, we can send a message either synchronously or asynchronously.</p>
+<p><b>Synchronous Message</b> &minus; Once a message is sent, it waits on and returns the result. Its format is as follows &minus;</p>
+<pre class="result notranslate">
+handle “message”
+</pre>
+<p><b>Asynchronous Message</b> &minus; After sending a message, start processing the next statement immediately without having to wait and return a result. Its format is as follows &minus;</p>
+<pre class="result notranslate">
+neg[handle] “message”
+</pre>
+<p>Messages that require a response, for example function calls or select statements, will normally use the synchronous form; while messages that need not return an output, for example inserting updates to a table, will be asynchronous.</p>
+<h1>Q Language - Message Handler</h1>
+<p>When a <b>q</b> process connects to another <b>q</b> process via inter-process communication, it is processed by message handlers. These message handlers have a default behavior. For example, in case of synchronous message handling, the handler returns the value of the query. The synchronous handler in this case is <b>.z.pg</b>, which we could override as per requirement.</p>
+<p>Kdb+ processes have several pre-defined message handlers. Message handlers are important for configuring the database. Some of the usages include &minus;</p>
+<ul class="list">
+<li><p><b>Logging</b> &minus; Log incoming messages (helpful in case of any fatal error),</p></li>
+<li><p><b>Security</b> &minus; Allow/disallow access to the database, certain function calls, etc., based on username / ip address. It helps in providing access to authorized subscribers only.</p></li>
+<li><p><b>Handle connections/disconnections</b> from other processes.</p></li>
+</ul>
+<h2>Predefined Message Handlers</h2>
+<p>Some of the predefined message handlers are discussed below.</p>
+<h3>.z.pg </h3>
+<p>It is a synchronous message handler (process get). This function gets called automatically whenever a sync message is received on a kdb+ instance.</p>
+<p>Parameter is the string/function call to be executed, i.e., the message passed. By default, it is defined as follows &minus;</p>
+<pre class="result notranslate">
+.z.pg: {value x}                / simply execute the message 
+                                received but we can overwrite it to
+give any customized result.
+.z.pg : {handle::.z.w;value x}  / this will store the remote handle
+.z.pg : {show .z.w;value x}     / this will show the remote handle
+</pre>
+<h3>.z.ps</h3>
+<p>It is an asynchronous message handler (process set). It is the equivalent handler for asynchronous messages. Parameter is the string/function call to be executed. By default, it is defined as,</p>
+<pre class="result notranslate">
+.z.pg : {value x}        / Can be overriden for a customized action.
+</pre>
+<p>Following is the customized message handler for asynchronous messages, where we have used the protected execution,</p>
+<pre class="result notranslate">
+.z.pg: {@[value; x; errhandler x]}
+</pre>
+<p>Here <b>errhandler</b> is a function used in case of any unexpected error.</p>
+<h3>.z.po[]</h3>
+<p>It is a connection open handler (process-open). It is executed when a remote process opens a connection. To see the handle when a connection to a process is opened, we can define the .z.po as,</p>
+<pre class="result notranslate">
+.z.po : {Show “Connection opened by” , string h: .z.h}
+</pre>
+<h3>.z.pc[]</h3>
+<p>It is a close connection handler (process-close). It is called when a connection is closed. We can create our own close handler which can reset the global connection handle to 0 and issue a command to set the timer to fire (execute) every 3 seconds (3000 milliseconds).</p>
+<pre class="result notranslate">
+.z.pc : { h::0; value “\\t 3000”} 
+</pre>
+<p>The timer handler (.z.ts) attempts to re-open the connection. On success, it turns the timer off.</p>
+<pre class="result notranslate">
+.z.ts : { h:: hopen `::5001; if [h>0; value “\\t 0”] }
+</pre>
+<h3>.z.pi[]</h3>
+<p>PI stands for process input. It is called for any sort of input. It can be used to handle console input or remote client input. Using .z.pi[], one can validate the console input or replace the default display. In addition, it can be used for any sort of logging operations.</p>
+<pre class="result notranslate">
+q).z.pi
+'.z.pi
+
+q).z.pi:{">", .Q.s value x}
+
+q)5+4
+>9
+
+q)30+42
+>72
+
+q)30*2
+>60
+
+q)\x .z.pi
+>q)
+
+q)5+4
+9
+</pre>
+<h3>.z.pw</h3>
+<p>It is a validation connection handler (user authentication). It adds an extra callback when a connection is being opened to a kdb+ session. It is called after the –u/-U checks and before the .z.po (port open).</p>
+<pre class="result notranslate">
+.z.pw : {[user_id;passwd] 1b}
+</pre>
+<p>Inputs are <b>userid</b> (symbol) and <b>password</b> (text).</p>
+<h1>Q Language - Attributes</h1>
+<p>Lists, dictionaries, or columns of a table can have attributes applied to them. Attributes impose certain properties on the list. Some attributes might disappear on modification.</p>
+<h2>Types of Attributes</h2>
+<h3>Sorted (`s#)</h3>
+<p>`s# means the list is sorted in an ascending order. If a list is explicitly sorted by asc (or xasc), the list will automatically have the sorted attribute set.</p>
+<pre class="result notranslate">
+q)L1: asc 40 30 20 50 9 4
+
+q)L1
+`s#4 9 20 30 40 50
+</pre>
+<p>A list which is known to be sorted can also have the attribute explicitly set. <b>Q</b> will check if the list is sorted, and if is not, an <b>s-fail</b> error will be thrown.</p>
+<pre class="result notranslate">
+q)L2:30 40 24 30 2
+
+q)`s#L2
+'s-fail
+</pre>
+<p>The sorted attribute will be lost upon an unsorted append.</p>
+<h3>Parted (`p#)</h3>
+<p>`p# means the list is parted and identical items are stored contiguously.</p>
+<p>The range is an <b>int</b> or <b>temporal type</b> having an underlying int value, such as years, months, days, etc. You can also partition over a symbol provided it is enumerated.</p>
+<p>Applying the parted attribute creates an index dictionary that maps each unique output value to the position of its first occurrence. When a list is parted, lookup is much faster, since linear search is replaced by hashtable lookup.</p>
+<pre class="result notranslate">
+q)L:`p# 99 88 77 1 2 3
+
+q)L
+`p#99 88 77 1 2 3
+
+q)L,:3
+
+q)L
+99 88 77 1 2 3 3
+</pre>
+<p><b>Note &minus;</b></p>
+<ul class="list">
+<li><p>The parted attribute is not preserved under an operation on the list, even if
+the operation preserves the partitioning.</p></li>
+<li><p>The parted attribute should be considered when the number of entities reaches a billion and most of the partitions are of substantial size, i.e., there is significant repetition.</p></li>
+</ul>
+<h3>Grouped (`g#)</h3>
+<p>`g# means the list is grouped. An internal dictionary is built and maintained which maps each unique item to each of its indices, requiring considerable storage space. For a list of length <b>L</b> containing <b>u</b> unique items of size <b>s</b>, this will be <b>(L × 4) + (u × s)</b> bytes.</p>
+<p>Grouping can be applied to a list when no other assumptions about its structure can be made.</p>
+<p>The attribute can be applied to any typed lists. It is maintained on appends, but lost on deletes.</p>
+<pre class="result notranslate">
+q)L: `g# 1 2 3 4 5 4 2 3 1 4 5 6
+
+q)L
+`g#1 2 3 4 5 4 2 3 1 4 5 6
+
+q)L,:9
+
+q)L
+`g#1 2 3 4 5 4 2 3 1 4 5 6 9
+
+q)L _:2
+
+q)L
+1 2 4 5 4 2 3 1 4 5 6 9
+</pre>
+<h3>Unique (`#u)</h3>
+<p>Applying the unique attribute (`u#) to a list indicates that the items of the list are distinct. Knowing that the elements of a list are unique dramatically speeds up <b>distinct</b> and allows <b>q</b> to execute some comparisons early.</p>
+<p>When a list is flagged as unique, an internal hash map is created to each item in the list. Operations on the list must preserve uniqueness or the attribute is lost.</p>
+<pre class="result notranslate">
+q)LU:`u#`MSFT`SAMSUNG`APPLE
+
+q)LU
+`u#`MSFT`SAMSUNG`APPLE
+
+q)LU,:`IBM                        /Uniqueness preserved
+
+q)LU
+`u#`MSFT`SAMSUNG`APPLE`IBM
+
+q)LU,:`SAMSUNG                    / Attribute lost
+
+q)LU
+`MSFT`SAMSUNG`APPLE`IBM`SAMSUNG
+</pre>
+<p><b>Note &minus;</b></p>
+<ul class="list">
+<li><p>`u# is preserved on concatenations which preserve the uniqueness. It is lost on deletions and non-unique concatenations.</p></li>
+<li><p>Searches on `u# lists are done via a hash function.</p></li>
+</ul>
+<h3>Removing Attributes</h3>
+<p>Attributes can be removed by applying `#.</p>
+<h3>Applying Attributes</h3>
+<p>Three formats for applying attributes are &minus;</p>
+<ul class="list">
+<li><p><b>L: `s# 14 2 3 3 9</b><span style="padding-left:9%;">/ Specify during list creation</span></p></li>
+<li><p><b>@[ `.; `L ; `s#]</b><span style="padding-left:10%;">/ Functional apply, i.e. to the variable list L</span></p>
+<p style="padding-left:28%;">/ in the default namespace (i.e. `.) apply</p>
+<p style="padding-left:28%;">/ the sorted `s# attribute</p></li>
+<li><p><b>Update `s#time from `tab</b></p>
+<p style="padding-left:28%;">/ Update the table (tab) to apply the</p>
+<p style="padding-left:28%;">/ attribute.</p></p></li>
+</ul>
+<p>Let’s apply the above three different formats with examples.</p>
+<pre class="result notranslate">
+q)/ set the attribute during creation
+
+q)L:`s# 3 4 9 10 23 84 90
+
+q)/apply the attribute to existing list data
+
+q)L1: 9 18 27 36 42 54
+
+q)@[`.;`L1;`s#]
+`.
+
+q)L1                 / check
+`s#9 18 27 36 42 54
+
+q)@[`.;`L1;`#]       / clear attribute
+`.
+
+q)L1
+9 18 27 36 42 54
+
+q)/update a table to apply the attribute
+
+q)t: ([] sym:`ibm`msft`samsung; mcap:9000 18000 27000)
+
+q)t:([]time:09:00 09:30 10:00t;sym:`ibm`msft`samsung; mcap:9000 18000 27000)
+
+q)t
+
+    time         sym    mcap
+---------------------------------
+  09:00:00.000   ibm    9000
+  09:30:00.000   msft   18000
+  10:00:00.000  samsung 27000
+
+q)update `s#time from `t
+`t
+
+q)meta t               / check it was applied
+
+    c  | t f a
+------ | -----
+  time | t s
+  sym  | s
+  mcap | j
+  
+Above we can see that the attribute column in meta table results shows the time column is sorted (`s#).
+</pre>
+<h1>Q Language - Functional Queries</h1>
+<p>Functional (Dynamic) queries allow specifying column names as symbols to typical q-sql select/exec/delete columns. It comes very handy when we want to specify column names dynamically.</p>
+<p>The functional forms are &minus;</p>
+<pre class="result notranslate">
+?[t;c;b;a]    / for select
+![t;c;b;a]    / for update
+</pre>
+<p>where</p>
+<ul class="list">
+<li><p><b>t</b> is a table;</p></li>
+<li><p><b>a</b> is a dictionary of aggregates;</p></li>
+<li><p><b>b</b> the by-phrase; and</p></li>
+<li><p><b>c</b> is a list of constraints.</p></li>
+</ul>
+<h2>Note &minus;</h2>
+<ul class="list">
+<li><p>All <b>q</b> entities in <b>a</b>, <b>b</b>, and <b>c</b> must be referenced by name, meaning as symbols containing the entity names.</p></li>
+<li><p>The syntactic forms of select and update are parsed into their equivalent functional forms by the <b>q</b> interpreter, so there is no performance difference between the two forms.</p></li>
+</ul>
+<h2>Functional select</h2>
+<p>The following code block shows how to use <b>functional select</b> &minus;</p>
+<pre class="result notranslate">
+q)t:([]n:`ibm`msft`samsung`apple;p:40 38 45 54)
+
+q)t
+
+    n       p
+-------------------
+   ibm     40
+   msft    38
+ samsung   45
+  apple    54
+
+q)select m:max p,s:sum p by name:n from t where p>36, n in `ibm`msft`apple
+
+  name |   m   s
+------ | ---------
+ apple |  54  54
+ ibm   |  40  40
+ msft  |  38  38
+</pre>
+<h3>Example 1</h3>
+<p>Let’s start with the easiest case, the functional version of <b>“select from t”</b> will look like &minus;</p>
+<pre class="result notranslate">
+q)?[t;();0b;()]     / select from t
+
+    n      p
+-----------------
+   ibm    40
+   msft   38
+ samsung  45
+  apple   54
+</pre>
+<h3>Example 2</h3>
+<p>In the following example, we use the enlist function to create singletons to ensure that appropriate entities are lists.</p>
+<pre class="result notranslate">
+q)wherecon: enlist (>;`p;40)
+
+q)?[`t;wherecon;0b;()] / select from t where p > 40
+
+    n      p
+----------------
+ samsung  45
+  apple   54
+</pre>
+<h3>Example 3</h3>
+<pre class="result notranslate">
+q)groupby: enlist[`p] ! enlist `p
+
+q)selcols: enlist [`n]!enlist `n
+
+q)?[ `t;(); groupby;selcols]        / select n by p from t
+
+   p  |    n
+----- | -------
+  38  |  msft
+  40  |  ibm
+  45  | samsung
+  54  | apple
+</pre>
+<h2>Functional Exec</h2>
+<p>The functional form of exec is a simplified form of <b>select</b>.</p>
+<pre class="result notranslate">
+q)?[t;();();`n]                / exec n from t (functional form of exec)
+`ibm`msft`samsung`apple
+
+q)?[t;();`n;`p]                / exec p by n from t (functional exec)
+
+apple   | 54
+ibm     | 40
+msft    | 38
+samsung | 45
+</pre>
+<h2>Functional Update</h2>
+<p>The functional form of update is completely analogous to that of <b>select</b>. In the following example, the use of enlist is to create singletons, to ensure that input entities are lists.</p>
+<pre class="result notranslate">
+q)c:enlist (>;`p;0)
+
+q)b: (enlist `n)!enlist `n
+
+q)a: (enlist `p) ! enlist (max;`p)
+
+q)![t;c;b;a]
+
+   n      p
+-------------
+  ibm    40
+  msft   38
+ samsung 45
+ apple   54
+</pre>
+<h2>Functional delete</h2>
+<p>Functional delete is a simplified form of functional update. Its syntax is as follows &minus;</p>
+<pre class="result notranslate">
+![t;c;0b;a]        / t is a table, c is a list of where constraints, a is a
+                   / list of column names
+</pre>
+<p>Let us now take an example to show how functional delete work &minus;</p>
+<pre class="result notranslate">
+q)![t; enlist (=;`p; 40); 0b;`symbol$()]
+                                          / delete from t where p = 40
+   n       p
+---------------
+  msft    38
+ samsung  45
+  apple   54
+</pre>
+<h1>Q Language - Table Arithmetic</h1>
+<p>In this chapter, we will learn how to operate on dictionaries and then tables. Let’s start with dictionaries &minus;</p>
+<pre class="result notranslate">
+q)d:`u`v`x`y`z! 9 18 27 36 45                  / Creating a dictionary d
+
+q)/ key of this dictionary (d) is given by
+
+q)key d
+`u`v`x`y`z
+
+q)/and the value by
+
+q)value d
+9 18 27 36 45
+
+q)/a specific value
+
+q)d`x
+27
+
+q)d[`x]
+27
+
+q)/values can be manipulated by using the arithmetic operator +-*% as,
+
+q)45 + d[`x`y]
+72 81
+</pre>
+<p>If one needs to amend the dictionary values, then the amend formulation can be &minus;</p>
+<pre class="result notranslate">
+q)@[`d;`z;*;9]
+`d
+
+q)d
+
+u | 9
+v | 18
+x | 27
+y | 36
+
+q)/Example, table tab
+
+q)tab:([]sym:`;time:0#0nt;price:0n;size:0N)
+
+q)n:10;sym:`IBM`SAMSUNG`APPLE`MSFT
+
+q)insert[`tab;(n?sym;("t"$.z.Z);n?100.0;n?100)]
+0 1 2 3 4 5 6 7 8 9
+
+q)`time xasc `tab
+`tab
+
+q)/ to get particular column from table tab
+
+q)tab[`size]
+12 10 1 90 73 90 43 90 84 63
+
+q)tab[`size]+9
+21 19 10 99 82 99 52 99 93 72
+
+z | 405
+
+q)/Example table tab
+
+q)tab:([]sym:`;time:0#0nt;price:0n;size:0N)
+
+q)n:10;sym:`IBM`SAMSUNG`APPLE`MSFT
+
+q)insert[`tab;(n?sym;("t"$.z.Z);n?100.0;n?100)]
+0 1 2 3 4 5 6 7 8 9
+
+q)`time xasc `tab
+`tab
+
+q)/ to get particular column from table tab
+
+q)tab[`size]
+12 10 1 90 73 90 43 90 84 63
+
+q)tab[`size]+9
+21 19 10 99 82 99 52 99 93 72
+
+q)/Example table tab
+
+q)tab:([]sym:`;time:0#0nt;price:0n;size:0N)
+
+q)n:10;sym:`IBM`SAMSUNG`APPLE`MSFT
+
+q)insert[`tab;(n?sym;("t"$.z.Z);n?100.0;n?100)]
+0 1 2 3 4 5 6 7 8 9
+
+q)`time xasc `tab
+`tab
+
+q)/ to get particular column from table tab
+
+q)tab[`size]
+12 10 1 90 73 90 43 90 84 63
+
+q)tab[`size]+9
+21 19 10 99 82 99 52 99 93 72
+
+q)/We can also use the @ amend too
+
+q)@[tab;`price;-;2]
+
+   sym      time           price     size
+--------------------------------------------
+  APPLE   11:16:39.779   6.388858     12
+  MSFT    11:16:39.779   17.59907     10
+  IBM     11:16:39.779   35.5638      1
+ SAMSUNG  11:16:39.779   59.37452     90
+  APPLE   11:16:39.779   50.94808     73
+ SAMSUNG  11:16:39.779   67.16099     90
+  APPLE   11:16:39.779   20.96615     43
+ SAMSUNG  11:16:39.779   67.19531     90
+  IBM     11:16:39.779   45.07883     84
+  IBM     11:16:39.779   61.46716     63
+
+q)/if the table is keyed
+
+q)tab1:`sym xkey tab[0 1 2 3 4]
+
+q)tab1
+
+   sym    |   time          price     size
+--------- | ----------------------------------
+  APPLE   | 11:16:39.779   8.388858    12
+  MSFT    | 11:16:39.779   19.59907    10
+  IBM     | 11:16:39.779   37.5638     1
+ SAMSUNG  | 11:16:39.779   61.37452    90
+  APPLE   | 11:16:39.779   52.94808    73
+
+q)/To work on specific column, try this
+
+q){tab1[x]`size} each sym
+1 90 12 10
+
+q)(0!tab1)`size
+12 10 1 90 73
+
+q)/once we got unkeyed table, manipulation is easy
+
+q)2+ (0!tab1)`size
+14 12 3 92 75
+</pre>
+<h1>Q Language - Tables on Disk</h1>
+<p>Data on your hard disk (also called historical database) can be saved in three different formats &minus; Flat Files, Splayed Tables, and Partitioned Tables. Here we will learn how to use these three formats to save data.</p>
+<h2>Flat file</h2>
+<p>Flat files are fully loaded into memory which is why their size (memory footprint) should be small. Tables are saved on disk entirely in one file (so size matters).</P>
+<p>The functions used to manipulate these tables are <b>set/get</b> &minus;</p>
+<pre class="result notranslate">
+`:path_to_file/filename set tablename
+</pre>
+<p>Let’s take an example to demonstrate how it works &minus;</p>
+<pre class="result notranslate">
+q)tables `.
+`s#`t`tab`tab1 
+
+q)`:c:/q/w32/tab1_test set tab1
+`:c:/q/w32/tab1_test
+</pre>
+<p>In Windows environment, flat files are saved at the location &minus; <b>C:\q\w32</b></p>
+<img src="images/windows_environment.jpg" alt="Windows Environment" />
+<p>Get the flat file from your disk (historical db) and use the <b>get</b> command as follows &minus;</p>
+<pre class="result notranslate">
+q)tab2: get `:c:/q/w32/tab1_test
+
+q)tab2
+
+   sym    |   time           price   size
+--------- | -------------------------------
+  APPLE   | 11:16:39.779   8.388858   12
+  MSFT    | 11:16:39.779   19.59907   10
+  IBM     | 11:16:39.779   37.5638    1
+ SAMSUNG  | 11:16:39.779   61.37452   90
+  APPLE   | 11:16:39.779   52.94808   73
+</pre>
+<p>A new table is created <b>tab2</b> with its contents stored in <b>tab1_test</b> file.</p>
+<h2>Splayed Tables</h2>
+<p>If there are too many columns in a table, then we store such tables in splayed format, i.e., we save them on disk in a directory. Inside the directory, each column is saved in a separate file under the same name as the column name. Each column is saved as a list of corresponding type in a kdb+ binary file.</p>
+<p>Saving a table in splayed format is very useful when we have to access only a few columns frequently out of its many columns. A splayed table directory contains <b>.d</b> binary file which contains the order of the columns.</p>
+<p>Much like a flat file, a table can be saved as splayed by using the <b>set</b> command. To save a table as splayed, the file path should end with a backlash &minus;</p>
+<pre class="result notranslate">
+`:path_to_filename/filename/ set tablename
+</pre>
+<p>For reading a splayed table, we can use the <b>get</b> function &minus;</p>
+<pre class="result notranslate">
+tablename: get `:path_to_file/filename
+</pre>
+<p><b>Note</b> &minus; For a table to be saved as splayed, it should be un-keyed and enumerated.</p>
+<p>In Windows environment, your file structure will appear as follows &minus;</p>
+<img src="images/file_structure.jpg" alt="File Structure" />
+<h2>Partitioned Tables</h2>
+<p>Partitioned tables provide an efficient means to manage huge tables containing significant volumes of data. Partitioned tables are splayed tables spread across more partitions (directories).</p>
+<p>Inside each partition, a table will have its own directory, with the structure of a splayed table. The tables could be split on a day/month/year basis in order to provide optimized access to its content.</p>
+<p>To get the content of a partitioned table, use the following code block &minus;</p>
+<pre class="result notranslate">
+q)get `:c:/q/data/2000.01.13              // <b>“get”</b> command used, sample folder
+
+quote| +`sym`time`bid`ask`bsize`asize`ex!(`p#`sym!0 0 0 0 0 0 0 0 0 0 0
+0 0 0….
+
+trade| +`sym`time`price`size`ex!(`p#`sym!0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 ….
+</pre>
+<p>Let’s try to get the contents of a trade table &minus;</p>
+<pre class="result notranslate">
+q)get `:c:/q/data/2000.01.13/trade
+
+   sym    time            price     size    ex
+--------------------------------------------------
+    0   09:30:00.496    0.4092016    7      T
+    0   09:30:00.501    1.428629     4      N
+    0   09:30:00.707    0.5647834    6      T
+    0   09:30:00.781    1.590509     5      T
+    0   09:30:00.848    2.242627     3      A
+    0   09:30:00.860    2.277041     8      T
+    0   09:30:00.931    0.8044885    8      A
+    0   09:30:01.197    1.344031     2      A
+    0   09:30:01.337    1.875        3      A
+    0   09:30:01.399    2.187723     7      A
+</pre>
+<p><b>Note</b> &minus; The partitioned mode is suitable for tables with millions of records per day (i.e. time series data)</p>
+<h3>Sym file</h3>
+<p>The sym file is a kdb+ binary file containing the list of symbols from all splayed and partitioned tables. It can be read with,</p>
+<pre class="result notranslate">
+get `:sym
+</pre>
+<h3>par.txt file (optional)</h3>
+<p>This is a configuration file, used when partitions are spread on several directories/disk drives, and contain the paths to the disk partitions.</p>
+<h1>Q Language - Maintenance Functions</h1>
+<h2>.Q.en</h2>
+<p><b>.Q.en</b> is a dyadic function which help in splaying a table by enumerating a symbol column. It is especially useful when we are dealing with historical db (splayed, partition tables etc.).  &minus;</p>
+<pre class="result notranslate">
+.Q.en[`:directory;table]
+</pre>
+<p>where <b>directory</b> is the home directory of the historical database where <b>sym file</b> is located and <b>table</b> is the table to be enumerated.</p>
+<p>Manual enumeration of tables is not required to save them as splayed tables, as this will be done by &minus;</p>
+<pre class="result notranslate">
+.Q.en[`:directory_where_symbol_file_stored]table_name
+</pre>
+<h2>.Q.dpft</h2>
+<p>The <b>.Q.dpft</b> function helps in creating partitioned and segmented tables. It is advanced form of <b>.Q.en</b>, as it not only splays the table but also creates a partition table.</p>
+<p>There are four arguments used in <b>.Q.dpft</b> &minus;</p>
+<ul class="list">
+<li><p>symbolic file handle of the database where we want to create a partition,</p></li>
+<li><p><b>q</b> data value with which we are going to partition the table, </p></li>
+<li><p>name of the field with which parted (`p#) attribute is going to be applied (usually `sym), and</p></li>
+<li><p>the table name.</p></li>
+</ul>
+<p>Let’s take an example to see how it works &minus;</p>
+<pre class="result notranslate">
+q)tab:([]sym:5?`msft`hsbc`samsung`ibm;time:5?(09:30:30);price:5?30.25)
+
+q).Q.dpft[`:c:/q/;2014.08.24;`sym;`tab]
+`tab
+
+q)delete tab from `
+'type
+
+q)delete tab from `/
+'type
+
+q)delete tab from .
+'type
+
+q)delete tab from `.
+`.
+
+q)tab
+'tab
+</pre>
+<p>We have deleted the table <b>tab</b> from the memory. Let us now load it from the db</p>
+<pre class="result notranslate">
+q)\l c:/q/2014.08.24/
+
+q)\a
+,`tab
+
+q)tab
+
+   sym      time      price
+-------------------------------
+  hsbc    07:38:13   15.64201
+  hsbc    07:21:05   5.387037
+  msft    06:16:58   11.88076
+  msft    08:09:26   12.30159
+ samsung  04:57:56   15.60838
+</pre>
+<h2>.Q.chk</h2>
+<p>.Q.chk is a monadic function whose single parameter is the symbolic file handle of the root directory. It creates empty tables in a partition, wherever necessary, by examining each partition subdirectories in the root.</p>
+<pre class="result notranslate">
+.Q.chk `:directory
+</pre>
+<p>where <b>directory</b> is the home directory of the historical database.</p>
+<hr />
+<div class="pre-btn">
+<a href="q_language_maintenance_functions.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="pdf-btn">
+<a href="pdf/kdbplus_quick_guide.pdf" title="KDB+ Quick Guide" target="_blank"><i class="icon icon-file-pdf-o big-font"></i> PDF</a>
+</div>
+<div class="nxt-btn">
+<a href="kdbplus_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "KDB+ Quick Guide",
+    "name": "KDB+ Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/kdbplus/images/kdbplus_console.jpg",
+        "width": 719,
+        "height": 363
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:51.",
+    "dateModified": "July 23 2017 03:34:51.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "This is a complete quide to kdb+ from kx systems, aimed primarily at those learning independently. kdb+, introduced in 2003, is the new generation of the kdb database which is designed to capture, analyze, compare, and store data...."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Computer Programming",
+                "@id": "https://www.tutorialspoint.com/computer_programming_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Kdbplus",
+                "@id": "https://www.tutorialspoint.com/kdbplus"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "KDB+ - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/kdbplus/kdbplus_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:10:03 GMT -->
+</html>

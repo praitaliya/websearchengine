@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/impala/impala_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:40:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Impala Quick Guide</title>
+<meta name="description" content="Impala Quick Guide - Learn Impala starting from the Overview, Environment, Architecture, Shell, Query Language Basics, Create a Database, Drop a Database, Select a Database, Create Table Statement, Insert Statement, Select Statement, Describe Statement, Alter Table, Drop a Table, Truncate a Table, Show Tables, Create View, Alter View, Drop a View, Order By Clause, Group By Clause, Having Clause, Limit Clause, Offset Clause, Union Clause, With Clause, Distinct Operator." />
+<meta name="keywords" content="Impala, Tutorial, Overview, Environment, Architecture, Shell, Query Language Basics, Create a Database, Drop a Database, Select a Database, Create Table Statement, Insert Statement, Select Statement, Describe Statement, Alter Table, Drop a Table, Truncate a Table, Show Tables, Create View, Alter View, Drop a View, Order By Clause, Group By Clause, Having Clause, Limit Clause, Offset Clause, Union Clause, With Clause, Distinct Operator." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #ef192d url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #ef192d !important;}
+.submenu-item{ border-bottom: 2px solid #ef192d !important; border-top: 2px solid #ef192d !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/impala-mini-logo.jpg" alt="Impala Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Impala Tutorial</li>
+<li><a href="index.html">Impala - Home</a></li>
+<li><a href="impala_overview.html">Impala - Overview</a></li>
+<li><a href="impala_environment.html">Impala - Environment</a></li>
+<li><a href="impala_architecture.html">Impala - Architecture</a></li>
+<li><a href="impala_shell.html">Impala - Shell</a></li>
+<li><a href="impala_query_language_basics.html">Impala - Query Language Basics</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Database Specific Statements</li>
+<li><a href="impala_create_database.html">Impala - Create a Database</a></li>
+<li><a href="impala_drop_database.html">Impala - Drop a Database</a></li>
+<li><a href="impala_select_database.html">Impala - Select a Database</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Table Specific Statements</li>
+<li><a href="impala_create_table_statement.html">Impala - Create Table Statement</a></li>
+<li><a href="impala_insert_statement.html">Impala - Insert Statement</a></li>
+<li><a href="impala_select_statement.html">Impala - Select Statement</a></li>
+<li><a href="impala_describe_statement.html">Impala - Describe Statement</a></li>
+<li><a href="impala_alter_table.html">Impala - Alter Table</a></li>
+<li><a href="impala_drop_table.html">Impala - Drop a Table</a></li>
+<li><a href="impala_truncate_table.html">Impala - Truncate a Table</a></li>
+<li><a href="impala_show_tables.html">Impala - Show Tables</a></li>
+<li><a href="impala_create_view.html">Impala - Create View</a></li>
+<li><a href="impala_alter_view.html">Impala - Alter View</a></li>
+<li><a href="impala_drop_view.html">Impala - Drop a View</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Impala - Clauses</li>
+<li><a href="impala_order_by_clause.html">Impala - Order By Clause</a></li>
+<li><a href="impala_group_by_clause.html">Impala - Group By Clause</a></li>
+<li><a href="impala_having_clause.html">Impala - Having Clause</a></li>
+<li><a href="impala_limit_clause.html">Impala - Limit Clause</a></li>
+<li><a href="impala_offset_clause.html">Impala - Offset Clause</a></li>
+<li><a href="impala_union_clause.html">Impala - Union Clause</a></li>
+<li><a href="impala_with_clause.html">Impala - With Clause</a></li>
+<li><a href="impala_distinct_operator.html">Impala - Distinct Operator</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Impala Useful Resources</li>
+<li><a href="impala_quick_guide.html">Impala - Quick Guide</a></li>
+<li><a href="impala_useful_resources.html">Impala - Useful Resources</a></li>
+<li><a href="impala_discussion.html">Impala - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Impala - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="impala_distinct_operator.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="impala_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Impala - Introduction</h1>
+<h2>What is Impala?</h2>
+<p>Impala is a MPP (Massive Parallel Processing) SQL query engine for processing huge volumes of data that is stored in Hadoop cluster. It is an open source software which is written in C++ and Java. It provides high performance and low latency compared to other SQL engines for Hadoop.</p>
+<p>In other words, Impala is the highest performing SQL engine (giving RDBMS-like experience) which provides the fastest way to access data that is stored in Hadoop Distributed File System.</p>
+<h2>Why Impala?</h2>
+<p>Impala combines the SQL support and multi-user performance of a traditional analytic database with the scalability and flexibility of Apache Hadoop, by utilizing standard components such as HDFS, HBase, Metastore, YARN, and Sentry.</p>
+<ul class="list">
+<li><p>With Impala, users can communicate with HDFS or HBase using SQL queries in a faster way compared to other SQL engines like Hive.</p></li>
+<li><p>Impala can read almost all the file formats such as Parquet, Avro, RCFile used by Hadoop.</p></li>
+</ul>
+<p>Impala uses the same metadata, SQL syntax (Hive SQL), ODBC driver, and user interface (Hue Beeswax) as Apache Hive, providing a familiar and unified platform for batch-oriented or real-time queries.</p>
+<p>Unlike Apache Hive, <b>Impala is not based on MapReduce algorithms</b>. It implements a distributed architecture based on <b>daemon processes</b> that are responsible for all the aspects of query execution that run on the same machines.</p>
+<p>Thus, it reduces the latency of utilizing MapReduce and this makes Impala faster than Apache Hive.</p>
+<h2>Advantages of Impala</h2>
+<p>Here is a list of some noted advantages of Cloudera Impala.</p>
+<ul class="list">
+<li><p>Using impala, you can process data that is stored in HDFS at lightning-fast speed with traditional SQL knowledge.</p></li>
+<li><p>Since the data processing is carried where the data resides (on Hadoop cluster), data transformation and data movement is not required for data stored on Hadoop, while working with Impala.</p></li>
+<li><p>Using Impala, you can access the data that is stored in HDFS, HBase, and Amazon s3 without the knowledge of Java (MapReduce jobs). You can access them with a basic idea of SQL queries.</p></li>
+<li><p>To write queries in business tools, the data has to be gone through a complicated extract-transform-load (ETL) cycle. But, with Impala, this procedure is shortened. The time-consuming stages of loading &amp; reorganizing is overcome with the new techniques such as <b><i>exploratory data analysis &amp; data discovery</i></b> making the process faster.</p></li>
+<li><p>Impala is pioneering the use of the Parquet file format, a columnar storage layout that is optimized for large-scale queries typical in data warehouse scenarios.</p></li>
+</ul>
+<h2>Features of Impala</h2>
+<p>Given below are the features of cloudera Impala &minus;</p>
+<ul class="list">
+<li><p>Impala is available freely as open source under the Apache license.</p></li>
+<li><p>Impala supports in-memory data processing, i.e., it accesses/analyzes data that is stored on Hadoop data nodes without data movement.</p></li>
+<li><p>You can access data using Impala using SQL-like queries.</p></li>
+<li><p>Impala provides faster access for the data in HDFS when compared to other SQL engines.</p></li>
+<li><p>Using Impala, you can store data in storage systems like HDFS, Apache HBase, and Amazon s3.</p></li>
+<li><p>You can integrate Impala with business intelligence tools like Tableau, Pentaho, Micro strategy, and Zoom data.</p></li>
+<li><p>Impala supports various file formats such as, LZO, Sequence File, Avro, RCFile, and Parquet.</p></li>
+<li><p>Impala uses metadata, ODBC driver, and SQL syntax from Apache Hive.</p></li>
+</ul>
+<h2>Relational Databases and Impala</h2>
+<p>Impala uses a Query language that is similar to SQL and HiveQL. The following table describes some of the key dfferences between SQL and Impala Query language.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Impala</th>
+<th style="text-align:center;">Relational databases</th>
+</tr>
+<tr>
+<td>Impala uses an SQL like query language that is similar to HiveQL.</td>
+<td style="vertical-align:middle;">Relational databases use SQL language.</td>
+</tr>
+<tr>
+<td>In Impala, you cannot update or delete individual records.</td>
+<td>In relational databases, it is possible to update or delete individual records.</td>
+</tr>
+<tr>
+<td>Impala does not support transactions.</td>
+<td>Relational databases support transactions.</td>
+</tr>
+<tr>
+<td>Impala does not support indexing.</td>
+<td>Relational databases support indexing.</td>
+</tr>
+<tr>
+<td>Impala stores and manages large amounts of data (petabytes).</td>
+<td>Relational databases handle smaller amounts of data (terabytes) when compared to Impala.</td>
+</tr>
+</table>
+<h2>Hive, Hbase, and Impala</h2>
+<p>Though Cloudera Impala uses the same query language, metastore, and the user interface as Hive, it differs with Hive and HBase in certain aspects. The following table presents a comparative analysis among HBase, Hive, and Impala.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:cente;r">HBase</th>
+<th style="text-align:center;">Hive</th>
+<th style="text-align:center;">Impala</th>
+</tr>
+<tr>
+<td>HBase is wide-column store database based on Apache Hadoop. It uses the concepts of BigTable.</td>
+<td>Hive is a data warehouse software. Using this, we can access and manage large distributed datasets, built on Hadoop.</td>
+<td>Impala is a tool to manage, analyze data that is stored on Hadoop.</td>
+</tr>
+<tr>
+<td>The data model of HBase is wide column store.</td>
+<td style="vertical-align:middle;">Hive follows Relational model.</td>
+<td>Impala follows Relational model.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">HBase is developed using Java language.</td>
+<td style="vertical-align:middle;">Hive is developed using Java language.</td>
+<td>Impala is developed using C++.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">The data model of HBase is schema-free.</td>
+<td style="vertical-align:middle;">The data model of Hive is Schema-based.</td>
+<td>The data model of Impala is Schema-based.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">HBase provides Java, RESTful and, Thrift API’s.</td>
+<td style="vertical-align:middle;">Hive provides JDBC, ODBC, Thrift API’s.</td>
+<td>Impala provides JDBC and ODBC API’s.</td>
+</tr>
+<tr>
+<td>Supports programming languages like C, C#, C++, Groovy, Java PHP, Python, and Scala.</td>
+<td style="vertical-align:middle;">Supports programming languages like C++, Java, PHP, and Python.</td>
+<td>Impala supports all languages supporting JDBC/ODBC.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">HBase provides support for triggers.</td>
+<td style="vertical-align:middle;">Hive does not provide any support for triggers.</td>
+<td style="vertical-align:middle;">Impala does not provide any support for triggers.</td>
+</tr>
+</table>
+<p>All these three databases &minus;</p>
+<ul class="list">
+<li><p>Are NOSQL databases.</p></li>
+<li><p>Available as open source.</p></li>
+<li><p>Support server-side scripting.</p></li>
+<li><p>Follow ACID properties like Durability and Concurrency.</p></li>
+<li><p>Use <b>sharding</b> for <b>partitioning</b>.</p></li>
+</ul>
+<h2>Drawbacks of Impala</h2>
+<p>Some of the drawbacks of using Impala are as follows &minus;</p>
+<ul class="list">
+<li>Impala does not provide any support for Serialization and Deserialization.</li>
+<li>Impala can only read text files, not custom binary files.</li>
+<li>Whenever new records/files are added to the data directory in HDFS, the table needs to be refreshed.</li>
+</ul>
+<h1>Impala - Environment</h1>
+<p>This chapter explains the prerequisites for installing Impala, how to download, install and set up <b>Impala</b> in your system.</p>
+<p>Similar to Hadoop and its ecosystem software, we need to install Impala on Linux operating system. Since cloudera shipped Impala, it is available with <b>Cloudera Quick Start VM.</b></p>
+<p>This chapter describes how to download <b>Cloudera Quick Start VM</b> and start Impala.</p>
+<h2>Downloading Cloudera Quick Start VM</h2>
+<p>Follow the steps given below to download the latest version of <b>Cloudera QuickStartVM</b>.</p>
+<h3>Step 1</h3>
+<p>Open the homepage of cloudera website <a target="_blank" rel="nofollow" href ="http://www.cloudera.com/">http://www.cloudera.com/</a>. You will get the page as shown below.</p>
+<img src="images/homepage_of_cloudera_website.jpg" alt="Homepage of Cloudera Website" />
+<h3>Step 2</h3>
+<p>Click the <b>Sign in</b> link on the cloudera homepage, which will redirect you to the Sign in page as shown below.</p>
+<img src="images/sign_in_page.jpg" alt="Sign in Page" />
+<p>If you haven’t registered yet, click the <b>Register Now</b> link which will give you <b>Account Registration</b> form. Register there and sign in to cloudera account.</p>
+<h3>Step 3</h3>
+<p>After signing in, open the download page of cloudera website by clicking on the <b>Downloads</b> link highlighted in the following snapshot.</p>
+<img src="images/downloads_link.jpg" alt="Downloads Link" />
+<h3>Step 4 - Download QuickStartVM</h3>
+<p>Download the cloudera <b>QuickStartVM</b> by clicking on the <b>Download Now</b> button, as highlighted in the following snapshot</p>
+<img src="images/download_quickstartvm.jpg" alt="Download QuickStartVM" />
+<p>This will redirect you to the download page of <b>QuickStart VM</b>.</p>
+<img src="images/download_page_quickstartvm.jpg" alt="Download Page QuickStart VM" />
+<p>Click the <b>Get ONE NOW</b> button, accept the license agreement, and click the submit button as shown below.</p>
+<img src="images/submit_button.jpg" alt="Submit Button" />
+<p>Cloudera provides its VM compatible VMware, KVM and VIRTUALBOX. Select the required version. Here in our tutorial, we are demonstrating the <b>Cloudera QuickStartVM</b> setup using virtual box, therefore click the <b>VIRTUALBOX DOWNLOAD</b> button, as shown in the snapshot given below.</p>
+<img src="images/virtual_box_download.jpg" alt="Virtual Box Download" />
+<p>This will start downloading a file named <b>cloudera-quickstart-vm-5.5.0-0-virtualbox.ovf</b> which is a virtual box image file.</p>
+<h2>Importing the Cloudera QuickStartVM</h2>
+<p>After downloading the <b>cloudera-quickstart-vm-5.5.0-0-virtualbox.ovf</b> file, we need to import it using virtual box. For that, first of all, you need to install virtual box in your system. Follow the steps given below to import the downloaded image file.</p>
+<h3>Step 1</h3>
+<p>Download virtual box from the following link and install it <a target="_blank" rel="nofollow" href="https://www.virtualbox.org/">https://www.virtualbox.org/</a></p>
+<h3>Step 2</h3>
+<p>Open the virtual box software. Click <b>File</b> and choose <b>Import Appliance</b>, as shown below.</p>
+<img src="images/virtual_box_software.jpg" alt="Virtual Box Software" />
+<h3>Step 3</h3>
+<p>On clicking <b>Import Appliance</b>, you will get the Import Virtual Appliance window. Select the location of the downloaded image file as shown below.</p>
+<img src="images/import_appliance_window.jpg" alt="Import Appliance Window" />
+<p>After importing <b>Cloudera QuickStartVM</b> image, start the virtual machine. This virtual machine has Hadoop, cloudera Impala, and all the required software installed. The snapshot of the VM is shown below.</p>
+<img src="images/snapshot_of_vm.jpg" alt="Snapshot of VM" />
+<h2>Starting Impala Shell</h2>
+<p>To start Impala, open the terminal and execute the following command.</p>
+<pre class="result notranslate">
+[cloudera@quickstart ~] $ impala-shell
+</pre> 
+<p>This will start the Impala Shell, displaying the following message.</p>
+<pre class="result notranslate">
+Starting Impala Shell without Kerberos authentication 
+Connected to quickstart.cloudera:21000 
+Server version: impalad version 2.3.0-cdh5.5.0 RELEASE (build
+0c891d79aa38f297d244855a32f1e17280e2129b) 
+********************************************************************************
+ Welcome to the Impala shell. Copyright (c) 2015 Cloudera, Inc. All rights reserved. 
+(Impala Shell v2.3.0-cdh5.5.0 (0c891d7) built on Mon Nov 9 12:18:12 PST 2015)
+ 
+Press TAB twice to see a list of available commands. 
+******************************************************************************** 
+[quickstart.cloudera:21000] &gt;
+</pre> 
+<p><b>Note</b> &minus; We will discuss all the impala-shell commands in later chapters.</p>
+<h2>Impala Query editor</h2>
+<p>In addition to <b>Impala shell</b>, you can communicate with Impala using the Hue browser. After installing CDH5 and starting Impala, if you open your browser, you will get the cloudera homepage as shown below.</p>
+<img src="images/cloudera_homepage.jpg" alt="Cloudera Homepage" />
+<p>Now, click the bookmark <b>Hue</b> to open the Hue browser. On clicking, you can see the login page of the Hue Browser, logging with the credentials cloudera and cloudera.</p>
+<img src="images/hue_browser.jpg" alt="Hue Browser" />
+<p>As soon as you log on to the Hue browser, you can see the Quick Start Wizard of Hue browser as shown below.</p>
+<img src="images/quick_start_wizard_hue_browser.jpg" alt="Quick Start Wizard" />
+<p>On clicking the <b>Query Editors</b> drop-down menu, you will get the list of editors Impala supports as shown in the following screenshot.</p>
+<img src="images/query_editor.jpg" alt="Query Editor" />
+<p>On clicking <b>Impala</b> in the drop-down menu, you will get the Impala query editor as shown below.</p>
+<img src="images/impala_query_editor.jpg" alt="Impala Query Editor" />
+<h1>Impala - Architecture</h1>
+<p>Impala is an MPP (Massive Parallel Processing) query execution engine that runs on a number of systems in the Hadoop cluster. Unlike traditional storage systems, impala is decoupled from its storage engine. It has three main components namely, Impala daemon <i>(Impalad)</i>, Impala Statestore, and Impala metadata or metastore.</p>
+<img src="images/impala_architecture.jpg" alt="Impala Architecture" />
+<h2>Impala daemon(<i>Impalad</i>)</h2>
+<p>Impala daemon (also known as <b>impalad</b>) runs on each node where Impala is installed. It accepts the queries from various interfaces like impala shell, hue browser, etc.… and processes them.</p>
+<p>Whenever a query is submitted to an impalad on a particular node, that node serves as a “<b>coordinator node</b>” for that query. Multiple queries are served by <i>Impalad</i> running on other nodes as well. After accepting the query, <i>Impalad</i> reads and writes to data files and parallelizes the queries by distributing the work to the other Impala nodes in the Impala cluster. When queries are processing on various <i>Impalad instances</i>, all of them return the result to the central coordinating node.</p>
+<p>Depending on the requirement, queries can be submitted to a dedicated <i>Impalad</i> or in a load balanced manner to another <i>Impalad</i> in your cluster.</p>
+<h2>Impala State Store</h2>
+<p>Impala has another important component called Impala State store, which is responsible for checking the health of each <i>Impalad</i> and then relaying each Impala daemon health to the other daemons frequently. This can run on same node where Impala server or other node within the cluster is running.</p>
+<p>The name of the Impala State store daemon process is <i>State stored</i>. <i>Impalad</i> reports its health status to the Impala State store daemon, i.e., <i>State stored</i>.</p>
+<p>In the event of a node failure due to any reason, <i>Statestore</i> updates all other nodes about this failure and once such a notification is available to the other <i>impalad</i>, no other Impala daemon assigns any further queries to the affected node.</p>
+<h2>Impala Metadata &amp; Meta Store</h2>
+<p>Impala metadata &amp; meta store is another important component. Impala uses traditional MySQL or PostgreSQL databases to store table definitions. The important details such as table &amp; column information &amp; table definitions are stored in a centralized database known as a meta store.</p>
+<p>Each Impala node caches all of the metadata locally. When dealing with an extremely large amount of data and/or many partitions, getting table specific metadata could take a significant amount of time. So, a locally stored metadata cache helps in providing such information instantly.</p>
+<p>When a table definition or table data is updated, other Impala daemons must update their metadata cache by retrieving the latest metadata before issuing a new query against the table in question.</p>
+<h2>Query Processing Interfaces</h2>
+<p>To process queries, Impala provides three interfaces as listed below.</p>
+<ul class="list">
+<li><p><b>Impala-shell</b> &minus; After setting up Impala using the Cloudera VM, you can start the Impala shell by typing the command <b>impala-shell</b> in the editor. We will discuss more about the Impala shell in coming chapters.</p></li>
+<li><p><b>Hue interface</b> &minus; You can process Impala queries using the Hue browser. In the Hue browser, you have Impala query editor where you can type and execute the impala queries. To access this editor, first of all, you need to logging to the Hue browser.</p></li>
+<li><p><b>ODBC/JDBC drivers</b> &minus; Just like other databases, Impala provides ODBC/JDBC drivers. Using these drivers, you can connect to impala through programming languages that supports these drivers and build applications that process queries in impala using those programming languages.</p></li>
+</ul>
+<h2>Query Execution Procedure</h2>
+<p>Whenever users pass a query using any of the interfaces provided, this is accepted by one of the Impalads in the cluster. This Impalad is treated as a coordinator for that particular query.</p>
+<p>After receiving the query, the query coordinator verifies whether the query is appropriate, using the <b>Table Schema</b> from the Hive meta store. Later, it collects the information about the location of the data that is required to execute the query, from HDFS name node and sends this information to other impalads in order to execute the query.</p>
+<p>All the other Impala daemons read the specified data block and processes the query. As soon all the daemons complete their tasks, the query coordinator collects the result back and delivers it to the user.</p>
+<h1>Impala - Shell</h1>
+<p>In the earlier chapters, we have seen the installation of Impala using cloudera 
+and its architecture.</p> 
+<ul class="list">
+<li>Impala shell (command prompt)</li>
+<li>Hue (User Interface)</li>
+<li>ODBC and JDBC (Third party libraries)</li>
+</ul>
+<p>This chapter explains how to start Impala Shell and the various options of the shell.</p>
+<h2>Impala Shell Command Reference</h2>
+<p>The commands of Impala shell are classified as <b>general commands, query specific options</b>, and <b>table and database specific options</b>, as explained below.</p>
+<h3>General Commands</h3>
+<ul class="list">
+<li>help</li>
+<li>version</li>
+<li>history</li>
+<li>shell (or) !</li>
+<li>connect</li>
+<li>exit | quit</li>
+</ul>
+<h3>Query specific options</h3>
+<ul class="list">
+<li>Set/unset</li>
+<li>Profile</li>
+<li>Explain</li>
+</ul>
+<h3>Table and Database specific options</h3>
+<ul class="list">
+<li>Alter</li>
+<li>describe</li>
+<li>drop</li>
+<li>insert</li>
+<li>select</li>
+<li>show</li>
+<li>use</li>
+</ul>
+<h2>Starting Impala Shell</h2>
+<p>Open the cloudera terminal, sign in as superuser, and type <b>cloudera</b> as password as shown below.</p>
+<pre class="result notranslate">
+[cloudera@quickstart ~]$ su
+Password: cloudera
+[root@quickstart cloudera]#
+</pre> 
+<p>Start Impala shell by typing the following command &minus;</p>
+<pre class="result notranslate">
+<b>[root@quickstart cloudera] # impala-shell</b> 
+Starting Impala Shell without Kerberos authentication 
+Connected to quickstart.cloudera:21000 
+Server version: impalad version 2.3.0-cdh5.5.0 RELEASE 
+(build 0c891d79aa38f297d244855a32f1e17280e2129b)
+********************************************************************* 
+
+Welcome to the Impala shell. Copyright (c) 2015 Cloudera, Inc. All rights reserved.
+(Impala Shell v2.3.0-cdh5.5.0 (0c891d7) built on Mon Nov 9 12:18:12 PST 2015)
+
+Want to know what version of Impala you're connected to? Run the VERSION command to 
+find out! 
+********************************************************************* 
+[quickstart.cloudera:21000] &gt;
+</pre> 
+<h2>Impala – General Purpose Commands</h2>
+<p>The general purpose commands of Impala are explained below  &minus;</p>
+<h3>help command</h3>
+<p>The <b>help</b> command of Impala shell gives you a list of the commands available in Impala &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; help;</b>
+ 
+Documented commands (type help &lt;topic&gt;):
+========================================================
+compute  describe  insert  set     unset  with  version
+connect  explain   quit    show    values use
+exit     history   profile select  shell  tip 
+  
+Undocumented commands:
+========================================= 
+alter create desc drop help load summary
+</pre>
+<h3>version command</h3>
+<p>The <b>version</b> command gives you the current version of Impala, as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; version;</b>
+Shell version: Impala Shell v2.3.0-cdh5.5.0 (0c891d7) built on Mon Nov 9 
+12:18:12 PST 2015
+
+Server version: impalad version 2.3.0-cdh5.5.0 RELEASE (build 
+0c891d79aa38f297d244855a32f1e17280e2129b)
+</pre>
+<h3>history command</h3>
+<p>The <b>history</b> command of Impala displays the last 10 commands executed in the shell. Following is the example of the <b>history</b> command. Here we have executed 5 commands, namely, version, help, show, use, and history.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; history;</b>
+[1]:version;
+[2]:help;
+[3]:show databases;
+[4]:use my_db;
+[5]:history;
+</pre>
+<h3>quit/exit command</h3>
+<p>You can come out of the Impala shell using the <b>quit</b> or <b>exit</b> command, as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; exit;</b> 
+Goodbye cloudera
+</pre>
+<h3>connect command</h3>
+<p>The <b>connect</b> command is used to connect to a given instance of Impala. In case you do not specify any instance, then it connects to the default port <b>21000</b> as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; connect;</b> 
+Connected to quickstart.cloudera:21000 
+Server version: impalad version 2.3.0-cdh5.5.0 RELEASE (build 
+0c891d79aa38f297d244855a32f1e17280e2129b)
+</pre>
+<h2>Impala Query Specific Options</h2>
+<p>The query specific commands of Impala accept a query. They are explained below &minus;</p>
+<h3>Explain</h3>
+<p>The <b>explain</b> command returns the execution plan for the given query.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; explain select * from sample;</b>
+Query: explain select * from sample
++------------------------------------------------------------------------------------+ 
+| Explain String                                                                     | 
++------------------------------------------------------------------------------------+ 
+| Estimated Per-Host Requirements: Memory = 48.00MB VCores = 1                       | 
+| WARNING: The following tables are missing relevant table and/or column statistics. |
+| my_db.customers                                                                    | 
+| 01:EXCHANGE [UNPARTITIONED]                                                        | 
+| 00:SCAN HDFS [my_db.customers]                                                     | 
+| partitions = 1/1 files = 6 size = 148B                                             | 
++------------------------------------------------------------------------------------+ 
+Fetched 7 row(s) in 0.17s
+</pre>
+<h3>Profile</h3>
+<p>The <b>profile</b> command displays the low-level information about the recent query. This command is used for diagnosis and performance tuning of a query. Following is the example of a <b>profile</b> command. In this scenario, the <b>profile</b> command returns the low-level information of <b>explain</b> query.</p>
+<pre class="prettyprint notranslate">
+<b>[quickstart.cloudera:21000] &gt; profile;</b>
+
+Query Runtime Profile: 
+Query (id=164b1294a1049189:a67598a6699e3ab6): 
+
+   Summary: 
+      Session ID: e74927207cd752b5:65ca61e630ad3ad
+      Session Type: BEESWAX 
+      Start Time: 2016-04-17 23:49:26.08148000 End Time: 2016-04-17 23:49:26.2404000 
+      Query Type: EXPLAIN 
+      Query State: FINISHED 
+      Query Status: OK 
+      Impala Version: impalad version 2.3.0-cdh5.5.0 RELEASE (build 0c891d77280e2129b) 
+      User: cloudera 
+      Connected User: cloudera 
+      Delegated User: 
+      Network Address:10.0.2.15:43870 
+      Default Db: my_db 
+      Sql Statement: explain select * from sample 
+      Coordinator: quickstart.cloudera:22000 
+      : 0ns 
+      Query Timeline: 167.304ms 
+         - Start execution: 41.292us (41.292us) - Planning finished: 56.42ms (56.386ms) 
+         - Rows available: 58.247ms (1.819ms) 
+         - First row fetched: 160.72ms (101.824ms) 
+         - Unregister query: 166.325ms (6.253ms)
+         
+   ImpalaServer: 
+      - ClientFetchWaitTimer: 107.969ms 
+      - RowMaterializationTimer: 0ns
+</pre>
+<h2>Table and Database Specific Options</h2>
+<p>The following table lists out the table and data specific options in Impala.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Command &amp; Explanation</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>Alter</b></p>
+<p>The <b>alter</b> command is used to change the structure and name of a table in Impala.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>Describe</b></p>
+<p>The <b>describe</b> command of Impala gives the metadata of a table. It contains the information like columns and their data types. The <b>describe</b> command has <b>desc</b> as a short cut.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>Drop</b></p>
+<p>The <b>drop</b> command is used to remove a construct from Impala, where a construct can be a table, a view, or a database function.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>insert</b></p>
+<p>The <b>insert</b> command of Impala is used to,</p>
+<ul class="list">
+<li>Append data (columns) into a table.</li>
+<li>Override the data of an existing table.</li>
+<li>Override the data of an existing table.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>select</b></p>
+<p>The <b>select</b> statement is used to perform a desired operation on a particular dataset. It specifies the dataset on which to complete some action. You can print or store (in a file) the result of the select statement.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>show</b></p>
+<p>The <b>show</b> statement of Impala is used to display the metastore of various constructs such as tables, databases, and tables.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>use</b></p>
+<p>The <b>use</b> statement of Impala is used to change the current context to the desired database.</p>
+</td>
+</tr>
+</table>
+<h1>Impala - Query Language Basics</h1>
+<h2>Impala Data types</h2>
+<p>The following table describes the Impala data types.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Data Type &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>BIGINT</b></p>
+<p>This datatype stores numerical values and the range of this data type is -9223372036854775808 to 9223372036854775807. This datatype is used in create table and alter table statements.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>BOOLEAN</b></p>
+<p>This data type stores only <b>true</b> or <b>false</b> values and it is used in the column definition of create table statement.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>CHAR</b></p>
+<p>This data type is a fixed length storage, it is padded with spaces, you can store up to the maximum length of 255.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>DECIMAL</b></p>
+<p>This data type is used to store decimal values and it is used in create table and alter table statements.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>DOUBLE</b></p>
+<p>This data type is used to store the floating point values in the range of positive or negative 4.94065645841246544e-324d -1.79769313486231570e+308.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>FLOAT</b></p>
+<p>This data type is used to store single precision floating value datatypes in the range of positive or negative 1.40129846432481707e-45 .. 3.40282346638528860e+38.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>INT</b></p>
+<p>This data type is used to store 4-byte integer up to the range of -2147483648 to 2147483647.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<p><b>SMALLINT</b></p>
+<p>This data type is used to store 2-byte integer up to the range of -32768 to 32767.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<p><b>STRING</b></p>
+<p>This is used to store string values.</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<p><b>TIMESTAMP</b></p>
+<p>This data type is used to represent a point in a time.</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td>
+<p><b>TINYINT</b></p>
+<p>This data type is used to store 1-byte integer value up to the range of -128 to 127.</p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td>
+<p><b>VARCHAR</b></p>
+<p>This data type is used to store variable length character up to the maximum length 65,535.</p>
+</td>
+</tr>
+<tr>
+<td>13</td>
+<td>
+<p><b>ARRAY</b></p>
+<p>This is a complex data type and it is used to store variable number of ordered elements.</p>
+</td>
+</tr>
+<tr>
+<td>14</td>
+<td>
+<p><b>Map</b></p>
+<p>This is a complex data type and it is used to store variable number of key-value pairs.</p>
+</td>
+</tr>
+<tr>
+<td>15</td>
+<td>
+<p><b>Struct</b></p>
+<p>This is a complex data type and used to represent multiple fields of a single item.</p>
+</td>
+</tr>
+</table>
+<h2>Comments in Impala</h2>
+<p>Comments in Impala are similar to those in SQL.In general we have two types of comments in programming languages namely Single-line Comments and Multiline Comments.</p>
+<p><b>Single-line comments</b> &minus; Every single line that is followed by "—" is considered as a comment in Impala. Following is an example of a single-line comments in Impala.</p>
+<pre class="result notranslate">
+-- Hello welcome to tutorials point.
+</pre> 
+<p><b>Multiline comments</b> &minus; All the lines between <b>/*</b> and <b>*/</b> are considered as multiline comments in Impala. Following is an example of a multiline comments in Impala.</p>
+<pre class="result notranslate">
+/*
+Hi this is an example
+Of multiline comments in Impala
+*/
+</pre> 
+<p>The operators in Impala are similar to those in SQL. Refer our SQL tutorial by clicking the following link <a target="_blank" href="../sql/sql-operators.html" />sql-operators.</a>
+<h1>Impala - Create a Database</h1>
+<p>In Impala, a database is a construct which holds related tables, views, and functions within their namespaces. It is represented as a directory tree in HDFS; it contains tables partitions, and data files. This chapter explains how to create a database in Impala.</p>
+<h2>CREATE DATABASE Statement</h2>
+<p>The <b>CREATE DATABASE Statement</b> is used to create a new database in Impala.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of the <b>CREATE DATABASE</b> Statement.</p>
+<pre class="result notranslate">
+CREATE DATABASE IF NOT EXISTS database_name;
+</pre> 
+<p>Here, <b>IF NOT EXISTS</b> is an optional clause. If we use this clause, a database with the given name is created, only if there is no existing database with the same name.</p>
+<h3>Example</h3>
+<p>Following is an example of the <b>create database statement</b>. In this example, we have created a database with the name <b>my_database.</b></p>
+<pre class="prettyprint notranslate">
+[quickstart.cloudera:21000] &gt; CREATE DATABASE IF NOT EXISTS my_database;
+</pre> 
+<p>On executing the above query in <b>cloudera impala-shell</b>, you will get the following output.</p>
+<pre class="result notranslate">
+Query: create DATABASE my_database 
+
+Fetched 0 row(s) in 0.21s
+</pre>
+<h3>Verification</h3>
+<p>The <b>SHOW DATABASES</b> query gives the list of the databases in Impala, therefore you can verify whether the database is created, using the <b>SHOW</b> DATABASES statement. Here you can observe the newly created database <b>my_db</b> in the list.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; show databases;</b> 
+
+Query: show databases
++-----------------------------------------------+
+| name                                          | 
++-----------------------------------------------+ 
+| _impala_builtins                              |
+| default                                       | 
+|  my_db                                        | 
++-----------------------------------------------+
+Fetched 3 row(s) in 0.20s 
+[quickstart.cloudera:21000] &gt;
+</pre>
+<h3>Hdfs Path</h3>
+<p>In order to create a database in HDFS file system, you need to specify the location where the database is to be created.</p>
+<pre class="result notranslate">
+CREATE DATABASE IF NOT EXISTS <b>database_name</b> LOCATION <b>hdfs_path;</b>
+</pre>
+<h2>Creating a Database using Hue Browser</h2>
+<p>Open Impala Query editor and type the <b>CREATE DATABASE</b> statement in it. Thereafter, click the execute button as shown in the following screenshot.</p>
+<img src="images/execute_button.jpg" alt="Execute Button" />
+<p>After executing the query, gently move the curser to the top of the dropdown menu and you will find a refresh symbol. If you click on the refresh symbol, the list of databases will be refreshed and the recent changes are applied to it.</p>
+<img src="images/refresh_symbol.jpg" alt="Refresh Symbol" />
+<h3>Verification</h3>
+<p>Click the <b>drop-down box</b> under the heading <b>DATABASE</b> on the left-hand side of the editor. There you can see a list of databases in the system. Here you can observe the newly created database <b>my_db</b> as shown below.</p>
+<img src="images/verification.jpg" alt="Verification" />
+<p>If you observe carefully, you can see only one database, i.e., <b>my_db</b> in the list along with the default database.</p>
+<h1>Impala - Drop a Database</h1>
+<p>The <b>DROP DATABASE Statement</b> of Impala is used to remove a database from Impala. Before deleting the database, it is recommended to remove all the tables from it.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of <b>DROP DATABASE</b> Statement.</p>
+<pre class="result notranslate">
+DROP (DATABASE|SCHEMA) [IF EXISTS] database_name [RESTRICT | 
+CASCADE] [LOCATION hdfs_path];
+</pre>
+<p>Here, <b>IF EXISTS</b> is an optional clause. If we use this clause when a database with the given name exists, then it will be deleted. And if there is no existing database with the given name, then no operation is performed.</p>
+<h2>Example</h2>
+<p>Following is an example of <b>DROP DATABASE</b> statement. Assume you have a database in Impala with the name <b>sample_database</b>.</p>
+<p>And, if you verify the list of databases using the <b>SHOW DATABASES</b> statement, you will observe the name in it.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; SHOW DATABASES;</b>
+
+Query: show DATABASES
++-----------------------+ 
+| name                  | 
++-----------------------+ 
+| _impala_builtins      | 
+| default               | 
+| my_db                 | 
+| sample_database       | 
++-----------------------+ 
+Fetched 4 row(s) in 0.11s
+</pre>
+<p>Now, you can delete this database using the <b>DROP DATABASE Statement</b> as shown below.</p>
+<pre class="result notranslate">
+ &lt; DROP DATABASE IF EXISTS sample_database;
+</pre>
+<p>This will delete the specified database and gives you the following output.</p>
+<pre class="result notranslate">
+Query: drop DATABASE IF EXISTS sample_database;
+</pre>
+<h3>Verification</h3>
+<p>You can verify whether the given database is deleted, using the <b>SHOW DATABASES</b> statement. Here you can observe that the database named <b>sample_database</b> is removed from the list of databases.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; SHOW DATABASES;</b>
+
+Query: show DATABASES 
++----------------------+ 
+| name                 | 
++----------------------+ 
+| _impala_builtins     | 
+| default              | 
+| my_db                | 
++----------------------+ 
+Fetched 3 row(s) in 0.10s 
+[quickstart.cloudera:21000] &gt;
+</pre>
+<h2>Cascade</h2>
+<p>In general, to delete a database, you need to remove all the tables in it manually. If you use cascade, Impala removes the tables within the specified database before deleting it.</p>
+<h3>Example</h3>
+<p>Suppose there is a database in Impala named <b>sample</b>, and it contains two tables, namely, <b>student</b> and <b>test</b>. If you try to remove this database directly, you will get an error as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; DROP database sample;</b>
+Query: drop database sample 
+ERROR: 
+ImpalaRuntimeException: Error making 'dropDatabase' RPC to Hive Metastore: 
+CAUSED BY: InvalidOperationException: Database sample is not empty. One or more 
+tables exist.
+</pre> 
+<p>Using <b>cascade</b>, you can delete this database directly (without deleting its contents manually) as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; DROP database sample cascade;</b> 
+Query: drop database sample cascade
+</pre> 
+<p><b>Note</b> &minus; You cannot delete the “<b>current database</b>” in Impala. Therefore, before deleting a database, you need to make sure that the current context is set to the database other than the one which you are going to delete.</p>
+<h2>Deleting a Database using Hue Browser</h2>
+<p>Open Impala Query editor and type the <b>DELETE DATABASE</b> statement in it and click on the execute button as shown below. Suppose there are three databases, namely, <b>my_db, my_database</b>, and <b>sample_database</b> along with the default database. Here we are deleting the database named my_database.</p>
+<img src="images/delete_database.jpg" alt="Delete Database" />
+<p>After executing the query, gently move the cursor to the top of the dropdown menu. Then, you will find a refresh symbol as shown in the screenshot given below. If you click on the refresh symbol, the list of databases will be refreshed and the recent changes done will be applied to it.</p>
+<img src="images/list_databases_refreshed.jpg" alt="Database List" />
+<h3>Verification</h3>
+<p>Click on the <b>drop down</b> under the heading <b>DATABASE</b> on the left-hand side of the editor. There, you can see a list of databases in the system. Here you can observe the newly created database <b>my_db</b> as shown below.</p>
+<img src="images/drop_down.jpg" alt="Drop Down" />
+<p>If you observe carefully, you can see only one database, i.e., <b>my_db</b> in the list along with the default database.</p>
+<h1>Impala - Select a Database</h1>
+<p>Once you get connected to Impala, it is required to select one among the available databases. The <b>USE DATABASE Statement</b> of Impala is used to switch the current session to another database.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of <b>USE</b> Statement.</p>
+<pre class="result notranslate">
+USE db_name;
+</pre>
+<h2>Example</h2>
+<p>Following is an example of <b>USE statement</b>. First of all, let us create a database with the name <b>sample_database</b> as shown below.</p>
+<pre class="result notranslate">
+&gt; CREATE DATABASE IF NOT EXISTS sample_database;
+</pre>
+<p>This will create a new database and give you the following output.</p>
+<pre class="result notranslate">
+Query: create DATABASE IF NOT EXISTS my_db2
+
+Fetched 0 row(s) in 2.73s
+</pre>
+<p>If you verify the list of databases using the <b>SHOW DATABASES</b> statement, you can observe the name of newly created database in it.</p>
+<pre class="prettyprint notranslate">
+&gt; SHOW DATABASES;
+
+Query: show DATABASES 
++-----------------------+ 
+| name                  | 
++-----------------------+ 
+| _impala_builtins      | 
+| default               | 
+| my_db                 | 
+| sample_database       | 
++-----------------------+ 
+Fetched 4 row(s) in 0.11s
+</pre>
+<p>Now, let’s switch the session to the newly created database (sample_database) using the <b>USE</b> Statement as shown below.</p>
+<pre class="result notranslate">
+&gt; USE sample_database;
+</pre>
+<p>This will change the current context to sample_database and display a message as shown below.</p>
+<pre class="result notranslate">
+Query: use sample_database
+</pre>
+<h2>Selecting a Database using Hue Browser</h2>
+<p>On the left-hand side of the <b>Query Editor</b> of Impala, you will find a dropdown menu as shown in the following screenshot.</p>
+<img src="images/selecting_a_database.jpg" alt="Selecting a Database" />
+<p>If you click on the dropdown menu, you will find the list of all the databases in Impala as shown below.</p>
+<img src="images/selecting_databases_dropdown_list.jpg" alt=" Selecting Databases Dropdown list " />
+<p>Simply select the database to which you need to change the current context.</p>
+<h1>Impala - Create Table Statement</h1>
+<p>The <b>CREATE TABLE</b> Statement is used to create a new table in the required database in Impala. Creating a basic table involves naming the table and defining its columns and each column's data type.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>CREATE TABLE</b> Statement. Here, <b>IF NOT EXISTS</b> is an optional clause. If we use this clause, a table with the given name is created, only if there is no existing table in the specified database with the same name.</p>
+<pre class="prettyprint notranslate">
+create table IF NOT EXISTS database_name.table_name (
+   column1 data_type,
+   column2 data_type,
+   column3 data_type,
+   ………
+   columnN data_type
+);
+</pre> 
+<p>CREATE TABLE is the keyword that instructs the database system to create a new table. The unique name or identifier for the table follows the CREATE TABLE statement. Optionally you can specify <b>database_name</b> along with <b>table_name</b>.</p>
+<h2>Example</h2>
+<p>Following is an example of the create table statement. In this example, we have created a table named <b>student</b> in the database <b>my_db</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; CREATE TABLE IF NOT EXISTS my_db.student
+   (name STRING, age INT, contact INT );
+</pre> 
+<p>On executing the above statement, a table with the specified name will be created, displaying the following output.</p>
+<pre class="result notranslate">
+Query: create table student (name STRING, age INT, phone INT) 
+
+Fetched 0 row(s) in 0.48s
+</pre>
+<h3>Verification</h3>
+<p>The <b>show Tables</b> query gives a list of tables in the current database in Impala. Therefore, you can verify whether the table is created, using the <b>Show Tables</b> statement.</p>
+<p>First of all, you need to switch the context to the database in which the required table exists, as shown below.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; use my_db; 
+Query: use my_db
+</pre> 
+<p>Then, if you get the list of tables using the <b>show tables</b> query, you can observe the table named <b>student</b> in it as shown below.</p>
+<pre class="prettyprint notranslate">
+[quickstart.cloudera:21000] &gt; <b>show tables;</b>
+
+Query: show tables 
++-----------+ 
+| name      | 
++-----------+ 
+| student   | 
++-----------+ 
+Fetched 1 row(s) in 0.10s 
+</pre>
+<h3>HDFS path</h3>
+<p>In order to create a database in HDFS file system, you need to specify the location where the database is to be created as shown below.</p>
+<pre class="result notranslate">
+CREATE DATABASE IF NOT EXISTS database_name LOCATION hdfs_path;
+</pre>
+<h2>Creating a Database using Hue Browser</h2>
+<p>Open impala Query editor and type the <b>CREATE Table</b> Statement in it. And click on the execute button as shown in the following screenshot.</p>
+<img src="images/create_database.jpg" alt="Create a Database" />
+<p>After executing the query, gently move the cursor to the top of the dropdown menu and you will find a refresh symbol. If you click on the refresh symbol, the list of databases will be refreshed and the recent changes done are applied to it.</p>
+<img src="images/create_database_drop_down.jpg" alt="Create Database Drop Down" />
+<h3>Verification</h3>
+<p>Click on the <b>drop down</b> under the heading <b>DATABASE</b> on the left-hand side of the editor. There you can see a list of databases. Select the database <b>my_db</b> as shown below.</p>
+<img src="images/create_database_verification.jpg" alt="Create a Database Verification" />
+<p>On selecting the database <b>my_db</b> you can see a list of tables in it as shown below. Here you can find the newly created table <b>student</b> as shown below.</p>
+<img src="images/create_database_my_db.jpg" alt="Create  a Database My DB" />
+<h1>Impala - Insert Statement</h1>
+<p>The <b>INSERT</b> Statement of Impala has two clauses &minus; <b>into</b> and <b>overwrite</b>. Insert statement with <b>into</b> clause is used to add new records into an existing table in a database.</p>
+<h2>Syntax</h2>
+<p>There are two basic syntaxes of <b>INSERT</b> statement as follows &minus;</p>
+<pre class="result noranslate">
+insert into table_name (column1, column2, column3,...columnN)
+
+values (value1, value2, value3,...valueN);
+</pre> 
+<p>Here, column1, column2,...columnN are the names of the columns in the table into which you want to insert data.</p>
+<p>You can also add values without specifying the column names but, for that you need to make sure the order of the values is in the same order as the columns in the table as shown below.</p>
+<pre class="result notranslate">
+Insert into table_name values (value1, value2, value2);
+</pre> 
+<p>CREATE TABLE is the keyword telling the database system to create a new table. The unique name or identifier for the table follows the CREATE TABLE statement. Optionally you can specify <b>database_name</b> along with the <b>table_name</b>.</p>
+<h2>Example</h2>
+<p>Suppose we have created a table named <b>student</b> in Impala as shown below.</p>
+<pre class="result notranslate">
+create table employee (Id INT, name STRING, age INT,address STRING, salary BIGINT);
+</pre>
+<p>Following is an example of creating a record in the table named <b>employee</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; insert into employee 
+(ID,NAME,AGE,ADDRESS,SALARY)VALUES (1, 'Ramesh', 32, 'Ahmedabad', 20000 );
+</pre> 
+<p>On executing the above statement, a record is inserted into the table named <b>employee</b> displaying the following message.</p>
+<pre class="result notranslate">
+Query: insert into employee (ID,NAME,AGE,ADDRESS,SALARY) VALUES (1, 'Ramesh',
+   32, 'Ahmedabad', 20000 ) 
+Inserted 1 row(s) in 1.32s
+</pre> 
+<p>You can insert another record without specifying the column names as shown below.</p>
+<pre class="result noranslate">
+[quickstart.cloudera:21000] &gt; insert into employee values (2, 'Khilan', 25, 
+   'Delhi', 15000 );
+</pre> 
+<p>On executing the above statement, a record is inserted into the table named <b>employee</b> displaying the following message.</p>
+<pre class="result notranslate">
+Query: insert into employee values (2, 'Khilan', 25, 'Delhi', 15000 ) 
+Inserted 1 row(s) in 0.31s
+</pre> 
+<p>You can insert a few more records in the employee table as shown below.</p>
+<pre class="result notranslate">
+Insert into employee values (3, 'kaushik', 23, 'Kota', 30000 );
+
+Insert into employee values (4, 'Chaitali', 25, 'Mumbai', 35000 );
+
+Insert into employee values (5, 'Hardik', 27, 'Bhopal', 40000 );
+
+Insert into employee values (6, 'Komal', 22, 'MP', 32000 );
+</pre> 
+<p>After inserting the values, the <b>employee</b> table in Impala will be as shown below.</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+--------+
+| id | name     | age | address   | salary |
++----+----------+-----+-----------+--------+
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  |
+| 2  | Khilan   | 25  | Delhi     | 15000  |
+| 5  | Hardik   | 27  | Bhopal    | 40000  |
+| 4  | Chaitali | 25  | Mumbai    | 35000  |
+| 3  | kaushik  | 23  | Kota      | 30000  |
+| 6  | Komal    | 22  | MP        | 32000  |
++----+----------+-----+-----------+--------+
+</pre>
+<h2>Overwriting the Data in a Table</h2>
+<p>We can overwrite the records of a table using overwrite clause. The overwritten records will be permanently deleted from the table. Following is the syntax of using the overwrite clause.</p>
+<pre class="result notranslate">
+Insert overwrite table_name values (value1, value2, value2);
+</pre>
+<h3>Example</h3>
+<p>Following is an example of using the clause <b>overwrite</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; Insert overwrite employee values (1, 'Ram', 26, 
+   'Vishakhapatnam', 37000 );
+</pre> 
+<p>On executing the above query, this will overwrite the table data with the specified record displaying the following message.</p>
+<pre class="result notranslate">
+Query: insert overwrite employee values (1, 'Ram', 26, 'Vishakhapatnam', 37000 ) 
+Inserted 1 row(s) in 0.31s
+</pre> 
+<p>On verifying the table, you can observe that all the records of the table <b>employee</b> are overwritten by new records as shown below.</p>
+<pre class="result notranslate">
++----+------+-----+---------------+--------+
+| id | name | age | address       | salary |
++----+------+-----+---------------+--------+
+| 1  | Ram  | 26  | Vishakhapatnam| 37000  |
++----+------+-----+---------------+--------+
+</pre>
+<h2>Inserting Data using Hue Browser</h2>
+<p>Open Impala Query editor and type the <b>insert</b> Statement in it. And click on the execute button as shown in the following screenshot.</p>
+<img src="images/insert_data.jpg" alt="Inserting Data" />
+<p>After executing the query/statement, this record is added to the table.</p>
+<h1>Impala - Select Statement</h1>
+<p>Impala <b>SELECT</b> statement is used to fetch the data from one or more tables in a database. This query returns data in the form of tables.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the Impala <b>select</b> statement.</p>
+<pre class="result notranslate">
+SELECT column1, column2, columnN from table_name;
+</pre>
+<p>Here, column1, column2...are the fields of a table whose values you want to fetch. If you want to fetch all the fields available in the field, then you can use the following syntax &minus;</p>
+<pre class="result notranslate">
+SELECT * FROM table_name;
+</pre>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in Impala, with the following data &minus;</p>
+<pre class="result notranslate">
+ID    NAME       AGE    ADDRESS      SALARY
+---   -------    ---    ----------   -------
+1     Ramesh     32     Ahmedabad    20000
+2     Khilan     25     Delhi        15000
+3     Hardik     27     Bhopal       40000
+4     Chaitali   25     Mumbai       35000
+5     kaushik    23     Kota         30000
+6     Komal      22     Mp           32000
+</pre>
+<p>You can fetch the <b>id, name</b>, and <b>age</b> of all the records of the <b>customers</b> table using <b>select</b> statement as shown below &minus;</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; select id, name, age from customers;
+</pre>
+<p>On executing the above query, Impala fetches id, name, age of all the records from the specified table and displays them as shown below.</p>
+<pre class="result notranslate">
+Query: select id,name,age from customers
+
++----+----------+-----+
+| id | name     | age |
+| 1  | Ramesh   | 32  |
+| 2  | Khilan   | 25  |
+| 3  | Hardik   | 27  |
+| 4  | Chaitali | 25  |
+| 5  | kaushik  | 23  |
+| 6  | Komal    | 22  |
++----+----------+-----+
+
+Fetched 6 row(s) in 0.66s
+</pre>
+<p>You can also fetch <b>all</b> the records from the <b>customers</b> table using the <b>select</b> query as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select name, age from customers;</b> 
+Query: select * from customers
+</pre>
+<p>On executing the above query, Impala fetches and displays all the records from the specified table as shown below.</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+--------+
+| id | name     | age | address   | salary |
++----+----------+-----+-----------+--------+
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  |
+| 2  | Khilan   | 25  | Delhi     | 15000  |
+| 3  | Hardik   | 27  | Bhopal    | 40000  |
+| 4  | Chaitali | 25  | Mumbai    | 35000  |
+| 5  | kaushik  | 23  | Kota      | 30000  |
+| 6  | Komal    | 22  | MP        | 32000  |
++----+----------+-----+-----------+--------+
+
+Fetched 6 row(s) in 0.66s
+</pre>
+<h2>Fetching the Records using Hue</h2>
+<p>Open Impala Query editor and type the <b>select</b> Statement in it. And click on the execute button as shown in the following screenshot.</p>
+<img src="images/fetching_records.jpg" alt="Fetching Records" />
+<p>After executing the query, if you scroll down and select the <b>Results</b> tab, you can see the list of the records of the specified table as shown below.</p>
+<img src="images/fetching_records_result.jpg" alt="Fetching Records Result" />
+<h1>Impala - Describe Statement</h1>
+<p>The <b>describe</b> statement in Impala is used to give the description of the table. The result of this statement contains the information about a table such as the column names and their data types.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the Impala <b>describe</b> statement.</p>
+<pre class ="result notranslate">
+Describe table_name;
+</pre>
+<h2>Example</h2>
+<p>For example, assume we have a table named <b>customer</b> in Impala, with the following data &minus;</p>
+<pre class="result notranslate">
+ID    NAME     AGE    ADDRESS     SALARY
+--- --------- ----- ----------- -----------
+1   Ramesh     32    Ahmedabad    20000
+2   Khilan     25    Delhi        15000
+3   Hardik     27    Bhopal       40000
+4   Chaitali   25    Mumbai       35000
+5   kaushik    23    Kota         30000
+6   Komal      22    Mp           32000
+</pre> 
+<p>You can get the description of the <b>customer</b> table using the <b>describe</b> statement as shown below  &minus;</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; describe customer;
+</pre> 
+<p>On executing the above query, Impala fetches the <b>metadata</b> of the specified table and displays it as shown below.</p>
+<pre class="result notranslate">
+Query: describe customer
+ 
++---------+--------+---------+ 
+| name    | type   | comment | 
++---------+--------+---------+ 
+| id      | int    |         |                    
+| name    | string |         | 
+| age     | int    |         | 
+| address | string |         | 
+| salary  | bigint |         |
++---------+--------+---------+ 
+
+Fetched 5 row(s) in 0.51s
+</pre>
+<h2>Describing the Records using Hue</h2>
+<p>Open Impala Query editor and type the <b>describe</b> statement in it and click on the execute button as shown in the following screenshot.</p>
+<img src="images/describe_records.jpg" alt="Describe Records" />
+<p>After executing the query, if you scroll down and select the <b>Results</b> tab, you can see the metadata of the table as shown below.</p>
+<img src="images/results_tab.jpg" alt="Results Tab" />
+<h1>Impala - Alter Table</h1>
+<p>The Alter table statement in Impala is used to perform changes on a given table. Using this statement, we can add, delete, or modify columns in an existing table and we can also rename it.</p>
+<p>This Chapter explains various types of alter statements with syntax and examples. First of all assume that we have a table named <b>customers</b> in the <b>my_db</b> database in Impala, with the following data</p>
+<pre class="result notranslate">
+ID   NAME     AGE   ADDRESS    SALARY
+--- --------- ----- ----------- --------
+1   Ramesh    32    Ahmedabad   20000
+2   Khilan    25    Delhi       15000
+3   Hardik    27    Bhopal      40000
+4   Chaitali  25    Mumbai      35000
+5   kaushik   23    Kota        30000
+6   Komal     22    Mp          32000
+</pre> 
+<p>And, if you get the list of tables in the database <b>my_db</b>, you can find the <b>customers</b> table in it as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; show tables;</b>
+
+Query: show tables 
++-----------+ 
+| name      | 
++-----------+ 
+| customers | 
+| employee  | 
+| student   | 
+| student1  | 
++-----------+
+</pre>
+<h2>Altering the name of a table</h2>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>ALTER TABLE</b> to rename an existing table is as follows &minus;</p>
+<pre class="result notranslate">
+ALTER TABLE [old_db_name.]old_table_name RENAME TO [new_db_name.]new_table_name
+</pre>
+<h3>Example</h3>
+<p>Following is an example of changing the name of the table using the <b>alter</b> statement. Here we are changing the name of the table <b>customers</b> to users.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; ALTER TABLE my_db.customers RENAME TO my_db.users;
+</pre> 
+<p>After executing the above query, Impala changes the name of the table as required, displaying the following message.</p>
+<pre class="result notranslate">
+Query: alter TABLE my_db.customers RENAME TO my_db.users
+</pre> 
+<p>You can verify the list of tables in the current database using the <b>show tables</b> statement. You can find the table named <b>users</b> instead of <b>customers</b>.</p>
+<pre class="result notranslate">
+Query: show tables 
++----------+ 
+| name     | 
++----------+ 
+| employee | 
+| student  | 
+| student1 | 
+| users    | 
++----------+ 
+Fetched 4 row(s) in 0.10s
+</pre>
+<h2>Adding columns to a table</h2>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>ALTER TABLE</b> to add columns to an existing table is as follows &minus;</p>
+<pre class="result notranslate">
+ALTER TABLE name ADD COLUMNS (col_spec[, col_spec ...])
+</pre>
+<h3>Example</h3>
+<p>The following query is an example demonstrating how to add columns to an existing table. Here we are adding two columns account_no and phone_number (both are of bigint data type) to the <b>users</b> table.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; ALTER TABLE users ADD COLUMNS (account_no BIGINT, 
+phone_no BIGINT);
+</pre>
+<p>On executing the above query, it will add the specified columns to the table named <b>student</b>, displaying the following message.</p>
+<pre class="result notranslate">
+Query: alter TABLE users ADD COLUMNS (account_no BIGINT, phone_no BIGINT)
+</pre> 
+<p>If you verify the schema of the table <b>users</b>, you can find the newly added columns in it as shown below.</p>
+<pre class="result notranslate">
+<b>quickstart.cloudera:21000] &gt; describe</b> users;
+ 
+Query: describe users 
++------------+--------+---------+ 
+| name       | type   | comment | 
++------------+--------+---------+ 
+| id         | int    |         | 
+| name       | string |         | 
+| age        | int    |         |
+| address    | string |         | 
+| salary     | bigint |         | 
+| account_no | bigint |         | 
+| phone_no   | bigint |         | 
++------------+--------+---------+ 
+Fetched 7 row(s) in 0.20s
+</pre>
+<h2>Dropping columns from a table</h2>
+<h3>Syntax</h3>
+<p>The basic syntax of ALTER TABLE to <b>DROP COLUMN</b> in an existing table is as follows &minus;</p>
+<pre class="result notranslate">
+ALTER TABLE name DROP [COLUMN] column_name
+</pre>
+<h3>Example</h3>
+<p>The following query is an example of deleting columns from an existing table. Here we are deleting the column named <b>account_no</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; ALTER TABLE users DROP account_no;
+</pre> 
+<p>On executing the above query, Impala deletes the column named account_no displaying the following message.</p>
+<pre class="result notranslate">
+Query: alter TABLE users DROP account_no
+</pre> 
+<p>If you verify the schema of the table <b>users</b>, you cannot find the column named <b>account_no</b> since it was deleted.</p>
+<pre class="result noyranslate">
+<b>[quickstart.cloudera:21000] &gt; describe</b> users; 
+
+Query: describe users 
++----------+--------+---------+ 
+| name     | type   | comment | 
++----------+--------+---------+ 
+| id       | int    |         | 
+| name     | string |         | 
+| age      | int    |         | 
+| address  | string |         | 
+| salary   | bigint |         | 
+| phone_no | bigint |         |
++----------+--------+---------+ 
+Fetched 6 row(s) in 0.11s
+</pre>
+<h2>Changing the name and type of a column</h2>
+<h3>Syntax</h3>
+<p>The basic syntax of ALTER TABLE to <b>change the name and datatype</b> of a column in an existing table is as follows &minus;</p>
+<pre class="result notranslate">
+ALTER TABLE name CHANGE column_name new_name new_type
+</pre>
+<h3>Example</h3>
+<p>Following is an example of changing the name and datatype of a column using the alter statement. Here we are changing the name of the column <b>phone_no to email</b> and its data type to <b>string</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; ALTER TABLE users CHANGE phone_no e_mail string;
+</pre> 
+<p>On executing the above query, Impala does the specified changes, displaying the following message.</p>
+<pre class="result notranslate">
+Query: alter TABLE users CHANGE phone_no e_mail string
+</pre> 
+<p>You can verify the metadata of the table users using the <b>describe</b> statement. You can observe that Impala has done the required changes to the specified column.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] > describe users; 
+Query: describe users 
++----------+--------+---------+ 
+| name     | type   | comment | 
++----------+--------+---------+ 
+| id       | int    |         | 
+| name     | string |         | 
+| age      | int    |         | 
+| address  | string |         | 
+| salary   | bigint |         | 
+| phone_no | bigint |         |
++----------+--------+---------+ 
+Fetched 6 row(s) in 0.11s
+</pre>
+<h2>Altering a Table using Hue</h2>
+<p>Open the Impala Query editor and type the <b>alter</b> statement in it and click on the execute button as shown in the following screenshot.</p>
+<img src="images/altering_a_table.jpg" alt="Altering a Table" />
+<p>On executing the above query, it will change the name of the table <b>customers</b> to <b>users</b>. In the same way, we can execute all the <b>alter</b> queries.</p>
+<h1>Impala - Drop a Table</h1>
+<p>The Impala <b>drop table</b> statement is used to delete an existing table in Impala. This statement also deletes the underlying HDFS files for internal tables</p>
+<p><b>NOTE</b> &minus; You have to be careful while using this command because once a table is deleted, then all the information available in the table would also be lost forever.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>DROP TABLE</b> Statement. Here, <b>IF EXISTS</b> is an optional clause. If we use this clause, a table with the given name is deleted, only if it exists. Otherwise, no operation will be carried out.</p>
+<pre class="result notranslate">
+DROP table database_name.table_name;
+</pre>
+<p>If you try to delete a table that doesn’t exist without the IF EXISTS clause, an error will be generated. Optionally you can specify <b>database_name</b> along with t<b>able_name</b>.</p>
+<h2>Example</h2>
+<p>Let us first verify the list of tables in the database <b>my_db</b> as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; show tables;</b>
+
+Query: show tables 
++------------+ 
+| name       | 
++------------+ 
+| customers  | 
+| employee   | 
+| student    | 
++------------+ 
+Fetched 3 row(s) in 0.11s
+</pre>
+<p>From the above result, you can observe that the database <b>my_db</b> contains 3 tables</p>
+<p>Following is an example of the <b>drop table statement</b>. In this example, we are deleting the table named <b>student</b> from the database <b>my_db</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; drop table if exists my_db.student;
+</pre>
+<p>On executing the above query, a table with the specified name will be deleted, displaying the following output.</p>
+<pre class="result notranslate">
+Query: drop table if exists student
+</pre>
+<h3>Verification</h3>
+<p>The <b>show Tables</b> query gives a list of the tables in the current database in Impala. Therefore, you can verify whether a table is deleted, using the <b>Show Tables</b> statement.</p>
+<p>First of all, you need to switch the context to the database in which the required table exists, as shown below.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; use my_db; 
+Query: use my_db
+</pre>
+<p>Then, if you get the list of tables using the <b>show tables</b> query, you can observe the table named <b>student</b> is not in the list.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; show tables; 
+
+Query: show tables 
++-----------+ 
+| name      | 
++-----------+ 
+| customers | 
+| employee  | 
+| student   | 
++-----------+ 
+Fetched 3 row(s) in 0.11s
+</pre>
+<h2>Creating a Database using Hue Browser</h2>
+<p>Open Impala Query editor and type the <b>drop Table</b> Statement in it. And click on the execute button as shown in the following screenshot.</p>
+<img src="images/creating_database.jpg" alt="Creating Database" />
+<p>After executing the query, gently move the cursor to the top of the dropdown menu and you will find a refresh symbol. If you click on the refresh symbol, the list of databases will be refreshed and the recent changes done are applied to it.</p>
+<img src="images/creating_database_dropdown.jpg" alt="Creating Database Dropdown" />
+<h3>Verification</h3>
+<p>Click on the <b>drop down</b> under the heading <b>DATABASE</b> on the left-hand side of the editor. There you can see a list of databases; select the database <b>my_db</b> as shown below.</p>
+<img src="images/creating_database_verification.jpg" alt="Creating Database Verification" />
+<p>On selecting the database <b>my_db</b>, you can see a list of tables in it as shown below. Here you cannot find the deleted table <b>student</b> in the list as shown below.</p>
+<img src="images/creating_database_my_db.jpg" alt="Creating Database MY DB" />
+<h1>Impala - Truncate a Table</h1>
+<p>The <b>Truncate Table</b> Statement of Impala is used to remove all the records from an existing table.</p>
+<p>You can also use DROP TABLE command to delete a complete table, but it would remove the complete table structure from the database and you would need to re-create this table once again if you wish you store some data.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the truncate table statement.</p>
+<pre class="result notranslate">
+truncate table_name;
+</pre>
+<h2>Example</h2>
+<p>Suppose, we have a table named <b>customers</b> in Impala, and if you verify its contents, you are getting the following result. This means that the customers table contains 6 records.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers;</b> 
+
+Query: select * from customers 
++----+----------+-----+-----------+--------+--------+ 
+| id | name     | age | address   | salary | e_mail | 
++----+----------+-----+-----------+--------+--------+
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | NULL   | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | NULL   | 
+| 3  | kaushik  | 23  | Kota      | 30000  | NULL   |
+| 4  | Chaitali | 25  | Mumbai    | 35000  | NULL   | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | NULL   | 
+| 6  | Komal    | 22  | MP        | 32000  | NULL   | 
++----+----------+-----+-----------+--------+--------+
+</pre>
+<p>Following is an example of truncating a table in Impala using <b>truncate statement</b>. Here we are removing all the records of the table named <b>customers</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; truncate customers;
+</pre>
+<p>On executing the above statement, Impala deletes all the records of the specified table, displaying the following message.</p>
+<pre class="result notranslate">
+Query: truncate customers 
+
+Fetched 0 row(s) in 0.37s
+</pre>
+<h3>Verification</h3>
+<p>If you verify the contents of the customers table, after the delete operation, using <b>select</b> statement, you will get an empty row as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers;</b>
+Query: select * from customers 
+
+Fetched 0 row(s) in 0.12s
+</pre>
+<h2>Truncating a Table using Hue Browser</h2>
+<p>Open Impala Query editor and type the <b>truncate</b> Statement in it. And click on the execute button as shown in the following screenshot.</p>
+<img src="images/truncating_table.jpg" alt="Truncating Table" />
+<p>After executing the query/statement, all the records from the table are deleted.</p>
+<h1>Impala - Show Tables</h1>
+<p>The <b>show tables</b> statement in Impala is used to get the list of all the existing tables in the current database.</p>
+<h2>Example</h2>
+<p>Following is an example of the <b>show tables</b> statement. If you want to get the list of tables in a particular database, first of all, change the context to the required database and get the list of tables in it using <b>show tables</b> statement as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; use my_db;</b> 
+Query: use my_db
+[quickstart.cloudera:21000] &gt; show tables;
+</pre>
+<p>On executing the above query, Impala fetches the list of all the tables in the specified database and displays it as shown below.</p>
+<pre class="result notranslate">
+Query: show tables 
++-----------+ 
+| name      | 
++-----------+ 
+| customers | 
+| employee  | 
++-----------+ 
+Fetched 2 row(s) in 0.10s
+</pre>
+<h2>Listing the Tables using Hue</h2>
+<p>Open impala Query editor, select the context as <b>my_db</b> and type the <b>show tables</b> statement in it and click on the execute button as shown in the following screenshot.</p>
+<img src="images/listing_the_tables.jpg" alt="Listing the Tables" />
+<p>After executing the query, if you scroll down and select the <b>Results</b> tab, you can see the list of the tables as shown below.</p>
+<img src="images/listing_the_tables_results.jpg" alt="Listing the Tables Results" />
+<h1>Impala - Create View</h1>
+<p>A view is nothing more than a statement of Impala query language that is stored in the database with an associated name. It is a composition of a table in the form of a predefined SQL query.</p>
+<p>A view can contain all the rows of a table or selected ones. A view can be created from one or many tables. Views allow users to &minus;</p>
+<ul class="list">
+<li><p>Structure data in a way that users or classes of users find natural or intuitive.</p></li>
+<li><p>Restrict access to the data such that a user can see and (sometimes) modify exactly what they need and no more.</p></li>
+<li><p>Summarize data from various tables which can be used to generate reports.</p></li>
+</ul>
+<p>You can create a view using the <b>Create View</b> statement of Impala.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the create view statement. <b>IF NOT EXISTS</b> is an optional clause. If we use this clause, a table with the given name is created, only if there is no existing table in the specified database with the same name.</p>
+<pre class="result notranslate">
+Create View IF NOT EXISTS view_name as Select statement
+</pre>
+<h2>Example</h2>
+<p>For example, assume we have a table named <b>customers</b> in the <b>my_db</b> database in Impala, with the following data.</p>
+<pre class="result notranslate">
+ID  NAME      AGE   ADDRESS     SALARY
+--- --------- ----- ----------- --------
+1   Ramesh    32    Ahmedabad   20000
+2   Khilan    25    Delhi       15000
+3   Hardik    27    Bhopal      40000
+4   Chaitali  25    Mumbai      35000
+5   kaushik   23    Kota        30000
+6   Komal     22    MP          32000
+</pre>
+<p>Following is an example of <b>Create View Statement</b>. In this example, we are creating a view as <b>customers</b> table which contains the columns, name, and age.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; CREATE VIEW IF NOT EXISTS customers_view AS 
+select name, age from customers;
+</pre>
+<p>On executing the above query, a view with the desired columns is created, displaying the following message.</p>
+<pre class="result notranslate">
+Query: create VIEW IF NOT EXISTS sample AS select * from customers 
+Fetched 0 row(s) in 0.33s
+</pre>
+<h2>Verification</h2>
+<p>You can verify the contents of the view just created, using the <b>select</b> statement as shown below.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; select * from customers_view;
+</pre>
+<p>This will produce the following result.</p>
+<pre class="result notranslate">
+Query: select * from customers_view 
++----------+-----+ 
+| name     | age | 
++----------+-----+ 
+| Komal    | 22  | 
+| Khilan   | 25  | 
+| Ramesh   | 32  | 
+| Hardik   | 27  | 
+| Chaitali | 25  | 
+| kaushik  | 23  | 
++----------+-----+ 
+Fetched 6 row(s) in 4.80s
+</pre>
+<h2>Creating a View using Hue</h2>
+<p>Open Impala Query editor, select the context as <b>my_db</b>, and type the <b>Create View</b> statement in it and click on the execute button as shown in the following screenshot.</p>
+<img src="images/creating_view.jpg" alt="Creating View" />
+<p>After executing the query, if you scroll down, you can see the <b>view</b> named <b>sample</b> created in the list of tables as shown below.</p>
+<img src="images/creating_view_sample.jpg" alt="Creating a View and Sample" />
+<h1>Impala - Alter View</h1>
+<p>The <b>Alter View</b> statement of Impala is used to change a view. Using this statement, you can change the name of a view, change the database, and the query associated with it.</p>
+<p>Since a <b>view</b> is a logical construct, no physical data will be affected by the <b>alter view</b> query.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>Alter View</b> statement</p>
+<pre class="result no translate">
+ALTER VIEW database_name.view_name as Select statement
+</pre>
+<h2>Example</h2>
+<p>For example, assume we have a view named <b>customers_view</b> in the <b>my_db</b> database in Impala with the following contents.</p>
+<pre class="result notranslate">
++----------+-----+ 
+| name     | age | 
++----------+-----+ 
+| Komal    | 22  | 
+| Khilan   | 25  | 
+| Ramesh   | 32  | 
+| Hardik   | 27  | 
+| Chaitali | 25  | 
+| kaushik  | 23  | 
++----------+-----+
+</pre>
+<p>Following is an example of <b>Alter View Statement</b>. In this example, we are including the columns id, name, and salary instead of name and age to the <b>customers_view</b>.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; Alter view customers_view as select id, name, 
+salary from customers;
+</pre>
+<p>On executing the above query, Impala does the specified changes to the <b>customers_view</b>, displaying the following message.</p>
+<pre class="result notranslate">
+Query: alter view customers_view as select id, name, salary from customers
+</pre>
+<h2>Verification</h2>
+<p>You can verify the contents of the <b>view</b> named <b>customers_view</b>, using the <b>select</b> statement as shown below.</p>
+<pre class="prettyprint notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers_view;</b>
+Query: select * from customers_view
+</pre>
+<p>This will produce the following result.</p>
+<pre class="result notranslate">
++----+----------+--------+ 
+| id | name     | salary | 
++----+----------+--------+
+| 3  | kaushik  | 30000  | 
+| 2  | Khilan   | 15000  | 
+| 5  | Hardik   | 40000  | 
+| 6  | Komal    | 32000  | 
+| 1  | Ramesh   | 20000  | 
+| 4  | Chaitali | 35000  | 
++----+----------+--------+ 
+Fetched 6 row(s) in 0.69s
+</pre>
+<h2>Altering a View using Hue</h2>
+<p>Open Impala Query editor, select the context as <b>my_db</b>, and type the <b>Alter View</b> statement in it and click on the execute button as shown in the following screenshot.</p>
+<img src="images/altering_a_view.jpg" alt="Altering a View" />
+<p>After executing the query, the <b>view</b> named <b>sample</b> will be altered accordingly.</p>
+<h1>Impala - Drop a View</h1>
+<p>The <b>Drop View</b> query of Impala is used to delete an existing view. Since a <b>view</b> is a logical construct, no physical data will be affected by the <b>drop view</b> query.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the drop view statement.</p>
+<pre class="result notranslate">
+DROP VIEW database_name.view_name;
+</pre>
+<h2>Example</h2>
+<p>For example, assume we have a view named <b>customers_view</b> in the <b>my_db</b> database in Impala with the following contents.</p>
+<pre class="result notranslate">
++----------+-----+ 
+| name     | age | 
++----------+-----+ 
+| Komal    | 22  | 
+| Khilan   | 25  | 
+| Ramesh   | 32  | 
+| Hardik   | 27  | 
+| Chaitali | 25  | 
+| kaushik  | 23  | 
++----------+-----+
+</pre>
+<p>Following is an example of <b>Drop View Statement</b>. In this example, we are trying to delete the <b>view</b> named <b>customers_view</b> using the <b>drop view</b> query.</p>
+<pre class="prettyprint notranslate">
+[quickstart.cloudera:21000] > Drop view customers_view;
+</pre>
+<p>On executing the above query, Impala deletes the specified view, displaying the following message.</p>
+<pre class="result notranslate">
+Query: drop view customers_view
+</pre>
+<h2>Verification</h2>
+<p>If you verify the list of tables using <b>show tables</b> statement, you can observe that the <b>view</b> named <b>customers_view</b> is deleted.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; show tables;
+</pre>
+<p>This will produce the following result.</p>
+<pre class="result notranslate">
+Query: show tables 
++-----------+ 
+| name      | 
++-----------+ 
+| customers | 
+| employee  | 
+| sample    | 
++-----------+ 
+Fetched 3 row(s) in 0.10s
+</pre>
+<h2>Dropping a View using Hue</h2>
+<p>Open Impala Query editor, select the context as <b>my_db</b>, and type the <b>Drop view</b> statement in it and click on the execute button as shown in the following screenshot.</p>
+<img src="images/dropping_a_view.jpg" alt="Dropping a View"  />
+<p>After executing the query, if you scroll down, you can see a list named <b>TABLES</b>. This list contains all the <b>tables</b> and <b>views</b> in the current database. From this list, you can find that the specified <b>view</b> was deleted.</p>
+<img src="images/dropping_a_view_tables.jpg" alt="Dropping a View Tables" />
+<h1>Impala - Order By Clause</h1>
+<p>The Impala <b>ORDER BY</b> clause is used to sort the data in an ascending or descending order, based on one or more columns. Some databases sort the query results in ascending order by default.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the ORDER BY clause.</p>
+<pre class="result notranslate">
+select * from table_name ORDER BY col_name [ASC|DESC] [NULLS FIRST|NULLS LAST]
+</pre>
+<p>You can arrange the data in the table in ascending or descending order using the keywords <b>ASC</b> or <b>DESC</b> respectively.</p>
+<p>In the same way, if we use NULLS FIRST, all the null values in the table are arranged in the top rows; and if we use NULLS LAST, the rows containing null values will be arranged last.</p>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in the database <b>my_db</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers;</b>
+Query: select * from customers 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 1  | Ramesh   |  32 | Ahmedabad | 20000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 6 row(s) in 0.51s
+</pre>
+<p>Following is an example of arranging the data in the <b>customers</b> table, in ascending order of their <b>id’s</b> using the <b>order by</b> clause.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; Select * from customers ORDER BY id asc;
+</pre>
+<p>On executing, the above query produces the following output.</p>
+<pre class="result notranslate">
+Query: select * from customers ORDER BY id asc 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 6 row(s) in 0.56s
+</pre>
+<p>In the same way, you can arrange the data of <b>customers</b> table in descending order using the <b>order by</b> clause as shown below.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; Select * from customers ORDER BY id desc;
+</pre>
+<p>On executing, the above query produces the following output.</p>
+<pre class="result notranslate">
+Query: select * from customers ORDER BY id desc 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 6  | Komal    | 22  | MP        | 32000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  |
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 6 row(s) in 0.54s
+</pre>
+<h1>Impala - Group By Clause</h1>
+<p>The Impala <b>GROUP BY</b> clause is used in collaboration with the SELECT statement to arrange identical data into groups.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the GROUP BY clause.</p>
+<pre class="result notranslate">
+select data from table_name Group BY col_name;
+</pre>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in the database <b>my_db</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers;</b> 
+Query: select * from customers 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 6 row(s) in 0.51s
+</pre>
+<p>You can get the total amount of salary of each customer using GROUP BY query as shown below.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; Select name, sum(salary) from customers Group BY name;
+</pre>
+<p>On executing, the above query gives the following output.</p>
+<pre class="result notranslate">
+Query: select name, sum(salary) from customers Group BY name 
++----------+-------------+ 
+| name     | sum(salary) | 
++----------+-------------+ 
+| Ramesh   | 20000       | 
+| Komal    | 32000       | 
+| Hardik   | 40000       | 
+| Khilan   | 15000       | 
+| Chaitali | 35000       | 
+| kaushik  | 30000       |
++----------+-------------+ 
+Fetched 6 row(s) in 1.75s
+</pre>
+<p>Assume that this table has multiple records as shown below.</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  |
+| 2  | Ramesh   | 32  | Ahmedabad | 1000|  | 
+| 3  | Khilan   | 25  | Delhi     | 15000  | 
+| 4  | kaushik  | 23  | Kota      | 30000  | 
+| 5  | Chaitali | 25  | Mumbai    | 35000  |
+| 6  | Chaitali | 25  | Mumbai    | 2000   |
+| 7  | Hardik   | 27  | Bhopal    | 40000  | 
+| 8  | Komal    | 22  | MP        | 32000  | 
++----+----------+-----+-----------+--------+
+</pre>
+<p>Now again, you can get the total amount of salaries of the employees, considering the repeated entries of records, using the <b>Group By</b> clause as shown below.</p>
+<pre class="result notranslate">
+Select name, sum(salary) from customers Group BY name;
+</pre>
+<p>On executing, the above query gives the following output.</p>
+<pre class="result notranslate">
+Query: select name, sum(salary) from customers Group BY name 
++----------+-------------+ 
+| name     | sum(salary) | 
++----------+-------------+ 
+| Ramesh   | 21000       | 
+| Komal    | 32000       | 
+| Hardik   | 40000       | 
+| Khilan   | 15000       | 
+| Chaitali | 37000       | 
+| kaushik  | 30000       | 
++----------+-------------+
+Fetched 6 row(s) in 1.75s
+</pre>
+<h1>Impala - Having Clause</h1>
+<p>The <b>Having</b> clause in Impala enables you to specify conditions that filter which group results appear in the final results.</p>
+<p>In general, the <b>Having</b> clause is used along with <b>group by</b> clause; it places conditions on groups created by the GROUP BY clause.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>Having</b>clause.</p>
+<pre class="result notranslate">
+select * from table_name ORDER BY col_name [ASC|DESC] [NULLS FIRST|NULLS LAST]
+</pre>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in the database <b>my_db</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] > select * from customers;</b> 
+Query: select * from customers 
++----+----------+-----+-------------+--------+ 
+| id | name     | age | address     | salary | 
++----+----------+-----+-------------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad   | 20000  |
+| 2  | Khilan   | 25  | Delhi       | 15000  | 
+| 3  | kaushik  | 23  | Kota        | 30000  | 
+| 4  | Chaitali | 25  | Mumbai      | 35000  | 
+| 5  | Hardik   | 27  | Bhopal      | 40000  | 
+| 6  | Komal    | 22  | MP          | 32000  | 
+| 7  | ram      | 25  | chennai     | 23000  | 
+| 8  | rahim    | 22  | vizag       | 31000  | 
+| 9  | robert   | 23  | banglore    | 28000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 9 row(s) in 0.51s
+</pre>
+<p>Following is an example of using <b>Having</b> clause in Impala &minus;</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; select max(salary) from customers group by age having max(salary) &gt; 20000;
+</pre>
+<p>This query initially groups the table by age and selects the maximum salaries of each group and displays those salaries, which are greater than 20000 as shown below.</p>
+<pre class="result notranslate">
+20000 
++-------------+ 
+| max(salary) |
++-------------+ 
+| 30000       |
+| 35000       | 
+| 40000       | 
+| 32000       | 
++-------------+ 
+Fetched 4 row(s) in 1.30s
+</pre>
+<h1>Impala - Limit Clause</h1>
+<p>The <b>limit</b> clause in Impala is used to restrict the number of rows of a resultset to a desired number, i.e., the resultset of the query does not hold the records beyond the specified limit.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>Limit</b> clause in Impala.</p>
+<pre class="result notranslate">
+select * from table_name order by id limit numerical_expression;
+</pre>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in the database <b>my_db</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers;</b> 
+Query: select * from customers 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 8  | ram      | 22  | vizag     | 31000  | 
+| 9  | robert   | 23  | banglore  | 28000  | 
+| 7  | ram      | 25  | chennai   | 23000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 9 row(s) in 0.51s
+</pre>
+<p>You can arrange the records in the table in the ascending order of their id’s using the <b>order by</b> clause as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers order by id;</b> 
+Query: select * from customers order by id 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
+| 7  | ram      | 25  | chennai   | 23000  | 
+| 8  | ram      | 22  | vizag     | 31000  |
+| 9  | robert   | 23  | banglore  | 28000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 9 row(s) in 0.54s
+</pre>
+<p>Now, using the <b>limit</b> clause, you can restrict the number of records of the output to 4, using the <b>limit</b> clause as shown below.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; select * from customers order by id limit 4;
+</pre>
+<p>On executing, the above query gives the following output.</p>
+<pre class="result notranslate">
+Query: select * from customers order by id limit 4 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  |
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 4 row(s) in 0.64s
+</pre>
+<h1>Impala - Offset Clause</h1>
+<p>In general, the rows in the resultset of a <b>select</b> query starts from 0. Using the <b>offset</b> clause, we can decide from where the output should be considered. For example, if we choose the offset as 0, the result will be as usual and if we choose the offset as 5, the result starts from the fifth row.</p>
+<img src="images/offset_clause.jpg" alt="Offset Clause" />
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>offset</b>clause in Impala.</p>
+<pre class="result notranslate">
+select data from table_name Group BY col_name;
+</pre>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in the database <b>my_db</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers;</b> 
+Query: select * from customers 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 8  | ram      | 22  | vizag     | 31000  | 
+| 9  | robert   | 23  | banglore  | 28000  |
+| 7  | ram      | 25  | chennai   | 23000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 9 row(s) in 0.51s
+</pre>
+<p>You can arrange the records in the table in the ascending order of their id’s and limit the number of records to 4, using <b>limit</b> and <b>order by</b> clauses as shown below.</p>
+<pre class="result notranslate">
+Query: select * from customers order by id limit 4 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 4 row(s) in 0.64s
+</pre>
+<p>Following is an example of the <b>offset</b> clause. Here, we are getting the records in the <b>customers</b> table in the order of their id’s and printing the first four rows starting from the 0<sup>th</sup> row.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; select * from customers order by id limit 4 offset 0;
+</pre>
+<p>On executing, the above query gives the following result.</p>
+<pre class="result notranslate">
+Query: select * from customers order by id limit 4 offset 0 
++----+----------+-----+-----------+--------+
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 4 row(s) in 0.62s
+</pre>
+<p>In the same way, you can get four records from the <b>customers</b> table starting from the row having offset 5 as shown below.</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers order by id limit 4 offset 5;</b> 
+Query: select * from customers order by id limit 4 offset 5 
++----+--------+-----+----------+--------+ 
+| id | name   | age | address  | salary | 
++----+--------+-----+----------+--------+ 
+| 6  | Komal  | 22  | MP       | 32000  | 
+| 7  | ram    | 25  | chennai  | 23000  | 
+| 8  | ram    | 22  | vizag    | 31000  |
+| 9  | robert | 23  | banglore | 28000  | 
++----+--------+-----+----------+--------+ 
+Fetched 4 row(s) in 0.52s
+</pre>
+<h1>Impala - Union Clause</h1>
+<p>You can combine the results of two queries using the <b>Union</b> clause of Impala.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>Union</b> clause in Impala.</p>
+<pre class="result notranslate">
+query1 union query2;
+</pre>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in the database <b>my_db</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers; </b>
+Query: select * from customers 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 9  | robert   | 23  | banglore  | 28000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
+| 7  | ram      | 25  | chennai   | 23000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
+| 8  | ram      | 22  | vizag     | 31000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 9 row(s) in 0.59s
+</pre>
+<p>In the same way, suppose we have another table named <b>employee</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from employee;</b> 
+Query: select * from employee 
++----+---------+-----+---------+--------+ 
+| id | name    | age | address | salary | 
++----+---------+-----+---------+--------+ 
+| 3  | mahesh  | 54  | Chennai | 55000  | 
+| 2  | ramesh  | 44  | Chennai | 50000  | 
+| 4  | Rupesh  | 64  | Delhi   | 60000  | 
+| 1  | subhash | 34  | Delhi   | 40000  | 
++----+---------+-----+---------+--------+ 
+Fetched 4 row(s) in 0.59s
+</pre>
+<p>Following is an example of the <b>union</b> clause in Impala. In this example, we arrange the records in both tables in the order of their id’s and limit their number by 3 using two separate queries and joining these queries using the <b>UNION</b> clause.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; select * from customers order by id limit 3
+ union select * from employee order by id limit 3;
+</pre>
+<p>On executing, the above query gives the following output.</p>
+<pre class="result notranslate">
+Query: select * from customers order by id limit 3 union select 
+   * from employee order by id limit 3 
++----+---------+-----+-----------+--------+ 
+| id | name    | age | address   | salary | 
++----+---------+-----+-----------+--------+ 
+| 2  | Khilan  | 25  | Delhi     | 15000  |
+| 3  | mahesh  | 54  | Chennai   | 55000  | 
+| 1  | subhash | 34  | Delhi     | 40000  | 
+| 2  | ramesh  | 44  | Chennai   | 50000  | 
+| 3  | kaushik | 23  | Kota      | 30000  | 
+| 1  | Ramesh  | 32  | Ahmedabad | 20000  | 
++----+---------+-----+-----------+--------+ 
+Fetched 6 row(s) in 3.11s
+</pre>
+<h1>Impala - With Clause</h1>
+<p>In case a query is way too complex, we can define <b>aliases</b> to complex parts and include them in the query using the <b>with</b> clause of Impala.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>with</b> clause in Impala.</p>
+<pre class="result notranslate">
+with x as (select 1), y as (select 2) (select * from x union y);
+</pre>
+<h2>Example</h2>
+<p>Assume we have a table named <b>customers</b> in the database <b>my_db</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from customers;</b>
+Query: select * from customers 
++----+----------+-----+-----------+--------+ 
+| id | name     | age | address   | salary | 
++----+----------+-----+-----------+--------+ 
+| 1  | Ramesh   | 32  | Ahmedabad | 20000  | 
+| 9  | robert   | 23  | banglore  | 28000  | 
+| 2  | Khilan   | 25  | Delhi     | 15000  | 
+| 4  | Chaitali | 25  | Mumbai    | 35000  | 
+| 7  | ram      | 25  | chennai   | 23000  | 
+| 6  | Komal    | 22  | MP        | 32000  | 
+| 8  | ram      | 22  | vizag     | 31000  | 
+| 5  | Hardik   | 27  | Bhopal    | 40000  | 
+| 3  | kaushik  | 23  | Kota      | 30000  | 
++----+----------+-----+-----------+--------+ 
+Fetched 9 row(s) in 0.59s
+</pre>
+<p>In the same way, suppose we have another table named <b>employee</b> and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select * from employee;</b> 
+Query: select * from employee 
++----+---------+-----+---------+--------+ 
+| id | name    | age | address | salary | 
++----+---------+-----+---------+--------+ 
+| 3  | mahesh  | 54  | Chennai | 55000  | 
+| 2  | ramesh  | 44  | Chennai | 50000  | 
+| 4  | Rupesh  | 64  | Delhi   | 60000  | 
+| 1  | subhash | 34  | Delhi   | 40000  | 
++----+---------+-----+---------+--------+ 
+Fetched 4 row(s) in 0.59s
+</pre>
+<p>Following is an example of the <b>with</b> clause in Impala. In this example, we are displaying the records from both <b>employee</b> and <b>customers</b> whose age is greater than 25 using <b>with</b> clause.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; 
+   with t1 as (select * from customers where age&gt;25), 
+   t2 as (select * from employee where age&gt;25) 
+   (select * from t1 union select * from t2);
+</pre>
+<p>On executing, the above query gives the following output.</p>
+<pre class="result notranslate">
+Query: with t1 as (select * from customers where age&gt;25), t2 as (select * from employee where age&gt;25) 
+   (select * from t1 union select * from t2)
++----+---------+-----+-----------+--------+ 
+| id | name    | age | address   | salary | 
++----+---------+-----+-----------+--------+ 
+| 3  | mahesh  | 54  | Chennai   | 55000  | 
+| 1  | subhash | 34  | Delhi     | 40000  | 
+| 2  | ramesh  | 44  | Chennai   | 50000  | 
+| 5  | Hardik  | 27  | Bhopal    | 40000  | 
+| 4  | Rupesh  | 64  | Delhi     | 60000  | 
+| 1  | Ramesh  | 32  | Ahmedabad | 20000  | 
++----+---------+-----+-----------+--------+ 
+Fetched 6 row(s) in 1.73s
+</pre>
+<h1>Impala - Distinct Operator</h1>
+<p>The <b>distinct</b> operator in Impala is used to get the unique values by removing duplicates.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the <b>distinct </b>operator.</p>
+<pre class="result notranslate">
+select distinct columns… from table_name;
+</pre>
+<h2>Example</h2>
+<p>Assume that we have a table named <b>customers</b> in Impala and its contents are as follows &minus;</p>
+<pre class="result notranslate">
+<b>[quickstart.cloudera:21000] &gt; select distinct id, name, age, salary from customers;</b> 
+Query: select distinct id, name, age, salary from customers
+</pre>
+<p>Here you can observe the salary of the customers Ramesh and Chaitali entered twice and using the <b>distinct</b> operator, we can select the unique values as shown below.</p>
+<pre class="result notranslate">
+[quickstart.cloudera:21000] &gt; select distinct name, age, address from customers;
+</pre>
+<p>On executing, the above query gives the following output.</p>
+<pre class="result notranslate">
+Query: select distinct id, name from customers
++----------+-----+-----------+ 
+| name     | age | address   | 
++----------+-----+-----------+ 
+| Ramesh   | 32  | Ahmedabad |
+| Khilan   | 25  | Delhi     | 
+| kaushik  | 23  | Kota      | 
+| Chaitali | 25  | Mumbai    |
+| Hardik   | 27  | Bhopal    |
+| Komal    | 22  | MP        | 
++----------+-----+-----------+
+Fetched 9 row(s) in 1.46s
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="impala_distinct_operator.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="impala_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/impala/impala_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/impala/impala_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/impala/impala_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/impala/impala_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/impala/impala_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/impala/impala_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Impala Quick Guide",
+    "name": "Impala Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/impala/impala_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/impala/images/homepage_of_cloudera_website.jpg",
+        "width": 600,
+        "height": 446
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:49.",
+    "dateModified": "July 23 2017 03:34:49.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Impala is a MPP (Massive Parallel Processing) SQL query engine for processing huge volumes of data that is stored in Hadoop cluster. It is an open source software which is written in C++ and Java. It provides high performance and low latency compared to o..."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Big Data Analytics",
+                "@id": "https://www.tutorialspoint.com/big_data_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Impala",
+                "@id": "https://www.tutorialspoint.com/impala"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "Impala - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/impala/impala_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:40:21 GMT -->
+</html>

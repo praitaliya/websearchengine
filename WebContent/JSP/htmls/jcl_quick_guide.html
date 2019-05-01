@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/jcl/jcl_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:09:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>JCL Quick Guide</title>
+<meta name="description" content="JCL Quick Guide - Learn  JCL ( Job Control Language) in simple and easy steps starting from their overview, Environment Setup, JOB statement, Exec Statement, DD Statement, Base Library, Procedures, Conditional Job Processing, Defining Datasets, Input, Output, Running COBOL Programs, Utility Programs, Sort Tricks, FAQ." />
+<meta name="keywords" content="JCL, Job, Control, Language, Tutorial, Environment, Setup, JOB statement, Exec Statement, DD Statement, Base Library, Procedures, Conditional Job Processing, Defining Datasets, Input, Output, Running COBOL Programs,  Utility Programs, Sort Tricks, FAQ." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #814489 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #814489 !important;}
+.submenu-item{ border-bottom: 2px solid #814489 !important; border-top: 2px solid #814489 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/jcl-mini-logo.jpg" alt="JCL Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li><a class="videolink" href="../jcl_online_training/index.html" target="_blank"><img src="images/jcl-video-tutorials.jpg" alt="JCL Video Tutorials" /></a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">JCL Tutorial</li>
+<li><a target="_top" href="index.html">JCL Home</a></li>
+<li><a target="_top" href="jcl_overview.html">JCL - Overview</a></li>
+<li><a target="_top" href="jcl_environment_setup.html">JCL - Environment</a></li>
+<li><a target="_top" href="jcl_job_statement.html">JCL - JOB Statement</a></li>
+<li><a target="_top" href="jcl_exec_statement.html">JCL - EXEC Statement</a></li>
+<li><a target="_top" href="jcl_dd_statement.html">JCL - DD Statement</a></li>
+<li><a target="_top" href="jcl_base_library.html">JCL - Base Library</a></li>
+<li><a target="_top" href="jcl_procedures.htm">JCL - Procedures</a></li>
+<li><a target="_top" href="jcl_conditional_processing.htm">JCL - Conditional Processing</a></li>
+<li><a target="_top" href="jcl_defining_datasets.html">JCL - Defining Datasets</a></li>
+<li><a target="_top" href="jcl_input_output.html">JCL - Input/Output Methods</a></li>
+<li><a target="_top" href="jcl_run_cobol_programs.html">JCL - Run COBOL Programs</a></li>
+<li><a target="_top" href="jcl_utility_programs.html">JCL - Utility Programs</a></li>
+<li><a target="_top" href="jcl_basic_sort_tricks.html">JCL - Basic Sort Tricks</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">JCL Useful Resources</li>
+<li><a target="_top" href="jcl_questions_answers.html">JCL - Questions and Answers</a></li>
+<li><a target="_top" href="jcl_quick_guide.html">JCL - Quick Guide</a></li>
+<li><a target="_top" href="jcl_useful_resources.html">JCL - Useful Resources</a></li>
+<li><a target="_top" href="jcl_discussion.html">JCL - Discussion</a></li>
+</ul>
+
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>JCL - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="jcl_basic_sort_tricks.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="jcl_interview_questions.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>JCL - Overview</h1>
+<h2>When to use JCL</h2>       
+<p>JCL is used in a mainframe environment to act as a communication between a program (Example: COBOL, Assembler or PL/I) and the operating system.  In a mainframe environment, programs can be executed in batch and online mode.  Example of a batch system can be processing the bank transactions through a VSAM (Virtual Storage Access Method) file and applying it to the corresponding accounts. Example of an online system can be a back office screen used by staffs in a bank to open an account. In batch mode, programs are submitted to the operating system as a job through a JCL.</p>
+<p>Batch and Online processing differ in the aspect of input, output and program execution request. In batch processing, these aspects are fed into a JCL which is in turn received by the Operating System.</p>
+<h2>Job Processing</h2>
+<p>A job is a unit of work which can be made up of many job steps. Each job step is specified in a Job Control Language (JCL) through a set of Job Control Statements.</p>
+<p>The Operating System uses <b>Job Entry System (JES)</b> to receive jobs into the Operating System, to schedule them for processing and to control the output.</p>
+<p>Job processing goes through a series of steps as given below:</p>
+<img src="images/job-processing.jpg" alt="Job Processing" />
+<ul class="list">
+<li><p><b>Job Submission -</b> Submitting the JCL to JES.</p></li>
+<li><p><b>Job Conversion -</b> The JCL along with the PROC is converted into an interpreted text to be understood by JES and stored into a dataset, which we call as SPOOL.</p></li>
+<li><p><b>Job Queuing -</b> JES decides the priority of the job based on CLASS and PRTY parameters in the JOB statement (explained in <a href="jcl_job_statement.html">JCL - JOB Statement</a> chapter). The JCL errors are checked and the job is scheduled into the job queue if there are no errors.</p></li>
+<li><p><b>Job Execution -</b> When the job reaches its highest priority, it is taken up for execution from the job queue. The JCL is read from the SPOOL, the program is executed and the output is redirected to the corresponding output destination as specified in the JCL.</p></li>
+<li><p><b>Purging -</b> When the job is complete, the allocated resources and the JES SPOOL space is released. In order to store the job log, we need to copy the job log to another dataset before it is released from the SPOOL.</p></li>
+</ul>
+<h1>JCL - Environment Setup</h1>
+<h2>Installing JCL on Windows/Linux</h2>       
+<p>There are many Free Mainframe Emulators available for Windows which can be used to write and learn sample JCLs.</p>
+<p>One such emulator is Hercules, which can be easily installed in Windows by following few simple steps given below:</p>
+<ul class="list">
+<li><p>Download and install the Hercules emulator, which is available from the Hercules' home site -  : <a href="http://www.hercules-390.eu/" target="_blank" rel="nofollow">www.hercules-390.eu</a></p></li>
+<li><p>Once you installed package on Windows machine, it will create a folder like <b>C:\Mainframes</b>.</p></li>
+<li><p>Run Command Prompt (CMD) and reach the directory C:\Mainframes on CMD.</p></li>
+<li><p>The complete guide on various commands to write and execute a JCL can be found on URL <b>www.jaymoseley.com/hercules/installmvs/instmvs2.htm</b></p></li>
+</ul>
+<p>Hercules is an open source software implementation of the mainframe System/370 and ESA/390 architectures, in addition to the latest 64-bit z/Architecture. Hercules runs under Linux, Windows, Solaris, FreeBSD, and Mac OS X.</p>
+<h2>Running JCL on Mainframes</h2>
+<p>A user can connect to a mainframe server in a number of ways such a thin client, dummy terminal, Virtual Client System (VCS) or Virtual Desktop System (VDS).</p>
+<p>Every valid user is given a login id to enter into the Z/OS interface (TSO/E or ISPF). In the Z/OS interface, the JCL can be coded and stored as a member in a Partitioned Dataset (PDS). When the JCL is submitted, it is executed and the output received as explained in the job processing section of previous chapter.</p>
+<h2>Structure of a JCL</h2>
+<p>The basic structure of a JCL with the common statements is given below:</p>
+<pre class="prettyprint notranslate">
+//SAMPJCL JOB 1,CLASS=6,MSGCLASS=0,NOTIFY=&amp;SYSUID          <b>(1)</b>
+//*                                                        <b>(2)</b>
+//STEP010  EXEC PGM=SORT                                   <b>(3)</b> 
+//SORTIN   DD DSN=JCL.SAMPLE.INPUT,DISP=SHR                <b>(4)</b>
+//SORTOUT  DD DSN=JCL.SAMPLE.OUTPUT,                       <b>(5)</b>
+//         DISP=(NEW,CATLG,CATLG),DATACLAS=DSIZE50                
+//SYSOUT   DD SYSOUT=*                                     <b>(6)</b> 
+//SYSUDUMP DD SYSOUT=C                                     <b>(6)</b> 
+//SYSPRINT DD SYSOUT=*                                     <b>(6)</b> 
+//SYSIN    DD *                                            <b>(6)</b> 
+  SORT FIELDS=COPY                                    
+  INCLUDE COND=(28,3,CH,EQ,C'XXX')                                    
+/*                                                         <b>(7)</b>  
+</pre>
+<h2>Program Description</h2>
+<p>The numbered JCL statements have been explained below:</p>
+<p><b>(1) JOB statement</b> - Specifies the information required for SPOOLing of the job such as job id, priority of execution, user-id to be notified upon completion of the job.</p>
+<p><b>(2) //* statement</b> - This is a comment statement.</p>
+<p><b>(3) EXEC statement</b> - Specifies the PROC/Program to be executed. In the above example, a SORT program is being executed (i.e., sorting the input data in a particular order)</p>
+<p><b>(4) Input DD statement</b> - Specifies the type of input to be passed to the program mentioned in (3). In the above example, a Physical Sequential (PS) file is passed as input in shared mode (DISP = SHR).</p>
+<p><b>(5) Output DD statement</b> - Specifies the type of output to be produced by the program upon execution. In the above example, a PS file is created. If a statement extends beyond the 70th position in a line, then it is continued in the next line, which should start with "//" followed by one or more spaces.</p>
+<p><b>(6)</b> There can be other types of DD statements to specify additional information to the program (In the above example: The SORT condition is specified in the SYSIN DD statement) and to specify the destination for error/execution log (Example: SYSUDUMP/SYSPRINT). DD statements can be contained in a dataset (mainframe file) or as in stream data (information hard-coded within the JCL) as given in above example.</p>
+<p><b>(7)</b> <b>/*</b> marks the end of in stream data.</p>
+<p>All the JCL statements except in stream data starts with //. There should be at least one space before and after JOB, EXEC and DD keywords and there should not be any spaces in rest of the statement.</p>
+<h2>JOB Parameter Types</h2>
+<p>Each of the JCL statements is accompanied by a set of parameters to help the Operating Systems in completing the program execution. The parameters can be of two types:</p>
+<h3>Positional Parameters</h3>
+<ul class="list">
+<li><p>Appears at pre-defined position and order in the statement. Example: Accounting information Parameter can appear only after the <b>JOB</b> keyword and before the programmer name parameter and the Keyword Parameters. If a positional parameter is omitted, it has to be replaced with a comma.</p></li>
+<li><p>Positional Parameters are present in JOB and EXEC statements. In the above example, PGM is a positional parameter coded after the <b>EXEC</b> keyword.</p></li>
+</ul>
+<h3>Keyword Parameters</h3>
+<ul class="list">
+<li><p>They are coded after the positional parameters, but can appear in any order. Keyword parameters can be omitted if not required. The generic syntax is KEYWORD= <i>value</i>. Example: MSGCLASS=X, i.e., the job log is redirected to the output SPOOL after the job completion.</p></li>
+<li><p>In the above example, CLASS, MSGCLASS and NOTIFY are keyword parameters of JOB statement. There can be keyword parameters in EXEC statement as well.</p></li>
+</ul>
+<p>These parameters have been detailed out in the subsequent chapters along with appropriate examples.</p>
+<h1>JCL - JOB Statement</h1>
+<p>JOB Statement is the first control statement in a JCL. This gives the identity of the job to the Operating System (OS), in the spool and in the scheduler. The parameters in the JOB statement help the Operating Systems in allocating the right scheduler, required CPU time and issuing notifications to the user.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL JOB statement:</p>
+<pre class="prettyprint notranslate">
+//Job-name JOB Positional-param, Keyword-param 
+</pre>
+<h2>Description</h2>
+<p>Let us see the description of the terms used in above JOB statement syntax.</p>
+<h3>Job-name</h3>
+<p>This gives an id to the job while submitting it to the OS. It is can be length of 1 to 8 with alphanumeric characters and starts just after //.</p>
+<h3>JOB</h3>
+<p>This is the keyword to identify it as a JOB statement.</p>
+<h3>Positional-param</h3>
+<p>There are positional parameters, which can be of two types:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:25%;">Positional Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>Account information</b></td>
+<td>This refers to the person or group to which the CPU time is owed. It is set as per the rules of the company owning the mainframes. If it is specified as (*), then it takes the id of the user, who has currently logged into the Mainframe Terminal.</td>
+</tr>
+<tr>
+<td><b>Programmer name</b></td>
+<td>This identifies the person or group, who is in charge of the JCL. This is not a mandatory parameter and can be replaced by a comma.</td>
+</tr>
+</table>
+<h3>Keyword-param</h3>
+<p>Following are the various keyword parameters, which can be used in JOB statement. You can use one or more parameters based on requirements and they are separated by comma:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:25%;">Keyword Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>CLASS</b></td>
+<td><p>Based on the time duration and the number of resources required by the job, companies assign different job classes. These can be visualized as individual schedulers used by the OS to receive the jobs. Placing the jobs in the right scheduler will aid in easy execution of the jobs. Some companies have different classes for jobs in test and production environment.</p>
+<p>Valid values for CLASS parameter are A to Z characters and 0 to 9 numeric (of length 1). Following is the syntax:</p>
+<p><b>CLASS=0 to 9 | A to Z</b></p>
+</td>
+</tr>
+<tr>
+<td><b>PRTY</b></td>
+<td><p>To specify the priority of the job within a job class. If this parameter is not specified, then the job is added to the end of the queue in the specified CLASS. Following is the syntax:</p>
+<p><b>PRTY=N</b></p>
+<p>Where N is a number in between 0 to 15 and higher the number, higher is the priority.</p>
+</td>
+</tr>
+<tr>
+<td><b>NOTIFY</b></td>
+<td><p>The system sends the success or failure message (Maximum Condition Code) to the user specified in this parameter. Following is the syntax:</p>
+<p><b>NOTIFY="userid | &amp;SYSUID"</b></p>
+<p>Here system sends the message to the user "userid" but if we use NOTIFY = &amp;SYSUID, then the message is sent to the user submitting the JCL.</p>
+</td>
+</tr>
+<tr>
+<td><b>MSGCLASS</b></td>
+<td><p>To specify the output destination for the system and Job messages when the job is complete. Following is the syntax:</p>
+<p><b>MSGCLASS=CLASS</b></p>
+<p>Valid values of CLASS can be from "A" to "Z" and "0" to "9". MSGCLASS = Y can be set as a class to send the job log to the JMR (JOBLOG Management and Retrieval: a repository within mainframes to store the job statistics).</p>
+</td>
+</tr>
+<tr>
+<td><b>MSGLEVEL</b></td>
+<td><p>Specifies the type of messages to be written to the output destination specified in the MSGCLASS. Following is the syntax:</p>
+<p><b>MSGLEVEL=(<i>ST, MSG</i>)</b></p>
+<p><i>ST</i> = Type of statements written to output log</p>
+<ul class="list">
+<li><p>When <i>ST</i> = 0, Job statements only.</p></li>
+<li><p>When <i>ST</i> = 1, JCL along with symbolic parameters expanded.</p></li>
+<li><p>When <i>ST</i> = 2, Input JCL only.</p></li>
+</ul>
+<p><i>MSG</i> = Type of messages written to output log.</p>
+<ul class="list">
+<li><p>When <i>MSG</i> = 0, Allocation and Termination messages written upon abnormal job completion.</p></li>
+<li><p>When <i>MSG</i> = 1, Allocation and Termination messages written irrespective of the nature of job completion.</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><b>TYPRUN</b></td>
+<td><p>Specifies a special processing for the job. Following is the syntax:</p>
+<p><b>TYPRUN = SCAN | HOLD</b></p>
+<p>Where SCAN and HOLD has the following description</p>
+<ul class="list">
+<li><p>TYPRUN = SCAN checks the syntax errors of the JCL without executing it.</p></li>
+<li><p>TYPRUN = HOLD puts the job on HOLD in the job queue.To release the job, "A" can be typed against the job in the SPOOL, which will bring the job to execution.</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><b>TIME</b></td>
+<td><p>Specifies the time span to be used by the processor to execute the job. Following is the syntax:</p>
+<p><b>TIME=(mm, ss)  or TIME=ss</b></p>
+<p>Where mm = minutes and ss = seconds</p>
+<p>This parameter can be useful while testing a newly coded program. In order to ensure that the program does not run for long because of looping errors, a time parameter can be coded so that the program abends when the specified CPU time is reached.</p></td>
+</tr>
+<tr>
+<td><b>REGION</b></td>
+<td><p>Specifies the address space required to run a job step within the job. Following is the syntax:</p>
+<p><b>REGION=nK | nM</b></p>
+<p>Here, <i>region</i> can be specified as nK or nM where n is a number, K is kilobyte and M is Megabyte.</p>
+<p>When REGION = 0K or 0M, largest address space is provided for execution.In critical applications, coding of 0K or 0M is prohibited to avoid wasting the address space.</p></td>
+</tr>
+</table>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+//URMISAMP JOB (*),"tutpoint",CLASS=6,PRTY=10,NOTIFY=&SYSUID, 
+//   MSGCLASS=X,MSGLEVEL=(1,1),TYPRUN=SCAN, 
+//   TIME=(3,0),REGION=10K                                          
+</pre>
+<p>Here, JOB statement is getting extended beyond the 70th position in a line,so we continue in the next line which should start with "//" followed by one or more spaces.</p>
+<h2>Miscellaneous Parameters</h2>
+<p>There are few other parameters, which can be used with JOB Statement but they are not frequently used:</p>
+<table class="table table-bordered">
+<tr>
+<td style="width:25%;"><b>ADDRSPC</b></td>
+<td>Type of storage used: Virtual or Real</td>
+</tr>
+<tr>
+<td><b>BYTES</b></td>
+<td>Size of data to be written to output log and the action to be taken when the size is exceeded.</td>
+</tr>
+<tr>
+<td><b>LINES</b></td>
+<td>Maximum number of lines to be printed to output log.</td>
+</tr>
+<tr>
+<td><b>PAGES</b></td>
+<td>Maximum number of pages to be printed to output log.</td>
+</tr>
+<tr>
+<td><b>USER</b></td>
+<td>User id used to submit the job</td>
+</tr>
+<tr>
+<td><b>PASSWORD</b></td>
+<td>Password of the user-id specified in the USER parameter.</td>
+</tr>
+<tr>
+<td style="width:26%;"><b>COND and RESTART</b></td>
+<td>These are used in conditional job step processing and are explained in detail  while discussing  conditional Processing.</td>
+</tr>
+</table>
+<h1>JCL - EXEC Statement</h1>
+<p>Each JCL can be made of many job steps. Each job step can execute a program directly or can call a procedure, which in turn executes one or more programs (job steps). The statement, which holds the job step program/procedure information is the <b>EXEC statement.</b></p>
+<p>The purpose of the EXEC statement is to provide required information for the program/procedure executed in the job step. Parameters coded in this statement can pass data to the program in execution, can override certain parameters of JOB statement and can pass parameters to the procedure if the EXEC statement calls a procedure instead of directly executing a program.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL EXEC statement:</p>
+<pre class="prettyprint notranslate">
+//Step-name EXEC Positional-param, Keyword-param 
+</pre>
+<h2>Description</h2>
+<p>Let us see the description of the terms used in above EXEC statement syntax.</p>
+<h3>STEP-NAME</h3> 
+<p>This identifies the job step within the JCL. It can be of length 1 to 8 with alphanumeric characters.</p>
+<h3>EXEC</h3> 
+<p>This is the keyword to identify it as an EXEC statement.</p>
+<h3>POSITIONAL-PARAM</h3>
+<p>These are positional parameters, which can be of two types:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:30%;">Positional Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>PGM</b></td>
+<td>This refers to the program name to be executed in the job step.</td>
+</tr>
+<tr>
+<td><b>PROC</b></td>
+<td>This refers to the procedure name to be executed in the job step. We will discuss it a separate chapter.</td>
+</tr>
+</table>
+<h3>KEYWORD-PARAM</h3>
+<p>Following are the various keyword parameters for EXEC statement. You can use one or more parameters based on requirements and they are separated by comma:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:30%;">Keyword Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>PARM</b></td>
+<td><p>Used to provide parametrized data to the program that is being executed in the job step. This is a program dependant field and do not have definite rules, except that the PARM value has to be included within quotation in the event of having special characters.</p>
+<p>For example given below, the value "CUST1000" is passed as an alphanumeric value to the program. If the program is in COBOL, the value passed through a PARM parameter in a JCL is received in the LINKAGE SECTION of the program.</p></td>
+</tr>
+<tr>
+<td><b>ADDRSPC</b></td>
+<td><p>This is used to specify whether the job step require virtual or real storage for execution. Virtual storage is pageable whereas real storage is not and is placed in the main memory for execution. Job steps, which require faster execution can be placed in real storage. Following is the syntax:</p>
+<p><b>ADDRSPC=VIRT | REAL</b></p>
+<p>When an ADDRSPC is not coded, VIRT is the default one.</p></td>
+</tr>
+<tr>
+<td><b>ACCT</b></td>
+<td><p>This specifies the accounting information of the job step. Following is the syntax:</p>
+<p><b>ACCT=(userid)</b></p>
+<p>This is similar to the positional parameter <b>accounting information</b> in the JOB statement. If it is coded both in JOB and EXEC statement, then the accounting information in JOB statement applies to all job steps where an ACCT parameter is not coded. The ACCT parameter in an EXEC statement will override the one present in the JOB statement for that job step only.</p></td>
+</tr>
+</table>
+<h2>Common Keyword Parameters of EXEC and JOB Statement</h2>
+<table class="table table-bordered">
+<tr>
+<th style="width:30%;">Keyword Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>ADDRSPC</b></td>
+<td>ADDRSPC coded in JOB statement overrides the ADDRSPC coded in EXEC statement of any job step.</td>
+</tr>
+<tr>
+<td><b>TIME</b></td>
+<td>If TIME is coded in an EXEC statement, then it applies to that job step only. If it is specified in both JOB and EXEC statement, then both will be in effect and can cause time-out error due to either of it. It is not recommended to use TIME parameter in both the JOB and EXEC statement together.</td>
+</tr>
+<tr>
+<td><b>REGION</b></td>
+<td><p>If REGION is coded in an EXEC statement, then it applies to that job step only.</p>
+<p>REGION coded in JOB statement overrides the REGION coded in EXEC statement of any job step.</p>
+</td>
+</tr>
+<tr>
+<td><b>COND</b></td>
+<td><p>Used to control the job step execution based on the return-code of the previous step.</p>
+<p>If a COND parameter is coded in an EXEC statement of a job step, then the COND parameter of the JOB statement (if present) is ignored. The various tests that can be performed using a COND parameter is explained in conditional Processing.</p></td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>Following is a simple example of JCL script along with JOB and EXEC statements:</p>
+<pre class="prettyprint notranslate">
+//TTYYSAMP JOB 'TUTO',CLASS=6,MSGCLASS=X,REGION=8K,
+//      NOTIFY=&amp;SYSUID
+//*
+//STEP010 EXEC PGM=MYCOBOL,PARAM=CUST1000,
+//      ACCT=(XXXX),REGION=8K,ADDRSPC=REAL,TIME=1440
+</pre>
+<h1>JCL - DD Statement</h1>
+<p>Datasets are mainframe files with records organised in a specific format. Datasets are stored on the Direct Access Storage Device (DASD) or Tapes of the mainframe and are basic data storage areas. If these data are required to be used/created in a batch program, then the file (i.e., dataset) physical name along with the file format and organisation are coded in a JCL.</p>
+<p>The definition of each dataset used in the JCL is given using the <b>DD statement</b>. The input and output resources required by a job step needs to be described within a DD statement with information such as the dataset organisation, storage requirements and record length.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL DD statement:</p>
+<pre class="prettyprint notranslate">
+//DD-name DD Parameters
+</pre>
+<h2>Description</h2>
+<p>Let us see the description of the terms used in above DD statement syntax.</p>
+<h3>DD-NAME</h3> 
+<p> A DD-NAME identifies the dataset or input/output resource. If this is an input/output file used by a COBOL/Assembler program, then the file is referenced by this name within the program.</p>
+<h3>DD</h3> 
+<p>This is the keyword to identify it as an DD statement.</p>
+<h3>PARAMETERS</h3>
+<p>Following are the various parameters for DD statement. You can use one or more parameters based on requirements and they are separated by comma:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:25%;">Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>DSN</b></td>
+<td><p>The DSN parameter refers to the physical dataset name of a newly created or existing dataset. The DSN value can be made up of sub-names each of 1 to 8 characters length, separated by periods and of total length of 44 characters (alphanumeric). Following is the syntax:</p>
+<p><b>DSN=Physical Dataset Name</b></p>
+<p><b>Temporary datasets</b> need storage only for the job duration and are deleted at job completion. Such datasets are represented as <b>DSN=&amp;name </b> or simply without a DSN specified.</p>
+<p>If a temporary dataset created by a job step is to be used in the next job step, then it is referenced as <b>DSN=*.stepname.ddname</b>. This is called <b> Backward Referencing.</b></p></td>
+</tr>
+<tr>
+<td><b>DISP</b></td>
+<td><p> The DISP parameter is used to describe the status of the dataset, disposition at the end of the job step on normal and abnormal completion. DISP is not required in a DD statement only when the dataset gets created and deleted in the same job step (like the temporary datasets). Following is the syntax:</p>
+<p><b> DISP=(status, normal-disposition, abnormal-disposition)</b></p>
+<p>Following are valid values for <b>status</b>:</p>
+<ul class="list">
+<li><p><b>NEW</b> : The dataset is newly created by the job step. OUTPUT1 in the example above.</p></li>
+<li><p><b>OLD</b> : The dataset is already created and will be overwritten in the job step. The job step gains exclusive access on the dataset and no other job can access this dataset until the completion of the job step.</p></li>
+<li><p><b>SHR</b> : The dataset is already created and will be read in the job step. The dataset can be read by multiple jobs at the same time. Example: INPUT1 and INPUT2.</p></li>
+<li><p><b>MOD</b> : The dataset is already created. This disposition will be used when there is a need to append new records to the existing dataset (existing records will not be overwritten).</p></li>
+</ul>
+<p>A <b>normal-disposition</b> parameter can take one of the following values</p>
+<ul class="list">
+<li><p> CATLG, UNCATLG, DELETE, PASS and KEEP</p></li>
+</ul>
+<p>A <b>abnormal-disposition</b> parameter can take one of the following values</p>
+<ul class="list">
+<li><p> CATLG, UNCATLG, DELETE and KEEP</p></li>
+</ul>
+<p>Here is the description of CATLG, UNCATLG, DELETE, PASS and KEEP parameters:</p>
+<ul class="list">
+<li><p><b>CATLG</b> : The dataset is retained with a entry in the system catalog.</p></li>
+<li><p><b>UNCATLG</b> : The dataset is retained but system catalog entry is removed.</p></li>
+<li><p><b>KEEP</b> : The dataset is retained without changing any of the catalog entries. KEEP is the only valid disposition for VSAM files. This is to be used only for permanent datasets.</p></li>
+<li><p><b>DELETE</b> : Dataset is deleted from user and system catalog.</p></li>
+<li><p><b>PASS</b> : This is valid only for normal disposition. This is used when the dataset is to be passed and processed by the next job step in a JCL</p></li>
+</ul>
+<p>When any of the sub-parameters of DISP are not specified, the default values are as follows:</p>
+<ul class="list">
+<li><p><b>status</b> : NEW is the default value.</p></li>
+<li><p><b>normal-disposition</b> : If status is NEW, default normal-disposition is DELETE, else it is KEEP.</p></li>
+<li><p><b>abnormal-disposition</b> : Same as normal disposition.</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><b>DCB</b></td>
+<td><p>The Data Control Block (DCB) parameter details the physical characteristics of a dataset. This parameter is required for datasets that are newly created in the job step.</p>
+<p>LRECL is the length of each record held within the dataset.</p>
+<p>RECFM is the record format of the dataset. RECFM can hold values FB, V or VB. FB is a fixed block organisation where one or more logical records are grouped within a single block. V is variable organisation  where one variable length logical record is placed within one physical block. VB is Variable Block organisation where one or more variable length logical records are placed within one physical block.</p>
+<p>BLKSIZE is the size of the physical block. The larger the block, greater is the number of records for a FB or VB file.</p>
+<p>DSORG is the type of dataset organisation. DSORG can hold values PS (Physical Sequential), PO (Partitioned Organisation) and DA (Direct Organisation).</p>
+<p>When there is a need to replicate the DCB values of one dataset to another within the same jobstep or JCL, then it is specified as DCB=*.stepname.ddname where stepname is the name of the job step and ddname is the dataset from which the DCB is copied.</p>
+<p>Check below example where RECFM=FB,LRECL=80 forms the DCB of dataset OUTPUT1.</p>
+</td>
+</tr>
+<tr>
+<td><b>SPACE</b></td>
+<td><p>The SPACE parameter specifies the space required for the dataset in the DASD (Direct Access Storage Disk). Following is the syntax:</p>
+<p><b>SPACE=(spcunits, (pri, sec, dir), RLSE)</b></p>
+<p>Here is the description of all the used parameters:</p>
+<ul class="list">
+<li><p><b>spcunits</b> : This can be one of the CYL(Cylinder), TRK(Tracks) or BLKSIZE(Block Size).</p></li>
+<li><p><b>pri</b> : This is the primary space required for the dataset.</p></li>
+<li><p><b>sec</b> : This is the additional space required, when the primary space is not being sufficient.</p></li>
+<li><p><b>ir</b> : This is the directory blocks required, if the dataset is a PDS (Partitioned Dataset) with members within it.</p></li>
+<li><p><b>RLSE</b> : This is used to release the unused space at job completion.</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><b>UNIT</b></td>
+<td><p>The UNIT and VOL parameters are listed in the system catalog for catalogued datasets and hence can be accessed with just the physical DSN name. But for uncataloged datasets, the DD statement should include these parameters. For new datasets to be created, the UNIT/VOL parameters can be specified or the Z/OS allocates the suitable device and volume.</p>
+<p>The UNIT parameter specifies the type of device on which the dataset is stored. The device type can be identified using Hardware Address or Device type group. Following is the syntax:</p>
+<p><b>UNIT=DASD  | SYSDA</b></p>
+<p>Where DASD stands for Direct Access Storage Device and SYSDA stands for System Direct Access and refers to the next available disk storage device.</p>
+</td>
+</tr>
+<tr>
+<td><b>VOL</b></td>
+<td><p>The VOL parameter specifies the volume number on the device identified by the UNIT parameter. Following is the syntax:</p>
+<p><b>VOL=SER=(v1,v2)</b></p>
+<p>Where v1, v2 are volume serial numbers. You can use the following syntax as well:</p>
+<p><b>VOL=REF=*.DDNAME</b></p>
+<p>Where REF is the backward reference to the volume serial number of a dataset in any of the preceding job steps in the JCL.</p></td>
+</tr>
+<tr>
+<td><b>SYSOUT</b></td>
+<td><p>The DD statement parameters discussed so far corresponds to data being stored in a dataset. The SYSOUT parameter directs the data to output device based on the class specified. Following is the syntax</p>
+<p><b>SYSOUT=class</b></p>
+<p>Where if class is A then it directs output to printer, and if  class is <b>*</b> then it directs output to same destination as that of the MSGCLASS parameter in the JOB statement.</p></td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>Following is an example, which makes use of DD statements along with various parameters explained above:</p>
+<pre class="prettyprint notranslate">
+//TTYYSAMP JOB 'TUTO',CLASS=6,MSGCLASS=X,REGION=8K,
+//         NOTIFY=&amp;SYSUID
+//*
+//STEP010  EXEC PGM=ICETOOL,ADDRSPC=REAL
+//*
+//INPUT1   DD DSN=TUTO.SORT.INPUT1,DISP=SHR
+//INPUT2   DD DSN=TUTO.SORT.INPUT2,DISP=SHR,UNIT=SYSDA,
+//         VOL=SER=(1243,1244)
+//OUTPUT1  DD DSN=MYFILES.SAMPLE.OUTPUT1,DISP=(,CATLG,DELETE),
+//         RECFM=FB,LRECL=80,SPACE=(CYL,(10,20))
+//OUTPUT2  DD SYSOUT=*
+</pre>
+<h1>JCL - Base Library</h1>
+<p><b>Base Library</b> is the Partitioned Dataset (PDS), which holds the load modules of the program to be executed in the JCL or the catalogued procedure, which is called in the program. Base libraries can be specified for the whole JCL in a <b>JOBLIB</b> library or for a particular job step in a <b>STEPLIB</b> statement.</p>
+<h2>JOBLIB Statement</h2>   
+<p>A <b>JOBLIB</b> statement is used in order to identify the location of the program to be executed in a JCL. The JOBLIB statement is specified after the JOB statement and before the EXEC statement. This can be used only for the in stream procedures and programs.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL JOBLIB statement:</p>
+<pre class="prettyprint notranslate">
+//JOBLIB DD DSN=dsnname,DISP=SHR                                      
+</pre>
+<p>The JOBLIB statement is applicable to all the EXEC statements within the JCL. The program specified in the EXEC statement will be searched in the JOBLIB library followed by the system library.</p>
+<p>For example, if the EXEC statement is executing a COBOL program, the load module of the COBOL program should be placed within the JOBLIB library.</p>
+<h2>STEPLIB Statement</h2>   
+<p>A <b>STEPLIB</b> statement is used in order to identify the location of the program to be executed within a Job Step. The STEPLIB statement is specified after the EXEC statement and before the DD statement of the job step.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL STEPLIB statement:</p>
+<pre class="prettyprint notranslate">
+//STEPLIB DD DSN=dsnname,DISP=SHR                                      
+</pre>
+<p>The program specified in the EXEC statement will be searched in the STEPLIB library followed by the system library. STEPLIB coded in a job step overrides the JOBLIB statement.</p>
+<h2>Example</h2>
+<p>The following example shows the usage of JOBLIB and STEPLIB statements:</p>
+<pre class="prettyprint notranslate">
+//MYJCL JOB ,,CLASS=6,NOTIFY=&SYSUID
+//*
+//<b>JOBLIB</b> DD DSN=MYPROC.BASE.LIB1,DISP=SHR
+//*
+//STEP1 EXEC PGM=MYPROG1
+//INPUT1 DD DSN=MYFILE.SAMPLE.INPUT1,DISP=SHR
+//OUTPUT1 DD DSN=MYFILES.SAMPLE.OUTPUT1,DISP=(,CATLG,DELETE),
+//           RECFM=FB,LRECL=80
+//*
+//STEP2 EXEC PGM=MYPROG2
+//<b>STEPLIB</b> DD DSN=MYPROC.BASE.LIB2,DISP=SHR
+//INPUT2 DD DSN=MYFILE.SAMPLE.INPUT2,DISP=SHR
+//OUTPUT2 DD DSN=MYFILES.SAMPLE.OUTPUT2,DISP=(,CATLG,DELETE),
+//           RECFM=FB,LRECL=80                                      
+</pre>
+<p>Here, the load module of the program MYPROG1 (in STEP1) is searched in the MYPROC.SAMPLE.LIB1. If not found, it is searched in the system library. In STEP2, STEPLIB overrides JOBLIB and load module of the program MYPROG2 is searched in MYPROC.SAMPLE.LIB2 and then in the system library.</p>
+<h2>INCLUDE Statement</h2>   
+<p>A set of JCL statements coded within a member of a PDS can be included to a JCL using an <b>INCLUDE</b> statement. When the JES interprets the JCL, the set of JCL statements within the INCLUDE member replaces the INCLUDE statement.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL INCLUDE statement:</p>
+<pre class="prettyprint notranslate">
+//name <b>INCLUDE</b> MEMBER=member-name                                      
+</pre>
+<p>The main purpose of INCLUDE statement is reusability. For example, common files to be used across many JCLs can be coded as DD statements within INCLUDE member and used in a JCL.</p>
+<p>Dummy DD statements, data card specifications, PROCs, JOB, PROC statements cannot be coded within an INCLUDE member. An INLCUDE statement can be coded within an INCLUDE member and further nesting can be done up to 15 levels.</p>
+<h2>JCLLIB Statement</h2>   
+<p>A <b>JCLLIB</b> statement is used to identify the private libraries used in the job. It can be used both with instream and cataloged procedures.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL JCLLIB statement:</p>
+<pre class="prettyprint notranslate">
+//name <b>JCLLIB</b> ORDER=(library1, library2....)                                  
+</pre>
+<p>The libraries specified in the JCLLIB statement will be searched in the given order to locate the programs, procedures and INCLUDE member used in the job. There can be only one JCLLIB statement in a JCL; specified after a JOB statement and before EXEC and INCLUDE statement but it cannot be coded within an INCLUDE member.</p>
+<h2>Example</h2>
+<p>In the following example, the program MYPROG3 and INCLUDE member MYINCL is searched in the order of MYPROC.BASE.LIB1, MYPROC.BASE.LIB2, system library.</p>
+<pre class="prettyprint notranslate">
+//MYJCL JOB ,,CLASS=6,NOTIFY=&SYSUID
+//*
+//MYLIB <b>JCLLIB</b> ORDER=(MYPROC.BASE.LIB1,MYPROC.BASE.LIB2)
+//*
+//STEP1 EXEC PGM=<b>MYPROG3</b>
+//INC <b>INCLUDE</b> MEMBER=MYINCL
+//OUTPUT1 DD DSN=MYFILES.SAMPLE.OUTPUT1,DISP=(,CATLG,DELETE),
+//           RECFM=FB,LRECL=80
+//*                                
+</pre>
+<h1>JCL - Procedures</h1>
+<p>The <b>JCL Procedures</b> are set of statements inside a JCL grouped together to perform a particular function. Usually, the fixed part of the JCL is coded in a procedure. The varying part of the Job is coded within the JCL.</p>
+<p>You can use a procedure to achieve parallel execution of a program using multiple input files. A JCL can be created for each input file, and a single procedure can be called simultaneously by passing the input file name as a symbolic parameter.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL procedure definition:</p>
+<pre class="prettyprint notranslate">
+//*
+//<i>Step-name</i> <b>EXEC</b> <i>procedure name</i> 
+</pre>
+<p>The contents of the procedure are held within the JCL for an instream procedure. The contents are held within a different member of the base library for a cataloged procedure. This chapter is going to explain two types of procedures available in JCL and then finally we will see how we can nest various procedures.</p>
+<h2>Instream Procedure</h2>   
+<p>When the procedure is coded within the same JCL member, it is called an Instream Procedure. It should start with a PROC statement and end with a PEND statement.</p>
+<pre class="prettyprint notranslate">
+//SAMPINST JOB 1,CLASS=6,MSGCLASS=Y,NOTIFY=&SYSUID
+//*
+//INSTPROC   <b>PROC</b>                //*START OF PROCEDURE
+//PROC1		EXEC PGM=SORT
+//SORTIN	DD DSN=&DSNAME,DISP=SHR
+//SORTOUT	DD SYSOUT=*MYINCL
+//SYSOUT	DD SYSOUT=*
+//SYSIN		DD DSN=&DATAC LRECL=80
+//           <b>PEND</b>               //*END OF PROCEDURE
+//*
+//STEP1      EXEC INSTPROC,DSNME=MYDATA.URMI.INPUT1,
+//           DATAC=MYDATA.BASE.LIB1(DATA1)
+//*
+//STEP2      EXEC INSTPROC,DSNME=MYDATA.URMI.INPUT2
+//           DATAC=MYDATA.BASE.LIB1(DATA1)
+//*                               
+</pre>
+<p>In the above example, the procedure INSTPROC is called in STEP1 and STEP2 using different input files. The parameters DSNAME and DATAC can be coded with different values while calling the procedure and these are called as <b>symbolic parameters</b>. The varying input to the JCL such as file names, datacards, PARM values, etc., are passed as symbolic parameters to procedures.</p>
+<p>While coding symbolic parameters, do not use KEYWORDS, PARAMETERS or SUB-PARAMETERS as symbolic names. Example: Do not use TIME=&TIME but yes you can use TIME=&TM and it is assumed as a right way of coding symbolics.</p>
+<p>User-defined symbolic parameters are called <b>JCL Symbols</b>. There are certain symbols called <b>system symbols</b>, which are used for logon job executions. The only system symbol used in batch jobs by normal users is <b>&amp;SYSUID</b> and this is used in the NOTIFY parameter in the JOB statement.</p>
+<h2>Cataloged Procedure</h2>
+<p>When the procedure is separated out from the JCL and coded in a different data store, it is called a <b>Cataloged Procedure</b>. A PROC statement is not mandatory to be coded in a cataloged procedure. Following is an example of JCL where it's calling CATLPROC procedure:</p>
+<pre class="prettyprint notranslate">
+//SAMPINST JOB 1,CLASS=6,MSGCLASS=Y,NOTIFY=&SYSUID
+//*
+//STEP EXEC <b>CATLPROC</b>,PROG=CATPRC1,DSNME=MYDATA.URMI.INPUT
+//          DATAC=MYDATA.BASE.LIB1(DATA1)
+</pre>
+<p>Here, the procedure CATLPROC is cataloged in MYCOBOL.BASE.LIB1. PROG,DATAC and DSNAME are passed as symbolic parameters to the procedure CATLPROC.</p>
+<pre class="prettyprint notranslate">
+//CATLPROC <b>PROC</b> PROG=,BASELB=MYCOBOL.BASE.LIB1
+//*
+//PROC1     EXEC PGM=&PROG
+//STEPLIB   DD DSN=&BASELB,DISP=SHR
+//IN1       DD DSN=&DSNAME,DISP=SHR
+//OUT1      DD SYSOUT=*
+//SYSOUT    DD SYSOUT=*
+//SYSIN     DD DSN=&DATAC
+//*
+</pre>
+<p>Within the procedure, the symbolic parameters PROG and BASELB are coded. Please note that the PROG parameter within the procedure is overridden by the value in the JCL and hence PGM takes the value CATPRC1 during execution.</p>
+<h2>Nested Procedures</h2>
+<p>Calling a procedure from within a procedure is called a <b>nested procedure</b>.  Procedures can be nested up to 15 levels. The nesting can be completely in-stream or cataloged. We cannot code an instream procedure within a cataloged procedure.</p>
+<pre class="prettyprint notranslate">
+//SAMPINST JOB 1,CLASS=6,MSGCLASS=Y,NOTIFY=&SYSUID
+//*
+//SETNM     SET DSNM1=INPUT1,DSNM2=OUTPUT1
+//INSTPRC1  <b>PROC</b>               //* START OF PROCEDURE 1
+//STEP1        EXEC PGM=SORT,DISP=SHR
+//SORTIN       DD DSN=&DSNM1,DISP=SHR
+//SORTOUT      DD DSN=&DSNM2,DISP=(,PASS)
+//SYSOUT       DD SYSOUT=*
+//SYSIN        DD DSN=&DATAC
+//*
+//STEP2        EXEC <b>PROC=INSTPRC2</b>,DSNM2=MYDATA.URMI.OUTPUT2
+//          <b>PEND</b>               //* END OF PROCEDURE 1
+//*
+//INSTPRC2  <b>PROC</b>               //* START OF PROCEDURE 2
+//STEP1        EXEC PGM=SORT
+//SORTIN       DD DSN=*.INSTPRC1.STEP1.SORTOUT
+//SORTOUT      DD DSN=&DSNM2,DISP=OLD
+//SYSOUT       DD SYSOUT=*
+//SYSIN        DD DSN=&DATAC
+//          <b>PEND</b>               //* END OF PROCEDURE 2
+//*
+//JSTEP1    EXEC INSTPRC1,DSNM1=MYDATA.URMI.INPUT1,
+//          DATAC=MYDATA.BASE.LIB1(DATA1)
+//*
+</pre>
+<p>In the above example, the JCL calls the procedure INSTPRC1 in JSTEP1 and procedure INSTPRC2 is being called within the procedure INSTPRC1. Here, the output of INSTPRC1 (SORTOUT) is passed as input (SORTIN) to INSTPRC2.</p>
+<blockquote>A <b>SET statement</b> is used to define commonly used symbolics across job steps or procedures. It initializes the previous values in the symbolic names. It has to be defined before the first use of the symbolic names in the JCL.</blockquote>
+<p>Let's have a look at the below description to understand a little more about the above program:</p>
+<ul class="list">
+<li><p>SET parameter initializes DSNM1=INPUT1 and DSNM2=OUTPUT1.</p></li>
+<li><p>When INSTPRC1 is called in JSTEP1 of JCL, DSNM1=MYDATA.URMI.INPUT1 and DSNM2=OUTPUT1., i.e., the value initialized in SET statement is reset with the value set in any of the job step/procedures.</p></li>
+<li><p>When INSTPRC2 is called in STEP2 of INSTPRC1, DSNM1=MYDATA.URMI.INPUT1 and DSNM2=MYDATA.URMI.OUTPUT2.</p></li>
+</ul>
+<h1>JCL - Conditional Processing</h1>
+<p>The Job Entry System uses two approaches to perform conditional processing in a JCL. When a job completes, a return code is set based on the status of execution. The return code can be a number between 0 (successful execution) to 4095 (non-zero shows error condition). The most common conventional values are:</p>
+<ul class="list">
+<li><p>0 = Normal - all OK</p></li>
+<li><p>4 = Warning - minor errors or problems.</p></li>
+<li><p>8 = Error - significant errors or problems.</p></li>
+<li><p>12 = Severe error - major errors or problems, the results should not be trusted.</p></li>
+<li><p>16 = Terminal error - very serious problems, do not use the results.</p></li>
+</ul>
+<p>A job step execution can be controlled based on the return code of the previous step(s) using the <b>COND </b> parameter and <b>IF-THEN-ELSE</b> construct, which has been explained in this tutorial.</p>
+<h2>COND parameter</h2>   
+<p>A <b>COND</b> parameter can be coded in the JOB or EXEC statement of JCL. It is a test on the return code of the preceding job steps. If the test is evaluated to be true, the current job step execution is bypassed. Bypassing is just omission of the job step and not an abnormal termination. There can be at most eight conditions combined in a single test.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL COND Parameter:</p>
+<pre class="prettyprint notranslate">
+COND=(rc,logical-operator)
+or
+COND=(rc,logical-operator,stepname)
+or
+COND=EVEN
+or 
+COND=ONLY
+</pre>
+<p>Here is the description of parameters used:</p>
+<ul class="list">
+<li><p><b>rc</b> : This is the return code</p></li>
+<li><p><b>logical-operator</b> : This can be GT (Greater Than), GE (Greater than or Equal to), EQ (Equal to), LT (Lesser Than), LE (Lesser than or Equal to) or NE (Not Equal to).</p></li>
+<li><p><b>stepname</b> : This is the job step whose return code is used in the test.</p></li>
+</ul>
+<p>Last two conditions (a) COND=EVEN and (b) COND=ONLY, have been explained below in this tutorial.</p>
+<p>The COND can be coded either inside JOB statement or EXEC statement, and in both the cases, it behaves differently as explained below:</p>
+<h2>COND inside JOB statement</h2>
+<p>When COND is coded in JOB statement, the condition is tested for every job step. When the condition is true at any particular job step, it is bypassed along with the job steps following it. Following is an example:</p>
+<pre class="prettyprint notranslate">
+//CNDSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID,COND=(5,LE)
+//*
+//STEP10 EXEC PGM=FIRSTP  
+<b>//* STEP10 executes without any test being performed.</b>
+
+//STEP20 EXEC PGM=SECONDP 
+<b>//* STEP20 is bypassed, if RC of STEP10 is 5 or above. 
+//* Say STEP10 ends with RC4 and hence test is false. 
+//* So STEP20 executes and lets say it ends with RC16.</b>
+
+//STEP30 EXEC PGM=SORT
+<b>//* STEP30 is bypassed since 5 <= 16.</b>
+</pre>
+<h2>COND inside EXEC statement</h2>
+<p>When COND is coded in EXEC statement of a job step and found to be true, only that job step is bypassed, and execution is continued from next job step.</p>
+<pre class="prettyprint notranslate">
+//CNDSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID
+//*
+//STP01 EXEC PGM=SORT
+<b>//* Assuming STP01 ends with RC0.</b>
+
+//STP02 EXEC PGM=MYCOBB,COND=(0,EQ,STP01)
+<b>//* In STP02, condition evaluates to TRUE and step bypassed.</b>
+
+//STP03 EXEC PGM=IEBGENER,COND=((10,LT,STP01),(10,GT,STP02))
+<b>//* In STP03, first condition fails and hence STP03 executes. 
+//* Since STP02 is bypassed, the condition (10,GT,STP02) in 
+//* STP03 is not tested.</b>
+</pre>
+<h3>COND=EVEN</h3>
+<p>When COND=EVEN is coded, the current job step is executed, even if any of the previous steps abnormally terminate. If any other RC condition is coded along with COND=EVEN, then the job step executes if none of the RC condition is true.</p>
+<pre class="prettyprint notranslate">
+//CNDSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID
+//*
+//STP01 EXEC PGM=SORT
+<b>//* Assuming STP01 ends with RC0.</b>
+
+//STP02 EXEC PGM=MYCOBB,COND=(0,EQ,STP01)
+<b>//* In STP02, condition evaluates to TRUE and step bypassed.</b>
+
+//STP03 EXEC PGM=IEBGENER,COND=((10,LT,STP01),EVEN)
+<b>//* In STP03, condition (10,LT,STP01) evaluates to true,
+//* hence the step is bypassed.</b>
+</pre>
+<h3>COND=ONLY</h3>
+<p>When COND=ONLY is coded, the current job step is executed, only when any of the previous steps abnormally terminate. If any other RC condition is coded along with COND=ONLY, then the job step executes if none of the RC condition is true and any of the previous job steps fail abnormally.</p>
+<pre class="prettyprint notranslate">
+//CNDSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID
+//*
+//STP01 EXEC PGM=SORT
+<b>//* Assuming STP01 ends with RC0.</b>
+
+//STP02 EXEC PGM=MYCOBB,COND=(4,EQ,STP01)
+<b>//* In STP02, condition evaluates to FALSE, step is executed 
+//* and assume the step abends.</b>
+
+//STP03 EXEC PGM=IEBGENER,COND=((0,EQ,STP01),ONLY)
+<b>//* In STP03, though the STP02 abends, the condition 
+//* (0,EQ,STP01) is met. Hence STP03 is bypassed.</b>
+</pre>
+<h2>IF-THEN-ELSE Construct</h2>
+<p>Another approach to control the job processing is by using IF-THEN-ELSE constructs. This gives more flexibility and user-friendly way of conditional processing.</p>
+<h2>Syntax</h2>
+<p>Following is the basic syntax of a JCL IF-THEN-ELSE Construct:</p>
+<pre class="prettyprint notranslate">
+//name IF condition THEN
+list of statements //* action to be taken when condition is true
+//name ELSE 
+list of statements //* action to be taken when condition is false
+//name ENDIF
+</pre>
+<p>Following is the description of the used terms in the above IF-THEN-ELSE Construct:</p>
+<ul class="list">
+<li><p><b>name</b> : This is optional and a name can have 1 to 8 alphanumeric characters starting with alphabet, #,$ or @.</p></li>
+<li><p><b>Condition</b> : A condition will have a format: <b>KEYWORD OPERATOR VALUE</b>, where <b>KEYWORDS</b> can be RC (Return Code), ABENDCC (System or user completion code), ABEND, RUN (step started execution). An <b>OPERATOR</b> can be logical operator (AND (&), OR (|)) or relational operator (<, <=, >, >=, <>).</p></li>
+</ul>
+<h2>Example</h2>
+<p>Following is a simple example showing the usage of IF-THEN-ELSE:</p>
+<pre class="prettyprint notranslate">
+//CNDSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID
+//*
+//PRC1   PROC
+//PST1	   EXEC PGM=SORT
+//PST2	   EXEC PGM=IEBGENER
+//       PEND
+//STP01  EXEC PGM=SORT 
+//IF1    IF STP01.RC = 0 THEN
+//STP02     EXEC PGM=MYCOBB1,PARM=123
+//       ENDIF
+//IF2    IF STP01.RUN THEN
+//STP03a    EXEC PGM=IEBGENER
+//STP03b    EXEC PGM=SORT
+//       ENDIF
+//IF3    IF STP03b.!ABEND THEN
+//STP04     EXEC PGM=MYCOBB1,PARM=456
+//       ELSE
+//       ENDIF
+//IF4    IF (STP01.RC = 0 & STP02.RC <= 4) THEN
+//STP05     EXEC PROC=PRC1
+//       ENDIF
+//IF5    IF STP05.PRC1.PST1.ABEND THEN
+//STP06     EXEC PGM=MYABD
+//       ELSE
+//STP07     EXEC PGM=SORT
+//       ENDIF
+</pre>
+<p>Let's try to look into the above program to understand it in little more detail:</p>
+<ul class="list">
+<li><p>The return code of STP01 is tested in IF1. If it is 0, then STP02 is executed. Else, the processing goes to the next IF statement (IF2).</p></li>
+<li><p>In IF2, If STP01 has started execution, then STP03a and STP03b are executed.</p></li>
+<li><p>In IF3, If STP03b does not ABEND, then STP04 is executed. In ELSE, there are no statements. It is called a NULL ELSE statement.</p></li>
+<li><p>In IF4, if STP01.RC = 0 and STP02.RC <=4 are TRUE, then STP05 is executed.</p></li>
+<li><p>In IF5, if the proc-step PST1 in PROC PRC1 in jobstep STP05 ABEND, then STP06 is executed. Else STP07 is executed.</p></li>
+<li><p>If IF4 evaluates to false, then STP05 is not executed. In that case, IF5 are not tested and the steps STP06, STP07 are not executed.</p></li>
+</ul>
+<p>The IF-THEN-ELSE will not be executed in the case of abnormal termination of the job such as user cancelling the job, job time expiry or a dataset is backward referenced to a step that is bypassed.</p>
+<h2>Setting Checkpoints</h2>
+<p>You can set checkpoint dataset inside your JCL program using <b>SYSCKEOV,</b> which is a DD statement.</p>
+<p>A <b>CHKPT</b> is the parameter coded for multi-volume QSAM datasets in a DD statement. When a CHKPT is coded as CHKPT=EOV, a checkpoint is written to the dataset specified in the SYSCKEOV statement at the end of each volume of the input/output multi-volume dataset.</p>
+<pre class="prettyprint notranslate">
+//CHKSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID
+//*
+//STP01     EXEC PGM=MYCOBB
+//SYSCKEOV  DD DSNAME=SAMPLE.CHK,DISP=MOD
+//IN1       DD DSN=SAMPLE.IN,DISP=SHR
+//OUT1      DD DSN=SAMPLE.OUT,DISP=(,CATLG,CATLG)
+//          CHKPT=EOV,LRECL=80,RECFM=FB	
+</pre>
+<P>In the above example, a checkpoint is written in dataset SAMPLE.CHK at the end of each volume of the output dataset SAMPLE.OUT.</p>
+<h2>Restart Processing</h2>
+<p>You can restart processing  ether using automated way using the <b>RD parameter</b> or manual using  the <b>RESTART parameter</b>.</p>
+<p><b>RD parameter</b> is coded in the JOB or EXEC statement and it helps in automated JOB/STEP restart and can hold one of the four values: R, RNC, NR or NC.</p>
+<ul class="list">
+<li><p><b>RD=R</b> allows automated restarts and considers the checkpoint coded in the CHKPT parameter of the DD statement.</p></li>
+<li><p><b>RD=RNC</b> allows automated restarts, but overrides (ignores) the CHKPT parameter.</p></li>
+<li><p><b>RD=NR</b> specifies that the job/step cannot be automatically restarted. But when it is manually restarted using the RESTART parameter, CHKPT parameter (if any) will be considered.</p></li>
+<li><p><b>RD=NC</b> disallows automated restart and checkpoint processing.</p></li>
+</ul>
+<p>If there is a requirement to do automated restart for specific abend codes only, then it can be specified  in the <b>SCHEDxx</b> member of the IBM system parmlib library.</p>
+<p><b>RESTART parameter</b> is coded in the JOB or EXEC statement and it helps in manual restart of the JOB/STEP after the job failure. RESTART can be accompanied with a checkid, which is the checkpoint written in the dataset coded in the SYSCKEOV DD statement. When a checkid is coded, the SYSCHK DD statement should be coded to reference the checkpoint dataset after the JOBLIB statement (if any), else after the JOB statement.</p>
+<pre class="prettyprint notranslate">
+//CHKSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID,RESTART=(STP01,chk5)
+//*
+//SYSCHK    DD DSN=SAMPLE.CHK,DISP=OLD
+//STP01     EXEC PGM=MYCOBB
+//*SYSCKEOV	DD DSNAME=SAMPLE.CHK,DISP=MOD
+//IN1       DD DSN=SAMPLE.IN,DISP=SHR
+//OUT1      DD DSN=SAMPLE.OUT,DISP=(,CATLG,CATLG)
+//          CHKPT=EOV,LRECL=80,RECFM=FB	
+</pre>
+<p>In the above example, chk5 is the checkid, i.e., STP01 is restarted at checkpoint5. Please note that a SYSCHK statement is added and SYSCKEOV statement is commented out in the previous program explained in Setting Checkpoint section.</p>
+<h1>JCL - Defining Datasets</h1>
+<p>A dataset name specifies the name of a file and it is denoted by DSN in JCL. The DSN parameter refers to the physical dataset name of a newly created or existing dataset. The DSN value can be made up of sub-names each of 1 to 8 characters length, separated by periods and of total length of 44 characters (alphanumeric). Following is the syntax:</p>
+<pre class="prettyprint notranslate">
+<b>DSN=&amp;name | *.stepname.ddname</b>
+</pre>
+<p><b>Temporary datasets</b> need storage only for the job duration and are deleted at job completion. Such datasets are represented as <b>DSN=&amp;name</b> or simply without a DSN specified.</p>
+<p>If a temporary dataset created by a job step is to be used in the next job step, then it is referenced as <b>DSN=*.stepname.ddname</b>. This is called <b>Backward Referencing.</b></p>
+<h2>Concatenating Datasets</h2>   
+<p>If there is more than one dataset of the same format, they can be concatenated and passed as an input to the program in a single DD name.</p>
+<pre class="prettyprint notranslate">
+//CONCATEX JOB CLASS=6,NOTIFY=&amp;SYSUID
+//*
+//STEP10    EXEC PGM=SORT
+//SORTIN    DD DSN=SAMPLE.INPUT1,DISP=SHR
+//          DD DSN=SAMPLE.INPUT2,DISP=SHR
+//          DD DSN=SAMPLE.INPUT3,DISP=SHR
+//SORTOUT   DD DSN=SAMPLE.OUTPUT,DISP=(,CATLG,DELETE),
+//          LRECL=50,RECFM=FB
+</pre>
+<p>In the above example, three datasets are concatenated and passed as input to the SORT program in the SORTIN DD name. The files are merged, sorted on the specified key fields and then written to a single output file SAMPLE.OUTPUT in the SORTOUT DD name.</p>
+<h2>Overriding Datasets</h2>
+<p>In a standardised JCL, the program to be executed and its related datasets are placed within a cataloged procedure, which is called in the JCL. Usually, for testing purposes or for an incident fix, there might be a  need to use different datasets other than the ones specified in the cataloged procedure. In that case, the dataset in the procedure can be overridden in the JCL.</p>
+<pre class="prettyprint notranslate">
+//SAMPINST JOB 1,CLASS=6,MSGCLASS=Y,NOTIFY=&SYSUID
+//*
+//JSTEP1    EXEC <b>CATLPROC</b>,PROG=CATPRC1,DSNME=MYDATA.URMI.INPUT
+//          DATAC=MYDATA.BASE.LIB1(DATA1)
+//STEP1.IN1 DD DSN=MYDATA.OVER.INPUT,DISP=SHR
+//*
+//* The cataloged procedure is as below:
+//*
+//CATLPROC <b>PROC</b> PROG=,BASELB=MYCOBOL.BASE.LIB1
+//*
+//STEP1     EXEC PGM=&PROG
+//STEPLIB   DD DSN=&BASELB,DISP=SHR
+//IN1       DD DSN=MYDATA.URMI.INPUT,DISP=SHR
+//OUT1      DD SYSOUT=*
+//SYSOUT    DD SYSOUT=*
+//SYSIN     DD MYDATA.BASE.LIB1(DATA1),DISP=SHR
+//*
+//STEP2     EXEC PGM=SORT
+</pre>
+<p>In the above example, the dataset IN1 uses the file MYDATA.URMI.INPUT in the PROC, which is overridden in the JCL. Hence, the input file used in execution is MYDATA.OVER.INPUT. Please note that the dataset is referred as STEP1.IN1. If there is only one step in the JCL/PROC, then the dataset can be referred with just the DD name. Similarly, if there are more than one step in the JCL, then the dataset is to be overridden as JSTEP1.STEP1.IN1.</p>
+<pre class="prettyprint notranslate">
+//SAMPINST  JOB 1,CLASS=6,MSGCLASS=Y,NOTIFY=&SYSUID
+//*
+//STEP      EXEC <b>CATLPROC</b>,PROG=CATPRC1,DSNME=MYDATA.URMI.INPUT
+//          DATAC=MYDATA.BASE.LIB1(DATA1)
+//STEP1.IN1 DD DSN=MYDATA.OVER.INPUT,DISP=SHR
+//          DD DUMMY
+//          DD DUMMY
+//*
+</pre>
+<p>In the above example, out of the three datasets concatenated in IN1, the first one is overridden in the JCL and the rest is kept as that present in PROC.</p>
+<h2>Defining GDGs in a JCL</h2>
+<p>Generation Data Groups (GDGs) are group of datasets related to each other by a common name. The common name is referred as GDG base and each dataset associated with the base is called a GDG version.</p>
+<p>For example,  MYDATA.URMI.SAMPLE.GDG is the GDG base name. The datasets are named as MYDATA.URMI.SAMPLE.GDG.G0001V00, MYDATA.URMI.SAMPLE.GDG.G0002V00 and so on. The latest version of the GDG is referred as MYDATA.URMI.SAMPLE.GDG(0), previous versions are referred as (-1), (-2) and so on. The next version to be created in a program is refered as MYDATA.URMI.SAMPLE.GDG(+1) in the JCL.</p>
+<h3>Create/ Alter GDG in a JCL</h3>
+<p>The GDG versions can have same or different DCB parameters. An initial model DCB can be defined to be used by all versions, but it can be overridden when creating new versions.</p>
+<pre class="prettyprint notranslate">
+//GDGSTEP1 EXEC PGM=IDCAMS
+//SYSPRINT DD  SYSOUT=*
+//SYSIN    DD  *
+           DEFINE GDG(NAME(MYDATA.URMI.SAMPLE.GDG)   -
+           LIMIT(7)                           -
+           NOEMPTY                            -
+           SCRATCH)
+/*
+//GDGSTEP2 EXEC PGM=IEFBR14
+//GDGMODLD DD  DSN=MYDATA.URMI.SAMPLE.GDG,
+//         DISP=(NEW,CATLG,DELETE),
+//         UNIT=SYSDA,
+//         SPACE=(CYL,10,20),
+//         DCB=(LRECL=50,RECFM=FB)
+//
+</pre>
+<p>In the above example, IDCAMS utility defines the GDG base in GDGSTEP1 with below parameters passed in the SYSIN DD statement:</p>
+<ul class="list">
+<li><p><b>NAME</b> specifies the physical dataset name of the GDG base.</p></li>
+<li><p><b>LIMIT</b> specifies the maximum number of versions that the GDG base can hold.</p></li>
+<li><p><b>EMPTY</b> uncataloges all  the generations when the LIMIT is reached.</p></li>
+<li><p><b>NOEMPTY</b> uncataloges the least recent generation.</p></li>
+<li><p><b>SCRATCH</b> physically deletes the generation when it is uncataloged.</p></li>
+<li><p><b>NOSCRATCH</b> do not delete the dataset, i.e., it can be referred using the UNIT and VOL parameters.</p></li>
+</ul>
+<p>In GDGSTEP2, IEFBR14 utility specifies model DD parameters to be used by all versions.</p>
+<p>IDCAMS can be used to alter the definition parameters of a GDG such as increasing LIMIT, changing EMPTY to NOEMPTY, etc., and its related versions using the SYSIN command is <b>ALTER MYDATA.URMI.SAMPLE.GDG LIMIT(15) EMPTY</b>.</p>
+<h3>Delete GDG in a JCL</h3>
+<p>Using IEFBR14 utility, we can delete a single version of a GDG.</p>
+<pre class="prettyprint notranslate">
+//GDGSTEP3   EXEC PGM=IEFBR14
+//GDGDEL     DD  DSN=MYDATA.URMI.SAMPLE.GDG(0),
+//           DISP=(OLD,DELETE,DELETE)
+</pre>
+<P>In the above example, the latest version of MYDATA.URMI.SAMPLE.GDG is deleted. Please note that the DISP parameter on normal job completion is coded as DELETE. Hence, the dataset is deleted when the job completes execution.</p>
+<p>IDCAMS can be used to delete the GDG and its related versions using the SYSIN command <b> DELETE(MYDATA.URMI.SAMPLE.GDG) GDG FORCE/PURGE</b>.</p>
+<ul class="list">
+<li><p><b>FORCE</b> deletes the GDG versions and the GDG base. If any of the GDG versions are set with an expiration date which is yet to expire, then those are not deleted and hence the GDG base is retained.</p></li>
+<li><p><b>PURGE</b> deletes the GDG versions and the GDG base irrespective of the expiration date.</p></li>
+</ul>
+<h3>Using GDG in a JCL</h3>
+<p>In the following example, the latest version of MYDATA.URMI.SAMPLE.GDG is used as input to the program and a new version of MYDATA.URMI.SAMPLE.GDG is created as the output.</p>
+<pre class="prettyprint notranslate">
+//CNDSAMP JOB CLASS=6,NOTIFY=&amp;SYSUID
+//*
+//STP01   EXEC PGM=MYCOBB
+//IN1     DD DSN=MYDATA.URMI.SAMPLE.GDG(0),DISP=SHR
+//OUT1    DD DSN=MYDATA.URMI.SAMPLE.GDG(+1),DISP=(,CALTG,DELETE)
+//        LRECL=100,RECFM=FB
+</pre>
+<p>Here, if the GDG had been referred by the actual name like MYDATA.URMI.SAMPLE.GDG.G0001V00, then it leads to changing the JCL every time before execution. Using (0) and (+1) makes it dynamically substitute the GDG version for execution.</p>
+<h1>Input-Output Methods</h1>
+<p>Any batch program executed through a JCL requires data input, which is processed and an output is created. There are different methods of feeding input to the program and writing output received from a JCL. In batch mode, there is no user interaction required but input and output devices and required organisation are defined in JCL and submitted.</p>
+<h2>Data Input in a JCL</h2>   
+<p>There are various ways to feed the data to a program using JCL and these methods have been explained below:</p>
+<h3>INSTREAM DATA</h3>
+<p>Instream data to a program can be specified using a SYSIN DD statement.</p>
+<pre class="prettyprint notranslate">
+//CONCATEX JOB CLASS=6,NOTIFY=&SYSUID
+//* <b>Example 1:</b>
+//STEP10 EXEC PGM=MYPROG
+//IN1    DD DSN=SAMPLE.INPUT1,DISP=SHR
+//OUT1   DD DSN=SAMPLE.OUTPUT1,DISP=(,CATLG,DELETE),
+//       LRECL=50,RECFM=FB
+//SYSIN  DD *
+//CUST1  1000
+//CUST2  1001
+/*
+//*
+//* <b>Example 2:</b>
+//STEP20 EXEC PGM=MYPROG
+//OUT1   DD DSN=SAMPLE.OUTPUT2,DISP=(,CATLG,DELETE),
+//       LRECL=50,RECFM=FB
+//SYSIN  DD DSN=SAMPLE.SYSIN.DATA,DISP=SHR
+//*
+</pre>
+<p>In Example 1, input to MYPROG is passed through SYSIN. The data is provided within the JCL. Two records of data are passed to the program. Please note that /* marks the end of instream SYSIN data.</p>
+<p>"CUST1 1000" is record1 and "CUST2 1001" is record2. End of data condition is met when the symbol /* is encountered while reading the data.</p>
+<p>In Example 2, the SYSIN data is held within a dataset, where SAMPLE.SYSIN.DATA is a PS file, which can hold one or more records of data.</p>
+<h3>Data Input through files</h3>
+<p>As mentioned in most of the examples in previous chapters, data input to a program can be provided through PS, VSAM or GDG files, with relevant DSN name and DISP parameters along with DD statements.</p>
+<p>In Example 1, SAMPLE.INPUT1 is the input file through which data is passed to MYPROG. It is referred as IN1 within the program.</p>
+<h2>Data Output in a JCL</h2>
+<p>The output in a JCL can be cataloged into a dataset or passed to the SYSOUT. As mentioned in DD statements chapter, <b>SYSOUT=*</b> redirects the output to the same class as that mentioned in the MSGCLASS parameter of the JOB statement.</p> 
+<h3>Saving Job Logs</h3>
+<p>Specifying <b>MSGCLASS=Y</b> saves the job log in the JMR (Joblog Management and Retrieval). The entire JOB log can be redirected to the SPOOL and can be saved to a dataset by giving the XDC command against the job name in the SPOOL. When the XDC command is given in the SPOOL, a dataset creation screen is opened up. The job log can then be saved by giving appropriate PS or PDS definition.</p>
+<p>Job logs can also be saved into a dataset by mentioning an already created dataset for SYSOUT and SYSPRINT. But the entire job log cannot be captured through this way (i.e., JESMSG will not be cataloged) as done in JMR or XDC.</p>
+<pre class="prettyprint notranslate">
+//SAMPINST JOB 1,CLASS=6,MSGCLASS=Y,NOTIFY=&SYSUID
+//*
+//STEP1    EXEC PGM=MYPROG
+//IN1      DD DSN=MYDATA.URMI.INPUT,DISP=SHR
+//OUT1     DD SYSOUT=*
+//SYSOUT   DD DSN=MYDATA.URMI.SYSOUT,DISP=SHR
+//SYSPRINT DD DSN=MYDATA.URMI.SYSPRINT,DISP=SHR
+//SYSIN    DD MYDATA.BASE.LIB1(DATA1),DISP=SHR
+//*
+//STEP2    EXEC PGM=SORT
+</pre>
+<p>In the above example, SYSOUT is cataloged in MYDATA.URMI.SYSOUT and SYSPRINT in MYDATA.URMI.SYSPRINT.</p>
+<h1>Running COBOL Programs using JCL</h1>
+<h2>Compiling COBOL Programs</h2>   
+<p>In order to execute a COBOL program in batch mode using JCL, the program needs to be compiled and a load module is created with all the sub-programs. The JCL uses the load module and not the actual program at the time of execution. The load libraries are concatenated and given to the JCL at the time of execution using <b>JCLLIB</b> or <b>STEPLIB</b>.</p>
+<p>There are many mainframe compiler utilities available to compile a COBOL program. Some corporate companies use Change Management tools like <b>Endevor</b>, which compiles and stores every version of the program. This is useful in tracking the changes made to the program.</p>
+<pre class="prettyprint notranslate">
+//COMPILE   JOB ,CLASS=6,MSGCLASS=X,NOTIFY=&SYSUID             
+//*            
+//STEP1     EXEC IGYCRCTL,PARM=RMODE,DYNAM,SSRANGE
+//SYSIN     DD DSN=MYDATA.URMI.SOURCES(MYCOBB),DISP=SHR
+//SYSLIB    DD DSN=MYDATA.URMI.COPYBOOK(MYCOPY),DISP=SHR
+//SYSLMOD   DD DSN=MYDATA.URMI.LOAD(MYCOBB),DISP=SHR
+//SYSPRINT  DD SYSOUT=*
+//*
+</pre>
+<p>IGYCRCTL is an IBM COBOL compiler utility. The compiler options are passed using PARM parameter. In the above example, RMODE instructs the compiler to use relative addressing mode in the program. The COBOL program is passed using SYSIN parameter and the copybook is the library used by the program in SYSLIB.</p>
+<p>This JCL produces the load module of the program as output which is used as the input to the execution JCL.</p>
+<h2>Running COBOL Programs</h2>   
+<p>Below a JCL example where the program MYPROG is executed using the input file MYDATA.URMI.INPUT and produces two output files written to the spool.</p>
+<pre class="prettyprint notranslate">
+//COBBSTEP  JOB CLASS=6,NOTIFY=&SYSUID
+//
+//STEP10    EXEC PGM=MYPROG,PARM=ACCT5000
+//STEPLIB   DD DSN=MYDATA.URMI.LOADLIB,DISP=SHR
+//INPUT1    DD DSN=MYDATA.URMI.INPUT,DISP=SHR
+//OUT1      DD SYSOUT=*
+//OUT2      DD SYSOUT=*
+//SYSIN     DD *
+//CUST1     1000
+//CUST2     1001
+/*
+</pre>
+<p>The load module of MYPROG is located in MYDATA.URMI.LOADLIB. This is important to note that the above JCL can be used for a non-DB2 COBOL module only.</p>
+<h2>Passing Data to COBOL Programs</h2>
+<p>Data input to COBOL batch program can be through files, PARAM parameter and SYSIN DD statement. In the above example:</p>
+<ul class="list">
+<li><p>Data records are passed to MYPROG through file MYDATA.URMI.INPUT. This file will be referred in the program using the DD name INPUT1. The file can be opened, read and closed in the program.</p></li>
+<li><p>The PARM parameter data ACCT5000 is received in the LINKAGE section of the program MYPROG in a variable defined within that section.</p></li>
+<li><p>The data in the SYSIN statement is received through ACCEPT statement in the PROCEDURE division of the program. Every ACCEPT statement reads one whole record (i.e., CUST1 1000) into a working storage variable defined in the program.</p></li> 
+</ul>
+<h2>Running a COBOL-DB2 program</h2>
+<p>For running COBOL DB2 program, specialised IBM utility is used in the JCL and program; DB2 region and required parameters are passed as input to the utility.</p>
+<p>The below steps are followed in running a COBOL-DB2 program:</p>
+<ul class="list">
+<li><p>When a COBOL-DB2 program is compiled, a DBRM (Database Request Module) is created along with the load module. The DBRM contains the SQL statements of the COBOL programs with its syntax checked to be correct.</p></li>
+<li><p>The DBRM is bound to the DB2 region (environment) in which the COBOL will run. This can be done using the IKJEFT01 utility in a JCL.</p></li>
+<li><p>After the bind step, the COBOL-DB2 program is run using IKJEFT01 (again) with the load library and DBRM library as the input to the JCL.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//STEP001  EXEC PGM=IKJEFT01
+//*
+//STEPLIB  DD DSN=MYDATA.URMI.DBRMLIB,DISP=SHR
+//*
+//input files
+//output files
+//SYSPRINT DD SYSOUT=*
+//SYSABOUT DD SYSOUT=*
+//SYSDBOUT DD SYSOUT=*
+//SYSUDUMP DD SYSOUT=*
+//DISPLAY  DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//SYSTSPRT DD SYSOUT=*
+//SYSTSIN  DD *
+    DSN SYSTEM(SSID)
+    RUN PROGRAM(MYCOBB) PLAN(PLANNAME) PARM(parameters to cobol program) -
+    LIB('MYDATA.URMI.LOADLIB')
+    END
+/*
+</pre>
+<p>In the above example, MYCOBB is the COBOL-DB2 program run using IKJEFT01. Please note that the program name, DB2 Sub-System Id (SSID), DB2 Plan name are passed within the SYSTSIN DD statement. The DBRM library is specified in the STEPLIB.</p>
+<h1>JCL - Utility Programs</h1>
+<h2>IBM Dataset Utilities</h2>   
+<p>Utility programs are pre-written programs, widely used in mainframes by system programmers and application developers to achieve day-to-day requirements, organising and maintaining data. A few of them are listed below with their functionality:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:25%;">Utility Name</th>
+<th>Functionality</th>
+</tr>
+<tr>
+<td><b>IEHMOVE</b></td>
+<td>Moves or copies sequential datasets.</td>
+</tr>
+<tr>
+<td><b>IEHPROGM</b></td>
+<td>Deleting and renaming datasets; catalog or uncatalog datasets other than VSAM.<</td>
+</tr>
+<tr>
+<td><b>IEHCOMPR</b></td>
+<td>Compares data in sequential datasets.</td>
+</tr>
+<tr>
+<td><b>IEBCOPY</b></td>
+<td>Copy, Merge, compress, back-up or restore PDS.</td>
+</tr>
+<tr>
+<td><b>IEFBR14</b></td>
+<td><p>No operation utility. Used to return control to user and terminate. It is usually used to create empty dataset or delete an existing dataset.</p>
+<p>For example, if a dataset is passed as input to a IEFBR14 program with DISP=(OLD,DELETE,DELETE), the dataset is deleted at job completion.</p></td>
+</tr>
+<tr>
+<td><b>IEBEDIT</b></td>
+<td>Used to copy selected parts of a JCL. For Example, if a JCL has 5 steps and we require to execute step 1 and 3 only, then a IEBEDIT JCL can be coded with a dataset which contains the actual JCL to be executed. In the SYSIN of IEBEDIT, we can specify STEP1 and STEP3 as parameters. When this JCL is executed, it executes the STEP1 and STEP3 of the actual JCL.</td>
+</tr>
+<tr>
+<td><b>IDCAMS</b></td>
+<td>Create, delete, rename, catalog, uncatalog datasets (other than PDS). Usually used to manage VSAM datasets.</td>
+</tr>
+</table>
+<p>These utility programs need to be used with appropriate DD statements in a JCL in order to achieve the specified functionality.</p>
+<h2>DFSORT Overview</h2>   
+<p>DFSORT is a powerful IBM utility used to copy, sort or merge datasets. SORTIN and SORTINnn DD statements are used to specify input datasets. SORTOUT and OUTFIL statements are used to specify output data.</p>
+<p>SYSIN DD statement is used to specify the sort and merge conditions. DFSORT is generally used to achieve the below functionalities:</p>
+<ul class="list">
+<li><p>SORT the input file(s) in the order of the specified field(s) position in the file.</p></li>
+<li><p>INCLUDE or OMIT records from the input file(s) based on the specified condition.</p></li>
+<li><p>SORT MERGE input file(s) in the order of the specified field(s) position in the file.</p></li>
+<li><p>SORT JOIN two or more input files based on a specified JOIN KEY (field(s) in each input file).</p></li>
+<li><p>When there is additional processing to be done on the input files, a USER EXIT program can be called from the SORT program. For example, if there is a header/trailer to be added to the output file, then a USER written COBOL program can be called from the SORT program to perform this functionality. Using a control card, data can be passed to the COBOL program.</p></li>
+<li><p>On the other way round, a SORT can be called internally from a COBOL program to arrange the input file in a particular order before being processed. Usually, this is not recommended in view of performance for large files.</p></li>
+</ul>
+<h2>ICETOOL Overview</h2>
+<p>ICETOOL is a multi-purpose DFSORT utility used to perform a variety of operations on datasets. Input and output datasets can be defined using user defined DD names. The file operations are specified in the TOOLIN DD statement. Additional conditions can be specified in user defined 'CTL' DD statements.</p>
+<p>Few of the utilities of ICETOOL are given below:</p>
+<ul class="list">
+<li><p>ICETOOL can achieve all the functionalities of DFSORT in one or more conditions.</p></li>
+<li><p>SPLICE is a powerful operation of ICETOOL which is similar to SORT JOIN, but with additional features. It can compare two or more files on specified field(s) and create one or more output files like file with matching records, file with non-matching records, etc.</p></li>
+<li><p>Data in one file in a particular position can be OVERLAYed into another position in the same or different file.</p></li>
+<li><p>A File can be split into n files based on a specified condition. For example, a file containing names of employees can be split into 26 files, each containing the names starting with A, B, C and so on.</p></li>
+<li><p>Different combination of file manipulation is possible using ICETOOL with a little exploration of the tool.</p></li>
+</ul>
+<h2>SYNCSORT Overview</h2>
+<p>SYNCSORT is used to copy, merge or sort datasets with a high performance. It gives best utilization of system resources and efficient operation in 31-bit and 64-bit address spaces.</p>
+<p>It can be used in the same lines of DFSORT and can achieve the same features. It can be invoked by a JCL or from within a program coded in COBOL, PL/1 or Assembler language. It also supports User Exit programs to be called from the SYNCSORT program.</p> 
+<p>Frequently used sort tricks using these utilities are explained in the next chapter. Complex requirements, which requires a huge programming in COBOL/ASSEMBLER can be achieved using the above utilities in simple steps.</p>
+<h1>JCL - Basic Sort Tricks</h1>
+<p>The day-to-day application requirements in a corporate world that can be achieved using Utility Programs are illustrated below:</p>
+<p><b>1. A file has 100 records. The first 10 records need to be written to output file.</b></p>
+<pre class="prettyprint notranslate">
+//JSTEP020 EXEC PGM=ICETOOL                                          
+//TOOLMSG  DD SYSOUT=*                                               
+//DFSMSG   DD SYSOUT=*                                               
+//IN1      DD DSN=MYDATA.URMI.STOPAFT,DISP=SHR    
+//OUT1	   DD SYSOUT=*
+//TOOLIN   DD *                                                      
+  COPY FROM(IN1) TO(OUT1) USING(CTL1)                                  
+/*
+//CTL1CNTL DD *                        
+  OPTION STOPAFT=10               
+/*     
+</pre>
+<P>The option STOPAFT will stop reading the input file after 10th record and terminates the program. Hence, 10 records are written to output.</p>
+<p><b>2. Input file has one or more records for same employee number. Write unique records to output.</b></p>
+<pre class="prettyprint notranslate">
+//STEP010  EXEC PGM=SORT 
+//SYSOUT   DD SYSOUT=*                                                
+//SORTIN   DD DSN=MYDATA.URMI.DUPIN,DISP=SHR
+//SORTOUT  DD SYSOUT=*
+//SYSIN    DD *            
+  SORT FIELDS=(1,15,ZD,A) 
+  SUM FIELDS=NONE          
+/*                         
+</PRE>
+<p>SUM FIELDS=NONE removes duplicates on fields specified in SORT FIELDS. In the above example, employee number is in the field position 1,15. The output file will contain the unique employee numbers sorted in ascending order.</p>
+<p><b>3. Overwrite input record content.</b></p>
+<pre class="prettyprint notranslate">
+//JSTEP010 EXEC PGM=SORT                                             
+//SORTIN   DD DSN= MYDATA.URMI.SAMPLE.MAIN,DISP=SHR       
+//SORTOUT  DD SYSOUT=*                 
+//SYSPRINT DD SYSOUT=*                                               
+//SYSOUT   DD SYSOUT=*                                               
+//SYSIN    DD *                                                      
+ OPTION COPY                                                         
+  INREC OVERLAY=(47:1,6)                      
+/*                        
+</PRE>
+<p>In the input file, the content in position 1,6 is overwritten to the position 47,6 and then copied to the output file. INREC OVERLAY operation is used in order to rewrite data in input file before copying to output.</p>
+<p><b>4. Adding a sequence number to the output file.</b></p>
+<pre class="prettyprint notranslate">
+//JSTEP010 EXEC PGM=SORT                                             
+//SORTIN   DD *
+  data1
+  data2
+  data3
+/*
+//SORTOUT  DD SYSOUT=*                 
+//SYSPRINT DD SYSOUT=*                                               
+//SYSOUT   DD SYSOUT=*                                               
+//SYSIN    DD *                                                      
+ OPTION COPY                                                         
+ BUILD=(1:1,5,10:SEQNUM,4,ZD,START=1000,INCR=2)                      
+/*                        
+</PRE>
+<p>The output will be:</p>
+<pre class="prettyprint notranslate">
+data1    1000
+data2    1002
+data3    1004
+</pre>
+<p>4-digit sequence number is added in output at position 10, starting at 1000 and incremented by 2 for every record.</p>
+<p><b>5. Adding Header/Trailer to output file.</b></p>
+<pre class="prettyprint notranslate">
+//JSTEP010 EXEC PGM=SORT                                             
+//SORTIN   DD *
+  data1
+  data2
+  data3
+/*
+//SORTOUT  DD SYSOUT=*                 
+//SYSPRINT DD SYSOUT=*                                               
+//SYSOUT   DD SYSOUT=*                                               
+//SYSIN    DD *                                                      
+ SORT FIELDS=COPY                                                     
+  OUTFIL REMOVECC,                                                     
+  HEADER1=(1:C'HDR',10:X'020110131C'),                    
+  TRAILER1=(1:C'TRL',TOT=(10,9,PD,TO=PD,LENGTH=9)) 
+/*                        
+</Pre>
+<p>The output will be:</p>
+<pre class="prettyprint notranslate">
+HDR       20110131
+data1    
+data2    
+data3 
+TRL       000000003
+</pre>
+<p>TOT calculates the number of records in the input file. HDR and TRL are added as identifiers to header/trailer, which is user defined and can be customised as per the users' needs.</p>
+<p><b>6. Conditional Processing</b></p>
+<pre class="prettyprint notranslate">
+//JSTEP010 EXEC PGM=SORT                                             
+//SORTIN   DD *
+  data1select
+  data2
+  data3select
+/*
+//SORTOUT  DD SYSOUT=*                 
+//SYSPRINT DD SYSOUT=*                                               
+//SYSOUT   DD SYSOUT=*                                               
+//SYSIN    DD *           
+  INREC  IFTHEN=(WHEN=(6,1,CH,NE,C' '),BUILD=(1:1,15),
+         IFTHEN=(WHEN=(6,1,CH,EQ,C' '),BUILD=(1:1,5,7:C'EMPTY    ') 
+  OPTION COPY                                                     
+/*                        
+</Pre>
+<p>The output will be:</p>
+<pre class="prettyprint notranslate">
+data1select   
+data2 EMPTY  
+data3select
+</pre>
+<p>Based on the 6th position of the file, the BUILD of output file varies. If 6th position is SPACES, then text "EMPTY" is appended to input record. Else, the input record is written to output, as-is.</p>
+<p><b>7. Backing up a file</b></p>
+<pre class="prettyprint notranslate">
+//JSTEP001 EXEC PGM=IEBGENER                                       
+//SYSPRINT DD SYSOUT=*                                             
+//SYSIN    DD *                                                    
+//SYSOUT   DD SYSOUT=*                                             
+//SORTOUT  DD DUMMY                                                
+//SYSUT1   DD DSN=MYDATA.URMI.ORIG,DISP=SHR                     
+//SYSUT2   DD DSN=MYDATA.URMI.BACKUP,DISP=(NEW,CATLG,DELETE),
+//             DCB=*.SYSUT1,SPACE=(CYL,(50,1),RLSE)      
+</pre>
+<p>IEBGENER copies the file in SYSUT1 to file in SYSUT2. Please note that file in SYSUT2 takes the same DCB as that of the SYSUT1 in the above example.</p>
+<p><b>8. File Comparison</b></p>
+<pre class="prettyprint notranslate">
+//STEP010  EXEC PGM=SORT                                              
+//MAIN     DD *
+  1000
+  1001
+  1003
+  1005
+//LOOKUP   DD *
+  1000
+  1002
+  1003
+//MATCH    DD DSN=MYDATA.URMI.SAMPLE.MATCH,DISP=OLD
+//NOMATCH1 DD DSN=MYDATA.URMI.SAMPLE.NOMATCH1,DISP=OLD
+//NOMATCH2 DD DSN=MYDATA.URMI.SAMPLE.NOMATCH2,DISP=OLD 
+//SYSOUT   DD SYSOUT=*                                                       
+//SYSIN    DD *                                                       
+  JOINKEYS F1=MAIN,FIELDS=(1,4,A)                            
+  JOINKEYS F2=LOOKUP,FIELDS=(1,4,A)                               
+  JOIN UNPAIRED,F1,F2                                                 
+  REFORMAT FIELDS=(?,F1:1,4,F2:1,4)                                
+  OPTION COPY                                                         
+  OUTFIL FNAMES=MATCH,INCLUDE=(1,1,CH,EQ,C'B'),BUILD=(1:2,4)                                                
+  OUTFIL FNAMES=NOMATCH1,INCLUDE=(1,1,CH,EQ,C'1'),BUILD=(1:2,4) 
+  OUTFIL FNAMES=NOMATCH2,INCLUDE=(1,1,CH,EQ,C'2'),BUILD=(1:2,4) 
+/*                                                                             
+</Pre>
+<ul class="list">
+<li><P>JOINKEYS specifies the field on which the two files are compared.</p></li>
+<li><p>REFORMAT FIELDS=? places 'B' (matched records), '1' (present in file1, but not in file2), or '2' (present in file2 but not in file1) in the 1st position of the output BUILD.</p></li>
+<li><p>JOIN UNPAIRED does a full outer join on the two files.</p></li>
+</ul>
+<p>The output will be:</p>
+<pre class="prettyprint notranslate">
+<b>MATCH File</b>
+1000
+1003
+
+<b>NOMATCH1 File</b>
+1001
+1005
+
+<b>NOMATCH2 File</b>
+1002
+</pre>
+<p>The same functionality can be achieved using ICETOOL also.</p>
+<hr />
+<div class="pre-btn">
+<a href="jcl_basic_sort_tricks.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="pdf-btn">
+<a href="pdf/jcl_quick_guide.pdf" title="JCL Quick Guide" target="_blank"><i class="icon icon-file-pdf-o big-font"></i> PDF</a>
+</div>
+<div class="nxt-btn">
+<a href="jcl_interview_questions.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/jcl/jcl_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/jcl/jcl_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/jcl/jcl_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/jcl/jcl_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/jcl/jcl_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/jcl/jcl_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "JCL Quick Guide",
+    "name": "JCL Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/jcl/jcl_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/jcl/images/job-processing.jpg",
+        "width": 367,
+        "height": 284
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:51.",
+    "dateModified": "July 23 2017 03:34:51.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "JCL is used in a mainframe environment to act as a communication between a program (Example: COBOL, Assembler or PL/I) and the operating system.  In a mainframe environment, programs can be executed in batch and online mode.  Example of a batch system can..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Jcl",
+                "@id": "https://www.tutorialspoint.com/jcl"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "JCL - Quick Guide"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/jcl/jcl_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:09:52 GMT -->
+</html>

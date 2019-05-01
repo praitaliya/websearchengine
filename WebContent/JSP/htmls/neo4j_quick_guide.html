@@ -1,0 +1,2455 @@
+<!doctype html> 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 14:41:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Neo4j Quick Guide</title>
+<meta name="description" content="Neo4j Quick Guide - Learn Neo4j in simple and easy steps starting from basic to advanced concepts with examples including Overview, Data Model, Environment Setup, Building Blocks, CQL Introduction, Creating Nodes, Creating a Relationship, Merge Command, Set, Delete, Remove, Foreach, Match, Optional Match, Where, Return, Order By, Limit, Skip, With, Unwind Clause, Count, String, Aggregation Function, Backup and Restore, Index, Create Unique Constraint, Drop Unique." />
+<meta name="keywords" content="Neo4j, Tutorial, Learning, Overview, Data Model, Environment Setup, Building Blocks, CQL Introduction, Creating Nodes, Creating a Relationship, Merge Command, Set, Delete, Remove, Foreach, Match, Optional Match, Where, Return, Order By, Limit, Skip, With, Unwind Clause, Count, String, Aggregation Function, Backup and Restore, Index, Create Unique Constraint, Drop Unique." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #2068B4 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #2068B4 !important;}
+.submenu-item{ border-bottom: 2px solid #2068B4 !important; border-top: 2px solid #2068B4 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<style>
+.ts {
+   text-align:center !important;
+   vertical-align:middle !important;
+}
+</style>
+<div class="mini-logo">
+<img src="images/neo4j-mini-logo.jpg" alt="Neo4j Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j Tutorial</li>
+<li><a href="index.html">Neo4j - Home</a></li>
+<li><a href="neo4j_overview.html">Neo4j - Overview</a></li>
+<li><a href="neo4j_data_model.html">Neo4j - Data Model</a></li>
+<li><a href="neo4j_environment_setup.html">Neo4j - Environment Setup</a></li>
+<li><a href="neo4j_building_blocks.html">Neo4j - Building Blocks</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j CQL</li>
+<li><a href="neo4j_cql_introduction.html">Neo4j CQL - Introduction</a></li>
+<li><a href="neo4j_cql_creating_nodes.html">Neo4j CQL - Creating Nodes</a></li>
+<li><a href="neo4j_cql_creating_relationship.html">Neo4j CQL - Creating a Relationship</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j CQL Write Clauses</li>
+<li><a href="neo4j_merge_command.html">Neo4j - Merge Command</a></li>
+<li><a href="neo4j_set_clause.html">Neo4j - Set Clause</a></li>
+<li><a href="neo4j_delete_clause.html">Neo4j - Delete Clause</a></li>
+<li><a href="neo4j_remove_clause.html">Neo4j - Remove Clause</a></li>
+<li><a href="neo4j_foreach_clause.html">Neo4j - Foreach Clause</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j CQL Read Clause</li>
+<li><a href="neo4j_match_clause.html">Neo4j - Match Clause</a></li>
+<li><a href="neo4j_optional_match_clause.html">Neo4j - Optional Match Clause</a></li>
+<li><a href="neo4j_where_clause.html">Neo4j - Where Clause</a></li>
+<li><a href="neo4j_count_function.html">Neo4j - Count Function</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j CQL General Clauses</li>
+<li><a href="neo4j_return_clause.html">Neo4j - Return Clause</a></li>
+<li><a href="neo4j_order_by_clause.html">Neo4j - Order By Clause</a></li>
+<li><a href="neo4j_limit_clause.html">Neo4j - Limit Clause</a></li>
+<li><a href="neo4j_skip_clause.html">Neo4j - Skip Clause</a></li>
+<li><a href="neo4j_with_clause.html">Neo4j - With Clause</a></li>
+<li><a href="neo4j_unwind_clause.html">Neo4j - Unwind Clause</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j CQL Functions</li>
+<li><a href="neo4j_string_functions.html">Neo4j - String Functions</a></li>
+<li><a href="neo4j_aggregation_function.html">Neo4j - Aggregation Function</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j CQL Admin</li>
+<li><a href="neo4j_backup_and_restore.html">Neo4j - Backup &amp; Restore</a></li>
+<li><a href="neo4j_index.html">Neo4j - Index</a></li>
+<li><a href="neo4j_create_unique_constraint.html">Neo4j - Create Unique Constraint</a></li>
+<li><a href="neo4j_drop_unique.html">Neo4j - Drop Unique</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Neo4j Useful Resources</li>
+<li><a href="neo4j_quick_guide.html">Neo4j - Quick Guide</a></li>
+<li><a href="neo4j_useful_resources.html">Neo4j - Useful Resources</a></li>
+<li><a href="neo4j_discussion.html">Neo4j - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Neo4j - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="neo4j_drop_unique.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="neo4j_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Neo4j - Overview</h1>
+<p>Neo4j is the world's leading open source Graph Database which is developed using Java technology. It is highly scalable and schema free (NoSQL).</p>
+<h2>What is a Graph Database?</h2>
+<p>A graph is a pictorial representation of a set of objects where some pairs of objects are connected by links. It is composed of two elements - nodes (vertices) and relationships (edges).</p>
+<p>Graph database is a database used to model the data in the form of graph. In here, the nodes of a graph depict the entities while the relationships depict the association of these nodes.</p>
+<h3>Popular Graph Databases</h3>
+<p>Neo4j is a popular Graph Database. Other Graph Databases are Oracle NoSQL Database, OrientDB, HypherGraphDB, GraphBase, InfiniteGraph, and AllegroGraph.</p>
+<h3>Why Graph Databases?</h3>
+<p>Nowadays, most of the data exists in the form of the relationship between different objects and more often, the relationship between the data is more valuable than the data itself.</p>
+<p>Relational databases store highly structured data which have several records storing the same type of data so they can be used to store structured data and, they do not store the relationships between the data.</p>
+<p>Unlike other databases, graph databases store relationships and connections as first-class entities.</p>
+<p>The data model for graph databases is simpler compared to other databases and, they can be used with OLTP systems. They provide features like transactional integrity and operational availability.</p>
+<h3>RDBMS Vs Graph Database</h3>
+<p>Following is the table which compares Relational databases and Graph databases.</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">RDBMS</th>
+<th style="text-align:center;">Graph Database</th>
+</tr>
+<tr>
+<td>1</td>
+<td>Tables</td>
+<td>Graphs</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Rows</td>
+<td>Nodes</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Columns and Data</td>
+<td>Properties and its values</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Constraints</td>
+<td>Relationships</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Joins</td>
+<td>Traversal</td>
+</tr>
+</table>
+<h2>Advantages of Neo4j</h2>
+<p>Following are the advantages of Neo4j.</p>
+<ul class="list">
+<li><p><b>Flexible data model</b> &minus; Neo4j provides a flexible simple and yet powerful data model, which can be easily changed according to the applications and industries.</p></li>
+<li><p><b>Real-time insights</b> &minus; Neo4j provides results based on real-time data.</p></li>
+<li><p><b>High availability</b> &minus; Neo4j is highly available for large enterprise real-time applications with transactional guarantees.</p></li>
+<li><p><b>Connected and semi structures data</b> &minus; Using Neo4j, you can easily represent connected and semi-structured data.</p></li>
+<li><p><b>Easy retrieval</b> &minus; Using Neo4j, you can not only represent but also easily retrieve (traverse/navigate) connected data faster when compared to other databases.</p></li> 
+<li><p><b>Cypher query language</b> &minus; Neo4j provides a declarative query language to represent the graph visually, using an ascii-art syntax. The commands of this language are in human readable format and very easy to learn.</p></li>
+<li><p><b>No joins</b> &minus; Using Neo4j, it does NOT require complex joins to retrieve connected/related data as it is very easy to retrieve its adjacent node or relationship details without joins or indexes.</p></li>
+</ul>
+<h2>Features of Neo4j</h2>
+<p>Following are the notable features of Neo4j &minus;</p>
+<ul class="list">
+<li><p><b>Data model (flexible schema)</b> &minus; Neo4j follows a data model named native property graph model. Here, the graph contains nodes (entities) and these nodes are connected with each other (depicted by relationships). Nodes and relationships store data in key-value pairs known as properties.</p>
+<p>In Neo4j, there is no need to follow a fixed schema. You can add or remove properties as per requirement. It also provides schema constraints.</p></li> 
+<li><p><b>ACID properties</b> &minus; Neo4j supports full ACID (Atomicity, Consistency, Isolation, and Durability) rules.</p></li>
+<li><p><b>Scalability and reliability</b> &minus; You can scale the database by increasing the number of reads/writes, and the volume without effecting the query processing speed and data integrity. Neo4j also provides support for <b>replication</b> for data safety and reliability.</p></li>
+<li><p><b>Cypher Query Language</b> &minus; Neo4j provides a powerful declarative query language known as Cypher. It uses ASCII-art for depicting graphs. Cypher is easy to learn and can be used to create and retrieve relations between data without using the complex queries like Joins.</p></li>
+<li><p><b>Built-in web application</b> &minus; Neo4j provides a built-in <b>Neo4j Browser</b> web application. Using this, you can create and query your graph data.</p></li>
+<li><p><b>Drivers</b> &minus; Neo4j can work with &minus;</p>
+<ul class="list">
+<li><p>REST API to work with programming languages such as Java, Spring, Scala etc.</p></li> 
+<li><p>Java Script to work with UI MVC frameworks such as Node JS.</p></li>
+<li><p>It supports two kinds of Java API: Cypher API and Native Java API to develop Java applications. In addition to these, you can also work with other databases such as MongoDB, Cassandra, etc.</p></li>
+</ul>
+</li>
+<li><p><b>Indexing</b> &minus; Neo4j supports Indexes by using Apache Lucence.</p></li>
+</ul>
+<h1>Neo4j - Data Model</h1>
+<h2>Neo4j Property Graph Data Model</h2>
+<p>Neo4j Graph Database follows the Property Graph Model to store and manage its data.</p>
+<p>Following are the key features of Property Graph Model &minus;</p>
+<ul class="list">
+<li><p>The model represents data in Nodes, Relationships and Properties</p></li>
+<li><p>Properties are key-value pairs</p></li>
+<li><p>Nodes are represented using circle and Relationships are represented using arrow keys</p></li>
+<li><p>Relationships have directions: Unidirectional and Bidirectional</p></li>
+<li><p>Each Relationship contains "Start Node" or "From Node" and "To Node" or "End Node"</p></li>
+<li><p>Both Nodes and Relationships contain properties</p></li>
+<li><p>Relationships connects nodes</p></li>
+</ul>
+<p>In Property Graph Data Model, relationships should be directional. If we try to create relationships without direction, then it will throw an error message.</p>
+<p>In Neo4j too, relationships should be directional. If we try to create relationships without direction, then Neo4j will throw an error message saying that "Relationships should be directional".</p>
+<p>Neo4j Graph Database stores all of its data in Nodes and Relationships. We neither need any additional RRBMS Database nor any SQL database to store Neo4j database data. It stores its data in terms of Graphs in its native format.</p>
+<p>Neo4j uses Native GPE (Graph Processing Engine) to work with its Native graph storage format.</p>
+<p>The main building blocks of Graph DB Data Model are &minus;</p>
+<ul class="list">
+<li>Nodes</li>
+<li>Relationships</li>
+<li>Properties</li>
+</ul>
+<p>Following is a simple example of a Property Graph.</p>
+<img src="images/property_graph.jpg" alt="Property Graph" />
+<p>Here, we have represented Nodes using Circles. Relationships are represented using Arrows. Relationships are directional. We can represent Node's data in terms of Properties (key-value pairs). In this example, we have represented each Node's Id property within the Node's Circle.</p>
+<h1>Neo4j - Environment Setup</h1>
+<p>In this chapter, we will discuss how to install Neo4j in your system using exe file.</p>
+<h2>Neo4j Database Server Setup with Windows exe File</h2>
+<p>Follow the steps given below to download Neo4j into your system.</p>
+<p><b>Step 1</b> &minus; Visit the Neo4j official site using <a target="_blank" rel="nofollow" href="https://neo4j.com/">https://neo4j.com/</a>. On clicking, this link will take you to the homepage of neo4j website.</p>
+<img src="images/homepage.jpg" alt="Home Page" />
+<p><b>Step 2</b> &minus; As highlighted in the above screenshot, this page has a Download button on the top right hand side. Click it.</p>
+<p><b>Step 3</b> &minus; This will redirect you to the downloads page, where you can download the community edition and the enterprise edition of Neo4j. Download the community edition of the software by clicking the respective button.</p>
+<img src="images/download_page.jpg" alt="Download Page" />
+<p><b>Step 4</b> &minus; This will take you to the page where you can download community version of Neo4j software compatible with different operating systems. Download the file respective to the desired operating system.</p>
+<img src="images/respective_operating_system.jpg" alt="Respective Operating System" />
+<p>This will download a file named <b>neo4j-community_windows-x64_3_1_1.exe</b> to your system as shown in the following screenshot.</p>
+<img src="images/community_window.jpg" alt="Community Windows" />
+<p><b>Step 5</b> &minus; Double-click the exe file to install Neo4j Server.</p>
+<img src="images/exe_file.jpg" alt="Exe File" />
+<p><b>Step 6</b> &minus; Accept the license agreement and proceed with the installation. After completion of the process, you can observe that Neo4j is installed in your system.</p>
+<h2>Starting the Server</h2>
+<p><b>Step 1</b> &minus; Click the Windows startmenu and start the Neo4j server by clicking the start menu shortcut for Neo4j.</p>
+<img src="images/starting_server.jpg" alt="Starting Server" />
+<p><b>Step 2</b> &minus; On clicking the shortcut, you will get a window for Neo4j Community edition. By default, it selects c:\Users\[username]\Documents\Neo4j\default.graphdb. If you want, you can change your path to a different directory.</p>
+<img src="images/shortcut.jpg" alt="Shortcut" />
+<p><b>Step 3</b> &minus; Click the "Start" button to start the Neo4j server.</p>
+<img src="images/start_button.jpg" alt="Start Button" />
+<p>Once the server starts, you can observe that the database directory is populated as shown in the following screenshot.</p>
+<img src="images/database_directory.jpg" alt="Database Directory" />
+<h2>Working with Neo4j</h2>
+<p>As discussed in the previous chapters, neo4j provides an in-built browse application to work with Neo4j. You can access Neo4j using the URL <b>http://localhost:7474/</b></p>
+<img src="images/working.jpg" alt="Working" />
+<h1>Neo4j - Building Blocks</h1>
+<p>Neo4j Graph Database has the following building blocks &minus;</p>
+<ul class="list">
+<li>Nodes</li>
+<li>Properties</li>
+<li>Relationships</li>
+<li>Labels</li>
+<li>Data Browser</li>
+</ul>
+<h2>Node</h2>
+<p>Node is a fundamental unit of a Graph. It contains properties with key-value pairs as shown in the following image.</p>
+<img src="images/node.jpg" alt="Node" />
+<p>Here, Node Name = "Employee" and it contains a set of properties as key-value pairs.</p>
+<h2>Properties</h2>
+<p>Property is a key-value pair to describe Graph Nodes and Relationships.</p>
+<pre class="result notranslate">
+Key = Value 
+</pre>
+<p>Where Key is a String and Value may be represented using any Neo4j Data types.</p>
+<h2>Relationships</h2>
+<p>Relationships are another major building block of a Graph Database. It connects two nodes as depicted in the following figure.</p>
+<img src="images/relationship.jpg" alt="Relationship" />
+<p>Here, Emp and Dept are two different nodes. "WORKS_FOR" is a relationship between Emp and Dept nodes.</p>
+<p>As it denotes, the arrow mark from Emp to Dept, this relationship describes &minus;</p>
+<pre class="result notranslate">
+Emp WORKS_FOR Dept 
+</pre>
+<p>Each relationship contains one start node and one end node.</p>
+<p>Here, "Emp" is a start node, and "Dept" is an end node.</p>
+<p>As this relationship arrow mark represents a relationship from "Emp" node to "Dept" node, this relationship is known as an "Incoming Relationship" to "Dept" Node and "Outgoing Relationship" to "Emp" node.</p>
+<p>Like nodes, relationships also can contain properties as key-value pairs.</p>
+<img src="images/properties.jpg" alt="Properties" />
+<p>Here, "WORKS_FOR" relationship has one property as key-value pair.</p>
+<pre class="result notranslate">
+Id = 123 
+</pre>
+<p>It represents an Id of this relationship.</p>
+<h2>Labels</h2>
+<p>Label associates a common name to a set of nodes or relationships. A node or relationship can contain one or more labels. We can create new labels to existing nodes or relationships. We can remove the existing labels from the existing nodes or relationships.</p>
+<p>From the previous diagram, we can observe that there are two nodes.</p>
+<p>Left side node has a Label: "Emp" and the right side node has a Label: "Dept".</p>
+<p>Relationship between those two nodes also has a Label: "WORKS_FOR".</p>
+<p><b>Note</b> &minus; Neo4j stores data in Properties of Nodes or Relationships.</p>
+<h2>Neo4j Data Browser</h2>
+<p>Once we install Neo4j, we can access Neo4j Data Browser using the following URL</p>
+<pre class="result notranslate">
+http://localhost:7474/browser/
+</pre>
+<p></p>
+<img src="images/data_browser.jpg" alt="Data Browser" />
+<p>Neo4j Data Browser is used to execute CQL commands and view the output.</p>
+<p>Here, we need to execute all CQL commands at dollar prompt: <b>"$"</b></p>
+<p>Type commands after the dollar symbol and click the "Execute" button to run your commands.</p>
+<p>It interacts with Neo4j Database Server, retrieves and displays the results just below the dollar prompt.</p>
+<p>Use "VI View" button to view the results in diagrams format. The above diagram shows results in "UI View" format.</p>
+<p>Use "Grid View" button to view the results in Grid View. The following diagram shows the same results in "Grid View" format.</p>
+<img src="images/grid_view.jpg" alt="Grid View" />
+<p>When we use "Grid View" to view our Query results, we can export them into a file in two different formats.</p>
+<h3>CSV</h3>
+<p>Click the "Export CSV" button to export the results in csv file format.</p>
+<img src="images/csv.jpg" alt="CSV" />
+<h3>JSON</h3>
+<p>Click the "Export JSON" button to export the results in JSON file format.</p>
+<img src="images/json.jpg" alt="Json" />
+<p>However, if we use "UI View" to see our Query results, we can export them into a file in only one format: JSON</p>
+<h1>Neo4j CQL - Introduction</h1>
+<p>CQL stands for Cypher Query Language. Like Oracle Database has query language SQL, Neo4j has CQL as query language.</p>
+<h3>Neo4j CQL</h3>
+<ul class="list">
+<li>Is a query language for Neo4j Graph Database.</li>
+<li>Is a declarative pattern-matching language.</li>
+<li>Follows SQL like syntax.</li>
+<li>Syntax is very simple and in human readable format.</li>
+</ul>
+<h3>Like Oracle SQL</h3>
+<ul class="list">
+<li><p>Neo4j CQL has commands to perform Database operations.</p></li>
+<li><p>Neo4j CQL supports many clauses such as WHERE, ORDER BY, etc., to write very complex queries in an easy manner.</p></li>
+<li><p>Neo4j CQL supports some functions such as String, Aggregation. In addition to them, it also supports some Relationship Functions.</p></li>
+</ul>
+<h2>Neo4j CQL Clauses</h2>
+<p>Following are the read clauses of Neo4j <b>C</b>ypher <b>Q</b>uery <b>L</b>anguage &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center; width:25%;">Read Clauses</th>
+<th style="text-align:center;">Usage</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td class="ts">MATCH</td>
+<td>This clause is used to search the data with a specified pattern.</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td class="ts">OPTIONAL MATCH</td>
+<td>This is the same as match, the only difference being it can use nulls in case of missing parts of the pattern.</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td class="ts">WHERE</td>
+<td>This clause id is used to add contents to the CQL queries.</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td class="ts">START</td>
+<td>This clause is used to find the starting points through the legacy indexes.</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td class="ts">LOAD CSV</td>
+<td>This clause is used to import data from CSV files.</td>
+</tr>
+</table>
+<p>Following are the write clauses of Neo4j <b>C</b>ypher <b>Q</b>uery <b>L</b>anguage &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center; width:25%;">Write Clause</th>
+<th style="text-align:center;">Usage</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td class="ts">CREATE</td>
+<td>This clause is used to create nodes, relationships, and properties.</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td class="ts">MERGE</td>
+<td>This clause verifies whether the specified pattern exists in the graph. If not, it creates the pattern.</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td class="ts">SET</td>
+<td>This clause is used to update labels on nodes, properties on nodes and relationships.</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td class="ts">DELETE</td>
+<td>This clause is used to delete nodes and relationships or paths etc. from the graph.</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td class="ts">REMOVE</td>
+<td>This clause is used to remove properties and elements from nodes and relationships.</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td class="ts">FOREACH</td>
+<td>This class is used to update the data within a list.</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td class="ts">CREATE UNIQUE</td>
+<td>Using the clauses CREATE and MATCH, you can get a unique pattern by matching the existing pattern and creating the missing one.</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td class="ts">Importing CSV files with Cypher</td>
+<td>Using Load CSV you can import data from .csv files.</td>
+</tr>
+</table>
+<p>Following are the general clauses of Neo4j <b>C</b>ypher <b>Q</b>uery <b>L</b>anguage &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center; width:25%;">General Clauses</th>
+<th style="text-align:center;">Usage</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td class="ts">RETURN</td>
+<td>This clause is used to define what to include in the query result set.</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td class="ts">ORDER BY</td>
+<td>This clause is used to arrange the output of a query in order. It is used along with the clauses <b>RETURN</b> or <b>WITH</b>.</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td class="ts">LIMIT</td>
+<td>This clause is used to limit the rows in the result to a specific value.</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td class="ts">SKIP</td>
+<td>This clause is used to define from which row to start including the rows in the output.</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td class="ts">WITH</td>
+<td>This clause is used to chain the query parts together.</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td class="ts">UNWIND</td>
+<td>This clause is used to expand a list into a sequence of rows.</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td class="ts">UNION</td>
+<td>This clause is used to combine the result of multiple queries.</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td class="ts">CALL</td>
+<td>This clause is used to invoke a procedure deployed in the database.</td>
+</tr>
+</table>
+<h2>Neo4j CQL Functions</h2>
+<p>Following are the frequently used Neo4j CQL Functions &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center; width:25%;">CQL Functions</th>
+<th style="text-align:center;">Usage</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td class="ts">String</td>
+<td>They are used to work with String literals.</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td class="ts">Aggregation</td>
+<td>They are used to perform some aggregation operations on CQL Query results.</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td class="ts">Relationship</td>
+<td>They are used to get details of relationships such as startnode, endnode, etc.</td>
+</tr>
+</table>
+<p>We will discuss all Neo4j CQL commands, clauses and functions syntax, usage and examples in-detail in the subsequent chapters.</p>
+<h2>Neo4j CQL Data Types</h2>
+<p>These data types are similar to Java language. They are used to define properties of a node or a relationship.</p>
+<p>Neo4j CQL supports the following data types &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">CQL Data Type</th>
+<th style="text-align:center;">Usage</th>
+</tr>
+<tr>
+<td style="text-align:center;">1</td>
+<td style="text-align:center;">Boolean</td>
+<td>It is used to represent Boolean literals: true, false.</td>
+</tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td style="text-align:center;">byte</td>
+<td>It is used to represent 8-bit integers.</td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td style="text-align:center;">short</td>
+<td>It is used to represent 16-bit integers.</td>
+</tr>
+<tr>
+<td style="text-align:center;">4</td>
+<td style="text-align:center;">int</td>
+<td>It is used to represent 32-bit integers.</td>
+</tr>
+<tr>
+<td style="text-align:center;">5</td>
+<td style="text-align:center;">long</td>
+<td>It is used to represent 64-bit integers.</td>
+</tr>
+<tr>
+<td style="text-align:center;">6</td>
+<td style="text-align:center;">float</td>
+<td>It is used to represent 32-bit floating-point numbers.</td>
+</tr>
+<tr>
+<td style="text-align:center;">7</td>
+<td style="text-align:center;">double</td>
+<td>It is used to represent 64-bit floating-point numbers.</td>
+</tr>
+<tr>
+<td style="text-align:center;">8</td>
+<td style="text-align:center;">char</td>
+<td>It is used to represent 16-bit characters.</td>
+</tr>
+<tr>
+<td style="text-align:center;">9</td>
+<td style="text-align:center;">String</td>
+<td>It is used to represent Strings.</td>
+</tr>
+</table>
+<h2>CQL Operators</h2>
+<p>Following are the list of operators supported by Neo4j Cypher Query language.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Type</th>
+<th style="text-align:center;">Operators</th>
+</tr>
+<tr>
+<td style="text-align:center;">1</td>
+<td style="text-align:center;">Mathematical</td>
+<td>+, -, *, /, %, ^ </td>
+</tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td style="text-align:center;">Comparison</td>
+<td>+, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;= </td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td style="text-align:center;">Boolean</td>
+<td>AND, OR, XOR, NOT</td>
+</tr>
+<tr>
+<td style="text-align:center;">4</td>
+<td style="text-align:center;">String</td>
+<td>+</td>
+</tr>
+<tr>
+<td style="text-align:center;">5</td>
+<td style="text-align:center;">List</td>
+<td>+, IN, [X], [X…..Y]</td>
+</tr>
+<tr>
+<td style="text-align:center;">6</td>
+<td style="text-align:center;">Regular Expression</td>
+<td>=-</td>
+</tr>
+<tr>
+<td style="text-align:center;">7</td>
+<td style="text-align:center;">String matching</td>
+<td>STARTS WITH, ENDS WITH, CONSTRAINTS</td>
+</tr>
+</table>
+<h2>Boolean Operators in Neo4j CQL</h2>
+<p>Neo4j supports the following Boolean operators to use in Neo4j CQL WHERE clause to support multiple conditions.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Boolean Operators</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td class="ts">AND</td>
+<td>It is a Neo4j CQL keyword to support AND operation. It is like SQL AND operator.</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td class="ts">OR</td>
+<td>It is a Neo4j CQL keyword to support OR operation. It is like SQL AND operator.</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td class="ts">NOT</td>
+<td>It is a Neo4j CQL keyword to support NOT operation. It is like SQL AND operator.</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td class="ts">XOR</td>
+<td>It is a Neo4j CQL keyword to support XOR operation. It is like SQL AND operator.</td>
+</tr>
+</table>
+<h2>Comparison Operators in Neo4j CQL</h2>
+<p>Neo4j supports the following Comparison operators to use in Neo4j CQL WHERE clause to support conditions.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Boolean Operators</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">1</td>
+<td style="text-align:center;">=</td>
+<td>It is a Neo4j CQL "Equal To" operator.</td>
+</tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td style="text-align:center;">&lt; &gt;</td>
+<td>It is a Neo4j CQL "Not Equal To" operator.</td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td style="text-align:center;">&lt;</td>
+<td>It is a Neo4j CQL "Less Than" operator.</td>
+</tr>
+<tr>
+<td style="text-align:center;">4</td>
+<td style="text-align:center;">&gt;</td>
+<td>It is a Neo4j CQL "Greater Than" operator.</td>
+</tr>
+<tr>
+<td style="text-align:center;">5</td>
+<td style="text-align:center;">&lt;= </td></td>
+<td>It is a Neo4j CQL "Less Than Or Equal To" operator.</td>
+</tr>
+<tr>
+<td style="text-align:center;">6</td>
+<td style="text-align:center;">&gt; =</td>
+<td>It is a Neo4j CQL "Greater Than Or Equal To" operator.</td>
+</tr>
+</table>
+<h1>Neo4j CQL - Creating Nodes</h1>
+<p>As discussed, a node is a data/record in a graph database. You can create a node in Neo4j using the <b>CREATE</b> clause. This chapter teaches you how to &minus;</p>
+<ul class="list">
+<li>Create a single node</li>
+<li>Create multiple nodes</li> 
+<li>Create a node with a label</li> 
+<li>Create a node with multiple labels</li>
+<li>Create a node with properties</li>
+<li>Returning the created node</li>
+</ul>
+<h2>Creating a Single node</h2>
+<p>You can create a node in Neo4j by simply specifying the name of the node that is to be created along with the CREATE clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax for creating a node using Cypher Query Language.</p>
+<pre class="result notranslate">
+CREATE (node_name); 
+</pre>
+<p><b>Note</b> &minus; Semicolon (;) is optional.</p>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates a node in Neo4j.</p>
+<pre class="result notranslate">
+CREATE (sample) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server as shown in the following screenshot.</p>
+<img src="images/start_button.jpg" alt="Start Button" />
+<p><b>Step 2</b> &minus; Open your browser, copy paste the following URL in your address bar <b>http://localhost:7474/.</b> This will give you the built-in browser app of Neo4j with a dollar prompt as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 3</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/dollar_prompt.jpg" alt="Dollar Prompt" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/single_node.jpg" alt="Single Node" />
+<h3>Verification</h3>
+<p>To verify the creation of the node type, execute the following query in the dollar prompt.</p>
+<pre class="result notranslate">
+MATCH (n) RETURN n 
+</pre>
+<p>This query returns all the nodes in the database (we will discuss this query in detail in the coming chapters).</p>
+<p>On executing, this query shows the created node as shown in the following screenshot.</p>
+<img src="images/nodes_in_database.jpg" alt="Nodes in Database" />
+<h2>Creating Multiple Nodes</h2>
+<p>The create clause of Neo4j CQL is also used to create multiple nodes at the same time. To do so, you need to pass the names of the nodes to be created, separated by a comma.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create multiple nodes using the CREATE clause.</p>
+<pre class="result notranslate">
+CREATE (node1),(node2)
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates multiple nodes in Neo4j.</p>
+<pre class="result notranslate">
+CREATE (sample1),(sample2) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/desired_query.jpg" alt="Desired Query" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/multiple_node.jpg" alt="Multiple Node" />
+<h3>Verification</h3>
+<p>To verify the creation of the node, type and execute the following query in the dollar prompt.</p>
+<pre class="result notranslate">
+MATCH (n) RETURN n 
+</pre>
+<p>This query returns all the nodes in the database (we will discuss this query in detail in the coming chapters).</p>
+<p>On executing, this query shows the created node as shown in the following screenshot.</p>
+<img src="images/multiple_verification.jpg" alt="Multiple Verification" />
+<h2>Creating a Node with a Label</h2>
+<p>A label in Neo4j is used to group (classify) the nodes using labels. You can create a label for a node in Neo4j using the CREATE clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax for creating a node with a label using Cypher Query Language.</p>
+<pre class="result notranslate">
+CREATE (node:label) 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates a node with a label.</p>
+<pre class="result notranslate">
+CREATE (Dhawan:player) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/node_label.jpg" alt="Node Label" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/node_statement.jpg" alt="Node Statement" />
+<h3>Verification</h3>
+<p>To verify the creation of the node, type and execute the following query in the dollar prompt.</p>
+<pre class="result notranslate">
+MATCH (n) RETURN n 
+</pre>
+<p>This query returns all the nodes in the database (we will discuss this query in detail in the coming chapters).</p>
+<p>On executing, this query shows the created node as shown in the following screenshot.</p>
+<img src="images/label_verification.jpg" alt="Label Verification" />
+<h2>Creating a Node with Multiple Labels</h2>
+<p>You can also create multiple labels for a single node. You need to specify the labels for the node by separating them with a colon “ : ”.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a node with multiple labels.</p>
+<pre class="result notranslate">
+CREATE (node:label1:label2:. . . . labeln) 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates a node with multiple labels in Neo4j.</p>
+<pre class="result notranslate">
+CREATE (Dhawan:person:player) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/multiple_label.jpg" alt="Multiple Label" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/executed_query.jpg" alt="Executed Query" />
+<h3>Verification</h3>
+<p>To verify the creation of the node, type and execute the following query in the dollar prompt.</p>
+<pre class="result notranslate">
+MATCH (n) RETURN n 
+</pre>
+<p>This query returns all the nodes in the database (we will discuss this query in detail in the coming chapters).</p>
+<p>On executing, this query shows the created node as shown in the following screenshot.</p>
+<img src="images/multi_label_verification.jpg" alt="Multi Label Verification" />
+<h2>Create Node with Properties</h2>
+<p>Properties are the key-value pairs using which a node stores data. You can create a node with properties using the CREATE clause. You need to specify these properties separated by commas within the flower braces “{ }”.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a node with properties.</p>
+<pre class="result notranslate">
+CREATE (node:label { key1: value, key2: value, . . . . . . . . .  }) 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates a node with properties.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhawan:player{name: "Shikar Dhawan", YOB: 1985, POB: "Delhi"}) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/property_step.jpg" alt="Property Step" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/label_result.jpg" alt="Lable Result" />
+<h3>Verification</h3>
+<p>To verify the creation of the node, type and execute the following query in the dollar prompt.</p>
+<pre class="result notranslate">
+MATCH (n) RETURN n 
+</pre>
+<p>This query returns all the nodes in the database (we will discuss this query in detail in the coming chapters).</p>
+<p>On executing, this query shows the created node as shown in the following screenshot.</p>
+<img src="images/creation_node.jpg" alt="Creation Node" />
+<h2>Returning the Created Node</h2>
+<p>Throughout the chapter, we used the <b>MATCH (n) RETURN n</b> query to view the created nodes. This query returns all the existing nodes in the database.</p>
+<p>Instead of this, we can use the RETURN clause with CREATE to view the newly created node.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to return a node in Neo4j.</p>
+<pre class="result notranslate">
+CREATE (Node:Label{properties. . . . }) RETURN Node 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates a node with properties and returns it.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhawan:player{name: "Shikar Dhawan", YOB: 1985, POB: "Delhi"}) RETURN Dhawan 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/play_button.jpg" alt="Play Button" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/return_node.jpg" alt="Return Node" />
+<h1>Neo4j CQL - Creating a Relationship</h1>
+<p>In Noe4j, a relationship is an element using which we connect two nodes of a graph. These relationships have direction, type, and the form patterns of data. This chapter teaches you how to &minus;</p>
+<ul class="list">
+<li>Create relationships</li>
+<li>Create a relationship between the existing nodes</li>
+<li>Create a relationship with label and properties</li>
+</ul>
+<h2>Creating Relationships</h2>
+<p>We can create a relationship using the CREATE clause. We will specify relationship within the square braces “[  ]” depending on the direction of the relationship it is placed between hyphen “ - ” and arrow “ &rarr; ” as shown in the following syntax.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a relationship using the CREATE clause.</p>
+<pre class="result notranslate">
+CREATE (node1)-[:RelationshipType]-&gt;(node2) 
+</pre>
+<h3>Example</h3>
+<p>First of all, create two nodes Ind and Dhawan in the database, as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhawan:player{name: "Shikar Dhawan", YOB: 1985, POB: "Delhi"}) 
+CREATE (Ind:Country {name: "India"})
+</pre>
+<p>Now, create a relationship named <b>BATSMAN_OF</b> between these two nodes as &minus;</p>
+<pre class="result notranslate">
+CREATE (Dhawan)-[r:BATSMAN_OF]-&gt;(Ind) 
+</pre>
+<p>Finally, return both the nodes to see the created relationship.</p>
+<pre class="result notranslate">
+RETURN Dhawan, Ind 
+</pre>
+<p></p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p>Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/highlighted_query.jpg" alt="Highlighted Query" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/executing.jpg" alt="Executing">
+<h2>Creating a Relationship Between the Existing Nodes</h2>
+<p>You can also create a relationship between the existing nodes using the <b>MATCH</b> clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a relationship using the MATCH clause.</p>
+<pre class="result notranslate">
+MATCH (a:LabeofNode1), (b:LabeofNode2) 
+   WHERE a.name = "nameofnode1" AND b.name = " nameofnode2" 
+CREATE (a)-[: Relation]-&gt;(b) 
+RETURN a,b 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates a relationship using the match clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (a:player), (b:Country) WHERE a.name = "Shikar Dhawan" AND b.name = "India" 
+CREATE (a)-[r: BATSMAN_OF]-&gt;(b) 
+RETURN a,b 
+</pre>
+<p>To execute the above query, carry out the following steps.</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/existing_node.jpg" alt="Existing Node" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/executing.jpg" alt="Executing" />
+<h2>Creating a Relationship with Label and Properties</h2>
+<p>You can create a relationship with label and properties using the CREATE clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a relationship with label and properties using the CREATE clause.</p>
+<pre class="result notranslate">
+CREATE (node1)-[label:Rel_Type {key1:value1, key2:value2, . . . n}]-&gt; (node2) 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates a relationship with label and properties.</p>
+<pre class="prettyprint notranslate">
+MATCH (a:player), (b:Country) WHERE a.name = "Shikar Dhawan" AND b.name = "India" 
+CREATE (a)-[r:BATSMAN_OF {Matches:5, Avg:90.75}]-&gt;(b)  
+RETURN a,b 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/label_property.jpg" alt="Label Property" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/executing.jpg" alt="Executing" />
+<h2>Creating a Complete Path</h2>
+<p>In Neo4j, a path is formed using continuous relationships. A path can be created using the create clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a path in Neo4j using the CREATE clause.</p>
+<pre class="result notranslate">
+CREATE p = (Node1 {properties})-[:Relationship_Type]-&gt;
+   (Node2 {properties})[:Relationship_Type]-&gt;(Node3 {properties}) 
+RETURN p 
+</pre>
+<h3>Example</h3>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/champions_trophy.jpg" alt="Champions Trophy" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/result.jpg" alt="Result" />
+<h1>Neo4j - Merge Command</h1>
+<p>MERGE command is a combination of CREATE command and MATCH command.</p>
+<p>Neo4j CQL MERGE command searches for a given pattern in the graph. If it exists, then it returns the results.</p>
+<p>If it does NOT exist in the graph, then it creates a new node/relationship and returns the results.</p>
+<p>In this chapter you are going to learn how to &minus;</p>
+<ul class="list">
+<li>Merge a node with label</li>
+<li>Merge a node with properties</li>
+<li>OnCreate and OnMatch</li>
+<li>Merge a relationship</li>
+</ul>
+<h3>Syntax</h3>
+<p>Following is the syntax for the MERGE command.</p>
+<pre class="result notranslate">
+MERGE (node: label {properties . . . . . . . }) 
+</pre>
+<p>Before proceeding to the examples in this section, create two nodes in the database with labels Dhawan and Ind. Create a relationship of type “BATSMAN_OF” from Dhawan to Ind as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhawan:player{name: "Shikar Dhawan", YOB: 1985, POB: "Delhi"}) 
+CREATE (Ind:Country {name: "India"}) 
+CREATE (Dhawan)-[r:BATSMAN_OF]-&gt;(Ind) 
+</pre>
+<h2>Merging a Node with a Label</h2>
+<p>You can merge a node in the database based on the label using the MERGE clause. If you try to merge a node based on the label, then Neo4j verifies whether there exists any node with the given label. If not, the current node will be created.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to merge a node based on a label.</p>
+<pre class="result notranslate">
+MERGE (node:label) RETURN node 
+</pre>
+<h3>Example 1</h3>
+<p>Following is a sample Cypher Query which merges a node into Neo4j (based on label). When you execute this query, Neo4j verifies whether there is any node with the label <b>player</b>. If not, it creates a node named “Jadeja” and returns it.</p>
+<p>If, there exists any node with the given label, Neo4j returns them all.</p>
+<pre class="result notranslate">
+MERGE (Jadeja:player) RETURN Jadeja 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/merge.jpg" alt="Merge" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Since you have already created a node named “Dhawan” with the label “player” in the database, Neo4j returns it as shown in the following screenshot.</p>
+<img src="images/dhawan_player.jpg" alt="Dhawan Player" />
+<h3>Example 2</h3>
+<p>Now, try to merge a node named “CT2013” with a label named Tournament. Since there are no nodes with this label, Neo4j creates a node with the given name and returns it.</p>
+<pre class="prettyprint notranslate">
+MERGE (CT2013:Tournament{name: "ICC Champions Trophy 2013"}) 
+RETURN CT2013, labels(CT2013)
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and Start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/merging_node.jpg" alt="Merging Node" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. As discussed, since there is no node with the given label (Tournament). Neo4j creates and returns the specified node as shown in the following screenshot.</p>
+<img src="images/tornament.jpg" alt="Tornament" />
+<h2>Merging a Node with Properties</h2>
+<p>You can also merge a node with a set of properties. If you do so, Neo4j searches for an equal match for the specified node, including the properties. If it doesn’t find any, it creates one.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to merge a node using properties.</p>
+<pre class="result notranslate">
+MERGE (node:label {key1:value, key2:value, key3:value . . . . . . . . }) 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query to merge a node using properties. This query tries to merge the node named “jadeja” using properties and label. Since there is no such node with the exact label and properties, Neo4j creates one.</p>
+<pre class="prettyprint notranslate">
+MERGE (Jadeja:player {name: "Ravindra Jadeja", YOB: 1988, POB: "NavagamGhed"}) 
+RETURN Jadeja 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and Start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/merging_properties.jpg" alt="Merging Properties" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. As discussed, since there are no nodes with the specified label and properties, it creates one, as shown in the following screenshot.</p>
+<img src="images/property_result.jpg" alt="Property Result" />
+<h2>OnCreate and OnMatch</h2>
+<p>Whenever, we execute a merge query, a node is either matched or created. Using on create and on match, you can set properties for indicating whether the node is created or matched.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of <b>OnCreate</b> and <b>OnMatch</b> clauses.</p>
+<pre class="result notranslate">
+MERGE (node:label {properties . . . . . . . . . . .}) 
+ON CREATE SET property.isCreated ="true" 
+ON MATCH SET property.isFound ="true"
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which demonstrates the usage of <b>OnCreate</b> and <b>OnMatch</b> clauses in Neo4j. If the specified node already exists in the database, then the node will be matched and the property with key-value pair isFound = "true" will be created in the node.</p>
+<p>If the specified node doesn’t exist in the database, then the node will be created, and within it a property with a key-value pair isCreated ="true" will be created.</p>
+<pre class="prettyprint notranslate">
+MERGE (Jadeja:player {name: "Ravindra Jadeja", YOB: 1988, POB: "NavagamGhed"}) 
+ON CREATE SET Jadeja.isCreated = "true" 
+ON MATCH SET Jadeja.isFound = "true" 
+RETURN Jadeja 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/match_set.jpg" alt="Match Set" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. As discussed, since there is no node with the specified details, Neo4j created it along with the property <b>isFound</b> as shown in the following screenshot.</p>
+<img src="images/oncreate_result.jpg" alt="Oncreate Result" />
+<h2>Merge a Relationship</h2>
+<p>Just like nodes, you can also merge the relationships using the MERGE clause.</p>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which merges a relationship using the MATCH clause in Neo4j. This query tries to merge a relationship named <b>WINNERS_OF</b> between the nodes “ind” (label: Country &amp; name: India) and ICC13 (label: Tournament &amp; name: ICC Champions Trophy 2013).</p>
+<p>Since such relation doesn’t exist, Neo4j creates one.</p>
+<pre class="prettyprint notranslate">
+MATCH (a:Country), (b:Tournament) 
+   WHERE a.name = "India" AND b.name = "ICC Champions Trophy 2013" 
+   MERGE (a)-[r:WINNERS_OF]-&gt;(b) 
+RETURN a, b 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/winners_list.jpg" alt="Winners List" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Since the specified relation doesn’t exist in the database, Neo4j creates one as shown in the following screenshot.</p>
+<img src="images/relationship_merge.jpg" alt="Relationship Merge" />
+<p>In the same way, you can merge multiple relationships and undirected relationships too.</p>
+<h1>Neo4j - Set Clause</h1>
+<p>Using Set clause, you can add new properties to an existing Node or Relationship, and also add or update existing Properties values.</p>
+<p>In this chapter, we are going to discuss how to &minus;</p>
+<ul class="list">
+<li>Set a property</li>
+<li>Remove a property</li>
+<li>Set multiple properties</li>
+<li>Set a label on a node</li>
+<li>Set multiple labels on a node</li>
+</ul>
+<h2>Setting a Property</h2>
+<p>Using the SET clause, you can create a new property in a node.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax for setting a property.</p>
+<pre class="result notranslate">
+MATCH (node:label{properties . . . . . . . . . . . . . . }) 
+SET node.property = value 
+RETURN node
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, first create a node named Dhawan as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhawan:player{name: "shikar Dhawan", YOB: 1985, POB: "Delhi"}) 
+</pre>
+<p>Following is a sample Cypher Query to create a property named <i>“highestscore”</i> with value <i>“187”</i>.</p>
+<pre class="prettyprint notranslate">
+MATCH (Dhawan:player{name: "shikar Dhawan", YOB: 1985, POB: "Delhi"}) 
+SET Dhawan.highestscore = 187 
+RETURN Dhawan
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screnshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/match_player.jpg" alt="Match Player" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that a property with a key-value pair highestscore/187 is created in the node named “Dhawan”.</p>
+<img src="images/key_value.jpg" alt="Key Value" />
+<h2>Removing a Property</h2>
+<p>You can remove an existing property by passing <b>NULL</b> as value to it.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of removing a property from a node using the SET clause.</p>
+<pre class="result notranslate">
+MATCH (node:label {properties}) 
+SET node.property = NULL 
+RETURN node 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, first create a node “jadeja” as shown below.</p>
+<pre class="prettyprint notranslate">
+Create (Jadeja:player {name: "Ravindra Jadeja", YOB: 1988, POB: "NavagamGhed"})
+</pre>
+<p>Following is a sample Cypher Query which removes the property named POB from this node using the SET clause as shown below.</p>
+<pre class="prettyprint notranslate">
+MATCH (Jadeja:player {name: "Ravindra Jadeja", YOB: 1988, POB: "NavagamGhed"}) 
+SET Jadeja.POB = NULL 
+RETURN Jadeja 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/remove_property.jpg" alt="Remove property" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that the variable named <b>POB</b> was deleted.</p>
+<img src="images/deleted_pob.jpg" alt="Deleted POB" />
+<h2>Setting Multiple Properties</h2>
+<p>In the same way, you can create multiple properties in a node using the Set clause. To do so, you need to specify these key value pairs with commas.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create multiple properties in a node using the SET clause.</p>
+<pre class="result notranslate">
+MATCH (node:label {properties}) 
+SET node.property1 = value, node.property2 = value 
+RETURN node 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates multiple properties in a node using the SET clause in Neo4j.</p>
+<pre class="prettyprint notranslate">
+MATCH (Jadeja:player {name: "Ravindra Jadeja", YOB: 1988})  
+SET Jadeja.POB: "NavagamGhed", Jadeja.HS = "90" 
+RETURN Jadeja
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/multiple_properties.jpg" alt="Multiple Properties" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that properties named POB and HS were created.</p>
+<img src="images/executing_properties.jpg" alt="Executing Properties" />
+<h2>Setting a Label on a Node</h2>
+<p>You can set a label to an existing node using the SET clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to set a label to an existing node.</p>
+<pre class="result notranslate">
+MATCH (n {properties . . . . . . . }) 
+SET n :label 
+RETURN n 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, first create a node “Anderson” as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Anderson {name: "James Anderson", YOB: 1982, POB: "Burnely"})
+</pre>
+<p>Following is a sample Cypher Query to set a label on a node using the SET clause. This query adds the label “player” to the node Anderson and returns it.</p>
+<pre class="prettyprint notranslate">
+MATCH (Anderson {name: "James Anderson", YOB: 1982, POB: "Burnely"}) 
+SET Anderson: player 
+RETURN Anderson 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/label_node.jpg" alt="Label Node" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that the label named “player” is added to the node.</p>
+<img src="images/added_player.jpg" alt="Added Player" />
+<h2>Setting Multiple Labels on a Node</h2>
+<p>You can set multiple labels to an existing node using the SET clause. Here you need to specify the labels by separating them with colons “:”.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to set multiple labels to an existing node using the SET clause.</p>
+<pre class="result notranslate">
+MATCH (n {properties . . . . . . . }) 
+SET n :label1:label2 
+RETURN n 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, first create a node named “Ishant” as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Ishant {name: "Ishant Sharma", YOB: 1988, POB: "Delhi"}) 
+</pre>
+<p>Following is a sample Cypher Query used to create multiple labels on a node using the SET clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (Ishant {name: "Ishant Sharma", YOB: 1988, POB: "Delhi"}) 
+SET Ishant: player:person 
+RETURN Ishant 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/multi_label.jpg" alt="Multi Label" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that two labels - person and player – are added to the node named <b>Ishant</b>.</p>
+<img src="images/ishant_player.jpg" alt="Ishant Player" />
+<h1>Neo4j - Delete Clause</h1>
+<p>You can delete nodes and relationships from a database using the DELETE clause.</p>
+<h2>Deleting All Nodes and Relationships</h2>
+<p>Following is the query to delete all the nodes and the relationships in the database using the DELETE clause.</p>
+<h3>Query</h3>
+<pre class="result notranslate">
+MATCH (n) DETACH DELETE n
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/detach_match.jpg" alt="Detach Match" />
+<p>This will delete all the nodes and relationships from your neo4j database and make it empty.</p>
+<h2>Deleting a Particular Node</h2>
+<p>To delete a particular node, you need to specify the details of the node in the place of “n” in the above query.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to delete a particular node from Neo4j using the DELETE clause.</p>
+<pre class="result notranslate">
+MATCH (node:label {properties . . . . . . . . . .  }) 
+DETACH DELETE node
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create a node “Ishant” in the Neo4j database as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Ishant:player {name: "Ishant Sharma", YOB: 1988, POB: "Delhi"}) 
+</pre>
+<p>Following is a sample Cypher Query which deletes the above created node using the DELETE clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (Ishant:player {name: "Ishant Sharma", YOB: 1988, POB: "Delhi"}) 
+DETACH DELETE Ishant
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/particular_node.jpg" alt="Particular Node" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that the specified node is deleted.</p>
+<img src="images/deleted_node.jpg" alt="Deleted Node" />
+<h1>Neo4j - Remove Clause</h1>
+<p>The REMOVE clause is used to remove properties and labels from graph elements (Nodes or Relationships).</p>
+<p>The main difference between Neo4j CQL DELETE and REMOVE commands is &minus;</p>
+<ul class="list">
+<li>DELETE operation is used to delete nodes and associated relationships.</li>
+<li>REMOVE operation is used to remove labels and properties.</li>
+</ul>
+<h2>Removing a Property</h2>
+<p>You can remove a property of a node using MATCH along with the REMOVE clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to remove a property of a node using the REMOVE clause.</p>
+<pre class="result notranslate">
+MATCH (node:label{properties . . . . . . . }) 
+REMOVE node.property 
+RETURN node 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create a node named <b>Dhoni</b> as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"})
+</pre>
+<p>Following is a sample Cypher Query to remove the above created node using the REMOVE clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"}) 
+REMOVE Dhoni.POB 
+RETURN Dhoni 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/remove_ranchi.jpg" alt="Remove Ranchi" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here, you can observe that the node named POB was deleted.</p>
+<img src="images/remove_property_result.jpg" alt="Remove Property Result" />
+<h2>Removing a Label From a Node</h2>
+<p>Similar to property, you can also remove a label from an existing node using the remove clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to remove a label from a node.</p>
+<pre class="result notranslate">
+MATCH (node:label {properties . . . . . . . . . . . }) 
+REMOVE node:label 
+RETURN node 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query to remove a label from an existing node using the remove clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"}) 
+REMOVE Dhoni:player 
+RETURN Dhoni 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/remove_player.jpg" alt="Remove Player" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here, you can observe that the label was deleted from the node.</p>
+<img src="images/remove_result.jpg" alt="Remove Result" />
+<h2>Removing Multiple Labels</h2>
+<p>You can also remove multiple labels from an existing node.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to remove multiple labels from a node.</p>
+<pre class="result notranslate">
+MATCH (node:label1:label2 {properties . . . . . . . . }) 
+REMOVE node:label1:label2 
+RETURN node
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create a node Ishant as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Ishant:player:person {name: "Ishant Sharma", YOB: 1988, POB: "Delhi"}) 
+</pre>
+<p>Following is a sample Cypher Query to remove multiple labels from a node.</p>
+<pre class="prettyprint notranslate">
+MATCH (Ishant:player:person {name: "Ishant Sharma", YOB: 1988, POB: "Delhi"}) 
+REMOVE Ishant:player:person 
+RETURN Ishant 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/remove_multi_label.jpg" alt="Remove Multi Label" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here, you can observe that the specified labels were deleted from the node.</p>
+<img src="images/multi_label_result.jpg" alt="Multi Label Result" />
+<h1>Neo4j - Foreach Clause</h1>
+<p>The <b>FOREACH</b> clause is used to update data within a list whether components of a path, or result of aggregation.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the FOREACH clause.</p>
+<pre class="result notranslate">
+MATCH p = (start node)-[*]-&gt;(end node) 
+WHERE start.node = "node_name" AND end.node = "node_name" 
+FOREACH (n IN nodes(p)| SET n.marked = TRUE) 
+</pre>
+<h2>Example</h2>
+<p>Before proceeding with the example, create a path <b>p</b> in Neo4j database as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE p = (Dhawan {name:"Shikar Dhawan"})-[:TOPSCORRER_OF]-&gt;(Ind{name: 
+   "India"})-[:WINNER_OF]-&gt;(CT2013{name: "Champions Trophy 2013"}) 
+RETURN p 
+</pre>
+<p>Following is a sample Cypher Query which adds a property to all the nodes along the path using the FOREACH clause.</p>
+<pre class="prettyprint notranslate">
+MATCH p = (Dhawan)-[*]-&gt;(CT2013) 
+   WHERE Dhawan.name = "Shikar Dhawan" AND CT2013.name = "Champions Trophy 2013" 
+FOREACH (n IN nodes(p)| SET n.marked = TRUE)
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/for_each.jpg" alt="For each" />
+<h2>Result</h2>
+<p>On executing, you will get the following result.</p>
+<img src="images/set_properties.jpg" alt="Set Properties" />
+<h2>Verification</h2>
+<p>To verify the creation of the node, type and execute the following query in the dollar prompt.</p>
+<pre class="result notranslate">
+MATCH (n) RETURN n 
+</pre>
+<p>This query returns all the nodes in the database (we will discuss this query in detail in the coming chapters).</p>
+<p>On executing, this query shows the created node as shown in the following screenshot.</p>
+<img src="images/created_result.jpg" alt="Created Result" />
+<h1>Neo4j - Match Clause</h1>
+<p>In this chapter, we will learn about Match Clause and all the functions that can be performed using this clause.</p>
+<h2>Get All Nodes Using Match</h2>
+<p>Using the MATCH clause of Neo4j you can retrieve all nodes in the Neo4j database.</p>
+<h3>Example</h3>
+<p>Before proceeding with the example, create 3 nodes and 2 relationships as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"}) 
+CREATE (Ind:Country {name: "India", result: "Winners"}) 
+CREATE (CT2013:Tornament {name: "ICC Champions Trophy 2013"}) 
+CREATE (Ind)-[r1:WINNERS_OF {NRR:0.938 ,pts:6}]-&gt;(CT2013) 
+
+CREATE(Dhoni)-[r2:CAPTAIN_OF]-&gt;(Ind)  
+CREATE (Dhawan:player{name: "shikar Dhawan", YOB: 1995, POB: "Delhi"}) 
+CREATE (Jadeja:player {name: "Ravindra Jadeja", YOB: 1988, POB: "NavagamGhed"})  
+
+CREATE (Dhawan)-[:TOP_SCORER_OF {Runs:363}]-&gt;(Ind) 
+CREATE (Jadeja)-[:HIGHEST_WICKET_TAKER_OF {Wickets:12}]-&gt;(Ind) 
+</pre>
+<p>Following is the query which returns all the nodes in Neo4j database.</p>
+<pre class="result notranslate">
+MATCH (n) RETURN n 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/match_return.jpg" alt="Match Return" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/executing_result.jpg" alt="Executing Result" />
+<h2>Getting All Nodes Under a Specific Label</h2>
+<p>Using match clause, you can get all the nodes under a specific label.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to get all the nodes under a specific label.</p>
+<pre class="result notranslate">
+MATCH (node:label) 
+RETURN node 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query, which returns all the nodes in the database under the label <b>player</b>.</p>
+<pre class="result notranslate">
+MATCH (n:player) 
+RETURN n 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/n_player.jpg" alt="N Player" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/specific_label.jpg" alt="Specific Label" />
+<h2>Match by Relationship</h2>
+<p>You can retrieve nodes based on relationship using the MATCH clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of retrieving nodes based on the relationship using the MATCH clause.</p>
+<pre class="result notranslate">
+MATCH (node:label)&lt;-[: Relationship]-(n) 
+RETURN n 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query to retrieve nodes based on relationship using the MATCH clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (Ind:Country {name: "India", result: "Winners"})&lt;-[: TOP_SCORER_OF]-(n) 
+RETURN n.name 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/top_scorer.jpg" alt="Top Scorer" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/match_relationship.jpg" alt="Match Relationship" />
+<h2>Delete All Nodes</h2>
+<p>You can delete all the nodes using the MATCH clause.</p>
+<h3>Query</h3>
+<p>Following is the query to delete all the nodes in Neo4j.</p>
+<pre class="result notranslate">
+MATCH (n) detach delete n 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/desired_press.jpg" alt="Desired Press" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/deleted_relationship.jpg" alt="Deleted Relationship" />
+<h1>Neo4j - Optional Match Clause</h1>
+<p>The <b>OPTIONAL MATCH</b> clause is used to search for the pattern described in it, while using nulls for missing parts of the pattern.</p>
+<p>OPTIONAL MATCH is similar to the match clause, the only difference being it returns null as a result of the missing parts of the pattern.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the OPTIONAL MATCH with relationship.</p>
+<pre class="result notranslate">
+MATCH (node:label {properties. . . . . . . . . . . . . .}) 
+OPTIONAL MATCH (node)--&gt;(x) 
+RETURN x
+</pre>
+<h2>Example</h2>
+<p>Following is a sample Cypher Query which tries to retrieve the relations from the node ICCT2013. Since there are no such nodes, it returns null.</p>
+<pre class="prettyprint notranslate">
+MATCH (a:Tornament {name: "ICC Champions Trophy 2013"}) 
+OPTIONAL MATCH (a)--&gt;(x) 
+RETURN x 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/optional_match.jpg" alt="Optional Match" />
+<h2>Result</h2>
+<p>On executing, you will get the following result. Here you can observe that since there are no matches for the required pattern, Neo4j returned null.</p>
+<img src="images/pattern_required.jpg" alt="Pattern Required" />
+<h1>Neo4j - Where Clause</h1>
+<p>Like SQL, Neo4j CQL has provided WHERE clause in CQL MATCH command to filter the results of a MATCH Query.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of the WHERE clause.</p>
+<pre class="result notranslate">
+MATCH (label)  
+WHERE label.country = "property" 
+RETURN label 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create five nodes in the database as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE(Dhawan:player{name:"shikar Dhawan", YOB: 1985, runs:363, country: "India"}
+CREATE(Jonathan:player{name:"Jonathan Trott", YOB:1981, runs:229, country:"South Africa"}
+CREATE(Sangakkara:player{name:"Kumar Sangakkara", YOB:1977, runs:222, 
+   country:"Srilanka"})
+CREATE(Rohit:player{name:"Rohit Sharma", YOB: 1987, runs:177, country:"India"})
+CREATE(Virat:player{name:"Virat Kohli", YOB: 1988, runs:176, country:"India"})
+CREATE(Ind:Country {name: "India", result: "Winners"})
+</pre>
+<p>Following is a sample Cypher Query which returns all the players (nodes) that belongs to the country India using WHERE clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (player)  
+WHERE player.country = "India" 
+RETURN player 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/where_player.jpg" alt="Where Player" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/where_result.jpg" alt="Where Result" />
+<h2>WHERE Clause with Multiple Conditions</h2>
+<p>You can also use the WHERE clause to verify multiple conditions.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to use WHERE clause in Neo4j with multiple conditions.</p>
+<pre class="result notranslate">
+MATCH (emp:Employee)  
+WHERE emp.name = 'Abc' AND emp.name = 'Xyz' 
+RETURN emp 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which filters the nodes in the Neo4j database using two conditions.</p>
+<pre class="prettyprint notranslate">
+MATCH (player)  
+WHERE player.country = "India" AND player.runs &gt;=175 
+RETURN player 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/return_player.jpg" alt="Return Player" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/condition_result.jpg" alt="Condition Result" />
+<h2>Using Relationship with Where Clause</h2>
+<p>You can also use Where clause to filter the nodes using the relationships.</p>
+<h3>Example</h3>
+<p>Assume we have the following graph in the database.</p>
+<img src="images/assumed_database.jpg" alt="Assumed Database" />
+<p>Following is a sample Cypher Query to retrieve the top scorer of India using WHERE clause as shown below.</p>
+<pre class="prettyprint notranslate">
+MATCH (n) 
+WHERE (n)-[: TOP_SCORER_OF]-&gt;( {name: "India", result: "Winners"}) 
+RETURN n 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/winners_result.jpg" alt="Winners Result" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that Neo4j returned the node, which has the relation TOP_SCORER_OF to the country with the node having the name India.</p>
+<img src="images/returned_node.jpg" alt="Returned Node" />
+<h1>Neo4j - Count Function</h1>
+<p>Assume we have created a graph in the database with the following details.</p>
+<img src="images/count_database.jpg" alt="Count Database" />
+<h2>Count</h2>
+<p>The <b>count()</b> function is used to count the number of rows.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of the count function.</p>
+<pre class="result notranslate">
+MATCH (n { name: 'A' })--&gt;(x) 
+RETURN n, count(&ast;) 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which demonstrates the usage of the <b>count()</b> function.</p>
+<pre class="prettyprint notranslate">
+Match(n{name: "India", result: "Winners"})--(x)  
+RETURN n, count(*) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/count_match.jpg" alt="Count Match" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/count_result.jpg" alt="Count Result" />
+<h2>Group Count</h2>
+<p>The <b>COUNT</b> clause is also used to count the groups of relationship types.</p>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which counts and returns the number of nodes participating in each relation.</p>
+<pre class="prettyprint notranslate">
+Match(n{name: "India", result: "Winners"})-[r]-(x)  
+RETURN type (r), count(*) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/group_count.jpg" alt="Group Count" />
+<h1>Neo4j - Return Clause</h1>
+<p>The RETURN clause is used return nodes, relationships, and properties in Neo4j. In this chapter, we are going to learn how to &minus;</p>
+<ul class="list">
+<li>Return nodes</li>
+<li>Return multiple nodes</li>
+<li>Return relationships</li>
+<li>Return properties</li>
+<li>Return all elements</li>
+<li>Return a variable with column alias</li>
+</ul>
+<h2>Returning Nodes</h2>
+<p>You can return a node using the RETURN clause.</p>
+<h3>Syntax</h3>
+<p>Following is a syntax to return nodes using the RETURN clause.</p>
+<pre class="result notranslate">
+Create (node:label {properties}) 
+RETURN node 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create 3 nodes and 2 relationships as shown below.</p>
+<pre class="prettyprint notranslate">
+Create (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"}) 
+CREATE (Ind:Country {name: "India", result: "Winners"}) 
+CREATE (CT2013:Tornament {name: "ICC Champions Trophy 2013"}) 
+CREATE (Ind)-[r1:WINNERS_OF {NRR:0.938 ,pts:6}]-&gt;(CT2013) 
+CREATE(Dhoni)-[r2:CAPTAIN_OF]-&gt;(Ind) 
+</pre>
+<p>Following is a sample Cypher Query which creates a node named Dhoni and returns it.</p>
+<pre class="prettyprint notranslate">
+Create (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"}) 
+RETURN Dhoni
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/return.jpg" alt="Return" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/create_player.jpg" alt="Create Player" />
+<h2>Returning Multiple Nodes</h2>
+<p>You can also return multiple nodes using the return clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to return multiple nodes using the return clause.</p>
+<pre class="result notranslate">
+CREATE (Ind:Country {name: "India", result: "Winners"}) 
+CREATE (CT2013:Tornament {name: "ICC Champions Trophy 2013"}) 
+RETURN Ind, CT2013 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query to return multiple nodes using the return clause.</p>
+<pre class="prettyprint notranslate">
+CREATE (Ind:Country {name: "India", result: "Winners"}) 
+CREATE (CT2013:Tornament {name: "ICC Champions Trophy 2013"}) 
+RETURN Ind, CT2013 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/multi_node.jpg" alt="Multi Node" />
+<h3>Result</h3>
+<p>On executing, you will get the following result. Here you can observe that Neo4j returned 2 nodes.</p>
+<img src="images/create_tornament.jpg" alt="Create Tornament" />
+<h2>Returning Relationships</h2>
+<p>You can also return relationships using the Return clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to return relationships using the RETURN clause.</p>
+<pre class="result notranslate">
+CREATE (node1)-[Relationship:Relationship_type]-&gt;(node2) 
+RETURN Relationship 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which creates two relationships and returns them.</p>
+<pre class="prettyprint notranslate">
+CREATE (Ind)-[r1:WINNERS_OF {NRR:0.938 ,pts:6}]-&gt;(CT2013) 
+CREATE(Dhoni)-[r2:CAPTAIN_OF]-&gt;(Ind) 
+RETURN r1, r2 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/relationship_return.jpg" alt="Relationship Return" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/create_winners.jpg" alt="Create Winners" />
+<h2>Returning Properties</h2>
+<p>You can also return properties using the RETURN clause.</p>
+<h3>Syntax</h3>
+<p>Following is a syntax to return properties using the RETURN clause.</p>
+<pre class="result notranslate">
+Match (node:label {properties . . . . . . . . . . }) 
+Return node.property 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query to return the properties of a node.</p>
+<pre class="prettyprint notranslate">
+Match (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"}) 
+Return Dhoni.name, Dhoni.POB 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/property_return.jpg" alt="Property Return" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/streaming.jpg" alt="Streaming" />
+<h2>Returning All Elements</h2>
+<p>You can return all the elements in the Neo4j database using the RETURN clause.</p>
+<h3>Example</h3>
+<p>Following is an example Cypher Query to return all the elements in the database.</p>
+<pre class="prettyprint notranslate">
+Match p = (n {name: "India", result: "Winners"})-[r]-(x)  
+RETURN * 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/all_elements.jpg" alt="All Elements" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/all_elements_result.jpg" alt="All Elements Result" />
+<h2>Returning a Variable With a Column Alias</h2>
+<p>You can return a particular column with alias using RETURN clause in Neo4j.</p>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which returns the column POB as Place Of Birth.</p>
+<pre class="prettyprint notranslate">
+Match (Dhoni:player {name: "MahendraSingh Dhoni", YOB: 1981, POB: "Ranchi"}) 
+Return Dhoni.POB as Place Of Birth
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/return_column.jpg" alt="Return Column" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/column_alias.jpg" alt="Column Alias" />
+<h1>Neo4j - Order By Clause</h1>
+<p>You can arrange the result data in order using the ORDER BY clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of the ORDER BY clause.</p>
+<pre class="result notranslate">
+MATCH (n)  
+RETURN n.property1, n.property2 . . . . . . . .  
+ORDER BY n.property
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create 5 nodes in Neo4j database as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE(Dhawan:player{name:"shikar Dhawan", YOB: 1985, runs:363, country: "India"})
+CREATE(Jonathan:player{name:"Jonathan Trott", YOB:1981, runs:229, country:"South Africa"})
+CREATE(Sangakkara:player{name:"Kumar Sangakkara", YOB:1977, runs:222, country:"Srilanka"})
+CREATE(Rohit:player{name:"Rohit Sharma", YOB: 1987, runs:177, country:"India"})
+CREATE(Virat:player{name:"Virat Kohli", YOB: 1988, runs:176, country:"India"})
+</pre>
+<p>Following is a sample Cypher Query which returns the above created nodes in the order of the runs scored by the player using the ORDERBY clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (n)  
+RETURN n.name, n.runs 
+ORDER BY n.runs 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/return_name.jpg" alt="Return Name" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/records.jpg" alt="Records" />
+<h2>Ordering Nodes by Multiple Properties</h2>
+<p>You can arrange the nodes based on multiple properties using <b>ORDEYBY</b> clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to arrange nodes by multiple properties using the ORDERBY clause.</p>
+<pre class="result notranslate">
+MATCH (n) 
+RETURN n 
+ORDER BY n.age, n.name 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which arranges the nodes created earlier in this chapter based on the properties - runs and country.</p>
+<pre class="prettyprint notranslate">
+MATCH (n) 
+RETURN n.name, n.runs, n.country 
+ORDER BY n.runs, n.country
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/order_by_runs.jpg" alt="Order By Runs" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/ordering_nodes.jpg" alt="Ordering Nodes" />
+<h2>Ordering Nodes by Descending Order</h2>
+<p>You can arrange the nodes in a database in a descending order using the <b>ORDERBY</b> clause.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to arrange the nodes in a database.</p>
+<pre class="result notranslate">
+MATCH (n) 
+RETURN n 
+ORDER BY n.name DESC 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which arranges the nodes in a database in a descending order using the ORDERBY clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (n)  
+RETURN n.name, n.runs 
+ORDER BY n.runs DESC 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/descending_order.jpg" alt="Descending Order" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/order_by.jpg" alt="Order By" />
+<h1>Neo4j - Limit Clause</h1>
+<p>The <b>limit</b> clause is used to limit the number of rows in the output.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax of the LIMIT clause.</p>
+<pre class="result notranslate">
+MATCH (n) 
+RETURN n 
+ORDER BY n.name 
+LIMIT 3 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create 5 nodes in the Neo4j database as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE(Dhawan:player{name:"shikar Dhawan", YOB: 1985, runs:363, country: "India"})
+CREATE(Jonathan:player{name:"Jonathan Trott", YOB:1981, runs:229, country:"South Africa"})
+CREATE(Sangakkara:player{name:"Kumar Sangakkara", YOB:1977, runs:222, country:"Srilanka"})
+CREATE(Rohit:player{name:"Rohit Sharma", YOB: 1987, runs:177, country:"India"})
+CREATE(Virat:player{name:"Virat Kohli", YOB: 1988, runs:176, country:"India"})
+</pre>
+<p>Following is a sample Cypher Query which returns the nodes created above in a descending order and limits the records in the result to 3.</p>
+<pre class="prettyprint notranslate">
+MATCH (n)  
+RETURN n.name, n.runs 
+ORDER BY n.runs DESC 
+LIMIT 3 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/limit.jpg" alt="Limit" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/limit_result.jpg" alt="Limit Result" />
+<h2>Limit with expression</h2>
+<p>You can also use the LIMIT clause with expression.</p>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which limits the records using an expression.</p>
+<pre class="prettyprint notranslate">
+MATCH (n) 
+RETURN n.name, n.runs 
+ORDER BY n.runs DESC 
+LIMIT toInt(3 * rand())+ 1 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/expression_limit.jpg" alt="Expression Limit" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/expression_result.jpg" alt="Expression Result" />
+<h1>Neo4j - Skip Clause</h1>
+<p>The SKIP clause is used to define from which row to start including the rows in the output.</p>
+<h3>Example</h3>
+<p>Before proceeding with the example, create 5 nodes as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE(Dhawan:player{name:"shikar Dhawan", YOB: 1985, runs:363, country: "India"})
+CREATE(Jonathan:player{name:"Jonathan Trott", YOB:1981, runs:229, country:"South Africa"})
+CREATE(Sangakkara:player{name:"Kumar Sangakkara", YOB:1977, runs:222, country:"Srilanka"})
+CREATE(Rohit:player{name:"Rohit Sharma", YOB: 1987, runs:177, country:"India"})
+CREATE(Virat:player{name:"Virat Kohli", YOB: 1988, runs:176, country:"India"})
+</pre>
+<p>Following is a sample Cypher Query which returns all the nodes in the database skipping the first 3 nodes.</p>
+<pre class="prettyprint notranslate">
+MATCH (n)  
+RETURN n.name, n.runs 
+ORDER BY n.runs DESC 
+SKIP 3 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/skip.jpg" alt="Skip" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/skip_result.jpg" alt="Skip Result" />
+<h2>Skip Using Expression</h2>
+<p>You can skip the records of a result using an expression.</p>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query which uses the SKIP clause with an expression.</p>
+<pre class="prettyprint notranslate">
+MATCH (n)  
+RETURN n.name, n.runs 
+ORDER BY n.runs DESC 
+SKIP toInt (2*rand())+ 1 
+</pre>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/skip_expression.jpg" alt="Skip Expression" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/skip_expression_result.jpg" alt="Skip Expression Result" />
+<h1>Neo4j - With Clause</h1>
+<p>You can chain the query arts together using the WITH clause.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of the WITH clause.</p>
+<pre class="result notranslate">
+MATCH (n) 
+WITH n 
+ORDER BY n.property 
+RETURN collect(n.property) 
+</pre>
+<h2>Example</h2>
+<p>Following is a sample Cypher Query which demonstrates the usage of the WITH clause.</p>
+<pre class="prettyprint notranslate">
+MATCH (n) 
+WITH n 
+ORDER BY n.name DESC LIMIT 3 
+RETURN collect(n.name) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/return_collect.jpg" alt="Return Collect" />
+<h2>Result</h2>
+<p>On executing, you will get the following result.</p>
+<img src="images/collect_result.jpg" alt="Collect Result" />
+<h1>Neo4j - Unwind Clause</h1>
+<p>The unwind clause is used to unwind a list into a sequence of rows.</p>
+<h2>Example</h2>
+<p>Following is a sample Cypher Query which unwinds a list.</p>
+<pre class="prettyprint notranslate">
+UNWIND [a, b, c, d] AS x 
+RETURN x 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/return_collect.jpg" alt="Return Collect" />
+<h2>Result</h2>
+<p>On executing, you will get the following result.</p>
+<img src="images/collect_result.jpg" alt="Collect Result" />
+<h1>Neo4j - String Functions</h1>
+<p>Like SQL, Neo4J CQL has provided a set of String functions to use them in CQL Queries to get the required results.</p>
+<p>Here, we are going to discuss some of the important and frequently used functions.</p>
+<h2>String Functions List</h2>
+<p>Following is the list of prominent String functions in Neo4j.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Function &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><a href="string_upper.html">UPPER</a>
+<p>It is used to change all letters into upper case letters.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><a href="string_lower.html">LOWER</a>
+<p>It is used to change all letters into lower case letters.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><a href="string_substring.html">SUBSTRING</a>
+<p>It is used to get substring of a given String.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><b>Replace</b></a>
+<p>It is used to replace a substring with a given substring of a String.</p>
+</td>
+</tr>
+</table>
+<h1>Neo4j - Aggregation Function</h1>
+<p>Like SQL, Neo4j CQL has provided some aggregation functions to use in RETURN clause. It is similar to GROUP BY clause in SQL.</p>
+<p>We can use this RETURN + Aggregation Functions in MATCH command to work on a group of nodes and return some aggregated value.</p>
+<h2>AGGREGATION Functions List</h2>
+<p>Following is the list of aggregation functions in Neo4j.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Function &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><a href="aggregation_count.html">COUNT</a>
+<p>It returns the number of rows returned by MATCH command.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><a href="aggregation_max.html">MAX</a>
+<p>It returns the maximum value from a set of rows returned by MATCH command.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><a href="aggregation_min.html">MIN</a>
+<p>It returns the minimum value from a set of rows returned by MATCH command.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><a href="aggregation_sum.html">SUM</a>
+<p>It returns the summation value of all rows returned by MATCH command.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><a href="aggregation_avg.html">AVG</a>
+<p>It returns the average value of all rows returned by MATCH command.</p>
+</td>
+</tr>
+</table>
+<h1>Neo4j - Backup &amp; Restore</h1>
+<p>In real-time applications, we should take backup of our application database regularly, so that we can restore to some working condition at any failure point.</p>
+<p>This rule is applicable for both RDBMS and NoSQL databases.</p>
+<p>In this section, we are going to discuss about two important DBA tasks.</p>
+<ul class="list">
+<li>How to back up a Neo4j Database.</li>
+<li>How to restore Neo4j Database to a specific backup.</li>
+</ul>
+<p><b>Note</b> &minus; These steps are applicable to Windows Operating System only. We should use similar kind of commands to do the same steps in other operating systems.</p>
+<h2>Neo4j Database Backup</h2>
+<p><b>Step 1</b> &minus; Click "Neo4j Community" using the following path &minus;</p>
+<p>Windows "Start" button &rarr; "All Programs" &rarr; "Neo4j Community" &rarr; "Neo4j Community"</p>
+<p>By default, it selects <b>c:\Users\[username]\Documents\Neo4j\default.graphdb.</b> However if we wish to, we can change the path to a different directory.</p>
+<p><b>Step 2</b> &minus; Here we have changed to our Neo4j Database folder.</p>
+<p>C:\Ne04j2.0db</p>
+<img src="images/community_setting.jpg" alt="Community Setting" />
+<p><b>Step 3</b> &minus; Click the "Start" button.</p>
+<img src="images/browse_stop.jpg" alt="Browse Stop" />
+<p>Once the server starts, we can observe our Neo4j Database files are generated at a specified directory.</p>
+<img src="images/observe_directory.jpg" alt="Observed Directory" />
+<p>Before taking a database backup, the first and foremost thing we should do is shutdown the Neo4j Database server.</p>
+<p><b>Step 4</b> &minus; Click the "Stop" button to shut down the server.</p>
+<img src="images/community_setting.jpg" alt="Community Setting" />
+<p>Neo4j Database files are available at C:\Ne04j2.0db</p>
+<img src="images/observe_directory.jpg" alt="Observe Directory" />
+<p><b>Step 5</b> &minus; Open the command prompt.</p>
+<img src="images/command_prompt.jpg" alt="Command Prompt" />
+<p><b>Step 6</b> &minus; Create a folder "Neo4jDbBackup-01" at C:\Neo4j (This may be any location in your file system).</p>
+<pre class="result notranslate">
+mkdir C:\Neo4j\Neo4jDbBackup-01 
+</pre>
+<p></p>
+<img src="images/cmd_mkdir.jpg" alt="Cmd Mkdir" />
+<p>It creates a new folder "Neo4jDbBackup-01" at the specified file system location "C:\Neo4j\"</p>
+<img src="images/new_directory.jpg" alt="New Directory" />
+<p><b>Step 7</b> &minus; Type the following command and press Enter key.</p>
+<pre class="result notranslate">
+copy C:\Ne04j2.0db C:\Neo4j\Neo4jDbBackup-01 
+</pre>
+<p></p>
+<img src="images/backup_command.jpg" alt="Backup Command" />
+<p></p>
+<img src="images/copied_statements.jpg" alt="Copied Statements" />
+<p>This means our files are copied to the required destination folder. Access that folder and observe that the folder has our database files.</p>
+<img src="images/database_files.jpg" alt="Database files" />
+<p><b>Step 8</b> &minus; Use any Windows compression/decompression tool like WinZip, 7 Zip, or WinRAR to zip our Database folder.</p>
+<img src="images/zip_folder.jpg" alt="ZIP Folder" />
+<p><b>Step 9</b> &minus; Now our Neo4jDbBackup-01.zip file is created. If you have any memory constraints in your file system, then remove "Neo4jDbBackup-01" folder at "C:\Neo4j\"</p>
+<img src="images/memory_constraint.jpg" alt="Memory Constraint" />
+<h2>Neo4j Database Restore</h2>
+<p><b>Step 1</b> &minus; Shutdown the database server. Please refer to the previous steps to shut down the server.</p>
+<img src="images/community_setting.jpg" alt="Community Setting" />
+<p><b>Step 2</b> &minus; Empty the current database folder.</p>
+<img src="images/current_database.jpg" alt="Current Database" />
+<p><b>Step 3</b> &minus; Use any Windows compression/decompression tool like WinZip, 7 Zip, or WinRar to unzip our backup folder.</p>
+<img src="images/extracting_files.jpg" alt="Extracting Files" />
+<p><b>Step 4</b> &minus; Open the command prompt and execute the following command.</p>
+<pre class="result notranslate">
+Copy C:\Neo4j\Neo4jDbBackup-01 C:\Ne04j2.0db 
+</pre>
+<p></p>
+<img src="images/execute.jpg" alt="Execute" />
+<p>Now we can observe that our database folder contains working backup files</p>
+<p><b>Step 5</b> &minus; Start the server by clicking the "Start" button.</p>
+<img src="images/community_setting.jpg" alt="Community Setting" />
+<p></p>
+<img src="images/browse_stop.jpg" alt="Browse Stop" />
+<p><b>Step 6</b> &minus; Execute some MATCH + RETURN commands to verify whether we have restored our database properly.</p>
+<h1>Neo4j - Index</h1>
+<p>Neo4j SQL supports Indexes on node or relationship properties to improve the performance of the application. We can create indexes on properties for all nodes, which have the same label name.</p>
+<p>We can use these indexed columns on MATCH or WHERE or IN operator to improve the execution of CQL command.</p>
+<p>In this chapter, we will discuss how to &minus;</p>
+<ul class="list">
+<li>Create an Index</li>
+<li>Delete an Index</li>
+</ul>
+<h2>Creating an Index</h2>
+<p>Neo4j CQL provides "CREATE INDEX" command to create indexes on Node or Relationship properties.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create an index in Neo4j.</p>
+<pre class="result notranslate">
+CREATE INDEX ON:label (node) 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create a node Dhawan as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE (Dhawan:player{name: "shikar Dhawan", YOB: 1995, POB: "Delhi"})
+</pre>
+<p>Following is a sample Cypher Query to create an index on the node Dhawan in Neo4j.</p>
+<pre class="prettyprint notranslate">
+CREATE INDEX ON:player(Dhawan) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown below.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/index_on.jpg" alt="Index On" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/added_index.jpg" alt="Added Index" />
+<h2>Deleting an Index</h2>
+<p>Neo4j CQL provides a "DROP INDEX" command to drop an existing index of a Node or Relationshis property.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create an index in Neo4j.</p>
+<pre class="result notranslate">
+DROP INDEX ON:label(node) 
+</pre>
+<h3>Example</h3>
+<p>Following is a sample Cypher Query to create an index on the node named “Dhawan” in Neo4j.</p>
+<pre class="prettyprint notranslate">
+DROP INDEX ON:player(Dhawan) 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/drop_index.jpg" alt="Drop Index" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/remove_index.jpg" alt="Remove Index" />
+<h1>Neo4j - Create Unique Constraint</h1>
+<p>In Neo4j database, CQL CREATE command always creates a new node or relationship which means even though you use the same values, it inserts a new row. As per our application requirements for some nodes or relationships, we have to avoid this duplication. For this, we should use some database constraints to create a rule on one or more properties of a node or relationship.</p>
+<p>Like SQL, Neo4j database also supports UNIQUE constraint on node or relationship properties. UNIQUE constraint is used to avoid duplicate records and to enforce data integrity rule.</p>
+<h2>Create UNIQUE Constraint</h2>
+<p>Neo4j CQL provides "CREATE CONSTRAINT" command to create unique constraints on node or relationship properties.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a UNIQUE constraint in Neo4j.</p>
+<pre class="result notranslate">
+MATCH (root {name: "Dhawan"}) 
+CREATE UNIQUE (root)-[:LOVES]-(someone) 
+RETURN someone 
+</pre>
+<h3>Example</h3>
+<p>Before proceeding with the example, create 4 nodes as shown below.</p>
+<pre class="prettyprint notranslate">
+CREATE(Dhawan:player{id:001, name: "shikar Dhawan", YOB: 1995, POB: "Delhi"}) 
+CREATE(Jonathan:player {id:002, name: "Jonathan Trott", YOB: 1981, POB: "CapeTown"}) 
+CREATE(Sangakkara:player {id:003, name: "Kumar Sangakkara", YOB: 1977, POB: "Matale"}) 
+CREATE(Rohit:player {id:004, name: "Rohit Sharma", YOB: 1987, POB: "Nagpur"}) 
+CREATE(Virat:player {id:005, name: "Virat Kohli", YOB: 1988, POB: "Delhi"}) 
+</pre>
+<p>Following is a sample Cypher Query to create a UNIQUE constraint on the property id using Neo4j.</p>
+<pre class="prettyprint notranslate">
+CREATE CONSTRAINT ON (n:player) ASSERT n.id IS UNIQUE
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/create_unique.jpg" alt="Create Unique" />
+<h3>Result</h3>
+<p>On executing, you will get the following result.</p>
+<img src="images/added_constraint.jpg" alt="Added Constraint" />
+<h3>Verification</h3>
+<p>Now, try to add another node with a redundant id value. Here, we are trying to create a node with id <b>002</b>.</p>
+<pre class="prettyprint notranslate">
+CREATE (Jadeja:player {id:002, name: "Ravindra Jadeja", YOB: 1988, POB: "NavagamGhed"}) 
+</pre>
+<p>If you execute this query, you will get an error message as shown in the following screenshot.</p>
+<img src="images/node_label_play.jpg" alt="Node Label Play" />
+<h1>Neo4j - Drop Unique</h1>
+<p>We have already discussed creating UNIQUE constraint operations with examples in the previous chapter. In this chapter, we will discuss dropping UNIQUE constraint operation with examples.</p>
+<p>Neo4j CQL provides "DROP CONSTRAINT" command to delete existing Unique constraint from a node or relationship property.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax for dropping a UNIQUE constraint in Neo4j.</p>
+<pre class="result notranslate">
+DROP CONSTRAINT ON (node:label) 
+ASSERT node.id IS UNIQUE 
+</pre>
+<h2>Example</h2>
+<p>Following is a sample Cypher Query to remove the UNIQUE constraint on the property <b>id</b>.</p>
+<pre class="prettyprint notranslate">
+DROP CONSTRAINT ON (n:player) 
+ASSERT n.id IS UNIQUE 
+</pre>
+<p>To execute the above query, carry out the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Open the Neo4j desktop App and start the Neo4j Server. Open the built-in browser app of Neo4j using the URL <b>http://localhost:7474/</b> as shown in the following screenshot.</p>
+<img src="images/browser_app.jpg" alt="Browser App" />
+<p><b>Step 2</b> &minus; Copy and paste the desired query in the dollar prompt and press the play button (to execute the query) highlighted in the following screenshot.</p>
+<img src="images/drop_constraint.jpg" alt="Drop Constraint" />
+<h2>Result</h2>
+<p>On executing, you will get the following result.</p>
+<img src="images/removed_constraint.jpg" alt="Removed Constraint" />
+<hr />
+<div class="pre-btn">
+<a href="neo4j_drop_unique.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="neo4j_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/neo4j/neo4j_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 14:41:20 GMT -->
+</html>

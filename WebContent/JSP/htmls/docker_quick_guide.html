@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/docker/docker_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Docker Quick Guide</title>
+<meta name="description" content="Docker Quick Guide - Learn Docker in simple and easy steps starting from basic to advanced concepts with examples including Overview, Installing Docker on Linux, Installation, Hub, Images, Containers, Working With Containers, Architecture, Container and Hosts, Configuring, Container and Shells, File, Building Files, Public Repositories, Managing Ports, Private Registries, Building a Web Server Docker File, Instruction Commands, Container Linking, Storage, Networking, Setting Node.js, Setting MongoDB, Setting NGINX, Setting ASP.Net, Cloud, Logging, Compose, Continuous Integration, Kubernetes Architecture, Working of Kubernetes." />
+<meta name="keywords" content="Docker, Tutorial, Overview, Installing Docker on Linux, Installation, Hub, Images, Containers, Working With Containers, Architecture, Container and Hosts, Configuring, Container and Shells, File, Building Files, Public Repositories, Managing Ports, Private Registries, Building a Web Server Docker File, Instruction Commands, Container Linking, Storage, Networking, Setting Node.js, Setting MongoDB, Setting NGINX, Setting ASP.Net, Cloud, Logging, Compose, Continuous Integration, Kubernetes Architecture, Working of Kubernetes." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #15a2d6 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #15a2d6 !important;}
+.submenu-item{ border-bottom: 2px solid #15a2d6 !important; border-top: 2px solid #15a2d6 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/docker/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/docker/images/docker-mini-logo.jpg" alt="Docker Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Docker Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/docker/index.htm">Docker - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_overview.htm">Docker - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/installing_docker_on_linux.htm">Docker - Installing Docker on Linux</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_installation.htm">Docker - Installation</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_hub.htm">Docker - Hub</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_images.htm">Docker - Images</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_containers.htm">Docker - Containers</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_working_with_containers.htm">Docker - Working With Containers</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_architecture.htm">Docker - Architecture</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_container_and_hosts.htm">Docker - Container &amp; Hosts</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/configuring_docker.htm">Docker - Configuring</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_containers_and_shells.htm">Docker - Containers &amp; Shells</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_file.htm">Docker - File</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/building_docker_files.htm">Docker - Building Files</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_public_repositories.htm">Docker - Public Repositories</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_managing_ports.htm">Docker - Managing Ports</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_private_registries.htm">Docker - Private Registries</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/building_web_server_docker_file.htm">Building a Web Server Docker File</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_instruction_commands.htm">Docker - Instruction Commands</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_container_linking.htm">Docker - Container Linking</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_storage.htm">Docker - Storage</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_networking.htm">Docker - Networking</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_setting_nodejs.htm">Docker - Setting Node.js</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_setting_mongodb.htm">Docker - Setting MongoDB</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_setting_nginx.htm">Docker - Setting NGINX</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_toolbox.htm">Docker - Toolbox</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_setting_asp.net.htm">Docker - Setting ASP.Net</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_cloud.htm">Docker - Cloud </a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_logging.htm">Docker - Logging</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_compose.htm">Docker - Compose</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_continuous_integration.htm">Docker - Continuous Integration</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_kubernetes_architecture.htm">Docker - Kubernetes Architecture</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_working_of_kubernetes.htm">Docker - Working of Kubernetes</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Docker Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_quick_guide.htm">Docker - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_useful_resources.htm">Docker - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/docker/docker_discussion.htm">Docker - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Docker - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/docker/docker_working_of_kubernetes.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/docker/docker_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Docker - Overview</h1>
+<p>Docker is a container management service. The keywords of Docker are <b>develop, ship</b> and <b>run</b> anywhere. The whole idea of Docker is for developers to easily develop applications, ship them into containers which can then be deployed anywhere.</p>
+<p>The initial release of Docker was in March 2013 and since then, it has become the buzzword for modern world development, especially in the face of Agile-based projects.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_overview.jpg" alt="Docker Overview" />
+<h2>Features of Docker</h2>
+<ul class="list">
+<li><p>Docker has the ability to reduce the size of development by providing a smaller footprint of the operating system via containers.</p></li>
+<li><p>With containers, it becomes easier for teams across different units, such as development, QA and Operations to work seamlessly across applications.</p></li>
+<li><p>You can deploy Docker containers anywhere, on any physical and virtual machines and even on the cloud.</p></li>
+<li><p>Since Docker containers are pretty lightweight, they are very easily scalable.</p></li>
+</ul>
+<h2>Components of Docker</h2>
+<p>Docker has the following components</p>
+<ul class="list">
+<li><p><b>Docker for Mac</b> &minus; It allows one to run Docker containers on the Mac OS.</p></li>
+<li><p><b>Docker for Linux</b> &minus; It allows one to run Docker containers on the Linux OS.</p></li>
+<li><p><b>Docker for Windows</b> &minus; It allows one to run Docker containers on the Windows OS.</p></li>
+<li><p><b>Docker Engine</b> &minus; It is used for building Docker images and creating Docker containers.</p></li>
+<li><p><b>Docker Hub</b> &minus; This is the registry which is used to host various Docker images.</p></li>
+<li><p><b>Docker Compose</b> &minus; This is used to define applications using multiple Docker containers.</p></li>
+</ul>
+<p>We will discuss all these components in detail in the subsequent chapters.</p>
+<p>The official site for Docker is <a target="_blank" rel="nofollow" href="https://www.docker.com/">https://www.docker.com/</a> The site has all information and documentation about the Docker software. It also has the download links for various operating systems.</p>
+<h1>Installing Docker on Linux</h1>
+<p>To start the installation of Docker, we are going to use an Ubuntu instance. You can use Oracle Virtual Box to setup a virtual Linux instance, in case you don’t have it already.</p>  
+<p>The following screenshot shows a simple Ubuntu server which has been installed on Oracle Virtual Box. There is an OS user named <b>demo</b> which has been defined on the system having entire root access to the sever.</p>
+<img src="https://www.tutorialspoint.com/docker/images/demo_button.jpg" alt="Demo Button" />
+<p>To install Docker, we need to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Before installing Docker, you first have to ensure that you have the right Linux kernel version running. Docker is only designed to run on Linux kernel version 3.8 and higher. We can do this by running the following command.</p>
+<h3>uname</h3>
+<p>This method returns the system information about the Linux system.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+uname -a
+</pre>
+<h3>Options</h3>
+<p><b>a</b> &minus; This is used to ensure that the system information is returned.</p>
+<h3>Return Value</h3>
+<p>This method returns the following information on the Linux system &minus;</p>
+<ul class="list">
+<li>kernel name</li>
+<li>node name</li>
+<li>kernel release</li>
+<li>kernel version</li>
+<li>machine</li>
+<li>processor</li>
+<li>hardware platform</li>
+<li>operating system</li>
+</ul>
+<h3>Example</h3>
+<pre class="result notranslate">
+uname –a
+</pre>
+<h3>Output</h3>
+<p>When we run above command, we will get the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/output.jpg" alt="Output" />
+<p>From the output, we can see that the Linux kernel version is 4.2.0-27 which is higher than version 3.8, so we are good to go.</p>
+<p><b>Step 2</b> &minus; You need to update the OS with the latest packages, which can be done via the following command &minus;</p>
+<pre class="result notranslate">
+apt-get
+</pre>
+<p>This method installs packages from the Internet on to the Linux system.</p>
+<h3>Syntax</h3>
+<p>sudo apt-get update</p>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>sudo</b> &minus; The <b>sudo</b> command is used to ensure that the command runs with root access.</p></li>
+<li><p><b>update</b> &minus; The <b>update</b> option is used ensure that all packages are updated on the Linux system.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>None</p>
+<h3>Example</h3>
+<pre class="result notranslate">
+sudo apt-get update
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, we will get the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/example_output.jpg" alt="Example Output" />
+<p>This command will connect to the internet and download the latest system packages for Ubuntu.</p>
+<p><b>Step 3</b> &minus; The next step is to install the necessary certificates that will be required to work with the Docker site later on to download the necessary Docker packages. It can be done with the following command.</p>
+<pre class="result notranslate">
+sudo apt-get install apt-transport-https ca-certificates
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/necessary_docker_packages.jpg" alt="Necessary Docker Packages" />
+<p><b>Step 4</b> &minus; The next step is to add the new GPG key. This key is required to ensure that all data is encrypted when downloading the necessary packages for Docker.</p>
+<p>The following command will download the key with the ID 58118E89F3A912897C070ADBF76221572C52609D from the <b>keyserver</b> hkp://ha.pool.sks-keyservers.net:80 and adds it to the <b>adv</b> keychain. Please note that this particular key is required to download the necessary Docker packages.</p>
+<img src="https://www.tutorialspoint.com/docker/images/new_pgp_key.jpg" alt="New PGP Key" />
+<p><b>Step 5</b> &minus; Next, depending on the version of Ubuntu you have, you will need to add the relevant site to the <b>docker.list</b> for the <b>apt package manager</b>, so that it will be able to detect the Docker packages from the Docker site and download them accordingly.</p>
+<ul class="list">
+<li><p>Precise 12.04 (LTS) ─ deb <a target="_blank" rel="nofollow" href="https://apt.dockerproject.org/repo/">https://apt.dockerproject.org/repo</a>ubuntu-precise main</p></li>
+<li><p>Trusty 14.04 (LTS) ─ deb <a target="_blank" rel="nofollow" href="https://apt.dockerproject.org/repo/">https://apt.dockerproject.org/repo/</a> ubuntu-trusty main</p></li>
+<li><p>Wily 15.10 ─ deb <a target="_blank" rel="nofollow" href="https://apt.dockerproject.org/repo/">https://apt.dockerproject.org/repo</a>  ubuntu-wily main </p></li>
+<li><p>Xenial 16.04 (LTS) - <a target="_blank" rel="nofollow" href="https://apt.dockerproject.org/repo/">https://apt.dockerproject.org/repo</a> ubuntu-xenial main</p></li>
+</ul>
+<p>Since our OS is Ubuntu 14.04, we will use the Repository name as “deb <a target="_blank" rel="nofollow" href="https://apt.dockerproject.org/repo/"
+>https://apt.dockerproject.org/repo</a>ubuntu-trusty main”.</p>
+<p>And then, we will need to add this repository to the <b>docker.list</b> as mentioned above.</p>
+<pre class="result notranslate">
+echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main” 
+   | sudo tee /etc/apt/sources.list.d/docker.list
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_list.jpg" alt="Docker List" />
+<p><b>Step 6</b> &minus; Next, we issue the <b>apt-get update command</b> to update the packages on the Ubuntu system.</p>
+<img src="https://www.tutorialspoint.com/docker/images/apt_get_update_command.jpg" alt="APT-GET Update Command" />
+<p><b>Step 7</b> &minus; If you want to verify that the package manager is pointing to the right repository, you can do it by issuing the <b>apt-cache command</b>.</p>
+<pre class="result notranslate">
+apt-cache policy docker-engine
+</pre>
+<p>In the output, you will get the link to <a target="_blank" rel="nofollow" href="https://apt.dockerproject.org/repo/">https://apt.dockerproject.org/repo/</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/apt_get_update_command.jpg" alt="APT-GET Update Command" />
+<p><b>Step 8</b> &minus;  Issue the <b>apt-get update command</b> to ensure all the packages on the local system are up to date.</p>
+<img src="https://www.tutorialspoint.com/docker/images/packages_updation.jpg" alt="APT-GET Packages Updation" />
+<p><b>Step 9</b> &minus; For Ubuntu Trusty, Wily, and Xenial, we have to install the linux-image-extra-* kernel packages, which allows one to use the <b>aufs storage driver</b>. This driver is used by the newer versions of Docker.</p>
+<p>It can be done by using the following command.</p>
+<pre class="result notranslate">
+sudo apt-get install linux-image-extra-$(uname -r) 
+   linux-image-extra-virtual
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/aufs_storage_driver.jpg" alt="Aufs Storage Driver" />
+<p><b>Step 10</b> &minus; The final step is to install Docker and we can do this with the following command &minus;</p>
+<pre class="result notranslate">
+sudo apt-get install –y docker-engine
+</pre>
+<p>Here, <b>apt-get</b> uses the install option to download the Docker-engine image from the Docker website and get Docker installed.</p>
+<p>The Docker-engine is the official package from the Docker Corporation for Ubuntu-based systems.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_engine.jpg" alt="Docker-engine" />
+<p>In the next section, we will see how to check for the version of Docker that was installed.</p>
+<h2>Docker Version</h2>
+<p>To see the version of Docker running, you can issue the following command &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker version 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>version</b> &minus; It is used to ensure the Docker command returns the Docker version installed.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will provide the various details of the Docker version installed on the system.</p>
+<h3>Example</h3>
+<pre class="result notranslate">
+sudo docker version 
+</pre>
+<h3>Output</h3>
+<p>When we run the above program, we will get the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_version_output.jpg" alt="Docker Version Output" />
+<h2>Docker Info</h2>
+<p>To see more information on the Docker running on the system, you can issue the following command &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker info
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>info</b> &minus; It is used to ensure that the Docker command returns the detailed information on the Docker service installed.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will provide the various details of the Docker installed on the system such as &minus;</p>
+<ul class="list">
+<li>Number of containers</li>
+<li>Number of images</li>
+<li>The storage driver used by Docker</li>
+<li>The root directory used by Docker</li>
+<li>The execution driver used by Docker</li>
+</ul>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker info
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, we will get the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_info_example_output.jpg" alt="Docker Info Example Output" />
+<h2>Docker for Windows</h2>
+<p>Docker has out-of-the-box support for Windows, but you need to have the following configuration in order to install Docker for Windows.</p>
+<h3>System Requirements</h3>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<td>Windows OS</td>
+<td>Windows 10 64 bit</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>2 GB RAM (recommended)</td>
+</tr>
+</table>
+<p>You can download Docker for Windows from &minus; <a target="_blank" rel="nofollow" href="https://docs.docker.com/docker-for-windows/">https://docs.docker.com/docker-for-windows/</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_for_windows.jpg" alt="Docker for Windows" />
+<h2>Docker ToolBox</h2>
+<p>Docker ToolBox has been designed for older versions of Windows, such as Windows 8.1 and Windows 7. You need to have the following configuration in order to install Docker for Windows.</p>
+<h3>System Requirements</h3>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<td>Windows OS</td>
+<td>Windows 7 , 8, 8.1</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>2 GB RAM (recommended)</td>
+</tr>
+<tr>
+<td>Virtualization</td>
+<td>This should be enabled.</td>
+</tr>
+</table>
+<p>You can download Docker ToolBox from &minus; <a target="_blank" rel="nofollow" href="https://www.docker.com/products/docker-toolbox">https://www.docker.com/products/docker-toolbox</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_toolbox.jpg" alt="Docker Toolbox" />
+<h1>Docker - Installation</h1>
+<p>Let’s go through the installation of each product.</p>
+<h2>Docker for Windows</h2>
+<p>Once the installer has been downloaded, double-click it to start the installer and then follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Click on the Agreement terms and then the Install button to proceed ahead with the installation.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_setup.jpg" alt="Docker Setup" />
+<p><b>Step 2</b> &minus; Once complete, click the Finish button to complete the installation.</p>
+<img src="https://www.tutorialspoint.com/docker/images/finish.jpg" alt="Finish" />
+<h2>Docker ToolBox</h2>
+<p>Once the installer has been downloaded, double-click it to start the installer and then follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Click the Next button on the start screen.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_toolbox_next.jpg" alt="Docker ToolBox Next" />
+<p><b>Step 2</b> &minus; Keep the default location on the next screen and click the Next button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/destination_location.jpg" alt="Destination Location" />
+<p><b>Step 3</b> &minus; Keep the default components and click the Next button to proceed.</p>
+<img src="https://www.tutorialspoint.com/docker/images/select_components.jpg" alt="Select Components" />
+<p><b>Step 4</b> &minus; Keep the Additional Tasks as they are and then click the Next button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/additional_tasks.jpg" alt="Additional Tasks" />
+<p><b>Step 5</b> &minus; On the final screen, click the Install button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/install.jpg" alt="Install" />
+<h2>Working with Docker Toolbox</h2>
+<p>Let’s now look at how Docker Toolbox can be used to work with Docker containers on Windows. The first step is to launch the Docker Toolbox application for which the shortcut is created on the desktop when the installation of Docker toolbox is carried out.</p>
+<img src="https://www.tutorialspoint.com/docker/images/quickstart_terminal.jpg" alt="Quickstart Terminal" />
+<p>Next, you will see the configuration being carried out when Docker toolbox is launched.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_toolbox_launched.jpg" alt="Docker Toolbox Terminal" />
+<p>Once done, you will see Docker configured and launched. You will get an interactive shell for Docker.</p>
+<img src="https://www.tutorialspoint.com/docker/images/interactive_shell.jpg" alt="Interactive Shell" />
+<p>To test that Docker runs properly, we can use the Docker <b>run command</b> to download and run a simple <b>HelloWorld Docker container</b>.</p>
+<p>The working of the Docker <b>run command</b> is given below &minus;</p>
+<pre class="result notranslate">
+docker run 
+</pre>
+<p>This command is used to run a command in a Docker container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker run image
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>Image</b> &minus; This is the name of the image which is used to run the container.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will run the command in the desired container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker run hello-world
+</pre>
+<p>This command will download the <b>hello-world</b> image, if it is not already present, and run the <b>hello-world</b> as a container.</p>
+<h3>Output</h3>
+<p>When we run the above command, we will get the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_container.jpg" alt="Docker Container" />
+<p>If you want to run the Ubuntu OS on Windows, you can download the Ubuntu Image using the following command &minus;</p>
+<pre class="result notranslate">
+Docker run –it Ubuntu bash
+</pre>
+<p>Here you are telling Docker to run the command in the interactive mode via the <b>–it</b> option.</p>
+<img src="https://www.tutorialspoint.com/docker/images/ubuntu_image.jpg" alt="Ubuntu Image" />
+<p>In the output you can see that the Ubuntu image is downloaded and run and then you will be logged in as a root user in the Ubuntu container.</p>
+<h1>Docker - Hub</h1>
+<p>Docker Hub is a registry service on the cloud that allows you to download Docker images that are built by other communities. You can also upload your own Docker built images to Docker hub. In this chapter, we will see how to download and the use the Jenkins Docker image from Docker hub.
+</p>
+<p>The official site for Docker hub is &minus; <a target+"_blank" rel="nofollow" href="https://www.docker.com/community-edition#/add_ons">https://www.docker.com/community-edition#/add_ons</a></p>
+<p><b>Step 1</b> &minus; First you need to do a simple sign-up on Docker hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_hub_singup.jpg" alt="Docker Hub Singup" />
+<p><b>Step 2</b> &minus; Once you have signed up, you will be logged into Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/logged_into_docker_hub.jpg" alt="Logged into Docker Hub" />
+<p><b>Step 3</b> &minus; Next, let’s browse and find the Jenkins image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/jenkins_image.jpg" alt="Jenkins image" />
+<p><b>Step 4</b> &minus; If you scroll down on the same page, you can see the Docker <b>pull</b> command. This will be used to download the Jenkins image onto the local Ubuntu server.</p>
+<img src="https://www.tutorialspoint.com/docker/images/pull_command.jpg" alt="Pull Command" />
+<p><b>Step 5</b> &minus; Now, go to the Ubuntu server and run the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker pull jenkins 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/ubuntu_server.jpg" alt="Ubuntu server" />
+<p>To run Jenkins, you need to run the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker run -p 8080:8080 -p 50000:50000 jenkins 
+</pre>
+<p>Note the following points about the above <b>sudo</b> command &minus;</p>
+<ul class="list">
+<li><p>We are using the <b>sudo</b> command to ensure it runs with root access.</p></li>
+<li><p>Here, <b>jenkins</b> is the name of the image we want to download from Docker hub and install on our Ubuntu machine.</p></li>
+<li><p><b>-p</b> is used to map the port number of the internal Docker image to our main Ubuntu server so that we can access the container accordingly.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/sudo_command.jpg" alt="Sudo Command" />
+<p>You will then have Jenkins successfully running as a container on the Ubuntu machine.</p>
+<h1>Docker - Images</h1>
+<p>In Docker, everything is based on Images. An image is a combination of a file system and parameters. Let’s take an example of the following command in Docker.</p>
+<pre class="result notranslate">
+docker run hello-world 
+</pre>
+<ul class="list">
+<li><p>The Docker command is specific and tells the Docker program on the Operating System that something needs to be done.</p></li>
+<li><p>The <b>run</b> command is used to mention that we want to create an instance of an image, which is then called a <b>container</b>.</p></li>
+<li><p>Finally, "hello-world" represents the image from which the container is made.</p></li>
+</ul>
+<p>Now let’s look at how we can use the CentOS image available in Docker Hub to run CentOS on our Ubuntu machine. We can do this by executing the following command on our Ubuntu machine &minus;</p>
+<pre class="result notranslate">
+sudo docker run centos –it /bin/bash
+</pre>
+<p>Note the following points about the above <b>sudo</b> command &minus;</p>
+<ul class="list">
+<li><p>We are using the <b>sudo</b> command to ensure that it runs with <b>root</b> access.</p></li>
+<li><p>Here, <b>centos</b> is the name of the image we want to download from Docker Hub and install on our Ubuntu machine.</p></li>
+<li><p><b>─it</b> is used to mention that we want to run in <b>interactive mode</b>.</p></li>
+<li><p><b>/bin/bash</b> is used to run the bash shell once CentOS is up and running.</p></li>
+</ul>
+<h2>Displaying Docker Images</h2>
+<p>To see the list of Docker images on the system, you can issue the following command.</p>
+<pre class="result notranslate">
+docker images
+</pre>
+<p>This command is used to display all the images currently installed on the system.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker images 
+</pre>
+<h3>Options</h3>
+<p>None</p>
+<h3>Return Value</h3>
+<p>The output will provide the list of images on the system.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker images
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/displaying_docker_images.jpg" alt="Displaying Docker Images" />
+<p>From the above output, you can see that the server has three images: <b>centos, newcentos,</b> and <b>jenkins</b>. Each image has the following attributes &minus;</p>
+<ul class="list">
+<li><p><b>TAG</b> &minus; This is used to logically tag images.</p></li>
+<li><p><b>Image ID</b> &minus; This is used to uniquely identify the image.</p></li>
+<li><p><b>Created</b> &minus; The number of days since the image was created.</p></li>
+<li><p><b>Virtual Size</b> &minus; The size of the image.</p></li>
+</ul>
+<h2>Downloading Docker Images</h2>
+<p>Images can be downloaded from Docker Hub using the Docker <b>run</b> command. Let’s see in detail how we can do this.</p>
+<h3>Syntax</h3>
+<p>The following syntax is used to run a command in a Docker container.</p>
+<pre class="result notranslate">
+docker run image 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>Image</b> &minus; This is the name of the image which is used to run the container.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will run the command in the desired container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker run centos
+</pre>
+<p>This command will download the <b>centos</b> image, if it is not already present, and run the OS as a container.</p>
+<h3>Output</h3>
+<p>When we run the above command, we will get the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/downloading_docker_images.jpg" alt="Downloading Docker Images" />
+<p>You will now see the CentOS Docker image downloaded. Now, if we run the Docker <b>images</b> command to see the list of images on the system, we should be able to see the <b>centos</b> image as well.</p>
+<img src="https://www.tutorialspoint.com/docker/images/centos.jpg" alt="Centos" />
+<h2>Removing Docker Images</h2>
+<p>The Docker images on the system can be removed via the <b>docker rmi</b> command. Let’s look at this command in more detail.</p>
+<pre class="result notranslate">
+docker rmi
+</pre>
+<p>This command is used to remove Docker images.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker rmi ImageID
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ImageID</b> &minus; This is the ID of the image which needs to be removed.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will provide the Image ID of the deleted Image.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker rmi 7a86f8ffcb25 
+</pre>
+<p>Here, <b>7a86f8ffcb25</b> is the Image ID of the <b>newcentos</b> image.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/removing_docker_images.jpg" alt="Removing Docker Images" />
+<p>Let’s see some more Docker commands on images.</p>
+<h2>docker images -q</h2>
+<p>This command is used to return only the Image ID’s of the images.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker images 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>q</b> &minus; It tells the Docker command to return the Image ID’s only.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will show only the Image ID’s of the images on the Docker host.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker images -q 
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_images_q.jpg" alt="Docker Images Q" />
+<h2>docker inspect</h2>
+<p>This command is used see the details of an image or container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker inspect Repository 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>Repository</b> &minus; This is the name of the Image.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will show detailed information on the Image.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker inspect jenkins 
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_inspect.jpg" alt="Docker Inspect" />
+<h1>Docker - Containers</h1>
+<p>Containers are instances of Docker images that can be run using the Docker run command. The basic purpose of Docker is to run containers. Let’s discuss how to work with containers.</p>
+<h2>Running a Container</h2>
+<p>Running of containers is managed with the Docker <b>run</b> command. To run a container in an interactive mode, first launch the Docker container.</p>
+<pre class="result notranslate">
+sudo docker run –it centos /bin/bash 
+</pre>
+<p>Then hit Crtl+p and you will return to your OS shell.</p>
+<img src="https://www.tutorialspoint.com/docker/images/containers.jpg" alt="Containers" />
+<p>You will then be running in the instance of the CentOS system on the Ubuntu server.</p>
+<h2>Listing of Containers</h2>
+<p>One can list all of the containers on the machine via the <b>docker ps</b> command. This command is used to return the currently running containers.</p>
+<pre class="result notranslate">
+docker ps
+</pre>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker ps 
+</pre>
+<h3>Options</h3>
+<p>None</p>
+<h3>Return Value</h3>
+<p>The output will show the currently running containers.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker ps
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/listing_of_containers.jpg" alt="Listing of Containers" />
+<p>Let’s see some more variations of the <b>docker ps</b> command.</p>
+<h2>docker ps -a</h2>
+<p>This command is used to list all of the containers on the system</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker ps -a 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>─a</b> &minus; It tells the <b>docker ps</b> command to list all of the containers on the system.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will show all containers.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker ps -a 
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_ps_a.jpg" alt="Docker PS A" />
+<h2>docker history</h2>
+<p>With this command, you can see all the commands that were run with an image via a container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker history ImageID 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ImageID</b> &minus; This is the Image ID for which you want to see all the commands that were run against it.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will show all the commands run against that image.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker history centos
+</pre>
+<p>The above command will show all the commands that were run against the <b>centos</b> image.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_history.jpg" alt="Docker History" />
+<h1>Docker - Working with Containers</h1>
+<p>In this chapter, we will explore in detail what we can do with containers.</p>
+<h2>docker top</h2>
+<p>With this command, you can see the top processes within a container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker top ContainerID 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID for which you want to see the top processes.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will show the top-level processes within a container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker top 9f215ed0b0d3 
+</pre>
+<p>The above command will show the top-level processes within a container.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_top.jpg" alt="Docker Top" />
+<h2>docker stop</h2>
+<p>This command is used to stop a running container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker stop ContainerID 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID which needs to be stopped.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will give the ID of the stopped container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker stop 9f215ed0b0d3 
+</pre>
+<p>The above command will stop the Docker container <b>9f215ed0b0d3</b>.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_stop.jpg" alt="Docker Stop" />
+<h2>docker rm</h2>
+<p>This command is used to delete a container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker rm ContainerID 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID which needs to be removed.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will give the ID of the removed container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker rm 9f215ed0b0d3 
+</pre>
+<p>The above command will remove the Docker container <b>9f215ed0b0d3</b>.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_rm.jpg" alt="Docker RM" />
+<h2>docker stats</h2>
+<p>This command is used to provide the statistics of a running container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker stats ContainerID 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID for which the stats need to be provided.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The output will show the CPU and Memory utilization of the Container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker rm 9f215ed0b0d3 
+</pre>
+<p>The above command will provide CPU and memory utilization of the Container <b>9f215ed0b0d3</b>.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_stats.jpg" alt="Docker Stats" />
+<h2>docker attach</h2>
+<p>This command is used to attach to a running container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker attach ContainerID 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID to which you need to attach.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>None</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker attach 07b0b6f434fe 
+</pre>
+<p>The above command will attach to the Docker container <b>07b0b6f434fe</b>.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_attach.jpg" alt="Docker Attach" />
+<p>Once you have attached to the Docker container, you can run the above command to see the process utilization in that Docker container.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_attach_container.jpg" alt="Docker Attach Container" />
+<h2>docker pause</h2>
+<p>This command is used to pause the processes in a running container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker pause ContainerID 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID to which you need to pause the processes in the container.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The ContainerID of the paused container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker pause 07b0b6f434fe 
+</pre>
+<p>The above command will pause the processes in a running container <b>07b0b6f434fe</b>.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_pause.jpg" alt="Docker Pause" />
+<h2>docker unpause</h2>
+<p>This command is used to <b>unpause</b> the processes in a running container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker unpause ContainerID
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID to which you need to unpause the processes in the container.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The ContainerID of the running container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker unpause 07b0b6f434fe 
+</pre>
+<p>The above command will unpause the processes in a running container: 07b0b6f434fe</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_unpause.jpg" alt="Docker Unpause" />
+<h2>docker kill</h2>
+<p>This command is used to kill the processes in a running container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker kill ContainerID
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>ContainerID</b> &minus; This is the Container ID to which you need to kill the processes in the container.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The ContainerID of the running container.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker kill 07b0b6f434fe 
+</pre>
+<p>The above command will kill the processes in the running container <b>07b0b6f434fe</b>.</p>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_kill.jpg" alt="Docker Kill" />
+<h2>Docker – Container Lifecycle</h2>
+<p>The following illustration explains the entire lifecycle of a Docker container.</p>
+<img src="https://www.tutorialspoint.com/docker/images/container_lifecycle.jpg" alt="Container Lifecycle" />
+<ul class="list">
+<li><p>Initially, the Docker container will be in the <b>created</b> state.</p></li>
+<li><p>Then the Docker container goes into the running state when the Docker <b>run</b> command is used.</p></li>
+<li><p>The Docker <b>kill</b> command is used to kill an existing Docker container.</p></li>
+<li><p>The Docker <b>pause</b> command is used to pause an existing Docker container.</p></li>
+<li><p>The Docker <b>stop</b> command is used to pause an existing Docker container.</p></li>
+<li><p>The Docker <b>run</b> command is used to put a container back from a <b>stopped</b> state to a <b>running</b> state.</p></li>
+</ul>
+<h1>Docker - Architecture</h1>
+<p>The following image shows the standard and traditional architecture of <b>virtualization</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/virtualization.jpg" alt="Virtualization" />
+<ul class="list">
+<li><p>The server is the physical server that is used to host multiple virtual machines.</p></li>
+<li><p>The Host OS is the base machine such as Linux or Windows.</p></li>
+<li><p>The Hypervisor is either VMWare or Windows Hyper V that is used to host virtual machines.</p></li>
+<li><p>You would then install multiple operating systems as virtual machines on top of the existing hypervisor as Guest OS.</p></li>
+<li><p>You would then host your applications on top of each Guest OS.</p></li>
+</ul>
+<p>The following image shows the new generation of virtualization that is enabled via Dockers. Let’s have a look at the various layers.</p>
+<img src="https://www.tutorialspoint.com/docker/images/various_layers.jpg" alt="Various Layers" />
+<ul class="list">
+<li><p>The server is the physical server that is used to host multiple virtual machines. So this layer remains the same.</p></li>
+<li><p>The Host OS is the base machine such as Linux or Windows. So this layer remains the same.</p></li>
+<li><p>Now comes the new generation which is the Docker engine. This is used to run the operating system which earlier used to be virtual machines as Docker containers.</p></li>
+<li><p>All of the Apps now run as Docker containers.</p></li>
+</ul>
+<p>The clear advantage in this architecture is that you don’t need to have extra hardware for Guest OS. Everything works as Docker containers.</p>
+<h1>Docker - Container and Hosts</h1>
+<p>The good thing about the Docker engine is that it is designed to work on various operating systems. We have already seen the installation on Windows and seen all the Docker commands on Linux systems. Now let’s see the various Docker commands on the Windows OS.</p>
+<h2>Docker Images</h2>
+<p>Let’s run the Docker <b>images</b> command on the Windows host.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_images.jpg" alt="Docker Images" />
+<p>From here, we can see that we have two images &minus; <b>ubuntu</b> and <b>hello-world</b>.</p>
+<h2>Running a Container</h2>
+<p>Now let’s run a container in the Windows Docker host. </p>
+<img src="https://www.tutorialspoint.com/docker/images/running_container.jpg" alt="Running Container" />
+<p>We can see that by running the container, we can now run the Ubuntu container on a Windows host.</p>
+<h2>Listing All Containers</h2>
+<p>Let’s list all the containers on the Windows host.</p>
+<img src="https://www.tutorialspoint.com/docker/images/listing_containers.jpg" alt="Listing Containers" />
+<h2>Stopping a Container</h2>
+<p>Let’s now stop a running container on the Windows host.</p>
+<img src="https://www.tutorialspoint.com/docker/images/stopping_a_container.jpg" alt="Stopping a Container" />
+<p>So you can see that the Docker engine is pretty consistent when it comes to different Docker hosts and it works on Windows in the same way it works on Linux.</p>
+<h1>Docker - Configuring</h1>
+<p>In this chapter, we will look at the different options to configure Docker.</p>
+<h2>service docker stop</h2>
+<p>This command is used to stop the Docker <b>daemon</b> process.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+service docker stop 
+</pre>
+<h3>Options</h3>
+<p>None</p>
+<h3>Return Value</h3>
+<p>A message showing that the Docker process has stopped.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo service docker stop 
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/service_docker_stop.jpg" alt="Service Docker Stop" />
+<h2>service docker start</h2>
+<p>This command is used to start the Docker daemon process.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+service docker start 
+</pre>
+<h3>Options</h3>
+<p>None</p>
+<h3>Return Value</h3>
+<p>A message showing that the Docker process has started.</p>
+<h3>Example</h3>
+<pre class="result notranslate">sudo service docker start</pre>
+<h3>Output</h3>
+<p>When we run the above command, it will produce the following result &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/service_docker_start.jpg" alt="Service Docker Start" />
+<h1>Docker - Containers and Shells</h1>
+<p>By default, when you launch a container, you will also use a <b>shell command</b> while launching the container as shown below. This is what we have seen in the earlier chapters when we were working with containers.</p>
+<img src="https://www.tutorialspoint.com/docker/images/shell_command.jpg" alt="Shell Command" />
+<p>In the above screenshot, you can observe that we have issued the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker run –it centos /bin/bash 
+</pre>
+<p>We used this command to create a new container and then used the Ctrl+P+Q command to exit out of the container. It ensures that the container still exists even after we exit from the container.</p>
+<p>We can verify that the container still exists with the Docker <b>ps</b> command. If we had to exit out of the container directly, then the container itself would be destroyed.</p>
+<p>Now there is an easier way to attach to containers and exit them cleanly without the need of destroying them. One way of achieving this is by using the <b>nsenter</b> command.</p>
+<p>Before we run the <b>nsenter</b> command, you need to first install the <b>nsenter</b> image. It can be done by using the following command &minus;</p>
+<pre class="result notranslate">
+docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/nsenter_image.jpg" alt="Nsenter Image" />
+<p>Before we use the <b>nsenter</b> command, we need to get the Process ID of the container, because this is required by the <b>nsenter</b> command. We can get the Process ID via the Docker <b>inspect command</b> and filtering it via the <b>Pid</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/inspect_command.jpg" alt="Inspect Command" />
+<p>As seen in the above screenshot, we have first used the <b>docker ps</b> command to see the running containers. We can see that there is one running container with the ID of ef42a4c5e663.</p>  
+<p>We then use the Docker <b>inspect</b> command to inspect the configuration of this container and then use the <b>grep</b> command to just filter the Process ID. And from the output, we can see that the Process ID is 2978.</p>
+<p>Now that we have the process ID, we can proceed forward and use the <b>nsenter</b> command to attach to the Docker container.</p>
+<h2>nsenter</h2>
+<p>This method allows one to attach to a container without exiting the container.</p>
+<h3>Syntax</h3>
+<p>nsenter –m –u –n –p –i –t containerID command</p>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>-u</b> is used to mention the <b>Uts namespace</b></p></li>
+<li><p><b>-m</b> is used to mention the <b>mount namespace</b></p></li>
+<li><p><b>-n</b> is used to mention the <b> network namespace</b></p></li>
+<li><p><b>-p</b> is used to mention the <b>process namespace</b></p></li>
+<li><p><b>-i</b> s to make the container run in interactive mode.</b></p></li>
+<li><p><b>-t</b> is used to connect the I/O streams of the container to the host OS.</p></li>
+<li><p><b>containerID</b> &minus; This is the ID of the container.</p></li>
+<li><p><b>Command</b> &minus; This is the command to run within the container.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>None</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo nsenter –m –u –n –p –i –t 2978 /bin/bash
+</pre>
+<h3>Output</h3>
+<img src="https://www.tutorialspoint.com/docker/images/nsenter.jpg" alt="Nsenter" />
+<p>From the output, we can observe the following points &minus;</p>
+<ul class="list">
+<li><p>The prompt changes to the <b>bash shell</b> directly when we issue the <b>nsenter</b> command.</p></li>
+<li><p>We then issue the <b>exit</b> command. Now normally if you did not use the <b>nsenter</b> command, the container would be destroyed. But you would notice that when we run the <b>nsenter</b> command, the container is still up and running.</p></li>
+</ul>
+<h1>Docker - File</h1>
+<p>In the earlier chapters, we have seen the various Image files such as Centos which get downloaded from <b>Docker hub</b> from which you can spin up containers. An example is again shown below.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_file.jpg" alt="Docker File" />
+<p>If we use the Docker <b>images</b> command, we can see the existing images in our system. From the above screenshot, we can see that there are two images: <b>centos</b> and <b>nsenter</b>.</p>
+<p>But Docker also gives you the capability to create your own Docker images, and it can be done with the help of <b>Docker Files</b>. A Docker File is a simple text file with instructions on how to build your images.</p>
+<p>The following steps explain how you should go about creating a Docker File.</p>
+<p><b>Step 1</b> &minus; Create a file called <b>Docker File</b> and edit it using <b>vim</b>. Please note that the name of the file has to be "Dockerfile" with "D" as capital.</p>
+<img src="https://www.tutorialspoint.com/docker/images/edit_vim.jpg" alt="Edit Vim" />
+<p><b>Step 2</b> &minus; Build your Docker File using the following instructions.</p>
+<pre class="result notranslate">
+#This is a sample Image 
+FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+
+RUN apt-get update 
+RUN apt-get install –y nginx 
+CMD [“echo”,”Image created”] 
+</pre>
+<p>The following points need to be noted about the above file &minus;</p>
+<ul class="list">
+<li><p>The first line "#This is a sample Image" is a comment. You can add comments to the Docker File with the help of the <b>#</b> command</p></li>
+<li><p>The next line has to start with the <b>FROM</b> keyword. It tells docker, from which base image you want to base your image from. In our example, we are creating an image from the <b>ubuntu</b> image.</p></li>
+<li><p>The next command is the person who is going to maintain this image. Here you specify the <b>MAINTAINER</b> keyword and just mention the email ID.</p></li>
+<li><p>The <b>RUN</b> command is used to run instructions against the image. In our case, we first update our Ubuntu system and then install the nginx server on our <b>ubuntu</b> image.</p></li>
+<li><p>The last command is used to display a message to the user.</p></li>
+</ul>
+<p><b>Step 3</b> &minus; Save the file. In the next chapter, we will discuss how to build the image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/build_the_image.jpg" alt="Build the Image" />
+<h1>Docker - Building Files</h1>
+<p>We created our Docker File in the last chapter. It’s now time to build the Docker File. The Docker File can be built with the following command &minus;</p>
+<pre class="result notranslate">
+docker build 
+</pre>
+<p>Let’s learn more about this command.</p>
+<h2>docker build</h2>
+<p>This method allows the users to build their own Docker images.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker build  -t ImageName:TagName dir
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>-t</b> &minus; is to mention a tag to the image </p></li>
+<li><p><b>ImageName</b> &minus; This is the name you want to give to your image.</p></li>
+<li><p><b>TagName</b> &minus; This is the tag you want to give to your image.</p></li>
+<li><p><b>Dir</b> &minus; The directory where the Docker File is present.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>None</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker build –t myimage:0.1 
+</pre>
+<p>Here, <b>myimage</b> is the name we are giving to the Image and <b>0.1</b> is the tag number we are giving to our image.</p> 
+<p>Since the Docker File is in the present working directory, we used "." at the end of the command to signify the present working directory.</p>
+<h3>Output</h3>
+<p>From the output, you will first see that the Ubuntu Image will be downloaded from Docker Hub, because there is no image available locally on the machine.</p>
+<img src="https://www.tutorialspoint.com/docker/images/no_image.jpg" alt="No Image" />
+<p>Finally, when the build is complete, all the necessary commands would have run on the image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/commands_run_over_image.jpg" alt="commands run over image" />
+<p>You will then see the successfully built message and the ID of the new Image. When you run the Docker <b>images command</b>, you would then be able to see your new image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/built_message_id.jpg" alt="Built Message and ID" />
+<p>You can now build containers from your new Image.</p>
+<h1>Docker - Public Repositories</h1>
+<p>Public repositories can be used to host Docker images which can be used by everyone else. An example is the images which are available in Docker Hub. Most of the images such as Centos, Ubuntu, and Jenkins are all publicly available for all. We can also make our images available by publishing it to the public repository on Docker Hub.</p>  
+<p>For our example, we will use the <b>myimage</b> repository built in the "Building Docker Files" chapter and upload that image to Docker Hub. Let’s first review the images on our Docker host to see what we can push to the Docker registry.</p>
+<img src="https://www.tutorialspoint.com/docker/images/my_image.jpg" alt="Myimage" />
+<p>Here, we have our <b>myimage:0.1</b> image which was created as a part of the “Building Docker Files” chapter. Let’s use this to upload to the Docker public repository.</p>
+<p>The following steps explain how you can upload an image to public repository.</p>
+<p><b>Step 1</b> &minus; Log into Docker Hub and create your repository. This is the repository where your image will be stored. Go to <a target="_blank" rel="nofollow" href="https://hub.docker.com/">https://hub.docker.com/</a> and log in with your credentials.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_hub.jpg" alt="Docker Hub" />
+<p><b>Step 2</b> &minus; Click the button "Create Repository" on the above screen and create a repository with the name <b>demorep</b>. Make sure that the visibility of the repository is public.</p>
+<img src="https://www.tutorialspoint.com/docker/images/demorep.jpg" alt="Demorep" />
+<p>Once the repository is created, make a note of the <b>pull</b> command which is attached to the repository.</p>
+<img src="https://www.tutorialspoint.com/docker/images/repository.jpg" alt="Repository" />
+<p>The <b>pull</b> command which will be used in our repository is as follows &minus;</p>
+<pre class="result notranslate">
+docker pull demousr/demorep
+</pre>
+<p><b>Step 3</b> &minus; Now go back to the Docker Host. Here we need to tag our <b>myimage</b> to the new repository created in Docker Hub. We can do this via the Docker <b>tag command</b>.</p>
+<p>We will learn more about this <b>tag command</b> later in this chapter.</p>
+<p><b>Step 4</b> &minus; Issue the Docker login command to login into the Docker Hub repository from the command prompt. The Docker login command will prompt you for the username and password to the Docker Hub repository.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_login_command.jpg" alt="Docker Login Command" />
+<p><b>Step 5</b> &minus; Once the image has been tagged, it’s now time to push the image to the Docker Hub repository. We can do this via the Docker <b>push</b> command. We will learn more about this command later in this chapter.</p>
+<h2>docker tag</h2>
+<p>This method allows one to tag an image to the relevant repository.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker tag imageID Repositoryname 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>imageID</b> &minus; This is the ImageID which needs to be tagged to the repository.</p></li>
+<li><p><b>Repositoryname</b> &minus; This is the repository name to which the ImageID needs to be tagged to.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>None</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker tag ab0c1d3744dd demousr/demorep:1.0
+</pre>
+<h3>Output</h3>
+<p>A sample output of the above example is given below.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_tag.jpg" alt="Docker Tag" />
+<h2>docker push</h2>
+<p>This method allows one to push images to the Docker Hub.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker push Repositoryname 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>Repositoryname</b> &minus; This is the repository name which needs to be pushed to the Docker Hub.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The long ID of the repository pushed to Docker Hub.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker push demousr/demorep:1.0 
+</pre>
+<h3>Output</h3>
+<img src="https://www.tutorialspoint.com/docker/images/docker_push.jpg" alt="Docker Push" />
+<p>If you go back to the Docker Hub page and go to your repository, you will see the tag name in the repository.</p>
+<img src="https://www.tutorialspoint.com/docker/images/tag_name_in_repository.jpg" alt="Tag Name in the Repository" />
+<p>Now let’s try to pull the repository we uploaded onto our Docker host. Let’s first delete the images, <b>myimage:0.1</b> and <b>demousr/demorep:1.0</b>, from the local Docker host. Let’s use the Docker <b>pull command</b> to pull the repository from the Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_pull_command.jpg" alt="Docker Pull Command" />
+<p>From the above screenshot, you can see that the Docker <b>pull</b> command has taken our new repository from the Docker Hub and placed it on our machine.</p>
+<h1>Docker - Managing Ports</h1>
+<p>In Docker, the containers themselves can have applications running on ports. When you run a container, if you want to access the application in the container via a port number, you need to map the port number of the container to the port number of the Docker host. Let’s look at an example of how this can be achieved.</p>
+<p>In our example, we are going to download the Jenkins container from Docker Hub. We are then going to map the Jenkins port number to the port number on the Docker host.</p>
+<p><b>Step 1</b> &minus; First, you need to do a simple sign-up on Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/simple_sing_up.jpg" alt="simple Sing up" />
+<p><b>Step 2</b> &minus; Once you have signed up, you will be logged into Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/logged_docker_hub.jpg" alt="Logged Docker Hub" />
+<p><b>Step 3</b> &minus; Next, let’s browse and find the Jenkins image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/run_command.jpg" alt="Run Command" />
+<p><b>Step 4</b> &minus; If you scroll down on the same page, you can see the Docker <b>pull</b> command. This will be used to download the Jenkins Image onto the local Ubuntu server.</p>
+<img src="https://www.tutorialspoint.com/docker/images/local_ubuntu_server.jpg" alt="Local Ubuntu Server" />
+<p><b>Step 5</b> &minus; Now go to the Ubuntu server and run the command &minus;</p>
+<pre class="result notranslate">
+sudo docker pull jenkins 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/inspect_image.jpg" alt="Inspect Image" />
+<p><b>Step 6</b> &minus; To understand what ports are exposed by the container, you should use the Docker <b>inspect command</b> to inspect the image.</p>
+<p>Let’s now learn more about this <b>inspect</b> command.</p>
+<h2>docker inspect</h2>
+<p>This method allows one to return low-level information on the container or image.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker inspect Container/Image 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>Container/Image</b> &minus; The container or image to inspect</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The low-level information of the image or container in JSON format.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker inspect jenkins 
+</pre>
+<h3>Output</h3>
+<img src="https://www.tutorialspoint.com/docker/images/docker_inspect_output.jpg" alt="Docker Inspect Output" />
+<p>The output of the <b>inspect</b> command gives a JSON output. If we observe the output, we can see that there is a section of "ExposedPorts" and see that there are two ports mentioned. One is the <b>data port</b> of 8080 and the other is the <b>control port</b> of 50000.</p> 
+<p>To run Jenkins and map the ports, you need to change the Docker <b>run</b> command and add the ‘p’ option which specifies the port mapping. So, you need to run the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker run -p 8080:8080 -p 50000:50000 jenkins 
+</pre>
+<p>The left-hand side of the port number mapping is the Docker host port to map to and the right-hand side is the Docker container port number.</p>
+<p>When you open the browser and navigate to the Docker host on port 8080, you will see Jenkins up and running.</p>
+<img src="https://www.tutorialspoint.com/docker/images/unlock_jenkins.jpg" alt="Unlock jenkins" />
+<h1>Docker - Private Registries</h1>
+<p>You might have the need to have your own private repositories. You may not want to host the repositories on Docker Hub. For this, there is a repository container itself from Docker. Let’s see how we can download and use the container for registry.</p>
+<p><b>Step 1</b> &minus; Use the Docker <b>run</b> command to download the private registry. This can be done using the following command.</p>
+<pre class="result notranslate">
+sudo docker run –d –p 5000:5000 –-name registry registry:2
+</pre>
+<p>The following points need to be noted about the above command &minus;</p>
+<ul class="list">
+<li><p><b>Registry</b> is the container managed by Docker which can be used to host private repositories.</p></li>
+<li><p>The port number exposed by the container is 5000. Hence with the <b>–p command</b>, we are mapping the same port number to the 5000 port number on our localhost.</p></li>
+<li><p>We are just tagging the registry container as “2”, to differentiate it on the Docker host.</p></li>
+<li><p>The <b>–d</b> option is used to run the container in detached mode. This is so that the container can run in the background</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/detached_mode.jpg" alt="Detached Mode" />
+<p></p>
+<p><b>Step 2</b> &minus; Let’s do a <b>docker ps</b> to see that the registry container is indeed running.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_ps.jpg" alt="Docker PS" />
+<p>We have now confirmed that the registry container is indeed running.</p>
+<p><b>Step 3</b> &minus; Now let’s tag one of our existing images so that we can push it to our local repository. In our example, since we have the <b>centos</b> image available locally, we are going to tag it to our private repository and add a tag name of <b>centos</b>.</p>
+<pre class="result notranslate">
+sudo docker tag 67591570dd29 localhost:5000/centos 
+</pre>
+<p>The following points need to be noted about the above command &minus;</p>
+<ul class="list">
+<li><p><b>67591570dd29</b> refers to the Image ID for the <b>centos</b> image.</p></li>
+<li><p><b>localhost:5000</b> is the location of our private repository.</p></li>
+<li><p>We are tagging the repository name as <b>centos</b> in our private repository.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/private_repository.jpg" alt="Private Repository" />
+<p></p>
+<p><b>Step 4</b> &minus; Now let’s use the Docker <b>push</b> command to push the repository to our private repository.</p>
+<pre class="result notranslate">
+sudo docker push localhost:5000/centos 
+</pre>
+<p>Here, we are pushing the <b>centos</b> image to the private repository hosted at <b>localhost:5000</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/localhost.jpg" alt="Localhost" />
+<p></p>
+<p><b>Step 5</b> &minus; Now let’s delete the local images we have for <b>centos</b> using the <b>docker rmi</b> commands. We can then download the required <b>centos</b> image from our private repository.</p>
+<pre class="result notranslate">
+sudo docker rmi centos:latest 
+sudo docker rmi 67591570dd29
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_rmi_commands.jpg" alt="Docker RMI Commands" />
+<p></p>
+<p><b>Step 6</b> &minus;  Now that we don’t have any <b>centos</b> images on our local machine, we can now use the following Docker <b>pull</b> command to pull the <b>centos</b> image from our private repository.</p>
+<pre class="result notranslate">
+sudo docker pull localhost:5000/centos
+</pre>
+<p>Here, we are pulling the <b>centos</b> image to the private repository hosted at <b>localhost:5000</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/pulling_centos_image.jpg" alt="Pulling Centos Image" />
+<p>If you now see the images on your system, you will see the <b>centos</b> image as well.</p>
+<h1>Docker - Building a Web Server Docker File</h1>
+<p>We have already learnt how to use Docker File to build our own custom images. Now let’s see how we can build a web server image which can be used to build containers.</p>  
+<p>In our example, we are going to use the Apache Web Server on Ubuntu to build our image. Let’s follow the steps given below, to build our web server Docker file.</p>
+<p><b>Step 1</b> &minus; The first step is to build our Docker File. Let’s use <b>vim</b> and create a Docker File with the following information.</p>
+<pre class="result notranslate">
+FROM ubuntu 
+RUN apt-get update 
+RUN apt-get install –y apache2 
+RUN apt-get install –y apache2-utils 
+RUN apt-get clean 
+EXPOSE 80 CMD [“apache2ctl”, “-D”, “FOREGROUND”]
+</pre>
+<p>The following points need to be noted about the above statements &minus;</p>
+<ul class="list">
+<li><p>We are first creating our image to be from the Ubuntu base image.</p></li>
+<li><p>Next, we are going to use the RUN command to update all the packages on the Ubuntu system.</p></li>
+<li><p>Next, we use the RUN command to install apache2 on our image.</p></li>
+<li><p>Next, we use the RUN command to install the necessary utility apache2 packages on our image.</p></li>
+<li><p>Next, we use the RUN command to clean any unnecessary files from the system.</p></li>
+<li><p>The EXPOSE command is used to expose port 80 of Apache in the container to the Docker host.</p></li>
+<li><p>Finally, the CMD command is used to run apache2 in the background.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/apache2.jpg" alt="Apache2" />
+<p>Now that the file details have been entered, just save the file.</p>
+<p><b>Step 2</b> &minus; Run the Docker <b>build</b> command to build the Docker file. It can be done using the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker build –t=”mywebserver” . 
+</pre>
+<p>We are tagging our image as <b>mywebserver</b>. Once the image is built, you will get a successful message that the file has been built.</p>
+<img src="https://www.tutorialspoint.com/docker/images/my_web_servers.jpg" alt="Mywebservers" />
+<p><b>Step 3</b> &minus; Now that the web server file has been built, it’s now time to create a container from the image. We can do this with the Docker <b>run</b> command.</p>
+<pre class="result notranslate">
+sudo docker run –d –p 80:80 mywebserver 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_run_command.jpg" alt="Docker Run Command" />
+<p>The following points need to be noted about the above command &minus;</p>
+<ul class="list">
+<li><p>The port number exposed by the container is 80. Hence with the <b>–p</b> command, we are mapping the same port number to the 80 port number on our localhost.</p></li>
+<li><p>The <b>–d</b> option is used to run the container in detached mode. This is so that the container can run in the background.</p></li>
+</ul>
+<p>If you go to port 80 of the Docker host in your web browser, you will now see that Apache is up and running.</p>
+<img src="https://www.tutorialspoint.com/docker/images/apache_is_running.jpg" alt="Apache is running" />
+<h1>Docker - Instruction Commands</h1>
+<p>Docker has a host of instruction commands. These are commands that are put in the Docker File. Let’s look at the ones which are available.</p>
+<h2>CMD Instruction</h2>
+<p>This command is used to execute a command at runtime when the container is executed.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+CMD command param1 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>command</b> &minus; This is the command to run when the container is launched.</p></li>
+<li><p><b>param1</b> &minus; This is the parameter entered to the command.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The command will execute accordingly.</p>
+<h3>Example</h3>
+<p>In our example, we will enter a simple 
+<b>Hello World</b> echo in our Docker File and create an image and launch a container from it.</p>
+<p><b>Step 1</b> &minus; Build the Docker File with the following commands &minus;</p>
+<pre class="result notranslate">
+FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+CMD [“echo” , “hello world”] 
+</pre>
+<p>Here, the CMD is just used to print <b>hello world</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/cmd.jpg" alt="CMD" />
+<p><b>Step 2</b> &minus; Build the image using the Docker <b>build</b> command.</p>
+<img src="https://www.tutorialspoint.com/docker/images/build_command.jpg" alt="Build Command" />
+<p><b>Step 3</b> &minus; Run a container from the image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/run_a_container.jpg" alt="Run a container" />
+<h2>ENTRYPOINT</h2>
+<p>This command can also be used to execute commands at runtime for the container. But we can be more flexible with the ENTRYPOINT command.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+ENTRYPOINT command param1 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>command</b> &minus; This is the command to run when the container is launched.</p></li>
+<li><p><b>param1</b> &minus; This is the parameter entered into the command.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The command will execute accordingly.</p>
+<h3>Example</h3>
+<p>Let’s take a look at an example to understand more about ENTRYPOINT. In our example, we will enter a simple <b>echo</b> command in our Docker File and create an image and launch a container from it.</p>
+<p><b>Step 1</b> &minus; Build the Docker File with the following commands &minus;</p>
+<pre class="result notranslate">
+FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+ENTRYPOINT [“echo”]
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/entry_point.jpg" alt="ENTRYPOINT" />
+<p><b>Step 2</b> &minus; Build the image using the Docker <b>build</b> command.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_build_command.jpg" alt="Docker Build Command" />
+<p><b>Step 3</b> &minus; Run a container from the image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/container_from_image.jpg" alt="Container from Image" />
+<h2>ENV</h2>
+<p>This command is used to set environment variables in the container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+ENV key value 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>Key</b> &minus; This is the key for the environment variable.</p></li>
+<li><p><b>value</b> &minus; This is the value for the environment variable.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The command will execute accordingly.</p>
+<h3>Example</h3>
+<p>In our example, we will enter a simple <b>echo</b> command in our Docker File and create an image and launch a container from it.</p>
+<p><b>Step 1</b> &minus; Build the Docker File with the following commands &minus;</p>
+<pre class="result notranslate">
+FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+ENV var1=Tutorial var2=point 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/env.jpg" alt="ENV" />
+<p></p>
+<p><b>Step 2</b> &minus; Build the image using the Docker <b>build</b> command.</p>
+<img src="https://www.tutorialspoint.com/docker/images/env_docker_build_command.jpg" alt="ENV Build Docker Command" />
+<p></p>
+<p><b>Step 3</b> &minus; Run a container from the image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/env_run_a_container.jpg" alt="ENV Run a Container" />
+<p><b>Step 4</b> &minus; Finally, execute the <b>env</b> command to see the environment variables.</p>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/env_command.jpg" alt="ENV Command" />
+<h2>WORKDIR</h2>
+<p>This command is used to set the working directory of the container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+WORKDIR dirname 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>dirname</b> &minus; The new working directory. If the directory does not exist, it will be added.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The command will execute accordingly.</p>
+<h3>Example</h3>
+<p>In our example, we will enter a simple <b>echo</b> command in our Docker File and create an image and launch a container from it.</p>
+<p><b>Step 1</b> &minus; Build the Docker File with the following commands &minus;</p>
+<pre class="result notranslate">
+FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+WORKDIR /newtemp 
+CMD pwd
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/workdir.jpg" alt="WORKDIR" />
+<p><b>Step 2</b> &minus; Build the image using the Docker <b>build</b> command.</p>
+<img src="https://www.tutorialspoint.com/docker/images/workdir_build_command.jpg" alt="Workdir Build Command" />
+<p><b>Step 3</b> &minus; Run a container from the image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/workdir_run_command.jpg" alt="WORKDIR Run Command" />
+<h1>Docker - Container Linking</h1>
+<p>Container Linking allows multiple containers to link with each other. It is a better option than exposing ports. Let’s go step by step and learn how it works.</p>
+<p><b>Step 1</b> &minus; Download the Jenkins image, if it is not already present, using the Jenkins <b>pull</b> command.</p>
+<img src="https://www.tutorialspoint.com/docker/images/container_linking.jpg" alt="Container Linking" />
+<p><b>Step 2</b> &minus; Once the image is available, run the container, but this time, you can specify a name to the container by using the <b>–-name</b> option. This will be our <b>source container</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/name_option.jpg" alt="Name Option" />
+<p><b>Step 3</b> &minus; Next, it is time to launch the destination container, but this time, we will link it with our source container. For our destination container, we will use the standard Ubuntu image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/standard_ubuntu_image.jpg" alt="Standard Ubuntu Image" />
+<p>When you do a <b>docker ps</b>, you will see both the containers running.</p>
+<p><b>Step 4</b> &minus;  Now, attach to the receiving container.</p>
+<img src="https://www.tutorialspoint.com/docker/images/receiving_container.jpg" alt="Receiving Container" />
+<p>Then run the <b>env</b> command. You will notice new variables for linking with the source container.</p>
+<img src="https://www.tutorialspoint.com/docker/images/new_variables.jpg" alt="New Variables" />
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/source_container.jpg" alt="Source Continer" />
+<h1>Docker - Storage</h1>
+<h3>Storage Drivers</h3>
+<p>Docker has multiple storage drivers that allow one to work with the underlying storage devices. The following table shows the different storage drivers along with the technology used for the storage drivers.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Technology</th>
+<th style="text-align:center">Storage Driver</th>
+</tr>
+<tr>
+<td>OverlayFS</td>
+<td>overlay or overlay2</td>
+</tr>
+<tr>
+<td>AUFS</td>
+<td>aufs</td>
+</tr>
+<tr>
+<td>Btrfs</td>
+<td>brtfs</td>
+</tr>
+<tr>
+<td>Device Manager</td>
+<td>devicemanager</td>
+</tr>
+<tr>
+<td>VFS</td>
+<td>vfs</td>
+</tr>
+<tr>
+<td>ZFS</td>
+<td>zfs</td>
+</tr>
+</table>
+<p>Let us now discuss some of the instances in which you would use the various storage drivers &minus;</p>
+<h3>AUFS</h3>
+<ul class="list">
+<li><p>This is a stable driver; can be used for production-ready applications.</p></li>
+<li><p>It has good memory usage and is good for ensuring a smooth Docker experience for containers.</p></li>
+<li><p>There is a high-write activity associated with this driver which should be considered.</p></li>
+<li><p>It’s good for systems which are of Platform as a service type work.</p></li>
+</ul>
+<h3>Devicemapper</h3>
+<ul class="list">
+<li><p>This is a stable driver; ensures a smooth Docker experience.</p></li>
+<li><p>This driver is good for testing applications in the lab.</p></li>
+<li><p>This driver is in line with the main Linux kernel functionality.</p></li>
+</ul>
+<h3>Btrfs</h3>
+<ul class="list">
+<li><p>This driver is in line with the main Linux kernel functionality.</p></li>
+<li><p>There is a high-write activity associated with this driver which should be considered.</p></li>
+<li><p>This driver is good for instances where you maintain multiple build pools.</p></li>
+</ul>
+<h3>Ovelay</h3>
+<ul class="list">
+<li><p>This is a stable driver and it is in line with the main Linux kernel functionality.</p></li>
+<li><p>It has a good memory usage.</p></li>
+<li><p>This driver is good for testing applications in the lab.</p></li>
+</ul>
+<h3>ZFS</h3>
+<ul class="list">
+<li><p>This is a stable driver and it is good for testing applications in the lab.</p></li>
+<li><p>It’s good for systems which are of Platform-as-a-Service type work.</p></li>
+</ul>
+<p>To see the storage driver being used, issue the <b>docker info</b> command.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker info 
+</pre>
+<h3>Options</h3>
+<p>None</p>
+<h3>Return Value</h3>
+<p>The command will provide all relative information on the Docker component installed on the Docker Host.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker info 
+</pre>
+<h3>Output</h3>
+<p>The following output shows that the main driver used is the <b>aufs</b> driver and that the root directory is stored in <b>/var/lib/docker/aufs</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/aufs_driver.jpg" alt="AUFS Driver" />
+<h2>Data Volumes</h2>
+<p>In Docker, you have a separate volume that can shared across containers. These are known as <b>data volumes</b>. Some of the features of data volume are &minus;</p>
+<ul class="list">
+<li>They are initialized when the container is created.</li>
+<li>They can be shared and also reused amongst many containers.</li>
+<li>Any changes to the volume itself can be made directly.</li>
+<li>They exist even after the container is deleted.</li>
+</ul>
+<p>Let’s look at our Jenkins container. Let’s do a <b>docker inspect</b> to see the details of this image. We can issue the following command to write the output of the <b>docker inspect</b> command to a text file and then view the file accordingly.</p>
+<pre class="result notranslate">
+sudo docker inspect Jenkins &gt; tmp.txt
+</pre>
+<p>When you view the text file using the <b>more command</b>, you will see an entry as <b>JENKINS_HOME=/var/Jenkins_home</b>.</p>
+<p>This is the mapping that is done within the container via the Jenkins image.</p>
+<img src="https://www.tutorialspoint.com/docker/images/data_volumes.jpg" alt="Data Volumes" />
+<p>Now suppose you wanted to map the volume in the container to a local volume, then you need to specify the –v option when launching the container. An example is shown below &minus;</p>
+<pre class="prettyprint notranslate">
+sudo docker run –d –v /home/demo:/var/jenkins_home –p 8080:8080 –p 50000:50000 jenkins 
+</pre>
+<p>The –v option is used to map the volume in the container which is <b>/var/jenkins_home</b> to a location on our Docker Host which is <b>/home/demo</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/v_option.jpg" alt="V Option" />
+<p>Now if you go to the <b>/home/demo</b> location on your Docker Host after launching your container, you will see all the container files present there.</p>
+<img src="https://www.tutorialspoint.com/docker/images/container_files.jpg" alt="Container Files" />
+<h2>Changing the Storage Driver for a Container</h2>
+<p>If you wanted to change to the storage driver used for a container, you can do so when launching the container. This can be done by using the <b>–volume-driver</b> parameter when using the <b>docker run</b> command. An example is given below &minus;</p>
+<pre class="prettyprint notranslate">
+sudo docker run –d –volume-driver=flocker 
+   –v /home/demo:/var/jenkins_home –p 8080:8080 –p 50000:50000 jenkins
+</pre>
+<p>The <b>–volume-driver</b> option is used to specify another storage driver for the container.</p>
+<img src="https://www.tutorialspoint.com/docker/images/volume_driver.jpg" alt="Volume Driver" />
+<p>To confirm that the driver has been changed, first let’s use the <b>docker ps</b> command to see the running containers and get the container ID. So, issue the following command first &minus;</p>
+<pre class="result notranslate">
+sudo docker ps
+</pre>
+<p>Then issue a <b>docker inspect</b> against the container and put the output in a text file using the command.</p>
+<pre class="result notranslate">
+sudo docker inspect 9bffb1bfebee &gt; temp.txt 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_inspect_against_command.jpg" alt="Docker Against Command" />
+<p>If you browse through the text file and go to the line which says <b>VolumeDriver</b>, you will see that the driver name has been changed.</p>
+<img src="https://www.tutorialspoint.com/docker/images/driver_name_has_changed.jpg" alt="Driver name has changed" />
+<h2>Creating a Volume</h2>
+<p>A volume can be created beforehand using the <b>docker</b> command. Let’s learn more about this command.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker volume create –-name=volumename –-opt options
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>name</b> &minus; This is the name of the volume which needs to be created.</p></li>
+<li><p><b>opt</b> &minus; These are options you can provide while creating the volume.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The command will output the name of the volume created.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker volume create –-name = demo –opt o = size = 100m 
+</pre>
+<p>In the above command, we are creating a volume of size 100MB and with a name of demo.</p>
+<h3>Output</h3>
+<p>The output of the above command is shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/creating_a_volume.jpg" alt="Creating a Volume" />
+<h2>Listing all the Volumes</h2>
+<p>You can also list all the <b>docker volumes</b> on a <b>docker host</b>. More details on this command is given below &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker volume ls 
+</pre>
+<h3>Options</h3>
+<p>None</p>
+<h3>Return Value</h3>
+<p>The command will output all the volumes on the <b>docker host</b>.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker volume ls
+</pre>
+<h3>Output</h3>
+<p>The output of the above command is shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/listing_all_volumes_output.jpg" alt="Listing All Volumes Output" />
+<h1>Docker - Networking</h1>
+<p>Docker takes care of the networking aspects so that the containers can communicate with other containers and also with the Docker Host. If you do an <b>ifconfig</b> on the Docker Host, you will see the Docker Ethernet adapter. This adapter is created when Docker is installed on the Docker Host.</p>
+<img src="https://www.tutorialspoint.com/docker/images/ifconfig.jpg" alt="IFCONFIG" />
+<p>This is a bridge between the Docker Host and the Linux Host. Now let’s look at some commands associated with networking in Docker.</p>
+<h2>Listing All Docker Networks</h2>
+<p>This command can be used to list all the networks associated with Docker on the host.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker network ls 
+</pre>
+<h3>Options</h3>
+<p>None</p>
+<h3>Return Value</h3>
+<p>The command will output all the networks on the Docker Host.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker network ls
+</pre>
+<h3>Output</h3>
+<p>The output of the above command is shown below</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_networks.jpg" alt="Docker Networks" />
+<h2>Inspecting a Docker network</h2>
+<p>If you want to see more details on the network associated with Docker, you can use the Docker <b>network inspect</b> command.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker network inspect networkname 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>networkname</b> &minus; This is the name of the network you need to inspect.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The command will output all the details about the network.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker network inspect bridge 
+</pre>
+<h3>Output</h3>
+<p>The output of the above command is shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/inspecting_docker_network.jpg" alt="Inspecting Docker Network" />
+<p>Now let’s run a container and see what happens when we inspect the network again. Let’s spin up an Ubuntu container with the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker run –it ubuntu:latest /bin/bash 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/run_a_container_in_network.jpg" alt="Run a Container in Network" />
+<p>Now if we inspect our network name via the following command, you will now see that the container is attached to the bridge.</p>
+<pre class="result notranslate">
+sudo docker network inspect bridge
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/container_attached_to_bridge.jpg" alt="Container Attached to Bridge" />
+<h2>Creating Your Own New Network</h2>
+<p>One can create a network in Docker before launching containers. This can be done with the following command &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker network create –-driver drivername name 
+</pre>
+<h3>Options</h3>
+<ul class="list">
+<li><p><b>drivername</b> &minus; This is the name used for the network driver.</p></li>
+<li><p><b>name</b> &minus; This is the name given to the network.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The command will output the long ID for the new network.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+sudo docker network create –-driver bridge new_nw 
+</pre>
+<h3>Output</h3>
+<p>The output of the above command is shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/long_id.jpg" alt="Long ID" />
+<p>You can now attach the new network when launching the container. So let’s spin up an Ubuntu container with the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker run –it –network=new_nw ubuntu:latest /bin/bash
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/new_network.jpg" alt="New Network" />
+<p>And now when you inspect the network via the following command, you will see the container attached to the network.</p>
+<pre class="result notranslate">
+sudo docker network inspect new_nw 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/new_nw.jpg" alt="New NW" />
+<h1>Docker - Setting Node.js</h1>
+<p>Node.js is a JavaScript framework that is used for developing server-side applications. It is an open source framework that is developed to run on a variety of operating systems. Since Node.js is a popular framework for development, Docker has also ensured it has support for Node.js applications.</p>
+<p>We will now see the various steps for getting the Docker container for Node.js up and running.</p>
+<p><b>Step 1</b> &minus; The first step is to pull the image from Docker Hub. When you log into Docker Hub, you will be able to search and see the image for Node.js as shown below. Just type in Node in the search box and click on the node (official) link which comes up in the search results.</p>
+<img src="https://www.tutorialspoint.com/docker/images/pull_image_from_docker_hub.jpg" alt="Pull Image from Docker Hub" />
+<p><b>Step 2</b> &minus; You will see that the Docker <b>pull</b> command for node in the details of the repository in Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/documentation.jpg" alt="Documentation" />
+<p><b>Step 3</b> &minus; On the Docker Host, use the Docker <b>pull</b> command as shown above to download the latest node image from Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/latest_node_image.jpg" alt="Latest Node Image" />
+<p>Once the <b>pull</b> is complete, we can then proceed with the next step.</p>
+<img src="https://www.tutorialspoint.com/docker/images/pull_complete.jpg" alt="Pull is Complete" />
+<p><b>Step 4</b> &minus; On the Docker Host, let’s use the <b>vim</b> editor and create one Node.js example file. In this file, we will add a simple command to display “HelloWorld” to the command prompt.</p>
+<img src="https://www.tutorialspoint.com/docker/images/vim_editor.jpg" alt="Vim Editor" />
+<p>In the Node.js file, let’s add the following statement &minus;</p>
+<pre class="result notranslate">
+Console.log(‘Hello World’);
+</pre>
+<p>This will output the “Hello World” phrase when we run it through Node.js.</p>
+<img src="https://www.tutorialspoint.com/docker/images/hello_world_phrase.jpg" alt="Hello World Phrase" />
+<p>Ensure that you save the file and then proceed to the next step.</p>
+<p><b>Step 5</b> &minus; To run our Node.js script using the Node Docker container, we need to execute the following statement &minus;</p>
+<pre class="result notranslate">
+sudo docker run –it –rm –name = HelloWorld –v “$PWD”:/usr/src/app 
+   –w /usr/src/app node node HelloWorld.js
+</pre>
+<p>The following points need to be noted about the above command &minus;</p>
+<ul class="list">
+<li><p>The <b>–rm</b> option is used to remove the container after it is run.</p></li>
+<li><p>We are giving a name to the container called “HelloWorld”.</p></li>
+<li><p>We are mentioning to map the volume in the container which is <b>/usr/src/app</b> to our current present working directory. This is done so that the node container will pick up our HelloWorld.js script which is present in our working directory on the Docker Host.</p></li>
+<li><p>The <b>–w</b> option is used to specify the working directory used by Node.js.</p></li>
+<li><p>The first node option is used to specify to run the node image.</p></li>
+<li><p>The second node option is used to mention to run the node command in the node container.</p></li>
+<li><p>And finally we mention the name of our script.</p></li>
+</ul>
+<p>We will then get the following output. And from the output, we can clearly see that the Node container ran as a container and executed the HelloWorld.js script.</p>
+<img src="https://www.tutorialspoint.com/docker/images/helloworld_js_script.jpg" alt="HelloWorld JS Script" />
+<h1>Docker - Setting MongoDB</h1>
+<p>MongoDB is a famous document-oriented database that is used by many modern-day web applications. Since MongoDB is a popular database for development, Docker has also ensured it has support for MongoDB.</p>
+<p>We will now see the various steps for getting the Docker container for MongoDB up and running.</p>
+<p><b>Step 1</b> &minus; The first step is to pull the image from Docker Hub. When you log into Docker Hub, you will be able to search and see the image for Mongo as shown below. Just type in Mongo in the search box and click on the Mongo (official) link which comes up in the search results.</p>
+<img src="https://www.tutorialspoint.com/docker/images/mongo_db.jpg" alt="Mongo DB" />
+<p><b>Step 2</b> &minus; You will see that the Docker <b>pull</b> command for Mongo in the details of the repository in Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_pull_command_for_mongo.jpg" alt="Docker Pull Command For MONGO" />
+<p><b>Step 3</b> &minus; On the Docker Host, use the Docker <b>pull</b> command as shown above to download the latest Mongo image from Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/latest_mongo_image.jpg" alt="latest Mongo Image" />
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/pull_command_mongo_db.jpg" alt="Pull Command MongoDB" />
+<p><b>Step 4</b> &minus; Now that we have the image for Mongo, let’s first run a MongoDB container which will be our instance for MongoDB. For this, we will issue the following command &minus;</p>
+<pre class="result notranslate">
+sudo docker –it –d mongo
+</pre>
+<p>The following points can be noted about the above command &minus;</p>
+<ul class="list">
+<li><p>The <b>–it</b> option is used to run the container in interactive mode.</p></li>
+<li><p>The <b>–d</b> option is used to run the container as a daemon process.</p></li>
+<li><p>And finally we are creating a container from the Mongo image.</p></li>
+</ul>
+<p>You can then issue the <b>docker ps</b> command to see the running containers &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/mongodb_container.jpg" alt="MongoDB Container" />
+<p>Take a note of the following points &minus;</p>
+<ul class="list">
+<li><p>The name of the container is <b>tender_poitras</b>. This name will be different since the name of the containers keep on changing when you spin up a container. But just make a note of the container which you have launched.</p></li>
+<li><p>Next, also notice the port number it is running on. It is listening on the TCP port of 27017.</p></li>
+</ul>
+<p><b>Step 5</b> &minus; Now let’s spin up another container which will act as our client which will be used to connect to the MongoDB database. Let’s issue the following command for this &minus;</p>
+<pre class="result notranslate">
+sudo docker run –it –link=tender_poitras:mongo mongo /bin/bash 
+</pre>
+<p>The following points can be noted about the above command &minus;</p>
+<ul class="list">
+<li><p>The <b>–it</b> option is used to run the container in interactive mode.</p></li>
+<li><p>We are now linking our new container to the already launched MongoDB server container. Here, you need to mention the name of the already launched container.</p></li>
+<li><p>We are then specifying that we want to launch the Mongo container as our client and then run the <b>bin/bash</b> shell in our new container.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/bin_bash.jpg" alt="Bin Bash" />
+<p>You will now be in the new container.</p>
+<p><b>Step 6</b> &minus; Run the <b>env</b> command in the new container to see the details of how to connect to the MongoDB server container.</p>
+<img src="https://www.tutorialspoint.com/docker/images/env_command_new_container.jpg" alt="ENV Container New Command" />
+<p><b>Step 6</b> &minus; Now it’s time to connect to the MongoDB server from the client container. We can do this via the following command &minus;</p>
+<pre class="result notranslate">
+mongo 172.17.0.2:27017 
+</pre>
+<p>The following points need to be noted about the above command</p>
+<ul class="list">
+<li><p>The <b>mongo</b> command is the client <b>mongo</b> command that is used to connect to a MongoDB database.</p></li>
+<li><p>The IP and port number is what you get when you use the <b>env</b> command.</p></li>
+</ul>
+<p>Once you run the command, you will then be connected to the MongoDB database.</p>
+<img src="https://www.tutorialspoint.com/docker/images/mongodb_database.jpg" alt="MongoDB database" />
+<p>You can then run any MongoDB command in the command prompt. In our example, we are running the following command &minus;</p>
+<pre class="result notranslate">
+use demo
+</pre>
+<p>This command is a MongoDB command which is used to switch to a database name <b>demo</b>. If the database is not available, it will be created.</p>
+<img src="https://www.tutorialspoint.com/docker/images/database_name_demo.jpg" alt="Database name DEMO" />
+<p>Now you have successfully created a client and server MongoDB container.</p>
+<h1>Docker - Setting NGINX</h1>
+<p>NGINX is a popular lightweight web application that is used for developing server-side applications. It is an open-source web server that is developed to run on a variety of operating systems. Since <b>nginx</b> is a popular web server for development, Docker has ensured that it has support for <b>nginx</b>.</p>
+<p>We will now see the various steps for getting the Docker container for <b>nginx</b> up and running.</p>
+<p><b>Step 1</b> &minus; The first step is to pull the image from Docker Hub. When you log into Docker Hub, you will be able to search and see the image for <b>nginx</b> as shown below. Just type in nginx in the search box and click on the <b>nginx</b> (official) link which comes up in the search results.</p>
+<img src="https://www.tutorialspoint.com/docker/images/nginx_official_link.jpg" alt="NGINX Official Link" />
+<p><b>Step 2</b> &minus; You will see that the Docker <b>pull</b> command for <b>nginx</b> in the details of the repository in Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_pull_command_for_nginx.jpg" alt="Docker Pull Command for NGINX" />
+<p><b>Step 3</b> &minus; On the Docker Host, use the Docker <b>pull</b> command as shown above to download the latest nginx image from Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/nginx_image.jpg" alt="NGINX Image" />
+<p><b>Step 4</b> &minus; Now let’s run the <b>nginx</b> container via the following command.</p>
+<pre class="result notranslate">
+sudo docker run –p 8080:80 –d nginx
+</pre>
+<p>We are exposing the port on the <b>nginx</b> server which is port 80 to the port 8080 on the Docker Host.</p>
+<img src="https://www.tutorialspoint.com/docker/images/nginx_server.jpg" alt="NGINX Server" />
+<p>Once you run the command, you will get the following output if you browse to the URL <b>http://dockerhost:8080</b>. This shows that the <b>nginx</b> container is up and running.</p>
+<img src="https://www.tutorialspoint.com/docker/images/nginx_container.jpg" alt="NGINX Container" />
+<p><b>Step 5</b> &minus; Let’s look at another example where we can host a simple web page in our <b>ngnix</b> container. In our example, we will create a simple <b>HelloWorld.html</b> file and host it in our <b>nginx</b> container.</p>
+<p>Let’s first create an HTML file called <b>HelloWorld.html</b></p>
+<img src="https://www.tutorialspoint.com/docker/images/html_file.jpg" alt="HTML File" />
+<p>Let’s add a simple line of Hello World in the HTML file.</p>
+<img src="https://www.tutorialspoint.com/docker/images/simple_line_hello_world.jpg" alt="Simple Line Hello World" />
+<p>Let’s then run the following Docker command.</p>
+<pre class="result notranslate">
+sudo docker run –p 8080:80 –v 
+   “$PWD”:/usr/share/nginx/html:ro –d nginx 
+</pre>
+<p>The following points need to be noted about the above command &minus;</p>
+<ul class="list">
+<li><p>We are exposing the port on the <b>nginx</b> server which is port 80 to the port 8080 on the Docker Host.</p></li>
+<li><p>Next, we are attaching the volume on the container which is <b>/usr/share/nginx/html</b> to our present working directory. This is where our HelloWorld.html file is stored.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/working_directory.jpg" alt="Working Directory" />
+<p>Now if we browse to the URL <b> http://dockerhost:8080/HelloWorld.html</b> we will get the following output as expected &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/output_expected.jpg" alt="Output Expected" />
+<h1>Docker - Toolbox</h1>
+<p>In the introductory chapters, we have seen the installation of Docker toolbox on Windows. The Docker toolbox is developed so that Docker containers can be run on Windows and MacOS. The site for toolbox on Windows is <a target="_blank" rel="nofollow" href="https://docs.docker.com/docker-for-windows/">https://docs.docker.com/docker-for-windows/</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/toolbox_on_windows.jpg" alt="Toolbox on Windows" />
+<p>For Windows, you need to have Windows 10 or Windows Server 2016 with Hyper-V enabled.</p>
+<p>The toolbox consists of the following components &minus;</p>
+<ul class="list">
+<li><p><b>Docker Engine</b> &minus; This is used as the base engine or Docker daemon that is used to run Docker containers.</p></li>
+<li><p><b>Docker Machine</b> &minus; for running Docker machine commands.</p></li>
+<li><p><b>Docker Compose</b> for running Docker compose commands.</p></li>
+<li><p><b>Kinematic</b> &minus; This is the Docker GUI built for Windows and Mac OS.</p></li>
+<li><p><b>Oracle virtualbox</b></p></li>
+</ul>
+<p>Let’s now discuss the different types of activities that are possible with Docker toolbox.</p>
+<h2>Running in Powershell</h2>
+<p>With Docker toolbox on Windows 10, you can now run Docker commands off <b>powershell</b>. If you open powershell on Windows and type in the command of Docker version, you will get all the required details about the Docker version installed.</p>
+<img src="https://www.tutorialspoint.com/docker/images/windows_powershell.jpg" alt="Windows Powershell" />
+<h2>Pulling Images and Running Containers</h2>
+<p>You can also now pull Images from Docker Hub and run containers in powershell as you would do in Linux. The following example will show in brief the downloading of the Ubuntu image and running of the container off the image.</p>
+<p>The first step is to use the Docker <b>pull</b> command to pull the Ubuntu image from Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/pulling_images.jpg" alt="Pulling Images" />
+<p>The next step is to run the Docker image using the following <b>run</b> command &minus;</p>
+<pre class="result notranslate">
+docker run –it ubuntu /bin/bash 
+</pre>
+<p>You will notice that the command is the same as it was in Linux.</p>
+<img src="https://www.tutorialspoint.com/docker/images/same_command.jpg" alt="Same Command" />
+<h2>Kitematic</h2>
+<p>This is the GUI equivalent of Docker on Windows. To open this GUI, go to the taskbar and on the Docker icon, right-click and choose to open Kitematic.</p>
+<img src="https://www.tutorialspoint.com/docker/images/kitematic.jpg" alt="Kitematic" />
+<p>It will prompt you to download Kitematic GUI. Once downloaded, just unzip the contents. There will be a file called <b>Kitematic.exe</b>. Double-click this exe file to open the GUI interface.</p>
+<p>You will then be requested to log into Docker Hub, enter through the GUI. Just enter the required username and password and then click the Login button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/connect_to_docker_hub.jpg" alt="Connect to Docker Hub" />
+<p>Once logged in, you will be able to see all the images downloaded on the system on the left-hand side of the interface.</p>
+<img src="https://www.tutorialspoint.com/docker/images/images_downloaded.jpg" alt="Images Downloaded" />
+<p>On the right-hand side, you will find all the images available on Docker Hub.</p>
+<p>Let’s take an example to understand how to download the Node image from Docker Hub using Kitematic.</p>
+<p><b>Step 1</b> &minus; Enter the keyword of node in the search criteria.</p>
+<img src="https://www.tutorialspoint.com/docker/images/keyword_of_node.jpg" alt="keyword of node" />
+<p><b>Step 2</b> &minus; Click the <b>create</b> button on official Node image. You will then see the image being downloaded.</p>
+<img src="https://www.tutorialspoint.com/docker/images/create_button.jpg" alt="Create Button" />
+<p>Once the image has been downloaded, it will then start running the Node container.</p>
+<img src="https://www.tutorialspoint.com/docker/images/node_container.jpg" alt="Node Container" />
+<p><b>Step 3</b> &minus; If you go to the <b>settings</b> tab, you can drill-down to further settings options, as shown below.</p>
+<ul class="list">
+<li><p><b>General settings</b> &minus; In this tab, you can name the container, change the path settings, and delete the container.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/general_settings.jpg" alt="General settings" />
+<ul class="list">
+<li><p><b>Ports</b> &minus; Here you can see the different port mappings. If you want, you can create your own port mappings.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/ports.jpg" alt="Ports" />
+<ul class="list">
+<li><p><b>Volumes</b> &minus; Here you can see the different volume mappings.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/volumes.jpg" alt="Volumes" />
+<ul class="list">
+<li><p><b>Advanced</b> &minus; It contains the advanced settings for the container.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/advanced.jpg" alt="Advanced" />
+<h1>Docker - Setting ASP.Net</h1>
+<p>ASP.Net is the standard web development framework that is provided by Microsoft for developing server-side applications. Since ASP.Net has been around for quite a long time for development, Docker has ensured that it has support for ASP.Net.</p>  
+<p>In this chapter, we will see the various steps for getting the Docker container for ASP.Net up and running.</p>
+<h2>Prerequisites</h2>
+<p>The following steps need to be carried out first for running ASP.Net.</p>
+<p><b>Step 1</b> &minus; Since this can only run on Windows systems, you first need to ensure that you have either Windows 10 or Window Server 2016.</p>
+<p><b>Step 2</b> &minus; Next, ensure that Hyper-V is and Containers are installed on the Windows system. To install Hyper–V and Containers, you can go to Turn Windows Features ON or OFF. Then ensure the Hyper-V option and Containers is checked and click the OK button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/windows_features.jpg" alt="Windows Features" />
+<p>The system might require a restart after this operation.</p>
+<p><b>Step 3</b> &minus; Next, you need to use the following Powershell command to install the <b>1.13.0rc4</b> version of Docker. The following command will download this and store it in the temp location.</p>
+<pre class="result notranslate">
+Invoke-WebRequest "https://test.docker.com/builds/Windows/x86_64/docker-1.13.0-
+   rc4.zip" -OutFile "$env:TEMP\docker-1.13.0-rc4.zip" –UseBasicParsing 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/destination_path.jpg" alt="Destination Path" />
+<p><b>Step 4</b> &minus; Next, you need to expand the archive using the following <b>powershell</b> command.</p>
+<pre class="result notranslate">
+Expand-Archive -Path "$env:TEMP\docker-1.13.0-rc4.zip" -DestinationPath $env:ProgramFiles
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/expand_the archive.jpg" alt="Expand the Archive" />
+<p><b>Step 5</b> &minus; Next, you need to add the Docker Files to the environment variable using the following <b>powershell</b> command.</p>
+<pre class="result notranslate">
+$env:path += ";$env:ProgramFiles\Docker" 
+</pre>
+<p><b>Step 6</b> &minus; Next, you need to register the Docker Daemon Service using the following <b>powershell</b> command.</p>
+<pre class="result notranslate">
+dockerd --register-service 
+</pre>
+<p><b>Step 7</b> &minus; Finally, you can start the <b>docker daemon</b> using the following command.</p>
+<pre class="result notranslate">
+Start-Service Docker
+</pre>
+<p>Use the <b>docker version</b> command in <b>powershell</b> to verify that the <b>docker daemon</b> is working</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_version.jpg" alt="Docker Version" />
+<h2>Installing the ASP.Net Container</h2>
+<p>Let’s see how to install the ASP.Net container.</p>
+<p><b>Step 1</b> &minus; The first step is to pull the image from Docker Hub. When you log into Docker Hub, you will be able to search and see the image for <b>Microsoft/aspnet</b> as shown below. Just type in <b>asp</b> in the search box and click on the Microsoft/aspnet link which comes up in the search results.</p>
+<img src="https://www.tutorialspoint.com/docker/images/microsoft_aspnet.jpg" alt="Microsoft/ASPNET" />
+<p><b>Step 2</b> &minus; You will see that the Docker <b>pull</b> command for ASP.Net in the details of the repository in Docker Hub.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_pull_command_for_aspnet.jpg" alt="Docker Pull Command for ASPNET" />
+<p><b>Step 3</b> &minus; Go to Docker Host and run the Docker <b>pull</b> command for the microsoft/aspnet image. Note that the image is pretty large, somewhere close to 4.2 GB.</p>
+<img src="https://www.tutorialspoint.com/docker/images/microsoft_aspnet_image.jpg" alt="Microsoft/Aspnet Image" />
+<p><b>Step 4</b> &minus; Now go to the following location <a target="_blank" rel="nofollow" href="https://github.com/Microsoft/aspnet-docker">https://github.com/Microsoft/aspnet-docker</a> and download the entire Git repository.</p>
+<p><b>Step 5</b> &minus; Create a folder called <b>App</b> in your C drive. Then copy the contents from the <b>4.6.2/sample</b> folder to your C drive. Go the Docker File in the sample directory and issue the following command &minus;</p>
+<pre class="result notranslate">
+docker build –t aspnet-site-new –build-arg site_root=/ 
+</pre>
+<p>The following points need to be noted about the above command &minus;</p>
+<ul class="list">
+<li>It builds a new image called <b>aspnet-site-new</b> from the Docker File.</li>
+<li>The root path is set to the localpath folder.</li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/localpath_folder.jpg" alt="Localpath Folder" />
+<p><b>Step 6</b> &minus; Now it’s time to run the container. It can be done using the following command &minus;</p>
+<pre class="result notranslate">
+docker run –d –p 8000:80 –name my-running-site-new aspnet-site-new 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/new_aspnet_site.jpg" alt="New ASPNET Site" />
+<p><b>Step 7</b> &minus; You will now have IIS running in the Docker container. To find the IP Address of the Docker container, you can issue the Docker <b>inspect</b> command as shown below.</p>
+<img src="https://www.tutorialspoint.com/docker/images/iis_running_in_the_docker_container.jpg" alt="IIS running in the Docker container" />
+<h1>Docker - Cloud</h1>
+<p>The Docker Cloud is a service provided by Docker in which you can carry out the following operations &minus;</p>
+<ul class="list">
+<li><p><b>Nodes</b> &minus; You can connect the Docker Cloud to your existing cloud providers such as Azure and AWS to spin up containers on these environments.</p></li>
+<li><p><b>Cloud Repository</b> &minus; Provides a place where you can store your own repositories.</p></li>
+<li><p><b>Continuous Integration</b> &minus; Connect with <b>Github</b> and build a continuous integration pipeline.</p></li>
+<li><p><b>Application Deployment</b> &minus; Deploy and scale infrastructure and containers.</p></li>
+<li><p><b>Continuous Deployment</b> &minus; Can automate deployments.</p></li>
+</ul>
+<h2>Getting started</h2>
+<p>You can go to the following link to getting started with Docker Cloud &minus; <a target="_blank" rel="nofollow" href="https://cloud.docker.com/">https://cloud.docker.com/</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_cloud.jpg" alt="Docker Cloud" />
+<p>Once logged in, you will be provided with the following basic interface &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/basic_interface.jpg" alt="Basic Interface" />
+<h2>Connecting to the Cloud Provider</h2>
+<p>The first step is to connect to an existing cloud provider. The following steps will show you how to connect with an Amazon Cloud provider.</p>
+<p><b>Step 1</b> &minus; The first step is to ensure that you have the right AWS keys. This can be taken from the <b>aws</b> console. Log into your <b>aws</b> account using the following link &minus; <a target="_blank" rel="nofollow "href="https://aws.amazon.com/console/">https://aws.amazon.com/console/</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/aws_management_console.jpg" alt="AWS Management Console" />
+<p><b>Step 2</b> &minus; Once logged in, go to the Security Credentials section. Make a note of the access keys which will be used from Docker Hub.</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/security_credentials_section.jpg" alt="Security Credentials section" />
+<p><b>Step 3</b> &minus; Next, you need to create a policy in <b>aws</b> that will allow Docker to view EC2 instances. Go to the profiles section in <b>aws</b>. Click the <b>Create Policy</b> button.</a></p>
+<img src="https://www.tutorialspoint.com/docker/images/create_policy.jpg" alt="Create Policy" />
+<p><b>Step 4</b> &minus; Click on ‘Create Your Own Policy’ and give the policy name as <b>dockercloudpolicy</b> and the policy definition as shown below.</a></p>
+<pre class="prettyprint notranslate">
+{ 
+   "Version": "2012-10-17", 
+   "Statement": [ { 
+      "Action": [ 
+         "ec2:*", 
+         "iam:ListInstanceProfiles" 
+      ], 
+      "Effect": "Allow", 
+      "Resource": "*" 
+   } ] 
+}
+</pre>
+<img src="https://www.tutorialspoint.com/docker/images/review_policy.jpg" alt="Review Policy" />
+<p>Next, click the <b>Create Policy</b> button</p>
+<p><b>Step 5</b> &minus; Next, you need to create a <b>role</b> which will be used by Docker to spin up nodes on AWS. For this, go to the <b>Roles</b> section in AWS and click the <b>Create New Role</b> option.</p>
+<img src="https://www.tutorialspoint.com/docker/images/create_new_role.jpg" alt="Create New Role" />
+<p><b>Step 6</b> &minus; Give the name for the role as <b>dockercloud-role</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/next_step.jpg" alt="Next Step" />
+<p><b>Step 7</b> &minus; On the next screen, go to ‘Role for Cross Account Access’ and select “Provide access between your account and a 3rd party AWS account".</p>
+<img src="https://www.tutorialspoint.com/docker/images/select_role_type.jpg" alt="Select Role Type" />
+<p><b>Step 8</b> &minus; On the next screen, enter the following details &minus;</p>
+<ul class="list">
+<li>In the Account ID field, enter the ID for the Docker Cloud service: 689684103426.</li>
+<li>In the External ID field, enter your Docker Cloud username.</li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/account_external_id.jpg" alt="Account External ID" />
+<p><b>Step 9</b> &minus; Then, click the <b>Next Step</b> button and on the next screen, attach the policy which was created in the earlier step.</p>
+<img src="https://www.tutorialspoint.com/docker/images/attach_policy.jpg" alt="Attach Policy" />
+<p><b>Step 10</b> &minus; Finally, on the last screen when the role is created, make sure to copy the <b>arn</b> role which is created.</p>
+<pre class="prettyprint notranslate">
+arn:aws:iam::085363624145:role/dockercloud-role
+</pre>
+<img src="https://www.tutorialspoint.com/docker/images/create_role_name_arn.jpg" alt="Create Role Name ARN" />
+<p><b>Step 11</b> &minus; Now go back to <b>Docker Cloud</b>, select <b>Cloud Providers</b>, and click the <b>plug symbol</b> next to Amazon Web Services.</p>
+<img src="https://www.tutorialspoint.com/docker/images/cloud_providers.jpg" alt="Cloud Providers" />
+<p>Enter the <b>arn</b> role and click the <b>Save</b> button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/aws_credentials.jpg" alt="AWS Credentials" />
+<p>Once saved, the integration with AWS would be complete.</p>
+<img src="https://www.tutorialspoint.com/docker/images/integration_with_aws.jpg" alt="Integration with AWS" />
+<h2>Setting Up Nodes</h2>
+<p>Once the integration with AWS is complete, the next step is to setup a node. Go to the Nodes section in Docker Cloud. Note that the setting up of nodes will automatically setup a node cluster first.</p>
+<p><b>Step 1</b> &minus; Go to the Nodes section in Docker Cloud.</p>
+<img src="https://www.tutorialspoint.com/docker/images/nodes_section.jpg" alt="Nodes Section" />
+<p><b>Step 2</b> &minus; Next, you can give the details of the nodes which will be setup in AWS.</p>
+<img src="https://www.tutorialspoint.com/docker/images/node_clusters_wizard.jpg" alt="Node Clusters Wizard" />
+<p>You can then click the Launch Node cluster which will be present at the bottom of the screen. Once the node is deployed, you will get the notification in the Node Cluster screen.</p>
+<img src="https://www.tutorialspoint.com/docker/images/actions.jpg" alt="Actions" />
+<h2>Deploying a Service</h2>
+<p>The next step after deploying a node is to deploy a service. To do this, we need to perform the following steps.</p>
+<p><b>Step 1</b> &minus; Go to the <b>Services Section</b> in Docker Cloud. Click the <b>Create</b> button</p>
+<img src="https://www.tutorialspoint.com/docker/images/services_section.jpg" alt="Services Section" />
+<p><b>Step 2</b> &minus; Choose the Service which is required. In our case, let’s choose <b>mongo</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/mongo.jpg" alt="Mongo" />
+<p><b>Step 3</b> &minus; On the next screen, choose the <b>Create &amp; Deploy</b> option. This will start deploying the <b>Mongo</b> container on your node cluster.</p>
+<img src="https://www.tutorialspoint.com/docker/images/create_deploy.jpg" alt="Create Deploy" />
+<p>Once deployed, you will be able to see the container in a running state.</p>
+<img src="https://www.tutorialspoint.com/docker/images/container_in_running_state.jpg" alt="Container in Running State" />
+<h1>Docker - Logging</h1>
+<p>Docker has logging mechanisms in place which can be used to debug issues as and when they occur. There is logging at the <b>daemon level</b> and at the <b>container level</b>. Let’s look at the different levels of logging.</p>
+<h2>Daemon Logging</h2>
+<p>At the daemon logging level, there are four levels of logging available &minus;</p>
+<ul class="list">
+<li><p><b>Debug</b> &minus; It details all the possible information handled by the daemon process.</p></li>
+<li><p><b>Info</b> &minus; It details all the errors + Information handled by the daemon process.</p></li>
+<li><p><b>Errors</b> &minus; It details all the errors handled by the daemon process.</p></li>
+<li><p><b>Fatal</b> &minus; It only details all the fatal errors handled by the daemon process.</p></li>
+</ul>
+<p>Go through the following steps to learn how to enable logging.</p>
+<p><b>Step 1</b> &minus; First, we need to stop the <b>docker daemon process</b>, if it is already running. It can be done using the following command &minus;</p>
+<pre class="result notranslate">
+sudo service docker stop 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_daemon_process.jpg" alt="Docker Daemon Process" />
+<p><b>Step 2</b> &minus; Now we need to start the <b>docker daemon process</b>. But this time, we need to append the <b>–l</b> parameter to specify the logging option. So let’s issue the following command when starting the <b>docker daemon process</b>.</p>
+<pre class="result notranslate">
+sudo dockerd –l debug &amp;
+</pre>
+<p>The following points need to be noted about the above command &minus;</p>
+<ul class="list">
+<li><p><b>dockerd</b> is the executable for the <b>docker daemon process</b>.</p></li>
+<li><p>The <b>–l</b> option is used to specify the logging level. In our case, we are putting this as debug</p></li>
+<li><p><b>&amp;</b> is used to come back to the command prompt after the logging has been enabled.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/docker/images/points.jpg" alt="Points" />
+<p>Once you start the Docker process with logging, you will also now see the <b>Debug Logs</b> being sent to the console.</p>
+<img src="https://www.tutorialspoint.com/docker/images/debug_logs.jpg" alt="Debug Logs" />
+<p>Now, if you execute any Docker command such as <b>docker images</b>, the Debug information will also be sent to the console.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_images_logging.jpg" alt="Docker Images Logging" />
+<h2>Container Logging</h2>
+<p>Logging is also available at the container level. So in our example, let’s spin up an Ubuntu container first. We can do it by using the following command.</p>
+<pre class="result notranslate">
+sudo docker run –it ubuntu /bin/bash 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/container_logging.jpg" alt="Container Logging" />
+<p>Now, we can use the <b>docker log command</b> to see the logs of the container.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+Docker logs containerID 
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>containerID</b> &minus; This is the ID of the container for which you need to see the logs.</p></li>
+</ul>
+<h3>Example</h3>
+<p>On our Docker Host, let’s issue the following command. Before that, you can issue some commands whilst in the container.</p>
+<pre class="result notranslate">
+sudo docker logs 6bfb1271fcdd 
+</pre>
+<h3>Output</h3>
+<img src="https://www.tutorialspoint.com/docker/images/container_logging_output.jpg" alt="Container Logging Output" />
+<p>From the output, you can see that the commands executed in the container are shown in the logs.</p>
+<h1>Docker - Compose</h1>
+<p><b>Docker Compose</b> is used to run multiple containers as a single service. For example, suppose you had an application which required NGNIX and MySQL, you could create one file which would start both the containers as a service without the need to start each one separately.</p>
+<p>In this chapter, we will see how to get started with Docker Compose. Then, we will look at how to get a simple service with MySQL and NGNIX up and running using Docker Compose.</p>
+<h2>Docker Compose ─ Installation</h2>
+<p>The following steps need to be followed to get Docker Compose up and running.</p>
+<p><b>Step 1</b> &minus; Download the necessary files from <b>github</b> using the following command &minus;</p>
+<pre class="result notranslate">
+curl -L "https://github.com/docker/compose/releases/download/1.10.0-rc2/dockercompose
+   -$(uname -s) -$(uname -m)" -o /home/demo/docker-compose
+</pre>
+<p>The above command will download the latest version of Docker Compose which at the time of writing this article is <b>1.10.0-rc2</b>. It will then store it in the directory <b>/home/demo/</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_compose.jpg" alt="Docker Compose" />
+<p><b>Step 2</b> &minus; Next, we need to provide <b>execute privileges</b> to the downloaded Docker Compose file, using the following command &minus;</p>
+<pre class="result notranslate">
+chmod +x /home/demo/docker-compose
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/execute_privileges.jpg" alt="Execute Privileges" />
+<p>We can then use the following command to see the <b>compose</b>  version.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+docker-compose version 
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>version</b> &minus; This is used to specify that we want the details of the version of <b>Docker Compose</b>.</p></li>
+</ul>
+<h3>Output</h3>
+<p>The version details of Docker Compose will be displayed.</p>
+<h3>Example</h3>
+<p>The following example shows how to get the <b>docker-compose</b> version.</p>
+<pre class="result notranslate">
+sudo ./docker-compose -version 
+</pre>
+<h3>Output</h3>
+<p>You will then get the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_compose_installation.jpg" alt="Docker Compose Installation" />
+<h2>Creating Your First Docker-Compose File</h2>
+<p>Now let’s go ahead and create our first Docker Compose file. All Docker Compose files are YAML files. You can create one using the vim editor. So execute the following command to create the <b>compose</b> file &minus;</p>
+<pre class="result notranslate">
+sudo vim docker-compose.yml 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/compose_file.jpg" alt="Compose File" />
+<p>Let’s take a close look at the various details of this file &minus;</p>
+<ul class="list">
+<li><p>The <b>database</b> and <b>web</b> keyword are used to define two separate services. One will be running our <b>mysql</b> database and the other will be our <b>nginx</b> web server.</p></li>
+<li><p>The <b>image</b> keyword is used to specify the image from <b>dockerhub</b> for our <b>mysql</b> and <b>nginx</b> containers</p></li>
+<li><p>For the database, we are using the ports keyword to mention the ports that need to be exposed for <b>mysql</b>.</p></li>
+<li><p>And then, we also specify the environment variables for <b>mysql</b> which are required to run <b>mysql</b>.</p></li>
+</ul>
+<p>Now let’s run our Docker Compose file using the following command &minus;</p>
+<pre class="result notranslate">
+sudo ./docker-compose up 
+</pre>
+<p>This command will take the <b>docker-compose.yml</b> file in your local directory and start building the containers.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_compose_yml.jpg" alt="Docker Compose YML" />
+<p>Once executed, all the images will start downloading and the containers will start automatically.</p>
+<img src="https://www.tutorialspoint.com/docker/images/start_downloading.jpg" alt="Start Downloading" />
+<p>And when you do a <b>docker ps</b>, you can see that the containers are indeed up and running.</p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_compose_container.jpg" alt="Docker Compose Container" />
+<h1>Docker - Continuous Integration</h1>
+<p>Docker has integrations with many Continuous Integrations tools, which also includes the popular CI tool known as <b>Jenkins</b>. Within Jenkins, you have plugins available which can be used to work with containers. So let’s quickly look at a Docker plugin available for the Jenkins tool.</p>
+<p>Let’s go step by step and see what’s available in Jenkins for Docker containers.</p>
+<p><b>Step 1</b> &minus; Go to your Jenkins dashboard and click <b>Manage Jenkins</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/manage_jenkins.jpg" alt="Manage Jenkins" />
+<p><b>Step 2</b> &minus; Go to <b>Manage Plugins</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/manage_pluggins.jpg" alt="Manage Plugins" />
+<p><b>Step 3</b> &minus; Search for Docker plugins. Choose the Docker plugin and click the <b>Install</b> <b>without restart</b> button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/install_without_restart.jpg" alt="Install Without Restart Button" />
+<p><b>Step 4</b> &minus; Once the installation is completed, go to your job in the Jenkins dashboard. In our example, we have a job called <b>Demo</b>.</p>
+<img src="https://www.tutorialspoint.com/docker/images/demo.jpg" alt="Demo" />
+<p><b>Step 5</b> &minus; In the job, when you go to the Build step, you can now see the option to start and stop containers.</p>
+<img src="https://www.tutorialspoint.com/docker/images/add_build_step.jpg" alt="Add Build step" />
+<p><b>Step 6</b> &minus; As a simple example, you can choose the further option to stop containers when the build is completed. Then, click the <b>Save</b> button.</p>
+<img src="https://www.tutorialspoint.com/docker/images/stop_all_containers.jpg" alt="Stop All Containers" />
+<p>Now, just run your job in Jenkins. In the Console output, you will now be able to see that the command to Stop All containers has run.</p>
+<img src="https://www.tutorialspoint.com/docker/images/console_output.jpg" alt="Console Output" />
+<h1>Docker - Kubernetes Architecture</h1>
+<p>Kubernetes is an orchestration framework for Docker containers which helps expose containers as services to the outside world. For example, you can have two services &minus; One service would contain <b>nginx</b> and <b>mongoDB</b>, and another service would contain <b>nginx</b> and <b>redis</b>. Each service can have an IP or service point which can be connected by other applications. Kubernetes is then used to manage these services.</p>
+<p>The following diagram shows in a simplistic format how Kubernetes works from an architecture point of view.</p>
+<img src="https://www.tutorialspoint.com/docker/images/kubernetes_architecture.jpg" alt="Kubernetes Architecture" />
+<p>The <b>minion</b> is the node on which all the services run. You can have many minions running at one point in time. Each minion will host one or more POD. Each <b>POD</b> is like hosting a service. Each POD then contains the Docker containers. Each POD can host a different set of Docker containers. The proxy is then used to control the exposing of these services to the outside world.</p>
+<p>Kubernetes has several components in its architecture. The role of each component is explained below &mius;</p>
+<ul class="list">
+<li><p><b>etcd</b> &minus; This component is a highly available <b>key-value</b> store that is used for storing <b>shared configuration</b> and <b>service discovery</b>. Here the various applications will be able to connect to the services via the <b>discovery service</b>.</p></li>
+<li><p><b>Flannel</b> &minus; This is a backend network which is required for the containers.</p></li>
+<li><p><b>kube-apiserver</b> &minus; This is an API which can be used to orchestrate the Docker containers.</p></li>
+<li><p><b>kube-controller-manager</b> &minus; This is used to control the <b>Kubernetes services</b>.</p></li>
+<li><p><b>kube-scheduler</b> &minus; This is used to schedule the containers on hosts.</p></li>
+<li><p><b>Kubelet</b> &minus; This is used to control the launching of containers via <b>manifest files</b>.</p></li>
+<li><p><b>kube-proxy</b> &minus; This is used to provide network proxy services to the outside world.</p></li>
+</ul>
+<h1>Docker - Working of Kubernetes</h1>
+<p>In this chapter, we will see how to install <b>Kubenetes</b> via <b>kubeadm</b>. This is a tool which helps in the installation of Kubernetes. Let’s go step by step and learn how to install Kubernetes.</p>
+<p><b>Step 1</b> &minus; Ensure that the <b>Ubuntu server version</b> you are working on is <b>16.04</b>.</p>
+<p><b>Step 2</b> &minus; Ensure that you generate a <b>ssh</b> key which can be used for <b>ssh</b> login. You can do this using the following command.</p>
+<pre class="result notranslate">
+ssh-keygen 
+</pre>
+<p>This will generate a key in your <b>home folder</b> as shown below.</p>
+<img src="https://www.tutorialspoint.com/docker/images/home_folder.jpg" alt="Home Folder" />
+<p><b>Step 3</b> &minus; Next, depending on the version of Ubuntu you have, you will need to add the relevant site to the <b>docker.list</b> for the <b>apt package manager</b>, so that it will be able to detect the <b>Kubernetes packages</b> from the <b>kubernetes</b> site and download them accordingly.</p>
+<p>We can do it using the following commands.</p>
+<pre class="result notranslate">
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -  
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main” | sudo tee /etc/apt/sources.list.d/docker.list
+</pre>
+<p><b>Step 4</b> &minus; We then issue an apt-get update to ensure all packages are downloaded on the Ubuntu server.</p>
+<img src="https://www.tutorialspoint.com/docker/images/issue_apt_get_update.jpg" alt="Issue APT Get Update" />
+<p><b>Step 5</b> &minus; Install the Docker package as detailed in the earlier chapters.</p>
+<p><b>Step 6</b> &minus; Now it’s time to install <b>kubernetes</b> by installing the following packages &minus;</p>
+<pre class="result notranslate">
+apt-get install –y kubelet kubeadm kubectl kubernetes-cni
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/install_kubernetes.jpg" alt="Install Kubenetes" />
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/docker_package.jpg" alt="Docker Package" />
+<p><b>Step 7</b> &minus; Once all <b>kubernetes</b> packages are downloaded, it’s time to start the kubernetes controller using the following command &minus;</p>
+<pre class="result notranslate">
+kubeadm init 
+</pre>
+<p></p>
+<img src="https://www.tutorialspoint.com/docker/images/kubernetes_packages.jpg" alt="kubernetes Packages" />
+<p>Once done, you will get a successful message that the master is up and running and nodes can now join the cluster.</p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/docker/docker_working_of_kubernetes.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/docker/docker_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/docker/docker_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/docker/docker_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/docker/docker_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/docker/docker_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/docker/docker_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/docker/docker_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/docker/docker_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:19 GMT -->
+</html>

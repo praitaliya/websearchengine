@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:31:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>SAP Security Quick Guide</title>
+<meta name="description" content="SAP Security Quick Guide - Learn SAP Security in simple and easy steps starting from basic to advanced concepts with examples including Overview, User Authentication and Management, Network Communication Security, Protecting Standard Users, Un-authorizing Logons Protections, System Authorization Concept, Unix Platform, Windows Platform, Databases, User Authentication and Single SignOn, Logon Tickets." />
+<meta name="keywords" content="SAP Security, Tutorial, Overview, User Authentication and Management, Network Communication Security, Protecting Standard Users, Un-authorizing Logons Protections, System Authorization Concept, Unix Platform, Windows Platform, Databases, User Authentication and Single SignOn, Logon Tickets." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #036db0 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #036db0 !important;}
+.submenu-item{ border-bottom: 2px solid #036db0 !important; border-top: 2px solid #036db0 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/sap_security/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/sap_security/images/sap-security-mini-logo.jpg" alt="SAP Security Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">SAP Security Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/sap_security/index.htm">SAP Security - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_overview.htm">SAP Security - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_user_authentication_management.htm">User Authentication &amp; Management</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_network_communication.htm">Network Communication Security</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_protecting_standard_users.htm">Protecting Standard Users</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_unauthorizing_logons_protections.htm">Un-authorizing Logons Protections</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_system_authorization_concept.htm">System Authorization Concept</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_unix_platform.htm">SAP Security - Unix Platform</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_windows_platform.htm">SAP Security - Windows Platform</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_databases.htm">SAP Security - Databases</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_user_authentication_single_signon.htm">User Authentication &amp; Single SignOn</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_logon_tickets.htm">SAP Security - Logon Tickets</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">SAP Security Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm">SAP Security - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_useful_resources.htm">SAP Security - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/sap_security/sap_security_discussion.htm">SAP Security - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>SAP Security - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/sap_security/sap_security_logon_tickets.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/sap_security/sap_security_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>SAP Security - Overview</h1>
+<p>In a SAP Distributed Environment, there is always a need that you protect your critical information and data from unauthorized access. Human Errors, Incorrect Access Provisioning shouldn’t allow unauthorized access to any system and there is a need to maintain and review the profile policies and system security policies in your SAP Environment.</p> 
+<p>To make the system secure, you should have good understanding of user access profiles, password policies, data encryption and authorization methods to be used in the system. You should regularly check <b>SAP System Landscape</b> and monitor all the changes that are made in configuration and access profiles.</p>  
+<p>The standard super users should be well-protected and user profile parameters and values should be set carefully to meet the system security requirements.</p> 
+<p>While communicating over a network, you should understand the network topology and network services should be reviewed and enabled after considerable checks. Data over the network should be well protected by using private keys.</p>
+<h2>Why is Security Required?</h2>
+<p>To access the information in a distributed environment, there is a possibility that critical information and data is leaked to unauthorized access and system security is broken due to either – Lack of password policies, Standard super users are not well maintained, or any other reasons.</p> 
+<p>A few key reasons of breach of access in a SAP system are as follows &minus;</p> 
+<ul class="list">
+<li><p>Strong password policies are not maintained. 
+<li><p>Standard users, super user, DB users are not properly maintained and passwords are not changed regularly.</p></li> 
+<li><p>Profile parameters are not correctly defined. 
+<li><p>Unsuccessful logon attempts are not monitored and idle user session end policies are not defined.</p></li> 
+<li><p>Network Communication security is not considered while sending data over internet and no use of encryption keys.</p></li> 
+<li><p>Database users are not maintained properly and no security measures are considered while setting up the information database.</p></li> 
+<li><p>Single Sign-on’s are not properly configured and maintained in a SAP environment.</p></li>
+</ul> 
+<p>To overcome all the above reasons there is a need that you define security policies in your SAP environment. Security parameters should be defined and password policies should be reviewed after regular time intervals.</p>
+<p>The Database Security is one of the critical component of securing your SAP environment. So, there is a need that you manage your database users and see to it that passwords are well protected.</p> 
+<p>The following Security mechanism should be applied in the system to protect SAP Environment from any unauthorized access &minus;</p>
+<ul class="list">
+<li>User Authentication and Management</li>
+<li>Network Communication Security</li>
+<li>Protecting Standard Users and Super users</li>
+<li>Unsuccessful Logons Protections</li>
+<li>Profile parameters and password policies</li>
+<li>SAP System Security in Unix and Windows Platform</li>
+<li>Single Sign-On Concept</li>
+</ul>
+<img src="https://www.tutorialspoint.com/sap_security/images/sap_security_policy.jpg" alt="SAP Security Policy" />
+<p>So, the security in SAP system is required in a distributed environment and you need to be sure that your data and processes support your business needs without allowing unauthorized access to critical information. In a SAP system, human errors, negligence, or attempted manipulation on the system can result in loss of critical information.</p>
+<h1>User Authentication and Management</h1>
+<p>If an unauthorized user can access SAP system under a known authorized user and can make configuration changes and manipulate system configuration and key policies. If an authorized user has access to important data and information of a system, then that user can also access other critical information as well. This enhances the use of secure authentication to protect the Availability, Integrity and Privacy of a User System.</p>
+<h2>Authentication Mechanism in a SAP System</h2>
+<p>Authentication mechanism defines the way you access your SAP system. There are various authentication methods that are provided &minus;</p> 
+<ul class="list">
+<li>User Id’s and user management tools</li>
+<li>Secure Network Communication</li>
+<li>SAP Logon Tickets</li>
+<li>X.509 Client Certificates</li>
+</ul>
+<h3>User ID’s and User Management Tools</h3> 
+<p>Most common method of authentication in a SAP system is by using the username and password to login. The User ID’s to login are created by the SAP Administrator. To provide secure authentication mechanism via the username and password, there is a need to define password policies that doesn’t allow users to set easy predicted password.</p> 
+<p>SAP provides various default parameters that you should set to define password policies- password length, password complexity, default password change, etc</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/user_id.jpg" alt="User Id" />
+<h2>User Management Tools in a SAP System</h2>
+<p><b>SAP NetWeaver System</b> provides various user management tools that can be used to effectively manage users in your environment. They provide very strong authentication method for both type of NetWeaver Application servers – Java and ABAP.</p> 
+<p>Some of the most common User Management Tools are &minus;</p> 
+<h3>User Management for ABAP Application Server (Transaction Code: SU01)</h3> 
+<p>You can use user management Transaction-Code SU01 to maintain users in your ABAP based Application Servers.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/user_management_tool.jpg" alt="User management Tool" />
+<h3>SAP NetWeaver Identity Management</h3>
+<p>You can use SAP NetWeaver Identity Management for user management as well as for managing roles and role assignments in your SAP environment.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/display_identity.jpg" alt="Display Identity" />
+<h3>PFCG Roles</h3>
+<p>You can use profile generator PFCG to create roles and assign authorizations to users in ABAP based systems.</p>
+<p><b>Transaction Code</b> &minus; PFCG</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/show_documentation.jpg" alt="Show Documentation" />
+<h3>Central User Administration</h3>
+<p>You can use CUA to maintain users for multiple ABAP-based systems. You can also sync it with your directory servers. Using this tool, you can manage all the user master record centrally from the client of the system.</p>
+<p><b>Transaction Code</b> &minus; SCUA and create distribution model.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/central_user_administration.jpg" alt="Central User Administration" />
+<h3>User Management Engine UME</h3>
+<p>You can use UME roles to control the user authorization in the system. An administrator can use actions which represent the smallest entity of UME role that a user can use to build access rights.</p> 
+<p>You can open UME administration console using SAP NetWeaver Administrator option.</p>
+<h2>Password Policy</h2>
+<p>A password policy is defined as a set of instructions that a user must follow to improve system security by using strong passwords and by using them properly. In many organizations, password policy is shared as a part of security awareness training and it is mandatory for users to maintain the policy for security of critical systems and information in an organization.</p> 
+<p>Using password policy in a SAP system, an administrator can setup system users to deploy strong passwords that are not easy to break. This also helps to change the password at the regular time intervals for system security.</p> 
+<p>The following password policies are commonly used in a SAP System &minus;</p>
+<h3>Default/Initial Password Change</h3>
+<p>This allows the users to change the initial password immediately when used for the first time.</p>
+<h3>Password Length</h3>
+<p>In a SAP system, the minimum length for passwords in SAP Systems is 3 by default. This value can be changed using profile parameter and maximum length that is allowed is 8.</p>
+<p><b>Transaction Code</b> &minus; RZ11</p>
+<p><b>Parameter Name</b> &minus; login/min_password_lng</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/maintain_profile_parameters.jpg" alt="Maintain Profile Parameters" />
+<p>You can click on documentation of the profile parameter for this policy and you can see the detailed documentation as from SAP as follows &minus;</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/performance_assistant.jpg" alt="Performance Assistant" />
+<p><b>Parameter</b> &minus; login/min_password_lng</p>
+<p><b>Short text</b> &minus; Minimum password length</p>
+<p><b>Parameter Description</b> &minus; This parameter specifies the minimum length of the logon password. The password must have at least three characters. However, the administrator can specify a greater minimum length. This setting applies when new passwords are assigned and when existing passwords are changed or reset.</p>
+<p><b>Application Area</b> &minus; Logon</p>
+<p><b>Parameter Unit</b> &minus; Number of characters (alphanumeric)</p>
+<p><b>Default Value</b> &minus; 6</p>
+<p><b>Who is permitted to make changes?</b> Customer</p>
+<p><b>Operating System Restrictions</b> &minus; None </p>
+<p><b>Database System Restrictions</b> &minus; None  </p>
+<h2>Illegal Passwords</h2>
+<p>You cannot select the first character of any password as a question mark (?) or an exclamation mark (!). You can also add the other characters that you want to restrict in the illegal password table.</p>
+<p><b>Transaction Code</b> &minus; SM30 Table Name: USR40.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/illegal_passwords.jpg" alt="Illegal Passwords" />
+<p>Once you enter the table &minus; <b>USR40</b> and click on <b>Display</b> at the top, it will show you the list of all the impermissible passwords.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/impermissible_passwords.jpg" alt="Impermissible Passwords" />
+<p>Once you click on <b>New Entries</b>, you can enter the new values to this table and also select the case sensitive check box.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/case_sensitive_check_box.jpg" alt="Case Sensitive Check Box" />
+<h3>Password Pattern</h3>
+<p>You can also set that the first three characters of the password cannot appear in the same order as part of the user name. Different password patterns that can be restricted using password policy include &minus;</p>
+<ul class="list">
+<li>The first three characters cannot all be the same.</p></li>
+<li>The first three characters cannot include space characters.</p></li>
+<li>The password cannot be PASS or SAP.</p></li>
+</ul>
+<h3>Password Change</h3>
+<p>In this policy, a user can be allowed to change his or her password almost once a day, but an administrator can reset a user’s password as often as necessary.</p> 
+<p>A user shouldn’t be allowed to reuse the last five passwords. However, an administrator can reset the password that is used by a user previously.</p>
+<h2>Profile Parameters</h2>
+<p>There are different profile parameters that you can define in a SAP system for user management and password policy.</p>
+<p>In a SAP system, you can display the documentation for each profile parameter by going to <b>Tools &rarr; CCMS &rarr; Configuration &rarr;Profile Maintenance</b>(Transaction: RZ11). Enter the parameter name and click on <b>Display</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/profile_parameters.jpg" alt="Profile Parameters" />
+<p>In the next window that shows up, you must enter the parameter name, you can see 2 options &minus;</p>
+<p><b>Display</b> &minus; To display the value of parameters in SAP system.</p>
+<p><b>Display Docu</b> &minus; To display SAP documentation for that parameter.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/display_document.jpg" alt="Display Document" />
+<p>When you click on the Display button, you will be moved to <b>Maintain Profile Parameter</b> screen. You can see the following details &minus;</p>
+<ul class="list">
+<li>Name</p></li>
+<li>Type</p></li>
+<li>Selection Criteria</p></li>
+<li>Parameter Group</p></li>
+<li>Parameter Description and many more</p></li>
+</ul>
+<p>At the bottom, you have current value of parameter <b>login/min_password_lng</b></p>
+<img src="https://www.tutorialspoint.com/sap_security/images/current_value_of_parameter.jpg" alt="Current Value Of Parameter" />
+<p>When you click on <b>Display Doc</b> option, it will display SAP documentation for the parameter.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/sap_documentation_for_parameter.jpg" alt="SAP documentation for the parameter" />
+<h3>Parameter Description</h3>
+<p>This parameter specifies the minimum length of the logon password. The password must have at least three characters. However, the administrator can specify a greater minimum length. This setting applies when new passwords are assigned and when existing passwords are changed or reset.</p> 
+<p>Each parameter has a default value, permitted value as below &minus;</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/parameter_description.jpg" alt="Parameter Description" />
+<p>There are different password parameters in a SAP system. You can enter each parameter in the <b>RZ11</b> transaction and can view the documentation.</p>
+<ul class="list">
+<li>login/min_password_diff</li>
+<li>login/min_password_digits</p></li>
+<li>login/min_password_letters</li>
+<li>login/min_password_specials</li>
+<li>login/min_password_lowercase</li> 
+<li>login/min_password_uppercase</li>
+<li>login/disable_password_logon</li>
+<li>login/password_charset</li>
+<li>login/password_downwards_compatibility</li>
+<li>login/password_compliance_to_current_policy</li>
+</ul>
+<p>To change the Parameter value, run <b>Transaction RZ10</b> and select the Profile as shown below &minus;</p>
+<ul class="list">
+<li><p><b>Multiple application servers</b> &minus; Use DEFAULT profile.</p></li>
+<li><p><b>Single Application servers</b> &minus; Use Instance Profile.</p></li>
+</ul>
+<p>Select <b>Extended Maintenance</b> and click <b>Display</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/edit_profiles.jpg" alt="Edit Profiles" />
+<p>Select the parameter that you want to change and click on <b>Parameter</b> at the top.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/parameter.jpg" alt="Parameter" />
+<p>When you click on the Parameter tab, you can change the value of parameter in new window. You can also create the new parameter by clicking on <b>Create (F5)</b>.</p> 
+<p>You can also see the status of the parameter in this window. Type the parameter value and click on <b>Copy</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/copy_button.jpg" alt="Copy Button" />
+<p>You will be prompted to save when you exit the screen. Click on Yes to save the parameter value.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/parameter_value.jpg" alt="parameter value" />
+<h1>SAP Security - Network Communication</h1>
+<p><b>Secure Network Communication (SNC)</b> can also be used to login to an application server using secure authentication method. You can use SNC for user authentication via SAP GUI for windows or by using an RFC connection.</p>  
+<p>The SNC uses an external security product to perform the authentication between the communication partners. You can use security measures like public key infrastructure PKI, and procedures to generate and distribute key pairs.</p> 
+<p>You should define network topology that can eliminate threats and prevent network attacks. When users cannot login to the application or database layer, attackers cannot get access to the SAP system or the database system to access critical information.</p> 
+<p>A well-defined network topology doesn’t allow intruders to connect to the company’s LAN and hence no access to security loop holes on the network services or on the SAP system.</p> 
+<h2>Network Topology in a SAP System</h2> 
+<p>Your physical network architecture completely depends on the size of your SAP System. A SAP System is commonly implemented with a client-server architecture and each system is commonly divided into the following three layers &minus;</p> 
+<ul class="list">
+<li>Database Layer</li> 
+<li>Application Layer</li> 
+<li>Presentation Layer</li> 
+</ul>
+<p>When your SAP system is small, it may not have a separate application and database server. However, in a large system, many application servers communicate with a database server and several frontends. This defines the network topology of a system from simple to complex and you should consider different scenarios when organizing your network topology.</p>  
+<p>In a large-scale organization, it is recommended that you install your application and database server on different machines and place in a separate LAN from the frontend system.</p>
+<p>In the following image, you can see the preferred Network topology of a SAP system &minus;</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/preferred_network_topology.jpg" alt="Preferred Network Topology" />
+<p>When you place your database and application server in separate VLAN from frontends VLAN, it allows you to improve the access control system and hence increases the security of your SAP system. Frontend systems are in different VLAN, so it is not easy to get into the Server VLAN and hence bypass the security of your SAP system.</p>
+<h2>SAP Network Services</h2> 
+<p>In your SAP system, there are various services that are enabled however only few are required to run SAP system. In a SAP system, the <b>Landscape</b>, <b>Database</b> and <b>Application Servers</b> are the most common target of network attacks. Many network services are running in your landscape that allows the access to these servers and these services should be carefully monitored.</p> 
+<p>In your Window/UNIX machines, these services are maintained in <b>/etc/services</b>. You can open this file in Windows machine by going to the following path &minus;</p>
+<p style="text-align:center"><b>system32/drivers/etc/services</b></p>
+<img src="https://www.tutorialspoint.com/sap_security/images/windows_machine.jpg" alt="Windows Machine" />
+<p>You can open this file in a Notepad and review all the activated services in your server &minus;</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/services_notepad.jpg" alt="Services Notepad" />
+<p>It is recommended that you disable all the unrequired services on landscape servers. Sometimes these services contain a few errors which can be used by intruders to gain unauthorized access. When you disable these services, you reduce the chances of an attack on your network.</p> 
+<p>For high level of security, it is also recommended to use static password files in your SAP environment.</p> 
+<h2>Private Keys</h2> 
+<p>SNC uses an external security product to perform the authentication between the communication partners. You can use security measures like <b>Public Key Infrastructure (PKI)</b> and other procedures to generate and distribute key pairs and to ensure that private keys for users are properly secured.</p>
+<p>There are different ways of securing the private keys for a network authorization &minus;</p>
+<ul class="list">
+<li>Hardware Solution</li>
+<li>Software Solution</li>
+</ul>
+<p>Let us now discuss them in detail.</p>
+<h3>Hardware Solution</h3>
+<p>You can protect private keys for users using hardware solution where you issue smart card to individual users. All the keys are stored in a smart card and the user should authenticate to their smart cards via biometrics by using finger prints or using a PIN password.</p>  
+<p>These smart cards should be protected from theft or loss by each individual user and users can use the card to encrypt the documents.</p> 
+<p>Users are not allowed to share the smart cards or give them to other users.</p>
+<h3>Software Solution</h3>
+<p>It is also possible to use software solution to store private keys for individual users. Software solution is less expensive solution as compared to hardware solution, but they are also less secure.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/hardware_solution_to_store_private_keys.jpg" alt="Hardware Solution To Store Private Keys" />
+<p>When users store private keys in files and user details, there is a need to secure those files for unauthorized access.</p>
+<h1>SAP Security - Protecting Standard Users</h1>
+<p>When you install the SAP system for the first time, there are a few default users that are created to perform administrative tasks. By default, it creates three clients in the SAP Environment, which are &minus;</p> 
+<ul class="list">
+<li><p>Client 000 &minus; SAP Reference Client</p></li> 
+<li><p>Client 001 &minus; Template Client from SAP</p></li> 
+<li><p>Client 066 &minus; SAP Early Watch Client</p></li>
+</ul> 
+<p>SAP creates standard users in the above-mentioned client in the system. Each standard user has its own default password with the first installation.</p> 
+<p>Standard Users in a SAP system includes the following users under default client &minus;</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<th style="text-align:center">User</th>
+<th style="text-align:center">Details</th>
+<th style="text-align:center">Client</th>
+<th style="text-align:center">Default Password</th>
+</tr>
+<tr>
+<td>SAP</td>
+<td>SAP System Super User</td>
+<td>000, 001, 066</td>
+<td>6071992</td>
+</tr>
+<tr style="text-align:center;">
+<td colspan="3">
+All New Clients</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>DDIC</td>
+<td>ABAP Dictionary Super User</td>
+<td>000, 001</td>
+<td>19920706</td>
+</tr>
+<tr>
+<td>SAPCPIC</td>
+<td>CPI-C User for SAP</td>
+<td>000, 001</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>EARLYWATCH</td>
+<td>Early Watch User</td>
+<td>66</td>
+<td>support</td>
+</tr>
+</table>
+<p>These are the standard users under SAP Default clients to perform administrative and configuration task in SAP system. To maintain security in a SAP system, you should protect these users &minus;</p>
+<ul class="list">
+<li><p>You should add these users to group SUPER, so that they are only modified by an Administrator who has the privilege to add/modify users to group SUPER.</p></li>
+<li><p>Default password for Standard users should be changed.</p></li>
+</ul>
+<h2>How to See the List of Clients in a SAP System?</h2>
+<p>You can see the list of all the clients in your SAP environment by using Transaction <b>SM30</b>, display the table <b>T000</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/table_t000.jpg" alt="Table T000" />
+<p>When you enter the table, and click on <b>Display</b>, it will show you the list of all clients in your SAP system. This table includes detail of all default clients and new clients that you create in an environment for sharing of resources.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/environment_for_sharing_of_resources.jpg" alt="Environment for sharing of resources" />
+<p>You can use report <b>RSUSR003</b> to make sure that the user SAP has been created in all clients and that the standard passwords have been changed for SAP, DDIC and SAPCPIC.</p>
+<p>Go to <b>ABAP Editor SE38</b> and enter the report name and click on EXECUTE.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/abap_editor.jpg" alt="ABAP Editor" />
+<p>Enter the report title and click on <b>Execute</b> button. It will display all the clients and standard users in SAP System, Password Status, Reason for Use Lock, Valid From and Valid To, etc.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/test.jpg" alt="Test" />
+<h3>Protecting the SAP System Super User</h3>
+<p>To protect a SAP System Super User “SAP”, you can perform the following steps in a system &minus;</p>
+<p><b>Step 1</b> &minus; You need to define the new Super User in a SAP system and deactivate the SAP user. Note that you must not delete user SAP in the system. To deactivate the hard-coded user, you can use the profile parameter: <b>login/no_automatic_user_sapstar.</b></p>
+<p>If the user master record of the user SAP* is deleted, it is possible to log on with “SAP” and the initial password PASS.</p>
+<p>“SAP” user has the following properties &minus;</p>
+<p>The user has full authorizations, since no authorization checks are performed.</p>
+<ul class="list">
+<li><p>The default password PASS cannot be changed.</p></li>
+<li><p>You can use the profile parameter <b>login/no_automatic_user_sapstar</b> to deactivate these special properties of SAP and to control of the automatic login of user SAP* .</p></li>
+</ul>
+<p><b>Step 2</b> &minus; To check the value of this parameter, run Transaction <b>RZ11</b> and enter the parameter name.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/run_transaction.jpg" alt="Run Transaction" />
+<p><b>Values allowed:</b> 0, 1, in which &minus;</p>
+<ul class="list">
+<li><p><b>0</b> &minus; Automatic user SAP* is permissible.</p></li>
+<li><p><b>1</b> &minus; Automatic user SAP* is deactivated.</p></li>
+</ul>
+<p><b>Step 3</b> &minus; In the following system, you can see the value of this parameter is set to 1. This shows that the Super user “SAP” is deactivated in the system.</p>
+<p><b>Step 4</b> &minus; Click on <b>Display</b> and you can see the current value of this parameter.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/display_button.jpg" alt="Display Button" />
+<p>To create a new Super user in the system, define a new user master record and assign the profile <b>SAP_ALL</b> to this super user.</p>
+<h3>DDIC User Protection</h3>
+<p>A DDIC user is required for certain tasks related to Software Logistics, ABAP Dictionary, and Tasks related to installation and upgrade. To protect this user, it is advisable to lock this user in a SAP system. You shouldn’t delete this user to perform few functionalities for future use.</p>
+<p>To lock the user, use Transaction code: <b>SU01</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/ddic_user_protection.jpg" alt="DDIC User Protection" />
+<p>If you want to protect this user, you can assign the <b>SAP_ALL</b> authorization to this user at the time of installation and later lock it.</p>
+<h3>Protecting the SAPCPIC User</h3>
+<p>A SAPCPIC user is used for calling certain programs and function modules in a SAP system and is a non-dialog user.</p>  
+<p>You should lock this user and change the password for this user to protect it. In the previous releases, when you lock SAPCPIC user or change the password, it affects additional programs RSCOLL00, RSCOLL30, and LSYPGU01.</p> 
+<h3>Protecting Early Watch</h3>
+<p>A 066 Client − This is called SAP Early watch and is used for diagnostic scans and monitoring service in SAP system and user EARLYWATCH is the interactive user for the Early Watch service in Client 066. To secure this user, you can perform the following actions &minus;</p>
+<ul class="list">
+<li>Lock EARLYWATCH user until it is not required in a SAP environment.</li>
+<li>Change the default password for this user.</li>
+</ul>
+<h3>Key Points</h3>
+<p>To protect SAP Standard users and to protect clients in SAP landscape, you should consider the following key points &minus;</p>
+<ul class="list">
+<li><p>You should properly maintain the clients in a SAP system and ensure that there are no unknown clients that exist.</p></li>
+<li><p>You need to ensure that SAP super user “SAP” exists and has been deactivated in all clients.</p></li>
+<li><p>You need to ensure that default password is changed for all SAP standard users SAP, DDIC and EARLYWATCH user.</p></li>
+<li><p>You need to ensure that all the Standard users have been added to the SUPER group in a SAP system and the only person authorized to make changes to SUPER group can only edit these users.</p></li>
+<li><p>You need to ensure that the default password for SAPCPIC has been changed and this user is locked and it is unlocked when it is required.</p></li>
+<li><p>All SAP standard users should be locked and can only be unlocked when it is required. Password should be well protected for all these users.</p></li>
+</ul>
+<h2>How to Change Password of a Standard User?</h2>
+<p>You should ensure that password for all SAP standard users should be changed in all the clients maintained in <b>Table T000</b> and user “SAP” should exist for all clients.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/change_of_password.jpg" alt="Change of Password" />
+<p>To change the password, login with Super user. Enter the user Id in Username field for which you want to change the password. Click on Change Password option as shown in the following screenshot &minus;</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/change_password_option.jpg" alt="Change Password Option" />
+<p>Enter the new password, repeat password and click on <b>Apply</b>. You should repeat the same process for all the standard users.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/change_password_window.jpg" alt="Change Password Window" />
+<h1>Un-authorizing Logons Protections</h1>
+<p>To implement security in a SAP system, it is required to monitor unsuccessful login in a SAP environment. When someone tries to login to a system using an incorrect password, the system should either lock the username for some time or that session should be terminated after a defined number of attempts.</p> 
+<p>Various security parameters can be set for unauthorized logon attempts &minus;</p> 
+<ul class="list">
+<li>Terminating a Session</li>
+<li>Locking User</li>
+<li>Activating Screen Savers</li>
+<li>Monitoring unsuccessful logon attempts</li>
+<li>Recording logon attempts</li>
+</ul> 
+<p>Let us now discuss each of these in detail.</p> 
+<h3>Terminating a Session</h3> 
+<p>When there are a multiple number of unsuccessful login attempts made on a single user id, the system ends the session for that user. This should be sent using a Profile parameter &minus; <b>login/fails_to_session_end.</b></p> 
+<p>To change the Parameter value, run Transaction <b>RZ10</b> and select the Profile as shown in the following screenshot. Select Extended Maintenance and click on <b>Display</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/extended_maintenance.jpg" alt="Extended Maintenance" />
+<p>Select the parameter that you want to change and click on the <b>Parameter</b> button at the top as shown below.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/parameter_button.jpg" alt="Parameter Button" />
+<p>When you click on the Parameter tab, you can change the value of the parameter in a new window. You can also create the new parameter by clicking on the <b>Create (F5)</b> button.</p>
+<p>To see the details of this parameter, run Transaction Code: <b>RZ11</b> and enter the profile name – <b>login/fails_to_session_end and the click on Display Document</b>.</p>
+<ul class="list">
+<li><p><b>Parameter</b> &minus; login/fails_to_session_end</p></li>
+<li><p><b>Short text</b> &minus; Number of invalid login attempts until the session ends.</p></li>
+<li><p><b>Parameter Description</b> &minus; Number of invalid login attempts that can be made with a user master record until the logon procedure is terminated.</p></li>
+<li><p><b>Application Area</b> &minus; Logon</p></li>
+<li><p><b>Default Value</b> &minus; 3</p></li>
+<li><p><b>Who is permitted to make changes?</b> &minus; Customer</p></li>
+<li><p><b>Operating System Restrictions</b> &minus; None</p></li>
+<li><p><b>Database System Restrictions</b> &minus; None</p></li>
+<li><p><b>Are other parameters affected or dependent?</b> &minus; None</p></li>
+<li><p><b>Values allowed</b> &minus; 1 - 99</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/sap_security/images/login_fails_to_session_end.jpg" alt="Login/Fails to session end" />
+<p>In the above screenshot, you can see value of this parameter is set to 3, i.e. the default value too. After 3 unsuccessful login attempts, session will be terminated for a single user.</p> 
+<h3>Locking User</h3> 
+<p>You can also put a check on a specific User Id, if a set number of consecutive unsuccessful attempts to logon is exceeded under a single User Id. Set the number of invalid logon attempts that are allowed in the profile parameter: <b>login/fails_to_user_lock</b>.</p>
+<ul class="list"> 
+<li><p>It is possible to set a lock on specific User ID’s.</p></li> 
+<li><p>Locks are applied on a User Id till midnight. However, it can also be removed manually at any time by a System Administrator.</p></li> 
+<li><p>In a SAP system, you can also set a parameter value that allows lock to be placed on the User Id till they are manually removed. Parameter name: <b>login/failed_user_auto_unlock</b>.</p></li>
+</ul> 
+<p><b>Profile parameter: login/fails_to_user_lock</b></p> 
+<p>Every time an incorrect logon password is entered, the failed logon counter for the relevant user master record is increased. The logon attempts can be logged in the Security Audit Log. If the limit specified by this parameter is exceeded, the relevant user is locked. This process is also logged in Syslog.</p> 
+<p>The lock is no longer valid after the current day is over. (Other Condition &minus;login/failed_user_auto_unlock)</p>
+<p>The failed logon counter is reset once the user logs on using the correct password. Logons that are not password-based do not have any effect on the failed logon counter. However, active logon locks are checked for every logon.</p>
+<ul class="list">
+<li><p><b>Values allowed</b> &minus; 1 – 99</p></li>
+</ul>
+<p>To see the current value of this parameter, use <b>T-Code: RZ11</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/login_fails_to_user_lock.jpg" alt="Login Fails to User Lock" />
+<p></p>
+<img src="https://www.tutorialspoint.com/sap_security/images/metadata_for_parameter.jpg" alt="Metadata for Parameter" />
+<ul class="list">
+<li><p><b>Parameter name</b> &minus; login/failed_user_auto_unlock</p></li>
+<li><p><b>Short text</b> &minus; Disable automatic unlocking of locked user at midnight.</p></li>
+<li><p><b>Parameter Description</b> &minus; Controls the unlocking of users locked by logging on incorrectly. If the parameter is set to 1, locks that were set due to failed password logon attempts only apply on the same day (as the locking). If the parameter is set to 0, the locks remain in effect.</p></li>
+<li><p><b>Application Area</b> &minus; Logon.</p></li>
+<li><p><b>Default Value</b> &minus; 0.</p></li>
+</ul>
+<h3>Activating Screen Savers</h3>
+<p>System administrators can also enable screen savers to protect the frontend screen from any unauthorized access. These screensavers can be password protected.</p>
+<h3>Monitoring Unsuccessful Logon Attempts and Recording Logon Attempts</h3>
+<p>In a SAP system, you can use report <b>RSUSR006</b> to check if there are users who have tried any unsuccessful logon attempts in the system. This report contains detail about the number of incorrect login attempts by a user and the user locks and you can schedule this report as per your requirement.</p>
+<p>Go to <b>ABAP Editor SE38</b> and enter the report name and then click on <b>EXECUTE</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/execute.jpg" alt="Execute" />
+<p>In this report, you have different details like Username, Type, Created On, Creator, Password, Lock and Incorrect Login Details.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/list_of_users.jpg" alt="List Of Users" />
+<p>In a SAP system, it is also possible that you use Security Audit Log (transactions SM18, SM19 and SM20) to record all the successful and unsuccessful logon attempts. You can analyze the security audit logs using SM20 transaction, but security audit should be activated in the system to monitor security audit logs.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/security_audit_log.jpg" alt="Security Audit Log" />
+<h2>Logging off Idle Users</h2>
+<p>When a user is already logged into a SAP system and session is inactive for a specific period, you can also set them to logoff to avoid any unauthorized access.</p>
+<p>To enable this setting, you need to specify this value in the profile parameter: <b>rdisp/gui_auto_logout</b>.</p>
+<ul class="list">
+<li><p><b>Parameter Description</b> &minus; You can define that inactive SAP GUI users are automatically logged off from a SAP system after a predefined period. The parameter configures this time. Automatic logoff in the SAP system is deactivated by default (value 0), that is, the users are not logged off even if they do not execute any actions for a longer period.</p></li>
+<li><p><b>Values allowed</b> &minus; n [unit], where n &gt;= 0 and Unit = S | M | H | D</p></li>
+</ul>
+<p>To see the current value of parameter, run T-Code: 
+<b>RZ11</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/t_code_rz11.jpg" alt="T Code RZ11" />
+<p></p>
+<img src="https://www.tutorialspoint.com/sap_security/images/current_value.jpg" alt="CUrrent Value" />
+<p>The following table shows you the list of key parameters, their default and permitted value in a SAP system &minus;</p> 
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Parameter</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Permitted Value</th>
+</tr>
+<tr>
+<td>Login/fails_to_session_end</td>
+<td>Number of invalid login attempts until session end</td>
+<td>3</td>
+<td>1-99</td>
+</tr>
+<tr>
+<td>Login/fails_to_user_lock</td>
+<td>Number of invalid login attempts until user lock</td>
+<td>12</td>
+<td>1-99</td>
+</tr>
+<tr>
+<td>Login/failed_user_auto_unlock</td>
+<td>When sets t 1: Locks apply on the day that they are set.They are removed the next day when the user logs on</td>
+<td>1</td>
+<td>0 or 1</td>
+</tr>
+<tr>
+<td>rdisp/gui_auto_output</td>
+<td>Maximum idle time for a user in number of seconds</td>
+<td>0(no limit)</td>
+<td>unrestricted</td>
+</tr>
+</table>
+<h1>SAP Security - System Authorization Concept</h1>
+<p>The SAP System Authorization Concept deals with protecting the SAP system from running transactions and programs from unauthorized access. You shouldn’t allow users to execute transactions and programs in SAP system until they have defined authorization for this activity.</p> 
+<p>To make your system more secure and to implement strong authorization, you need to review your authorization plan to make sure that it meets the security requirement of the company and there are no security violations.</p> 
+<h2>User Types</h2>
+<p>In Prior releases of the SAP System, the user types were only divided in two categories – Dialog users and Non-Dialog users and only non-dialog users were recommended for communication between two systems. With SAP 4.6C, user types have been divided into the following categories &minus;</p>
+<ul class="list">
+<li><p><b>Dialog User</b> &minus; This user is used for individual interactive system access and most of the client work is performed using a dialog user. Password can be changed by the user itself. In dialog user, multiple dialog logons can be prevented.</p></li>
+<li><p><b>Service User</b> &minus; This is used to perform interactive system access to perform some predetermined task like product catalog display. Multiple logins allowed for this user and only an Administrator can change the password for this user.</p></li>
+<li><p><b>System User</b> &minus; This user id is used to perform most of the system related tasks – Transport Management System, Defining Workflows and ALE. It is not an interactive system dependent user and there are multiple logins allowed for this user.</p></li>
+<li><p><b>Reference User</b> &minus; A Reference user is not used for logging into a SAP system. This user is used to provide additional authorization to internal users. In a SAP system, you can go to the Roles tab and specify a reference user for additional rights for dialog users.</p></li>
+<li><p><b>Communication Users</b> &minus; This user type is used to maintain dialog free login between different systems like RFC connection, CPIC. The Dialog logon using SAP GUI is not possible for Communication users. A User type can change their passwords like common dialog users. RFC functional module can be used to change the password.</p></li>
+</ul>
+<p>The Transaction Code: <b>SU01</b> is used for user creation in a SAP system. In the following screen, you can see different User types in a SAP system under the SU01 Transaction.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/transaction_code_su01.jpg" alt="Transaction Code SU01" />
+<h2>Creating a User</h2>
+<p>To create a user or multiple users with different access rights in a SAP system you should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Use transaction code — <b>SU01</b>.</p>
+<p><b>Step 2</b> &minus; Enter the username you want to create, click on create icon as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/creating_a_user.jpg" alt="Creating a User" />
+<p><b>Step 3</b> &minus; You will be directed to the next tab — the Address tab. Here, you need to enter the details like First Name, Last Name, Phone Number, Email Id, etc.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/address.jpg" alt="Address" />
+<p><b>Step 4</b> &minus; You will further be directed to the next tab — <b>Logon Data</b>. Enter the user type under Logon data tab. We have five different user types.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/dialog.jpg" alt="Dialog" />
+<p><b>Step 5</b> &minus; Type the first Login Password&rarr; New Password &rarr; Repeat Password.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/new_password.jpg" alt="New Password" />
+<p><b>Step 6</b> &minus; You will be directed to the next tab — Roles −Assign the roles to the user.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/next_tab.jpg" alt="Next Tab" />
+<p><b>Step 7</b> &minus; You will further be directed to the next tab — Profiles −Assign the Profiles to users.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/assign_profiles_to_users.jpg" alt="Assign Profile to Users" />
+<p><b>Step 8</b> &minus; Click on Save to receive confirmation.</p>
+<h2>Central User Administration (CUA)</h2>
+<p>The Central User Administration is one of the key concept that allows you to manage all users in a SAP system landscape using a central system. Using this tool, you can manage all user master record centrally in one system. A Central User Administrator allows you to save money and resources in managing similar users in one system landscape.</p>
+<p>The advantages of Central User Administration are &minus;</p>
+<ul class="list">
+<li><p>When you configure CUA in SAP landscape, you can create or delete users using only the central system.</p></li>
+<li><p>All the required roles and authorization exists in a child system in active forms.</p></li>
+<li><p>All the users are monitored and managed centrally that makes the task of administration easy and clearer view to all user management activities in a complex system landscape.</p></li>
+<li><p>The Central User Administrator allows you to save money and resources in managing similar users in one system landscape.</p></li>
+</ul>
+<p>The data exchanges performed using the <b>ALE</b> landscape called as <b>Application Link Enabling</b> that allows to exchange the data in controlled manner. ALE is used by the Central User Administrator for data exchange to child systems in a SAP system landscape.</p>
+<p>In a complex landscape environment, you define one system as the Central system with ALE environment and this is linked to all the child systems using bidirectional data exchange. The child system in landscape are not connected with each other.</p>
+<p>To implement Central User Administration, the following points should be considered &minus;</p>
+<ul class="list">
+<li><p>You need a SAP environment with multiple clients in a single/distributed environment.</p></li>
+<li><p>Administrator to manage users, need authorization on following Transaction Codes &minus;</p>
+<ul class="list">
+<li><p>SU01</p></li>
+<li><p>SCC4</p></li>
+<li><p>SCUA</p></li>
+<li><p>SCUM</p></li>
+<li><p>SM59</p></li>
+<li><p>BD54</p></li>
+<li><p>BD64</p></li>
+</ul>
+</li>
+<li><p>You should create a trusting-trusted relationship between systems.</p></li>
+<li><p>You should create system users in central and child system.</p></li>
+<li><p>Create Logical System and assign logical system to corresponding client.</p></li>
+<li><p>Create model view and BAPI to model view.</p></li>
+<li><p>Create a Central User Administrator and set distribution parameters for fields.</p></li>
+<li><p>Synchronize company addresses</p></li>
+<li><p>Transfer Users</p></li>
+</ul>
+<p>In a centrally managed environment, you need to create an Administrator first. Log on in all logical systems of the future CUA as user SAP* with the default password PASS.</p>
+<p>Run the Transaction <b>SU01</b> and create a user with administrator role assigned to it.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/su01.jpg" alt="SU01" />
+<p>To define a Logical system use Transaction <b>BD54.</b> Click on New Entries to create a new logical system.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/change_view_logical_systems.jpg" alt="Change View Logical Systems" />
+<p>Create a new logical name in capital letters for the Central User Administration for central and all child systems including those from other SAP Systems.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/new_logical_name.jpg" alt="New Logical Name" />
+<p>To easily identify the system, you have the following naming convention that can be used to identify the Central User Administration system &minus;</p>
+<p style="text-align:center"><b>&lt;System ID&gt;CLNT&lt;Client&gt;</b></p>
+<p>Enter some useful description of a logical system. Save your entry by clicking on the Save button. Next is to create the logical system name for the central system in all child systems.</p>
+<p>To assign a Logical system to a client, use Transaction <b>SCC4</b> and switch to Change mode.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/display_view.jpg" alt="Display View" />
+<p>Open the client that you want to assign to logical system by double clicking or by clicking on the <b>Details</b> button. A client can only be assigned to one logical system.</p>  
+<p>In a logical system field in client details, enter a logical system name to which you want to assign this client.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/logical_system.jpg" alt="Logical System" />
+<p>Perform the above steps for all the clients in a SAP environment that you want to include in the Central User Administrator. To save your settings, click on the Save button at the top.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/save.jpg" alt="Save" />
+<h2>Protecting Specific Profiles in SAP</h2>
+<p>To maintain security in a SAP system, you need to maintain specific profiles that contain critical authorization. There are various SAP authorization profiles that you need to protect in a SAP system that has full authorization.</p>
+<p>A few profiles that need to be protected in a SAP system are &minus;</p>
+<ul class="list">
+<li>SAP_ALL</li>
+<li>SAP_NEW</li>
+<li>P_BAS_ALL</li>
+</ul>
+<h3>SAP_ALL Authorization Profile</h3>
+<p>A SAP_ALL authorization profile allows the user to perform all the tasks in a SAP system. This is the composite profile that contains all the authorization in a SAP system. The users with this authorization can perform all the activities in a SAP system, so this profile shouldn’t be assigned to any user in your system.</p> 
+<p>It is recommended that a single user should be maintained with a profile. While the password should be well protected for that user and it should only be used when it is required.</p> 
+<p>Instead of assigning SAP_ALL authorizations, you should assign individual authorizations to the appropriate users. Your system Superuser / System Administration, instead of assigning SAP_ALL authorization to them, you should use individual authorizations that are required.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/sap_authorizations.jpg" alt="Sap Authorizations" />
+<h3>SAP_NEW Authorization</h3>
+<p>A SAP_NEW authorization contains all the authorizations that are required in a new release. When a system upgrade is done, this profile is used so that some tasks are run properly.</p>
+<p>You should remember the following points about this authorization &minus;</p>
+<ul class="list">
+<li><p>When a system upgrade is performed, you need to delete the SAP_NEW profiles for releases prior to this.</p></li>
+<li><p>You need to assign separate authorizations under the SAP_NEW profile to different users in your environment.</p></li>
+<li><p>This profile shouldn’t be kept active for too long.</p></li>
+<li><p>When you have a long list of SAP_NEW profiles in the environment, it shows you need to review your authorization policy in the system.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/sap_security/images/profiles.jpg" alt="Profiles" />
+<p>To see the list of all the SAP_NEW profiles, you should select this profile by double clicking and then &rarr; go to <b>Choose</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/choose.jpg" alt="Choose" />
+<h3>P_BAS_ALL Authorization</h3>
+<p>This authorization allows user to view the content of tables from other applications. This authorization contains <b>P_TABU_DIS</b> authorization. This authorization allows the PA user to see the table content that doesn’t belong to their group.</p>
+<h2>PFCG Role Maintenance</h2>
+<p>PFCG Role Maintenance can be used to manage roles and authorization in a SAP system. In PFCG, the role represents a work that a person performs related to real-life scenarios. PFCG allows you to define set of transactions that can be assigned to a person to perform their daily work.</p>
+<p>When the roles are created in a PFCG Transaction, you can use Transaction <b>SU01</b> to assign these roles to individual users. A user in a SAP system can be assigned multiple number of roles and that are related to his/her daily task in real-life.</p>
+<p>These roles are in connection between user and authorizations in a SAP system. The actual authorizations and profiles are stored in the form of objects in a SAP system.</p>
+<p>Using PFCG Role Maintenance, you can perform the following functions &minus;</p>
+<ul class="list">
+<li>Changing and Assigning Roles</li>
+<li>Creating Roles</li>
+<li>Creating Composite Roles</li>
+<li>Transporting and Distributing Roles</li>
+</ul>
+<p>Let us now discuss these functions in detail.</p>
+<h3>Changing and Assigning Roles</h3>
+<p>Run Transaction: PFCG</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/pfcg.jpg" alt="PFCG" />
+<p>It will take you to role maintenance window. To change the existing role, enter the delivered role name in the field.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/roles_maintenance.jpg" alt="Roles Maintenance" />
+<p>Copy the standard role by clicking on Copy role button. Enter the name from namespace. Click on value selection button and select the role to which you want to copy this.</p> 
+<p>You can also select the delivered roles by SAP starts with <b>SAP_,</b> but then default roles will be overwritten.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/overwritten.jpg" alt="Overwritten" />
+<p>To change the role, click on the <b>Change</b> button in Role Maintenance.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/change_button.jpg" alt="Change Button" />
+<p>Navigate to the Menu tab to change the user menu on the Menu tab page. Go to the Authorization tab to change the Authorization data for that user.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/authorizations.jpg" alt="Authorizations" />
+<p>You can also use the Expert Mode to adjust the authorizations for the menu changes under Authorization. Click on Generate button to generate the profile for this role.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/change_authorizations.jpg" alt="Change Authorizations" />
+<p>To assign the users to this role, go to User tab in Changes Role option. To assign a user to this role, it should exist in the system.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/user.jpg" alt="User" />
+<p>You can also perform a User Comparison if required. Click on User Comparison option. You can also click on the Information button to know more about Single and Composite roles and User Comparison option to compare the master records.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/user_comparison.jpg" alt="User Comparison" />
+<h2>Creating Roles in PFCG</h2>
+<p>You can create both single roles and composite roles in PFCG. Enter the role name and click on Create Single or Composite Roles as shown in the screenshot below.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/create_single_role.jpg" alt="Create Single Role" />
+<p>You can select from Customer namespace like Y_ or Z_. SAP delivered roles start with SAP_ and you can’t take the name from SAP delivered roles.</p>  
+<p>Once you click on Create role button, you should add Transactions, Reports and Web Addresses under the MENU tab in role definition.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/menu_tab.jpg" alt="MENU tab" />
+<p>Navigate to Authorization tab to generate the Profile, click on Change Authorization data option.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/authorization_data_option.jpg" alt="Authorization Data Option" />
+<p>As per your activity selection, you are prompted to enter the organizational levels. When you enter a particular value in the dialog box, die authorization fields of the role are maintained automatically.</p>
+<p>You can adapt the reference for the roles. Once a role definition is done, you need to generate the role. Click on Generate (Shift+F5).</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/shift_f5.jpg" alt="Shift F5" />
+<p>In this structure, when you see red traffic lights, it shows the organizational levels with no values. You can enter and change organizational levels with Organization levels next to Maintained tab.</p>
+<p>Enter the Profile name and click on the tick option to complete the Generate step.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/tick_option.jpg" alt="Tick Option" />
+<p>Click on <b>Save</b> to save the profile. You can directly assign this role to users by going to the User tabs. In a similar way, you can create Composite roles using the PFCG Role Maintenance Option.</p>
+<h2>Transporting and Distributing Roles</h2>
+<p>Run the Transaction – PFCG and enter the role name that you want to transport and click on Transport Role.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/utilities.jpg" alt="Utilities" />
+<p>You will reach to role transport option. You have multiple options under the Transport Roles &minus;</p>
+<ul class="list">
+<li>Transport single roles for composite roles.</li>
+<li>Transport generated profiles for roles.</li>
+<li>Personalization Data.</li>
+</ul>
+<img src="https://www.tutorialspoint.com/sap_security/images/role_of_transport.jpg" alt="Role of Transport" />
+<p>In the next dialog box, you should mention user assignment and the personalization data should also be transported. If the user assignments are also transported, they will replace the entire user assignment of roles in the target system.</p>
+<p>To lock a system so that user assignments of roles cannot be imported, enter it in the Customizing table <b>PRGN_CUST</b> using transaction <b>SM30</b> and select the value field <b>USER_REL_IMPORT number</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/prompt.jpg" alt="Prompt" />
+<p>This role is entered in customizing request. You can view this using Transaction <b>SE10</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/transaction_se10.jpg" alt="Transaction SE10" />
+<p>In Customizing request, authorization profiles are transported along with the roles.</p>
+<h2>Authorization Info System Transaction – SUIM</h2>
+<p>In Authorization Management, SUIM is a key tool using which you can find the user profiles in a SAP system and can also assign those profiles to that User ID. SUIM provides an initial screen that provides options for Searching Users, Roles, Profiles, Authorizations, Transactions, and Comparison.</p>
+<p>To open User Information System, Run Transaction: <b>SUIM</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/user_information_system.jpg" alt="User Information System" />
+<p>In a User Information System, you have different nodes that can be used to perform different functions in a SAP system. Like in a User node, you can perform a search on users based on selection criteria. You can get the locked list of users, users having access to a particular set of transactions, etc.</p>
+<p>When you expand each tab, you have option to generate different reports based on different selection criteria. Like when you expand user tab, you have the following options &minus;</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/structure.jpg" alt="Structure" />
+<p>When you click on users by complex selection criteria, you can apply multiple selection conditions simultaneously. The following screenshot shows you different selection criteria’s.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/selection_criterias.jpg" alt="Selection Criterias" />
+<h3>Role Node</h3>
+<p>In a similar way, you can access different nodes like Roles, Profiles, Authorizations and various other options under this user information system.</p>
+<p>You can also use SUIM tool for searching roles and profiles. You can assign a list of transactions to a particular set of user ID’s, by performing a search by transaction and assignment in SUIM and assign those roles to that user ID.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/user_information.jpg" alt="User Information" />
+<p>Using the User Information system, you can perform various searches in a SAP system. You can enter different selection criteria and pull the reports based on Users, Profiles, roles, Transactions and various other criteria.</p>
+<p><b>RSUSR002</b> &minus; Users by Complex Selection Criteria.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/complex_selection_criteria.jpg" alt="Complex Selection Criteria" />
+<h1>SAP Security - Unix Platform</h1>
+<p>You need to take various security measures while using certain Unix Properties, Files or Services, Protecting Password Files and Deactivating BSD Remote Services for <b>rlogin</b> and <b>remsh</b>.</p> 
+<h3>Password Protection</h3> 
+<p>In a Unix platform, an attacker can use dictionary attack program to discover password information stored in the Unix OS. You can store the passwords in a shadow password file and only a root user can have access to this file to improve the security in a system.</p> 
+<h3>Deactivating Remote Services</h3> 
+<p>BSD Remote services allows remote access to Unix systems. When a remote connection is initiated <b>/etc/host.equiv</b> and <b>$HOME/.rhosts</b> are used and in case when these files contain information about the hostname and IP address of connection source or any wildcard characters, there is no need to enter the password while logging in.</p> 
+<p>The remote services rlogin and remsh are security threat in this scenario and you need to deactivate these services. You can deactivate these services by going to <b>inetd.conf</b> file in the Unix system.</p> 
+<img src="https://www.tutorialspoint.com/sap_security/images/unix_system.jpg" alt="Unix System" />
+<p>In a Unix system, rlogin is a remote shell client (like SSH), which is designed to be fast and small. It is not encrypted, which may have some small drawbacks in high security environments, but it can operate at very high speeds. Both the server and client do not use a lot of memory.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/ssh.jpg" alt="SSH" />
+<h3>Securing Network File System in UNIX</h3>
+<p>In a UNIX platform, a Network File System is used to access transport and work directories over the network from a SAP system. To access work directories, the authentication process involves network addresses. It is possible that unauthorized access can be gained by attackers over the Network File System using IP spoofing.</p>
+<p>To make the system secure, you shouldn’t distribute home directory over the Network File System and write authorization to these directories should be carefully assigned.</p>
+<h3>SAP System Directory Access for SAP System in UNIX</h3>
+<p>You should set the following access rights for SAP System Directories in UNIX &minus;</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<th style="text-align:center">SAP Directory</th>
+<th style="text-align:center">Octal form Access Privilege</th>
+<th style="text-align:center">Owner</th>
+<th style="text-align:center">Group</th>
+</tr>
+<tr>
+<td>/sapmnt/&lt;SID&gt;/exe</td>
+<td>775</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/sapmnt/&lt;SID&gt;/exe/saposcol</td>
+<td>4755</td>
+<td>root</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/sapmnt/&lt;SID&gt;/global</td>
+<td>700</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/sapmnt/&lt;SID&gt;/profile</td>
+<td>755</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/&lt;SID&gt;</td>
+<td>751</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/&lt;SID&gt;/&lt;Instance ID&gt;</td>
+<td>755</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/&lt;SID&gt;/&lt;Instance ID&gt;/*</td>
+<td>750</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/&lt;SID&gt;/&lt;Instance ID&gt;/sec</td>
+<td>700</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/&lt;SID&gt;/SYS</td>
+<td>755</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/&lt;SID&gt;/SYS/*</td>
+<td>755</td>
+<td>&lt;sid>adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/trans</td>
+<td>775</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/trans/*</td>
+<td>770</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>/usr/sap/trans/.sapconf</td>
+<td>775</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>&lt;home directory of &lt;sid&gt;adm&gt;</td>
+<td>700</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+<tr>
+<td>&lt;home directory of &lt;sid&gt;adm&gt;/*</td>
+<td>700</td>
+<td>&lt;sid&gt;adm</td>
+<td>sapsys</td>
+</tr>
+</table>
+<h1>SAP Security - Windows Platform</h1>
+<p>You need to create different users and groups in the Windows Platform to run your SAP system securely. To ease the user management task, it is suggested to add all WIN NT users to user group with correct access rights at OS level. In the Window Operating System, there are different group levels &minus;</p>
+<ul class="list">
+<li><p>Global Groups</p></li>
+<li><p>Local Groups</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/sap_security/images/new_global_group.jpg" alt="New Global Group" />
+<h3>Global Groups</h3>
+<p>Global Groups in WIN are available at domain level and can be used to assign users from multiple servers. Global groups are available to all servers in one domain.</p>
+<p>You can select the name of Global Groups as per your convenience. However, it is recommended to use naming conventions as per the <b>SAP R/3 System Installation</b>, which is the standard Global Group for SAP System Administrators and it is defined as <b>SAP_&lt;SID&gt;_GlobalAdmin</b>.</p>
+<p>In the Window Platform, there are various commonly created Global Groups that can be used to run a SAP System &minus;</p>
+<ul class="list">
+<li><p><b>SAPadmin</b> &minus; This group contains a list of all SAP System Administrators.</p></li>
+<li><p><b>SAPusers</b> &minus; This group contains a list of all SAP Application Users.</p></li>
+<li><p><b>SAPservices</b> &minus; This group contains a list of all SAP System Programs.</p></li>
+<li><p><b>Domain Admin</b> &minus; This group contains a list of all administrators from all domains.</p></li>
+</ul>
+<h3>Local Groups</h3>
+<p>Local groups in Windows Platform are limited to one server in a domain. During the installation, rights are assigned to individual users and not groups. However, it is recommended that you assign access rights to local groups instead of single users.</p> 
+<p>Local groups are used to increase the security of the Windows environment in shared domains. You can further assign global users and global groups to a local group. You can create a local group with any name, but it is recommended that you use the local group name as: <b>SAP_&lt;SID&gt;_LocalAdmin</b>.</p>
+<p>You can define various relations between users, local groups and global groups &minus;</p> 
+<ul class="list">
+<li><p>A single user can be a part of a global group and a local group as well.</p></li> 
+<li><p>You can also include a global group to a local group.</p></li>
+</ul>
+<h3>Standard Users in a Windows Platform</h3>
+<p>When you run SAP system on a Windows platform, there are standard users that should be carefully managed. The following are some of the standard users in Windows &minus;</p>
+<p><b>Window NT User</b> &minus;</p>
+<ul class="list">
+<li><p><b>Administrator</b> &minus; Administrator accounts with access to all the resources.</p></li>
+<li><p><b>Guest</b> &minus; Only guest access to all the resources in system.</p></li>
+</ul>
+<p><b>SAP System User</b> &minus;</p>
+<ul class="list">
+<li><p><b>&lt;SID&gt;ADM SAP</b> &minus; System Administrator with full access on all SAP resources.</p></li>
+<li><p><b>SAPService&lt;SID&gt;</b> &minus; Special user responsible to run SAP services.</p></li>
+</ul>
+<p><b>Database Users</b> &minus;</p>
+<ul class="list">
+<li><p><b>&lt;DBService&gt;</b> &minus; To run database specific services in Window platform.</p></li>
+<li><p><b>&lt;DBuser&gt;</b> &minus; Database user to perform general DB operations.</p></li>
+</ul>
+<p>Also, note that the Administrator and Guest users are created during the installation process and are used to perform Window specific tasks. All these users should be protected in a Window platform.</p>
+<h1>SAP Security - Databases</h1>
+<p>It is critical and essential to protect your database users in a SAP system. A database can be an Oracle database, SQL Server or a MYSQL Database. You need to protect the standard users from these databases. Password should be protected for standard users and they should be changed regularly.</p>
+<h2>Oracle Standard Users</h2>
+<p>The following table shows the list of standard users in the Windows environment. Password should be maintained for all these users.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">User Name</th>
+<th style="text-align:center">Type</th>
+<th style="text-align:center">Password Change Method</th>
+</tr>
+<tr>
+<td>&lt;SID&gt;ADM</td>
+<td>Operating System User</td>
+<td>OPS$ mechanism</td>
+</tr>
+<tr>
+<td>SAPServic&lt;SID&gt;</td>
+<td>Operating System User</td>
+<td>OPS$ mechanism</td>
+</tr>
+<tr>
+<td>SYS (internal)</td>
+<td>Operating System User</td>
+<td>SAPDBA</td>
+</tr>
+<tr>
+<td>SYSTEM</td>
+<td>Operating System User</td>
+<td>SAPDBA</td>
+</tr>
+<tr>
+<td>SAPR3</td>
+<td>Operating System User</td>
+<td>SAPDBA</td>
+</tr>
+</table>
+<h3>How to Create an OPS$ user for &lt;SID&gt;ADM?</h3>
+<p>To create an OPS$ user, you need to login with the &lt;SID&gt;ADM. You should first stop SAP System if it is running and then execute the command given below.</p>
+<p><b>Create user OPS$&lt;adm_user&gt; default tablespace psapuserid temporary tablespace psaptemp identified externally;</b></p>
+<p>Here the &lt;adm_user&gt; is &minus;</p>
+<ul class="list">
+<li><p>&lt;SID&gt;ADM for older Oracle releases </p></li>
+<li><p>&lt;domain_name&gt;\&lt;SID&gt;ADM latest releases </p></li>
+</ul>
+<p>Then you should follow the steps given below &minus;</p>
+<ul class="list">
+<li><p>Grant connect, resource to OPS$ &lt;adm_user&gtl;</p></li>
+<li><p>Connect /</p></li>
+<li><p>Create table SAPUSER ( USERID Varchar(20), PASSWD VARCHAR2(20)); </p></li>
+<li><p>Insert into SAPUSER values (‘SAPR3’,’&lt;password&gt;); </p></li>
+<li><p>Connect internal</p></li>
+<li><p>Alter user SAPR3 identified by &lt;password&gt;; </p></li>
+</ul>
+<p>In a similar way, you can create <b>OPS$</b> for <b>SAPService&lt;SID&gt;</b>. In the following command, you should use SAP_service_user instead of adm_user.</p>
+<p><b>Create user OPS$&lt;SAP_service_user&gt; default tablespace psapuserid temporary tablespace psaptemp identified externally;</b></p>
+<p>Here the &lt;SAP_service_user&gt; is &minus;</p>
+<ul class="list">
+<li><p>SAPService&lt;SID&gt; for older Oracle releases </p></li>
+<li><p>&lt;domain_name&gt;\SAPservice&lt;SID&gt; for latest releases </p></li>
+</ul>
+<h2>Password Management for DB Users</h2>
+<p>It is necessary to manage passwords for standard users in your database. There are various utilities that you can use for a password change.</p>
+<h3>How to Change Password for a DBA User Using SAPDBA?</h3>
+<p>Password can be changed for a DBA user using the command line or GUI. To change the password using the command line, you should use the following command &minus;</p>
+<p><b>Sapdba [-u &lt;user1&gt;/&lt;user1_password&gt;] –user2 &lt;user2_password&gt;</b></p>
+<p>In above command, <b>user1</b> is the database user that SAPDBA uses to logon into the database.</p>
+<ul class="list">
+<li><p>&lt;user1_password&gt; is the password for user1’s password.</p></li>
+<li><p>&lt;user2&gt; shows the database user for which the password should be changed.</p></li>
+<li><p>&lt;user2_password&gt; is the new password for the same user.</p></li>
+</ul>
+<p>In case you want to login using username “SYSTEM” with its default password, you can omit <b>–u</b> from the command.</p>
+<p><b>Sapdba –u system/&lt;system_password&gt;] –sapr3 &lt;sapr3_password&gt;</b></p>
+<h3>How to Change Password for SAPR3 Using SVRMGRL? </h3>
+<p>The SVRMGRL is an old utility that was shipped with prior releases of Oracle and has been used to perform database functions mentioned below. In the latest releases, the Server Manager commands are now available in <b>SQL*Plus</b>.</p>
+<ul class="list">
+<li>Creating Database</li>
+<li>Start and Shut down Database</li>
+<li>Recovery of Database</li>
+<li>Password Management</li>
+</ul>
+<p>To change the password, you should follow the steps given below &minus;</p>
+<ul class="list">
+<li>Start SVRMGRL.</li>
+<li>Connect to the database using the connect internal command.</li>
+<li>SVRMGR&gt; connect internal.</li>
+<li>Connected.</li>
+</ul>
+<p>The next step is to update the SAPUSER table by entering the command given below &minus;</p>
+<p><b>Update OPS$ &lt;SID&gt;ADM.SAPUSER set PASSWD = ’&lt;new_password&gt;’ where USERID = ’SAPR3’;</b></p>
+<p>You should update the password for <b>SAPR3</b> in the database using the command line.</p>
+<p>Alter user sapr3 is identified by &lt;new_password&gt;</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/sql_command_prompt.jpg" alt="SQL Command Prompt" />
+<h1>User Authentication and Single SignOn</h1>
+<p><b>Single Sign-On (SSO)</b> is one of the key concept that allows you to login to one system and you can access multiple systems in the backend. SSO allows the user to access software resources across SAP systems in the back-end.</p>  
+<p>The <b>SSO with NetWeaver</b> platform provides user authentication and helps system administrators to manage the user loads in a complex SAP System Landscape. SSO configuration simplifies the process of how a user logs into the SAP systems and applications in landscape by enhancing the security measures and reduces the password management tasks for multiple systems.</p>  
+<p>SSO helps an organization to reduce their operation cost by decreasing the number of calls to the Service Desk related to password issues and hence increase the productivity of the business users. SAP NetWeaver integration mechanism allows you to easily integrate your SAP NetWeaver system in the SSO concept and provides easy access to backend systems in SAP System Landscape Environment.</p>
+<h2>SAP Single Sign-On Concept</h2>
+<p>The Single Sign-On can be configured with mySAP Workplace which allows a user to login to mySAP Workplace daily and they can access the applications without repeatedly entering their username and password.</p>
+<p>You can configure SSO with mySAP Workplace using the following authentication methods &minus;</p>
+<ul class="list">
+<li>Username and password</li>
+<li>SAP Logon Tickets</li>
+<li>X.509 client Certificates</li>
+</ul>
+<h3>Integration in Single Sign-On</h3>
+<p>The SSO with NetWeaver platform provides user authentication and helps system administrators to manage the user loads in a complex SAP system landscape. SSO configuration simplifies the process how user login to SAP systems and applications in landscape by enhancing the security measures and reduces the password management tasks for multiple systems.</p>  
+<p>Using SAP NetWeaver allows you to configure different mechanisms that authorized users use to access the NetWeaver System using the SSO method. The login mechanism in system depends on the technology of SAP NetWeaver system and different communication channels used for accessing those systems.</p>
+<h3>Configuring Single Sign-On in a SAP GUI</h3>
+<p>To configure a Single Sign-On, you need to have access to the following T-codes &minus;</p>
+<ul class="list">
+<li>RZ10</li>
+<li>STRUST</li>
+</ul>
+<p>Once you have these T-codes, you should follow the steps given below &minus;</p>
+<p><b>Step 1</b> &minus; Login to any SAP ECC System using the SAP GUI, go to T-code <b>RZ10</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/rz10.jpg" alt="RZ10" />
+<p><b>Step 2</b> &minus; Select the Default profile and Extended Maintenance after that.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/restrictions.jpg" alt="Restrictions" />
+<p><b>Step 3</b> &minus; Click on Change and you will see the list of parameters for the profile.</p>
+<p><b>Step 4</b> &minus; Change the following profile parameters &minus;</p>
+<ul class="list">
+<li>login/create_sso2_ticket = 1</li>
+<li>login/accept_sso2_ticket = 1</li>
+</ul>
+<img src="https://www.tutorialspoint.com/sap_security/images/list_of_parameters.jpg" alt="List of parameters" />
+<p><b>Step 5</b> &minus; Save and Activate the profile. It will generate a new profile.</p>
+<p><b>Step 6</b> &minus; Export the <b>R3SSO</b> certificate from the Trust Manager, go to transaction <b>STRUST</b>.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/trust_manager.jpg" alt="Trust Manager" />
+<p><b>Step 7</b> &minus;  Double-click the text box to the right of Own Certificate. The certificate information is displayed. Note down the values of this certificate as you need to enter the values.</p>
+<p><b>Step 8</b> &minus;  Click on Icon Export Certificate.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/export_certificate.jpg" alt="Export Certificate" />
+<p><b>Step 9</b> &minus; Save the file as &lt;R3_Name&gt;-&lt;Client&gt;.crt.</p>
+<p><b>Example</b> &minus; EBS-300.crt</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/select_file.jpg" alt="Select File" />
+<p><b>Step 10</b> &minus; Click on the tick box to create the file in the parent directory.</p>
+<p><b>Step 11</b> &minus; Import <b>R3 SSO</b> certificate to the Java engine using the administrator tool.</p>
+<p><b>Note</b> &minus; Make sure the Java engine is started.</p>
+<p><b>Step 12</b> &minus; Open the Java Administration tool.</p>
+<p><b>Step 13</b> &minus; Enter the Java Engine Administrator password and click on Connect.</p>
+<p><b>Step 14</b> &minus; Choose Server &rarr; Services Key &rarr; Storage.</p>
+<p><b>Step 15</b> &minus; Click on the Ticket Key Store in the View panel.</p>
+<p><b>Step 16</b> &minus; Click on Load in the Entry group box. Select the .crt file you exported in the previous step.</p>
+<p><b>Step 17</b> &minus; Configure the Security Provider service in the SAP Java engine using the Administrator tool.</p>
+<p><b>Step 18</b> &minus; Choose Server Services Security Provider.</p>
+<p><b>Step 19</b> &minus; Choose ticket in the Component panel and go to the Authentication tab.</p>
+<p><b>Step 20</b> &minus; Modify the options of Evaluate Ticket Login Module and add the following properties to each backend system on which you want to configure SSO.</p>
+<h3>Single Sign-On for Web-Based Access</h3>
+<p>You can configure several options with SSO to access SAP NetWeaver system. You can also access SAP NetWeaver System via a web browser or from some other web client. Using SSO, users can access backend systems and other secured information located in the company network.</p> 
+<p>SSO allows you to use several security authentication methods for integrating web based user access on NetWeaver Application servers. You can also implement various network communication security methods like Cryptography to send the information over network.</p>  
+<p>The Following authentication methods can be configured with SSO to access data over Application servers &minus;</p> 
+<ul class="list">
+<li>Using User ID and Password Authentication</li> 
+<li>Using Logon Tickets</li> 
+<li>Using X.509 Client Certificates</li> 
+<li>Using SAML Browser Artifacts</li> 
+<li>Using SAML 2.0</li> 
+<li>Using Kerberos Authentication</li> 
+</ul>
+<p>While accessing data over the internet, you can also use the security mechanism in the Network and Transport Layer.</p>
+<h1>SAP Security - Logon Tickets</h1>
+<p>You can configure the digitally signed SAP logon tickets to configure with a Single Sign-On to access integrated applications in a SAP environment. You can configure a portal to issue SAP logon tickets to the users and the users need to authenticate this system for initial access. When SAP logon tickets are issued to users they are saved in web browsers and allows the user to login to different systems with use of SSO.</p>
+<p>In an ABAP application server, there are two different types of Logon ticket that can be configured &minus;</p>
+<ul class="list">
+<li><p><b>Logon Tickets</b> &minus; These tickets allow web based access using SSO method.</p></li>
+<li><p><b>Authentication Assertion Tickets</b> &minus; These tickets are used for system to system communication.</p></li>
+</ul>
+<p>To configure SAP logon tickets, the following parameters should be set in the User profile.</p>
+<h2>login/accept_sso2_ticket</h2>
+<p>You can use Single Sign-On (SSO) tickets to allow an SSO between SAP systems and even beyond the non-SAP systems. An SSO ticket can be a logon ticket or an assertion ticket. The logon ticket is transferred as a cookie with the name <b>MYSAPSSO2</b>. The assertion ticket is transferred as an HTTP header variable with the name MYSAPSSO2.</p>
+<p><b>Note</b> &minus; This requires additional configuration steps for issuing and accepting the systems. The SSO component systems should permit logon by an SSO ticket (login/accept_sso2_ticket = 1).</b></p>
+<p>If only the procedure (X.509 client certificate) is used for a Single Sign-On, or if you do not want to use the Single Sign-On for this system, you can deactivate this logon by SSO ticket (login/accept_sso2_ticket = 0).</p>
+<p>To set the parameter, use Transaction <b>RZ11</b></p>
+<p><b>Values allowed</b> &minus; 0 / 1</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/values_allowed.jpg" alt="Values Allowed" />
+<h2>login/create_sso2_ticket</h2>
+<p>You can use the Single Sign-On (SSO) tickets to allow an SSO between SAP systems and even beyond to non-SAP systems. An SSO ticket can be a logon ticket or an assertion ticket. The logon ticket is transferred as a cookie with the name MYSAPSSO2. The assertion ticket is transferred as an HTTP header variable with the name MYSAPSSO2.</p>
+<p><b>Note</b> &minus; This requires additional configuration steps for the issuing and accepting the systems.</p>
+<p>The issuing system should permit the generation of an SSO ticket &minus;</p>
+<ul class="list">
+<li><p>login/create_sso2_ticket = 1 : SSO ticket including certificate</p></li>
+<li><p>login/create_sso2_ticket = 2 : SSO ticket without certificate</p></li>
+<li><p>login/create_sso2_ticket = 3 : Generate only assertion tickets</p></li>
+</ul>
+<p><b>Values allowed</b>&minus; 0 / 1 / 2 / 3</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/metadata_for_parameter_login_data.jpg" alt="Metadata for Parameter Login Data" />
+<h2>login/ticket_expiration_time</h2>
+<p>To make it possible to have a Single Sign-On (SSO) when using mySAP.com Workplace, SSO tickets can be used. When creating an SSO ticket, you can set the validity period. Once this has expired, the SSO ticket cannot be used any more to log on to workplace component systems. The user then needs to log on to the workplace server again to obtain a new SSO ticket.</p>
+<p><b>Values allowed</b> &minus; &lt;Hours&gt;[:&lt;Minutes&gt;]</p>
+<p>If incorrect values are entered, the default value is used (8 hours).</p>
+<p>The correct values will be as shown below &minus;</p>
+<ul class="list">
+<li><p>24 &rarr; 24 hours</p></li>
+<li><p>1:30 &rarr; 1 hours, 30 minutes</p></li>
+<li><p>0:05 &rarr; 5 minutes</p></li>
+</ul>
+<p>The incorrect values will be as follows &minus;</p>
+<ul class="list">
+<li><p>40 (0:40 would be correct)</p></li>
+<li><p>0:60 (1 would be correct)</p></li>
+<li><p>10:000 (10 would be correct)</p></li>
+<li><p>24: (24 would be correct)</p></li>
+<li><p>1:A3</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/sap_security/images/metadata_for_parameter_login_data_expiration_time.jpg" alt="Metadata for Parameter Login Data and Expiration Time" />
+<h2>X.509 Client Certificates</h2>
+<p>Using an SSO method, you can use X.509 client certificates to authenticate the NetWeaver Application Server. The client certificates use very strong cryptography methods to secure user access to the NetWeaver Application server, so your NetWeaver Application Server should be enabled with strong cryptography techniques.</p>
+<p>You should have SSL configured on your SAP NetWeaver application servers as the authentication occurs using the SSL protocol without entering any username and password. To use the SSL protocol, it requires an HTTPS connection to communicate between the Web browser and the NetWeaver ABAP Application Server.</p>
+<h2>Security Assertion Markup Language (SAML2.0)</h2>
+<p>The SAML2.0 can be used as authentication with Single Sign-On SSO and it enables SSO across different domains. SAML 2.0 is developed by an organization name OASIS. It also provides a Single Log-Out option, which means that when a user logs off from all the systems, the service provider in the SAP system notifies the identity providers which in turn logs off all the sessions.</p>
+<p>The following are the advantages of using SAML2.0 authentication &minus;</p>
+<ul class="list">
+<li><p>You can decrease the overhead of maintaining authentication for the system hosting the application to other system.</p></li>
+<li><p>You can also maintain authentication for external service providers without maintaining user identities in systems.</p></li>
+<li><p>Single Logout option in all systems.</p></li>
+<li><p>To map the user accounts automatically.</p></li>
+</ul>
+<h2>Kerberos Authentication</h2>
+<p>You can also user Kerberos Authentication for SAP NetWeaver Application server using access via web clients and web browsers. It uses Simple and Protected GSS API Negotiation mechanism <b>SPNego</b> which also requires a Single Sign-On SSO 2.0 or higher version with additional licenses to use this authentication. The <b>SPNego</b> doesn’t support Transport Layer security, so it is recommended to use SSL protocol to add transport layer security to communicate with NetWeaver Application Server.</p>
+<img src="https://www.tutorialspoint.com/sap_security/images/new_user.jpg" alt="New User" />
+<p>In above screenshot, you can see different authentication methods that can be configured in a user profile for authentication purposes.</p> 
+<p>Each authentication method in SAP has its own advantages and can be used in different scenarios.</p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/sap_security/sap_security_logon_tickets.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/sap_security/sap_security_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/sap_security/sap_security_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:31:43 GMT -->
+</html>

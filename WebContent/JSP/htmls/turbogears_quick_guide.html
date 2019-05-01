@@ -1,0 +1,3049 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:14:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>TurboGears Quick Guide</title>
+<meta name="description" content="TurboGears Quick Guide - Learn TurboGears starting from Overview, Environment, First Program, Dependencies, Serving Templates, HTTP Methods, Genshi Template Language, Includes, JSON Rendering, URL Hierarchy, Toscawidgets Forms, Validation, Flash Messages, Cookies and Sessions, Caching, SQLAlchemy, Creating Models, Crud Operations, DataGrid, Pagination, Admin Access, Authorization and Authentication, Using MongoDB, Scaffolding, Hooks, Writing Extensions, Pluggable Applications, Restful Applications, Deployment." />
+<meta name="keywords" content="TurboGears, Tutorial, Overview, Environment, First Program, Dependencies, Serving Templates, HTTP Methods, Genshi Template Language, Includes, JSON Rendering, URL Hierarchy, Toscawidgets Forms, Validation, Flash Messages, Cookies and Sessions, Caching, SQLAlchemy, Creating Models, Crud Operations, DataGrid, Pagination, Admin Access, Authorization and Authentication, Using MongoDB, Scaffolding, Hooks, Writing Extensions, Pluggable Applications, Restful Applications, Deployment." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #00736f url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #00736f !important;}
+.submenu-item{ border-bottom: 2px solid #00736f !important; border-top: 2px solid #00736f !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/turbogears/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/turbogears/images/turbogears-mini-logo.jpg" alt="TurboGears Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">TurboGears Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/turbogears/index.htm">TurboGears - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_overview.htm">TurboGears - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_environment.htm">TurboGears - Environment</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_first_program.htm">TurboGears - First Program</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_dependencies.htm">TurboGears - Dependencies</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_serving_templates.htm">TurboGears - Serving Templates</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_http_methods.htm">TurboGears - HTTP Methods</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_genshi_template_language.htm">Genshi Template Language</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_includes.htm">TurboGears - Includes</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_json_rendering.htm">TurboGears - JSON Rendering</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_url_hierarchy.htm">TurboGears - URL Hierarchy</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_toscawidgets_forms.htm">TurboGears - Toscawidgets Forms</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_validation.htm">TurboGears - Validation</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_flash_messages.htm">TurboGears - Flash Messages</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_cookies_and_sessions.htm">TurboGears - Cookies and Sessions</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_caching.htm">TurboGears - Caching</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_sqlalchemy.htm">TurboGears - Sqlalchemy</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_creating_models.htm">TurboGears - Creating Models</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_crud_operations.htm">TurboGears - Crud Operations</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_datagrid.htm">TurboGears - DataGrid</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_pagination.htm">TurboGears - Pagination</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_admin_access.htm">TurboGears - Admin Access</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_authorization_and_authentication.htm">Authorization &amp; Authentication</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_using_mongodb.htm">TurboGears - Using MongoDB</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_scaffolding.htm">TurboGears - Scaffolding</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_hooks.htm">TurboGears - Hooks</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_writing_extensions.htm">TurboGears - Writing Extensions</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_pluggable_applications.htm">TurboGears - Pluggable Applications</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_restful_applications.htm">TurboGears - Restful Applications</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_deployment.htm">TurboGears - Deployment</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">TurboGears Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm">TurboGears - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_useful_resources.htm">TurboGears - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/turbogears/turbogears_discussion.htm">TurboGears - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Turbogears - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/turbogears/turbogears_deployment.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/turbogears/turbogears_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>TurboGears - Overview</h1>
+<h2>What is Web Framework?</h2>
+<p>Web Application Framework or simply Web Framework represents a collection of libraries and modules, which enables a web application developer to write applications, without having to bother about low level details such as protocols, thread management, etc.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/web_frameworks.jpg" alt="Web Frameworks" />
+<h2>What is TurboGears?</h2>
+<p>TurboGears is a web application framework written in Python. Originally created by Kevin Dangoor in 2005, its latest version TurboGears (ver 2.3.7) is managed by a group of developers led by Mark Ramm and Florent Aide.</p>
+<p>TurboGears follows the Model-View-Controller paradigm as do most modern web frameworks like Rails, Django, Struts, etc.</p>
+<h2>Model View Controller</h2>
+<p>MVC is a software design pattern for developing web applications. A Model View Controller pattern is made up of three parts &minus;</p>
+<ul class="list">
+<li><p><b>Model</b> &minus; The lowest level of the pattern is responsible for maintaining data.</p></li>
+<li><p><b>View</b> &minus; This is responsible for displaying all or a portion of data to the user.</p></li>
+<li><p><b>Controller</b> &minus; Software Code that controls the interactions between the Model and View.</p></li>
+</ul>
+<p>MVC is popular as it isolates the application logic from the user interface layer and supports separation of concerns. Here, the Controller receives all requests for the application and then works with the Model to prepare any data needed by the View. The View then uses the data prepared by the Controller to generate a final presentable response. The MVC abstraction can be graphically represented as follows &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/mvc.jpg" alt="MVC" />
+<h3>The Model</h3>
+<p>The Model is responsible for managing the data of the application. It responds to the request from the view and it also responds to instructions from the controller to update itself.</p>
+<h3>The View</h3>
+<p>A presentation of data in a particular format, triggered by a controller's decision to present the data. They are script based templating systems very easy to integrate with AJAX technology.</p>
+<h3>The Controller</h3>
+<p>The controller is responsible for responding to the user input and perform interactions on the data model objects. The Controller receives the input, it validates the input and then performs the business operation that modifies the state of the data model.</p>
+<p>TurboGears is built on top of a number of libraries and tools. These tools have changed between different versions of TurboGears. The components of current version (ver 2.3.7) are listed below.</p>
+<h2>SQLAlchemy</h2>
+<p>It is an open source SQL kit that provides Object relation mapping (ORM) for Python code.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/sqlalchemy.jpg" alt="SQLAlchemy" />
+<h3>Genshi</h3>
+<p>This templating engine is used to construct the front-end of TG applications. A web templating system combines a template with a certain data source to render dynamic web pages.</p>
+<h3>ToscaWidgets</h3>
+<p>It is a widget library for generating HTML forms with server side controls. Tosca also acts as a middleware to connect with JavaScript widgets and toolkits.</p>
+<h3>Gearbox</h3>
+<p>It provides a set of commands to manage projects and server TurboGears applications. TurboGears applications can be deployed on any WSGI compliant web server.</p>
+<p>The Web Server Gateway Interface (WSGI) has been adopted as a standard for Python web application development. WSGI is a specification for universal interface between web server and web applications. The wsgiref package is a reference implementation of WSGI. It is used to add WSGI support to web TurboGears web framework. The simple_server module in this package implements a simple HTTP server that serves WSGI applications. We shall be using it to test applications developed during this tutorial.</p>
+<h1>TurboGears - Environment</h1>
+<h2>Prerequisite</h2>
+<p>Python 2.6 or higher. Earlier versions of TurboGears were not compliant with Python 3.X. Latest version claims to work well on Python 3.X. However, official documentation of TurboGears is still based on Python 2.7 environment.</p>
+<p>The following command <b>installs virtualenv</b> &minus;</p>
+<pre class="result notranslate">
+pip install virtualenv
+</pre>
+<p>This command needs <b>administrator</b> privileges. Add <b>sudo before pip</b> on Linux/Mac OS. If you are on Windows, log in as Administrator. On Ubuntu virtualenv may be installed using its package manager.</p>
+<pre class="result notranslate">
+Sudo apt-get install virtualenv
+</pre>
+<p>Once installed, the new virtual environment is created in a folder.</p>
+<pre class="result notranslate">
+mkdir newproj
+cd newproj
+virtualenv venv
+</pre>
+<p>To activate corresponding environment, on <b>Linux/OS X</b></p>
+<pre class="result notranslate">
+venv/bin/activate
+</pre>
+<p>on <b>Windows</b></p>
+<pre class="result notranslate">
+venv\scripts\activate
+</pre>
+<p>We are now ready to <b>install TurboGears</b> in this environment. A minimal installation of TurboGears is done by following command &minus;</p>
+<pre class="result notranslate">
+pip install TurboGears2
+</pre>
+<p>The above command can be run directly without virtual environment for system wide installation.</p>
+<p>To install TurboGears along with development tools, use following command &minus;</p>
+<pre class="result notranslate">
+pip install tg.devtools
+</pre>
+<h1>TurboGears - First Program</h1>
+<p>TurboGears has a minimal mode that makes it possible to create single file applications quickly. Simple examples and services can be built quickly with minimal set of dependencies.</p>
+<p>Application class in a TG application is inherited from <b>TGController</b> class. Methods in this class are available for access by <b>@expose</b> decorator from <b>tg</b> module. In our first application, <b>index()</b> method is mapped as root of our application. The TGController class also needs to be imported from <b>tg</b> module.</p>
+<pre class="prettyprint notranslate">
+from tg import expose, TGController
+class MyController(TGController):
+   @expose()
+   def index(self):
+      return 'Hello World turbogears'
+</pre>
+<p>Next, set the application’s configuration and declare application object. <b>AppConfig</b> class constructor here takes two parameters – minimal attribute set to true and the controller class.</p>
+<pre class="prettyprint notranslate">
+config = AppConfig(minimal = True, root_controller = RootController())
+application = config.make_wsgi_app()
+</pre>
+<p>The <b>make_wsgi_app()</b> function here constructs application object.</p>
+<p>In order to serve this application, we now need to start the HTTP server. As mentioned earlier, we shall use <b>simple_server</b> module in <b>wsgiref</b> package to set up and start it. This module has <b>make_server()</b> method which requires port number and application object as arguments.</p>
+<pre class="prettyprint notranslate">
+from wsgiref.simple_server import make_server
+server = make_server('', 8080, application)
+server.serve_forever()
+</pre>
+<p>It means that our application is going to be served at port number 8080 of localhost.</p>
+<p>The following is the complete code of our first TurboGears application &minus;</p>
+<p><b>app.py</b></p>
+<pre class="prettyprint notranslate">
+from wsgiref.simple_server import make_server
+from tg import expose, TGController, AppConfig
+
+class MyController(TGController):
+
+   @expose()
+   def index(self):
+      return 'Hello World TurboGears'
+		 
+config = AppConfig(minimal = True, root_controller = MyController())
+application = config.make_wsgi_app()
+
+print "Serving on port 8080..."
+server = make_server('', 8080, application)
+server.serve_forever()
+</pre>
+<p>Run the above script from Python shell.</p>
+<pre class="result notranslate">
+Python app.py
+</pre>
+<p>Enter <b>http://localhost:8080</b> in browser’s address bar to view ‘Hello World TurboGears’ message.</p>
+<p>The <b>tg.devtools</b> of TurboGears contains Gearbox. It is a set of commands, which are useful for management of more complex TG projects. Full stack projects can be quickly created by the following Gearbox command &minus;</p>
+<pre class="result notranslate">
+gearbox quickstart HelloWorld
+</pre>
+<p>This will create a project called <b>HelloWorld</b>.</p>
+<h1>TurboGears - Dependencies</h1>
+<p>A TurboGears project contains the following directories &minus;</p>
+<ul class="list">
+<li><p><b>Config</b> &minus; Where project setup and configuration relies</p></li>
+<li><p><b>Controllers</b> &minus; All the project controllers, the logic of web application</p></li>
+<li><p><b>i018n</b> &minus; Translation files for the languages supported</p></li>
+<li><p><b>Lib</b> &minus; Utility python functions and classes</p></li>
+<li><p><b>Model</b> &minus; Database models</p></li>
+<li><p><b>Public Static Files</b> &minus; CSS, JavaScript and images</p></li>
+<li><p><b>Templates</b> &minus; Templates exposed by our controllers.</p></li>
+<li><p><b>Tests</b> &minus; The set of Tests done.</p></li>
+<li><p><b>Websetup</b> &minus; Functions to execute at application setup.</p></li>
+</ul>
+<h2>How to Install a project</h2>
+<p>This project now needs to be installed. A <b>setup.py</b> is already provided in project’s base directory. Project dependencies get installed when this script is executed.</p>
+<pre class="result notranslate">
+Python setup.py develop
+</pre>
+<p>By default, following dependencies are installed at the time of project set up &minus;</p>
+<ul class="list">
+<li>Beaker</li>
+<li>Genshi</li>
+<li>zope.sqlalchemy</li>
+<li>sqlalchemy</li>
+<li>alembic</li>
+<li>repoze.who</li>
+<li>tw2.forms</li>
+<li>tgext.admin &ge; 0.6.1</li>
+<li>WebHelpers2</li>
+<li>babel</li>
+</ul>
+<p>After installation, start serving the project on development server by issuing following command in shell &minus;</p>
+<pre class="result notranslate">
+Gearbox serve –reload –debug
+</pre>
+<p>Follow the above mentioned command to serve a pre-built example project. Open <b>http://localhost:8080</b> in browser. This readymade sample application gives a brief introduction about TurboGears framework itself.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/project_window.jpg" alt="Project Window" />
+<p>In this Hello project, the default controller is created in controllers directory as <b>Hello/hello/controllers.root.py</b>. Let us <b>modify root.py</b> with following code &minus; </p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, flash
+
+class RootController(BaseController):
+   movie = MovieController()
+   @expose()
+   def index(self):
+      return "&lt;h1&gt;Hello World&lt;/h1&gt;"
+		
+   @expose()
+   def _default(self, *args, **kw):
+      return "This page is not ready"
+</pre>
+<p>Once a basic working application is ready, more views can be added in the controller class. In the <b>Mycontroller</b> class above, a new method <b>sayHello()</b> is added. The <b>@expose()</b> decorator attaches <b>/sayHello</b> URL to it. This function is designed to accept a name as a parameter from the URL.</p>
+<p>After starting server through ‘gearbox serve’ command, <b>http://localhost:8080</b>. Hello World message will be displayed in the browser, even if the following URLs are entered &minus;</p>
+<p><b>http://localhost:8080/</b></p>
+<p><b>http://localhost:8080/index</b></p>
+<p>All these URLs are mapped to <b>RootController.index()</b> method. This class also has <b>_default()</b> method that will be invoked, whenever a URL is not mapped to any specific function. Response to URL is mapped to a function by @expose() decorator.</p>
+<p>It is possible to send a parameter to an exposed function from the URL. The following function reads the name parameter from URL.</p>
+<pre class="prettyprint notranslate">
+@expose()
+def sayHello(self, name):
+   return '&lt;h3&gt;Hello %s&lt;/h3&gt;' %name
+</pre>
+<p>The following output will be seen in the browser as response to the URL &minus; <b>http://localhost:8080/?name=MVL</b></p>
+<pre class="result notranslate">
+Hello MVL
+</pre>
+<p>TurboGears automatically maps URL parameters to function arguments. Our RootController class is inherited from BaseController. This is defined as <b>base.py</b> in the <b>lib folder</b> of application.</p>
+<p>Its code is as follow &minus;</p>
+<pre class="prettyprint notranslate">
+from tg import TGController, tmpl_context
+from tg import request
+
+__all__ = ['BaseController']
+
+def __call__(self, environ, context):
+   tmpl_context.identity = request.identity
+   return TGController.__call__(self, environ, context)
+</pre>
+<p><b>TGController.__call__</b> dispatches to the Controller method the request is routed to.</p>
+<h1>TurboGears - Serving Templates</h1>
+<p>An Event though HTML content can be returned to the browser, for more advanced output, the use of template engine is always preferred. In a full stack project ‘quickstarted’ by gearbox, Genshi is enabled as the default template renderer. In a minimal application, however Genshi (or any other template engine, such as jinja) needs to be installed and enabled. Genshi template engine permits to write templates in pure xhtml and validates them to detect issues at compile time and prevent serving broken pages.</p>
+<p>Templates are referred to by using a dotted notation. In our Hello project a templates directory is provided to store template web pages. Hence <b>sample.html</b> will be referred as hello.templates.sample (extension not mentioned). TurboGears renders this template through an expose decorator to link controller method to it by <b>tg.render_template()</b> function.</p>
+<p>The exposed controller function returns a Python dictionary object. This dictionary object is in turn passed on to the linked template. Placeholders in template are filled with dictionary values.</p>
+<p>To begin with, let us display a web page with plain html script. The exposed controller returns a <b>null dictionary object</b> as we do not intend to send any data to be parsed inside the HTML script.</p>
+<h2>How to Creat a Sample HTML</h2>
+<p>Our <b>sample.html</b> is given below. Ensure that it is stored in templates directory of project.</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;h2&gt;Hello, Welcome to TurboGears!.&lt;/h2&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Add <b>sample()</b> function in <b>root.py</b> and expose sample.html through it.</p>
+<pre class="prettyprint notranslate">
+@expose("hello.templates.sample")
+   def sample(self):
+      return {}
+</pre>
+<p>The following result will be displayed in the browser when a URL <b>http://localhost:8080/sample</b> is entered after starting the web server.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/display_result.jpg" alt="Display Result" />
+<p>As mentioned above, a dictionary object is sent as collection of parameters to a Genshi template. This template contains ‘place holders’, which are dynamically filled with parameters received from the controller.</p>
+<p>Let us change the <b>sample()</b> function to send a dictionary object to the sample template.</p>
+<pre class="prettyprint notranslate">
+@expose("hello.templates.sample")
+   def sample(self,name):
+      mydata = {'person':name}
+      return mydata
+</pre>
+<p>Create <b>sample.html</b> in templates folder (<b>templates\sample.html</b>)</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;h2&gt;Hello, my name is ${person}!.&lt;/h2&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>In the above HTML code, <b>${person}</b> is the placeholder. Enter <b>http://localhost:8080/sample?name=MVL</b> as URL in the browser. This URL is mapped to <b>sample()</b> method in our root controller. It returns a dictionary object. This is picked by linked template page sample.html in templates directory. The ${person} is then substituted by MVL in the web page.</p>
+<p>It is also possible to access the HTML form data in a controller function. HTML form uses to send form data.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/result.jpg" alt="Result" />
+<h1>TurboGears - HTTP Methods</h1>
+<p>Http Protocol is the foundation of data communication in world wide web. Different methods of data retrieval from specified URL are defined in this protocol. Following table summarizes different http methods &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center; width:10%;">S.No</th>
+<th style="text-align:center;">HTTP Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>GET</b></p>
+<p>Sends data in unencrypted form to the server. Most common method.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>HEAD</b></p>
+<p>Same as GET, but without response body</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>POST</b></p>
+<p>Used to send HTML form data to server. Data received by POST method is not cached by server.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>PUT</b></p>
+<p>Replaces all current representations of the target resource with the uploaded content.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>DELETE</b></p>
+<p>Removes all current representations of the target resource given by a URL</p></td>
+</tr>
+</table>
+<h2>Creating an HTML Form</h2>
+<p>Let us create an HTML Form and send form data to a URL. Save the following script as login.html</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;form action = "http://localhost:8080/login" method = "get"&gt;
+         &lt;p&gt;Enter Name:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "nm" /&gt;&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "submit" value = "submit" /&gt;&lt;/p&gt;
+      &lt;/form&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Data entered in this form is to be submitted to <b>‘/login’ URL</b>. Now create a controller function <b>loginpage()</b> and expose the above html page to it.</p>
+<pre class="prettyprint notranslate">
+@expose("hello.templates.login")
+   def loginpage(self):
+      return {}
+</pre>
+<p>In order to receive the form data, provide a <b>login()</b> controller, which has form attributes as its parameters. Here <b>‘nm’</b> is name of text input field in login form, the same is used as a parameter of login() function.</p>
+<pre class="prettyprint notranslate">
+@expose("hello.templates.sample")
+   def login(self, nm):
+      name = nm
+      return {'person':name}
+</pre>
+<p>As it can be seen, data received from login form is being sent to sample.html template (used earlier). It is parsed by a <b>Genshi template engine</b> to generate the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/genshi_result.jpg" alt="Genshi Result" />
+<h2>POST Method</h2>
+<p>When HTML form uses POST method to dispatch data to the URL in action attribute, the form data is not exposed in URL. The encoded data is received in a <b>dict</b> argument by the controller function. The **<b>kw</b> argument below is the dictionary object holding for data.</p>
+<p>HTML form contains two input text fields.</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+	
+      &lt;form action = "http://localhost:8080/marks" method = "post"&gt;
+         &lt;p&gt;Marks in Physics:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "phy" /&gt;&lt;/p&gt;
+         &lt;p&gt;Marks in Maths:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "maths" /&gt;&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "submit" value = "submit" /&gt;&lt;/p&gt;
+      &lt;/form&gt;
+		
+   &lt;/body&gt;	
+&lt;/html&gt;
+</pre>
+<p>The <b>marks()</b> controller receives form data and sends it to <b>sample.html</b> template. Code for <b>root.py</b> is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, request
+
+class RootController(BaseController):
+   @expose("hello.templates.marks")
+   def marksform(self):
+      return {}
+		
+   @expose("hello.templates.sample")
+   def marks(self, **kw):
+      phy = kw['phy']
+      maths = kw['maths']
+      ttl = int(phy)+int(maths)
+      mydata = {'phy':phy, 'maths':maths, 'total':ttl}
+      return mydata
+</pre>
+<p>Finally, the sample.html template is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;h2&gt;Hello, Welcome to TurboGears!.&lt;/h2&gt;
+      &lt;h3&gt;Marks in Physics: ${phy}.&lt;/h3&gt;
+      &lt;h3&gt;Marks in Maths: ${maths}.&lt;/h3&gt;
+      &lt;h3&gt;Total Marks: ${total}&lt;/h3&gt;
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<p>Start the server (if not already running)</p>
+<pre class="result notranslate">
+Gearbox server –reload –debug
+</pre>
+<p>Enter <b>http://localhost::8080/marksform</b> in browser</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/sample_template.jpg" alt="Sample Template" />
+<p>The <b>sample.html</b> will render following output &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/sample_html_result.jpg" alt="Sample Html Result" />
+<h1>TurboGears - Genshi Template Language</h1>
+<p>Genshi is a XML based template language. It is similar to <b>Kid</b>, which used to be the template engine for earlier versions of TurboGears. Genshi as well as Kid are inspired by other well-known template languages like <b>HSLT, TAL</b> and <b>PHP</b>.</p>
+<p>A Genshi template consists of processing directives. These Directives are elements and attributes in a template. Genshi directives are defined in a namespace <a target="_blank" rel="nofollow" href="http://genshi.edgewall.org/">http://genshi.edgewall.org/</a> . Hence this namespace needs to be declared in the root element of template.</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   lang = "en"&gt;
+...
+&lt;/html&gt;
+</pre>
+<p>Above declaration means that default namespace is set to XHTML and Genshi directives have ‘py’ prefix.</p>
+<h2>Genshi Directives</h2>
+<p>A number of directives are defined in Genshi. Following list enumerates Genshi directives &minus;</p>
+<ul class="list">
+<li>py:if</li>
+<li>py:choose</li>
+<li>py:for</li>
+<li>py:def</li>
+<li>py:match</li>
+<li>py:with</li>
+<li>py:replace</li>
+<li>py:content</li>
+<li>py:attrs</li>
+<li>py:strip</li>
+</ul>
+<h2>Conditional Sections</h2>
+<p>Genshi provides two directives for conditional rendering of content&minus; py:if and py:choose.</p>
+<h3>py:if</h3>
+<p>The contents of this directive’s element will be rendered only if the expression in <b>if clause</b> evaluates to true. Assuming that data in the template context is <b>{‘foo’:True, ‘bar’:’Hello’}</b>, the following directive &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;div&gt;
+   &lt;b py:if = "foo"&gt;${bar}&lt;/b&gt;
+&lt;/div&gt;
+</pre>
+<p>will result in</p>
+<pre class="result notranslate">
+Hello
+</pre>
+<p>This output, however would not be rendered if <b>‘foo’ is set to False</b>.</p>
+<p>This directive can also be used as element. In this case <b>&lt;py:if&gt;</b> must be closed by corresponding <b>&lt;/py:if&gt;</b></p>
+<pre class="prettyprint notranslate">
+&lt;div&gt;
+   &lt;py:if test = "foo"&gt;
+      &lt;b&gt;${bar}&lt;/b&gt;
+   &lt;/py:if&gt;
+&lt;/div&gt;
+</pre>
+<h3>py:choose</h3>
+<p>The advanced conditional processing is possible with the use of <b>py:choose</b> in combination with <b>py:when</b> and <b>py:otherwise</b> directives. This feature is similar to <b>switch – case</b> construct in <b>C/C++</b>.</p>
+<p>Expression in <b>py:choose</b> directive is checked with different values identified with <b>py:when</b> alternatives and corresponding contents will be rendered. A default alternative can be provided in the form of <b>py:otherwise</b> directive.</p>
+<pre class="prettyprint notranslate">
+&lt;div py:choose = "foo”&gt;
+   &lt;span py:when = "0"&gt;0&lt;/span&gt;
+   &lt;span py:when = "1"&gt;1&lt;/span&gt;
+   &lt;span py:otherwise = ""&gt;2&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+<p>The following example illustrates use of <b>py:choose</b> and <b>py:when</b> directives. The HTML form posts data to /marks URL. The <b>marks()</b> function redirects marks and results in the form of a dictionary object to <b>total.html</b> template. The conditional display of <b>result Pass/Fail</b> is achieved by using <b>py:choose</b> and <b>py:when</b> directives.</p>
+<p>HTML script of entering marks (<b>marks.html</b>) is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;form action = "http://localhost:8080/marks" method = "post"&gt;
+         &lt;p&gt;Marks in Physics:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "phy" /&gt;&lt;/p&gt;
+         &lt;p&gt;Marks in Maths:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "maths" /&gt;&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "submit" value = "submit" /&gt;&lt;/p&gt;
+      &lt;/form&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>The complete code of <b>root.py</b> is as follows. The <b>marks()</b> controller is sending marks and result to <b>total.html</b> template &minus;</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, request
+
+class RootController(BaseController):
+   @expose("hello.templates.marks")
+      def marksform(self):
+      return {}
+		
+   @expose("hello.templates.total")
+      def marks(self, **kw):
+      phy = kw['phy']
+      maths = kw['maths']
+      ttl = int(phy)+int(maths)
+      avg = ttl/2
+		
+      if avg &ge; 50:
+         mydata = {'phy':phy, 'maths':maths, 'total':ttl, 'result':2}
+      else:
+         mydata = {'phy':phy, 'maths':maths, 'total':ttl,'result':1}
+	
+      return mydata
+</pre>
+<p>The <b>total.html</b> in templates folder receives dictionary data and parses it in html output conditionally as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   lang = "en"&gt;
+	
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;h2&gt;Hello, Welcome to TurboGears!.&lt;/h2&gt;
+      &lt;h3&gt;Marks in Physics: ${phy}.&lt;/h3&gt;
+      &lt;h3&gt;Marks in Maths: ${maths}.&lt;/h3&gt;
+      &lt;h3&gt;Total Marks: ${total}&lt;/h3&gt;
+		
+      &lt;div py:choose = "result"&gt;
+         &lt;span py:when = "1"&gt;&lt;h2&gt;Result: Fail&lt;/h2&gt;&lt;/span&gt;
+         &lt;span py:when = "2"&gt;&lt;h2&gt;Result: Pass&lt;/h2&gt;&lt;/span&gt;
+      &lt;/div&gt;
+		
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Start the server (if not already running)</p>
+<pre class="result notranslate">
+Gearbox server –reload –debug
+</pre>
+<p>Enter <b>http://localhost::8080/marksform</b> in browser &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/result_window.jpg" alt="Result Window" />
+<p>The <b>total.html</b> will render following output &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/total_html.jpg" alt="Total Html" />
+<h3>py:for</h3>
+<p>Element in py:for directive is repeated for each item in an iterable, typically a Python List object. If <b>items = [1,2,3]</b> is present in a template context, it can be iterated upon by following py:for directive &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;ul&gt;
+   &lt;li py:for = "item in items"&gt;${item}&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>The following output will be rendered &minus;</p>
+<pre class="result notranslate">
+1
+2
+3
+</pre>
+<p>The following example shows HTML form data rendered in total.html template using py:for directive can also be used as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;py:for each = "item in items"&gt;
+   &lt;li&gt;${item}&lt;/li&gt;
+&lt;/py:for&gt;
+</pre>
+<h2>HTML Form Script</h2>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+	
+      &lt;form action = "http://localhost:8080/loop" method="post"&gt;
+         &lt;p&gt;Marks in Physics:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "phy" /&gt;&lt;/p&gt;
+         &lt;p&gt;Marks in Chemistry:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "che" /&gt;&lt;/p&gt;
+         &lt;p&gt;Marks in Maths:&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "text" name = "maths" /&gt;&lt;/p&gt;
+         &lt;p&gt;&lt;input type = "submit" value = "submit" /&gt;&lt;/p&gt;
+      &lt;/form&gt;
+		
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>The <b>loop()</b> controller reads form data and sends it to total.template in the form of a list object.</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, request
+
+class RootController(BaseController):
+   @expose("hello.templates.marks")
+   def marksform(self):
+   return {}
+	
+   @expose("hello.templates.temp")
+   def loop(self, **kw):
+      phy = kw['phy']
+      maths = kw['maths']
+      che = kw['che']
+      l1 = []
+      l1.append(phy)
+      l1.append(che)
+      l1.append(maths)
+		
+   return ({'subjects':['physics', 'Chemistry', 'Mathematics'], 'marks':l1})
+</pre>
+<p>The temp.html template uses py:for loop to render contents of dict object in the form of a table.</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml" 
+   xmlns:py = "http://genshi.edgewall.org/" lang = "en"&gt;
+	
+   &lt;body&gt;
+      &lt;b&gt;Marks Statement&lt;/b&gt;
+      &lt;table border = '1'&gt;
+         &lt;thead&gt;
+            &lt;py:for each = "key in subjects"&gt;&lt;th&gt;${key}&lt;/th&gt;&lt;/py:for&gt;
+         &lt;/thead&gt;
+         &lt;tr&gt;
+            &lt;py:for each = "key in marks"&gt;&lt;td&gt;${key}&lt;/td&gt;&lt;/py:for&gt;
+         &lt;/tr&gt;
+      &lt;/table&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Start the server (if not already running)</p>
+<pre class="result notranslate">
+gearbox server –reload –debug
+</pre>
+<p>Enter <b>http://localhost::8080/marksform</b> in the browser.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/window_result.jpg" alt="Window Result" />
+<p>The following output will be displayed in the browser when the above form is submitted.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/form_output.jpg" alt="Form Output" />
+<h3>py:def</h3>
+<p>This directive is used to create a macro. A macro is a reusable snippet of template code. Much like a Python function, it has a name and can optionally have parameters. Output of this macro can be inserted at any place in a template.</p>
+<p>The py:def directive follows the following syntax &minus;</p>
+<pre class="result notranslate">
+&lt;p py:def = "greeting(name)"&gt;
+   Hello, ${name}!
+&lt;/p&gt;
+</pre>
+<p>This macro can be rendered with a variable value to ‘name’ parameter.</p>
+<pre class="prettyprint notranslate">
+${greeting('world')}
+${greeting('everybody)}
+</pre>
+<p>This directive can also be used with another version of syntax as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;py:def function = "greeting(name)"&gt;
+   &lt;p&gt;Hello, ${name}! &lt;/p&gt;
+&lt;/py:def&gt;
+</pre>
+<p>In following example, <b>macro()</b> controller in <b>root.py</b> sends a <b>dict</b> object with two keys name1 and name2 to macro.html template.</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, request
+
+class RootController(BaseController):
+   @expose('hello.templates.macro')
+   def macro(self):
+      return {'name1':'TutorialPoint', 'name2':'TurboGears'}
+</pre>
+<p>This macro.html template contains definition of a macro called greeting. It is used to generate greeting message for data received from controller.</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   lang = "en"&gt;
+	
+   &lt;body&gt;
+      &lt;h2&gt;py:def example&lt;/h2&gt;
+		
+      &lt;div&gt;
+         &lt;div py:def = "greeting(name)"&gt;
+            Hello, Welcome to ${name}!
+         &lt;/div&gt;
+				
+         &lt;b&gt;
+            ${greeting(name1)}
+            ${greeting(name2)}
+         &lt;/b&gt;
+			
+      &lt;/div&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Start the server using gearbox</p>
+<pre class="result notranslate">
+gearbox serve –reload –debug
+</pre>
+<p>Invoke macro() controller by entering following URL in browser &minus;</p>
+<p><b>http://localhost:8080/macro</b></p>
+<p>Following output will be rendered in the browser &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/def_example.jpg" alt="Def Example" />
+<h3>py:with</h3>
+<p>This directive lets you assign expressions to local variables. These local variables make expression inside less verbose and more efficient.</p>
+<p>Assuming that x = 50 is given in context data for a template, following will be the py:with directive &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;div&gt;
+   &lt;span py:with = "y = 50; z = x+y"&gt;$x $y $z&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+<p>It will result in the following output &minus;</p>
+<pre class="result notranslate">
+50 50 100
+</pre>
+<p>An alternative version for py:with directive is also available &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;div&gt;
+   &lt;py:with = "y = 50; z = x+y"&gt;$x $y $z&lt;/py:with&gt;
+&lt;/div&gt;
+</pre>
+<p>In the following example, macro() controller returns a dict object with name, phy and maths keys.</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, request
+
+class RootController(BaseController):
+   @expose('hello.templates.macro')
+   def macro(self):
+      return {'name':'XYZ', 'phy':60, 'maths':70}
+</pre>
+<p>The template macro.html adds values of phy and maths keys using py:with directive.</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   lang = "en"&gt;
+	
+   &lt;body&gt;
+      &lt;h2&gt;py:with example&lt;/h2&gt;
+      &lt;h3&gt;Marks Statement for : ${name}!&lt;/h3&gt;
+		
+      &lt;b&gt;Phy: $phy Maths: $maths
+         &lt;span py:with = "ttl = phy+maths"&gt;Total: $ttl&lt;/span&gt;
+      &lt;/b&gt;
+		
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<p>The browser will render the following output in response to the URL <b>http://localhost:8080/macro</b></p>
+<img src="https://www.tutorialspoint.com/turbogears/images/py_for_example.jpg" alt="Py:for Example" />
+<h2>Structure Manipulation Directives</h2>
+<p>The <b>py:attrs</b> directive adds, modifies or removes attributes from the element.</p>
+<pre class="prettyprint notranslate">
+&lt;ul&gt;
+   &lt;li py:attrs = "foo"&gt;Bar&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>If <b>foo = {‘class’:’collapse’}</b> is present in a template context, which the above snippet will render.</p>
+<pre class="prettyprint notranslate">
+&lt;ul&gt;
+   &lt;li class = "collapse"&gt;Bar&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>The <b>py:content</b> directive replaces any nested content with the result of evaluating the expression &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;ul&gt;
+   &lt;li py:content = "bar"&gt;Hello&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>Given bar = ’Bye’ in the context data, this would produce</p>
+<pre class="prettyprint notranslate">
+&lt;ul&gt;
+   &lt;li&gt;Bye&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>The <b>py:replace</b> directive replaces the element itself with the result of evaluating the expression &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;div&gt;
+   &lt;span py:replace = "bar"&gt;Hello&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+<p>Given bar = ’Bye’ in the context data, it would produce</p>
+<pre class="prettyprint notranslate">
+&lt;div&gt;
+   Bye
+&lt;/div&gt;
+</pre>
+<h1>TurboGears - Includes</h1>
+<p>Contents of another XML document (especially HTML document) can be included by using inclusion tags in the current document. In order to enable such an inclusion, XInclude namespace must be declared in the root element of the HTML document.</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml" xmlns:xi = "http://www.w3.org/2001/XInclude &gt;
+</pre>
+<p>The above declaration specifies that include directive contains <b>‘xi’</b> prefix. To add contents of another html page in the current document, use xi:include directive as follows &minus;</p>
+<pre class="result notranslate">
+&lt;xi:include href = "somepage.html" /&gt;
+</pre>
+<p>In the following example, root.py contains include() controller, which exposes include.html.</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, request
+
+class RootController(BaseController):
+   @expose('hello.templates.include')
+   def include(self):
+      return {}
+</pre>
+<h2>Heading and Footer HTML</h2>
+<p>In include.html, include namespace is declared and contents of heading.html and footer.html are added. Here is the HTML script of templates\include.html &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml" 
+   xmlns:xi = "http://www.w3.org/2001/XInclude"&gt;
+	
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;xi:include href = "heading.html" /&gt;
+      &lt;h2&gt;main content &lt;/h2&gt;
+      &lt;xi:include href = "footer.html" /&gt;
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<p>Here is the templates\heading.html code &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;h1&gt;This is page Header&lt;/h1&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>The following is the templates\footer.html</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;h3&gt;This is page footer&lt;/h3&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Start the development using a gearbox and enter <b>http://localhost:8080/include</b> in the browser. The output rendered will be as shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/template_example.jpg" alt="Template Examples" />
+<p>This way the modular construction of views can be achieved. If the resource mentioned in xi:include directive is not available, an error will be raised. In such a case an alternative resource may be loaded by using xi:fallback.</p>
+<pre class="prettyprint notranslate">
+&lt;xi:include href = “main.html”&gt;
+   &lt;xi:fallback href = ”default.html”/&gt;
+&lt;/xi.include&gt;
+</pre>
+<p>Inclusion of content can be made dynamic as href attribute that can contain expressions.</p>
+<p>Add following controller in root.py.</p>
+<pre class="prettyprint notranslate">
+@expose('hello.templates.ref-include')
+   def refinclude(self):
+      return {'pages':['heading','main','footer']}
+</pre>
+<p>Save following code as ref-include.html in templates folder.</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   xmlns:xi = "http://www.w3.org/2001/XInclude"&gt;
+	
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Templating Example&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;xi:include href = "${name}.html" py:for = "name in pages" /&gt;
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<p>Before starting the server make sure that templates folder has a heading.html, main.html and footer.html. Enter <b>http://localhost:8082/refinclude</b> in the browser to get the following output</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/footer_template.jpg" alt="Footer Template" />
+<h1>TurboGears - JSON Rendering</h1>
+<p>The <b>@expose()</b> decorator by default renders html content. However, this can be set to <b>json content type</b>. TurboGears supports json rendering through <b>tg.jsonify.JSONEncoder (**kwargs)</b> class. To render json data simply pass json as content type to expose decorator.</p>
+<pre class="prettyprint notranslate">
+@expose('json')
+def jsondata(self, **kwargs):
+   return dict(hello = 'World')
+</pre>
+<p>If '/jsondata' URL is entered in browser, it will respond by showing &minus;</p>
+<pre class="result notranslate">
+{"hello": "World"}
+</pre>
+<h2>jsonp Rendering</h2>
+<p>jsonp stands for json with padding. It works similar to json output except for the fact that it provides an application/javascript response with a call to a javascript function providing all the values returned by the controller as function arguments.</p>
+<p>To enable jsonp rendering you must first append it to the list of required engines inside your application – <b>config/app_cfg.py</b> &minus;</p>
+<pre class="result notranslate">
+base_config.renderers.append('jsonp')
+</pre>
+<p>Write your expose decorator as follows &minus;</p>
+<pre class="prettyprint notranslate">
+@expose('json')
+@expose('jsonp')
+def jsonpdata (self, **kwargs): 
+   return dict(hello = 'World')
+</pre>
+<p>When accessing /jsonpdata?callback = callme, you should see &minus;</p>
+<pre class="result notranslate">
+callme({"hello": "World"});
+</pre>
+<h1>TurboGears - URL Hierarchy</h1>
+<p>Sometimes, a web application may require a URL structure that is having more than one level. TurboGears can traverse object hierarchy to find appropriate method that can handle your request.</p>
+<p>A project ‘quickstarted’ with gearbox has a BaseController class in project’s lib folder. It is available as ‘Hello/hello/lib/base.py’. It serves as base class for all sub controllers. In order to add a sub level of URL in application, design a sub class called BlogController derived from BaseController.</p>
+<p>This BlogController has two controller functions, index() and post(). Both are designed to expose a template each, blog.html and post.html.</p>
+<p><b>Note</b> &minus; These templates are put inside a sub folder &minus; templates/blog</p>
+<pre class="prettyprint notranslate">
+class BlogController(BaseController):
+
+   @expose('hello.templates.blog.blog')
+   def index(self):
+      return {}
+		
+   @expose('hello.templates.blog.post')
+   def post(self):
+      from datetime import date
+      now = date.today().strftime("%d-%m-%y")
+      return {'date':now}
+</pre>
+<p>Now declare an object of this class in RootController class (in root.py) as follows &minus;</p>
+<pre class="result notranslate">
+class RootController(BaseController):
+   blog = BlogController()
+</pre>
+<p>Other controller functions for top level URLs will be there in this class as earlier.</p>
+<p>When a URL <b>http://localhost:8080/blog/</b> is entered, it will be mapped to index() controller function inside BlogController class. Similarly, <b>http://localhost:8080/blog/post</b> will invoke post() function.</p>
+<p>The code for blog.html and post.html is as below &minus;</p>
+<pre class="prettyprint notranslate">
+Blog.html
+
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h2&gt;My Blog&lt;/h2&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+
+post.html
+
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h2&gt;My new post dated $date&lt;/h2&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>When a URL <b>http://localhost:8080/blog/</b> is entered, it will produce the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/blog.jpg" alt="Blog" />
+<p>When a URL <b>http://localhost:8080/blog/post</b> is entered, it will produce the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/blog_post.jpg" alt="Blog Post" />
+<h1>TurboGears – ToscaWidgets Forms</h1>
+<p>One of the most essential aspect of any web application is to present the user interface for a user. HTML provides a &lt;form&gt; tag which is used to design an interface. Form’s elements such as text input, radio, select etc. can be appropriately used. Data entered by the user is submitted in the form of Http request message to server side script by either GET or POST method.</p>
+<p>Server side script has to recreate the form elements from http request data. So in this effect, the form elements have to be defined twice – once in HTML and again in server side script.</p>
+<p>Another disadvantage of using HTML form is that it is difficult (if not impossible) to render the form elements dynamically. HTML itself provides no way to validate user’s input.</p>
+<h2>ToscaWidgets2</h2>
+<p>TurboGears relies on ToscaWidgets2, a flexible form rendering and validation library. Using ToscaWidgets, we can define the form fields in our Python script and render them using a HTML template. It is also possible to apply validation to tw2 field.</p>
+<p>ToscaWidgets library is a collection of many modules. Some important modules are listed below &minus;</p>
+<ul class="list">
+<li><p><b>tw2.core</b> &minus; It provides core functionality. Widgets in this module are not meant to be available for end-user.</p></li>
+<li><p><b>tw2.forms</b> &minus; This is a basic forms library. It contains widgets for fields, fieldsets and forms.</p></li>
+<li><p><b>tw2.dynforms</b> &minus; This contains dynamic forms functionality.</p></li>
+<li><p><b>tw2.sqla</b> &minus; This is an interface for SQLAlchemy database.</p></li>
+</ul>
+<h3>tw2.forms</h3>
+<p>It contains a Form class, which acts as a base for custom forms. There is a TableForm class that is useful in rendering fields in a two column table. ListForm presents its fields in an unordered list.</p>
+<section class="toggle">
+<label>The following table shows the most commonly used types of fields in tw2.forms module &minus;</label>
+<div class="toggle-content">
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center;">Fields &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>TextField</b></p>
+<p>A single line text input field</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>TextArea</b></p>
+<p>Multi-line text input field</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>CheckBox</b></p>
+<p>Presents a checkable rectangular box with label</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>CheckBoxList</b></p>
+<p>Multi-selectable group pf check boxes</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>RadioButton</b></p>
+<p>A toggle button to select/deselect</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>RadioButtonList</b></p>
+<p>Group of mutually exclusive Radio buttons</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>PasswordField</b></p>
+<p>Similar to Textfield but input keys are not revealed</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>CalendarDatePicker</b></p>
+<p>Lets the user to choose a date</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>SubmitButton</b></p>
+<p>Button to submit a form</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><p><b>ImageButton</b></p>
+<p>Clickable button with an image on top</p></td>
+</tr>
+<tr>
+<td>11</td>
+<td><p><b>SingleSelectField</b></p>
+<p>Enables selection of single item from a list</p></td>
+</tr>
+<tr>
+<td>12</td>
+<td><p><b>MultipleSelectField</b></p>
+<p>Enables selection of multiple items from the list</p></td>
+</tr>
+<tr>
+<td>13</td>
+<td><p><b>FileField</b></p>
+<p>Field for uploading file</p></td>
+</tr>
+<tr>
+<td>14</td>
+<td><p><b>EmailField</b></p>
+<p>An email input field</p></td>
+</tr>
+<tr>
+<td>15</td>
+<td><p><b>URLField</b></p>
+<p>An input field to enter URL</p></td>
+</tr>
+<tr>
+<td>16</td>
+<td><p><b>NumberField</b></p>
+<p>A number spinbox</p></td>
+</tr>
+<tr>
+<td>17</td>
+<td><p><b>RangeField</b></p>
+<p>A number slider</p></td>
+</tr>
+</table>
+</div>
+</section>
+<p>In the following example, a form using some of these widgets is constructed. While most of these widgets are defined in tw2.forms, CalendarDateField is defined in tw2.Dynforms module. Hence both these modules along with tw2.core are imported in the beginning &minus;</p>
+<pre class="prettyprint notranslate">
+import tw2.core as twc
+import tw2.forms as twf
+import tw2.dynforms as twd
+</pre>
+<p>A ToscaWidgets form is a class derived from <b>tw2.forms.form</b> base class. The required widgets are placed inside a Layout object. In this example, <b>TableLayout</b> is used. The Widgets are rendered in a two column table. First column shows the caption and second column shows the input or selection field.</p>
+<p>A TextField object is created using the following constructor &minus;</p>
+<pre class="result notranslate">
+twf.TextField(size, value = None)
+</pre>
+<p>If not mentioned TextField object takes a default size and is initially blank. While declaring TextArea object, the number of rows and columns may be mentioned.</p>
+<pre class="result notranslate">
+twf.TextArea("",rows = 5, cols = 30)
+</pre>
+<p>The NumberField object is a TextField which can accept only digits. Up and down arrows are generated on the right border to increase or decrease the number inside it. Initial value can also be specified as an argument in the constructor.</p>
+<pre class="result notranslate">
+twf.NumberField(value)
+</pre>
+<p>Just to the right of a CalendarDatePicker box, a calendar button is displayed. When pressed a date selector pops up. The user can manually type a date in the box or select from the date selector.</p>
+<pre class="result notranslate">
+twd.CalendarDatePicker()
+</pre>
+<p>EmailField object presents a TextField, but the text in it must be in email format.</p>
+<pre class="result notranslate">
+EmailID = twf.EmailField()
+</pre>
+<p>The following form also has a RadioButtonList. The constructor of this class contains a List object as a value of options parameter. A Radio Button for each option will be rendered. Default selection is specified with the value parameter.</p>
+<pre class="result notranslate">
+twf.RadioButtonList(options = ["option1","option2"],value = option1)
+</pre>
+<p>The CheckBoxList renders check boxes for each option in the list.</p>
+<pre class="result notranslate">
+twf.CheckBoxList(options = [option1, option2, option3])
+</pre>
+<p>The dropdown list is called as a SingleSelectfield in this ToscaWidgets library. Items in a List object corresponding to options parameter form the drop down list. Visible caption is set as a value of prompt_text parameter.</p>
+<pre class="result notranslate">
+twf.SingleSelectField(prompt_text = 'text', options=['item1', 'item2', 'item3'])
+</pre>
+<p>By default, the form displays a Submit button with its caption as ‘save’. In order to display another caption, create a SubmitButton object and specify it as value parameter.</p>
+<pre class="result notranslate">
+twf.SubmitButton(value='Submit')
+</pre>
+<p>The form is submitted to a URL, which is specified as a value of action parameter of the form. By default, the form data is submitted by http POST method.</p>
+<pre class="result notranslate">
+action = 'URL'
+</pre>
+<p>In following code, a form named as AdmissionForm is designed using the above explained widgets. Add this code in root.py before RootController class.</p>
+<pre class="prettyprint notranslate">
+class AdmissionForm(twf.Form):
+   class child(twf.TableLayout):
+      NameOfStudent = twf.TextField(size = 20)
+      AddressForCorrespondance = twf.TextArea("", rows = 5, cols = 30)
+      PINCODE = twf.NumberField(value = 431602)
+      DateOfBirth = twd.CalendarDatePicker()
+      EmailID = twf.EmailField()
+      Gender = twf.RadioButtonList(options = ["Male","Female"],value = 'Male')
+      Subjects = twf.CheckBoxList(options = ['TurboGears', 'Flask', 'Django', 'Pyramid'])
+
+      MediumOfInstruction = twf.SingleSelectField(prompt_text = 'choose',
+         options = ['English', 'Hindi', 'Marathi', 'Telugu'])
+			
+      action = '/save_form'
+      submit = twf.SubmitButton(value ='Submit')
+</pre>
+<p>Now save this code below as <b>twform.html</b> in templates directory &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   lang = "en"&gt;
+   
+   &lt;head&gt;
+      &lt;title&gt;TurboGears Form Example&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;div id = "tw form"&gt;
+         ${form.display(value = dict(title = 'default title'))}
+      &lt;/div&gt;
+   &lt;/body&gt;
+   
+&lt;/html&gt;
+</pre>
+<p>In RootController class (in root.py), add the following controller function &minus;</p>
+<pre class="prettyprint notranslate">
+@expose('hello.templates.twform')
+def twform(self, *args, **kw):
+   return dict(page = 'twform', form = MovieForm)
+</pre>
+<p>In the AdmissionForm class, we have <b>stipulated/save_form</b> as action URL. Hence add <b>save_form()</b> function in RootController.</p>
+<pre class="prettyprint notranslate">
+@expose()
+def save_movie(self, **kw):
+   return str(kw)
+</pre>
+<p>Ensure that the server is running (using gearbox serve). Enter 
+<b>http://localhost:8080/twform</b> in the browser.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/turbogears_forms.jpg" alt="Forms"/>
+<p>Pressing the submit button will post this data to <b>save_form()</b> URL, which will display the form data in the form of a dictionary object.</p>
+<pre class="result notranslate">
+{
+   'EmailID': u'lathkar@yahoo.com', 
+   'NameOfStudent': u'Malhar Lathkar', 
+   'Gender': u'Male', 
+   'PINCODE': u'431602', 
+   'DateOfBirth': u'2015-12-29', 
+   'Subjects': [u'TurboGears', u'Flask', u'Django'], 
+   'MediumOfInstruction': u'', 
+   'AddressForCorrespondance': u'Shivaji Nagar\r\nNanded\r\nMaharashtra'
+}
+</pre>
+<h1>TurboGears – Validation</h1>
+<p>A good Forms widget library should have an input validation feature. For example, the user should be forced to enter data in a mandatory field, or verify if an email field contains a valid email, without resorting to any other programmatic means (like JavaScript function) for validation.</p>
+<p>Early versions of ToscaWidgets Forms Library used to rely on FormEncode module for validation support. ToscaWidgets2 now has built-in validation support available in tw2.core module. However, it is still possible to use FormEncode validation techniques.</p>
+<p>In order to subject a ToscaWidgets form to validation, @validate decorator is used.</p>
+<pre class="result notranslate">
+@validate(form, error_handler, validators)
+</pre>
+<ul class="list">
+<li><p>The <b>’form’</b> is the ToscaWidgets form object to be validated.</p></li>
+<li><p>The <b>‘error-handler’</b> is the controller method used to handle form errors.</p></li>
+<li><p>The <b>‘validators’</b> are a dictionary object containing FormEncode validators.</p></li>
+</ul>
+<h2>Types of Validators</h2>
+<p>The tw2.core module contains a validator class from which other validators are inherited. It is also possible to design a custom validator based on it. Some of the important validators are described below &minus;</p>
+<p><b>LengthValidator</b> &minus; Check whether a value has a prescribed length. Minimum and maximum limits are defined with min and max parameters. Custom messages for length below and above min and max can be specified as tooshort and toolong parameter.</p>
+<pre class="result notranslate">
+tw2.core.LengthValidator(min = minval, max = maxval, 
+   msgs = { 'tooshort': (‘message for short length’), 
+   'toolong': (‘message for long length)})
+</pre>
+<p><b>RangeValidator</b> &minus; Usually used along with RangeField. It useful to validate value of a numeric field within minimum and maximum limits. Messages for tooshort and toolong parameters can be customized.</p>
+<pre class="result notranslate">
+tw2.core.RangeValidator(min = minval, max = maxval, 
+   msgs = { 'tooshort': (‘message for short length’), 
+   'toolong': (‘message for long length)})
+</pre>
+<p><b>IntValidator</b> &minus; This class is derived from the RangeValidator. This is normally used to validate if input in a normal text field is containing integer data. Minimum and maximum limits as well as error messages can be set. Additionally, error message for non-integer input can be specified as ‘notint’ parameter.</p>
+<pre class="result notranslate">
+tw2.core.IntValidator(msgs = {‘notint’:’Must be Integer’})
+</pre>
+<p><b>OneOfValidator</b> &minus; This validator forces the user to select a value from the available options in the list only.</p>
+<pre class="result notranslate">
+tw2.core.OneOfValidator(values = [option1, option2,..], 
+   msgs = {‘notinlist’:’Not in List’}}
+</pre>
+<p><b>DateValidator</b> &minus; Very useful to ensure that user input is a valid date. Date format (default is Y-M-D) and error message are customizable. Minimum and maximum date limits can also be specified. DateTimeValidator is also available to verify object of DateTime class.</p>
+<pre class="result notranslate">
+tw2.core.DateValidator(msgs = {format = ’%Y-%m-%d’, 
+   'baddatetime': ('baddate', ('Must follow date format $format_str'))}
+</pre>
+<p><b>EmailValidator</b> &minus; Validates user input against a valid email address. This class is inherited from a more general RegexValidator.</p>
+<pre class="result notranslate">
+tw2.core.EmailValidator(msgs = {'badregex': ('bademail', 
+   ('Must be a valid email address')) }
+</pre>
+<p><b>UrlValidator</b> &minus; This class is also inherited from RegexValidator. It validates the user input for a valid URL.</p>
+<pre class="result notranslate">
+tw2.core.UrlValidator(msgs = {'badregex': ('badurl', ('Must be a valid URL’)) }
+</pre>
+<p><b>MatchValidator</b> &minus; Confirms whether the value of one field is matched with the other. This is especially useful, where user is required to choose and confirm a password field. Typical usage of MatchValidator is shown below &minus;</p>
+<pre class="prettyprint notranslate">
+import tw2.core as twc
+import tw2.forms as twf
+  
+  class AdmissionForm(twf.Form):
+      class child(twf.TableLayout):
+         validator = twc.MatchValidator('pw', 'pwconfirm')
+         pw = twf.PasswordField()
+         pwconfirm = twf.PasswordField()
+</pre>
+<p>It is also possible to construct a compound validator, where the validation is desired to succeed, if any one of checks pass. In other cases, you may want validation to succeed, only if the input passes all the checks. For this, tw2.core provides the Any and All validators, which are subclasses of the extendable CompoundValidator.</p>
+<h1>TurboGears – Flash Messages</h1>
+<p>TurboGears provides a very convenient messaging system for notifying information to user in a non-obtrusive way. TGFlash class in tg module provides support for flashing messages that are stored in a plain cookie. This class supports fetching flash messages on server side as well as client side through JavaScript.</p>
+<p>The <b>render()</b> method of TGFlash class, when used from Python itself, can be invoked from template to render a flash message. If used on JavaScript, it provides a WebFlash object. It exposes <b>payload()</b> and <b>render()</b> methods to fetch current flash message and render it from JavaScript.</p>
+<p>When a TurboGears project is created using ‘quickstart’, it has a Master.html template. It contains the definition of a variable of that flash object. Contents of this flash message received from the controller substitutes the marked placeholder in this template.</p>
+<pre class="prettyprint notranslate">
+&lt;py:with vars = "flash = tg.flash_obj.render('flash', use_js = False)"&gt;
+   &lt;div py:if = "flash" py:replace = "Markup(flash)" /&gt;
+&lt;/py:with&gt;
+</pre>
+<p>The <b>tg.flash_obj</b> is the WebFlash object, which is available inside any rendered template by including <b>master.html</b> template. This object permits to retrieve the current flash message and display it.</p>
+<p>The Flash messages are stored in a cookie (whose name by default is webflash) by using <b>tg.flash()</b> method. The message and status parameters are then passed to it.</p>
+<pre class="result notranslate">
+tg.flash('Message', 'status')
+</pre>
+<p>If the method that is called flash performs a redirect, then the flash will be visible inside the redirected page. If the method directly exposes a template, then the flash will be visible inside the template itself.</p>
+<p>Appearance of flash message can be customized by applying CSS styling to status code. A ‘quickstarted’ project contains error, warning, info and ok status codes customized by a stylesheet public/css/style.css. More status codes with styles can also be added.</p>
+<pre class="prettyprint notranslate">
+#flash &gt; .warning {
+   color: #c09853;
+   background-color: #fcf8e3;
+   border-color: #fbeed5;
+}
+
+#flash &gt; .ok {
+   color: #468847;
+   background-color: #dff0d8;
+   border-color: #d6e9c6;
+}
+
+#flash &gt; .error {
+   color: #b94a48;
+   background-color: #f2dede;
+   border-color: #eed3d7;
+}
+
+#flash &gt; .info {
+   color: #3a87ad;
+   background-color: #d9edf7;
+   border-color: #bce8f1;
+}
+</pre>
+<p>This external style sheet needs to be included in the template &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;link rel = "stylesheet" type = "text/css" media = "screen" 
+   href = "${tg.url('/css/style.css')}" /&gt;
+</pre>
+<p>The configuration of any Flash message support can be achieved by setting parameters for configure() method of TGFlash object or in app_cfg.py (in config folder). The configurable parameters are &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center;">Parameters &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>flash.cookie_name</b></p>
+<p>Name of the cookie used to store flash messages. Default is <b>webflash</b>.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>flash.default_status</b></p>
+<p>Default message status if not specified (ok by default)</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>flash.template</b></p>
+<p>Used as the <b>flash template</b> when rendered.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>flash.allow_html</b></p>
+<p>Turns <b>on/off escaping in flash messages</b>, by default HTML is not allowed.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>flash.js_call</b></p>
+<p>JavaScript code which will be run when displaying the flash from JavaScript. Default is <b>webflash.render()</b></p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>flash.js_template</b></p>
+<p><b>string.Template</b> instance used to replace full JavaScript support for flash messages.</p></td>
+</tr>
+</table>
+<ul class="list">
+<li><p><b>pop_payload()</b> &minus; function <b>fetches current flash message, status</b> and related information. Getting the flash message will delete the cookie.</p></li>
+<li><p><b>render(container_id, use_js=True)</b> &minus; Render the flash message inside template or provide Javascript support for them.</p></li>
+<li><p><b>container_id</b> is the DIV where the messages will be displayed, while use_js switches between rendering the flash as HTML or for JavaScript usage.</p></li>
+<li><p><b>status</b> &minus; Get only current flash status, getting the flash status will delete the cookie.</p></li>
+<li><p><b>message</b> &minus; Get only current flash message, getting the flash message will delete the cookie.</p></li>
+</ul>
+<h2>How to Make a Simple Flash Message?</h2>
+<p>In the following example, a flash() method is provided in the root controller class. It calls a flash() message which is rendered to the exposed template, flash.html</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, flash, redirect, request
+
+class RootController(BaseController):
+   @expose('hello.templates.flash')
+   def flash(self, user = None):
+      
+      if user:
+         flash(message = "Welcome "+user,status = "ok")
+      else:
+         flash(message = "Welcome Guest",status = "info")
+      return {}
+</pre>
+<p>The code for making <b>flash.html</b> in the templates folder is as follows</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   xmlns:xi = "http://www.w3.org/2001/XInclude"&gt;
+
+   &lt;head&gt;
+      &lt;title&gt;TurboGears 2.3: Flash messages&gt;/title&gt;
+      &lt;link rel = "stylesheet" type = "text/css" media = "screen"
+         href = "${tg.url('/css/style.css')}" /&gt;
+			
+      &lt;py:with vars = "flash = tg.flash_obj.render('flash', use_js = False)"&gt;
+         &lt;div py:if = "flash" py:replace = "Markup(flash)" /&gt;
+      &lt;/py:with&gt;
+		
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;h2&gt;Hello TurboGears&lt;/h2&gt;
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<p>Start the server and enter <b>http://localhost:8080/flash?user=MVL</b> in the browser</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/flash_message.jpg" alt="Flash Message"/>
+<p>Change URL to <b>http://localhost:8080/flash</b> and see the flash message differently formatted as per definition in style.css</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/message.jpg" alt="Message"/>
+<h1>TurboGears – Cookies &amp; Sessions</h1>
+<p>It is often required to hold simple browsing data attached to a user’s browser. Sessions are the most commonly used technique. Session represents data which need not be stored in a more persistent form like disk file or database.</p>
+<p>However, sessiondata in TurboGears can be backed by filesystem, database or hashed cookie values. A small amount of session data is generally kept in cookies, but for the larger volume of session data MemCache is used.</p>
+<p>MemCache is a system-level daemon. It provides fast access to cached data and is extremely scalable. However, it is intended for use only on secure servers, and hence must be maintained and secured by sysadmin.</p>
+<h2>Beaker in Session Management</h2>
+<p>TurboGears uses Beaker for session management. A project quickstarted by gearbox is by default configured to use hashed cookies to store session data.</p>
+<p>Each time a client connects, the session middleware (Beaker) will inspect the cookie using the cookie name, which has been defined in the configuration file. If the cookie is not found, it will be set in the browser. On all subsequent visits, the middleware will find the cookie and make use of it.</p>
+<p>In order to enable session management, session class should be incorporated in the project by following import statement &minus;</p>
+<pre class="result notranslate">
+from tg import session
+</pre>
+<p>To save the data in a session variable &minus;</p>
+<pre class="result notranslate">
+session[‘key’] = value
+session.save()
+</pre>
+<p>To retrieve the session variable &minus;</p>
+<pre class="result notranslate">
+return session[‘key’]
+</pre>
+<p>Note that you need to explicitly save the session in order for your keys to be stored in that session.</p>
+<p>The <b>delete()</b> method of the session object will erase all the user sessions &minus;</p>
+<pre class="result notranslate">
+session.delete()
+</pre>
+<p>Even though it’s not customary to delete all the user sessions on any given production environment, you will typically do it for cleaning up after usability or functional tests have been done.</p>
+<p>Given below is a simple example to demonstrate sessions. RootController class has a <b>setsession()</b> method which sets a session variable.</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, session
+class RootController(BaseController):
+   
+   @expose()
+   def setsession(self):
+      session['user'] = 'MVL'
+      session.save()
+      
+      str = "&lt;b&gt;sessionVariable set to "+session['user'] 
+      str = str+"&lt;br&gt;&lt;a href = '/getsession'&gt;click here to retrieve&lt;/a&gt;&lt;/b&gt;"
+      return str
+   
+   @expose()
+   def getsession(self):
+      return "&lt;b&gt;value of session variable retrieved " +session['user'] +"&lt;/b&gt;"
+</pre>
+<p>Enter <b>http://localhost:8080/setsession</b></p>
+<img src="https://www.tutorialspoint.com/turbogears/images/session.jpg" alt="Session" />
+<p>A link in the browser leads to <b>http://localhost:8080/getsession</b> which retrieves and displays the session variable &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/variable.jpg" alt="Variable" />
+<h1>TurboGears – Caching</h1>
+<p>In order to enhance the performance of a web application, especially if it is involved in lengthy operations, caching techniques are used. TurboGears provides two types of caching techniques &minus;</p>
+<p><b>Whole-page Caching</b></p>
+<p>It works at the HTTP protocol level to avoid entire requests to the server by having either the user’s browser, or an intermediate proxy server (such as Squid) intercept the request and return a cached copy of the file.</p>
+<p><b>Application-level Caching</b></p>
+<p>This works within the application server to cache computed values, often the results of complex database queries, so that future requests can avoid needing to re-calculate the values. For web applications, application-level caching provides a flexible way to cache the results of complex queries so that the total load of a given controller method can be reduced to a few user-specific or case-specific queries and the rendering overhead of a template.</p>
+<h2>Application-level Caching</h2>
+<p>As mentioned earlier, ‘quickstarted’ TurboGears project is configured to enable Beaker package for caching support. Beaker supports the following back-ends used for cache storage &minus;</p>
+<ul class="list">
+<li><p><b>memory</b> &minus; Used for per-process storage. It is extremely fast.</p></li>
+<li><p><b>filesystem</b> &minus; per-process storage as well as multi-process.</p></li>
+<li><p><b>DBM database</b> &minus; per-process, multi-process, fairly fast.</p></li>
+<li><p><b>SQLAlchemy database</b> &minus; per-database-server storage. Slower compared to the above given options.</p></li>
+<li><p><b>Memcached</b> &minus; multi-server memory based cache.</p></li>
+</ul>
+<h2>Controller Caching</h2>
+<p>For quick controller caching, a <b>cached()</b> decorator is available. The entire controller body is cached depending on various parameters of request. The definition of <b>tg.decorators.cached()</b> decorator is as follows</p>
+<pre class="result notranslate">
+tg.decorators.cached(key, expire, type, 
+   query-args, cache_headers, invalidate_on_startup, cache_response)
+</pre>
+<p>The description of parameters is as follows &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center;">Parameters &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>key</b></p>
+<p>Specifies the controller parameters used to generate the cache key.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>expire</b></p>
+<p>Time in seconds before cache expires, Defaults to “never”.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Type</b></p>
+<p>dbm, memory, file, memcached, or None.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>cache_headers</b></p>
+<p>A tuple of header names indicating response headers.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>invalidate_on_startup</b></p>
+<p>If True, cache is invalidated each time application starts or is restarted.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>cache_response</b></p>
+<p>response should be cached or not, defaults to True.</p></td>
+</tr>
+</table>
+<p>Following is an example of controller caching &minus;</p>
+<pre class="prettyprint notranslate">
+@cached(expire = 100, type = 'memory')
+@expose()
+def simple(self):
+   return "This is a cached controller!"
+</pre>
+<h2>Template Level Caching</h2>
+<p>The Genshi template engine retrieves template from a cache if its contents have not changed. The default size of this cache is 25. By default, automatic reloading of templates is true. In order to improve performance, the following settings can be made in <b>app_cfg.py</b> &minus;</p>
+<pre class="prettyprint notranslate">
+[app:main]
+genshi.max_cache_size = 100
+auto_reload_templates = false
+</pre>
+<p>To cache a template, you just have to return the <b>tg_cache</b> option from the controller that renders the cached template.</p>
+<p>The tg_cache is a dictionary that accepts the following keys &minus;</p>
+<ul class="list">
+<li><p><b>key</b> &minus; The cache key. <b>Default:</b> None.<p></li>
+<li><p><b>expire</b> &minus; how long the cache must stay alive. <b>Default:</b> never expires<p></li>
+<li><p><b>type</b> &minus; memory, dbm, memcached. <b>Default:</b> dbm.<p></li>
+</ul>
+<p>The following example illustrates template caching &minus;</p>
+<pre class="prettyprint notranslate">
+@expose(hello.templates.user')
+def user(self, username):
+   return dict(user = username, tg_cache = dict(key = user, expire = 900))
+</pre>
+<h1>TurboGears – SQLAlchemy</h1>
+<p>Although it is possible to use SQL in TurboGears application to perform CRUD operations on any relational database, it is advisable to use SQLAlchemy, a Python toolkit is a powerful Object Relation Mapper that gives application developers the full power and flexibility of SQL. In addition to support for SQL based databases through SQLAlchemy, TurboGears also supports MongoDB database though Ming. In this section, the functionality of SQLAlchemy is discussed.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/sql.jpg" alt="Sql" />
+<h2>What is ORM (Object Relational Mapping)?</h2>
+<p>Most programming language platforms are object oriented. The data in RDBMS servers on the other hand is stored as tables. Object relation mapping is a technique of mapping object parameters to underlying RDBMS table structure. An ORM API provides methods to perform CRUD operations without having to write raw SQL statements.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/orm.jpg" alt="Orm" />
+<p>When a TurboGears project is created using ‘quickstart’ command from gearbox toolkit, SQLAlchemy support is enabled by default by the following configuration settings &minus;</p>
+<pre class="prettyprint notranslate">
+config['use_sqlalchemy'] = True
+config['sqlalchemy.url'] = 'sqlite:///devdata.db'
+</pre>
+<p>The ‘quickstarted’ project also creates a models package within it. For example, a ‘Hello’ project will have Hello\hello\model. The following files are created in this package &minus;</p>
+<ul class="list">
+<li><p><b>__init__.py</b> &minus; This is where the database access is set up. The application’s model objects are imported in this module. It also has a DBSession - a global session manager and also a DeclarativeBase, which is a base class for all the model classes.</p></li>
+<li><p><b>auth.py</b> &minus; This is where the models used by the authentication stack are defined. Additional database models are stored in this package, as a separate module, and added in the __init__.py.</p></li>
+</ul>
+<h1>TurboGears – Creating Models</h1>
+<p>Let us add a student model which will set up a student table in our <b>sqlite</b> database.</p>
+<p><b>Hello\hello\model\student.py</b></p>
+<pre class="prettyprint notranslate">
+from sqlalchemy import *
+from sqlalchemy.orm import mapper, relation, relation, backref
+from sqlalchemy import Table, ForeignKey, Column
+from sqlalchemy.types import Integer, Unicode, DateTime
+
+from hello.model import DeclarativeBase, metadata, DBSession
+from datetime import datetime
+
+class student(DeclarativeBase):
+   __tablename__ = 'student'
+
+   uid = Column(Integer, primary_key = True)
+   name = Column(Unicode(20), nullable = False, default = '')
+   city = Column(Unicode(20), nullable = False, default = '')
+   address = Column(Unicode(100), nullable = False, default = '')
+   pincode = Column(Unicode(10), nullable = False, default = '')
+</pre>
+<p>Now add this model in <b>init_model()</b> function inside <b>__init__.py.</b> This function already contains the auth model in it. Add our student model below it.</p>
+<pre class="result notranslate">
+# Import your model modules here.
+from hello.model.auth import User, Group, Permission
+from hello.model.student import student
+</pre>
+<p>If you want the table to be initialized with some data at the time of setting up the models, add it in bootstrap.py in websetup package. Add the following statements in the <b>bootstrap()</b> function.</p>
+<pre class="prettyprint notranslate">
+s1 = model.student()
+s1.name = 'M.V.Lathkar'
+s1.city = 'Nanded'
+s1.address = 'Shivaji Nagar'
+s1.pincode = '431602'
+
+model.DBSession.add(s1)
+model.DBSession.flush()
+transaction.commit()
+</pre>
+<p>The Models are initialized by running setup-app command of gearbox &minus;</p>
+<pre class="result notranslate">
+gearbox setup-app
+</pre>
+<p>Session object of SQLAlchemy manages all persistence operations of ORM object.</p>
+<h1>TurboGears – CRUD Operations</h1>
+<p>The following session methods perform CRUD Operations &minus;</p>
+<ul class="list">
+<li><p><b>DBSession.add(model object)</b> &minus; inserts a record into mapped table.</p></li>
+<li><p><b>DBSession.delete(model object)</b> &minus; deletes record from the table.</p></li>
+<li><p><b>DBSession.query(model).all()</b> &minus; retrieves all the records from table (corresponding to a SELECT query).</p></li>
+</ul>
+<p>You can apply filter to the retrieved record set by using a filter attribute. For instance, in order to retrieve records with city = ’Hyderabad’ in students table, use the following statement &minus;</p>
+<pre class="prettyprint notranslate">
+DBSession.query(model.student).filter_by(city = ’Hyderabad’).all()
+</pre>
+<p>We shall now see how to interact with the models through controller URLs.</p>
+<p>First let us design a ToscaWidgets form for entering the student’s data</p>
+<p><b>Hello\hello\controllers.studentform.py</b></p>
+<pre class="prettyprint notranslate">
+import tw2.core as twc
+import tw2.forms as twf
+
+class StudentForm(twf.Form):
+   class child(twf.TableLayout):
+      name = twf.TextField(size = 20)
+      city = twf.TextField()
+      address = twf.TextArea("",rows = 5, cols = 30)
+      pincode = twf.NumberField()
+
+   action = '/save_record'
+   submit = twf.SubmitButton(value = 'Submit')
+</pre>
+<p>In the RootController (root.py of Hello application), add the following function mapping ‘/add’ URL &minus;</p>
+<pre class="prettyprint notranslate">
+from hello.controllers.studentform import StudentForm
+
+class RootController(BaseController):
+   @expose('hello.templates.studentform')
+   def add(self, *args, **kw):
+      return dict(page='studentform', form = StudentForm)
+</pre>
+<p>Save the following HTML code as <b>studentform.html</b> in the templates folder &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   lang = "en"&gt;
+   
+   &lt;head&gt;
+      &lt;title&gt;Student Registration Form&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;div id = "getting_started"&gt;
+         ${form.display(value = dict(title = 'Enter data'))}
+      &lt;/div&gt;
+   &lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+<p>Enter <b>http://localhost:8080/add</b> in the browser after starting the server. The following Student information form will open up in the browser &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/registration.jpg" alt="Registration" />
+<p>The above form is designed to be submitted to the <b>‘/save_record’</b> URL. Hence a <b>save_record()</b> function needs to be added in the <b>root.py</b> to expose it. The data from the studentform is received by this function as a <b>dict()</b> object. It is used to add a new record in the student table underlying student model.</p>
+<pre class="prettyprint notranslate">
+@expose()
+#@validate(form = AdmissionForm, error_handler = index1)
+
+def save_record(self, **kw):
+   newstudent = student(name = kw['name'],city = kw['city'],
+      address = kw['address'], pincode = kw['pincode'])
+   DBSession.add(newstudent)
+   flash(message = "new entry added successfully")
+   redirect("/listrec")
+</pre>
+<p>Please note that after the successful addition, the browser will be redirected to <b>‘/listrec’ URL</b>. This URL is exposed by a <b>listrec() function</b>. This function selects all records in the student table and sends them in the form of a dict object to the studentlist.html template. This <b>listrec()</b> function is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+@expose ("hello.templates.studentlist")
+def listrec(self):
+   entries = DBSession.query(student).all()
+   return dict(entries = entries)
+</pre>
+<p>The studentlist.html template iterates through the entries dictionary object using py:for directive. The studentlist.html template is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"&gt;
+   
+   &lt;head&gt;
+      &lt;link rel = "stylesheet" type = "text/css" media = "screen" 
+         href = "${tg.url('/css/style.css')}" /&gt;
+      &lt;title&gt;Welcome to TurboGears&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;h1&gt;Welcome to TurboGears&lt;/h1&gt;
+      
+      &lt;py:with vars = "flash = tg.flash_obj.render('flash', use_js = False)"&gt;
+         &lt;div py:if = "flash" py:replace = "Markup(flash)" /&gt;
+      &lt;/py:with&gt;
+      
+      &lt;h2&gt;Current Entries&lt;/h2&gt;
+      
+      &lt;table border = '1'&gt;
+         &lt;thead&gt;
+            &lt;tr&gt;
+               &lt;th&gt;Name&lt;/th&gt;
+               &lt;th&gt;City&lt;/th&gt;
+               &lt;th&gt;Address&lt;/th&gt;
+               &lt;th&gt;Pincode&lt;/th&gt;
+            &lt;/tr&gt;
+         &lt;/thead&gt;
+         
+         &lt;tbody&gt;
+            &lt;py:for each = "entry in entries"&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;${entry.name}&lt;/td&gt;
+                  &lt;td&gt;${entry.city}&lt;/td&gt;
+                  &lt;td&gt;${entry.address}&lt;/td&gt;
+                  &lt;td&gt;${entry.pincode}&lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/py:for&gt;
+         &lt;/tbody&gt;
+         
+      &lt;/table&gt;
+   
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Now revisit the <b>http://localhost:8080/add</b> and enter data in the form. By clicking on the submit button, it will take the browser to studentlist.html. It will also flash a ‘new record added successfully’ message.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/entries.jpg" alt="Entries" />
+<h1>TurboGears – DataGrid</h1>
+<p>The ToscaWidgets contains a DataGrid control which provides a quick way to present data in tabular form. The DataGrid object is declared as follows &minus;</p>
+<pre class="prettyprint notranslate">
+from tw2.forms import DataGrid
+student_grid = DataGrid(fields = [('Name', 'name'),('City', 'city'),
+   ('Address','address'), ('PINCODE', 'pincode')])
+</pre>
+<p>Now, showgrid() function retrieves all the records in student table and exposes the data to grid.html template. First the code for showgrid() function and then grid.html code is given below &minus;</p>
+<h2>showgrid()</h2>
+<pre class="prettyprint notranslate">
+@expose('hello.templates.grid')
+def showgrid(self):
+   data = DBSession.query(student).all()
+   return dict(page = 'grid', grid = student_grid, data = data)
+</pre>
+<h2>grid.html</h2>
+<pre class="prettyprint notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   lang = "en"&gt;
+   
+   &lt;head&gt;
+      &lt;title&gt;Student Registration Form&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;div id = "getting_started"&gt;
+         &lt;div&gt;${grid.display(value = data)}&lt;/div&gt;
+      &lt;/div&gt;
+   &lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+<p>The following tabular data will be displayed when <b>http://localhost:8080/showlist</b> URL is entered in the browser &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/form.jpg" alt="Form" />
+<h1>TurboGears – Pagination</h1>
+<p>TurboGears provides a convenient decorator called paginate() to divide output in the pages. This decorator is combined with the expose() decorator. The @Paginate() decorator takes the dictionary object of query result as argument. In addition, the number of records per page are decided by value of items_per_page attribute. Ensure that you import paginate function from tg.decorators into your code.</p>
+<p>Rewrite listrec() function in root.py as follows &minus;</p>
+<pre class="prettyprint notranslate">
+from tg.decorators import paginate
+class RootController(BaseController):
+   @expose ("hello.templates.studentlist")
+   @paginate("entries", items_per_page = 3)
+	
+   def listrec(self):
+      entries = DBSession.query(student).all()
+      return dict(entries = entries)
+</pre>
+<p>The items per page are set to be three.</p>
+<p>In the studentlist.html template, page navigation is enabled by adding tmpl_context.paginators.entries.pager() below the py:for directive. The code for this template should be as below &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"&gt;
+   
+   &lt;head&gt;
+      &lt;link rel = "stylesheet" type = "text/css" media = "screen" 
+         href = "${tg.url('/css/style.css')}" /&gt;
+      &lt;title&gt;Welcome to TurboGears&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      
+      &lt;h1&gt;Welcome to TurboGears&lt;/h1&gt;
+		
+      &lt;py:with vars = "flash = tg.flash_obj.render('flash', use_js = False)"&gt;
+         &lt;div py:if = "flash" py:replace = "Markup(flash)" /&gt;
+      &lt;/py:with&gt;
+      
+      &lt;h2&gt;Current Entries&lt;/h2&gt;
+		
+      &lt;table border = '1'&gt;
+         &lt;thead&gt;
+            &lt;tr&gt;
+               &lt;th&gt;Name&lt;/th&gt;
+               &lt;th&gt;City&lt;/th&gt;
+               &lt;th&gt;Address&lt;/th&gt;
+               &lt;th&gt;Pincode&lt;/th&gt;
+            &lt;/tr&gt;
+         &lt;/thead&gt;
+         
+         &lt;tbody&gt;
+            &lt;py:for each = "entry in entries"&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;${entry.name}&lt;/td&gt;
+                  &lt;td&gt;${entry.city}&lt;/td&gt;
+                  &lt;td&gt;${entry.address}&lt;/td&gt;
+                  &lt;td&gt;${entry.pincode}&lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/py:for&gt;
+				
+            &lt;div&gt;${tmpl_context.paginators.entries.pager()}&lt;/div&gt;
+         &lt;/tbody&gt;
+         
+      &lt;/table&gt;
+   
+   &lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+<p>Enter <b>http://localhost:8080/listrec</b> in the browser. The first page of records in the table are displayed. On top of this table, links to page numbers are also seen.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/record.jpg" alt="Record" />
+<h2>How to Add Pagination Support to Datagrid</h2>
+<p>It is also possible to add pagination support to datagrid. In the following example, paginated datagrid is designed to display action button. In order to activate action button datagrid object is constructed with following code &minus;</p>
+<pre class="prettyprint notranslate">
+student_grid = DataGrid(fields = [('Name', 'name'),('City', 'city'),
+   ('Address','address'), ('PINCODE', 'pincode'),
+   ('Action', lambda obj:genshi.Markup('&lt;a
+      href = "%s"&gt;Edit&lt;/a&gt;' % url('/edit',
+      params = dict(name = obj.name)))) ])
+</pre>
+<p>Here the action button is linked to the name parameter of each row in the data grid.</p>
+<p>Rewrite the <b>showgrid()</b> function as follows &minus;</p>
+<pre class="prettyprint notranslate">
+@expose('hello.templates.grid')
+@paginate("data", items_per_page = 3)
+
+def showgrid(self):
+   data = DBSession.query(student).all()
+   return dict(page = 'grid', grid = student_grid, data = data)
+</pre>
+<p>The browser shows paginated datagrid as follows &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/registration_form.jpg" alt="Registration Form"/>
+<p>By clicking the Edit button in the third row, it will redirect to the following URL <b>http://localhost:8080/edit?name=Rajesh+Patil</b></p>
+<h1>TurboGears – Admin Access</h1>
+<p>TurboGears provides the tgext.admin extension, which is powered by tgext.crud and sprox. This Sprox is a package used for the creation of web widgets directly from the database schema. This can be used to automatically create simple administration pages and is the toolkit powering the /admin page in the newly quickstarted applications.</p>
+<p>By default, the admin will provide an autogenerated access to all the models imported in your project models/__init__.py.</p>
+<h2>How to Create TurboGears Admin</h2>
+<p>The default TurboGears admin is created as an object of AdminController class &minus;</p>
+<pre class="prettyprint notranslate">
+from tgext.admin.controller import AdminController
+
+class RootController(BaseController):
+   admin = AdminController(model, DBSession, config_type = TGAdminConfig)
+</pre>
+<p>This creates an admin for all the models with the default TurboGears admin configuration.</p>
+<p>Through the manager, a user has been created during the setup phase. Now, it is possible to get access to the TurboGears Admin at <b>http://localhost:8080/admin</b> The first time this page is accessed, it will ask for authentication. You can simply provide the username and password of the user that the setup-app command created for us &minus;</p>
+<pre class="result notranslate">
+Username: manager
+Password: managepass
+</pre>
+<p>In order to login to the quickstarted project, add the following functions to the RootController class (controllers/root.py).</p>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, flash, redirect, request,url, lurl
+from tg import redirect, validate
+from hello import model
+from hello.model import DBSession
+from tgext.admin.tgadminconfig import BootstrapTGAdminConfig as TGAdminConfig
+from tgext.admin.controller import AdminController
+from tg.exceptions import HTTPFound
+
+class RootController(BaseController):
+   admin = AdminController(model, DBSession, config_type =  TGAdminConfig)
+   
+   @expose('hello.templates.index')
+   def index(self):
+      return dict(page = 'index')
+   
+   @expose('hello.templates.login')
+   def login(self, came_from = lurl('/'), failure = None,    login = ''):
+	
+      if failure is not None:
+         if failure == 'user-not-found':
+            flash(_('User not found'), 'error')
+         elif failure == 'invalid-password':
+            flash(_('Invalid Password'), 'error')
+			
+      login_counter = request.environ.get('repoze.who.logins', 0)
+		
+      if failure is None and login_counter &gt; 0:
+         flash(_('Wrong credentials'), 'warning')
+		 
+      return dict(page = 'login', login_counter = str(login_counter), 
+         came_from = came_from, login = login)
+   @expose()
+	
+   def post_login(self, came_from = lurl('/')):
+      if not request.identity:
+         
+         login_counter = request.environ.get('repoze.who.logins', 0) + 1
+            redirect('/login', params = dict(came_from = came_from,
+            __logins = login_counter))
+		
+         userid = request.identity['repoze.who.userid']
+         flash(('Welcome back, %s!') % userid)
+			
+         return HTTPFound(location = came_from)
+</pre>
+<p>Login to the 'quickstarted' application after starting the server and by visiting <b>http://localhost:8080/login</b> and then enter the manager credentials as displayed above. The browser will display an admin page like the one shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/admin_page.jpg" alt="Admin pade" />
+<p>The page shows all the models created in this application. You can click any model to see the listing of entries in it &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/student_listing.jpg" alt="Student Listing" />
+<p>The 'New' button on top of this datagrid allows the record to be added. Similarly, action buttons for editing and deleting a record are also provided in actions column of this datagrid. A search box is also displayed to select records conditionally.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/datagrid.jpg" alt="DataGrid" />
+<h1>TurboGears – Authorization &amp; Authentication</h1>
+<p>A TurboGears application is created by quickstart and setup-app options of the gearbox toolkit, which has the authorization and authentication support enabled by default. The models declared in auth.py are set up and initialized as per values assigned in bootstrap.py.</p>
+<p>The following models are declared in auth.py &minus; </p>
+<h2>User Model</h2>
+<p>The User model contains the design of a tg_user table. This table is used by the repose.who package. This repose.who package is a powerful as well as an extensible authentication library for WSGI applications. The structure of a user model is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+class User(DeclarativeBase):
+
+"""
+   __tablename__ = 'tg_user'
+   
+   user_id = Column(Integer, autoincrement = True, primary_key=True)
+   user_name = Column(Unicode(16), unique = True, nullable = False)
+   email_address = Column(Unicode(255), unique = True,nullable=False)
+                                             
+   display_name = Column(Unicode(255))
+   _password = Column('password', Unicode(128))
+   created = Column(DateTime, default = datetime.now)
+</pre>
+<p>This group model contains the definition tg_group table. Its definition is given in auth.py as follows &minus;</p>
+<pre class="prettyprint notranslate">
+class Group(DeclarativeBase):
+   __tablename__ = 'tg_group'
+   
+   group_id = Column(Integer, autoincrement = True,primary_key = True)
+   group_name = Column(Unicode(16),unique = True,nullable = False)
+   display_name = Column(Unicode(255))
+   created = Column(DateTime, default = datetime.now)
+</pre>
+<p>Another model permission is also set up, which contains permission definition.</p>
+<pre class="prettyprint notranslate">
+class Permission(DeclarativeBase):
+   __tablename__ = 'tg_permission'
+   
+   permission_id = Column(Integer,autoincrement = True,primary_key = True)
+   permission_name = Column(Unicode(63), unique = True, nullable = False)
+   description = Column(Unicode(255))
+</pre>
+<p>At the time of setting up models, the following data is added in these tables &minus;</p>
+<pre class="prettyprint notranslate">
+u = model.User()
+u.user_name = 'manager'
+u.display_name = 'Example manager'
+u.email_address = 'manager@somedomain.com'
+u.password = 'managepass'
+
+model.DBSession.add(u)
+g = model.Group()
+g.group_name = 'managers'
+g.display_name = 'Managers Group'
+g.users.append(u)
+
+model.DBSession.add(g)
+p = model.Permission()
+p.permission_name = 'manage'
+p.description = 'This permission gives an administrative right'
+p.groups.append(g)
+
+model.DBSession.add(p)
+u1 = model.User()
+u1.user_name = 'editor'
+u1.display_name = 'Example editor'
+u1.email_address = 'editor@somedomain.com'
+u1.password = 'editpass'
+
+model.DBSession.add(u1)
+</pre>
+<h2>Predicate Model</h2>
+<p>The predicates module in tg package contains definitions for predicate checkers. A predicate is a condition that must be met for the user to be able to access the requested source. Such a predicate, or condition, may be made up of more predicates – those are called compound predicates. Action controllers, or controllers, may have only one predicate, be it single or compound.</p>
+<p>If a user is not logged in, or does not have the proper permissions, this predicate checker throws a 401 (HTTP Unauthorized), which is caught by the repoze.who middleware to display the login page allowing the user to login, and redirecting the user back to the proper page when they are done.</p>
+<p>The different conditions or predicates defined in tg.predicates module are &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center;">tg.predicates module &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>All</b></p>
+<p>Check if all predicates specified are met</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>Any<b></p>
+<p>Check if at least one of specified predicates are met</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>is_user</b></p>
+<p>Check that the authenticated user's username is the specified one</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>in_group</b></p>
+<p>Check that the user belongs to the specific group.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>in_all_groups</b></p>
+<p>Check that the user belongs to all of the specified groups.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>in_any_group</b></p>
+<p>Check that the user belongs to at least one of the specified groups.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>is_anonymous</b></p>
+<p>Check that the current user is anonymous.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>has_permission</b></p>
+<p>Check that the current user has the specified permission.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>has_all_permissions</b></p>
+<p>Check that the current user has been granted all of the specified permissions.</td></p>
+</tr>
+<tr>
+<td>10</td>
+<td><p><b>has_any_permission</b></p>
+<p>Check that the user has at least one of the specified permissions.</p></td>
+</tr>
+</table>
+<p>For example, if you have a predicate, which is <b>grant access user belonging to customers group</b>, then you can use the following built-in predicate checker &minus;</p>
+<pre class="prettyprint notranslate">
+from tg.predicates import in_group
+p in_group(‘customers’)
+</pre>
+<p>The following predicate checker will grant access to ‘root’ user or anybody with ‘manage’ permission &minus;</p>
+<pre class="prettyprint notranslate">
+from tg.predicates import Any, is_user, has_permission
+p = Any(is_user('root'), has_permission('manage'), 
+   sg = 'Only administrators can remove blog posts')
+</pre>
+<h1>TurboGears - Using MongoDB</h1>
+<p>TurboGears also supports MongoDB document databases. It uses Ming, an Object Document Mapper API. Usage of Ming is very much similar to SQLAlchemy. Ming query language makes it possible to port SQLAlchemy based TurboGears project to Ming.</p>
+<h2>What is PyMongo</h2>
+<p>PyMongo is a Python distribution containing tools for working with MongoDB. Ming extends PyMongo providing &minus;</p>
+<ul class="list">
+<li>Declarative Models</li>
+<li>Schema Validation and Conversion</li>
+<li>Schema Evolution</li>
+<li>Pure InMemory MongoDB Implementation</li>
+<li>Unit of Work</li>
+<li>Identity Map</li>
+<li>One-To-Many, Many-To-One and Many-To-Many Relations</li>
+</ul>
+<p>First of all, you need to download and install MongoDB. The latest distribution of MongoDB can be downloaded from <a target="_blank" rel="nofollow" href="https://www.mongodb.org/downloads#production">https://www.mongodb.org/downloads</a></p>
+<p>On Windows, start MongoDB server by providing -dbpath option &minus;</p>
+<pre class="result notranslate">
+C:\mongodb\bin>Mongod --dbpath d:\mongo
+</pre>
+<p><b>D:\mongo folder</b> is designated to store MongoDB database. Server starts listening at <b>http://localhost:27017.</b> Now to start MongoDB shell use the following command &minus;</p>
+<pre class="result notranslate">
+C:\mongodb\bin>Mongo
+</pre>
+<p>Our MongoDB environment is now ready.</p>
+<p>Now create a TurboGears project with -ming option &minus;</p>
+<pre class="result notranslate">
+gearbox quickstart --ming Hello
+</pre>
+<p>This quickstarted project will provide an authentication and authorization layer like the one that is provided for the SQLAlchemy version. This application will now try to connect to a server on port 27017 on the local machine. The development.ini file in project folder contains the following settings &minus;</p>
+<pre class="prettyprint notranslate">
+ming.url = mongodb://localhost:27017/
+ming.db = hello
+</pre>
+<p>Setup the project using the following command &minus;</p>
+<pre class="result notranslate">
+Python setup.py develop
+</pre>
+<p>The project folder contains models subfolder which has the following files &minus;</p>
+<ul class="list">
+<li><p><i><b>__init__.py</b></i> &minus; This is where the <b>database</b> access is set up. Your collections should be <b>imported into this module</b>. For example, we shall add student collection in this package.<p></li>
+<li><p><i><b>session.py</b></i> &minus; This file defines the <b>session of your database connection</b>. You will need to import this each time you have to declare a <b>MappedClass</b> to specify the session to <b>perform queries</b>.<p></li>
+<li><p><i><b>auth.py</b></i> &minus; This file will be created, if you have <b>enabled authentication and authorization</b> in the quickstart. It defines three collections <b>repoze</b>.who, which further relies on: User, Group, and Permission.<p></li>
+</ul>
+<h2>Defining Your Collection</h2>
+<p>By default, TurboGears configures Ming in a declarative mode. This is similar to the SQLAlchemy declarative support and needs each model to inherit from the MappedClass class.</p>
+<p>The MappedClass requires that a __mongometa__ subclass is available inside, which further provides the details regarding the name of the collection storing the documents and the session used to store the documents.</p>
+<p>MappedClass also contains definition of fields in the document. Ming’s odm module has definitions of different types of field properties &minus;</p>
+<ul class="list">
+<li>FieldProperty</li>
+<li>ForeignIdProperty</li>
+<li>RelationProperty</li>
+</ul>
+<p>The <b>ming.schema module</b> defines the following data types &minus;</p>
+<ul class="list">
+<li>ming.schema.Anything</li>
+<li>ming.schema.Array</li>
+<li>ming.schema.Binary</li>
+<li>ming.schema.Bool</li>
+<li>ming.schema.Float</li>
+<li>ming.schema.Int</li>
+<li>ming.schema.ObjectId</li>
+<li>ming.schema.Scalar</li>
+<li>ming.schema.String</li>
+</ul>
+<p>To add the student collection in this model, save the following code as student.py in hello/models folder.</p>
+<h3>Hello\models\student.py</h3>
+<pre class="prettyprint notranslate">
+from ming import schema
+from ming.odm import MappedClass
+from ming.odm import FieldProperty, ForeignIdProperty
+from hello.model import DBSession
+   
+Class student(MappedClass):
+   class __mongometa__:
+      session = DBSession
+      name = 'student'
+      
+   _id = FieldProperty(schema.ObjectId)
+   name = FieldProperty(schema.String(required = True))
+   city = FieldProperty(schema.String(if_missing = ''))
+   address = FieldProperty(schema.String(if_missing = ''))
+   pincode = FieldProperty(schema.String(if_missing = ''))
+</pre>
+<p>Finally, include this model in hello\models\__init__.py</p>
+<pre class="prettyprint notranslate">
+# Import your model modules here.
+from hello.model.auth import User, Group, Permission
+from hello.model.student import student
+</pre>
+<p>To set up these models, run the following gearbox command &minus;</p>
+<pre class="result notranslate">
+Gearbox setup-app
+</pre>
+<p>Start the server with the following gearbox command &minus;</p>
+<pre class="result notranslate">
+Gearbox serve –reload –debug
+</pre>
+<p>Open the homepage of this application <b>(http://localhost:8080/)</b> and login with manager credentials. Admin page of this application will show the list of models set up. (login as manager, password managepass)</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/homepage_application.jpg"alt="Homepage Application" />
+<p>The creation of collections can also be verified in MongoDB web interface as well as the MongoDB shell.</p>
+<p>The ODMSession is used to perform several database operations using the following functions &minus;</p>
+<ul class="list">
+<li>model.query.find()</li>
+<li>model.query.find_and_modify()</li>
+<li>model.remove()</li>
+<li>model.update()</li>
+<li>model.flush()</li>
+</ul>
+<h2>Designing a ToscoWidget Form</h2>
+<p>We shall now design a ToscoWidget form to enter student data and add it into the table underlying the student model.</p>
+<p>Following is the code for creating a studentform.py &minus;</p>
+<h3>Hello\controllers\studentform.py</h3>
+<pre class="prettyprint notranslate">
+import tw2.core as twc
+import tw2.forms as twf
+   
+class StudentForm(twf.Form):
+
+   class child(twf.TableLayout):
+      name = twf.TextField(size = 20)
+      city = twf.TextField()
+      address = twf.TextArea("",rows = 5, cols = 30)
+      pincode = twf.NumberField()
+		
+   action = '/save_record'
+   submit = twf.SubmitButton(value = 'Submit')     
+</pre>
+<p>In the application's Rootcontroller '/add' URL that calls add() function, which will open the above designed form in the browser. Its submit button then invokes save_record() function. It retrieves the form data and saves it in student table and redirects the application to '/listrec' URL, which exposes the studentlist template.</p>
+<p>The root.py for this activity is as follows &minus;</p>
+<h3>Hello/controllers/root.py</h3>
+<pre class="prettyprint notranslate">
+from hello.lib.base import BaseController
+from tg import expose, flash, redirect, request,url, lurl
+from tg import redirect, validate
+from hello import model
+from hello.model import DBSession
+from hello.model.student import student
+   
+from hello.controllers.studentform import StudentForm
+   
+class RootController(BaseController):
+   @expose()
+   def index(self):
+      return "&lt;h1&gt;Hello World&lt;/h1&gt;"
+         
+   @expose ("hello.templates.studentlist")
+   def listrec(self):
+      entries = student.query.find()
+      return dict(entries = entries)
+               
+   @expose('hello.templates.studentform')
+   def add(self, *args, **kw):
+      return dict(page = 'studentform', form = StudentForm)
+         
+   @expose()
+   def save_record(self, **kw):
+      newstudent = student(name = kw['name'],city = kw['city'],
+         address = kw['address'], pincode = kw['pincode'])
+      DBSession.flush()
+      flash(message = "new entry added successfully")
+      redirect("/listrec")
+</pre> 
+<p>The following templates are created in the templates folder &minus;</p>
+<h3>Hello\templates\studentform.html</h3>
+<pre class="prettyprint notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns = "http://www.w3.org/1999/xhtml" 
+   xmlns:py = "http://genshi.edgewall.org/" lang = "en"&gt;
+	
+   &lt;head&gt;
+      &lt;title&gt;Student Registration Form&lt;/title&gt;
+   &lt;/head&gt;
+	
+
+   &lt;body&gt;
+      &lt;div id = "getting_started"&gt;
+         ${form.display(value = dict(title = 'Enter data'))}
+      &lt;/div&gt;
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<h3>Hello\templates\studentlist.html</h3>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml" 
+   xmlns:py = "http://genshi.edgewall.org/"&gt;
+
+   &lt;head&gt;
+      &lt;link rel = "stylesheet" type = "text/css" media = "screen" 
+         href = ${tg.url('/css/style.css')}" /&gt;
+      &lt;title&gt;Welcome to TurboGears&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;h1&gt;Welcome to TurboGears&lt;/h1&gt;
+		
+      &lt;py:with vars = "flash = tg.flash_obj.render('flash', use_js = False)"&gt;
+         &lt;div py:if = "flash" py:replace = "Markup(flash)" /&gt;
+      &lt;/py:with&gt;
+      
+      &lt;h2&gt;Current Entries&lt;/h2&gt;
+		
+      &lt;table border = '1'&gt;
+         &lt;thead&gt;
+            &lt;tr&gt;
+               &lt;th&gt;Name&lt;/th&gt;
+               &lt;th&gt;City&lt;/th&gt;
+               &lt;th&gt;Address&lt;/th&gt;
+               &lt;th&gt;Pincode&lt;/th&gt;
+            &lt;/tr&gt;
+         &lt;/thead&gt;
+         
+         &lt;tbody&gt;
+            &lt;py:for each = "entry in entries"&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;${entry.name}&lt;/td&gt;
+                  &lt;td&gt;${entry.city}&lt;/td&gt;
+                  &lt;td&gt;${entry.address}&lt;/td&gt;
+                  &lt;td&gt;${entry.pincode}&lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/py:for&gt;
+         &lt;/tbody&gt;
+      &lt;/table&gt;
+		
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<p>Restart the server and enter <b>http://localhost:8080/add</b> in the browser &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/student_registration_form.jpg"alt="Student Registration Form" />
+<p>Each time the data is added and submit button is pressed, the list of current entries will be displayed.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/new_entry_output.jpg"alt="New Entry Output" />
+<h1>TurboGears – Scaffolding</h1>
+<p>Gearbox toolkit contains scaffold command, which is very useful to quickly create new components of TurboGears application. An application generated by quickstart command of gearbox has a skeleton template in the model folder (model.py.template), a templates folder (template.html.template) and a controllers folder (controller.py.template). These ‘.template’ files are used as basis for creating new scaffolds for an application</p>
+<p>For example, in order to create a new model named mymodel, simply run the following command &minus;</p>
+<pre class="result notranslate">
+gearbox scaffold model mymodel
+</pre>
+<p>This command will generate model/mymodel.py with newmodel class defined in it.</p>
+<pre class="prettyprint notranslate">
+# -*- coding: utf-8 -*-
+"""Mymodel model module."""
+from sqlalchemy import *
+from sqlalchemy import Table, ForeignKey, Column
+from sqlalchemy.types import Integer, Unicode, DateTime, LargeBinary
+from sqlalchemy.orm import relationship, backref
+from hello.model import DeclarativeBase, metadata, DBSession
+
+class Mymodel(DeclarativeBase):
+   __tablename__ = 'mymodels'
+   
+   uid = Column(Integer, primary_key = True)
+   data = Column(Unicode(255), nullable = False)
+   
+   user_id = Column(Integer, ForeignKey('tg_user.user_id'), index = True)
+   user = relationship('User', uselist = False,
+      backref = backref('mymodels',cascade = 'all, delete-orphan'))
+   __all__ = ['Mymodel']
+</pre>
+<p>The users can now make modifications in the table structure as per their requirement and then import it inside <b>model/__init__.py</b> to make the model available inside the application.</p>
+<p>In order to create a model, a controller class to handle it and an index page all these three components can be created simultaneously by the following command.</p>
+<pre class="result notranslate">
+gearbox scaffold model controller template mymodel
+</pre>
+<p>This command will result in controllers\mymodel.py in which the MymodelController class is duly defined.</p>
+<pre class="prettyprint notranslate">
+# -*- coding: utf-8 -*-
+"""Mymodel controller module"""
+
+from tg import expose, redirect, validate, flash, url
+# from tg.i18n import ugettext as _
+# from tg import predicates
+
+from hello.lib.base import BaseController
+# from hello.model import DBSession
+
+class MymodelController(BaseController):
+   # Uncomment this line if your controller requires an authenticated user
+   # allow_only = predicates.not_anonymous()
+   
+   @expose('hello.templates.mymodel')
+   def index(self, **kw):
+      return dict(page = 'mymodel-index')
+</pre>
+<p>To start using this controller, mount it inside your application RootController just to define an instance of MymodelController. Add these lines in the controllers\root.py &minus;</p>
+<pre class="prettyprint notranslate">
+From hello.controller.mymodel import MymodelController
+
+class RootController(BaseController): mymodel = MymodelController()
+</pre>
+<p>A template scaffold templates\mymodel.html will also be created in the templates folder. It will act as an index page for ‘/mymodel’ URL.</p>
+<p>The generated <b>mymodel.html file</b> in the templates folder will be as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"
+   xmlns:py = "http://genshi.edgewall.org/"
+   xmlns:xi = "http://www.w3.org/2001/XInclude"&gt;
+	
+   &lt;xi:include href = "master.html" /&gt;
+	
+   &lt;head&gt;
+      &lt;title&gt;Mymodel&lt;/title&gt;
+   &lt;/head&gt;
+	
+   &lt;body&gt;
+      &lt;div class = "row"&gt;
+         &lt;div class = "col-md-12"&gt;
+            &lt;h2&gt;Mymodel&lt;/h2&gt;
+            &lt;p&gt;Template page for Mymodel&lt;/p&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   &lt;/body&gt;
+	
+&lt;/html&gt;
+</pre>
+<h1>TurboGears – Hooks</h1>
+<p>There are three ways in TurboGears to plug behaviors inside the existing applications.</p>
+<ul class="list">
+<li><p><b>Hook</b> &minus; It is a mechanism by which it is possible to define an event, and notify registered listeners as and when the events are emitted.</p></li>
+<li><p><b>Controller Wrapper</b> &minus; It sits between TurboGears and Controller, so that it is possible to extend controller like a decorator. Thus, it can be attached to any third-party controller application.</p></li>
+<li><p><b>Application Wrapper</b> &minus; It is similar to any WSGI middleware, but works in TurboGears context only.</p></li>
+</ul>
+<p>Here in this chapter, we will discuss how to use hooks inside an existing application.</p>
+<h2>Hooks</h2>
+<p>Hooks are events registered in the application’s configuration file <b>app_cfg.py</b>. Any controller is then hooked to these events by event decorators.</p>
+<p>The following hooks are defined in TurboGears &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Hooks &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Startup()</b></p>
+<p>application wide only, called when the application starts.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>shutdown()</b></p>
+<p>application wide only, called when the application exits.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>configure_new_app</b></p>
+<p>new application got created by the application configurator.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>before_config(app)</b></p>
+<p>application wide only, called right after creating application, but before setting up options and middleware</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>after_config(app)</b></p>
+<p>application wide only, called after finishing setting everything up.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>before_validate</b></p>
+<p>Called before performing validation</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>before_call</b></p>
+<p>Called after validation, before calling the actual controller method.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>before_render</b></p>
+<p>Called before rendering a controller template, output is the controller return value.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>after_render</b></p>
+<p>Called after finishing rendering a controller template.</p></td>
+</tr>
+</table>
+<h2>Register a Hook</h2>
+<p>In order to <b>register a Hook,</b> create functions in <b>app_cfg.py</b> and then register them using the following code &minus;</p>
+<pre class="result notranslate">
+tg.hooks.register(hookane, function, controller)
+</pre>
+<p>In the following code, on_startup, on_shutdown and before_render hooks are registered in app_cfg.py.</p>
+<pre class="prettyprint notranslate">
+def on_startup():
+   print 'hello, startup world'
+   
+def on_shutdown():
+   print 'hello, shutdown world'
+   
+def before_render(remainder, params, output):
+   print 'system wide before render'
+   
+# ... (base_config init code)
+tg.hooks.register('startup', on_startup)
+tg.hooks.register('shutdown', on_shutdown)
+tg.hooks.register('before_render', before_render)
+</pre>
+<p>The before_render hook is registered with a controller function in the Rootcontroller. Add the following code in controllers\root.py.</p>
+<pre class="prettyprint notranslate">
+from tg.decorators import before_render
+
+class RootController(BaseController):
+   @expose('hello.templates.index')
+   @before_render(before_render_cb)
+	
+   def index(self, *args, **kw):
+      return dict(page = 'index')
+</pre>
+<p>When the application is served, start up message is displayed in the console.</p>
+<pre class="prettyprint notranslate">
+hello, startup world
+Starting Standard HTTP server on http://127.0.0.1:8080
+</pre>
+<p>When ‘/’ URL is entered in the browser, a message corresponding to the before_render hook is displayed on the console.</p>
+<pre class="result notranslate">
+system wide before render
+Going to render {'page': 'index'}
+</pre>
+<h1>TurboGears - Writing Extensions</h1>
+<p>TurboGears extensions are identified by <b>tgext.* package</b>. A Gearbox toolkit provides tgext command to create a sample extension. For example &minus;</p>
+<pre class="result notranslate">
+gearbox tgext -n myextension
+</pre>
+<p>Other optional parameters for this command are &minus;</p>
+<ul class="list">
+<li><p><b>--author</b> &minus; name of package author.</p></li>
+<li><p><b>--email</b> &minus; email of package author.</p></li>
+<li><p><b>--licence</b> &minus; licence used for package. Default is MIT.</p></li>
+<li><p><b>--description</b> &minus; Description of package.</p></li>
+<li><p><b>--keywords</b> &minus; Package keywords (default: turbogears2.extension).</p></li>
+</ul>
+<p>This will create a tgext.myextension directory, which has a simple sample extension inside.</p>
+<p><b>Run the setup.py</b> inside the directory &minus;</p>
+<pre class="result notranslate">
+Python setup.py install
+</pre>
+<p>The <b>_init_.py</b> file inside <b>tgext/myextension</b> folder contains &minus;</p>
+<ul class="list">
+<li><p><b>Plugme function</b> &minus; This is the entry point of extension.</p></li>
+<li><p><b>SetupExtension class</b> &minus; extension initialization takes place here.</p></li>
+<li><p><b>On_startup function</b> &minus; inside the class is a hook registered on __call__ function inside class.</p></li>
+</ul>
+<p>Brief version of the<b> tgext\myextension\__init__.py</b>.</p>
+<pre class="prettyprint notranslate">
+from tg import config
+from tg import hooks
+from tg.configuration import milestones
+
+import logging
+log = logging.getLogger('tgext.myextension')
+
+def plugme(configurator, options = None):
+   if options is None:
+      options = {}
+   log.info('Setting up tgext.myextension extension...')
+   milestones.config_ready.register(SetupExtension(configurator))
+   
+   return dict(appid='tgext.myextension')
+	
+class SetupExtension(object):
+   def __init__(self, configurator):
+      self.configurator = configurator
+      
+   def __call__(self):
+      log.info('>>> Public files path is %s' % config['paths']['static_files'])
+      hooks.register('startup', self.on_startup)
+      
+   def echo_wrapper_factory(handler, config):
+      def echo_wrapper(controller, environ, context):
+         log.info('Serving: %s' % context.request.path)
+         return handler(controller, environ, context)
+      return echo_wrapper
+      
+   self.configurator.register_wrapper(echo_wrapper_factory)
+   
+   def on_startup(self):
+      log.info('+ Application Running!')
+</pre>
+<p>Once the extension is installed, turn it on by making the following additions in the application's <b>app_cfg.py</b> configuration file.</p>
+<pre class="prettyprint notranslate">
+from tgext.myextension import plugme
+
+plugme(base_config)
+</pre>
+<p>If we launch the server using a gearbox server command, the notification of a newly registered extension can be viewed on the console by the following &minus;</p>
+<pre class="prettyprint notranslate">
+14:29:13,250 INFO [tgext.myextension] Setting up tgext.myextension extension...
+14:29:13,453 INFO [tgext.myextension] >>> Public files path is c:\tghello\hello\hello\public
+14:29:13,453 INFO [tgext.myextension] + Application Running!
+
+Starting Standard HTTP server on http://127.0.0.1:8080
+</pre>
+<h1>TurboGears - Pluggable Applications</h1>
+<p>If your extension needs to expose models and controllers, you probably want to have a look at the <b>Pluggable Applications</b>, which are meant to create reusable Turbogears applications that can be plugged inside other applications to extend their features.</p>
+<p>Use the following gearbox command to create a pluggable application &minus;</p>
+<pre class="result notranslate">
+gearbox quickstart-pluggable plugtest
+</pre>
+<p>These pluggable applications can define their own &minus;</p>
+<ul class="list">
+<li><p><b>Controllers</b> &minus; which will be automatically mounted, when the application is purged.</p></li>
+<li><p><b>Models</b> &minus; which will be available inside and outside the plugged application.</p></li>
+<li><p><b>Helpers</b> &minus; which can be automatically exposed in the ‘H’ object in an application template.</p></li>
+<li><p><b>Bootstrap</b> &minus; which will be executed when setup-app is called.</p></li>
+<li><p><b>Statics</b> &minus; which will be available at their own private path.</p></li>
+</ul>
+<p>Install this plugtest application and mount the same by making the following modifications in <b>app_cfg.py</b>.</p>
+<pre class="result notranslate">
+from tgext.pluggable import plug
+plug(base_config, plugtest)
+</pre>
+<h1>TurboGears – RESTful Applications</h1>
+<p>REST stands for <b>RE</b>presentational State Transfer. REST is web standards based architecture and uses HTTP Protocol for data communication. It revolves around a resource where every component is a resource and a resource is accessed by a common interface using HTTP standard methods. REST was first introduced by <b>Roy Fielding in 2000</b>.</p>
+<h2>What is a RestController</h2>
+<p>RestController in TurboGears provides a mechanism to access the request’s method, not just the URL. Standard HTTP verbiage includes: GET, POST, PUT, and DELETE. The RestController supports these, and also adds a few shortcuts for URL dispatch that makes displaying the data as forms and lists, a little easier for the user.</p>
+<p>To explain how RESTful works with TurboGears, we are going to define a simple webservice that exposes a list of students.</p>
+<p>The code for student model is given below &minus;</p>
+<h3>model\student.py</h3>
+<pre class="prettyprint notranslate">
+# -* - coding: utf-8 -*-
+from sqlalchemy import *
+
+from sqlalchemy.orm import mapper, relation, relation, backref
+from sqlalchemy import Table, ForeignKey, Column
+from sqlalchemy.types import Integer, Unicode, DateTime
+from hello.model import DeclarativeBase, metadata, DBSession
+from datetime import datetime
+
+class student(DeclarativeBase):
+   __tablename__ = 'student'
+   
+   uid = Column(Integer, primary_key = True)
+   name = Column(Unicode(20), nullable = False, default = '')
+   city = Column(Unicode(20), nullable = False, default = '')
+   address = Column(Unicode(100), nullable = False, default = '')
+   pincode = Column(Unicode(10), nullable = False, default = '')
+</pre>
+<p>Now create a controller based on RestController and provide a view function to list out list of students in json format.</p>  
+<h3>Controllers\student.py</h3> 
+<pre class="prettyprint notranslate">
+from tg import RestController
+from tg import expose
+from hello import model
+from hello.model import DBSession
+from hello.model.student import student
+from tg.decorators import with_trailing_slash
+
+class StudentController(RestController):
+   @expose('json')
+   def get_all(self):
+      students = DBSession.query(student).all()
+      return dict(students=students)
+</pre>
+<p>Mount this StudentController in RootController of application by incorporating following lines in <b>root.py</b> &minus;</p>
+<pre class="prettyprint notranslate">
+from hello.controllers.student import StudentController
+
+class RootController(BaseController):
+
+   students = StudentController()
+</pre>
+<p>Going to the <b>http://localhost:8080/students</b> it will provide the list of our students encoded in json format.</p>
+<p>We use the post method to define how we go about saving our student to the database. This method gets called whenever the<b> http://localhost:8080/student</b> url is accessed using a POST request &minus; </p>
+<pre class="prettyprint notranslate">
+@expose('json')
+def post(self, name, city, address, pincode):
+   newstudent = student(name = name, city = city, address = address, pincode = pincode)
+   DBSession.add(newstudent)
+   DBSession.flush()
+   return dict(student = newstudent)
+</pre>
+<p>Using the <b>get_one()</b> method, we can display one item from the database to the user &minus;</p>
+<pre class="prettyprint notranslate">
+@expose('json')
+def get_one(self, movie_id):
+   newstudent = DBSession.query(student).get(uid)
+   return dict(movie = movie)
+</pre>
+<p>PUT is the method used for updating an existing record using REST &minus; </p>
+<pre class="prettyprint notranslate">
+@expose('json')
+def put(self, name = name, city = city, address =  address, pincode = pincode, **kw):
+   newstudent = DBSession.query(student).get(name)
+   newstudent.name = name
+   newstudent.city = city
+   newstudent.address = address
+   newstudent.pincode = pincode
+   return dict(student = newstudent)
+</pre>
+<p>The work-horse of delete is attached to the post_delete method. Here we actually remove the record from the database, and then redirect back to the listing page &minus;</p>
+<pre class="prettyprint notranslate">
+@expose('json')
+def post_delete(self, uid, **kw):
+   newstudent = DBSession.query(student).get(uid)
+   DBSession.delete(newstudent)
+   return dict(movie = newstudent.uid)
+</pre>
+<h1>TurboGears - Deployment</h1>
+<p>To switch over from a development environment to a full-fledged production environment, application needs to be deployed on a real web server. Depending upon what you have, there are different options available to deploy a TurboGears web application.</p>
+<h2>Apache with mod_wsgi</h2>
+<p>The mod_wsgi is an Apache module developed by Graham Dumpleton. It allows WSGI programs to be served using the Apache web server.</p>
+<p>Firstly, install Apache 2.X for your platform, if not done already. Once you have Apache installed, install mod_wsgi. Create and activate Python virtual environment on the server and install TurboGears in it.</p>
+<p>Install your application within the application director, then create a script named <b>app.wsgi</b>.</p>
+<p>Configure Apache installation as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;VirtualHost *:80&gt;
+   ServerName www.site1.com
+   WSGIProcessGroup www.site1.com
+   WSGIDaemonProcess www.site1.com user = &lt;username&gt; 
+      group = www-data threads = 4 python-path = &lt;pythonpath&gt;
+   WSGIScriptAlias myapp/app.wsgi
+	
+   #Serve static files directly without TurboGears
+   Alias /images
+   Alias /css
+   Alias /js
+   CustomLog
+   ErrorLog
+&lt;/VirtualHost&gt;
+</pre>
+<h3>Restart Apache</h3>
+<p><a target="_blank" rel="nofollow" href="http://www.site1.com/">http://www.site1.com/</a> on a browser to access the application.</p>
+<h2>TurboGears under Circus and Chaussette</h2>
+<p>Circus is a process &amp; socket manager. It can be used to monitor and control processes and sockets. When paired with the Chaussette WSGI server, it can become a powerful tool to deploy your application and manage any related process your applications need.</p>
+<h2>TurboGears - GoogleAppEngine</h2>
+<p>Install the Google AppEngine SDK for Python from the following URL &minus; 
+<a target="_blank" rel="nofollow" href="https://cloud.google.com/appengine/downloads">https://cloud.google.coms</a></p>
+<p>Install the Google AppEngine on your system. Then open Google Developer console and sign in with your Google Account &minus; <a target="_blank" rel="nofollow" href="https://console.developers.google.com/start">https://console.developers.google.com/start</a></p>
+<p>Create a new project called <b>mytgapp</b> &minus;</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/mytgapp_project.jpg" alt="Mytgapp Project" />
+<p>Using Google AppEngine Launcher, create a new application named <b>mytgapp.</b></p>
+<img src="https://www.tutorialspoint.com/turbogears/images/new_application.jpg" alt="New Application" />
+<p></p>
+<img src="https://www.tutorialspoint.com/turbogears/images/google_app_engine_launcher.jpg" alt="Google App Engine Launcher" />
+<p>The following files will be created in the specified directory &minus;</p>
+<ul class="list">
+<li>app.yaml</li>
+<li>favicon.ico</li>
+<li>index.yaml</li>
+<li>main.py</li>
+</ul>
+<p>By default,the created application relies on the Webapp2 framework. To remove this dependency, edit the app.yaml file and delete the following part &minus;</p>
+<pre class="result notranslate">
+libraries:
+   - name: webapp2
+   version: "2.5.2"
+</pre>
+<p>Create a temporary virtual environment in a directory named mytgapp and install TurboGears. Create a TurboGears application in it. Now we can proceed editing the <b>main.py</b> file which is started by AppEngine to run our application and actually write a TurboGears application there.</p>
+<p>Add the following contents in <b>main.py</b> &minus;</p>
+<pre class="prettyprint notranslate">
+import os
+import site
+site.addsitedir(os.path.join(os.path.dirname(__file__), 'packages'))
+from tg import expose, TGController, AppConfig
+
+class RootController(TGController):
+   @expose()
+   def index(self):
+      return "&lt;h1&gt;Hello World&lt;/h1&gt;"
+		
+config = AppConfig(minimal = True, root_controller = RootController())
+app = config.make_wsgi_app()
+</pre>
+<p>Now run the application from AppEngine Launcher and click on browse button to see that application works properly on the localhost.</p>
+<p>We have already created a project named mytgapp in the developer console. Now click on the deploy button in the Launcher. After the deployment process is over, <a target="_blank" rel="nofollow" href="http://mytgapp.appspot.com/">http://mytgapp.appspot.com/</a> visit to view our application online.</p>
+<img src="https://www.tutorialspoint.com/turbogears/images/mytgapp_appspot.jpg" alt="mytgapp appspot" />
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/turbogears/turbogears_deployment.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/turbogears/turbogears_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=5"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "TurboGears Quick Guide",
+    "name": "TurboGears Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/turbogears/images/web_frameworks.jpg",
+        "width": 600,
+        "height": 437
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:49.",
+    "dateModified": "July 23 2017 03:34:49.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Web Application Framework or simply Web Framework represents a collection of libraries and modules, which enables a web application developer to write applications, without having to bother about low level details such as protocols, thread management, etc..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Turbogears",
+                "@id": "https://www.tutorialspoint.com/turbogears"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "TurboGears - Quick Guide"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/turbogears/turbogears_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:14:27 GMT -->
+</html>

@@ -1,0 +1,2491 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:23:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Cucumber Quick Guide</title>
+<meta name="description" content="Cucumber Quick Guide - Learn Cucumber starting from Overview, Environment, Gherkins, Features, Scenarios, Annotations, Scenario Outline, Tags, Data Tables, Comments, Hooks, Command Line Options, Junit Runner, Reports, Debugging, Java Testing, Ruby Testing." /> 
+<meta name="keywords" content="Cucumber, Tutorial, Overview, Environment, Gherkins, Features, Scenarios, Annotations, Scenario Outline, Tags, Data Tables, Comments, Hooks, Command Line Options, Junit Runner, Reports, Debugging, Java Testing, Ruby Testing." /> 
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #00A719 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #00A719 !important;}
+.submenu-item{ border-bottom: 2px solid #00A719 !important; border-top: 2px solid #00A719 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/cucumber/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/cucumber/images/cucumber-mini-logo.jpg" alt="Cucumber Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Cucumber Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/cucumber/index.htm">Cucumber - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_overview.htm">Cucumber - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_environment.htm">Cucumber - Environment</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_gherkins.htm">Cucumber - Gherkins</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_features.htm">Cucumber - Features</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_scenarios.htm">Cucumber - Scenarios</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_annotations.htm">Cucumber - Annotations</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_scenario_outline.htm">Cucumber - Scenario Outline</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_tags.htm">Cucumber - Tags</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_data_tables.htm">Cucumber - Data Tables</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_comments.htm">Cucumber - Comments</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_hooks.htm">Cucumber - Hooks</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_command_line_options.htm">Cucumber - Command Line Options</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_junit_runner.htm">Cucumber - JUnit Runner</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_reports.htm">Cucumber - Reports</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_debugging.htm">Cucumber - Debugging</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_java_testing.htm">Cucumber - Java Testing</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_ruby_testing.htm">Cucumber - Ruby Testing</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Cucumber Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm">Cucumber - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_useful_resources.htm">Cucumber - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/cucumber/cucumber_discussion.htm">Cucumber - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Cucumber - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/cucumber/cucumber_ruby_testing.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/cucumber/cucumber_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Cucumber - Overview</h1>
+<p>In order to get better advantage of the software testing, organizations are nowadays taking a step forward. They implement important acceptance test scenarios while development is in-progress. This approach is commonly known as <b>Behavior Driven Development</b> (BDD).</p>
+<p>Behavior Driven Development gives us an opportunity to create test scripts from both the developer’s and the customer’s prospective as well. So in the beginning, developers, project managers, QAs, user acceptance testers and the product owner (stockholder), all get together and brainstorm about which test scenarios should be passed in order to call this software/application successful. This way they come up with a set of test scenarios. All these test scripts are in simple English language, so it serves the purpose of documentation also.</p>
+<h2>Example</h2>
+<p>If we are developing a user authentication feature, then the following can be few key test scenarios, which needs to get passed in order to call it a success.</p>
+<ul class="list">
+<li><p>The user should be able to login with correct username and correct password.</p></li>
+<li><p>The user should not be able to login with incorrect username and correct password.</p></li>
+<li><p>The user should not be able to login with correct username and incorrect password.</p></li>
+</ul>
+<h2>How it Works</h2>
+<p>By the time the code is ready, test scripts are ready too. The code has to pass the test scripts defined in BDD. If it does not happen, code refactoring will be needed. Code gets freezed only after successful execution of defined test scripts.</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/bdd.jpg" alt="BDD" />
+<p>It is a very simple notion, but what we need in order to get this concept implemented. The answer is, Behavior Driven Development (BDD) Framework. Cucumber is one such open source tool, which supports behavior driven development. To be more precise, Cucumber can be defined as a testing framework, driven by plain English text. It serves as documentation, automated tests, and a development aid – all in one.</p>
+<p>So what does Cucumber do? It can be described in the following steps &minus;</p>
+<p>Cucumber reads the code written in plain English text (Language Gherkin – to be introduced later in this tutorial) in the feature file (to be introduced later).</p>
+<p>It finds the exact match of each step in the step definition (a code file - details provided later in the tutorial).</p>
+<p>The piece of code to be executed can be different software frameworks like <b>Selenium, Ruby on Rails</b>, etc. Not every BDD framework tool supports every tool.</p>
+<p>This has become the reason for Cucumber's popularity over other frameworks, like <b>JBehave, JDave, Easyb,</b> etc.</p>
+<p>Cucumber supports over a dozen different software platforms like &minus;</p>
+<ul class="list">
+<li>Ruby on Rails</li>
+<li>Selenium</li>
+<li>PicoContainer</li>
+<li>Spring Framework</li>
+<li>Watir</li>
+</ul>
+<h2>Advantages of Cucumber Over Other Tools</h2>
+<ul class="list">
+<li><p>Cucumber supports different languages like Java.net and Ruby.</p></li>
+<li><p>It acts as a bridge between the business and technical language. We can accomplish this by creating a test case in plain English text.</p></li>
+<li><p>It allows the test script to be written without knowledge of any code, it allows the involvement of non-programmers as well.</p></li>
+<li><p>It serves the purpose of end-to-end test framework unlike other tools.</p></li>
+<li><p>Due to simple test script architecture, Cucumber provides code reusability.</p></li>
+</ul>
+<h1>Cucumber - Environment</h1>
+<p>In this chapter, we will see the environment setup for Cucumber with Selenium WebDriver and Java, on Windows Machine.</p>
+<h2>Prerequisites for Environment Setup</h2>
+<p>Following are the prerequisites required to set up with &minus;</p>
+<h3>Java</h3>
+<p><b>Why we need</b> &minus; Java is a robust programming language. Cucumber supports Java platform for the execution.</p>
+<p><b>How to install</b> &minus;</p>
+<p><b>Step 1</b> &minus; Download jdk and jre from the following link <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="nofollow">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+<p><b>Step 2</b> &minus; Accept license agreement.</p>
+<p><b>Step 3</b> &minus; Install JDK and JRE.</p>
+<p><b>Step 4</b> &minus; Set the environment variable as shown in the following screenshots.</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/system_properties.jpg" alt="System Properties" />
+<p></p>
+<img src="https://www.tutorialspoint.com/cucumber/images/edit_system_variable.jpg" alt="Edit System Variable" />
+<h3>Eclipse</h3>
+<p><b>Why we need</b> &minus; Eclipse is an Integrated Development Environment (IDE). It contains a base workspace and an extensible plug-in system for customizing the environment.</p>
+<p><b>How to install</b> &minus;</p>
+<p><b>Step 1</b> &minus; Make sure JAVA is installed on your machine.</p>
+<p><b>Step 2</b> &minus; Download Eclipse from <a target="_blank" rel="nofollow" href="https://eclipse.org/downloads/">https://eclipse.org/downloads/</a></p>
+<p><b>Step 3</b> &minus; Unzip and Eclipse is installed.</p>
+<h3>Maven</h3>
+<p><b>Why we need</b> &minus; Maven is a build automation tool used primarily for Java projects. It provides a common platform to perform activities like generating source code, compiling code, packaging code to a jar, etc. Later if any of the software versions gets changed, Maven provides an easy way to modify the test project accordingly.</p>
+<p><b>How to install</b> &minus;</p>
+<p><b>Step 1</b> &minus; Download Maven from the following link &minus; <a target="_blank" rel="nofollow" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
+<p><b>Step 2</b> &minus; Unzip the file and remember the location.</p>
+<p><b>Step 3</b> &minus; Create environment variable MAVEN_HOME as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/system_variables.jpg" alt="System Variables" />
+<p><b>Step 4</b> &minus; Edit Path variable and include Maven as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/edit_path_variable.jpg" alt="Edit Path Variable" />
+<p><b>Step 5</b> &minus; Download MAVEN plugin from Eclipse.</p>
+<p><b>Step 6</b> &minus; Open Eclipse.</p>
+<p><b>Step 7</b> &minus; Go to Help &#8594; Eclipse Marketplace &#8594; Search Maven &#8594; Maven Integration for Eclipse &#8594; INSTALL.</p>
+<h2>Configure Cucumber with Maven</h2>
+<p><b>Step 1</b> &minus; Create a Maven project.</p>
+<ul class="list">
+<li><p>Go to File &#8594; New &#8594; Others &#8594; Maven &#8594; Maven Project &#8594; Next.</p></li>
+<li><p>Provide group Id (group Id will identify your project uniquely across all projects).</p></li>
+<li><p>Provide artifact Id (artifact Id is the name of the jar without version. You can choose any name, which is in lowercase). Click on Finish.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/new_maven_project.jpg" alt="New Maven Project" />
+<p><b>Step 2</b> &minus; Open pom.xml.</p>
+<ul class="list">
+<li><p>Go to package explorer on the left hand side of Eclipse.</p></li>
+<li><p>Expand the project <b>CucumberTest</b>.</p></li>
+<li><p>Locate <b>pom.xml</b> file.</p></li>
+<li><p>Right-click and select the option, open with “Text Editor”.</p></li>
+</ul>
+<p><b>Step 3</b> &minus; Add dependency for selenium: This will indicate Maven which Selenium jar files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Open <b>pom.xml</b> is in the edit mode, create dependencies tag (&lt;dependencies&gt;&lt;/dependencies&gt;), inside the project tag.</p></li>
+<li><p>Inside the dependencies tag, create dependency tag (&lt;dependency&gt;&lt;/dependency&gt;).</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt; 
+   &lt;artifactId&gt;selenium-java&lt;/artifactId&gt; 
+   &lt;version&gt;2.47.1&lt;/version&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 4</b> &minus; Add dependency for Cucumber-Java: This will indicate Maven, which Cucumber files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt;
+   &lt;artifactId&gt;cucumber-java&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 5</b> &minus; Add dependency for Cucumber-JUnit: This will indicate Maven, which Cucumber JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-junit&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 6</b> &minus; Add dependency for JUnit: This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 7</b> &minus; Verify binaries.</p>
+<ul class="list">
+<li><p>Once <b>pom.xml</b> is edited successfully, save it.</p></li>
+<li><p>Go to Project &#8594; Clean &minus; It will take a few minutes.</p></li>
+</ul>
+<p>You will be able to see a Maven repository like shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/package_explorer.jpg" alt="Package Explorer" />
+<ul class="list">
+<li><p>Create a feature file (to be covered later).</p></li>
+<li><p>Create a step definition file (to be covered later).</p></li>
+<li><p>Create a JUnit runner to run the test (to be covered later).</p></li>
+</ul>
+<h1>Cucumber - Gherkins</h1>
+<p>So far, we have got an understanding of Cucumber and what it does. It executes the test scripts, which have been defined in the feature file (to be covered in subsequent chapters). The language, in which this executable feature files is written, is known as <b>Gherkin</b>. Gherkin is a plain English text language, which helps the tool - Cucumber to interpret and execute the test scripts.</p>
+<p>One may think that, it has been discussed many times that Cucumber supports simple English text then why we need a separate language - Gherkins. The answer lies in the concept of the Behavior Driven Development.</p>
+<p>As discussed earlier, we had seen that BDD incorporates different prospectives while creating test scripts. It can be development prospective, business prospective, etc. That said, we will need people from different community like developers, project managers, product owners, and testers while developing test scripts. As these people do not belong to the same category, there is a risk of not using the common language for test script conceptualizing. This was the evolution point for Gherkins.</p>
+<p>Gherkin provides the common set of keywords in English text, which can be used by people amongst the different community and yet get the same output in the form of test scripts.</p>
+<h2>Example</h2>
+<p><b>Feature</b> &minus; Login functionality for a social networking site. <b>Given</b> I am a social networking site user. <b>When</b> I enter username as username1. <b>And</b> I enter password as password1. <b>Then</b> I should be redirected to the home page of the site.</p>
+<p>The above-mentioned scenario is of a feature called user login. All the words highlighted in bold are Gherkin keywords.</p>
+<p>Example of few other keywords &minus;</p>
+<ul class="list">
+<li>Background</li>
+<li>But</li>
+<li>*</li>
+<li>Scenario Outline</li>
+<li>Examples</li>
+</ul>
+<p>Gherkin will parse each step written in step definition file (to be covered later). So the steps mentioned in the feature file and the step definition file (to be covered later) should match.</p>
+<p>You can locate the Gherkin jars in the Maven Dependency folder in the Package Explorer. It gets downloaded along with the other Cucumber jars. It will look like the following screenshot &minus;</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/gherkin_jars.jpg" alt="Gherkin Jars" />
+<p>Another interesting fact about Gherkin is, it supports not only English but many other native languages such as French, Finnish, Indonesian, Hungarian, Hindi, Urdu, Gujarati, etc.</p>
+<h1>Cucumber - Features</h1>
+<p>A <b>Feature</b> can be defined as a standalone unit or functionality of a project. Let’s take a very common example of a social networking site. How does the feature of this product/project look like? Few basic features can be determined as &minus;</p>
+<ul class="list">
+<li><p>Create and remove the user from the social networking site.</p></li>
+<li><p>User login functionality for the social networking site.</p></li>
+<li><p>Sharing photos or videos on the social networking site.</p></li>
+<li><p>Sending a friend request.</p></li>
+<li><p>Logout.</p></li>
+</ul>
+<p>By now, it is clear that, each independent functionality of the product under test can be termed as a feature when we talk about Cucumber. It is a best practice later when you start testing, that before deriving the test scripts, we should determine the features to be tested.</p>
+<p>A feature usually contains a list of scenarios to be tested for that feature. A file in which we store features, description about the features and scenarios to be tested is known as <b>Feature File</b>. We will see more about feature files in the following chapter.</p>
+<p>The keyword to represent a feature under test in Gherkins is “Feature”. The suggested best practice is, to write a small description of the feature beneath the feature title in the feature file. This will fulfill the need of a good documentation as well.</p>
+<h3>Example</h3>
+<p><b>Feature</b> &minus; Login functionality for a social networking site.</p>
+<p>The user should be able to login into the social networking site if the username and the password are correct.</p>
+<p>The user should be shown the error message if the username and the password are incorrect.</p>
+<p>The user should be navigated to home page, if the username and password are correct.</p>
+<h2>Feature Files</h2>
+<p>The file, in which Cucumber tests are written, is known as <b>feature files</b>. It is advisable that there should be a separate feature file, for each feature under test. The extension of the feature file needs to be “.feature”.</p>
+<p>One can create as many feature files as needed. To have an organized structure, each feature should have one feature file.</p>
+<p>For Example &minus;</p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Feature</th>
+<th style="text-align:center;">Feature File name</th>
+</tr>
+<tr>
+<td>1</td>
+<td>User Login</td>
+<td>userLogin.feature</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Share the Post</td>
+<td>sharePost.feature</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Create Account</td>
+<td>createAccount.feature</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Delete Account</td>
+<td>deleteAccount.feature</td>
+</tr>
+</table>
+<p>The naming convention to be used for feature name, feature file name depends on the individual’s choice. There is no ground rule in Cucumber about names.</p>
+<p>A simple feature file consists of the following keywords/parts &minus;</p>
+<ul class="list">
+<li><p><b>Feature</b> &minus; Name of the feature under test.</p></li>
+<li><p><b>Description</b> (optional) &minus; Describe about feature under test.</p></li>
+<li><p><b>Scenario</b> &minus; What is the test scenario.</p></li>
+<li><p><b>Given</b> &minus; Prerequisite before the test steps get executed.</p></li>
+<li><p><b>When</b> &minus; Specific condition which should match in order to execute the next step.</p></li>
+<li><p><b>Then</b> &minus; What should happen if the condition mentioned in WHEN is satisfied.</p></li>
+</ul>
+<h3>Example</h3>
+<p><b>Feature</b> &minus; User login on social networking site.</p>
+<p>The user should be able to login into the social networking site when the username and the password are correct.</p>
+<p>The user should be shown an error message when the username and the password are incorrect.</p>
+<p>The user should be navigated to the home page if the username and the password are correct.</p>
+<p><b>Outline</b> &minus; Login functionality for a social networking site.</p>
+<p>The given user navigates to Facebook. When I enter Username as "&lt;username&gt;" and Password as "&lt;password&gt;". Then, login should be unsuccessful.</p>
+<pre class="result notranslate">
+| username  | password  |
+| username1 | password1 |
+</pre>
+<p><b>* AND</b> keyword is used to show conjunction between two conditions. <b>AND</b> can be used with any other keywords like <b>GIVEN, WHEN</b> and <b>THEN</b>.</p>
+<p>There are no logic details written in the feature file.</p>
+<h2>Steps Definitions</h2>
+<p>We have got our feature file ready with the test scenarios defined. However, this is not the complete job done. Cucumber doesn’t really know which piece of code is to be executed for any specific scenario outlined in a feature file.</p>
+<p>This calls the need of an intermediate – Step Definition file. Steps definition file stores the mapping between each step of the scenario defined in the feature file with a code of function to be executed.</p>
+<p>So, now when Cucumber executes a step of the scenario mentioned in the feature file, it scans the step definition file and figures out which function is to be called.</p>
+<h3>Example of Step Definition File</h3>
+<pre class="prettyprint notranslate">
+public void goToFacebook() { 
+   driver = new FirefoxDriver(); 
+   driver.navigate().to("https://www.facebook.com/"); 
+} 
+@When "^user logs in using Username as \"([^\"]*)\" and Password as \"([^\"]*)\"$"
+public void I_enter_Username_as_and_Password_as(String arg1, String arg2) {
+   driver.findElement(By.id("email")).sendKeys(arg1);
+   driver.findElement(By.id("pass")).sendKeys(arg2);
+   driver.findElement(By.id("u_0_v")).click(); 
+} 
+@Then"^login should be unsuccessful$" 
+public void validateRelogin() { 
+   if(driver.getCurrentUrl().equalsIgnoreCase(
+      "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){ 
+         System.out.println("Test Pass");
+   } else { 
+      System.out.println("Test Failed"); 
+   } 
+   driver.close(); 
+}
+</pre>
+<p>So with each function, whatever code you want to execute with each test step (i.e. GIVEN/THEN/WHEN), you can write it within Step Definition file. Make sure that code/function has been defined for each of the steps.</p>
+<p>This function can be Java functions, where we can use both Java and Selenium commands in order to automate our test steps.</p>
+<h1>Cucumber - Scenarios</h1>
+<p><b>Scenario</b> is one of the core Gherkin structures. Every scenario starts with the keyword “Scenario:” (or localized one) and is followed by an optional scenario title. Each feature can have one or more scenarios and every scenario consists of one or more steps. A very simple example of scenario can be &minus;</p>
+<p><b>Scenario</b> &minus; Verify Help Functionality.</p>
+<p>Given user navigates to Facebook.</p>
+<p>When the user clicks on Help, then the Help page opens.</p>
+<p>Consider a case, where we need to execute a test scenario more than once. Suppose, we need to make sure that the login functionality is working for all types of subscription holders. That requires execution of login functionality scenario multiple times. Copy paste the same steps in order to just re-execute the code, does not seem to be a smart idea. For this, Gherkin provides one more structure, which is scenario outline.</p>
+<p>Scenario outline is similar to scenario structure; the only difference is the provision of multiple inputs. As you can see in the following example, the test case remains the same and non-repeatable. At the bottom we have provided multiple input values for the variables “Username” and “Password”. While running the actual test, Cucumber will replace the variable with input values provided and it will execute the test. Once pass-1 has been executed, the test will rerun for second iteration with another input value. Such variable or placeholders can be represented with ”&lt;&gt;” while mentioning with gherkin statements.</p>
+<h2>Example</h2>
+<p><b>Scenario Outline</b> &minus; Login functionality for a social networking site. The given user navigates to Facebook.</p>
+<p>When the user logs in using the Username as "&lt;username&gt;" and the Password as "&lt;password&gt;", then login should be successful.</p>
+<pre class="result notranslate">
+| username | password  | 
+| user1    | password1 | 
+| user2    | password2 |
+</pre>
+<p>There are a few tips and tricks to smartly define the Cucumber scenarios.</p>
+<ul class="list">
+<li><p>Each step should be clearly defined, so that it does not create any confusion for the reader.</p></li>
+<li><p>Do not repeat the test scenario, if needed use scenario outline to implement repetition.</p></li>
+<li><p>Develop a test step in a way that, it can be used within multiple scenarios and scenario outlines.</p></li>
+<li><p>As far as possible, keep each step completely independent. For example: “Given the user is logged in”. This can be divided into two steps</p>
+<ul class="list">
+<li>Given the user enters the user name.</li>
+<li>Clicks on login.</li>
+</ul></li>
+</ul>
+<h1>Cucumber - Annotations</h1>
+<p><b>Annotation</b> is a predefined text, which holds a specific meaning. It lets the compiler/interpreter know, what should be done upon execution. Cucumber has got the following few annotations &minus;</p>
+<ul class="list">
+<li><p><b>Given</b> &minus;</p>
+<ul class="list">
+<li><p>It describes the pre-requisite for the test to be executed.</p></li>
+<li><p>Example &minus; GIVEN I am a Facebook user</p></li>
+</ul></li>
+<li><p><b>When</b> &minus;</p> 
+<ul class="list">
+<li><p>It defines the trigger point for any test scenario execution.</p></li>
+<li><p>Example &minus; WHEN I enter "&lt;username&gt;"</p></li>
+</ul></li>
+<li><p><b>Then</b> &minus;</p> 
+<ul class="list">
+<li><p>Then holds the expected result for the test to be executed.</p></li>
+<li><p>Example &minus; THEN login should be successful.</p></li>
+</ul></li>
+<li><p><b>And</b> &minus;</p>
+<ul class="list">
+<li><p>It provides the logical AND condition between any two statements. AND can be used in conjunction with GIVEN, WHEN and THEN statement.</p></li>
+<li><p>Example &minus; WHEN I enter my "&lt;username&gt;" AND I enter my "&lt;password&gt;"</p></li>
+</ul></li>
+<li><p><b>But</b> &minus;</p>
+<ul class="list">
+<li><p>It signifies logical OR condition between any two statements. OR can be used in conjunction with GIVEN, WHEN and THEN statement.</p></li>
+<li><p>Example &minus; THEN login should be successful. BUT home page should not be missing.</p></li>
+</ul></li>
+<li><p><b>Scenario</b> &minus;</p>
+<ul class="list">
+<li><p>Details about the scenario under the test needs to be captured after the keyword “Scenario:”</p></li>
+<li><p>Example &minus;</p>
+<p>Scenario:</p>
+<p>GIVEN I am a Facebook user</p>
+<p>WHEN I enter my</p>
+<p>AND I enter my</p>
+<p>THEN login should be successful.</p>
+<p>BUT home page should not be missing.</p></li>
+</ul></li>
+<li><p><b>Scenario Outline</b> &minus; (To be covered later)</p></li>
+<li><p><b>Examples</b> &minus; (To be covered later)</p></li>
+<li><p><b>Background</b> &minus;</p>
+<ul class="list">
+<li><p>Background generally has the instruction on what to setup before each scenario runs. However, it gets executed after “Before” hook (to be covered later). So this is ideal to be used for code when we want to set up the web-browser or we want to establish the database connectivity.</p>
+<ul class="list">
+<li><p>Example &minus;</p>
+<p>Background:</p>
+<p>Go to Facebook home page.</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2>Example Scenario</h2>
+<p>Let’s automate a scenario in order to understand annotations better.</p>
+<p><b>Step 1</b></p>
+<p>Create a Maven Test Project named as <b>AnnotationTest</b>.</p>
+<ul class="list">
+<li><p>Go to File &#8594; New &#8594; Others &#8594; Maven &#8594; Maven Project &#8594; Next.</p></li>
+<li><p>Provide group Id (group Id will identify your project uniquely across all projects).</p></li>
+<li><p>Provide artifact Id (artifact Id is the name of the jar without version. You can choose any name which is in lowercase).</p></li>
+<li><p>Click on Finish.</p></li>
+<li><p>Open <b>pom.xml &minus;</b></p>
+<ul class="list">
+<li><p>Go to package explorer on the left hand side of Eclipse.</p></li>
+<li><p>Expand the project CucumberTest.</p></li>
+<li><p>Locate pom.xml file.</p></li>
+<li><p>Right-click and select the option, Open with “Text Editor”.</p></li>
+</ul></li>
+<li><p>Add dependency for Selenium &minus; This will indicate Maven, which Selenium jar files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Open pom.xml is in edit mode, create dependencies tag (&lt;dependencies&gt;&lt;/dependencies&gt;), inside the project tag.</p></li>
+<li><p>Inside the dependencies tag, create dependency tag (&lt;dependency&gt;&lt;/dependency&gt;).</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt; 
+   &lt;artifactId&gt;selenium-java&lt;/artifactId&gt; 
+   &lt;version&gt;2.47.1&lt;/version&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-Java &minus; This will indicate Maven, which Cucumber files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-java&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-JUnit &minus; This will indicate Maven, which Cucumber JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-junit&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for JUnit &minus; This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Verify binaries.</p>
+<ul class="list">
+<li><p>Once pom.xml is edited successfully, save it.</p></li>
+<li><p>Go to Project &#8594; Clean &minus; It will take a few minutes.</p></li>
+</ul></li>
+</ul>
+<p><b>Step 2</b></p>
+<p>Create a package named Annotation under <b>src/test/java</b></p>
+<ul class="list">
+<li><p>Select the newly created project.</p></li>
+<li><p>Right-click and select ‘New’.</p></li>
+<li><p>Select option as ‘Package’.</p></li>
+<li><p>Name it as ‘Annotation’.</p></li>
+<li><p>Save it.</p></li>
+</ul>
+<p><b>Step 3</b></p>
+<p>Create a feature file named <b>annotation.feature</b>.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file a name such as <b>outline.feature</b>.</p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="result notranslate">
+Feature: annotation 
+#This is how background can be used to eliminate duplicate steps 
+
+Background: 
+   User navigates to Facebook Given 
+   I am on Facebook login page 
+
+#Scenario with AND 
+Scenario: 
+   When I enter username as "TOM"
+   And I enter password as "JERRY" 
+   Then Login should fail 
+
+#Scenario with BUT 
+Scenario: 
+   When I enter username as "TOM" 
+   And I enter password as "JERRY" 
+   Then Login should fail 
+   But Relogin option should be available
+</pre>
+<p><b>Step 4</b></p>
+<p>Create a step definition file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file name as <b>annotation.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package Annotation; 
+
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When; 
+
+public class annotation { 
+   WebDriver driver = null; 
+   @Given("^I am on Facebook login page$") 
+	
+   public void goToFacebook() { 
+      driver = new FirefoxDriver(); 
+      driver.navigate().to("https://www.facebook.com/"); 
+   }
+	
+   @When("^I enter username as \"(.*)\"$") 
+   public void enterUsername(String arg1) {   
+      driver.findElement(By.id("email")).sendKeys(arg1); 
+   }
+	
+   @When ("^I enter password as \"(.*)\"$") 
+   public void enterPassword(String arg1) {
+      driver.findElement(By.id("pass")).sendKeys(arg1);
+      driver.findElement(By.id("u_0_v")).click(); 
+   } 
+	
+   @Then("^Login should fail$") 
+   public void checkFail() {  
+      if(driver.getCurrentUrl().equalsIgnoreCase(
+         "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){ 
+            System.out.println("Test1 Pass"); 
+      } else { 
+         System.out.println("Test1 Failed"); 
+      } 
+      driver.close(); 
+   } 
+	
+   @Then("^Relogin option should be available$") 
+   public void checkRelogin() { 
+      if(driver.getCurrentUrl().equalsIgnoreCase(
+         "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){ 
+            System.out.println("Test2 Pass"); 
+      } else { 
+         System.out.println("Test2 Failed"); 
+      } 
+      driver.close(); 
+   }
+} 
+</pre>
+<p><b>Step 5</b></p>
+<p>Create a runner class file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file a name, such as <b>runTest.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package Annotation; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"})
+ 
+public class runTest { 
+}
+</pre>
+<p><b>Step 6</b></p>
+<p>Run the test using option &minus;</p>
+<ul class="list">
+<li><p>Select runTest.java file from the package explorer.</p></li>
+<li><p>Right-click and select the option <b>‘Run as’</b></p></li>
+<li><p>Select JUnit test.</p></li>
+</ul>
+<p>You will observe the following things when you run this class file &minus;</p>
+<ul class="list">
+<li><p>Facebook opens in a new Firefox web-browser instance.</p></li>
+<li><p>TOM will be passed as an input to the username field.</p></li>
+<li><p>JERRY will be passed as an input to the password field.</p></li>
+<li><p>Login will be clicked.</p></li>
+<li><p>Message will be displayed on the browser regarding unsuccessful login.</p></li>
+<li><p>In the console, you will see “Test Pass” printed</p></li>
+<li><p>Step result 1. to 5. Will be re-executed for username as "" and password as "".</p></li>
+</ul>
+<h1>Cucumber - Scenario Outline</h1>
+<p><b>Scenario outline</b> basically replaces variable/keywords with the value from the table. Each row in the table is considered to be a scenario.</p>
+<p>Let’s continue with the same example of Facebook login feature. So far we have been executing one scenario: Upon providing the correct user name, login is successful. Now, suppose we want to check if login is successful for all three possible types of inputs, which are username, email address, or phone number. To achieve this, we will need to write three different scenarios, where each scenario will vary with the type of input, login is successful. In this case, scenarios will look like the following.</p>
+<p style="padding-left:7%"><b>Scenario:</b></p>
+<p style="padding-left:7%">Given user navigates to Facebook</p>
+<p style="padding-left:7%">When I enter correct username and password</p>
+<p style="padding-left:7%">Then login should be successful</p>
+<p style="padding-left:7%"><b>Scenario:</b></p>
+<p style="padding-left:7%">Given user navigates to Facebook</p>
+<p style="padding-left:7%">When I enter correct email address and password</p>
+<p style="padding-left:7%">Then login should be successful</p>
+<p style="padding-left:7%"><b>Scenario:</b></p>
+<p style="padding-left:7%">Given user navigates to Facebook</p>
+<p style="padding-left:7%">When I enter correct phone number and password</p>
+<p style="padding-left:7%">Then login should be successful</p>
+<p>Here, if we see closely, for above three scenarios: statements are the same, only the input parameter (username/email address/phone number) is changing. That’s where the importance of scenario outline comes into picture.</p>
+<p>When we define any scenario with scenario outline, we can specify one test scenario and at the bottom of it we can provide a number of inputs. The scenario will get executed as many times as the number of inputs provided.</p>
+<h2>Example</h2>
+<p>Let’s create an example of a scenario outline &minus;</p>
+<p><b>Step 1</b> &minus; Create a Maven Test Project named as <b>ScenarioOutlineTest</b></p>
+<ul class="list">
+<li><p>Go to File &#8594; New &#8594; Others &#8594; Maven &#8594; Maven Project &#8594; Next.</p></li>
+<li><p>Provide group Id (group Id will identify your project uniquely across all projects).</p></li>
+<li><p>Provide artifact Id (artifact Id is the name of the jar without version. You can choose any name which is in lowercase).</p></li>
+<li><p>Click on Finish.</p></li>
+<li><p>Open <b>pom.xml</b> &minus;</p>
+<ul class="list">
+<li><p>Go to package explorer on the left hand side of Eclipse.</p></li>
+<li><p>Expand the project CucumberTest.</p></li>
+<li><p>Locate pom.xml file.</p></li>
+<li><p>Right-click and select the option, Open with “Text Editor”.</p></li>
+</ul></li>
+<li><p>Add dependency for Selenium &minus; This will indicate Maven, which Selenium jar files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Open pom.xml is in edit mode, create dependencies tag (&lt;dependencies&gt;&lt;/dependencies&gt;), inside the project tag.</p></li>
+<li><p>Inside the dependencies tag, create dependency tag (&lt;dependency&gt;&lt;/dependency&gt;).</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt; 
+   &lt;artifactId&gt;selenium-java&lt;/artifactId&gt; 
+   &lt;version&gt;2.47.1&lt;/version&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-Java: This will indicate Maven, which Cucumber files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-java&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-JUnit: This will indicate Maven, which Cucumber JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-junit&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for JUnit - This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for JUnit - This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Verify binaries.</p>
+<ul class="list">
+<li><p>Once pom.xml is edited successfully, save it.</p></li>
+<li><p>Go to Project &#8594;  Clean &minus; It will take a few minutes.</p></li>
+</ul></li>
+</ul>
+<p><b>Step 2</b> &minus; Create a package named “outline” under <b>src/test/java</b></p>
+<img src="https://www.tutorialspoint.com/cucumber/images/java_package.jpg" alt="Java Package" />
+<p><b>Step 3</b> &minus; Create a feature file named <b>“outline.feature”</b></p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file name such as <b>“outline.feature”</b></p>
+<ul class="list">
+<li><p>Write the following text within the file and save it.</p>
+<p><b>Feature</b> &minus; Scenario Outline</p>
+<p><b>Scenario Outline</b> &minus; Login functionality for a social networking site.</p>
+<p>Given user navigates to Facebook</p>
+<p>When I enter Username as "&lt;username&gt;" and Password as "&lt;password&gt;"</p>
+<p>Then login should be unsuccessful</p></li>
+</ul></li>
+</ul>
+<p><b>Example</b> &minus;</p>
+<pre class="result notranslate">
+| username  | password  | 
+| username1 | password1 | 
+| username2 | password2 |
+</pre>
+<p><b>Note</b> &minus; Here, example annotation describes the range of input to be provided upon scenario execution. Test scenario will be executed for each of the input provided. So, in the given example, test scenario will be executed three times.</p>
+<p><b>Step 4</b> &minus; Create a step definition file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file name as <b>stepdefinition.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package Outline;
+ 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When; 
+
+public class stepdefinition { 
+   WebDriver driver = null; 
+	
+   @Given("^user navigates to facebook$") 
+   public void goToFacebook() { 
+      driver = new FirefoxDriver(); 
+      driver.navigate().to("https://www.facebook.com/"); 
+   } 
+	
+   @When("^I enter Username as \"([^\"]*)\" and Password as \"([^\"]*)\"$") 
+   public void I_enter_Username_as_and_Password_as(String arg1, String arg2) {
+      driver.findElement(By.id("email")).sendKeys(arg1);
+      driver.findElement(By.id("pass")).sendKeys(arg2);
+      driver.findElement(By.id("u_0_v")).click(); 
+   } 
+	
+   @Then("^login should be unsuccessful$") 
+   public void validateRelogin() { 
+      if(driver.getCurrentUrl().equalsIgnoreCase(
+      "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){
+         System.out.println("Test Pass"); 
+      } else { 
+         System.out.println("Test Failed"); 
+      } 
+      driver.close(); 
+   }    
+}
+</pre>
+<p><b>Note</b> &minus; In the above code, we have to define a function having two input argument: one username and other will be for password. So for each set of input provided in the example tag, Set of GIVEN, WHEN and THEN will be executed.</p>
+<p><b>Step 5</b> &minus; Create a runner class file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file name such as <b>runTest.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package Outline; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"})
+
+public class runTest { }
+</pre>
+<ul class="list">
+<li><p>Run the test using option &minus;</p>
+<ul class="list">
+<li><p>Select <b>runTest.java</b> file from package explorer.</p></li>
+<li><p>Right-click and select the option <b>‘Run as’</b>.</p></li>
+<li><p>Select JUnit test.</p></li>
+</ul></li>
+</ul>
+<p>You will observe the following things when you run this class file</p>
+<ul class="list">
+<li><p>Facebook opens in a new Firefox web-browser instance.</p></li>
+<li><p>Username1 and password1 will be passed as an input to username and password field.</p></li>
+<li><p>Login will be clicked.</p></li>
+<li><p>Message will be displayed on the browser regarding unsuccessful login.</p></li>
+<li><p>In the console, you will see “Test Pass” printed.</p></li>
+<li><p>Step result 1 to 5 will be re-executed for username2 and password2.</p></li>
+</ul>
+<p>In nutshell, when scenario does not change but only the data value gets changed, it is advisable to use scenario outline data tables.</p>
+<h1>Cucumber - Tags</h1>
+<p>It looks simple when we just have one, two, or maybe five scenarios in a feature file. However, in real life it does not happen. For each feature under test, we may have 10, 20, or may be more number of scenarios in a single feature file. They may represent different purpose (Smoke test/Regression test), different prospectives (Developer/QA/BA), different status (Ready for execution/Work in progress), etc. How to manage execution for such a mass?</p>
+<p>For this, Cucumber has already provided a way to organize your scenario execution by using tags in feature file. We can define each scenario with a useful tag. Later, in the runner file, we can decide which specific tag (and so as the scenario(s)) we want Cucumber to execute. Tag starts with “@”. After “@” you can have any relevant text to define your tag. Let’s understand this with an example.</p>
+<p>Suppose, there are two or more scenarios in a feature file. We want to execute only one scenario as part of smoke test. So first thing is to identify that scenario and second is to tag it with “@SmokeTest” text at the beginning of the scenario. Let’s take a deep look at it &minus;</p>
+<p><b>Step 1</b> &minus; Create a Maven project named as <b>cucumberTag</b>.</p>
+<p><b>Step 2</b>&minus; Create a package named <b>cucumberTag</b> under <b>src/test/java</b></p>
+<p><b>Step 3</b>&minus; Create a feature file named <b>cucumberTag.feature</b>.</p>
+<p>Write the following text within the file and save it. This feature file contains two scenarios where only one has been marked as <b>SmokeTest</b> tag.</p>
+<p style="padding-left:8%"><b>Feature</b> &minus; Cucumber Tag</p>
+<p style="padding-left:8%"><b>Scenario Outline</b> &minus; Login functionality for a social networking site.</p>
+<p style="padding-left:8%">Given user navigates to Facebook</p>
+<p style="padding-left:8%">When I enter Username as "&lt;username&gt;" and Password as "&lt;password&gt;"</p>
+<p style="padding-left:8%">Then login should be unsuccessful</p>
+<h2>Examples</h2>
+<pre class="result notranslate">
+| username  | password  | 
+| username1 | password1 | 
+| username2 | password2 |
+</pre>
+<p>#following scenario has been tagged as SmokeTest and this should get executed. @SmokeTest</p>
+<p style="padding-left:8%"><b>Scenario:</b></p>
+<p style="padding-left:8%">Given user navigates to Facebook</p>
+<p style="padding-left:8%">When I enter Username as "&lt;&gt;" and Password as "&lt;&gt;"</p>
+<p style="padding-left:8%">Then the user should be redirected to login retry</p>
+<p><b>Step 4</b> &minus; Create a step definition file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file a name such as <b>cucumberTag.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package cucumberTag;
+ 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When; 
+
+public class cucumberTag { 
+   WebDriver driver = null; 
+	
+   @Given("^user navigates to facebook$") 
+   public void goToFacebook() { 
+      driver = new FirefoxDriver(); 
+      driver.navigate().to("https://www.facebook.com/"); 
+   } 
+	
+   @When("^I enter Username as \"([^\"]*)\" and Password as \"([^\"]*)\"$") 
+   public void I_enter_Username_as_and_Password_as(String arg1, String arg2) {
+      driver.findElement(By.id("email")).sendKeys(arg1);
+      driver.findElement(By.id("pass")).sendKeys(arg2);
+      driver.findElement(By.id("u_0_v")).click(); 
+   } 
+	
+   @Then("^login should be unsuccessful$") 
+   public void validateRelogin() { 
+      if(driver.getCurrentUrl().equalsIgnoreCase(
+         "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){ 
+            System.out.println("Test Pass"); 
+      } else { 
+         System.out.println("Test Failed"); 
+      }
+      driver.close(); 
+   } 
+	
+   @Then("^User should be redirected to login retry$") 
+   public void loginRetry() { 
+      if(driver.getCurrentUrl().equalsIgnoreCase(
+         "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){ 
+            System.out.println("Test Pass"); 
+      } else { 
+         System.out.println("Test Failed"); 
+      } 
+      driver.close(); 
+   } 
+}
+</pre>
+<p><b>Step 5</b> &minus; Create a runner class file.</p>
+<ul class="list">
+<li><p>Create a runner class named as <b>runTest.java</b> inside the package.</p></li>
+<li><p>Write the following code.</p></li>
+<li><p>Save the file.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package cucumberTag; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"}) 
+
+public class runTest { }
+</pre>
+<ul class="list">
+<li><p>Run the test option.</p></li>
+<li><p>Right-click and select the option <b>‘Run as’</b>.</p></li>
+<li><p>Select JUnit test.</p></li>
+</ul>
+<p>You will observe the following things, when you run this class file.</p>
+<ul class="list">
+<li><p>Facebook opens in a new Firefox web-browser instance.</p></li>
+<li><p>No value will be provided to the username and the password field.</p></li>
+<li><p>Login will be clicked.</p></li>
+<li><p>Login retry page will be loaded.</p></li>
+</ul>
+<p>There is no limit in defining tags within the feature file. Based on your need, you can derive tags to be used and scenarios to be executed.</p>
+<p>There are mainly two types of tag &minus;</p>
+<ul class="list">
+<li><p><b>Default tag</b> &minus; Default tag has their predefined meanings. Example @Dev,@Ignore</p></li>
+<li><p><b>Custom tag</b> &minus; Custom tag provides you full flexibility to choose appropriate text for defining your tag.</p></li>
+</ul>
+<p>Tag can also be defined at a feature level. Once you define a tag at the feature level, it ensures that all the scenarios within that feature file inherits that tag. Depending on the nature of the scenario, we can use more than one tag for the single feature. Whenever Cucumber finds an appropriate call, a specific scenario will be executed.</p>
+<p>Cucumber also provides a way to inverse the choice of tags. Consider that out of 25 defined scenarios, 10 are marked as smoke test. We are required to execute only regression test scenarios.</p>
+<p>For this, we can use “~” in JUnit runner class to exclude smoke test scenario. It will look like the following.</p>
+<pre class="prettyprint notranslate">
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"}, 
+   tags = {"~@SmokeTest"})
+	
+public class runTest { }
+</pre>
+<p>While defining multiple tags, we can also define logical or/and logical and operation.</p>
+<ul class="list">
+<li><p>Defining logical or in runner class &minus; <b>@dev,@wip</b> &minus; It says that scenarios matching any of this tag needs to be executed.</p></li>
+<li><p>Defining logical or in runner class &minus; <b>[@dev,~@wip] &minus;</b> It says that scenarios matching both these tag needs to be executed.</p></li>
+</ul>
+<h1>Cucumber - Data Tables</h1>
+<p>While working on automation, we may face variety of scenarios. Each scenario carries a different meaning and needs.</p>
+<p>Since the beginning, we have been taking an example of login functionality for a social networking site, where we just had two input parameters to be passed. Let’s think of some more possibility. How about “New user registration” functionality? Typically, what can be the input parameters while registering a new user for a social networking site? Something like the following &minus;</p>
+<ul class="list">
+<li>User Name</li>
+<li>Email Address</li>
+<li>Password</li>
+<li>Re-enter password</li>
+<li>Birthdate</li>
+<li>Gender</li>
+<li>Phone number</li>
+</ul>
+<p><b>Feature</b> &minus; New user registration.</p>
+<p>Verify that the new user registration is unsuccessful after passing the incorrect inputs.</p>
+<p>Given I am on a new user registration page.</p>
+<p>When I enter the user name and an e-mail address as email address and password as, and re-enter password as and Birthdate as and Gender as and phone number as then the user registration should be unsuccessful.</p>
+<p>It looks a bit messy at first glance. So, is there any better way to manage such chunk of inputs? Answer can be “Data Table”. Data table is a set of input to be provided for a single tag. This tag can be GIVEN, WHEN, or THEN.</p>
+<p>Let’s write the above scenario with the help of data table and it will look like the following &minus;</p>
+<p>Given I am on a new user registration page</p>
+<p>When I enter valid data on the page</p>
+<pre class="result notranslate">
+| Fields                 | Values              |
+| First Name             | Tom                 |
+| Last Name              | Kenny               |
+| Email Address          | someone@someone.com |
+| Re-enter Email Address | someone@someone.com |
+| Password               | Password1           |
+| Birthdate              | 01                  |
+</pre>
+<p>Then the user registration should be successful.</p>
+<h2>Example</h2>
+<p>Let’s automate an example of a data table.</p>
+<p><b>Step 1</b> &minus; Create a Maven Test Project named “DataTableTest”.</p>
+<ul class="list">
+<li><p>Go to File &#8594; New &#8594; Others &#8594; Maven &#8594; Maven Project &#8594; Next.</p></li>
+<li><p>Provide <b>group Id</b> (group Id will identify your project uniquely across all projects).</p></li>
+<li><p>Provide <b>artifact Id</b> (artifact Id is the name of the jar without version. You can choose any name which is in lowercase).</p></li>
+<li><p>Click on Finish.</p></li>
+<li><p>Open pom.xml &minus;</p>
+<ul class="list">
+<li><p>Go to package explorer on the left hand side of Eclipse.</p></li>
+<li><p>Expand the project CucumberTest.</p></li>
+<li><p>Locate pom.xml file.</p></li>
+<li><p>Right-click and select the option, Open with “Text Editor”.</p></li>
+</ul></li>
+<li><p>Add dependency for Selenium: This will indicate Maven, which Selenium jar files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Open pom.xml is in edit mode, create dependencies tag (&lt;dependencies&gt;&lt;/dependencies&gt;), inside the project tag.</p></li>
+<li><p>Inside the dependencies tag, create dependency tag. (&lt;dependency&gt;&lt;/dependency&gt;).</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li></ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt; 
+   &lt;artifactId&gt;selenium-java&lt;/artifactId&gt; 
+   &lt;version&gt;2.47.1&lt;/version&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-Java &minus; This will indicate Maven, which Cucumber files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-java&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-JUnit &minus; This will indicate Maven, which Cucumber JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-junit&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for JUnit &minus; This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Verify binaries.</p>
+<ul class="list">
+<li><p>Once pom.xml is edited successfully, save it.</p></li>
+<li><p>Go to Project &#8594; Clean &minus; It will take a few minutes.</p></li>
+</ul></li>
+</ul>
+<p><b>Step 2</b> &minus; Create a package named <b>dataTable</b> under <b>src/test/java</b></p>
+<p><b>Step 3</b> &minus; Create a Feature file.</p>
+<ul class="list">
+<li><p>Create a feature file, named as <b>dataTable</b>.feature inside the package dataTable (see section scenario outline for more detailed steps).</p></li>
+<li><p>Write the following text.</p>
+<p><b>Feature</b> &minus; Data table</p>
+<p>Verify that the new user registration is unsuccessful after passing incorrect inputs.</p>
+<p><b>Scenario:</b></p>
+<p>Given I am on the new user registration page</p>
+<p>When I enter invalid data on the page</p>
+</li>
+</ul>
+<pre class="result notranslate">
+| Fields                 | Values              |
+| First Name             | Tom                 |
+| Last Name              | Kenny               |
+| Email Address          | someone@someone.com |
+| Re-enter Email Address | someone@someone.com |
+| Password               | Password1           |
+| Birthdate              | 01                  |
+</pre>
+<p>Then the user registration should be unsuccessful</p>
+<ul class="list">
+<li><p>Save the file.</p></li>
+</ul>
+<p><b>Step 4</b> &minus; Create step definition file.</p>
+<ul class="list">
+<li><p>Create the step definition file named as ‘dataTable.java’ inside the package dataTable (see section scenario outline for more detailed steps).</p></li>
+<li><p>Write the following code.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package dataTable; 
+
+import java.util.List; 
+
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.WebElement; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+import org.openqa.selenium.support.ui.Select;
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When; 
+import cucumber.table.DataTable; 
+
+public class stepdefinition { 
+   WebDriver driver = null;
+	
+   @Given("^I am on new user registration page$") 
+   public void goToFacebook() { 
+      //Intiate web browser instance. driver = new FirefoxDriver();
+      driver.navigate().to("https://www.facebook.com/"); 
+   } 
+	
+   @When("^I enter invalid data on the page$") 
+   public void enterData(DataTable table){ 
+      //Initialize data table 
+      List&lt;list&gt; data = table.raw();
+      System.out.println(data.get(1).get(1)); 
+      
+      //Enter data
+      driver.findElement(By.name("firstname")).sendKeys(data.get(1).get(1));
+      driver.findElement(By.name("lastname")).sendKeys(data.get(2).get(1));
+      driver.findElement(By.name("reg_email__")).sendKeys(data.get(3).get(1));     
+      driver.findElement(By.name("reg_email_confirmation__")).
+         sendKeys(data.get(4).get(1)); 
+      driver.findElement(By.name("reg_passwd__")).sendKeys(data.get(5).get(1)); 
+      
+      Select dropdownB = new Select(driver.findElement(By.name("birthday_day"))); 
+      dropdownB.selectByValue("15"); 
+		
+      Select dropdownM = new Select(driver.findElement(By.name("birthday_month")));
+      dropdownM.selectByValue("6"); 
+		
+      Select dropdownY = new Select(driver.findElement(By.name("birthday_year")));
+      dropdownY.selectByValue("1990"); 
+		
+      driver.findElement(By.className("_58mt")).click(); 
+      // Click submit button driver.findElement(By.name("websubmit")).click(); 
+   } 
+	
+   @Then("^User registration should be unsuccessful$") 
+   public void User_registration_should_be_unsuccessful() {
+      if(driver.getCurrentUrl().equalsIgnoreCase("https://www.facebook.com/")){
+         System.out.println("Test Pass"); 
+      } else { 
+         System.out.println("Test Failed"); 
+      } 
+      driver.close(); 
+   } 
+}
+</pre>
+<ul class="list">
+<li><p>Save the file.</p></li>
+</ul>
+<p><b>Step 5</b> &minus; Create a runner class file.</p>
+<ul class="list">
+<li><p>Create runner class named as runTest.java inside the package.</p></li>
+<li><p>Write the following code.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package dataTable; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"})
+ 
+public class runTest { }
+</pre>
+<ul class="list">
+<li><p>Save the file.</p></li>
+<li><p>Run the test using the option</p>
+<ul class="list">
+<li><p>Select runTest.java file from the package explorer.</p></li>
+<li><p>Right-click and select the option, Run as.</p></li>
+<li><p>Select JUnit test.</p></li>
+</ul></li>
+</ul>
+<p>You may observe the following things upon successful execution.</p>
+<ul class="list">
+<li><p>Facebook website gets loaded.</p></li>
+<li><p>Data will be entered on the registration page.</p></li>
+<li><p>Submit button will be clicked.</p></li>
+<li><p>We will see that home page will not displayed and “Test Pass” will be written on the console.</p></li>
+</ul>
+<h1>Cucumber - Comments</h1>
+<p><b>Comment</b> is basically a piece of code meant for documentation purpose and not for execution. Be it a step definition file or a feature file, to make it more readable and understandable. So, it is important to use/put comments at appropriate places in the file. This also helps while debugging the code. Cucumber feature files can have comments at any place. To put comments, we just need to start the statement with “#” sign.</p>
+<p>Different programming languages have got different norms for defining the comments. Let’s see how Cucumber deals with it.</p>
+<ul class="list">
+<li><p>Step definition file &minus; If you are using Java as a platform then mark your comments with “//”.</p></li>
+<li><p>Feature File &minus; In case of feature file, we just need to put # before beginning your comment.</p></li>
+</ul>
+<h2>Example</h2>
+<p>The highlighted text in the program refer to the comments in the code.</p>
+<pre class="result notranslate">
+Feature: annotation 
+
+#This is how background can be used to eliminate duplicate steps 
+Background: 
+User navigates to Facebook 
+Given I am on Facebook login page 
+
+#Scenario with AND 
+Scenario: 
+When I enter username as "TOM" 
+And I enter password as "JERRY" 
+Then Login should fail 
+
+#Scenario with BUT 
+Scenario: 
+When I enter username as "TOM" 
+And I enter password as "JERRY" 
+Then Login should fail 
+But Relogin option should be available
+</pre>
+<h1>Cucumber - Hooks</h1>
+<p>Cucumber <b>hook</b> allows us to better manage the code workflow and helps us to reduce the code redundancy. We can say that it is an unseen step, which allows us to perform our scenarios or tests.</p>
+<p>To understand this notion better, let’s take an example of a feature file and a step definition file.</p>
+<p>The highlighted portion in the given statement actually does the job of setting up the webdriver and ending the webdriver session. So, it is actually not relevant to the essence of “Given statement”, and it is more like a setup for the test. Also if we think with a broader prospective, then in case of multiple scenarios for this feature, this webdriver setup and cleanup will run with each given statement. Logically, it makes sense to have the setup and cleanup executed only once.</p>
+<p>So to bring optimization, hooks can be utilized. More often we use two types of hooks: “Before” hook and “After” hook. Method/function/piece of code, defined within Before and After hooks, always run, even if the scenario gets passed or failed.</p>
+<p>As the name suggests, before hook gets executed well before any other test scenarios, and after hook gets executed after executing all the scenarios.</p>
+<p>Hooks are defined within the step definition file only.</p>
+<p>Let’s automate an example of before and after hook.</p>
+<p><b>Step 1</b> &minus; Create Maven project as hookTest, add necessary dependency in pom.xml.</p>
+<p><b>Step 2</b> &minus; Create a Java package named as hookTest under <b>src/test/java</b></p>
+<p><b>Step 3</b> &minus; Create a step definition file named as <b>hookTest.java</b> under the package.</p>
+<pre class="prettyprint notranslate">
+package hookTest; 
+
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When; 
+
+public class hookTest {
+   WebDriver driver = null; 
+	
+   @Before public void setUp(){ 
+      driver = new FirefoxDriver(); 
+   } 
+	
+   @Given("^user navigates to facebook$") 
+   public void goToFacebook() { 
+      driver.navigate().to("https://www.facebook.com/");
+   } 
+	
+   @When("^I enter Username as \"([^\"]*)\" and Password as \"([^\"]*)\"$") 
+   public void I_enter_Username_as_and_Password_as(String arg1, String arg2) {
+      driver.findElement(By.id("email")).sendKeys(arg1);
+      driver.findElement(By.id("pass")).sendKeys(arg2);
+      driver.findElement(By.id("u_0_v")).click(); 
+   } 
+	
+   @Then("^login should be unsuccessful$") 
+   public void validateRelogin() { 
+      if(driver.getCurrentUrl().equalsIgnoreCase(
+         "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){ 
+            System.out.println("Test Pass"); 
+      } else { 
+         System.out.println("Test Failed"); 
+      } 
+      driver.close(); 
+   } 
+	
+   @After public void cleanUp(){ 
+      driver.close(); 
+   } 
+}
+</pre>
+<p><b>Step 4</b> &minus; Create a feature file named “hookTest.feature” under the package.</p>
+<p><b>Feature</b> &minus; Scenario Outline.</p>
+<p><b>Scenario Outline</b> &minus; Hook Test</p>
+<p>Given user navigates to Facebook</p>
+<p>When I enter Username as "&lt;username&gt;" and Password as "&lt;password&gt;"</p>
+<p>Then login should be unsuccessful</p>
+<h2>Examples</h2>
+<pre class="result notranslate">
+| username  | password  | 
+| username1 | password1 |
+</pre>
+<p><b>Step 5</b> &minus; Create a runner class file.</p>
+<ul class="list">
+<li><p>Create the runner class as runTest.java inside the package dataTable (see the section scenario outline for more detailed steps).</p></li>
+<li><p>Write the following code.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package hookTest; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"})  
+
+public class runTest { }
+</pre>
+<ul class="list">
+<li><p>Save the file.</p></li>
+<li><p>Run the test using option &minus;</p>
+<ul class="list">
+<li><p>Select runTest.java file from the package explorer.</p></li>
+<li><p>Right-click and select the option, Run as.</p></li>
+<li><p>Select JUnit test.</p></li>
+</ul></li>
+</ul>
+<p>So now when we run this, following will be the sequence of execution.</p>
+<ul class="list">
+<li><p>Before hook &minus; Set up the webdriver and other prerequisites to run the test.</p></li>
+<li><p>Given statement</p></li>
+<li><p>When statement</p></li>
+<li><p>Then statement</p></li>
+<li><p>After hook &minus; Close the webdriver and do the cleanup process.</p></li>
+</ul>
+<h2>Tagged Hooks</h2>
+<p>We can also indicate if we want before and after hooks to be executed with a specific tag only. <b>Example</b> &minus; @Before(‘@Web’). The same concept of tag logical and/or can be applied with hooks as well. <b>Example</b> &minus; @Before(@dev,@wip), @Before(@dev,~@wip)</p>
+<h1>Cucumber - Command Line Options</h1>
+<p>Cucumber can be used to test almost any computer system. So far we have seen how to run a test using Eclipse IDE. There is one more way through which we can run the Cucumber test that is through command line interface. So what is the advantage of doing it?</p>
+<p>Running any test framework from the Terminal has its own advantages, such as overriding the run configurations mentioned in the code.</p>
+<p>In order to execute Cucumber test with command prompt, use the following steps after system configuration.</p>
+<p><b>Step 1</b>&minus; Create a Maven Test Project named <b>commandLine</b>.</p>
+<ul class="list">
+<li><p>Go to File &#8594; New &#8594; Others &#8594; Maven &#8594; Maven Project &#8594; Next.</p></li>
+<li><p>Provide group Id (group Id will identify your project uniquely across all projects).</p></li>
+<li><p>Provide artifact Id (artifact Id is the name of the jar without version. You can choose any name which is in lowercase).</p></li>
+<li><p>Click on Finish.</p></li>
+<li><p>Open pom.xml &minus;</p>
+<ul class="list">
+<li><p>Go to the package explorer on the left hand side of Eclipse.</p></li>
+<li><p>Expand the project CucumberTest.</p></li>
+<li><p>Locate <b>pom.xml</b> file.</p></li>
+<li><p>Right-click and select the option, Open with “Text Editor”.</p></li>
+</ul></li>
+<li><p>Add dependency for Selenium &minus; This will indicate Maven, which Selenium jar files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Open pom.xml is in edit mode, create dependencies tag (&lt;dependencies&gt;&lt;/dependencies&gt;), inside the project tag.</p></li>
+<li><p>Inside the dependencies tag, create dependency tag. (&lt;dependency&gt;&lt;/dependency&gt;).</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt; 
+   &lt;artifactId&gt;selenium-java&lt;/artifactId&gt; 
+   &lt;version&gt;2.47.1&lt;/version&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-Java &minus; This will indicate Maven, which Cucumber files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-java&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-JUnit &minus; This will indicate Maven, which Cucumber JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-junit&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for JUnit &minus; This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Verify binaries.</p>
+<ul class="list">
+<li><p>Once pom.xml is edited successfully, save it.</p></li>
+<li><p>Go to Project &#8594; Clean &minus; It will take few minutes.</p></li>
+</ul></li>
+</ul>
+<p><b>Step 2</b> &minus; Create a package named “outline” under src/test/java</p>
+<p><b>Step 3</b> &minus; Create a feature file named “commandLine.feature”.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file a name such as “commandLine.feature”</p></li>
+<li><p>Write below text within the file and save it.</p>
+<p><b>Feature</b> &minus; Scenario Outline</p>
+<p><b>Scenario Outline</b> &minus; Login functionality for a social networking site.</p>
+<p>Given the user navigates to Facebook</p>
+<p>When I enter Username as "&lt;username&gt;" and Password as "&lt;password&gt;"</p>
+<p>Then login should be unsuccessful</p></li>
+</ul>
+<h2>Examples</h2>
+<pre class="result notranslate">
+| username  | password  | 
+| username1 | password1 | 
+| username2 | password2 |
+</pre>
+<p><b>Note</b> &minus; Here, example annotation describes the range of input to be provided upon scenario execution. Test scenario will be executed for each of the input provided. So, in the given example, test scenario will be executed three times.</p>
+<p><b>Step 4</b> &minus; Create a step definition file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Name the file as <b>commandLine.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package Outline; 
+
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; i
+import cucumber.annotation.en.When; 
+
+public class stepdefinition { 
+   WebDriver driver = null;
+	
+   @Given("^user navigates to facebook$") 
+   public void goToFacebook() { 
+      driver = new FirefoxDriver(); 
+      driver.navigate().to("https://www.facebook.com/"); 
+   } 
+	
+   @When("^I enter Username as \"([^\"]*)\" and Password as \"([^\"]*)\"$") 
+   public void I_enter_Username_as_and_Password_as(String arg1, String arg2) {
+      driver.findElement(By.id("email")).sendKeys(arg1);
+      driver.findElement(By.id("pass")).sendKeys(arg2);
+      driver.findElement(By.id("u_0_v")).click(); 
+   } 
+	
+   @Then("^login should be unsuccessful$") 
+   public void validateRelogin() { 
+      if(driver.getCurrentUrl().equalsIgnoreCase(
+         "https://www.facebook.com/login.php?login_attempt=1&lwv=110")){ 
+            System.out.println("Test Pass"); 
+      } else { 
+         System.out.println("Test Failed"); 
+      } 
+      driver.close(); 
+   } 
+}
+</pre>
+<p><b>Note</b> &minus; In code, we have to define a function having two input arguments: one username and other will be for password. So, for each set of input provided in the example tag, set of GIVEN, WHEN and THEN will be executed.</p>
+<p><b>Step 5</b> &minus; Create a runner class file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file a name such as, <b>runTest.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package Outline; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"}) 
+
+public class runTest { }
+</pre>
+<ul class="list">
+<li><p>Open a command prompt.</p></li>
+<li><p>Go to the directory where this package “commandLine” resides. e:\Workspace\LoginTest\src&gt;cd test\java</p></li>
+<li><p>Run the command mvn test: You will see that all the scenario, described in the feature file have been executed (if there isn’t any error). Finally, at the bottom you will find the following information.</p></li>
+</ul>
+<h2>Result</h2>
+<pre class="result notranslate">
+This describes the total test run, along with failure if any.
+</pre>
+<p>The previous command runs everything as mentioned in the JUnit Runner class. However, if we want to override the configurations mentioned in the Runner, following are the few examples to do it.</p>
+<ul class="list">
+<li><p>Now run command mvn test - Dcucumber.options="--help" on command prompt. Running this will print all available options.</p></li>
+<li><p>To run the specific tags only, run the command mvn test -Dcucumber.options="--tags @SmokeTest" on command prompt. It will run only tags, which are marked with @SmokeTest.</p></li>
+<li><p>In order to change the format of the result, run the command E:\Workspace\LoginTest&gt;mvn test -Dcucumber.options="--plugin junit:target/cucumber-junit-report.xml" on command prompt It changes the report format to JUnit report generator.</p></li>
+</ul>
+<h1>Cucumber - JUnit Runner</h1>
+<p>It is important to understand what Junit is, before we begin our discussion for Cucumber JUnit Runner. <b>JUnit</b> is an open source unit testing framework for the Java programming language. JUnit has been important in the development of test-driven development, and is one of a family of unit testing frameworks, which is collectively known as xUnit that originated with SUnit.</p>
+<h2>Benefits of Using JUnit</h2>
+<ul class="list">
+<li><p>Unit has a <b>Graphical User Interface</b> (GUI), making it possible to write and test source code quickly and easily.</p></li>
+<li><p>JUnit allows the developer to incrementally build test suites to measure progress and detect unintended side effects.</p></li>
+<li><p>Test can be run continuously.</p></li>
+<li><p>JUnit shows test progress in a bar that is normally green but turns red when a test fails.</p></li>
+</ul>
+<p>By now, we have seen the benefits of using JUnit, but the reason we are discussing it right now is Cucumber framework. On one hand, Cucumber is providing a way for non-technical person to define test cases for a product, and on the other hand, our expectation is for smooth and timely execution of such test cases.</p>
+<p>JUnit acts as a bridge between these two. So, the flow of execution will look like the following &minus;</p>
+<ul class="list">
+<li><p>Stakeholders write down the feature file.</p></li>
+<li><p>Step definition file will be created accordingly.</p></li>
+<li><p>Specify the JUnit runner class to run the series of test cases.</p></li>
+<li><p>Once we run the JUnit runner class &minus;</p>
+<ul class="list">
+<li><p>It will parse the Gherkin feature file.</p></li>
+<li><p>It will execute the functions written in the step definition file according to feature file statements.</p></li>
+<li><p>JUnit will combine the test case result.</p></li>
+<li><p>It will build the test report in the specified format (which can be html/JSON).</p></li>
+</ul></li>
+</ul>
+<p>The important point here is how to configure JUnit to do all these things? Following are the steps &minus;</p>
+<p><b>Step 1</b> &minus; Install Java.</p>
+<ul class="list">
+<li><p>Download jdk and jre from the link <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="nofollow">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p></li>
+<li><p>Accept license agreement.</p></li>
+<li><p>Install JDK and JRE.</p></li>
+<li><p>Set environment variable as shown in the following screenshot.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/install_java.jpg" alt="Install Java" />
+<p><b>Step 2</b> &minus; Install Eclipse.</p>
+<ul class="list">
+<li><p><b>Why we need</b> &minus; Eclipse is an Integrated Development Environment (IDE). It contains a base workspace and an extensible plug-in system for customizing the environment.</p></li>
+<li><p><b>How to install</b> &minus;</p>
+<ul class="list">
+<li><p>Make sure JAVA is installed on your machine.</p></li>
+<li><p>Download Eclipse from <a href="http://www.eclipse.org/downloads" target="_blank" rel="nofollow">http://www.eclipse.org/downloads</a></p></li>
+<li><p>Unzip and Eclipse is installed.</p></li>
+</ul></li>
+</ul>
+<p><b>Step 3</b> &minus; Install Maven.</p>
+<ul class="list">
+<li><p><b>Why we need</b> &minus; Maven is a build automation tool used primarily for Java projects. It provides a common platform to perform activities like generating source code, compiling code, packaging code to a jar, etc. Also later if any of the software versions gets changed, Maven provides an easy way to modify the test project accordingly.</p></li>
+<li><p><b>How to install</b> &minus;</p>
+<ul class="list">
+<li><p>Download Maven &minus; <a href="https://maven.apache.org/download.cgi" target="_blank" rel="nofollow">https://maven.apache.org/download.cgi</a></p></li>
+<li><p>Unzip the file and remember the location.</p></li>
+<li><p>Create environment variable MAVEN_HOME as shown in the following screenshot.</p></li>
+</ul></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/maven_home.jpg" alt="Maven Home" />
+<ul class="list">
+<li><p>Edit Path variable and include Maven as shown in the following screenshot.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/path_variable.jpg" alt="Path Variable" />
+<ul class="list">
+<li><p>Download MAVEN plugin from Eclipse.</p>
+<ul class="list">
+<li><p>Open Eclipse.</p></li>
+<li><p>Got to Help &#8594; Eclipse Marketplace &#8594; Search maven &#8594; Maven Integration for Eclipse &#8594; INSTALL.</p></li>
+</ul></li>
+</ul>
+<p><b>Step 4</b> &minus; How to configure Cucumber with Maven</p>
+<ul class="list">
+<li><p>Create a Maven project in Eclipse.</p>
+<ul class="list">
+<li><p>Go to File &#8594; New &#8594; Others &#8594; Maven &#8594; Maven Project &#8594; Next.</p></li>
+<li><p>Provide group Id (group Id will identify your project uniquely across all projects).</p></li>
+<li><p>Provide artifact Id (artifact Id is the name of the jar without version. You can choose any name which is in lowercase).</p></li>
+<li><p>Click on Finish.</p></li>
+</ul></li>
+<li><p>Open pom.xml</p>
+<ul class="list">
+<li><p>Go to package explorer on the left hand side of Eclipse.</p></li>
+<li><p>Expand the project CucumberTest.</p></li>
+<li><p>Locate pom.xml file.</p></li>
+<li><p>Right-click and select the option, Open with “Text Editor”.</p></li>
+</ul></li>
+<li><p>Add dependency for Selenium &minus; This will indicate Maven, which Selenium jar files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Open pom.xml is in edit mode, create dependencies tag (&lt;dependencies&gt;&lt;/dependencies&gt;), inside the project tag.</p></li>
+<li><p>Inside the dependencies tag, create dependency tag. (&lt;dependency&gt;&lt;/dependency&gt;).</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt; 
+   &lt;artifactId&gt;selenium-java&lt;/artifactId&gt; 
+   &lt;version&gt;2.47.1&lt;/version&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-Java &minus; This will indicate Maven, which Cucumber files to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-java&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for Cucumber-JUnit: This will indicate Maven, which Cucumber JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-junit&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Add dependency for JUnit &minus; This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<ul class="list">
+<li><p>Verify binaries</p>
+<ul class="list">
+<li><p>Once <b>pom.xml</b> is edited successfully, save it.</p></li>
+<li><p>Go to Project &#8594; Clean &minus; It will take a few minutes.</p></li>
+<li><p>After that you will be able to see a Maven repository like the following screenshot.</p></li>
+</ul></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/maven_repository.jpg" alt="Maven Repository" />
+<p><b>Step 5</b> &minus; Create feature file (to be covered later).</p>
+<p><b>Step 6</b> &minus; Create step definition file (to be covered later).</p>
+<p><b>Step 7</b> &minus; Create Junit runner to run the test (to be covered later).</p>
+<h1>Cucumber - Reports</h1>
+<p>We do test execution in order to understand the stability of a product, so be it manual test or an automated test, it is very important to generate a concise report that can depict the stability of a product. Hence, while we are automating our test scenario with Cucumber, it is essential to know, how better we can generate our Cucumber test reports. As we know that Cucumber is a BDD framework, it does not have a fancy reporting mechanism.</p>
+<p>In order to achieve this, we need to integrate Cucumber with other open source tool like Ant/Junit. Here, we will take examples of JUnit further because, it provides support for Java language.</p>
+<p>Let’s look into the details of different report format, which is available and easy to use &minus;</p>
+<h2>Pretty Format (HTML Report)</h2>
+<p>Pretty Format generates the Cucumber test report in the HTML format, i.e. an HTML file. It is the most readable report format. It generates the report in the same way as it is a feature file, so tracing is also made easy. Also, you can specify the location where you want this report to be placed after the test execution. It can be &minus;</p>
+<ul class="list">
+<li><p><b>Local Directory</b> &minus; We can specify target directory for report as any local directory of the machine where the test will run.</p></li>
+<li><p><b>Server Directory</b> &minus; Also we have a provision to specify a target directory as any directory on the server, which is publically accessible. This generally helps when we want our clients/stakeholders to view the test results at any given point of time.</p></li>
+</ul>
+<h3>Example</h3>
+<p>Let’s automate an example of a pretty format.</p>
+<p><b>Step 1</b> &minus; Create a Maven project named <b>cucumberReport</b> in Eclipse.</p>
+<p><b>Step 2</b> &minus; Create a package named <b>CucumberReport</b> under <b>src/test/java</b></p>
+<p><b>Step 3</b> &minus; Create a feature file named <b>cucumberReport.feature</b></p>
+<p>Write the following text within the file and save it.</p>
+<p><b>Feature</b> &minus; Cucumber Report</p>
+<p style="padding-left:12%">#This is to check test result for Pass test case</p>
+<p style="padding-left:12%"><b>Scenario:</b> Login functionality exists</p>
+<p style="padding-left:12%">Given I have opened the browser</p>
+<p style="padding-left:12%">When I open Facebook website</p>
+<p style="padding-left:12%">Then Login button should exist</p>
+<p style="padding-left:12%">#This is to check test result for Failed test case</p>
+<p style="padding-left:12%"><b>Scenario:</b> Forgot password exists</p>
+<p style="padding-left:12%">Given I have open the browser</p>
+<p style="padding-left:12%">When I open Facebook website</p>
+<p style="padding-left:12%">Then Forgot password link should exist</p>
+<p><b>Note</b> &minus; Here scenario first will pass, whereas the second scenario will fail. So that we can witness how the pass and failed report looks like.</p>
+<p><b>Step 4</b> &minus; Create a step definition file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file name as <b>cucumberReport.java</b></p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package CucumberReport; 
+
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When; 
+
+public class cucumberReport { 
+   WebDriver driver = null;
+	
+   @Given("^I have open the browser$") 
+   public void openBrowser() { 
+      driver = new FirefoxDriver();
+   } 
+	
+   @When("^I open Facebook website$") 
+   public void goToFacebook() { 
+      driver.navigate().to("https://www.facebook.com/"); 
+   } 
+	
+   @Then("^Login button should exits$") 
+   public void loginButton() { 
+      if(driver.findElement(By.id("u_0_v")).isEnabled()) { 
+         System.out.println("Test 1 Pass"); 
+      } else { 
+         System.out.println("Test 1 Fail");
+      }
+   } 
+	
+   @Then("^Forgot password link should exist$") 
+   public void forgotPWD() { 
+      if(driver.findElement(By.id("")).isEnabled()) { 
+         System.out.println("Test 1 Pass"); 
+      } else {
+         System.out.println("Test 1 Fail");
+      } 
+   } 
+}
+</pre>
+<p><b>Step 5</b> &minus; Create a runner class file.</p>
+<ul class="list">
+<li><p>Create a runner class named <b>runTest.java</b> inside the package.</p></li>
+<li><p>Write the following code. Save the file.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package CucumberReport; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options( 
+   format = {"pretty", "html:target/Destination"} ) 
+//Specifying pretty as a format option ensure that HTML report will be generated. 
+//When we specify html:target/Destination - It will generate the HTML report 
+
+inside the Destination folder, in the target folder of the maven project.
+ 
+public class runTest { }
+</pre>
+<ul class="list">
+<li><p>Run the test using option</p>
+<ul class="list">
+<li><p>Select <b>runTest.java</b> file from package explorer.</p></li>
+<li><p>Right-click and select the option, <b>Run as</b>.</p></li>
+<li><p>Select JUnit test.</p></li>
+</ul></li>
+</ul>
+<p>You will observe the following things when you run this class file.</p>
+<p>Both the scenario will get executed one by one.</p>
+<p>A folder named Destination will be created inside the target directory.</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/cucumber_json.jpg" alt="Cucumber Json" />
+<p>The report will be there named as “Index.html”.</p>
+<p>Open Index.html with web browser.</p>
+<p>You will see the report mentioned in the following image &minus;</p>
+<img src="https://www.tutorialspoint.com/cucumber/images/cucumber_report.jpg" alt="Cucumber Report" />
+<p>It exactly highlights the color of failed scenario. Moreover, you will see highlight for failed step in that scenario. This makes the debugging very easy.</p>
+<h2>JSON Report</h2>
+<p>By now we have seen how easy HTML report is. However, if we want to pass on this report information to any other application, that’s kind of tricky in case of HTML reports. Here comes the need of another reporting format. JSON-Java script object notation is another format for generating Cucumber test reports. JSON is an object containing a lot of information stored in text format. JSON reports bring a different value to the table. JSON report can also be used as a payload of information to be transferred between different servers. Further, it can be used to be displayed as a web page. In a nutshell, JSON reports can be used by other application.</p>
+<p><b>What is payload information?</b> When data is sent over the Internet, each unit transmitted includes both header information and the actual data being sent. The header identifies the source and destination of the packet, while the actual data is referred to as the payload. In order to generate a JSON report, we just need to make a change in the runner file.</p>
+<ul class="list">
+<li><p>Change the format option in the runner file as follows.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package CucumberReport; 
+
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options( format={"json:target/Destination/cucumber.json"}) 
+
+//When we specify json:target/Destination/cucumber.json - It will generate the JSON  
+report inside the Destination folder, in the target folder of the maven project.
+
+public class runTest {}
+</pre>
+<ul class="list">
+<li><p>Run the test using option &minus;</p> 
+<ul class="list">
+<li><p>Select <b>runTest.java</b> file from package explorer.</p></li>
+<li><p>Right click and select option <b>Run as</b>.</p></li>
+<li><p>Select JUnit test.</p></li>
+</ul></li>
+</ul>
+<ul class="list">
+<li><p>You will observe the following things when you run this class file.</p>
+<ul class="list">
+<li><p>Both the scenario will get executed one by one.</p></li>
+</ul></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/folder_name.jpg" alt="Folder Name" />
+<ul class="list">
+<li><p>The report will be there named as <b>cucumber.json</b> (as provided in runner class).</p></li>
+<li><p>Open <b>cucumber.json</b> file with the text editor.</p></li>
+<li><p>You will see the report mentioned in the following screenshot after placing line breaks &minus;</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/text_editor.jpg" alt="Text Editor" />
+<p><b>Note</b> &minus; JSON is less readable as compared to the HTML report format.</p>
+<h1>Cucumber - Debugging</h1>
+<p>It is very likely that your test may fail due to unknown reasons. Identifying the cause of failure and correcting it is very important. This process is known as <b>debugging</b>. Following are a few tips and tricks, which makes Cucumber debugging a bit easy.</p>
+<p>Debugging option is available with Eclipse. Place the break point. Click the file and debug using the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Place the manual break points in the Ruby step definition file.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+require 'ruby-debug' 
+Then /^the process should exit cleanly$/ do 
+breakpoint 
+assert @exited_cleanly, "Process did not exit cleanly: #{@stdout}" 
+end
+</pre>
+<p><b>Step 2</b> &minus; We can also define a separate debug step like the following in the step definition file.</p> 
+<pre class="prettyprint notranslate">
+Then /^I debug$/ do 
+breakpoint 
+0 
+end
+</pre>
+<p><b>Step 3</b> &minus; <b>Webrat</b> is the default tool for cucumber testing with Rails. It lets you do things like click links, type and submit forms, and so on.</p>
+<p>There will be times where you try to click on something, for example, and it’s not there. You’ll get a big blob of HTML thrown back, and figuring out what that exactly means can be a real drag.</p>
+<pre class="result notranslate">
+save_and_open_page
+</pre>
+<p>Webrat provides a method save_and_open_page which captures the current HTML, saves it, and then will open it in a browser for you. Extremely useful.</p>
+<pre class="prettyprint notranslate">
+When /^I follow "(.*)"$/ do |link| 
+save_and_open_page 
+click_link(link) 
+end
+</pre>
+<h1>Cucumber - Java Testing</h1>
+<p>To run Cucumber test with Java, following are the steps.</p>
+<p><b>Step 1</b> &minus; Install Java &minus;</p>
+<ul class="list">
+<li><p>Download jdk and jre from</p> 
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="nofollow">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p></li>
+<li><p>Accept license agreement.</p></li>
+<li><p>Install JDK and JRE.</p></li>
+<li><p>Set environment variable as shown in the following picture.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/environment_variable.jpg" alt="Environment Variable" />
+<p><b>Step 2</b> &minus; Install Eclipse IDE &minus;</p>
+<ul class="list">
+<li><p>Make sure JAVA is installed on your machine.</p></li>
+<li><p>Download Eclipse from <a href="https://eclipse.org/downloads/" target="_blank" rel="nofollow">https://eclipse.org/downloads/</a></p></li>
+<li><p>Unzip and Eclipse installed.</p></li>
+</ul>
+<p><b>Step 3</b> &minus; Install Maven &minus;</p>
+<ul class="list">
+<li><p>Download Maven &minus;<a href="https://maven.apache.org/download.cgi" target="_blank" rel="nofollow">https://maven.apache.org/download.cgi</a></p></li>
+<li><p>Unzip the file and remember the location.</p></li>
+<li><p>Create environment variable MAVEN_HOME as shown in the following image.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/apache_maven.jpg" alt="Apache Maven" />
+<ul class="list">
+<li><p>Edit Path variable and include Maven.</p></li>
+<li><p>Download MAVEN plugin from Eclipse</p>
+<ul class="list">
+<li><p>Open Eclipse.</p></li>
+<li><p>Got to Help &#8594; Eclipse Marketplace &#8594; Search maven &#8594; Maven Integration for Eclipse &#8594;INSTALL</p></li>
+</ul></li>
+</ul>
+<p><b>Step 4</b> &minus; Configure Cucumber with Maven.</p>
+<ul class="list">
+<li><p>Create a Maven project.</p>
+<ul class="list">
+<li><p>Go to File &#8594; New &#8594; Others &#8594; Maven &#8594; Maven Project &#8594; Next.</p></li>
+<li><p>Provide group Id (group Id will identify your project uniquely across all projects).</p></li>
+<li><p>Provide artifact Id (artifact Id is the name of the jar without version. You can choose any name which is in lowercase).</p></li>
+<li><p>Click on Finish.</p></li>
+</ul></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/maven_project.jpg" alt="Maven Project" /> 
+<p><b>Step 5</b> &minus; Open pom.xml &minus;</p>
+<ul class="list">
+<li><p>Go to the package explorer on the left hand side of Eclipse.</p></li>
+<li><p>Expand the project CucumberTest.</p></li>
+<li><p>Locate pom.xml file.</p></li>
+<li><p>Right-click and select the option, Open with “Text Editor”.</p></li>
+</ul>
+<p><b>Step 6</b> &minus; Add dependency for Selenium &minus; This will indicate Maven, which Selenium jar files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Open pom.xml is in edit mode, create dependencies tag (&lt;dependencies&gt;&lt;/dependencies&gt;), inside the project tag.</p></li>
+<li><p>Inside the dependencies tag, create dependency tag. (&lt;dependency&gt;&lt;/dependency&gt;)</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt; 
+   &lt;artifactId&gt;selenium-java&lt;/artifactId&gt; 
+   &lt;version&gt;2.47.1&lt;/version&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 7</b> &minus; Add dependency for Cucumber-Java &minus; This will indicate Maven, which Cucumber files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide following information within the dependency tag.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-java&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 8</b> &minus; Add dependency for Cucumber-JUnit &minus; This will indicate Maven, which Cucumber JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;info.cukes&lt;/groupId&gt; 
+   &lt;artifactId&gt;cucumber-junit&lt;/artifactId&gt; 
+   &lt;version&gt;1.0.2&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 9</b>&minus; Add dependency for JUnit &minus; This will indicate Maven, which JUnit files are to be downloaded from the central repository to the local repository.</p>
+<ul class="list">
+<li><p>Create one more dependency tag.</p></li>
+<li><p>Provide the following information within the dependency tag.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;dependency&gt; 
+   &lt;groupId&gt;junit&lt;/groupId&gt; 
+   &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+   &lt;version&gt;4.10&lt;/version&gt; 
+   &lt;scope&gt;test&lt;/scope&gt; 
+&lt;/dependency&gt;
+</pre>
+<p><b>Step 10</b> &minus; Verify binaries.</p>
+<ul class="list">
+<li><p>Once pom.xml is edited successfully, save it.</p></li>
+<li><p>Go to Project &#8594; Clean &minus; It will take a few minutes.</p></li>
+<li><p>You will be able to see a Maven repository.</p></li>
+</ul>
+<p><b>Step 11</b> &minus; Create a package under <b>src/test/java</b> named as <b>cucumberJava</b>.</p>
+<p><b>Step 12</b> &minus; Create feature file</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file a name such as <b>cucumberJava.feature</b>.</p></li>
+<li><p>Write the following text within the file and save it.</p>
+<p><b>Feature:</b> CucumberJava</p>
+<p><b>Scenario:</b> Login functionality exists</p>
+<p>Given I have open the browser</p>
+<p>When I open Facebook website</p>
+<p>Then Login button should exits</p></li>
+</ul>
+<p><b>Step 13</b> &minus; Create step definition file &minus;</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file name a name such as <b>annotation.java</b>.</p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package CucumberJava; 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.firefox.FirefoxDriver; 
+
+import cucumber.annotation.en.Given; 
+import cucumber.annotation.en.Then; 
+import cucumber.annotation.en.When; 
+
+public class cucumberJava { 
+   WebDriver driver = null; 
+   @Given("^I have open the browser$") 
+   public void openBrowser() { 
+      driver = new FirefoxDriver(); 
+   } 
+   @When("^I open Facebook website$") 
+   public void goToFacebook() { 
+      driver.navigate().to("https://www.facebook.com/"); 
+   } 
+   @Then("^Login button should exits$") 
+   public void loginButton() { 
+      if(driver.findElement(By.id("u_0_v")).isEnabled()) { 
+         System.out.println("Test 1 Pass"); 
+      } else { 
+         System.out.println("Test 1 Fail"); 
+      } 
+      driver.close(); 
+   } 
+}
+</pre>
+<p><b>Step 14</b> &minus; Create a runner class file.</p>
+<ul class="list">
+<li><p>Select and right-click on the package outline.</p></li>
+<li><p>Click on ‘New’ file.</p></li>
+<li><p>Give the file name as <b>runTest.java</b>.</p></li>
+<li><p>Write the following text within the file and save it.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+package cucumberJava; 
+import org.junit.runner.RunWith; 
+import cucumber.junit.Cucumber; 
+
+@RunWith(Cucumber.class) 
+@Cucumber.Options(format = {"pretty", "html:target/cucumber"}) 
+public class runTest { 
+}
+</pre>
+<p><b>Step 15</b> &minus; Run the test using option &minus;</p>
+<ul class="list">
+<li><p>Select runTest.java file from the package explorer.</p></li>
+<li><p>Right-click and select the option, <b>Run as</b>.</p></li>
+<li><p>Select JUnit test.</p></li>
+</ul>
+<p>You will observe the following things upon execution &minus;</p>
+<ul class="list">
+<li><p>An instance of Firefox web browser will open.</p></li>
+<li><p>It will open the Facebook login page on the browser.</p></li>
+<li><p>It will detect the login button.</p></li>
+<li><p>The browser will close.</p></li>
+<li><p>In the JUnit window, you will see a scenario with green tick mark, which indicates success of the test execution.</p></li>
+</ul>
+<h1>Cucumber - Ruby Testing</h1>
+<p>Ruby language has the following advantages &minus;</p>
+<ul class="list">
+<li><p>It is easy to understand.</p></li>
+<li><p>It is an object-oriented language.</p></li>
+<li><p>It is a powerful class library.</p></li>
+<li><p>It has massive online support.</p></li>
+</ul>
+<p>Following is the step-by-step process of how Cucumber works with Ruby.</p>
+<p><b>Step 1</b> &minus; Install Ruby.</p>
+<ul class="list">
+<li><p>Go to RubyInstaller download page.</p></li>
+<li><p>Download the version best suited for your operating system (i.e. 32 or 64 bit).</p></li>
+<li><p>Run the downloaded exe.</p></li>
+<li><p>During the installation, tick the option “Add Ruby…” and “Associate …”, as shown in the following image.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/cucumber/images/setup_ruby.jpg" alt="Setup Ruby" />
+<p><b>Step 2</b> &minus; Download and extract Dev kit.</p>
+<ul class="list">
+<li><p>Go to RubyInstaller download page.</p></li>
+<li><p>Download the Devkit version best suited for your operating system (i.e. 32 or 64 bit).</p></li>
+<li><p>Extract the devkit at c:\Ruby\Devkit folder.</p></li>
+<li><p>Open the command prompt.</p></li>
+<li><p>Inside the Ruby devkit, run the following command.</p></li>
+</ul>
+<pre class="result notranslate">
+C:\Ruby\devkit&gt; ruby dk.rb init 
+C:\Ruby\devkit&gt; ruby dk.rb install
+</pre>
+<p><b>Step 3</b> &minus; Install Cucumber and other Ruby gem.</p>
+<ul class="list">
+<li><p>To install Cucumber, first update the current gem setup</p></li>
+</ul>
+<pre class="result notranslate">
+C:\Users\Admin&gt; gem update –system
+</pre>
+<ul class="list">
+<li><p>Next, install the gems you need for Cucumber web testing.</p></li>
+</ul>
+<pre class="result notranslate">
+C:\Users\Admin&gt; gem install --no-ri --no-rdoc rspec 
+C:\Users\Admin&gt; gem install --no-ri --no-rdoc win32console 
+C:\Users\Admin&gt; gem install --no-ri --no-rdoc watir-webdriver 
+C:\Users\Admin&gt; gem install --no-ri --no-rdoc cucumber
+</pre>
+<ul class="list">
+<li><p>Run Cucumber</p></li>
+</ul>
+<pre class="result notranslate">
+C:\Users\Admin\Documents&gt;cucumber –init 
+C:\Users\Admin\Documents&gt;cucumber
+</pre>
+<p><b>Step 4</b> &minus; Install IDE – KOMODO.</p>
+<ul class="list">
+<li><p>Go to the page <a rel="nofollow" target="_blank" href="http://www.activestate.com/komodo-ide/downloads">http://www.activestate.com/komodo-ide/downloads</a></p></li>
+<li><p>Download the free trial installer.</p></li>
+<li><p>Double-click on the downloaded exe.</p></li>
+<li><p>Follow the installation steps.</p></li>
+<li><p>Finish the installation and open the IDE.</p></li>
+</ul>
+<p><b>Step 5</b> &minus; Install <b>Watir</b> &minus; Go to command prompt and run the following command, <b>"gem install watir"</b></p>
+<p><b>Step 6</b> &minus; Install <b>rspec</b> &minus; Go to command prompt and run the following command, <b>"gem install rspec"</b></p>
+<p><b>Step 7</b> &minus; Create feature file.</p>
+<ul class="list">
+<li><p>Open KOMODO editor.</p></li>
+<li><p>Click on new file icon.</p></li>
+<li><p>Write the following text.</p>
+<p><b>Feature:</b> Users must be able to search for content using Google.</p>
+<p><b>Scenario:</b> Search for a term.</p>
+<p>Given I have entered <b>"watir"</b> into the query.</p>
+<p>When I click <b>"search"</b></p>
+<p>Then I should see some results</p></li>
+</ul>
+<ul class="list">
+<li><p>Click <b>save</b> icon.</p></li>
+<li><p>Give the name as CucumberRuby.feature.</p></li>
+<li><p>Choose any folder, for example: <b>“e:\WithRuby”</b></p></li>
+<li><p>Save the file.</p></li>
+</ul>
+<p><b>Step 8</b> &minus; Create step definition file.</p>
+<ul class="list">
+<li><p>Open KOMODO editor.</p></li>
+<li><p>Click ‘New’ file icon.</p></li>
+<li><p>Write the following code.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+require "watir-webdriver" 
+require "rspec/expectations" 
+
+Given /^I have entered "([^"]*)" into the query$/ do |term| 
+@browser ||= Watir::Browser.new :firefox 
+@browser.goto "google.com" 
+@browser.text_field(:name =&gt; "q").set term 
+end 
+
+When /^I click "([^"]*)"$/ do |button_name| 
+@browser.button.click 
+end 
+
+Then /^I should see some results$/ do 
+@browser.div(:id =&gt; "resultStats").wait_until_present 
+@browser.div(:id =&gt; "resultStats").should exist 
+@browser.close 
+End
+</pre>
+<ul class="list">
+<li><p>Click save icon.</p></li>
+<li><p>Give the name as <b>CucumberRuby.rb</b></p></li>
+<li><p>Choose any folder for example: <b>“e:\WithRuby”</b></p></li>
+<li><p>Save the file.</p></li>
+</ul>
+<p><b>Step 9</b> &minus; Create the test file.</p>
+<ul class="list">
+<li><p>Open KOMODO editor.</p></li>
+<li><p>Click on ‘New’ file icon.</p></li>
+<li><p>Write the following code.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+require "rubygems" 
+require "test/unit" 
+require "watir-webdriver" 
+
+class GoogleSearch &lt; Test::Unit::TestCase 
+def setup 
+@browser ||= Watir::Browser.new :firefox 
+end 
+
+def teardown 
+@browser.close 
+end 
+
+def test_search 
+@browser.goto "google.com" 
+@browser.text_field(:name =&gt; "q").set "watir" 
+@browser.button.click 
+@browser.div(:id =&gt; "resultStats").wait_until_present assert 
+@browser.title == "watir - Google Search" 
+end 
+end
+</pre>
+<ul class="list">
+<li><p>Click Save icon.</p></li>
+<li><p>Name the file as <b>test.rb</b> and choose any folder for example: “e:\WithRuby”</p></li>
+<li><p>Save the file.</p></li>
+</ul>
+<p><b>Step 10</b> &minus; Run the feature file.</p>
+<ul class="list">
+<li><p>Go to command prompt.</p></li>
+<li><p>Go to directory <b>e:\WithRuby</b></p></li>
+<li><p>Run the following command.</p></li>
+</ul>
+<pre class="result notranslate">
+e:\With Ruby&gt;ruby test.rb
+</pre>
+<p>You will observe the following things upon execution &minus;</p>
+<ul class="list">
+<li><p>A web browser instance will open.</p></li>
+<li><p>Google.com webpage will get loaded.</p></li>
+<li><p>Search text <b>watir</b> will be entered.</p></li>
+<li><p>Search button will be placed.</p></li>
+<li><p>Search results shall be displayed on the webpage.</p></li>
+<li><p>Browser instance will get closed.</p></li>
+</ul>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/cucumber/cucumber_ruby_testing.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/cucumber/cucumber_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/cucumber/cucumber_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:23:04 GMT -->
+</html>

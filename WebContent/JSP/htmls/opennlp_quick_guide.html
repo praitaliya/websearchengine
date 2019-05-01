@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:21:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>OpenNLP Quick Guide</title>
+<meta name="description" content="OpenNLP Quick Guide - Learn OpenNLP in simple and easy steps starting from basic to advanced concepts with examples including Overview, Environment, Referenced API, Sentence Detection, Tokenization, Named Entity Recognition, Finding Parts of Speech, Parsing the Sentences, Chunking Sentences, Command Line Interface." />
+<meta name="keywords" content="OpenNLP, Tutorial, Overview, Environment, Referenced API, Sentence Detection, Tokenization, Named Entity Recognition, Finding Parts of Speech, Parsing the Sentences, Chunking Sentences, Command Line Interface." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #ff9900 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #ff9900 !important;}
+.submenu-item{ border-bottom: 2px solid #ff9900 !important; border-top: 2px solid #ff9900 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/opennlp/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/opennlp/images/opennlp-mini-logo.jpg" alt="OpenNLP Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">OpenNLP Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/opennlp/index.htm">OpenNLP - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_overview.htm">OpenNLP - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_environment.htm">OpenNLP - Environment</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_referenced_api.htm">OpenNLP - Referenced API</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_sentence_detection.htm">OpenNLP - Sentence Detection</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_tokenization.htm">OpenNLP - Tokenization</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_named_entity_recognition.htm">Named Entity Recognition</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_finding_parts_of_speech.htm">OpenNLP - Finding Parts of Speech</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_parsing_the_sentences.htm">OpenNLP - Parsing the Sentences</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_chunking_sentences.htm">OpenNLP - Chunking Sentences</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_command_line_interface.htm">OpenNLP - Command Line Interface</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">OpenNLP Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm">OpenNLP - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_useful_resources.htm">OpenNLP - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/opennlp/opennlp_discussion.htm">OpenNLP - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>OpenNLP - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/opennlp/opennlp_command_line_interface.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/opennlp/opennlp_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>OpenNLP - Overview</h1>
+<p>NLP is a set of tools used to derive meaningful and useful information from natural language sources such as web pages and text documents.</p>
+<h2>What is Open NLP?</h2>
+<p>Apache <b>OpenNLP</b> is an open-source Java library which is used to process natural language text. You can build an efficient text processing service using this library.</p>
+<p>OpenNLP provides services such as tokenization, sentence segmentation, part-of-speech tagging, named entity extraction, chunking, parsing, and co-reference resolution, etc.</p>
+<h2>Features of OpenNLP</h2>
+<p>Following are the notable features of OpenNLP  &minus;</p>
+<ul class="list">
+<li><p><b>Named Entity Recognition (NER)</b> &minus; Open NLP supports NER, using which you can extract names of locations, people and things even while processing queries.</p></li>
+<li><p><b>Summarize</b> &minus; Using the <b>summarize</b> feature, you can summarize Paragraphs, articles, documents or their collection in NLP.</p></li>
+<li><p><b>Searching</b> &minus; In OpenNLP, a given search string or its synonyms can be identified in given text, even though the given word is altered or misspelled.</p></li>
+<li><p><b>Tagging (POS)</b> &minus; Tagging in NLP is used to divide the text into various grammatical elements for further analysis.</p></li>
+<li><p><b>Translation</b> &minus; In NLP, Translation helps in translating one language into another.</p></li>
+<li><p><b>Information grouping</b> &minus; This option in NLP groups the textual information in the content of the document, just like Parts of speech.</p></li>
+<li><p><b>Natural Language Generation</b> &minus; It is used for generating information from a database and automating the information reports such as weather analysis or medical reports.</p></li>
+<li><p><b>Feedback Analysis</b> &minus; As the name implies, various types of feedbacks from people are collected, regarding the products, by NLP to analyze how well the product is successful in winning their hearts.</p></li>
+<li><p><b>Speech recognition</b> &minus; Though it is difficult to analyze human speech, NLP has some builtin features for this requirement.</p></li>
+</ul>
+<h3>Open NLP API</h3>
+<p>The Apache OpenNLP library provides classes and interfaces to perform various tasks of natural language processing such as sentence detection, tokenization, finding a name, tagging the parts of speech, chunking a sentence, parsing, co-reference resolution, and document categorization.</p> 
+<p>In addition to these tasks, we can also train and evaluate our own models for any of these tasks.</p>
+<h3>OpenNLP CLI</h3>
+<p>In addition to the library, OpenNLP also provides a Command Line Interface (CLI), where we can train and evaluate models. We will discuss this topic in detail in the last chapter of this tutorial.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/opennlp_cli.jpg" alt="OpenNLP CLI" />
+<h2>Open NLP Models</h2>
+<p>To perform various NLP tasks, OpenNLP provides a set of predefined models. This set includes models for different languages.</p>
+<h3>Downloading the models</h3>
+<p>You can follow the steps given below to download the predefined models provided by OpenNLP.</p>
+<p><b>Step 1</b> &minus; Open the index page of OpenNLP models by clicking the following link &minus; <a target="_blank" rel=nofollow  href= "http://opennlp.sourceforge.net/models-1.5/">http://opennlp.sourceforge.net/models-1.5/</a>.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/opennlp_models.jpg" alt="OpenNLP Models" />
+<p><b>Step 2</b> &minus;  On visiting the given link, you will get to see a list of components of various languages and the links to download them. Here, you can get the list of all the predefined models provided by OpenNLP.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/predefined_models.jpg" alt="Predefined Models" />
+<p>Download all these models to the folder <b>C:/OpenNLP_models/></b>, by clicking on their respective links. All these models are language dependent and while using these, you have to make sure that the model language matches with the language of the input text.</p>
+<h2>History of OpenNLP</h2>
+<ul class="list">
+<li><p>In 2010, OpenNLP entered the Apache incubation.</p></li>
+<li><p>In 2011, Apache OpenNLP 1.5.2 Incubating was released, and in the same year, it graduated as a top-level Apache project.</p></li>
+<li><p>In 2015, OpenNLP was 1.6.0 released.</p></li>
+</ul>
+<h1>OpenNLP - Environment</h1>
+<p>In this chapter, we will discuss how you can setup OpenNLP environment in your system. Let’s start with the installation process.</p>
+<h2>Installing OpenNLP</h2>
+<p>Following are the steps to download <b>Apache OpenNLP library</b> in your system.</p>
+<p><b>Step 1</b> &minus; Open the homepage of <b>Apache OpenNLP</b> by clicking the following link &minus; <a target="_blank" rel="nofollow" href="https://opennlp.apache.org/" >https://opennlp.apache.org/</a>.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/apache_opennlp.jpg" alt="Apache OpenNLP" />
+<p><b>Step 2</b> &minus; Now, click on the <b>Downloads</b> link. On clicking, you will be directed to a page where you can find various mirrors which will redirect you to the Apache Software Foundation Distribution directory.</p>
+<p><b>Step 3</b> &minus; In this page you can find links to download various Apache distributions. Browse through them and find the OpenNLP distribution and click it.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/distribution.jpg" alt="Distribution" />
+<p><b>Step 4</b> &minus; On clicking, you will be redirected to the directory where you can see the index of the OpenNLP distribution, as shown below.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/index_of_opennlp.jpg" alt="Index of Opennlp" />
+<p>Click on the latest version from the available distributions.</p>
+<p><b>Step 5</b> &minus; Each distribution provides Source and Binary files of OpenNLP library in various formats. Download the source and binary files, <b>apache-opennlp-1.6.0-bin.zip</b> and <b>apache-opennlp1.6.0-src.zip</b> (for Windows).</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/source_binary_files_of_opennlp.jpg" alt="Source and Binary Files of OpenNLP" />
+<h2>Setting the Classpath</h2>
+<p>After downloading the OpenNLP library, you need to set its path to the <b>bin</b> directory. Assume that you have downloaded the OpenNLP library to the E drive of your system.</p>
+<p>Now, follow the steps that are given below &minus;</p>
+<p><b>Step 1</b> &minus; Right-click on 'My Computer' and select 'Properties'.</p>
+<p><b>Step 2</b> &minus; Click on the 'Environment Variables' button under the 'Advanced' tab.</p>
+<p><b>Step 3</b> &minus; Select the <b>path</b> variable and click the <b>Edit</b> button, as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/system_variables_path.jpg" alt="System Variables Path" />
+<p><b>Step 4</b> &minus; In the Edit Environment Variable window, click the <b>New</b> button and add the path for OpenNLP directory <b>E:\apache-opennlp-1.6.0\bin</b> and click the <b>OK</b> button, as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/edit_environment_variable_window.jpg" alt="Edit Environment Variable Window" />
+<h2>Eclipse Installation</h2>
+<p>You can set the Eclipse environment for OpenNLP library, either by setting the <b>Build path</b> to the JAR files or by using <b>pom.xml</b>.</p>
+<h3>Setting Build Path to the JAR Files</h3>
+<p>Follow the steps given below to install OpenNLP in Eclipse &minus;</p>
+<p><b>Step 1</b> &minus; Make sure that you have Eclipse environment installed in your system.</p>
+<p><b>Step 2</b> &minus; Open Eclipse. Click File &rarr; New &rarr; Open a new project, as shown below.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/new_project.jpg" alt="New Project" />
+<p><b>Step 3</b> &minus; You will get the <b>New Project</b> wizard. In this wizard, select Java project and proceed by clicking the <b>Next</b> button.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/java_project.jpg" alt="Java Project" />
+<p><b>Step 4</b> &minus; Next, you will get the <b>New Java Project wizard</b>. Here, you need to create a new project and click the <b>Next</b> button, as shown below.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/my_project.jpg" alt="My Project" />
+<p><b>Step 5</b> &minus; After creating a new project, right-click on it, select <b>Build Path</b> and click <b>Configure Build Path</b>.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/configure_build_path.jpg" alt="Configure Build Path" />
+<p><b>Step 6</b> &minus; Next, you will get the <b>Java Build Path</b> wizard. Here, click the <b>Add External JARs</b> button, as shown below.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/java_build_path.jpg" alt="Java Build Path" />
+<p><b>Step 7</b> &minus; Select the jar files <b>opennlp-tools-1.6.0.jar</b> and <b>opennlp-uima-1.6.0.jar</b> located in the <b>lib</b> folder of <b>apache-opennlp-1.6.0 folder</b>.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/opennlp_tools.jpg" alt="Opennlp Tools" />
+<p>On clicking the <b>Open</b> button in the above screen, the selected files will be added to your library.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/add_external_jars.jpg" alt="Add External JARs" />
+<p>On clicking <b>OK</b>, you will successfully add the required JAR files to the current project and you can verify these added libraries by expanding the Referenced Libraries, as shown below.</p>
+<img src="https://www.tutorialspoint.com/opennlp/images/sample_workspace.jpg" alt="Sample Workspace" />
+<h3>Using pom.xml</h3>
+<p>Convert the project into a Maven project and add the following code to its <b>pom.xml</b>.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt; 
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; 
+   &lt;groupId&gt;myproject&lt;/groupId&gt; 
+   &lt;artifactId&gt;myproject&lt;/artifactId&gt; 
+   &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; 
+   &lt;build&gt; 
+      &lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt; 
+      &lt;plugins&gt; 
+         &lt;plugin&gt; 
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt; 
+            &lt;version&gt;3.5.1&lt;/version&gt; 
+            &lt;configuration&gt; 
+               &lt;source&gt;1.8&lt;/source&gt; 
+               &lt;target&gt;1.8&lt;/target&gt; 
+            &lt;/configuration&gt; 
+         &lt;/plugin&gt; 
+      &lt;/plugins&gt; 
+   &lt;/build&gt; 
+   &lt;dependencies&gt;  
+      &lt;dependency&gt; 
+         &lt;groupId&gt;org.apache.opennlp&lt;/groupId&gt; 
+         &lt;artifactId&gt;opennlp-tools&lt;/artifactId&gt; 
+         &lt;version&gt;1.6.0&lt;/version&gt; 
+     &lt;/dependency&gt; 
+     &lt;dependency&gt; 
+         &lt;groupId&gt;org.apache.opennlp&lt;/groupId&gt; 
+         &lt;artifactId&gt;opennlp-uima&lt;/artifactId&gt; 
+         &lt;version&gt;1.6.0&lt;/version&gt; 
+      &lt;/dependency&gt;      
+  &lt;/dependencies&gt;  
+&lt;/project&gt; 
+</pre>
+<h1>OpenNLP - Referenced API</h1>
+<p>In this chapter, we will discuss about the classes and methods that we will be using in the subsequent chapters of this tutorial.</p>
+<h2>Sentence Detection</h2>
+<h3>SentenceModel class</h3>
+<p>This class represents the predefined model which is used to detect the sentences in the given raw text. This class belongs to the package <b>opennlp.tools.sentdetect</b>.</p>
+<p>The constructor of this class accepts an <b>InputStream</b> object of the sentence detector model file (en-sent.bin).</p>
+<h3>SentenceDetectorME class</h3>
+<p>This class belongs to the package <b>opennlp.tools.sentdetect</b> and it contains methods to split the raw text into sentences. This class uses a maximum entropy model to evaluate end-ofsentence characters in a string to determine if they signify the end of a sentence.</p>
+<p>Following are the important methods of this class.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>sentDetect()</b></p>
+<p>This method is used to detect the sentences in the raw text passed to it. It accepts a String variable as a parameter and returns a String array which holds the sentences from the given raw text.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">2</td>
+<td>
+<p><b>sentPosDetect()</b></p>
+<p>This method is used to detect the positions of the sentences in the given text. This method accepts a string variable, representing the sentence and returns an array of objects of the type <b>Span</b>.</p>
+<p>The class named <b>Span</b> of the <b>opennlp.tools.util</b> package is used to store the start and end integer of sets.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">3</td>
+<td>
+<p><b>getSentenceProbabilities()</b></p>
+<p>This method returns the probabilities associated with the most recent calls to <b>sentDetect()</b> method.</p>
+</td>
+</tr>
+</table>
+<h2>Tokenization</h2>
+<h3>TokenizerModel class</h3>
+<p>This class represents the predefined model which is used to tokenize the given sentence. This class belongs to the package <b>opennlp.tools.tokenizer</b>.</p>
+<p>The constructor of this class accepts a <b>InputStream</b> object of the tokenizer model file (entoken.bin).</p>
+<h3>Classes</h3>
+<p>To perform tokenization, the OpenNLP library provides three main classes. All the three classes implement the interface called <b>Tokenizer</b>.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Classes and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>SimpleTokenizer</b></p>
+<p>This class tokenizes the given raw text using character classes.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">2</td>
+<td>
+<p><b>WhitespaceTokenizer</b></p>
+<p>This class uses whitespaces to tokenize the given text.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">3</td>
+<td>
+<p><b>TokenizerME</b></p>
+<p>This class converts raw text in to separate tokens. It uses Maximum Entropy to make its decisions.</p>
+</td>
+</tr>
+</table>
+<p>These classes contain the following methods.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>tokenize()</b></p>
+<p>This method is used to tokenize the raw text. This method accepts a String variable as a parameter, and returns an array of Strings (tokens).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">2</td>
+<td>
+<p><b>sentPosDetect()</b></p>
+<p>This method is used to get the positions or spans of the tokens. It accepts the sentence (or) raw text in the form of the string and returns an array of objects of the type <b>Span</b>.</p>
+</td>
+</tr>
+</table>
+<p>In addition to the above two methods, the <b>TokenizerME</b> class has the <b>getTokenProbabilities()</b> method.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>getTokenProbabilities()</b></p>
+<p>This method is used to get the probabilities associated with the most recent calls to the <b>tokenizePos()</b> method.</p>
+</td>
+</tr>
+</table>
+<h2>NameEntityRecognition</h2>
+<h3>TokenNameFinderModel class</h3>
+<p>This class represents the predefined model which is used to find the named entities in the given sentence. This class belongs to the package <b>opennlp.tools.namefind</b>.</p>
+<p>The constructor of this class accepts a <b>InputStream</b> object of the name finder model file (enner-person.bin).</p>
+<h3>NameFinderME class</h3>
+<p>The class belongs to the package <b>opennlp.tools.namefind</b> and it contains methods to perform the NER tasks. This class uses a maximum entropy model to find the named entities in the given raw text.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>find()</b></p>
+<p>This method is used to detect the names in the raw text. It accepts a String variable representing the raw text as a parameter and, returns an array of objects of the type Span.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">2</td>
+<td>
+<p><b>probs()</b></p>
+<p>This method is used to get the probabilities of the last decoded sequence.</p>
+</td>
+</tr>
+</table>
+<h2>Finding the Parts of Speech</h2>
+<h3>POSModel class</h3>
+<p>This class represents the predefined model which is used to tag the parts of speech of the given sentence. This class belongs to the package <b>opennlp.tools.postag</b>.</p>
+<p>The constructor of this class accepts a <b>InputStream</b> object of the pos-tagger model file (enpos-maxent.bin).</p>
+<h3>POSTaggerME class</h3>
+<p>This class belongs to the package <b>opennlp.tools.postag</b> and it is used to predict the parts of speech of the given raw text. It uses Maximum Entropy to make its decisions.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>tag()</b></p>
+<p>This method is used to assign the sentence of tokens POS tags. This method accepts an array of tokens (String) as a parameter, and returns a tags (array).</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">2</td>
+<td>
+<p><b>getSentenceProbabilities()</b></p>
+<p>This method is used to get the probabilities for each tag of the recently tagged sentence.</p>
+</td>
+</tr>
+</table>
+<h2>Parsing the Sentence</h2>
+<h3>ParserModel class</h3>
+<p>This class represents the predefined model which is used to parse the given sentence. This class belongs to the package <b>opennlp.tools.parser</b>.</p>
+<p>The constructor of this class accepts a <b>InputStream</b> object of the parser model file (en-parserchunking.bin).</p>
+<h3>Parser Factory class</h3>
+<p>This class belongs to the package <b>opennlp.tools.parser</b> and it is used to create parsers.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>create()</b></p>
+<p>This is a static method and it is used to create a parser object. This method accepts the Filestream object of the parser model file.</p>
+</td>
+</tr>
+</table>
+<h3>ParserTool class</h3>
+<p>This class belongs to the <b>opennlp.tools.cmdline.parser</b> package and, it is used to parse the content.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>parseLine()</b></p>
+<p>This method of the <b>ParserTool</b> class is used to parse the raw text in OpenNLP. This method accepts  &minus;</p>
+<ul class="list">
+<li>A String variable representing the text to be parsed.</li>
+<li>A parser object.</li>
+<li>An integer representing the no.of parses to be carried out.</li>
+</ul>
+</td>
+</tr>
+</table>
+<h2>Chunking</h2>
+<h3>ChunkerModel class</h3>
+<p>This class represents the predefined model which is used to divide a sentence into smaller chunks. This class belongs to the package <b>opennlp.tools.chunker</b>.</p>
+<p>The constructor of this class accepts a <b>InputStream</b> object of the <b>chunker</b> model file (enchunker.bin).</p>
+<h3>ChunkerME class</h3>
+<p>This class belongs to the package named <b>opennlp.tools.chunker</b> and it is used to divide the given sentence in to smaller chunks.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td>
+<p><b>chunk()</b></p>
+<p>This method is used to divide the given sentence in to smaller chunks. It accepts tokens of a sentence and <b>P</b>arts <b>O</b>f <b>S</b>peech tags as parameters.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">2</td>
+<td>
+<p><b>probs()</b></p>
+<p>This method returns the probabilities of the last decoded sequence.</p>
+</td>
+</tr>
+</table>
+<h1>OpenNLP - Sentence Detection</h1>
+<p>While processing a natural language, deciding the beginning and end of the sentences is one of the problems to be addressed. This process is known as <b>S</b>entence <b>B</b>oundary <b>D</b>isambiguation (SBD) or simply sentence breaking.</p> 
+<p>The techniques we use to detect the sentences in the given text, depends on the language of the text.</p>
+<h2>Sentence Detection Using Java</h2>
+<p>We can detect the sentences in the given text in Java using, Regular Expressions, and a set of simple rules.</p>
+<p>For example, let us assume a period, a question mark, or an exclamation mark ends a sentence in the given text, then we can split the sentence using the <b>split()</b> method of the <b>String</b> class. Here, we have to pass a regular expression in String format.</p>
+<p>Following is the program which determines the sentences in a given text using Java regular expressions <b>(split method)</b>. Save this program in a file with the name <b>SentenceDetection_RE.java</b>.</p>
+<pre class="prettyprint notranslate">
+public class SentenceDetection_RE {  
+   public static void main(String args[]){ 
+     
+      String sentence = " Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+     
+      String simple = "[.?!]";      
+      String[] splitString = (sentence.split(simple));     
+      for (String string : splitString)   
+         System.out.println(string);      
+   } 
+}
+</pre>
+<p>Compile and execute the saved java file from the command prompt using the following commands.</p>
+<pre class="prettyprint notranslate">
+javac SentenceDetection_RE.java 
+java SentenceDetection_RE
+</pre>
+<p>On executing, the above program creates a PDF document displaying the following message.</p>
+<pre class="result notranslate">
+Hi 
+How are you 
+Welcome to Tutorialspoint 
+We provide free tutorials on various technologies
+</pre>
+<h2>Sentence Detection Using OpenNLP</h2>
+<p>To detect sentences, OpenNLP uses a predefined model, a file named <b>en-sent.bin</b>. This predefined model is trained to detect sentences in a given raw text.</p>
+<p>The <b>opennlp.tools.sentdetect</b> package contains the classes and interfaces that are used to perform the sentence detection task.</p>
+<p>To detect a sentence using OpenNLP library, you need to &minus;</p>
+<ul class="list">
+<li><p>Load the <b>en-sent.bin</b> model using the <b>SentenceModel</b> class</p></li>
+<li><p>Instantiate the <b>SentenceDetectorME</b> class.</p></li>
+<li><p>Detect the sentences using the <b>sentDetect()</b> method of this class.</p></li>
+</ul>
+<p>Following are the steps to be followed to write a program which detects the sentences from the given raw text.</p>
+<h3>Step 1: Loading the model</h3>
+<p>The model for sentence detection is represented by the class named <b>SentenceModel</b>, which belongs to the package <b>opennlp.tools.sentdetect</b>.</p>
+<p>To load a sentence detection model &minus;</p>
+<ul class="list">
+<li><p>Create an <b>InputStream</b> object of the model (Instantiate the FileInputStream and pass the path of the model in String format to its constructor).</p></li>
+<li><p>Instantiate the <b>SentenceModel</b> class and pass the <b>InputStream</b> (object) of the model as a parameter to its constructor as shown in the following code block &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//Loading sentence detector model 
+InputStream inputStream = new FileInputStream("C:/OpenNLP_models/ensent.bin"); 
+SentenceModel model = new SentenceModel(inputStream);
+</pre>
+<h3>Step 2: Instantiating the SentenceDetectorME class</h3>
+<p>The <b>SentenceDetectorME</b> class of the package <b>opennlp.tools.sentdetect</b> contains methods to split the raw text into sentences. This class uses the Maximum Entropy model to evaluate end-of-sentence characters in a string to determine if they signify the end of a sentence.</p>
+<p>Instantiate this class and pass the model object created in the previous step, as shown below.</p>
+<pre class="prettyprint notranslate">
+//Instantiating the SentenceDetectorME class 
+SentenceDetectorME detector = new SentenceDetectorME(model);
+</pre>
+<h3>Step 3: Detecting the sentence</h3>
+<p>The <b>sentDetect()</b> method of the <b>SentenceDetectorME</b> class is used to detect the sentences in the raw text passed to it. This method accepts a String variable as a parameter.</p>
+<p>Invoke this method by passing the String format of the sentence to this method.</p>
+<pre class="prettyprint notranslate">
+//Detecting the sentence 
+String sentences[] = detector.sentDetect(sentence);
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program which detects the sentences in a given raw text. Save this program in a file with named <b>SentenceDetectionME.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.sentdetect.SentenceDetectorME; 
+import opennlp.tools.sentdetect.SentenceModel;  
+
+public class SentenceDetectionME { 
+  
+   public static void main(String args[]) throws Exception { 
+   
+      String sentence = "Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+       
+      //Loading sentence detector model 
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-sent.bin"); 
+      SentenceModel model = new SentenceModel(inputStream); 
+       
+      //Instantiating the SentenceDetectorME class 
+      SentenceDetectorME detector = new SentenceDetectorME(model);  
+    
+      //Detecting the sentence
+      String sentences[] = detector.sentDetect(sentence); 
+    
+      //Printing the sentences 
+      for(String sent : sentences)        
+         System.out.println(sent);  
+   } 
+}
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac SentenceDetectorME.java 
+java SentenceDetectorME
+</pre>
+<p>On executing, the above program reads the given String and detects the sentences in it and displays the following output.</p>
+<pre class="result notranslate">
+Hi. How are you? 
+Welcome to Tutorialspoint. 
+We provide free tutorials on various technologies
+</pre>
+<h2>Detecting the Positions of the Sentences</h2>
+<p>We can also detect the positions of the sentences using the sentPosDetect() method of the <b>SentenceDetectorME class</b>.</p>
+<p>Following are the steps to be followed to write a program which detects the positions of the sentences from the given raw text.</p>
+<h3>Step 1: Loading the model</h3>
+<p>The model for sentence detection is represented by the class named <b>SentenceModel</b>, which belongs to the package <b>opennlp.tools.sentdetect</b>.</p>
+<p>To load a sentence detection model &minus;</p>
+<ul class="list">
+<li><p>Create an <b>InputStream</b> object of the model (Instantiate the FileInputStream and pass the path of the model in String format to its constructor).</p></li>
+<li><p>Instantiate the <b>SentenceModel</b> class and pass the <b>InputStream</b> (object) of the model as a parameter to its constructor, as shown in the following code block.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//Loading sentence detector model 
+InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-sent.bin"); 
+SentenceModel model = new SentenceModel(inputStream);
+</pre>
+<h3>Step 2: Instantiating the SentenceDetectorME class</h3>
+<p>The <b>SentenceDetectorME</b> class of the package <b>opennlp.tools.sentdetect</b> contains methods to split the raw text into sentences. This class uses the Maximum Entropy model to evaluate end-of-sentence characters in a string to determine if they signify the end of a sentence.</p>
+<p>Instantiate this class and pass the model object created in the previous step.</p>
+<pre class="prettyprint notranslate">
+//Instantiating the SentenceDetectorME class 
+SentenceDetectorME detector = new SentenceDetectorME(model); 
+</pre>
+<h3>Step 3: Detecting the position of the sentence</h3>
+<p>The <b>sentPosDetect()</b> method of the <b>SentenceDetectorME</b> class is used to detect the positions of the sentences in the raw text passed to it. This method accepts a String variable as a parameter.</p>
+<p>Invoke this method by passing the String format of the sentence as a parameter to this method.</p>
+<pre class="prettyprint notranslate">
+//Detecting the position of the sentences in the paragraph  
+Span[] spans = detector.sentPosDetect(sentence); 
+</pre>
+<h3>Step 4: Printing the spans of the sentences</h3>
+<p>The <b>sentPosDetect()</b> method of the <b>SentenceDetectorME</b> class returns an array of objects of the type <b>Span</b>. The class named Span of the <b>opennlp.tools.util</b> package is used to store the start and end integer of sets.</p>
+<p>You can store the spans returned by the <b>sentPosDetect()</b> method in the Span array and print them, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Printing the sentences and their spans of a sentence 
+for (Span span : spans)         
+System.out.println(paragraph.substring(span); 
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program which detects the sentences in the given raw text. Save this program in a file with named <b>SentenceDetectionME.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream; 
+  
+import opennlp.tools.sentdetect.SentenceDetectorME; 
+import opennlp.tools.sentdetect.SentenceModel; 
+import opennlp.tools.util.Span;
+
+public class SentencePosDetection { 
+  
+   public static void main(String args[]) throws Exception { 
+   
+      String paragraph = "Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+       
+      //Loading sentence detector model 
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-sent.bin"); 
+      SentenceModel model = new SentenceModel(inputStream); 
+       
+      //Instantiating the SentenceDetectorME class 
+      SentenceDetectorME detector = new SentenceDetectorME(model);  
+       
+      //Detecting the position of the sentences in the raw text 
+      Span spans[] = detector.sentPosDetect(paragraph); 
+       
+      //Printing the spans of the sentences in the paragraph 
+      for (Span span : spans)         
+         System.out.println(span);  
+   } 
+}
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac SentencePosDetection.java 
+java SentencePosDetection
+</pre>
+<p>On executing, the above program reads the given String and detects the sentences in it and displays the following output.</p>
+<pre class="result notranslate">
+[0..16) 
+[17..43) 
+[44..93)
+</pre>
+<h2>Sentences along with their Positions</h2>
+<p>The <b>substring()</b> method of the String class accepts the <b>begin</b> and the <b>end offsets</b> and returns the respective string. We can use this method to print the sentences and their spans (positions) together, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+for (Span span : spans)         
+   System.out.println(sen.substring(span.getStart(), span.getEnd())+" "+ span); 
+</pre>
+<p>Following is the program to detect the sentences from the given raw text and display them along with their positions. Save this program in a file with name <b>SentencesAndPosDetection.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.sentdetect.SentenceDetectorME; 
+import opennlp.tools.sentdetect.SentenceModel; 
+import opennlp.tools.util.Span; 
+   
+public class SentencesAndPosDetection { 
+  
+   public static void main(String args[]) throws Exception { 
+     
+      String sen = "Hi. How are you? Welcome to Tutorialspoint." 
+         + " We provide free tutorials on various technologies"; 
+      //Loading a sentence model 
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-sent.bin"); 
+      SentenceModel model = new SentenceModel(inputStream); 
+       
+      //Instantiating the SentenceDetectorME class 
+      SentenceDetectorME detector = new SentenceDetectorME(model);  
+       
+      //Detecting the position of the sentences in the paragraph  
+      Span[] spans = detector.sentPosDetect(sen);  
+      
+      //Printing the sentences and their spans of a paragraph 
+      for (Span span : spans)         
+         System.out.println(sen.substring(span.getStart(), span.getEnd())+" "+ span);  
+   } 
+}  
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac SentencesAndPosDetection.java 
+java SentencesAndPosDetection
+</pre>
+<p>On executing, the above program reads the given String and detects the sentences along with their positions and displays the following output.</p>
+<pre class="result notranslate">
+Hi. How are you? [0..16) 
+Welcome to Tutorialspoint. [17..43)  
+We provide free tutorials on various technologies [44..93)
+</pre>
+<h2>Sentence Probability Detection</h2>
+<p>The <b>getSentenceProbabilities()</b> method of the <b>SentenceDetectorME</b> class returns the probabilities associated with the most recent calls to the sentDetect() method.</p>
+<pre class="result notranslate">
+//Getting the probabilities of the last decoded sequence       
+double[] probs = detector.getSentenceProbabilities(); 
+</pre>
+<p>Following is the program to print the probabilities associated with the calls to the sentDetect() method. Save this program in a file with the name <b>SentenceDetectionMEProbs.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.sentdetect.SentenceDetectorME; 
+import opennlp.tools.sentdetect.SentenceModel;  
+
+public class SentenceDetectionMEProbs { 
+  
+   public static void main(String args[]) throws Exception { 
+   
+      String sentence = "Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+       
+      //Loading sentence detector model 
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-sent.bin");
+      SentenceModel model = new SentenceModel(inputStream); 
+       
+      //Instantiating the SentenceDetectorME class
+      SentenceDetectorME detector = new SentenceDetectorME(model);  
+      
+      //Detecting the sentence 
+      String sentences[] = detector.sentDetect(sentence); 
+    
+      //Printing the sentences 
+      for(String sent : sentences)        
+         System.out.println(sent);   
+         
+      //Getting the probabilities of the last decoded sequence       
+      double[] probs = detector.getSentenceProbabilities(); 
+       
+      System.out.println("  "); 
+       
+      for(int i = 0; i&lt;probs.length; i++) 
+         System.out.println(probs[i]); 
+   } 
+}       
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="result notranslate">
+javac SentenceDetectionMEProbs.java 
+java SentenceDetectionMEProbs
+</pre>
+<p>On executing, the above program reads the given String and detects the sentences and prints them. In addition, it also returns the probabilities associated with the most recent calls to the sentDetect() method, as shown below.</p>
+<pre class="result notranslate">
+Hi. How are you? 
+Welcome to Tutorialspoint. 
+We provide free tutorials on various technologies 
+   
+0.9240246995179983 
+0.9957680129995953 
+1.0
+</pre>
+<h1>OpenNLP - Tokenization</h1>
+<p>The process of chopping the given sentence into smaller parts (tokens) is known as <b>tokenization</b>. In general, the given raw text is tokenized based on a set of delimiters (mostly whitespaces).</p>
+<p>Tokenization is used in tasks such as spell-checking, processing searches, identifying parts of speech, sentence detection, document classification of documents, etc.</p>
+<h2>Tokenizing using OpenNLP</h2>
+<p>The <b>opennlp.tools.tokenize</b> package contains the classes and interfaces that are used to perform tokenization.</p>
+<p>To tokenize the given sentences into simpler fragments, the OpenNLP library provides three different classes &minus;</p>
+<ul class="list">
+<li><p><b>SimpleTokenizer</b> &minus; This class tokenizes the given raw text using character classes.</p></li>
+<li><p><b>WhitespaceTokenizer</b> &minus; This class uses whitespaces to tokenize the given text.</p></li>
+<li><p><b>TokenizerME</b> &minus; This class converts raw text into separate tokens. It uses Maximum Entropy to make its decisions.</p></li>
+</ul>
+<h3>SimpleTokenizer</h3>
+<p>To tokenize a sentence using the <b>SimpleTokenizer</b> class, you need to &minus;</p>
+<ul class="list">
+<li><p>Create an object of the respective class.</p></li>
+<li><p>Tokenize the sentence using the <b>tokenize()</b> method.</p></li>
+<li><p>Print the tokens.</p></li>
+</ul>
+<p>Following are the steps to be followed to write a program which tokenizes the given raw text.</p>
+<p><b>Step 1</b> &minus; Instantiating the respective class</p>
+<p>In both the classes, there are no constructors available to instantiate them. Therefore, we need to create objects of these classes using the static variable <b>INSTANCE</b>.</p>
+<pre class="prettyprint notranslate">
+SimpleTokenizer tokenizer = SimpleTokenizer.INSTANCE;   
+</pre>
+<p><b>Step 2</b> &minus; Tokenize the sentences</p>
+<p>Both these classes contain a method called <b>tokenize()</b>. This method accepts a raw text in String format. On invoking, it tokenizes the given String and returns an array of Strings (tokens).</p>
+<p>Tokenize the sentence using the <b>tokenizer()</b> method as shown below.</p>
+<pre class="prettyprint notranslate">
+//Tokenizing the given sentence 
+ String tokens[] = tokenizer.tokenize(sentence); 
+</pre>
+<p><b>Step 3</b> &minus; Print the tokens</p>
+<p>After tokenizing the sentence, you can print the tokens using <b>for loop</b>, as shown below.</p>
+<pre class="prettyprint notranslate">
+//Printing the tokens 
+for(String token : tokens)       
+   System.out.println(token);
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program which tokenizes the given sentence using the SimpleTokenizer class. Save this program in a file with the name <b>SimpleTokenizerExample.java</b>.</p>
+<pre class="prettyprint notranslate">
+import opennlp.tools.tokenize.SimpleTokenizer;  
+public class SimpleTokenizerExample { 
+   public static void main(String args[]){ 
+     
+      String sentence = "Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+    
+      //Instantiating SimpleTokenizer class 
+      SimpleTokenizer simpleTokenizer = SimpleTokenizer.INSTANCE;  
+       
+      //Tokenizing the given sentence 
+      String tokens[] = simpleTokenizer.tokenize(sentence);  
+       
+      //Printing the tokens 
+      for(String token : tokens) {         
+         System.out.println(token);  
+      }       
+   }  
+}
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac SimpleTokenizerExample.java 
+java SimpleTokenizerExample
+</pre>
+<p>On executing, the above program reads the given String (raw text), tokenizes it, and displays the following output &minus;</p>
+<pre class="result notranslate">
+Hi 
+. 
+How 
+are 
+you 
+? 
+Welcome 
+to 
+Tutorialspoint 
+. 
+We 
+provide 
+free 
+tutorials 
+on 
+various 
+technologies 
+</pre>
+<p></p>
+
+
+<h3>WhitespaceTokenizer</h3>
+<p>To tokenize a sentence using the <b>WhitespaceTokenizer</b> class, you need to &minus;</p>
+<ul class="list">
+<li><p>Create an object of the respective class.</p></li>
+<li><p>Tokenize the sentence using the <b>tokenize()</b> method.</p></li>
+<li><p>Print the tokens.</p></li>
+</ul>
+<p>Following are the steps to be followed to write a program which tokenizes the given raw text.</p>
+<p><b>Step 1</b> &minus; Instantiating the respective class</p>
+<p>In both the classes, there are no constructors available to instantiate them. Therefore, we need to create objects of these classes using the static variable <b>INSTANCE</b>.</p>
+<pre class="prettyprint notranslate">
+WhitespaceTokenizer tokenizer = WhitespaceTokenizer.INSTANCE; 
+</pre>
+<p><b>Step 2</b> &minus; Tokenize the sentences</p>
+<p>Both these classes contain a method called <b>tokenize()</b>. This method accepts a raw text in String format. On invoking, it tokenizes the given String and returns an array of Strings (tokens).</p>
+<p>Tokenize the sentence using the <b>tokenizer()</b> method as shown below.</p>
+<pre class="prettyprint notranslate">
+//Tokenizing the given sentence 
+ String tokens[] = tokenizer.tokenize(sentence); 
+</pre>
+<p><b>Step 3</b> &minus; Print the tokens</p>
+<p>After tokenizing the sentence, you can print the tokens using <b>for loop</b>, as shown below.</p>
+<pre class="prettyprint notranslate">
+//Printing the tokens 
+for(String token : tokens)       
+   System.out.println(token);
+</pre>
+
+<p><b>Example</b></p>
+<p>Following is the program which tokenizes the given sentence using the <b>WhitespaceTokenizer</b> class. Save this program in a file with the name <b>WhitespaceTokenizerExample.java</b>.</p>
+<pre class="prettyprint notranslate">
+import opennlp.tools.tokenize.WhitespaceTokenizer;  
+
+public class WhitespaceTokenizerExample {  
+   
+   public static void main(String args[]){ 
+     
+      String sentence = "Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+    
+      //Instantiating whitespaceTokenizer class 
+       WhitespaceTokenizer whitespaceTokenizer = WhitespaceTokenizer.INSTANCE;  
+       
+      //Tokenizing the given paragraph 
+      String tokens[] = whitespaceTokenizer.tokenize(sentence);  
+       
+      //Printing the tokens 
+      for(String token : tokens)     
+         System.out.println(token);        
+   } 
+}
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac WhitespaceTokenizerExample.java 
+java WhitespaceTokenizerExample 
+</pre>
+<p>On executing, the above program reads the given String (raw text), tokenizes it, and displays the following output.</p>
+<pre class="result notranslate">
+Hi. 
+How 
+are 
+you? 
+Welcome 
+to 
+Tutorialspoint. 
+We 
+provide 
+free 
+tutorials 
+on 
+various 
+technologies
+</pre>
+<h3>TokenizerME class</h3>
+<p>OpenNLP also uses a predefined model, a file named de-token.bin, to tokenize the sentences. It is trained to tokenize the sentences in a given raw text.</p>
+<p>The <b>TokenizerME</b> class of the <b>opennlp.tools.tokenizer</b> package is used to load this model, and tokenize the given raw text using OpenNLP library. To do so, you need to &minus;</p>
+<ul class="list">
+<li><p>Load the <b>en-token.bin</b> model using the <b>TokenizerModel</b> class.</p></li>
+<li><p>Instantiate the <b>TokenizerME</b> class.</p></li>
+<li><p>Tokenize the sentences using the <b>tokenize()</b> method of this class.</p></li>
+</ul>
+<p>Following are the steps to be followed to write a program which tokenizes the sentences from the given raw text using the <b>TokenizerME</b> class.</p>
+<p><b>Step 1</b> &minus; Loading the model</p>
+<p>The model for tokenization is represented by the class named <b>TokenizerModel</b>, which belongs to the package <b>opennlp.tools.tokenize</b>.</p>
+<p>To load a tokenizer model &minus;</p>
+<ul class="list">
+<li><p>Create an <b>InputStream</b> object of the model (Instantiate the FileInputStream and pass the path of the model in String format to its constructor).</p></li>
+<li><p>Instantiate the <b>TokenizerModel</b> class and pass the <b>InputStream</b> (object) of the model as a parameter to its constructor, as shown in the following code block.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//Loading the Tokenizer model 
+InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-token.bin"); 
+TokenizerModel tokenModel = new TokenizerModel(inputStream);
+</pre>
+<p><b>Step 2</b> &minus; Instantiating the TokenizerME class</p>
+<p>The <b>TokenizerME</b> class of the package <b>opennlp.tools.tokenize</b> contains methods to chop the raw text into smaller parts (tokens). It uses Maximum Entropy to make its decisions.</p>
+<p>Instantiate this class and pass the model object created in the previous step as shown below.</p>
+<pre class="prettyprint notranslate">
+//Instantiating the TokenizerME class 
+TokenizerME tokenizer = new TokenizerME(tokenModel);
+</pre>
+<p><b>Step 3</b> &minus; Tokenizing the sentence</p>
+<p>The <b>tokenize()</b> method of the <b>TokenizerME</b> class is used to tokenize the raw text passed to it. This method accepts a String variable as a parameter, and returns an array of Strings (tokens).</p>
+<p>Invoke this method by passing the String format of the sentence to this method, as follows.</p>
+<pre class="prettyprint notranslate">
+//Tokenizing the given raw text 
+String tokens[] = tokenizer.tokenize(paragraph);
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program which tokenizes the given raw text. Save this program in a file with the name <b>TokenizerMEExample.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream; 
+import opennlp.tools.tokenize.TokenizerME; 
+import opennlp.tools.tokenize.TokenizerModel;  
+
+public class TokenizerMEExample { 
+  
+   public static void main(String args[]) throws Exception{     
+     
+      String sentence = "Hi. How are you? Welcome to Tutorialspoint. " 
+            + "We provide free tutorials on various technologies"; 
+       
+      //Loading the Tokenizer model 
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-token.bin"); 
+      TokenizerModel tokenModel = new TokenizerModel(inputStream); 
+       
+      //Instantiating the TokenizerME class 
+      TokenizerME tokenizer = new TokenizerME(tokenModel); 
+       
+      //Tokenizing the given raw text 
+      String tokens[] = tokenizer.tokenize(sentence);       
+          
+      //Printing the tokens  
+      for (String a : tokens) 
+         System.out.println(a); 
+   } 
+} 
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="result notranslate">
+javac TokenizerMEExample.java 
+java TokenizerMEExample
+</pre>
+<p>On executing, the above program reads the given String and detects the sentences in it and displays the following output &minus;</p>
+<pre class="result notranslate">
+Hi 
+. 
+How 
+are 
+you 
+? 
+Welcome 
+to 
+Tutorialspoint 
+. 
+We 
+provide 
+free 
+tutorials 
+on 
+various 
+technologie
+</pre>
+<h2>Retrieving the Positions of the Tokens</h2>
+<p>We can also get the positions or <b>spans</b> of the tokens using the <b>tokenizePos()</b> method. This is the method of the Tokenizer interface of the package <b>opennlp.tools.tokenize</b>. Since all the (three) Tokenizer classes implement this interface, you can find this method in all of them.</p>
+<p>This method accepts the sentence or raw text in the form of a string and returns an array of objects of the type <b>Span</b>.</p>
+<p>You can get the positions of the tokens using the <b>tokenizePos()</b> method, as follows &minus;</p>
+<pre class="prettyprint notranslate">
+//Retrieving the tokens 
+tokenizer.tokenizePos(sentence); 
+</pre>
+<h3>Printing the positions (spans)</h3>
+<p>The class named <b>Span</b> of the <b>opennlp.tools.util</b> package is used to store the start and end integer of sets.</p>
+<p>You can store the spans returned by the <b>tokenizePos()</b> method in the Span array and print them, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Retrieving the tokens 
+Span[] tokens = tokenizer.tokenizePos(sentence);
+//Printing the spans of tokens 
+for( Span token : tokens)        
+   System.out.println(token);
+</pre>
+<h3>Printing tokens and their positions together</h3>
+<p>The <b>substring()</b> method of the String class accepts the <b>begin</b> and the <b>end</b> offsets and returns the respective string. We can use this method to print the tokens and their spans (positions) together, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Printing the spans of tokens 
+for(Span token : tokens)  
+   System.out.println(token +" "+sent.substring(token.getStart(), token.getEnd()));
+</pre>
+<p></p>
+<p><b>Example(SimpleTokenizer)</b></p>
+<p>Following is the program which retrieves the token spans of the raw text using the <b>SimpleTokenizer</b> class. It also prints the tokens along with their positions. Save this program in a file with named <b>SimpleTokenizerSpans.java</b>.</p>
+<pre class="prettyprint notranslate">
+import opennlp.tools.tokenize.SimpleTokenizer; 
+import opennlp.tools.util.Span;  
+
+public class SimpleTokenizerSpans {  
+   public static void main(String args[]){ 
+     
+      String sent = "Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+    
+      //Instantiating SimpleTokenizer class 
+      SimpleTokenizer simpleTokenizer = SimpleTokenizer.INSTANCE;  
+       
+      //Retrieving the boundaries of the tokens 
+      Span[] tokens = simpleTokenizer.tokenizePos(sent);  
+       
+      //Printing the spans of tokens 
+      for( Span token : tokens)
+         System.out.println(token +" "+sent.substring(token.getStart(), token.getEnd()));          
+   } 
+}      
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac SimpleTokenizerSpans.java 
+java SimpleTokenizerSpans 
+</pre>
+<p>On executing, the above program reads the given String (raw text), tokenizes it, and displays the following output &minus;</p>
+<pre class="result notranslate">
+[0..2) Hi 
+[2..3) . 
+[4..7) How 
+[8..11) are 
+[12..15) you 
+[15..16) ? 
+[17..24) Welcome 
+[25..27) to 
+[28..42) Tutorialspoint 
+[42..43) . 
+[44..46) We 
+[47..54) provide 
+[55..59) free 
+[60..69) tutorials 
+[70..72) on 
+[73..80) various 
+[81..93) technologies 
+</pre>
+<p></p>
+<p><b>Example (WhitespaceTokenizer)</b></p>
+<p>Following is the program which retrieves the token spans of the raw text using the <b>WhitespaceTokenizer</b> class. It also prints the tokens along with their positions. Save this program in a file with the name <b>WhitespaceTokenizerSpans.java</b>.</p>
+<pre class="prettyprint notranslate">
+import opennlp.tools.tokenize.WhitespaceTokenizer;
+import opennlp.tools.util.Span; 
+public class WhitespaceTokenizerSpans {  
+   public static void main(String args[]){ 
+     
+      String sent = "Hi. How are you? Welcome to Tutorialspoint. " 
+         + "We provide free tutorials on various technologies"; 
+    
+      //Instantiating SimpleTokenizer class 
+      WhitespaceTokenizer whitespaceTokenizer = WhitespaceTokenizer.INSTANCE;  
+       
+      //Retrieving the tokens 
+      Span[] tokens = whitespaceTokenizer.tokenizePos(sent);  
+       
+      //Printing the spans of tokens 
+      for( Span token : tokens) 
+         System.out.println(token +" 
+            "+sent.substring(token.getStart(), token.getEnd()));        
+   } 
+} 
+</pre>
+<p>Compile and execute the saved java file from the command prompt using the following commands</p>
+<pre class="prettyprint notranslate">
+javac WhitespaceTokenizerSpans.java 
+java WhitespaceTokenizerSpans
+</pre>
+<p>On executing, the above program reads the given String (raw text), tokenizes it, and displays the following output.</p>
+<pre class="result notranslate">
+[0..3) Hi. 
+[4..7) How 
+[8..11) are 
+[12..16) you? 
+[17..24) Welcome 
+[25..27) to 
+[28..43) Tutorialspoint. 
+[44..46) We 
+[47..54) provide 
+[55..59) free
+[60..69) tutorials 
+[70..72) on 
+[73..80) various 
+[81..93) technologies
+</pre>
+<p></p>
+<p><b>Example (TokenizerME)</b></p>
+<p>Following is the program which retrieves the token spans of the raw text using the <b>TokenizerME</b> class. It also prints the tokens along with their positions. Save this program in a file with the name <b>TokenizerMESpans.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream; 
+import opennlp.tools.tokenize.TokenizerME; 
+import opennlp.tools.tokenize.TokenizerModel; 
+import opennlp.tools.util.Span;  
+
+public class TokenizerMESpans { 
+   public static void main(String args[]) throws Exception{     
+      String sent = "Hello John how are you welcome to Tutorialspoint"; 
+       
+      //Loading the Tokenizer model 
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-token.bin"); 
+      TokenizerModel tokenModel = new TokenizerModel(inputStream); 
+       
+      //Instantiating the TokenizerME class 
+      TokenizerME tokenizer = new TokenizerME(tokenModel); 
+       
+      //Retrieving the positions of the tokens 
+      Span tokens[] = tokenizer.tokenizePos(sent); 
+       
+      //Printing the spans of tokens 
+      for(Span token : tokens) 
+         System.out.println(token +" "+sent.substring(token.getStart(), token.getEnd()));      
+   } 
+} 
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac TokenizerMESpans.java 
+java TokenizerMESpans
+</pre>
+<p>On executing, the above program reads the given String (raw text), tokenizes it, and displays the following output &minus;</p>
+<pre class="result notranslate">
+[0..5) Hello 
+[6..10) John 
+[11..14) how 
+[15..18) are 
+[19..22) you 
+[23..30) welcome 
+[31..33) to 
+[34..48) Tutorialspoint 
+</pre>
+<h2>Tokenizer Probability</h2>
+<p>The getTokenProbabilities() method of the TokenizerME class is used to get the probabilities associated with the most recent calls to the tokenizePos() method.</p>
+<pre class="prettyprint notranslate">
+//Getting the probabilities of the recent calls to tokenizePos() method 
+double[] probs = detector.getSentenceProbabilities(); 
+</pre>
+<p>Following is the program to print the probabilities associated with the calls to tokenizePos() method. Save this program in a file with the name <b>TokenizerMEProbs.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream; 
+import opennlp.tools.tokenize.TokenizerME; 
+import opennlp.tools.tokenize.TokenizerModel; 
+import opennlp.tools.util.Span;  
+
+public class TokenizerMEProbs { 
+   
+   public static void main(String args[]) throws Exception{     
+      String sent = "Hello John how are you welcome to Tutorialspoint"; 
+      
+      //Loading the Tokenizer model 
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-token.bin"); 
+      TokenizerModel tokenModel = new TokenizerModel(inputStream); 
+      
+      //Instantiating the TokenizerME class 
+      TokenizerME tokenizer = new TokenizerME(tokenModel);
+      
+      //Retrieving the positions of the tokens 
+      Span tokens[] = tokenizer.tokenizePos(sent); 
+       
+      //Getting the probabilities of the recent calls to tokenizePos() method 
+      double[] probs = tokenizer.getTokenProbabilities(); 
+       
+      //Printing the spans of tokens 
+      for(Span token : tokens) 
+         System.out.println(token +" "+sent.substring(token.getStart(), token.getEnd()));      
+         System.out.println("  "); 
+         for(int i = 0; i&lt;probs.length; i++) 
+            System.out.println(probs[i]);          
+   } 
+}      
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac TokenizerMEProbs.java 
+java TokenizerMEProbs 
+</pre>
+<p>On executing, the above program reads the given String and tokenizes the sentences and prints them. In addition, it also returns the probabilities associated with the most recent calls to the tokenizerPos() method.</p>
+<pre class="result notranslate">
+[0..5) Hello 
+[6..10) John 
+[11..14) how 
+[15..18) are 
+[19..22) you 
+[23..30) welcome 
+[31..33) to 
+[34..48) Tutorialspoint 
+   
+1.0 
+1.0 
+1.0 
+1.0 
+1.0 
+1.0 
+1.0 
+1.0
+</pre>
+<h1>OpenNLP - Named Entity Recognition</h1>
+<p>The process of finding names, people, places, and other entities, from a given text is known as <b>N</b>amed <b>E</b>ntity <b>R</b>ecognition (NER). In this chapter, we will discuss how to carry out NER through Java program using OpenNLP library.</p>
+<h2>Named Entity Recognition using open NLP</h2>
+<p>To perform various NER tasks, OpenNLP uses different predefined models namely, en-nerdate.bn, en-ner-location.bin, en-ner-organization.bin, en-ner-person.bin, and en-ner-time.bin. All these files are predefined models which are trained to detect the respective entities in a given raw text. </p>
+<p>The <b>opennlp.tools.namefind</b> package contains the classes and interfaces that are used to perform the NER task. To perform NER task using OpenNLP library, you need to &minus;</p>
+<ul class="list">
+<li><p>Load the respective model using the <b>TokenNameFinderModel</b> class.</p></li>
+<li><p>Instantiate the <b>NameFinder</b> class.</p></li>
+<li><p>Find the names and print them.</p></li>
+</ul>
+<p>Following are the steps to be followed to write a program which detects the name entities from a given raw text.</p>
+<h3>Step 1: Loading the model</h3>
+<p>The model for sentence detection is represented by the class named <b>TokenNameFinderModel</b>, which belongs to the package <b>opennlp.tools.namefind</b>.</p>
+<p>To load an NER model &minus;</p>
+<ul class="list">
+<li><p>Create an <b>InputStream</b> object of the model (Instantiate the FileInputStream and pass the path of the appropriate NER model in String format to its constructor).</p></li>
+<li><p>Instantiate the <b>TokenNameFinderModel</b> class and pass the <b>InputStream</b> (object) of the model as a parameter to its constructor, as shown in the following code block.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//Loading the NER-person model 
+InputStream inputStreamNameFinder = new FileInputStream(".../en-nerperson.bin");       
+TokenNameFinderModel model = new TokenNameFinderModel(inputStreamNameFinder);
+</pre>
+<h3>Step 2: Instantiating the NameFinderME class</h3>
+<p>The <b>NameFinderME</b> class of the package <b>opennlp.tools.namefind</b> contains methods to perform the NER tasks. This class uses the Maximum Entropy model to find the named entities in the given raw text.</p>
+<p>Instantiate this class and pass the model object created in the previous step as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+//Instantiating the NameFinderME class 
+NameFinderME nameFinder = new NameFinderME(model);
+</pre>
+<h3>Step 3: Finding the names in the sentence</h3>
+<p>The <b>find()</b> method of the <b>NameFinderME</b> class is used to detect the names in the raw text passed to it. This method accepts a String variable as a parameter.</p>
+<p>Invoke this method by passing the String format of the sentence to this method.</p>
+<pre class="prettyprint notranslate">
+//Finding the names in the sentence 
+Span nameSpans[] = nameFinder.find(sentence);
+</pre>
+<h3>Step 4: Printing the spans of the names in the sentence</h3>
+<p>The <b>find()</b> method of the <b>NameFinderME</b> class returns an array of objects of the type Span. The class named Span of the <b>opennlp.tools.util</b> package is used to store the <b>start</b> and <b>end</b> integer of sets.</p>
+<p>You can store the spans returned by the <b>find()</b> method in the Span array and print them, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Printing the sentences and their spans of a sentence 
+for (Span span : spans)         
+System.out.println(paragraph.substring(span);
+</pre>
+<p><b>NER Example</b></p>
+<p>Following is the program which reads the given sentence and recognizes the spans of the names of the persons in it. Save this program in a file with the name <b>NameFinderME_Example.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.namefind.NameFinderME; 
+import opennlp.tools.namefind.TokenNameFinderModel; 
+import opennlp.tools.util.Span;  
+
+public class NameFinderME_Example { 
+   public static void main(String args[]) throws Exception{ 
+      /Loading the NER - Person model       InputStream inputStream = new 
+         FileInputStream("C:/OpenNLP_models/en-ner-person.bin"); 
+      TokenNameFinderModel model = new TokenNameFinderModel(inputStream);
+      
+      //Instantiating the NameFinder class 
+      NameFinderME nameFinder = new NameFinderME(model); 
+    
+      //Getting the sentence in the form of String array  
+      String [] sentence = new String[]{ 
+         "Mike", 
+         "and", 
+         "Smith", 
+         "are", 
+         "good", 
+         "friends" 
+      }; 
+       
+      //Finding the names in the sentence 
+      Span nameSpans[] = nameFinder.find(sentence); 
+       
+      //Printing the spans of the names in the sentence 
+      for(Span s: nameSpans) 
+         System.out.println(s.toString());    
+   }    
+}      
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac NameFinderME_Example.java 
+java NameFinderME_Example
+</pre>
+<p>On executing, the above program reads the given String (raw text), detects the names of the persons in it, and displays their positions (spans), as shown below.</p>
+<pre class="result notranslate">
+[0..1) person 
+[2..3) person 
+</pre>
+<h2>Names along with their Positions</h2>
+<p>The <b>substring()</b> method of the String class accepts the <b>begin</b> and the <b>end offsets</b> and returns the respective string. We can use this method to print the names and their spans (positions) together, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+for(Span s: nameSpans)        
+   System.out.println(s.toString()+"  "+tokens[s.getStart()]);
+</pre>
+<p>Following is the program to detect the names from the given raw text and display them along with their positions. Save this program in a file with the name <b>NameFinderSentences.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.namefind.NameFinderME; 
+import opennlp.tools.namefind.TokenNameFinderModel; 
+import opennlp.tools.tokenize.TokenizerME; 
+import opennlp.tools.tokenize.TokenizerModel; 
+import opennlp.tools.util.Span;  
+
+public class NameFinderSentences {  
+   public static void main(String args[]) throws Exception{        
+      
+      //Loading the tokenizer model 
+      InputStream inputStreamTokenizer = new 
+         FileInputStream("C:/OpenNLP_models/entoken.bin");
+      TokenizerModel tokenModel = new TokenizerModel(inputStreamTokenizer); 
+       
+      //Instantiating the TokenizerME class 
+      TokenizerME tokenizer = new TokenizerME(tokenModel); 
+       
+      //Tokenizing the sentence in to a string array 
+      String sentence = "Mike is senior programming 
+      manager and Rama is a clerk both are working at 
+      Tutorialspoint"; 
+      String tokens[] = tokenizer.tokenize(sentence); 
+       
+      //Loading the NER-person model 
+      InputStream inputStreamNameFinder = new 
+         FileInputStream("C:/OpenNLP_models/enner-person.bin");       
+      TokenNameFinderModel model = new TokenNameFinderModel(inputStreamNameFinder);
+      
+      //Instantiating the NameFinderME class 
+      NameFinderME nameFinder = new NameFinderME(model);       
+      
+      //Finding the names in the sentence 
+      Span nameSpans[] = nameFinder.find(tokens);        
+      
+      //Printing the names and their spans in a sentence 
+      for(Span s: nameSpans)        
+         System.out.println(s.toString()+"  "+tokens[s.getStart()]);      
+   }    
+} 
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac NameFinderSentences.java 
+java NameFinderSentences 
+</pre>
+<p>On executing, the above program reads the given String (raw text), detects the names of the persons in it, and displays their positions (spans) as shown below.</p>
+<pre class="result notranslate">
+[0..1) person  Mike
+</pre>
+<h2>Finding the Names of the Location</h2>
+<p>By loading various models, you can detect various named entities. Following is a Java program which loads the <b>en-ner-location.bin</b> model and detects the location names in the given sentence. Save this program in a file with the name <b>LocationFinder.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.namefind.NameFinderME; 
+import opennlp.tools.namefind.TokenNameFinderModel; 
+import opennlp.tools.tokenize.TokenizerME; 
+import opennlp.tools.tokenize.TokenizerModel; 
+import opennlp.tools.util.Span;  
+
+public class LocationFinder { 
+   public static void main(String args[]) throws Exception{
+ 
+      InputStream inputStreamTokenizer = new 
+         FileInputStream("C:/OpenNLP_models/entoken.bin"); 
+      TokenizerModel tokenModel = new TokenizerModel(inputStreamTokenizer); 
+       
+      //String paragraph = "Mike and Smith are classmates"; 
+      String paragraph = "Tutorialspoint is located in Hyderabad"; 
+        
+      //Instantiating the TokenizerME class 
+      TokenizerME tokenizer = new TokenizerME(tokenModel); 
+      String tokens[] = tokenizer.tokenize(paragraph); 
+       
+      //Loading the NER-location moodel 
+      InputStream inputStreamNameFinder = new 
+         FileInputStream("C:/OpenNLP_models/en- ner-location.bin");       
+      TokenNameFinderModel model = new TokenNameFinderModel(inputStreamNameFinder); 
+        
+      //Instantiating the NameFinderME class 
+      NameFinderME nameFinder = new NameFinderME(model);      
+        
+      //Finding the names of a location 
+      Span nameSpans[] = nameFinder.find(tokens);        
+      //Printing the spans of the locations in the sentence 
+      for(Span s: nameSpans)        
+         System.out.println(s.toString()+"  "+tokens[s.getStart()]); 
+   }    
+}   
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac LocationFinder.java 
+java LocationFinder
+</pre>
+<p>On executing, the above program reads the given String (raw text), detects the names of the persons in it, and displays their positions (spans), as shown below.</p>
+<pre class="result notranslate">
+[4..5) location  Hyderabad
+</pre>
+<h2>NameFinder Probability</h2>
+<p>The <b>probs()</b>method of the <b>NameFinderME</b> class is used to get the probabilities of the last decoded sequence.</p>
+<pre class="prettyprint notranslate">
+double[] probs = nameFinder.probs(); 
+</pre>
+<p>Following is the program to print the probabilities. Save this program in a file with the name <b>TokenizerMEProbs.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream; 
+import opennlp.tools.tokenize.TokenizerME; 
+import opennlp.tools.tokenize.TokenizerModel; 
+import opennlp.tools.util.Span; 
+public class TokenizerMEProbs { 
+   public static void main(String args[]) throws Exception{     
+      String sent = "Hello John how are you welcome to Tutorialspoint"; 
+       
+      //Loading the Tokenizer model 
+      InputStream inputStream = new 
+         FileInputStream("C:/OpenNLP_models/en-token.bin"); 
+      TokenizerModel tokenModel = new TokenizerModel(inputStream); 
+       
+      //Instantiating the TokenizerME class 
+      TokenizerME tokenizer = new TokenizerME(tokenModel); 
+       
+      //Retrieving the positions of the tokens 
+      Span tokens[] = tokenizer.tokenizePos(sent); 
+       
+      //Getting the probabilities of the recent calls to tokenizePos() method 
+      double[] probs = tokenizer.getTokenProbabilities(); 
+       
+      //Printing the spans of tokens 
+      for( Span token : tokens) 
+         System.out.println(token +" 
+            "+sent.substring(token.getStart(), token.getEnd()));      
+         System.out.println("  "); 
+      for(int i = 0; i&lt;probs.length; i++) 
+         System.out.println(probs[i]);          
+   } 
+}
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac TokenizerMEProbs.java 
+java TokenizerMEProbs
+</pre>
+<p>On executing, the above program reads the given String, tokenizes the sentences, and prints them. In addition, it also returns the probabilities of the last decoded sequence, as shown below.</p>
+<pre class="result notranslate">
+[0..5) Hello 
+[6..10) John 
+[11..14) how 
+[15..18) are 
+[19..22) you 
+[23..30) welcome 
+[31..33) to 
+[34..48) Tutorialspoint 
+   
+1.0 
+1.0 
+1.0 
+1.0 
+1.0 
+1.0 
+1.0 
+1.0
+</pre>
+<h1>OpenNLP - Finding Parts of Speech</h1>
+<p>Using OpenNLP, you can also detect the Parts of Speech of a given sentence and print them. Instead of full name of the parts of speech, OpenNLP uses short forms of each parts of speech. The following table indicates the various parts of speeches detected by OpenNLP and their meanings.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Parts of Speech</th>
+<th style="text-align:center">Meaning of parts of speech</th>
+</tr>
+<tr>
+<td>NN</td>
+<td>Noun, singular or mass</td>
+</tr>
+<tr>
+<td>DT</td>
+<td>Determiner</td>
+</tr>
+<tr>
+<td>VB</td>
+<td>Verb, base form</td>
+</tr>
+<tr>
+<td>VBD</td>
+<td>Verb, past tense</td>
+</tr>
+<tr>
+<td>VBZ</td>
+<td>Verb, third person singular present</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>Preposition or subordinating conjunction</td>
+</tr>
+<tr>
+<td>NNP</td>
+<td>Proper noun, singular</td>
+</tr>
+<tr>
+<td>TO</td>
+<td>to</td>
+</tr>
+<tr>
+<td>JJ</td>
+<td>Adjective</td>
+</tr>
+</table>
+<h2>Tagging the Parts of Speech</h2>
+<p>To tag the parts of speech of a sentence, OpenNLP uses a model, a file named <b>en-posmaxent.bin</b>. This is a predefined model which is trained to tag the parts of speech of the given raw text.</p>
+<p>The <b>POSTaggerME</b> class of the <b>opennlp.tools.postag</b> package is used to load this model, and tag the parts of speech of the given raw text using OpenNLP library. To do so, you need to &minus;</p>
+<ul class="list">
+<li><p>Load the <b>en-pos-maxent.bin</b> model using the <b>POSModel</b> class.</p></li>
+<li><p>Instantiate the <b>POSTaggerME</b> class.</p></li>
+<li><p>Tokenize the sentence.</p></li>
+<li><p>Generate the tags using <b>tag()</b> method.</p></li>
+<li><p>Print the tokens and tags using <b>POSSample</b> class.</p></li>
+</ul>
+<p>Following are the steps to be followed to write a program which tags the parts of the speech in the given raw text using the <b>POSTaggerME</b> class.</p>
+<h3>Step 1: Load the model</h3>
+<p>The model for POS tagging is represented by the class named <b>POSModel</b>, which belongs to the package <b>opennlp.tools.postag</b>.</p>
+<p>To load a tokenizer model &minus;</p>
+<ul class="list">
+<li><p>Create an <b>InputStream</b> object of the model (Instantiate the FileInputStream and pass the path of the model in String format to its constructor).</p></li>
+<li><p>Instantiate the <b>POSModel</b> class and pass the <b>InputStream</b> (object) of the model as a parameter to its constructor, as shown in the following code block  &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//Loading Parts of speech-maxent model 
+InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-pos-maxent.bin"); 
+POSModel model = new POSModel(inputStream); 
+</pre>
+<h3>Step 2: Instantiating the POSTaggerME class</h3>
+<p>The <b>POSTaggerME</b> class of the package <b>opennlp.tools.postag</b> is used to predict the parts of speech of the given raw text. It uses Maximum Entropy to make its decisions.</p>
+<p>Instantiate this class and pass the model object created in the previous step, as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+//Instantiating POSTaggerME class 
+POSTaggerME tagger = new POSTaggerME(model);
+</pre>
+<h3>Step 3: Tokenizing the sentence</h3>
+<p>The <b>tokenize()</b> method of the <b>whitespaceTokenizer</b> class is used to tokenize the raw text passed to it. This method accepts a String variable as a parameter, and returns an array of Strings (tokens).</p>
+<p>Instantiate the <b>whitespaceTokenizer</b> class and the invoke this method by passing the String format of the sentence to this method.</p>
+<pre class="prettyprint notranslate">
+//Tokenizing the sentence using WhitespaceTokenizer class  
+WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+String[] tokens = whitespaceTokenizer.tokenize(sentence); 
+</pre>
+<h3>Step 4: Generating the tags</h3>
+<p>The <b>tag()</b> method of the <b>whitespaceTokenizer</b> class assigns POS tags to the sentence of tokens. This method accepts an array of tokens (String) as a parameter and returns tag (array).</p>
+<p>Invoke the <b>tag()</b> method by passing the tokens generated in the previous step to it.</p>
+<pre class="prettyprint notranslate">
+//Generating tags 
+String[] tags = tagger.tag(tokens); 
+</pre>
+<h3>Step 5: Printing the tokens and the tags</h3>
+<p>The <b>POSSample</b> class represents the POS-tagged sentence. To instantiate this class, we would require an array of tokens (of the text) and an array of tags.</p>
+<p>The <b>toString()</b> method of this class returns the tagged sentence. Instantiate this class by passing the token and the tag arrays created in the previous steps and invoke its <b>toString()</b> method, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Instantiating the POSSample class 
+POSSample sample = new POSSample(tokens, tags); 
+System.out.println(sample.toString());
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program which tags the parts of speech in a given raw text. Save this program in a file with the name <b>PosTaggerExample.java.</b></p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.postag.POSModel; 
+import opennlp.tools.postag.POSSample; 
+import opennlp.tools.postag.POSTaggerME; 
+import opennlp.tools.tokenize.WhitespaceTokenizer;  
+
+public class PosTaggerExample { 
+  
+   public static void main(String args[]) throws Exception{ 
+    
+      //Loading Parts of speech-maxent model       
+      InputStream inputStream = new 
+         FileInputStream("C:/OpenNLP_models/en-pos-maxent.bin"); 
+      POSModel model = new POSModel(inputStream); 
+       
+      //Instantiating POSTaggerME class 
+      POSTaggerME tagger = new POSTaggerME(model); 
+       
+      String sentence = "Hi welcome to Tutorialspoint"; 
+       
+      //Tokenizing the sentence using WhitespaceTokenizer class  
+      WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+      String[] tokens = whitespaceTokenizer.tokenize(sentence); 
+       
+      //Generating tags 
+      String[] tags = tagger.tag(tokens);
+      
+      //Instantiating the POSSample class 
+      POSSample sample = new POSSample(tokens, tags); 
+      System.out.println(sample.toString()); 
+   
+   } 
+}       
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac PosTaggerExample.java 
+java PosTaggerExample 
+</pre>
+<p>On executing, the above program reads the given text and detects the parts of speech of these sentences and displays them, as shown below.</p>
+<pre class ="result notranslate">
+Hi_NNP welcome_JJ to_TO Tutorialspoint_VB 
+</pre>
+<h2>POS Tagger Performance</h2>
+<p>Following is the program which tags the parts of speech of a given raw text. It also monitors the performance and displays the performance of the tagger. Save this program in a file with the name <b>PosTagger_Performance.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.cmdline.PerformanceMonitor; 
+import opennlp.tools.postag.POSModel; 
+import opennlp.tools.postag.POSSample; 
+import opennlp.tools.postag.POSTaggerME; 
+import opennlp.tools.tokenize.WhitespaceTokenizer;  
+
+public class PosTagger_Performance { 
+   public static void main(String args[]) throws Exception{ 
+      //Loading Parts of speech-maxent model       
+      InputStream inputStream = new 
+         FileInputStream("C:/OpenNLP_models/en-pos-maxent.bin"); 
+      POSModel model = new POSModel(inputStream); 
+       
+      //Creating an object of WhitespaceTokenizer class  
+      WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+      
+      //Tokenizing the sentence 
+      String sentence = "Hi welcome to Tutorialspoint"; 
+      String[] tokens = whitespaceTokenizer.tokenize(sentence); 
+       
+      //Instantiating POSTaggerME class 
+      POSTaggerME tagger = new POSTaggerME(model); 
+       
+      //Generating tags 
+      String[] tags = tagger.tag(tokens); 
+       
+      //Instantiating POSSample class       
+      POSSample sample = new POSSample(tokens, tags); 
+      System.out.println(sample.toString()); 
+       
+      //Monitoring the performance of POS tagger 
+      PerformanceMonitor perfMon = new PerformanceMonitor(System.err, "sent"); 
+      perfMon.start(); 
+      perfMon.incrementCounter(); 
+      perfMon.stopAndPrintFinalResult();      
+   } 
+}
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac PosTaggerExample.java 
+java PosTaggerExample 
+</pre>
+<p>On executing, the above program reads the given text and tags the parts of speech of these sentences and displays them. In addition, it also monitors the performance of the POS tagger and displays it.</p>
+<pre class="result notranslate">
+Hi_NNP welcome_JJ to_TO Tutorialspoint_VB  
+Average: 0.0 sent/s  
+Total: 1 sent 
+Runtime: 0.0s 
+</pre>
+<h2>POS Tagger Probability</h2>
+<p>The <b>probs()</b> method of the <b>POSTaggerME</b> class is used to find the probabilities for each tag of the recently tagged sentence.</p>
+<pre class="prettyprint notranslate">
+//Getting the probabilities of the recent calls to tokenizePos() method 
+double[] probs = detector.getSentenceProbabilities(); 
+</pre>
+<p>Following is the program which displays the probabilities for each tag of the last tagged sentence. Save this program in a file with the name <b>PosTaggerProbs.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.postag.POSModel; 
+import opennlp.tools.postag.POSSample; 
+import opennlp.tools.postag.POSTaggerME; 
+import opennlp.tools.tokenize.WhitespaceTokenizer;  
+
+public class PosTaggerProbs { 
+   
+   public static void main(String args[]) throws Exception{ 
+      
+      //Loading Parts of speech-maxent model       
+      InputStream inputStream = new FileInputStream("C:/OpenNLP_mdl/en-pos-maxent.bin"); 
+      POSModel model = new POSModel(inputStream); 
+       
+      //Creating an object of WhitespaceTokenizer class  
+      WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+       
+      //Tokenizing the sentence 
+      String sentence = "Hi welcome to Tutorialspoint"; 
+      String[] tokens = whitespaceTokenizer.tokenize(sentence); 
+       
+      //Instantiating POSTaggerME class 
+      POSTaggerME tagger = new POSTaggerME(model); 
+             
+      //Generating tags 
+      String[] tags = tagger.tag(tokens);       
+      
+      //Instantiating the POSSample class 
+      POSSample sample = new POSSample(tokens, tags);  
+      System.out.println(sample.toString());
+      
+      //Probabilities for each tag of the last tagged sentence. 
+      double [] probs = tagger.probs();       
+      System.out.println("  ");       
+      
+      //Printing the probabilities  
+      for(int i = 0; i&lt;probs.length; i++) 
+         System.out.println(probs[i]); 
+   } 
+}      
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac TokenizerMEProbs.java 
+java TokenizerMEProbs
+</pre>
+<p>On executing, the above program reads the given raw text, tags the parts of speech of each token in it, and displays them. In addition, it also displays the probabilities for each parts of speech in the given sentence, as shown below.</p>
+<pre class="result notranslate">
+Hi_NNP welcome_JJ to_TO Tutorialspoint_VB    
+0.6416834779738033 
+0.42983612874819177 
+0.8584513635863117 
+0.4394784478206072 
+</pre>
+<h1>OpenNLP - Parsing the Sentences</h1>
+<p>Using OpenNLP API, you can parse the given sentences. In this chapter, we will discuss how to parse raw text using OpenNLP API.</p>
+<h2>Parsing Raw Text using OpenNLP Library</h2>
+<p>To detect the sentences, OpenNLP uses a predefined model, a file named <b>en-parserchunking.bin</b>. This is a predefined model which is trained to parse the given raw text.</p>
+<p>The <b>Parser</b> class of the <b>opennlp.tools.Parser</b> package is used to hold the parse constituents and the <b>ParserTool</b> class of the <b>opennlp.tools.cmdline.parser</b> package is used to parse the content.</p>
+<p>Following are the steps to be followed to write a program which parses the given raw text using the <b>ParserTool</b> class.</p>
+<h3>Step 1: Loading the model</h3>
+<p>The model for parsing text is represented by the class named <b>ParserModel</b>, which belongs to the package <b>opennlp.tools.parser</b>.</p>
+<p>To load a tokenizer model &minus;</p>
+<ul class="list">
+<li><p>Create an <b>InputStream</b> object of the model (Instantiate the FileInputStream and pass the path of the model in String format to its constructor).</p></li>
+<li><p>Instantiate the <b>ParserModel</b> class and pass the <b>InputStream</b> (object) of the model as a parameter to its constructor, as shown in the following code block.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//Loading parser model 
+InputStream inputStream = new FileInputStream(".../en-parserchunking.bin"); 
+ParserModel model = new ParserModel(inputStream);
+</pre>
+<h3>Step 2: Creating an object of the Parser class</h3>
+<p>The <b>Parser</b> class of the package <b>opennlp.tools.parser</b> represents a data structure for holding parse constituents. You can create an object of this class using the static <b>create()</b> method of the <b>ParserFactory</b> class.</p>
+<p>Invoke the <b>create()</b> method of the <b>ParserFactory</b> by passing the model object created in the previous step, as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+//Creating a parser Parser parser = ParserFactory.create(model); 
+</pre>
+<h3>Step 3: Parsing the sentence</h3>
+<p>The <b>parseLine()</b> method of the <b>ParserTool</b> class is used to parse the raw text in OpenNLP. This method accepts &minus;</p>
+<ul class="list">
+<li><p>a String variable representing the text to be parsed.</p></li>
+<li><p>a parser object.</p></li>
+<li><p>an integer representing the number of parses to be carried out.</p></li>
+</ul>
+<p>Invoke this method by passing the sentence the following parameters: the parse object created in the previous steps, and an integer representing the required number of parses to be carried out.  </p>
+<pre class="prettyprint notranslate">
+//Parsing the sentence 
+String sentence = "Tutorialspoint is the largest tutorial library.";       
+Parse topParses[] = ParserTool.parseLine(sentence, parser, 1);
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program which parses the given raw text. Save this program in a file with the name <b>ParserExample.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.FileInputStream; 
+import java.io.InputStream;  
+
+import opennlp.tools.cmdline.parser.ParserTool; 
+import opennlp.tools.parser.Parse; 
+import opennlp.tools.parser.Parser; 
+import opennlp.tools.parser.ParserFactory; 
+import opennlp.tools.parser.ParserModel;  
+
+public class ParserExample { 
+   
+   public static void main(String args[]) throws Exception{  
+      //Loading parser model 
+      InputStream inputStream = new FileInputStream(".../en-parserchunking.bin"); 
+      ParserModel model = new ParserModel(inputStream); 
+       
+      //Creating a parser 
+      Parser parser = ParserFactory.create(model); 
+      
+      //Parsing the sentence 
+      String sentence = "Tutorialspoint is the largest tutorial library.";
+      Parse topParses[] = ParserTool.parseLine(sentence, parser, 1); 
+    
+      for (Parse p : topParses) 
+         p.show();          
+   } 
+}      
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac ParserExample.java 
+java ParserExample 
+</pre>
+<p>On executing, the above program reads the given raw text, parses it, and displays the following output &minus;</p>
+<pre class="result notranslate">
+(TOP (S (NP (NN Tutorialspoint)) (VP (VBZ is) (NP (DT the) (JJS largest) (NN
+   tutorial) (NN library.))))) 
+</pre>
+<h1>OpenNLP - Chunking Sentences</h1>
+<p>Chunking a sentences refers to breaking/dividing a sentence into parts of words such as word groups and verb groups.</p>
+<h2>Chunking a Sentence using OpenNLP</h2>
+<p>To detect the sentences, OpenNLP uses a model, a file named <b>en-chunker.bin</b>. This is a predefined model which is trained to chunk the sentences in the given raw text.</p>
+<p>The <b>opennlp.tools.chunker</b> package contains the classes and interfaces that are used to find non-recursive syntactic annotation such as noun phrase chunks.</p>
+<p>You can chunk a sentence using the method <b>chunk()</b> of the <b>ChunkerME</b> class. This method accepts tokens of a sentence and POS tags as parameters. Therefore, before starting the process of chunking, first of all you need to Tokenize the sentence and generate the parts POS tags of it.</p>
+<p>To chunk a sentence using OpenNLP library, you need to &minus;</p>
+<ul class="list">
+<li><p>Tokenize the sentence.</p></li>
+<li><p>Generate POS tags for it.</p></li>
+<li><p>Load the <b>en-chunker.bin</b> model using the <b>ChunkerModel</b> class</p></li>
+<li><p>Instantiate the <b>ChunkerME</b> class.</p></li>
+<li><p>Chunk the sentences using the <b>chunk()</b> method of this class.</p></li>
+</ul>
+<p>Following are the steps to be followed to write a program to chunk sentences from the given raw text.</p>
+<h3>Step 1: Tokenizing the sentence</h3>
+<p>Tokenize the sentences using the <b>tokenize()</b> method of the <b>whitespaceTokenizer</b> class, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Tokenizing the sentence 
+String sentence = "Hi welcome to Tutorialspoint";       
+WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+String[] tokens = whitespaceTokenizer.tokenize(sentence);
+</pre>
+<h3>Step 2: Generating the POS tags</h3>
+<p>Generate the  POS tags of the sentence using the <b>tag()</b> method of the <b>POSTaggerME</b> class, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Generating the POS tags 
+File file = new File("C:/OpenNLP_models/en-pos-maxent.bin");     
+POSModel model = new POSModelLoader().load(file);     
+//Constructing the tagger 
+POSTaggerME tagger = new POSTaggerME(model);        
+//Generating tags from the tokens 
+String[] tags = tagger.tag(tokens); 
+</pre>
+<h3>Step 3: Loading the model</h3>
+<p>The model for chunking a sentence is represented by the class named <b>ChunkerModel</b>, which belongs to the package <b>opennlp.tools.chunker</b>.</p>
+<p>To load a sentence detection model &minus;</p>
+<ul class="list">
+<li><p>Create an <b>InputStream</b> object of the model (Instantiate the FileInputStream and pass the path of the model in String format to its constructor).</p></li>
+<li><p>Instantiate the <b>ChunkerModel</b> class and pass the <b>InputStream</b> (object) of the model as a parameter to its constructor, as shown in the following code block &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+//Loading the chunker model 
+InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-chunker.bin"); 
+ChunkerModel chunkerModel = new ChunkerModel(inputStream);  
+</pre>
+<h3>Step 4: Instantiating the chunkerME class</h3>
+<p>The <b>chunkerME</b> class of the package <b>opennlp.tools.chunker</b> contains methods to chunk the sentences. This is a maximum-entropy-based chunker.</p>
+<p>Instantiate this class and pass the model object created in the previous step.</p>
+<pre class="prettyprint notranslate">
+//Instantiate the ChunkerME class 
+ChunkerME chunkerME = new ChunkerME(chunkerModel); 
+</pre>
+<h3>Step 5: Chunking the sentence</h3>
+<p>The <b>chunk()</b> method of the <b>ChunkerME</b> class is used to chunk the sentences in the raw text passed to it. This method accepts two String arrays representing tokens and tags, as parameters.</p> 
+<p>Invoke this method by passing the token array and tag array created in the previous steps as parameters.</p>
+<pre class="prettyprint notranslate">
+//Generating the chunks 
+String result[] = chunkerME.chunk(tokens, tags); 
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program to chunk the sentences in the given raw text. Save this program in a file with the name <b>ChunkerExample.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.File; 
+import java.io.FileInputStream; 
+import java.io.IOException; 
+import java.io.InputStream;  
+
+import opennlp.tools.chunker.ChunkerME; 
+import opennlp.tools.chunker.ChunkerModel; 
+import opennlp.tools.cmdline.postag.POSModelLoader; 
+import opennlp.tools.postag.POSModel; 
+import opennlp.tools.postag.POSTaggerME; 
+import opennlp.tools.tokenize.WhitespaceTokenizer;  
+
+public class ChunkerExample{ 
+   
+   public static void main(String args[]) throws IOException { 
+      //Tokenizing the sentence 
+      String sentence = "Hi welcome to Tutorialspoint";       
+      WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+      String[] tokens = whitespaceTokenizer.tokenize(sentence); 
+     
+      //Generating the POS tags 
+      //Load the parts of speech model 
+      File file = new File("C:/OpenNLP_models/en-pos-maxent.bin"); 
+      POSModel model = new POSModelLoader().load(file);     
+      
+      //Constructing the tagger 
+      POSTaggerME tagger = new POSTaggerME(model);        
+      
+      //Generating tags from the tokens 
+      String[] tags = tagger.tag(tokens);    
+    
+      //Loading the chunker model 
+      InputStream inputStream = new 
+         FileInputStream("C:/OpenNLP_models/en-chunker.bin"); 
+      ChunkerModel chunkerModel = new ChunkerModel(inputStream);  
+      
+      //Instantiate the ChunkerME class 
+      ChunkerME chunkerME = new ChunkerME(chunkerModel);
+       
+      //Generating the chunks 
+      String result[] = chunkerME.chunk(tokens, tags); 
+  
+      for (String s : result) 
+         System.out.println(s);         
+   }    
+}      
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following command &minus;</p>
+<pre class="prettyprint notranslate">
+javac ChunkerExample.java 
+java ChunkerExample 
+</pre>
+<p>On executing, the above program reads the given String and chunks the sentences in it, and displays them as shown below.</p>
+<pre class="result notranslate">
+Loading POS Tagger model ... done (1.040s) 
+B-NP 
+I-NP 
+B-VP 
+I-VP
+</pre>
+<h2>Detecting the Positions of the Tokens</h2>
+<p>We can also detect the positions or spans of the chunks using the <b>chunkAsSpans()</b> method of the <b>ChunkerME</b> class. This method returns an array of objects of the type Span. The class named Span of the <b>opennlp.tools.util</b> package is used to store the <b>start</b> and <b>end</b> integer of sets.</p>
+<p>You can store the spans returned by the <b>chunkAsSpans()</b> method in the Span array and print them, as shown in the following code block.</p>
+<pre class="prettyprint notranslate">
+//Generating the tagged chunk spans 
+Span[] span = chunkerME.chunkAsSpans(tokens, tags); 
+       
+for (Span s : span) 
+   System.out.println(s.toString()); 
+</pre>
+<p><b>Example</b></p>
+<p>Following is the program which detects the sentences in the given raw text. Save this program in a file with the name <b>ChunkerSpansEample.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.File; 
+import java.io.FileInputStream; 
+import java.io.IOException; 
+import java.io.InputStream;  
+
+import opennlp.tools.chunker.ChunkerME; 
+import opennlp.tools.chunker.ChunkerModel; 
+import opennlp.tools.cmdline.postag.POSModelLoader; 
+import opennlp.tools.postag.POSModel; 
+import opennlp.tools.postag.POSTaggerME; 
+import opennlp.tools.tokenize.WhitespaceTokenizer; 
+import opennlp.tools.util.Span;  
+
+public class ChunkerSpansEample{ 
+   
+   public static void main(String args[]) throws IOException { 
+      //Load the parts of speech model 
+      File file = new File("C:/OpenNLP_models/en-pos-maxent.bin");     
+      POSModel model = new POSModelLoader().load(file); 
+       
+      //Constructing the tagger 
+      POSTaggerME tagger = new POSTaggerME(model); 
+  
+      //Tokenizing the sentence 
+      String sentence = "Hi welcome to Tutorialspoint";       
+      WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+      String[] tokens = whitespaceTokenizer.tokenize(sentence); 
+       
+      //Generating tags from the tokens 
+      String[] tags = tagger.tag(tokens);       
+   
+      //Loading the chunker model 
+      InputStream inputStream = new 
+         FileInputStream("C:/OpenNLP_models/en-chunker.bin"); 
+      ChunkerModel chunkerModel = new ChunkerModel(inputStream);
+      ChunkerME chunkerME = new ChunkerME(chunkerModel);       
+           
+      //Generating the tagged chunk spans 
+      Span[] span = chunkerME.chunkAsSpans(tokens, tags); 
+       
+      for (Span s : span) 
+         System.out.println(s.toString());  
+   }    
+}
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac ChunkerSpansEample.java 
+java ChunkerSpansEample
+</pre>
+<p>On executing, the above program reads the given String and spans of the chunks in it, and displays the following output &minus;</p>
+<pre class="result notranslate">
+Loading POS Tagger model ... done (1.059s) 
+[0..2) NP 
+[2..4) VP 
+</pre>
+<h2>Chunker Probability Detection</h2>
+<p>The <b>probs()</b> method of the <b>ChunkerME</b> class returns the probabilities of the last decoded sequence.</p>
+<pre class="prettyprint notranslate">
+//Getting the probabilities of the last decoded sequence       
+double[] probs = chunkerME.probs(); 
+</pre>
+<p>Following is the program to print the probabilities of the last decoded sequence by the <b>chunker</b>. Save this program in a file with the name <b>ChunkerProbsExample.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.io.File; 
+import java.io.FileInputStream; 
+import java.io.IOException; 
+import java.io.InputStream; 
+import opennlp.tools.chunker.ChunkerME; 
+import opennlp.tools.chunker.ChunkerModel; 
+import opennlp.tools.cmdline.postag.POSModelLoader; 
+import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTaggerME; 
+import opennlp.tools.tokenize.WhitespaceTokenizer;  
+
+public class ChunkerProbsExample{ 
+   
+   public static void main(String args[]) throws IOException { 
+      //Load the parts of speech model 
+      File file = new File("C:/OpenNLP_models/en-pos-maxent.bin");     
+      POSModel model = new POSModelLoader().load(file); 
+       
+      //Constructing the tagger 
+      POSTaggerME tagger = new POSTaggerME(model); 
+  
+      //Tokenizing the sentence 
+      String sentence = "Hi welcome to Tutorialspoint";       
+      WhitespaceTokenizer whitespaceTokenizer= WhitespaceTokenizer.INSTANCE; 
+      String[] tokens = whitespaceTokenizer.tokenize(sentence); 
+       
+      //Generating tags from the tokens 
+      String[] tags = tagger.tag(tokens);       
+   
+      //Loading the chunker model 
+      InputStream inputStream = new 
+         FileInputStream("C:/OpenNLP_models/en-chunker.bin"); 
+      ChunkerModel cModel = new ChunkerModel(inputStream); 
+      ChunkerME chunkerME = new ChunkerME(cModel); 
+       
+      //Generating the chunk tags 
+      chunkerME.chunk(tokens, tags); 
+       
+      //Getting the probabilities of the last decoded sequence       
+      double[] probs = chunkerME.probs(); 
+      for(int i = 0; i&lt;probs.length; i++) 
+         System.out.println(probs[i]);       
+   }    
+}   
+</pre>
+<p>Compile and execute the saved Java file from the Command prompt using the following commands &minus;</p>
+<pre class="prettyprint notranslate">
+javac ChunkerProbsExample.java 
+java ChunkerProbsExample 
+</pre>
+<p>On executing, the above program reads the given String, chunks it, and prints the probabilities of the last decoded sequence.</p>
+<pre class="result notranslate">
+0.9592746040797778 
+0.6883933131241501 
+0.8830563473996004 
+0.8951150529746051 
+</pre>
+<h1>OpenNLP - Command Line Interface</h1>
+<p>OpenNLP provides a Command Line Interface (CLI) to carry out different operations through the command line. In this chapter, we will take some examples to show how we can use the OpenNLP Command Line Interface.</p>
+<h2>Tokenizing</h2>
+<h3>input.txt</h3>
+<pre class="result notranslate">
+Hi. How are you? Welcome to Tutorialspoint. We provide free tutorials on various technologies
+</pre>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+ &gt; opennlp TokenizerME path_for_models../en-token.bin &lt;inputfile..&gt; outputfile.. 
+</pre>
+<h3>command</h3>
+<pre class="prettyprint notranslate">
+C:\&gt; opennlp TokenizerME C:\OpenNLP_models/en-token.bin &lt;input.txt &gt;output.txt
+</pre>
+<h3>output</h3>
+<pre class="result notranslate">
+Loading Tokenizer model ... done (0.207s)  
+Average: 214.3 sent/s 
+Total: 3 sent 
+Runtime: 0.014s
+</pre>
+<h3>output.txt</h3>
+<pre class="result notranslate">
+Hi . How are you ? Welcome to Tutorialspoint . We provide free tutorials on various technologies
+</pre>
+<h2>Sentence Detection</h2>
+<h3>input.txt</h3>
+<pre class="result notranslate">
+Hi. How are you? Welcome to Tutorialspoint. We provide free tutorials on various technologies
+</pre>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+ &gt; opennlp SentenceDetector path_for_models../en-token.bin &lt;inputfile..&gt; outputfile.. 
+</pre>
+<h3>command</h3>
+<pre class="prettyprint notranslate">
+C:\&gt; opennlp SentenceDetector C:\OpenNLP_models/en-sent.bin &lt;input.txt &gt; output_sendet.txt 
+</pre>
+<h3>Output</h3>
+<pre class="result notranslate">
+Loading Sentence Detector model ... done (0.067s)  
+
+Average: 750.0 sent/s 
+Total: 3 sent 
+Runtime: 0.004s
+</pre>
+<h3>Output_sendet.txt</h3>
+<pre class="result notranslate">
+Hi. How are you? 
+Welcome to Tutorialspoint. 
+We provide free tutorials on various technologies 
+</pre>
+<h2>Named Entity Recognition</h2>
+<h3>input.txt</h3>
+<pre class="result notranslate">
+&lt;START:person&gt; &lt;START:person&gt; Mike &lt;END&gt; &lt;END&gt; is senior programming manager and 
+&lt;START:person&gt; Rama &lt;END&gt; is a clerk both are working at Tutorialspoint 
+</pre>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+ &gt; opennlp TokenNameFinder path_for_models../en-token.bin &lt;inputfile.. 
+</pre>
+<h3>Command</h3>
+<pre class="prettyprint notranslate">
+C:\&gt;opennlp TokenNameFinder C:\OpenNLP_models\en-ner-person.bin &lt;input_namefinder.txt
+</pre>
+<h3>Output</h3>
+<pre class="result notranslate">
+Loading Token Name Finder model ... done (0.730s) 
+&lt;START:person&gt; &lt;START:person&gt; Mike &lt;END&gt; &lt;END&gt; is senior programming manager and 
+&lt;START:person&gt; Rama &lt;END&gt; is a clerk both are working at Tutorialspoint  
+Average: 55.6 sent/s 
+Total: 1 sent 
+Runtime: 0.018s
+</pre>
+<h2>Parts of Speech Tagging</h2>
+<h3>Input.txt</h3>
+<pre class="result notranslate">
+Hi. How are you? Welcome to Tutorialspoint. We provide free tutorials on various technologies 
+</pre>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+ &gt; opennlp POSTagger path_for_models../en-token.bin &lt;inputfile.. 
+</pre>
+<h3>Command</h3>
+<pre class="prettyprint notranslate">
+C:\&gt;opennlp POSTagger C:\OpenNLP_models/en-pos-maxent.bin &lt; input.txt 
+</pre>
+<h3>Output</h3>
+<pre class="result notranslate">
+Loading POS Tagger model ... done (1.315s) 
+Hi._NNP How_WRB are_VBP you?_JJ Welcome_NNP to_TO Tutorialspoint._NNP We_PRP 
+provide_VBP free_JJ tutorials_NNS on_IN various_JJ technologies_NNS  
+
+Average: 66.7 sent/s 
+Total: 1 sent 
+Runtime: 0.015s 
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/opennlp/opennlp_command_line_interface.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/opennlp/opennlp_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:21:44 GMT -->
+</html>

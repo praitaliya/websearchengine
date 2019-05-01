@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/gradle/gradle_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:35:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Gradle Quick Guide</title>
+<meta name="description" content="Gradle Quick Guide - Learn Gradle in simple and easy steps starting from Overview, Installation, Build Script, Tasks, Dependency Management, Plugins, Running a Build, Build a JAVA Project, Build a Groovy Project, Testing, Multi-Project Build, Deployment, Eclipse Integration." />
+<meta name="keywords" content="Gradle, Tutorial, Learning, Overview, Installation, Build Script, Tasks, Dependency Management, Plugins, Running a Build, Build a JAVA Project, Build a Groovy Project, Testing, Multi-Project Build, Deployment, Eclipse Integration." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #1ca610 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #1ca610 !important;}
+.submenu-item{ border-bottom: 2px solid #1ca610 !important; border-top: 2px solid #1ca610 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/gradle/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/gradle/images/gradle-mini-logo.jpg" alt="Gradle Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Gradle Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/gradle/index.htm">Gradle – Home</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_overview.htm">Gradle – Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_installation.htm">Gradle – Installation</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_build_script.htm">Gradle – Build Script</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_tasks.htm">Gradle – Tasks</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_dependency_management.htm">Gradle – Dependency Management</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_plugins.htm">Gradle – Plugins</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_running_a_build.htm">Gradle – Running a Build</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_build_a_java_project.htm">Gradle – Build a JAVA Project</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_build_a_groovy_project.htm">Gradle – Build a Groovy Project</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_testing.htm">Gradle – Testing</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_multi_project_build.htm">Gradle – Multi-Project Build</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_deployment.htm">Gradle – Deployment</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_eclipse_integration.htm">Gradle – Eclipse Integration</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Gradle Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_quick_guide.htm">Gradle - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_useful_resources.htm">Gradle - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/gradle/gradle_discussion.htm">Gradle - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Gradle - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/gradle/gradle_eclipse_integration.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/gradle/gradle_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Gradle - Overview</h1>
+<p>ANT and Maven shared considerable success in the Java marketplace. ANT was the first build tool released in 2000 and it is developed based on procedural programming idea. Later, it was improved with an ability to accept plug-ins and dependency management over the network with the help on Apache-Ivy. The main drawback was XML as a format to write build scripts. XML being hierarchical is not good for procedural programming and tends to become unmanageably big.</p>
+<p>Maven was introduced in 2004. It comes with a lot of improvement than ANT. It changes its structure and it continues using XML for writing build specifications. Maven relies on the conventions and is able to download the dependencies over the network. The main benefit of Maven is its life cycle. While following the same life cycle for multiple projects continuously, this comes a cost of flexibility. Maven also faces some problems in dependency management. It does not handle well conflicts between versions of the same library, and complex customized build scripts are actually harder to write in Maven than in ANT.</p>
+<p>Finally, Gradle came into the picture in 2012. Gradle carries some efficient features from both the tools.</p>
+<h2>Features of Gradle</h2>
+<p>Following is the list of features that Gradle provides.</p>
+<ul class="list">
+<li><p><b>Declarative builds and build-by-convention</b> &minus; Gradle is available with separate Domain Specific Language (DSL) based on Groovy language. Gradle provides declarative language elements. The elements also provide build-by-convention support for Java, Groovy, OSGi, Web and Scala.</p></li>
+<li><p><b>Language for dependency based programming</b> &minus; The declarative language lies on top of a general purpose task graph, which you can fully leverage in your build.</p></li>
+<li><p><b>Structure your build</b> &minus; Gradle allows you to apply common design principles to your build. It gives you a perfect structure for build, so that you can design well-structured and easily maintained, comprehensible build.</p></li>
+<li><p><b>Deep API</b> &minus; Using this API, you can monitor and customize its configuration and execution behavior to its core.</p></li>
+<li><p><b>Gradle scales</b> &minus; Gradle can easily increase productivity, from simple and single project builds to huge enterprise multi-project builds.</p></li>
+<li><p><b>Multi-project builds</b> &minus; Gradle supports multi-project builds and also partial builds. If you build a subproject, Gradle takes care of building all the subprojects that it depends on.</p></li>
+<li><p><b>Different ways to manage your builds</b> &minus; Gradle supports different strategies to manage your dependencies.</p></li>
+<li><p><b>First build integration tool</b> &minus; Gradle completely supports ANT tasks, Maven and lvy repository infrastructure for publishing and retrieving dependencies. It also provides a converter for turning a Maven pom.xml to Gradle script.</p></li>
+<li><p><b>Ease of migration</b> &minus; Gradle can easily adapt to any structure you have. Therefore, you can always develop your Gradle build in the same branch where you can build</p></li>
+<li><p><b>Gradle Wrapper</b> &minus; Gradle Wrapper allows you to execute Gradle builds on machines where Gradle is not installed. This is useful for continuous integration of servers.</p></li>
+<li><p><b>Free open source</b> &minus; Gradle is an open source project, and licensed under the Apache Software License (ASL).</p></li>
+<li><p><b>Groovy</b> &minus; Gradle's build script is written in Groovy. The whole design of Gradle is oriented towards being used as a language, not as a rigid framework. Groovy allows you to write your own script with some abstractions. The entire Gradle API is designed in Groovy language.</p></li>
+</ul>
+<h2>Why Groovy?</h2>
+<p>The complete Gradle API is designed using Groovy language. This is an advantage of an internal DSL over XML. Gradle is general purpose build tool at its core; its main focus is Java projects. In such projects, the team members will be very familiar with Java and it is better that a build should be as transparent as possible to all team members.</p>
+<p>Languages like Python, Groovy or Ruby are better for build framework. Why Groovy was chosen is, because it offers by far the greatest transparency for people using Java. The base syntax of Groovy is same as Java. Groovy provides much more on top of that.</p>
+<h1>Gradle - Installation</h1>
+<p>Gradle is a build tool, based on Java. There are some prerequisites that needs to be installed before installing the Gradle framework.</p>
+<h2>Prerequisites</h2>
+<p>JDK and Groovy are the prerequisites for Gradle installation.</p>
+<ul class="list">
+<li><p>Gradle requires JDK version 6 or later to be installed in your system. It uses the JDK libraries which is installed and sets to the JAVA_HOME environmental variable.</p></li>
+<li><p>Gradle carries its own Groovy library, therefore, we do no need to install Groovy explicitly. If it is installed, that is ignored by Gradle.</p></li>
+</ul>
+<p>Following are the steps to install Gradle in your system.</p>
+<h2>Step 1 &minus; Verify JAVA Installation</h2>
+<p>First of all, you need to have Java Software Development Kit (SDK) installed on your system. To verify this, execute <b>Java –version</b> command in any of the platform you are working on.</p>
+<h3>In Windows &minus;</h3>
+<p>Execute the following command to verify Java installation. I have installed JDK 1.8 in my system.</p>
+<pre class="prettyprint notranslate">
+C:\> java - version
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+java version "1.8.0_66"
+Java(TM) SE Runtime Environment (build 1.8.0_66-b18)
+Java HotSpot(TM) 64-Bit Server VM (build 25.66-b18, mixed mode)
+</pre>
+<h3>In Linux &minus;</h3>
+<p>Execute the following command to verify Java installation. I have installed JDK 1.8 in my system.</p>
+<pre class="prettyprint notranslate">
+$ java - version
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+java version "1.8.0_66"
+Java(TM) SE Runtime Environment (build 1.8.0_66-b18)
+Java HotSpot(TM) 64-Bit Server VM (build 25.66-b18, mixed mode)
+</pre>
+<p>We assume the readers of this tutorial have Java SDK version 1.8.0_66 installed on their system.</p>
+<h2>Step 2 &minus; Download Gradle Build File</h2>
+<p>Download the latest version of Gradle from the <a href="http://gradle.org/gradle-download/" rel="nofollow" target="_blank">Download Gradle</a> link. In the reference page, click on the <b>Complete Distribution</b> link. This step is common for any platform. For this you will get the complete distribution file into your Downloads folder.</p>
+<h2>Step 3 &minus; Set Up Environment for Gradle</h2>
+<p>Setting up the environment means we have to extract the distribution file and copy the library files into proper location. Setting up <b>GRADLE_HOME</b> and <b>PATH</b> environmental variables.</p>
+<p>This step is platform dependent.</p>
+<h3>In Windows &minus;</h3>
+<p>Extract the downloaded zip file named <b>gradle-2.11-all.zip</b> and copy the distribution files from <b>Downloads\gradle-2.11\</b> to <b>C:\gradle\</b> location.</p>
+<p>Later, add the <b>C:\gradle</b> and <b>C:\gradle\bin</b> directories to the <b>GRADLE_HOME</b> and <b>PATH</b> system variables. Right-click on My Computer &rarr; Click properties &rarr; Advanced system settings &rarr; Environment variables. There you will find a dialog box for creating and editing system variables. Click ‘New’ button for creating GRADLE_HOME variable (follow the left side screenshot). Click ‘Edit’ for editing the existing Path system variable (follow the right side screenshot). The process is shown in the following screenshots.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/setup_environment_for_gradle.jpg" alt="Setup Environment for Gradle" />
+<h3>In Linux &minus;</h3>
+<p>Extract the downloaded zip file named <b>gradle-2.11-all.zip</b> then you will find an extracted file named <b>gradle-2.11</b>.</p>
+<p>You can use the following to move the distribution files from <b>Downloads/gradle-2.11/</b> to <b>/opt/gradle/</b> location. Execute this operation from the Downloads directory.</p>
+<pre class="prettyprint notranslate">
+$ sudo mv gradle-2.11 /opt/gradle
+</pre>
+<p>Edit the ~/.bashrc file and paste the following content to it and save it.</p>
+<pre class="result notranslate">
+export ORIENT_HOME = /opt/gradle
+export PATH = $PATH:
+</pre>
+<p>Execute the following command to execute <b>~/.bashrc</b> file.</p>
+<pre class="result notranslate">
+$ source ~/.bashrc
+</pre>
+<h2>Step 4 &minus; Verify the Gradle Installation</h2>
+<h3>In Windows &minus;</h3>
+<p>You can execute the following command in command prompt.</p>
+<pre class="prettyprint notranslate">
+C:\> gradle –v
+</pre>
+<p><b>Output</b> &minus; You will find the Gradle version.</p>
+<pre class="result notranslate">
+------------------------------------------------------------
+Gradle 2.11
+------------------------------------------------------------
+
+Build time: 2016-02-08 07:59:16 UTC
+Build number: none
+Revision: 584db1c7c90bdd1de1d1c4c51271c665bfcba978
+
+Groovy: 2.4.4
+Ant: Apache Ant(TM) version 1.9.3 compiled on December 23 2013
+JVM: 1.7.0_60 (Oracle Corporation 24.60-b09)
+OS: Windows 8.1 6.3 amd64
+</pre>
+<h3>In Linux &minus;</h3>
+<p>You can execute the following command in terminal.</p>
+<pre class="prettyprint notranslate">
+$ gradle –v
+</pre>
+<p><b>Output</b> &minus; You will find the Gradle version.</p>
+<pre class="result notranslate">
+------------------------------------------------------------
+Gradle 2.11
+------------------------------------------------------------
+
+Build time: 2016-02-08 07:59:16 UTC
+Build number: none
+Revision: 584db1c7c90bdd1de1d1c4c51271c665bfcba978
+
+Groovy: 2.4.4
+Ant: Apache Ant(TM) version 1.9.3 compiled on December 23 2013
+JVM: 1.7.0_60 (Oracle Corporation 24.60-b09)
+OS: Linux 3.13.0-74-generic amd64
+</pre>
+<h1>Gradle - Build Script</h1>
+<p>Gradle builds a script file for handling two things; one is <b>projects</b> and another one is <b>tasks</b>. Every Gradle build represents one or more projects. A project represents a library JAR or a web application or it might represent a ZIP that assembled from the JARs produced by other projects. In simple words, a project is made up of different tasks. A task means a piece of work which a build performs. A task might be compiling some classes, creating a JAR, generating Javadoc, or publishing some archives to a repository.</p>
+<p>Gradle uses <b>Groovy language </b>for writing scripts.</p>
+<h2>Writing Build Script</h2>
+<p>Gradle provides a Domain Specific Language (DSL), for describing builds. This uses the Groovy language to make it easier to describe a build. Each build script of Gradle is encoded using UTF-8, saved offline and named as build.gradle.</p>
+<h3>build.gradle</h3>
+<p>We are describing about tasks and projects by using a Groovy script. You can run a Gradle build using the Gradle command. This command looks for a file called <b>build.gradle</b>. Take a look at the following example which represents a small script that prints <b>tutorialspoint</b>. Copy and save the following script into a file named <b>build.gradle</b>. This build script defines a task name hello, which is used to print tutorialspoint string.</p>
+<pre class="prettyprint notranslate">
+task hello {
+   doLast {
+      println 'tutorialspoint'
+   }
+}
+</pre>
+<p>Execute the following command in the command prompt. It executes the above script. You should execute this, where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+tutorialspoint
+</pre>
+<p>If you think task works similar to ANT’s target, then that’s right - Gradle task is equivalent to ANT target.</p>
+<p>You can simplify this hello task by specifying a shortcut (represents a symbol <b>&lt;&lt;</b>) to the <b>doLast</b> statement. If you add this shortcut to the above task <b>hello</b> it will look like the following script.</p>
+<pre class="result notranslate">
+task hello &lt;&lt; {
+   println 'tutorialspoint'
+}
+</pre>
+<p>You can execute the above script using <b>gradle –q hello</b> command.</p>
+<p>The Gradle script mainly uses two real Objects; one is Project Object and another one is Script Object.</p>
+<p><b>Project Object</b> &minus; Each script describes about one or multiple projects. While in the execution, this script configures the Project Object. You can call some methods and use property in your build script which are delegated to the Project Object.</p>
+<p><b>Script Object</b> &minus; Gradle takes script code into classes, which implements Script Interface and then executes. This means that of all the properties and methods declared by the script interface are available in your script.</p>
+<p>The following table defines the list of <b>standard project properties</b>. All these properties are available in your build script.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr. No.</th>
+<th style="text-align:center;">Name</th>
+<th style="text-align:center;">Type</th>
+<th style="text-align:center;">Default Value</th>
+</tr>
+<tr>
+<td>1</td>
+<td>project</td>
+<td>Project</td>
+<td>The Project instance</td>
+</tr>
+<tr>
+<td>2</td>
+<td>name</td>
+<td>String</td>
+<td>The name of the project directory.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>path</td>
+<td>String</td>
+<td>The absolute path of the project.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>description</td>
+<td>String</td>
+<td>A description for the project.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>projectDir</td>
+<td>File</td>
+<td>The directory containing the build script.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>buildDir</td>
+<td>File</td>
+<td>projectDir/build</td>
+</tr>
+<tr>
+<td>7</td>
+<td>group</td>
+<td>Object</td>
+<td>Unspecified</td>
+</tr>
+<tr>
+<td>8</td>
+<td>version</td>
+<td>Object</td>
+<td>Unspecified</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ant</td>
+<td>AntBuilder</td>
+<td>An AntBuilder instance</td>
+</tr>
+</table>
+<h2>How Gradle Uses Groovy</h2>
+<p>Gradle build scripts use the full length Groovy API. As a startup, take a look at the following examples. The following example explains about converting a string to upper case.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task upper &lt;&lt; {
+   String expString = 'TUTORIALS point'
+   println "Original: " + expString
+   println "Upper case: " + expString.toUpperCase()}
+</pre>
+<p>Execute the following command in the command prompt. It executes the above given script. You should execute this, where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q upper
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+Original: TUTORIALS point
+Upper case: TUTORIALS POINT
+</pre>
+<p>The following example explains about printing the value of an implicit parameter ($it) for 4 times.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task count &lt;&lt; {
+   4.times { 
+      print "$it " 
+   }
+}
+</pre>
+<p>Execute the following command in the command prompt. It executes the above given script. You should execute this, where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+$ gradle –q count
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+0 1 2 3
+</pre>
+<p>Groovy language provides plenty of features. Following are some important features.</p>
+<h3>Groovy JDK Methods</h3>
+<p>Groovy adds lots of useful methods to the standard Java classes. For example, Iterable API from JDK implements an <b>each()</b> method which iterates over the elements of the Iterable Interface.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task groovyJDK &lt;&lt; {
+   String myName = "Marc";
+   myName.each() { 
+      println "${it}" 
+   };
+}
+</pre>
+<p>Execute the following command in the command prompt. It executes the above given script. You should execute this, where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q groovyJDK
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+M
+a
+r
+c
+</pre>
+<h3>Property Accessors</h3>
+<p>You can automatically accesses appropriate getter and setter methods of a particular property by specifying its reference.</p>
+<p>The following snippet defines the syntaxes of getter and setter methods of a property <b>buildDir</b>.</p>
+<pre class="result notranslate">
+// Using a getter method
+println project.buildDir
+println getProject().getBuildDir()
+
+// Using a setter method
+project.buildDir = 'target'
+getProject().setBuildDir('target')
+</pre>
+<h3>Optional Parentheses on Method Calls</h3>
+<p>Groovy contains a special feature in methods calling that is the parentheses are optional for method calling. This feature applies to Gradle scripting as well.</p>
+<p>Take a look at the following syntax. That defines a method calling <b>systemProperty</b> of <b>test</b> object.</p>
+<pre class="result notranslate">
+test.systemProperty 'some.prop', 'value'
+test.systemProperty('some.prop', 'value')
+</pre>
+<h3>Closure as the Last Parameter of the Method</h3>
+<p>Gradle DSL uses closures in many places. Where the last parameter of a method is a closure, you can place the closure after the method call.</p>
+<p>The following snippet defines the syntaxes Closures use as repositories() method parameters.</p>
+<pre class="result notranslate">
+repositories {
+   println "in a closure"
+}
+repositories() { 
+   println "in a closure" 
+}
+repositories({ println "in a closure" })
+</pre>
+<h2>Default Imports for Gradle Scripts</h2>
+<p>Gradle automatically adds a set of import statements to the Gradle scripts. The following list shows you the default import packages to the Gradle script.</p>
+<section class="toggle">
+<label>Given below are the default import packages to the Gradle script</label>
+<div class="toggle-content">
+<pre class="prettyprint notranslate">
+import org.gradle.*
+import org.gradle.api.*
+import org.gradle.api.artifacts.*
+import org.gradle.api.artifacts.cache.*
+import org.gradle.api.artifacts.component.*
+import org.gradle.api.artifacts.dsl.*
+import org.gradle.api.artifacts.ivy.*
+import org.gradle.api.artifacts.maven.*
+import org.gradle.api.artifacts.query.*
+import org.gradle.api.artifacts.repositories.*
+import org.gradle.api.artifacts.result.*
+import org.gradle.api.component.*
+import org.gradle.api.credentials.*
+import org.gradle.api.distribution.*
+import org.gradle.api.distribution.plugins.*
+import org.gradle.api.dsl.*
+import org.gradle.api.execution.*
+import org.gradle.api.file.*
+import org.gradle.api.initialization.*
+import org.gradle.api.initialization.dsl.*
+import org.gradle.api.invocation.*
+import org.gradle.api.java.archives.*
+import org.gradle.api.logging.*
+import org.gradle.api.plugins.*
+import org.gradle.api.plugins.announce.*
+import org.gradle.api.plugins.antlr.*
+import org.gradle.api.plugins.buildcomparison.gradle.*
+import org.gradle.api.plugins.jetty.*
+import org.gradle.api.plugins.osgi.*
+import org.gradle.api.plugins.quality.*
+import org.gradle.api.plugins.scala.*
+import org.gradle.api.plugins.sonar.*
+import org.gradle.api.plugins.sonar.model.*
+import org.gradle.api.publish.*
+import org.gradle.api.publish.ivy.*
+import org.gradle.api.publish.ivy.plugins.*
+import org.gradle.api.publish.ivy.tasks.*
+import org.gradle.api.publish.maven.*
+import org.gradle.api.publish.maven.plugins.*
+import org.gradle.api.publish.maven.tasks.*
+import org.gradle.api.publish.plugins.*
+import org.gradle.api.reporting.*
+import org.gradle.api.reporting.components.*
+import org.gradle.api.reporting.dependencies.*
+import org.gradle.api.reporting.model.*
+import org.gradle.api.reporting.plugins.*
+import org.gradle.api.resources.*
+import org.gradle.api.specs.*
+import org.gradle.api.tasks.*
+import org.gradle.api.tasks.ant.*
+import org.gradle.api.tasks.application.*
+import org.gradle.api.tasks.bundling.*
+import org.gradle.api.tasks.compile.*
+import org.gradle.api.tasks.diagnostics.*
+import org.gradle.api.tasks.incremental.*
+import org.gradle.api.tasks.javadoc.*
+import org.gradle.api.tasks.scala.*
+import org.gradle.api.tasks.testing.*
+import org.gradle.api.tasks.testing.junit.*
+import org.gradle.api.tasks.testing.testng.*
+import org.gradle.api.tasks.util.*
+import org.gradle.api.tasks.wrapper.*
+import org.gradle.authentication.*
+import org.gradle.authentication.http.*
+import org.gradle.buildinit.plugins.*
+import org.gradle.buildinit.tasks.*
+import org.gradle.external.javadoc.*
+import org.gradle.ide.cdt.*
+import org.gradle.ide.cdt.tasks.*
+import org.gradle.ide.visualstudio.*
+import org.gradle.ide.visualstudio.plugins.*
+import org.gradle.ide.visualstudio.tasks.*
+import org.gradle.ivy.*
+import org.gradle.jvm.*
+import org.gradle.jvm.application.scripts.*
+import org.gradle.jvm.application.tasks.*
+import org.gradle.jvm.platform.*
+import org.gradle.jvm.plugins.*
+import org.gradle.jvm.tasks.*
+import org.gradle.jvm.tasks.api.*
+import org.gradle.jvm.test.*
+import org.gradle.jvm.toolchain.*
+import org.gradle.language.assembler.*
+import org.gradle.language.assembler.plugins.*
+import org.gradle.language.assembler.tasks.*
+import org.gradle.language.base.*
+import org.gradle.language.base.artifact.*
+import org.gradle.language.base.plugins.*
+import org.gradle.language.base.sources.*
+import org.gradle.language.c.*
+import org.gradle.language.c.plugins.*
+import org.gradle.language.c.tasks.*
+import org.gradle.language.coffeescript.*
+import org.gradle.language.cpp.*
+import org.gradle.language.cpp.plugins.*
+import org.gradle.language.cpp.tasks.*
+import org.gradle.language.java.*
+import org.gradle.language.java.artifact.*
+import org.gradle.language.java.plugins.*
+import org.gradle.language.java.tasks.*
+import org.gradle.language.javascript.*
+import org.gradle.language.jvm.*
+import org.gradle.language.jvm.plugins.*
+import org.gradle.language.jvm.tasks.*
+import org.gradle.language.nativeplatform.*
+import org.gradle.language.nativeplatform.tasks.*
+import org.gradle.language.objectivec.*
+import org.gradle.language.objectivec.plugins.*
+import org.gradle.language.objectivec.tasks.*
+import org.gradle.language.objectivecpp.*
+import org.gradle.language.objectivecpp.plugins.*
+import org.gradle.language.objectivecpp.tasks.*
+import org.gradle.language.rc.*
+import org.gradle.language.rc.plugins.*
+import org.gradle.language.rc.tasks.*
+import org.gradle.language.routes.*
+import org.gradle.language.scala.*
+import org.gradle.language.scala.plugins.*
+import org.gradle.language.scala.tasks.*
+import org.gradle.language.scala.toolchain.*
+import org.gradle.language.twirl.*
+import org.gradle.maven.*
+import org.gradle.model.*
+import org.gradle.nativeplatform.*
+import org.gradle.nativeplatform.platform.*
+import org.gradle.nativeplatform.plugins.*
+import org.gradle.nativeplatform.tasks.*
+import org.gradle.nativeplatform.test.*
+import org.gradle.nativeplatform.test.cunit.*
+import org.gradle.nativeplatform.test.cunit.plugins.*
+import org.gradle.nativeplatform.test.cunit.tasks.*
+import org.gradle.nativeplatform.test.googletest.*
+import org.gradle.nativeplatform.test.googletest.plugins.*
+import org.gradle.nativeplatform.test.plugins.*
+import org.gradle.nativeplatform.test.tasks.*
+import org.gradle.nativeplatform.toolchain.*
+import org.gradle.nativeplatform.toolchain.plugins.*
+import org.gradle.platform.base.*
+import org.gradle.platform.base.binary
+import org.gradle.platform.base.component.*
+import org.gradle.platform.base.plugins.*
+import org.gradle.platform.base.test.*
+import org.gradle.play.*
+import org.gradle.play.distribution.*
+import org.gradle.play.platform.*
+import org.gradle.play.plugins.*
+import org.gradle.play.tasks.*
+import org.gradle.play.toolchain.*
+import org.gradle.plugin.use.*
+import org.gradle.plugins.ear.*
+import org.gradle.plugins.ear.descriptor.*
+import org.gradle.plugins.ide.api.*
+import org.gradle.plugins.ide.eclipse.*
+import org.gradle.plugins.ide.idea.*
+import org.gradle.plugins.javascript.base.*
+import org.gradle.plugins.javascript.coffeescript.*
+import org.gradle.plugins.javascript.envjs.*
+import org.gradle.plugins.javascript.envjs.browser.*
+import org.gradle.plugins.javascript.envjs.http.*
+import org.gradle.plugins.javascript.envjs.http.simple.*
+import org.gradle.plugins.javascript.jshint.*
+import org.gradle.plugins.javascript.rhino.*
+import org.gradle.plugins.javascript.rhino.worker.*
+import org.gradle.plugins.signing.*
+import org.gradle.plugins.signing.signatory.*
+import org.gradle.plugins.signing.signatory.pgp.*
+import org.gradle.plugins.signing.type.*
+import org.gradle.plugins.signing.type.pgp.*
+import org.gradle.process.*
+import org.gradle.sonar.runner.*
+import org.gradle.sonar.runner.plugins.*
+import org.gradle.sonar.runner.tasks.*
+import org.gradle.testing.jacoco.plugins.*
+import org.gradle.testing.jacoco.tasks.*
+import org.gradle.testkit.runner.*
+import org.gradle.util.*
+</pre>
+</div>
+</section>
+<h1>Gradle - Tasks</h1>
+<p>Gradle build script describes one or more Projects. Each project is made up of different tasks. A task is a piece of work which a build performs. The task might be compiling some classes, storing class files into separate target folder, creating JAR, generating Javadoc, or publishing some archives to repositories.</p>
+<p>This chapter explains what is task and how to generate and execute a task.</p>
+<h2>Defining Tasks</h2>
+<p>Task is a keyword which is used to define a task into build script. Take a look at the following example which represents a task named <b>hello</b> that prints <b>tutorialspoint</b>. Copy and save the following script into a file named <b>build.gradle</b>. This build script defines a task named ‘hello’, which is used to print tutorialspoint string.</p>
+<pre class="prettyprint notranslate">
+task hello {
+   doLast {
+      println 'tutorialspoint'
+   }
+}
+</pre>
+<p>Execute the following command in the command prompt. It executes the above script. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+tutorialspoint
+</pre>
+<p>You can simplify this hello task by specifying a shortcut (represents a symbol <b>&lt;&lt;</b>) to the <b>doLast</b> statement. If you add this shortcut to the above task <b>hello</b> it will look like the following script.</p>
+<pre class="prettyprint notranslate">
+task hello &lt;&lt; {
+   println 'tutorialspoint'
+}
+</pre>
+<p>You can execute the above script using <b>gradle –q hello</b> command.</p>
+<p>Here are some variations in defining a task, take a look at it. The following example defines a task <b>hello</b>.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task (hello) &lt;&lt; {
+   println "tutorialspoint"
+}
+</pre>
+<p>Execute the following command in the command prompt. You should execute this, where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+tutorialspoint
+</pre>
+<p>You can also use strings for the task names. Take a look at the same hello example. Here we will use String as task.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task('hello') &lt;&lt; {
+   println "tutorialspoint"
+}
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+tutorialspoint
+</pre>
+<p>You can also use alternative syntax for defining a task. That is using create() method to defining a task. Take a look at the same hello example.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+tasks.create(name: 'hello') &lt;&lt; {
+   println "tutorialspoint"
+}
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+tutorialspoint
+</pre>
+<h2>Locating Tasks</h2>
+<p>If you want to locate tasks that you defined in the build file, then you have to use respective standard project properties. That means each task is available as a property of the project, using the task name as the property name.</p>
+<p>Take a look at the following code that accesses tasks as properties.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task hello
+
+println hello.name
+println project.hello.name
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+hello
+hello
+</pre>
+<p>You can also use all the properties through the tasks collection.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task hello
+
+println tasks.hello.name
+println tasks['hello'].name
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+hello
+hello
+</pre>
+<p>You can access tasks from any project using the task's path. For this you can call the getByPath() method with a task name, or a relative path, or an absolute path.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+project(':projectA') {
+   task hello
+}
+task hello
+
+println tasks.getByPath('hello').path
+println tasks.getByPath(':hello').path
+println tasks.getByPath('projectA:hello').path
+println tasks.getByPath(':projectA:hello').path
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+:hello
+:hello
+:projectA:hello
+:projectA:hello
+</pre>
+<h2>Adding Dependencies to Tasks</h2>
+<p>You can make a task dependent on another task, which means when one task is done only then the other task will start. Each task is differentiated with a task name. Collection of task names is referred by its tasks collection. To refer to a task in another project, you should use path of the project as a prefix to the respective task name.</p>
+<p>The following example adds a dependency from taskX to taskY.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task taskX &lt;&lt; {
+   println 'taskX'
+}
+task taskY(dependsOn: 'taskX') &lt;&lt; {
+   println "taskY"
+}
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q taskY
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+taskX
+taskY
+</pre>
+<p>The above example is adding dependency on task by using its names. There is another way to achieve task dependency that is define the dependency using a Task object.</p>
+<p>Let us take the same example of taskY being dependent on taskX but we are using task objects instead of task reference names.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task taskY &lt;&lt; {
+   println 'taskY'
+}
+task taskX &lt;&lt; {
+   println 'taskX'
+}
+taskY.dependsOn taskX
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q taskY
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+taskX
+taskY
+</pre>
+<p>There is another way to add dependency to the task, that is, by using closures. In this case, the task is released through the closure. If you use closure in the build script that should return a single task or collection of task objects. The following example adds a dependency from taskX to all the tasks in the project, whose name starts with <b>'lib'</b>.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task taskX &lt;&lt; {
+   println 'taskX'
+}
+taskX.dependsOn {
+   tasks.findAll { 
+      task &rarr; task.name.startsWith('lib') 
+   }
+}
+task lib1 &lt;&lt; {
+   println 'lib1'
+}
+task lib2 &lt;&lt; {
+   println 'lib2'
+}
+task notALib &lt;&lt; {
+   println 'notALib'
+}
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q taskX
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+lib1
+lib2
+taskX
+</pre>
+<h2>Adding a Description to a Task</h2>
+<p>You can add a description to your task. This description is displayed when executing <b>Gradle tasks</b>. This is possible by using the description keyword.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task copy(type: Copy) {
+   description 'Copies the resource directory to the target directory.'
+   from 'resources'
+   into 'target'
+   include('**/*.txt', '**/*.xml', '**/*.properties')
+   println("description applied")
+}
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q copy
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+description applied
+</pre>
+<h2>Skipping Tasks</h2>
+<p>Skipping tasks can be done by passing a predicate closure. This is possible only if method of a task or a closure throwing a <b>StopExecutionException</b> before the actual work of a task is executed.</p>
+<p>Copy and save the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task eclipse &lt;&lt; {
+   println 'Hello Eclipse'
+}
+
+// #1st approach - closure returning true, if the task should be executed, false if not.
+eclipse.onlyIf {
+   project.hasProperty('usingEclipse')
+}
+
+// #2nd approach - alternatively throw an StopExecutionException() like this
+eclipse.doFirst {
+   if(!usingEclipse) {
+      throw new StopExecutionException()
+   }
+}
+</pre>
+<p>Execute the following command in the command prompt. You should execute this where the build.gradle file is stored.</p>
+<pre class="result notranslate">
+C:\> gradle –q eclipse
+</pre>
+<h2>Task Structure</h2>
+<p>Gradle has different phases, when working with tasks. First of all, there is a configuration phase, where the code, which is specified directly in a task's closure, is executed. The configuration block is executed for every available task and not only for those tasks which are later actually executed.</p>
+<p>After the configuration phase, the execution phase runs the code inside the <b>doFirst</b> or <b>doLast</b> closures of those tasks, which are actually executed.</p>
+<h1>Gradle - Dependency Management</h1>
+<p>Gradle build script defines a process to build projects; each project contains some dependencies and some publications. Dependencies means the things that support to build your project such as required JAR file from other projects and external JARs like JDBC JAR or Eh-cache JAR in the class path. Publications means the outcomes of the project, such as test class files and build files, like war files.</p>
+<p>Almost all the projects are not self-contained. They need files build by other projects to compile and test the source files. For example, in order to use Hibernate in the project, you need to include some Hibernate JARs in the classpath. Gradle uses some special script to define the dependencies, which needs to be downloaded.</p>
+<p>Gradle takes care of building and publishing the outcomes somewhere. Publishing is based on the task that you define. You might want to copy the files to the local directory, or upload them to a remote Maven or lvy repository, or you might use the files from another project in the same multi-project build. The process of publishing is called as <b>publication</b>.</p>
+<h2>Declaring Your Dependencies</h2>
+<p>Gradle follows some special syntax to define dependencies. The following script defines two dependencies, one is Hibernate core 3.6.7 and second one is Junit with the version 4.0 and later. Take a look at the following code. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java'
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+   testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+</pre>
+<h2>Dependency Configurations</h2>
+<p>Dependency configuration is nothing but defines a set of dependencies. You can use this feature to declare external dependencies, which you want to download from the web. This defines the following different standard configurations.</p>
+<ul class="list">
+<li><p><b>Compile</b> &minus; The dependencies required to compile the production source of the project.</p></li>
+<li><p><b>Runtime</b> &minus; The dependencies required by the production classes at runtime. By default, also includes the compile time dependencies.</p></li>
+<li><p><b>Test Compile</b> &minus; The dependencies required to compile the test source of the project. By default, it includes compiled production classes and the compile time dependencies.</p></li>
+<li><p><b>Test Runtime</b> &minus; The dependencies required to run the tests. By default, it includes runtime and test compile dependencies.</p></li>
+</ul>
+<h2>External Dependencies</h2>
+<p>External dependencies is a type of dependency. This is a dependency on some files that is built outside the current build, and is stored in a repository of some kind, such as Maven central, corporate Maven or lvy repository, or a directory in the local file system.</p>
+<p>The following code snippet is to define the external dependency. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+dependencies {
+   compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+}
+</pre>
+<p>An external dependency is declaring external dependencies and the shortcut form looks like "group: name: version".</p>
+<h2>Repositories</h2>
+<p>While adding external dependencies. Gradle looks for them in a repository. A repository is just a collection of files, organized by group, name and version. By default, Gradle does not define any repositories. We have to define at least one repository explicitly. The following code snippet defines how to define maven repository. Use this code in <b>build.gradle</b> file.</p>
+<pre class="result notranslate">
+repositories {
+   mavenCentral()
+}
+</pre>
+<p>Following code is to define remote maven. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+repositories {
+   maven {
+      url "http://repo.mycompany.com/maven2"
+   }
+}
+</pre>
+<h2>Publishing Artifacts</h2>
+<p>Dependency configurations are also used to publish files. These published files are called artifacts. Usually, we use plug-ins to define artifacts. However, you do need to tell Gradle where to publish the artifacts. You can achieve this by attaching repositories to the upload archives task. Take a look at the following syntax for publishing Maven repository. While executing, Gradle will generate and upload a Pom.xml as per the project requirements. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'maven'
+
+uploadArchives {
+   repositories {
+      mavenDeployer {
+         repository(url: "file://localhost/tmp/myRepo/")
+      }
+   }
+}
+</pre>
+<h1>Gradle - Plugins</h1>
+<p>A plugin is nothing but a set of tasks, almost all useful tasks such as compiling tasks, setting domain objects, setting up source files, etc. are handled by plugins. Applying a plugin to a project, allows the plugin to extend the project’s capabilities. Plugins can &minus;</p>
+<ul class="list">
+<li><p>Extend the basic Gradle model (e.g. add new DSL elements that can be configured).</p></li>
+<li><p>Configure the project according to conversions (e.g. add new tasks or configure sensible defaults).</p></li>
+<li><p>Apply specific configuration (e.g. add organizational repositories or enforce standards).</p></li>
+</ul>
+<h2>Types of Plugins</h2>
+<p>There are two types of plugins in Gradle, script plugins and binary plugins. Script plugins is an additional build script that gives a declarative approach to manipulating the build. This is typically used within a build. Binary plugins are the classes that implement the plugin interface and adopt a programmatic approach to manipulating the build. Binary plugins can reside with a build script, with the project hierarchy or externally in a plugin JAR.</p>
+<h2>Applying Plugins</h2>
+<p><b>Project.apply()</b> API method is used to apply the particular plugin. You can use the same plugin for multiple times. There are two types of plugins one is script plugin and second is binary plugin.</p>
+<h3>Script Plugins</h3>
+<p>Script plugins can be applied from a script on the local filesystem or at a remote location. Filesystem locations are relative to the project directory, while remote script locations specifies HTTP URL. Take a look at the following code snippet. It is used to apply the <b>other.gradle</b> plugin to the build script. Use this code in <b>build.gradle</b> file.</p>
+<pre class="result notranslate">
+apply from: 'other.gradle'
+</pre>
+<h3>Binary Plugins</h3>
+<p>Each plugin is identified by a plugin id. Some core plugins use short names to apply it and some community plugins use fully qualified name for plugin id. Sometimes it allows to specify a class of plugin.</p>
+<p>Take a look at the following code snippet. It shows how to apply Java plugin by using its type. Use this code in <b>build.gradle</b> file.</p>
+<pre class="result notranslate">
+apply plugin: JavaPlugin
+</pre>
+<p>Take a look at the following code for applying core plugin using the short name. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+plugins {
+   id 'java'
+}
+</pre>
+<p>Take a look at the following code for applying community plugin using the short name. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+plugins {
+   id "com.jfrog.bintray" version "0.4.1"
+}
+</pre>
+<h2>Writing Custom Plugins</h2>
+<p>While creating a custom plugin, you need to write an implementation of plugin. Gradle instantiates the plugin and calls the plugin instance using Plugin.apply() method. The following sample contains a greeting plugin, which adds a hello task to the project. Take a look at the following code. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+apply plugin: GreetingPlugin
+
+class GreetingPlugin implements Plugin&lt;Project&gt; {
+   void apply(Project project) {
+      project.task('hello') &lt;&lt; {
+         println "Hello from the GreetingPlugin"
+      }
+   }
+}
+</pre>
+<p>Use the following code to execute the above script.</p>
+<pre class="result notranslate">
+C:\> gradle -q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+Hello from the GreetingPlugin
+</pre>
+<h2>Getting Input from the Build</h2>
+<p>Most of the plugins need the configuration support from the build script. The Gradle project has an associated ‘ExtensionContainer’ object that helps to track all the setting and properties being passed to plugins.</p>
+<p>Let's add a simple extension object to the project. Here, we add a greeting extension object to the project, which allows you to configure the greeting. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+apply plugin: GreetingPlugin
+
+greeting.message = 'Hi from Gradle'
+
+class GreetingPlugin implements Plugin&lt;Project&gt; {
+   void apply(Project project) {
+      // Add the 'greeting' extension object
+      project.extensions.create("greeting", GreetingPluginExtension)
+		
+      // Add a task that uses the configuration
+      project.task('hello') &lt;&lt; {
+         println project.greeting.message
+      }
+   }
+}
+
+class GreetingPluginExtension {
+   def String message = 'Hello from GreetingPlugin'
+}
+</pre>
+<p>Use the following code to execute the above script.</p>
+<pre class="result notranslate">
+C:\> gradle -q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+Hello from Gradle
+</pre>
+<p>In this example, GreetingPlugin is a plain old Groovy object with a field called ‘message’. The extension object is added to the plugin list with the name greeting. This object then becomes available as a project property with the same name as the extension object.</p>
+<p>Gradle adds a configuration closure for each extension object, so you can group the settings together. Take a look at the following code. Use this code in <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+apply plugin: GreetingPlugin
+
+greeting {
+   message = 'Hi'
+   greeter = 'Gradle'
+}
+
+class GreetingPlugin implements Plugin&lt;Project&gt; {
+   void apply(Project project) {
+      project.extensions.create("greeting", GreetingPluginExtension)
+		
+      project.task('hello') &lt;&lt; {
+         println "${project.greeting.message} from ${project.greeting.greeter}"
+      }
+   }
+}
+
+class GreetingPluginExtension {
+   String message
+   String greeter
+}
+</pre>
+<p>Use the following code to execute the above script.</p>
+<pre class="result notranslate">
+C:\> gradle -q hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+Hello from Gradle
+</pre>
+<h2>Standard Gradle Plugins</h2>
+<p>There are different plugins which are included in the Gradle distribution.</p>
+<h3>Language Plugins</h3>
+<p>These plugins add support for various languages which can be compiled and executed in the JVM.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Plugin Id</th>
+<th style="text-align:center;">Automatically Applies</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td>java</td>
+<td>java-base</td>
+<td>Adds Java compilation, testing, and bundling capabilities to a project. It serves as the basis for many of the other Gradle plugins.</td>
+</tr>
+<tr>
+<td>groovy</td>
+<td>java,groovy-base</td>
+<td>Adds support for building Groovy projects.</td>
+</tr>
+<tr>
+<td>scala</td>
+<td>java,scala-base</td>
+<td>Adds support for building Scala projects.</td>
+</tr>
+<tr>
+<td>antlr</td>
+<td>Java</td>
+<td>Adds support for generating parsers using Antlr.</td>
+</tr>
+</table>
+<h3>Incubating Language Plugins</h3>
+<p>These plugins add support for various languages.</p>
+<table class="table table-bordered" >
+<tr>
+<th style="text-align:center;">Plugin Id</th>
+<th>Automatically Applies</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">assembler</td>
+<td style="text-align:center;">-</td>
+<td>Adds native assembly language capabilities to a project.</td>
+</tr>
+<tr>
+<td style="text-align:center;">c</td>
+<td style="text-align:center;">-</td>
+<td>Adds C source compilation capabilities to a project.</td>
+</tr>
+<tr>
+<td style="text-align:center;">cpp</td>
+<td style="text-align:center;">-</td>
+<td>Adds C++ source compilation capabilities to a project.</td>
+</tr>
+<tr>
+<td style="text-align:center;">objective-c</td>
+<td style="text-align:center;">-</td>
+<td>Adds Objective-C source compilation capabilities to a project.</td>
+</tr>
+<tr>
+<td style="text-align:center;">objective-cpp</td>
+<td style="text-align:center;">-</td>
+<td>Adds Objective-C++ source compilation capabilities to a project.</td>
+</tr>
+<tr>
+<td>windows-resources</td>
+<td style="text-align:center;">-</td>
+<td>Adds support for including Windows resources in native binaries.</td>
+</tr>
+</table>
+<h1>Gradle - Running a Build</h1>
+<p>Gradle provides a command line to execute build script. It can execute more than one task at a time. This chapter explains how to execute multiple tasks using different options.</p>
+<h2>Executing Multiple Tasks</h2>
+<p>You can execute multiple tasks from a single build file. Gradle can handle that build file using <b>gradle command</b>. This command will compile each task in the order that they are listed and execute each task along with the dependencies using different options.</p>
+<p><b>Example</b> &minus; There are four tasks - task1, task2, task3, and task4. Task3 and task4 depends on task 1and task2. Take a look at the following diagram.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/executing_multiple_tasks.jpg" alt="Executing Multiple Tasks" />
+<p>In the above four tasks are dependent on each other, represented with an arrow symbol. Take a look at the following code. Copy and paste it into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+task task1 &lt;&lt; {
+   println 'compiling source'
+}
+
+task task2(dependsOn: task1) &lt;&lt; {
+   println 'compiling unit tests'
+}
+
+task task3(dependsOn: [task1, task2]) &lt;&lt; {
+   println 'running unit tests'
+}
+
+task task4(dependsOn: [task1, task3]) &lt;&lt; {
+   println 'building the distribution'
+}
+</pre>
+<p>You can use the following code for compiling and executing the above task.</p>
+<pre class="result notranslate">
+C:\> gradle task4 test
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+:task1
+compiling source
+:task2
+compiling unit tests
+:task3
+running unit tests
+:task4
+building the distribution
+
+BUILD SUCCESSFUL
+
+Total time: 1 secs
+</pre>
+<h2>Excluding Tasks</h2>
+<p>While excluding a task from the execution you can use –x option along with the gradle command and mention the name of the task, which you want to exclude.</p>
+<p>Use the following command to exclude task4 from the above script.</p>
+<pre class="result notranslate">
+C:\> gradle task4 -x test
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+:task1
+compiling source
+:task4
+building the distribution
+
+BUILD SUCCESSFUL
+
+Total time: 1 secs
+</pre>
+<h2>Continuing the Build When a Failure Occurs</h2>
+<p>Gradle will abort the execution and fail the build as soon as any task fails. You can continue the execution even when a failure occurs. For this, you have to use –continue option with the gradle command. It handles each task separately along with their dependencies. The important point is, it will catch each encountered failure and report at the end of the execution of the build. Suppose if a task fails, then the dependent subsequent tasks also will not be executed.</p>
+<h2>Selecting Which Build to Execute</h2>
+<p>When you run the gradle command, it looks for a build file in the current directory. You can use the –b option to select a particular build file along with the absolute path. The following example shows selecting a project ‘hello’ from <b>myproject.gradle</b> file, which is located in the <b>subdir/</b>.</p>
+<pre class="prettyprint notranslate">
+task hello &lt;&lt; {
+   println "using build file '$buildFile.name' in '$buildFile.parentFile.name'."
+}
+</pre>
+<p>You can use the following command to execute the above script.</p>
+<pre class="result notranslate">
+C:\> gradle -q -b subdir/myproject.gradle hello
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+using build file 'myproject.gradle' in 'subdir'.
+</pre>
+<h2>Obtaining Build Information</h2>
+<p>Gradle provides several built-in tasks for retrieving the information details regarding the task and the project. This can be useful to understand the structure and the dependencies of your build and for debugging problems. You can use project report plugin to add tasks to your project, which will generate these reports.</p>
+<h3>Listing Projects</h3>
+<p>You can list the project hierarchy of the selected project and their sub projects using <b>gradle –q projects</b> command. Here is the example, use the following command to list all the project in the build file.</p>
+<pre class="result notranslate">
+C:\> gradle -q projects
+</pre>
+<p><b>Output</b> &minus;</p>
+<pre class="result notranslate">
+------------------------------------------------------------
+Root project
+------------------------------------------------------------
+
+Root project 'projectReports'
++--- Project ':api' - The shared API for the application
+\--- Project ':webapp' - The Web application implementation
+
+To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
+For example, try running gradle :api:tasks
+</pre>
+<p>The report shows the description of each project, if specified. You can use the following command to specify the description. Paste it in the <b>build.gradle</b> file.</p>
+<pre class="result notranslate">
+description = 'The shared API for the application'
+</pre>
+<h3>Listing Tasks</h3>
+<p>You can list all the tasks which belong to the multiple projects by using the following command.</p>
+<pre class="result notranslate">
+C:\> gradle -q tasks
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+------------------------------------------------------------
+All tasks runnable from root project
+------------------------------------------------------------
+
+Default tasks: dists
+
+Build tasks
+-----------
+clean - Deletes the build directory (build)
+dists - Builds the distribution
+libs - Builds the JAR
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build. [incubating]
+wrapper - Generates Gradle wrapper files. [incubating]
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in root project 'projectReports'.
+components - Displays the components produced by root project 'projectReports'. [incubating]
+dependencies - Displays all dependencies declared in root project 'projectReports'.
+dependencyInsight - Displays the insight into a specific dependency in root project 'projectReports'.
+help - Displays a help message.
+model - Displays the configuration model of root project 'projectReports'. [incubating]
+projects - Displays the sub-projects of root project 'projectReports'.
+properties - Displays the properties of root project 'projectReports'.
+tasks - Displays the tasks runnable from root project 'projectReports' 
+   (some of the displayed tasks may belong to subprojects).
+
+To see all tasks and more detail, run gradle tasks --all
+
+To see more detail about a task, run gradle help --task &lt;task&gt;
+</pre>
+<p>You can use the following command to display the information of all tasks.</p>
+<pre class="result notranslate">
+C:\> gradle -q tasks --all
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+------------------------------------------------------------
+All tasks runnable from root project
+------------------------------------------------------------
+
+Default tasks: dists
+
+Build tasks
+-----------
+clean - Deletes the build directory (build)
+api:clean - Deletes the build directory (build)
+webapp:clean - Deletes the build directory (build)
+dists - Builds the distribution [api:libs, webapp:libs]
+   docs - Builds the documentation
+api:libs - Builds the JAR
+   api:compile - Compiles the source files
+webapp:libs - Builds the JAR [api:libs]
+   webapp:compile - Compiles the source files
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build. [incubating]
+wrapper - Generates Gradle wrapper files. [incubating]
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in root project 'projectReports'.
+api:buildEnvironment - Displays all buildscript dependencies declared in project ':api'.
+webapp:buildEnvironment - Displays all buildscript dependencies declared in project ':webapp'.
+components - Displays the components produced by root project 'projectReports'. [incubating]
+api:components - Displays the components produced by project ':api'. [incubating]
+webapp:components - Displays the components produced by project ':webapp'. [incubating]
+dependencies - Displays all dependencies declared in root project 'projectReports'.
+api:dependencies - Displays all dependencies declared in project ':api'.
+webapp:dependencies - Displays all dependencies declared in project ':webapp'.
+dependencyInsight - Displays the insight into a specific dependency in root project 'projectReports'.
+api:dependencyInsight - Displays the insight into a specific dependency in project ':api'.
+webapp:dependencyInsight - Displays the insight into a specific dependency in project ':webapp'.
+help - Displays a help message.
+api:help - Displays a help message.
+webapp:help - Displays a help message.
+model - Displays the configuration model of root project 'projectReports'. [incubating]
+api:model - Displays the configuration model of project ':api'. [incubating]
+webapp:model - Displays the configuration model of project ':webapp'. [incubating]
+projects - Displays the sub-projects of root project 'projectReports'.
+api:projects - Displays the sub-projects of project ':api'.
+webapp:projects - Displays the sub-projects of project ':webapp'.
+properties - Displays the properties of root project 'projectReports'.
+api:properties - Displays the properties of project ':api'.
+webapp:properties - Displays the properties of project ':webapp'.
+tasks - Displays the tasks runnable from root project 'projectReports' 
+   (some of the displayed tasks may belong to subprojects).
+api:tasks - Displays the tasks runnable from project ':api'.
+webapp:tasks - Displays the tasks runnable from project ':webapp'.
+</pre>
+<p>Following is a list of commands with their descriptions.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:15%;">Sr. No.</th>
+<th style="text-align:center;">Command</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">1</td>
+<td style="vertical-align:middle;">gradle –q help –task &lt;task name&gt;</td>
+<td>Provides the usage information (such as path, type, description, group) about a specific task or multiple tasks.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">2</td>
+<td style="vertical-align:middle;">gradle –q dependencies</td>
+<td>Provides a list of dependencies of the selected project.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">3</td>
+<td>gradle -q api:dependencies --configuration &lt;task name&gt;</td>
+<td>Provides the list of limited dependencies respective to configuration.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">4</td>
+<td>gradle –q buildEnvironment</td>
+<td>Provides the list of build script dependencies.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">5</td>
+<td>gradle –q dependencyInsight</td>
+<td>Provides an insight into a particular dependency.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; text-align:center;">6</td>
+<td>Gradle –q properties</td>
+<td>Provides the list of properties of the selected project.</td>
+</tr>
+</table>
+<h1>Gradle - Build a JAVA Project</h1>
+<p>This chapter explains how to build a Java project using Gradle build file. First, we have to add Java plugin to the build script because it provides tasks to compile Java source code, run unit tests, create Javadoc and create a JAR file. Use the following line in <b>build.gradle</b> file.</p>
+<pre class="result notranslate">
+apply plugin: 'java'
+</pre>
+<h2>Java Default Project Layout</h2>
+<p>Whenever you add a plugin to your build, it assume a certain setup of Java project (similar to Maven). Take a look at the following directory structure.</p>
+<ul class="list">
+<li>src/main/java contains the Java source code</li>
+<li>src/test/java contains the Java tests</li>
+</ul>
+<p>If you follow this setup, the following build file is sufficient to compile, test, and bundle a Java project.</p>
+<p>To start the build, type the following command on the command line.</p>
+<pre class="result notranslate">
+C:\> gradle build
+</pre>
+<p><b>SourceSets</b> can be used to specify a different project structure. For example, the sources are stored in a <b>src</b> folder rather than in <b>src/main/java</b>. Take a look at the following directory structure.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java'
+sourceSets {
+   main {
+      java {
+         srcDir 'src'
+      }
+   }
+	
+   test {
+      java {
+         srcDir 'test'
+      }
+}
+}
+</pre>
+<h2>init Task Execution</h2>
+<p>Gradle does not yet support multiple project templates. But it offers an <b>init</b> task to create the structure of a new Gradle project. Without additional parameters, this task creates a Gradle project, which contains the gradle wrapper files, a <b>build.gradle</b> and <b>settings.gradle</b> file.</p>
+<p>When adding the <b>--type</b> parameter with <b>java-library</b> as value, a java project structure is created and the <b>build.gradle</b> file contains a certain Java template with Junit. Take a look at the following code for <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java'
+
+repositories {
+   jcenter()
+}
+
+dependencies {
+   compile 'org.slf4j:slf4j-api:1.7.12'
+   testCompile 'junit:junit:4.12'
+}
+</pre>
+<p>In the repositories section, it defines where to find the dependencies. <b>Jcenter</b> is for resolving your dependencies. Dependencies section is for providing information about external dependencies.</p>
+<h2>Specifying Java Version</h2>
+<p>Usually, a Java project has a version and a target JRE on which it is compiled. The <b>version</b> and <b>sourceCompatibility</b> property can be set in the <b>build.gradle</b> file.</p>
+<pre class="result notranslate">
+version = 0.1.0
+sourceCompatibility = 1.8
+</pre>
+<p>If the artifact is an executable Java application, the <b>MANIFEST.MF</b> file must be aware of the class with the main method.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java'
+
+jar {
+   manifest {
+      attributes 'Main-Class': 'com.example.main.Application'
+   }
+}
+</pre>
+<p>Let us consider an example. Create a directory structure as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/directory_structure.jpg" alt="Directory Structure" />
+<p>Copy the following Java code into App.java file and store it into <b>consumerbanking\src\main\java\com\bank</b> directory.</p>
+<pre class="prettyprint notranslate">
+package com.bank;
+
+/**
+* Hello world!
+*
+*/
+
+public class App {
+   public static void main( String[] args ){
+      System.out.println( "Hello World!" );
+   }
+}
+</pre>
+<p>Copy the following Java code into AppTset.java file and store into <b>consumerbanking\src\test\java\com\bank</b> directory.</p>
+<pre class="prettyprint notranslate">
+package com.bank;
+
+/**
+* Hello world!
+*
+*/
+
+public class App{
+   public static void main( String[] args ){
+      System.out.println( "Hello World!" );
+   }
+}
+</pre>
+<p>Copy the following code into build.gradle file and placed into <b>consumerbanking\</b> directory.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java'
+
+repositories {
+   jcenter()
+}
+
+dependencies {
+   compile 'org.slf4j:slf4j-api:1.7.12'
+   testCompile 'junit:junit:4.12'
+}
+
+jar {
+   manifest {
+      attributes 'Main-Class': 'com.example.main.Application'
+   }
+}
+</pre>
+<p>To compile and execute the above script use the following commands.</p>
+<pre class="result notranslate">
+consumerbanking\> gradle tasks
+consumerbanking\> gradle assemble
+consumerbanking\> gradle build
+</pre>
+<p>Check all the class files in the respective directories and check <b>consumerbanking\build\lib</b> folder for <b>consumerbanking.jar</b> file.</p>
+<h1>Gradle - Build a Groovy Project</h1>
+<p>This chapter explains how to compile and execute a Groovy project using <b>build.gradle</b> file.</p>
+<h2>The Groovy Plug-in</h2>
+<p>The Groovy plug-in for Gradle extends the Java plug-in and provides tasks for Groovy programs. You can use the following line for applying groovy plugin.</p>
+<pre class="result notranslate">
+apply plugin: 'groovy'
+</pre>
+<p>The complete build script file is as follows. Copy the following code into <b>build.gradle</b> file.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'groovy'
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   compile 'org.codehaus.groovy:groovy-all:2.4.5'
+   testCompile 'junit:junit:4.12'
+}
+</pre>
+<p>You can use the following command to execute the build script.</p>
+<pre class="result notranslate">
+gradle build
+</pre>
+<h2>Default Project Layout of Groovy Projects</h2>
+<p>The Groovy plugin assumes a certain setup of your Groovy project.</p>
+<ul class="list">
+<li>src/main/groovy contains the Groovy source code</li>
+<li>src/test/groovy contains the Groovy tests</li>
+<li>src/main/java contains the Java source code</li>
+<li>src/test/java contains the Java tests</li>
+</ul>
+<p>Check the respective directory from the build folder where <b>build.gradle</b> file is placed.</p>
+<h1>Gradle - Testing</h1>
+<p>The test task automatically detects and executes all unit tests in the test source set. It also generates a report once test execution is complete. JUnit and TestNG are the supported APIs.</p>
+<p>The test task provides a <b>Test.getDebug()</b> method that can be set to launch to make the JVM wait for a debugger. Before proceeding to the execution, it sets the debugger post to <b>5005</b>.</p>
+<h2>Test Detection</h2>
+<p>The <b>Test Task</b> detects which classes are test classes by inspecting the compiled test classes. By default it scans all .class files. You can set custom includes / excludes, only those classes will be scanned. Depending on the test framework used (JUnit / TestNG), the test class detection uses different criteria.</p>
+<p>When using JUnit, we scan for both JUnit 3 and 4 test classes. If any of the following criteria match, the class is considered to be a JUnit test class &minus;</p>
+<ul class="list">
+<li>Class or a super class extends TestCase or GroovyTestCase</li>
+<li>Class or a super class is annotated with @RunWith</li>
+<li>Class or a super class contain a method annotated with @Test</li>
+<li>When using TestNG, we scan for methods annotated with @Test</li>
+</ul>
+<p><b>Note</b> &minus; The abstract classes are not executed. Gradle also scans the inheritance tree into jar files on the test classpath.</p>
+<p>If you don't want to use test class detection, you can disable it by setting <b>scanForTestClasses</b> to false.</p>
+<h2>Test Grouping</h2>
+<p>JUnit and TestNG allows sophisticated groupings of test methods. For grouping, JUnit test classes and methods JUnit 4.8 introduces the concept of categories. The test task allows the specification of the JUnit categories you want to include and exclude.</p>
+<p>You can use the following code snippet in build.gradle file to group test methods.</p>
+<pre class="prettyprint notranslate">
+test {
+   useJUnit {
+      includeCategories 'org.gradle.junit.CategoryA'
+      excludeCategories 'org.gradle.junit.CategoryB'
+   }
+}
+</pre>
+<h2>Include and Exclude Particular Tests</h2>
+<p>The <b>Test</b> class has an <b>include</b> and <b>exclude</b> method. These methods can be used to specify, which tests should actually be run.</p>
+<p>Run only the included tests &minus;</p>
+<pre class="prettyprint notranslate">
+test {
+   include '**my.package.name/*'
+}
+</pre>
+<p>Skip excluded tests &minus;</p>
+<pre class="prettyprint notranslate">
+test {
+   exclude '**my.package.name/*'
+}
+</pre>
+<p>The sample <b>build.gradle</b> file as shown in the following code shows different configuration options.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java' // adds 'test' task
+
+test {
+   // enable TestNG support (default is JUnit)
+   useTestNG()
+
+   // set a system property for the test JVM(s)
+   systemProperty 'some.prop', 'value'
+
+   // explicitly include or exclude tests
+   include 'org/foo/**'
+   exclude 'org/boo/**'
+
+   // show standard out and standard error of the test JVM(s) on the console
+   testLogging.showStandardStreams = true
+
+   // set heap size for the test JVM(s)
+   minHeapSize = "128m"
+   maxHeapSize = "512m"
+
+   // set JVM arguments for the test JVM(s)
+   jvmArgs '-XX:MaxPermSize=256m'
+   
+   // listen to events in the test execution lifecycle
+   beforeTest { 
+      descriptor &rarr; logger.lifecycle("Running test: " + descriptor)
+   }
+
+   // listen to standard out and standard error of the test JVM(s)
+   onOutput { 
+      descriptor, event &rarr; logger.lifecycle
+         ("Test: " + descriptor + " produced standard out/err: " 
+         + event.message )
+   }
+}
+</pre>
+<p>You can use the following command syntax to execute some test task.</p>
+<pre class="result notranslate">
+gradle &lt;someTestTask&gt; --debug-jvm
+</pre>
+<h1>Gradle - Multi-Project Build</h1>
+<p>Gradle can handle smallest and largest projects easily. Small projects have a single build file and a source tree. It is very easy to digest and understand a project that has been split into smaller, inter-dependent modules. Gradle perfectly supports this scenario that is multi-project build.</p>
+<h2>Structure for Multi-project Build</h2>
+<p>Such builds come in all shapes and sizes, but they do have some common characteristics &minus;</p>
+<ul class="list">
+<li><p>A settings.gradle file in the root or master directory of the project.</p></li>
+<li><p>A build.gradle file in the root or master directory.</p></li>
+<li><p>Child directories that have their own *.gradle build files (some multi-project builds may omit child project build scripts).</p></li>
+</ul>
+<p>For listing all the projects in the build file, you can use the following command.</p>
+<pre class="result notranslate">
+C:\> gradle -q projects
+</pre>
+<p>If the command is executed successfully, you will get the following output.</p>
+<pre class="result notranslate">
+------------------------------------------------------------
+Root project
+------------------------------------------------------------
+
+Root project 'projectReports'
++--- Project ':api' - The shared API for the application
+\--- Project ':webapp' - The Web application implementation
+
+To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
+For example, try running gradle :api:tasks
+</pre>
+<p>The report shows the description of each project, if specified. You can use the following command to specify the description. Paste it in the <b>build.gradle</b> file.</p>
+<pre class="result notranslate">
+description = 'The shared API for the application'
+</pre>
+<h2>Specifying a General Build Configuration</h2>
+<p>In a <b>build.gradle</b> file in the root_project, general configurations can be applied to all projects or just to the sub projects.</p>
+<pre class="prettyprint notranslate">
+allprojects {
+   group = 'com.example.gradle'
+   version = '0.1.0'
+}
+
+subprojects {
+   apply plugin: 'java'
+   apply plugin: 'eclipse'
+}
+</pre>
+<p>This specifies a common <b>com.example.gradle</b> group and the <b>0.1.0</b> version to all projects. The <b>subprojects</b> closure applies common configurations for all sub projects, but not to the root project, like the <b>allprojects</b> closure does.</p>
+<h2>Project Specific Configurations and Dependencies</h2>
+<p>The core <b>ui</b> and <b>util</b> subprojects can also have their own <b>build.gradle</b> file, if they have specific needs, which are not already applied by the general configuration of the root project.</p>
+<p>For instance, the ui project usually has a dependency to the core project. So the ui project needs its own <b>build.gradle</b> file to specify this dependency.</p>
+<pre class="prettyprint notranslate">
+dependencies {
+   compile project(':core')
+   compile 'log4j:log4j:1.2.17'
+}
+</pre>
+<p>Project dependencies are specified with the project method.</p>
+<h1>Gradle - Deployment</h1>
+<p>Gradle offers several ways to deploy build artifacts repositories. When deploying signatures for your artifacts to a Maven repository, you will also want to sign the published POM file.</p>
+<h2>Using the Maven-publish Plugin</h2>
+<p>Gradle provides <b>maven-publish</b> plugin by default. It is used to publish the gradle script. Take a look at the following code.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+publishing {
+   publications {
+      mavenJava(MavenPublication) {
+         from components.java
+      }
+   }
+
+   repositories {
+      maven {
+         url "$buildDir/repo"
+      }
+   }
+}
+</pre>
+<p>There are several publish options, when the <b>Java</b> and the <b>maven-publish</b> plugin is applied. Take a look at the following code, it will deploy the project into a remote repository.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+group 'workshop'
+version = '1.0.0'
+
+publishing {
+   publications {
+      mavenJava(MavenPublication) { 
+         from components.java 
+      }
+   }
+	
+   repositories {
+      maven {
+         // default credentials for a nexus repository manager
+         credentials {
+            username 'admin'
+            password 'admin123'
+         }
+         // url to the releases maven repository
+            url "http://localhost:8081/nexus/content/repositories/releases/"
+      }
+   }
+}
+</pre>
+<h2>Converting a Project from Maven to Gradle</h2>
+<p>There is a special command for converting Apache Maven <b>pom.xml</b> files to Gradle build files, if all used Maven plug-ins are known to this task.</p>
+<p>In this section, the following <b>pom.xml</b> maven configuration will be converted to a Gradle project. Take a look at the following code.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+	
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.example.app&lt;/groupId&gt;
+   &lt;artifactId&gt;example-app&lt;/artifactId&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   
+   &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+	
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;junit&lt;/groupId&gt;
+         &lt;artifactId&gt;junit&lt;/artifactId&gt;
+
+         &lt;version&gt;4.11&lt;/version&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+	
+&lt;/project&gt;
+</pre>
+<p>You can use the following command on the command line that results in the following Gradle configuration.</p>
+<pre class="result notranslate">
+C:\> gradle init --type pom
+</pre>
+<p>The <b>init</b> task depends on the wrapper task so that a Gradle wrapper is created.</p>
+<p>The resulting <b>build.gradle</b> file looks similar to the following.</p>
+<pre class="prettyprint notranslate">
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.example.app'
+version = '1.0.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+repositories {
+   maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+   testCompile group: 'junit', name: 'junit', version:'4.11'
+}
+</pre>
+<h1>Gradle - Eclipse Integration</h1>
+<p>This chapter explains the integration of Eclipse and Gradle. Following are the steps to add Gradle plugin to Eclipse.</p>
+<h2>Step 1 &minus; Open Eclipse Marketplace</h2>
+<p>Open the eclipse which is installed in your system. Go to help &rarr; click EclipseMarketplace as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/open_eclipse_marketplace.jpg" alt="Open Eclipse Marketplace" />
+<h2>Step 2 &minus; Install Buildship Plugin</h2>
+<p>Click Eclipse Marketplace, there you will find the following screenshot. On the left search bar, type <b>buildship</b>. Buildship is a Gradle integration plugin. When you find buildship on your screen, click Install button present on the right side of the screen as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/install_buildship_plugin.jpg" alt="Install Buildship Plugin" />
+<p>You will find the following screenshot. There you need to confirm the software installation by clicking the confirm button. Take a look at the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/confirm.jpg" alt="Confirm" />
+<p>Click ‘I accept the terms of the license agreement’ in the following screen and then click ‘Finish’. Take a look at the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/accept_license.jpg" alt="Accept License" />
+<p>It will take some time to install. Take a look at the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/installation_process.jpg" alt="Installation Process" />
+<p>After that, it will ask for restarting Eclipse. There you will select <b>Yes</b>.</p>
+<h2>Step 3 &minus; Verifying Gradle Plugin</h2>
+<p>While verifying, we will create a new project by following the given procedure. In the eclipse, go to file &rarr; click New &rarr; click Other projects. The following screen pops up. Select Gradle Project and click Next.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/verifying_gradle_plugin.jpg" alt="Verifying Gradle Plugin" />
+<p>After clicking the Next button, the following screen pops up. On the screen, you will have to provide the Gradle home directory path of local file system and then click Next button as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/gradle_home_directory.jpg" alt="Gradle Home Directory" />
+<p>Take a look at the following screenshot. You will have to provide the name for Gradle project. In this tutorial, we are using the name <b>demoproject</b>. Click Finish button.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/demoproject.jpg" alt="Demo Project" />
+<p>In the following screenshot, you will need to confirm the project. For which you will have to click Finish button.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/confirm_the_project.jpg" alt="Confirm the Project" />
+<h2>Step 4 &minus; Verifying Directory Structure</h2>
+<p>After successful installation of Gradle plugin, please check the demo project directory structure for the default files and folders as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/gradle/images/verifying_directory_structure.jpg" alt="Verifying Directory Structure" />
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/gradle/gradle_eclipse_integration.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/gradle/gradle_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/gradle/gradle_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/gradle/gradle_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/gradle/gradle_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/gradle/gradle_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/gradle/gradle_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/gradle/gradle_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/gradle/gradle_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:35:16 GMT -->
+</html>

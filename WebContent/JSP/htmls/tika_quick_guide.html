@@ -1,0 +1,2678 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/tika/tika_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:21:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>TIKA - Quick Guide</title>
+<meta name="description" content="TIKA Quick Guide - Learn TIKA concepts in simple and easy steps starting from Overview, Architecture, Environment, Referenced API, File Formats, Document Type Detection, Content Extraction, Metadata Extraction, Language Detection, GUI, Extracting PDF, Extracting ODF, Extracting MS-Office Files, Extracting Text Document, Extracting HTML Document, Extracting XML Document, Extracting .class File, Extracting JAR File, Extracting Image File, Extracting mp4 Files, Extracting mp3 Files." />
+<meta name="keywords" content="TIKA Overview, Architecture, Environment, Referenced API, File Formats, Document Type Detection, Content Extraction, Metadata Extraction, Language Detection, GUI, Extracting PDF, Extracting ODF, Extracting MS-Office Files, Extracting Text Document, Extracting HTML Document, Extracting XML Document, Extracting .class File, Extracting JAR File, Extracting Image File, Extracting mp4 Files, Extracting mp3 Files." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #270e9d url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #270e9d !important;}
+.submenu-item{ border-bottom: 2px solid #270e9d !important; border-top: 2px solid #270e9d !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/apache-tika-mini-logo.jpg" alt="APACHE TIKA Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">TIKA Tutorial</li>
+<li><a href="index.html">TIKA - Home</a></li>
+<li><a href="tika_overview.html">TIKA - Overview</a></li>
+<li><a href="tika_architecture.html">TIKA - Architecture</a></li>
+<li><a href="tika_environment.html">TIKA - Environment</a></li>
+<li><a href="tika_referenced_api.html">TIKA - Referenced API</a></li>
+<li><a href="tika_file_formats.html">TIKA - File Formats</a></li>
+<li><a href="tika_document_type_detection.html">TIKA - Document Type Detection</a></li>
+<li><a href="tika_content_extraction.html">TIKA - Content Extraction</a></li>
+<li><a href="tika_metadata_extraction.html">TIKA - Metadata Extraction</a></li>
+<li><a href="tika_language_detection.html">TIKA - Language Detection</a></li>
+<li><a href="tika_gui.html">TIKA - GUI</a></li>
+</ul>
+<ul  class="nav nav-list primary left-menu" > 
+<li class="heading">TIKA Examples</li>
+<li><a href="tika_extracting_pdf.html">TIKA - Extracting PDF</a></li>
+<li><a href="tika_extracting_odf.html">TIKA - Extracting ODF</a></li>
+<li><a href="tika_extracting_ms_office_files.html">TIKA - Extracting MS-Office Files</a></li>
+<li><a href="tika_extracting_text_document.html">TIKA - Extracting Text Document</a></li>
+<li><a href="tika_extracting_html_document.html">TIKA - Extracting HTML Document</a></li>
+<li><a href="tika_extracting_xml_document.html">TIKA - Extracting XML Document</a></li>
+<li><a href="tika_extracting_class_file.html">TIKA - Extracting .class File</a></li>
+<li><a href="tika_extracting_jar_file.html">TIKA - Extracting JAR File</a></li>
+<li><a href="tika_extracting_image_file.html">TIKA - Extracting Image File</a></li>
+<li><a href="tika_extracting_mp4_files.html">TIKA - Extracting mp4 Files</a></li>
+<li><a href="tika_extracting_mp3_files.html">TIKA - Extracting mp3 Files</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">TIKA Useful Resources</li>
+<li><a href="tika_quick_guide.html">TIKA - Quick Guide</a></li>
+<li><a href="tika_useful_resources.html">TIKA - Useful Resources</a></li>
+<li><a href="tika_discussion.html">TIKA - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>TIKA - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr>
+<div class="pre-btn">
+<a href="tika_extracting_mp3_files.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="tika_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>TIKA - Overview</h1>
+<h2>What is Apache Tika?</h2>
+<ul class="list">
+<li><p>Apache Tika is a library that is used for document type detection and content extraction from various file formats.</p></li>
+<li><p>Internally, Tika uses existing various document parsers and document type detection techniques to detect and extract data.</p></li> 
+<li><p>Using Tika, one can develop a universal type detector and content extractor to extract both structured text as well as metadata from different types of documents such as spreadsheets, text documents, images, PDFs and even multimedia input formats to a certain extent.</p></li> 
+<li><p>Tika provides a single generic API for parsing different file formats. It uses 83 existing specialized parser ibraries for each document type.</p></li>
+<li><p>All these parser libraries are encapsulated under a single interface called the <b>Parser interface</b>.</p></li>
+</ul>
+<img src="images/appache_tika.jpg" alt="Appache Tika" />
+<h2>Why Tika?</h2>
+<p>According to filext.com, there are about 15k to 51k content types, and this number is growing day by day. Data is being stored in various formats such as text documents, excel spreadsheet, PDFs, images, and multimedia files, to name a few. Therefore, applications such as search engines and content management systems need additional support for easy extraction of data from these document types. Apache Tika serves this purpose by providing a generic API to locate and extract data from multiple file formats.</p>
+<h2>Apache Tika Applications</h2>
+<p>There are various applications that make use of Apache Tika. Here we will discuss a few prominent applications that depend heavily on Apache Tika.</p>
+<h3>Search Engines</h3>
+<p>Tika is widely used while developing search engines to index the text contents of digital documents.</p>
+<ul class="list">
+<li><p>Search engines are information processing systems designed to search information and indexed documents from the Web.</p></li>
+<li><p>Crawler is an important component of a search engine that crawls through the Web to fetch the documents that are to be indexed using some indexing technique. Thereafter, the crawler transfers these indexed documents to an extraction component.</p></li>
+<li><p>The duty of extraction component is to extract the text and metadata from the document. Such extracted content and metadata are very useful for a search engine. This extraction component contains Tika.</p></li> 
+<li><p>The extracted content is then passed to the indexer of the search engine that uses it to build a search index. Apart from this, the search engine uses the extracted content in many other ways as well.</p></li>
+</ul>
+<img src="images/search_engine.jpg" alt="Search Engine" />
+<h3>Document Analysis</h3>
+<ul class="list">
+<li><p>In the field of artificial intelligence, there are certain tools to analyze documents automatically at semantic level and extract all kinds of data from them.</p></li> 
+<li><p>In such applications, the documents are classified based on the prominent terms in the extracted content of the document.</p></li>
+<li><p>These tools make use of Tika for content extraction to analyze documents varying from plain text to digital documents.</p></li>
+</ul>
+<h3>Digital Asset Management</h3>
+<ul class="list">
+<li><p>Some organizations manage their digital assets such as photographs, e-books, drawings, music and video using a special application known as digital asset management (DAM).</p></li>
+<li><p>Such applications take the help of document type detectors and metadata extractor to classify the various documents.</p></li>
+</ul> 
+<h3>Content Analysis</h3>
+<ul class="list">
+<li><p>Websites like Amazon recommend newly released contents of their website to individual users according to their interests. To do so, these websites follow <b>machine learning techniques</b>, or take the help of social media websites like Facebook to extract required information such as likes and interests of the users. This gathered information will be in the form of html tags or other formats that require further content type detection and extraction.</p></li> 
+<li><p>For content analysis of a document, we have technologies that implement machine learning techniques such as <b>UIMA</b> and <b>Mahout</b>. These technologies are useful in clustering and analyzing the data in the documents.</p></li>  
+<li><p><b>Apache Mahout</b> is a framework which provides ML algorithms on Apache Hadoop – a cloud computing platform. Mahout provides an architecture by following certain clustering and filtering techniques. By following this architecture, programmers can write their own ML algorithms to produce recommendations by taking various text and metadata combinations. To provide inputs to these algorithms, recent versions of Mahout use Tika to extract text and metadata from binary content.</p></li>
+<li><p><b>Apache UIMA</b> analyzes and processes various programming languages and produces UIMA annotations. Internally it uses Tika Annotator to extract document text and metadata.</p></li>
+</ul>
+<h2>History</h2>
+<table class="table table-bordered">
+<tr>
+<th>Year</th>
+<th>Development</th>
+</tr>
+<tr>
+<td>2006</td>
+<td>The idea of Tika was projected before the Lucene Project Management Committee.</td>
+</tr>
+<tr>
+<td>2006</td>
+<td>The concept of Tika and its usefulness in the Jackrabbit project was discussed.</td>
+</tr>
+<tr>
+<td>2007</td>
+<td>Tika entered into Apache incubator.</td>
+</tr>
+<tr>
+<td>2008</td>
+<td>Versions 0.1 and 0.2 were released and Tika graduated from the incubator to the Lucene sub-project.</td>
+</tr>
+<tr>
+<td>2009</td>
+<td>Versions 0.3, 0.4, and 0.5 were released.</td>
+</tr>
+<tr>
+<td>2010</td>
+<td>Version 0.6 and 0.7 were released and Tika graduated into the top-level Apache project.</td>
+</tr>
+<tr>
+<td>2011</td>
+<td>Tika 1.0 was released and the book on Tika "Tika in Action” was also released in the same year.</td>
+</tr>
+</table>
+<h1>TIKA - Architecture</h1>
+<h2>Application-Level Architecture of Tika</h2>
+<p>Application programmers can easily integrate Tika in their applications. Tika provides a Command Line Interface and a GUI to make it user friendly.</p>
+<p>In this chapter, we will discuss the four important modules that constitute the Tika architecture. The following illustration shows the architecture of Tika along with its four modules:</p>
+<ul class="list">
+<li>Language detection mechanism.</li>
+<li>MIME detection mechanism.</li>
+<li>Parser interface.</li> 
+<li>Tika Facade class.</li>
+</ul>
+<img src="images/tika_architecture.jpg" alt="Tika Architecture" />
+<h3>Language Detection Mechanism</h3> 
+<p>Whenever a text document is passed to Tika, it will detect the language in which it was written. It accepts documents without language annotation and adds that information in the metadata of the document by detecting the language.</p>
+<p>To support language identification, Tika has a class called <b>Language Identifier</b>in the package <b>org.apache.tika.language</b>, and a language identification repository inside which contains algorithms for language detection from a given text. Tika internally uses N-gram algorithm for language detection.</p> 
+<h3>MIME Detection Mechanism</h3>
+<p>Tika can detect the document type according to the MIME standards. Default MIME type detection in Tika is done using <a href="http://tika.apache.org/1.4/api/org/apache/tika/mime/MimeTypes.html" rel="nofollow" target="_blank">org.apache.tika.mime.mimeTypes</a>. It uses the <a href="http://tika.apache.org/1.4/api/org/apache/tika/detect/Detector.html" rel="nofollow" target="_blank">org.apache.tika.detect.Detector</a> interface for most of the content type detection.</p> 
+<p>Internally Tika uses several techniques like file globs, content-type hints, magic bytes, character encodings, and several other techniques.</p> 
+<h3>Parser Interface</h3>
+<p>The parser interface of org.apache.tika.parser is the key interface for parsing documents in Tika. This Interface extracts the text and the metadata from a document and summarizes it for external users who are willing to write parser plugins.</p>
+<p>Using different concrete parser classes, specific for individual document types, Tika supports a lot of document formats. These format specific classes provide support for different document formats, either by directly implementing the parser logic or by using external parser libraries.</p>
+<h3>Tika Facade Class</h3>
+<p>Using Tika facade class is the simplest and direct way of calling Tika from Java, and it follows the facade design pattern. You can find the Tika facade class in the org.apache.tika package of Tika API.</p>
+<p>By implementing basic use cases, Tika acts as a broker of landscape. It abstracts the underlying complexity of the Tika library such as MIME detection mechanism, parser interface, and language detection mechanism, and provides the users a simple interface to use.</p>
+<h2>Features of Tika</h2>
+<ul class="list">
+<li><p><b>Unified parser Interface</b> : Tika encapsulates all the third party parser libraries within a single parser interface. Due to this feature, the user escapes from the burden of selecting the suitable parser library and use it according to the file type encountered.</p></li>
+<li><p><b>Low memory usage</b> : Tika consumes less memory resources therefore it is easily embeddable with Java applications. We can also use Tika within the application which run on platforms with less resources like mobile PDA.</p></li>
+<li><p><b>Fast processing</b> : Quick content detection and extraction from applications can be expected.</p></li>
+<li><p><b>Flexible metadata</b> : Tika understands all the metadata models which are used to describe files.</p></li>
+<li><p><b>Parser integration</b> : Tika can use various parser libraries available for each document type in a single application.</p></li>
+<li><p><b>MIME type detection</b> : Tika can detect and extract content from all the media types included in the MIME standards.</p></li>
+<li><p><b>Language detection</b> : Tika includes language identification feature, therefore can be used in documents based on language type in a multi lingual websites.</p></li>
+</ul>
+<h2>Functionalities of Tika</h2>
+<p>Tika supports various functionalities:</p>
+<ul class="list">
+<li>Document type detection</li>
+<li>Content extraction</li>
+<li>Metadata extraction</li>
+<li>Language detection</li>
+</ul>
+<h3>Document Type Detection</h3> 
+<p>Tika uses various detection techniques and detects the type of the document given to it.</p>
+<img src="images/detection.jpg" alt="Detection" />
+<h3>Content Extraction</h3>
+<p>Tika has a parser library that can parse the content of various document formats and extract them. After detecting the type of the document, it selects the appropriate parser from the parser repository and passes the document. Different classes of Tika have methods to parse different document formats.</p>
+<img src="images/extraction.jpg" alt="Extraction" />
+<h3>Metadata Extraction</h3> 
+<p>Along with the content, Tika extracts the metadata of the document with the same procedure as in content extraction. For some document types, Tika have classes to extract metadata.</p>
+<img src="images/extraction1.jpg" alt="Extraction1" />
+<h3>Language Detection</h3>
+<p>Internally, Tika follows algorithms like n-gram to detect the language of the content in a given document. Tika depends on classes like Language identifier and Profiler for language identification.</p>
+<img src="images/detection1.jpg" alt="Detection1" />
+<h1>TIKA - Environment</h1>
+<p>This chapter takes you through the process of setting up Apache Tika on Windows and Linux. User administration is needed while installing the Apache Tika.</p>
+<h2>System Requirements</h2>
+<table class="table table-bordered">
+<tr>
+<td>JDK</td>
+<td>Java SE 2 JDK 1.6 or above</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>1 GB RAM (recommeneded)</td>
+</tr>
+<tr>
+<td>Disk Space</td>
+<td>No minimum requirement</td>
+</tr>
+<tr>
+<td>Operating System Version</td>
+<td>Windows XP or above, Linux</td>
+</tr>
+</table>
+<h3>Step 1:  Verifying Java Installation</h3>
+<p>To verify Java installation, open the console and execute the following java command.</p>
+<table class="table table-bordered">
+<tr>
+<th>OS</th>
+<th>Task</th>
+<th>Command</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Open command console</td>
+<td>\>java –version</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>Open command terminal</td>
+<td>$java –version</td>
+</tr>
+</table>
+<p>If Java has been installed properly on your system, then you should get one of the following outputs, depending on the platform you are working on.</p>
+<table class="table table-bordered">
+<tr>
+<th>OS</th>
+<th>Output</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td><p>Java version "1.7.0_60"<p> 
+<p>Java (TM) SE Run Time Environment (build 1.7.0_60-b19)</p> 
+<p>Java Hotspot (TM) 64-bit Server VM (build 24.60-b09, mixed mode)</p></td>
+</tr>
+<tr>
+<td>Lunix</td>
+<td><p>java version "1.7.0_25"</p>
+<p>Open JDK Runtime Environment (rhel-2.3.10.4.el6_4-x86_64)</p>
+<p>Open JDK 64-Bit Server VM (build 23.7-b01, mixed mode)</p></td>
+</tr>
+</table>
+<ul class="list">
+<li><p>We assume the readers of this tutorial have Java 1.7.0_60 installed on their system before proceeding for this tutorial.</p></li> 
+<li><p>In case you do not have Java SDK, download its current version from <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" rel="nofollow" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/index.html and have it installed</a>.</p></li>
+</ul>
+<h3>Step 2: Setting Java Environment</h3>
+<p>Set the JAVA_HOME environment variable to point to the base directory location where Java is installed on your machine. For example,</p>
+<table class="table table-bordered">
+<tr>
+<th>OS</th>
+<th>Output</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Set Environmental variable JAVA_HOME to C:\ProgramFiles\java\jdk1.7.0_60</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>export  JAVA_HOME=/usr/local/java-current</td>
+</tr>
+</table>
+<p>Append the full path of the Java compiler location to the System Path.</p>
+<table class="table table-bordered">
+<tr>
+<th>OS</th>
+<th>Output</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Append the String; C:\Program Files\Java\jdk1.7.0_60\bin to the end of the system variable PATH.</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>export PATH=$PATH:$JAVA_HOME/bin/</td>
+</tr>
+</table>
+<p>Verify the command java-version from command prompt as explained above.</p>	
+<h3>Step 3: Setting up Apache Tika Environment</h3>
+<p>Programmers can integrate Apache Tika in their environment by using</p>
+<ul class="list">
+<li>Command line,</li> 
+<li>Tika API,</li> 
+<li>Command line interface (CLI) of Tika,</li>
+<li>Graphical User interface (GUI) of Tika, or</li> 
+<li>the source code.</li>
+</ul> 
+<p>For any of these approaches, first of all, you have to download the source code of Tika.</p>
+<p>You will find the source code of Tika at <a href="http://tika.apache.org/download.html" rel="nofollow" target="_blank">http://Tika.apache.org/download.html,</a> where you will find two links:</p>
+<p><b>apache-tika-1.6-src.zip</b>: It contains the source code of Tika, and 
+<b>Tika -app-1.6.jar</b>: It is a jar file that contains the Tika application.</p>
+<p>Download these two files. A snapshot of the official website of Tika is shown below.</p> 
+<img src="images/tika_environment.jpg" alt="Tika Environment " />
+<p>After downloading the files, set the classpath for the jar file <b>tika-app-1.6.jar</b>. Add the complete path of the jar file as shown in the table below.</p>
+<table class="table table-bordered">
+<tr>
+<th>OS</th>
+<th>Output</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Append the String “C:\jars\Tika-app-1.6.jar” to the user environment variable CLASSPATH</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><p>Export CLASSPATH=$CLASSPATH:</p>
+<p>/usr/share/jars/Tika-app-1.6.tar:</p></td>
+</tr>
+</table>
+<p>Apache provides Tika application, a Graphical User Interface (GUI) application using Eclipse.</p>
+<h2>Tika-Maven Build using Eclipse</h2>
+<ul class="list">
+<li><p>Open eclipse and create a new project.</p></li> 
+<li><p>If you do not having Maven in your Eclipse, set it up by following the given steps.</p> 
+<ul class="list">
+<li><p>Open the<a href="http://wiki.eclipse.org/M2E_updatesite_and_gittags" rel="nofollow" target="_blank"> link http://wiki.eclipse.org/M2E_updatesite_and_gittags </a>. There you will find the m2e plugin releases in a tabular format</p></li>
+</ul>
+</li>
+</ul>
+<img src="images/m2e_release.jpg" alt="m2e Release" />
+<!--<ul class="list">-->
+<ul class="list">
+<li><p>Pick the latest version and save the path of the url in p2 url column.</p></li>  
+<li><p>Now revisit eclipse, in the menu bar, click <b>Help</b>, and choose <b>Install New Software</b> from the dropdown menu</p></li> 
+</ul> 
+<!--</ul>-->
+<img src="images/eclipse.jpg" alt="Eclipse" />
+<!--<ul class="list">-->
+<ul class="list">
+<li><p>Click the <b>Add</b> button, type any desired name, as it is optional. Now paste the saved url in the <b>Location</b> field.</p></li>
+<li><p>A new plugin will be added with the name you have chosen in the previous step, check the checkbox in front of it, and click <b>Next</b>.</p></li>
+</ul>
+<!--</ul>-->
+<img src="images/install.jpg" alt="Install" />
+<!--<ul class="list">-->
+<ul class="list">
+<li><p>Proceed with the installation. Once completed, restart the Eclipse.</p></li>
+<li><p>Now right click on the project, and in the <b>configure</b> option, select <b>convert to maven project</b>.</p></li>
+<li><p>A new wizard for creating a new pom appears. Enter the Group Id as org.apache.tika, enter the latest version of Tika, select the <b>packaging</b> as jar, and click <b>Finish</b>.</p></li>
+</ul>
+<!--</ul>-->
+<p>The Maven project is successfully installed, and your project is converted into Maven. Now you have to configure the pom.xml file.</p>
+<h2>Configure the XML File</h2>
+<p>Get the Tika maven dependency from<a href="http://mvnrepository.com/artifact/org.apache.tika" rel="nofollow" target="_blank"> http://mvnrepository.com/artifact/org.apache.tika</a></p>
+<p>Shown below is the complete Maven dependency of Apache Tika.</p> 
+<pre class="prettyprint notranslate">
+&lt;dependency&gt;
+   &lt;groupId&gt;org.apache.Tika&lt;/groupId&gt;
+   &lt;artifactId&gt;Tika-core&lt;/artifactId&gt;
+   &lt;version&gt;1.6&lt;/version&gt;
+
+   &lt;groupId&gt;org.apache.Tika&lt;/groupId&gt;
+   &lt;artifactId&gt; Tika-parsers&lt;/artifactId&gt;
+   &lt;version&gt; 1.6&lt;/version&gt;
+
+   &lt;groupId&gt; org.apache.Tika&lt;/groupId&gt;
+   &lt;artifactId&gt;Tika&lt;/artifactId&gt;
+   &lt;version&gt;1.6&lt;/version&gt;
+
+   &lt;groupId&gt;org.apache.Tika&lt;/groupId&gt;
+   &lt; artifactId&gt;Tika-serialization&lt;/artifactId&gt;
+   &lt; version&gt;1.6&lt; /version&gt;
+
+   &lt; groupId&gt;org.apache.Tika&lt; /groupId&gt;
+   &lt; artifactId&gt;Tika-app&lt; /artifactId&gt;
+   &lt; version&gt;1.6&lt; /version&gt;
+
+   &lt;groupId&gt;org.apache.Tika&lt;/groupId&gt;
+   &lt;artifactId&gt;Tika-bundle&lt;/artifactId&gt;
+   &lt;version&gt;1.6&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+<h1>TIKA - Referenced API</h1>
+<p>Users can embed Tika in their applications using the Tika facade class. It has methods to explore all the functionalities of Tika. Since it is a facade class, Tika abstracts the complexity behind its functions. In addition to this, users can also use the various classes of Tika in their applications.</p>
+<img src="images/user_application.jpg" alt="User Application" />
+<h2>Tika Class (facade)</h2>
+<p>This is the most prominent class of the Tika library and follows the facade design pattern. Therefore, it abstracts all the internal implementations and provides simple methods to access the Tika functionalities. The following table lists the constructors of this class along with their descriptions.</p>
+<p><b>package</b> : org.apache.tika</p>
+<p><b>class</b>: Tika</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Constructor and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Tika ()</b></p>
+<p>Uses default configuration and constructs the Tika class.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>Tika (Detector detector)</b></p>
+<p>Creates a Tika facade by accepting the detector instance as parameter</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Tika (Detector detector, Parser parser)</b></p>
+<p>Creates a Tika facade by accepting the detector and parser instances as parameters.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>Tika (Detector detector, Parser parser, Translator translator)</b></p>
+<p>Creates a Tika facade by accepting the detector, the parser, and the translator instance as parameters.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>Tika (TikaConfig config)</b></p>
+<p>Creates a Tika facade by accepting the object of the TikaConfig class as parameter.</p></td>
+</tr>
+</table>
+<h2>Methods and Description</h2>
+<p>The following are the important methods of Tika facade class:</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Methods and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><a href="https://tika.apache.org/1.6/api/org/apache/tika/Tika.html" rel="nofollow" target="_blank">parse<b>ToString (File file)</b></a></p>
+<p>This method and all its variants parses the file passed as parameter and returns the extracted text content in the String format. By default, the length of this string parameter is limited.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p>int <b>getMaxStringLength ()</b></p>
+<p>Returns the maximum length of strings returned by the parseToString methods.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p>void <b>setMaxStringLength</b>(int maxStringLength)</p>
+<p>Sets the maximum length of strings returned by the parseToString methods.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><a href="http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html?is-external=true" rel="nofollow" target="_blank">Reade <b>parse (File file)</b></a></p>
+<p>This method and all its variants parses the file passed as parameter and returns the extracted text content in the form of java.io.reader object.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" rel="nofollow" target="_blank">String <b>detect (InputStream</b> stream, <b>Metadata</b> metadata)</a></p>
+<p>This method and all its variants accepts an InputStream object and a Metadata object as parameters, detects the type of the given document, and returns the document type name as String object. This method abstracts the detection mechanisms used by Tika.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" rel="nofollow" target="_blank">String <b>translate (InputStream</b> text, <b>String</b> targetLanguage)</a></p>
+<p>This method and all its variants accepts the InputStream object and a String representing the language that we want our text to be translated, and translates the given text to the desired language, attempting to auto-detect the source language.</p></td>
+</tr>
+</table>
+<h2>Parser Interface</h2>
+<p>This is the interface that is implemented by all the parser classes of Tika package.</p>
+<p><b>package</b> : org.apache.tika.parser</p>
+<p><b>Interface</b> : Parser</p>
+<h2>Methods and Description</h2>
+<p>The following is the important method of Tika Parser interface:</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Methods and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>parse (InputStream stream, ContentHandler handler, Metadata metadata, ParseContext context)</b></p>
+<p>This method parses the given document into a sequence of XHTML and SAX events. After parsing, it places the extracted document content in the object of the ContentHandler class and the metadata in the object of the Metadata class.</p></td>
+</tr>
+</table>
+<h2>Metadata Class</h2> 
+<p>This class implements various interfaces such as CreativeCommons, Geographic, HttpHeaders, Message, MSOffice, ClimateForcast, TIFF, TikaMetadataKeys, TikaMimeKeys, Serializable to support various data models. The following tables list the constructors and methods of this class along with their descriptions.</p>
+<p><b>package</b> : org.apache.tika.metadata</p>
+<p><b>class</b> : Metadata</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Constructor and description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Metadata()</b></p>
+<p>Constructs a new, empty metadata.</p></td>
+</tr>
+</table>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Methods and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>add (Property property, String value)</b></p>
+<p>Adds a metadata property/value mapping to a given document. Using this function, we can set the value to a property.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>add (String name, String value)</b></p>
+<p>Adds a metadata property/value mapping to a given document. Using this method, we can set a new name value to the existing metadata of a document.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>String get (Property property)</b></p>
+<p>Returns the value (if any) of the metadata property given.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>String get (String name)</b></p>
+<p>Returns the value (if any) of the metadata name given.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>Date getDate (Property property)</b></p>
+<p>Returns the value of Date metadata property.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>String[] getValues (Property property)</b></p>
+<p>Returns all the values of a metadata property.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>String[] getValues (String name)</b></p>
+<p>Returns all the values of a given metadata name.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>String[] names()</b></p>
+<p>Returns all the names of metadata elements in a metadata object.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>set (Property property, Date date)</b></p>
+<p> Sets the date value of the given metadata property</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><p><a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/Metadata.html" rel="nofollow" target="_blank">set <b>(Property property, String[] values)</b></a></p>
+<p>Sets multiple values to a metadata property.</p></td>
+</tr>
+</table>
+<h2>Language Identifier Class</h2>
+<p>This class identifies the language of the given content. The following tables list the constructors of this class along with their descriptions.</p>
+<p><b>package</b> : org.apache.tika.language</p>
+<p><b>class</b> : Language Identifier</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Constructor and description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>LanguageIdentifier (LanguageProfile profile)</b></p>
+<p>Instantiates the language identifier. Here you have to pass a LanguageProfile object as parameter.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>LanguageIdentifier (String content)</b></p>
+<p>This constructor can instantiate a language identifier by passing on a String from text content</p></td>
+</table>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Methods and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String getLanguage ()</a></b></p>
+<p>Returns the language given to the current LanguageIdentifier object.</p></td>
+</tr>
+</table>
+<h1>TIKA - File Formats</h1>
+<h2>File Formats Supported by Tika</h2> 
+<p>The following table shows the file formats Tika supports.</p>
+<table class="table table-bordered">
+<tr>
+<th>File format</th>
+<th>Package Library</th>
+<th>Class in Tika</th>
+</tr>
+<tr>
+<td>XML</td>
+<td>org.apache.tika.parser.xml</td>
+<td>XMLParser</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>org.apache.tika.parser.html and it uses Tagsoup Library</td>
+<td>HtmlParser</td>
+</tr>
+<tr>
+<td>MS-Office compound document Ole2 till 2007 ooxml 2007 onwards</td>
+<td><p>org.apache.tika.parser.microsoft</p>
+<p>org.apache.tika.parser.microsoft.ooxml and it uses Apache Poi library</p></td>
+<td><p>OfficeParser(ole2)</p>
+<p>OOXMLParser(ooxml)</p></td>
+</tr>
+<tr>
+<td>OpenDocument Format openoffice</td>
+<td>org.apache.tika.parser.odf</td>
+<td>OpenOfficeParser</td>
+</tr>
+<tr>
+<td>portable Document Format(PDF)</td>
+<td>org.apache.tika.parser.pdf and this package uses Apache PdfBox library</td>
+<td>PDFParser</td>
+</tr>
+<tr>
+<td>Electronic Publication Format (digital books)</td>
+<td>org.apache.tika.parser.epub</td>
+<td>EpubParser</td>
+</tr>
+<tr>
+<td>Rich Text format</td>
+<td>org.apache.tika.parser.rtf</td>
+<td>RTFParser</td>
+</tr>
+<tr>
+<td>Compression and packaging formats</td>
+<td>org.apache.tika.parser.pkg and this package uses Common compress library</td>
+<td>PackageParser and CompressorParser and its sub-classes</td>
+</tr>
+<tr>
+<td>Text format</td>
+<td>org.apache.tika.parser.txt</td>
+<td>TXTParser</td>
+</tr>
+<tr>
+<td>Feed and syndication formats</td>
+<td>org.apache.tika.parser.feed</td>
+<td>FeedParser</td>
+</tr>
+<tr>
+<td>Audio formats</td>
+<td>org.apache.tika.parser.audio and org.apache.tika.parser.mp3</td>
+<td>AudioParser MidiParser Mp3- for mp3parser</td>
+</tr>
+<tr>
+<td>Imageparsers</td>
+<td>org.apache.tika.parser.jpeg</td>
+<td>JpegParser-for jpeg images </td>
+</tr>
+<tr>
+<td>Videoformats</td>
+<td>org.apache.tika.parser.mp4 and org.apache.tika.parser.video this parser internally uses Simple Algorithm to parse flash video formats </td>
+<td>Mp4parser FlvParser</td>
+</tr>
+<tr>
+<td>java class files and jar files</td>
+<td>org.apache.tika.parser.asm</td>
+<td>ClassParser CompressorParser</td>
+</tr>
+<tr>
+<td>Mobxformat (email messages)</td>
+<td>org.apache.tika.parser.mbox</td>
+<td>MobXParser</td>
+</tr>
+<tr>
+<td>Cad formats</td>
+<td>org.apache.tika.parser.dwg</td>
+<td>DWGParser</td>
+</tr>
+<tr>
+<td>FontFormats</td>
+<td>org.apache.tika.parser.font</td>
+<td>TrueTypeParser</td>
+</tr>
+<tr>
+<td>executable programs and libraries</td>
+<td>org.apache.tika.parser.executable</td>
+<td>ExecutableParser</td>
+</tr>
+</table>
+<h1>TIKA - Document Type Detection</h1>
+<h2>MIME Standards</h2>  
+<p>Multipurpose Internet Mail Extensions (MIME) standards are the best available standards for identifying document types. The knowledge of these standards helps the browser during internal interactions.</p> 
+<p>Whenever the browser encounters a media file, it chooses a compatible software available with it to display its contents. In case it does not have any suitable application to run a particular media file, it recommends the user to get the suitable plugin software for it.</p>   
+<h2>Type Detection in Tika</h2>  
+<p>Tika supports all the Internet media document types provided in MIME. Whenever a file is passed through Tika, it detects the file and its document type. To detect media types, Tika internally uses the following mechanisms.</p>  
+<h3>File extensions</h3>
+<p>Checking the file extensions is the simplest and most-widely used method to detect the format of a file. Many applications and operating systems provide support for these extensions. Shown below are the extension of a few known file types.</p>
+<table class="table table-bordered">
+<tr>
+<th>File name</th>
+<th>Extention</th>
+</tr>
+<tr>
+<td>image</td>
+<td>.jpg</td>
+</tr>
+<tr>
+<td>audio</td>
+<td>.mp3</td>
+</tr>
+<tr>
+<td>java archive file</td>
+<td>.jar</td>
+</tr>
+<tr>
+<td>java class file</td>
+<td>.class</td>
+</tr>
+</table>
+<h3>Content-type hints</h3>
+<p>Whenever you retrieve a file from a database or attach it to another document, you may lose the file’s name or extension. In such cases, the metadata supplied with the file is used to detect the file extension.</p>
+<h3>Magic bytes</h3>
+<p>Observing the raw bytes of a file, you can find some unique character patterns for each file. Some files have special byte prefixes called <b>magic bytes</b> that are specially made and included in a file for the purpose of identifying the file type.</p>
+<p>For example, you can find CA FE BA BE (hexadecimal format) in a java file and %PDF (ASCII format) in a pdf file. Tika uses this information to identify the media type of a file.</p>
+<h3>Character encodings</h3>
+<p>Files with plain text are encoded using different types of character encoding. The main challenge here is to identify the type of character encoding used in the files. Tika follows character encoding techniques like <b>Bom markers</b> and <b>Byte Frequencies</b> to identify the encoding system used by the plain text content.</p> 
+<h3>Xml root characters</h3>
+<p>To detect XML documents, Tika parses the xml documents and extracts the information such as root elements, namespaces, and referenced schemas from where the true media type of the files can be found.</p>
+<h2>Type detection using Facade class</h2>
+<p>The <b>detect()</b> method of facade class is used to detect the document type. This method accepts a file as input. Shown below is an example program for document type detection with Tika facade class.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+
+import java.util.Scanner;
+
+import org.apache.tika.Tika;
+
+Public class TikaTypedetection {
+
+   public static void main(String[] args) throws Exception {
+   
+      Scanner scanner = new Scanner(System.in);
+      String filepath = scanner.nextLine();
+      System.out.println(filepath);
+   
+      //creating file object
+      File file = new File(filepath);//
+   
+      //using tika facade class 
+      Tika tika = new Tika();
+   
+      //detecting the file type using detect method
+      String filetype = tika.detect(file);
+      System.out.println(filetype);
+   }
+}
+</pre>
+<p>Save the above code as TypeDetection.java and run it from the command prompt using the following commands:</p>
+<pre class="prettyprint notranslate">
+javac TypeDetection.java
+java TypeDetection 
+enter path of your file
+c:\tika example\ring.mp3
+audio/mpeg
+</pre>
+<h1>TIKA - Content Extraction</h1>
+<p>Tika uses various parser libraries to extract content from given parsers. It chooses the right parser for extracting the given document type.</p> 
+<p>For parsing documents, the parseToString() method of Tika facade class is generally used. Shown below are the steps involved in the parsing process and these are abstracted by the Tika ParsertoString() method.</p>
+<img src="images/parsing_process.jpg" alt="Parsing Process" />
+<p>Abstracting the parsing process:</p>
+<ul class="list">
+<li><p>Initially when we pass a document to Tika, it uses a suitable type detection mechanism available with it and detects the document type.</p></li> 
+<li><p>Once the document type is known, it chooses a suitable parser from its parser repository. The parser repository contains classes that make use of external libraries.</p></li> 
+<li><p>Then the document is passed to choose the parser which will parse the content, extract the text, and also throw exceptions for unreadable formats.</p></li>
+</ul>
+<h2>Content Extraction using Tika</h2>
+<p>Given below is the program for extracting text from a file using Tika facade class:</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
+public class TikaExtraction {
+   public static void main(final String[] args) throws IOException, SAXException,TikaException {
+   
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("enter path of your file");
+      String filepath = scanner.nextLine();
+   
+      //creating the file object		        
+      File file = new File(filepath); 
+   
+      //using tika facade
+      Tika tika = new Tika();
+      String filecontent = tika.parseToString(file);
+      System.out.println("Extracted Content: " + filecontent);
+  }	 
+}
+</pre>
+<p>Save the above code as TikaExtraction.java and run it from the command prompt:</p>
+<pre class="result notranslate">
+javac TikaExtraction.java 
+java TikaExtraction
+</pre>
+<p><b>Note</b> : Here you have to pass the full path of your file. For example, we are passing the location of a sample text document with the following content.</p>
+<pre class="result notranslate">
+Hi students welcome to tutorialspoint
+</pre>
+<p>It gives you the following output:</p>
+<pre class="result notranslate">
+enter path of your file
+c:\Tika example\sample.txt
+
+Extracted Content: Hi students welcome to tutorialspoint
+</pre>
+<h2>Content Extraction using Parser Interface</h2>
+<p>The parser package of Tika provides several interfaces and classes using which we can parse a text document. Given below is the block diagram of the org.apache.tika.parser package.</p>
+<img src="images/parser_interface.jpg" alt="Parser Interface" />
+<p>There are several parser classes available, e.g., pdf parser, Mp3Passer, OfficeParser, etc., to parse respective documents individually. All these classes implement the parser interface.</p> 
+<h3>CompositeParser</h3>
+<p>The given diagram shows Tika’s general-purpose parser classes <b>CompositeParser</b> and <b>AutoDetectParser</b>. Since the CompositeParser class follows composite design pattern, you can use a group of parser instances as a single parser. The CompositeParser class also allows access to all the classes that implement the parser interface.</p>
+<h3>AutoDetectParser</h3>
+<p>This is a subclass of CompositeParser and it provides automatic type detection. Using this functionality, the AutoDetectParser automatically sends the incoming documents to the appropriate parser classes using the composite methodology.</p>
+<h3>parse() method</h3>
+<p>Along with parseToString(), you can also use the parse() method of the parser Interface. The prototype of this method is shown below.</p>
+<pre class="prettyprint notranslate">
+parse(<a href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" rel="nofollow" target="_blank">InputStream</a> stream, <a href="http://docs.oracle.com/javase/6/docs/api/org/xml/sax/ContentHandler.html?is-external=true" rel="nofollow" target="_blank">ContentHandler</a> handler, <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/Metadata.html" rel="nofollow" target="_blank">Metadata</a> metadata, 
+<a href="https://tika.apache.org/1.6/api/org/apache/tika/parser/ParseContext.html" rel="nofollow" target="_blank">ParseContext</a> context)
+</pre>
+<p>The following table lists the four objects it accepts as parameters.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Object and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>InputStream stream</b></p>
+<p>Any Inputstream object that contains the content of the file</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>ContentHandler handler</b></p>
+<p>Tika passes the document as XHTML content to this handler, thereafter the document is processed using SAX API. It provides efficient post-processing of the contents in a document.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Metadata metadata</b></p>
+<p>The metadata object is used both as a source and a target of document metadata.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>ParseContext context</b></p>
+<p>This object is used in cases where the client application wants to customize the parsing process.</p></td>
+</tr>
+</table>
+<h3>Example:</h3>
+<p>Given below is an example that shows how the parse() method is used.</p>
+<p><b>Step 1:</b></p>
+<p>To use the parse() method of the parser interface, instantiate any of the classes providing the implementation for this interface.</p>
+<p>There are individual parser classes such as PDFParser, OfficeParser, XMLParser, etc. You can use any of these individual document parsers. Alternatively, you can use either CompositeParser or AutoDetectParser that uses all the parser classes internally and extracts the contents of a document using a suitable parser.</p>
+<pre class="prettyprint notranslate">
+Parser parser = new AutoDetectParser();
+   (or)
+Parser parser = new CompositeParser();  
+   (or)        
+object of any individual parsers given in Tika Library 
+</pre>
+<p><b>Step 2:</b></p>
+<p>Create a handler class object. Given below are the three content handlers:</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Class and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>BodyContentHandler</b></p>
+<p>This class picks the body part of the XHTML output and writes that content to the output writer or output stream. Then it redirects the XHTML content to another content handler instance.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>LinkContentHandler</b></p>
+<p>This class detects and picks all the H-Ref tags of the XHTML document and forwards those for the use of tools like web crawlers.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>TeeContentHandler</b></p>
+<p>This class helps in using multiple tools simultaneously.</p></td>
+</tr>
+</table>
+<p>Since our target is to extract the text contents from a document, instantiate BodyContentHandler as shown below:</p>
+<pre class="prettyprint notranslate">
+BodyContentHandler handler = new BodyContentHandler( );
+</pre>
+<p><b>Step 3:</b></p>
+<p>Create the Metadata object as shown below:</p>
+<pre class="prettyprint notranslate">
+Metadata metadata = new Metadata();
+</pre>
+<p><b>Step 4:</b></p>
+<p>Create any of the input stream objects, and pass your file that should be extracted to it.</p>
+<h3>FileInputstream</h3>  
+<p>Instantiate a file object by passing the file path as parameter and pass this object to the FileInputStream class constructor.</p>
+<p><b>Note</b> : The path passed to the file object should not contain spaces.</p>
+<p>The problem with these input stream classes is that they don’t support random access reads, which is required to process some file formats efficiently. To resolve this problem, Tika provides TikaInputStream.</p>
+<pre class="prettyprint notranslate">
+File file=new File(filepath)
+FileInputStream inputstream=new FileInputStream(file);
+   (or)
+InputStream stream = TikaInputStream.get(new File(filename));
+</pre>
+<p><b>Step 5:</b></p>
+<p>Create a parse context object as shown below:</p>
+<pre class="prettyprint notranslate">
+ParseContext context =new ParseContext();
+</pre>
+<p><b>Step 6:</b></p>
+<p>Instantiate the parser object, invoke the parse method, and pass all the objects required, as shown in the prototype below:</p>
+<pre class="prettyprint notranslate">
+parser.parse(inputstream, handler, metadata, context);
+</pre>
+<p>Given below is the program for content extraction using the parser interface:</p>
+<pre class="prettyprint notranslate">
+package ContentExtraction;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import java.util.Scanner;
+
+import org.apache.Tika.exception.TikaException;
+import org.apache.Tika.metadata.Metadata;
+import org.apache.Tika.parser.AutoDetectParser;
+import org.apache.Tika.parser.ParseContext;
+import org.apache.Tika.parser.Parser;
+import org.apache.Tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class ParserExtraction {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("enter path of your file");
+      String filepath = scanner.nextLine();
+      
+      //creating file object
+      File file = new File(filepath);
+      
+      //parse method parameters
+      Parser parser = new AutoDetectParser();
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream=new FileInputStream(file);
+      ParseContext context =new ParseContext();
+      
+      parser.parse(inputstream, handler, metadata, context);
+      System.out.println(handler.toString());
+   }	 	  
+}
+</pre>
+<p>Save the above code as ParserExtraction.java and run it from the command prompt:</p>
+<pre class="result notranslate">
+javac  ParserExtraction.java 
+java  ParserExtraction
+</pre>
+<p><b>Note</b> : Here you have to pass your file path. For example, we are passing the location of a sample text document that contains the following content.</p>
+<pre class="result notranslate">
+Hi students welcome to tutorialspoint
+</pre>
+<p>It gives the following output:</p>
+<pre class="result notranslate">
+Enter path of your file
+c:\Tika example\sample.txt
+Extracted Content: Hi students welcome to tutorialspoint
+</pre>
+<h1>TIKA - Metadata Extraction</h1>
+<p>Besides content, Tika also extracts the metadata from a file. Metadata is nothing but the additional information supplied with a file. If we consider an audio file, the artist name, album name, title comes under metadata.</p> 
+<h2>XMP Standards</h2>
+<p>The Extensible Metadata Platform (XMP) is a standard for processing and storing information related to the content of a file. It was created by <a href="http://en.wikipedia.org/wiki/Adobe_Systems" rel="nofollow" target="_blank">Adobe Systems Inc</a>. XMP provides standards for defining, creating, and processing of <a href="http://en.wikipedia.org/wiki/Metadata" rel="nofollow" target="_blank">metadata</a>. You can embed this standard into several file formats such as <a href="http://en.wikipedia.org/wiki/Portable_Document_Format" rel="nofollow" target="_blank">PDF</a>, <a href="http://en.wikipedia.org/wiki/JPEG" rel="nofollow" target="_blank">JPEG</a>, <a href="http://en.wikipedia.org/wiki/JPEG_2000" rel="nofollow" target="_blank">JPEG</a>, <a href="http://en.wikipedia.org/wiki/Graphics_Interchange_Format" rel="nofollow" target="_blank">GIF</a>, <a href="http://en.wikipedia.org/wiki/Portable_Network_Graphics"rel="nofollow" target="_blank">jpg</a>, <a href="http://en.wikipedia.org/wiki/HTML" rel="nofollow" target="_blank">HTML</a>, etc.</p>
+<h2>Property Class</h2>
+<p>Tika uses the Property class to follow XMP property definition. It provides the <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/Property.PropertyType.html" rel="nofollow" target="_blank">PropertyType</a> and <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/Property.ValueType.html" rel="nofollow" target="_blank">ValueType</a> enums to capture the name and value of a metadata.</p>
+<h2>Metadata Class</h2>
+<p>This class implements various interfaces such as <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/ClimateForcast.html" rel="nofollow" target="_blank">ClimateForcast</a>, CativeCommons, <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/Geographic.html" rel="nofollow" target="_blank">Geographic</a>, TIFF etc. to provide support for various metadata models. In addition, this class provides various methods to extract the content from a file.</p>
+<h2>Metadata Names</h2>
+<p>We can extract the list of all metadata names of a file from its metadata object using the method <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/Metadata.html" rel="nofollow" target="_blank">names()</a>. It returns all the names as a string array. Using the name of the metadata, we can get the value using the <b>get()</b> method. It takes a metadata name and returns a value associated with it.</p>
+<pre class="prettyprint notranslate">
+String[] metadaNames = metadata.names();
+
+String value = metadata.get(name);
+</pre>
+<h2>Extracting Metadata using Parse Method</h2>
+<p>Whenever we parse a file using parse(), we pass an empty metadata object as one of the parameters. This method extracts the metadata of the given file (if that file contains any), and places them in the metadata object. Therefore, after parsing the file using parse(), we can extract the metadata from that object.</p>
+<pre class="prettyprint notranslate">
+Parser parser = new AutoDetectParser();
+BodyContentHandler handler = new BodyContentHandler();
+Metadata metadata = new Metadata();   //empty metadata object 
+FileInputStream inputstream = new FileInputStream(file);
+ParseContext context = new ParseContext();
+parser.parse(inputstream, handler, metadata, context);
+// now this metadata object contains the extracted metadata of the given file.
+metadata.metadata.names();
+</pre>
+<p>Given below is the complete program to extract metadata from a text file.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import org.apache.Tika.exception.TikaException;
+import org.apache.Tika.metadata.Metadata;
+import org.apache.Tika.parser.AutoDetectParser;
+import org.apache.Tika.parser.ParseContext;
+import org.apache.Tika.parser.Parser;
+import org.apache.Tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class GetMetadata {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("enter path of your file");
+      String filepath = scanner.nextLine();
+      
+      //creating file object
+      File file = new File(filepath);
+      Parser parser = new AutoDetectParser();
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(file);
+      ParseContext context = new ParseContext();
+      parser.parse(inputstream, handler, metadata, context);
+      System.out.println(handler.toString());
+      
+      //getting the list of all meta data elements 
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) {
+         System.out.println(name + ": " + metadata.get(name));
+      }
+   }
+} 
+</pre>
+<p>Save the above code as GetMetadata.java and run it from the command prompt using the following commands:</p>
+<pre class="result notranslate">
+javac  GetMetadata .java
+java  GetMetadata
+</pre>
+<p><b>Note</b> : Here you have to pass your file path. For example, we are passing the location of the following image.</p>
+<img src="images/baby.jpg" alt="jpg" />
+<p>It gives the following output:</p>
+<pre class="result notranslate">
+enter path of your file
+E:\office\Tika\stand alone\parsers\boy.jpg
+
+Resolution Units: inch
+Compression Type: Baseline
+Data Precision: 8 bits
+Number of Components: 3
+tiff:ImageLength: 1000
+Component 2: Cb component: Quantization table 1, Sampling factors 1 horiz/1 vert
+Component 1: Y component: Quantization table 0, Sampling factors 1 horiz/1 vert
+Image Height: 1000 pixels
+X Resolution: 300 dots
+Original Transmission Reference: 53616c7465645f5fd22a84941585d89cc735d889c9d5ac58a01faf2c92ee3c6f9bcb38359bbe1eef
+Image Width: 714 pixels
+IPTC-NAA record: 92 bytes binary data
+Component 3: Cr component: Quantization table 1, Sampling factors 1 horiz/1 vert
+tiff:BitsPerSample: 8
+Application Record Version: 4
+tiff:ImageWidth: 714
+Content-Type: image/jpeg
+Y Resolution: 300 dots
+</pre>
+<p>We can also get our desired metadata values.</p>
+<h2>Adding New Metadata Values</h2>
+<p>We can add new metadata values using the add() method of the metadata class. Given below is the syntax of this method. Here we are adding the author name.</p>
+<pre class="prettyprint notranslate">
+metadata.add(“author”,”Tutorials point”); 
+</pre>
+<p>The Metadata class has predefined properties including the properties inherited from classes like <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/ClimateForcast.html" rel="nofollow" target="_blank">ClimateForcast</a>, CativeCommons, <a href="https://tika.apache.org/1.6/api/org/apache/tika/metadata/Geographic.html" rel="nofollow" target="_blank">Geographic</a>, etc., to support various data models. Shown below is the usage of the SOFTWARE data type inherited from the TIFF interface implemented by Tika to follow XMP metadata standards for TIFF image formats.</p>
+<pre class="prettyprint notranslate">
+metadata.add(Metadata.SOFTWARE,"ms paint");
+</pre>
+<p>Given below is the complete program that demonstrates how to add metadata values to a given file. Here the list of the metadata elements is displayed in the output so that you can observe the change in the list after adding new values.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+import org.apache.Tika.exception.TikaException;
+import org.apache.Tika.metadata.Metadata;
+import org.apache.Tika.parser.AutoDetectParser;
+import org.apache.Tika.parser.ParseContext;
+import org.apache.Tika.parser.Parser;
+import org.apache.Tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class AddMetadata {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("enter path of your file");
+      
+      String filepath = scanner.nextLine();
+      File file = new File(filepath);
+      Parser parser = new AutoDetectParser();
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(file);
+      ParseContext context = new ParseContext();
+      
+      parser.parse(inputstream, handler, metadata, context);
+   
+      //list of meta data elements before adding new elements
+      System.out.println("metadata elements of the given file " + Arrays.toString(metadata.names()));
+      System.out.println("enter the number of metadata name value pairs to be added ");
+      int number = scanner.nextInt();
+      
+      for(int i=0; i&lt;number i++) {
+         System.out.println("enter metadata" + (i+1) + "name:");
+         String name = scanner.next();
+         System.out.println("enter metadata" + (i+1) + "value:");
+         String value = scanner.next();
+         
+         metadata.add(name,value);
+         metadata.add(name,value);
+      }
+      
+      System.out.println(" metadata name value pair is successfully added");
+   
+      //printing all the meta data elements after adding new elements
+      System.out.println("Here is the list of all the metadata elements  after adding new elements ");
+      System.out.println( Arrays.toString(metadata.names()));
+   }
+}
+</pre>		    		    	       
+<p>Save the above code as AddMetadata.java class and run it from the command prompt:</p>
+<pre class="result notranslate">
+javac  AddMetadata .java 
+java  AddMetadata
+</pre>
+<p><b>Note</b> : Here you have to pass your file path. For example, we are passing the location of a sample text document with the following content:</p>
+<pre class="result notranslate">
+Hi students welcome to tutorialspoint
+</pre>
+<p>It gives the following output:</p>
+<pre class="result notranslate">
+enter path of your file
+E:\office\Tika\stand alone\parsers\one.txt
+metadata elements of the given file :[Content-Encoding, Content-Type]
+enter the number of metadata name value pairs to be added 
+1
+enter metadata1name:
+Author
+enter metadata1value:
+Tutorials point
+metadata name value pair is successfully added
+Here is the list of all the metadata elements  after adding new elements 
+[Content-Encoding, Author, Content-Type]
+</pre>
+<h2>Setting Values to Existing Metadata Elements</h2>
+<p>You can set values to the existing metadata elements using the set() method. The syntax of setting the date property using the set() method is as follows:</p>
+<pre class="prettyprint notranslate">
+metadata.set(Metadata.DATE, new Date());
+</pre>
+<p>You can also set multiple values to the properties using the set() method. The syntax of setting multiple values to the Author property using the set() method is as follows:</p>
+<pre class="prettyprint notranslate">
+metadata.set(Metadata.AUTHOR, "ram ,raheem ,robin ");
+</pre>
+<p>Given below is the complete program demonstrating the set() method.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Scanner;
+
+import org.apache.Tika.exception.TikaException;
+import org.apache.Tika.metadata.Metadata;
+import org.apache.Tika.parser.AutoDetectParser;
+import org.apache.Tika.parser.ParseContext;
+import org.apache.Tika.parser.Parser;
+import org.apache.Tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class SetMetadata {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      //accepting file path from user
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("enter path of your file");
+      String filepath = scanner.nextLine();
+   
+      //parameters of parse() method
+      File file=new File(filepath);
+      Parser parser = new AutoDetectParser();
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream=new FileInputStream(file);
+      ParseContext context =new ParseContext();
+      parser.parse(inputstream, handler, metadata, context);
+      
+      //list of meta data elements elements
+      System.out.println( " metadata elements and values of the given file :");
+      String[] metadataNamesb4 = metadata.names();
+      
+      for(String name : metadataNamesb4) {		        
+         System.out.println(name + ": " + metadata.get(name));
+      }
+   
+      //setting date meta data 
+      metadata.set(Metadata.DATE, new Date());
+   
+      //setting multiple values to author property
+      metadata.set(Metadata.AUTHOR, "ram, raheem, robin ");
+      
+      //printing all the meta data elements with new elements
+      System.out.println(“List of all the metadata elements with new elements ");
+      String[] metadataNamesafter = metadata.names();
+   
+      for(String name : metadataNamesafter) {     
+         System.out.println(name + ": " + metadata.get(name));
+      }
+   }
+}	
+</pre>
+<p>Save the above code as SetMetadata.java and run it from the command prompt:</p>
+<pre class="result notranslate">
+javac  SetMetadata.java 
+java  SetMetadata
+</pre>
+<p><b>Note</b> : Here you have to pass your file path. For example, we are passing the location of a sample text document with the following content:</p>
+<pre class="result notranslate">
+Hi students welcome to tutorialspoint
+</pre>
+<p>In the output, you can observe the newly added metadata elements.</p>
+<pre class="result notranslate">
+enter path of your file
+E:\office\Tika\stand alone\parsers\one.txt
+metadata elements and values of the given file :
+Content-Encoding: ISO-8859-1
+Content-Type: text/plain; charset=ISO-8859-1
+Here is the list of all the metadata elements  after adding new elements 
+date: 2014-09-24T07:01:32Z
+Content-Encoding: ISO-8859-1
+Author: ram, raheem, robin 
+Content-Type: text/plain; charset=ISO-8859-1
+</pre>
+<h1>TIKA - Language Detection</h1>
+<h2>Need for Language Detection</h2>
+<p>For classification of documents based on the language they are written in a multilingual website, a language detection tool is needed. This tool should accept documents without language annotation (metadata) and add that information in the metadata of the document by detecting the language.</p>
+<h2>Algorithms for Profiling Corpus</h2>
+<h3>What is Corpus?</h3>
+<p>To detect the language of a document, a language profile is constructed and compared with the profile of the known languages. The text set of these known languages is known as a <b>corpus</b>.</p> 
+<p>A corpus is a collection of texts of a written language that explains how the language is used in real situations.</p>
+<p>The corpus is developed from books, transcripts, and other data resources like the Internet. The accuracy of the corpus depends upon the profiling algorithm we use to frame the corpus.</p>
+<h3>What are Profiling Algorithms?</h3>
+<p>The common way of detecting languages is by using dictionaries. The words used in a given piece of text will be matched with those that are in the dictionaries.</p> 
+<p>A list of common words used in a language will be the most simple and effective corpus for detecting a particular language, for example, articles <b>a</b>, <b>an</b>, <b>the</b> in English.</p>
+<h3>Using Word Sets as Corpus</h3>
+<p>Using word sets, a simple algorithm is framed to find the distance between two corpora, which will be equal to the sum of differences between the frequencies of matching words.</p>
+<p>Such algorithms suffer from the following problems:</p>
+<ul class="list">
+<li><p>Since the frequency of matching words is very less, the algorithm cannot efficiently work with small texts having few sentences. It needs a lot of text for accurate match.</p></li>
+<li><p>It cannot detect word boundaries for languages having compound sentences, and those having no word dividers like spaces or punctuation marks.</p></li>
+</ul>
+<p>Due to these difficulties in using word sets as corpus, individual characters or character groups are considered.</p>
+<h3>Using Character Sets as Corpus</h3>
+<p>Since the characters that are commonly used in a language are finite in number, it is easy to apply an algorithm based on word frequencies rather than characters. This algorithm works even better in case of certain character sets used in one or very few languages.</p>
+<p>This algorithm suffers from the following drawbacks:</p>
+<ul class="list">
+<li><p>It is difficult to differentiate two languages having similar character frequencies.</p></li>
+<li><p>There is no specific tool or algorithm to specifically identify a language with the help of (as corpus) the character set used by multiple languages.</p></li>
+</ul>
+<h3>N-gram Algorithm</h3>
+<p>The drawbacks stated above gave rise to a new approach of using character sequences of a given length for profiling corpus. Such sequence of characters are called as N-grams in general, where N represents the length of the character sequence.</p>
+<ul class="list">
+<li><p>N-gram algorithm is an effective approach for language detection, especially in case of European languages like English.</p></li>
+<li><p>This algorithm works fine with short texts.</p></li>
+<li><p>Though there are advanced language profiling algorithms to detect multiple languages in a multilingual document having more attractive features, Tika uses the 3-grams algorithm, as it is suitable in most practical situations.</p></li>
+</ul>
+<h2>Language Detection in Tika</h2>
+<p>Among all the 184 standard languages standardized by ISO 639-1, Tika can detect 18 languages. Language detection in Tika is done using the <b>getLanguage()</b> method of the <b>LanguageIdentifier</b> class. This method returns the code name of the language in String format. Given below is the list of the 18 language-code pairs detected by Tika:</p>
+<table class="table table-bordered">
+<tr>
+<td>da—Danish</td>
+<td>de—German</td>
+<td>et—Estonian</td>
+<td>el—Greek</td>
+</tr>
+<tr>
+<td>en—English</td>
+<td>es—Spanish</td>
+<td>fi—Finnish</td>
+<td>fr—French</td>
+</tr>
+<tr>
+<td>hu—Hungarian</td>
+<td>is—Icelandic</td>
+<td>it—Italian</td>
+<td>nl—Dutch</td>
+</tr>
+<tr>
+<td>no—Norwegian</td>
+<td>pl—Polish</td>
+<td>pt—Portuguese</td>
+<td>ru—Russian</td>
+</tr>
+<tr>
+<td>sv—Swedish</td>
+<td>th—Thai</td>
+</tr>
+</table>
+<p>While instantiating the <b>LanguageIdentifier</b> class, you should pass the String format of the content to be extracted, or a <b>LanguageProfile</b> class object.</p>
+<pre class="prettyprint notranslate">
+LanguageIdentifier object=new LanguageIdentifier(“this is english”);
+</pre>
+<p>Given below is the example program for Language detection in Tika.</p>
+<pre class="prettyprint notranslate">
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.Tika.exception.TikaException;
+import org.apache.Tika.language.LanguageIdentifier;
+import org.xml.sax.SAXException;
+
+public class LanguageDetection  {
+
+   public static void main(String args[])throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("enter the text content of any standard language");
+      String content = scanner.nextLine();
+      LanguageIdentifier identifier = new LanguageIdentifier(content);
+      String language = identifier.getLanguage();
+      System.out.println("Language of the given content is:" + language);
+   }
+}
+</pre>
+<p>Save the above code as <b>LanguageDetection.java</b> and run it from the command prompt using the following commands:</p>
+<pre class="result notranslate">
+javac  LanguageDetection.java 
+java  LanguageDetection 
+</pre>
+<p>It gives the following output:</p>
+<pre class="result notranslate">
+enter the text content of any standard language
+this is english 
+Language of the given content is:en
+</pre>
+<h2>Language Detection of a Document</h2>
+<p>To detect the language of a given document, you have to parse it using the parse() method. The parse() method parses the content and stores it in the handler object, which was passed to it as one of the arguments. Pass the String format of the handler object to the constructor of the <b>LanguageIdentifier</b> class as shown below:</p>
+<pre class="prettyprint notranslate">
+parser.parse(inputstream, handler, metadata, context);
+LanguageIdentifier object = new LanguageIdentifier(handler.toString());
+</pre>
+<p>Given below is the complete program that demonstrates how to detect the language of a given document:</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.Tika.Tika;
+import org.apache.Tika.exception.TikaException;
+import org.apache.Tika.metadata.Metadata;
+import org.apache.Tika.parser.AutoDetectParser;
+import org.apache.Tika.parser.ParseContext;
+import org.apache.Tika.parser.Parser;
+import org.apache.Tika.sax.BodyContentHandler;
+import org.apache.Tika.language.*;
+
+import org.xml.sax.SAXException;
+
+public class DocumentLanguageDetection {
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+
+      Scanner scanner=new Scanner(System.in);
+      System.out.println("enter the path of the file ");
+      String filepath=scanner.nextLine();
+      File file=new File(filepath);
+      Tika Tika = new Tika();
+   
+      //detecting the file type
+      Parser parser = new AutoDetectParser();
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream content=new FileInputStream(file);
+      parser.parse(content, handler, metadata, new ParseContext());
+      LanguageIdentifier object=new LanguageIdentifier(handler.toString());
+      System.out.println("name :"+ object.getLanguage());
+   }
+}
+</pre>
+<p>Save the above code as SetMetadata.java and run it from the command prompt:</p>
+<pre class="result notranslate">
+javac  SetMetadata.java 
+java  SetMetadata 
+</pre>
+<p><b>Note</b> : Here you have to pass your file path. For example, we are passing the location of a sample text document with the following content:</p>
+<pre class="result notranslate">
+Hi students welcome to tutorialspoint
+</pre>
+<p>It gives the following output:</p>
+<pre class="result notranslate">
+enter the path of the file 
+E:\office\Tika\stand alone\parsers\one.txt
+name :en
+</pre>
+<p>Along with the Tika jar, Tika provides a Graphical User Interface application (GUI) and a Command Line Interface (CLI) application. You can execute a Tika application from the command prompt too like other Java applications.</p>
+<h1>TIKA - GUI</h1>
+<h2>Graphical User Interface (GUI)</h2>
+<ul class="list">
+<li><p>Tika provides a jar file along with its source code in the following link <a href="http://tika.apache.org/download.html" rel="nofollow" target="_blank">http://tika.apache.org/download.html.</a></p></li>
+<li><p>Download both the files, set the classpath for the jar file.</p></li>
+<li><p>Extract the source code zip folder, open the tika-app folder.</p></li>
+<li><p>In the extracted folder at “tika-1.6\tika-app\src\main\java\org\apache\Tika\gui” you will see two class files: ParsingTransferHandler.java and TikaGUI.java.</p></li>
+<li><p>Compile both the class files and execute the TikaGUI.java class file, it opens the following window.</p></li>
+</ul>
+<img src="images/open_window.jpg" alt="Open Window" />
+<p>Let us now see how to make use of the Tika GUI.</p>
+<p>On the GUI, click open, browse and select a file that is to be extracted, or drag it onto the whitespace of the window.</p>
+<p>Tika extracts the content of the files and displays it in five different formats, viz. metadata, formatted text, plain text, main content, and structured text. You can choose any of the format you want.</p>
+<p>In the same way, you will also find the CLI class in the “tika-1.6\tika-app\src\main\java\org\apache\tika\cli” folder.</p> 
+<p>The following illustration shows what Tika can do. When we drop the image on the GUI, Tika extracts and displays its metadata.</p>
+<img src="images/gui.jpg" alt="GUI" />
+<h1>TIKA - Extracting PDF</h1>
+<p>Given below is the program to extract content and metadata from a PDF.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.pdf.PDFParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class PdfParse {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+
+      Scanner scanner =new Scanner(System.in);		
+      System.out.println("enter path of your pdf file");
+      String fileName=scanner.nextLine();
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+   
+      //parsing the document using PDF parser
+      PDFParser pdfparser = new PDFParser(); 
+      pdfparser.parse(inputstream, handler, metadata,pcontext);
+   
+      //getting the content of the document
+      System.out.println("Contents of the PDF :" + handler.toString());
+   
+      //getting metadata of the document
+      System.out.println("Metadata of the PDF:");
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) {    
+         System.out.println(name+ " : " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>PdfParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac PdfParse.java
+java PdfParse
+</pre>
+<p>The application will ask you to enter the path of the pdf document that is to be parsed. Here we are passing the following PDF Document:</p>
+<img src="images/pdf_example.jpg" alt="PDF Example" />
+<p>The PDF we are passing has the following properties:</p>
+<img src="images/pdf_example1.jpg" alt="PDF Example1" />
+<p>After compiling the program, enter the full path of the PDF that is to be extracted.</p>
+<pre class="result notranslate">
+enter path of your pdf file
+C:\TikaExamples\example.pdf
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the PDF:
+
+Apache Tika is a framework for content type detection and content extraction 
+which was designed by Apache software foundation. It detects and extracts metadata 
+and structured text content from different types of documents such as spreadsheets, 
+text documents, images or PDFs including audio or video input formats to certain extent.  
+
+Metadata of the PDF:
+
+dcterms:modified :     2014-09-28T12:31:16Z
+meta:creation-date :     2014-09-28T12:31:16Z
+meta:save-date :     2014-09-28T12:31:16Z
+dc:creator :     Krishna Kasyap
+pdf:PDFVersion :     1.5
+Last-Modified :     2014-09-28T12:31:16Z
+Author :     Krishna Kasyap
+dcterms:created :     2014-09-28T12:31:16Z
+date :     2014-09-28T12:31:16Z
+modified :     2014-09-28T12:31:16Z
+creator :     Krishna Kasyap
+xmpTPg:NPages :     1
+Creation-Date :     2014-09-28T12:31:16Z
+pdf:encrypted :     false
+meta:author :     Krishna Kasyap
+created :     Sun Sep 28 05:31:16 PDT 2014
+dc:format :     application/pdf; version=1.5
+producer :     Microsoft® Word 2013
+Content-Type :     application/pdf
+xmp:CreatorTool :     Microsoft® Word 2013
+Last-Save-Date :     2014-09-28T12:31:16Z
+</pre>
+<h1>TIKA - Extracting ODF</h1>
+<p>Given below is the program to extract content and metadata from Open Office Document Format (ODF).</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.odf.OpenDocumentParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class OpenDocumentParse {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("enter path of your odf file");
+      String fileName=scanner.nextLine();
+      
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+      
+      //Open Document Parser
+      OpenDocumentParser openofficeparser = new OpenDocumentParser(); 
+      openofficeparser.parse(inputstream, handler, metadata,pcontext);
+      System.out.println("Contents of the document:" +handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) {
+         System.out.println(name + ":  " + metadata.get(name));      
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>OpenDocumentParse.java</b>, and compile it in the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac OpenDocumentParse.java
+java OpenDocumentParse
+</pre>
+<p>The application will ask you to enter the path of the ODF that is to be parsed. Here we are passing the following sample open document presentation:</p>
+<img src="images/presentation.jpg" alt="Presentation" />
+<p>This document has the following properties:</p>
+<img src="images/example2.jpg" alt="Example2" />
+<p>After compiling the program, enter the full path of the ODF that is to be extracted.</p>
+<pre class="result notranslate">
+enter path of your odf file:
+C:\TikaExamples\example_open_document_presentation.odp
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+Apache Tika
+Apache Tika is a framework for content type detection and content extraction which was designed 
+by Apache software foundation. It detects and extracts metadata and structured text content from 
+different types of documents such as spreadsheets, text documents, images or PDFs including audio 
+or video input formats to certain extent. 
+
+Metadata of the document:
+editing-cycles:   4
+meta:creation-date:   2009-04-16T11:32:32.86
+dcterms:modified:   2014-09-28T07:46:13.03
+meta:save-date:   2014-09-28T07:46:13.03
+Last-Modified:   2014-09-28T07:46:13.03
+dcterms:created:   2009-04-16T11:32:32.86
+date:   2014-09-28T07:46:13.03
+modified:   2014-09-28T07:46:13.03
+nbObject:   36
+Edit-Time:   PT32M6S
+Creation-Date:   2009-04-16T11:32:32.86
+Object-Count:   36
+meta:object-count:   36
+generator:   OpenOffice/4.1.0$Win32 OpenOffice.org_project/410m18$Build-9764
+Content-Type:   application/vnd.oasis.opendocument.presentation
+Last-Save-Date:   2014-09-28T07:46:13.03
+</pre>
+<h1>TIKA - Extracting MS Office Files</h1>
+<p>Given below is the program to extract content and metadata from a Microsoft Office Document.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.microsoft.ooxml.OOXMLParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class MSExcelParse {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your MS-Office Document:");
+      String fileName = scanner.nextLine();
+      
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+      
+      //OOXml parser
+      OOXMLParser  msofficeparser = new OOXMLParser(); 
+      msofficeparser.parse(inputstream, handler, metadata,pcontext);
+      System.out.println("Contents of the document:" + handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) {		        
+         System.out.println(name + ": " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>MSExelParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac MSExcelParse.java
+java MSExcelParse 
+</pre>
+<p>Here we are passing the following sample Excel file</p>
+<img src="images/passing_excel.jpg" alt="Passing Excel" />
+<p>The given Excel file has the following properties:</p>
+<img src="images/excel_properties.jpg" alt="Excel Properties" />
+<p>The application will ask you to enter the path of the MS-Office document that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your MS-Office Document:
+C:\TikaExamples\example_msExcel.xlsx
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+Sheet1
+Name	Age	Designation		Salary
+Ramu	50	Manager			50,000
+Raheem	40	Assistant manager	40,000
+Robert	30	Superviser		30,000
+sita	25	Clerk			25,000
+sameer	25	Section in-charge	20,000
+
+Metadata of the document:
+meta:creation-date:    2006-09-16T00:00:00Z
+dcterms:modified:    2014-09-28T15:18:41Z
+meta:save-date:    2014-09-28T15:18:41Z
+Application-Name:    Microsoft Excel
+extended-properties:Company:    
+dcterms:created:    2006-09-16T00:00:00Z
+Last-Modified:    2014-09-28T15:18:41Z
+Application-Version:    15.0300
+date:    2014-09-28T15:18:41Z
+publisher:    
+modified:    2014-09-28T15:18:41Z
+Creation-Date:    2006-09-16T00:00:00Z
+extended-properties:AppVersion:    15.0300
+protected:    false
+dc:publisher:    
+extended-properties:Application:    Microsoft Excel
+Content-Type:    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+Last-Save-Date:    2014-09-28T15:18:41Z
+</pre>
+<h1>TIKA - Extracting Text Document</h1>
+<p>Given below is the program to extract content and metadata from a Text document:</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.sax.BodyContentHandler;
+import org.apache.tika.parser.txt.TXTParser;
+
+import org.xml.sax.SAXException;
+
+public class TextParser {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file:");
+      String fileName = scanner.nextLine();
+      
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+      
+      //Text document parser
+      TXTParser TexTParser = new TXTParser();
+      TexTParser.parse(inputstream, handler, metadata,pcontext);
+      System.out.println("Contents of the document:" + handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) { 
+         System.out.println(name + ":   " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>TextParser.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac TextParser .java
+java TextParser
+</pre>
+<p>Here we are passing the following sample text document:</p>
+<img src="images/simple_document.jpg" alt="Simple Document" />
+<p>The text document has the following properties:</p>
+<img src="images/document_properties.jpg" alt="Document Properties" />
+<p>The application will ask you to enter the path of the text document that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\example.txt
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+<p>At tutorialspoint.com, we strive hard to provide quality tutorials for self-learning purpose in the domains of Academics, Information Technology, Management and Computer Programming Languages.</p>
+<p>The endeavour started by Mohtashim, an AMU alumni, who is the founder and the managing director of Tutorials Point (I) Pvt. Ltd. He came up with the website tutorialspoint.com in year 2006 with the help of handpicked freelancers, with an array of tutorials for computer programming languages.</p>
+Metadata of the document:
+Content-Encoding:   windows-1252
+Content-Type:   text/plain; charset=windows-1252
+</pre>
+<h1>TIKA - Extracting HTML Document</h1>
+<p>Given below is the program to extract content and metadata from an HTML document.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.html.HtmlParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class HtmlParse {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file");
+      String fileName = scanner.nextLine();
+      
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+      
+      //Html parser
+      HtmlParser htmlparser = new HtmlParser();
+      htmlparser.parse(inputstream, handler, metadata,pcontext);
+      System.out.println("Contents of the document:" + handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) {
+         System.out.println(name + ":   " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>HtmlParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac HtmlParse.java
+java HtmlParse 
+</pre>
+<p>Here we are passing the following sample HTML document.</p>
+<img src="images/example3.jpg" alt="example" />
+<p>The HTML document has the following properties:</p>
+<img src="images/document_properties1.jpg" alt="Document Properties1" />
+<p>The application will ask you to enter the path of the HTML document that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\example1.html
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+	Name	                     Salary	    age
+	Ramesh Raman	             50000	    20
+	Shabbir Hussein	             70000          25
+	Umesh Raman	             50000	    30
+	Somesh	                     50000	    35
+Metadata of the document:
+title:   HTML Table Header
+Content-Encoding:   windows-1252
+Content-Type:   text/html; charset=windows-1252
+dc:title:   HTML Table Header
+</pre>
+<h1>TIKA - Extracting XML Document</h1>
+<p>Given below is the program to extract content and metadata from an XML document:</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.xml.XMLParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class XmlParse {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file:");
+      String fileName = scanner.nextLine();
+      
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+      
+      //Xml parser
+      XMLParser xmlparser = new  XMLParser(); 
+      xmlparser.parse(inputstream, handler, metadata, pcontext);
+      System.out.println("Contents of the document:" + handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) {  
+         System.out.println(name + ":   " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>XmlParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac XmlParse.java
+java XmlParse 
+</pre>
+<p>Here we are passing the following sample XML document.</p>
+<img src="images/xml_document.jpg" alt="XML Document" />
+<p>This document has the following properties:</p>
+<img src="images/xml_document1.jpg" alt="XML Document1" />
+<p>The application will ask you to enter the path of XML document that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\pom.xml
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:   
+4.0.0
+org.apache.tika
+tika
+1.6
+org.apache.tika
+tika-core
+1.6
+org.apache.tika
+tika-parsers
+1.6
+src
+maven-compiler-plugin
+3.1
+1.7
+1.7
+
+Metadata of the document:
+Content-Type:   application/xml 
+</pre>
+<h1>TIKA - Extracting .class File</h1>	
+<p>Given below is the program to extract content and metadata from a .class file.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.asm.ClassParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class JavaClassParse {
+
+   public static void main(final String[] args) throws IOException, SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file:");
+      String fileName = scanner.nextLine();
+      
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+      
+      //Html parser
+      ClassParser  ClassParser =new  ClassParser();
+      ClassParser.parse(inputstream, handler, metadata,pcontext);
+      System.out.println("Contents of the document:" + handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+   
+      for(String name : metadataNames) {   
+         System.out.println(name + ":    " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>JavaClassParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac JavaClassParse.java
+java JavaClassParse 
+</pre>
+<p>Here we are passing the .class file of the following <b>Example.java</b> file:</p>
+<img src="images/java_excel.jpg" alt="JAVA Excel" />
+<p>And this .class file has the following properties:</p>
+<img src="images/example_class.jpg" alt="Example Class" />
+<p>The application will ask you to enter the path class file that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\Example.class
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+package tutorialspoint.tika.examples;
+public synchronized class Example {
+   public void Example();
+   public static void main(String[]);
+}
+
+Metadata of the document:
+title: Example
+resourceName: Example.class
+dc:title: Example
+</pre>
+<h1>TIKA - Extracting JAR File</h1>
+<p>Given below is the program to extract content and metadata from a Java Archive (jar) file:</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.sax.BodyContentHandler;
+import org.apache.tika.parser.pkg.PackageParser;
+
+import org.xml.sax.SAXException;
+
+public class PackageParse {
+
+   public static void main(final String[] args) throws IOException,SAXException, TikaException {
+   
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file:");
+      String fileName = scanner.nextLine();
+   
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext=new ParseContext();
+      
+      //Package parser
+      PackageParser packageparser =new PackageParser();
+      packageparser.parse(inputstream, handler, metadata,pcontext);
+      System.out.println("Contents of the document: "+handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+      
+      for(String name : metadataNames) {
+         System.out.println(name + ":   " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>PackageParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac PackageParse.java
+java PackageParse 
+</pre>
+<p>Here we are passing the jar file of the following Example.java file.</p>
+<img src="images/java_example.jpg" alt="JAVA Example" />
+<p>The jar file has the following properties:</p>
+<img src="images/jar_example.jpg" alt="JAR Example" />
+<p>The application will ask you to enter the path of the jar file that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\example.jar
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+META-INF/MANIFEST.MF
+tutorialspoint/tika/examples/Example.class
+
+Metadata of the document:
+Content-Type:   application/zip
+</pre>
+<h1>TIKA - Extracting Image File</h1>
+<p>Given below is the program to extract content and metadata from a JPEG image.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.jpeg.JpegParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class JpegParse {
+
+   public static void main(final String[] args) throws IOException,SAXException, TikaException {
+
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file:");
+      String fileName = scanner.nextLine();
+
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext=new ParseContext();
+   
+      //Jpeg Parse
+      JpegParser JpegParser = new JpegParser();
+      JpegParser.parse(inputstream, handler, metadata, pcontext);
+      System.out.println("Contents of the document:" +handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+
+      for(String name : metadataNames) {   
+         System.out.println(name + ": " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>JpegParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac JpegParse.java
+java JpegParse 
+</pre>
+<p>Here we are passing the following JPEG file:</p>
+<img src="images/baby.jpg" alt="Baby" />
+<p>The JPEG file has the following properties:</p>
+<img src="images/property.jpg" alt="Property" />
+<p>The application will ask you to enter the path of the JPEG file that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\boy.jpg
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+
+
+Metadata of the document:
+IPTC-NAA record: 92 bytes binary data
+Number of Components: 3
+Image Height: 1000 pixels
+Resolution Units: inch
+Data Precision: 8 bits
+tiff:BitsPerSample: 8
+Compression Type: Baseline
+Component 1: Y component: Quantization table 0, Sampling factors 1 horiz/1 vert
+Component 2: Cb component: Quantization table 1, Sampling factors 1 horiz/1 vert
+tiff:ImageLength: 1000
+Component 3: Cr component: Quantization table 1, Sampling factors 1 horiz/1 vert
+X Resolution: 300 dots
+tiff:ImageWidth: 714
+Application Record Version: 4
+Image Width: 714 pixels
+Original Transmission Reference:
+ 53616c7465645f5fd22a84941585d89cc735d889c9d5ac58a01faf2c92ee3c6f9bcb38359bbe1eef
+Y Resolution: 300 dots
+</pre>
+<h1>TIKA - Extracting mp4 Files</h1>
+<p>Given below is the program to extract content and metadata from mp4 files:</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.mp4.MP4Parser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class Mp4Parse {
+
+   public static void main(final String[] args) throws IOException,SAXException, TikaException {
+
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file");
+      String fileName = scanner.nextLine();
+
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+
+      //Html parser
+      MP4Parser MP4Parser = new MP4Parser();
+      MP4Parser.parse(inputstream, handler, metadata,pcontext);
+      System.out.println("Contents of the document:  :" + handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+
+      for(String name : metadataNames) {
+         System.out.println(name + ": " + metadata.get(name));
+      }
+   }  
+}
+</pre>
+<p>Save the above code as JpegParse.java, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac Mp4Parse.java
+java Mp4Parse 
+</pre>
+<p>Here we are passing an mp4 file having the following properties:</p>
+<img src="images/passing_mp4.jpg" alt="Passing MP4" />
+<p>The application will ask you to enter the path of the mp4 file that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\example.mp4
+</pre>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+
+Metadata of the document:
+dcterms:modified: 2014-01-06T12:10:27Z
+meta:creation-date: 1904-01-01T00:00:00Z
+meta:save-date: 2014-01-06T12:10:27Z
+Last-Modified: 2014-01-06T12:10:27Z
+dcterms:created: 1904-01-01T00:00:00Z
+date: 2014-01-06T12:10:27Z
+tiff:ImageLength: 360
+modified: 2014-01-06T12:10:27Z
+Creation-Date: 1904-01-01T00:00:00Z
+tiff:ImageWidth: 640
+Content-Type: video/mp4
+Last-Save-Date: 2014-01-06T12:10:27Z
+</pre>
+<h1>TIKA - Extracting mp3 Files</h1>
+<p>Given below is the program to extract content and metadata from mp3 files:</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.mp3.LyricsHandler;
+import org.apache.tika.parser.mp3.Mp3Parser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import org.xml.sax.SAXException;
+
+public class Mp3Parse {
+   public static void main(final String[] args) throws Exception, IOException, SAXException, TikaException {
+
+      Scanner scanner = new Scanner(System.in);		
+      System.out.println("Enter the path of your file:");
+      String fileName = scanner.nextLine();
+      System.out.println(fileName);
+
+      //detecting the file type
+      BodyContentHandler handler = new BodyContentHandler();
+      Metadata metadata = new Metadata();
+      FileInputStream inputstream = new FileInputStream(new File(fileName));
+      ParseContext pcontext = new ParseContext();
+
+      //Mp3 parser
+      Mp3Parser Mp3Parser = new Mp3Parser();
+      Mp3Parser.parse(inputstream, handler, metadata, pcontext);
+      LyricsHandler lyrics = new LyricsHandler(inputstream,handler);
+
+      while(lyrics.hasLyrics()) {
+         System.out.println(lyrics.toString());
+      }
+
+      System.out.println("Contents of the document:" +handler.toString());
+      System.out.println("Metadata of the document:");
+      String[] metadataNames = metadata.names();
+   
+      for(String name : metadataNames) { 
+         System.out.println(name + ": " + metadata.get(name));
+      }
+   }
+}
+</pre>
+<p>Save the above code as <b>JpegParse.java</b>, and compile it from the command prompt by using the following commands:</p>
+<pre class="result notranslate">
+javac Mp3Parse.java
+java Mp3Parse 
+</pre>
+<p>Here we are passing an mp3 file having the following properties:</p>
+<img src="images/example_mp3.jpg" alt="Example MP3" />
+<p>The application will ask you to enter the path of the mp3 file that is to be parsed.</p>
+<pre class="result notranslate">
+Enter the path of your file:
+C:\TikaExamples\example.mp3
+</pre>
+<p>If the given file has any lyrics, our application will capture and display that along with the output.</p>
+<p><b>Output:</b></p>
+<pre class="result notranslate">
+Contents of the document:
+Kanulanu Thaake
+Arijit Singh
+Manam (2014), track 01/06
+2014
+Soundtrack
+30171.65
+eng - 
+DRGM
+Arijit Singh
+Manam (2014), track 01/06
+2014
+Soundtrack
+30171.65
+eng - 
+DRGM
+
+Metadata of the document:
+xmpDM:releaseDate: 2014
+xmpDM:duration: 30171.650390625
+xmpDM:audioChannelType: Stereo
+dc:creator: Arijit Singh
+xmpDM:album: Manam (2014)
+Author: Arijit Singh
+xmpDM:artist: Arijit Singh
+channels: 2
+xmpDM:audioSampleRate: 44100
+xmpDM:logComment: eng - 
+DRGM
+xmpDM:trackNumber: 01/06
+version: MPEG 3 Layer III Version 1
+creator: Arijit Singh
+xmpDM:composer: Music : Anoop Rubens | Lyrics : Vanamali
+xmpDM:audioCompressor: MP3
+title: Kanulanu Thaake
+samplerate: 44100
+meta:author: Arijit Singh
+xmpDM:genre: Soundtrack
+Content-Type: audio/mpeg
+xmpDM:albumArtist: Manam (2014)
+dc:title: Kanulanu Thaake
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="tika_extracting_mp3_files.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="pdf-btn">
+<a href="pdf/tika_quick_guide.pdf" title="TIKA - Quick Guide" target="_blank"><i class="icon icon-file-pdf-o big-font"></i> PDF</a>
+</div>
+<div class="nxt-btn">
+<a href="tika_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/tika/tika_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/tika/tika_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/tika/tika_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/tika/tika_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/tika/tika_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/tika/tika_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "TIKA - Quick Guide",
+    "name": "TIKA - Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/tika/tika_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/tika/images/appache_tika.jpg",
+        "width": 600,
+        "height": 266
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:50.",
+    "dateModified": "July 23 2017 03:34:50.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Apache Tika is a library that is used for document type detection and content extraction from various file formats...."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Java Technologies",
+                "@id": "https://www.tutorialspoint.com/java_technology_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Tika",
+                "@id": "https://www.tutorialspoint.com/tika"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "TIKA - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/tika/tika_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:21:58 GMT -->
+</html>
+  

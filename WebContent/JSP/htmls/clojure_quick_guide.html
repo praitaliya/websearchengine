@@ -1,0 +1,3402 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/clojure/clojure_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:55:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Clojure Quick Guide</title>
+<meta name="description" content="Clojure Quick Guide - Learn Clojure in simple and easy steps starting from Overview, Environment, Basic Syntax, REPL, Data Types, Variables, Operators, Loops, Decision Making, Functions, Numbers, Recursion, File I/O, Strings, Lists, Sets, Vectors, Maps, Namespaces, Exception Handling, Sequences, Regular Expressions, Predicates, Destructuring, Date and Time, Atoms, Metadata, StructMaps, Agents, Watchers, Macros, Reference Values, Databases, Java Interface, Concurrent Programming, Applications, Automated Testing, Libraries." /> 
+<meta name="keywords" content="Clojure, Tutorial, Learning, Overview, Environment, Basic Syntax, REPL, Data Types, Variables, Operators, Loops, Decision Making, Functions, Numbers, Recursion, File I/O, Strings, Lists, Sets, Vectors, Maps, Namespaces, Exception Handling, Sequences, Regular Expressions, Predicates, Destructuring, Date and Time, Atoms, Metadata, StructMaps, Agents, Watchers, Macros, Reference Values, Databases, Java Interface, Concurrent Programming, Applications, Automated Testing, Libraries." /> 
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+pre.prettyprint.tryit {min-height:37px; background: #eee url(images/try-it.jpg) top right no-repeat !important}select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #63b132 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #63b132 !important;}
+.submenu-item{ border-bottom: 2px solid #63b132 !important; border-top: 2px solid #63b132 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/clojure-mini-logo.jpg" alt="Clojure Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Clojure Tutorial</li>
+<li><a href="index.html">Clojure - Home</a></li>
+<li><a href="clojure_overview.html">Clojure - Overview</a></li>
+<li><a href="clojure_environment.html">Clojure - Environment</a></li>
+<li><a href="clojure_basic_syntax.html">Clojure - Basic Syntax</a></li>
+<li><a href="clojure_repl.html">Clojure - REPL</a></li>
+<li><a href="clojure_data_types.html">Clojure - Data Types</a></li>
+<li><a href="clojure_variables.html">Clojure - Variables</a></li>
+<li><a href="clojure_operators.html">Clojure - Operators</a></li>
+<li><a href="clojure_loops.html">Clojure - Loops</a></li>
+<li><a href="clojure_decision_making.html">Clojure - Decision Making</a></li>
+<li><a href="clojure_functions.html">Clojure - Functions</a></li>
+<li><a href="clojure_numbers.html">Clojure - Numbers</a></li>
+<li><a href="clojure_recursion.html">Clojure - Recursion</a></li>
+<li><a href="clojure_file_io.html">Clojure - File I/O</a></li>
+<li><a href="clojure_strings.html">Clojure - Strings</a></li>
+<li><a href="clojure_lists.html">Clojure - Lists</a></li>
+<li><a href="clojure_sets.html">Clojure - Sets</a></li>
+<li><a href="clojure_vectors.html">Clojure - Vectors</a></li>
+<li><a href="clojure_maps.html">Clojure - Maps</a></li>
+<li><a href="clojure_namespaces.html">Clojure - Namespaces</a></li>
+<li><a href="clojure_exception_handling.html">Clojure - Exception Handling</a></li>
+<li><a href="clojure_sequences.html">Clojure - Sequences</a></li>
+<li><a href="clojure_regular_expressions.html">Clojure - Regular Expressions</a></li>
+<li><a href="clojure_predicates.html">Clojure - Predicates</a></li>
+<li><a href="clojure_destructuring.html">Clojure - Destructuring</a></li>
+<li><a href="clojure_date_and_time.html">Clojure - Date &amp; Time</a></li>
+<li><a href="clojure_atoms.html">Clojure - Atoms</a></li>
+<li><a href="clojure_metadata.html">Clojure - Metadata</a></li>
+<li><a href="clojure_structmaps.html">Clojure - StructMaps</a></li>
+<li><a href="clojure_agents.html">Clojure - Agents</a></li>
+<li><a href="clojure_watchers.html">Clojure - Watchers</a></li>
+<li><a href="clojure_macros.html">Clojure - Macros</a></li>
+<li><a href="clojure_reference_values.html">Clojure - Reference Values</a></li>
+<li><a href="clojure_databases.html">Clojure - Databases</a></li>
+<li><a href="clojure_java_interface.html">Clojure - Java Interface</a></li>
+<li><a href="clojure_concurrent_programming.html">Clojure - Concurrent Programming</a></li>
+<li><a href="clojure_applications.html">Clojure - Applications</a></li>
+<li><a href="clojure_automated_testing.html">Clojure - Automated Testing</a></li>
+<li><a href="clojure_libraries.html">Clojure - Libraries</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Clojure Useful Resources</li>
+<li><a href="clojure_quick_guide.html">Clojure - Quick Guide</a></li>
+<li><a href="clojure_useful_resources.html">Clojure - Useful Resources</a></li>
+<li><a href="clojure_discussion.html">Clojure - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Clojure - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="clojure_libraries.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="clojure_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Clojure - Overview</h1>
+<p>Clojure is a high level, dynamic functional programming language. Clojure is designed based on the LISP programming language and has compilers which makes it run on both Java and .Net runtime environment.</p>
+<p>Before we talk about Clojure, let’s just have a quick description of LISP programming language. LISPs have a tiny language core, almost no syntax, and a powerful macro facility. With these features, you can bend LISP to meet your design, instead of the other way around. LISP has been there for a long time dating back to 1958.</p>
+<p>Common LISP reads in an expression, evaluates it, and then prints out the result. For example, if you want to compute the value of a simple mathematical expression of 4+6 then you type in.</p>
+<pre class="result notranslate">
+USER(1) (+ 4 6)
+</pre>
+<p>Clojure has the following high-level key objectives as a programming language.</p>
+<ul class="list">
+<li><p>It is based on the LISP programming language which makes its code statements smaller than traditional programming languages.</p></li>
+<li><p>It is a functional programming language.</p></li>
+<li><p>It focuses on immutability which is basically the concept that you should not make any changes to objects which are created in place.</p></li>
+<li><p>It can manage the state of an application for the programmer.</p></li>
+<li><p>It supports concurrency.</p></li>
+<li><p>It embraces existing programming languages. For example, Clojure can make use of the entire Java ecosystem for management of the running of the code via the JVM.</p></li>
+</ul>
+<p>The official website for Clojure is <a href="http://clojure.org/" target="_blank" rel="nofollow">http://clojure.org/</a></p>
+<img src="images/clojure_overview.jpg" alt="Clojure Overview" />
+<h1>Clojure - Environment</h1>
+<blockquote>
+<h2>Try it Option Online</h2>
+<p>We have set up the Clojure Programming environment on-line, so that you can compile and execute all the available examples on line. It gives you confidence in what you are reading and enables you to verify the programs with different options. Feel free to modify any example and execute it on-line.</p>
+<p>Try the following example using our on-line compiler available at <a href="../codingground.html" target="_blank" > CodingGround.</a></p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+
+(defn hello-world [username]
+   (println (format "Hello, %s" username)))
+
+(hello-world "world")
+</pre>
+<p>For most of the examples given in this tutorial, you will find a <b>Try it</b> option in our website code sections at the top right corner that will take you to the online compiler. So just make use of it and enjoy your learning.</p> 
+</blockquote>
+<p>There are a variety of ways to work with Clojure as a programming language. We will look at two ways to work with Clojure programming.</p>
+<ul class="list">
+<li><p><b>Leiningen</b> &minus; Leiningen is an essential tool to create, build, and automate Clojure projects.</p></li>
+<li><p><b>Eclipse Plugin</b> &minus; There is a plugin called CounterClockwise, which is available for Eclipse for carrying out Clojure development in the Eclipse IDE.</p></li>
+</ul>
+<h2>Leiningen Installation</h2>
+<p>Ensure the following System requirements are met before proceeding with the installation.</p>
+<h3>System Requirements</h3>
+<table class="table table-bordered">
+<tr>
+<td>JDK</td>
+<td>JDK 1.7 or above</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>2 GB RAM (recommended)</td>
+</tr>
+</table>
+<p><b>Step 1</b> &minus; Download the binary installation. Go to the link <a href="http://leiningen-win-installer.djpowell.net/" target="_blank" rel="nofollow">http://leiningen-wininstaller</a>to get the Windows Installer. Click on the option to start the download of the Groovy installer.</p>
+<p><b>Step 2</b> &minus; Launch the Installer and click the Next button.</p>
+<img src="images/launching_installer.jpg" alt="Launching Installer" />
+<p><b>Step 3</b> Specify the location for the installation and click the Next button.</p>
+<img src="images/location_installation.jpg" alt="Location Installation" />
+<p><b>Step 4</b> &minus; The setup will detect the location of an existing Java installation. Click the Next button to proceed.</p>
+<img src="images/java_installation.jpg" alt="Java Installation" />
+<p><b>Step 5</b> &minus; Click the Install button to begin the installation.</p>
+<img src="images/begin_installation.jpg" alt="Begin Installation" />
+<p>After the installation is complete, it will give you the option to open a Clojure REPL, which is an environment that can be used to create and test your Clojure programs.</p>
+<img src="images/clojure_programs.jpg" alt="Clojure Programs" />
+<h2>Eclipse Installation</h2>
+<p>Ensure the following System requirements are met before proceeding with the installation.</p>
+<h3>System Requirements</h3>
+<table class="table table-bordered">
+<tr>
+<td>JDK</td>
+<td>JDK 1.7 or above</td>
+</tr>
+<tr>
+<td>Eclipse</td>
+<td>Eclipse 4.5 (Mars)</td>
+</tr>
+</table>
+<p><b>Step 1</b> &minus; Open Eclipse and click the Menu item. Click Help &rarr; Eclipse Marketplace.</p>
+<img src="images/eclipse_marketplace.jpg" alt="Eclipse Marketplace" />
+<p><b>Step 2</b> &minus; Type in the keyword Clojure in the dialog box which appears and hit the ‘Go’ button. The option for counterclockwise will appear, click the Install button to begin the installation of this plugin.</p>
+<img src="images/clojure_dialog_box.jpg" alt="Clojure Dialog Box" />
+<p><b>Step 3</b> &minus; In the next dialog box, click the Confirm button to begin the installation.</p>
+<img src="images/clojure_confirm_button.jpg" alt="Clojure Confirm Button" />
+<p><b>Step 4</b> &minus; In the next dialog box, you will be requested to accept the license agreement. Accept the license agreement and click the Finish button to continue with the installation.</p>
+<img src="images/accept_license_agreement.jpg" alt="Accept License Agreement" />
+<p>The installation will begin, and once completed, it will prompt you to restart Eclipse.</p>
+<p>Once Eclipse is restarted, you will see the option in Eclipse to create a new Clojure project.</p>
+<img src="images/clojure_project.jpg" alt="Clojure Project" />
+<h1>Clojure - Basic Syntax</h1>
+<p>In order to understand the basic syntax of Clojure, let’s first look at a simple Hello World program.</p>
+<h2>Hello World as a Complete Program</h2>
+<p>Write ‘Hello world’ in a complete Clojure program. Following is an example.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+(defn hello-world []
+   (println "Hello World"))
+(hello-world)
+</pre> 
+<p>The following things need to be noted about the above program.</p>
+<ul class="list">
+<li><p>The program will be written in a file called main.clj. The extension ‘clj’ is the extension name for a clojure code file. In the above example, the name of the file is called main.clj.</p></li>
+<li><p>The ‘defn’ keyword is used to define a function. We will see functions in details in another chapter. But for now, know that we are creating a function called helloworld, which will have our main Clojure code.</p></li>
+<li><p>In our Clojure code, we are using the ‘println’ statement to print “Hello World” to the console output.</p></li>
+<li><p>We then call the hello-world function which in turn runs the ‘println’ statement.</p></li>
+</ul>
+<p>The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello World
+</pre>
+<h2>General Form of a Statement</h2>
+<p>The general form of any statement needs to be evaluated in braces as shown in the following example.</p>
+<pre class="result notranslate">
+(+ 1 2)
+</pre>
+<p>In the above example, the entire expression is enclosed in braces. The output of the above statement is 3. The &plus; operator acts like a function in Clojure, which is used for the addition of numerals. The values of 1 and 2 are known as <b> parameters to the function</b>.</p>
+<p>Let us consider another example. In this example, ‘str’ is the operator which is used to concatenate two strings. The strings “Hello” and “World” are used as parameters.</p>
+<pre class="result notranslate">
+(str "Hello" "World")
+</pre>
+<h3>Example</h3>
+<p>If we combine the above two statements and write a program, it will look like the following.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+(defn Example []
+   (println (str "Hello World"))
+   (println (+ 1 2)))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+Hello World
+3
+</pre>
+<h2>Namespaces</h2>
+<p>A namespace is used to define a logical boundary between modules defined in Clojure.</p>
+<h3>Current Namespace</h3>
+<p>This defines the current namespace in which the current Clojure code resides in.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+*ns*
+</pre>
+<h3>Example</h3>
+<p>In the REPL command window run the following command.</p>
+<pre class="result notranslate">
+*ns*
+</pre>
+<h3>Output</h3>
+<p>When we run the above command, the output will defer depending on what is the current namespace. Following is an example of an output. The namespace of the Clojure code is &minus;</p>
+<pre class="result notranslate">
+clojure.examples.hello
+
+(ns clojure.examples.hello
+   (:gen-class))
+(defn Example []
+   (println (str "Hello World"))
+   (println (+ 1 2)))
+(Example)
+</pre>
+<h2>Require Statement in Clojure</h2>
+<p>Clojure code is packaged in libraries. Each Clojure library belongs to a namespace, which is analogous to a Java package. You can load a Clojure library with the ‘Require’ statement.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+(require quoted-namespace-symbol)
+</pre>
+<h3>Example</h3>
+<p>Following is an example of the usage of this statement.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+(require ‘clojure.java.io’)
+(defn Example []
+   (.exists (file "Example.txt")))
+(Example)
+</pre>
+<p>In the above code, we are using the ‘require’ keyword to import the namespace clojure.java.io which has all the functions required for input/output functionality. Since we not have the required library, we can use the ‘file’ function in the above code.</p>
+<h2>Comments in Clojure</h2>
+<p>Comments are used to document your code. Single line comments are identified by using the ;; at any position in the line. Following is an example.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (println "Hello World"))
+(Example)
+</pre>
+<h2>Delimiters</h2>
+<p>In Clojure, statements can be split or delimited by using either the curved or square bracket braces.</p>
+<h3>Example</h3>
+<p>Following are two examples.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (println (+ 1 2 3)))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+6
+</pre>
+<h3>Example</h3>
+<p>Following is another example.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (println [+ 1 2 3]))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+[#object[clojure.core$_PLUS_ 0x10f163b "clojure.core$_PLUS_@10f163b"] 1 2 3]
+</pre>
+<h2>Whitespaces</h2>
+<p>Whitespaces can be used in Clojure to split different components of a statement for better clarity. This can be done with the assistance of the comma (,) operator.</p>
+<p>For example, the following two statements are equivalent and the output of both the statements will be 15.</p>
+<pre class="result notranslate">
+(+ 1 2 3 4 5)
+(+ 1, 2, 3, 4, 5)
+</pre>
+<p>Although Clojure ignores commas, it sometimes uses them to make things easier for the programmer to read.</p>
+<p>For instance, if you have a hash map like the following (def a-map {:a 1 :b 2 :c 3}) and ask for its value in the REPL window, Clojure will print the output as {:a 1, :b 2, :c 3}.</p>
+<p>The results are easier to read, especially if you’re looking at a large amount of data.</p>
+<h2>Symbols</h2>
+<p>In Clojure, symbols are equivalent to identifiers in other programming languages. But unlike other programming languages, the compiler sees symbols as actual string values. As a symbol is a value, a symbol can be stored in a collection, passed as an argument to a function, etc., just like any other object.</p>
+<p>A symbol can only contain alphanumeric characters and ‘* + ! / . : - _ ?’ but must not begin with a numeral or colon.</p>
+<p>Following are valid examples of symbols.</p>
+<pre class="result notranslate">
+tutorial-point!
+TUTORIAL
++tutorial+
+</pre>
+<h2>Clojure Project Structure</h2>
+<p>Finally let’s talk about a typical project structure for a Clojure project. Since Clojure code runs on Java virtual machine, most of the project structure within Clojure is similar to what you would find in a java project. Following is the snapshot of a sample project structure in Eclipse for a Clojure project.</p>
+<img src="images/basic_syntax.jpg" alt="Basic Syntax" />
+<p>Following key things need to be noted about the above program structure.</p>
+<ul class="list">
+<li><p>demo_1 &minus; This is the package in which the Clojure code file is placed.</p></li>
+<li><p>core.clj &minus; This is the main Clojure code file, which will contain the code for the Clojure application.</p></li>
+<li><p>The Leiningen folder contains files like clojure-1.6.0.jar which is required to run any Clojure-based application.</p></li>
+<li><p>The pom.properties file will contain information such as the groupId, artifactId and version of the Clojure project.</p></li>
+<li><p>The project.clj file contains information about the Clojure application itself. Following is a sample of the project file contents.</p></li>
+</ul>
+<pre class="result notranslate">
+(defproject demo-1 "0.1.0-SNAPSHOT"
+   :description "FIXME: write description"
+   :url "http://example.com/FIXME"
+   :license {
+      :name "Eclipse Public License"
+      :url "http://www.eclipse.org/legal/epl-v10.html"
+   }
+   :dependencies [[org.clojure/clojure "1.6.0"]])
+</pre>
+<h1>Clojure - REPL</h1>
+<p>REPL (read-eval-print loop) is a tool for experimenting with Clojure code. It allows you to interact with a running program and quickly try out if things work out as they should. It does this by presenting you with a prompt where you can enter the code. It then reads your input, evaluates it, prints the result, and loops, presenting you with a prompt again.</p>
+<p>This process enables a quick feedback cycle that isn’t possible in most other languages.</p>
+<h2>Starting a REPL Session</h2>
+<p>A REPL session can be started in Leiningen by typing the following command in the command line.</p>
+<pre class="result notranslate">
+lein repl
+</pre>
+<p>This will start the following REPL window.</p>
+<img src="images/repl_window.jpg" alt="REPL Window" />
+<p>You then start evaluating Clojure commands in the REPL window as required.</p>
+<p>To start a REPL session in Eclipse, click the Menu option, go to Run As &rarr; Clojure Application.</p>
+<img src="images/repl_session.jpg" alt="REPL Session" />
+<p>This will start a new REPL session in a separate window along with the console output.</p>
+<img src="images/repl_console_output.jpg" alt="REPL Console Output" />
+<p>Conceptually, REPL is similar to Secure Shell (SSH). In the same way that you can use SSH to interact with a remote server, Clojure REPL allows you to interact with a running Clojure process. This feature can be very powerful because you can even attach a REPL toa live production app and modify your program as it runs.</p>
+<h2>Special Variables in REPL</h2>
+<p>REPL includes some useful variables, the one widely used is the special variable *1, *2, and *3. These are used to evaluate the results of the three most recent expressions.</p>
+<p>Following example shows how these variables can be used.</p>
+<pre class="prettyprint notranslate">
+user => "Hello"
+Hello
+user => "World"
+World
+user => (str *2 *1)
+HelloWorld
+</pre>
+<p>In the above example, first two strings are being sent to the REPL output window as “Hello” and “World” respectively. Then the *2 and *1 variables are used to recall the last 2 evaluated expressions.</p>
+<h1>Clojure - Data Types</h1>
+<p>Clojure offers a wide variety of <b>built-in data types.</b></p>
+<h2>Built-in Data Types</h2>
+<p>Following is a list of data types which are defined in Clojure.</p>
+<ul class="list">
+<li><p><b>Integers</b> &minus; Following are the representation of Integers available in Clojure.</p>
+<ul class="list">
+<li><p><b>Decimal Integers (Short, Long and Int)</b> &minus; These are used to represent whole numbers. For example, 1234.</p></li>
+<li><p><b>Octal Numbers</b> &minus; These are used to represent numbers in octal representation. For example, 012.</p></li>
+<li><p><b>Hexadecimal Numbers</b> &minus; These are used to represent numbers in representation. For example, 0xff.</p></li>
+<li><p><b>Radix Numbers</b> &minus; These are used to represent numbers in radix representation. For example, 2r1111 where the radix is an integer between 2 and 36, inclusive.</p></li>
+</ul></li>
+</ul>
+<ul class="list">
+<li><p><b>Floating point.</b></p>
+<ul class="list">
+<li><p>The default is used to represent 32-bit floating point numbers. For example, 12.34.</p></li>
+<li><p>The other representation is the scientific notation. For example, 1.35e-12.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="list">
+<li><p><b>char</b> &minus; This defines a single character literal. Characters are defined with the backlash symbol. For example, /e.</p></li>
+<li><p><b>Boolean</b> &minus; This represents a Boolean value, which can either be true or false.</p></li>
+<li><p><b>String</b> &minus; These are text literals which are represented in the form of chain of characters. For example, “Hello World”.</p></li>
+<li><p><b>Nil</b> &minus; This is used to represent a NULL value in Clojure.</p></li>
+<li><p><b>Atom</b> &minus; Atoms provide a way to manage shared, synchronous, independent state. They are a reference type like refs and vars.</p></li>
+</ul>
+<h2>Bound Values</h2>
+<p>Since all of the datatypes in Clojure are inherited from Java, the bounded values are the same as in Java programming language. The following table shows the maximum allowed values for the numerical and decimal literals.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">S.No.</th>
+<th style="text-align:center;">Numerical and Decimal literals.</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>Short</b></p>
+<p>-32,768 to 32,767</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>int</b></p>
+<p>-2,147,483,648 to 2,147,483,647</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>long</b></p>
+<p>-9,223,372,036,854,775,808 to +9,223,372,036,854,775,807</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>float</b></p>
+<p>1.40129846432481707e-45 to 3.40282346638528860e+38</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>double</b></p>
+<p>4.94065645841246544e-324d to 1.79769313486231570e+308d</p>
+</td>
+</tr>
+</table>
+<h2>Class Numeric Types</h2>
+<p>In addition to the primitive types, the following object types (sometimes referred to as wrapper types) are allowed.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center;">Name</th>
+</tr>
+<tr>
+<td>java.lang.Byte</td>
+</tr>
+<tr>
+<td>java.lang.Short</td>
+</tr>
+<tr>
+<td>java.lang.Integer</td>
+</tr>
+<tr>
+<td>java.lang.Long</td>
+</tr>
+<tr>
+<td>java.lang.Float</td>
+</tr>
+<tr>
+<td>java.lang.Double</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>The following program shows a consolidated clojure code to demonstrate the data types in Clojure.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   ;; The below code declares a integer variable
+   (def x 1)
+   
+   ;; The below code declares a float variable
+   (def y 1.25)
+   
+   ;; The below code declares a string variable
+   (def str1 "Hello")
+   (println x)
+   (println y)
+   (println str1))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+1
+1.25
+Hello
+</pre>
+<h1>Clojure - Variables</h1>
+<p>In Clojure, <b>variables</b> are defined by the <b>‘def’</b> keyword. It’s a bit different wherein the concept of variables has more to do with binding. In Clojure, a value is bound to a variable. One key thing to note in Clojure is that variables are immutable, which means that in order for the value of the variable to change, it needs to be destroyed and recreated again.</p>
+<p>Following are the basic types of variables in Clojure.</p>
+<ul class="list">
+<li><p><b>short</b> &minus; This is used to represent a short number. For example, 10.</p></li>
+<li><p><b>int</b> &minus; This is used to represent whole numbers. For example, 1234.</p></li>
+<li><p><b>long</b> &minus; This is used to represent a long number. For example, 10000090.</p></li>
+<li><p><b>float</b> &minus; This is used to represent 32-bit floating point numbers. For example, 12.34.</p></li>
+<li><p><b>char</b> &minus; This defines a single character literal. For example, ‘/a’.</p></li>
+<li><p><b>Boolean</b> &minus; This represents a Boolean value, which can either be true or false.</p></li>
+<li><p><b>String</b> &minus; These are text literals which are represented in the form of chain of characters. For example, “Hello World”.</p></li>
+</ul>
+<h2>Variable Declarations</h2>
+<p>Following is the general syntax of defining a variable.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+(def var-name var-value)
+</pre>
+<p>Where ‘var-name’ is the name of the variable and ‘var-value’ is the value bound to the variable.</p>
+<h3>Example</h3>
+<p>Following is an example of variable declaration.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   ;; The below code declares a integer variable
+   (def x 1)
+   
+   ;; The below code declares a float variable
+   (def y 1.25)
+
+   ;; The below code declares a string variable
+   (def str1 "Hello")
+   
+   ;; The below code declares a boolean variable
+   (def status true))
+(Example)
+</pre>
+<h2>Naming Variables</h2>
+<p>The name of a variable can be composed of letters, digits, and the underscore character. It must begin with either a letter or an underscore. Upper and lowercase letters are distinct because Clojure, just like Java is a case-sensitive programming language.</p>
+<h3>Example</h3>
+<p>Following are some examples of variable naming in Clojure.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   ;; The below code declares a Boolean variable with the name of status
+   (def status true)
+   
+   ;; The below code declares a Boolean variable with the name of STATUS
+   (def STATUS false)
+   
+   ;; The below code declares a variable with an underscore character.
+   (def _num1 2))
+(Example)
+</pre>
+<p><b>Note</b> &minus; In the above statements, because of the case sensitivity, status and STATUS are two different variable defines in Clojure.</p>
+<p>The above example shows how to define a variable with an underscore character.</p>
+<h2>Printing variables</h2>
+<p>Since Clojure uses the JVM environment, you can also use the ‘println’ function. The following example shows how this can be achieved.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   ;; The below code declares a integer variable
+   (def x 1)
+   
+   ;; The below code declares a float variable
+   (def y 1.25)
+   
+   ;; The below code declares a string variable
+   (def str1 "Hello")
+   (println x)
+   (println y)
+   (println str1))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+1
+1.25
+Hello
+</pre>
+<h1>Clojure - Operators</h1>
+<p>An <b>operator</b> is a symbol that tells the compiler to perform specific mathematical or logical manipulations.</p>
+<p>Clojure has the following types of operators &minus;</p>
+<ul class="list">
+<li>Arithmetic operators</li>
+<li>Relational operators</li>
+<li>Logical operators</li>
+<li>Bitwise operators</li>
+</ul>
+<p><b>Note</b> &minus; In Clojure, operators and operands work in the following syntax manner.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+(operator operand1 operand2 operandn)
+</pre>
+<p>For example,</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+(+ 1 2)
+</pre>
+<p>The above example does an arithmetic operation on the numbers 1 and 2.</p>
+<h2>Arithmetic Operators</h2>
+<p>Clojure language supports the normal Arithmetic operators as any language. Following are the Arithmetic operators available in Clojure.</p>
+<p><a href="clojure_arithmetic_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operator</th>
+<th style="text-align:center;">Description</th>
+<th style="text-align:center;">Example</th>
+</tr>
+<tr>
+<td>+</td>
+<td>Addition of two operands</td>
+<td>(+ 1 2) will give 3</td>
+</tr>
+<tr>
+<td>−</td>
+<td>Subtracts second operand from the first</td>
+<td>(- 2 1) will give 1</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Multiplication of both operands</td>
+<td>(* 2 2) will give 4</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Division of numerator by denominator</td>
+<td>(float (/ 3 2)) will give 1.5</td>
+</tr>
+<tr>
+<td>inc</td>
+<td>Incremental operators used to increment the value of an operand by 1</td>
+<td>inc 5 will give 6</td>
+</tr>
+<tr>
+<td>dec</td>
+<td>Incremental operators used to decrement the value of an operand by 1</td>
+<td>dec 5 will give 4</td>
+</tr>
+<tr>
+<td>max</td>
+<td>Returns the largest of its arguments</td>
+<td>max 1 2 3 will return 3</td>
+</tr>
+<tr>
+<td>min</td>
+<td>Returns the smallest of its arguments</td>
+<td>min 1 2 3 will return 1</td>
+</tr>
+<tr>
+<td>rem</td>
+<td>Remainder of dividing the first number by the second</td>
+<td>rem 3 2 will give 1</td>
+</tr>
+</table>
+<h2>Relational Operators</h2>
+<p>Relational operators allow comparison of objects. Following are the relational operators available in Clojure.</p>
+<p><a href="clojure_relational_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operator</th>
+<th style="text-align:center;">Description</th>
+<th style="text-align:center;">Example</th>
+</tr>
+<tr>
+<td>=</td>
+<td>Tests the equality between two objects</td>
+<td>(= 2 2) will give true</td>
+</tr>
+<tr>
+<td>not=</td>
+<td>Tests the difference between two objects</td>
+<td>(not = 3 2) will give true</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>Checks to see if the left object is less than the right operand</td>
+<td>(&lt; 2 3) will give true</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>Checks to see if the left object is less than or equal to the right operand</td>
+<td>(&lt;= 2 3) will give true</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>Checks to see if the left object is greater than the right operand</td>
+<td>(&gt; 3 2) will give true</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>Checks to see if the left object is greater than or equal to the right operand</td>
+<td>(&gt;= 3 2) will give true</td>
+</tr>
+</table>
+<h2>Logical Operators</h2>
+<p>Logical operators are used to evaluate Boolean expressions. Following are the logical operators available in Groovy.</p>
+<p><a href="clojure_logical_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operator</th>
+<th style="text-align:center;">Description</th>
+<th style="text-align:center;">Example</th>
+</tr>
+<tr>
+<td><p><b>and</b></p></td>
+<td>This is the logical “and” operator</td>
+<td>(or true true) will give true</td>
+</tr>
+<tr>
+<td><p><b>or</b></p></td>
+<td>This is the logical “or” operator</td>
+<td>(and true false) will give false</td>
+</tr>
+<tr>
+<td><p><b>not</b></p></td>
+<td>This is the logical “not” operator</td>
+<td>(not false) will give true</td>
+</tr>
+</table>
+<p>The following code snippet shows how the various operators can be used.</p>
+<h2>Bitwise Operators</h2>
+<p>Clojure provides four bitwise operators. Following are the bitwise operators available in Clojure.</p>
+<p><a href="clojure_bitwise_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center; width:11%;">S. No.</th>
+<th style="text-align:center;">Operator &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>bit-and</b></p>
+<p>This is the bitwise “and” operator</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>bit-or</b></p>
+<p>This is the bitwise “or” operator</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>bit-xor</b></p>
+<p>This is the bitwise “xor” or Exclusive ‘or’ operator</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>bit-not</b></p>
+<p>This is the bitwise negation operator</p></td>
+</tr>
+</table>
+<p>Following is the truth table showcasing these operators.</p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center;">p</th>
+<th style="text-align:center;">q</th>
+<th style="text-align:center;">p&amp;q</th>
+<th style="text-align:center;">p | q</th>
+<th style="text-align:center;">p ^ q</th>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</table>
+<h2>Operator Precedence</h2>
+<p>As is the case with LISPs in general, there is no need to worry about operator precedence. This is one of the benefits of S-Expressions and prefix notation. All functions evaluate left to right and inside out. The operators in Clojure are just functions, and everything is fully parenthesized.</p>
+<h1>Clojure - Loops</h1>
+<p>So far we have seen statements which are executed one after the other in a sequential manner. Additionally, statements are provided in Clojure to alter the flow of control in a program’s logic. They are then classified into flow of control statements which we will see in detail.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Loops &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_while_statement.html">While Statement</a>
+<p>The <b>'while'</b> statement is executed by first evaluating the condition expression (a Boolean value), and if the result is true, then the statements in the while loop are executed.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_doseq_statement.html">Doseq Statement</a>
+<p>The <b>‘doseq’</b> statement is similar to the ‘for each’ statement which is found in many other programming languages. The doseq statement is basically used to iterate over a sequence.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_dotimes_statement.html">Dotimes Statement</a>
+<p>The <b>‘dotimes’</b> statement is used to execute a statement ‘x’ number of times.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_loop_statement.html">Loop Statement</a>
+<p>The loop special form is not like a <b>‘for’</b> loop. The usage of loop is the same as the let binding. However, loop sets a recursion point</p></td>
+</tr>
+</table>
+<h1>Clojure - Decision Making</h1>
+<p><b>Decision-making structures</b> require that the programmer specify one or more conditions to be evaluated or tested by the program, along with a statement or statements to be executed if the condition is determined to be true, and optionally, other statements to be executed if the condition is determined to be false.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_if_statement.html">If Statement</a>
+<p>In Clojure, the condition is an expression which evaluates it to be either true or false. <b>'If'</b> the condition is true, then statement#1 will be executed, else statement#2 will be executed.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_if_do_expression.html">If/do Expression</a>
+<p>The <b>‘if-do’</b> expression in Clojure is used to allow multiple expressions to be executed for each branch of the ‘if’ statement.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_nested_if_statement.html">Nested If Statement</a>
+<p>Multiple <b>'if'</b> statements embedded inside each other.</p></td> 
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_case_statement.html">Case Statement</a>
+<p>Clojure offers the <b>‘case’</b> statement which is similar to the <b>‘switch’</b> statement available in the Java programming language.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_cond_statement.html">Cond Statement</a>
+<p>Clojure offers another evaluation statement called the <b>‘cond’</b> statement. This statement takes a set of test/expression pairs.</p></td>
+</tr>
+</table>
+<h1>Clojure - Functions</h1>
+<p>Clojure is known as a functional programming language, hence you would expect to see a lot of emphasis on how functions work in Clojure. This chapter covers what all can be done with functions in Clojure.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Functions &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_defining_a_function.html">Defining a Function</a>
+<p>A function is defined by using the <b>‘defn’</b> macro.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_anonymous_functions.html">Anonymous Functions</a>
+<p>An anonymous function is a function which has no name associated with it.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_functions_multiple_arguments.html">Functions with Multiple Arguments</a>
+<p>Clojure functions can be defined with zero or more parameters. The values you pass to functions are called <b>arguments</b>, and the arguments can be of any type.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_variadic_functions.html">Variadic Functions</a>
+<p>Clojure offers the ‘case’ statement which is similar to the ‘switch’ statement available in the Java programming language.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_higher_order_functions.html">Higher Order Functions</a>
+<p>Higher-order functions (HOFs) are functions that take other functions as arguments. HOFs are an important functional programming technique and are quite commonly used in Clojure.</p></td>
+</tr>
+</table>
+<h1>Clojure - Numbers</h1>
+<p><b>Numbers</b> datatype in Clojure is derived from Java classes.</p>
+<p>Clojure supports integer and floating point numbers.</p>
+<ul class="list">
+<li><p>An integer is a value that does not include a fraction.</p></li>
+<li><p>A floating-point number is a decimal value that includes a decimal fraction.</p></li>
+</ul>
+<p>Following is an example of numbers in Clojure.</p>
+<pre class="prettyprint notranslate">
+(def x 5)
+(def y 5.25)
+</pre>
+<p>Where ‘x’ is of the type <b>Integer</b> and ‘y’ is the <b>float</b>.</p>
+<p>In Java, the following classes are attached to the numbers defined in Clojure.</p>
+<img src="images/numbers.jpg" alt="Numbers" />
+<p>To actually see that the numbers in Clojure are derived from Java classes, use the following program to see the type of numbers assigned when using the ‘def’ command.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (def x 5)
+   (def y 5.25)
+   (println (type x))
+   (println (type y)))
+(Example)
+</pre>
+<p>The <b>‘type’</b> command is used to output the class associated with the value assigned to a variable.</p>
+<h2>Output</h2>
+<p>The above code will produce the following output.</p>
+<pre class="result notranslate">
+Java.lang.long
+Java.lang.double
+</pre>
+<h2>Number Tests</h2>
+<p>The following test functions are available for numbers.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Numbers &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_zero.html">zero?</a>
+<p>Returns true if the number is zero, else false.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_pos.html">pos?</a>
+<p>Returns true if number is greater than zero, else false.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_neg.html">neg?</a>
+<p>Returns true if number is less than zero, else false.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_even.html">even?</a>
+<p>Returns true if the number is even, and throws an exception if the number is not an integer.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_odd.html">odd?</a>
+<p>Returns true if the number is odd, and throws an exception if the number is not an integer.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_number.html">number?</a>
+<p>Returns true if the number is really a Number.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="clojure_integer.html">integer?</a>
+<p>Returns true if the number is an integer.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="clojure_float.html">float?</a>
+<p>Returns true if the number is a float.</p></td>
+</tr>
+</table>
+<h1>Clojure - Recursion</h1>
+<p>We have seen the recur statement in an earlier topic and whereas the ‘for’ loop is somewhat like a loop, <b>recur</b> is a real loop in Clojure.</p>
+<p>If you have a programming background, you may have heard of tail recursion, which is a major feature of functional languages. This recur special form is the one that implements tail recursion. As the word “tail recursion” indicates, recur must be called in the tail position. In other words, recur must be the last thing to be evaluated.</p>
+<p>The simplest example of the recur statement is used within the ‘for’ loop. In the following example, the recur statement is used to change the value of the variable ‘i’ and feed the value of the variable back to the loop expression.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (loop [i 0]
+      (when (&lt; i 5)
+      (println i)
+      (recur (inc i)))))
+(Example)
+</pre>
+<h2>Output</h2>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+0
+1
+2
+3
+4
+</pre>
+<h1>Clojure - File I/O</h1>
+<p>Clojure provides a number of helper methods when working with I/O. It offers easier classes to provide the following functionalities for files.</p>
+<ul class="list">
+<li>Reading files</li>
+<li>Writing to files</li>
+<li>Seeing whether a file is a file or directory</li>
+</ul>
+<p>Let’s explore some of the file operations Clojure has to offer.</p>
+<h2>Reading the Contents of a File as an Entire String</h2>
+<p>If you want to get the entire contents of the file as a string, you can use the <b>clojure.core.slurp</b> method. The slurp command opens a reader on a file and reads all its contents, returning a string.</p>
+<p>Following is an example of how this can be done.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (def string1 (slurp "Example.txt"))
+   (println string1))
+(Example)
+</pre>
+<p>If the file contains the following lines, they will be printed as &minus;</p>
+<pre class="result notranslate">
+line : Example1
+line : Example2
+</pre>
+<h2>Reading the Contents of a File One Line at a Time</h2>
+<p>If you want to get the entire contents of the file as a string one line at a time, you can use the <b>clojure.java.io/reader</b> method. The clojure.java.io/reader class creates a reader buffer, which is used to read each line of the file.</p>
+<p>Following is an example that shows how this can be done.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (with-open [rdr (clojure.java.io/reader "Example.txt")]
+   (reduce conj [] (line-seq rdr))))
+(Example)
+</pre>
+<p>If the file contains the following lines, they will be printed as &minus;</p>
+<pre class="result notranslate">
+line : Example1
+line : Example2
+</pre>
+<p>The output will be shown as &minus;</p>
+<pre class="result notranslate">
+["line : Example1" "line : Example2"]
+</pre>
+<h2>Writing ‘to’ Files</h2>
+<p>If you want to write ‘to’ files, you can use the <b>clojure.core.spit</b> command to spew entire strings into files. The spit command is the opposite of the slurp method. This method opens a file as a writer, writes content, then closes file.</p>
+<p>Following is an example.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (spit "Example.txt"
+      "This is a string"))
+</pre>
+<p>In the above example, if you see the contents of the Example.txt file , you will see the contents of “This is a string”.</p>
+<h2>Writing ‘to’ Files One Line at a Time</h2>
+<p>If you want to write ‘to’ files one line at a time, you can use the <b>clojure.java.io.writer</b> class. The clojure.java.io.writer class is used to create a writer stream wherein bytes of data are fed into the stream and subsequently into the file.</p>
+<p>Following is an example that shows how the spit command can be used.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (with-open [w (clojure.java.io/writer "Example.txt" :append true)]
+      (.write w (str "hello" "world"))))
+(Example)
+</pre>
+<p>When the above code is executed, the line “hello world” will be present in the Example.txt file. The append:true option is to append data to the file. If this option is not specified, then the file will be overwritten whenever data is written to the file.</p>
+<h2>Checking to See If a File Exists</h2>
+<p>To check if a file exists, the <b>clojure.java.io.file</b> class can be used to check for the existence of a file. Following is an example that shows how this can be accomplished.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.hello
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (println (.exists (clojure.java.io/file "Example.txt"))))
+(Example)
+</pre>
+<p>If the file Example.txt exists, the output will be true.</p>
+<h2>Reading from the Console</h2>
+<p>To read data from the console, the <b>read-line</b> statement can be used. Following is an example that shows how this can be used.</p>
+<p>If you enter the (read-line) command in the REPL window, you will have the chance to enter some input in the console window.</p>
+<pre class="prettyprint notranslate">
+user->(read-line)
+Hello World
+</pre>
+<p>The above code will produce the following output.</p>
+<pre class="result notranslate">
+“Hello World”
+</pre>
+<h1>Clojure - Strings</h1>
+<p>A <b>String</b> literal is constructed in Clojure by enclosing the string text in quotations. Strings in Clojure need to be constructed using the double quotation marks such as “Hello World”.</p>
+<h2>Example</h2>
+<p>Following is an example of the usage of strings in Clojure.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+(defn hello-world []
+   (println "Hello World")
+   (println "This is a demo application"))
+(hello-world)
+</pre>
+<h2>Output</h2>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+Hello World
+This is a demo application
+</pre>
+<h2>Basic String Operations</h2>
+<p>Clojure has a number of operations that can be performed on strings. Following are the operations.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">String Operations &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_str.html">str</a>
+<p>The concatenation of strings can be done by the simple str function.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_strings_format.html">format</a>
+<p>The formatting of strings can be done by the simple format function. The format function formats a string using <b>java.lang.String.format.</b></p></td> 
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_strings_count.html">count</a>
+<p>Returns true if number is less than zero, else false.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_strings_subs.html">subs</a>
+<p>Returns the substring of ‘s’ beginning at start inclusive, and ending at end (defaults to length of string), exclusive.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_strings_compare.html">compare</a>
+<p>Returns a negative number, zero, or a positive number when ‘x’ is logically 'less than', 'equal to', or 'greater than' ‘y’.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_strings_lowercase.html">lower-case</a>
+<p>Converts string to all lower-case.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="clojure_strings_uppercase.html">upper-case</a>
+<p>Converts string to all upper-case.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="clojure_strings_join.html">join</a>
+<p>Returns a string of all elements in collection, as returned by (seq collection), separated by an optional separator.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="clojure_strings_split.html">split</a>
+<p>Splits string on a regular expression.</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="clojure_strings_splitlines.html">split-lines</a>
+<p>Split strings is based on the escape characters \n or \r\n.</p></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="clojure_strings_reverse.html">reverse</a>
+<p>Reverses the characters in a string.</p></td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="clojure_strings_replace.html">replace</a>
+<p>Replaces all instance of a match in a string with the replacement string.</p></td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="clojure_strings_trim.html">trim</a>
+<p>Removes whitespace from both ends of the string.</p></td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="clojure_strings_triml.html">triml</a>
+<p>Removes whitespace from the left hand side of the string.</p></td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="clojure_strings_trimr.html">trimr</a>
+<p>Removes whitespace from the right hand side of the string.</p></td>
+</tr>
+</table>
+<h1>Clojure - Lists</h1>
+<p><b>List</b> is a structure used to store a collection of data items. In Clojure, the List implements the <b>ISeq</b> interface. Lists are created in Clojure by using the list function.</p>
+<h2>Example</h2>
+<p>Following is an example of creating a list of numbers in Clojure.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn example []
+   (println (list 1 2 3 4)))
+(example)
+</pre>
+<h2>Output</h2>
+<p>The above code produces the following output.</p>
+<pre class="result notranslate">
+(1 2 3 4)
+</pre>
+<p>Following is an example of creating a list of characters in Clojure.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn example []
+   (println (list 'a 'b 'c 'd)))
+(example)
+</pre>
+<p>The above code produces the following output.</p>
+<pre class="result notranslate">
+(a b c d)
+</pre>
+<p>Following are the list methods available in Clojure.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Lists &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_list.html">list*</a>
+<p>Creates a new list containing the items prepended to the rest, the last of which will be treated as a sequence.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_lists_first.html">first</a>
+<p>This function returns the first item in the list.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_lists_nth.html">nth</a>
+<p>This function returns the item in the ‘nth’ position in the list.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_lists_cons.html">cons</a>
+<p>Returns a new list wherein an element is added to the beginning of the list.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_lists_conj.html">conj</a>
+<p>Returns a new list wherein the list is at the beginning and the elements to be appended are placed at the end.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_lists_rest.html">rest</a>
+<p>Returns the remaining items in the list after the first item.</p></td>
+</tr>
+</table>
+<h1>Clojure - Sets</h1>
+<p><b>Sets</b> in Clojure are a set of unique values. Sets are created in Clojure with the help of the set command.</p>
+<h2>Example</h2>
+<p>Following is an example of the creation of sets in Clojure.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn example []
+   (println (set '(1 1 2 2))))
+(example)
+</pre>
+<h2>Output</h2>
+<p>The above code produces the following output.</p>
+<pre class="result notranslate">
+#{1,2}
+</pre>
+<p>Following are the methods available in Clojure for sets.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Sets &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_sortedset.html">sorted-set</a>
+<p>Returns a sorted set of elements.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_get.html">get</a>
+<p>Returns the element at the index position.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_contains.html">contains?</a>
+<p>Finds out whether the set contains a certain element or not.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_sets_conj.html">conj</a>
+<p>Appends an element to the set and returns the new set of elements.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_disj.html">disj</a>
+<p>Disjoins an element from the set.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_union.html">union</a>
+<p>Disjoins an element from the set.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="clojure_difference.html">difference</a>
+<p>Return a set that is the first set without elements of the remaining sets.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="clojure_intersection.html">intersection</a>
+<p>Return a set that is the intersection of the input sets.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="clojure_subset.html">subset?</a>
+<p>Is set1 a subset of set2?</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="clojure_superset.html">superset?</a>
+<p>Is set1 a superset of set2?</p></td>
+</tr>
+</table>
+<h1>Clojure - Vectors</h1>
+<p>A <b>Vector</b> is a collection of values indexed by contiguous integers. A vector is created by using the vector method in Clojure.</p>
+<h2>Example</h2>
+<p>Following is an example of creating a vector in Clojure.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:require [clojure.set :as set])
+   (:gen-class))
+(defn example []
+   (println (vector 1 2 3)))
+(example)
+</pre>
+<h2>Output</h2>
+<p>The above code produces the following output.</p>
+<pre class="result notranslate">
+[1 2 3]
+</pre>
+<p>Following are the methods available in Clojure.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Vectors &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_vectorof.html">vector-of</a>
+<p>Creates a new vector of a single primitive type ‘t’, where ‘t’ is one of :int :long :float :double :byte :short :char or :boolean.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_vectors_nth.html">nth</a>
+<p>This function returns the item in the nth position in the vector.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_vectors_get.html">get</a>
+<p>Returns the element at the index position in the vector.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_vectors_conj.html">conj</a>
+<p>Appends an element to the vector and returns the new set of vector elements.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_vectors_pop.html">pop</a>
+<p>For a list or queue, returns a new list/queue without the first item, for a vector, returns a new vector without the last item.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_vectors_subvec.html">subvec</a>
+<p>Returns a sub vector from a starting and ending index.</p></td>
+</tr>
+</table>
+<h1>Clojure - Maps</h1>
+<p>A <b>Map</b> is a collection that maps keys to values. Two different map types are provided - hashed and sorted. <b>HashMaps</b> require keys that correctly support hashCode and equals. <b>SortedMaps</b> require keys that implement Comparable, or an instance of Comparator.</p>
+<p>A map can be created in two ways, the first is via the hash-map method.</p>
+<h2>Creation - HashMaps</h2>
+<p>HashMaps have a typical key value relationship and is created by using hash-map function.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn example []
+   (def demokeys (hash-map "z" "1" "b" "2" "a" "3"))
+   (println demokeys))
+(example)
+</pre>
+<h2>Output</h2>
+<p>The above code produces the following output.</p>
+<pre class="result notranslate">
+{z 1, b 2, a 3}
+</pre>
+<h2>Creation - SortedMaps</h2>
+<p>SortedMaps have the unique characteristic of sorting their elements based on the key element. Following is an example that shows how the sorted map can be created using the sorted-map function.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn example []
+   (def demokeys (sorted-map "z" "1" "b" "2" "a" "3"))
+   (println demokeys))
+(example)
+</pre>
+<p>The above code produces the following output.</p>
+<pre class="result notranslate">
+{a 3, b 2, z 1}
+</pre>
+<p>From the above program you can clearly see that elements in the maps are sorted as per the key value. Following are the methods available for maps.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Maps &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_maps_get.html">get</a>
+<p>Returns the value mapped to key, not-found or nil if key is not present.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_maps_contains.html">contains?</a>
+<p>See whether the map contains a required key.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_maps_find.html">find</a>
+<p>Returns the map entry for the key.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_maps_keys.html">keys</a>
+<p>Returns the list of keys in the map.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_maps_vals.html">vals</a>
+<p>Returns the list of values in the map.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_maps_dissoc.html">dissoc</a>
+<p>Dissociates a key value entry from the map.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="clojure_maps_merge.html">merge</a>
+<p>Merges two maps entries into one single map entry.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="clojure_maps_mergewith.html">merge-with</a>
+<p>Returns a map that consists of the rest of the maps conj-ed onto the first.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="clojure_maps_selectkeys.html">select-keys</a>
+<p>Returns a map containing only those entries in map whose key is in keys.</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="clojure_maps_renamekeys.html">rename-keys</a>
+<p>Renames keys in the current HashMap to the newly defined ones.</p></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="clojure_mapinvert.html">map-invert</a>
+<p>Inverts the maps so that the values become the keys and vice versa.</p></td>
+</tr>
+</table>
+<h1>Clojure - Namespaces</h1>
+<p><b>Namespaces</b> in Clojure are used to differentiate classes into separate logical spaces just like in Java. Consider the following statement.</p>
+<pre class="result notranslate">
+(:require [clojure.set :as set])
+</pre>
+<p>In the above statement, ‘clojure.set’ is a namespace which contains various classes and methods to be used in the program. For example, the above namespace contains the function called map-invert, which is used to invert a map of key-values. We cannot use this function unless we explicitly tell our program to include this namespace.</p>
+<p>Let’s look at the different methods available for namespaces.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_namespace.html">*ns*</a>
+<p>This is used to look at your current namespace.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_ns.html">ns</a>
+<p>This is used to create a new namespace and associate it with the running program.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_alias.html">alias</a>
+<p>Add an alias in the current namespace to another namespace. Arguments are two symbols: the alias to be used and the symbolic name of the target namespace.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_allns.html">all-ns</a>
+<p>Returns a list of all namespaces.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_findns.html">find-ns</a>
+<p>Finds and returns a particular namespace.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_nsname.html">ns-name</a>
+<p>Returns the name of a particular namespace.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="clojure_nsaliases.html">ns-aliases</a>
+<p>Returns the aliases, which are associated with any namespaces.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="clojure_nsmap.html">ns-map</a>
+<p>Returns a map of all the mappings for the namespace.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="clojure_unalias.html">un-alias</a>
+<p>Returns a map containing only those entries in map whose key is in keys.</p></td>
+</tr>
+</table>
+<h1>Clojure - Exception Handling</h1>
+<p><b>Exception handling</b> is required in any programming language to handle the runtime errors so that the normal flow of the application can be maintained. Exception usually disrupts the normal flow of the application, which is the reason why we need to use exception handling in our application.</p>
+<p>Exception is broadly classified into the following categories &minus;</p>
+<ul class="list">
+<li><p><b>Checked Exception</b> &minus; The classes that extend Throwable class except RuntimeException and Error are known as checked exceptions. E.g. IOException, SQLException, etc. Checked exceptions are checked at compile-time.</p></li>
+</ul>
+<p>Let’s consider the following program which does an operation on a file called Example.txt. However, there can be always a case wherein the file Example.txt does not exist.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (def string1 (slurp "Example.txt"))
+   (println string1))
+(Example)
+</pre>
+<p>If the file Example.txt does not exist, then the following exception will be generated by the program.</p>
+<pre class="result notranslate">
+Caused by: java.io.FileNotFoundException: Example.txt (No such file or
+directory)
+at java.io.FileInputStream.open0(Native Method)
+at java.io.FileInputStream.open(FileInputStream.java:195)
+at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:138)
+at clojure.java.io$fn__9185.invoke(io.clj:229)
+at clojure.java.io$fn__9098$G__9091__9105.invoke(io.clj:69)
+at clojure.java.io$fn__9197.invoke(io.clj:258)
+at clojure.java.io$fn__9098$G__9091__9105.invoke(io.clj:69)
+</pre>
+<p>From the above exception, we can clearly see that the program raised a FileNotFoundException.</p>
+<ul class="list">
+<li><p><b>Unchecked Exception</b> &minus; The classes that extend RuntimeException are known as unchecked exceptions. For example, ArithmeticException, NullPointerException, ArrayIndexOutOfBoundsException, etc. Unchecked exceptions are not checked at compile-time rather they are checked at runtime.</p></li>
+</ul>
+<p>One classical case is the ArrayIndexOutOfBoundsException which happens when you try to access an index of an array which is greater than the length of the array. Following is a typical example of this sort of mistake.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (try
+      (aget (int-array [1 2 3]) 5)
+      (catch Exception e (println (str "caught exception: " (.toString e))))
+      (finally (println "This is our final block")))
+   (println "Let's move on"))
+(Example)
+</pre>
+<p>When the above code is executed, the following exception will be raised.</p>
+<pre class="result notranslate">
+caught exception: java.lang.ArrayIndexOutOfBoundsException: 5
+This is our final block
+Let's move on
+</pre>
+<h2>Error</h2>
+<p>Error is irrecoverable e.g. OutOfMemoryError, VirtualMachineError, AssertionError, etc. These are errors which the program can never recover from and will cause the program to crash. We now need some mechanism to catch these exceptions so that the program can continue to run if these exceptions exist.</p>
+<p>The following diagram shows how the hierarchy of exceptions in Clojure is organized. It’s all based on the hierarchy defined in Java.</p>
+<img src="images/exceptions_in_clojure.jpg" alt="Exceptions in Clojure" />
+<h3>Catching Exceptions</h3>
+<p>Just like other programming languages, Clojure provides the normal ‘try-catch‘ block to catch exceptions as and when they occur.</p>
+<p>Following is the general syntax of the try-catch block.</p>
+<pre class="result notranslate">
+(try
+   (//Protected code)
+   catch Exception e1)
+(//Catch block)
+</pre>
+<p>All of your code which could raise an exception is placed in the <b>Protected code block</b>.</p>
+<p>In the <b>catch block</b>, you can write custom code to handle your exception so that the application can recover from the exception.</p>
+<p>Let’s look at our earlier example which generated a file-not-found exception and see how we can use the try catch block to catch the exception raised by the program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (try
+      (def string1 (slurp "Example.txt"))
+      (println string1)
+      (catch Exception e (println (str "caught exception: " (.getMessage e))))))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+caught exception: Example.txt (No such file or directory)
+</pre>
+<p>From the above code, we wrap out faulty code in the <b>try block</b>. In the catch block, we are just catching our exception and outputting a message that an exception has occurred. So, we now have a meaningful way of capturing the exception, which is generated by the program.</p>
+<h2>Multiple Catch Blocks</h2>
+<p>One can have multiple catch blocks to handle multiple types of exceptions. For each catch block, depending on the type of exception raised you would write code to handle it accordingly.</p>
+<p>Let’s modify our earlier code to include two catch blocks, one which is specific for our file not found exception and the other is for a general exception block.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (try
+      (def string1 (slurp "Example.txt"))
+      (println string1)
+      
+      (catch java.io.FileNotFoundException e (println (str "caught file
+         exception: " (.getMessage e))))
+      
+      (catch Exception e (println (str "caught exception: " (.getMessage e)))))
+   (println "Let's move on"))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+caught file exception: Example.txt (No such file or directory)
+Let's move on
+</pre>
+<p>From the above output, we can clearly see that our exception was caught by the ‘FileNotFoundException’ catch block and not the general one.</p>
+<h2>Finally Block</h2>
+<p>The finally block follows a try block or a catch block. A finally block of code always executes, irrespective of occurrence of an Exception.</p>
+<p>Using a finally block allows you to run any cleanup-type statements that you want to execute, no matter what happens in the protected code. Following is the syntax for this block.</p>
+<pre class="result notranslate">
+(try
+   (//Protected code)
+   catch Exception e1)
+(//Catch block)
+(finally
+   //Cleanup code)
+</pre>
+<p>Let’s modify the above code and add the finally block of code. Following is the code snippet.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (try
+      (def string1 (slurp "Example.txt"))
+      (println string1)
+      
+      (catch java.io.FileNotFoundException e (println (str "caught file
+         exception: " (.getMessage e))))
+      
+      (catch Exception e (println (str "caught exception: " (.getMessage e))))
+      (finally (println "This is our final block")))
+   (println "Let's move on"))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+caught file exception: Example.txt (No such file or directory)
+This is our final block
+Let's move on
+</pre>
+<p>From the above program, you can see that the final block is also implemented after the catch block catches the required exception.</p>
+<p>Since Clojure derives its exception handling from Java, similar to Java, the following methods are available in Clojure for managing the exceptions.</p>
+<ul class="list">
+<li><p><b>public String getMessage()</b> &minus; Returns a detailed message about the exception that has occurred. This message is initialized in the Throwable constructor.</p></li>
+<li><p><b>public Throwable getCause()</b> &minus; Returns the cause of the exception as represented by a Throwable object.</p></li>
+<li><p><b>public String toString()</b> &minus; Returns the name of the class concatenated with the result of getMessage().</p></li>
+<li><p><b>public void printStackTrace()</b> &minus; Prints the result of toString() along with the stack trace to System.err, the error output stream.</p></li>
+<li><p><b>public StackTraceElement [] getStackTrace()</b> &minus; Returns an array containing each element on the stack trace. The element at index 0 represents the top of the call stack, and the last element in the array represents the method at the bottom of the call stack.</p></li>
+<li><p><b>public Throwable fillInStackTrace()</b> &minus; Fills the stack trace of this Throwable object with the current stack trace, adding to any previous information in the stack trace.</p></li>
+</ul>
+<p>Following is the example code that uses some of the methods listed above.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (try
+      (def string1 (slurp "Example.txt"))
+      (println string1)
+      
+      (catch java.io.FileNotFoundException e (println (str "caught file
+         exception: " (.toString e))))
+      
+      (catch Exception e (println (str "caught exception: " (.toString e))))
+   (finally (println "This is our final block")))
+   (println "Let's move on"))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+caught file exception: java.io.FileNotFoundException: Example.txt (No such file
+or directory)
+This is our final block
+Let's move on
+</pre>
+<h1>Clojure - Sequences</h1>
+<p><b>Sequences</b> are created with the help of the <b>‘seq’</b> command. Following is a simple example of a sequence creation.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (println (seq [1 2 3])))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+(1 2 3)
+</pre>
+<p>Following are the various methods available for sequences.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_sequences_cons.html">cons</a>
+<p>Returns a new sequence where ‘x’ is the first element and ‘seq’ is the rest.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_sequences_conj.html">conj</a>
+<p>Returns a new sequence where ‘x’ is the element that is added to the end of the sequence.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_sequences_concat.html">concat</a>
+<p>This is used to concat two sequences together.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_sequences_distinct.html">distinct</a>
+<p>Used to only ensure that distinct elements are added to the sequence.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_sequences_reverse.html">reverse</a>
+<p>Reverses the elements in the sequence.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_sequences_first.html">first</a>
+<p>Returns the first element of the sequence.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="clojure_sequences_last.html">last</a>
+<p>Returns the last element of the sequence.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="clojure_sequences_rest.html">rest</a>
+<p>Returns the entire sequence except for the first element.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="clojure_sequences_sort.html">sort</a>
+<p>Returns a sorted sequence of elements.</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="clojure_sequences_drop.html">drop</a>
+<p>Drops elements from a sequence based on the number of elements, which needs to be removed.</p></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="clojure_sequences_takelast.html">take-last</a>
+<p>Takes the last list of elements from the sequence.</p></td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="clojure_sequences_take.html">take</a>
+<p>Takes the first list of elements from the sequence.</p></td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="clojure_sequences_splitat.html">split-at</a>
+<p>Splits the sequence of items into two parts. A location is specified at which the split should happen.</p></td>
+</tr>
+</table>
+<h1>Clojure - Regular Expressions</h1>
+<p>A <b>regular expression</b> is a pattern that is used to find substrings in text. Regular expressions are used in a variety of programming languages and used a lot in LISP type programming languages.</p>
+<p>Following is an example of a regular expression.</p>
+<pre class="result notranslate">
+//d+
+</pre>
+<p>The above regular expression is used to find one more occurrence of a digit in a string. The // characters are used to ensure that characters ‘d’ and ‘+’ are used to represent a regular expression.</p>
+<p>In general, regular expressions works with the following set of rules.</p>
+<ul class="list">
+<li><p>There are two special positional characters that are used to denote the beginning and end of a line: caret (∧) and dollar sign ($):</p></li>
+<li><p>Regular expressions can also include quantifiers. The plus sign (+) represents one or more times, applied to the preceding element of the expression. The asterisk (*) is used to represent zero or more occurrences. The question mark (?) denotes zero or once.</p></li>
+<li><p>The metacharacter { and } is used to match a specific number of instances of the preceding character.</p></li>
+<li><p>In a regular expression, the period symbol (.) can represent any character. This is described as the wildcard character.</p></li>
+<li><p>A regular expression may include character classes. A set of characters can be given as a simple sequence of characters enclosed in the metacharacters [and] as in [aeiou]. For letter or number ranges, you can use a dash separator as in [a–z] or [a–mA–M]. The complement of a character class is denoted by a leading caret ithin the square brackets as in [∧a–z] and represents all characters other than those specified.</p></li>
+</ul>
+<p>The following methods are available for regular expressions.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_regular_expressions_repattern.html">re-pattern</a>
+<p>Returns an instance of java.util.regex.Pattern. This is then used in further methods for pattern matching.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_regular_expressions_refind.html">refind</a>
+<p>Returns the next regex match, if any, of string to pattern, using java.util.regex.Matcher.find()</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_regular_expressions_replace.html">replace</a>
+<p>The replace function is used to replace a substring in a string with a new string value. The search for the substring is done with the use of a pattern.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_regular_expressions_replacefirst.html">replace-first</a>
+<p>The replace function is used to replace a substring in a string with a new string value, but only for the first occurrence of the substring. The search for the substring is done with the use of a pattern.</p></td>
+</tr>
+</table>
+<h1>Clojure - Predicates</h1>
+<p><b>Predicates</b> are functions that evaluate a condition and provide a value of either true or false. We have seen predicate functions in the examples of the chapter on numbers. We have seen functions like ‘even?’ which is used to test if a number is even or not, or ‘neg?’ which is used to test if a number is greater than zero or not. All of these functions return either a true or false value.</p>
+<p>Following is an example of predicates in Clojure.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+
+;; This program displays Hello World
+(defn Example []
+   (def x (even? 0))
+   (println x)
+   
+   (def x (neg? 2))
+   (println x)
+   
+   (def x (odd? 3))
+   (println x)
+   
+   (def x (pos? 3))
+   (println x))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+true
+false
+true
+true
+</pre>
+<p>In addition to the normal predicate functions, Clojure provides more functions for predicates. The following methods are available for predicates.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_predicates_everypred.html">every-pred</a>
+<p>Takes a set of predicates and returns a function ‘f’ that returns true if all of its composing predicates return a logical true value against all of its arguments, else it returns false.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_predicates_every.html">every?</a>
+<p>Returns true if the predicate is true for every value, else false.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_predicates_some.html">some</a>
+<p>Returns the first logical true value for any predicate value of x in the collection of values.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_predicates_notany.html">not-any?</a>
+<p>Returns false if any of the predicates of the values in a collection are logically true, else true.</p></td>
+</tr>
+</table>
+<h1>Clojure - Destructuring</h1>
+<p><b>Destructuring</b> is a functionality within Clojure, which allows one to extract values from a data structure, such as a vector and bind them to symbols without having to explicitly traverse the datastructure.</p>
+<p>Let’s look at an example of what exactly Destructuring means and how does it happen.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def my-vector [1 2 3 4])
+   (let [[a b c d] my-vector]
+   (println a b c d)))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1 2 3 4
+</pre>
+<p>In the above example, following things are to be noted &minus;</p>
+<ul class="list">
+<li><p>We are defining a vector of integers as 1 ,2, 3 and 4.</p></li>
+<li><p>We are then using the <b>‘let’</b> statement to assign 4 variables (a, b, c, and d) to the my-vector variable directly.</p></li>
+<li><p>If we run the <b>‘println’</b> statement on the four variables, we can see that they have already been assigned to the values in the vector respectively.</p></li>
+</ul>
+<p>So clojure has destructured the my-vector variable which has four values when it was assigned using the ‘let’ statement. The deconstructed four values were then assigned to the four parameters accordingly.</p>
+<p>If there are excess variables which don’t have a corresponding value to which they can be assigned to, then they will be assigned the value of nil. The following example makes this point clear.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.hello
+   (:gen-class))
+(defn Example []
+   (def my-vector [1 2 3 4])
+   (let [[a b c d e] my-vector]
+   (println a b c d e)))
+(Example)
+</pre>
+<p>The above program produces the following output. You can see from the output that since the last variable ‘e’ does not have a corresponding value in the vector, it accounts to nil.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1 2 3 4 nil
+</pre>
+<h2>the-rest</h2>
+<p>The ‘the-rest’ variable is used to store the remaining values, which cannot get assigned to any variable.</p>
+<p>An example on how this is used is shown in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def my-vector [1 2 3 4])
+   (let [[a b &amp; the-rest] my-vector]
+   (println a b the-rest)))
+(Example)
+</pre>
+<p>The above program produces the following output. From the output, you can clearly see that the values of 3 and 4 cannot be assigned to any variable so they are assigned to the ‘the-rest’ variable.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1 2 (3 4)
+</pre>
+<h2>Destructuring Maps</h2>
+<p>Just like vectors, maps can also be destructured. Following is an example of how this can be accomplished.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def my-map {"a" 1 "b" 2})
+   (let [{a "a" b "b"} my-map]
+   (println a b)))
+(Example)
+</pre>
+<p>The above program produces the following output. From the program you can clearly see that the map values of “a” and “b” are assigned to the variables of a and b.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1 2
+</pre>
+<p>Similarly in the case of vectors, if there is no corresponding value in the map when the destructuring happens, then the variable will be assigned a value of nil.</p>
+<p>Following is an example.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def my-map {"a" 1 "b" 2})
+   (let [{a "a" b "b" c "c"} my-map]
+   (println a b c)))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1 2 nil
+</pre>
+<h1>Clojure - Date and Time</h1>
+<p>Since the Clojure framework is derived from Java classes, one can use the date-time classes available in Java in Clojure. The <b>class date</b> represents a specific instant in time, with millisecond precision.</p>
+<p>Following are the methods available for the date-time class.</p>
+<h2>java.util.Date</h2>
+<p>This is used to create the date object in Clojure.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax.</p>
+<pre class="result notranslate">
+java.util.Date.
+</pre>
+<p><b>Parameters</b> &minus; None.</p>
+<p><b>Return Value</b> &minus; Allocates a Date object and initializes it so that it represents the time at which it was allocated, measured to the nearest millisecond.</p>
+<h3>Example</h3>
+<p>An example on how this is used is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns example)
+(defn Example []
+   (def date (.toString (java.util.Date.)))
+   (println date))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output. This will depend on the current date and time on the system, on which the program is being run.</p>
+<pre class="result notranslate">
+Tue Mar 01 06:11:17 UTC 2016
+</pre>
+<h2>java.text.SimpleDateFormat</h2>
+<p>This is used to format the date output.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax.</p>
+<pre class="result notranslate">
+(java.text.SimpleDateFormat. format dt)
+</pre>
+<p><b>Parameters</b> &minus; ‘format’ is the format to be used when formatting the date. ‘dt’ is the date which needs to be formatted.</p>
+<p><b>Return Value</b> &minus; A formatted date output.</p>
+<h3>Example</h3>
+<p>An example on how this is used is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns example)
+(defn Example []
+   (def date (.format (java.text.SimpleDateFormat. "MM/dd/yyyy") (new java.util.Date)))
+   (println date))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output. This will depend on the current date and time on the system, on which the program is being run.</p>
+<pre class="result notranslate">
+03/01/2016
+</pre>
+<h2>getTime</h2>
+<p>Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax.</p>
+<pre class="result notranslate">
+(.getTime)
+</pre>
+<p><b>Parameters</b> &minus; None.</p>
+<p><b>Return Value</b> &minus; The number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this date.</p>
+<h3>Example</h3>
+<p>An example on how this is used is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns example)
+(import java.util.Date)
+(defn Example []
+   (def date (.getTime (java.util.Date.)))
+   (println date))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output. This will depend on the current date and time on the system, on which the program is being run.</p>
+<pre class="result notranslate">
+1456812778160
+</pre>
+<h1>Clojure - Atoms</h1>
+<p><b>Atoms</b> are a data type in Clojure that provide a way to manage shared, synchronous, independent state. An atom is just like any reference type in any other programming language. The primary use of an atom is to hold Clojure’s immutable datastructures. The value held by an atom is changed with the <b>swap! method</b>.</p>
+<p>Internally, swap! reads the current value, applies the function to it, and attempts to compare-and-set it in. Since another thread may have changed the value in the intervening time, it may have to retry, and does so in a spin loop. The net effect is that the value will always be the result of the application of the supplied function to a current value, atomically.</p>
+<h2>Example</h2>
+<p>Atoms are created with the help of the atom method. An example on the same is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn example []
+   (def myatom (atom 1))
+   (println @myatom))
+(example)
+</pre>
+<h2>Output</h2>
+<p>The above program produces the following result.</p>
+<pre class="result notranslate">
+1
+</pre>
+<p>The value of atom is accessed by using the @ symbol. Clojure has a few operations that can be performed on atoms. Following are the operations.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Operations &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_atoms_reset.html">reset!</a>
+<p>Sets the value of atom to a new value without regard for the current value.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_atoms_compare_and_set.html">compare-and-set!</a>
+<p>Atomically sets the value of atom to the new value if and only if the current value of the atom is identical to the old value held by the atom. Returns true if set happens, else it returns false.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_atoms_swap.html">swap!</a>
+<p>Atomically swaps the value of the atom with a new one based on a particular function.</p></td>
+</tr>
+</table>
+<h1>Clojure - Metadata</h1>
+<p>In Clojure, <b>metadata</b> is used to annotate the data in a collection or for the data stored in a symbol. This is normally used to annotate data about types to the underlying compiler, but can also be used for developers. Metadata is not considered as part of the value of the object. At the same time, metadata is immutable.</p>
+<p>The following operations are possible in Clojure with regards to metadata.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:70px;">S.No.</th>
+<th style="text-align:center;">Operations &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_metawith.html">meta-with</a>
+<p>This function is used to define a metadata map for any object.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_meta.html">meta</a>
+<p>This function is used to see if any metadata is associated with an object.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_varymeta.html">vary-meta</a>
+<p>Returns an object of the same type and value as the original object, but with a combined metadata.</p></td>
+</tr>
+</table>
+<h1>Clojure - StructMaps</h1>
+<p><b>StructMaps</b> are used for creating structures in Clojure. For example, if you wanted to create a structure which comprised of an Employee Name and Employeeid, you can do that with StructMaps.</p>
+<p>The following operations are possible in Clojure with regards to StructMaps.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Operations &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_defstruct.html">defstruct</a>
+<p>This function is used for defining the structure which is required.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_struct.html">struct</a>
+<p>This function is used to define a structure object of the type, which is created by the defstruct operation.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_structmap.html">struct-map</a>
+<p>This function is used to specifically assign values to key values by explicitly defining which values get assigned to which keys in the structure.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_accessing_individual_fields.html">Accessing Individual Fields</a>
+<p>Individual fields of the structure can be accessed by accessing the keys along with the structure object.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_immutable_nature.html">Immutable Nature</a>
+<p>By default structures are also immutable, so if we try to change the value of a particular key, it will not change.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_adding_key_to_structure.html">Adding a New Key to the Structure</a>
+<p>Since structures are immutable, the only way that another key can be added to the structure is via the creation of a new structure. An example on how this can be achieved is shown in the following program.</p></td>
+</tr>
+</table>
+<h1>Clojure - Agents</h1>
+<p>As pointed out many times, Clojure is a programming language wherein many of the data types are immutable, which means that the only way one can change the value of a variable is to create a new variable and assign the new value to it. However, Clojure does provide some elements, which can create an mutable state. We have seen that this can be achieved with the atom data type. The other way this can be achieved is via Agents.</p>
+<p><b>Agents</b> provide independent, asynchronous change of individual locations. Agents are bound to a single storage location for their lifetime, and only allow mutation of that location (to a new state) to occur as a result of an action. Actions are functions (with, optionally, additional arguments) that are asynchronously applied to an Agent’s state and whose return value becomes the Agent’s new state.</p>
+<p>The following operations are possible in Clojure with regards to Agents.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Operations &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_agent.html">agent</a>
+<p>An agent is created by using the agent command.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_send.html">send</a>
+<p>This function is used to send across a value to the agent.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_shutdownagents.html">shutdown-agents</a>
+<p>This function is used to shut down any running agents.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_sendoff.html">send-off</a>
+<p>There are instances wherein an agent is assigned a function which is blocking in nature.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_awaitfor.html">await-for</a>
+<p>Since there is a delay when a value of an agent is updated, Clojure provided a ‘await-for’ function which is used to specify time in milliseconds to wait for the agent to be updated.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_await.html">await</a>
+<p>Blocks the current thread (indefinitely!) until all actions dispatched thus far, from this thread or agent, to the agent(s) have occurred. Will block on failed agents.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="clojure_agenterror.html">agent-error</a>
+<p>Returns the exception thrown during an asynchronous action of the agent, if the agent fails. Returns nil if the agent does not fail.</p></td>
+</tr>
+</table>
+<h1>Clojure - Watchers</h1>
+<p><b>Watchers</b> are functions added to variable types such as atoms and reference variables which get invoked when a value of the variable type changes. For example, if the calling program changes the value of an atom variable, and if a watcher function is attached to the atom variable, the function will be invoked as soon as the value of the atom is changed.</p>
+<p>The following functions are available in Clojure for Watchers.</p>
+<h2>add-watch</h2>
+<p>Adds a watch function to an agent/atom/var/ref reference. The watch <b>‘fn’</b> must be a ‘fn’ of 4 args: a key, the reference, its old-state, its new-state. Whenever the reference's state might have been changed, any registered watches will have their functions called.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax.</p>
+<pre class="result notranslate">
+(add-watch variable :watcher
+   (fn [key variable-type old-state new-state]))
+</pre>
+<p><b>Parameters</b> &minus; ‘variable’ is the name of the atom or reference variable. ‘variable-type’ is the type of variable, either atom or reference variable. ‘old-state &amp; new-state’ are parameters that will automatically hold the old and new value of the variable. ‘key’ must be unique per reference, and can be used to remove the watch with remove-watch.</p>
+<p><b>Return Value</b> &minus; None.</p>
+<h3>Example</h3>
+<p>An example on how this is used is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def x (atom 0))
+   (add-watch x :watcher
+      (fn [key atom old-state new-state]
+      (println "The value of the atom has been changed")
+      (println "old-state" old-state)
+      (println "new-state" new-state)))
+(reset! x 2))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+The value of the atom has been changed
+old-state 0
+new-state 2
+</pre>
+<h2>remove-watch</h2>
+<p>Removes a watch which has been attached to a reference variable.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax.</p>
+<pre class="result notranslate">
+(remove-watch variable watchname)
+</pre>
+<p><b>Parameters</b> &minus; ‘variable’ is the name of the atom or reference variable. ‘watchname’ is the name given to the watch when the watch function is defined.</p>
+<p><b>Return Value</b> &minus; None.</p>
+<h3>Example</h3>
+<p>An example on how this is used is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def x (atom 0))
+   (add-watch x :watcher
+      (fn [key atom old-state new-state]
+         (println "The value of the atom has been changed")
+         (println "old-state" old-state)
+         (println "new-state" new-state)))
+   (reset! x 2)
+   (remove-watch x :watcher)
+(reset! x 4))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+The value of the atom has been changed
+old-state 0
+new-state 2
+</pre>
+<p>You can clearly see from the above program that the second reset command does not trigger the watcher since it was removed from the watcher’s list.</p>
+<h1>Clojure - Macros</h1>
+<p>In any language, <b>Macros</b> are used to generate inline code. Clojure is no exception and provides simple macro facilities for developers. Macros are used to write code-generation routines, which provide the developer a powerful way to tailor the language to the needs of the developer.</p>
+<p>Following are the methods available for Macros.</p>
+<h2>defmacro</h2>
+<p>This function is used to define your macro. The macro will have a macro name, a parameter list and the body of the macro.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax.</p>
+<pre class="result notranslate">
+(defmacro name [params*] body)
+</pre>
+<p><b>Parameters</b> &minus; ‘name’ is the name of the macro. ‘params’ are the parameters assigned to the macro. ‘body’ is the body of the macro.</p>
+<p><b>Return Value</b> &minus; None.</p>
+<h3>Example</h3>
+<p>An example on how this is used is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (defmacro Simple []
+      (println "Hello"))
+   (macroexpand '(Simple)))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+Hello
+</pre>
+<p>From the above program you can see that the macro ‘Simple’ is expanded inline to ‘println’ “Hello”. Macros are similar to functions, with the only difference that the arguments to a form are evaluated in the case of macros.</p>
+<h2>macro-expand</h2>
+<p>This is used to expand a macro and place the code inline in the program.</p>
+<h3>Syntax</h3>
+<p>Following is the syntax.</p>
+<pre class="result notranslate">
+(macroexpand macroname)
+</pre>
+<p><b>Parameters</b> &minus; ‘macroname’ is the name of the macro which needs to be expanded.</p>
+<p><b>Return Value</b> &minus; The expanded macro.</p>
+<h3>Example</h3>
+<p>An example on how this is used is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (defmacro Simple []
+      (println "Hello"))
+   (macroexpand '(Simple)))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+Hello
+</pre>
+<h2>Macro with Arguments</h2>
+<p>Macros can also be used to take in arguments. The macro can take in any number of arguments. Following example showcases how arguments can be used.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (defmacro Simple [arg]
+      (list 2 arg))
+   (println (macroexpand '(Simple 2))))
+(Example)
+</pre>
+<p>The above example places an argument in the Simple macro and then uses the argument to add argument value to a list.</p>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+(2 2)
+</pre>
+<h1>Clojure - Reference Values</h1>
+<p><b>Reference values</b> are another way Clojure can work with the demand to have mutable variables. Clojure provides mutable data types such as atoms, agents, and reference types.</p>
+<p>Following are the operations available for reference values.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Operations &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_ref.html">ref</a>
+<p>This is used to create a reference value. When creating a reference value, there is an option to provide a validator function, which will validate the value created.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_refset.html">ref-set</a>
+<p>This function is used to set the value of a reference to a new value irrespective of whatever is the older value.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_alter.html">alter</a>
+<p>This function is used to alter the value of a reference type but in a safe manner. This is run in a thread, which cannot be accessed by another process.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_dosync.html">dosync</a>
+<p>Runs the expression (in an implicit do) in a transaction that encompasses expression and any nested calls.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_commute.html">commute</a>
+<p>Commute is also used to change the value of a reference type just like alter and ref-set.</p></td>
+</tr>
+</table>
+<h1>Clojure - Databases</h1>
+<p>In order to use the database functionality, please ensure to first download the <b>jdbc files</b> from the following url &minus; <a target="_blank" rel="nofollow" href="https://codeload.github.com/clojure/java.jdbc/zip/master">https://codeload.github.com/clojure/java.jdbc/zip/master</a></p>
+<p>You will find a zip file which has the necessary drivers for Clojure to have the ability to connect to databases. Once the zip file is extracted, ensure to add the unzipped location to your classpath.</p>
+<p>The main file for database connectivity is a file called <b>jdbc.clj</b> in the location clojure/java.</p>
+<p>The clojure jdbc connector supports a wide variety of databases, some of which are the following.</p>
+<ul class="list">
+<li>H2Database</li>
+<li>Oracle</li>
+<li>Microsoft SQL Server</li>
+<li>MySQL</li>
+<li>PostgreSQL</li>
+</ul>
+<p>In our example, we are going to use MySQL DB as an example.</p>
+<p>The following operations are possible in Clojure with regards to Databases.</p>
+<h2>Database Connection</h2>
+<p>Before connecting to a MySQL database, make sure of the following &minus;</p>
+<ul class="list">
+<li>You have created a database TESTDB.</li>
+<li>You have created a table EMPLOYEE in TESTDB.</li>
+<li>This table has fields FIRST_NAME, LAST_NAME, AGE, SEX and INCOME.</li>
+<li>User ID "testuser" and password "test123" are set to access TESTDB.</li>
+<li>Ensure you have downloaded the ‘mysql jar file’ and added the file to your classpath.</li>
+<li>You have gone through MySQL tutorial to understand <a target="_blank" href="../mysql/index.html">MySQL Basics</a>.</li>
+</ul>
+<h3>Syntax</h3>
+<p>Following is the syntax to create a connection in Clojure.</p>
+<pre class="result notranslate">
+(def connection_name {
+   :subprotocol “protocol_name”
+   :subname “Location of mysql DB”
+   :user “username” :password “password” })
+</pre>
+<p><b>Parameters</b> &minus; ‘connection_name’ is the name to be given to the connection. ‘subprotocol’ is the protocol to be used for the connection. By default we will be using the mysql protocol. ‘subname’ is the url to connect to the mysql db along with the database name. ‘user’ is the username used to connect to the database. ‘password’ is the password to be used to connect to the database.</p>
+<p><b>Return Value</b> &minus; This will provide a connection string, which can be used in subsequent mysql operations.</p>
+<p>The following example shows how to connect to the tables in the information schema and retrieve all the data in the table.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+(ns test.core
+   (:require [clojure.java.jdbc :as sql]))
+(defn -main []
+   (def mysql-db {
+      :subprotocol "mysql"
+      :subname "//127.0.0.1:3306/information_schema"
+      :user "root"
+      :password "shakinstev"})
+   (println (sql/query mysql-db
+      ["select table_name from tables"]
+      :row-fn :table_name)))
+</pre>
+<h2>Querying Data</h2>
+<p>Querying data on any database means to fetch some useful information from the database. Once a database connection is established, you are ready to make a query into this database. Following is the syntax by which data can be queried using Clojure.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+clojure.java.jdbc/query dbconn
+["query"]
+   :row-fn :sequence
+</pre>
+<p><b>Parameters</b> &minus; ‘dbconn’ is the name of the connection used to connect to the database. ‘query’ is the query string used to fetch data from the database. ‘:sequence’ is by default all the rows of data fetched from the database and is returned as a sequence. The necessary operations on the sequence can then be done to see what data has been fetched.</p>
+<p><b>Return Value</b> &minus; This will return a sequence, which will have the rows of data from the query operation.</p>
+<p>The following example shows how to connect to the employee table and fetch the first_name column of the rows in the table.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+(ns test.core
+   (:require [clojure.java.jdbc :as sql]))
+(defn -main []
+   (def mysql-db {
+      :subprotocol "mysql"
+      :subname "//127.0.0.1:3306/testdb"
+      :user "root"
+      :password "shakinstev"})
+   (println (sql/query mysql-db
+      ["select first_name from employee"]
+      :row-fn :first_name)))
+</pre>
+<p>From the above code, we can see that</p>
+<ul class="list">
+<li><p>The query of “select first_name from employee” is passed as the query string.</p></li>
+<li><p>The :first_name is the sequence, which is returned as a result of the fetch operation.</p></li>
+</ul>
+<p>If we assume that there is just one row in our database which contains a first_name value of John, following will be the output of the above program.</p>
+<pre class="result notranslate">
+(John)
+</pre>
+<h2>Inserting Data</h2>
+<p>It is required when you want to create your records into a database table. Following is the syntax by which data can be inserted using Clojure. This is done by using the <b>‘insert!’</b> function.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+clojure.java.jdbc/insert!
+   :table_name {:column_namen columnvalue}
+</pre>
+<p><b>Parameters</b> &minus; ‘:table_name’ is the name of the table in which the insertion needs to be made. ‘{:column_namen columnvalue }’ is a map of all the column names and values, which need to be added as a row in the table.</p>
+<p><b>Return Value</b> &minus; This will return nil if the insertion is made successfully.</p>
+<p>The following example shows how to insert a record into the employee table in the testdb database.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+(ns test.core
+   (:require [clojure.java.jdbc :as sql]))
+(defn -main []
+   (def mysql-db {
+      :subprotocol "mysql"
+      :subname "//127.0.0.1:3306/testdb"
+      :user "root"
+      :password "shakinstev"})
+   (sql/insert! mysql-db
+      :employee {:first_name "John" :last_name "Mark" :sex "M" :age 30 :income 30}))
+</pre>
+<p>If you now check your MySQL database and the employee table, you will see that the above row will be successfully inserted in the table.</p>
+<h2>Deleting Data</h2>
+<p>Rows can be deleted from a table by using the <b>‘delete!’</b> function. Following is the syntax on how this operation can be performed.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+clojure.java.jdbc/delete!
+   :table_name [condition]
+</pre>
+<p><b>Parameters</b> &minus; ‘:table_name’ is the name of the table in which the insertion needs to be made. ‘condition’ is the condition used to determine which row needs to be deleted from the table.</p>
+<p><b>Return Value</b> &minus; This will return the number of rows deleted.</p>
+<p>The following example shows how to delete a record from the employee table in the testdb database. The example deletes a row from the table based on the condition that the age is equal to 30.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+(ns test.core
+   (:require [clojure.java.jdbc :as sql]))
+(defn -main []
+   (def mysql-db {
+      :subprotocol "mysql"
+      :subname "//127.0.0.1:3306/testdb"
+      :user "root"
+      :password "shakinstev"})
+   (println (sql/delete! mysql-db
+      :employee ["age = ? " 30])))
+</pre>
+<p>If you had a record which had a row with age equal to the value of 30, that row will be deleted.</p>
+<h2>Updating Data</h2>
+<p>Rows can be updated from a table by using the <b>‘update!’</b> function. Following is the syntax on how this operation can be performed.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+clojure.java.jdbc/update!
+   :table_name
+{setcondition}
+[condition]
+</pre>
+<p><b>Parameters</b> &minus; ‘:table_name’ is the name of the table in which the insertion needs to be made. ‘setcondition’ is the column which needs to be updated as mentioned in terms of a map. ‘condition’ is the condition which is used to determine which row needs to be deleted from the table.</p>
+<p><b>Return Value</b> &minus; This will return the number of rows updated.</p>
+<p>The following example shows how to delete a record from the employee table in the testdb database. The example updates a row from the table based on the condition that the age is equal to 30 and updates the value of income to 40.</p>
+<pre class="prettyprint notranslate">
+(ns test.core
+   (:require [clojure.java.jdbc :as sql]))
+(defn -main []
+   (def mysql-db {
+      :subprotocol "mysql"
+      :subname "//127.0.0.1:3306/testdb"
+      :user "root"
+      :password "shakinstev"})
+   (println (sql/update! mysql-db
+      :employee
+      {:income 40}
+      ["age = ? " 30])))
+</pre>
+<p>If you had a record which had a row with age equal to the value of 30, that row will be updated wherein the value of income will be set to 40.</p>
+<h2>Transactions</h2>
+<p>Transactions are mechanisms that ensure data consistency. Transactions have the following four properties &minus;</p>
+<ul class="list">
+<li><p><b>Atomicity</b> &minus; Either a transaction completes or nothing happens at all.</p></li>
+<li><p><b>Consistency</b> &minus; A transaction must start in a consistent state and leave the system in a consistent state.</p></li>
+<li><p><b>Isolation</b> &minus; Intermediate results of a transaction are not visible outside the current transaction.</p></li>
+<li><p><b>Durability</b> &minus; Once a transaction was committed, the effects are persistent, even after a system failure.</p></li>
+</ul>
+<h3>Example</h3>
+<p>The following example shows how to implement transactions in Clojure. Any operations which needs to be performed in a transaction needs to be embedded in the <b>‘with-dbtransaction’</b> clause.</p>
+<pre class="prettyprint notranslate">
+(ns test.core
+   (:require [clojure.java.jdbc :as sql]))
+(defn -main []
+   (def mysql-db {
+      :subprotocol "mysql"
+      :subname "//127.0.0.1:3306/testdb"
+      :user "root"
+      :password "shakinstev"})
+   (sql/with-db-transaction [t-con mysql-db]
+      (sql/update! t-con
+         :employee
+         {:income 40}
+         ["age = ? " 30])))
+</pre>
+<h1>Clojure - Java Interface</h1>
+<p>As we already know, Clojure code runs on the Java virtual environment at the end. Thus it only makes sense that Clojure is able to utilize all of the functionalities from Java. In this chapter, let’s discuss the correlation between Clojure and Java.</p>
+<h2>Calling Java Methods</h2>
+<p>Java methods can be called by using the dot notation. An example is strings. Since all strings in Clojure are anyway Java strings, you can call normal Java methods on strings.</p>
+<p>An example on how this is done is shown in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns Project
+   (:gen-class))
+(defn Example []
+   (println (.toUpperCase "Hello World")))
+(Example)
+</pre>
+<p>The above program produces the following output. You can see from the code that if you just call the dot notation for any string method, it will also work in Clojure.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+HELLO WORLD
+</pre>
+<h2>Calling Java Methods with Parameters</h2>
+<p>You can also call Java methods with parameters. An example on how this is done is shown in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns Project
+   (:gen-class))
+(defn Example []
+   (println (.indexOf "Hello World","e")))
+(Example)
+</pre>
+<p>The above program produces the following output. You can see from the above code, that we are passing the parameter “e” to the indexOf method. The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1
+</pre>
+<h2>Creating Java Objects</h2>
+<p>Objects can be created in Clojure by using the ‘new’ keyword similar to what is done in Java.</p>
+<p>An example on how this is done is shown in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns Project
+   (:gen-class))
+(defn Example []
+   (def str1 (new String "Hello"))
+   (println str1))
+(Example)
+</pre>
+<p>The above program produces the following output. You can see from the above code, that we can use the ‘new’ keyword to create a new object from the existing String class from Java. We can pass the value while creating the object, just like we do in Java. The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello
+</pre>
+<p>Following is another example which shows how we can create an object of the Integer class and use them in the normal Clojure commands.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns Project
+   (:gen-class))
+(defn Example []
+   (def my-int(new Integer 1))
+   (println (+ 2 my-int)))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+3
+</pre>
+<h2>Import Command</h2>
+<p>We can also use the import command to include Java libraries in the namespace so that the classes and methods can be accessed easily.</p>
+<p>The following example shows how we can use the import command. In the example we are using the import command to import the classes from the <b>java.util.stack</b> library. We can then use the push and pop method of the stack class as they are.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns Project
+   (:gen-class))
+(import java.util.Stack)
+(defn Example []
+   (let [stack (Stack.)]
+   (.push stack "First Element")
+   (.push stack "Second Element")
+   (println (first stack))))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+First Element
+</pre>
+<h2>Running Code Using the Java Command</h2>
+<p>Clojure code can be run using the Java command. Following is the syntax of how this can be done.</p>
+<pre class="result notranslate">
+java -jar clojure-1.2.0.jar -i main.clj
+</pre>
+<p>You have to mention the Clojure jar file, so that all Clojure-based classes will be loaded in the JVM. The ‘main.clj’ file is the Clojure code file which needs to be executed.</p>
+<h2>Java Built-in Functions</h2>
+<p>Clojure can use many of the built-in functions of Java. Some of them are &minus;</p>
+<p><b>Math PI function</b> &minus; Clojure can use the Math method to the value of PI. Following is an example code.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns Project
+   (:gen-class))
+(defn Example []
+   (println (. Math PI)))
+(Example)
+</pre>
+<p>The above code produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+3.141592653589793
+</pre>
+<p><b>System Properties</b> &minus; Clojure can also query the system properties. Following is an example code.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns Project
+   (:gen-class))
+(defn Example []
+   (println (.. System getProperties (get "java.version"))))
+(Example)
+</pre>
+<p>Depending on the version of Java on the system, the corresponding value will be displayed. Following is an example output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1.8.0_45
+</pre>
+<h1>Clojure - Concurrent Programming</h1>
+<p>In Clojure programming most data types are immutable, thus when it comes to concurrent programming, the code using these data types are pretty safe when the code runs on multiple processors. But many a times, there is a requirement to share data, and when it comes to shared data across multiple processors, it becomes necessary to ensure that the state of the data is maintained in terms of integrity when working with multiple processors. This is known as <b>concurrent programming</b> and Clojure provides support for such programming.</p>
+<p>The software transactional memory system (STM), exposed through dosync, ref, set, alter, etc. supports sharing changing state between threads in a synchronous and coordinated manner. The agent system supports sharing changing state between threads in an asynchronous and independent manner. The atoms system supports sharing changing state between threads in a synchronous and independent manner. Whereas the dynamic var system, exposed through def, binding, etc. supports isolating changing state within threads.</p>
+<p>Other programming languages also follow the model for concurrent programming.</p>
+<ul class="list">
+<li><p>They have a direct reference to the data which can be changed.</p></li>
+<li><p>If shared access is required, the object is locked, the value is changed, and the process continues for the next access to that value.</p></li>
+</ul>
+<p>In Clojure there are no locks, but Indirect references to immutable persistent data structures.</p>
+<p>There are three types of references in Clojure.</p>
+<ul class="list">
+<li><p><b>Vars</b> &minus; Changes are isolated in threads.</p></li>
+<li><p><b>Refs</b> &minus; Changes are synchronized and coordinated between threads.</p></li>
+<li><p><b>Agents</b> &minus; Involves asynchronous independent changes between threads.</p></li>
+</ul>
+<p>The following operations are possible in Clojure with regards to concurrent programming.</p>
+<h2>Transactions</h2>
+<p>Concurrency in Clojure is based on transactions. References can only be changed within a transaction. Following rules are applied in transactions.</p>
+<ul class="list">
+<li>All changes are atomic and isolated.</li>
+<li>Every change to a reference happens in a transaction.</li>
+<li>No transaction sees the effect made by another transaction.</li>
+<li>All transactions are placed inside of dosync block.</li>
+</ul>
+<p>We already seen what the dosync block does, let’s look at it again.</p>
+<h2>dosync</h2>
+<p>Runs the expression (in an implicit do) in a transaction that encompasses expression and any nested calls. Starts a transaction if none is already running on this thread. Any uncaught exception will abort the transaction and flow out of dosync.</p>
+<p>Following is the syntax.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+(dosync expression)
+</pre>
+<p><b>Parameters</b> &minus; ‘expression’ is the set of expressions which will come in the dosync block.</p>
+<p><b>Return Value</b> &minus; None.</p>
+<p>Let’s look at an example wherein we try to change the value of a reference variable.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def names (ref []))
+   (alter names conj "Mark"))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program when run gives the following error.</p>
+<pre class="result notranslate">
+Caused by: java.lang.IllegalStateException: No transaction running
+   at clojure.lang.LockingTransaction.getEx(LockingTransaction.java:208)
+   at clojure.lang.Ref.alter(Ref.java:173)
+   at clojure.core$alter.doInvoke(core.clj:1866)
+   at clojure.lang.RestFn.invoke(RestFn.java:443)
+   at clojure.examples.example$Example.invoke(main.clj:5)
+   at clojure.examples.example$eval8.invoke(main.clj:7)
+   at clojure.lang.Compiler.eval(Compiler.java:5424)
+   ... 12 more
+</pre>
+<p>From the error you can clearly see that you cannot change the value of a reference type without first initiating a transaction.</p>
+<p>In order for the above code to work, we have to place the alter command in a dosync block as done in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def names (ref []))
+   
+   (defn change [newname]
+      (dosync
+         (alter names conj newname)))
+   (change "John")
+   (change "Mark")
+   (println @names))
+(Example)
+</pre>
+<p>The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+[John Mark]
+</pre>
+<p>Let’s see another example of dosync.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+(ns clojure.examples.example
+   (:gen-class))
+(defn Example []
+   (def var1 (ref 10))
+   (def var2 (ref 20))
+   (println @var1 @var2)
+   
+   (defn change-value [var1 var2 newvalue]
+      (dosync
+         (alter var1 - newvalue)
+         (alter var2 + newvalue)))
+   (change-value var1 var2 20)
+   (println @var1 @var2))
+(Example)
+</pre>
+<p>In the above example, we have two values which are being changed in a dosync block. If the transaction is successful, both values will change else the whole transaction will fail.</p>
+<p>The above program produces the following output.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+10 20
+-10 40
+</pre>
+<h1>Clojure - Applications</h1>
+<p>Clojure has some contributed libraries which have the enablement for creating <b>Desktop</b> and <b>Web-based applications</b>. Let’s discuss each one of them.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Applications &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="clojure_desktop_seesaw.html">Desktop – See-saw</a>
+<p>See-saw is a library which can be used for creating desktop applications.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="clojure_desktop_changing_value_text.html">Desktop – Changing the Value of Text</a>
+<p>The value of the content in the window can be changed by using the <b>‘config!’</b> option. In the following example the config! option is used to change the window content to the new value of “Good Bye”.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="clojure_desktop_displaying_modal_text_view.html">Desktop – Displaying a Modal Dialog Box</a>
+<p>A modal dialog box can be shown by using the alert method of the see-saw class. The method takes the text value, which needs to be shown in the modal dialog box.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="clojure_desktop_displaying_buttons.html">Desktop – Displaying Buttons</a>
+<p>Buttons can be displayed with the help of the button class.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="clojure_desktop_displaying_labels.html">Desktop – Displaying Labels</a>
+<p>Labels can be displayed with the help of the label class.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="clojure_desktop_displaying_text_fields.html">Desktop – Displaying Text Fields</a>
+<p>Text Fields can be displayed with the help of the text class.</p></td>
+</tr>
+</table>
+<h2>Web Applications - Introduction</h2>
+<p>To create a web application in Clojure you need to use the Ring application library, which is available at the following link <a target="_blank" rel="nofollow" href="https://github.com/ring-clojure/ring">https://github.com/ring-clojure/ring</a></p>
+<p>You need to ensure you download the necessary jars from the site and ensure to add it as a dependency for the Clojure application.</p>
+<p>The <b>Ring framework</b> provides the following capabilities &minus;</p>
+<ul class="list">
+<li><p>Sets things up such that an http request comes into your web application as a regular Clojure HashMap, and likewise makes it so that you can return a response as a HashMap.</p></li>
+<li><p>Provides a specification describing exactly what those request and response maps should look like.</p></li>
+<li><p>Brings along a web server (Jetty) and connects your web application to it.</p></li>
+</ul>
+<p>The Ring framework automatically can start a web server and ensures the Clojure application works on this server. Then one can also use the Compojure framework. This allows one to create routes which is now how most modern web applications are developed.</p>
+<p><b>Creating your first Clojure application</b> &minus; The following example shows how you can create your first web application in Clojure.</p>
+<pre class="prettyprint notranslate">
+(ns my-webapp.handler
+   (:require [compojure.core :refer :all]
+      [compojure.route :as route]
+      [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+(defroutes app-routes
+   (GET "/" [] "Hello World")
+   (route/not-found "Not Found"))
+(def app
+   (wrap-defaults app-routes site-defaults))
+</pre>
+<p>Let’s look at the following aspects of the program &minus;</p>
+<ul class="list">
+<li><p>The <b>‘defroutes’</b> is used to create routes so that request made to the web application to different routes can be directed to different functions in your Clojure application.</p></li>
+<li><p>In the above example, the “/” is known as the default route, so when you browse to the base of your web application, the string “Hello World” will be sent to the web browser.</p></li>
+<li><p>If the user hits any url which cannot be processed by the Clojure application, then it will display the string “Not Found”.</p></li>
+</ul>
+<p>When you run the Clojure application, by default your application will be loaded as localhost:3000, so if you browse to this location, you will receive the following output.</p>
+<img src="images/clojure_application.jpg" alt="Clojure Application" />
+<h2>Web Applications – Adding More Routes to Your Web Application</h2>
+<p>You can also add more routes to your web application. The following example shows how to achieve this.</p>
+<pre class="prettyprint notranslate">
+(ns my-webapp.handler
+   (:require [compojure.core :refer :all]
+      [compojure.route :as route]
+      [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+(defroutes app-routes
+   (GET "/" [] "Hello World")
+   (GET "/Tutorial" [] "This is a tutorial on Clojure")
+   (route/not-found "Not Found"))
+(def app
+   (wrap-defaults app-routes site-defaults))
+</pre>
+<p>You can see that adding a route in the application is as easy as just adding another GET function with the url route. (GET "/Tutorial" [] "This is a tutorial on Clojure")</p>
+<p>If you browse to the location <b>http://localhost:3000/Tutorial</b>, you will receive the following output.</p>
+<img src="images/localhost.jpg" alt="Localhost" />
+<h1>Clojure - Automated Testing</h1>
+<p>In this chapter, let’s discuss automated testing options provided by Clojure.</p>
+<h2>Testing for Client Applications</h2>
+<p>In order to use testing for Clojure framework, you have to use the dependencies located at <a target="_blank" rel="nofollow" href="https://github.com/slagyr/speclj#manual-installation">https://github.com/slagyr/speclj#manual-installation</a></p>
+<p>This URL provides the <b>speclj</b> framework, which is used as a Test data driven or Behaviour driven test framework for Clojure. You have to ensure that you use the Clojure 1.7.0 framework when using any of the ‘speclj’ libraries. By default, the test files will be different from the Clojure code files and need to be placed in a ‘spec’ directory.</p>
+<p>Following is a sample code for a test file.</p>
+<pre class="prettyprint notranslate">
+(ns change.core-spec
+   (:require [speclj.core :refer :all]))
+(describe "Truth"
+   (it "is true"
+   (should true))
+   (it "is not false"
+   (should-not false)))
+(run-specs)
+</pre>
+<p>Following things need to be noted about the above code &minus;</p>
+<ul class="list">
+<li><p>We first have to ensure to use the ‘require’ statement to include all the core libraries in the ‘speclj’ framework.</p></li>
+<li><p>Next is the ‘describe’ function. This is used to provide a description for the test case being created.</p></li>
+<li><p>Next function is the ‘it’ function, which is the actual test case. In the first test case, the “is true” string is the name given to the test case.</p></li>
+<li><p>Should and should-not are known as <b>assertions</b>. All assertions begin with should. Should and should-not are just two of the many assertions available. They both take expressions that they will check for truthy-ness and falsy-ness respectively.</p></li>
+</ul>
+<p>If you run the test case, you will get the following output. The output shows the time taken in milliseconds for the test case to run.</p>
+<pre class="result notranslate">
+←[32m.←[0m←[32m.←[0m
+Finished in 0.00014 seconds
+</pre>
+<h2>Testing for Web-based Applications</h2>
+<p><b>Selenium</b> is one of the key frameworks used for testing modern day web-based applications. Clojure libraries are also available which can be used for testing web-based applications.</p>
+<p>Let’s look at how we can use the Selenium libraries for testing Clojure web-based applications.</p>
+<p><b>Step 1</b> &minus; The first step is to ensure we are using the Ring and Compojure framework to create a web-based application, which needs to be tested. Let’s use one of the examples from our earlier chapters. The following code is a simple web application, which displays “Hello World” in the browser.</p>
+<pre class="prettyprint notranslate">
+(ns my-webapp.handler
+   (:require [compojure.core :refer :all]
+      [compojure.route :as route]
+      [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+(defroutes app-routes
+   (GET "/" [] "Hello World")
+   (route/not-found "Not Found"))
+(def app
+   (wrap-defaults app-routes site-defaults))
+</pre>
+<p><b>Step 2</b> &minus; Next make sure to download the selenium jar file <a target="_blank" rel="nofollow" href="http://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server/2.47.0">http://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server/2.47.0</a> and include it in your classpath.</p>
+<p><b>Step 3</b> &minus; Also ensure to download the ‘clj’ web driver, which will be used for running the web test from the following location.</p>
+<p><a target="_blank" rel="nofollow" href="https://clojars.org/clj-webdriver/versions/0.7.1">https://clojars.org/clj-webdriver/versions/0.7.1</a></p>
+<p><b>Step 4</b> &minus; In your project directory, create another directory called features and create a file called ‘config.clj’.</p>
+<p><b>Step 5</b> &minus; Next add the following code to the ‘config.clj’ file created in the earlier step.</p>
+<pre class="result notranslate">
+ns clj-webdriver-tutorial.features.config)
+(def test-port 3000)
+(def test-host "localhost")
+(def test-base-url (str "http://" test-host ":" test-port "/"))
+</pre>
+<p>The above code basically tells the web test framework to test the application, which gets loaded at the URL <b>http://localhost:3000</b></p>
+<p><b>Step 6</b> &minus; Finally, let’s write our code to carry out our test.</p>
+<pre class="prettyprint notranslate">
+(ns clj-webdriver-tutorial.features.homepage
+   (:require [clojure.test :refer :all]
+      [ring.adapter.jetty :refer [run-jetty]]
+      [clj-webdriver.taxi :refer :all]
+      [clj-webdriver-tutorial.features.config :refer :all]
+      [clj-webdriver-tutorial.handler :refer [app-routes]]))
+(ns clj-webdriver-tutorial.features.homepage
+   (:require [clojure.test :refer :all]
+      [ring.adapter.jetty :refer [run-jetty]]
+      [clj-webdriver.taxi :refer :all]
+      [clj-webdriver-tutorial.features.config :refer :all]
+      [clj-webdriver-tutorial.handler :refer [app-routes]]))
+(defn start-server []
+   (loop [server (run-jetty app-routes {:port test-port, :join? false})]
+      (if (.isStarted server)
+         server
+         (recur server))))
+(defn stop-server [server]
+   (.stop server))
+(defn start-browser []
+   (set-driver! {:browser :firefox}))
+(defn stop-browser []
+   (quit))
+(deftest homepage-greeting
+   (let [server (start-server)]
+      (start-browser)
+      (to test-base-url)
+      (is (= (text "body") "Hello World"))
+      (stop-browser)
+      (stop-server server)))
+</pre>
+<p>The above code is going to take the following actions &minus;</p>
+<ul class="list">
+<li>Start the server for the application.</li>
+<li>Open the root path in the browser.</li>
+<li>Check if the "Hello World" message is present on the page.</li>
+<li>Close the browser.</li>
+<li>Shut down the server.</li>
+</ul>
+<h1>Clojure - Libraries</h1>
+<p>One thing which makes the Clojure library so powerful is the number of libraries available for the Clojure framework. We have already seen so many libraries used in our earlier examples for web testing, web development, developing swing-based applications, the jdbc library for connecting to MySQL databases. Following are just a couple of examples of few more libraries.</p>
+<h2>data.xml</h2>
+<p>This library allows Clojure to work with XML data. The library version to be used is org.clojure/data.xml "0.0.8". The data.xml supports parsing and emitting XML. The parsing functions will read XML from a Reader or InputStream.</p>
+<h3>Example</h3>
+<p>Following is an example of the data processing from a string to XML.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.example
+   (use 'clojure.data.xml)
+   (:gen-class))
+(defn Example []
+   (let [input-xml (java.io.StringReader. "&lt;?xml version = \"1.0\"
+      encoding = \"UTF-8\"?&gt;&lt;example&gt;&lt;clo&gt;&lt;Tutorial&gt;The Tutorial
+      value&lt;/Tutorial&gt;&lt;/clo&gt;&lt;/example&gt;")]
+      (parse input-xml)))
+
+#clojure.data.xml.Element{
+   :tag :example, :attrs {}, :content (#clojure.data.xml.Element {
+      :tag :clo, :attrs {}, :content (#clojure.data.xml.Element {
+         :tag :Tutorial, :attrs {},:content ("The Tutorial value")})})}
+(Example)
+</pre>
+<h2>data.json</h2>
+<p>This library allows Clojure to work with JSON data. The library version to be used is org.clojure/data.json "0.2.6".</p>
+<h3>Example</h3>
+<p>Following is an example on the use of this library.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.example
+   (:require [clojure.data.json :as json])
+   (:gen-class))
+(defn Example []
+   (println (json/write-str {:a 1 :b 2})))
+(Example)
+</pre>
+<h3>Output</h3>
+<p>The above program produces the following output.</p>
+<pre class="result notranslate">
+{\"a\":1,\"b\":2}
+</pre>
+<h2>data.csv</h2>
+<p>This library allows Clojure to work with <b>‘csv’</b> data. The library version to be used is org.clojure/data.csv "0.1.3".</p>
+<h3>Example</h3>
+<p>Following is an example on the use of this library.</p>
+<pre class="prettyprint notranslate">
+(ns clojure.examples.example
+   (require '[clojure.data.csv :as csv]
+      '[clojure.java.io :as io])
+   (:gen-class))
+(defn Example []
+   (with-open [in-file (io/reader "in-file.csv")]
+      (doall
+      (csv/read-csv in-file)))
+   (with-open [out-file (io/writer "out-file.csv")]
+   (csv/write-csv out-file
+      [[":A" "a"]
+      [":B" "b"]])))
+(Example)
+</pre>
+<p>In the above code, the ‘csv’ function will first read a file called <b>in-file.csv</b> and put all the data in the variable in-file. Next, we are using the write-csv function to write all data to a file called <b>out-file.csv.</b></p>
+<hr />
+<div class="pre-btn">
+<a href="clojure_libraries.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="clojure_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/clojure/clojure_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/clojure/clojure_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/clojure/clojure_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/clojure/clojure_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/clojure/clojure_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/clojure/clojure_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="text/javascript" src="../theme/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+   var tryit = new $.TryIt('try_clojure.html');
+   tryit.compile();
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Clojure Quick Guide",
+    "name": "Clojure Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/clojure/clojure_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/clojure/images/clojure_overview.jpg",
+        "width": 600,
+        "height": 298
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:50.",
+    "dateModified": "July 23 2017 03:34:50.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Clojure is a high level, dynamic functional programming language. Clojure is designed based on the LISP programming language and has compilers which makes it run on both Java and .Net runtime environment...."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Computer Programming",
+                "@id": "https://www.tutorialspoint.com/computer_programming_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Clojure",
+                "@id": "https://www.tutorialspoint.com/clojure"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "Clojure - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/clojure/clojure_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:55:56 GMT -->
+</html>

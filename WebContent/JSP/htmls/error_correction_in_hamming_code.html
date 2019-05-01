@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/digital_electronics/error_correction_in_hamming_code.asp by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 19:07:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Error correction in hamming code</title>
+<meta name="Description" content="Error correction in hamming code - Digital Electronics - Digital Electronics Video tutorials GATE, IES and other PSUs exams preparation and to help Electronics & Communication Engineering Students covering Number System, Conversions, Signed magnative repersentation, Binary arithmetic addition, complemet addition, complemet subtraction, BCD Code, Excess-3 code, Boolean Expression representation, etc." />
+<meta name="Keywords" content=" Number System, Conversions, Signed magnative repersentation, Binary arithmetic addition, complemet addition, complemet subtraction, BCD Code, Excess-3 code, Boolean Expression representation, etc." />
+<style>
+.video-banner{min-height:178px; height:178px;}  
+.radicand { padding: 1px; border-top: thin #908d8d solid; }
+h1 .radicand { padding: 0px; border-top: thin #545454 solid; }
+</style>
+
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #017385 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #017385 !important;}
+.submenu-item{ border-bottom: 2px solid #017385 !important; border-top: 2px solid #017385 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/assets/videotutorials/courses/digital_electronics/course_16_logo_image.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+	
+<!-- tutors -->
+<link rel="stylesheet" href="https://www.tutorialspoint.com/videotutorials/css/videos.css">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<script>
+   var baseurl = 'https://www.tutorialspoint.com/videotutorials/';
+   var relative_baseurl = 'https://www.tutorialspoint.com/videotutorials/';
+</script>
+
+<!-- banner div -->
+<div class="video-banner">
+   <div class="container">
+      <div class="row">
+         <img src="https://www.tutorialspoint.com/videotutorials//images/video-banner-img.png" alt="Video Tutorials" style="height:175px; float:left; margin:5px 0px 0px 0px;"/>
+         <h2>            
+            <a href="https://www.tutorialspoint.com/videotutorials/index.htm">
+                <img src="https://www.tutorialspoint.com/videotutorials/images/video-logo.png" alt="Video Tutorials" title="Video Tutorials"/>
+             </a><br/>
+         </h2>
+               </div>
+   </div>
+</div>
+<!-- end of banner div -->
+<style>
+.video-banner{display:none;}
+ul.submenu li {width:100%; background:#eee!important; list-style-type:circle!important; list-style-position:inherit; line-height:32px!important;
+margin:0px 0px 0px 0px!important; padding:0px 0px 0px 0px!important; border-bottom:1px dotted #8a8a8a!important;}
+.clsSection { background: #017385 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.container{width:1322px; margin:0 auto;}
+@media (min-width: 992px){.col-md-2{width:21%!important;} .col-md-7{width:56%!important; } .col-md-3{width:auto!important;}}
+#sidebar #scroller {width:125%!important;}
+#sidebar {overflow-x:auto!important;}
+@media (max-width: 479px) {.col-md-7 {width:100%!important;}
+@media (max-width: 320px) and (min-width: 240px) {.col-md-7 {width:100%!important;}
+@media (max-width: 667px) and (min-width: 375px){.col-md-7 {width:100%!important;}
+</style>
+<div role="main" class="main">
+   <div class="container video_container">
+      <!-- PRINTING STARTS HERE -->      
+      <div class="row">
+		 <div class="content">
+			<div class="col-md-2">
+			   <div class="sidebar">
+			   <div class="crs-left-img">
+				 <img src="https://www.tutorialspoint.com/assets/videotutorials/courses/digital_electronics/380_course_16_image.jpg" title="Digital Electronics" alt="Digital Electronics" />
+			   </div>
+			   <div id="sidebar">
+				  <div id="scroller">
+					 <ul class="nav nav-list primary left-menu">	
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Introduction to Number Systems</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='11'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/index.asp" style="background:none!important; padding:0px 0px 0px 4px!important;">
+								  <i class="fa-home"></i>&nbsp;Digital Electronics - Home&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='12'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/digital_electronics_overview.asp" style="">
+								  Digital Electronics Overview<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='13'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_number_systems_and_base_or_radix.asp" style="">
+								  Introduction to Number Systems & base or radix<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='14'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/find_out_the_base_or_radix.asp" style="">
+								  Find out the base or radix<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Conversions</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='21'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/decimal_to_any_other_number_system_convertion.asp" style="">
+								  Decimal to any other number system convertion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='22'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_equivalent_of_decimal_number.asp" style="">
+								  Binary equivalent of decimal number<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='23'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/decimal_to_octal_number_example.asp" style="">
+								  Decimal to octal number example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='24'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/octal_equivalent_of_decimal_number.asp" style="">
+								  octal equivalent of decimal number<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='25'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexadecimal_equivalent_of_decimal_number.asp" style="">
+								  Hexadecimal equivalent of decimal number<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='26'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/decimal_to_binary_and_hexa_conversion_example.asp" style="">
+								  Decimal to binary and hexa conversion example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='27'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/any_other_number_system_into_decimal.asp" style="">
+								  Any other number system into decimal<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='28'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/decimal_equivalent_of_binary_number.asp" style="">
+								  Decimal equivalent of binary number<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='29'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/decimal_equivalent_of_binary_number_example.asp" style="">
+								  Decimal equivalent of binary number example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='210'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/octal_to_decimal_number_conversion.asp" style="">
+								  Octal to decimal number conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='211'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/octal_to_decimal_number_example.asp" style="">
+								  Octal to decimal number example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='212'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexadecimal_to_decimal_number_conversion.asp" style="">
+								  Hexadecimal to decimal number conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='213'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexadecimal_to_decimal_number_example.asp" style="">
+								  hexadecimal to decimal number example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='214'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/octal_to_binary_number_conversion.asp" style="">
+								  octal to binary number conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='215'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_to_octal_conversion_example.asp" style="">
+								  binary to octal conversion example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='216'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexadecimal_to_binary_and_binary_to_hexa_conversion.asp" style="">
+								  Hexadecimal to binary and binary to hexa conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='217'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexa_to_binary_conversion_example_1.asp" style="">
+								  hexa to binary conversion example 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='218'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexa_to_binary_conversion_example_2.asp" style="">
+								  hexa to binary conversion example 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='219'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexadecimal_to_octal_and_octal_to_hexa_number_conversion.asp" style="">
+								  Hexadecimal to octal and octal to hexa number conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='220'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/octal_to_hexa_conversions_example_1.asp" style="">
+								  Octal to Hexa conversions example 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='221'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/octal_to_hexa_conversions_example_2.asp" style="">
+								  Octal to Hexa conversions example 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='222'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/octal_to_hexa_conversion_example_3.asp" style="">
+								  octal to hexa conversion example 3<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='223'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexa_to_octal_conversion_example_1.asp" style="">
+								  Hexa to octal conversion example 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='224'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexa_to_octal_conversions_example_2.asp" style="">
+								  hexa to octal conversions example 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='225'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/minimal_decimal_equivalent.asp" style="">
+								  Minimal decimal equivalent<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='226'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/required_bits_to_represent_a_number_part_a.asp" style="">
+								  Required bits to represent a number - part A<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='227'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/required_bits_to_represent_a_number_part_b.asp" style="">
+								  Required bits to represent a number - part B<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='228'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/match_the_list_octal_binary.asp" style="">
+								  match the list octal binary<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='229'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/find_unknown_value_in_a_relation.asp" style="">
+								  Find unknown value in a relation<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='230'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/conversions_examples_part_1.asp" style="">
+								  conversions examples part 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='231'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/conversions_examples_part_2.asp" style="">
+								  conversions examples part 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='232'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_coded_pentory_problem.asp" style="">
+								  Binary Coded Pentory Problem<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Sign Bit Representation</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='31'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/signed_magnative_repersentation.asp" style="">
+								  Signed magnative repersentation<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='32'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/1s_and_2s_complement_representation_of_signed_numbers.asp" style="">
+								  1's & 2's complement representation of signed numbers<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='33'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2s_complement_repersentation_example.asp" style="">
+								  2's complement repersentation example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='34'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2s_complement_representation_previous_gate_problem_1.asp" style="">
+								  2's complement representation previous gate problem 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='35'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2s_complement_representation_previous_gate_problem_2.asp" style="">
+								  2's complement representation previous gate problem 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='36'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2s_complement_representation_previous_gate_problem_3.asp" style="">
+								  2's complement representation previous gate problem 3<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='37'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2s_complement_representation_previous_gate_problem_4.asp" style="">
+								  2's complement representation previous gate problem 4<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='38'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2s_complement_representation_previous_gate_problem_5.asp" style="">
+								  2's complement representation previous gate problem 5<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Binary Arithmetic</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='41'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_arithmetic_addition.asp" style="">
+								  Binary arithmetic addition<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='42'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_arithmetic_subtraction.asp" style="">
+								  Binary arithmetic subtraction<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='43'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_arithmetic_multiplication.asp" style="">
+								  Binary arithmetic multiplication<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='44'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binari_arithmetic_multiplication_example.asp" style="">
+								  Binari arithmetic multiplication example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='45'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_arithmetic_division.asp" style="">
+								  Binary arithmetic division<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Complement Subtractions</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='51'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_complemet_subtraction.asp" style="">
+								  Introduction to complemet subtraction<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='52'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/1andrsquos_complemet_subtraction_smaller_to_larger.asp" style="">
+								  1’s Complemet subtraction smaller to larger<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='53'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/1andrsquos_complemet_subtraction_smaller_from_larger_example.asp" style="">
+								  1’s Complemet subtraction smaller from larger example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='54'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/1andrsquos_complement_subtraction_larger_to_samller.asp" style="">
+								  1’s Complement subtraction larger to samller<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='55'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/1andrsquos_complement_subtraction_larger_from_smaller_example.asp" style="">
+								  1’s Complement subtraction larger from smaller example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='56'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2andrsquos_complemet_subtraction_smaller_from_larger.asp" style="">
+								  2’s Complemet subtraction smaller from larger<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='57'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2andrsquos_complement_subtraction_smaller_from_larger_example.asp" style="">
+								  2’s Complement subtraction smaller from larger example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='58'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2andrsquos_complemet_subtraction_larger_from_smaller.asp" style="">
+								  2’s Complemet subtraction larger from smaller<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='59'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2andrsquos_complement_subtraction_previous_gate_problem.asp" style="">
+								  2’s Complement subtraction previous gate problem<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">15&rsquo;s & 16&rsquo;s complement Subtractions</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='61'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_15andrsquos_and_16andrsquos_complement.asp" style="">
+								  Introduction to 15’s & 16’s complement<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='62'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexadecimal_addition.asp" style="">
+								  Hexadecimal addition<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='63'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hexadecimal_subtraction.asp" style="">
+								  Hexadecimal subtraction<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='64'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/15andrsquos_complement_subtraction_smaller_from_larger.asp" style="">
+								  15’s complement subtraction smaller from larger<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='65'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/15andrsquos_complement_subtraction_smaller_from_larger_examples.asp" style="">
+								  15’s complement subtraction smaller from larger examples<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='66'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/15andrsquos_complement_subtraction_larger_from_smaller.asp" style="">
+								  15’s Complement subtraction larger from smaller<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='67'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/16andrsquos_complement_subtraction_smaller_from_larger.asp" style="">
+								  16’s complement subtraction smaller from larger<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='68'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/16andrsquos_complement_subtraction_larger_from_smaller.asp" style="">
+								  16’s complement subtraction larger from smaller<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='69'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/15andrsquos_complement_and_16s_complement_subtraction_examples.asp" style="">
+								  15’s complement and 16s complement subtraction examples<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">BCD Code & Arithmetic</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='71'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/classification_of_binary_codes.asp" style="">
+								  Classification of binary codes<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='72'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/bcd_code.asp" style="">
+								  BCD Code<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='73'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/bcd_addition.asp" style="">
+								  BCD Addition<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='74'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/9andrsquos_complement_and_10andrsquos_complement.asp" style="">
+								  9’s complement & 10’s complement<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='75'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/bcd_subtraction_using_9andrsquos_complement.asp" style="">
+								  BCD subtraction using 9’s complement<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='76'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/bcd_subtraction_using_9andrsquos_complement_example.asp" style="">
+								  BCD subtraction using 9’s complement example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='77'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/bcd_subtraction_using_10andrsquos_complement.asp" style="">
+								  BCD subtraction using 10’s complement<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='78'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/bcd_subtraction_using_10andrsquos_complement_example.asp" style="">
+								  BCD subtraction using 10’s complement example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Excess-3  Arithmetic</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='81'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_code.asp" style="">
+								  Excess-3 code<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='82'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_addition.asp" style="">
+								  Excess-3 addition<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='83'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_addition_example.asp" style="">
+								  Excess-3 addition example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='84'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_subtraction_using_9andrsquos_complement.asp" style="">
+								  Excess-3 subtraction using 9’s complement<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='85'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_subtraction_using_9andrsquos_complement_example.asp" style="">
+								  Excess-3 subtraction using 9’s complement example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='86'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_subtraction_using_10andrsquos_complement.asp" style="">
+								  Excess-3 subtraction using 10’s complement<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='87'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_subtraction_using_10andrsquos_complement_example.asp" style="">
+								  Excess-3 subtraction using 10’s complement example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Gray Code & ASCII Code</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='91'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gray_code_and_conversion_binary_to_gray.asp" style="">
+								  Gray code & conversion binary to gray<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='92'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gray_to_binary_conversion.asp" style="">
+								  Gray to binary conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='93'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/ascii_code.asp" style="">
+								  ASCII Code<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">List of Gates</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='101'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_logic_gates_and_boolean_algebra.asp" style="">
+								  Introduction to logic gates & boolean algebra<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='102'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_logic_gates.asp" style="">
+								  Introduction to Logic Gates<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='103'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/and_gate.asp" style="">
+								  AND Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='104'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/or_gate.asp" style="">
+								  OR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='105'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/not_gate.asp" style="">
+								  NOT Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='106'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/nand_gate.asp" style="">
+								  NAND Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='107'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/nor_gate.asp" style="">
+								  NOR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='108'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/exor_gate.asp" style="">
+								  EX-OR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='109'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/ex_nor_gate.asp" style="">
+								  EX NOR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Alternate Gates & NAND, NOR relization</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='111'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/alternate_gate.asp" style="">
+								  Alternate Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='112'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/properties_of_exor_gate.asp" style="">
+								  Properties of EX-OR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='113'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/nand_realization.asp" style="">
+								  NAND Realization<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='114'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/nor_realization.asp" style="">
+								  NOR Realization<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='115'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/xor_gate_example.asp" style="">
+								  X-OR Gate example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='116'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/logic_gates_example.asp" style="">
+								  Logic Gates example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='117'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/implement_and_and_nand_gates.asp" style="">
+								  Implement AND & NAND Gates<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='118'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_back_propagation.asp" style="">
+								  Problem on back propagation<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='119'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/nand_realization_example.asp" style="">
+								  NAND realization example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Fundamentals & Theorem's of Boolean Algebra</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='121'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/fundamentals_of_boolean_algebra.asp" style="">
+								  Fundamentals of Boolean Algebra<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='122'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/theorems_of_boolean_algebra.asp" style="">
+								  Theorem's of Boolean Algebra<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='123'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/stuckat1_fault_in_logic_circuit.asp" style="">
+								  Stuck-at-1 fault in logic circuit<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='124'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/dual_of_boolean_expression.asp" style="">
+								  Dual of boolean expression<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='125'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/properties_of_boolean_algebra.asp" style="">
+								  Properties of Boolean Algebra<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Boolean Equation Representation</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='131'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/literal.asp" style="">
+								  Literal<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='132'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/boolean_expression_representation_in_sum_of_products_form.asp" style="">
+								  Boolean Expression representation in Sum of Products Form<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='133'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/boolean_expression_representation_in_product_of_sum_form.asp" style="">
+								  Boolean Expression representation in Product of Sum Form<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='134'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/boolean_expression_representation_using_canonical_form.asp" style="">
+								  Boolean Expression representation using Canonical Form<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='135'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/minterms_and_maxterms_in_boolean_algebra.asp" style="">
+								  Min-Terms and Max-Terms in boolean algebra<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='136'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/converting_sop_to_ssop.asp" style="">
+								  Converting SOP to SSOP<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='137'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/converting_pos_to_spos.asp" style="">
+								  Converting POS to SPOS<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='138'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/converting_ssop_to_spos.asp" style="">
+								  Converting SSOP to SPOS<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Propagation Delay</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='141'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/propagation_delay_and_example.asp" style="">
+								  Propagation Delay & Example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">K-Maps</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='151'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/kmap.asp" style="">
+								  K-Map<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='152'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/rules_for_kmap_simplification_part_1.asp" style="">
+								  Rules for K-Map simplification Part 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='153'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/rules_for_kmap_simplification_part_2.asp" style="">
+								  Rules for K-Map simplification Part 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='154'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/boolean_expression_solving_using_kmap.asp" style="">
+								  Boolean Expression solving using K-Map<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='155'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/donandrsquot_care_and_problem.asp" style="">
+								  Don’t care & Problem<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='156'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/expression_solving_using_boolean_law.asp" style="">
+								  Expression solving using boolean law<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Combinational Circuits</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='161'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_combinational_circuits.asp" style="">
+								  Introduction to combinational circuits<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='162'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/designing_steps_for_a_combinational_circuit.asp" style="">
+								  Designing Steps for a Combinational circuit<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Designing of Adders</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='171'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/design_of_half_adder.asp" style="">
+								  Design of half adder<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='172'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/designing_of_full_adder.asp" style="">
+								  Designing of Full Adder<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='173'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/half_substractor.asp" style="">
+								  Half Substractor<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='174'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/full_substractor.asp" style="">
+								  Full Substractor<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='175'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/nbit_parallel_adder_4bit_parallel_adder.asp" style="">
+								  N-Bit Parallel Adder (4-Bit Parallel Adder)<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='176'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/4bit_parallel_adder_cum_substractor.asp" style="">
+								  4-Bit Parallel Adder cum Substractor<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='177'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/designing_of_full_adder_using_half_adder.asp" style="">
+								  Designing of Full Adder using Half Adder<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='178'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/carry_generation_in_carry_look_ahead_adder.asp" style="">
+								  Carry Generation in Carry Look Ahead Adder<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='179'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/carry_look_ahead_adder.asp" style="">
+								  Carry Look Ahead Adder<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='1710'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/bcd_adder.asp" style="">
+								  BCD Adder<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='1711'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excess3_adder.asp" style="">
+								  Excess-3 Adder<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Designing of comparator</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='181'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/comparators_part_1.asp" style="">
+								  Comparators Part 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='182'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/comparators_part_2.asp" style="">
+								  Comparators Part 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Code converters</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='191'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_to_gray_code_converter.asp" style="">
+								  Binary to Gray Code Converter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='192'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/code_convertor_binary_to_bcd.asp" style="">
+								  Code convertor Binary to BCD<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Parity Generators</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='201'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/parity_bit_and_check_bit.asp" style="">
+								  Parity Bit & Check Bit<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='202'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/odd_parity_generator.asp" style="">
+								  Odd parity generator<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='203'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/even_parity_generator.asp" style="">
+								  Even Parity Generator<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Decoders</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='211'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/2_to_4_decoder_design.asp" style="">
+								  2 to 4 decoder design<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='212'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/3_to_8_decoder_design.asp" style="">
+								  3 to 8 Decoder Design<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Multiplexers</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='221'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/multiplexer_mux_2_x_1mux_design.asp" style="">
+								  Multiplexer (MUX) 2 X 1MUX Design<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='222'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_mux_part1.asp" style="">
+								  Problem on MUX Part-1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='223'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_mux_part2.asp" style="">
+								  Problem on MUX Part-2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='224'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/4x1_mux.asp" style="">
+								  4X1 MUX<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Hamming Code</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='231'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_of_hamming_code.asp" style="">
+								  Introduction of hamming code<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='232'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hamming_code_generation_with_an_example.asp" style="">
+								  Hamming code generation with an example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='233'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hamming_code_generation_example_with_even_parity.asp" style="">
+								  Hamming code generation example with even parity<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='234'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/hamming_code_example_with_oddparity.asp" style="">
+								  Hamming code example with odd-parity<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture activebar" id='235'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/error_correction_in_hamming_code.asp" style="">
+								  Error correction in hamming code<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='236'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/error_detection_and_correction_in_hamming_code.asp" style="">
+								  Error detection & correction in hamming code<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Basic Latch & Flip-Flop</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='241'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/d_to_t_flipflop_conversion.asp" style="">
+								  D to T Flip-Flop Conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='242'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_sequential_circuits.asp" style="">
+								  Introduction to sequential circuits<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='243'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/sr_latch_using_nor_gates.asp" style="">
+								  S-R Latch using NOR gates<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='244'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/sr_latch_with_nand_gates.asp" style="">
+								  S-R Latch with NAND Gates<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='245'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/sr_flip_flop.asp" style="">
+								  S-R Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='246'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/equation_for_sr_flip_flop.asp" style="">
+								  Equation for S-R Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='247'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/d_flip_flop.asp" style="">
+								  D Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='248'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/jk_flip_flop.asp" style="">
+								  J-K Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='249'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/t_flip_flop.asp" style="">
+								  T Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='2410'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/equation_for_jk_flip_flop.asp" style="">
+								  Equation for J-K Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='2411'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/race_around_condition_in_jk_flip_flop.asp" style="">
+								  Race around condition in J-K Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Excitation Tables</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='251'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excitation_table_for_sr_flip_flop.asp" style="">
+								  Excitation table for S-R Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='252'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excitation_table_for_d_flip_flop.asp" style="">
+								  Excitation table for D Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='253'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excitation_table_for_jk_flip_flop.asp" style="">
+								  Excitation table for J-K Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='254'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/excitation_table_for_t_flip_flop.asp" style="">
+								  Excitation table for T Flip Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Flip-Flop Conversions</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='261'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/flipflop_conversion_process_steps.asp" style="">
+								  Flip-Flop Conversion Process steps<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='262'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/sr_to_d_flip_flop_conversion.asp" style="">
+								  S-R to D Flip Flop Conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='263'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/sr_to_jk_flip_flop_conversion.asp" style="">
+								  S-R to J-K Flip Flop Conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='264'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/sr_to_t_flip_flop_conversion.asp" style="">
+								  S-R to T Flip Flop Conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='265'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/jk_to_t_flip_flop_conversion.asp" style="">
+								  J-K to T Flip Flop Conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='266'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/jk_to_d_flip_flop_conversion.asp" style="">
+								  J-K to D Flip Flop conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='267'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/t_to_d_flip_flop_conversion.asp" style="">
+								  T to D Flip Flop Conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='268'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/propagation_delay.asp" style="">
+								  Propagation delay<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Shift Registers</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='271'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/applications_of_flipflop.asp" style="">
+								  Applications of Flip-Flop<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='272'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/universal_shift_register.asp" style="">
+								  Universal Shift Register<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='273'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/serial_in_parallel_out_shift_register.asp" style="">
+								  Serial in Parallel out shift register<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='274'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/serial_in_serial_out_shift_register.asp" style="">
+								  Serial in Serial out shift register<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='275'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_shift_register_1.asp" style="">
+								  Problem on Shift register 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='276'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_shift_register_2.asp" style="">
+								  Problem on Shift register 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Counters</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='281'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_of_counter.asp" style="">
+								  Introduction of Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='282'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_of_asynchronous_counter.asp" style="">
+								  Introduction of Asynchronous Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='283'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/ripple_up_counter.asp" style="">
+								  Ripple Up Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='284'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/ripple_down_counter.asp" style="">
+								  Ripple Down Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='285'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/synchronous_counter.asp" style="">
+								  Synchronous Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='286'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/ring_counter_or_shift_register_counter.asp" style="">
+								  Ring Counter or Shift Register Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='287'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/twisted_ring_counter_or_johnsonandrsquos_counter.asp" style="">
+								  Twisted Ring Counter or Johnson’s Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='288'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_ripple_counter.asp" style="">
+								  Problem on Ripple Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Mod Counters</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='291'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/modulus_of_counter.asp" style="">
+								  Modulus of Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='292'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_counters_1.asp" style="">
+								  Problem on Counters 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='293'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/problem_on_counters_2.asp" style="">
+								  Problem on Counters 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='294'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/asynchronous_and_direct_inputs.asp" style="">
+								  Asynchronous & Direct Inputs<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='295'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/mod_3_counter.asp" style="">
+								  MOD 3 Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='296'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/mod_12_counter.asp" style="">
+								  MOD 12 Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='297'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/mod_counter_example.asp" style="">
+								  MOD Counter Example<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Bipolar Logic Families</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='301'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_logic_families.asp" style="">
+								  Introduction to Logic Families<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='302'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/characteristics_of_logic_families.asp" style="">
+								  Characteristics of Logic Families<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='303'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/resistor_transistor_logic_rtl.asp" style="">
+								  Resistor Transistor Logic (RTL)<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='304'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/direct_coupled_transistor_logic.asp" style="">
+								  Direct Coupled Transistor Logic<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='305'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/diode_transistor_logic_nand_gate.asp" style="">
+								  Diode Transistor Logic NAND Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='306'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/diode_transistor_logic_nor_gate.asp" style="">
+								  Diode Transistor Logic NOR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='307'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/transistor_transistor_logic.asp" style="">
+								  Transistor Transistor Logic<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='308'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/versions_in_transistor_transistor_logic.asp" style="">
+								  Versions in Transistor Transistor Logic<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Unipolar Logic Families</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='311'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/pmos_and_nmos_inverter.asp" style="">
+								  PMOS & NMOS Inverter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='312'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/cmos_inverter.asp" style="">
+								  CMOS Inverter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='313'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/pmos_nand_gate.asp" style="">
+								  PMOS NAND Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='314'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/pmos_nor_gate.asp" style="">
+								  PMOS NOR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='315'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/designing_of_universal_gates_using_nmos.asp" style="">
+								  Designing of universal Gates using NMOS<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='316'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/cmos_nand_gate.asp" style="">
+								  CMOS NAND Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='317'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/cmos_nor_gate.asp" style="">
+								  CMOS NOR Gate<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='318'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/comparision_of_logic_families.asp" style="">
+								  Comparision of Logic Families<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Semi Conductor Memories</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='321'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/semi_conductor_memories.asp" style="">
+								  Semi Conductor Memories<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='322'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/rom.asp" style="">
+								  ROM<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='323'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/ram.asp" style="">
+								  RAM<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='324'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/diffrence_between_sram_and_dram.asp" style="">
+								  Diffrence Between SRAM & DRAM <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Digital to Analog Converters DACs</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='331'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/introduction_to_data_converters.asp" style="">
+								  Introduction to Data Converters <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='332'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/binary_wishted_resistor_dac.asp" style="">
+								  Binary Wishted Resistor DAC <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='333'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/r2r_ladder_dac_voltage_switched.asp" style="">
+								  R-2R Ladder DAC (Voltage Switched) <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='334'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/r2r_ladder_dac_current_switched.asp" style="">
+								  R-2R Ladder DAC (Current Switched) <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">Analog to Digital Converters ADCs</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='341'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/counter_type_adc.asp" style="">
+								  Counter type ADC <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='342'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/successive_approximation_type_adc.asp" style="">
+								  Successive Approximation type ADC <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='343'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/flash_parallel_type_adc.asp" style="">
+								  Flash Parallel type ADC<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='344'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/dual_slope_or_integrating_type_adc.asp" style="">
+								  Dual Slope or Integrating type ADC <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='345'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/sigma_delta_adc.asp" style="">
+								  Sigma Delta ADC <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='346'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/adc_example.asp" style="">
+								  ADC Example <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='347'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/resolution_of_dac.asp" style="">
+								  Resolution of DAC<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+												   
+						   <li><a href="javascript:void(0);" class="clsSection">GATE Exam Questions & Answers</a>
+						   <ul class="submenu">
+						   					   
+						   <li class="clsLecture " id='351'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_logic_gates.asp" style="">
+								  GATE problem on Logic Gates<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='352'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_distributive_property.asp" style="">
+								  GATE problem on Distributive Property<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='353'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_propagation_delay.asp" style="">
+								  GATE problem on Propagation Delay<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='354'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_transposition_property.asp" style="">
+								  GATE problem on Transposition Property<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='355'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_kmaps_1.asp" style="">
+								  GATE Problem on K-Maps 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='356'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_kmaps_2.asp" style="">
+								  GATE Problem on K-Maps 2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='357'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_boolean_expression_using_kmap.asp" style="">
+								  GATE problem on Boolean Expression using K-Map<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='358'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_pos_expression_using_kmap.asp" style="">
+								  GATE problem on POS expression using K-Map<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='359'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_combinational_circuit_design.asp" style="">
+								  GATE Problem on Combinational Circuit design<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3510'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_mux_part1.asp" style="">
+								  GATE problem on MUX part-1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3511'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_mux_part2.asp" style="">
+								  GATE problem on MUX part-2<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3512'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_mux_part3.asp" style="">
+								  GATE problem on MUX part-3<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3513'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_kmap_and_logic_cuircuit_design.asp" style="">
+								  GATE problem on K-Map & logic cuircuit design<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3514'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_synchronous_counters.asp" style="">
+								  GATE Problem on Synchronous Counters<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3515'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_logic_gates_using_back_propagation_method.asp" style="">
+								  GATE problem on Logic Gates using Back propagation method<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3516'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_flipflop_conversion.asp" style="">
+								  GATE problem on Flip-Flop Conversion<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3517'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_race_around_condition.asp" style="">
+								  GATE Problem on Race around condition<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3518'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_problem_on_johnsonandrsquos_counter.asp" style="">
+								  GATE Problem on Johnson’s Counter<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3519'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_model_on_adc_1.asp" style="">
+								  GATE Model on ADC 1<i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3520'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_model_on_adc_2.asp" style="">
+								  GATE Model on ADC 2 <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3521'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_model_on_adc_3.asp" style="">
+								  GATE Model on ADC 3 <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3522'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_model_on_flash_adc.asp" style="">
+								  GATE Model on Flash ADC <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   					   
+						   <li class="clsLecture " id='3523'>
+							  <a href="https://www.tutorialspoint.com/digital_electronics/gate_model_on_resolution_of_dac.asp" style="">
+								  GATE Model on Resolution of DAC <i class="play"></i>&nbsp; 
+							  </a>
+						   </li>                     
+						   						   </ul>
+						</li>	   
+											  </ul>
+				  </div>		 
+			   </div>
+			   	     			 <!--div class="srch-login-links logolink" style="padding:11px 0px 4px 0px!important;">
+			<a href="http://www.tutorialspoint.com/tutor_connect/videotutorials/userlogin.php" title="Registered User Login"><i class="fa-user login-icon"></i> Login</a>
+			<a href="http://www.tutorialspoint.com/tutor_connect/videotutorials/usersignup.php" title="New User Register"><i class="fa-sign-in login-icon"></i> Signup</a>
+			<div class="clear"></div>
+		 </div>-->         
+        
+   		        
+    
+	  
+   <div class="job-desc top-jobs">
+	  <h4 style="margin:0px 2px 3px -2px!important;">Quick Links</h4>
+		 <ul class="nav nav-tab">
+			<li><a href="https://www.tutorialspoint.com/videotutorials/index.htm">
+			   <i class="fa-play-circle-o"></i> &nbsp;Video Tutorials</a> 
+			</li>
+			<li><a href="https://www.tutorialspoint.com/tutor_connect/index.htm">
+			   <i class="fa-user"></i> &nbsp;Tutor Connect</a>
+			</li>
+			<li><a href="https://www.tutorialspoint.com/whiteboard.htm" target="_blank">
+			   <img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png"
+					style="float:left; top:4px; position:relative; margin-right:2px;" alt="Whiteboard"> &nbsp;&nbsp;Whiteboard</a>
+			</li>
+			<li><a href="https://www.tutorialspoint.com/netmeeting.php" target="_blank">
+			   <i class="fa-video-camera"></i> &nbsp;Net Meeting</a>
+			</li>
+			<li><a href="https://www.tutorialspoint.com/tutorialslibrary.htm">
+			   <i class="tut-lib" style="padding:7px 0 7px 22px!important;"></i> &nbsp;Tutorials Library	</a>
+			</li>
+			<li><a href="https://www.tutorialspoint.com/codingground.htm">
+			   <i class="fa-code"></i> &nbsp;Coding Ground	</a>
+			</li>
+			<li><a href="https://www.tutorialspoint.com/online_dev_tools.htm">
+			   <i class="dev-tools-menu"></i>Tools</a>
+			</li>
+		 </ul>
+   </div>
+	  
+	</div>
+
+		
+
+			   
+			</div>
+            <div class="col-xs-12 col-sm-12 col-md-7 courseview" >
+               <div class="courseimg">				  
+                 			   <h1>
+				  Error correction in hamming code			   </h1>
+			   <div class="topgooglead">
+				  <hr />
+				  <script type="text/javascript"><!--
+				  google_ad_client = "pub-7133395778201029";
+				  google_ad_width = 728;
+				  google_ad_height = 90;
+				  google_ad_format = "728x90_as";
+				  google_ad_type = "image";
+				  google_ad_channel = "";
+				  //--></script>
+				  <script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+			   </div>
+			   <hr />
+			   <div class="pre-btn">
+					 					 <a href="https://www.tutorialspoint.com/digital_electronics/hamming_code_example_with_oddparity.asp"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+				  </div>
+				  <div class="nxt-btn">
+					 					 <a href="https://www.tutorialspoint.com/digital_electronics/error_detection_and_correction_in_hamming_code.asp">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+				  </div>
+			   <div class="clearer"></div>
+			   <hr />
+			  <div class="videoWrapper">	
+               <iframe id="player_lecture" src="http://player.vimeo.com/video/182851826?api=1&amp;player_id=player_lecture&amp;autoplay=1&amp;rel=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 	
+			   </div>
+			</div>
+                                       				  <hr>
+				  <div>
+				  <div class="pre-btn">
+					 					 <a href="https://www.tutorialspoint.com/digital_electronics/hamming_code_example_with_oddparity.asp"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+				  </div>
+               				  <div class="nxt-btn">
+					 					 <a href="https://www.tutorialspoint.com/digital_electronics/error_detection_and_correction_in_hamming_code.asp">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+				  </div>
+				  <hr>
+		 
+               <script src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script>
+               <script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/jquery.colorbox-min.js"></script>
+               <script>
+               function secondsToHms(d) { 
+                  d = Number(d);
+                  var h = Math.floor(d / 3600);
+                  var m = Math.floor(d % 3600 / 60);
+                  var s = Math.floor(d % 3600 % 60);
+                  return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s); 
+               }
+               $(document).ready(function(){
+                  $('.clsLecture').click(function(){
+                     $('.divLectureCls').slideUp("slow");
+                     if($('#divLecture'+$(this).attr('id')).is(':visible')){
+                        $('#divLecture'+$(this).attr('id')).slideUp("slow");
+                     } else {
+                        $('#divLecture'+$(this).attr('id')).slideDown("slow");
+                     }
+                     
+                  });
+               });
+                /* (function(){
+                   var vimeoPlayers = document.querySelectorAll('iframe'),
+                       player;
+
+                   for (var i = 0, length = vimeoPlayers.length; i < length; i++) {
+                       player = vimeoPlayers[i];
+                       $f(player).addEvent('ready', ready);
+                   }
+                   
+                   function addEvent(element, eventName, callback) {
+                       if (element.addEventListener) {
+                           element.addEventListener(eventName, callback, false);
+                       }
+                       else {
+                           element.attachEvent('on' + eventName, callback);
+                       }
+                   }
+                   function ready(player_id) {       
+                       var container = document.getElementById(player_id).parentElement.parentElement;
+                       var froogaloop = $f(player_id);
+                       froogaloop.api('getDuration', function (value, player_id) {
+                            var idsArray = player_id.split("_");
+                           document.getElementById('duration_'+idsArray[1]).innerHTML = secondsToHms(value);
+                      });
+                   }
+                  
+               })();  */
+               </script> 
+               </div>
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/videotutorials/video_course_view.php?course=digital_electronics&chapter=error_correction_in_hamming_code','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/videotutorials/video_course_view.php?course=digital_electronics&chapter=error_correction_in_hamming_code','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/videotutorials/video_course_view.php?course=digital_electronics&chapter=error_correction_in_hamming_code&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/videotutorials/video_course_view.php?course=digital_electronics&amp;chapter=error_correction_in_hamming_code','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/videotutorials/video_course_view.php?course=digital_electronics&chapter=error_correction_in_hamming_code&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/videotutorials/video_course_view.php?course=digital_electronics&chapter=error_correction_in_hamming_code&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "",
+    "name": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/videotutorials/video_course_view.php?course=digital_electronics&chapter=error_correction_in_hamming_code"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com",
+        "width": null,
+        "height": null
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "December 31 1969 18:00:00.",
+    "dateModified": "December 31 1969 18:00:00.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "..."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "",
+                "@id": "https://www.tutorialspoint.com/"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Videotutorials",
+                "@id": "https://www.tutorialspoint.com/videotutorials"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": null
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/digital_electronics/error_correction_in_hamming_code.asp by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 19:07:26 GMT -->
+</html>
+ 

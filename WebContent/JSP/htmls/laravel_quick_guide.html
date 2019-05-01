@@ -1,0 +1,3138 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/laravel/laravel_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:13:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Laravel Quick Guide</title>
+<meta name="description" content="Laravel Quick Guide - Learn Laravel in simple and easy steps starting from Overview, Installation, Application Structure, Configuration, Routing, Middleware, Controllers, Request, Cookie, Response, Views, Redirections, Working With Database, Errors and Logging, Forms, Localization, Session, Validation, File Uploading, Sending Email, Ajax, Error Handling, Event Handling, Facades, Security." />
+<meta name="keywords" content="Laravel, Tutorial, Overview, Installation, Application Structure, Configuration, Routing, Middleware, Controllers, Request, Cookie, Response, Views, Redirections, Working With Database, Errors and Logging, Forms, Localization, Session, Validation, File Uploading, Sending Email, Ajax, Error Handling, Event Handling, Facades, Security." /> 
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #FB503C url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #FB503C !important;}
+.submenu-item{ border-bottom: 2px solid #FB503C !important; border-top: 2px solid #FB503C !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/laravel/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/laravel/images/laravel-mini-logo.jpg" alt="Laravel Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Laravel Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/laravel/index.htm">Laravel - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_overview.htm">Laravel - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_installation.htm">Laravel - Installation</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_application_structure.htm">Laravel - Application Structure</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_configuration.htm">Laravel - Configuration</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_routing.htm">Laravel - Routing</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_middleware.htm">Laravel - Middleware</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_controllers.htm">Laravel - Controllers</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_request.htm">Laravel - Request</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_cookie.htm">Laravel - Cookie</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_response.htm">Laravel - Response</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_views.htm">Laravel - Views</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_redirections.htm">Laravel - Redirections</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_working_with_database.htm">Laravel - Working With Database</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_errors_and_logging.htm">Laravel - Errors &amp; Logging</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_forms.htm">Laravel - Forms</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_localization.htm">Laravel - Localization</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_session.htm">Laravel - Session</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_validation.htm">Laravel - Validation</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_file_uploading.htm">Laravel - File Uploading</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_sending_email.htm">Laravel - Sending Email</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_ajax.htm">Laravel - Ajax</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_error_handling.htm">Laravel - Error Handling</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_event_handling.htm">Laravel - Event Handling</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_facades.htm">Laravel - Facades</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_security.htm">Laravel - Security</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Laravel Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_quick_guide.htm">Laravel - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_useful_resources.htm">Laravel - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/laravel/laravel_discussion.htm">Laravel - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Laravel - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/laravel/laravel_security.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/laravel/laravel_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Laravel - Overview</h1>
+<h2>Introduction</h2>
+<p>Laravel is a MVC framework with bundles, migrations, and Artisan CLI. Laravel offers a robust set of tools and an application architecture that incorporates many of the best features of frameworks like CodeIgniter, Yii, ASP.NET MVC, Ruby on Rails, Sinatra, and others.</p>
+<p>Laravel is an Open Source framework. It has a very rich set of features which will boost the speed of Web Development. If you familiar with Core PHP and Advanced PHP, Laravel will make your task easier. It will save a lot time if you are planning to develop a website from scratch. Not only that, the website built in Laravel is also secure. It prevents the various attacks that can take place on websites.</p>
+<h2>Laravel – Features</h2>
+<p>Laravel offers the following key features &minus;</p>
+<ul class="list">
+<li>Modularity</li>
+<li>Testability</li>
+<li>Routing</li>
+<li>Configuration management</li>
+<li>Query builder and ORM (Object Relational Mapper)</li>
+<li>Schema builder, migrations, and seeding</li>
+<li>Template engine</li>
+<li>E-mailing</li>
+<li>Authentication</li>
+<li>Redis</li>
+<li>Queues</li>
+<li>Event and command bus</li>
+</ul>
+<h1>Laravel - Installation</h1>
+<p>For managing dependencies, Laravel uses <b>composer</b>. Make sure you have a Composer installed on your system before you install Laravel.</p>
+<p><b>Step 1</b> &minus; Visit the following URL and download composer to install it on your system.</p>
+<p><a rel="nofollow" target="_blank" href="https://getcomposer.org/download/">https://getcomposer.org/download/</a></p>
+<p><b>Step 2</b> &minus; After the Composer is installed, check the installation by typing the Composer command in the command prompt as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/composer.jpg" alt="Composer" />
+<p><b>Step 3</b> &minus; Create a new directory anywhere in your system for your new Laravel project. After that, move to path where you have created the new directory and type the following command there to install Laravel.</p>
+<pre class="result notranslate">
+composer create-project laravel/laravel –-prefer-dist
+</pre>
+<p><b>Step 4</b> &minus; The above command will install Laravel in the current directory. Start the Laravel service by executing the following command.</p>
+<pre class="result notranslate">
+php artisan serve
+</pre>
+<p><b>Step 5</b> &minus; After executing the above command, you will see a screen as shown below &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/administrator.jpg" alt="administrator.jpg" />
+<p><b>Step 6</b> &minus; Copy the URL underlined in gray in the above screenshot and open that URL in the browser. If you see the following screen, it implies Laravel has been installed successfully.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/laravel_installed.jpg" alt="Laravel Installed" />
+<h1>Laravel - Application Structure</h1>
+<h2>Root Directory</h2>
+<p>The root directory of Laravel contains various folders and files as shown in the following figure.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/root_directory.jpg" alt="Root Directory" />
+<ul class="list">
+<li><p><b>app</b> &minus; This directory contains the core code of the application.</p></li>
+<li><p><b>bootstrap</b> &minus; This directory contains the application bootstrapping script.</p></li>
+<li><p><b>config</b> &minus; This directory contains configuration files of application.</p></li>
+<li><p><b>database</b> &minus; This folder contains your database migration and seeds.</p></li>
+<li><p><b>public</b> &minus; This is the application’s document root. It starts the Laravel application. It also contains the assets of the application like JavaScript, CSS, Images, etc.</p></li>
+<li><p><b>resources</b> &minus; This directory contains raw assets such as the LESS &amp; Sass files, localization and language files, and Templates that are rendered as HTML.</p></li>
+<li><p><b>storage</b> &minus; This directory contains App storage, like file uploads etc. Framework storage (cache), and application-generated logs.</p></li>
+<li><p><b>test</b> &minus; This directory contains various test cases.</p></li>
+<li><p><b>vendor</b> &minus; This directory contains composer dependencies.</p></li>
+</ul>
+<h2>App Directory</h2>
+<p>This is the application directory. It contains a variety of additional directories, which are described below &minus;</p>
+<ul class="list">
+<li><p><b>Console</b> &minus; All the artisan commands are stored in this directory.</p></li>
+<li><p><b>Events</b> &minus; This directory stores events that your application can raise. Events may be used to alert other parts of your application that a given action has occurred, providing a great deal of flexibility and decoupling.</p></li>
+<li><p><b>Exceptions</b> &minus; This directory contains your application's exception handler and is also a good place to stick any exceptions thrown by your application.</p></li>
+<li><p><b>Http</b> &minus; This directory contains your controllers, filters, and requests.</p></li>
+<li><p><b>Jobs</b> &minus; This directory contains the queueable jobs for your application.</p></li>
+<li><p><b>Listeners</b> &minus; This directory contains the handler classes for your events. Handlers receive an event and perform logic in response to the event being fired. For example, a UserRegistered event might be handled by a SendWelcomeEmail listener.</p></li>
+<li><p><b>Policies</b> &minus; This directory contains various policies of the application</p></li>
+<li><p><b>Providers</b> &minus; This directory contains various service providers.</p></li>
+</ul>
+<h1>Laravel - Configuration</h1>
+<p>The config directory, as the name implies, contains all of your application's configuration files. In this directory, you will find various files needed to configure database, session, mail, application, services etc.</p>
+<h2>Basic Configuration</h2>
+<ul class="list">
+<li><p>After installing Laravel, the first thing we need to do is to set the write permission for the directory <b>storage</b> and <b>bootstrap/cache</b>.</p></li>
+<li><p>Generate Application key to secure session and other encrypted data. If the root directory doesn’t contain the <b>.env</b> file then rename the <b>.env.example</b> to <b>.env</b> file and execute the following command where you have installed Laravel. The newly generated key can be seen in the <b>.env</b> file.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/laravel/images/basic_configuration.jpg" alt="Basic Configuration" />
+<ul class="list">
+<li><p>You can also configure the locale, time zone, etc. of the application in the <b>config/app.php</b> file.</p></li>
+</ul>
+<h2>Environmental Configuration</h2>
+<p>Laravel provides facility to run your application in different environment like testing, production etc. You can configure the environment of your application in the <b>.env</b> file of the root directory of your application. If you have installed Laravel using composer, this file will automatically be created.</p>
+<p>In case you haven’t installed Laravel, you can simply rename the <b>.env.example</b> file to <b>.env</b> file. A sample of Laravel.env file is shown below.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/environmental_configuration.jpg" alt="Environmental Configuration" />
+<p>Notice the text underlined gray in the above image. <b>Local</b> environment variable has been set. It can further be changed to <b>production</b> or <b>testing</b> as per your requirement.</p>
+<h2>Database Configuration</h2>
+<p>The database of your application can be configured from <b>config/database.php</b> file. You can set configuration parameters that can be used by different databases and you can also set the default one to use.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/database_configuration.jpg" alt="Database Configuration" />
+<h2>Naming the Application</h2>
+<p>The App Directory, by default, is namespaced under App. To rename it, you can execute the following command and rename the namespace.</p>
+<pre class="result notranslate">
+php artisan app:name &lt;name-of-your-application&gt;
+</pre>
+<p>Replace the &lt;name-of-your-application&gt; with the new name of your application that you want to give.</p>
+<h2>Maintenance Mode</h2>
+<p>We need to modify our website on a regular basis. The website needs to be put on maintenance mode for this. Laravel has made this job easier. There are two artisan commands which are used to start and stop the maintenance mode which are described below.</p>
+<h3>Start Maintenance Mode</h3>
+<p>To start the maintenance mode, simply execute the following command.</p>
+<pre class="result notranslate">
+php artisan down
+</pre>
+<p>After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/maintenance_mode.jpg" alt="Maintenance Mode" />
+<p>It will activate the Maintenance mode and all the request to server will be redirected to a single maintenance page as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/start_maintenance_mode.jpg" alt="Start Maintenance Mode" />
+<h3>Stop Maintenance Mode</h3>
+<ul class="list">
+<li><p>After making changes to your website and to start it again, execute the following command.</p></li>
+</ul>
+<pre class="result notranslate">
+php artisan up
+</pre>
+<ul class="list">
+<li><p>After successful execution, you will receive the following output &minus;</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/laravel/images/stop_maintenance_mode.jpg" alt="Stop Maintenance Mode" />
+<h1>Laravel - Routing</h1>
+<h2>Basic Routing</h2>
+<p>Basic routing is meant to route your request to an appropriate controller. The routes of the application can be defined in <b>app/Http/routes.php</b> file. Here is the general route syntax for each of the possible request.</p>
+<pre class="prettyprint notranslate">
+Route::get('/', function () {
+   return 'Hello World';
+});
+
+Route::post('foo/bar', function () {
+   return 'Hello World';
+});
+
+Route::put('foo/bar', function () {
+   //
+});
+
+Route::delete('foo/bar', function () {
+   //
+});
+</pre>
+<p>Let us now understand how to see the Laravel homepage with the help of routing.</p>
+<h3>Example</h3>
+<p><b>app/Http/routes.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+Route::get('/', function () {
+   return view('welcome');
+});
+</pre>
+<p><b>resources/view/welcome.blade.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   
+   &lt;head&gt;
+      &lt;title&gt;Laravel&lt;/title&gt;
+      &lt;link href = "https://fonts.googleapis.com/css?family=Lato:100" rel = "stylesheet" 
+         type = "text/css"&gt;
+      
+      &lt;style&gt;
+         html, body {
+            height: 100%;
+         }
+         body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: table;
+            font-weight: 100;
+            font-family: 'Lato';
+         }
+         .container {
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+         }
+         .content {
+            text-align: center;
+            display: inline-block;
+         }
+         .title {
+            font-size: 96px;
+         }
+      &lt;/style&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;div class = "container"&gt;
+         
+         &lt;div class = "content"&gt;
+            &lt;div class = "title"&gt;Laravel 5&lt;/div&gt;
+         &lt;/div&gt;
+			
+      &lt;/div&gt;
+   &lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+<p>The routing mechanism is depicted in the following image &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/routing_mechanism.jpg" alt="Routing Mechanism" />
+<p>Let us now understand the steps in detail &minus;</p>
+<ul class="list">
+<li><p><b>Step 1</b> &minus; First, we need to execute the root URL of the application.</p></li>
+<li><p><b>Step 2</b> &minus; The executed URL will match with the appropriate method in the route.php file. In our case, it will match to get the method and the root (‘/’) URL. This will execute the related function.</p></li>
+<li><p><b>Step 3</b> &minus; The function calls the template file <b>resources/views/welcome.blade.php.</b> The function later calls the <b>view()</b> function with argument <b>‘welcome’</b> without using the <b>blade.php.</b> It will produce the following HTML output.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/laravel/images/laravel5.jpg" alt="Laravel5" />
+<h2>Routing Parameters</h2>
+<p>Often in the application, we intend to capture the parameters passed with the URL. To do this, we need to modify the code in routes.php file accordingly. There are two ways by which we can capture the parameters passed with the URL.</p>
+<ul class="list">
+<li>Required Parameters</li>
+<li>Optional Parameters</li>
+</ul>
+<h3>Required Parameters</h3>
+<p>These parameters must be present in the URL. For example, you may intend to capture the ID from the URL to do something with that ID. Here is the sample coding for <b>routes.php</b> file for that purpose.</p>
+<pre class="prettyprint notranslate">
+Route::get('ID/{id}',function($id){
+   echo 'ID: '.$id;
+});
+</pre>
+<p>Whatever argument that we pass after the root URL <b>(http://localhost:8000/ID/5)</b>, it will be stored in $id and we can use that parameter for further processing but here we are simply displaying it. We can pass it onto view or controller for further processing.</p>
+<h3>Optional Parameters</h3>
+<p>There are some parameters which may or may not be present in the URL and in such cases we can use the optional parameters. The presence of these parameters is not necessary in the URL. These parameters are indicated by “?” sign after the name of the parameters. Here is the sample coding for <b>routes.php</b> file for that purpose.</p>
+<pre class="result notranslate">
+Route::get('/user/{name?}',function($name = 'Virat'){
+   echo "Name: ".$name;
+});
+</pre>
+<h3>Example</h3>
+<p><b>routes.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+
+// First Route method – Root URL will match this method
+Route::get('/', function () {
+   return view('welcome');
+});
+
+// Second Route method – Root URL with ID will match this method
+Route::get('ID/{id}',function($id){
+   echo 'ID: '.$id;
+});
+
+// Third Route method – Root URL with or without name will match this method
+Route::get('/user/{name?}',function($name = 'Virat Gandhi'){
+   echo "Name: ".$name;
+});
+</pre>
+<p><b>Step 1</b> &minus; Here, we have defined 3 routes with get methods for different purposes. If we execute the below URL then it will execute the first method.</p>
+<p><b>http://localhost:8000</b></p>
+<p><b>Step 2</b> &minus; After successful execution of the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/optional_parameters.jpg" alt="Optional Parameters" />
+<p><b>Step 3</b> &minus; If we execute the below URL, it will execute the 2<sup>nd</sup> method and the argument/parameter ID will be passed to the variable $id.</p>
+<p><b>http://localhost:8000/ID/5</b></p>
+<p><b>Step 4</b> &minus; After successful execution of the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/id_5.jpg" alt="ID 5" />
+<p><b>Step 5</b> &minus; If we execute the below URL, it will execute the 3<sup>rd</sup> method and the optional argument/parameter name will be passed to the variable $name. The last argument ‘Virat’ is optional. If you remove it, the default name will be used that we have passed in the function as <b>‘Virat Gandhi’</b></p>
+<p><b>http://localhost:8000/user/Virat</b></p> 
+<p><b>Step 6</b> &minus; After successful execution of the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/name_virat.jpg" alt="Name Virat" />
+<p><b>Note</b> &minus; Regular expression can also be used to match the parameters.</p>
+<h1>Laravel - Middleware</h1>
+<h2>Define Middleware</h2>
+<p>As the name suggest, Middleware acts as a middle man between request and response. It is a type of filtering mechanism. For example, Laravel includes a middleware that verifies whether user of the application is authenticated or not. If the user is authenticated, he will be redirected to the home page otherwise, he will be redirected to the login page.</p>
+<p>Middleware can be created by executing the following command &minus;</p>
+<pre class="result notranslate">
+php artisan make:middleware &lt;middleware-name&gt;
+</pre>
+<p>Replace the &lt;middleware-name&gt; with the name of your middleware. The middleware that you create can be seen at <b>app/Http/Middleware</b> directory.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Let us now create AgeMiddleware. To create that, we need to execute the following command &minus;</p>
+<pre class="result notranslate">
+php artisan make:middleware AgeMiddleware
+</pre>
+<p><b>Step 2</b> &minus; After successful execution of the command, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/agemiddleware.jpg" alt="AgeMiddleware" />
+<p><b>Step 3</b> &minus; <b>AgeMiddleware</b> will be created at <b>app/Http/Middleware</b>. The newly created file will have the following code already created for you.</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Middleware;
+use Closure;
+
+class AgeMiddleware {
+   public function handle($request, Closure $next) {
+      return $next($request);
+   }
+}
+</pre>
+<h2>Register Middleware</h2>
+<p>We need to register each and every middleware before using it. There are two types of Middleware in Laravel.</p>
+<ul class="list">
+<li>Global Middleware</li>
+<li>Route Middleware</li>
+</ul>
+<p>The <b>Global Middleware</b> will run on every HTTP request of the application, whereas the <b>Route Middleware</b> will be assigned to a specific route. The middleware can be registered at <b>app/Http/Kernel.php.</b> This file contains two properties <b>$middleware</b> and <b>$routeMiddleware</b>. <b>$middleware</b> property is used to register Global Middleware and <b>$routeMiddleware</b> property is used to register route specific middleware.</p>
+<p>To register the global middleware, list the class at the end of $middleware property.</p>
+<pre class="prettyprint notranslate">
+protected $middleware = [
+   \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+   \App\Http\Middleware\EncryptCookies::class,
+   \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+   \Illuminate\Session\Middleware\StartSession::class,
+   \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+   \App\Http\Middleware\VerifyCsrfToken::class,
+];
+</pre>
+<p>To register the route specific middleware, add the key and value to $routeMiddleware property.</p>
+<pre class="prettyprint notranslate">
+protected $routeMiddleware = [
+   'auth' =&gt; \App\Http\Middleware\Authenticate::class,
+   'auth.basic' =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+   'guest' =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,
+];
+</pre>
+<h3>Example</h3>
+<p>We have created <b>AgeMiddleware</b> in the previous example. We can now register it in route specific middleware property. The code for that registration is shown below.</p>
+<p>The following is the code for <b>app/Http/Kernel.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+
+class Kernel extends HttpKernel {
+   protected $middleware = [
+      \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+      \App\Http\Middleware\EncryptCookies::class,
+      \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+      \Illuminate\Session\Middleware\StartSession::class,
+      \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+      \App\Http\Middleware\VerifyCsrfToken::class,
+   ];
+  
+   protected $routeMiddleware = [
+      'auth' =&gt; \App\Http\Middleware\Authenticate::class,
+      'auth.basic' =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+      'guest' =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,
+      'Age' =&gt; \App\Http\Middleware\AgeMiddleware::class,
+   ];
+}
+</pre>
+<h2>Middleware Parameters</h2>
+<p>We can also pass parameters with the Middleware. For example, if your application has different roles like user, admin, super admin etc. and you want to authenticate the action based on role, this can be achieved by passing parameters with middleware. The middleware that we create contains the following function and we can pass our custom argument after the <b>$next</b> argument.</p>
+<pre class="result notranslate">
+public function handle($request, Closure $next) {
+   return $next($request);
+}
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create RoleMiddleware by executing the following command &minus;</p>
+<pre class="result notranslate">
+php artisan make:middleware RoleMiddleware
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output</p>
+<img src="https://www.tutorialspoint.com/laravel/images/middleware_parameters.jpg" alt="Middleware Parameters" />
+<p><b>Step 3</b> &minus; Add the following code in the handle method of the newly created RoleMiddlewareat <b>app/Http/Middleware/RoleMiddleware.php.</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Middleware;
+use Closure;
+
+class RoleMiddleware {
+   public function handle($request, Closure $next, $role) {
+      echo "Role: ".$role;
+      return $next($request);
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Register the RoleMiddleware in <b>app\Http\Kernel.php</b> file. Add the line highlighted in gray color in that file to register RoleMiddleware.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/rolemiddleware.jpg" alt="RoleMiddleware" />
+<p><b>Step 5</b> &minus; Execute the following command to create <b>TestController</b> &minus;</p>
+<pre class="result notranslate">
+php artisan make:controller TestController --plain
+</pre>
+<p><b>Step 6</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/testcontroller.jpg" alt="TestController" />
+<p><b>Step 7</b> &minus; Copy the following code to <b>app/Http/TestController.php</b> file.</p>
+<p><b>app/Http/TestController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class TestController extends Controller {
+   public function index(){
+      echo "&lt;br&gt;Test Controller.";
+   }
+}
+</pre>
+<p><b>Step 8</b> &minus; Add the following line of code in <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('role',[
+   'middleware' =&gt; 'Role:editor',
+   'uses' =&gt; 'TestController@index',
+]);
+</pre>
+<p><b>Step 9</b> &minus; Visit the following URL to test the Middleware with parameters</p>
+<p><b>http://localhost:8000/role</b></p>
+<p><b>Step 10</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/role_editor.jpg" alt="Role Editor" />
+<h2>Terminable Middleware</h2>
+<p>Terminable middleware performs some task after the response has been sent to the browser. This can be accomplished by creating a middleware with <b>“terminate”</b> method in the middleware. Terminable middleware should be registered with global middleware. The terminate method will receive two arguments <b>$request</b> and <b>$response.</b> Terminate method can be created as shown in the following code.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create <b>TerminateMiddleware</b> by executing the below command.</p>
+<pre class="result notranslate">
+php artisan make:middleware TerminateMiddleware
+</pre>
+<p><b>Step 2</b> &minus; This will produce the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/terminable_middleware.jpg" alt="Terminable Middleware" />
+<p><b>Step 3</b> &minus; Copy the following code in the newly created <b>TerminateMiddleware</b> at <b>app/Http/Middleware/TerminateMiddleware.php.</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Middleware;
+use Closure;
+
+class TerminateMiddleware {
+   public function handle($request, Closure $next) {
+      echo "Executing statements of handle method of TerminateMiddleware.";
+      return $next($request);
+   }
+   
+   public function terminate($request, $response){
+      echo "&lt;br&gt;Executing statements of terminate method of TerminateMiddleware.";
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Register the <b>TerminateMiddleware</b> in <b>app\Http\Kernel.php</b> file. Add the line highlighted in gray color in that file to register TerminateMiddleware.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/terminatemiddleware.jpg" alt="TerminateMiddleware" />
+<p><b>Step 5</b> &minus; Execute the following command to create <b>ABCController</b>.</p>
+<pre class="result notranslate">
+php artisan make:controller ABCController --plain
+</pre>
+<p><b>Step 6</b> &minus; After successful execution of the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/abccontroller.jpg" alt="ABCController" />
+<p><b>Step 7</b> &minus; Copy the following code to <b>app/Http/ABCController.php</b> file.</p>
+<p><b>app/Http/ABCController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class ABCController extends Controller {
+   public function index(){
+      echo "&lt;br&gt;ABC Controller.";
+   }
+}
+</pre>
+<p><b>Step 8</b> &minus; Add the following line of code in <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('terminate',[
+   'middleware' =&gt; 'terminate',
+   'uses' =&gt; 'ABCController@index',
+]);
+</pre>
+<p><b>Step 9</b> &minus; Visit the following URL to test the Terminable Middleware.</p>
+<p><b>http://localhost:8000/terminate</b></p>
+<p><b>Step 10</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/abc_controller.jpg" alt="ABC Controller" />
+<h1>Laravel - Controllers</h1>
+<h2>Basic Controllers</h2>
+<p>In MVC framework, the letter ‘C’ stands for Controller. It acts as a directing traffic between Views and Models.</p>
+<h3>Creating a Controller</h3>
+<p>Open the command prompt or terminal based on the operating system you are using and type the following command to create controller using the Artisan CLI (Command Line Interface).</p>
+<pre class="result notranslate">
+php artisan make:controller &lt;controller-name&gt; --plain
+</pre>
+<p>Replace the &lt;controller-name&gt; with the name of your controller. This will create a plain constructor as we are passing the argument — <b>plain</b>. If you don’t want to create a plain constructor, you can simply ignore the argument. The created constructor can be seen at <b>app/Http/Controllers</b>. You will see that some basic coding has already been done for you and you can add your custom coding. The created controller can be called from routes.php by the following syntax.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+Route::get(‘base URI’,’controller@method’);
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Execute the following command to create <b>UserController</b>.</p>
+<pre class="result notranslate">
+php artisan make:controller UserController --plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/usercontroller.jpg" alt="UserController" />
+<p><b>Step 3</b> &minus; You can see the created controller at <b>app/Http/Controller/UserController.php</b> with some basic coding already written for you and you can add your own coding based on your need.</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller {
+   //
+}
+</pre>
+<h2>Controller Middleware</h2>
+<p>We have seen middleware before and it can be used with controller also. Middleware can also be assigned to controller’s route or within your controller’s constructor. You can use the middleware method to assign middleware to the controller. The registered middleware can also be restricted to certain method of the controller.</p>
+<h3>Assigning Middleware to Route</h3>
+<pre class="result notranslate">
+Route::get('profile', [
+   'middleware' =&gt; 'auth',
+   'uses' =&gt; 'UserController@showProfile'
+]);
+</pre>
+<p>Here we are assigning auth middleware to UserController in profile route.</p>
+<h3>Assigning Middleware within Controller’s constructor</h3>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller {
+   public function __construct(){
+      $this-&gt;middleware('auth');
+   }
+}
+</pre>
+<p>Here we are assigning auth middleware using the middleware method in the UserController’s constructor.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following lines to the <b>app/Http/routes.php</b> file and save it.</p>
+<p><b>routes.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+Route::get('/usercontroller/path',[
+   'middleware' =&gt; 'First',
+   'uses' =&gt; 'UserController@showPath'
+]);
+</pre>
+<p><b>Step 2</b> &minus; Create a middleware called <b>FirstMiddleware</b> by executing the following line.</p>
+<pre class="result notranslate">
+php artisan make:middleware FirstMiddleware
+</pre>
+<p><b>Step 3</b> &minus; Add the following code in the handle method of the newly created FirstMiddleware at <b>app/Http/Middleware</b>.</p>
+<p><b>FirstMiddleware.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Middleware;
+use Closure;
+
+class FirstMiddleware {
+   public function handle($request, Closure $next) {
+      echo '&lt;br&gt;First Middleware';
+      return $next($request);
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Create a middleware called <b>SecondMiddleware</b> by executing the following line.</p>
+<pre class="result notranslate">
+php artisan make:middleware SecondMiddleware
+</pre>
+<p><b>Step 5</b> &minus; Add the following code in the handle method of the newly created SecondMiddleware at <b>app/Http/Middleware</b>.</p>
+<p><b>SecondMiddleware.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Middleware;
+use Closure;
+
+class SecondMiddleware {
+   public function handle($request, Closure $next){
+      echo '&lt;br&gt;Second Middleware';
+      return $next($request);
+   }
+}
+</pre>
+<p><b>Step 6</b> &minus; Create a controller called <b>UserController</b> by executing the following line.</p>
+<pre class="result notranslate">
+php artisan make:controller UserController --plain
+</pre>
+<p><b>Step 7</b> &minus; After successful execution of the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/usercontroller1.jpg" alt="UserController1" />
+<p><b>Step 8</b> &minus; Copy the following code to <b>app/Http/UserController.php</b> file.</p>
+<p><b>app/Http/UserController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller {
+   public function __construct(){
+      $this-&gt;middleware('Second');
+   }
+   public function showPath(Request $request){
+      $uri = $request-&gt;path();
+      echo '&lt;br&gt;URI: '.$uri;
+      
+      $url = $request-&gt;url();
+      echo '&lt;br&gt;';
+      
+      echo 'URL: '.$url;
+      $method = $request-&gt;method();
+      echo '&lt;br&gt;';
+      
+      echo 'Method: '.$method;
+   }
+}
+</pre>
+<p><b>Step 9</b> &minus; Now launch the php’s internal web server by executing the following command, if you haven’t executed it yet.</p>
+<pre class="result notranslate">
+php artisan serve
+</pre>
+<p><b>Step 10</b> &minus; Visit the following URL.</p>
+<p><b>http://localhost:8000/usercontroller/path</b></p>
+<p><b>Step 11</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/usercontroller2.jpg" alt="UserController2" />
+<h2>Restful Resource Controllers</h2>
+<p>Often while making an application we need to perform <b>CRUD (Create, Read, Update, Delete)</b> operations. Laravel makes this job easy for us. Just create a controller and Laravel will automatically provide all the methods for the CRUD operations. You can also register a single route for all the methods in routes.php file.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a controller called <b>MyController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller MyController
+</pre>
+<p><b>Step 2</b> &minus; Add the following code in <b>app/Http/Controllers/MyController.php</b> file.</p>
+<p><b>app/Http/Controllers/MyController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class MyController extends Controller {
+   public function index(){
+      echo 'index';
+   }
+   public function create(){
+      echo 'create';
+   }
+   public function store(Request $request){
+      echo 'store';
+   }
+   public function show($id){
+      echo 'show';
+   }
+   public function edit($id){
+      echo 'edit';
+   }
+   public function update(Request $request, $id){
+      echo 'update';
+   }
+   public function destroy($id){
+      echo 'destroy';
+   }
+}
+</pre>
+<p><b>Step 3</b> &minus; Add the following line of code in <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::resource('my','MyController');
+</pre>
+<p><b>Step 4</b> &minus; We are now registering all the methods of MyController by registering a controller with resource. Below is the table of actions handled by resource controller.</p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center;">Verb</th>
+<th style="text-align:center;">Path</th>
+<th style="text-align:center;">Action</th>
+<th style="text-align:center;">Route Name</th>
+</tr>
+<tr>
+<td>GET</td>
+<td>/my</td>
+<td>index</td>
+<td>my.index</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/my/create</td>
+<td>create</td>
+<td>my.create</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/my</td>
+<td>store</td>
+<td>my.store</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/my/{my}</td>
+<td>show</td>
+<td>my.show</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/my/{my}/edit</td>
+<td>edit</td>
+<td>my.edit</td>
+</tr>
+<tr>
+<td>PUT/PATCH</td>
+<td>/my/{my}</td>
+<td>update</td>
+<td>my.update</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/my/{my}</td>
+<td>destroy</td>
+<td>my.destroy</td>
+</tr>
+</table>
+<p><b>Step 5</b> &minus; Try executing the URLs shown in the following table.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">URL</th>
+<th style="text-align:center; width:35%">Description</th>
+<th style="text-align:center;">Output Image</th>
+</tr>
+<tr>
+<td>http://localhost:8000/my</td>
+<td>Executes index method of MyController.php</td>
+<td>index</td>
+</tr>
+<tr>
+<td>http://localhost:8000/my/create</td>
+<td>Executes create method of MyController.php</td>
+<td>create</td>
+</tr>
+<tr>
+<td>http://localhost:8000/my/1</td>
+<td>Executes show method of MyController.php</td>
+<td>show</td>
+</tr>
+<tr>
+<td>http://localhost:8000/my/1/edit</td>
+<td>Executes edit method of MyController.php</td>
+<td>edit</td>
+</tr>
+</table>
+<h2>Implicit Controllers</h2>
+<p>Implicit Controllers allow you to define a single route to handle every action in the controller. You can define it in route.php file with <b>Route:controller</b> method as shown below.</p>
+<pre class="result notranslate">
+Route::controller(‘base URI’,’&lt;class-name-of-the-controller&gt;’);
+</pre>
+<p>Replace the &lt;class-name-of-the-controller&gt; with the class name that you have given to your controller.</p>
+<p>The method name of the controller should start with HTTP verb like get or post. If you start it with get, it will handle only get request and if it starts with post then it will handle the post request. After the HTTP verb you can, you can give any name to the method but it should follow the title case version of the URI.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Execute the below command to create a controller. We have kept the class name <b>ImplicitController</b>. You can give any name of your choice to the class.</p>
+<pre class="result notranslate">
+php artisan make:controller ImplicitController --plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/implicitcontroller.jpg" alt="Implicitcontroller" />
+<p><b>Step 3</b> &minus; Copy the following code to <b>app/Http/Controllers/ImplicitController.php</b> file.</p>
+<p><b>app/Http/Controllers/ImplicitController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class ImplicitController extends Controller {
+   /**
+   * Responds to requests to GET /test
+   */
+   public function getIndex(){
+      echo 'index method';
+   }
+   
+   /**
+   * Responds to requests to GET /test/show/1
+   */
+   public function getShow($id){
+      echo 'show method';
+   }
+   
+   /**
+   * Responds to requests to GET /test/admin-profile
+   */
+   public function getAdminProfile(){
+      echo 'admin profile method';
+   }
+   
+   /**
+   * Responds to requests to POST /test/profile
+   */
+   public function postProfile(){
+      echo 'profile method';
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Add the following line to <b>app/Http/routes.php</b> file to route the requests to specified controller.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::controller('test','ImplicitController');
+</pre>
+<h2>Constructor Injection</h2>
+<p>The Laravel service container is used to resolve all Laravel controllers. As a result, you are able to type-hint any dependencies your controller may need in its constructor. The dependencies will automatically be resolved and injected into the controller instance.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following code to <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="prettyprint notranslate">
+class MyClass{
+   public $foo = 'bar';
+}
+Route::get('/myclass','ImplicitController@index');
+</pre>
+<p><b>Step 2</b> &minus; Add the following code to <b>app/Http/Controllers/ImplicitController.php</b> file.</p>
+<p><b>app/Http/Controllers/ImplicitController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class ImplicitController extends Controller {
+   private $myclass;
+   
+   public function __construct(\MyClass $myclass){
+      $this-&gt;myclass = $myclass;
+   }
+   public function index(){
+      dd($this-&gt;myclass);
+   }
+}
+</pre>
+<p><b>Step 3</b> &minus; Visit the following URL to test the constructor injection.</p>
+<p><b>http://localhost:8000/myclass</b></p>
+<p><b>Step 4</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/constructor_injection.jpg" alt="Myclass" />
+<h2>Method Injection</h2>
+<p>In addition to constructor injection, you may also type — hint dependencies on your controller's action methods.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following code to <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+class MyClass{
+   public $foo = 'bar';
+}
+Route::get('/myclass','ImplicitController@index');
+</pre>
+<p><b>Step 2</b> &minus; Add the following code to <b>app/Http/Controllers/ImplicitController.php</b> file.</p>
+<p><b>app/Http/Controllers/ImplicitController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class ImplicitController extends Controller {
+   public function index(\MyClass $myclass){
+      dd($myclass);
+   }
+} 
+</pre>
+<p><b>Step 3</b> &minus; Visit the following URL to test the constructor injection.</p>
+<p><b>http://localhost:8000/myclass</b></p>
+<p>It will produce the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/constructor_injection.jpg" alt="Constructor Injection" />
+<h1>Laravel - Request</h1>
+<h2>Retrieving the Request URI</h2>
+<p>The <b>“path”</b> method is used to retrieve the requested URI. The <b>“is”</b> method is used to retrieve the requested URI which matches the particular pattern specified in the argument of the method. To get the full URL, we can use the <b>“url”</b> method.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Execute the below command to create a new controller called <b>UriController</b>.</p>
+<pre class="result notranslate">
+php artisan make:controller UriController –plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution of the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/uricontroller.jpg" alt="UriController" />
+<p><b>Step 3</b> &minus; After creating a controller, add the following code in that file.</p>
+<p><b>app/Http/Controllers/UriController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class UriController extends Controller {
+   
+   public function index(Request $request){
+      // Usage of path method
+      $path = $request-&gt;path();
+      echo 'Path Method: '.$path;
+      echo '&lt;br&gt;';
+     
+      // Usage of is method
+      $pattern = $request-&gt;is('foo/*');
+      echo 'is Method: '.$pattern;
+      echo '&lt;br&gt;';
+      
+      // Usage of url method
+      $url = $request-&gt;url();
+      echo 'URL method: '.$url;
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Add the following line in the <b>app/Http/route.php</b> file.</p>
+<p><b>app/Http/route.php</b></p>
+<pre class="result notranslate">
+Route::get('/foo/bar','UriController@index');
+</pre>
+<p><b>Step 5</b> &minus; Visit the following URL.</p>
+<p><b>http://localhost:8000/foo/bar</b></p>
+<p><b>Step 6</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/path_method.jpg" alt="Path Method" />
+<h2>Retrieving Input</h2>
+<p>The input values can be easily retrieved in Laravel. No matter what method was used <b>“get”</b> or <b>“post”</b>, the Laravel method will retrieve input values for both the methods the same way. There are two ways we can retrieve the input values.</p>
+<ul class="list">
+<li>Using the input() method<li>
+<li>Using the properties of Request instance</li>
+</ul>
+<h3>Using the input() method</h3>
+<p>The input() method takes one argument, the name of the field in form. For example, if the form contains username field then we can access it by the following way.</p>
+<pre class="result notranslate">
+$name = $request-&gt;input('username');
+</pre>
+<h3>Using the properties of Request instance</h3>
+<p>Like the input() method, we can get the username property directly from the request instance.</p>
+<pre class="result notranslate">
+$request-&gt;username
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a Registration form, where user can register himself and store the form at <b>resources/views/register.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+
+   &lt;head&gt;
+      &lt;title&gt;Form Example&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      &lt;form action = "/user/register" method = "post"&gt;
+         &lt;input type = "hidden" name = "_token" value = "&lt;?php echo csrf_token() ?&gt;"&gt;
+      
+         &lt;table&gt;
+            &lt;tr&gt;
+               &lt;td&gt;Name&lt;/td&gt;
+               &lt;td&gt;&lt;input type = "text" name = "name" /&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+         
+            &lt;tr&gt;
+               &lt;td&gt;Username&lt;/td&gt;
+               &lt;td&gt;&lt;input type = "text" name = "username" /&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+         
+            &lt;tr&gt;
+               &lt;td&gt;Password&lt;/td&gt;
+               &lt;td&gt;&lt;input type = "text" name = "password" /&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+         
+            &lt;tr&gt;
+               &lt;td colspan = "2" align = "center"&gt;
+                  &lt;input type = "submit" value = "Register" /&gt;
+               &lt;/td&gt;
+            &lt;/tr&gt;
+         &lt;/table&gt;
+      
+      &lt;/form&gt;
+   
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; Execute the below command to create a <b>UserRegistration</b> controller.</p>
+<pre class="result notranslate">
+php artisan make:controller UserRegistration --plain
+</pre>
+<p><b>Step 3</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/userregistration.jpg" alt="UserRegistration" />
+<p><b>Step 4</b> &minus; Copy the following code in <b>app/Http/Controllers/UserRegistration.php</b> controller.</p>
+<p><b>app/Http/Controllers/UserRegistration.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class UserRegistration extends Controller {
+   public function postRegister(Request $request){
+      //Retrieve the name input field
+      $name = $request-&gt;input('name');
+      echo 'Name: '.$name;
+      echo '&lt;br&gt;';
+      
+      //Retrieve the username input field
+      $username = $request-&gt;username;
+      echo 'Username: '.$username;
+      echo '&lt;br&gt;';
+      
+      //Retrieve the password input field
+      $password = $request-&gt;password;
+      echo 'Password: '.$password;
+   }
+}
+</pre>
+<p><b>Step 5</b> &minus; Add the following line in <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/register',function(){
+   return view('register');
+});
+Route::post('/user/register',array('uses'=&gt;'UserRegistration@postRegister'));
+</pre>
+<p><b>Step 6</b> &minus; Visit the following URL and you will see the registration form as shown in the below figure. Type the registration details and click Register and you will see on the second page that we have retrieved and displayed the user registration details.</p>
+<p><b>http://localhost:8000/register</b></p>
+<p><b>Step 7</b> &minus; The output will look something like as shown in below the following images.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/registration.jpg" alt="Registration" />
+<h1>Laravel - Cookie</h1>
+<h2>Creating Cookie</h2>
+<p>Cookie can be created by global cookie helper of Laravel. It is an instance of <b>Symfony\Component\HttpFoundation\Cookie</b>. The cookie can be attached to the response using the withCookie() method. Create a response instance of <b>Illuminate\Http\Response</b> class to call the withCookie() method. Cookie generated by the Laravel are encrypted and signed and it can’t be modified or read by the client.</p>
+<p>Here is a sample code with explanation.</p>
+<pre class="prettyprint notranslate">
+//Create a response instance
+$response = new Illuminate\Http\Response('Hello World');
+
+//Call the withCookie() method with the response method
+$response-&gt;withCookie(cookie('name', 'value', $minutes));
+
+//return the response
+return $response;
+</pre>
+<p>Cookie() method will take 3 arguments. First argument is the name of the cookie, second argument is the value of the cookie and the third argument is the duration of the cookie after which the cookie will get deleted automatically.</p>
+<p>Cookie can be set forever by using the forever method as shown in the below code.</p>
+<pre class="result notranslate">
+$response-&gt;withCookie(cookie()-&gt;forever('name', 'value'));
+</pre>
+<h2>Retrieving Cookie</h2>
+<p>Once we set the cookie, we can retrieve the cookie by cookie() method. This cookie() method will take only one argument which will be the name of the cookie. The cookie method can be called by using the instance of <b>Illuminate\Http\Request</b>.</p>
+<p>Here is a sample code.</p>
+<pre class="result notranslate">
+//’name’ is the name of the cookie to retrieve the value of
+$value = $request-&gt;cookie('name');
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Execute the below command to create a controller in which we will manipulate the cookie.</p>
+<pre class="result notranslate">
+php artisan make:controller CookieController --plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/cookiecontroller.jpg" alt="CookieController" />
+<p><b>Step 3</b> &minus; Copy the following code in <b>app/Http/Controllers/CookieController.php</b> file.</p>
+<p><b>app/Http/Controllers/CookieController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class CookieController extends Controller {
+   public function setCookie(Request $request){
+      $minutes = 1;
+      $response = new Response('Hello World');
+      $response-&gt;withCookie(cookie('name', 'virat', $minutes));
+      return $response;
+   }
+   public function getCookie(Request $request){
+      $value = $request-&gt;cookie('name');
+      echo $value;
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Add the following line in <b>app/Http/routes.php file</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/cookie/set','CookieController@setCookie');
+Route::get('/cookie/get','CookieController@getCookie');
+</pre>
+<p><b>Step 5</b> &minus; Visit the following URL to set the cookie.</p>
+<p><b>http://localhost:8000/cookie/set</b></p>
+<p><b>Step 6</b> &minus; The output will appear as shown below. The window appearing in the screenshot is taken from firefox but depending on your browser, cookie can also be checked from the cookie option.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/hello_world.jpg" alt="Hello World" />
+<p><b>Step 7</b> &minus; Visit the following URL to get the cookie from the above URL.</p>
+<p><b>http://localhost:8000/cookie/get</b></p>
+<p><b>Step 8</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/virat.jpg" alt="Virat" />
+<h1>Laravel - Response</h1>
+<h2>Basic Response</h2>
+<p>Each request has a response. Laravel provides several different ways to return response. Response can be sent either from route or from controller. The basic response that can be sent is simple string as shown in the below sample code. This string will be automatically converted to appropriate HTTP response.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following code to <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/basic_response', function () {
+   return 'Hello World';
+});
+</pre>
+<p><b>Step 2</b> &minus; Visit the following URL to test the basic response.</p>
+<p><b>http://localhost:8000/basic_response</b></p>
+<p><b>Step 3</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/basic_response.jpg" alt="Basic Response" />
+<h2>Attaching Headers</h2>
+<p>The response can be attached to headers using the header() method. We can also attach the series of headers as shown in the below sample code.</p>
+<pre class="prettyprint notranslate">
+return response($content,$status)
+   -&gt;header('Content-Type', $type)
+   -&gt;header('X-Header-One', 'Header Value')
+   -&gt;header('X-Header-Two', 'Header Value');
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following code to <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="prettyprint notranslate">
+Route::get('/header',function(){
+   return response("Hello", 200)-&gt;header('Content-Type', 'text/html');
+});
+</pre>
+<p><b>Step 2</b> &minus; Visit the following URL to test the basic response.</p>
+<p><b>http://localhost:8000/header</b></p>
+<p><b>Step 3</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/hello.jpg" alt="Hello" />
+<h2>Attaching Cookies</h2>
+<p>The withcookie() helper method is used to attach cookies. The cookie generated with this method can be attached by calling withcookie() method with response instance. By default, all cookies generated by Laravel are encrypted and signed so that they can't be modified or read by the client.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following code to <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="prettyprint notranslate">
+Route::get('/cookie',function(){
+   return response("Hello", 200)-&gt;header('Content-Type', 'text/html')
+      -&gt;withcookie('name','Virat Gandhi');
+});
+</pre>
+<p><b>Step 2</b> &minus; Visit the following URL to test the basic response.</p>
+<p><b>http://localhost:8000/cookie</b></p>
+<p><b>Step 3</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/hello.jpg" alt="Hello" />
+<h2>JSON Response</h2>
+<p>JSON response can be sent using the json method. This method will automatically set the Content-Type header to application/json. The json method will automatically convert the array into appropriate json response.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following line in <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="prettyprint notranslate">
+Route::get('json',function(){
+   return response()-&gt;json(['name' =&gt; 'Virat Gandhi', 'state' =&gt; 'Gujarat']);
+});
+</pre>
+<p><b>Step 2</b> &minus; Visit the following URL to test the json response.</p>
+<p><b>http://localhost:8000/json</b></p>
+<p><b>Step 3</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/json_response.jpg" alt="Json Response" />
+<h1>Laravel - Views</h1>
+<h2>Understanding Views</h2>
+<p>In MVC framework, the letter <b>“V”</b> stands for <b>Views</b>. It separates the application logic and the presentation logic. Views are stored in <b>resources/views</b> directory. Generally, the view contains the HTML which will be served by the application.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Copy the following code and save it at <b>resources/views/test.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h1&gt;Hello, World&lt;/h1&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; Add the following line in <b>app/Http/routes.php</b> file to set the route for the above view.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/test', function(){
+   return view('test');
+});
+</pre>
+<p><b>Step 3</b> &minus; Visit the following URL to see the output of the view.</p>
+<p><b>http://localhost:8000/test</b></p>
+<p><b>Step 4</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/understanding_views.jpg" alt="Understanding Views" />
+<h2>Passing Data to Views</h2>
+<p>While building application it may be required to pass data to the views. Pass an array to view helper function. After passing an array, we can use the key to get the value of that key in the HTML file.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Copy the following code and save it at <b>resources/views/test.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h1&gt;&lt;?php echo $name; ?&gt;&lt;/h1&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; Add the following line in <b>app/Http/routes.php</b> file to set the route for the above view.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/test', function(){
+   return view('test',[‘name’=&gt;’Virat Gandhi’]);
+});
+</pre>
+<p><b>Step 3</b> &minus; The value of the key name will be passed to test.php file and $name will be replaced by that value.</p>
+<p><b>Step 4</b> &minus; Visit the following URL to see the output of the view.</p>
+<p><b>http://localhost:8000/test</b></p>
+<p><b>Step 5</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/virat_gandhi.jpg" alt="Virat Gandhi" />
+<h2>Sharing Data with all Views</h2>
+<p>We have seen how we can pass data to views but at times, there is a need to pass data to all the views. Laravel makes this simpler. There is a method called <b>“share()”</b> which can be used for this purpose. The share() method will take two arguments, key and value. Typically <b>share()</b> method can be called from boot method of service provider. We can use any service provider, AppServiceProvider or our own service provider.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following line in <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/test', function(){
+   return view('test');
+});
+Route::get('/test2', function(){
+   return view('test2');
+});
+</pre>
+<p><b>Step 2</b> &minus; Create two view files — <b>test.php</b> and <b>test2.php</b> with the same code. These are the two files which will share data. Copy the following code in both the files. <b>resources/views/test.php &amp; resources/views/test2.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h1&gt;&lt;?php echo $name; ?&gt;&lt;/h1&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 3</b> &minus; Change the code of boot method in the file <b>app/Providers/AppServiceProvider.php</b> as shown below. (Here, we have used share method and the data that we have passed will be shared with all the views.)
+<b>app/Providers/AppServiceProvider.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Providers;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider {
+   
+   /**
+   * Bootstrap any application services.
+   *
+   * @return void
+   */
+
+   public function boot(){
+      view()-&gt;share('name', 'Virat Gandhi');
+   }
+
+   /**
+   * Register any application services.
+   *
+   * @return void
+   */
+
+   public function register(){
+      //
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Visit the following URLs.</p>
+<p><b>http://localhost:8000/test</b></p>
+<p><b>http://localhost:8000/test2</b></p>
+<p><b>Step 5</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/virat_gandhi.jpg" alt="Virat Gandhi" />
+<h2>Blade Templates</h2>
+<p>Blade is a simple, yet powerful templating engine provided with Laravel. Blade is Laravel's lightweight template language and its syntax is very easy to learn. A blade template contains extension — <b>blade.php</b> and is stored at <b>resources/views</b>.</p>
+<p>Blade also supports all of PHP's major constructs to create loops and conditions — @for, @foreach, @while, @if, and @elseif, allowing you to avoid opening and closing the &lt;?php tags everywhere in your templates. The main advantage of using Blade templates is that we can set up the master template and this master template can be extended by other individual pages.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a master template and save it at <b>resources/views/layouts/master.blade.php</b>.</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   
+   &lt;head&gt;
+      &lt;title&gt;@yield('title')&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      @section('sidebar')
+      This is the master sidebar.
+      @show
+      
+      &lt;div class = "container"&gt;
+         @yield('content')
+      &lt;/div&gt;
+   
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; Here, in the master template,</p>
+<ul class="list">
+<li><p><b>@yield('title')</b> is used to display the value of the title</p></li>
+<li><p><b>@section('sidebar')</b> is used to define a section named sidebar</p></li>
+<li><p><b>@show</b> is used to display the contents of a section</p></li>
+<li><p><b>@yield('content')</b> is used to display the contents of content</p></li>
+</ul>
+<p><b>Step 3</b> &minus; Now, create another page and extend the master template and save it at <b>resources/views/page.blade.php</b></p>
+<pre class="prettyprint notranslate">
+@extends('layouts.master')
+@section('title', 'Page Title')
+
+@section('sidebar')
+   @parent
+      &lt;p&gt;This is appended to the master sidebar.&lt;/p&gt;
+   @endsection
+   
+   @section('content')
+      &lt;h2&gt;{{$name}}&lt;/h2&gt;
+      &lt;p&gt;This is my body content.&lt;/p&gt;
+   @endsection
+</pre>
+<p><b>Step 4</b> &minus; Here is the description of each element.</p>
+<p><b>@extends('layouts.master')</b> is used to extend the master layout. <b>“layouts.master”</b> — Here, layouts is the name of the directory, where we have stored the master template and <b>“.master”</b> of the master template <b>“master.blade.php”</b> refers to its name but here only name is used without extension <b>blade.php</b></p>
+<ul class="list">
+<li><p><b>@section('title', 'Page Title')</b> &minus; sets the value of the title section.</p></li>
+<li><p><b>@section('sidebar')</b> &minus; defines a sidebar section in the child page of master layout.</p></li>
+<li><p><b>@parent</b> &minus; displays the content of the sidebar section, defined in the master layout.</p></li>
+<li><p><b>&lt;p&gt;</b> &minus; This is appended to the master sidebar.&lt;/p&gt; adds paragraph content to the sidebar section</p></li>
+<li><p><b>@endsection</b> &minus; ends the sidebar section.</p></li>
+<li><p><b>@section('content')</b> &minus; defines the content section.</p></li>
+<li><p><b>@section('content')</b> &minus; adds paragraph content to the content section.</p></li>
+<li><p><b>@endsection</b> &minus; ends the content section.</p></li>
+</ul>
+<p><b>Step 5</b> &minus; Now, set up the route to view this template. Add the following line at <b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('blade', function () {
+   return view('page',array('name' =&gt; 'Virat Gandhi'));
+});
+</pre>
+<p><b>Step 6</b> &minus; Visit the following URL to view the blade template example.</p>
+<p><b>http://localhost:8000/blade</b></p>
+<img src="https://www.tutorialspoint.com/laravel/images/blade_template.jpg" alt="Blade Template" />
+<h1>Laravel - Redirections</h1>
+<h2>Redirecting to Named Routes</h2>
+<p>Named route is used to give specific name to a route. The name can be assigned using the <b>“as”</b> array key.</p>
+<pre class="result notranslate">
+Route::get('user/profile', ['as' =&gt; 'profile', function () {
+   //
+}]);
+</pre>
+<p><b>Note</b> &minus; Here, we have given the name <b>“profile”</b> to a route <b>“user/profile”</b>.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a view called test.php and save it at <b>resources/views/test.php</b>.</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h1&gt;Example of Redirecting to Named Routes&lt;/h1&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; In routes.php, we have set up the route for test.php file. We have renamed it to <b>“testing”</b>. We have also set up another route <b>“redirect”</b> which will redirect the request to the named route <b>“testing”</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/test', ['as'=&gt;'testing',function(){
+   return view('test2');
+}]);
+Route::get('redirect',function(){
+   return redirect()-&gt;route('testing');
+});
+</pre>
+<p><b>Step 3</b> &minus; Visit the following URL to test the named route example.</p>
+<p><b>http://localhost:8000/redirect</b></p>
+<p><b>Step 4</b> &minus; After execution of the above URL, you will be redirected to http://localhost:8000/test as we are redirecting to the named route <b>“testing”</b>.</p>
+<p><b>Step 5</b> &minus; After successful execution of the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/virat_gandhi.jpg" alt="Virat Gandhi" />
+<h2>Redirecting to Controller Actions</h2>
+<p>Not only named route but we can also redirect to controller actions. We need to simply pass the controller and name of the <b>action</b> to the action method as shown in the following example. If you want to pass a parameter, you can pass it as second argument of action method.</p>
+<pre class="result notranslate">
+return redirect()-&gt;action(‘NameOfController@methodName’,[parameters]);
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Execute the below command to create a controller called <b>RedirectController</b>.</p>
+<pre class="result notranslate">
+php artisan make:controller RedirectController --plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/redirect_controller.jpg" alt="Redirect Controller" />
+<p><b>Step 3</b> &minus; Copy the following code to file <b>app/Http/Controllers/RedirectController.php</b>.</p>
+<p><b>app/Http/Controllers/RedirectController.php</b></p>
+<pre class="result notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class RedirectController extends Controller {
+   public function index(){
+      echo "Redirecting to controller's action.";
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Add the following lines in <b>app/Http/routes.php</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('rr','RedirectController@index');
+Route::get('/redirectcontroller',function(){
+   return redirect()-&gt;action('RedirectController@index');
+});
+</pre>
+<p><b>Step 5</b> &minus; Visit the following URL to test the example.</p>
+<p><b>http://localhost:8000/redirectcontroller</b></p>
+<p><b>Step 6</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/redirectcontroller.jpg" alt="RedirectController.jpg" />
+<h1>Laravel - Working With Database</h1>
+<h2>Connecting to Database</h2>
+<p>Laravel has made processing with database very easy. Laravel currently supports following 4 databases &minus;</p>
+<ul class="list">
+<li>MySQL</li>
+<li>Postgres</li>
+<li>SQLite</li>
+<li>SQL Server</li>
+</ul>
+<p>The query to the database can be fired using raw SQL, the fluent query builder, and the Eloquent ORM. To understand the all CRUD (Create, Read, Update, Delete) operations with Laravel, we will use simple student management system.</p>
+<p>Configure the database in <b>config/database.php</b> file and create the college database with structure in MySQL as shown in the following table.</p>
+<p><b>Database &minus; College</b></p>
+<p><b>Table &minus; student</b></p>
+<table class="table table-bordered" style="text-align:center;">
+<tr>
+<th style="text-align:center;">Column Name</th>
+<th style="text-align:center;">Column Datatype</th>
+<th style="text-align:center;">Extra</th>
+</tr>
+<tr>
+<td>Id</td>
+<td>int(11)</td>
+<td>Primary key | Auto increment</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>varchar(25)</td>
+<td></td>
+</tr>
+</table>
+<p>We will see how to add, delete, update and retrieve records from database using Laravel in student table.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Records &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="https://www.tutorialspoint.com/laravel/insert_records.htm">Insert Records</a>
+<p>We can insert the record using the DB facade with insert method.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://www.tutorialspoint.com/laravel/retrieve_records.htm">Retrieve Records</a>
+<p>After configuring the database, we can retrieve the records using the DB facade with select method.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://www.tutorialspoint.com/laravel/update_records.htm">Update Records</a>
+<p>We can update the records using the DB facade with update method.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://www.tutorialspoint.com/laravel/delete_records.htm">Delete Records</a>
+<p>We can delete the record using the DB facade with the delete method.</p>
+</td>
+</tr>
+</table>
+<h1>Laravel - Errors and Logging</h1>
+<h2>Errors</h2>
+<p>A project while underway, is borne to have a few errors. Errors and exception handling is already configured for you when you start a new Laravel project. Normally, in a local environment we need to see errors for debugging purposes. We need to hide these errors from users in production environment. This can be achieved with the variable <b>APP_DEBUG</b> set in the environment file <b>.env</b> stored at the root of the application.</p>
+<p>For local environment the value of <b>APP_DEBUG</b> should be <b>true</b> but for production it needs to be set to <b>false</b> to hide errors.</p>
+<p><b>Note</b> &minus; After changing the <b>APP_DEBUG</b> variable, restart the Laravel server.</p>
+<h2>Logging</h2>
+<p>Logging is an important mechanism by which system can log errors that are generated. It is useful to improve the reliability of the system. Laravel supports different logging modes like single, daily, syslog, and errorlog modes. You can set these modes in <b>config/app.php</b> file.</p>
+<pre class="result notranslate">
+'log' =&gt; 'daily'
+</pre>
+<p>You can see the generated log entries in <b>storage/logs/laravel.log</b> file.</p>
+<h1>Laravel - Forms</h1>
+<p>Laravel provides various in built tags to handle HTML forms easily and securely. All the major elements of HTML are generated using Laravel. To support this, we need to add HTML package to Laravel using composer.</p>
+<h2>Example 1</h2>
+<p><b>Step 1</b> &minus; Execute the following command to proceed with the same.</p>
+<pre class="result notranslate">
+composer require illuminate/html
+</pre>
+<p><b>Step 2</b> &minus; This will add HTML package to Laravel as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/html_package.jpg" alt="HTML Package" />
+<p><b>Step 3</b> &minus; Now, we need to add this package to Laravel configuration file which is stored at <b>config/app.php.</b> Open this file and you will see a list of Laravel service providers as shown in the following image. Add HTML service provider as indicated in the outlined box in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/laravel_service.jpg" alt="Laravel Service" />
+<p><b>Step 4</b> &minus; Add aliases in the same file for HTML and Form. Notice the two lines indicated in the outlined box in the following image and add those two lines.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/outlined_box.jpg" alt="Outlined Box" />
+<p><b>Step 5</b> &minus; Now everything is setup. Let’s see how we can use various HTML elements using Laravel tags.</p>
+<h3>Opening a Form</h3>
+<pre class="result notranslate">
+{{ Form::open(array('url' =&gt; 'foo/bar')) }}
+   //
+{{ Form::close() }}
+</pre>
+<h3>Generating a Label Element</h3>
+<pre class="result notranslate">
+echo Form::label('email', 'E-Mail Address');
+</pre>
+<h3>Generating a Text Input</h3>
+<pre class="result notranslate">
+echo Form::text('username');
+</pre>
+<h3>Specifying a Default Value</h3>
+<pre class="result notranslate">
+echo Form::text('email', 'example@gmail.com');
+</pre>
+<h3>Generating a Password Input</h3>
+<pre class="result notranslate">
+echo Form::password('password');
+</pre>
+<h3>Generating a File Input</h3>
+<pre class="result notranslate">
+echo Form::file('image');
+</pre>
+<h3>Generating a Checkbox Or Radio Input</h3>
+<pre class="result notranslate">
+echo Form::checkbox('name', 'value');
+echo Form::radio('name', 'value');
+</pre>
+<h3>Generating a Checkbox Or Radio Input That Is Checked</h3>
+<pre class="result notranslate">
+echo Form::checkbox('name', 'value', true);
+echo Form::radio('name', 'value', true);
+</pre>
+<h3>Generating a Drop-Down List</h3>
+<pre class="result notranslate">
+echo Form::select('size', array('L' =&gt; 'Large', 'S' =&gt; 'Small'));
+</pre>
+<h3>Generating A Submit Button</h3>
+<pre class="result notranslate">
+echo Form::submit('Click Me!');
+</pre>
+<h2>Example 2</h2>
+<p><b>Step 1</b> &minus; Copy the following code to create a view called <b>resources/views/form.php</b>.</p>
+<p><b>resources/views/form.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      
+      &lt;?php
+         echo Form::open(array('url' =&gt; 'foo/bar'));
+            echo Form::text('username','Username');
+            echo '&lt;br/&gt;';
+            
+            echo Form::text('email', 'example@gmail.com');
+            echo '&lt;br/&gt;';
+     
+            echo Form::password('password');
+            echo '&lt;br/&gt;';
+            
+            echo Form::checkbox('name', 'value');
+            echo '&lt;br/&gt;';
+            
+            echo Form::radio('name', 'value');
+            echo '&lt;br/&gt;';
+            
+            echo Form::file('image');
+            echo '&lt;br/&gt;';
+            
+            echo Form::select('size', array('L' =&gt; 'Large', 'S' =&gt; 'Small'));
+            echo '&lt;br/&gt;';
+            
+            echo Form::submit('Click Me!');
+         echo Form::close();
+      ?&gt;
+   
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; Add the following line in <b>app/Http/routes.php</b> to add a route for view form.php</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/form',function(){
+   return view('form');
+});
+</pre>
+<p><b>Step 3</b> &minus; Visit the following URL to see the form.</p>
+<p><b>http://localhost:8000/form</b></p>
+<p><b>Step 4</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/view_form.jpg" alt="View Form" />
+<h1>Laravel - Localization</h1>
+<p>Localization feature of Laravel supports different language to be used in application. You need to store all the strings of different language in a file and these files are stored at <b>resources/views</b> directory. You should create a separate directory for each supported language. All the language files should return an array of keyed strings as shown below.</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+return [
+   'welcome' =&gt; 'Welcome to the application'
+];
+</pre>
+<h2>Example</h2>
+<p><b>Step 1</b> &minus; Create 3 files for languages — <b>English, French</b>, and <b>German</b>. Save English file at <b>resources/lang/en/lang.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   return [
+      'msg' =&gt; 'Laravel Internationalization example.'
+   ];
+?&gt;
+</pre>
+<p><b>Step 2</b> &minus; Save French file at <b>resources/lang/fr/lang.php</b>.</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   return [
+      'msg' =&gt; 'Exemple Laravel internationalisation.'
+   ];
+?&gt;
+</pre>
+<p><b>Step 3</b> &minus; Save German file at <b>resources/lang/de/lang.php</b>.</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   return [
+      'msg' =&gt; 'Laravel Internationalisierung Beispiel.' 
+   ];
+?&gt;
+</pre>
+<p><b>Step 4</b> &minus; Create a controller called <b>LocalizationController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller LocalizationController --plain
+</pre>
+<p><b>Step 5</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/localizationcontroller.jpg" alt="LocalizationController" />
+<p><b>Step 6</b> &minus; Copy the following code to file <b>app/Http/Controllers/LocalizationController.php</b></p>
+<p><b>app/Http/Controllers/LocalizationController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class LocalizationController extends Controller {
+   public function index(Request $request,$locale){
+      //set’s application’s locale
+      app()-&gt;setLocale($locale);
+      
+      //Gets the translated message and displays it
+      echo trans('lang.msg');
+   }
+}
+</pre>
+<p><b>Step 7</b> &minus; Add a route for LocalizationController in <b>app/Http/routes.php</b> file. Notice that we are passing {locale} argument after localization/ which we will use to see output in different language.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('localization/{locale}','LocalizationController@index');
+</pre>
+<p><b>Step 8</b> &minus; Now, let us visit the different URLs to see all different languages. Execute the below URL to see output in English language.</p>
+<p><b>http://localhost:8000/localization/en</b></p>
+<p><b>Step 9</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/laravel_internationalization.jpg" alt="Laravel Internationalization" />
+<p><b>Step 10</b> &minus; Execute the below URL to see output in French language.</p>
+<p><b>http://localhost:8000/localization/fr</b></p>
+<p><b>Step 11</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/french_example.jpg" alt="French Example" />
+<p><b>Step 12</b> &minus; Execute the below URL to see output in German language</p>
+<p><b>http://localhost:8000/localization/de</b></p>
+<p><b>Step 13</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/german_example.jpg" alt="German Example" />
+<h1>Laravel - Session</h1>
+<p>Sessions are used to store information about the user across the requests. Laravel provides various drivers like <b>file, cookie, apc, array, Memcached, Redis,</b> and <b>database</b> to handle session data. By default, file driver is used because it is lightweight. Session can be configured in the file stored at <b>config/session.php</b>.</p>
+<h2>Accessing Session Data</h2>
+<p>To access the session data, we need an instance of session which can be accessed via HTTP request. After getting the instance, we can use the <b>get()</b> method, which will take one argument, <b>“key”</b>, to get the session data.</p>
+<pre class="result notranslate">
+$value = $request-&gt;session()-&gt;get('key');
+</pre>
+<p>You can use <b>all()</b> method to get all session data instead of <b>get()</b> method.</p>
+<h2>Storing Session Data</h2>
+<p>Data can be stored in session using the <b>put()</b> method. The <b>put()</b> method will take two arguments, the <b>“key”</b> and the <b>“value”</b>.</p>
+<pre class="result notranslate">
+$request-&gt;session()-&gt;put('key', 'value');
+</pre>
+<h2>Deleting Session Data</h2>
+<p>The <b>forget()</b> method is used to delete an item from the session. This method will take <b>“key”</b> as the argument.</p>
+<pre class="result notranslate">
+$request-&gt;session()-&gt;forget('key');
+</pre>
+<p>Use <b>flush()</b> method instead of <b>forget()</b> method to delete all session data. Use the <b>pull()</b> method to retrieve data from session and delete it afterwards. The pull() method will also take <b>“key”</b> as the argument. The difference between the <b>forget()</b> and the <b>pull()</b> method is that <b>forget()</b> method will not return the value of the session and <b>pull()</b> method will return it and delete that value from session.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a controller called <b>SessionController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller SessionController --plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/sessioncontroller.jpg" alt="SessionController" />
+<p><b>Step 3</b> &minus; Copy the following code in a file at <b>app/Http/Controllers/SessionController.php.</b></p>
+<p><b>app/Http/Controllers/SessionController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class SessionController extends Controller {
+   public function accessSessionData(Request $request){
+      if($request-&gt;session()-&gt;has('my_name'))
+         echo $request-&gt;session()-&gt;get('my_name');
+      else
+         echo 'No data in the session';
+   }
+   public function storeSessionData(Request $request){
+      $request-&gt;session()-&gt;put('my_name','Virat Gandhi');
+      echo "Data has been added to session";
+   }
+   public function deleteSessionData(Request $request){
+      $request-&gt;session()-&gt;forget('my_name');
+      echo "Data has been removed from session.";
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Add the following lines at <b>app/Http/routes.php</b> file.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('session/get','SessionController@accessSessionData');
+Route::get('session/set','SessionController@storeSessionData');
+Route::get('session/remove','SessionController@deleteSessionData');
+</pre>
+<p><b>Step 5</b> &minus; Visit the following URL to <b>set data in session</b>.</p>
+<p><b>http://localhost:8000/session/set</b></p>
+<p><b>Step 6</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/data_in_session.jpg" alt="Data in Session" />
+<p><b>Step 7</b> &minus; Visit the following URL to <b>get data from session</b>.</p>
+<p><b>http://localhost:8000/session/get</b></p>
+<p><b>Step 8</b> &minus; The output will appear as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/virat_gandhi.jpg" alt="Virat Gandhi" />
+<p><b>Step 9</b> &minus; Visit the following URL to <b>remove session data</b>.</p>
+<p><b>http://localhost:8000/session/remove</b></p>
+<p><b>Step 10</b> &minus; You will see a message as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/session.jpg" alt="Session" />
+<h1>Laravel - Validation</h1>
+<p>Validation is the most important aspect while designing an application. It validates the incoming data. By default, base controller class uses a <b>ValidatesRequests</b> trait which provides a convenient method to validate incoming HTTP requests with a variety of powerful validation rules.</p>
+<h2>Available Validation Rules in Laravel</h2>
+<table class="table table-bordered" style="text-align:center";>
+<tr>
+<th colspan="3" style="text-align:center";>Available Validation Rules in Laravel</th>
+</tr>
+<tr>
+<td>Accepted</td>
+<td>Active URL</td>
+<td>After (Date)</td>
+</tr>
+<tr>
+<td>Alpha</td>
+<td>Alpha Dash</td>
+<td>Alpha Numeric</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>Before (Date)</td>
+<td>Between</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>Confirmed</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>Date Format</td>
+<td>Different</td>
+<td>Digits</td>
+</tr>
+<tr>
+<td>Digits Between</td>
+<td>E-Mail</td>
+<td>Exists (Database)</td>
+</tr>
+<tr>
+<td>Image (File)</td>
+<td>In</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>IP Address</td>
+<td>JSON</td>
+<td>Max</td>
+</tr>
+<tr>
+<td>MIME Types(File)</td>
+<td>Min</td>
+<td>Not In</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td>Regular Expression</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Required If</td>
+<td>Required Unless</td>
+<td>Required With</td>
+</tr>
+<tr>
+<td>Required With All</td>
+<td>Required Without</td>
+<td>Required Without All</td>
+</tr>
+<tr>
+<td>Same</td>
+<td>Size</td>
+<td>String</td>
+</tr>
+<tr>
+<td>Timezone</td>
+<td>Unique (Database)</td>
+<td>URL</td>
+</tr>
+</table>
+<p>Laravel will always check for errors in the session data, and automatically bind them to the view if they are available. So, it is important to note that a <b>$errors</b> variable will always be available in all of your views on every request, allowing you to conveniently assume the <b>$errors</b> variable is always defined and can be safely used. The $errors variable will be an instance of <b>Illuminate\Support\MessageBag</b>. Error message can be displayed in view file by adding the code as shown below.</p>
+<pre class="prettyprint notranslate">
+@if (count($errors) &gt; 0)
+   &lt;div class = "alert alert-danger"&gt;
+      &lt;ul&gt;
+         @foreach ($errors-&gt;all() as $error)
+            &lt;li&gt;{{ $error }}&lt;/li&gt;
+         @endforeach
+      &lt;/ul&gt;
+   &lt;/div&gt;
+@endif
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a controller called <b>ValidationController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller ValidationController --plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/validationcontroller.jpg" alt="ValidationController" />
+<p><b>Step 3</b> &minus; Copy the following code in <b>app/Http/Controllers/ValidationController.php</b> file.</p>
+<p><b>app/Http/Controllers/ValidationController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class ValidationController extends Controller {
+   public function showform(){
+      return view('login');
+   }
+   public function validateform(Request $request){
+      print_r($request-&gt;all());
+      $this-&gt;validate($request,[
+         'username'=&gt;'required|max:8',
+         'password'=&gt;'required'
+      ]);
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Create a view file called <b>resources/views/login.blade.php</b> and copy the following code in that file.</p>
+<p><b>resources/views/login.blade.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   
+   &lt;head&gt;
+      &lt;title&gt;Login Form&lt;/title&gt;
+   &lt;/head&gt;
+
+   &lt;body&gt;
+      
+      @if (count($errors) &gt; 0)
+         &lt;div class = "alert alert-danger"&gt;
+            &lt;ul&gt;
+               @foreach ($errors-&gt;all() as $error)
+                  &lt;li&gt;{{ $error }}&lt;/li&gt;
+               @endforeach
+            &lt;/ul&gt;
+         &lt;/div&gt;
+      @endif
+      
+      &lt;?php
+         echo Form::open(array('url'=&gt;'/validation'));
+      ?&gt;
+      
+      &lt;table border = '1'&gt;
+         &lt;tr&gt;
+            &lt;td align = 'center' colspan = '2'&gt;Login&lt;/td&gt;
+         &lt;/tr&gt;
+         
+         &lt;tr&gt;
+            &lt;td&gt;Username&lt;/td&gt;
+            &lt;td&gt;&lt;?php echo Form::text('username'); ?&gt;&lt;/td&gt;
+         &lt;/tr&gt;
+         
+         &lt;tr&gt;
+            &lt;td&gt;Password&lt;/td&gt;
+            &lt;td&gt;&lt;?php echo Form::password('password'); ?&gt;&lt;/td&gt;
+         &lt;/tr&gt;
+         
+         &lt;tr&gt;
+            &lt;td align = 'center' colspan = '2'
+               &gt;&lt;?php echo Form::submit('Login'); ?  &gt;&lt;/td&gt;
+         &lt;/tr&gt;
+      &lt;/table&gt;
+      
+      &lt;?php
+         echo Form::close();
+      ?&gt;
+   
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 5</b> &minus; Add the following lines in <b>app/Http/routes.php</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/validation','ValidationController@showform');
+Route::post('/validation','ValidationController@validateform');
+</pre>
+<p><b>Step 6</b> &minus; Visit the following URL to test the validation.</p>
+<p><b>http://localhost:8000/validation</b></p>
+<p><b>Step 7</b> &minus; Click the <b>“Login”</b> button without entering anything in the text field. The output will be as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/login.jpg" alt="Login" />
+<h1>Laravel - File Uploading</h1>
+<p>Uploading Files in Laravel is very easy. All we need to do is to create a view file where a user can select a file to be uploaded and a controller where uploaded files will be processed.</p>
+<p>In a view file, we need to generate a file input by adding the following line of code.</p>
+<pre class="result notranslate">
+Form::file('file_name');
+</pre>
+<p>In Form::open(), we need to add <b>‘files’=&gt;’true’</b> as shown below. This facilitates the form to be uploaded in multiple parts.</p>
+<pre class="result notranslate">
+Form::open(array('url' =&gt; '/uploadfile','files'=&gt;'true'));
+</pre>
+<h2>Example</h2>
+<p><b>Step 1</b> &minus; Create a view file called <b>resources/views/uploadfile.php</b> and copy the following code in that file.</p>
+<p><b>resources/views/uploadfile.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      
+      &lt;?php
+         echo Form::open(array('url' =&gt; '/uploadfile','files'=&gt;'true'));
+         echo 'Select the file to upload.';
+         echo Form::file('image');
+         echo Form::submit('Upload File');
+         echo Form::close();
+      ?&gt;
+   
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; Create a controller called <b>UploadFileController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller UploadFileController --plain
+</pre>
+<p><b>Step 3</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/uploadfilecontroller.jpg" alt="UploadFileController" />
+<p><b>Step 4</b> &minus; Copy the following code in <b>app/Http/Controllers/UploadFileController.php</b> file.</p>
+<p><b>app/Http/Controllers/UploadFileController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class UploadFileController extends Controller {
+   public function index(){
+      return view('uploadfile');
+   }
+   public function showUploadFile(Request $request){
+      $file = $request-&gt;file('image');
+   
+      //Display File Name
+      echo 'File Name: '.$file-&gt;getClientOriginalName();
+      echo '&lt;br&gt;';
+   
+      //Display File Extension
+      echo 'File Extension: '.$file-&gt;getClientOriginalExtension();
+      echo '&lt;br&gt;';
+   
+      //Display File Real Path
+      echo 'File Real Path: '.$file-&gt;getRealPath();
+      echo '&lt;br&gt;';
+   
+      //Display File Size
+      echo 'File Size: '.$file-&gt;getSize();
+      echo '&lt;br&gt;';
+   
+      //Display File Mime Type
+      echo 'File Mime Type: '.$file-&gt;getMimeType();
+   
+      //Move Uploaded File
+      $destinationPath = 'uploads';
+      $file-&gt;move($destinationPath,$file-&gt;getClientOriginalName());
+   }
+}
+</pre>
+<p><b>Step 5</b> &minus; Add the following lines in <b>app/Http/routes.php</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/uploadfile','UploadFileController@index');
+Route::post('/uploadfile','UploadFileController@showUploadFile');
+</pre>
+<p><b>Step 6</b> &minus; Visit the following URL to test the upload file functionality.</p>
+<p><b>http://localhost:8000/uploadfile</b></p>
+<p><b>Step 7</b> &minus; You will receive a prompt as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/browse_file.jpg" alt="Browse File" />
+<h1>Laravel - Sending Email</h1>
+<p>Laravel uses free feature-rich library <b>“SwiftMailer”</b> to send emails. Using the library function, we can easily send emails without too many hassles. The e-mail templates are loaded in the same way as views, which means you can use the Blade syntax and inject data into your templates. The following is the syntax of the send function.</p>
+<table class="table table-bordered" style="text:align-center;">
+<tr>
+<td>Syntax</td>
+<td>void send(string|array $view, array $data, Closure|string $callback)</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Parameters</td>
+<td>
+<ul class="list">
+<li><p>$view(string|array) – name of the view that contains email message</p></li>
+<li><p>$data(array) – array of data to pass to view</p></li>
+<li><p>$callback – a Closure callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Returns</td>
+<td>nothing</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Sends email.</td>
+</tr>
+</table>
+<p>In the third argument, the $callback closure received message instance and with that instance we can also call the following functions and alter the message as shown below.</p>
+<ul class="list">
+<li>$message->subject('Welcome to the Tutorials Point');<li>
+<li>$message->from('email@example.com', 'Mr. Example');</li>
+<li>$message->to('email@example.com', 'Mr. Example');</li>
+</ul>
+<p>Some of the less common methods include &minus;</p>
+<ul class="list">
+<li>$message->sender('email@example.com', 'Mr. Example');</li>
+<li>$message->returnPath('email@example.com');</li>
+<li>$message->cc('email@example.com', 'Mr. Example');</li>
+<li>$message->bcc('email@example.com', 'Mr. Example');</li>
+<li>$message->replyTo('email@example.com', 'Mr. Example');</li>
+<li>$message->priority(2);</li>
+</ul>
+<p>To attach or embed files, you can use the following methods &minus;</p>
+<ul class="list">
+<li>$message->attach('path/to/attachment.txt');</li>
+<li>$message->embed('path/to/attachment.jpg');</li>
+</ul>
+<p>Mail can be sent as HTML or text. You can indicate the type of mail that you want to send in the first argument by passing an array as shown below. The default type is HTML. If you want to send plain text mail then use the following syntax.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+Mail::send([‘text’=&gt;’text.view’], $data, $callback);
+</pre>
+<p>In this syntax, the first argument takes an array. Use “text” as the key “name of the view” as value of the key.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; We will now send an email from Gmail account and for that you need to configure your Gmail account in Laravel environment file <b>— .env</b> file. Enable 2-step verification in your Gmail account and create an application specific password followed by changing the .env parameters as shown below.</p>
+<h3>.env</h3>
+<pre class="result notranslate">
+MAIL_DRIVER = smtp
+MAIL_HOST = smtp.gmail.com
+MAIL_PORT = 587
+MAIL_USERNAME = your-gmail-username
+MAIL_PASSWORD = your-application-specific-password
+MAIL_ENCRYPTION = tls
+</pre>
+<p><b>Step 2</b> &minus; After changing the <b>.env</b> file execute the below two commands to clear the cache and restart the Laravel server.</p>
+<pre class="result notranslate">
+php artisan config:cache
+</pre>
+<p><b>Step 3</b> &minus; Create a controller called <b>MailController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller MailController --plain
+</pre>
+<p><b>Step 4</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/mailcontroller.jpg" alt="MailController" />
+<p><b>Step 5</b> &minus; Copy the following code in <b>app/Http/Controllers/MailController.php</b> file.<b> app/Http/Controllers/MailController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Mail;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class MailController extends Controller {
+   public function basic_email(){
+      $data = array('name'=&gt;"Virat Gandhi");
+   
+      Mail::send(['text'=&gt;'mail'], $data, function($message) {
+         $message-&gt;to('abc@gmail.com', 'Tutorials Point')-&gt;subject
+            ('Laravel Basic Testing Mail');
+         $message-&gt;from('xyz@gmail.com','Virat Gandhi');
+      });
+      echo "Basic Email Sent. Check your inbox.";
+   }
+
+   public function html_email(){
+      $data = array('name'=&gt;"Virat Gandhi");
+      Mail::send('mail', $data, function($message) {
+         $message-&gt;to('abc@gmail.com', 'Tutorials Point')-&gt;subject
+            ('Laravel HTML Testing Mail');
+         $message-&gt;from('xyz@gmail.com','Virat Gandhi');
+      });
+      echo "HTML Email Sent. Check your inbox.";
+   }
+   
+   public function attachment_email(){
+      $data = array('name'=&gt;"Virat Gandhi");
+      Mail::send('mail', $data, function($message) {
+         $message-&gt;to('abc@gmail.com', 'Tutorials Point')-&gt;subject
+            ('Laravel Testing Mail with Attachment');
+         $message-&gt;attach('C:\laravel-master\laravel\public\uploads\image.png');
+         $message-&gt;attach('C:\laravel-master\laravel\public\uploads\test.txt');
+         $message-&gt;from('xyz@gmail.com','Virat Gandhi');
+      });
+      echo "Email Sent with attachment. Check your inbox.";
+   }
+}
+</pre>
+<p><b>Step 6</b> &minus; Copy the following code in <b>resources/views/mail.blade.php</b> file.</p>
+<p><b>resources/views/mail.blade.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;h1&gt;Hi, {{ $name }}&lt;/h1&gt;
+l&lt;p&gt;Sending Mail from Laravel.&lt;/p&gt;
+</pre>
+<p><b>Step 7</b> &minus; Add the following lines in <b>app/Http/routes.php.</b></p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');
+</pre>
+<p><b>Step 8</b> &minus; Visit the following URL to test basic email.</p>
+<p><b>http://localhost:8000/sendbasicemail</b></p>
+<p><b>Step 9</b> &minus; The output screen will look something like this. Check your inbox to see the basic email output.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/basic_email_sent.jpg" alt="Basic Email Sent" />
+<p><b>Step 10</b> &minus; Visit the following URL to test the HTML email.</p>
+<p><b>http://localhost:8000/sendhtmlemail</b></p>
+<p><b>Step 11</b> &minus; The output screen will look something like this. Check your inbox to see the html email output.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/html_email.jpg" alt="HTML Email" />
+<p><b>Step 12</b> &minus; Visit the following URL to test the HTML email with attachment.</p>
+<p><b>http://localhost:8000/sendattachmentemail</b></p>
+<p><b>Step 13</b> &minus; The output screen will look something like this. Check your inbox to see the html email output with attachment.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/email_sent.jpg" alt="Email Sent" />
+<p><b>Note</b> &minus; In the MailController.php file the email address in the from method should be the email address from which you can send email address. Generally, it should be the email address configured on your server.</p>
+<h1>Laravel - Ajax</h1>
+<p><b>Ajax (Asynchronous JavaScript and XML)</b> is a set of web development techniques utilizing many web technologies used on the client-side to create asynchronous Web applications. Import jquery library in your view file to use ajax functions of jquery which will be used to send and receive data using ajax from the server. On the server side you can use the response() function to send response to client and to send response in JSON format you can chain the response function with json() function.</p>
+<h2>json() function syntax</h2>
+<pre class="result notranslate">
+json(string|array $data = array(), int $status = 200, array $headers = array(), int $options)
+</pre>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a view file called <b>resources/views/message.php</b> and copy the following code in that file.</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Ajax Example&lt;/title&gt;
+      
+      &lt;script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;
+      &lt;/script&gt;
+      
+      &lt;script&gt;
+         function getMessage(){
+            $.ajax({
+               type:'POST',
+               url:'/getmsg',
+               data:'_token = &lt;?php echo csrf_token() ?&gt;',
+               success:function(data){
+                  $("#msg").html(data.msg);
+               }
+            });
+         }
+      &lt;/script&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;div id = 'msg'&gt;This message will be replaced using Ajax. 
+         Click the button to replace the message.&lt;/div&gt;
+      &lt;?php
+         echo Form::button('Replace Message',['onClick'=&gt;'getMessage()']);
+      ?&gt;
+   &lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+<p><b>Step 2</b> &minus; Create a controller called <b>AjaxController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller AjaxController --plain
+</pre>
+<p><b>Step 3</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/ajaxcontroller.jpg" alt="AjaxController" />
+<p><b>Step 4</b> &minus; Copy the following code in <b>app/Http/Controllers/AjaxController.php</b> file.</p>
+<p><b>app/Http/Controllers/AjaxController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class AjaxController extends Controller {
+   public function index(){
+      $msg = "This is a simple message.";
+      return response()-&gt;json(array('msg'=&gt; $msg), 200);
+   }
+}
+</pre>
+<p><b>Step 5</b> &minus; Add the following lines in <b>app/Http/routes.php</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('ajax',function(){
+   return view('message');
+});
+Route::post('/getmsg','AjaxController@index');
+</pre>
+<p><b>Step 6</b> &minus; Visit the following URL to test the Ajax functionality.</p>
+<p><b>http://localhost:8000/ajax</b></p>
+<p><b>Step 7</b> &minus; You will be redirected to a page where you will see a message as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/replace_message.jpg" alt="Replace Message" />
+<p><b>Step 8</b> &minus; The output will appear as shown in the following image after clicking the button.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/simple_message.jpg" alt="Simple Message" />
+<h1>Laravel - Error Handling</h1>
+<p>In Laravel all the exceptions are handled by <b>app\Exceptions\Handler</b> class. This class contains two methods — <b>report</b> and <b>render</b>.</p>
+<h3>report() method</h3>
+<p>report() method is used to report or log exception. It is also used to send log exceptions to external services like Sentry, Bugsnag etc.</p>
+<h3>render() method</h3>
+<p>render() method is used to render an exception into an HTTP response which will be sent back to browser.</p>
+<p>Beside these two methods, the <b>app\Exceptions\Handler</b> class contains an important property called <b>“$dontReport”</b>. This property takes an array of exception types that will not be logged.</p>
+<h2>HTTP Exceptions</h2>
+<p>Some exceptions describe HTTP error codes like 404, 500 etc. To generate such response anywhere in an application, you can use <b>abort()</b> method as follows.</p>
+<pre class="result notranslate">
+abort(404)
+</pre>
+<h2>Custom Error pages</h2>
+<p>Laravel makes it very easy for us to use the custom error pages for each separate error codes. For example, if you want to design custom page for error code <b>404</b>, you can create a view at <b>resources/views/errors/404</b>.blade.php. Same way, if you want to design error page for error code <b>500</b>, it should be stored at <b>resources/views/errors/500.blade.php</b>.</p>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Add the following lines in <b>app/Http/routes.php</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/error',function(){
+   abort(404);
+});
+</pre>
+<p><b>Step 2</b> &minus; Create a view file called <b>resources/views/errors/404.blade.php</b> and copy the following code in that file.</p>
+<p><b>resources/views/errors/404.blade.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    
+   &lt;head&gt;
+      &lt;title&gt;404&lt;/title&gt;
+      &lt;link href = "https://fonts.googleapis.com/css?family=Lato:100" rel = "stylesheet" 
+         type = "text/css"&gt;
+   
+      &lt;style&gt;
+         html, body {
+            height: 100%;
+         }
+         body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            color: #B0BEC5;
+            display: table;
+            font-weight: 100;
+            font-family: 'Lato';
+         }
+         .container {
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+         }
+         .content {
+            text-align: center;
+            display: inline-block;
+         }
+         .title {
+            font-size: 72px;
+            margin-bottom: 40px;
+         }
+      &lt;/style&gt;
+		
+   &lt;/head&gt;
+   &lt;body&gt;
+	
+      &lt;div class = "container"&gt;
+         &lt;div class = "content"&gt;
+            &lt;div class = "title"&gt;404 Error&lt;/div&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+		
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p><b>Step 3</b> &minus; Visit the following URL to test the event.</p>
+<p><b>http://localhost:8000/error</b></p>
+<p><b>Step 4</b> &minus; After visiting the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/404error.jpg" alt="404Error" />
+<h1>Laravel - Event Handling</h1>
+<p>An event is an action or occurrence recognized by a program that may be handled by the program. Laravel events simply provide an observer implementation. Event can be handled by the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Create an Event class.</p>
+<p>Event class can be created by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:event &lt;event-class&gt;
+</pre>
+<p>Here the &lt;event-class&gt; should be replaced with the name of the event class. The created class will be stored at <b>app\Events</b> directory.</p>
+<p><b>Step 2</b> &minus; Create a handler class to handle the created event.</p>
+<p>Event handler class can be created by executing the following command.</p>
+<pre class="result notranslate">
+php artisan handler:event &lt;handler-class&gt; --event = &lt;event-class&gt;
+</pre>
+<p>Here the &lt;event-class&gt; should be replaced with the name of the event class that we have created in step-1 and the &lt;handler-class&gt; should be replaced with the name of the handler class. The newly created handler class will be stored at <b>app\Handlers\Events</b> directory.</p>
+<p><b>Step 3</b> &minus; Register the Event class and its handler in EventServiceProvider class.</p>
+<p>We now need to register the event and its handler class in <b>app\Providers\EventServiceProvier.php</b> file. This file contains an array called $listen. In this array we need to add event class as key and event handler class as its value.</p>
+<p><b>Step 4</b> &minus; Fire the event.</p>
+<p>Last step is to fire the event with Event facade. fire() method hsould be called which takes object of the event class. Event can be fired as shown below &minus;</p>
+<pre class="result notranslate">
+Event::fire(&lt;Event Class Object&gt;);
+</pre>
+<p>&lt;Event Class Object&gt; should be replaced with the object of the event class.</p>
+<h2>Example</h2>
+<p><b>Step 1</b> &minus; Create a controller called <b>CreateStudentController</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:controller CreateStudentController --plain
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/studentcontroller.jpg" alt="StudentController" />
+<p><b>Step 3</b> &minus; Copy the following code in <b>app/Http/Controllers/CreateStudentController.php</b> file.</p>
+<p><b>app/Http/Controllers/CreateStudentController.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use DB;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Events\StudentAdded;
+use Event;
+
+class CreateStudentController extends Controller {
+   public function insertform(){
+      return view('stud_add');
+   }
+   
+   public function insert(Request $request){
+      $name = $request-&gt;input('stud_name');
+      DB::insert('insert into student (name) values(?)',[$name]);
+      echo "Record inserted successfully.&lt;br/&gt;";
+      echo '&lt;a href = "/event"&gt;Click Here&lt;/a&gt; to go back.';
+      
+      //firing an event
+      Event::fire(new StudentAdded($name));
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Create an event called <b>StudentAdded</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:event StudentAdded
+</pre>
+<p><b>Step 5</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/studentadded.jpg" alt="StudentAdded" />
+<p><b>Step 6</b> &minus; The above command will create an event file at <b>App\Events\StudentAdded.php</b>. Copy the following code in that file.</p>
+<p><b>App\Events\StudentAdded.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Events;
+use App\Events\Event;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+
+class StudentAdded extends Event {
+   use SerializesModels;
+   public $name;
+  
+   public function __construct($name) {
+      $this-&gt;name = $name;
+   }
+   public function broadcastOn() {
+      return [];
+   }
+}
+</pre>
+<p><b>Step 7</b> &minus; Create an event handler called <b>HandleNewStudentAdded</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan handler:event HandlerNewStudentAdded --event = StudentAdded
+</pre>
+<p><b>Step 8</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/handlenewsudent.jpg" alt="HandleNewSudent" />
+<p><b>Step 9</b> &minus; The above command will create an event handler file at <b>app\Handlers\Events\HandleNewStudentAdded.php</b>. Copy the following code in that file.</p>
+<p><b>app\Handlers\Events\HandleNewStudentAdded.php</b></p>
+<pre class="result notranslate">
+&lt;?php
+namespace App\Handlers\Events;
+use App\Events\StudentAdded;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class HandleNewStudentAdded {
+   protected $name;
+   
+   public function __construct() {
+      //
+   }
+   public function handle(StudentAdded $event) {
+      $this-&gt;name = $event-&gt;name;
+      echo "&lt;br&gt;New Student added in database with name: ".$this->name;
+   }
+}
+</pre>
+<p><b>Step 10</b> &minus; We now need to add the event class and its handler class in a file stored at <b>app\Providers\EventServiceProvider.php</b>. Notice the line in bold font and add that line in the file.</p>
+<p><b>app\Providers\EventServiceProvider.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Providers;
+use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+
+class EventServiceProvider extends ServiceProvider {
+   /**
+   * The event listener mappings for the application.
+   *
+   * @var array
+   */
+   protected $listen = [
+      'App\Events\SomeEvent' =&gt; [
+         'App\Listeners\EventListener',
+      ],
+   
+      'App\Events\StudentAdded' =&gt; [
+         'App\Handlers\Events\HandleNewStudentAdded',
+      ],
+   ];
+   /**
+   * Register any other events for your application.
+   *
+   * @param \Illuminate\Contracts\Events\Dispatcher $events
+   * @return void
+   */
+   public function boot(DispatcherContract $events) {
+      parent::boot($events);
+      //
+   }
+}
+</pre>
+<p><b>Step 11</b> &minus; Add the following lines in <b>app/Http/routes.php</b>.</p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('event','CreateStudentController@insertform');
+Route::post('addstudent','CreateStudentController@insert');
+</pre>
+<p><b>Step 12</b> &minus; Visit the following URL to test the event.</p>
+<p><b>http://localhost:8000/event</b></p>
+<p><b>Step 13</b> &minus; After visiting the above URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/name_abc.jpg" alt="Name Abc" />
+<p><b>Step 14</b> &minus; Add the name of student and click the “Add student” button which will redirect you to the below screen. Look at the line highlighted in gray color. We have added this line in our handle method of HandleNewStudentAdded class which indicates that statements are executed in handle method when an event is fired.</p>
+<img src="https://www.tutorialspoint.com/laravel/images/record_inserted.jpg" alt="Record Inserted" />
+<h1>Laravel - Facades</h1>
+<p>Facades provide a <b>"static"</b> interface to classes that are available in the application's service container. Laravel "facades" serve as "static proxies" to underlying classes in the service container, providing the benefit of a terse, expressive syntax while maintaining more testability and flexibility than traditional static methods.</p>
+<h2>How to create Facade</h2>
+<p>The following are the steps to create Facade in Laravel.</p>
+<ul class="list">
+<li><p><b>Step 1</b> &minus; Create PHP Class File.</p></li>
+<li><p><b>Step 2</b> &minus; Bind that class to Service Provider.</p></li>
+<li><p><b>Step 3</b> &minus; Register that ServiceProvider to Config\app.php as providers.</p></li>
+<li><p><b>Step 4</b> &minus; Create Class which is this class extends to lluminate\Support\Facades\Facade.</p></li>
+<li><p><b>Step 5</b> &minus; Register point 4 to Config\app.php as aliases.</p></li>
+</ul>
+<h2>Facade Class Reference</h2>
+<p>Laravel ships with many Facades. The following are the in-built Facade class references.</p>
+<table class="table table-bordered" style="text-align:center;" >
+<tr>
+<th style="text-align:center;">Facade</th>
+<th style="text-align:center;">Class</th>
+<th style="text-align:center;">Service Container Binding</th>
+</tr>
+<tr>
+<td>App</td>
+<td>Illuminate\Foundation\Application</td>
+<td>app</td>
+</tr>
+<tr>
+<td>Artisan</td>
+<td>Illuminate\Contracts\Console\Kernel</td>
+<td>artisan</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td>Illuminate\Auth\AuthManager</td>
+<td>auth</td>
+</tr>
+<tr>
+<td>Auth (Instance)</td>
+<td>Illuminate\Auth\Guard</td>
+<td></td>
+</tr>
+<tr>
+<td>Blade</td>
+<td>Illuminate\View\Compilers\BladeCompiler</td>
+<td>blade.compiler</td>
+</tr>
+<tr>
+<td>Bus</td>
+<td>Illuminate\Contracts\Bus\Dispatcher</td>
+<td></td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>Illuminate\Cache\Repository</td>
+<td>cache</td>
+</tr>
+<tr>
+<td>Config</td>
+<td>Illuminate\Config\Repository</td>
+<td>config</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>Illuminate\Cookie\CookieJar</td>
+<td>cookie</td>
+</tr>
+<tr>
+<td>Crypt</td>
+<td>Illuminate\Encryption\Encrypter</td>
+<td>encrypter</td>
+</tr>
+<tr>
+<td>DB</td>
+<td>Illuminate\Database\DatabaseManager</td>
+<td>db</td>
+</tr>
+<tr>
+<td>DB (Instance)</td>
+<td>Illuminate\Database\Connection</td>
+<td></td>
+</tr>
+<tr>
+<td>Event</td>
+<td>Illuminate\Events\Dispatcher</td>
+<td>events</td>
+</tr>
+<tr>
+<td>File</td>
+<td>Illuminate\Filesystem\Filesystem</td>
+<td>files</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>Illuminate\Contracts\Auth\Access\Gate</td>
+<td></td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>Illuminate\Contracts\Hashing\Hasher</td>
+<td>hash</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>Illuminate\Http\Request</td>
+<td>request</td>
+</tr>
+<tr>
+<td>Lang</td>
+<td>Illuminate\Translation\Translator</td>
+<td>translator</td>
+</tr>
+<tr>
+<td>Log</td>
+<td>Illuminate\Log\Writer</td>
+<td>log</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>Illuminate\Mail\Mailer</td>
+<td>mailer</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>Illuminate\Auth\Passwords\PasswordBroker</td>
+<td>auth.password</td>
+</tr>
+<tr>
+<td>Queue</td>
+<td>Illuminate\Queue\QueueManager</td>
+<td>queue</td>
+</tr>
+<tr>
+<td>Queue (Instance)</td>
+<td>Illuminate\Queue\QueueInterface</td>
+<td></td>
+</tr>
+<tr>
+<td>Queue (Base Class)</td>
+<td>Illuminate\Queue\Queue</td>
+<td></td>
+</tr>
+<tr>
+<td>Redirect</td>
+<td>Illuminate\Routing\Redirector</td>
+<td>redirect</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Illuminate\Redis\Database</td>
+<td>redis</td>
+</tr>
+<tr>
+<td>Request</td>
+<td>Illuminate\Http\Request</td>
+<td>request</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Illuminate\Contracts\Routing\ResponseFactory</td>
+<td></td>
+</tr>
+<tr>
+<td>Route</td>
+<td>Illuminate\Routing\Router</td>
+<td>router</td>
+</tr>
+<tr>
+<td>Schema</td>
+<td>Illuminate\Database\Schema\Blueprint</td>
+<td></td>
+</tr>
+<tr>
+<td>Session</td>
+<td>Illuminate\Session\SessionManager</td>
+<td>session</td>
+</tr>
+<tr>
+<td>Session (Instance)</td>
+<td>Illuminate\Session\Store</td>
+<td></td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Illuminate\Contracts\Filesystem\Factory</td>
+<td>filesystem</td>
+</tr>
+<tr>
+<td>URL</td>
+<td>Illuminate\Routing\UrlGenerator</td>
+<td>url</td>
+</tr>
+<tr>
+<td>Validator</td>
+<td>Illuminate\Validation\Factory</td>
+<td>validator</td>
+</tr>
+<tr>
+<td>Validator (Instance)</td>
+<td>Illuminate\Validation\Validator</td>
+<td></td>
+</tr>
+<tr>
+<td>View</td>
+<td>Illuminate\View\Factory</td>
+<td>view</td>
+</tr>
+<tr>
+<td>View (Instance)</td>
+<td>Illuminate\View\View</td>
+<td></td>
+</tr>
+</table>
+<h3>Example</h3>
+<p><b>Step 1</b> &minus; Create a service provider called <b>TestFacadesServiceProvider</b> by executing the following command.</p>
+<pre class="result notranslate">
+php artisan make:provider TestFacadesServiceProvider
+</pre>
+<p><b>Step 2</b> &minus; After successful execution, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/facadesserviceprovider.jpg" alt="FacadesServiceProvider" />
+<p><b>Step 3</b> &minus; Create a class called <b>“TestFacades.php”</b> at <b>“App/Test”</b>.</p>
+<p><b>App/Test/TestFacades.php</b></p>
+<pre class="result notranslate">
+&lt;?php
+namespace App\Test;
+
+class TestFacades{
+   public function testingFacades(){
+      echo "Testing the Facades in Laravel.";
+   }
+}
+?&gt;
+</pre>
+<p><b>Step 4</b> &minus; Create a Facade class called <b>“TestFacades.php”</b> at <b>“App/Test/Facades”</b>.</p>
+<p><b>App/Test/Facades/TestFacades.php</b></p>
+<pre class="result notranslate">
+&lt;?php
+namespace app\Test\Facades;
+use Illuminate\Support\Facades\Facade;
+
+class TestFacades extends Facade{
+   protected static function getFacadeAccessor() { return 'test'; }
+}
+</pre>
+<p><b>Step 5</b> &minus; Create a Facade class called <b>“TestFacadesServiceProviders.php”</b> at <b>“App/Test/Facades”.</b></p>
+<p><b>App/Providers/TestFacadesServiceProviders.php</b></p>
+<pre class="prettyprint notranslate">
+&lt;?php
+namespace App\Providers;
+use App;
+use Illuminate\Support\ServiceProvider;
+
+class TestFacadesServiceProvider extends ServiceProvider {
+   public function boot() {
+      //
+   }
+   public function register() {
+      App::bind('test',function() {
+         return new \App\Test\TestFacades;
+      });
+   }
+}
+</pre>
+<p><b>Step 6</b> &minus; Add a service provider in a file <b>config/app.php</b> as shown in the below figure.</p>
+<p><b>config/app.php</b></p>
+<img src="https://www.tutorialspoint.com/laravel/images/service_provider.jpg" alt="Service Provider" />
+<p><b>Step 7</b> &minus; Add an alias in a file <b>config/app.php</b> as shown in the below figure.</p>
+<p><b>config/app.php</b></p>
+<img src="https://www.tutorialspoint.com/laravel/images/alias.jpg" alt="Alias" />
+<p><b>Step 8</b> &minus; Add the following lines in <b>app/Http/routes.php.</b></p>
+<p><b>app/Http/routes.php</b></p>
+<pre class="result notranslate">
+Route::get('/facadeex', function(){
+   return TestFacades::testingFacades();
+});
+</pre>
+<p><b>Step 9</b> &minus; Visit the following URL to test the Facade.</p>
+<p><b>http://localhost:8000/facadeex</b></p>
+<p><b>Step 10</b> &minus; After visiting the URL, you will receive the following output &minus;</p>
+<img src="https://www.tutorialspoint.com/laravel/images/testing_facades.jpg" alt="Testing Facades" />
+<h1>Laravel - Security</h1>
+<p>Security is important feature while designing web applications. It assures the users of the website that their data is secured. Laravel provides various mechanisms to secure website. Some of the features are listed below &minus;</p>
+<ul class="list">
+<li><p><b>Storing Passwords</b> &minus; Laravel provides a class called <b>“Hash”</b> class which provides secure Bcrypt hashing. The password can be hashed in the following way.</p></li>
+</ul>
+<pre class="result notranslate">
+$password = Hash::make('secret');
+</pre>
+<ul class="list">
+<li><p><b>make()</b> function will take a value as argument and will return the hashed value. The hashed value can be checked using the <b>check()</b> function in the following way.</p></li>
+</ul>
+<pre class="result notranslate">
+Hash::check('secret', $hashedPassword)
+</pre>
+<p>The above function will return Boolean value. It will return true if password matched or false otherwise.</p>
+<ul class="list">
+<li><p><b>Authenticating Users</b> &minus; The other main security features in Laravel is authenticating user and perform some action. Laravel has made this task easier and to do this we can use <b>Auth::attempt</b> method in the following way.</p></li>
+</ul>
+<pre class="result notranslate">
+if (Auth::attempt(array('email' =&gt; $email, 'password' =&gt; $password))) {
+   return Redirect::intended('home');
+}
+</pre>
+<p>The <b>Auth::attempt</b> method will take credentials as argument and will verify those credentials against the credentials stored in database and will return true if it is matched or false otherwise.</p>
+<ul class="list">
+<li><p><b>CSRF Protection/Cross-site request forgery (XSS)</b> &minus; Cross-site scripting (XSS) attacks happen when attackers are able to place client-side JavaScript code in a page viewed by other users. To avoid this kind of attack, you should never trust any user-submitted data or escape any dangerous characters. You should favor the double-brace syntax <b>({{ $value }})</b> in your Blade templates, and only use the <b>{!! $value !!}</b> syntax, where you're certain the data is safe to display in its raw format.</p></li>
+<li><p><b>Avoiding SQL injection</b> &minus; SQL injection vulnerability exists when an application inserts arbitrary and unfiltered user input in an SQL query. By default, Laravel will protect you against this type of attack since both the query builder and Eloquent use PHP Data Objects (PDO) class behind the scenes. PDO uses prepared statements, which allows you to safely pass any parameters without having to escape and sanitize them.</p></li>
+<li><p><b>Cookies – Secure by default</b> &minus; Laravel makes it very easy to create, read, and expire cookies with its Cookie class. In Laravel all cookies are automatically signed and encrypted. This means that if they are tampered with, Laravel will automatically discard them. This also means that you will not be able to read them from the client side using JavaScript.</p></li>
+<li><p><b>Forcing HTTPS when exchanging sensitive data</b> &minus; HTTPS prevents attackers on the same network to intercept private information such as session variables, and log in as the victim.</p></li>
+</ul>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/laravel/laravel_security.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/laravel/laravel_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/laravel/laravel_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/laravel/laravel_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/laravel/laravel_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/laravel/laravel_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/laravel/laravel_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/laravel/laravel_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=5"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Laravel Quick Guide",
+    "name": "Laravel Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/laravel/laravel_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/laravel/images/composer.jpg",
+        "width": 600,
+        "height": 382
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:50.",
+    "dateModified": "July 23 2017 03:34:50.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Laravel is a MVC framework with bundles, migrations, and Artisan CLI. Laravel offers a robust set of tools and an application architecture that incorporates many of the best features of frameworks like CodeIgniter, Yii, ASP.NET MVC, Ruby on Rails, Sinatra..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Laravel",
+                "@id": "https://www.tutorialspoint.com/laravel"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Laravel - Quick Guide"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/laravel/laravel_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:13:06 GMT -->
+</html>

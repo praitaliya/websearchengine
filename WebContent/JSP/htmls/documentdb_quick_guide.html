@@ -1,0 +1,2985 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:29:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>DocumentDB Quick Guide</title>
+<meta name="description" content="DocumentDB Quick Guide - Learn DocumentDB starting from Introduction, Advantages, Environment Setup, Create, Connect Account, Create, List, Drop Databases, Create, Delete Collection, Insert, Query, Update, Delete Document, Data Modeling, Data Types, Limiting, Sorting, Indexing Records, Geospatial Data, Partitioning, Data Migration, Access Control, Visualize Data." /> 
+<meta name="keywords" content="DocumentDB, Tutorial, Introduction, Advantages, Environment Setup, Create, Connect Account, Create, List, Drop Databases, Create, Delete Collection, Insert, Query, Update, Delete Document, Data Modeling, Data Types, Limiting, Sorting, Indexing Records, Geospatial Data, Partitioning, Data Migration, Access Control, Visualize Data." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #3999c6 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #3999c6 !important;}
+.submenu-item{ border-bottom: 2px solid #3999c6 !important; border-top: 2px solid #3999c6 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/documentdb-mini-logo.jpg" alt="DocumentDB Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">DocumentDB Tutorial</li>
+<li><a href="index.html">DocumentDB - Home</a></li>
+<li><a href="documentdb_introduction.html">DocumentDB - Introduction</a></li>
+<li><a href="documentdb_advantages.html">DocumentDB - Advantages</a></li>
+<li><a href="documentdb_environment_setup.html">DocumentDB - Environment Setup</a></li>
+<li><a href="documentdb_create_account.html">DocumentDB - Create Account</a></li>
+<li><a href="documentdb_connect_account.html">DocumentDB - Connect Account</a></li>
+<li><a href="documentdb_create_database.html">DocumentDB - Create Database</a></li>
+<li><a href="documentdb_list_databases.html">DocumentDB - List Databases</a></li>
+<li><a href="documentdb_drop_databases.html">DocumentDB - Drop Databases</a></li>
+<li><a href="documentdb_create_collection.html">DocumentDB - Create Collection</a></li>
+<li><a href="documentdb_delete_collection.html">DocumentDB - Delete Collection</a></li>
+<li><a href="documentdb_insert_document.html">DocumentDB -  Insert Document</a></li>
+<li><a href="documentdb_query_document.html">DocumentDB - Query Document</a></li>
+<li><a href="documentdb_update_document.html">DocumentDB - Update Document</a></li>
+<li><a href="documentdb_delete_document.html">DocumentDB - Delete Document</a></li>
+<li><a href="documentdb_data_modeling.html">DocumentDB - Data Modeling</a></li>
+<li><a href="documentdb_data_types.html">DocumentDB - Data Types</a></li>
+<li><a href="documentdb_limiting_records.html">DocumentDB - Limiting Records</a></li>
+<li><a href="documentdb_sorting_records.html">DocumentDB - Sorting Records</a></li>
+<li><a href="documentdb_indexing_records.html">DocumentDB - Indexing Records </a></li>
+<li><a href="documentdb_geospatial_data.html">DocumentDB - Geospatial Data</a></li>
+<li><a href="documentdb_partitioning.html">DocumentDB - Partitioning</a></li>
+<li><a href="documentdb_data_migration.html">DocumentDB - Data Migration</a></li>
+<li><a href="documentdb_access_control.html">DocumentDB - Access Control</a></li>
+<li><a href="documentdb_visualize_data.html">DocumentDB - Visualize Data</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">DocumentDB Useful Resources</li>
+<li><a href="documentdb_quick_guide.html">DocumentDB - Quick Guide</a></li>
+<li><a href="documentdb_useful_resources.html">DocumentDB - Useful Resources</a></li>
+<li><a href="documentdb_discussion.html">DocumentDB - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>DocumentDB - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="documentdb_visualize_data.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="documentdb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>DocumentDB - Introduction</h1>
+<p>In this chapter, we will briefly discuss the major concepts around NoSQL and document databases. We will also have a quick overview of DocumentDB.</p>
+<h2>NoSQL Document Database</h2>
+<p>DocumentDB is Microsoft's newest NoSQL document database, so when you say NoSQL document database then, what precisely do we mean by NoSQL, and document database?</p>
+<ul class="list">
+<li><p>SQL means Structured Query Language which is traditional query language of relational databases. SQL is often equated with relational databases.</p></li>
+<li><p>It's really more helpful to think of a NoSQL database as a non-relational database, so NoSQL really means non-relational.</p></li>
+</ul>
+<p>There are different types of NoSQL databases which include key value stores such as &minus;</p>
+<ul class="list">
+<li>Azure Table Storage.</li>
+<li>Column-based stores like Cassandra.</li>
+<li>Graph databases like NEO4.</li>
+<li>Document databases like MongoDB and Azure DocumentDB.</li>
+</ul>
+<h2>Azure DocumentDB</h2>
+<p>Microsoft officially launched Azure DocumentDB on April 8<sup>th</sup>, 2015, and it certainly can be characterized as a typical NoSQL document database. It's massively scalable, and it works with schema-free JSON documents.</p>
+<ul class="list">
+<li><p>DocumentDB is a true schema-free NoSQL document database service designed for modern mobile and web applications.</p></li>
+<li><p>It also delivers consistently fast reads and writes, schema flexibility, and the ability to easily scale a database up and down on demand.</p></li>
+<li><p>It does not assume or require any schema for the JSON documents it indexes.</p></li>
+<li><p>DocumentDB automatically indexes every property in a document as soon as the document is added to the database.</p></li>
+<li><p>DocumentDB enables complex ad-hoc queries using a SQL language, and every document is instantly queryable the moment it's created, and you can search on any property anywhere within the document hierarchy.</p></li>
+</ul>
+<h2>DocumentDB – Pricing</h2>
+<p>DocumentDB is billed based on the number of collections contained in a database account. Each account can have one or more databases and each database can have a virtually unlimited number of collections, although there is an initial default quota of 100. This quota can be lifted by contacting Azure support.</p>
+<ul class="list">
+<li><p>A collection is not only a unit of scale, but also a unit of cost, so in DocumentDB you pay per collection, which has a storage capacity of up to 10 GB.</p></li>
+<li><p>At a minimum, you'll need one S1 collection to store documents in a database that will cost roughly $25 per month, which gets billed against your Azure subscription.</p></li>
+<li><p>As your database grows in size and exceeds 10 GB, you'll need to purchase another collection to contain the additional data.</p></li>
+<li><p>Each S1 collection will give you 250 request units per second, and if that's not enough, then you can scale the collection up to an S2 and get a 1000 request units per second for about $50 a month.</p></li>
+<li><p>You can also turn it all the way up to an S3 and pay around $100 a month.</p></li>
+</ul>
+<h1>DocumentDB - Advantages</h1>
+<p>DocumentDB stands out with some very unique capabilities. Azure DocumentDB offers the following key capabilities and benefits.</p>
+<h2>Schema Free</h2>
+<p>In a relational database, every table has a schema that defines the columns and data types that each row in the table must conform to.</p>
+<p>In contrast, a document database has no defined schema, and every document can be structured differently.</p>
+<h2>SQL Syntax</h2>
+<p>DocumentDB enables complex ad-hoc queries using SQL language, and every document is instantly queryable the moment it's created. You can search on any property anywhere within the document hierarchy.</p>
+<h2>Tunable Consistency</h2>
+<p>It provides some granular, well-defined consistency levels, which allows you to make sound trade-offs between consistency, availability, and latency.</p>
+<p>You can select from four well-defined consistency levels to achieve optimal trade-off between consistency and performance. For queries and read operations, DocumentDB offers four distinct consistency levels &minus;</p>
+<ul class="list">
+<li>Strong</li>
+<li>Bounded-staleness</li>
+<li>Session</li>
+<li>Eventual</li>
+</ul>
+<h2>Elastic Scale</h2>
+<p>Scalability is the name of the game with NoSQL, and DocumentDB delivers. DocumentDB has already been proven its scale.</p>
+<ul class="list">
+<li><p>Major services like Office OneNote and Xbox are already backed by DocumentDB with databases containing tens of terabytes of JSON documents, over a million active users, and operating consistently with 99.95% availability.</p></li>
+<li><p>You can elastically scale DocumentDB with predictable performance by creating more units as your application grows.</p></li>
+</ul>
+<h2>Fully Managed</h2>
+<p>DocumentDB is available as a fully managed cloud-based platform as a service running on Azure.</p>
+<ul class="list">
+<li><p>There is simply nothing for you to install or manage.</p></li>
+<li><p>There are no servers, cables, no operating systems or updates to deal with, no replicas to set up.</p></li>
+<li><p>Microsoft does all that work and keeps the service running.</p></li>
+<li><p>Within literally minutes, you can get started working with DocumentDB using just a browser and an Azure subscription.</p></li>
+</ul>
+<h1>DocumentDB - Environment Setup</h1>
+<p>Microsoft provides a free version of Visual Studio which also contains SQL Server and it can be downloaded from <a target="_blank" rel="nofollow" href="https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">https://www.visualstudio.com</a></p>
+<h2>Installation</h2>
+<p><b>Step 1</b> &minus; Once downloading is completed, run the installer. The following dialog will be displayed.</p>
+<img src="images/installer.jpg" alt="Installer" />
+<p><b>Step 2</b> &minus; Click on the Install button and it will start the installation process.</p>
+<img src="images/installation_process.jpg" alt="Installation Process" />
+<p><b>Step 3</b> &minus; Once the installation process is completed successfully, you will see the following dialog.</p>
+<img src="images/restart_now.jpg" alt="Restart Now" />
+<p><b>Step 4</b> &minus; Close this dialog and restart your computer if required.</p>
+<p><b>Step 5</b> &minus; Now open Visual studio from start Menu which will open the below dialog. It will take some time for the first time only for preparation.</p>
+<img src="images/visual_studio.jpg" alt="open visual studio" />
+<p>Once all is done, you will see the main window of Visual Studio.</p>
+<img src="images/main_window_of_visual_studio.jpg" alt="Main Window" />
+<p><b>Step 6</b> &minus; Let’s create a new project from File &rarr; New &rarr; Project.</p>
+<img src="images/create_new_project.jpg" alt="Create New Project" />
+<p><b>Step 7</b> &minus; Select Console Application, enter DocumentDBDemo in the Name field and click OK button.</p>
+<p><b>Step 8</b> &minus; In solution Explorer, right-click on your project.</p>
+<img src="images/right_click_on_project.jpg" alt="Right click on project" />
+<p><b>Step 9</b> &minus; Select Manage NuGet Packages which will open the following window in Visual Studio and in the Search Online input box, search for DocumentDB Client Library.</p>
+<img src="images/select_manage_nuget.jpg" alt="Manage NuGet Packages" />
+<p><b>Step 10</b> &minus; Install the latest version by clicking the install button.</p>
+<img src="images/license_acceptance.jpg" alt="License Acceptance" />
+<p><b>Step 11</b> &minus; Click “I Accept”. Once installation is done you will see the message in your output window.</p>
+<img src="images/start_application.jpg" alt="Start Application" />
+<p>You are now ready to start your application.</p>
+<h1>DocumentDB - Create Account</h1>
+<p>To use Microsoft Azure DocumentDB, you must create a DocumentDB account. In this chapter, we will create a DocumentDB account using Azure portal.</p>
+<p><b>Step 1</b> &minus; Log in to the online <a target="_blank" rel="nofollow" href="https://portal.azure.com/">https://portal.azure.com</a> if you already have an Azure subscription otherwise you need to sign in first.</p>
+<p>You will see the main Dashboard. It is fully customizable so you can arrange these tiles any way you like, resize them, add and remove tiles for things you frequently use or no longer do.</p>
+<img src="images/dashboard.jpg" alt="Dashbord" />
+<p><b>Step 2</b> &minus; Select the ‘New’ option on the top left side of the page.</p>
+<img src="images/new_option.jpg" alt="Select New Option" />
+<p><b>Step 3</b> &minus; Now select Data &plus; Storage &gt; Azure DocumentDB option and you see the following New DocumentDB account section.</p>
+<img src="images/azure_documentdb.jpg" alt="Azure DocumentDB" />
+<p>We need to come up with a globally unique name (ID), which combined with .documents.azure.com is the publicly addressable endpoint to our DocumentDB account. All the databases we create beneath that account can be accessed over the internet using this endpoint.</p>
+<p><b>Step 4</b> &minus; Let’s name it azuredocdbdemo and click on Resource Group &rarr; new_resource.</p>
+<img src="images/resource_group.jpg" alt="Resource Group" />
+<p><b>Step 5</b> &minus; Choose the location i.e., which Microsoft data center you want this account to be hosted. Select the location and choose your region.</p>
+<img src="images/select_location.jpg" alt="Select Location" />
+<p><b>Step 6</b> &minus; Check Pin to dashboard checkbox and just go ahead and click Create button.</p>
+<img src="images/create_button.jpg" alt="Create Button" />
+<p>You can see that the tile has already been added to the Dashboard, and it's letting us know that the account is being created. It can actually take a few minutes to set things up for a new account while DocumentDB allocates the endpoint, provisions replicas, and performs other work in the background.</p>
+<p>Once it is done, you will see the dashboard.</p>
+<img src="images/account_dashboard.jpg" alt="Account Dashboard" />
+<p><b>Step 7</b> &minus; Now click on the created DocumentDB account and you will see a detailed screen as the following image.</p>
+<img src="images/created_documentdb.jpg" alt="Created Documentdb" />
+<h1>DocumentDB - Connect Account</h1>
+<p>When you start programming against DocumentDB, the very first step is to connect. So to connect to your DocumentDB account you will need two things;</p>
+<ul class="list">
+<li>Endpoint</li>
+<li>Authorization Key</li>
+</ul>
+<h2>Endpoint</h2>
+<p>Endpoint is the URL to your DocumentDB account and it is constructed by combining your DocumentDB account name with .documents.azure.com. Let’s go to the Dashboard.</p>
+<img src="images/endpoint.jpg" alt="Endpoint" />
+<p>Now, click on the created DocumentDB account. You will see the details as shown in the following image.</p>
+<img src="images/click_created_documentdb.jpg" alt="click on created DocumentDB" />
+<p>When you select the ‘Keys’ option, it will display additional information as shown in the following image. You will also see the URL to your DocumentDB account, which you can use as your endpoint.</p>
+<img src="images/keys.jpg" alt="select keys option" />
+<h2>Authorization Key</h2>
+<p>Authorization key contains your credentials and there are two types of keys. The master key allows full access to all resources within the account, while resource tokens permit restricted access to specific resources.</p>
+<h3>Master Keys</h3>
+<ul class="list">
+<li><p>There's nothing you can't do with a master key. You can blow away your entire database if you want, using the master key.</p></li>
+<li><p>For this reason, you definitely don't want to be sharing the master key or distributing it to client environments. As an added security measure, it's a good idea to change it frequently.</p></li>
+<li><p>There are actually two master keys for each database account, the primary and the secondary as highlighted in the above screenshot.</p></li>
+</ul>
+<h3>Resource Tokens</h3>
+<ul class="list">
+<li><p>You can also use resource tokens instead of a master key.</p></li>
+<li><p>Connections based on resource tokens can only access the resources specified by the tokens and no other resources.</p></li>
+<li><p>Resource tokens are based on user permissions, so first you create one or more users, and these are defined at the database level.</p></li>
+<li><p>You create one or more permissions for each user, based on the resources that you want to allow each user to access.</p></li>
+<li><p>Each permission generates a resource token that allows either read-only or full access to a given resource and that can be any user resource within the database.</p></li>
+</ul>
+<p>Let’s go to console application created in chapter 3.</p>
+<p><b>Step 1</b> &minus; Add the following references in the Program.cs file.</p>
+<pre class="prettyprint notranslate">
+using Microsoft.Azure.Documents; 
+using Microsoft.Azure.Documents.Client; 
+using Microsoft.Azure.Documents.Linq; 
+using Newtonsoft.Json;
+</pre>
+<p><b>Step 2</b> &minus; Now add Endpoint URL and Authorization key. In this example we will be using primary key as Authorization key.</p>
+<p>Note that in your case both Endpoint URL and authorization key should be different.</p>
+<pre class="prettyprint notranslate">
+private const string EndpointUrl = "https://azuredocdbdemo.documents.azure.com:443/"; 
+private const string AuthorizationKey = 
+   "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+</pre>
+<p><b>Step 3</b> &minus; Create a new instance of the DocumentClient in asynchronous task called CreateDocumentClient and instantiate new DocumentClient.</p>
+<p><b>Step 4</b> &minus; Call your asynchronous task from your Main method.</p>
+<p>Following is the complete Program.cs file so far.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text; 
+using System.Threading.Tasks;
+
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
+using Newtonsoft.Json;
+
+namespace DocumentDBDemo { 
+
+   class Program {
+      private const string EndpointUrl = "https://azuredocdbdemo.documents.azure.com:443/";
+		
+      private const string AuthorizationKey = "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/
+         StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+			
+      static void Main(string[] args) {
+         try {
+            CreateDocumentClient().Wait();
+         } catch (Exception e) {
+            Exception baseException = e.GetBaseException();
+            Console.WriteLine("Error: {0}, Message: {1}", e.Message, baseException.Message);
+         }
+			
+         Console.ReadKey();
+      }
+		
+      private static async Task CreateDocumentClient() {
+         // Create a new instance of the DocumentClient
+         var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
+      }
+		
+   }
+}
+</pre>
+<p>In this chapter, we have learnt how to connect to a DocumentDB account and create an instance of the DocumentClient class.</p>
+<h1>DocumentDB - Create Database</h1>
+<p>In this chapter, we will learn how to create a database. To use Microsoft Azure DocumentDB, you must have a DocumentDB account, a database, a collection, and documents. We already have a DocumentDB account, now to create database we have two options &minus;</p>
+<ul class="list">
+<li>Microsoft Azure Portal or</li>
+<li>.Net SDK</li>
+</ul>
+<h2>Create a Database for DocumentDB using the Microsoft Azure Portal</h2>
+<p>To create a database using portal, following are the steps.</p>
+<p><b>Step 1</b> &minus; Login to Azure portal and you will see the dashboard.</p>
+<img src="images/login.jpg" alt="Login to portal" />
+<p><b>Step 2</b> &minus; Now click on the created DocumentDB account and you will see the details as shown in the following screenshot.</p>
+<img src="images/create_database.jpg" alt="click on created DocumentDB" />
+<p><b>Step 3</b> &minus; Select the Add Database option and provide the ID for your database.</p>
+<img src="images/add_database.jpg" alt="Select Add Database" />
+<p><b>Step 4</b> &minus; Click OK.</p>
+<img src="images/database_added.jpg" alt="Database added" />
+<p>You can see that the database is added. At the moment, it has no collection, but we can add collections later which are the containers that will store our JSON documents. Notice that it has both an ID and a Resource ID.</p>
+<h2>Create a Database for DocumentDB Using .Net SDK</h2>
+<p>To create a database using .Net SDK, following are the steps.</p>
+<p><b>Step 1</b> &minus; Open the Console Application in Visual Studio from the last chapter.</p>
+<p><b>Step 2</b> &minus; Create the new database by creating a new database object. To create a new database, we only need to assign the Id property, which we are setting to “mynewdb” in a CreateDatabase task.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreateDatabase(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("******** Create Database *******");
+	
+   var databaseDefinition = new Database { Id = "mynewdb" }; 
+   var result = await client.CreateDatabaseAsync(databaseDefinition); 
+   var database = result.Resource;
+	
+   Console.WriteLine(" Database Id: {0}; Rid: {1}", database.Id, database.ResourceId); 
+   Console.WriteLine("******** Database Created *******"); 
+} 
+</pre>
+<p><b>Step 3</b> &minus; Now pass this databaseDefinition on to CreateDatabaseAsync, and get back a result with a Resource property. All the create object methods return a Resource property that describes the item that was created, which is a database in this case.</p>
+<p>We get the new database object from the Resource property and it is displayed on the Console along with the Resource ID that DocumentDB assigned to it.</p>
+<p><b>Step 4</b> &minus; Now call CreateDatabase task from the CreateDocumentClient task after DocumentClient is instantiated.</p>
+<pre class="prettyprint notranslate">
+using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) { 
+   await CreateDatabase(client); 
+} 
+</pre>
+<p>Following is the complete Program.cs file so far.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
+using Newtonsoft.Json;
+
+namespace DocumentDBDemo {
+
+   class Program {
+      private const string EndpointUrl = "https://azuredocdbdemo.documents.azure.com:443/";
+		
+      private const string AuthorizationKey = "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/
+         StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+			
+      static void Main(string[] args) {
+         try {
+            CreateDocumentClient().Wait();
+         } catch (Exception e) {
+            Exception baseException = e.GetBaseException();
+            Console.WriteLine("Error: {0}, Message: {1}", e.Message, baseException.Message);
+         }
+         Console.ReadKey();
+      }
+		
+      private static async Task CreateDocumentClient() {
+         // Create a new instance of the DocumentClient
+         using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+            await CreateDatabase(client);
+         } 
+      }
+		
+      private async static Task CreateDatabase(DocumentClient client) {
+         Console.WriteLine();
+         Console.WriteLine("******** Create Database *******");
+			
+         var databaseDefinition = new Database { Id = "mynewdb" };
+         var result = await client.CreateDatabaseAsync(databaseDefinition);
+         var database = result.Resource;
+			
+         Console.WriteLine(" Database Id: {0}; Rid: {1}", database.Id, database.ResourceId);
+         Console.WriteLine("******** Database Created *******");
+      }
+		
+   } 
+}
+</pre>
+<p>When the above code is compiled and executed, you will receive the following output which contains the Database and Resources IDs.</p>
+<pre class="result notranslate">
+******** Create Database ******* 
+ Database Id: mynewdb; Rid: ltpJAA== 
+******** Database Created ******* 
+</pre>
+<h1>DocumentDB - List Databases</h1>
+<p>So far, we have created two databases in our DocumentDB account, first one is created using Azure portal while the second database is created using .Net SDK. Now to view these databases, you can use Azure portal.</p>
+<p>Go to your DocumentDB account on Azure portal and you will see two databases now.</p>
+<img src="images/two_databases.jpg" alt="Two Databases" />
+<p>You can also view or list the databases from your code using .Net SDK. Following are the steps involved.</p>
+<p><b>Step 1</b> &minus; Issue a database Query with no parameters which returns a complete list, but you can also pass in a query to look for a specific database or specific databases.</p>
+<pre class="prettyprint notranslate">
+private static void GetDatabases(DocumentClient client) {
+   Console.WriteLine();
+   Console.WriteLine();
+   Console.WriteLine("******** Get Databases List ********");
+	
+   var databases = client.CreateDatabaseQuery().ToList(); 
+	
+   foreach (var database in databases) { 
+      Console.WriteLine(" Database Id: {0}; Rid: {1}", database.Id, database.ResourceId);
+   }
+	
+   Console.WriteLine(); 
+   Console.WriteLine("Total databases: {0}", databases.Count);
+}
+</pre>
+<p>You will see that there are a bunch of these CreateQuery methods for locating collections, documents, users, and other resources. These methods don't actually execute the query, they just define the query and return an iterateable object.</p>
+<p>It's the call to ToList() that actually executes the query, iterates the results, and returns them in a list.</p>
+<p><b>Step 2</b> &minus; Call GetDatabases method from the CreateDocumentClient task after DocumentClient is instantiated.</p>
+<p><b>Step 3</b> &minus; You also need to comment the CreateDatabase task or change the database id, otherwise you will get an error message that the database exists.</p>
+<pre class="prettyprint notranslate">
+using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+   //await CreateDatabase(client); 
+   GetDatabases(client); 
+}
+</pre>
+<p>Following is the complete Program.cs file so far.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
+using Newtonsoft.Json; 
+
+namespace DocumentDBDemo {
+
+   class Program {
+      private const string EndpointUrl = "https://azuredocdbdemo.documents.azure.com:443/";
+		
+      private const string AuthorizationKey = "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/
+         StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+			
+      static void Main(string[] args) {
+         try {
+            CreateDocumentClient().Wait();
+         } catch (Exception e) {
+            Exception baseException = e.GetBaseException();
+            Console.WriteLine("Error: {0}, Message: {1}", e.Message, baseException.Message);
+         }
+         Console.ReadKey();
+      }
+		
+      private static async Task CreateDocumentClient() {
+         // Create a new instance of the DocumentClient
+         using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+            await CreateDatabase(client);
+            GetDatabases(client);
+         } 
+      }
+		
+      private async static Task CreateDatabase(DocumentClient client) {
+         Console.WriteLine();
+         Console.WriteLine("******** Create Database *******");
+			
+         var databaseDefinition = new Database { Id = "mynewdb" };
+         var result = await client.CreateDatabaseAsync(databaseDefinition);
+         var database = result.Resource;
+			
+         Console.WriteLine(" Database Id: {0}; Rid: {1}", database.Id, database.ResourceId);
+         Console.WriteLine("******** Database Created *******");
+      }
+		
+      private static void GetDatabases(DocumentClient client) {
+         Console.WriteLine();
+         Console.WriteLine();
+         Console.WriteLine("******** Get Databases List ********");
+			
+         var databases = client.CreateDatabaseQuery().ToList();
+			
+         foreach (var database in databases) {
+            Console.WriteLine(" Database Id: {0}; Rid: {1}",
+               database.Id, database.ResourceId);
+         }  
+			
+         Console.WriteLine(); 
+         Console.WriteLine("Total databases: {0}", databases.Count);
+      }
+		
+   } 
+}
+</pre>
+<p>When the above code is compiled and executed you will receive the following output which contains the Database and Resources IDs of both the databases. In the end you will also see the total number of databases.</p>
+<pre class="result notranslate">
+******** Get Databases List ******** 
+ Database Id: myfirstdb; Rid: Ic8LAA== 
+ Database Id: mynewdb; Rid: ltpJAA==  
+Total databases: 2 
+</pre>
+<h1>DocumentDB - Drop Databases</h1>
+<p>You can drop a database or databases from the portal as well as from the code by using .Net SDK. Here, we will discuss, in a step-wise manner, how to drop a database in DocumentDB.</p>
+<p><b>Step 1</b> &minus; Go to your DocumentDB account on Azure portal. For the purpose of demo, I have added two more databases as seen in the following screenshot.</p>
+<img src="images/drop_databases.jpg" alt="Drop Databases" />
+<p><b>Step 2</b> &minus; To drop any database, you need to click that database. Let’s select tempdb, you will see the following page, select the ‘Delete Database’ option.</p>
+<img src="images/delete_database.jpg" alt="Delete Database" />
+<p><b>Step 3</b> &minus; It will display the confirmation message, now click the ‘Yes’ button.</p>
+<img src="images/confirmation_message.jpg" alt="Confirmation Message" />
+<p>You will see that the tempdb is no more available in your dashboard.</p>
+<img src="images/tempdb_deleted.jpg" alt="TempDB Deleted" />
+<p>You can also delete databases from your code using .Net SDK. To do following are the steps.</p>
+<p><b>Step 1</b> &minus; Let's delete the database by specifying the ID of the database we want to delete, but we need its SelfLink.</p>
+<p><b>Step 2</b> &minus; We are calling the CreateDatabaseQuery like before, but this time we are actually supplying a query to return just the one database with the ID tempdb1.</p>
+<pre class="prettyprint notranslate">
+private async static Task DeleteDatabase(DocumentClient client) {
+   Console.WriteLine("******** Delete Database ********");
+   Database database = client
+      .CreateDatabaseQuery("SELECT * FROM c WHERE c.id = 'tempdb1'")
+      .AsEnumerable()
+      .First();
+   await client.DeleteDatabaseAsync(database.SelfLink);
+}
+</pre>
+<p><b>Step 3</b> &minus; This time, we can call AsEnumerable instead of ToList() because we don't actually need a list object. Expecting only result, calling AsEnumerable is sufficient so that we can get the first database object returned by the query with First(). This is the database object for tempdb1 and it has a SelfLink that we can use to call DeleteDatabaseAsync which deletes the database.</p>
+<p><b>Step 4</b> &minus; You also need to call DeleteDatabase task from the CreateDocumentClient task after DocumentClient is instantiated.</p>
+<p><b>Step 5</b> &minus; To view the list of databases after deleting the specified database, let’s call GetDatabases method again.</p>
+<pre class="prettyprint notranslate">
+using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+   //await CreateDatabase(client);
+	
+   GetDatabases(client);
+   await DeleteDatabase(client);
+   GetDatabases(client); 
+} 
+</pre>
+<p>Following is the complete Program.cs file so far.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
+using Newtonsoft.Json;
+
+namespace DocumentDBDemo {
+
+   class Program {
+	
+      private const string EndpointUrl = "https://azuredocdbdemo.documents.azure.com:443/";
+		
+      private const string AuthorizationKey = "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/
+         StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+			
+      static void Main(string[] args) {
+         try {
+            CreateDocumentClient().Wait();
+         } catch (Exception e) {
+            Exception baseException = e.GetBaseException();
+            Console.WriteLine("Error: {0}, Message: {1}", e.Message, baseException.Message);
+         }
+         Console.ReadKey();
+      }
+		
+      private static async Task CreateDocumentClient() {
+         // Create a new instance of the DocumentClient
+         using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+            //await CreateDatabase(client);
+            GetDatabases(client);
+            await DeleteDatabase(client);
+            GetDatabases(client);
+         }
+      }
+		
+      private async static Task CreateDatabase(DocumentClient client) {
+         Console.WriteLine();
+         Console.WriteLine("******** Create Database *******");
+			
+         var databaseDefinition = new Database { Id = "mynewdb" };
+         var result = await client.CreateDatabaseAsync(databaseDefinition);
+         var database = result.Resource;
+			
+         Console.WriteLine(" Database Id: {0}; Rid: {1}",
+            database.Id, database.ResourceId);
+         Console.WriteLine("******** Database Created *******");
+      }
+		
+      private static void GetDatabases(DocumentClient client) {
+         Console.WriteLine();
+         Console.WriteLine();
+         Console.WriteLine("******** Get Databases List ********");
+			
+         var databases = client.CreateDatabaseQuery().ToList();
+			
+         foreach (var database in databases) {
+            Console.WriteLine(" Database Id: {0}; Rid: {1}", database.Id,
+               database.ResourceId);
+         }
+			
+         Console.WriteLine();
+         Console.WriteLine("Total databases: {0}", databases.Count);
+      }
+		
+      private async static Task DeleteDatabase(DocumentClient client) {
+         Console.WriteLine();
+         Console.WriteLine("******** Delete Database ********");
+			
+         Database database = client
+            .CreateDatabaseQuery("SELECT * FROM c WHERE c.id = 'tempdb1'")
+            .AsEnumerable()
+            .First();
+         await client.DeleteDatabaseAsync(database.SelfLink);
+      }
+		
+   }
+}
+</pre>
+<p>When the above code is compiled and executed, you will receive the following output which contains the Database and Resources IDs of the three databases and total number of databases.</p>
+<pre class="result notranslate">
+******** Get Databases List ******** 
+ Database Id: myfirstdb; Rid: Ic8LAA== 
+ Database Id: mynewdb; Rid: ltpJAA== 
+ Database Id: tempdb1; Rid: 06JjAA==
+ 
+Total databases: 3  
+
+******** Delete Database ******** 
+  
+******** Get Databases List ******** 
+ Database Id: myfirstdb; Rid: Ic8LAA== 
+ Database Id: mynewdb; Rid: ltpJAA==
+ 
+Total databases: 2 
+</pre>
+<p>After deleting the database, you will also see at the end that only two databases are left in DocumentDB account.</p>
+<h1>DocumentDB - Create Collection</h1>
+<p>In this chapter, we will learn how to create a collection. It is similar to creating a database. You can create a collection either from the portal or from the code using .Net SDK.</p>
+<p><b>Step 1</b> &minus; Go to main dashboard on Azure portal.</p>
+<img src="images/create_collection.jpg" alt="Create Collection" />
+<p><b>Step 2</b> &minus; Select myfirstdb from the databases list.</p>
+<img src="images/myfirstdb.jpg" alt="myfirstdb" />
+<p><b>Step 3</b> &minus; Click on the ‘Add Collection’ option and specify the ID for collection. Select the Pricing Tier for different option.</p>
+<img src="images/add_collection.jpg" alt="Add Collection" />
+<p><b>Step 4</b> &minus; Let’s select S1 Standard and click Select &rarr; OK button.</p>
+<img src="images/s1_standard.jpg" alt="select S1 Standard" />
+<p>As you can see that MyCollection is added to the myfirstdb.</p>
+<p>You can also create collection from the code by using .Net SDK. Let’s have a look at the following steps to add collections from the code.</p>
+<p><b>Step 1</b> &minus; Open the Console application in Visual Studio.</p>
+<p><b>Step 2</b> &minus; To create a collection, first retrieve the myfirstdb database by its ID in the CreateDocumentClient task.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+
+   // Create a new instance of the DocumentClient
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First();
+			
+      await CreateCollection(client, "MyCollection1");
+      await CreateCollection(client, "MyCollection2", "S2"); 
+   }
+}
+</pre>
+<p>Following is the implementation for CreateCollection task.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreateCollection(DocumentClient client, string collectionId,
+   string offerType = "S1") {
+	
+   Console.WriteLine();
+   Console.WriteLine("**** Create Collection {0} in {1} ****", collectionId, database.Id);
+	
+   var collectionDefinition = new DocumentCollection { Id = collectionId };
+   var options = new RequestOptions { OfferType = offerType };
+   var result = await client.CreateDocumentCollectionAsync(database.SelfLink,
+      collectionDefinition, options);
+   var collection = result.Resource;
+	
+   Console.WriteLine("Created new collection");
+   ViewCollection(collection);
+}
+</pre>
+<p>We create a new DocumentCollection object that defines the new collection with the desired Id for the CreateDocumentCollectionAsync method which also accepts an options parameter that we're using here to set the performance tier of the new collection, which we're calling offerType.</p>
+<p>This defaults to S1 and since we didn't pass in an offerType, for MyCollection1, so this will be an S1 collection and for MyCollection2 we have passed S2 which make this one an S2 as shown above.</p>
+<p>Following is the implementation of the ViewCollection method.</p>
+<pre class="prettyprint notranslate">
+private static void ViewCollection(DocumentCollection collection) {
+   Console.WriteLine("Collection ID: {0} ", collection.Id); 
+   Console.WriteLine("Resource ID: {0} ", collection.ResourceId); 
+   Console.WriteLine("Self Link: {0} ", collection.SelfLink); 
+   Console.WriteLine("Documents Link: {0} ", collection.DocumentsLink); 
+   Console.WriteLine("UDFs Link: {0} ", collection.UserDefinedFunctionsLink); 
+   Console.WriteLine(" StoredProcs Link: {0} ", collection.StoredProceduresLink); 
+   Console.WriteLine("Triggers Link: {0} ", collection.TriggersLink); 
+   Console.WriteLine("Timestamp: {0} ", collection.Timestamp);
+}
+</pre>
+<p>Following is the complete implementation of program.cs file for collections.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
+
+using Newtonsoft.Json;
+
+namespace DocumentDBDemo {
+
+   class Program {
+	
+      private const string EndpointUrl = "https://azuredocdbdemo.documents.azure.com:443/";
+		
+      private const string AuthorizationKey = "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/
+         StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+			
+      private static Database database;
+		
+      static void Main(string[] args) {
+         try {
+            CreateDocumentClient().Wait();
+         } catch (Exception e) {
+            Exception baseException = e.GetBaseException();
+            Console.WriteLine("Error: {0}, Message: {1}", e.Message, baseException.Message);
+         }
+         Console.ReadKey();
+      }
+		
+      private static async Task CreateDocumentClient() {
+         // Create a new instance of the DocumentClient
+         using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+            database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+               'myfirstdb'").AsEnumerable().First();
+            await CreateCollection(client, "MyCollection1");
+            await CreateCollection(client, "MyCollection2", "S2");
+				
+            //await CreateDatabase(client);
+            //GetDatabases(client);
+            //await DeleteDatabase(client);
+            //GetDatabases(client);
+         }
+      }
+		
+      private async static Task CreateCollection(DocumentClient client,
+         string collectionId, string offerType = "S1") {
+			
+         Console.WriteLine();
+         Console.WriteLine("**** Create Collection {0} in {1} ****", collectionId,
+            database.Id);
+
+         var collectionDefinition = new DocumentCollection { Id = collectionId };
+         var options = new RequestOptions { OfferType = offerType };
+         var result = await 
+			
+			client.CreateDocumentCollectionAsync(database.SelfLink,
+            collectionDefinition, options);
+         var collection = result.Resource;
+
+         Console.WriteLine("Created new collection");
+         ViewCollection(collection);
+      }
+		
+      private static void ViewCollection(DocumentCollection collection) {
+         Console.WriteLine("Collection ID: {0} ", collection.Id);
+         Console.WriteLine("Resource ID: {0} ", collection.ResourceId);
+         Console.WriteLine("Self Link: {0} ", collection.SelfLink);
+         Console.WriteLine("Documents Link: {0} ", collection.DocumentsLink);
+         Console.WriteLine("UDFs Link: {0} ", collection.UserDefinedFunctionsLink);
+         Console.WriteLine("StoredProcs Link: {0} ", collection.StoredProceduresLink);
+         Console.WriteLine("Triggers Link: {0} ", collection.TriggersLink);
+         Console.WriteLine("Timestamp: {0} ", collection.Timestamp);
+      }
+		
+   }
+}
+</pre>
+<p>When the above code is compiled and executed, you will receive the following output which contains all the information related to collection.</p>
+<pre class="result notranslate">
+**** Create Collection MyCollection1 in myfirstdb **** 
+Created new collection
+   Collection ID: MyCollection1
+      Resource ID: Ic8LAPPvnAA=
+         Self Link: dbs/Ic8LAA==/colls/Ic8LAPPvnAA=/
+   Documents Link: dbs/Ic8LAA==/colls/Ic8LAPPvnAA=/docs/
+         UDFs Link: dbs/Ic8LAA==/colls/Ic8LAPPvnAA=/udfs/
+   StoredProcs Link: dbs/Ic8LAA==/colls/Ic8LAPPvnAA=/sprocs/
+      Triggers Link: dbs/Ic8LAA==/colls/Ic8LAPPvnAA=/triggers/
+         Timestamp: 12/10/2015 4:55:36 PM
+		  
+**** Create Collection MyCollection2 in myfirstdb ****
+Created new collection
+   Collection ID: MyCollection2
+      Resource ID: Ic8LAKGHDwE=
+         Self Link: dbs/Ic8LAA==/colls/Ic8LAKGHDwE=/
+   Documents Link: dbs/Ic8LAA==/colls/Ic8LAKGHDwE=/docs/
+         UDFs Link: dbs/Ic8LAA==/colls/Ic8LAKGHDwE=/udfs/
+   StoredProcs Link: dbs/Ic8LAA==/colls/Ic8LAKGHDwE=/sprocs/
+      Triggers Link: dbs/Ic8LAA==/colls/Ic8LAKGHDwE=/triggers/
+         Timestamp: 12/10/2015 4:55:38 PM
+</pre>
+<h1>DocumentDB - Delete Collection</h1>
+<p>To drop collection or collections you can do the same from the portal as well as from the code by using .Net SDK.</p>
+<p><b>Step 1</b> &minus; Go to your DocumentDB account on Azure portal. For the purpose of demo, I have added two more collections as seen in the following screenshot.</p>
+<img src="images/delete_collection.jpg" alt="Delete Collection" />
+<p><b>Step 2</b> &minus; To drop any collection, you need to click on that collection. Let’s select TempCollection1. You will see the following page, select the ‘Delete Collection’ option.</p>
+<img src="images/select_collection.jpg" alt="Select Collection" />
+<p><b>Step 3</b> &minus; It will display the confirmation message. Now click ‘Yes’ button.</p>
+<img src="images/delete_collection_message.jpg" alt="Delete Collection Message" />
+<p>You will see that the TempCollection1 is no more available on your dashboard.</p>
+<img src="images/collection_deleted.jpg" alt="Collection Deleted" />
+<p>You can also delete collections from your code using .Net SDK. To do that, following are the following steps.</p>
+<p><b>Step 1</b> &minus; Let's delete the collection by specifying the ID of the collection we want to delete.</p>
+<p>It's the usual pattern of querying by Id to obtain the selfLinks needed to delete a resource.</p>
+<pre class="prettyprint notranslate">
+private async static Task DeleteCollection(DocumentClient client, string collectionId) {
+   Console.WriteLine();
+   Console.WriteLine("**** Delete Collection {0} in {1} ****", collectionId, database.Id);
+	
+   var query = new SqlQuerySpec {
+      QueryText = "SELECT * FROM c WHERE c.id = @id",
+         Parameters = new SqlParameterCollection {
+         new SqlParameter {
+            Name = "@id", Value = collectionId
+         }
+      }
+   };
+	
+   DocumentCollection collection = client.CreateDocumentCollectionQuery(database.SelfLink,
+      query).AsEnumerable().First();
+		
+   await client.DeleteDocumentCollectionAsync(collection.SelfLink);
+   Console.WriteLine("Deleted collection {0} from database {1}", collectionId,
+      database.Id);
+}
+</pre>
+<p>Here we see the preferred way of constructing a parameterized query. We're not hardcoding the collectionId so this method can be used to delete any collection. We are querying for a specific collection by Id where the Id parameter is defined in this SqlParameterCollection assigned to the parameter's property of this SqlQuerySpec.</p>
+<p>Then the SDK does the work of constructing the final query string for DocumentDB with the collectionId embedded inside of it.</p>
+<p><b>Step 2</b> &minus; Run the query and then use its SelfLink to delete the collection from the CreateDocumentClient task.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient 
+	
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First(); 
+      await DeleteCollection(client, "TempCollection"); 
+   } 
+}
+</pre>
+<p>Following is the complete implementation of Program.cs file.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
+
+using Newtonsoft.Json;
+
+namespace DocumentDBDemo {
+
+   class Program {
+	
+      private const string EndpointUrl = "https://azuredocdbdemo.documents.azure.com:443/";
+		
+      private const string AuthorizationKey = "BBhjI0gxdVPdDbS4diTjdloJq7Fp4L5RO/
+         StTt6UtEufDM78qM2CtBZWbyVwFPSJIm8AcfDu2O+AfV T+TYUnBQ==";
+			
+      private static Database database;
+
+      static void Main(string[] args) {
+         try {
+            CreateDocumentClient().Wait();
+         } catch (Exception e) {
+            Exception baseException = e.GetBaseException();
+            Console.WriteLine("Error: {0}, Message: {1}", e.Message, baseException.Message);
+         }
+         Console.ReadKey();
+      }
+
+      private static async Task CreateDocumentClient() {
+         // Create a new instance of the DocumentClient
+         using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+            database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+               'myfirstdb'").AsEnumerable().First();
+            await DeleteCollection(client, "TempCollection");
+				
+            //await CreateCollection(client, "MyCollection1");
+            //await CreateCollection(client, "MyCollection2", "S2");
+            ////await CreateDatabase(client);
+            //GetDatabases(client);
+            //await DeleteDatabase(client);
+            //GetDatabases(client);
+         }
+      }
+		
+      private async static Task CreateCollection(DocumentClient client,
+         string collectionId, string offerType = "S1") {
+			
+         Console.WriteLine();
+         Console.WriteLine("**** Create Collection {0} in {1} ****", collectionId,
+            database.Id);
+         
+         var collectionDefinition = new DocumentCollection { Id = collectionId };
+         var options = new RequestOptions { OfferType = offerType };
+         var result = await client.CreateDocumentCollectionAsync(database.SelfLink,
+            collectionDefinition, options);
+				
+         var collection = result.Resource; 
+         
+         Console.WriteLine("Created new collection"); 
+         ViewCollection(collection); 
+      }
+
+      private static void ViewCollection(DocumentCollection collection) {
+         Console.WriteLine("Collection ID: {0} ", collection.Id); 
+         Console.WriteLine("Resource ID: {0} ", collection.ResourceId); 
+         Console.WriteLine("Self Link: {0} ", collection.SelfLink); 
+         Console.WriteLine("Documents Link: {0} ", collection.DocumentsLink); 
+         Console.WriteLine("UDFs Link: {0} ", collection.UserDefinedFunctionsLink); 
+         Console.WriteLine("StoredProcs Link: {0} ", collection.StoredProceduresLink); 
+         Console.WriteLine("Triggers Link: {0} ", collection.TriggersLink); 
+         Console.WriteLine("Timestamp: {0} ", collection.Timestamp); 
+      }
+		
+      private async static Task DeleteCollection(DocumentClient client,
+         string collectionId) {
+			
+         Console.WriteLine();
+         Console.WriteLine("**** Delete Collection {0} in {1} ****", collectionId,
+            database.Id);
+				
+         var query = new SqlQuerySpec {
+            QueryText = "SELECT * FROM c WHERE c.id = @id", Parameters = new
+               SqlParameterCollection {
+               new SqlParameter {
+                  Name = "@id", Value = collectionId
+               }
+            }
+         };
+			
+         DocumentCollection collection = client.CreateDocumentCollectionQuery
+            (database.SelfLink, query).AsEnumerable().First();
+				
+         await client.DeleteDocumentCollectionAsync(collection.SelfLink);
+         Console.WriteLine("Deleted collection {0} from database {1}", collectionId,
+            database.Id); 
+      }
+		
+   } 
+}
+</pre>
+<p>When the above code is compiled and executed, you will receive the following output.</p>
+<pre class="result notranslate">
+**** Delete Collection TempCollection in myfirstdb **** 
+Deleted collection TempCollection from database myfirstdb
+</pre>
+<h1>DocumentDB - Insert Document</h1>
+<p>In this chapter, we will get to work with actual documents in a collection. You can create documents using either Azure portal or .Net SDK.</p>
+<h2>Creating Documents with the Azure Portal</h2>
+<p>Let’s take a look at the following steps to add document to your collection.</p>
+<p><b>Step 1</b> &minus; Add new collection Families of S1 pricing tier in myfirstdb.</p>
+<img src="images/insert_document.jpg" alt="Insert Document" />
+<p><b>Step 2</b> &minus; Select the Families collection and click on Create Document option to open the New Document blade.</p>
+<img src="images/families_collection.jpg" alt="Families Collection" />
+<p>This is just a simple text editor that lets you type any JSON for a new document.</p>
+<img src="images/simple_text_editor.jpg" alt="simple text editor" />
+<p><b>Step 3</b> &minus; As this is raw data entry, let’s enter our first document.</p>
+<pre class="prettyprint notranslate">
+{
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship": "father" }, 
+      { "firstName": "Mary Kay", "relationship": "mother" } 
+   ], 
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type": "Rabbit" } ] 
+      } 
+   ], 
+	
+   "location": { "state": "WA", "county": "King", "city": "Seattle"}, 
+   "isRegistered": true
+}
+</pre>
+<p>When you enter the above document, you will see the following screen.</p>
+<img src="images/document.jpg" alt="Document" />
+<p>Notice that we've supplied an id for the document. The id value is always required, and it must be unique across all other documents in the same collection. When you leave it out then DocumentDB would automatically generate one for you using a GUID or a Globally Unique Identifier.</p>
+<p>The id is always a string and it can't be a number, date, Boolean, or another object, and it can't be longer than 255 characters.</p>
+<p>Also notice the document's hierarchal structure which has a few top-level properties like the required id, as well as lastName and isRegistered, but it also has nested properties.</p>
+<p>For instance, the parents property is supplied as a JSON array as denoted by the square brackets. We also have another array for children, even though there's only one child in the array in this example.</p>
+<p><b>Step 4</b> &minus; Click ‘Save’ button to save the document and we've created our first document.</p>
+<p>As you can see that pretty formatting was applied to our JSON, which breaks up every property on its own line indented with a whitespace to convey the nesting level of each property.</p>
+<img src="images/save_document.jpg" alt="Save Document" />
+<p>The portal includes a Document Explorer, so let's use that now to retrieve the document we just created.</p>
+<img src="images/retrieve_document.jpg" alt="Retrieve Document" />
+<p><b>Step 5</b> &minus; Choose a database and any collection within the database to view the documents in that collection. We currently have just one database named myfirstdb with one collection called Families, both of which have been preselected here in the dropdowns.</p>
+<img src="images/choose_database.jpg" alt="choose a Database" />
+<p>By default, the Document Explorer displays an unfiltered list of documents within the collection, but you can also search for any specific document by ID or multiple documents based on a wildcard search of a partial ID.</p>
+<p>We have only one document in our collection so far, and we see its ID on the following screen, AndersonFamily.</p>
+<p><b>Step 6</b> &minus; Click on the ID to view the document.</p>
+<img src="images/click_on_id.jpg" alt="Click on ID" />
+<h2>Creating Documents with the .NET SDK</h2>
+<p>As you know that documents are just another type of resource and you've already become familiar with how to treat resources using the SDK.</p>
+<ul class="list">
+<li><p>The one big difference between documents and other resources is that, of course, they're schema free.</p></li>
+<li><p>Thus there are a lot of options. Naturally, you can just work JSON object graphs or even raw strings of JSON text, but you can also use dynamic objects that lets you bind to properties at runtime without defining a class at compile time.</p></li>
+<li><p>You can also work with real C# objects, or Entities as they are called, which might be your business domain classes.</p></li>
+</ul>
+<p>Let’s start to create documents using .Net SDK. Following are the steps.</p>
+<p><b>Step 1</b> &minus; Instantiate DocumentClient then we will query for the myfirstdb database and then query for the MyCollection collection, which we store in this private variable collection so that it's accessible throughout the class.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient
+	
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First(); 
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();  
+			
+      await CreateDocuments(client); 
+   } 
+}
+</pre>
+<p><b>Step 2</b> &minus; Create some documents in CreateDocuments task.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreateDocuments(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create Documents ****"); 
+   Console.WriteLine();
+	
+   dynamic document1Definition = new {
+      name = "New Customer 1", address = new {
+         addressType = "Main Office", 
+         addressLine1 = "123 Main Street", 
+         location = new {
+            city = "Brooklyn", stateProvinceName = "New York" 
+         }, postalCode = "11229", countryRegionName = "United States"
+      }, 
+   };
+	
+   Document document1 = await CreateDocument(client, document1Definition); 
+   Console.WriteLine("Created document {0} from dynamic object", document1.Id); 
+   Console.WriteLine(); 
+} 
+</pre>
+<p>The first document will be generated from this dynamic object. This might look like JSON, but of course it isn't. This is C# code and we're creating a real .NET object, but there's no class definition. Instead, the properties are inferred from the way the object is initialized.</p>
+<p>Notice that we haven't supplied an Id property for this document.</p>
+<p>Now let's have a look into CreateDocument. It looks like the same pattern we saw for creating databases and collections.</p>
+<pre class="prettyprint notranslate">
+private async static Task&lt;Document&gt; CreateDocument(DocumentClient client,
+   object documentObject) {
+	
+   var result = await client.CreateDocumentAsync(collection.SelfLink, documentObject); 
+   var document = result.Resource;
+	
+   Console.WriteLine("Created new document: {0}\r\n{1}", document.Id, document); 
+   return result; 
+}
+</pre>
+<p><b>Step 3</b> &minus; This time we call CreateDocumentAsync specifying the SelfLink of the collection we want to add the document to. We get back a response with a resource property that, in this case, represents the new document with its system-generated properties.</p>
+<p>The Document object is a defined class in the SDK that inherits from resource and so it has all the common resource properties, but it also includes the dynamic properties that define the schema-free document itself.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreateDocuments(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create Documents ****"); 
+   Console.WriteLine();  
+	
+   dynamic document1Definition = new {
+      name = "New Customer 1", address = new { 
+         addressType = "Main Office",
+         addressLine1 = "123 Main Street", 
+         location = new {
+            city = "Brooklyn", stateProvinceName = "New York" 
+         }, postalCode = "11229", countryRegionName = "United States" 
+      }, 
+   };
+	
+   Document document1 = await CreateDocument(client, document1Definition); 
+   Console.WriteLine("Created document {0} from dynamic object", document1.Id); 
+   Console.WriteLine();
+}
+</pre>
+<p>When the above code is compiled and executed you will receive the following output.</p>
+<pre class="result notranslate">
+**** Create Documents ****  
+Created new document: 34e9873a-94c8-4720-9146-d63fb7840fad {
+   "name": "New Customer 1", 
+	
+   "address": { 
+      "addressType": "Main Office", 
+      "addressLine1": "123 Main Street", 
+      "location": { 
+         "city": "Brooklyn", "stateProvinceName": "New York" 
+      }, 
+      "postalCode": "11229", "countryRegionName": "United States"
+   }, 
+	
+   "id": "34e9873a-94c8-4720-9146-d63fb7840fad", 
+   "_rid": "Ic8LAMEUVgACAAAAAAAAAA==", 
+   "_ts": 1449812756, 
+   "_self": "dbs/Ic8LAA==/colls/Ic8LAMEUVgA=/docs/Ic8LAMEUVgACAAAAAAAAAA==/", 
+   "_etag": "\"00001000-0000-0000-0000-566a63140000\"", 
+   "_attachments": "attachments/" 
+} 
+Created document 34e9873a-94c8-4720-9146-d63fb7840fad from dynamic object 
+</pre>
+<p>As you can see, we haven’t supplied an Id, however DocumentDB generated this one for us for the new document.</p>
+<h1>DocumentDB - Query Document</h1>
+<p>In DocumentDB, we actually use SQL to query for documents, so this chapter is all about querying using the special SQL syntax in DocumentDB. Although if you are doing .NET development, there is also a LINQ provider that can be used and which can generate appropriate SQL from a LINQ query.</p>
+<h2>Querying Document using Portal</h2>
+<p>The Azure portal has a Query Explorer that lets you run any SQL query against your DocumentDB database.</p>
+<p>We will use the Query Explorer to demonstrate the many different capabilities and features of the query language starting with the simplest possible query.</p>
+<p><b>Step 1</b> &minus; In the database blade, click to open the Query Explorer blade.</p>
+<img src="images/query_explorer_blade.jpg" alt="Query Explorer Blade" />
+<p>Remember that queries run within the scope of a collection, and so the Query Explorer lets you choose the collection in this dropdown.</p>
+<img src="images/run_query.jpg" alt="Run Query" />
+<p><b>Step 2</b> &minus; Select Families collection which is created earlier using the portal.</p>
+<p>The Query Explorer opens up with this simple query SELECT * FROM c, which simply retrieves all documents from the collection.</p>
+<p><b>Step 3</b> &minus; Execute this query by clicking the ‘Run query’ button. Then you will see that the complete document is retrieved in the Results blade.</p>
+<img src="images/document_in_result_blade.jpg" alt="Document in Result Blade" />
+<h2>Querying Document using .Net SDK</h2>
+<p>Following are the steps to run some document queries using .Net SDK.</p>
+<p>In this example, we want to query for the newly created documents that we just added.</p>
+<p><b>Step 1</b> &minus; Call CreateDocumentQuery, passing in the collection to run the query against by its SelfLink and the query text.</p>
+<pre class="prettyprint notranslate">
+private async static Task QueryDocumentsWithPaging(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Query Documents (paged results) ****"); 
+   Console.WriteLine();  
+   Console.WriteLine("Quering for all documents"); 
+	
+   var sql = "SELECT * FROM c";  
+   var query = client.CreateDocumentQuery(collection.SelfLink, sql).AsDocumentQuery();
+	
+   while (query.HasMoreResults) {
+      var documents = await query.ExecuteNextAsync(); 
+		
+      foreach (var document in documents) { 
+         Console.WriteLine(" Id: {0}; Name: {1};", document.id, document.name); 
+      } 
+   }
+	
+   Console.WriteLine(); 
+} 
+</pre>
+<p>This query is also returning all documents in the entire collection, but we're not calling .ToList on CreateDocumentQuery as before, which would issue as many requests as necessary to pull down all the results in one line of code.</p>
+<p><b>Step 2</b> &minus; Instead, call AsDocumentQuery and this method returns a query object with a HasMoreResults property.</p>
+<p><b>Step 3</b> &minus; If HasMoreResults is true, then call ExecuteNextAsync to get the next chunk and then dump all the contents of that chunk.</p>
+<p><b>Step 4</b> &minus; You can also query using LINQ instead of SQL if you prefer. Here we've defined a LINQ query in q, but it won't execute until we run .ToList on it.</p>
+<pre class="prettyprint notranslate">
+private static void QueryDocumentsWithLinq(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Query Documents (LINQ) ****"); 
+   Console.WriteLine();  
+   Console.WriteLine("Quering for US customers (LINQ)");
+	
+   var q = 
+      from d in client.CreateDocumentQuery&lt;Customer&gt;(collection.DocumentsLink) 
+      where d.Address.CountryRegionName == " United States" 
+      select new {
+         Id = d.Id, 
+         Name = d.Name, 
+         City = d.Address.Location.City 
+      };  
+		
+   var documents = q.ToList();  
+   Console.WriteLine("Found {0} UK customers", documents.Count);
+	
+   foreach (var document in documents) {
+      var d = document as dynamic; 
+      Console.WriteLine(" Id: {0}; Name: {1}; City: {2}", d.Id, d.Name, d.City); 
+   } 
+	
+   Console.WriteLine(); 
+}
+</pre>
+<p>The SDK will convert our LINQ query into SQL syntax for DocumentDB, generating a SELECT and WHERE clause based on our LINQ syntax</p>
+<p><b>Step 5</b> &minus; Now call the above queries from the CreateDocumentClient task.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() { 
+   // Create a new instance of the DocumentClient 
+	
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First(); 
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();  
+			
+      //await CreateDocuments(client); 
+      await QueryDocumentsWithPaging(client); 
+      QueryDocumentsWithLinq(client); 
+   } 
+	
+}
+</pre>
+<p>When the above code is executed, you will receive the following output.</p>
+<pre class="result notranslate">
+**** Query Documents (paged results) ****  
+Quering for all documents 
+ Id: 7e9ad4fa-c432-4d1a-b120-58fd7113609f; Name: New Customer 1; 
+ Id: 34e9873a-94c8-4720-9146-d63fb7840fad; Name: New Customer 1;  
+ 
+**** Query Documents (LINQ) **** 
+Quering for US customers (LINQ) 
+Found 2 UK customers 
+ Id: 7e9ad4fa-c432-4d1a-b120-58fd7113609f; Name: New Customer 1; City: Brooklyn 
+ Id: 34e9873a-94c8-4720-9146-d63fb7840fad; Name: New Customer 1; City: Brooklyn
+</pre>
+<h1>DocumentDB - Update Document</h1>
+<p>In this chapter, we will learn how to update the documents. Using Azure portal, you can easily update document by opening the document in Document explorer and updating it in editor like a text file.</p>
+<img src="images/update_document.jpg" alt="Update Document" />
+<p>Click ‘Save’ button. Now when you need to change a document using .Net SDK you can just replace it. You don't need to delete and recreate it, which besides being tedious, would also change the resource id, which you wouldn't want to do when you're just modifying a document. Here are the following steps to update the document using .Net SDK.</p>
+<p>Let’s take a look at the following ReplaceDocuments task where we will query for documents where the isNew property is true, but we will get none because there aren't any. So, let's modify the documents we added earlier, those whose names start with New Customer.</p>
+<p><b>Step 1</b> &minus; Add the isNew property to these documents and set its value to true.</p>
+<pre class="prettyprint notranslate">
+private async static Task ReplaceDocuments(DocumentClient client) {
+
+   Console.WriteLine(); 
+   Console.WriteLine("&gt;&gt;&gt; Replace Documents &lt;&lt;&lt;"); 
+   Console.WriteLine();  
+   Console.WriteLine("Quering for documents with 'isNew' flag");
+	
+   var sql = "SELECT * FROM c WHERE c.isNew = true"; 
+   var documents = client.CreateDocumentQuery(collection.SelfLink, sql).ToList();
+	
+   Console.WriteLine("Documents with 'isNew' flag: {0} ", documents.Count); 
+   Console.WriteLine();  
+   Console.WriteLine("Quering for documents to be updated"); 
+	
+   sql = "SELECT * FROM c WHERE STARTSWITH(c.name, 'New Customer') = true"; 
+   documents = client.CreateDocumentQuery(collection.SelfLink, sql).ToList(); 
+   Console.WriteLine("Found {0} documents to be updated", documents.Count); 
+	
+   foreach (var document in documents) {
+      document.isNew = true; 
+      var result = await client.ReplaceDocumentAsync(document._self, document); 
+      var updatedDocument = result.Resource; 
+      Console.WriteLine("Updated document 'isNew' flag: {0}", updatedDocument.isNew); 
+   }
+	
+   Console.WriteLine();  
+   Console.WriteLine("Quering for documents with 'isNew' flag");
+	
+   sql = "SELECT * FROM c WHERE c.isNew = true"; 
+   documents = client.CreateDocumentQuery(collection.SelfLink, sql).ToList(); 
+   Console.WriteLine("Documents with 'isNew' flag: {0}: ", documents.Count); 
+   Console.WriteLine(); 
+}
+</pre>
+<p><b>Step 2</b> &minus; Get the documents to be updated using the same STARTSWITH query and that gives us the documents, which we are getting back here as dynamic objects.</p>
+<p><b>Step 3</b> &minus; Attach the isNew property and set it to true for each document.</p>
+<p><b>Step 4</b> &minus; Call ReplaceDocumentAsync, passing in the document's SelfLink, along with the updated document.</p>
+<p>Now just to prove that this worked, query for documents where isNew equaled true. Let’s call the above queries from the CreateDocumentClient task.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient
+	
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First(); 
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();
+			
+      //await CreateDocuments(client);  
+      //QueryDocumentsWithSql(client); 
+      //await QueryDocumentsWithPaging(client); 
+      //QueryDocumentsWithLinq(client); 
+      await ReplaceDocuments(client); 
+   }
+	
+}
+</pre>
+<p>When the above code is compiled and executed, you will receive the following output.</p>
+<pre class="result notranslate">
+**** Replace Documents ****  
+Quering for documents with 'isNew' flag 
+Documents with 'isNew' flag: 0 
+Quering for documents to be updated 
+Found 2 documents to be updated 
+Updated document ‘isNew’ flag: True 
+Updated document ‘isNew’ flag: True 
+Quering for documents with 'isNew' flag 
+Documents with 'isNew' flag: 2 
+</pre>
+<h1>DocumentDB - Delete Document</h1>
+<p>In this chapter, we will learn how to delete a document from your DocumentDB account. Using Azure Portal, you can easily delete any document by opening the document in Document Explorer and click the ‘Delete’ option.</p>
+<img src="images/delete_document.jpg" alt="Delete Document" />
+<p></p>
+<img src="images/delete_document_dialog.jpg" alt="Delete Document Dialog" />
+<p>It will display the confirmation message. Now press the Yes button and you will see that the document is no longer available in your DocumentDB account.</p>
+<p>Now when you want to delete a document using .Net SDK.</p>
+<p><b>Step 1</b> &minus; It's the same pattern as we've seen before where we'll query first to get the SelfLinks of each new document. We don't use SELECT * here, which would return the documents in their entirety, which we don't need.</p>
+<p><b>Step 2</b> &minus; Instead we're just selecting the SelfLinks into a list and then we just call DeleteDocumentAsync for each SelfLink, one at a time, to delete the documents from the collection.</p>
+<pre class="prettyprint notranslate">
+private async static Task DeleteDocuments(DocumentClient client) {
+   Console.WriteLine();
+   Console.WriteLine("&gt;&gt;&gt; Delete Documents &lt;&lt;&lt;");
+   Console.WriteLine();
+   Console.WriteLine("Quering for documents to be deleted");
+	
+   var sql =
+      "SELECT VALUE c._self FROM c WHERE STARTSWITH(c.name, 'New Customer') = true";
+		
+   var documentLinks =
+      client.CreateDocumentQuery&lt;string&gt;(collection.SelfLink, sql).ToList();
+		
+   Console.WriteLine("Found {0} documents to be deleted", documentLinks.Count);
+
+   foreach (var documentLink in documentLinks) {
+      await client.DeleteDocumentAsync(documentLink);
+   }
+	
+   Console.WriteLine("Deleted {0} new customer documents", documentLinks.Count);
+   Console.WriteLine();
+}
+</pre>
+<p><b>Step 3</b> &minus; Now let’s call the above DeleteDocuments from the CreateDocumentClient task.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient 
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First(); 
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();  
+			
+      await DeleteDocuments(client); 
+   } 
+}
+</pre>
+<p>When the above code is executed, you will receive the following output.</p>
+<pre class="result notranslate">
+***** Delete Documents *****  
+Quering for documents to be deleted 
+Found 2 documents to be deleted 
+Deleted 2 new customer documents 
+</pre>
+<h1>DocumentDB - Data Modeling</h1>
+<p>While schema-free databases, like DocumentDB, make it super easy to embrace changes to your data model, you should still spend some time thinking about your data.</p>
+<ul class="list">
+<li><p>You have a lot of options. Naturally, you can just work JSON object graphs or even raw strings of JSON text, but you can also use dynamic objects that lets you bind to properties at runtime without defining a class at compile time.</p></li>
+<li><p>You can also work with real C# objects, or Entities as they are called, which might be your business domain classes.</p></li>
+</ul>
+<h2>Relationships</h2>
+<p>Let’s take a look at the document's hierarchal structure. It has a few top-level properties like the required id, as well as lastName and isRegistered, but it also has nested properties.</p>
+<pre class="prettyprint notranslate">
+{ 
+   "id": "AndersenFamily", 
+   "lastName": "Andersen", 
+	
+   "parents": [ 
+      { "firstName": "Thomas", "relationship": "father" }, 
+      { "firstName": "Mary Kay", "relationship": "mother" } 
+   ],
+	
+   "children": [ 
+      { 
+         "firstName": "Henriette Thaulow", 
+         "gender": "female", 
+         "grade": 5, 
+         "pets": [ { "givenName": "Fluffy", "type": "Rabbit" } ] 
+      } 
+   ], 
+	
+   "location": { "state": "WA", "county": "King", "city": "Seattle"}, 
+   "isRegistered": true 
+}
+</pre>
+<ul class="list">
+<li><p>For instance, the parents property is supplied as a JSON array as denoted by the square brackets.</p></li>
+<li><p>We also have another array for children, even though there's only one child in the array in this example. So this is how you model the equivalent of one-to-many relationships within a document.</p></li>
+<li><p>You simply use arrays where each element in the array could be a simple value or another complex object, even another array.</p></li>
+<li><p>So one family can have multiple parents and multiple children and if you look at the child objects, they have a pet’s property that is itself a nested array for a oneto-many relationship between children and pets.</p></li>
+<li><p>For the location property, we're combining three related properties, the state, county, and city into an object.</p></li>
+<li><p>Embedding an object this way rather than embedding an array of objects is similar to having a one-to-one relationship between two rows in separate tables in a relational database.</p></li>
+</ul>
+<h2>Embedding Data</h2>
+<p>When you start modeling data in a document store, such as DocumentDB, try to treat your entities as self-contained documents represented in JSON. When working with relational databases, we always normalize data.</p>
+<ul class="list">
+<li><p>Normalizing your data typically involves taking an entity, such as a customer, and breaking it down into discreet pieces of data, like contact details and addresses.</p></li>
+<li><p>To read a customer, with all their contact details and addresses, you need to use JOINS to effectively aggregate your data at run time.</p></li>
+</ul>
+<p>Now let's take a look at how we would model the same data as a self-contained entity in a document database.</p>
+<pre class="prettyprint notranslate">
+{
+   "id": "1", 
+   "firstName": "Mark", 
+   "lastName": "Upston", 
+	
+   "addresses": [ 
+      {             
+         "line1": "232 Main Street", 
+         "line2": "Unit 1", 
+         "city": "Brooklyn", 
+         "state": "NY", 
+         "zip": 11229
+      }
+   ],
+	
+   "contactDetails": [ 
+      {"email": "mark.upston@xyz.com"}, 
+      {"phone": "+1 356 545-86455", "extension": 5555} 
+   ]
+} 
+</pre>
+<p>As you can see that we have denormalized the customer record where all the information of the customer is embedded into a single JSON document.</p>
+<p>In NoSQL we have a free schema, so you can add contact details and addresses in different format as well. In NoSQL, you can retrieve a customer record from the database in a single read operation. Similarly, updating a record is also a single write operation.</p>
+<p>Following are the steps to create documents using .Net SDK.</p>
+<p><b>Step 1</b> &minus; Instantiate DocumentClient. Then we will query for the myfirstdb database and also query for MyCollection collection, which we store in this private variable collection so that's it's accessible throughout the class.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() { 
+   // Create a new instance of the DocumentClient
+	
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) { 
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First(); 
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();  
+			
+      await CreateDocuments(client); 
+   }
+
+}
+</pre>
+<p><b>Step 2</b> &minus; Create some documents in CreateDocuments task.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreateDocuments(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create Documents ****"); 
+   Console.WriteLine();
+	
+   dynamic document1Definition = new {
+      name = "New Customer 1", address = new { 
+         addressType = "Main Office", 
+         addressLine1 = "123 Main Street", 
+         location = new { 
+            city = "Brooklyn", stateProvinceName = "New York"
+         }, 
+         postalCode = "11229", countryRegionName = "United States" 
+      }, 
+   };
+	
+   Document document1 = await CreateDocument(client, document1Definition); 
+   Console.WriteLine("Created document {0} from dynamic object", document1.Id); 
+   Console.WriteLine(); 
+}
+</pre>
+<p>The first document will be generated from this dynamic object. This might look like JSON, but of course it isn't. This is C# code and we're creating a real .NET object, but there's no class definition. Instead the properties are inferred from the way the object is initialized. You can notice also that we haven't supplied an Id property for this document.</p>
+<p><b>Step 3</b> &minus; Now let's take a look at the CreateDocument and it looks like the same pattern we saw for creating databases and collections.</p>
+<pre class="prettyprint notranslate">
+private async static Task&lt;Document&gt; CreateDocument(DocumentClient client,
+   object documentObject) {
+   var result = await client.CreateDocumentAsync(collection.SelfLink, documentObject); 
+	
+   var document = result.Resource; 
+   Console.WriteLine("Created new document: {0}\r\n{1}", document.Id, document); 
+	
+   return result; 
+}
+</pre>
+<p><b>Step 4</b> &minus; This time we call CreateDocumentAsync specifying the SelfLink of the collection we want to add the document to. We get back a response with a resource property that, in this case, represents the new document with its system-generated properties.</p>
+<p>In the following CreateDocuments task, we have created three documents.</p>
+<ul class="list">
+<li><p>In the first document, the Document object is a defined class in the SDK that inherits from resource and so it has all the common resource properties, but it also includes the dynamic properties that define the schema-free document itself.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+private async static Task CreateDocuments(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create Documents ****"); 
+   Console.WriteLine();
+	
+   dynamic document1Definition = new {
+      name = "New Customer 1", address = new {
+         addressType = "Main Office", 
+         addressLine1 = "123 Main Street", 
+         location = new {
+            city = "Brooklyn", stateProvinceName = "New York" 
+         }, 
+         postalCode = "11229", 
+         countryRegionName = "United States" 
+      }, 
+   };
+	
+   Document document1 = await CreateDocument(client, document1Definition); 
+   Console.WriteLine("Created document {0} from dynamic object", document1.Id); 
+   Console.WriteLine();
+	
+   var document2Definition = @" {
+      ""name"": ""New Customer 2"", 
+		
+      ""address"": { 
+         ""addressType"": ""Main Office"", 
+         ""addressLine1"": ""123 Main Street"", 
+         ""location"": { 
+            ""city"": ""Brooklyn"", ""stateProvinceName"": ""New York"" 
+         }, 
+         ""postalCode"": ""11229"", 
+         ""countryRegionName"": ""United States"" 
+      } 
+   }"; 
+	
+   Document document2 = await CreateDocument(client, document2Definition); 
+   Console.WriteLine("Created document {0} from JSON string", document2.Id);
+   Console.WriteLine();
+	
+   var document3Definition = new Customer {
+      Name = "New Customer 3", 
+		
+      Address = new Address {
+         AddressType = "Main Office", 
+         AddressLine1 = "123 Main Street", 
+         Location = new Location {
+            City = "Brooklyn", StateProvinceName = "New York" 
+         }, 
+         PostalCode = "11229", 
+         CountryRegionName = "United States" 
+      }, 
+   };
+	
+   Document document3 = await CreateDocument(client, document3Definition); 
+   Console.WriteLine("Created document {0} from typed object", document3.Id); 
+   Console.WriteLine(); 
+}
+</pre>
+<ul class="list">
+<li><p>This second document just works with a raw JSON string. Now we step into an overload for CreateDocument that uses the JavaScriptSerializer to de-serialize the string into an object, which it then passes on to the same CreateDocument method that we used to create the first document.</p></li>
+<li><p>In the third document, we have used the C# object Customer which is defined in our application.</p></li>
+</ul>
+<p>Let’s take a look at this customer, it has an Id and address property where the address is a nested object with its own properties including location, which is yet another nested object.</p>
+<pre class="prettyprint notranslate">
+using Newtonsoft.Json; 
+
+using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Text; 
+using System.Threading.Tasks;
+
+namespace DocumentDBDemo {
+ 
+   public class Customer { 
+      [JsonProperty(PropertyName = "id")] 
+      public string Id { get; set; }
+      // Must be nullable, unless generating unique values for new customers on client  
+      [JsonProperty(PropertyName = "name")] 
+      public string Name { get; set; }  
+      [JsonProperty(PropertyName = "address")] 
+      public Address Address { get; set; } 
+   }
+	
+   public class Address {
+      [JsonProperty(PropertyName = "addressType")] 
+      public string AddressType { get; set; }  
+		
+      [JsonProperty(PropertyName = "addressLine1")] 
+      public string AddressLine1 { get; set; }  
+		
+      [JsonProperty(PropertyName = "location")] 
+      public Location Location { get; set; }  
+		
+      [JsonProperty(PropertyName = "postalCode")] 
+      public string PostalCode { get; set; }  
+		
+      [JsonProperty(PropertyName = "countryRegionName")] 
+      public string CountryRegionName { get; set; } 
+   }
+	
+   public class Location { 
+      [JsonProperty(PropertyName = "city")] 
+      public string City { get; set; }  
+		
+      [JsonProperty(PropertyName = "stateProvinceName")]
+      public string StateProvinceName { get; set; } 
+   } 
+}
+</pre>
+<p>We also have JSON property attributes in place because we want to maintain proper conventions on both sides of the fence.</p>
+<p>So I just create my New Customer object along with its nested child objects and call into CreateDocument once more. Although our customer object does have an Id property we didn't supply a value for it and so DocumentDB generated one based on the GUID, just like it did for the previous two documents.</p>
+<p>When the above code is compiled and executed you will receive the following output.</p>
+<pre class="result notranslate">
+**** Create Documents ****  
+Created new document: 575882f0-236c-4c3d-81b9-d27780206b2c 
+{ 
+  "name": "New Customer 1", 
+  "address": { 
+    "addressType": "Main Office", 
+    "addressLine1": "123 Main Street", 
+    "location": { 
+      "city": "Brooklyn", 
+      "stateProvinceName": "New York" 
+    }, 
+    "postalCode": "11229", 
+    "countryRegionName": "United States" 
+  }, 
+  "id": "575882f0-236c-4c3d-81b9-d27780206b2c", 
+  "_rid": "kV5oANVXnwDGPgAAAAAAAA==", 
+  "_ts": 1450037545, 
+  "_self": "dbs/kV5oAA==/colls/kV5oANVXnwA=/docs/kV5oANVXnwDGPgAAAAAAAA==/", 
+  "_etag": "\"00006fce-0000-0000-0000-566dd1290000\"", 
+  "_attachments": "attachments/" 
+} 
+Created document 575882f0-236c-4c3d-81b9-d27780206b2c from dynamic object  
+Created new document: 8d7ad239-2148-4fab-901b-17a85d331056 
+{ 
+  "name": "New Customer 2", 
+  "address": {
+    "addressType": "Main Office", 
+    "addressLine1": "123 Main Street", 
+    "location": { 
+      "city": "Brooklyn", 
+      "stateProvinceName": "New York" 
+    }, 
+    "postalCode": "11229", 
+    "countryRegionName": "United States" 
+  }, 
+  "id": "8d7ad239-2148-4fab-901b-17a85d331056", 
+  "_rid": "kV5oANVXnwDHPgAAAAAAAA==", 
+  "_ts": 1450037545, 
+  "_self": "dbs/kV5oAA==/colls/kV5oANVXnwA=/docs/kV5oANVXnwDHPgAAAAAAAA==/", 
+  "_etag": "\"000070ce-0000-0000-0000-566dd1290000\"", 
+  "_attachments": "attachments/" 
+} 
+Created document 8d7ad239-2148-4fab-901b-17a85d331056 from JSON string  
+Created new document: 49f399a8-80c9-4844-ac28-cd1dee689968 
+{ 
+  "id": "49f399a8-80c9-4844-ac28-cd1dee689968", 
+  "name": "New Customer 3", 
+  "address": { 
+    "addressType": "Main Office", 
+    "addressLine1": "123 Main Street", 
+    "location": { 
+      "city": "Brooklyn", 
+      "stateProvinceName": "New York" 
+    }, 
+    "postalCode": "11229", 
+    "countryRegionName": "United States" 
+  }, 
+  "_rid": "kV5oANVXnwDIPgAAAAAAAA==", 
+  "_ts": 1450037546, 
+  "_self": "dbs/kV5oAA==/colls/kV5oANVXnwA=/docs/kV5oANVXnwDIPgAAAAAAAA==/", 
+  "_etag": "\"000071ce-0000-0000-0000-566dd12a0000\"", 
+  "_attachments": "attachments/" 
+}
+Created document 49f399a8-80c9-4844-ac28-cd1dee689968 from typed object
+</pre>
+<h1>DocumentDB - Data Types</h1>
+<p>JSON or JavaScript Object Notation is a lightweight text-based open standard designed for human-readable data interchange and also easy for machines to parse and generate. JSON is at the heart of DocumentDB. We transmit JSON over the wire, we store JSON as JSON, and we index the JSON tree allowing queries on the full JSON document.</p>
+<p>JSON format supports the following data types &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Type &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Number</b></p>
+<p>Double-precision floating-point format in JavaScript</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>String</b></p>
+<p>Double-quoted Unicode with backslash escaping</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Boolean</b></p>
+<p>True or false</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>Array</b></p>
+<p>An ordered sequence of values</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>Value</b></p>
+<p>It can be a string, a number, true or false, null, etc.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>Object</b></p>
+<p>An unordered collection of key:value pairs</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>Whitespace</b></p>
+<p>It can be used between any pair of tokens</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>Null</b></p>
+<p>Empty</p></td>
+</tr>
+</table>
+<p>Let’s take a look at a simple example DateTime type. Add birth date to the customer class.</p>
+<pre class="prettyprint notranslate">
+public class Customer {
+   [JsonProperty(PropertyName = "id")] 
+   public string Id { get; set; }
+	
+   // Must be nullable, unless generating unique values for new customers on client  
+   [JsonProperty(PropertyName = "name")] 
+   public string Name { get; set; }  
+	
+   [JsonProperty(PropertyName = "address")] 
+   public Address Address { get; set; }  
+	
+   [JsonProperty(PropertyName = "birthDate")] 
+   public DateTime BirthDate { get; set; } 
+}
+</pre>
+<p>We can store, retrieve, and query using DateTime as shown in the following code. </p>
+<pre class="prettyprint notranslate">
+private async static Task CreateDocuments(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create Documents ****"); 
+   Console.WriteLine();
+	
+   var document3Definition = new Customer { 
+      Id = "1001", 
+      Name = "Luke Andrew", 
+		
+      Address = new Address { 
+         AddressType = "Main Office", 
+         AddressLine1 = "123 Main Street", 
+         Location = new Location {
+            City = "Brooklyn",
+            StateProvinceName = "New York" 
+         }, 
+         PostalCode = "11229",
+         CountryRegionName = "United States" 
+      },
+		
+      BirthDate = DateTime.Parse(DateTime.Today.ToString()), 
+   };
+	
+   Document document3 = await CreateDocument(client, document3Definition); 
+   Console.WriteLine("Created document {0} from typed object", document3.Id); 
+   Console.WriteLine(); 
+}
+</pre>
+<p>When the above code is compiled and executed, and the document is created, you will see that birth date is added now.</p>
+<pre class="result notranslate">
+**** Create Documents ****  
+Created new document: 1001 
+{ 
+   "id": "1001", 
+   "name": "Luke Andrew", 
+   "address": { 
+      "addressType": "Main Office", 
+      "addressLine1": "123 Main Street", 
+      "location": { 
+         "city": "Brooklyn", 
+         "stateProvinceName": "New York" 
+      }, 
+      "postalCode": "11229", 
+      "countryRegionName": "United States" 
+   }, 
+   "birthDate": "2015-12-14T00:00:00", 
+   "_rid": "Ic8LAMEUVgAKAAAAAAAAAA==", 
+   "_ts": 1450113676, 
+   "_self": "dbs/Ic8LAA==/colls/Ic8LAMEUVgA=/docs/Ic8LAMEUVgAKAAAAAAAAAA==/", 
+   "_etag": "\"00002d00-0000-0000-0000-566efa8c0000\"", 
+   "_attachments": "attachments/" 
+} 
+Created document 1001 from typed object
+</pre>
+<h1>DocumentDB - Limiting Records</h1>
+<p>Microsoft has recently added a number of improvements on how you can query Azure DocumentDB, such as the TOP keyword to SQL grammar, which made queries run faster and consume fewer resources, increased the limits for query operators, and added support for additional LINQ operators in the .NET SDK.</p>
+<p>Let’s take a look at a simple example in which we will retrieve only the first two records. If you have a number of records and you want to retrieve only some of them, then you can use the Top keyword. In this example, we have a lot of records of earthquakes.</p>
+<img src="images/limiting_records.jpg" alt="Limiting Records" />
+<p>Now we want to show the first two records only</p>
+<p><b>Step 1</b> &minus; Go to the query explorer and run this query.</p>
+<pre class="result notranslate">
+SELECT * FROM c 
+WHERE c.magnitude &gt; 2.5 
+</pre>
+<p>You will see that it has retrieved four records because we have not specified TOP keyword yet.</p>
+<img src="images/retrieved_records.jpg" alt="Retrieved Records" />
+<p><b>Step 2</b> &minus; Now use the TOP keyword with same query. Here we have specified the TOP keyword and ‘2’ means that we want two records only.</p>
+<pre class="result notranslate">
+SELECT TOP 2 * FROM c 
+WHERE c.magnitude &gt; 2.5
+</pre>
+<p><b>Step 3</b> &minus; Now run this query and you will see that only two records are retrieved.</p>
+<img src="images/two_records_retrieved.jpg" alt="Two records retrieved" />
+<p>Similarly, you can use TOP keyword in code using .Net SDK. Following is the implementation.</p>
+<pre class="prettyprint notranslate">
+private async static Task QueryDocumentsWithPaging(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Query Documents (paged results) ****"); 
+   Console.WriteLine();  
+   Console.WriteLine("Quering for all documents"); 
+	
+   var sql = "SELECT TOP 3 * FROM c";  
+   var query = client 
+      .CreateDocumentQuery(collection.SelfLink, sql) 
+      .AsDocumentQuery(); 
+		
+   while (query.HasMoreResults) {
+      var documents = await query.ExecuteNextAsync(); 
+		
+      foreach (var document in documents) { 
+         Console.WriteLine(" PublicId: {0}; Magnitude: {1};", document.publicid,
+            document.magnitude); 
+      } 
+   } 
+	
+   Console.WriteLine(); 
+}
+</pre>
+<p>Following is the CreateDocumentClient task in which are instantiated the DocumentClient and earthquake database.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient 
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'earthquake'").AsEnumerable().First(); 
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'earthquakedata'").AsEnumerable().First(); 
+			
+      await QueryDocumentsWithPaging(client); 
+   } 
+}
+</pre>
+<p>When the above code is compiled and executed, you will see that only three records are retrieved.</p>
+<pre class="result notranslate">
+**** Query Documents (paged results) **** 
+ 
+Quering for all documents 
+PublicId: 2015p947400; Magnitude: 2.515176918; 
+PublicId: 2015p947373; Magnitude: 1.506774108; 
+PublicId: 2015p947329; Magnitude: 1.593394461;
+</pre>
+<h1>DocumentDB - Sorting Records</h1>
+<p>Microsoft Azure DocumentDB supports querying documents using SQL over JSON documents. You can sort documents in the collection on numbers and strings using an ORDER BY clause in your query. The clause can include an optional ASC/DESC argument to specify the order in which results must be retrieved.</p>
+<p>Let’s take a look at the following example in which we have a JSON document.</p>
+<pre class="prettyprint notranslate">
+{ 
+   "id": "Food Menu",
+   "description": "Grapes, red or green (European type, such as Thompson seedless), raw",
+	
+   "tags": [
+      {
+         "name": "grapes"
+      },
+		
+      {
+         "name": "red or green (european type"
+      },
+		
+      {
+         "name": "such as thompson seedless)"
+      },
+		
+      {
+         "name": "raw"
+      }
+   ],
+	
+   "foodGroup": "Fruits and Fruit Juices",
+	
+   "servings": [
+      {
+         "amount": 1,
+         "description": "cup",
+         "weightInGrams": 151
+      },
+		
+      {
+         "amount": 10,
+         "description": "grapes",
+         "weightInGrams": 49
+      },
+		
+      {
+         "amount": 1,
+         "description": "NLEA serving",
+         "weightInGrams": 126
+      }
+   ]
+	
+}
+</pre>
+<p>Following is the SQL query to sort the result in a descending order.</p>
+<pre class="prettyprint notranslate">
+SELECT f.description, f.foodGroup,  
+   f.servings[2].description AS servingDescription,  
+   f.servings[2].weightInGrams AS servingWeight  
+	
+FROM f  
+ORDER BY f.servings[2].weightInGrams DESC 
+</pre>
+<p>When the above query is executed, you will receive the following output.</p>
+<pre class="result notranslate">
+[
+   {
+      "description": "Grapes, red or green (European type, such as Thompson
+         seedless), raw",
+      "foodGroup": "Fruits and Fruit Juices",
+      "servingDescription": "NLEA serving",
+      "servingWeight": 126
+   }
+]
+</pre>
+<h1>DocumentDB - Indexing Records</h1>
+<p>By default, DocumentDB automatically indexes every property in a document as soon as the document is added to the database. However, you can take control and fine tune your own indexing policy that reduces storage and processing overhead when there are specific documents and/or properties that never needs to be indexed.</p>
+<p>The default indexing policy that tells DocumentDB to index every property automatically is suitable for many common scenarios. But you can also implement a custom policy that exercises fine control over exactly what gets indexed and what doesn't and other functionality with regards to indexing.</p>
+<p>DocumentDB supports the following types of indexing &minus;</p>
+<ul class="list">
+<li>Hash</li>
+<li>Range</li>
+</ul>
+<h2>Hash</h2>
+<p>Hash index enables efficient querying for equality, i.e., while searching for documents where a given property equals an exact value, rather than matching on a range of values like less than, greater than or between.</p>
+<p>You can perform range queries with a hash index, but DocumentDB will not be able to use the hash index to find matching documents and will instead need to sequentially scan each document to determine if it should be selected by the range query.</p>
+<p>You won't be able to sort your documents with an ORDER BY clause on a property that has just a hash index.</p>
+<h2>Range</h2>
+<p>Range index defined for the property, DocumentDB allows to efficiently query for documents against a range of values. It also allows you to sort the query results on that property, using ORDER BY.</p>
+<p>DocumentDB allows you to define both a hash and a range index on any or all properties, which enables efficient equality and range queries, as well as ORDER BY.</p>
+<h2>Indexing Policy</h2>
+<p>Every collection has an indexing policy that dictates which types of indexes are used for numbers and strings in every property of every document.</p>
+<ul class="list">
+<li><p>You can also control whether or not documents get indexed automatically as they are added to the collection.</p></li>
+<li><p>Automatic indexing is enabled by default, but you can override that behavior when adding a document, telling DocumentDB not to index that particular document.</p></li>
+<li><p>You can disable automatic indexing so that by default, documents are not indexed when added to the collection. Similarly, you can override this at the document level and instruct DocumentDB to index a particular document when adding it to the collection. This is known as manual indexing.</p></li>
+</ul>
+<h2>Include / Exclude Indexing</h2>
+<p>An indexing policy can also define which path or paths should be included or excluded from the index. This is useful if you know that there are certain parts of a document that you never query against and certain parts that you do.</p>
+<p>In these cases, you can reduce indexing overhead by telling DocumentDB to index just those particular portions of each document added to the collection.</p>
+<h2>Automatic Indexing</h2>
+<p>Let’s take a look at a simple example of automatic indexing.</p>
+<p><b>Step 1</b> &minus; First we create a collection called autoindexing and without explicitly supplying a policy, this collection uses the default indexing policy, which means that automatic indexing is enabled on this collection.</p>
+<p>Here we are using ID-based routing for the database self-link so we don't need to know its resource ID or query for it before creating the collection. We can just use the database ID, which is mydb.</p>
+<p><b>Step 2</b> &minus; Now let’s create two documents, both with the last name of Upston.</p>
+<pre class="prettyprint notranslate">
+private async static Task AutomaticIndexing(DocumentClient client) {
+   Console.WriteLine();
+   Console.WriteLine("**** Override Automatic Indexing ****");
+
+   // Create collection with automatic indexing
+
+   var collectionDefinition = new DocumentCollection {
+      Id = "autoindexing"
+   };
+	
+   var collection = await client.CreateDocumentCollectionAsync("dbs/mydb",
+      collectionDefinition);
+
+   // Add a document (indexed)
+   dynamic indexedDocumentDefinition = new {
+      id = "MARK",
+      firstName = "Mark",
+      lastName = "Upston",
+      addressLine = "123 Main Street",
+      city = "Brooklyn",
+      state = "New York",
+      zip = "11229",
+   };
+	
+   Document indexedDocument = await client
+      .CreateDocumentAsync("dbs/mydb/colls/autoindexing", indexedDocumentDefinition);
+		
+   // Add another document (request no indexing)
+   dynamic unindexedDocumentDefinition = new {
+      id = "JANE",
+      firstName = "Jane",
+      lastName = "Upston",
+      addressLine = "123 Main Street",
+      city = "Brooklyn",
+      state = "New York",
+      zip = "11229",
+   };
+	
+   Document unindexedDocument = await client
+      .CreateDocumentAsync("dbs/mydb/colls/autoindexing", unindexedDocumentDefinition,
+      new RequestOptions { IndexingDirective = IndexingDirective.Exclude });
+
+   //Unindexed document won't get returned when querying on non-ID (or selflink) property
+
+   var doeDocs = client.CreateDocumentQuery("dbs/mydb/colls/autoindexing", "SELECT *
+      FROM c WHERE c.lastName = 'Doe'").ToList();
+		
+   Console.WriteLine("Documents WHERE lastName = 'Doe': {0}", doeDocs.Count);
+
+   // Unindexed document will get returned when using no WHERE clause
+
+   var allDocs = client.CreateDocumentQuery("dbs/mydb/colls/autoindexing",
+      "SELECT * FROM c").ToList();
+   Console.WriteLine("All documents: {0}", allDocs.Count);
+	
+   // Unindexed document will get returned when querying by ID (or self-link) property
+	
+   Document janeDoc = client.CreateDocumentQuery("dbs/mydb/colls/autoindexing",
+      "SELECT * FROM c WHERE c.id = 'JANE'").AsEnumerable().FirstOrDefault();
+   Console.WriteLine("Unindexed document self-link: {0}", janeDoc.SelfLink);
+	
+   // Delete the collection
+	
+   await client.DeleteDocumentCollectionAsync("dbs/mydb/colls/autoindexing");
+}
+</pre>
+<p>This first one, for Mark Upston, gets added to the collection and is then immediately indexed automatically based on the default indexing policy.</p>
+<p>But when the second document for Mark Upston is added, we have passed the request options with IndexingDirective.Exclude which explicitly instructs DocumentDB not to index this document, despite the collection's indexing policy.</p>
+<p>We have different types of queries for both the documents at the end.</p>
+<p><b>Step 3</b> &minus; Let’s call the AutomaticIndexing task from CreateDocumentClient.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient 
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) { 
+      await AutomaticIndexing(client); 
+   } 
+}
+</pre>
+<p>When the above code is compiled and executed, you will receive the following output.</p>
+<pre class="result notranslate">
+**** Override Automatic Indexing **** 
+Documents WHERE lastName = 'Upston': 1 
+All documents: 2 
+Unindexed document self-link: dbs/kV5oAA==/colls/kV5oAOEkfQA=/docs/kV5oAOEkfQACA 
+AAAAAAAAA==/
+</pre>
+<p>As you can see we have two such documents, but the query returns only the one for Mark because the one for Mark isn't indexed. If we query again, without a WHERE clause to retrieve all the documents in the collection, then we get a result set with both documents and this is because unindexed documents are always returned by queries that have no WHERE clause.</p>
+<p>We can also retrieve unindexed documents by their ID or self-link. So when we query for Mark's document by his ID, MARK, we see that DocumentDB returns the document even though it isn't indexed in the collection.</p>
+<h2>Manual Indexing</h2>
+<p>Let’ take a look at a simple example of manual indexing by overriding automatic indexing.</p>
+<p><b>Step 1</b> &minus; First we'll create a collection called manualindexing and override the default policy by explicitly disabling automatic indexing. This means that, unless we request otherwise, new documents added to this collection will not be indexed.</p>
+<pre class="prettyprint notranslate">
+private async static Task ManualIndexing(DocumentClient client) {
+   Console.WriteLine();
+   Console.WriteLine("**** Manual Indexing ****");
+   // Create collection with manual indexing
+
+   var collectionDefinition = new DocumentCollection {
+      Id = "manualindexing",
+      IndexingPolicy = new IndexingPolicy {
+         Automatic = false,
+      },
+   };
+	
+   var collection = await client.CreateDocumentCollectionAsync("dbs/mydb",
+      collectionDefinition);
+		
+   // Add a document (unindexed)
+   dynamic unindexedDocumentDefinition = new {
+      id = "MARK",
+      firstName = "Mark",
+      lastName = "Doe",
+      addressLine = "123 Main Street",
+      city = "Brooklyn",
+      state = "New York",
+      zip = "11229",
+   }; 
+	
+   Document unindexedDocument = await client
+      .CreateDocumentAsync("dbs/mydb/colls/manualindexing", unindexedDocumentDefinition);
+  
+   // Add another document (request indexing)
+   dynamic indexedDocumentDefinition = new {
+      id = "JANE",
+      firstName = "Jane",
+      lastName = "Doe",
+      addressLine = "123 Main Street",
+      city = "Brooklyn",
+      state = "New York",
+      zip = "11229",
+   };
+	
+   Document indexedDocument = await client.CreateDocumentAsync
+      ("dbs/mydb/colls/manualindexing", indexedDocumentDefinition, new RequestOptions {
+      IndexingDirective = IndexingDirective.Include });
+
+   //Unindexed document won't get returned when querying on non-ID (or selflink) property
+
+   var doeDocs = client.CreateDocumentQuery("dbs/mydb/colls/manualindexing",
+      "SELECT * FROM c WHERE c.lastName = 'Doe'").ToList();
+   Console.WriteLine("Documents WHERE lastName = 'Doe': {0}", doeDocs.Count);
+	
+   // Unindexed document will get returned when using no WHERE clause
+	
+   var allDocs = client.CreateDocumentQuery("dbs/mydb/colls/manualindexing",
+      "SELECT * FROM c").ToList();
+   Console.WriteLine("All documents: {0}", allDocs.Count);
+	
+   // Unindexed document will get returned when querying by ID (or self-link) property
+	
+   Document markDoc = client
+      .CreateDocumentQuery("dbs/mydb/colls/manualindexing",
+      "SELECT * FROM c WHERE c.id = 'MARK'")
+      .AsEnumerable().FirstOrDefault();
+   Console.WriteLine("Unindexed document self-link: {0}", markDoc.SelfLink);
+   await client.DeleteDocumentCollectionAsync("dbs/mydb/colls/manualindexing");
+}
+</pre>
+<p><b>Step 2</b> &minus; Now we will again create the same two documents as before. We will not supply any special request options for Mark's document this time, because of the collection's indexing policy, this document will not get indexed.</p>
+<p><b>Step 3</b> &minus; Now when we add the second document for Mark, we use RequestOptions with IndexingDirective.Include to tell DocumentDB that it should index this document, which overrides the collection's indexing policy that says that it shouldn't.</p>
+<p>We have different types of queries for both the documents at the end.</p>
+<p><b>Step 4</b> &minus; Let’s call the ManualIndexing task from CreateDocumentClient.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient 
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      await ManualIndexing(client); 
+   } 
+}
+</pre>
+<p>When the above code is compiled and executed you will receive the following output.</p>
+<pre class="result notranslate">
+**** Manual Indexing **** 
+Documents WHERE lastName = 'Upston': 1 
+All documents: 2 
+Unindexed document self-link: dbs/kV5oAA==/colls/kV5oANHJPgE=/docs/kV5oANHJPgEBA 
+AAAAAAAAA==/
+</pre>
+<p>Again, the query returns only one of the two documents, but this time, it returns Jane Doe, which we explicitly requested to be indexed. But again as before, querying without a WHERE clause retrieves all the documents in the collection, including the unindexed document for Mark. We can also query for the unindexed document by its ID, which DocumentDB returns even though it's not indexed.</p>
+<h1>DocumentDB - Geospatial Data</h1>
+<p>Microsoft added <b>geospatial support</b>, which lets you store location data in your documents and perform spatial calculations for distance and intersections between points and polygons.</p>
+<ul class="list">
+<li><p>Spatial data describes the position and shape of objects in space.</p></li>
+<li><p>Typically, it can be used to represent the location of a person, a place of interest, or the boundary of a city, or a lake.</p></li>
+<li><p>Common use cases often involve proximity queries. For e.g., "find all universities near my current location".</p></li>
+</ul>
+<p>A <b>Point</b> denotes a single position in space which represents the exact location, e.g. street address of particular university. A point is represented in DocumentDB using its coordinate pair (longitude and latitude). Following is an example of JSON point.</p>
+<pre class="prettyprint notranslate">
+{ 
+   "type":"Point", 
+   "coordinates":[ 28.3, -10.7 ] 
+} 
+</pre>
+<p>Let’s take a look at a simple example which contains the location of a university.</p>
+<pre class="prettyprint notranslate">
+{ 
+   "id":"case-university", 
+   "name":"CASE: Center For Advanced Studies In Engineering", 
+   "city":"Islamabad", 
+	
+   "location": { 
+      "type":"Point", 
+      "coordinates":[ 33.7194136, -73.0964862 ] 
+   } 
+}
+</pre>
+<p>To retrieve the university name based on the location, you can use the following query.</p>
+<pre class="prettyprint notranslate">
+SELECT c.name FROM c 
+
+WHERE c.id = "case-university" AND ST_ISVALID({ 
+      "type":"Point", 
+      "coordinates":[ 33.7194136, -73.0964862 ]})
+</pre>
+<p>When the above query is executed you will receive the following output.</p>
+<pre class="result notranslate">
+[ 
+   { 
+      "name": "CASE: Center For Advanced Studies In Engineering" 
+   } 
+] 
+</pre>
+<h2>Create Document with Geospatial Data in .NET</h2>
+<p>You can create a document with geospatial data, let’s take a look at a simple example in which a university document is created.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreateDocuments(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create Documents ****"); 
+   Console.WriteLine();
+	
+   var uniDocument = new UniversityProfile {
+      Id = "nust", 
+      Name = "National University of Sciences and Technology", 
+      City = "Islamabad", 
+      Loc = new Point(33.6455715, 72.9903447) 
+   };
+	
+   Document document = await CreateDocument(client, uniDocument); 
+   Console.WriteLine("Created document {0} from typed object", document.Id); 
+   Console.WriteLine(); 
+}
+</pre>
+<p>Following is the implementation for the UniversityProfile class.</p>
+<pre class="prettyprint notranslate">
+public class UniversityProfile { 
+   [JsonProperty(PropertyName = "id")] 
+   public string Id { get; set; }  
+	
+   [JsonProperty("name")] 
+   public string Name { get; set; }
+	
+   [JsonProperty("city")] 
+   public string City { get; set; }  
+	
+   [JsonProperty("location")] 
+   public Point Loc { get; set; } 
+} 
+</pre>
+<p>When the above code is compiled and executed, you will receive the following output.</p>
+<pre class="result notranslate">
+**** Create Documents ****  
+Created new document: nust 
+{ 
+   "id": "nust", 
+   "name": "National University of Sciences and Technology", 
+   "city": "Islamabad", 
+   "location": { 
+      "type": "Point", 
+      "coordinates": [ 
+         33.6455715, 
+         72.9903447 
+      ] 
+   }, 
+   "_rid": "Ic8LAMEUVgANAAAAAAAAAA==", 
+   "_ts": 1450200910, 
+   "_self": "dbs/Ic8LAA==/colls/Ic8LAMEUVgA=/docs/Ic8LAMEUVgANAAAAAAAAAA==/", 
+   "_etag": "\"00004100-0000-0000-0000-56704f4e0000\"", 
+   "_attachments": "attachments/" 
+} 
+Created document nust from typed object 
+</pre>
+<h1>DocumentDB - Partitioning</h1>
+<p>When your database starts to grow beyond 10GB, you can scale out simply by creating new collections and then spreading or partitioning your data across more and more collections.</p>
+<p>Sooner or later a single collection, which has a 10GB capacity, will not be enough to contain your database. Now 10GB may not sound like a very large number, but remember that we're storing JSON documents, which is just plain text and you can fit a lot of plain text documents in 10GB, even when you consider the storage overhead for the indexes.</p>
+<p>Storage isn't the only concern when it comes to scalability. The maximum throughput available on a collection is two and a half thousand request units per second that you get with an S3 collection. Hence, if you need higher throughput, then you will also need to scale out by partitioning with multiple collections. Scale out partitioning is also called <b>horizontal partitioning</b>.</p>
+<p>There are many approaches that can be used for partitioning data with Azure DocumentDB. Following are most common strategies &minus;</p>
+<ul class="list">
+<li>Spillover Partitioning</li>
+<li>Range Partitioning</li>
+<li>Lookup Partitioning</li>
+<li>Hash Partitioning</li>
+</ul>
+<h2>Spillover Partitioning</h2>
+<p>Spillover partitioning is the simplest strategy because there is no partition key. It's often a good choice to start with when you're unsure about a lot of things. You might not know if you'll even ever need to scale out beyond a single collection or how many collections you may need to add or how fast you may need to add them.</p>
+<ul class="list">
+<li><p>Spillover partitioning starts with a single collection and there is no partition key.</p></li>
+<li><p>The collection starts to grow and then grows some more, and then some more, until you start getting close to the 10GB limit.</p></li>
+<li><p>When you reach 90 percent capacity, you spill over to a new collection and start using it for new documents.</p></li>
+<li><p>Once your database scales out to a larger number of collections, you'll probably want to shift to a strategy that's based on a partition key.</p></li>
+<li><p>When you do that you'll need to rebalance your data by moving documents to different collections based on whatever strategy you're migrating to.</p></li>
+</ul>
+<h2>Range Partitioning</h2>
+<p>One of the most common strategies is range partitioning. With this approach you determine the range of values that a document's partition key might fall in and direct the document to a collection corresponding to that range.</p>
+<ul class="list">
+<li><p>Dates are very typically used with this strategy where you create a collection to hold documents that fall within the defined range of dates. When you define ranges that are small enough, where you're confident that no collection will ever exceed its 10GB limit. For example, there may be a scenario where a single collection can reasonably handle documents for an entire month.</p></li>
+<li><p>It may also be the case that most users are querying for current data, which would be data for this month or perhaps last month, but users are rarely searching for much older data. So you start off in June with an S3 collection, which is the most expensive collection you can buy and delivers the best throughput you can get.</p></li>
+<li><p>In July you buy another S3 collection to store the July data and you also scale the June data down to a less-expensive S2 collection. Then in August, you get another S3 collection and scale July down to an S2 and June all the way down to an S1. It goes, month after month, where you're always keeping the current data available for high throughput and older data is kept available at lower throughputs.</p></li>
+<li><p>As long as the query provides a partition key, only the collection that needs to be queried will get queried and not all the collections in the database like it happens with spillover partitioning.</p></li>
+</ul>
+<h2>Lookup Partitioning</h2>
+<p>With lookup partitioning you can define a partition map that routes documents to specific collections based on their partition key. For example, you could partition by region.</p>
+<ul class="list">
+<li><p>Store all US documents in one collection, all European documents in another collection, and all documents from any other region in a third collection.</p></li>
+<li><p>Use this partition map and a lookup partition resolver can figure out which collection to create a document in and which collections to query, based on the partition key, which is the region property contained in each document.</p></li>
+</ul>
+<h2>Hash Partitioning</h2>
+<p>In hash partitioning, partitions are assigned based on the value of a hash function, allowing you to evenly distribute requests and data across a number of partitions.</p>
+<p>This is commonly used to partition data produced or consumed from a large number of distinct clients, and is useful for storing user profiles, catalog items, etc.</p>
+<p>Let’s take a look at a simple example of range partitioning using the RangePartitionResolver supplied by the .NET SDK.</p>
+<p><b>Step 1</b> &minus; Create a new DocumentClient and we will create two collections in CreateCollections task. One will contain documents for users that have user IDs beginning with A through M and the other for user IDs N through Z.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateCollections(DocumentClient client) {
+   await client.CreateDocumentCollectionAsync(“dbs/myfirstdb”, new DocumentCollection {
+      Id = “CollectionAM” }); 
+		
+   await client.CreateDocumentCollectionAsync(“dbs/myfirstdb”, new DocumentCollection {
+      Id = “CollectionNZ” }); 
+}
+</pre>
+<p><b>Step 2</b> &minus; Register the range resolver for the database.</p>
+<p><b>Step 3</b> &minus; Create a new RangePartitionResolver&lt;string&gt;, which is the datatype of our partition key. The constructor takes two parameters, the property name of the partition key and a dictionary that is the shard map or partition map, which is just a list of the ranges and corresponding collections that we are predefining for the resolver.</p>
+<pre class="prettyprint notranslate">
+private static void RegisterRangeResolver(DocumentClient client) {
+
+   //Note: \uffff is the largest UTF8 value, so M\ufff includes all strings that start with M.
+		
+   var resolver = new RangePartitionResolver&lt;string&gt;(
+      "userId", new Dictionary&lt;Range&lt;string&gt;, string&gt;() {
+      { new Range&lt;string&gt;("A", "M\uffff"), "dbs/myfirstdb/colls/CollectionAM" },
+      { new Range&lt;string&gt;("N", "Z\uffff"), "dbs/myfirstdb/colls/CollectionNZ" },
+   });
+	
+   client.PartitionResolvers["dbs/myfirstdb"] = resolver;
+ }
+</pre>
+<p>It's necessary to encode the largest possible UTF-8 value here. Or else the first range wouldn't match on any Ms except the one single M, and likewise for Z in the second range. So, you can just think of this encoded value here as a wildcard for matching on the partition key.</p>
+<p><b>Step 4</b> &minus; After creating the resolver, register it for the database with the current DocumentClient. To do that just assign it to the PartitionResolver's dictionary property.</p>
+<p>We'll create and query for documents against the database, not a collection as you normally do, the resolver will use this map to route requests to the appropriate collections.</p>
+<p>Now let's create some documents. First we will create one for userId Kirk, and then one for Spock.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentsAcrossPartitions(DocumentClient client) { 
+   Console.WriteLine(); 
+   Console.WriteLine("**** Create Documents Across Partitions ****");
+	
+   var kirkDocument = await client.CreateDocumentAsync("dbs/myfirstdb", new { userId =
+      "Kirk", title = "Captain" }); 
+   Console.WriteLine("Document 1: {0}", kirkDocument.Resource.SelfLink);
+	
+   var spockDocument = await client.CreateDocumentAsync("dbs/myfirstdb", new { userId =
+      "Spock", title = "Science Officer" });		
+   Console.WriteLine("Document 2: {0}", spockDocument.Resource.SelfLink); 
+}
+</pre>
+<p>The first parameter here is a self-link to the database, not a specific collection. This is not possible without a partition resolver, but with one it just works seamlessly.</p>
+<p>Both documents were saved to the database myfirstdb, but we know that Kirk is being stored in the collection for A through M and Spock is being stored in the collection for N to Z, if our RangePartitionResolver is working properly.</p>
+<p>Let’s call these from the CreateDocumentClient task as shown in the following code.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient 
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      await CreateCollections(client);  
+      RegisterRangeResolver(client);  
+      await CreateDocumentsAcrossPartitions(client); 
+   } 
+}
+</pre>
+<p>When the above code is executed, you will receive the following output.</p>
+<pre class="result notranslate">
+**** Create Documents Across Partitions **** 
+Document 1: dbs/Ic8LAA==/colls/Ic8LAO2DxAA=/docs/Ic8LAO2DxAABAAAAAAAAAA==/ 
+Document 2: dbs/Ic8LAA==/colls/Ic8LAP12QAE=/docs/Ic8LAP12QAEBAAAAAAAAAA==/
+</pre>
+<p>As seen the self-links of the two documents have different resource IDs because they exist in two separate collections.</p>
+<h1>DocumentDB - Data Migration</h1>
+<p>With the DocumentDB Data Migration tool, you can easily migrate data to DocumentDB. The DocumentDB Data Migration Tool is a free and open source utility you can download from the Microsoft Download Center <a target="_blank" rel="nofollow" href="https://www.microsoft.com/enus/download/details.aspx?id=46436"> https://www.microsoft.com/</a></p>
+<p>The Migration Tool supports many data sources, some of them are listed below &minus;</p>
+<ul class="list">
+<li><a href="documentdb_sql_server.html">SQL Server</a></li>
+<li><a href="documentdb_json_files.html">JSON files</a></li>
+<li><a href="documentdb_csv.html">Flat files of Comma-separated Values (CSV)</a></li>
+<li>MongoDB</li>
+<li>Azure Table Storage</li>
+<li>Amazon DynamoDB</li>
+<li>HBase, and even other DocumentDB databases</li>
+</ul>
+<p>After downloading the DocumentDB Data Migration tool, extract the zip file.</p>
+<p>You can see two executables in this folder as shown in the following screenshot.</p>
+<img src="images/exe_files.jpg" alt="Executable Files" />
+<p>First, there is dt.exe, which is the console version with a command line interface, and then there is dtui.exe, which is the desktop version with a graphical user interface.</p>
+<p>Let's launch the GUI version.</p>
+<img src="images/launch_gui_version.jpg" alt="Launch GUI version" />
+<p>You can see the Welcome page. Click ‘Next’ for the Source Information page.</p>
+<img src="images/source_information.jpg" alt="Source Information page" />
+<p>Here's where you configure your data source, and you can see the many supported choices from the dropdown menu.</p>
+<img src="images/specify_source_information.jpg" alt="Specify Source Information" />
+<p>When you make a selection, the rest of the Source Information page changes accordingly.</p>
+<p>It is very easy to import data to DocumentDB using the DocumentDB Data Migration Tool. We recommend you exercise the above examples and use the other data files as well.</p>
+<h1>DocumentDB - Access Control</h1>
+<p>DocumentDB provides the concepts to control access to DocumentDB resources. Access to DocumentDB resources is governed by a master key token or a resource token. Connections based on resource tokens can only access the resources specified by the tokens and no other resources. Resource tokens are based on user permissions.</p>
+<ul class="list">
+<li><p>First you create one or more users, and these are defined at the database level.</p></li>
+<li><p>Then you create one or more permissions for each user, based on the resources that you want to allow each user to access.</p></li>
+<li><p>Each permission generates a resource token that allows either read-only or full access to a given resource and that can be any user resource within the database.</p></li>
+<li><p>Users are defined at the database level and permissions are defined for each user.</p></li>
+<li><p>Users and permissions apply to all collections in the database.</p></li>
+</ul>
+<p>Let’s take a look at a simple example in which we will learn how to define users and permissions to achieve granular security in DocumentDB.</p>
+<p>We will start with a new DocumentClient and query for the myfirstdb database.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First();
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();
+			
+      var alice = await CreateUser(client, "Alice");
+      var tom = await CreateUser(client, "Tom");
+   }
+}
+</pre>
+<p>Following is the implementation for CreateUser.</p>
+<pre class="prettyprint notranslate">
+private async static Task&lt;User&gt; CreateUser(DocumentClient client, string userId) {
+   Console.WriteLine();
+   Console.WriteLine("**** Create User {0} in {1} ****", userId, database.Id);
+	
+   var userDefinition = new User { Id = userId };
+   var result = await client.CreateUserAsync(database.SelfLink, userDefinition);
+   var user = result.Resource;
+	
+   Console.WriteLine("Created new user");
+   ViewUser(user);
+	
+   return user;
+}
+</pre>
+<p><b>Step 1</b> &minus; Create two users, Alice and Tom like any resource we create, we construct a definition object with the desired Id and call the create method and in this case we're calling CreateUserAsync with the database's SelfLink and the userDefinition. We get back the result from whose resource property we obtain the newly created user object.</p>
+<p>Now to see these two new users in the database.</p>
+<pre class="prettyprint notranslate">
+private static void ViewUsers(DocumentClient client) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** View Users in {0} ****", database.Id);  
+	
+   var users = client.CreateUserQuery(database.UsersLink).ToList();
+   var i = 0;
+	
+   foreach (var user in users) { 
+      i++; 
+      Console.WriteLine(); 
+      Console.WriteLine("User #{0}", i); 
+      ViewUser(user); 
+   }
+	
+   Console.WriteLine();
+   Console.WriteLine("Total users in database {0}: {1}", database.Id, users.Count); 
+}
+  
+private static void ViewUser(User user) {
+   Console.WriteLine("User ID: {0} ", user.Id); 
+   Console.WriteLine("Resource ID: {0} ", user.ResourceId); 
+   Console.WriteLine("Self Link: {0} ", user.SelfLink); 
+   Console.WriteLine("Permissions Link: {0} ", user.PermissionsLink); 
+   Console.WriteLine("Timestamp: {0} ", user.Timestamp); 
+}
+</pre>
+<p><b>Step 2</b> &minus; Call CreateUserQuery, against the database's UsersLink to retrieve a list of all users. Then loop through them and view their properties.</p>
+<p>Now we have to create them first. So let's say that we wanted to allow Alice read/write permissions to the MyCollection collection, but Tom can only read documents in the collection.</p>
+<pre class="prettyprint notranslate">
+await CreatePermission(client, alice, "Alice Collection Access", PermissionMode.All,
+   collection);
+	
+await CreatePermission(client, tom, "Tom Collection Access", PermissionMode.Read,
+   collection);
+</pre>
+<p><b>Step 3</b>&minus; Create a permission on a resource that is MyCollection collection so we need to get that resource a SelfLink.</p>
+<p><b>Step 4</b> &minus; Then create a Permission.All on this collection for Alice and a Permission.Read on this collection for Tom.</p>
+<p>Following is the implementation for CreatePermission.</p>
+<pre class="prettyprint notranslate">
+private async static Task CreatePermission(DocumentClient client, User user,
+   string permId, PermissionMode permissionMode, string resourceLink) {
+   Console.WriteLine();
+   Console.WriteLine("**** Create Permission {0} for {1} ****", permId, user.Id);
+	
+   var permDefinition = new Permission {
+      Id = permId,
+      PermissionMode = permissionMode,
+      ResourceLink = resourceLink
+   };
+	
+   var result = await client.CreatePermissionAsync(user.SelfLink, permDefinition);
+   var perm = result.Resource;
+   Console.WriteLine("Created new permission");
+   ViewPermission(perm);
+}
+</pre>
+<p>As you should come to expect by now, we do this by creating a definition object for the new permission, which includes an Id and a permissionMode, which is either Permission.All or Permission.Read, and the SelfLink of the resource that's being secured by the permission.</p>
+<p><b>Step 5</b> &minus; Call CreatePermissionAsync and get the created permission from the resource property in the result.</p>
+<p>To view the created permission, following is the implementation of ViewPermissions.</p>
+<pre class="prettyprint notranslate">
+private static void ViewPermissions(DocumentClient client, User user) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** View Permissions for {0} ****", user.Id);
+	
+   var perms = client.CreatePermissionQuery(user.PermissionsLink).ToList();
+   var i = 0; 
+	
+   foreach (var perm in perms) {
+      i++; 
+      Console.WriteLine(); 
+      Console.WriteLine("Permission #{0}", i); 
+      ViewPermission(perm); 
+   }  
+	
+   Console.WriteLine(); 
+   Console.WriteLine("Total permissions for {0}: {1}", user.Id, perms.Count); 
+}
+  
+private static void ViewPermission(Permission perm) {
+   Console.WriteLine("Permission ID: {0} ", perm.Id); 
+   Console.WriteLine("Resource ID: {0} ", perm.ResourceId); 
+   Console.WriteLine("Permission Mode: {0} ", perm.PermissionMode);
+   Console.WriteLine("Token: {0} ", perm.Token); 
+   Console.WriteLine("Timestamp: {0} ", perm.Timestamp); 
+}
+</pre>
+<p>This time, it's a permission query against the user's permissions link and we simply list each permission returned for the user.</p>
+<p>Let's delete the Alice’s and Tom’s permissions.</p>
+<pre class="prettyprint notranslate">
+await DeletePermission(client, alice, "Alice Collection Access"); 
+await DeletePermission(client, tom, "Tom Collection Access");
+</pre>
+<p>Following is the implementation for DeletePermission.</p>
+<pre class="prettyprint notranslate">
+private async static Task DeletePermission(DocumentClient client, User user,
+   string permId) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Delete Permission {0} from {1} ****", permId, user.Id);
+	
+   var query = new SqlQuerySpec {
+      QueryText = "SELECT * FROM c WHERE c.id = @id", 
+      Parameters = new SqlParameterCollection {
+         new SqlParameter { Name = "@id", Value = permId }
+      } 
+   };
+	
+   Permission perm = client.CreatePermissionQuery(user.PermissionsLink, query)
+      .AsEnumerable().First();  
+   await client.DeletePermissionAsync(perm.SelfLink);  
+   Console.WriteLine("Deleted permission {0} from user {1}", permId, user.Id); 
+}
+</pre>
+<p><b>Step 6</b> &minus; To delete permissions, query by permission Id to get the SelfLink, and then using the SelfLink to delete the permission.</p>
+<p>Next, let’s delete the users themselves. Let’s delete both the users.</p>
+<pre class="prettyprint notranslate">
+await DeleteUser(client, "Alice"); 
+await DeleteUser(client, "Tom");
+</pre>
+<p>Following is the implementation for DeleteUser.</p>
+<pre class="prettyprint notranslate">
+private async static Task DeleteUser(DocumentClient client, string userId) {
+   Console.WriteLine(); 
+   Console.WriteLine("**** Delete User {0} in {1} ****", userId, database.Id);
+	
+   var query = new SqlQuerySpec { 
+      QueryText = "SELECT * FROM c WHERE c.id = @id", 
+      Parameters = new SqlParameterCollection {
+         new SqlParameter { Name = "@id", Value = userId }
+      } 
+   };
+	
+   User user = client.CreateUserQuery(database.SelfLink, query).AsEnumerable().First();  
+   await client.DeleteUserAsync(user.SelfLink);  
+   Console.WriteLine("Deleted user {0} from database {1}", userId, database.Id); 
+}
+</pre>
+<p><b>Step 7</b> &minus; First query to get her SelfLink and then call DeleteUserAsync to delete her user object.</p>
+<p>Following is the implementation of CreateDocumentClient task in which we call all the above tasks.</p>
+<pre class="prettyprint notranslate">
+private static async Task CreateDocumentClient() {
+   // Create a new instance of the DocumentClient
+   using (var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey)) {
+      database = client.CreateDatabaseQuery("SELECT * FROM c WHERE c.id =
+         'myfirstdb'").AsEnumerable().First();
+			
+      collection = client.CreateDocumentCollectionQuery(database.CollectionsLink,
+         "SELECT * FROM c WHERE c.id = 'MyCollection'").AsEnumerable().First();
+			
+      ViewUsers(client);
+		
+      var alice = await CreateUser(client, "Alice");
+      var tom = await CreateUser(client, "Tom");
+      ViewUsers(client);
+		
+      ViewPermissions(client, alice);
+      ViewPermissions(client, tom);
+		
+      string collectionLink = client.CreateDocumentCollectionQuery(database.SelfLink,
+         "SELECT VALUE c._self FROM c WHERE c.id = 'MyCollection'")
+         .AsEnumerable().First().Value;
+			
+      await CreatePermission(client, alice, "Alice Collection Access", PermissionMode.All,
+         collectionLink);
+			
+      await CreatePermission(client, tom, "Tom Collection Access", PermissionMode.Read,
+         collectionLink);
+			
+      ViewPermissions(client, alice);
+      ViewPermissions(client, tom);
+		
+      await DeletePermission(client, alice, "Alice Collection Access");
+      await DeletePermission(client, tom, "Tom Collection Access");
+		
+      await DeleteUser(client, "Alice");
+      await DeleteUser(client, "Tom");
+   }
+}
+</pre>
+<p>When the above code is compiled and executed you will receive the following output.</p>
+<pre class="result notranslate">
+**** View Users in myfirstdb **** 
+ 
+Total users in database myfirstdb: 0 
+ 
+**** Create User Alice in myfirstdb **** 
+Created new user 
+          User ID: Alice 
+      Resource ID: kV5oAC56NwA= 
+        Self Link: dbs/kV5oAA==/users/kV5oAC56NwA=/ 
+ Permissions Link: dbs/kV5oAA==/users/kV5oAC56NwA=/permissions/ 
+        Timestamp: 12/17/2015 5:44:19 PM
+		  
+**** Create User Tom in myfirstdb **** 
+Created new user 
+          User ID: Tom 
+      Resource ID: kV5oAALxKgA= 
+        Self Link: dbs/kV5oAA==/users/kV5oAALxKgA=/ 
+ Permissions Link: dbs/kV5oAA==/users/kV5oAALxKgA=/permissions/ 
+        Timestamp: 12/17/2015 5:44:21 PM
+		  
+**** View Users in myfirstdb ****
+  
+User #1 
+          User ID: Tom 
+      Resource ID: kV5oAALxKgA= 
+        Self Link: dbs/kV5oAA==/users/kV5oAALxKgA=/ 
+ Permissions Link: dbs/kV5oAA==/users/kV5oAALxKgA=/permissions/ 
+        Timestamp: 12/17/2015 5:44:21 PM 
+		  
+User #2 
+          User ID: Alice 
+      Resource ID: kV5oAC56NwA= 
+        Self Link: dbs/kV5oAA==/users/kV5oAC56NwA=/ 
+ Permissions Link: dbs/kV5oAA==/users/kV5oAC56NwA=/permissions/ 
+        Timestamp: 12/17/2015 5:44:19 PM
+		  
+Total users in database myfirstdb: 2
+  
+**** View Permissions for Alice **** 
+ 
+Total permissions for Alice: 0  
+
+**** View Permissions for Tom **** 
+ 
+Total permissions for Tom: 0  
+
+**** Create Permission Alice Collection Access for Alice **** 
+Created new permission 
+    Permission ID: Alice Collection Access 
+      Resource ID: kV5oAC56NwDON1RduEoCAA== 
+  Permission Mode: All
+            Token: type=resource&ver=1&sig=zB6hfvvleC0oGGbq5cc67w==;Zt3Lx 
+Ol14h8pd6/tyF1h62zbZKk9VwEIATIldw4ZyipQGW951kirueAKdeb3MxzQ7eCvDfvp7Y/ZxFpnip/D G 
+JYcPyim5cf+dgLvos6fUuiKSFSul7uEKqp5JmJqUCyAvD7w+qt1Qr1PmrJDyAIgbZDBFWGe2VT9FaBH o 
+PYwrLjRlnH0AxfbrR+T/UpWMSSHtLB8JvNFZNSH8hRjmQupuTSxCTYEC89bZ/pS6fNmNg8=; 
+        Timestamp: 12/17/2015 5:44:28 PM
+		  
+**** Create Permission Tom Collection Access for Tom **** 
+Created new permission 
+    Permission ID: Tom Collection Access 
+      Resource ID: kV5oAALxKgCMai3JKWdfAA== 
+  Permission Mode: Read 
+            Token: type=resource&ver=1&sig=ieBHKeyi6EY9ZOovDpe76w==;92gwq 
+V4AxKaCJ2dLS02VnJiig/5AEbPcfo1xvOjR10uK3a3FUMFULgsaK8nzxdz6hLVCIKUj6hvMOTOSN8Lt 7 
+i30mVqzpzCfe7JO3TYSJEI9D0/5HbMIEgaNJiCu0JPPwsjVecTytiLN56FHPguoQZ7WmUAhVTA0IMP6 p 
+jQpLDgJ43ZaG4Zv3qWJiO689balD+egwiU2b7RICH4j6R66UVye+GPxq/gjzqbHwx79t54=; 
+        Timestamp: 12/17/2015 5:44:30 PM
+		  
+**** View Permissions for Alice ****
+  
+Permission #1 
+    Permission ID: Alice Collection Access 
+      Resource ID: kV5oAC56NwDON1RduEoCAA== 
+  Permission Mode: All 
+            Token: type=resource&ver=1&sig=BSzz/VNe9j4IPJ9M31Mf4Q==;Tcq/B 
+X50njB1vmANZ/4aHj/3xNkghaqh1OfV95JMi6j4v7fkU+gyWe3mJasO3MJcoop9ixmVnB+RKOhFaSxE l 
+P37SaGuIIik7GAWS+dcEBWglMefc95L2YkeNuZsjmmW5b+a8ELCUg7N45MKbpzkp5BrmmGVJ7h4Z4pf D 
+rdmehYLuxSPLkr9ndbOOrD8E3bux6TgXCsgYQscpIlJHSKCKHUHfXWBP2Y1LV2zpJmRjis=; 
+        Timestamp: 12/17/2015 5:44:28 PM
+		  
+Total permissions for Alice: 1
+  
+**** View Permissions for Tom ****
+Permission #1 
+    Permission ID: Tom Collection Access 
+      Resource ID: kV5oAALxKgCMai3JKWdfAA== 
+  Permission Mode: Read 
+            Token: type=resource&ver=1&sig=NPkWNJp1mAkCASE8KdR6PA==;ur/G2 
+V+fDamBmzECux000VnF5i28f8WRbPwEPxD1DMpFPqYcu45wlDyzT5A5gBr3/R3qqYkEVn8bU+een6Gl j 
+L6vXzIwsZfL12u/1hW4mJT2as2PWH3eadry6Q/zRXHAxV8m+YuxSzlZPjBFyJ4Oi30mrTXbBAEafZhA 5 
+yvbHkpLmQkLCERy40FbIFOzG87ypljREpwWTKC/z8RSrsjITjAlfD/hVDoOyNJwX3HRaz4=; 
+        Timestamp: 12/17/2015 5:44:30 PM
+		  
+Total permissions for Tom: 1
+  
+**** Delete Permission Alice Collection Access from Alice **** 
+Deleted permission Alice Collection Access from user Alice
+  
+**** Delete Permission Tom Collection Access from Tom **** 
+Deleted permission Tom Collection Access from user Tom
+  
+**** Delete User Alice in myfirstdb **** 
+Deleted user Alice from database myfirstdb
+  
+**** Delete User Tom in myfirstdb **** 
+Deleted user Tom from database myfirstdb
+</pre>
+<h1>DocumentDB - Visualize Data</h1>
+<p>In this chapter, we will learn how to visualize data which is stored in DocumentDB. Microsoft provided Power BI Desktop tool which transforms your data into rich visuals. It also enables you to retrieve data from various data sources, merge and transform the data, create powerful reports and visualizations, and publish the reports to Power BI.</p>
+<p>In the latest version of Power BI Desktop, Microsoft has added support for DocumentDB as well in which you can now connect to your DocumentDB account. You can download this tool from the link, <a target="_blank" rel ="nofollow" href="https://powerbi.microsoft.com/en-us/desktop">https://powerbi.microsoft.com</a></p>
+<p>Let’s take a look at an example in which we will visualize the earthquakes data imported in the last chapter.</p>
+<p><b>Step 1</b> &minus; Once the tool is downloaded, launch the Power BI desktop.</p>
+<img src="images/power_bi_desktop.jpg" alt="launch Power BI" />
+<p><b>Step 2</b> &minus; Click ‘Get Data’ option which is on the Home tab under External Data group and it will display the Get Data page.</p>
+<img src="images/get_data.jpg" alt="Click Get Data" />
+<p><b>Step 3</b> &minus; Select the Microsoft Azure DocumentDB (Beta) option and click ‘Connect’ button.</p>
+<img src="images/microsoft_azure_documentdb.jpg" alt="Click Connect" />
+<p><b>Step 4</b> &minus; Enter the URL of your Azure DocumentDB account, Database and Collection from which you want visualize data and press Ok.</p>
+<p>If you are connecting to this endpoint for the first time, you will be prompted for the account key.</p>
+<img src="images/account_key.jpg" alt="Account Key" />
+<p><b>Step 5</b> &minus; Enter the account key (primary key) which is unique for each DocumentDB account available on Azure portal, and then click Connect.</p>
+<img src="images/list_of_records.jpg" alt="list of Record" />
+<p>When the account is successfully connected, it will retrieve the data from specified database. The Preview pane shows a list of Record items, a Document is represented as a Record type in Power BI.</p>
+<p><b>Step 6</b> &minus; Click ‘Edit’ button which will launch the Query Editor.</p>
+<img src="images/edit_button.jpg" alt="Click Edit button" />
+<p><b>Step 7</b> &minus; In the Power BI Query Editor, you should see a Document column in the center pane, click on the expander at the right side of the Document column header and select the columns which you want display.</p>
+<img src="images/query_editor.jpg" alt="Click on expander" />
+<p>As you can see that we have latitude and longitude as separate column but we visualize data in latitude, longitude coordinates form.</p>
+<p><b>Step 8</b> &minus; To do that, click ‘Add Column’ tab.</p>
+<img src="images/add_column.jpg" alt="click Add Column" />
+<p><b>Step 9</b> &minus; Select the Add Custom Column which will display the following page.</p>
+<img src="images/add_custom_column.jpg" alt="Add Custom Column" />
+<p><b>Step 10</b> &minus; Specify the new column name, let’s say LatLong and also the formula which will combine the latitude and longitude in one column separated by a comma. Following is the formula.</p>
+<pre class="result notranslate">
+Text.From([latitude])&amp;", "&amp;Text.From([longitude])
+</pre>
+<p><b>Step 11</b> &minus; Click OK to continue and you will see that the new column is added.</p>
+<img src="images/new_column_added.jpg" alt="New Column added" />
+<p><b>Step 12</b> &minus; Go to the Home tab and click ‘Close &amp; Apply’ option.</p>
+<img src="images/close_and_apply.jpg" alt="click close and apply" />
+<p><b>Step 13</b> &minus; You can create reports by dragging and dropping fields into the Report canvas. You can see on the right, there are two panes &minus; one Visualizations pane and the other is Fields pane.</p>
+<img src="images/create_reports.jpg" alt="create reports" />
+<p>Let’s create a map view showing the location of each earthquake.</p>
+<p><b>Step 14</b> &minus; Drag the map visual type from the Visualizations pane.</p>
+<p><b>Step 15</b> &minus; Now, drag and drop the LatLong field from the Fields pane to the Location property in Visualizations pane. Then, drag and drop the magnitude field to the Values property.</p>
+<p><b>Step 16</b> &minus; Drag and drop the depth field to the Color saturation property.</p>
+<img src="images/depth_field.jpg" alt="Depth Field" />
+<p>You will now see the Map visual showing a set of bubbles indicating the location of each earthquake.</p>
+<hr />
+<div class="pre-btn">
+<a href="documentdb_visualize_data.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="documentdb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/documentdb/documentdb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:29:01 GMT -->
+</html>

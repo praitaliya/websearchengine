@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:25:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>UnitTest Framework Quick Guide</title>
+<meta name="description" content="UnitTest Framework Quick Guide - Learn UnitTest Framework starting from Overview, Framework, API, Assertion, Discovery, Skip, Exceptions, Time Test, Unittest2, Signal Handling, Doctest API, Py.test Module, Nose Testing Framework, Tools." />
+<meta name="keywords" content="UnitTest Framework, Tutorial, Overview, Framework, API, Assertion, Discovery, Skip, Exceptions, Time Test, Unittest2, Signal Handling, Doctest API, Py.test Module, Nose Testing Framework, Tools." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+pre.prettyprint.tryit {min-height:37px; background: #eee url(https://www.tutorialspoint.com/unittest_framework/images/try-it.jpg) top right no-repeat !important}select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #02518f url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #02518f !important;}
+.submenu-item{ border-bottom: 2px solid #02518f !important; border-top: 2px solid #02518f !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/unittest_framework/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<style>
+.examslist{
+  padding: 0;
+  list-style-type: none;
+}
+.examsimg{
+  width: 275px;
+  float: right;
+  margin: 5px 3px 0px 26px !important;
+}
+</style>
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/unittest_framework/images/unit-testing-mini-logo.jpg" alt="UnitTest Framework Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">UnitTest Framework Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/index.htm">UnitTest Framework - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_overview.htm">UnitTest Framework - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework.htm">UnitTest Framework -  Framework</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_api.htm">UnitTest Framework - API</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_assertion.htm">UnitTest Framework - Assertion</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_test_discovery.htm">UnitTest Framework - Test Discovery</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_skip_test.htm">UnitTest Framework - Skip Test</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_exceptions_test.htm">UnitTest Framework - Exceptions Test</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_time_test.htm">UnitTest Framework - Time Test</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_unittest2.htm">UnitTest Framework - Unittest2</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_signal_handling.htm">UnitTest Framework - Signal Handling</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_doctest.htm">UnitTest Framework - Doctest</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_doctest_api.htm">UnitTest Framework - Doctest API</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_py_test_module.htm">UnitTest Framework - Py.test Module</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/nose_testing_framework.htm">Nose Testing - Framework</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/nose_testing_tools.htm">Nose Testing - Tools</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">UnitTest Framework Resources</li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm">UnitTest Framework - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_useful_resources.htm">UnitTest Framework - Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_discussion.htm">UnitTest Framework - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>UnitTest Framework - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/unittest_framework/nose_testing_tools.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>UnitTest Framework - Overview</h1>
+<p>Unit testing is a software testing method by which individual units of source code, such as functions, methods, and class are tested to determine whether they are fit for use. Intuitively, one can view a unit as the smallest testable part of an application. Unit tests are short code fragments created by programmers during the development process. It forms the basis for component testing.</p>
+<p>Unit testing can be done in the following two ways &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:50%; text-align:center;">Manual Testing</th>
+<th style="width:50%; text-align:center;">Automated Testing</th>
+</tr>
+<tr>
+<td><p>Executing the test cases manually without any tool support is known as manual testing.</p>
+ <ul class="list examslist">
+<li><p>Since test cases are executed by human resources so it is very <b>time consuming and tedious</b>.</p></li>
+<li><p>As test cases need to be executed manually so more testers are required in manual testing.</p></li>
+<li><p>It is less reliable as tests may not be performed with precision each time because of human errors.</p></li>
+<li><p>No programming can be done to write sophisticated tests which fetch hidden information.</p></li>
+</ul></td>
+<td><p>Taking tool support and executing the test cases by using automation tool is known as automation testing.</p>
+<ul class="list examslist">
+<li><p>Fast Automation runs test cases significantly faster than human resources.</p></li>
+<li><p>The <b>investment over human resources is less</b> as test cases are executed by using automation tool.</p></li>
+<li><p>Automation tests perform precisely same operation each time they are run and <b>are more reliable</b>.</p></li>
+<li><p>Testers <b>can program sophisticated tests</b> to bring out hidden information.</p></li>
+</ul></td>
+</tr>
+</table>
+<p>JUnit is a unit testing framework for the Java programming language. JUnit has been important in the development of test-driven development, and is one of a family of unit testing frameworks collectively known as xUnit that originated with JUnit. You can find out <a target="_blank" href="https://www.tutorialspoint.com/junit/index.htm">JUnit Tutorial</a> here.</p>
+<p>The Python unit testing framework, sometimes referred to as “PyUnit,” is a Python language version of JUnit developed by Kent Beck and Erich Gamma. PyUnit forms part of the Python Standard Library as of Python version 2.1.</p>
+<p>Python unit testing framework supports test automation, sharing of setup and shutdown code for tests, aggregation of tests into collections, and independence of the tests from the reporting framework. The unittest module provides classes that make it easy to support these qualities for a set of tests.</p>
+<p>This tutorial has been prepared for the beginners to help them understand the basic functionality of Python testing framework. After completing this tutorial you will find yourself at a moderate level of expertise in using Python testing framework from where you can take yourself to the next levels.</p>
+<p>You should have reasonable expertise in software development using Python language. Our <a target="_blank" href="https://www.tutorialspoint.com/python/index.htm">Python tutorial</a> is a good place to start learning Python. Knowledge of basics of software testing is also desirable.</p>
+<h2>Environment Setup</h2>
+<p>The classes needed to write tests are to be found in the 'unittest' module. If you are using older versions of Python (prior to Python 2.1), the module can be downloaded from <a target="_blank" rel="nofollow" href="http://pyunit.sourceforge.net/">http://pyunit.sourceforge.net/</a>. However, unittest module is now a part of the standard Python distribution; hence it requires no separate installation.</p>
+<h1>UnitTest Framework - Framework</h1>
+<p>'unittest' supports test automation, sharing of setup and shutdown code for tests, aggregation of tests into collections, and independence of the tests from the reporting framework.</p>
+<p>The unittest module provides classes that make it easy to support these qualities for a set of tests.</p>
+<p>To achieve this, unittest supports the following important concepts &minus;</p>
+<ul class="list">
+<li><p><b>test fixture</b> &minus; This represents the preparation needed to perform one or more tests, and any associate cleanup actions. This may involve, for example, creating temporary or proxy databases, directories, or starting a server process.</p></li>
+<li><p><b>test case</b> &minus; This is the smallest unit of testing. This checks for a specific response to a particular set of inputs. unittest provides a base class, <b>TestCase</b>, which may be used to create new test cases.</p></li>
+<li><p><b>test suite</b> &minus; This is a collection of test cases, test suites, or both. This is used to aggregate tests that should be executed together. Test suites are implemented by the TestSuite class.</p></li>
+<li><p><b>test runner</b> &minus; This is a component which orchestrates the execution of tests and provides the outcome to the user. The runner may use a graphical interface, a textual interface, or return a special value to indicate the results of executing the tests.</p></li>
+</ul>
+<h2>Creating a Unit Test</h2>
+<p>The following steps are involved in writing a simple unit test &minus;</p>
+<p><b>Step 1</b> &minus; Import the unittest module in your program.</p>
+<p><b>Step 2</b> &minus; Define a function to be tested. In the following example, add() function is to be subjected to test.</p>
+<p><b>Step 3</b> &minus; Create a testcase by subclassing unittest.TestCase.</p>
+<p><b>Step 4</b> &minus; Define a test as a method inside the class. Name of method must start with 'test'.</p>
+<p><b>Step 5</b> &minus; Each test calls assert function of TestCase class. There are many types of asserts. Following example calls assertEquals() function.</p>
+<p><b>Step 6</b> &minus; assertEquals() function compares result of add() function with arg2 argument and throws assertionError if comparison fails.</p>
+<p><b>Step 7</b> &minus; Finally, call main() method from the unittest module.</p>
+<pre class="prettyprint notranslate tryit">
+import unittest
+def add(x,y):
+   return x + y
+   
+class SimpleTest(unittest.TestCase):
+   def testadd1(self):
+      self.assertEquals(add(4,5),9)
+      
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p><b>Step 8</b> &minus; Run the above script from the command line.</p>
+<pre class="result notranslate">
+C:\Python27&gt;python SimpleTest.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+OK
+</pre>
+<p><b>Step 9</b> &minus; The following three could be the possible outcomes of a test &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:5%;">S.No.</th>
+<th style="text-align:center;">Message &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>OK</b></p>
+<p>The test passes. ‘A’ is displayed on console.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>FAIL</b></p>
+<p>The test does not pass, and raises an AssertionError exception. ‘F’ is displayed on console.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>ERROR</b></p>
+<p>The test raises an exception other than AssertionError. ‘E’ is displayed on console.</p></td>
+</tr>
+</table>
+<p>These outcomes are displayed on the console by '.', 'F' and 'E' respectively.</p>
+<h2>Command Line Interface</h2>
+<p>The unittest module can be used from the command line to run single or multiple tests.</p>
+<pre class="result notranslate">
+python -m unittest test1
+python -m unittest test_module.TestClass
+python -m unittest test_module.TestClass.test_method
+</pre>
+<p>unittest supports the following command line options. For a list of all the command-line options, use the following command &minus;</p>
+<pre class="result notranslate">
+Python –m unittest -h
+</pre>
+<p></p>
+<table class="table table-bordered">
+<tr>
+<th style="width:5%">S.No.</th>
+<th style="text-align:center;">Option &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>-h, --help</b></p>
+<p>Show this message</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>v, --verbose</b></p>
+<p>Verbose output</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>-q, --quiet</b></p>
+<p>Minimal output</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>-f, --failfast</b></p>
+<p>Stop on first failure</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>-c, --catch</b></p>
+<p>Catch control-C and display results</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>-b, --buffer</b></p>
+<p>Buffer stdout and stderr during test runs</p>
+</td>
+</tr>
+</table>
+<h1>UnitTest Framework - API</h1>
+<p>This chapter discusses the classes and methods defined in the unittest module. There are five major classes in this module.</p>
+<h2>TestCase Class</h2>
+<p>Object of this class represents the smallest testable unit. It holds the test routines and provides hooks for preparing each routine and for cleaning up thereafter.</p>
+<p>The following methods are defined in the TestCase class &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>setUp()</b></p>
+<p>Method called to prepare the test fixture. This is called immediately before calling the test method</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>tearDown()</b></p>
+<p>Method called immediately after the test method has been called and the result recorded. This is called even if the test method raised an exception,</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>setUpClass()</b></p>
+<p>A class method called before tests in an individual class run.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>tearDownClass()</b></p>
+<p>A class method called after tests in an individual class have run.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>run(result = None)</b></p>
+<p>Run the test, collecting the result into the test result object passed as <i>result</i>.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>skipTest(reason)</b></p>
+<p>Calling this during a test method or setUp() skips the current test.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>debug()</b></p>
+<p>Run the test without collecting the result.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>shortDescription()</b></p>
+<p>Returns a one-line description of the test.</p></td>
+</tr>
+</table>
+<h2>Fixtures</h2>
+<p>There can be numerous tests written inside a TestCase class. These test methods may need database connection, temporary files or other resources to be initialized. These are called fixtures. TestCase includes a special hook to configure and clean up any fixtures needed by your tests. To configure the fixtures, override setUp(). To clean up, override tearDown().</p>
+<p>In the following example, two tests are written inside the TestCase class. They test result of addition and subtraction of two values. The setup() method initializes the arguments based on shortDescription() of each test. teardown() method will be executed at the end of each test.</p>
+<pre class="prettyprint notranslate tryit">
+import unittest
+
+class simpleTest2(unittest.TestCase):
+   def setUp(self):
+      self.a = 10
+      self.b = 20
+      name = self.shortDescription()
+      if name == "Add":
+         self.a = 10
+         self.b = 20
+         print name, self.a, self.b
+      if name == "sub":
+         self.a = 50
+         self.b = 60
+         print name, self.a, self.b
+   def tearDown(self):
+      print '\nend of test',self.shortDescription()
+
+   def testadd(self):
+      """Add"""
+      result = self.a+self.b
+      self.assertTrue(result == 100)
+   def testsub(self):
+      """sub"""
+      result = self.a-self.b
+      self.assertTrue(result == -10)
+      
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>Run the above code from the command line. It gives the following output &minus;</p>
+<pre class="result notranslate">
+C:\Python27&gt;python test2.py
+Add 10 20
+F
+end of test Add
+sub 50 60
+end of test sub
+.
+================================================================
+FAIL: testadd (__main__.simpleTest2)
+Add
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "test2.py", line 21, in testadd
+      self.assertTrue(result == 100)
+AssertionError: False is not true
+----------------------------------------------------------------------
+Ran 2 tests in 0.015s
+
+FAILED (failures = 1)
+</pre>
+<h2>Class Fixture</h2>
+<p>TestCase class has a setUpClass() method which can be overridden to execute before the execution of individual tests inside a TestCase class. Similarly, tearDownClass() method will be executed after all test in the class. Both the methods are class methods. Hence, they must be decorated with @classmethod directive.</p>
+<p>The following example demonstrates the use of these class methods &minus;</p>
+<pre class="prettyprint notranslate">
+import unittest
+
+class TestFixtures(unittest.TestCase):
+
+   @classmethod
+   def setUpClass(cls):
+      print 'called once before any tests in class'
+
+   @classmethod
+   def tearDownClass(cls):
+      print '\ncalled once after all tests in class'
+
+   def setUp(self):
+      self.a = 10
+      self.b = 20
+      name = self.shortDescription()
+      print '\n',name
+   def tearDown(self):
+      print '\nend of test',self.shortDescription()
+
+   def test1(self):
+      """One"""
+      result = self.a+self.b
+      self.assertTrue(True)
+   def test2(self):
+      """Two"""
+      result = self.a-self.b
+      self.assertTrue(False)
+      
+if __name__ == '__main__':
+unittest.main()
+</pre>
+<h2>TestSuite Class</h2>
+<p>Python's testing framework provides a useful mechanism by which test case instances can be grouped together according to the features they test. This mechanism is made available by TestSuite class in unittest module.</p>
+<p>The following steps are involved in creating and running a test suite.</p>
+<p><b>Step 1</b> &minus; Create an instance of TestSuite class.</p>
+<pre class="prettyprint notranslate">
+suite = unittest.TestSuite()
+</pre>
+<p><b>Step 2</b> &minus; Add tests inside a TestCase class in the suite.</p>
+<pre class="prettyprint notranslate">
+suite.addTest(testcase class)
+</pre>
+<p><b>Step 3</b> &minus; You can also use makeSuite() method to add tests from a class</p>
+<pre class="prettyprint notranslate">
+suite = unittest.makeSuite(test case class)
+</pre>
+<p><b>Step 4</b> &minus; Individual tests can also be added in the suite.</p>
+<pre class="prettyprint notranslate">
+suite.addTest(testcaseclass(""testmethod")
+</pre>
+<p><b>Step 5</b> &minus; Create an object of the TestTestRunner class.</p>
+<pre class="prettyprint notranslate">
+runner = unittest.TextTestRunner()
+</pre>
+<p><b>Step 6</b> &minus; Call the run() method to run all the tests in the suite</p>
+<pre class="prettyprint notranslate">
+runner.run (suite)
+</pre>
+<p>The following methods are defined in TestSuite class &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>addTest()</b></p>
+<p>Adds a test method in the test suite.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>addTests()</b></p>
+<p>Adds tests from multiple TestCase classes.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>run()</b></p>
+<p>Runs the tests associated with this suite, collecting the result into the test result object</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>debug()</b></p>
+<p>Runs the tests associated with this suite without collecting the result.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>countTestCases()</b></p>
+<p>Returns the number of tests represented by this test object</p></td>
+</tr>
+</table>
+<p>The following example shows how to use TestSuite class &minus;</p>
+<pre class="prettyprint notranslate">
+import unittest
+class suiteTest(unittest.TestCase):
+   def setUp(self):
+      self.a = 10
+      self.b = 20
+      
+   def testadd(self):
+      """Add"""
+      result = self.a+self.b
+      self.assertTrue(result == 100)
+   def testsub(self):
+      """sub"""
+      result = self.a-self.b
+      self.assertTrue(result == -10)
+      
+def suite():
+   suite = unittest.TestSuite()
+##   suite.addTest (simpleTest3("testadd"))
+##   suite.addTest (simpleTest3("testsub"))
+   suite.addTest(unittest.makeSuite(simpleTest3))
+   return suite
+   
+if __name__ == '__main__':
+   runner = unittest.TextTestRunner()
+   test_suite = suite()
+   runner.run (test_suite)
+</pre>
+<p>You can experiment with the addTest() method by uncommenting the lines and comment statement having makeSuite() method.</p>
+<h2>TestLoader Class</h2>
+<p>The unittest package has the TestLoader class which is used to create test suites from classes and modules. By default, the unittest.defaultTestLoader instance is automatically created when the unittest.main(0 method is called. An explicit instance, however enables the customization of certain properties.</p>
+<p>In the following code, tests from two classes are collected in a List by using the TestLoader object.</p>
+<pre class="prettyprint notranslate">
+import unittest
+testList = [Test1, Test2]
+testLoad = unittest.TestLoader()
+
+TestList = []
+for testCase in testList:
+   testSuite = testLoad.loadTestsFromTestCase(testCase)
+   TestList.append(testSuite)
+   
+newSuite = unittest.TestSuite(TestList)
+runner = unittest.TextTestRunner()
+runner.run(newSuite)
+</pre>
+<p>The following table shows a list of methods in the TestLoader class &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>loadTestsFromTestCase()</b></p>
+<p>Return a suite of all tests cases contained in a TestCase class</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>loadTestsFromModule()</b></p>
+<p>Return a suite of all tests cases contained in the given module.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>loadTestsFromName()</b></p>
+<p>Return a suite of all tests cases given a string specifier.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>discover()</b></p>
+<p>Find all the test modules by recursing into subdirectories from the specified start directory, and return a TestSuite object</p></td>
+</tr>
+</table>
+<h2>TestResult Class</h2>
+<p>This class is used to compile information about the tests that have been successful and the tests that have met failure. A TestResult object stores the results of a set of tests. A TestResult instance is returned by the TestRunner.run() method.</p>
+<p>TestResult instances have the following attributes &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Attribute &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>Errors</b></p>
+<p>A list containing 2-tuples of TestCase instances and strings holding formatted tracebacks. Each tuple represents a test which raised an unexpected exception.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>Failures</b></p>
+<p>A list containing 2-tuples of TestCase instances and strings holding formatted tracebacks. Each tuple represents a test where a failure was explicitly signalled using the TestCase.assert*() methods.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>Skipped</b></p>
+<p>A list containing 2-tuples of TestCase instances and strings holding the reason for skipping the test.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>wasSuccessful()</b></p>
+<p>Return True if all tests run so far have passed, otherwise returns False.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>stop()</b></p>
+<p>This method can be called to signal that the set of tests being run should be aborted.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>startTestRun()</b></p>
+<p>Called once before any tests are executed.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>stopTestRun()</b></p>
+<p>Called once after all tests are executed.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>testsRun</b></p>
+<p>The total number of tests run so far.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>Buffer</b></p>
+<p>If set to true, <b>sys.stdout</b> and <b>sys.stderr</b> will be buffered in between startTest() and stopTest() being called.</p></td>
+</tr>
+</table>
+<p>The following code executes a test suite &minus;</p>
+<pre class="prettyprint notranslate">
+if __name__ == '__main__':
+   runner = unittest.TextTestRunner()
+   test_suite = suite()
+   result = runner.run (test_suite)
+   
+   print "---- START OF TEST RESULTS"
+   print result
+
+   print "result::errors"
+   print result.errors
+
+   print "result::failures"
+   print result.failures
+
+   print "result::skipped"
+   print result.skipped
+
+   print "result::successful"
+   print result.wasSuccessful()
+   
+   print "result::test-run"
+   print result.testsRun
+   print "---- END OF TEST RESULTS"
+</pre>
+<p>The code when executed displays the following output &minus;</p>
+<pre class="result notranslate">
+---- START OF TEST RESULTS
+&lt;unittest.runner.TextTestResult run = 2 errors = 0 failures = 1&gt;
+result::errors
+[]
+result::failures
+[(&lt;__main__.suiteTest testMethod = testadd&gt;, 'Traceback (most recent call last):\n
+   File "test3.py", line 10, in testadd\n 
+   self.assertTrue(result == 100)\nAssert
+   ionError: False is not true\n')]
+result::skipped
+[]
+result::successful
+False
+result::test-run
+2
+---- END OF TEST RESULTS
+</pre>
+<h1>UnitTest Framework - Assertion</h1>
+<p>Python testing framework uses Python's built-in assert() function which tests a particular condition. If the assertion fails, an AssertionError will be raised. The testing framework will then identify the test as Failure. Other exceptions are treated as Error.</p>
+<p>The following three sets of assertion functions are defined in unittest module &minus;</p>
+<ul class="list">
+<li>Basic Boolean Asserts</li>
+<li>Comparative Asserts</li>
+<li>Asserts for Collections</li>
+</ul>
+<p>Basic assert functions evaluate whether the result of an operation is True or False. All the assert methods accept a <b>msg</b> argument that, if specified, is used as the error message on failure.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>assertEqual(arg1, arg2, msg = None)</b></p>
+<p>Test that <i>arg1</i> and <i>arg2</i> are equal. If the values do not compare equal, the test will fail.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>assertNotEqual(arg1, arg2, msg = None)</b></p>
+<p>Test that <i>arg1</i> and <i>arg2</i> are not equal. If the values do compare equal, the test will fail.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>assertTrue(expr, msg = None)</b></p>
+<p>Test that <i>expr</i> is true. If false, test fails</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>assertFalse(expr, msg = None)</b></p>
+<p>Test that <i>expr</i> is false. If true, test fails</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>assertIs(arg1, arg2, msg = None)</b></p>
+<p>Test that <i>arg1</i> and <i>arg2</i> evaluate to the same object.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>assertIsNot(arg1, arg2, msg = None)</b></p>
+<p>Test that <i>arg1</i> and <i>arg2</i> don’t evaluate to the same object.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>assertIsNone(expr, msg = None)</b></p>
+<p>Test that <i>expr</i> is None. If not None, test fails</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>assertIsNotNone(expr, msg = None)</b></p>
+<p>Test that <i>expr</i> is not None. If None, test fails</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>assertIn(arg1, arg2, msg = None)</b></p>
+<p>Test that <i>arg1</i> is in <i>arg2</i>.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>assertNotIn(arg1, arg2, msg = None)</b></p>
+<p>Test that <i>arg1</i> is not in <i>arg2</i>.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>assertIsInstance(obj, cls, msg = None)</b></p>
+<p>Test that <i>obj</i> is an instance of <i>cls</i></p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>assertNotIsInstance(obj, cls, msg = None)</b></p>
+<p>Test that <i>obj</i> is not an instance of <i>cls</i></p></td>
+</tr>
+</table>
+<p>Some of the above assertion functions are implemented in the following code &minus;</p>
+<pre class="prettyprint notranslate tryit">
+import unittest
+
+class SimpleTest(unittest.TestCase):
+   def test1(self):
+      self.assertEqual(4 + 5,9)
+   def test2(self):
+      self.assertNotEqual(5 * 2,10)
+   def test3(self):
+      self.assertTrue(4 + 5 == 9,"The result is False")
+   def test4(self):
+      self.assertTrue(4 + 5 == 10,"assertion fails")
+   def test5(self):
+      self.assertIn(3,[1,2,3])
+   def test6(self):
+      self.assertNotIn(3, range(5))
+
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>When the above script is run, test2, test4 and test6 will show failure and others run successfully.</p>
+<pre class="result notranslate">
+FAIL: test2 (__main__.SimpleTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "C:\Python27\SimpleTest.py", line 9, in test2
+      self.assertNotEqual(5*2,10)
+AssertionError: 10 == 10
+
+FAIL: test4 (__main__.SimpleTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "C:\Python27\SimpleTest.py", line 13, in test4
+      self.assertTrue(4+5==10,"assertion fails")
+AssertionError: assertion fails
+
+FAIL: test6 (__main__.SimpleTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "C:\Python27\SimpleTest.py", line 17, in test6
+      self.assertNotIn(3, range(5))
+AssertionError: 3 unexpectedly found in [0, 1, 2, 3, 4]
+
+----------------------------------------------------------------------            
+Ran 6 tests in 0.001s                                                             
+                                                                                  
+FAILED (failures = 3)
+</pre>
+<p>The second set of assertion functions are <b>comparative asserts &minus;</b></p>
+<ul class="list">
+<li><p><b>assertAlmostEqual</b> (first, second, places = 7, msg = None, delta = None)</p>
+<p>Test that <i>first</i> and <i>second</i> are approximately (or not approximately) equal by computing the difference, rounding to the given number of decimal <i>places</i> (default 7),</p></li>
+<li><p><b>assertNotAlmostEqual</b> (first, second, places, msg, delta)</p>
+<p>Test that first and second are not approximately equal by computing the difference, rounding to the given number of decimal places (default 7), and comparing to zero.</p>
+<p>In both the above functions, if delta is supplied instead of places then the difference between first and second must be less or equal to (or greater than) delta.</p>
+<p>Supplying both delta and places raises a TypeError.</p></li>
+<li><p><b>assertGreater</b> (first, second, msg = None)</p>
+<p>Test that <i>first</i> is greater than <i>second</i> depending on the method name. If not, the test will fail.</p></li>
+<li><p><b>assertGreaterEqual</b> (first, second, msg = None)</p>
+<p>Test that <i>first</i> is greater than or equal to <i>second</i> depending on the method name. If not, the test will fail</p></li>
+<li><p><b>assertLess</b> (first, second, msg = None)</p>
+<p>Test that <i>first</i> is less than <i>second</i> depending on the method name. If not, the test will fail</p></li>
+<li><p><b>assertLessEqual</b> (first, second, msg = None)</p>
+<p>Test that <i>first</i> is less than or equal to <i>second</i> depending upon the method name. If not, the test will fail.</p></li>
+<li><p><b>assertRegexpMatches</b> (text, regexp, msg = None)</p>
+<p>Test that a regexp search matches the text. In case of failure, the error message will include the pattern and the text. regexp may be a regular expression object or a string containing a regular expression suitable for use by <b>re.search()</b>.</p></li>
+<li><p><b>assertNotRegexpMatches</b> (text, regexp, msg = None)</p>
+<p>Verifies that a <i>regexp</i> search does not match <i>text</i>. Fails with an error message including the pattern and the part of <i>text</i> that matches. <i>regexp</i> may be a regular expression object or a string containing a regular expression suitable for use by <b>re.search()</b>.</p></li>
+</ul>
+<p>The assertion functions are implemented in the following example &minus;</p>
+<pre class="prettyprint notranslate tryit">
+import unittest
+import math
+import re
+
+class SimpleTest(unittest.TestCase):
+   def test1(self):
+      self.assertAlmostEqual(22.0/7,3.14)
+   def test2(self):
+      self.assertNotAlmostEqual(10.0/3,3)
+   def test3(self):
+      self.assertGreater(math.pi,3)
+   def test4(self):
+      self.assertNotRegexpMatches("Tutorials Point (I) Private Limited","Point")
+
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>The above script reports test1 and test4 as Failure. In test1, the division of 22/7 is not within 7 decimal places of 3.14. Similarly, since the second argument matches with the text in first argument, test4 results in AssertionError.</p>
+<pre class="result notranslate">
+=====================================================FAIL: test1 (__main__.SimpleTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "asserttest.py", line 7, in test1
+      self.assertAlmostEqual(22.0/7,3.14)
+AssertionError: 3.142857142857143 != 3.14 within 7 places
+================================================================
+FAIL: test4 (__main__.SimpleTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "asserttest.py", line 13, in test4
+      self.assertNotRegexpMatches("Tutorials Point (I) Private Limited","Point")
+AssertionError: Regexp matched: 'Point' matches 'Point' in 'Tutorials Point (I)
+Private Limited'
+----------------------------------------------------------------------
+
+Ran 4 tests in 0.001s                                                             
+                                                                                  
+FAILED (failures = 2)
+</pre>
+<h2>Assert for Collections</h2>
+<p>This set of assert functions are meant to be used with collection data types in Python, such as List, Tuple, Dictionary and Set.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>assertListEqual (list1, list2, msg = None)</b></p>
+<p>Tests that two lists are equal. If not, an error message is constructed that shows only the differences between the two.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>assertTupleEqual (tuple1, tuple2, msg = None)</b></p>
+<p>Tests that two tuples are equal. If not, an error message is constructed that shows only the differences between the two.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>assertSetEqual (set1, set2, msg = None)</b></p>
+<p>Tests that two sets are equal. If not, an error message is constructed that lists the differences between the sets.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>assertDictEqual (expected, actual, msg = None)</b></p>
+<p>Test that two dictionaries are equal. If not, an error message is constructed that shows the differences in the dictionaries.</p></td>
+</tr>
+</table>
+<p>The following example implements the above methods &minus;</p>
+<pre class="prettyprint notranslate tryit">
+import unittest
+
+class SimpleTest(unittest.TestCase):
+   def test1(self):
+      self.assertListEqual([2,3,4], [1,2,3,4,5])
+   def test2(self):
+      self.assertTupleEqual((1*2,2*2,3*2), (2,4,6))
+   def test3(self):
+      self.assertDictEqual({1:11,2:22},{3:33,2:22,1:11})
+
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>In the above example, test1 and test3 show AssertionError. Error message displays the differences in List and Dictionary objects.</p>
+<pre class="result notranslate">
+FAIL: test1 (__main__.SimpleTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "asserttest.py", line 5, in test1
+      self.assertListEqual([2,3,4], [1,2,3,4,5])
+AssertionError: Lists differ: [2, 3, 4] != [1, 2, 3, 4, 5]
+
+First differing element 0:
+2
+1
+
+Second list contains 2 additional elements.
+First extra element 3:
+4
+
+- [2, 3, 4]
++ [1, 2, 3, 4, 5]
+? +++       +++
+
+FAIL: test3 (__main__.SimpleTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "asserttest.py", line 9, in test3
+      self.assertDictEqual({1:11,2:22},{3:33,2:22,1:11})
+AssertionError: {1: 11, 2: 22} != {1: 11, 2: 22, 3: 33}
+- {1: 11, 2: 22}
++ {1: 11, 2: 22, 3: 33}
+?              +++++++
+                                                                                  
+----------------------------------------------------------------------            
+Ran 3 tests in 0.001s                                                             
+                                                                                  
+FAILED (failures = 2)
+</pre>
+<h1>UnitTest Framework - Test Discovery</h1>
+<p>The TestLoader class has a discover() function. Python testing framework uses this for simple test discovery. In order to be compatible, modules and packages containing tests must be importable from top level directory.</p>
+<p>The following is the basic command line usage of test discovery &minus;</p>
+<pre class="result notranslate">
+Python –m unittest discover
+</pre>
+<p>Interpreter tries to load all modules containing test from current directory and inner directories recursively. Other command line options are &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Options &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>-v, --verbose</b></p>
+<p>Verbose output</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>-s, --start-directory</b></p>
+<p>directory Directory to start discovery (. default)</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>-p, --pattern</b></p>
+<p>pattern Pattern to match test files (test*.py default)</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>-t, --top-level-directory</b></p>
+<p>directory Top level directory of project (defaults to start directory)</p></td>
+</tr>
+</table>
+<p>For example, in order to discover the tests in modules whose names start with 'assert' in 'tests' directory, the following command line is used &minus;</p>
+<pre class="result notranslate">
+C:\python27&gt;python –m unittest –v –s "c:\test" –p "assert*.py"
+</pre>
+<p>Test discovery loads tests by importing them. Once test discovery has found all the test files from the start directory you specify, it turns the paths into package names to import.</p>
+<p>If you supply the start directory as a package name rather than a path to a directory then discover assumes that whichever location it imports from is the location you intended, so you will not get the warning.</p>
+<h1>UnitTest Framework - Skip Test</h1>
+<p>Support for skipping tests has been added since Python 2.7. It is possible to skip individual test method or TestCase class, conditionally as well as unconditionally. The framework allows a certain test to be marked as an 'expected failure'. This test will 'fail' but will not be counted as failed in TestResult.</p>
+<p>To skip a method unconditionally, the following unittest.skip() class method can be used &minus;</p>
+<pre class="prettyprint notranslate">
+import unittest
+
+   def add(x,y):
+      return x+y
+
+class SimpleTest(unittest.TestCase):
+   @unittest.skip("demonstrating skipping")
+   def testadd1(self):
+      self.assertEquals(add(4,5),9)
+
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>Since skip() is a class method, it is prefixed by @ token. The method takes one argument: a log message describing the reason for the skip.</p>
+<p>When the above script is executed, the following result is displayed on console &minus;</p>
+<pre class="result notranslate">
+C:\Python27&gt;python skiptest.py
+s
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK (skipped = 1)
+</pre>
+<p>The character 's' indicates that a test has been skipped.</p>
+<p>Alternate syntax for skipping test is using instance method skipTest() inside the test function.</p>
+<pre class="prettyprint notranslate">
+def testadd2(self):
+   self.skipTest("another method for skipping")
+   self.assertTrue(add(4 + 5) == 10)
+</pre>
+<p>The following decorators implement test skipping and expected failures &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>unittest.skip(reason)</b></p>
+<p>Unconditionally skip the decorated test. <i>reason</i> should describe why the test is being skipped.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>unittest.skipIf(condition, reason)</b></p>
+<p>Skip the decorated test if condition is true.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>unittest.skipUnless(condition, reason)</b></p>
+<p>Skip the decorated test unless condition is true.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>unittest.expectedFailure()</b></p>
+<p>Mark the test as an expected failure. If the test fails when run, the test is not counted as a failure.</p></td>
+</tr>
+</table>
+<p>The following example demonstrates the use of conditional skipping and expected failure.</p>
+<pre class="prettyprint notranslate tryit">
+import unittest
+
+class suiteTest(unittest.TestCase):
+   a = 50
+   b = 40
+   
+   def testadd(self):
+      """Add"""
+      result = self.a+self.b
+      self.assertEqual(result,100)
+
+   @unittest.skipIf(a&gt;b, "Skip over this routine")
+   def testsub(self):
+      """sub"""
+      result = self.a-self.b
+      self.assertTrue(result == -10)
+   
+   @unittest.skipUnless(b == 0, "Skip over this routine")
+   def testdiv(self):
+      """div"""
+      result = self.a/self.b
+      self.assertTrue(result == 1)
+
+   @unittest.expectedFailure
+   def testmul(self):
+      """mul"""
+      result = self.a*self.b
+      self.assertEqual(result == 0)
+
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>In the above example, testsub() and testdiv() will be skipped. In the first case a&gt;b is true, while in the second case b == 0 is not true. On the other hand, testmul() has been marked as expected failure.</p>
+<p>When the above script is run, two skipped tests show 's' and the expected failure is shown as 'x'.</p>
+<pre class="result notranslate">
+C:\Python27&gt;python skiptest.py
+Fsxs
+================================================================
+FAIL: testadd (__main__.suiteTest)
+Add
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "skiptest.py", line 9, in testadd
+      self.assertEqual(result,100)
+AssertionError: 90 != 100
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+FAILED (failures = 1, skipped = 2, expected failures = 1)
+</pre>
+<h1>UnitTest Framework - Exceptions Test</h1>
+<p>Python testing framework provides the following assertion methods to check that exceptions are raised.</p>
+<h3>assertRaises(exception, callable, *args, **kwds)</h3>
+<p>Test that an exception (first argument) is raised when a function is called with any positional or keyword arguments. The test passes if the expected exception is raised, is an error if another exception is raised, or fails if no exception is raised. To catch any of a group of exceptions, a tuple containing the exception classes may be passed as exception.</p>
+<p>In the example below, a test function is defined to check whether ZeroDivisionError is raised.</p>
+<pre class="prettyprint notranslate">
+import unittest
+
+def div(a,b):
+   return a/b
+class raiseTest(unittest.TestCase):
+   def testraise(self):
+      self.assertRaises(ZeroDivisionError, div, 1,0)
+
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>The testraise() function uses assertRaises() function to see if division by zero occurs when div() function is called. The above code will raise an exception. But changes arguments to div() function as follows &minus;</p>
+<pre class="prettyprint notranslate">
+self.assertRaises(ZeroDivisionError, div, 1,1)
+</pre>
+<p>When a code is run with these changes, the test fails as ZeroDivisionError doesn't occur.</p>
+<pre class="result notranslate">
+F
+================================================================
+FAIL: testraise (__main__.raiseTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "raisetest.py", line 7, in testraise
+      self.assertRaises(ZeroDivisionError, div, 1,1)
+AssertionError: ZeroDivisionError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures = 1)
+</pre>
+<h3>assertRaisesRegexp(exception, regexp, callable, *args, **kwds)</h3>
+<p>Tests that <i>regexp</i> matches on the string representation of the raised exception. regexp may be a regular expression object or a string containing a regular expression suitable for use by re.search().</p>
+<p>The following example shows how assertRaisesRegexp() is used &minus;</p>
+<pre class="prettyprint notranslate">
+import unittest
+import re
+
+class raiseTest(unittest.TestCase):
+   def testraiseRegex(self):
+      self.assertRaisesRegexp(TypeError, "invalid", reg,"Point","TutorialsPoint")
+      
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<p>Here, testraseRegex() test doesn't fail as first argument. "Point" is found in the second argument string.</p>
+<pre class="result notranslate">
+================================================================
+FAIL: testraiseRegex (__main__.raiseTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "C:/Python27/raiseTest.py", line 11, in testraiseRegex
+      self.assertRaisesRegexp(TypeError, "invalid", reg,"Point","TutorialsPoint")
+AssertionError: TypeError not raised
+----------------------------------------------------------------------
+</pre>
+<p>However, the change is as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+self.assertRaisesRegexp(TypeError, "invalid", reg,123,"TutorialsPoint")
+</pre>
+<p>TypeError exception will be thrown. Hence, the following result will be displayed &minus;</p>
+<pre class="result notranslate">
+================================================================
+FAIL: testraiseRegex (__main__.raiseTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "raisetest.py", line 11, in testraiseRegex
+      self.assertRaisesRegexp(TypeError, "invalid", reg,123,"TutorialsPoint")
+AssertionError: "invalid" does not match 
+   "first argument must be string or compiled pattern"
+----------------------------------------------------------------------
+</pre>
+<h1>UnitTest Framework - Time Test</h1>
+<p>Junit, the Java unit testing framework (Pyunit is implementation of JUnit) has a handy option of timeout. If a test takes more than specified time, it will be marked as failed.</p>
+<p>Python's testing framework doesn't contain any support for time out. However, a third part module called timeout-decorator can do the job.</p>
+<p>Download and install the module from &minus;</p>
+<p><a target="_blank" rel="nofollow" href="https://pypi.python.org/packages/source/t/timeout-decorator/timeout-decorator-0.3.2.tar.gz">https://pypi.python.org/packages/source/t/timeout-decorator/timeout-decorator-0.3.2.tar.gz</a></p>
+<ul class="list">
+<li>Import timeout_decorator in the code</li>
+<li>Put timeout decorator before the test</li>
+<li>@timeout_decorator.timeout(10)</li>
+</ul>
+<p>If a test method below this line takes more than the timeout mentioned (10 mins) here, a TimeOutError will be raised. For example &minus;</p>
+<pre class="prettyprint notranslate">
+import time
+import timeout_decorator
+
+class timeoutTest(unittest.TestCase):
+
+   @timeout_decorator.timeout(5)
+   def testtimeout(self):
+      print "Start"
+   for i in range(1,10):
+      time.sleep(1)
+      print "%d seconds have passed" % i
+      
+if __name__ == '__main__':
+   unittest.main()
+</pre>
+<h1>UnitTest Framework - Unittest2</h1>
+<p>unittest2 is a backport of additional features added to the Python testing framework in Python 2.7 and onwards. It is tested to run on Python 2.6, 2.7, and 3.*. Latest version can be downloaded from <a target="_blank" rel="nofollow" href="https://pypi.python.org/pypi/unittest2">https://pypi.python.org/pypi/unittest2</a></p>
+<p>To use unittest2 instead of unittest, simply replace import unittest with import unittest2.</p>
+<p>Classes in unittest2 derive from the appropriate classes in unittest, so it should be possible to use the unittest2 test running infrastructure without having to switch all your tests to using unittest2 immediately. In case you intend to implement new features, subclass your testcase from <b>unittest2.TestCase</b> instead of unittest.TestCase</p>
+<p>The following are the new features of unittest2 &minus;</p>
+<ul class="list">
+<li><p><b>addCleanups</b> for better resource management</p></li>
+<li><p>Contains many new assert methods</p></li>
+<li><p><b>assertRaises</b> as context manager, with access to the exception afterwards</p></li>
+<li><p>Has module level fixtures such as <b>setUpModule</b> and <b>tearDownModule</b></p></li>
+<li><p>Includes <b>load_tests</b> protocol for loading tests from modules or packages</p></li>
+<li><p><b>startTestRun</b> and <b>stopTestRun</b> methods on TestResult</p></li>
+</ul>
+<p>In Python 2.7, you invoke the unittest command line features (including test discover) with <b>python -m unittest &lt;args&gt;</b>.</p>
+<p>Instead, unittest2 comes with a script unit2.</p>
+<pre class="result notranslate">
+unit2 discover
+unit2 -v test_module
+</pre>
+<h1>UnitTest Framework - Signal Handling</h1>
+<p>More efficient handling of control-C during a test run is provided by The -c/--catch command-line option to unittest, along with the <b>catchbreak</b> parameter. With catch break behavior enabled, control-C will allow the currently running test to complete, and the test run will then end and report all the results so far. A second control-c will raise a KeyboardInterrupt in the usual way.</p>
+<p>If the unittest handler is called but signal.SIGINT handler isn’t installed, then it calls for the default handler. This will normally be the expected behavior by code that replaces an installed handler and delegates to it. For individual tests that need unittest control-c handling disabled, the removeHandler() decorator can be used.</p>
+<p>The following utility functions enable control-c handling functionality within test frameworks &minus;</p>
+<h3>unittest.installHandler()</h3>
+<p>Install the control-c handler. When a <b>signal.SIGINT</b> is received all registered results have TestResult.stop() called.</p>
+<h3>unittest.registerResult(result)</h3>
+<p>Register a <b>TestResult</b> object for control-c handling. Registering a result stores a weak reference to it, so it doesn’t prevent the result from being garbage collected.</p>
+<h3>unittest.removeResult(result)</h3>
+<p>Remove a registered result. Once a result has been removed then TestResult.stop() will no longer be called on that result object in response to a control-c.</p>
+<h3>unittest.removeHandler(function = None)</h3>
+<p>When called without arguments, this function removes the control-c handler if it has been installed. This function can also be used as a test decorator to temporarily remove the handler whilst the test is being executed.</p>
+<h2>GUI Test Runner</h2>
+<p>The unittest module is installed to discover and run tests interactively. This utility, a Python script 'inittestgui.py' uses Tkinter module which is a Python port for TK graphics tool kit. It gives an easy to use GUI for discovery and running tests.</p>
+<pre class="result notranslate">
+Python unittestgui.py
+</pre>
+<img src="https://www.tutorialspoint.com/unittest_framework/images/running_tests.jpg" alt="Running Test" />
+<p>Click the 'Discover Tests' button. A small dialog box appears where you can select directory and modules from which test are to be run.</p>
+<img src="https://www.tutorialspoint.com/unittest_framework/images/discover_tests.jpg" alt="Discover Test" />
+<p>Finally, click the start button. Tests will be discovered from the selected path and module names, and the result pane will display the results.</p>
+<img src="https://www.tutorialspoint.com/unittest_framework/images/result_pane.jpg" alt="Result Pane" />
+<p>In order to see the details of individual test, select and click on test in the result box &minus;</p>
+<img src="https://www.tutorialspoint.com/unittest_framework/images/individual_test_details.jpg" alt="Individual Test Details" />
+<p>If you do not find this utility in the Python installation, you can obtain it from the project page <a target="_blank" rel="nofollow" href="http://pyunit.sourceforge.net/">http://pyunit.sourceforge.net/</a>.</p>
+<p>Similar, utility based on wxpython toolkit is also available there.</p>
+<h1>UnitTest Framework - Doctest</h1>
+<p>Python' standard distribution contains 'Doctest' module. This module's functionality makes it possible to search for pieces of text that look like interactive Python sessions, and executes these sessions to see if they work exactly as shown.</p>
+<p>Doctest can be very useful in the following scenarios &minus;</p>
+<ul class="list">
+<li><p>To check that a module’s docstrings are up-to-date by verifying that all interactive examples still work as documented.</p></li>
+<li><p>To perform regression testing by verifying that interactive examples from a test file or a test object work as expected.</p></li>
+<li><p>To write tutorial documentation for a package, liberally illustrated with input-output examples</p></li>
+</ul>
+<p>In Python, a 'docstring' is a string literal which appears as the first expression in a class, function or module. It is ignored when the suite is executed, but it is recognized by the compiler and put into the <b>__doc__</b> attribute of the enclosing class, function or module. Since it is available via introspection, it is the canonical place for documentation of the object.</p>
+<p>It is a usual practice to put example usage of different parts of Python code inside the docstring. The doctest module allows to verify that these docstrings are up-to-date with the intermittent revisions in code.</p>
+<p>In the following code, a factorial function is defined interspersed with example usage. In order to verify if the example usage is correct, call the testmod() function in doctest module.</p>
+<pre class="prettyprint notranslate">
+"""
+This is the "example" module.
+
+The example module supplies one function, factorial(). For example,
+
+&gt;&gt;&gt; factorial(5)
+120
+"""
+
+def factorial(x):
+   """Return the factorial of n, an exact integer &gt;= 0.
+   &gt;&gt;&gt; factorial(-1)
+   Traceback (most recent call last):
+      ...
+   ValueError: x must be &gt;= 0
+   """
+   
+   if not x &gt;= 0:
+      raise ValueError("x must be &gt;= 0")
+   f = 1
+   for i in range(1,x+1):
+      f = f*i
+   return f
+   
+if __name__ == "__main__":
+   import doctest
+   doctest.testmod()
+</pre>
+<p>Enter and save the above script as FactDocTest.py and try to execute this script from the command line.</p>
+<pre class="result notranslate">
+Python FactDocTest.py
+</pre>
+<p>No output will be shown unless the example fails. Now, change the command line to the following &minus;</p>
+<pre class="result notranslate">
+Python FactDocTest.py –v
+</pre>
+<p>The console will now show the following output &minus;</p>
+<pre class="result notranslate">
+C:\Python27&gt;python FactDocTest.py -v
+Trying:
+   factorial(5)
+Expecting:
+   120
+ok
+Trying:
+   factorial(-1)
+Expecting:
+   Traceback (most recent call last):
+      ...
+   ValueError: x must be &gt;= 0
+ok
+2 items passed all tests:
+   1 tests in __main__
+   1 tests in __main__.factorial
+2 tests in 2 items.
+2 passed and 0 failed.
+Test passed.
+</pre>
+<p>If, on the other hand, the code of factorial() function doesn't give expected result in docstring, failure result will be displayed. For instance, change f = 2 in place of f = 1 in the above script and run the doctest again. The result will be as follows &minus;</p>
+<pre class="result notranslate">
+Trying:
+   factorial(5)
+Expecting:
+   120
+**********************************************************************
+File "docfacttest.py", line 6, in __main__
+Failed example:
+factorial(5)
+Expected:
+   120
+Got:
+   240
+Trying:
+   factorial(-1)
+Expecting:
+   Traceback (most recent call last):
+      ...
+   ValueError: x must be &gt;= 0
+ok
+1 items passed all tests:
+   1 tests in __main__.factorial
+**********************************************************************
+1 items had failures:
+   1 of 1 in __main__
+2 tests in 2 items.
+1 passed and 1 failed.
+***Test Failed*** 1 failures.
+</pre>
+<h2>Doctest: Checking Examples in a Text File</h2>
+<p>Another simple application of doctest is testing interactive examples in a text file. This can be done with the testfile() function.</p>
+<p>The following text is stored in a text file named 'example.txt'.</p>
+<pre class="prettyprint notranslate">
+Using ''factorial''
+-------------------
+This is an example text file in reStructuredText format. First import
+''factorial'' from the ''example'' module:
+   &gt;&gt;&gt; from example import factorial
+Now use it:
+   &gt;&gt;&gt; factorial(5)
+   120
+</pre>
+<p>The file content is treated as docstring. In order to verify the examples in the text file, use the testfile() function of doctest module.</p>
+<pre class="prettyprint notranslate">
+def factorial(x):
+   if not x &gt;= 0:
+      raise ValueError("x must be &gt;= 0")
+   f = 1
+   for i in range(1,x+1):
+      f = f*i
+   return f
+   
+if __name__ == "__main__":
+   import doctest
+   doctest.testfile("example.txt")
+</pre>
+<ul class="list">
+<li><p>As with the testmod(), testfile() won’t display anything unless an example fails. If an example does fail, then the failing example(s) and the cause(s) of the failure(s) are printed to console, using the same format as testmod().</p></li>
+<li><p>In most cases a copy-and-paste of an interactive console session works fine, but doctest isn’t trying to do an exact emulation of any specific Python shell.</p></li>
+<li><p>Any expected output must immediately follow the final '&gt;&gt;&gt; ' or '... ' line containing the code, and the expected output (if any) extends to the next '&gt;&gt;&gt; ' or all-whitespace line.</p></li>
+<li><p>Expected output cannot contain an all-whitespace line, since such a line is taken to signal the end of expected output. If expected output does contain a blank line, put &lt;BLANKLINE&gt; in your doctest example each place a blank line is expected.</p></li>
+</ul>
+<h1>UnitTest Framework - Doctest API</h1>
+<p>The doctest API revolves around the following two container classes used to store interactive examples from docstrings &minus;</p>
+<ul class="list">
+<li><p><b>Example</b> &minus; A single Python statement, paired with its expected output.</p></li>
+<li><p><b>DocTest</b> &minus; A collection of Examples, typically extracted from a single docstring or a text file.</p></li>
+</ul>
+<p>The following additional processing classes are defined to find, parse, and run, and check doctest examples &minus;</p>
+<ul class="list">
+<li><p><b>DocTestFinder</b> &minus; Finds all docstrings in a given module, and uses a DocTestParser to create a DocTest from every docstring that contains interactive examples.</p></li>
+<li><p><b>DocTestParser</b> &minus; Creates a doctest object from a string (such as an object’s docstring).</p></li>
+<li><p><b>DocTestRunner</b> &minus; Executes the examples in a doctest, and uses an OutputChecker to verify their output.</p></li>
+<li><p><b>OutputChecker</b> &minus; Compares the actual output from a doctest example with the expected output, and decides whether they match.</p></li>
+</ul>
+<h2>DocTestFinder Class</h2>
+<p>It is a processing class used to extract the doctests that are relevant to a given object, from its docstring and the docstrings of its contained objects. Doctests can currently be extracted from the following object types — modules, functions, classes, methods, staticmethods, classmethods, and properties.</p>
+<p>This class defines the find() method. It returns a list of the DocTests that are defined by the <i>object‘s</i> docstring, or by any of its contained objects’ docstrings.</p>
+<h2>DocTestParser Class</h2>
+<p>It is a processing class used to extract interactive examples from a string, and use them to create a DocTest object. This class defines the following methods &minus;</p>
+<ul class="list">
+<li><p><b>get_doctest()</b> &minus; Extract all doctest examples from the given string, and collect them into a <b>DocTest</b> object.</p></li>
+<li><p><b>get_examples(string[, name])</b> &minus; Extract all doctest examples from the given string, and return them as a list of <b>Example</b> objects. Line numbers are 0-based. The optional argument name is a name identifying this string, and is only used for error messages.</p></li>
+<li><p><b>parse(string[, name])</b> &minus; Divide the given string into examples and intervening text, and return them as a list of alternating <b>Examples</b> and strings. Line numbers for the <b>Examples</b> are 0-based. The optional argument name is a name identifying this string, and is only used for error messages.</p></li>
+</ul>
+<h2>DocTestRunner Class</h2>
+<p>This is a processing class used to execute and verify the interactive examples in a DocTest. The following methods are defined in it &minus;</p>
+<h3>report_start()</h3>
+<p>Report that the test runner is about to process the given example. This method is provided to allow subclasses of <b>DocTestRunner</b> to customize their output; it should not be called directly</p>
+<h3>report_success()</h3>
+<p>Report that the given example ran successfully. This method is provided to allow subclasses of DocTestRunner to customize their output; it should not be called directly.</p>
+<h3>report_failure()</h3>
+<p>Report that the given example failed. This method is provided to allow subclasses of <b>DocTestRunner</b> to customize their output; it should not be called directly.</p>
+<h3>report_unexpected_exception()</h3>
+<p>Report that the given example raised an unexpected exception. This method is provided to allow subclasses of DocTestRunner to customize their output; it should not be called directly.</p>
+<h3>run(test)</h3>
+<p>Run the examples in <i>test</i> (a DocTest object), and display the results using the writer function <i>out</i>.</p>
+<h3>summarize([verbose])</h3>
+<p>Print a summary of all the test cases that have been run by this DocTestRunner, and return a <i>named tuple</i> TestResults(failed, attempted). The optional <i>verbose</i> argument controls how detailed the summary is. If the verbosity is not specified, then the DocTestRunner‘s verbosity is used.</p>
+<h2>OutputChecker Class</h2>
+<p>This class is used to check whether the actual output from a doctest example matches the expected output.</p>
+<p>The following methods are defined in this class &minus;</p>
+<h3>check_output()</h3>
+<p>Return <b>True</b> if the actual output from an example (<i>got</i>) matches with the expected output (<i>want</i>). These strings are always considered to match if they are identical; but depending on what option flags the test runner is using, several non-exact match types are also possible. See section <i>Option Flags</i> and <i>Directives</i> for more information about option flags.</p>
+<h3>output_difference()</h3>
+<p>Return a string describing the differences between the expected output for a given example (<i>example</i>) and the actual output (<i>got</i>).</p>
+<h2>DocTest Integration with Unittest</h2>
+<p>The doctest module provides two functions that can be used to create unittest test suites from modules and text files containing doctests. To integrate with unittest test discovery, include a load_tests() function in your test module &minus;</p>
+<pre class="prettyprint notranslate">
+import unittest
+import doctest
+import doctestexample
+
+def load_tests(loader, tests, ignore):
+   tests.addTests(doctest.DocTestSuite(doctestexample))
+   return tests
+</pre>
+<p>A combined TestSuite of tests from unittest as well as doctest will be formed and it can now be executed by unittest module's main() method or run() method.</p>
+<p>The following are the two main functions for creating <b>unittest.TestSuite</b> instances from text files and modules with the doctests &minus;</p>
+<h3>doctest.DocFileSuite()</h3>
+<p>It is used to convert doctest tests from one or more text files to a <b>unittest.TestSuite</b>. The returned unittest.TestSuite is to be run by the unittest framework and runs the interactive examples in each file. If any of the examples in a file fails, then the synthesized unit test fails, and a <b>failureException</b> exception is raised showing the name of the file containing the test and a (sometimes approximate) line number.</p>
+<h3>doctest.DocTestSuite()</h3>
+<p>It is used to convert doctest tests for a module to a <b>unittest.TestSuite</b>.</p>
+<p>The returned unittest.TestSuite is to be run by the unittest framework and runs each doctest in the module. If any of the doctests fail, then the synthesized unit test fails, and a <b>failureException</b> exception is raised showing the name of the file containing the test and a (sometimes approximate) line number</p>
+<p>Under the covers, DocTestSuite() creates a <b>unittest.TestSuite</b> out of doctest.DocTestCase instances, and DocTestCase is a subclass of unittest.TestCase.</p>
+<p>Similarly, DocFileSuite() creates a unittest.TestSuite out of doctest.DocFileCase instances, and DocFileCase is a subclass of DocTestCase.</p>
+<p>So both ways of creating a unittest.TestSuite run instances of DocTestCase. When you run doctest functions yourself, you can control the doctest options in use directly, by passing option flags to doctest functions.</p>
+<p>However, if you’re writing a unittest framework, unittest ultimately controls when and how the tests get run. The framework author typically wants to control doctest reporting options (perhaps, e.g., specified by command line options), but there’s no way to pass options through unittest to doctest test runners.</p>
+<h1>UnitTest Framework - Py.test Module</h1>
+<p>It was in 2004 that Holger Krekel renamed his <b>std</b> package, whose name was often confused with that of the Standard Library that ships with Python, to the (only slightly less confusing) name 'py.' Though the package contains several sub-packages, it is now known almost entirely for its py.test framework.</p>
+<p>The py.test framework has set up a new standard for Python testing, and has become very popular with many developers today. The elegant and Pythonic idioms it introduced for test writing have made it possible for test suites to be written in a far more compact style.</p>
+<p>py.test is a no-boilerplate alternative to Python’s standard unittest module. Despite being a fully-featured and extensible test tool, it boasts of a simple syntax. Creating a test suite is as easy as writing a module with a couple of functions.</p>
+<p>py.test runs on all POSIX operating systems and WINDOWS (XP/7/8) with Python versions 2.6 and above.</p>
+<h2>Installation</h2>
+<p>Use the following code to load the pytest module in the current Python distribution as well as a py.test.exe utility. Tests can be run using both.</p>
+<pre class="result notranslate">
+pip install pytest
+</pre>
+<h2>Usage</h2>
+<p>You can simply use the assert statement for asserting test expectations. pytest’s assert introspection will intelligently report intermediate values of the assert expression freeing you from the need to learn the many names of <b>JUnit legacy methods</b>.</p>
+<pre class="prettyprint notranslate">
+# content of test_sample.py
+def func(x):
+   return x + 1
+   
+def test_answer():
+   assert func(3) == 5
+</pre>
+<p>Use the following command line to run the above test. Once the test is run, the following result is displayed on console &minus;</p>
+<pre class="result notranslate">
+C:\Python27&gt;scripts\py.test -v test_sample.py
+============================= test session starts =====================
+platform win32 -- Python 2.7.9, pytest-2.9.1, py-1.4.31, pluggy-0.3.1 -- C:\Pyth
+on27\python.exe
+cachedir: .cache
+rootdir: C:\Python27, inifile:
+collected 1 items
+test_sample.py::test_answer FAILED
+================================== FAILURES =====================
+_________________________________ test_answer _________________________________
+   def test_answer():
+&gt;  assert func(3) == 5
+E     assert 4 == 5
+E     + where 4 = func(3)
+test_sample.py:7: AssertionError
+========================== 1 failed in 0.05 seconds ====================
+</pre>
+<p>The test can also be run from the command line by including pytest module using –m switch.</p>
+<pre class="result notranslate">
+python -m pytest test_sample.py
+</pre>
+<h2>Grouping Multiple Tests in a Class</h2>
+<p>Once you start to have more than a few tests it often makes sense to group tests logically, in classes and modules. Let’s write a class containing two tests &minus;</p>
+<pre class="prettyprint notranslate">
+class TestClass:
+   def test_one(self):
+      x = "this"
+      assert 'h' in x
+   def test_two(self):
+      x = "hello"
+      assert hasattr(x, 'check')
+</pre>
+<p>The following test result will be displayed &minus;</p>
+<pre class="result notranslate">
+C:\Python27&gt;scripts\py.test -v test_class.py
+============================= test session starts =====================
+platform win32 -- Python 2.7.9, pytest-2.9.1, py-1.4.31, pluggy-0.3.1 -- C:\Pyt
+on27\python.exe
+cachedir: .cache
+rootdir: C:\Python27, inifile:
+collected 2 items
+test_class.py::TestClass::test_one PASSED
+test_class.py::TestClass::test_two FAILED
+================================== FAILURES =====================
+_____________________________ TestClass.test_two ______________________________
+self = &lt;test_class.TestClass instance at 0x01309DA0&gt;
+
+   def test_two(self):
+      x = "hello"
+&gt;  assert hasattr(x, 'check')
+E     assert hasattr('hello', 'check')
+
+test_class.py:7: AssertionError
+===================== 1 failed, 1 passed in 0.06 seconds ======================
+</pre>
+<h1>Nose Testing - Framework</h1>
+<p>The nose project was released in 2005, the year after <b>py.test</b> received its modern guise. It was written by Jason Pellerin to support the same test idioms that had been pioneered by py.test, but in a package that is easier to install and maintain.</p>
+<p>The <b>nose</b> module can be installed with the help of pip utility</p>
+<pre class="result notranslate">
+pip install nose
+</pre>
+<p>This will install the nose module in the current Python distribution as well as a nosetest.exe, which means the test can be run using this utility as well as using –m switch.</p>
+<pre class="result notranslate">
+C:\python>nosetests –v test_sample.py
+Or
+C:\python>python –m nose test_sample.py
+</pre>
+<p><b>nose</b> collects tests from <b>unittest.TestCase</b> subclasses, of course. We can also write simple test functions, as well as test classes that are not subclasses of unittest.TestCase. nose also supplies a number of helpful functions for writing timed tests, testing for exceptions, and other common use cases.</p>
+<p><b>nose</b> collects tests automatically. There’s no need to manually collect test cases into test suites. Running tests is responsive, since <b>nose</b> begins running tests as soon as the first test module is loaded.</p>
+<p>As with the unittest module, <b>nose</b> supports fixtures at the package, module, class, and test case level, so expensive initialization can be done as infrequently as possible.</p>
+<h2>Basic Usage</h2>
+<p>Let us consider nosetest.py similar to the script used earlier &minus;</p>
+<pre class="prettyprint notranslate">
+# content of nosetest.py
+def func(x):
+   return x + 1
+   
+def test_answer():
+   assert func(3) == 5
+</pre>
+<p>In order to run the above test, use the following command line syntax &minus;</p>
+<pre class="result notranslate">
+C:\python&gt;nosetests –v nosetest.py
+</pre>
+<p>The output displayed on console will be as follows &minus;</p>
+<pre class="result notranslate">
+nosetest.test_answer ... FAIL
+================================================================
+FAIL: nosetest.test_answer
+----------------------------------------------------------------------
+Traceback (most recent call last):
+   File "C:\Python34\lib\site-packages\nose\case.py", line 198, in runTest
+      self.test(*self.arg)
+   File "C:\Python34\nosetest.py", line 6, in test_answer
+      assert func(3) == 5
+AssertionError
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+FAILED (failures = 1)
+</pre>
+<p><b>nose</b> can be integrated with DocTest by using <b>with-doctest</b> option in athe bove command line.</p>
+<pre class="result notranslate">
+\nosetests --with-doctest -v nosetest.py
+</pre>
+<p>You may use <b>nose</b> in a test script &minus;</p>
+<pre class="prettyprint notranslate">
+import nose
+nose.main()
+</pre>
+<p>If you do not wish the test script to exit with 0 on success and 1 on failure (like unittest.main), use nose.run() instead &minus;</p>
+<pre class="prettyprint notranslate">
+import nose
+result = nose.run()
+</pre>
+<p>The result will be true if the test run is successful, or false if it fails or raises an uncaught exception.</p>
+<p><b>nose</b> supports fixtures (setup and teardown methods) at the package, module, class, and test level. As with py.test or unittest fixtures, setup always runs before any test (or collection of tests for test packages and modules); teardown runs if setup has completed successfully, regardless of the status of the test run.</p>
+<h1>Nose Testing - Tools</h1>
+<p>The nose.tools module provides a number of testing aids that you may find useful, including decorators for restricting test execution time and testing for exceptions, and all of the same assertX methods found in unittest.TestCase.</p>
+<ul class="list">
+<li><p><b>nose.tools.ok_(expr, msg = None)</b> &minus; Shorthand for assert.</p></li>
+<li><p><b>nose.tools.eq_(a, b, msg = None)</b> &minus; Shorthand for ‘assert a == b, “%r != %r” % (a, b)</p></li>
+<li><p><b>nose.tools.make_decorator(func)</b> &minus; Wraps a test decorator so as to properly replicate metadata of the decorated function, including nose’s additional stuff (namely, setup and teardown).</p></li>
+<li><p><b>nose.tools.raises(*exceptions)</b> &minus; Test must raise one of expected exceptions to pass.</p></li>
+<li><p><b>nose.tools.timed(limit)</b> &minus; Test must finish within specified time limit to pass</p></li>
+<li><p><b>nose.tools.istest(func)</b> &minus; Decorator to mark a function or method as a test</p></li>
+<li><p><b>nose.tools.nottest(func)</b> &minus; Decorator to mark a function or method as not a test</p></li>
+</ul>
+<h2>Parameterized Testing</h2>
+<p>Python's testing framework, unittest, doesn't have a simple way of running parametrized test cases. In other words, you can't easily pass arguments into a <b>unittest.TestCase</b> from outside.</p>
+<p>However, pytest module ports test parametrization in several well-integrated ways &minus;</p>
+<ul class="list">
+<li><p><b>pytest.fixture()</b> allows you to define parametrization at the level of fixture functions.</p></li>
+<li><p><b>@pytest.mark.parametrize</b> allows to define parametrization at the function or class level. It provides multiple argument/fixture sets for a particular test function or class.</p></li>
+<li><p><b>pytest_generate_tests</b> enables implementing your own custom dynamic parametrization scheme or extensions.</p></li>
+</ul>
+<p>A third party module 'nose-parameterized' allows Parameterized testing with any Python test framework. It can be downloaded from this link &minus; <a target="_blank" rel="nofollow" href="https://github.com/wolever/nose-parameterized">https://github.com/wolever/nose-parameterized</a></p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/unittest_framework/nose_testing_tools.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/unittest_framework/unittest_framework_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=5"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+   var tryit = new $.TryIt('https://www.tutorialspoint.com/unittest_framework/try_unittest_framework.php');
+   tryit.compile();
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "UnitTest Framework Quick Guide",
+    "name": "UnitTest Framework Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/unittest_framework/images/running_tests.jpg",
+        "width": 600,
+        "height": 375
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:50.",
+    "dateModified": "July 23 2017 03:34:50.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Unit testing is a software testing method by which individual units of source code, such as functions, methods, and class are tested to determine whether they are fit for use. Intuitively, one can view a unit as the smallest testable part of an applicatio..."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Software Quality",
+                "@id": "https://www.tutorialspoint.com/software_quality_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Unittest Framework",
+                "@id": "https://www.tutorialspoint.com/unittest_framework"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "UnitTest Framework - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/unittest_framework/unittest_framework_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:25:06 GMT -->
+</html>

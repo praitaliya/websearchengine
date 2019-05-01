@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 17:11:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Windows Server 2012 Quick Guide</title>
+<meta name="description" content="Windows Server 2012 Quick Guide - Learn Windows Server 2012 in simple and easy steps starting from basic to advanced concepts with examples including Overview, Installation, Server Roles, PowerShell, Remote Management, Windows Firewall, Remote Desktop Management, Resource Monitor, Active Directory, DC Accounts, File System, Group Managed Service Accounts, Group Policy Overview, DHCP Role, DNS Role, Primary Zones, Manage Records, IIS Overview, IIS Security, Hyper-V, Advanced Configuration, Configure WSUS Role, WSUS Policies and Tuning, Sharing of Files, File Manager, Print Server, Easy Printing, Configure Print Drivers, Network Services, Backup Management." />
+<meta name="keywords" content="Windows Server 2012, Tutorials, Learning, Overview, Installation, Server Roles, PowerShell, Remote Management, Windows Firewall, Remote Desktop Management, Resource Monitor, Active Directory, DC Accounts, File System, Group Managed Service Accounts, Group Policy Overview, DHCP Role, DNS Role, Primary Zones, Manage Records, IIS Overview, IIS Security, Hyper-V, Advanced Configuration, Configure WSUS Role, WSUS Policies and Tuning, Sharing of Files, File Manager, Print Server, Easy Printing, Configure Print Drivers, Network Services, Backup Management." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #00abf3 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #00abf3 !important;}
+.submenu-item{ border-bottom: 2px solid #00abf3 !important; border-top: 2px solid #00abf3 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/windows-server-2012-mini-logo.jpg" alt="Windows Server 2012 Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Windows Server 2012 Tutorial</li>
+<li><a href="index.html">Windows Server 2012 - Home</a></li>
+<li><a href="windows_server_2012_overview.html">Overview</a></li>
+<li><a href="windows_server_2012_installation.html">Installation</a></li>
+<li><a href="windows_server_2012_server_roles.html">Server Roles</a></li>
+<li><a href="windows_server_2012_powershell.html">PowerShell</a></li>
+<li><a href="windows_server_2012_remote_management.html">Remote Management</a></li>
+<li><a href="windows_server_2012_firewall.html">Windows Firewall</a></li>
+<li><a href="windows_server_2012_remote_desktop_management.html">Remote Desktop Management</a></li>
+<li><a href="windows_server_2012_resource_monitor.html">Resource Monitor</a></li>
+<li><a href="windows_server_2012_active_directory.html">Active Directory</a></li>
+<li><a href="windows_server_2012_dc_accounts.html">DC Accounts</a></li>
+<li><a href="windows_server_2012_file_system.html">File System</a></li>
+<li><a href="windows_server_2012_group_managed_service_accounts.html">Group Managed Service Accounts</a></li>
+<li><a href="windows_server_2012_group_policy_overview.html">Group Policy Overview</a></li>
+<li><a href="windows_server_2012_dhcp_role.html">DHCP Role</a></li>
+<li><a href="windows_server_2012_dns_role.html">DNS Role</a></li>
+<li><a href="windows_server_2012_primary_zones.html">Primary Zones</a></li>
+<li><a href="windows_server_2012_manage_records.html">Manage Records</a></li>
+<li><a href="windows_server_2012_iis_overview.html">IIS Overview</a></li>
+<li><a href="windows_server_2012_iis_security.html">IIS Security</a></li>
+<li><a href="windows_server_2012_hyperv.html">Hyper-V</a></li>
+<li><a href="windows_server_2012_advanced_configuration.html">Advanced Configuration</a></li>
+<li><a href="windows_server_2012_configure_wsus_role.html">Configure WSUS Role</a></li>
+<li><a href="windows_server_2012_wsus_policies_and_tuning.html">WSUS Policies &amp; Tuning</a></li>
+<li><a href="windows_server_2012_sharing_of_files.html">Sharing of Files</a></li>
+<li><a href="windows_server_2012_file_manager.html">File Manager</a></li>
+<li><a href="windows_server_2012_print_server.html">Print Server</a></li>
+<li><a href="windows_server_2012_easy_printing.html">Easy Printing</a></li>
+<li><a href="windows_server_2012_configure_print_drivers.html">Configure Print Drivers</a></li>
+<li><a href="windows_server_2012_network_services.html">Network Services</a></li>
+<li><a href="windows_server_2012_backup_management.html">Backup Management</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Windows Server 2012 Resources</li>
+<li><a href="windows_server_2012_quick_guide.html">Quick Guide</a></li>
+<li><a href="windows_server_2012_useful_resources.html">Useful Resources</a></li>
+<li><a href="windows_server_2012_discussion.html">Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Windows Server 2012 - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="windows_server_2012_backup_management.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="windows_server_2012_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Windows Server 2012 - Overview</h1>
+<p>Windows Server 2012 codenamed Windows Server 8 is the most recent version of the operating system from Microsoft regarding server management. But it is not the last one, as the last one is Windows Server 2016. Officially it was released on August 1st, 2012 and is being sold as a commercial version only.</p>
+<img src="images/server_2012.jpg" alt="Server 2012" />
+<h2>Improvements in Windows Server 2012</h2>
+<p>The major Improvements on this version are as follows &minus;</p>
+<ul class="list">
+<li><p>It is ready to be integrated with cloud systems and it still can maintain the classic features of local datacenters as a result <b>Hyper-V Virtualization</b> has new features <b>Hyper-v replicas</b>, it allows you to create virtual machines replications between clusters and storage systems.</p></li>
+<li><p>The <b>Storage migration</b> virtual disks can be moved to different physical storages, Virtual machine snapshots, virtual machines can be deleted from the Hyper-v and also from the virtual disks and it can be used directly without the need to shut down the virtual machine.</p></li>
+<li><p>The <b>Core server installation</b> easily switches to GUI installation without the need of reinstallation.</p></li> 
+<li><p>The file server and storage service improvement is that it eliminates identical copies in the same volumes as such and saves space.</p></li>
+<li><p>The <b>Storage pools and storage spaces</b> allows you to group the hard disks to one or more storage pools then it allows to create virtual disks. It can add other disks to the storage pools and make available to the users without impacting them.</p></li>
+<li><p>The <b>iSCSI Target Server</b> can offer block storage to other servers and applications on the network using the iSCSI standard.</p></li>
+<li><p><b>Active Directory cloning</b> can deploy additional domain controllers by cloning an existing virtual domain controller.</p></li>
+</ul>
+<p>The Windows Server 2012 has four editions: <b>Foundation, Essentials, Standard and Datacenter</b>. Each one of them has their own limitation accept the Datacenter version which is also the most expensive one.</p>
+<p>The following table will show what is the right one for your business needs &minus;</p>
+<img src="images/table.jpg" alt="Table" />
+<p>For finding out the cost of licensing you can click on the following link &minus; <a href="https://www.microsoft.com/en-us/server-cloud/products/windows-server-2012-r2/purchasing.aspx" target="_blank" rel="nofollow">https://www.microsoft.com/en-us/server-cloud/products/windows-server-2012-r2/purchasing.aspx</a></p>
+<img src="images/licensing_overview.jpg" alt="Licensing Overview" />
+<h1>Windows Server 2012 - Installation</h1>
+<p>In this chapter, we will discuss regarding the requirements and prerequisites of the Windows Server 2012.</p>
+<h2>System Requirements</h2>
+<p>Although most of the servers nowadays probably have the necessary requirements for Windows Server 2012. It will certainly be useful to know them in case you want to upgrade from an older system.</p>
+<p>The main requirements are &minus;</p>
+<ul class="list">
+<li><p>CPU socket minimum 1.4 GHz (64-bit processor) or faster for single core and Microsoft recommends is 3.1 GHz (64-bit processor) or faster multi-core.</p></li>
+<li><p>RAM memory minimum is 2GB, but Microsoft recommends 8GB.</p></li> 
+<li><p>160 GB hard disk with a 60 GB system partition space in your hard disk.</p></li>
+</ul>
+<p>One important thing to note here is that the installation process itself will verify your computer hardware and let you know if it qualifies for a Windows Server 2012 installation. If not, then you will need to upgrade your hardware.</p>
+<h3>Installation</h3>
+<p>The following steps are to be adhered for the installation of Windows Server 2012.</p>
+<p><b>Step 1</b> &minus; We can download the evaluation ISO of Windows Server 2012 R2 from the following link &minus; <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2012-r2" target="_blank" rel="nofollow">https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2012-r2</a></p>
+<p>But you will need to sign in first with a Microsoft account like Hotmail for example in order to complete the download and the good thing is that the evaluation period will last for 180 days, so you will have enough time to know if it will be the right product for you or not.</p>
+<img src="images/evaluation_iso.jpg" alt="Evaluation ISO" />
+<p>At the end, if you decide to buy the license of your Windows server 2012 R2. You can purchase it online via a Microsoft online store found in &minus; <a href="https://www.microsoftstore.com/store/msusa/en_US/list/Windows-Server/categoryID.70676900?icid=BusinessR_Software_80_Windows_Server_112315" target="_blank" rel="nofollow">http://www.microsoftstore.com/store/msusa/en_US/list/Windows-Server/categoryID.70676900?icid=BusinessR_Software_80_Windows_Server_112315</a></p>
+<p>For the Enterprise solution, I would recommend to purchase it via a Microsoft partner that is found in your country.</p>
+<img src="images/enterprise_solution.jpg" alt="Enterprise Solution" />
+<p><b>Step 2</b> &minus; After downloading the ISO of Microsoft, create a boot USB driver which can be created with the Microsoft tool called Windows USB/DVD Download Tool and can be downloaded from the following link &minus; <a href="https://www.microsoft.com/en-us/download/windows-usb-dvd-download-tool" target="_blank" rel="nofollow">https://www.microsoft.com/en-us/download/windows-usb-dvd-download-tool</a></p>
+<p>After downloading the EXE file, open it and select the ISO file location and then click next like in the following screenshot, and wait up to the end when the Boot USB is created.</p>
+<img src="images/iso_file_location.jpg" alt="ISO file location" />
+<p><b>Step 3</b> &minus; After completing the above given steps, plug-in the USB to the server and wait for a while till it loads the files. This will continue for about a couple of minutes as shown in the following screenshot.</p>
+<img src="images/plugin_usb.jpg" alt="Plug-in USB" />
+<p><b>Step 4</b> &minus; After the files are loaded, you will see the screen of language settings of installation, keyboard, time and currency format. Generally, all the default ones are also good enough to start with. Click Next.</p>
+<img src="images/settings_of_installation.jpg" alt="Settings of Installation" />
+<p><b>Step 5</b> &minus; Click “Install now”.</p>
+<img src="images/install_now.jpg" alt="Install Now" />
+<p><b>Step 6</b> &minus; Once you have clicked on Install Now, the setup will start and it will load all the files and the screen will look as shown in the following screenshot.</p>
+<img src="images/setup_starting.jpg" alt="Setup Starting" />
+<p><b>Step 7</b> &minus; Wait until the files are loaded and then you will see the following screen. Let’s select Windows Server 2012 DataCenter Evaluation (Server with GUI) and click Next.</p>
+<img src="images/server_with_gui.jpg" alt="Sever with GUI" />
+<p><b>Step 8</b> &minus; Click “I accept the license terms” and then click on the Next button as shown in the following screenshot.</p>
+<img src="images/click_accept.jpg" alt="Click Accept" />
+<p><b>Step 9</b> &minus; The following screen will appear. In “Driver Options” you can create a new partition, delete or format the Hard disk. After you have done this process then you can select the partition where the Windows server 2012 R2 will be installed in our case we have one partition. Once all this is done, then click on Next.</p>
+<img src="images/driver_options.jpg" alt="Driver Options" />
+<p><b>Step 10</b> &minus; Let’s wait until this process finishes during this time and then the server will reboot.</p>
+<img src="images/server_will_reboot.jpg" alt="Server will Reboot" />
+<p><b>Step 11</b> &minus; Once the reboot is done the following screen will appear. Set the password for the server and then click on “Finish”.</p>
+<img src="images/finish.jpg" alt="Finish" />
+<p><b>Step 12</b> &minus; It will take some minutes until the setup finishes completely.</p>
+<img src="images/finish_completely.jpg" alt="Finish Completely" />
+<p><b>Step 13</b> &minus; Once all this is done, you have completed the installation process and the following screen will appear.</p>
+<p>Congratulations!!!</p>
+<img src="images/congratulations.jpg" alt="Congratulations" />
+<h1>Windows Server 2012 - Server Roles</h1>
+<p>Like the previous version, Windows Server 2012 has the following roles which can be used and in the subsequent chapter, we will see how to install and configure the most important ones.</p>
+<p>The following picture shows all the roles. <b>A small reminder!</b> - Roles and Features are the tools that you need to install or activate in order to complete your IT Administration duties, without their installation you cannot do anything.</p>
+<img src="images/server_roles.jpg" alt="Server Roles" />
+<p>To add a role in the server we should adhere to the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Click with the mouse on Server Manager which is found in the task bar as shown in the following screenshot.</p>
+<img src="images/server_manager.jpg" alt="Server Manager" />
+<p><b>Step 2</b> &minus; After opening the “Server Manager”, click on the second option “Add roles and features”.</p>
+<img src="images/opening_server_manager.jpg" alt="Opening Server Manager" />
+<p><b>Step 3</b> &minus; The following screen will appear, then you can Click on the Next button.</p>
+<img src="images/click_next.jpg" alt="Click Next" />
+<p><b>Step 4</b> &minus; Select the Role-based or feature-based installation and then click on the Next button.</p>
+<img src="images/rolebased.jpg" alt="Role-based" />
+<p>In the next screen that appears, you will have the following two options &minus;</p>
+<p><b>Option 1</b> &minus; Select a server from the server pool. This option is – if you want to install the services in the physical server like being done in the following screenshot.</p>
+<img src="images/server_selection.jpg" alt="Server Selection" />
+<p><b>Option 2</b> &minus; Select a virtual Hard disk if you want to install the services in a virtual disk that can be somewhere in the network storage. Take a look at the following screenshot for better understanding.</p>
+<img src="images/select_virtual_hard_disk.jpg" alt="Select Virtual Hard Disk" />
+<p><b>Step 5</b> &minus; The last step will be to check the service that you want to install, but in the upcoming chapters we will continue this setup for each and every important services.</p>
+<img src="images/important_services.jpg" alt="Important Services" />
+<h1>Windows Server 2012 - PowerShell</h1>
+<p>Windows PowerShell is a <b>command-line shell</b> and <b>scripting language</b> designed especially for system administration. It’s analogue in Linux is called as Bash Scripting. Built on the .NET Framework, Windows PowerShell helps IT professionals to control and automate the administration of the Windows operating system and applications that run on Windows Server environment.</p>
+<p>Windows PowerShell commands, called <b>cmdlets</b>, let you manage the computers from the command line. Windows PowerShell providers let you access data stores, such as the Registry and Certificate Store, as easily as you access the file system.</p>
+<p>In addition, Windows PowerShell has a rich expression parser and a fully developed scripting language. So in simple words you can complete all the tasks that you do with GUI and much more.</p>
+<p>PowerShell Icon can be found in the task bar and in the start menu. Just by clicking on the icon, it will open.</p>
+<img src="images/powershell_icon.jpg" alt="PowerShell Icon" />
+<p>To open it, just click on the icon and then the following screen will open and it means that PowerShell is ready for you to work on.</p>
+<img src="images/powershell_ready.jpg" alt="PowerShell Ready" />
+<p>The latest version of PowerShell is 5.0 and to check what is installed in our server we type the following command – <b>:$PSVersionTable</b> as shown in the following screenshot and from the screen we also know that we have PSVersion 4.0</p>
+<img src="images/psversiontable.jpg" alt="PSVersionTable" />
+<p>To update with the latest version where it has more Cmdlets we have to download <b>Windows Management Framework 5.0</b> from the following link &minus; <a href="https://www.microsoft.com/en-us/download/details.aspx?id=50395" target="_blank" rel="nofollow">https://www.microsoft.com/en-us/download/details.aspx?id=50395</a> and install it.</p>
+<img src="images/windows_management_framework.jpg" alt="Windows Management Framework" />
+<h2>PowerShell ISE</h2>
+<p>The Windows PowerShell <b>Integrated Scripting Environment</b> (ISE) is a host application for Windows PowerShell. In Windows PowerShell ISE, you can run commands and write, test, and debug scripts in a single Windows-based graphic user interface with multiline editing, tab completion, syntax coloring, selective execution, context-sensitive help, and support for right-to-left languages.</p>
+<p>You can use menu items and keyboard shortcuts to perform many of the same tasks that you would perform in the Windows PowerShell console. For example, when you debug a script in the Windows PowerShell ISE, to set a line breakpoint in a script, right-click the line of code, and then click <b>Toggle Breakpoint</b>.</p>
+<p>To open it you just go to Start – Search and then Type – PowerShell as shown in the following screenshot.</p>
+<img src="images/search_powershell.jpg" alt="Search PowerShell" />
+<p>Then click on Windows PowerShell ISE. Or click on the downward Arrow as shown in the following screenshot.</p>
+<img src="images/powershell_ise.jpg" alt="PowerShell ISE" />
+<p>It will list all the applications installed on the server and then click on Windows PowerShell ISE.</p>
+<img src="images/windows_powershell_ise.jpg" alt="Windows PowerShell ISE" />
+<p>The following table will be open &minus;</p>
+<img src="images/following_table.jpg" alt="Following Table" />
+<p>It has three sections, which include – The <b>PowerShell Console</b> with number 1, then <b>Scripting File</b> number 2 and the third is the <b>Command Module</b> where you can find the module.</p>
+<p>While creating the script you can run directly and see the result like the following example &minus;</p>
+<img src="images/creating_script.jpg" alt="Creating Script" />
+<h2>PowerShell Basic Commands</h2>
+<p>There are a lot of PowerShell commands and it is very difficult to put in all these commands in this tutorial, we will focus on some of the most important as well as basic commands of PowerShell.</p>
+<p>The first step is to go to the Get-Help command which gives you an explanation about how to give a command and its parameter.</p>
+<img src="images/get_help_command.jpg" alt="Get Help Command" />
+<p><b>To get the list of Updates</b> &minus;</p>
+<ul class="list">
+<li>Get-HotFix and to install a hot fix as follows</li>
+<li>Get-HotFix -id kb2741530</li> 
+</ul>
+<img src="images/updates.jpg" alt="Updates" />
+<h1>Remote Management</h1>
+<p>Remote Management Service is one of the most important part pertaining to administration of Windows Server 2012. Administration of servers is performed through Windows Management Instrumentation. WMI instructions can be sent over network WinRM “Remote Management”.</p>
+<p>By default this utility is enabled, you can check it by going to Server Manager &rarr; then click on Local Server as shown in the following screenshot.</p>
+<img src="images/local_server.jpg" alt="Local Server" />
+<p>If in case it is disabled, you can enable it by Opening PowerShell and then typing EnablePSRemoting as shown in the screenshot given below.</p>
+<img src="images/enable_psremoting.jpg" alt="Enable PSRemoting" />
+<p>There is another way to enable it – Click on “Server Manager” &rarr; Local Server, then ENABLE Remote management.</p>
+<img src="images/enable_remote_management.jpg" alt="Enable Remote Management" />
+<h2>Adding a Server for Remote Management</h2>
+<p>To add other servers for remote management, follow the steps given below &minus;</p>
+<p><b>Step 1</b> &minus; Server Manager &rarr; Dashboard &rarr; Add other servers to manage.</p>
+<img src="images/dashboard.jpg" alt="Dashboard" />
+<p><b>Step 2</b> &minus; If the servers are joined to the domain, you add the select option “Active Directory“, in my case they are not joined, so I selected the second option “DNS” &rarr; In the search Box, I added the IP of the server that has to be managed &rarr; click on a small arrow &rarr; OK.</p>
+<img src="images/dns.jpg" alt="DNS" />
+<p><b>Step 3</b> &minus; Go to Server Manager &rarr; All Servers, you will see the server that you have added. As my server is in the Work Group, I have to right click and click on – “Manage As” as shown in the following screenshot.</p>
+<img src="images/manage_as.jpg" alt="Manage As" />
+<p><b>Step 4</b> &minus; Enter the credentials of the remote server as follows and then &rarr; OK.</p>
+<img src="images/windows_security.jpg" alt="Windows Security" />
+<p>To remove a managed server, Right Click on server &rarr; Remove Server.</p>
+<img src="images/remove_server.jpg" alt="Remove Server" />
+<h1>Windows Server 2012 - Windows Firewall</h1>
+<p>The Windows Firewall with Advanced Security is a firewall that runs on the Windows Server 2012 and is turned on by default. The Firewall settings within Windows Server 2012 are managed from within the <b>Windows Firewall Microsoft Management Console</b>. To set Firewall settings perform the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Click on the Server Manager from the task bar &rarr; Click the Tools menu and select Windows Firewall with Advanced Security.</p>
+<img src="images/advanced_security.jpg" alt="Advanced Security" />
+<p><b>Step 2</b> &minus; To see the current configuration settings by selecting <b>Windows Firewall Properties</b> from the MMC. This <b>allows access to modify the settings</b> for each of the three firewall profiles, which are – <b>Domain, Private and Public</b> and IPsec settings.</p>
+<img src="images/windows_firewall_properties.jpg" alt="Windows Firewall Properties" />
+<p><b>Step 3</b> &minus; Applying custom rules, which will include the following two steps &minus;</p>
+<ul class="list">
+<li><p>Select either <b>Inbound Rules</b> or <b>Outbound Rules</b> under <b>Windows Firewall with Advanced Security</b> on the left side of the management console. (As you Know outbound traffic is the traffic generated from server towards the internet and inbound traffic is vice versa). The rules that are currently enabled are denoted by green checkbox icon, while disabled rules display a grey checkbox icon.</p></li>
+<li><p>Right-clicking a rule will allow you toggle enable/disable.</p></li>
+</ul>
+<img src="images/custom_rules.jpg" alt="Custom Rules" />
+<h2>How to Create a New Firewall Rule?</h2>
+<p>To create a new Firewall Rule, you have to adhere to the following steps &minus;</p>
+<p><b>Step 1</b> &minus; From the right side of either the Inbound Rules or Outbound Rules – click “New Rule”.</p>
+<img src="images/new_firewall_rule.jpg" alt="New Firewall Rule" />
+<p><b>Step 2</b> &minus; Custom from the Rule Type radial button &rarr; click <b>Next</b>.</p>
+<img src="images/rule_type.jpg" alt="Rule Type" />
+<p><b>Step 3</b> &minus; Select the Program association for the Custom Firewall Rule as either All programs or the path to a program &rarr; click Next.</p>
+<img src="images/custom_firewall_rules.jpg" alt="Custom Firewall Rules" />
+<p><b>Step 4</b> &minus; Protocol type field <b>select the protocol type</b> &rarr; click <b>Next</b>.</p>
+<img src="images/select_protocol_type.jpg" alt="Select Protocol Type" />
+<p><b>Step 5</b> &minus; Select an <b>IP address association</b> for both local and remote addresses &rarr; click <b>Next</b>.</p>
+<img src="images/ip_address_association.jpg" alt="IP address association" />
+<p><b>Step 6</b> &minus; Select an action to take on matching traffic &rarr; click Next.</p>
+<img src="images/matching_traffic.jpg" alt="Matching Traffic" />
+<p><b>Step 7</b> &minus; Select the profiles associated with the custom rule &rarr; click <b>Next</b>.</p>
+<img src="images/profiles_associated.jpg" alt="Profiles Associated" />
+<p><b>Step 8</b> &minus; Put a name for your Firewall rule and an optional description &rarr; <b>Finish</b>.</p>
+<img src="images/optional_description.jpg" alt="Optional Description" />
+<p><b>Step 9</b> &minus; The firewall rule can be found on the corresponding Rule tab, either inbound or outbound depending on the type created. To disable or delete the rule find the rule in the MMC, right-click it and select either <b>Disable Rule</b> or <b>Delete</b>.</p>
+<img src="images/disable_rule.jpg" alt="Disable Rule" />
+<h1>Remote Desktop Management</h1>
+<p>In this chapter, we will see how to enable remote desktop application. It is important because this enables us to work remotely on the server. To do this, we have the following two options. For the first option, we have to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to Start &rarr; right click “This PC” &rarr; Properties.</p>
+<img src="images/properties.jpg" alt="Properties" />
+<p><b>Step 2</b> &minus; On Left side click “Remote Setting”.</p>
+<img src="images/remote_settings.jpg" alt="Remote Settings" />
+<p><b>Step 3</b> &minus; Check radio button “Allow Remote connection to this computer” and Check box “Allow connection only from computers running Remote Desktop with Network Level Authentication (recommended)” &rarr; click “Select Users”.</p>
+<img src="images/select_users.jpg" alt="Select Users" />
+<p><b>Step 4</b> &minus; Click Add.</p>
+<img src="images/click_add.jpg" alt="Click Add" />
+<p><b>Step 5</b> &minus; Type user that you want to allow access. In my case, it is administrator &rarr; click OK.</p>
+<img src="images/administrator.jpg" alt="Administrator" />
+<p>For the <b>second option</b>, we need to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Click on “Server Manage” &rarr; Local Server &rarr; click on “Enable” or Disable, if it is Disabled.</p>
+<img src="images/disabled.jpg" alt="Disabled" />
+<h1>Windows Server 2012 - Resource Monitor</h1>
+<p>Resource Monitor is a great tool to identify which program/service is using resources like program, applications, network connection and memory usages.</p>
+<p>To open Resource Monitor, go to Server Manage &rarr; Tools.</p>
+<img src="images/resource_monitor.jpg" alt="Resource Monitor" />
+<p>Click on “Resource Monitor”, the First Section is “Overview”. It tells how much CPU is consuming every application and on the right side of the table, it monitors in real time the chart of CPU usage. The Memory tells how much memory every application is consuming and in the right side of the table it is being monitored in real time in the chart of CPU usage.</p>
+<p>The Disk tab splits it by the different hard drives. This will show the current Disk I/O and will show the disk usage per process. The network tab will show the processes and their network bytes sent and received. It will also show the current TCP connections and what ports are currently listening, IDs too.</p>
+<img src="images/disk_tab.jpg" alt="Disk Tab" />
+<h1>Windows Server 2012 - Active Directory</h1>
+<p>In this chapter, we will see how to Install Active Directory in Windows Server 2012 R2. Many of us who have worked with the previous version run <b>DCPROMO.EXE</b> to install it, but in the 2012 version, it is recommended by Microsoft not to use it anymore.</p>
+<p>To continue with Installation follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to “Server Manager” &rarr; Manage &rarr; Add Roles and Feature.</p>
+<img src="images/add_roles.jpg" alt="Add Roles" />
+<p><b>Step 2</b> &minus; Click the Next button.</p>
+<img src="images/next_button.jpg" alt="Next Button" />
+<p><b>Step 3</b> &minus; As we are installing AAD on this machine, we will select “Role-based or featurebased Installation” &rarr; Next.</p>
+<img src="images/feature_based.jpg" alt="Feature Based" />
+<p><b>Step 4</b> &minus; Click on “Select a server from the server pool”, this is the case when it will be installed locally.</p>
+<img src="images/installed_locally.jpg" alt="Installed Locally" />
+<p><b>Step 5</b> &minus; Check mark in the box next to <b>Active Directory Domain Services</b>. A box will be explaining additional roles services or features which are also required to install domain services.</p>
+<img src="images/add_directory.jpg" alt="Add Directory" />
+<p><b>Step 6</b> &minus; Click Add Features.</p>
+<img src="images/add_features.jpg" alt="Add Features" />
+<p><b>Step 7</b> &minus; Check “Group Policy Management” &rarr; Next.</p>
+<img src="images/group_policy_management.jpg" alt="Group Policy Management" />
+<p><b>Step 8</b> &minus; Click the “Next” button.</p>
+<img src="images/next.jpg" alt="Next" />
+<p><b>Step 9</b> &minus; Click “Install”.</p>
+<img src="images/install.jpg" alt="Install" />
+<p>Installation Screen will come up now and you have to wait until installation bar completes.</p>
+<img src="images/installation_screen.jpg" alt="Installation Screen" />
+<p>Now that the installation of DC role is finished, you have to configure it for you server.</p>
+<p><b>Step 10</b> &minus; Click “Server Manager” &rarr; Open the Notifications Pane by selecting the <b>Notifications icon</b> from the top of the Server Manager. From the notification regarding configuring AD DS (Active Directory Domain Services), click <b>Promote this server to a domain controller</b>.</p>
+<img src="images/notification_icon.jpg" alt="Notification Icon" />
+<p><b>Step 11</b> &minus; Click “Add a new forest” &rarr; Insert your root domain name into the <b>Root domain name</b> field. In my case, I have put “example.com”.</p>
+<img src="images/add_new_forest.jpg" alt="Add New Forest" />
+<p><b>Step 12</b> &minus; <b>Select a Domain and Forest functional level</b>. Once selected <b>fill in a DSRM password</b> in the provided password fields. The DSRM password is used when booting the Domain Controller into recovery mode.</p>
+<img src="images/select_domain.jpg" alt="Select Domain" />
+<p><b>Step 13</b> &minus; In the next screen which shows up, there is a warning on the DNS Options tab, click OK and then select <b>Next</b>.</p>
+<img src="images/dns_options_tab.jpg" alt="DNS Options Tab" />
+<p><b>Step 14</b> &minus; Enter NETBIOS name and click “Next”.</p>
+<img src="images/netbios.jpg" alt="NETBIOS" />
+<p><b>Step 15</b> &minus; Select location of the SYSVOL, Log files and Database folders and then click <b>Next</b>.</p>
+<img src="images/sysvol.jpg" alt="SYSVOL" />
+<p><b>Step 16</b> &minus; Click “Install” and wait until it is finished. The server will restart several times.</p>
+<img src="images/installed.jpg" alt="Installed" />
+<p>The installation is now complete.</p>
+<h1>Windows Server 2012 - DC Accounts</h1>
+<p>In Windows 2012, creating account OU and group is nearly the same as in the previous versions.</p>
+<p>To Create an OU user, please follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to: Server Manager &rarr; Tools &rarr; Active Directory Users and Computers.</p>
+<img src="images/active_directory_users.jpg" alt="Active Directory Users" />
+<p><b>Step 2</b> &minus; To create an OU named Management. Right-click domain in Active Directory Users and Computers, choose <b>New</b> and click <b>Organizational Unit</b>.</p>
+<img src="images/organizational_unit.jpg" alt="Organizational Unit" />
+<p><b>Step 3</b> &minus; Type Management to name the OU. Check the <b>Protect container from accidental deletion option</b>. This option will protect this object from accidental deletion.</p>
+<img src="images/management.jpg" alt="Management" />
+<p><b>Step 4</b> &minus; To create a user, Right-click on the <b>Management</b> OU &rarr; click <b>New</b> &rarr; and then click <b>User</b>.</p>
+<img src="images/user.jpg" alt="User" />
+<p><b>Step 5</b> &minus; Complete the field with the data of the users &rarr; then click Next.</p>
+<img src="images/data_user.jpg" alt="Data User" />
+<p><b>Step 6</b> &minus; Now type-in the password. Check on the tick box &rarr; User must change password at next logon. The user will be forced to change the password when the user logs in &rarr; Click Next &rarr; and then click <b>Finish</b>.</p>
+<img src="images/click_finish.jpg" alt="Click Finish" />
+<h1>Windows Server 2012 - File System</h1>
+<p>In Windows Server 2012 a new file system it is presented with is caller Resilient File System (ReFS).</p>
+<p>The key attributes of ReFS include &minus;</p>
+<ul class="list">
+<li><p>Maintaining a high level of data availability and reliability, even when the individual underlying storage devices experience failures.</p></li>
+<li><p>Providing a full, end-to-end resilient architecture when used in conjunction with Storage Spaces. When used together, ReFS and Storage Spaces provide enhanced resiliency to storage device failures.</p></li>
+</ul>
+<p>The significant functionality included with ReFS is described below &minus;</p>
+<ul class="list">
+<li><p><b>Integrity</b> &minus; ReFS stores data in a way that protects it from many of the common errors that can normally cause data loss. When ReFS is used in conjunction with a mirror space or a parity space, detected corruption — both metadata and user data, when integrity streams are enabled — can be automatically repaired using the alternate copy provided by Storage Spaces. In addition, there are Windows PowerShell cmdlets (<b>Get-FileIntegrity</b> and <b>Set-FileIntegrity</b>) that you can use to manage the integrity and disk scrubbing policies.</p></li>
+<li><p><b>Availability</b> &minus; ReFS prioritizes the availability of data. Historically, file systems were often susceptible to data corruption that would require the system to be taken offline for repair. With ReFS, if corruption occurs, the repair process is both localized to the area of corruption and performed online, requiring no volume downtime. Although rare, if a volume does become corrupted or you choose not to use it with a mirror space or a parity space, ReFS implements <b>salvage</b>, a feature that removes the corrupt data from the namespace on a live volume and ensures that good data is not adversely affected by non-repairable corrupt data. Because ReFS performs all repair operations online, it does not have an offline <b>chkdsk</b> command.</p></li>
+<li><p><b>Scalability</b> &minus; As the amount and size of data that is stored on computers continues to rapidly increase, ReFS is designed to work well with extremely large data sets — petabytes and larger — without performance impact. ReFS is not only designed to support volume sizes of 2^64 bytes (allowed by Windows stack addresses), but ReFS is also designed to support even larger volume sizes of up to 2^78 bytes using 16 KB cluster sizes. This format also supports 2^64 – 1-byte file sizes, 2^64 files in a directory and the same number of directories in a volume.</p></li> 
+<li><p><b>Proactive Error Correction</b> &minus; The integrity capabilities of ReFS are leveraged by a data integrity scanner, which is also known as a <i>scrubber</i>. The integrity scanner periodically scans the volume, identifying latent corruptions and proactively triggering a repair of that corrupt data.</p></li>
+</ul>
+<p>When the metadata for a ReFS directory is corrupted, subfolders and their associated files are automatically recovered. ReFS identifies and recovers the files while ReFS remains online. Unrecoverable corruption of the ReFS directory metadata affects only those files that are in the directory in which the corruption has occurred.</p>
+<p>ReFS includes a new registry entry, <b>RefsDisableLastAccessUpdate</b>, which is the equivalent of the previous <b>NtfsDisableLastAccessUpdate</b> registry entry. The new storage command lets in Windows PowerShell are available (Get-FileIntegrity and SetFileIntegrity) for you to manage the integrity and disk scrubbing policies.</p>
+<h1>Group Managed Service Accounts</h1>
+<p>The Managed Service Accounts (MSA) was introduced in Windows Server 2008 R2 to automatically manage (change) passwords of service accounts. Using MSA, you can considerably reduce the risk of system accounts running system services being compromised. MSA has one major problem which is the usage of such service account only on one computer. It means that MSA Service Accounts cannot work with cluster or NLB services, which operate simultaneously on multiple servers and use the same account and password. To fix this, Microsoft added the feature of <b>Group Managed Service Accounts (gMSA)</b> to Windows Server 2012.</p>
+<p>To create a gMSA, we should follow the steps given below &minus;</p>
+<p><b>Step 1</b> &minus; Create the KDS Root Key. This is used by the KDS service on DC to generate passwords.</p>
+<img src="images/kds_service.jpg" alt="KDS Service" />
+<p>To use the key immediately in the test environment, you can run the PowerShell command &minus;</p>
+<pre class="result notranslate">
+Add-KdsRootKey –EffectiveTime ((get-date).addhours(-10)) 
+</pre>
+<p>To check whether it creates successfully or not, we run the PowerShell command &minus;</p>
+<pre class="result notranslate">
+Get-KdsRootKey 
+</pre>
+<p><b>Step 2</b> &minus; To create and configure gMSA &rarr; Open the Powershell terminal and type &minus;</p>
+<p>New – ADServiceAccount – name gmsa1 – DNSHostNamedc1.example.com – PrincipalsAllowedToRetrieveManagedPassword "gmsa1Group"</p>
+<p>In which,</p>
+<ul class="list">
+<li><p><b>gmsa1</b> is the name of the gMSA account to be created.</p></li>
+<li><p><b>dc1.example.com</b> is the DNS server Name.</p></li>
+<li><p><b>gmsa1Group</b> is the active directory group which includes all systems that have to be used. This group should be created before in the Groups.</p></li>
+</ul>
+<p>To check it, Go to &rarr; Server Manager &rarr; Tools &rarr; Active Directory Users and Computers &rarr; Managed Service Accounts.</p>
+<img src="images/managed_service_accounts.jpg" alt="Managed Service Accounts" />
+<p><b>Step 3</b> &minus; To install gMAs on a server &rarr; open PowerShell terminal and type in the following commands &minus;</p>
+<ul class="list">
+<li>Install &minus; ADServiceAccount – Identity gmsa1</li>
+<li>Test &minus; ADServiceAccount gmsa1</li> 
+</ul>
+<p>The result should come “True” after running the second command, as shown in the screenshot given below.</p>
+<img src="images/true.jpg" alt="True" />
+<p><b>Step 4</b> &minus; Go to service properties, specify that the service will be run with a <b>gMSA account</b>. In the <b>This account</b> box in the <b>Log on</b> tab type the name of the service account. At the end of the name use symbol <b>&dollar;</b>, the password need not to be specified. After the changes are saved, the service has to be restarted.</p>
+<img src="images/log_on.jpg" alt="Log On" />
+<p>The account will get the “Log On as a Service” and the password will be retrieved automatically.</p>
+<h1>Group Policy Overview</h1>
+<p>The features of Group Policy Management were installed during the DC Role Installation. Many of the management features haven’t changed as compared to the previous versions of Windows Server. To create a GPO (Group Policy Overview), we need to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To create a GPO open the <b>Group Policy Management Console (GPMC)</b>, go to <b>Server Manager &rarr; Tools &rarr; Group Policy Management</b> as shown in the screenshot below.</p>
+<img src="images/gpm.jpg" alt="GPM" />
+<p><b>Step 2</b> &minus; Right-click on an OU &rarr; select the first option Create a GPO in this domain and Link it here.</p>
+<img src="images/ou.jpg" alt="OU" />
+<p><b>Step 3</b> &minus; Type the Name for this GPO object &rarr; click OK button. We have selected the name as <b>Test</b> GPO.</p>
+<img src="images/test_gpo.jpg" alt="Test GPO" />
+<p><b>Step 4</b> &minus; Right-click the GPO object and click Edit.</p>
+<img src="images/gpo_object.jpg" alt="GPO Object" />
+<h1>Windows Server 2012 - DHCP Role</h1>
+<p>As you know <b>Dynamic Host Configuration Protocol</b> (DHCP) is commonly implemented network services in today’s network environments. DHCP is primarily used to automatically distribute IP configuration settings to network clients, eliminating manually configuring hosts on TCP/IP-based networks.</p>
+<p>To Install DHCP role, you will have to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to “Server Manager” &rarr; Manage &rarr; Add Roles and Features.</p>
+<img src="images/add_roles_features.jpg" alt="Add Roles Features" />
+<p><b>Step 2</b> &minus; Click Next.</p>
+<img src="images/next_click.jpg" alt="Next Click" />
+<p><b>Step 3</b> &minus; Select the <b>Role-based or feature-based installation</b> option &rarr; click Next.</p>
+<img src="images/featurebased_installation.jpg" alt="featured-based Installation" />
+<p><b>Step 4</b> &minus; We will install a Local DHCP Role as it will Select a server from the Server Pool &rarr; then click Next.</p>
+<img src="images/local_dhcp.jpg" alt="Local DHCP" />
+<p><b>Step 5</b> &minus; From the <b>Roles</b> lists, check the DHCP Server role &rarr; click <b>Add Features</b> on the popup windows as shown in the following screenshots.</p>
+<img src="images/roles.jpg" alt="Roles" />
+<p></p>
+<img src="images/roles_list.jpg" alt="Roles List" />
+<p><b>Step 6</b> &minus; Click Next.</p>
+<img src="images/roles_list_next.jpg" alt="Roles Lists Next" />
+<p><b>Step 7</b> &minus; Click Next.</p>
+<img src="images/dhcp_server.jpg" alt="DHCP Server" />
+<p><b>Step 8</b> &minus; Click Install.</p>
+<img src="images/confirmation.jpg" alt="Confirmation" />
+<p><b>Step 9</b> &minus; Click Close.</p>
+<img src="images/click_close.jpg" alt="Click Close" />
+<h2>Post-deployment Configuration</h2>
+<p>In this section, we will see how to do the post-deployment configuration of the DHCP. Please follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Click on the warning icon and then click on “Complete DHCP Configuration”.</p>
+<img src="images/complete_dhcp_configuration.jpg" alt="Complete DHCP Configuration" />
+<p><b>Step 2</b> &minus; Click Next.</p>
+<img src="images/description.jpg" alt="Description" />
+<p><b>Step 3</b> &minus; Select a domain user account that has permissions to create objects in the Net Services container in Active directory or a domain admin account &rarr; click Next.</p>
+<img src="images/admin_account.jpg" alt="Admin account" />
+<p><b>Step 4</b> &minus; Click Close.</p>
+<img src="images/summary.jpg" alt="Summary" />
+<h2>Scope Implementation of DHCP</h2>
+<p>Now we have to configure the service to make it useful for the computers. To do this, we need to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Server Manager screen &rarr; Tools &rarr; DHCP.</p>
+<img src="images/dhcp.jpg" alt="DHCP" />
+<p><b>Step 2</b> &minus; Right-click on the DHCP Server &rarr; then click on “Add/Remove Bindings… “</p>
+<img src="images/dhcp_servers.jpg" alt="DHCP Server" />
+<p><b>Step 3</b> &minus; Ensure the static IP address of the server should appear as shown in the following screenshot.</p>
+<img src="images/ip_address.jpg" alt="IP Address" />
+<p><b>Step 4</b> &minus; Right-click on IPv4 &rarr; Select “New Scope”.</p>
+<img src="images/ipv4.jpg" alt="IPv4" />
+<p><b>Step 5</b> &minus; Click “Next”.</p>
+<img src="images/new_scope_wizard.jpg" alt="New Scope Wizard" />
+<p><b>Step 6</b> &minus; Enter Scope Name and description as shown in the following screenshot and then &rarr; Next.</p>
+<img src="images/enter_scope_name.jpg" alt="Enter Scope Name" />
+<p><b>Step 7</b> &minus; Enter the Start and End IP address, the Subnet mask, leave the Length as default “24” for class C subnet &rarr; click Next.</p>
+<img src="images/c_subnet.jpg" alt="C subnet" />
+<p><b>Step 8</b> &minus; Enter your IP range in the exclusion list. If you have devices on the network that require static IP address and also ensure that the excluded range falls with the Start and End range earlier specified, then &rarr; click Next.</p>
+<img src="images/ip_range.jpg" alt="IP Range" />
+<p><b>Step 9</b> &minus; Enter the desired lease duration for the assigned IP’s or leave as default &rarr; then click Next.</p>
+<img src="images/lease_duration.jpg" alt="Lease Duration" />
+<p><b>Step 10</b> &minus; Select &rarr; <b>Yes, I want to configure these options now</b> to configure the DHCP options for the new scope &rarr; then click on Next.</p>
+<img src="images/new_scope.jpg" alt="New Scope" />
+<p><b>Step 11</b> &minus; Enter the default gateway which is the IP of your Router &rarr; then click Next.</p>
+<img src="images/default_gateway.jpg" alt="Default Gateway" />
+<p><b>Step 12</b> &minus; Add DNS IP &rarr; click Next (we can put Google DNS or if it is a Domain environment you can put the DC IP there) then click &rarr; Next.</p>
+<img src="images/dns_ip.jpg" alt="DNS IP" />
+<p><b>Step 13</b> &minus; Specify your WINS Server if any and then click &rarr; Next.</p>
+<img src="images/wins_server.jpg" alt="WINS Server" />
+<p><b>Step 14</b> &minus; Select <b>Yes, I want to activate this scope now</b> option to activate the scope immediately and then click &rarr; Next.</p>
+<img src="images/activate_scope.jpg" alt="Activate Scope" />
+<p><b>Step 15</b> &minus; Click Finish.</p>
+<img src="images/scope_finish.jpg" alt="Scope Finish" />
+<h1>Windows Server 2012 - DNS Role</h1>
+<p>DNS Role is one of the most important services in a network with Domain Controllers Environment. It helps us to resolve domain names internally and externally to IP and to have access to the requested service for the respective domain.</p>
+<p>Let us now see how to install the DNS Role. For this we need to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To Install DNS role, go to “Server Manager” &rarr; Manage &rarr; Add Roles and Features.</p>
+<img src="images/manage.jpg" alt="Manage" />
+<p><b>Step 2</b> &minus; Click Next.</p>
+<img src="images/before_you_begin.jpg" alt="Before you Begin" />
+<p><b>Step 3</b> &minus;  Select the <b>Role-based</b> or <b>feature-based installation</b> option and then click Next.</p>
+<img src="images/installation_type.jpg" alt="Installation Type" />
+<p><b>Step 4</b> &minus; We will install a Local DNS role as it will select a server from the server pool &rarr; and then click Next.</p>
+<img src="images/server_select.jpg" alt="Server Select" />
+<p><b>Step 5</b> &minus; From the <b>Server Roles</b> lists, check the <b>DNS Server</b> role &rarr; click Add Features on the popup windows and then click Next.</p>
+<img src="images/server_role.jpg" alt="Server Role" />
+<p></p>
+<img src="images/select_role.jpg" alt="Select Role" />
+<p><b>Step 6</b> &minus; Click Next.</p>
+<img src="images/server_dns.jpg" alt="Server DNS" />
+<p><b>Step 7</b> &minus; Click Install.</p>
+<img src="images/installation_selections.jpg" alt="Installation Selections" />
+<p><b>Step 8</b> &minus; Wait until installation bar is complete.</p>
+<img src="images/installation_bar.jpg" alt="installation Bar" />
+<p>Once the installation is finished, click on <b>Close</b>.</p>
+<h1>Windows Server 2012 - Primary Zones</h1>
+<p>To manage DNS, we have to create a primary Zone because by default, there are no zones in order to manage the records.</p>
+<p><b>Step 1</b> &minus; To manage DNS, go to Server Manager &rarr; Tools &rarr; DNS &rarr; Right click on “Forward Lookup Zone” &rarr; New Zone.</p>
+<img src="images/tools.jpg" alt="Tools" />
+<p></p>
+<img src="images/new_zone.jpg" alt="New Zone" />
+<p><b>Step 2</b> &minus; Select “Primary Zone” and then click Next.</p>
+<img src="images/primary_zone.jpg" alt="Primary Zone" />
+<p><b>Step 3</b> &minus; Enter the name of the primary Zone for which you want to manage the records.</p>
+<img src="images/new_zone_wizard.jpg" alt="New Zone Wizard" />
+<p><b>Step 4</b> &minus; Select “Create a new file with this filename” option.</p>
+<img src="images/create_new_file.jpg" alt="Create New File" />
+<p><b>Step 5</b> &minus; If you want to update the record of this zone manually, you have to select “Do not allow dynamic Updates”, as shown in the following screenshot.</p>
+<img src="images/update_zone.jpg" alt="Update Zone" />
+<p><b>Step 6</b> &minus; Click the Finish button.</p>
+<img src="images/completing_new_zone.jpg" alt="Completing New Zone" />
+<h1>Windows Server 2012 - Manage Records</h1>
+<p>As you know, in DNS you can add records according to your need and in Windows server 2012 as well. This doesn’t change too much from its earlier version of Windows Server 2008.</p>
+<p>To add or manage records, we have to follow the steps given below &minus;</p>
+<p><b>Step 1</b> &minus; Server Manager &rarr; DNS &rarr; Right click on the server that has a DNS record, which in our case is <b>local</b>.</p>
+<img src="images/local.jpg" alt="Local" />
+<p><b>Step 2</b> &minus; Go to “Forward Lookup Zone”.</p>
+<img src="images/forward_lookup_zone.jpg" alt="Forward Lookup Zone" />
+<p><b>Step 3</b> &minus; Right Click on the empty Field &rarr; New Host (A or AAAA) …</p>
+<img src="images/new_host.jpg" alt="New Host" />
+<p><b>Step 4</b> &minus; Name field and the subdomain name or case is WWW. &rarr; IP address we put is 192.168.1.200. So, when we will type-in our browser <a href="https://www.example.com/" rel="nofollow" target="_blank">www.example.com</a>, it will redirect us to 192.168.1.200.</p>
+<img src="images/add_host.jpg" alt="Add Host" />
+<p><b>Step 5</b> &minus; To add a Mail Server Record, we add an MX record and then Right click &rarr; New Mail Exchanger as shown in the screenshot given below.</p>
+<img src="images/new_mail_exchanger.jpg" alt="New Mail Exchanger" />
+<p><b>Step 6</b> &minus; At “Fully qualifies domain name(FQDN) of mail server”, you enter the name of mail server &rarr; then in the “Mail server priority”, you enter a number. The smaller the number, the higher the priority.</p>
+<img src="images/fqdn.jpg" alt="FQDN" />
+<h1>Windows Server 2012 - IIS Overview</h1>
+<p>The IIS or <b>Internet Information Services</b> role is one of the most important services in Windows Server 2012. It has improved features as compared to its previous versions and it helps us to publish web application or webpages.</p>
+<p>Let us now see how to install the IIS Role for which you will have to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To Install IIS role, go to “Server Manager” &rarr; then Manage &rarr; and then to Add Roles and Features.</p>
+<img src="images/manage.jpg" alt="Manage" />
+<p><b>Step 2</b> &minus; Click on Next in the window which pops up.</p>
+<img src="images/before_you_begin.jpg" alt="Before you Begin" />
+<p><b>Step 3</b> &minus; Select the <b>Role-based</b> or <b>feature-based installation</b> option and then click on Next.</p>
+<img src="images/installation_type.jpg" alt="Installation Type" />
+<p><b>Step 4</b> &minus; I will install a Local IIS role as it will Select a server from the server pool &rarr; then click on Next.</p>
+<img src="images/server_select.jpg" alt="Server Select" />
+<p><b>Step 5</b> &minus; From the Roles lists, check the “Web server” (IIS) Server role &rarr; Next.</p>
+<img src="images/iis_server_role.jpg" alt="IIS Server role" />
+<p><b>Step 6</b> &minus; Click Next.</p>
+<img src="images/features_next.jpg" alt="Features Next" />
+<p><b>Step 7</b> &minus; Click Next.</p>
+<img src="images/web_server_role_next.jpg" alt="Web Server Role Next" />
+<p><b>Step 8</b> &minus; You can choose all the default setting or customize them according to you needs.</p>
+<img src="images/default_settings.jpg" alt="Default Settings" />
+<p><b>Step 9</b> &minus; Click Install.</p>
+<img src="images/confirmation_install.jpg" alt="Confirmation Install" />
+<p><b>Step 10</b> &minus; Wait until the Installation Wizard finishes. Once it is done click Close.</p>
+<img src="images/installation_progress.jpg" alt="Installation Progress" />
+<p><b>Step 11</b> &minus; Check if your IIS is installed correctly. This can be done by opening your internet explorer and then typing <b>http://localhost</b> and you should be able to see the following screenshot.</p>
+<img src="images/installed_correctly.jpg" alt="Installed Correctly" />
+<h1>Windows Server 2012 - IIS Security</h1>
+<p>The IIS (<b>Internet Information Services</b>) is facing internet all the time. So, it is important to follow some rules in order to minimize the risk of being hacked or having any other security issues. The first rule is to take all the updates of the system regularly. The second one is to create different application polls to this, which can be done by following the steps shown below.</p>
+<p><b>Step 1</b> &minus; You have to go to: Server Manager &rarr; Internet Information Services(IIS) Manager &rarr; Application Pulls.</p>
+<img src="images/application_pools.jpg" alt="Application Pools" />
+<p><b>Step 2</b> &minus; Click “Sites” &rarr; Right Click “Default Website” &rarr; Manage Website &rarr; Advance Settings.</p>
+<img src="images/sites.jpg" alt="Sites" />
+<p><b>Step 3</b> &minus; Select the Default Pools.</p>
+<img src="images/default_pools.jpg" alt="Default Pools" />
+<p><b>Step 4</b> &minus; Disable the OPTIONS method, this can be done by following the path – Server Manager &rarr; Internet Information Services (IIS) Manager &rarr; Request Filtering.</p>
+<img src="images/request_filtering.jpg" alt="Request Filtering" />
+<p><b>Step 5</b> &minus; In the action pane, select "Deny Verb" &rarr; Insert ‘OPTIONS’ in the Verb &rarr; OK.</p>
+<img src="images/deny_verb.jpg" alt="Deny Verb" />
+<p><b>Step 6</b> &minus; Enable Dynamic IP Restrictions blocks by going to – IIS Manager &rarr; Double click on "IP Address and Domain Restrictions" &rarr; Actions pane.</p>
+<img src="images/actions_pane.jpg" alt="Actions Pane" />
+<p><b>Step 7</b> &minus; Then select "Edit Dynamic Restriction Settings" &rarr; Modify and set the dynamic IP restriction settings according to your needs &rarr; press OK.</p>
+<img src="images/edit.jpg" alt="Edit" />
+<p><b>Step 8</b> &minus; Enable and Configure Request Filtering Rules, to do this – IIS Manager &rarr; Double click on "Request Filtering" &rarr; Change to the Rules tab &rarr; Actions Pane.</p>
+<img src="images/rules_tab.jpg" alt="Rules Tab" />
+<p><b>Step 9</b> &minus; Then select "Add Filtering Rule" &rarr; Set the required rules &rarr; Click OK.</p>
+<img src="images/add_filtering_rule.jpg" alt="Add Filtering Rule" />
+<p><b>Step 10</b> &minus; Enable logging, to do this we need to follow this path – IIS Manager &rarr; select the specific site you want to configure &rarr; Logging.</p>
+<img src="images/logging.jpg" alt="Loging" />
+<h1>Windows Server 2012 - Hyper-V</h1>
+<p>Virtualization is one of the most important technology feature and Microsoft has invested on this and the responsible role is called as Hyper-V.</p>
+<p>Let us now see how to install the Hyper-V Role, for doing this we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; To Install DNS role go to “Server Manager” &rarr; Manage &rarr; Add Roles and Features.</p>
+<img src="images/manage.jpg" alt="Manage" />
+<p><b>Step 2</b> &minus; Click Next.</p>
+<img src="images/before_you_begin.jpg" alt="Before you Begin" />
+<p><b>Step 3</b> &minus; Select the <b>Role-based</b> or <b>feature-based installation</b> option &rarr; click Next.</p>
+<img src="images/installation_type.jpg" alt="Installation Type" />
+<p><b>Step 4</b> &minus; I will install a Local Hyper-V role as it will Select a server from the server pool &rarr; Next.</p>
+<img src="images/server_select.jpg" alt="Server Select" />
+<p><b>Step 5</b> &minus; From the Roles lists, check the Hyper-V Server role &rarr; click Add Features on the popup windows which show up and then &rarr; Next.</p>
+<img src="images/hyperv_server_role.jpg" alt="Hyper-V Server Role" />
+<p><b>Step 6</b> &minus; Click Next.</p>
+<img src="images/hyperv.jpg" alt="Hyper-V" />
+<p><b>Step 7</b> &minus; Choose your server’s physical network adapters that will take part in the virtualization &rarr; Next.</p>
+<img src="images/virtual_switches.jpg" alt="Virtual Switches" />
+<p><b>Step 8</b> &minus; Under <b>Migration</b>, leave the default settings &rarr; <b>Next</b>.</p>
+<img src="images/migration.jpg" alt="Migration" />
+<p><b>Step 9</b> &minus; Choose the path where to save the file.</p>
+<img src="images/default_stores.jpg" alt="Default Stores" />
+<p><b>Step 10</b> &minus; Click Install and wait for the installation bar to finish.</p>
+<img src="images/confirm_install.jpg" alt="Confirmation Install" />
+<h1>Advanced Configuration</h1>
+<p>In this chapter, we will see how to create a virtual machine. Firstly, we should open the Hyper-V manager and then follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Open “Server Manager” &rarr; and then Click on “Hyper-V”.</p>
+<img src="images/click_hyperv.jpg" alt="Click Hyper-V" />
+<p><b>Step 2</b> &minus; Click “New” on the Right side Panel or click on Action button in the options as shown in the screenshot below.</p>
+<img src="images/action_button.jpg" alt="Action button" />
+<p><b>Step 3</b> &minus; Double Click on the Virtual Machine option as shown in the following screenshot.</p>
+<img src="images/virtual_machine_option.jpg" alt="Virtual Machine Option" />
+<p><b>Step 4</b> &minus; A new table will be open &rarr; Type the Name of your new machine and then click Next.</p>
+<img src="images/new_table.jpg" alt="New Table" />
+<p><b>Step 5</b> &minus; A new table will be open where you must allocate the memory. Keep in mind that you cannot choose more memory than what you have in your system.</p>
+<img src="images/allocate_the_memory.jpg" alt="Allocate the Memory" />
+<p><b>Step 6</b> &minus; In the <b>Connection</b> dropdown box, choose you physical network adaptor and click Next.</p>
+<img src="images/connection.jpg" alt="Connection" />
+<p><b>Step 7</b> &minus; Now it is time to Create a Virtual Hard disk. If you already have one, choose the second option.</p>
+<img src="images/connect_virtual_hard_disk.jpg" alt="Connect Virtual Hard Disk" />
+<p><b>Step 8</b> &minus; Select the Image of ISO that should be installed and then click <b>Finish</b>.</p>
+<img src="images/image_of_iso.jpg" alt="Image of ISO" />
+<p></p>
+<img src="images/completing_the_new_wizard.jpg" alt="Completing the New Wizard" />
+<p><b>Step 9</b> &minus; Connect to the Virtual machine. To do so, Right Click on the machine name and then &rarr; Connect.</p>
+<img src="images/connect.jpg" alt="Connect" />
+<p><b>Step 10</b> &minus; After that, the Installation of your ISO will continue.</p>
+<img src="images/iso_installation.jpg" alt="ISO Installation" />
+<h1>Configure WSUS Role</h1>
+<p>As you know the WSUS (Windows Server Update Services) is an update service of Microsoft which allows the companies to test updates before installing to live environment.</p>
+<p>To install this role, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to “Server Manager” &rarr; Manage &rarr; Add Roles and Feature &rarr; Next &rarr; Select “Role-based or feature-Based-Installation &rarr; Select a server from the pool server and then &rarr; Next.</p>
+<img src="images/select_a_server.jpg" alt="Select a Server" />
+<p><b>Step 2</b> &minus; Check “Windows Server Update Service” a pop-up window table will come out &rarr; click “Add Features” then &rarr; Next and then again &rarr; Next.</p>
+<img src="images/update_service.jpg" alt="Update Service" />
+<p></p>
+<img src="images/wizard.jpg" alt="Wizard" />
+<p><b>Step 3</b> &minus; Check box of <b>WID Database</b> and <b>WSUS Services</b></p>
+<img src="images/wid_database.jpg" alt="WID Database" />
+<p><b>Step 4</b> &minus; Choose the path for the content. If you have another partition other than C:, then install it there because C: can risk to become full &rarr; Next.</p>
+<img src="images/choose_the_path.jpg" alt="Choose the Path" />
+<p>Once this is done, you should wait for the installation to finish.</p>
+<h1>WSUS Policies and Tuning</h1>
+<p>In this chapter, we will see how to configure WSUS and tune it. The following steps should be followed for configuring it.</p>
+<p><b>Step 1</b> &minus; When you open it for the first time, you should do it by going to “Server Manager” &rarr; Tools &rarr; Windows Server Update Services, then a Configuration wizard will be opened and then click &rarr; Next.</p>
+<img src="images/server_manager_tools.jpg" alt="Server Manager Tools" />
+<p><b>Step 2</b> &minus; Click “Start Connecting” &rarr; Wait until the green bar is full and then &rarr; Next.</p>
+<img src="images/start_connecting.jpg" alt="Start Connecting" />
+<p></p>
+<img src="images/green_bar_full.jpg" alt="Green Bar Full" />
+<p><b>Step 3</b> &minus; Check the box for which the updates want to be taken, I did for English and then &rarr; Next.</p>
+<img src="images/choose_languages.jpg" alt="Choose Languages" />
+<p><b>Step 4</b> &minus; Check the box for all the products which you want to update. It is just for Microsoft products and it is recommended to include all the products related to Microsoft and then &rarr; Next.</p>
+<img src="images/choose_products.jpg" alt="Choose Products" />
+<p><b>Step 5</b> &minus; Choose the classification updated to be downloaded, if you have a very good internet speed, then check all the boxes, otherwise just check “Critical Updates”.</p>
+<img src="images/choose_classifications.jpg" alt="Choose Classifications" />
+<p><b>Step 6</b> &minus; Now we should schedule the updates which I will recommend to do it automatically during night time &rarr; Next.</p>
+<img src="images/configure_sync_schedule.jpg" alt="Configure Sync Schedule" />
+<p><b>Step 7</b> &minus; Check Box “Begin initial synchronization” &rarr; Finish.</p>
+<img src="images/begin_initial_synchronization.jpg" alt="Begin Initial Synchronization" />
+<p><b>Step 8</b> &minus; Now the WSUS console will be open and we must add the computer to WSUS. To do this, go to Options &rarr; Computers.</p>
+<img src="images/computers.jpg" alt="Computers" />
+<p><b>Step 9</b> &minus; If you have a Domain Controler environment, choose the second option like in my case, otherwise choose the first option and then &rarr; OK.</p>
+<img src="images/domain_control.jpg" alt="domain Control" />
+<p><b>Step 10</b> &minus; After you have done all this, you should approve updates, which is similar like how it is done in the previous version. To do this – Right click on the updates &rarr; Approve as shown in the screenshot given below.</p>
+<img src="images/approve.jpg" alt="Approve" />
+<p><b>Step 11</b> &minus; Then you should click <b>Approve for install</b> as shown in the screenshot given below.</p>
+<img src="images/approve_for_install.jpg" alt="Approve for Install" />
+<h1>Windows Server 2012 - Sharing of Files</h1>
+<p>Another important service for Windows Server is <b>Sharing Files</b> and for this purpose the Windows Server 2012 has – <b>File and Storage Services</b>, which is found in Server Manager on the left pane as shown in the screenshot given below.</p>
+<img src="images/all_servers.jpg" alt="All Servers" />
+<p>Now let us see how to create a <b>Share</b> in the system with its respective rights. To do this, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Click Server Manager &rarr; then click on File and Storage Services in the Server Manager sidebar &rarr; click on Shares &rarr; click on the Shares drop-down list &rarr; click on New Share.</p>
+<img src="images/click_on_shares.jpg" alt="Click on Shares" />
+<p><b>Step 2</b> &minus; This will open the New Share Wizard &rarr; From here, select a type of share &rarr; I will create a very basic SMB share, so click on <b>SMB Share – Quick</b>. We can later configure the user rights of this share.</p>
+<img src="images/smb_share.jpg" alt="SMB Share" />
+<p><b>Step 3</b> &minus; Click “Type a custom path” &rarr; click on Browse button.</p>
+<img src="images/custom_path.jpg" alt="Custom Path" />
+<p><b>Step 4</b> &minus; Select the folder that you want to share &rarr; Click <b>Select Folder</b>.</p>
+<img src="images/select_folder.jpg" alt="Select Folder" />
+<p><b>Step 5</b> &minus; Click Next.</p>
+<img src="images/share_name.jpg" alt="Share Name" />
+<p><b>Step 6</b> &minus; You can choose one of the three options as per your need. The explanations are also mentioned alongside the check boxes, once selected &rarr; Next.</p>
+<img src="images/other_settings.jpg" alt="Other Settings" />
+<p><b>Step 7</b> &minus; Click on <b>Customize Permissions</b> to authorize the rights that your users need to have.</p>
+<img src="images/customize_permissions.jpg" alt="Customize Permissions" />
+<p><b>Step 8</b> &minus; Click on <b>Add</b> if you would like to add other users.</p>
+<img src="images/add.jpg" alt="Add" />
+<p><b>Step 9</b> &minus; Click on <b>Select a principal</b>.</p>
+<img src="images/select_principal.jpg" alt="Select Principal" />
+<p><b>Step 10</b> &minus; We should give rights that can be done by entering the object name, which is <b>Backup Operator</b> in this case and then &rarr; OK.</p>
+<img src="images/backup_operator.jpg" alt="Backup Operator" />
+<p><b>Step 11</b> &minus; To this user we will give <b>Read\Write rights</b>, for that we will check the respective boxes and then &rarr; OK &rarr; OK &rarr; Next.</p>
+<img src="images/respective_boxes.jpg" alt="Respective Boxes" />
+<p><b>Step 12</b> &minus; Click on <b>Create</b>.</p>
+<img src="images/click_on_create.jpg" alt="Click on Create" />
+<h1>Windows Server 2012 - File Manager</h1>
+<p>Like its previous versions, the present Windows Server 2012 version has a <b>File Server Resource Manager Role</b>. As you know, this is a role that helps system administrators to manage shared folders in the features link in setting up limits or file extension restrictions. To install it, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to Server Manager &rarr; Manage &rarr; Add Roles and Features &rarr; Next &rarr; Check on the <b>Role-based or feature-based installation</b> box &rarr; Check on the <b>Select a server from the server pool</b> box &rarr; Next.</p>
+<p>Then, at the list of the roles find  <b>File and Storage Services</b> and expand it. After this, expand the <b>Files and iSCSI Services</b> &rarr; Check on the <b>File Server Resource Manager</b> box and then a pop-up window will open.</p>
+<img src="images/files.jpg" alt="Files" />
+<p><b>Step 2</b> &minus; Click on <b>Add features</b> and then &rarr; Next.</p>
+<img src="images/click_add_features.jpg" alt="Click Add Features" />
+<p><b>Step 3</b> &minus; Click the Next button.</p>
+<img src="images/next_buttons.jpg" alt="Next Buttons" />
+<p><b>Step 4</b> &minus; Click the Install button.</p>
+<img src="images/install_button.jpg" alt="Install Button" />
+<p>Now that we installed the <b>File Server Resource Manager</b>, let us open it by following the path given below.</p>
+<p><b>Step 1</b> &minus; Click on <b>Server Manager</b> &rarr; Tools &rarr; File Server Resource Manager.</p>
+<img src="images/file_server_resource_manager.jpg" alt="File Server Resource Manager" />
+<p>To set quota to a folder, we should follow the steps as below.</p>
+<p><b>Step 2</b> &minus; On the left panel click on <b>Quota Management</b> &rarr; expand <b>Quota Templates</b> &rarr; click on <b>Create Quota Template…</b> on the right-hand side panel as shown in the screenshot given below.</p>
+<img src="images/quota_management.jpg" alt="Quota Management" />
+<p><b>Step 3</b> &minus; A new table will be opened, where the most important aspect to put is <b>Space Limit</b> depending on the need. Here, we will put 2GB and then &rarr; OK.</p>
+<img src="images/space_limit.jpg" alt="Space Limit" />
+<p><b>Step 4</b> &minus; You must put the threshold for it and once the folder reaches the capacity, it will send you a notification where you will have an option to put the email.</p>
+<img src="images/threshold.jpg" alt="Threshold" />
+<p><b>Step 5</b> &minus; Click Ok.</p>
+<img src="images/limit.jpg" alt="Limit" />
+<p><b>Step 6</b> &minus; Then to attach this quota to a folder – Right Click on the template &rarr; click on <b>Create Quota from Template…</b></p>
+<img src="images/create_quota.jpg" alt="Create Quota" />
+<p><b>Step 7</b> &minus; Click on <b>Browse…</b> and then select your folder &rarr; Create.</p>
+<img src="images/click_on_browser.jpg" alt="Click On Browser" />
+<p><b>Step 8</b> &minus; To put a file restriction to your folders, you can go to the left pane <b>File Screening Management</b> &rarr; File screening templates &rarr; Click on the left panel <b>Create File Screen Template…</b></p>
+<img src="images/file_screening.jpg" alt="File Screening" />
+<p><b>Step 9</b> &minus; Click on <b>Browse…</b> and find the folder that you want &rarr; Create.</p>
+<img src="images/browser.jpg" alt="Browser" />
+<h1>Windows Server 2012 - Print Server</h1>
+<p>In this chapter, we will see how to install a <b>Print Server</b> which plays some very important roles for the system administrator and the management. We should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to Server Manager &rarr; Manage &rarr; Add Roles and Features &rarr; Next &rarr; Check on the <b>Role-based</b> or <b>feature-based installation</b> box and &rarr; Check on <b>Select a server from the server pool</b> and then &rarr; Next.</p>
+<p>Once it is done then, at the list of the roles find <b>Print and Document Services</b> &rarr; A popup window will open.</p>
+<img src="images/print_document_services.jpg" alt="Print Document Services" />
+<p><b>Step 2</b> &minus; Click on <b>Add features</b> and then &rarr; Next &rarr; Next &rarr; Next.</p>
+<img src="images/role_administration.jpg" alt="Role Administration" />
+<p><b>Step 3</b> &minus; Check on the <b>Print Server</b> box and &rarr; Next.</p>
+<img src="images/print_server.jpg" alt="Print Server" />
+<p><b>Step 4</b> &minus; Click Install.</p>
+<img src="images/confirm_installation_selections.jpg" alt="Confirm Installation Selections" />
+<h1>Windows Server 2012 - Easy Printing</h1>
+<p><b>Easy Printing</b> is a feature which allows the client that connects via RDS to print over the network. It is installed in Windows server 2012 by default. Easy Printing is basically where the printer device is defined on the client system and a printer is connected directly via the network. All configuration is done via Group Policy Objects.</p>
+<p>The configuration settings can be found at <b>Computer Configuration</b> – Administrative Templates – Remote Desktop Services – Printer Redirection.</p>
+<p>For <b>User Configuration</b>, it will be have the same path – Administrative Templates – Remote Desktop Services – Printer Redirection.</p>
+<img src="images/printer_redirection.jpg" alt="Printer Redirection" />
+<p>In administration, another important aspect is to set the priority for the printer, so the users have the same printer installer and can print as per their priorities. In this, the users printing with higher priorities overpass the printing will lower priorities.</p>
+<p>To do so, you need to add different logical printers and then add then as per the users or departments that have different priorities.</p>
+<p>To do this, firstly let us add a printer to the print server by following the steps given below.</p>
+<p><b>Step 1</b> &minus; Click on <b>Server Manager</b> &rarr; Tools &rarr; Print Management &rarr; then on the left panel click <b>Print Servers</b> &rarr; then right click on <b>Printers</b> and &rarr; Add Printer.</p>
+<img src="images/add_printer.jpg" alt="Add Printer" />
+<p><b>Step 2</b> &minus; Next, follow the wizard to add the network printer like you do for a normal workstation and at the end this printer will be shown in the <b>Printer Management</b>.</p>
+<img src="images/print_management.jpg" alt="Print Management" />
+<p><b>Step 3</b> &minus; Now that we have installed the printer, we can set the priority on this printer – Right click on the printer &rarr; Advanced &rarr; put a number at <b>Priority from 1-99</b> &rarr; OK.</p>
+<img src="images/advanced.jpg" alt="Advanced" />
+<h1>Configure Print Drivers</h1>
+<p>If we want to add other additional drivers, so that our clients find them easier to install a printer on their own. We must follow the steps given below &minus;</p>
+<p><b>Step 1</b> &minus; Go to, Server Manager &rarr; Tools &rarr; Print Manager &rarr; Action &rarr; Add Driver…</p>
+<img src="images/add_driver.jpg" alt="Add Driver" />
+<p><b>Step 2</b> &minus; Check both boxes &rarr; Next.</p>
+<img src="images/check_boxes.jpg" alt="Check Boxes" />
+<p><b>Step 3</b> &minus; Choose the drivers Path to be installed and then &rarr; Next.</p>
+<img src="images/drivers_path.jpg" alt="Drivers Path" />
+<p><b>Step 4</b> &minus; Click the Finish button.</p>
+<img src="images/button_finish.jpg" alt="Button Finish" />
+<h1>Windows Server 2012 - Network Services</h1>
+<p>Windows has many network services too and you might already be knowing that it can become a router or a VPN Server too. Let us see how to use the Windows server 2012 as a router by installing the <b>Remote Access</b> role to it.</p>
+<p><b>PS</b> &minus; Server should have 2 network cards – One inside the LAN and the other facing the internet.</p>
+<p>To add the Remote Access role, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to, Server Manager &rarr; Manage &rarr; Add Roles and Features &rarr; Next &rarr; Check <b>Role-based</b> or <b>feature-based installation</b> &rarr; Check <b>Select a server from the server pool</b> &rarr; Next.</p>
+<p>Once all of it is done, then at the list of the roles find <b>Remote Access</b> and check it &rarr; A pop-up window will open.</p>
+<img src="images/remote_access.jpg" alt="Remote Access" />
+<p><b>Step 2</b> &minus; Click “Add Features” &rarr; Next.</p>
+<img src="images/remote_access_features.jpg" alt="Remote Access Features" />
+<p><b>Step 3</b> &minus; Click Next.</p>
+<img src="images/remote_access_combines.jpg" alt="Remote Access Combines" />
+<p><b>Step 4</b> &minus; Check on the <b>DirectAccess and VPN(RAS)</b> and <b>Routing</b> check boxes.</p>
+<img src="images/ras.jpg" alt="RAS" />
+<p><b>Step 5</b> &minus; Click <b>Install</b> and wait for it to be installed completely.</p>
+<img src="images/installed_completely.jpg" alt="Installed Completely" />
+<p>After the installation is done, let us now see the setup of the router. For this, we need to follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to, Server Manager &rarr; Tools &rarr; Routing and Remote Access.</p>
+<img src="images/routing.jpg" alt="Routing" />
+<p><b>Step 2</b> &minus; Right click &rarr; and then again click on <b>Configure and Enable Routing and Remote Access</b> as shown in the following screenshot.</p>
+<img src="images/enable_routing.jpg" alt="Enable Routing" />
+<p><b>Step 3</b> &minus; Select the <b>Network address translation (NAT)</b> option &rarr; Next.</p>
+<img src="images/nat.jpg" alt="NAT" />
+<p><b>Step 4</b> &minus; Now choose your Ethernet card that will be facing your internet site as shown in the following image and then &rarr; Next.</p>
+<img src="images/ethernet_card.jpg" alt="Ethernet Card" />
+<p><b>Step 5</b> &minus; Choose <b>I will set up name and address services later</b> as we have already set up the <b>DHCP</b> and <b>DNS</b> and then &rarr; Next.</p>
+<img src="images/dhcp_dns.jpg" alt="DHCP DNS" />
+<p><b>Step 6</b> &minus; Click the Finish button.</p>
+<img src="images/finished.jpg" alt="Finished" />
+<p>Now let us see how to make the VPN Setup to allow the employees to connect from home. To do this, we must follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to, Server Manager &rarr; Tools &rarr; Routing and Remote Access &rarr; Right click &rarr; and then again click on <b>Configure and Enable Routing and Remote Access</b> &rarr; Custom Configuration and then &rarr; Next.</p>
+<img src="images/configure_and_enable_routing.jpg" alt="Configure and Enable Routing" />
+<p><b>Step 2</b> &minus; VPN Access and then &rarr; Next.</p>
+<img src="images/vpn_access.jpg" alt="VPN Access" />
+<p><b>Step 3</b> &minus; Click the Finish button.</p>
+<img src="images/click_finish_button.jpg" alt="Click Finish Button" />
+<h1>Windows Server 2012 - Backup Management</h1>
+<p>In this chapter, we will install and configure <b>Backup</b> which does not differ too much from the previous versions.</p>
+<p>To <b>Install the backup</b> feature, we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to Server Manager &rarr; Manage &rarr; Add Roles and Features &rarr; Next &rarr; Check the <b>Role-based</b> or <b>feature-based installation</b> box &rarr; then check on the <b>Select a server from the server pool</b> box and then click Next.</p>
+<p>Once all this is done, check the <b>Windows Backup Server</b> box and then click on Next as shown in the following screenshot.</p>
+<img src="images/windows_backup_server.jpg" alt="Windows Backup Server" />
+<p><b>Step 2</b> &minus; Click <b>Install</b> and then wait for the process to Finish.</p>
+<img src="images/click_install_wait.jpg" alt="Click Install Wait" />
+<p>Now let us go and <b>Configure the Backup</b> Feature it, for which we should follow the steps given below.</p>
+<p><b>Step 1</b> &minus; Go to <b>Server Manager</b> &rarr; Tools &rarr; Windows Server Backup.</p>
+<img src="images/server_backup.jpg" alt="Server Backup" />
+<p><b>Step 2</b> &minus; Click on <b>Backup Schedule…</b> in the left side panel or click on <b>Action</b> at the top of the screen as shown in the following screenshot.</p>
+<img src="images/backup_schedule.jpg" alt="Backup Schedule" />
+<p><b>Step 3</b> &minus; Click Next.</p>
+<img src="images/getting_started.jpg" alt="Getting Started" />
+<p><b>Step 4</b> &minus; If you want to backup a file or a folder, you can click on custom file, but in this case I want to do a full backup of the server. So, we should click on the first option <b>Full server (recommended)</b> and then click Next.</p>
+<img src="images/full_server.jpg" alt="Full Server" />
+<p><b>Step 5</b> &minus; We should do backup once in a day, so we will choose the first option and the appropriate time, which generally is recommended at night &rarr; Next.</p>
+<img src="images/backup.jpg" alt="Backup" />
+<p><b>Step 6</b> &minus; We should not click on the <b>Back Up to a shared network folder</b> option because the backup should be saved somewhere out of the server that is being backed up and then click on Next.</p>
+<img src="images/shared_network.jpg" alt="Shared Network" />
+<p><b>Step 7</b> &minus; At the location, put the shared folder path and then &rarr; Next.</p>
+<img src="images/folder_path.jpg" alt="Folder Path" />
+<p><b>Step 8</b> &minus; It will pop-up a credentials table asking you for the username and password of the shared folder which you should put here and then click &rarr; OK.</p>
+<img src="images/credentials.jpg" alt="Credentials" />
+<p><b>Step 9</b> &minus; Click the Finish button.</p>
+<img src="images/confirmation_finished.jpg" alt="Confirmation Finished" />
+<p><b>Step 10</b> &minus; Now you will get a window showing the status if the backup was created successfully or not, which can be seen in the following screenshot.</p>
+<img src="images/status.jpg" alt="Status" />
+<hr />
+<div class="pre-btn">
+<a href="windows_server_2012_backup_management.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div><div class="print-btn">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="windows_server_2012_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Windows Server 2012 Quick Guide",
+    "name": "Windows Server 2012 Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/windows_server_2012/images/server_2012.jpg",
+        "width": 600,
+        "height": 184
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:51.",
+    "dateModified": "July 23 2017 03:34:51.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Windows Server 2012 codenamed Windows Server 8 is the most recent version of the operating system from Microsoft regarding server management. But it is not the last one, as the last one is Windows Server 2016. Officially it was released on August 1st, 201..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Windows Server 2012",
+                "@id": "https://www.tutorialspoint.com/windows_server_2012"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Quick Guide"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/windows_server_2012/windows_server_2012_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 17:11:05 GMT -->
+</html>

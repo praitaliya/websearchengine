@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:23:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Continuous Integration Quick Guide</title>
+<meta name="description" content="Continuous Integration Quick Guide - Learn Continuous Integration starting from the Overview, Software, Reducing Risks, Version Control, Features, Requirements, Building a Solution, Build Scripts, Building on the Server, Checking in Source Code, Creating a Project in TeamCity, Defining Tasks, Build Failure Notifications, Documentation and Feedback, Testing, Inspection, Database Integration, Deployment, Best Practices." />
+<meta name="keywords" content="Continuous Integration, Tutorial, Overview, Software, Reducing Risks, Version Control, Features, Requirements, Building a Solution, Build Scripts, Building on the Server, Checking in Source Code, Creating a Project in TeamCity, Defining Tasks, Build Failure Notifications, Documentation and Feedback, Testing, Inspection, Database Integration, Deployment, Best Practices." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #24605c url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #24605c !important;}
+.submenu-item{ border-bottom: 2px solid #24605c !important; border-top: 2px solid #24605c !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/continuous_integration/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/continuous_integration/images/continuous-integration-mini-logo.jpg" alt="Continuous Integration Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Continuous Integration Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/index.htm">CI - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_overview.htm">CI - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_software.htm">CI - Software</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_reducing_risks.htm">CI - Reducing Risks</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_version_control.htm">CI - Version Control</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_features.htm">CI - Features</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_requirements.htm">CI - Requirements</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_building_a_solution.htm">CI - Building a Solution</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_build_scripts.htm">CI - Build Scripts</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_building_on_the_server.htm">CI - Building On the Server</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_checking_in_source_code.htm">CI - Checking in Source Code</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_creating_project_teamcity.htm">CI - Creating a Project in TeamCity</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_defining_tasks.htm">CI - Defining Tasks</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_build_failure_notifications.htm">CI - Build Failure Notifications</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_documentation_feedback.htm">CI - Documentation and Feedback</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_testing.htm">CI - Testing</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_inspection.htm">CI - Inspection</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_database.htm">CI - Database</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_deployment.htm">CI - Deployment</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_best_practices.htm">CI - Best Practices</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Continuous Integration Resources</li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm">CI - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_useful_resources.htm">CI - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_discussion.htm">CI - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Continuous Integration - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_best_practices.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Continuous Integration - Overview</h1>
+<p>Continuous Integration was first introduced in the year 2000 with the software known as <b>Cruise Control</b>. Over the years, Continuous Integration has become a key practice in any software organization. This is a development practice that calls upon development teams to ensure that a build and subsequent testing is conducted for every code change made to a software program. This concept was meant to remove the problem of finding late occurrences of issues in the build lifecycle. Instead of the developers working in isolation and not integrating enough, Continuous Integration was introduced to ensure that the code changes and builds were never done in isolation.</p>
+<h2>Why Continuous Integration?</h2>
+<p>Continuous integration has become a very integral part of any software development process. The continuous Integration process helps to answer the following questions for the software development team.</p>
+<ul class="list">
+<li><p>Do all the software components work together as they should? – Sometimes systems can become so complex that there are multiple interfaces for each component. In such cases, it’s always critical to ensure that all the software components work seamlessly with each other.</p></li>
+<li><p>Is the code too complex for integration purposes? – If the continuous integration process keeps on failing, there could be a possibility that the code is just too complex. And this could be a signal to apply proper design patterns to make the code lesser complex and more maintainable.</p></li>
+<li><p>Does the code adhere to the established coding standards? – Most of the test cases will always check that the code is adhering to the proper coding standards. By doing an automated test after the automated build, this is a good point to check if the code meets all the desired coding standards.</p></li>
+<li><p>How much code is covered by automated tests? – There is no point in testing code if the test cases don’t cover the required functionality of the code. So it’s always a good practice to ensure that the test cases written should cover all the key scenarios of the application.</p></li>
+<li><p>Were all the tests successful after the latest change? – If a test fails, then there is no point in proceeding with the deployment of the code, so this is a good point to check if the code is ready to move to the deployment stage or not.</p></li>
+</ul>
+<h2>Workflow</h2>
+<p>The following image shows a quick workflow of how the entire Continuous Integration workflow works in any software development project. We will look at this in detail in the subsequent chapters.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/workflow.jpg" alt="Workflow" />
+<p>So, based on the above workflow, this is generally how the continuous integration process works.</p>
+<ul class="list">
+<li><p>First, a developer commits the code to the version control repository. Meanwhile, the Continuous Integration server on the integration build machine polls source code repository for changes (e.g., every few minutes).</p></li>
+<li><p>Soon after a commit occurs, the Continuous Integration server detects that changes have occurred in the version control repository, so the Continuous Integration server retrieves the latest copy of the code from the repository and then executes a build script, which integrates the software</p></li>
+<li><p>The Continuous Integration server generates feedback by e-mailing build results to the specified project members.</p></li>
+<li><p>Unit tests are then carried out if the build of that project passes. If the tests are successful, the code is ready to be deployed to either the staging or production server.</p></li>
+<li><p>The Continuous Integration server continues to poll for changes in the version control repository and the whole process repeats.</p></li>
+</ul>
+<h1>Continuous Integration - Software</h1>
+<p>The software part is the most important aspect of any Continuous Integration process. This chapter focusses on the software which will be needed for the entire Continuous Integration process.</p>
+<h3>Source Code Repository</h3>
+<p>The source code repository is used for maintaining all the source code and all the changes made to it. The two most popular ones for source code repository management is subversion and Git with Git being the most recent popular system. We will now look at how to get Git installed on the system.</p>
+<h3>System Requirements</h3>
+<table class="table table-bordered">
+<tr>
+<td style="vertical-align:middle; width:35%;">Memory</td>
+<td>2 GB RAM (recommended)</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Disk Space</td>
+<td>200 MB HDD for the installation. Additional storage is required to store the project source code and this is dependent on the source code being added.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Operating System Version</td>
+<td>Can be installed on Windows, Ubuntu/Debian, Red Hat/Fedora/CentOS, Mac OS X.</td>
+</tr>
+</table>
+<h2>Installing Git</h2>
+<p><b>Step 1</b> &minus; The official website for Git is <a target="_blank" rel="nofollow" href="https://git-scm.com/">https://git-scm.com/</a>. If you click on the link, you will get to the home page of the Git official website as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/official_website.jpg" alt="Official Website" />
+<p><b>Step 2</b> &minus; To download Git, just scroll down the screen and go to the Downloads section and click Downloads.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/downloads_section.jpg" alt="Downloads Section" />
+<p><b>Step 3</b> &minus; Click the Windows link and the download for Git will begin automatically.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git.jpg" alt="GIT" />
+<p><b>Step 4</b> &minus; Click the downloaded .exe file for Git. In our case, we are using the Git-2.6.1-64-bit.exe file. Click Run which comes appears on the next screen.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/exe_file.jpg" alt="Exe File" />
+<p><b>Step 5</b> &minus; Click the Next button that appears on the following screen.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/next_button.jpg" alt="Next Button" />
+<p><b>Step 6</b> &minus; Click Next in the following screen to accept the General License agreement.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/general_license_agreement.jpg" alt="General License agreement." />
+<p><b>Step 7</b> &minus; Choose the location for your Git installation.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git_installation.jpg" alt="GIT Installation" />
+<p><b>Step 8</b> &minus; Click Next to accept the default components that are need to be installed.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/default_components.jpg" alt="Default Components" />
+<p><b>Step 9</b> &minus; Choose the option of ‘Use Git from the Windows command prompt’ since we are going to be using Git from Windows.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git_from_windows.jpg" alt="Git From Windows" />
+<p><b>Step 10</b> &minus; In the following screen, accept the default setting of ‘Checkout Windows-style, commit Unix-style line endings’ and click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/checkout_windows_style.jpg" alt="Check out Windows Style" />
+<p><b>Step 11</b> &minus; In the following screen, choose the option of ‘Use Windows default console window’, since we are using Windows as the system for installation of Git.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/default_console_window.jpg" alt="Default Console Window" />
+<p>The installation will now start, and the subsequent steps can be followed for configuring Git, once the installation is complete.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/finish.jpg" alt="Finish" />
+<h2>Configuring Git</h2>
+<p>Once Git has been installed, the configuration steps need to be carried out for the initial configuration of Git.</p>
+<p>The first thing that needs to be done is to configure the identity in Git and then to configure a user name and email. This is important because every <b>Git commit</b> uses this information, and it’s immutably baked into the commits you start creating. One can do this by opening the command prompt and then enter the following commands &minus;</p>
+<pre class="result notranslate">
+git config –global user.name “Username”
+git config –global user.email “emailid”
+</pre>
+<p>The following screenshot is an example for better understanding.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/administrator_command_prompt.jpg" alt="Administrator Command Prompt" />
+<p>These commands will actually change the configuration file of Git accordingly. To ensure your settings have taken effect, you can list down the settings of the Git configuration file by using issuing the following command.</p>
+<pre class="result notranslate">
+git config --list
+</pre>
+<p>An example of the output is shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/example_output.jpg" alt="Example Output" />
+<h2>Continuous Integration Server</h2>
+<p>The next crucial software required for the entire continuous integration pipeline is the Continuous Integration software itself. Following are the most commonly used Continuous Integration softwares used in the industry &minus;</p>
+<ul class="list">
+<li><p><b>Jenkins</b>&minus; This is an open source Continuous Integration software which is used by a lot of development communities.</p></li>
+<li><p><b>Jet Brains TeamCity</b> &minus; This is one of the most popular commercial Continuous Integration software’s available and most companies use this for their Continuous Integration needs.</p></li>
+<li><p><b>Atlassian Bamboo</b> &minus; This is another popular Continuous Integration software provided by a company called Atlassian Pvt. Ltd.</p></li>
+</ul>
+<p>All of the softwares mentioned above, work on the same model for Continuous Integration. For the purpose of this tutorial, we will look at <b>Jetbrains TeamCity</b> for the Continuous Integration server.</p>
+<h2>Installing TeamCity</h2>
+<p>Following are the steps and the system requirements for installing Jet Brains TeamCity in your computer.</p>
+<h3>System Requirements</h3>
+<table class="table table-bordered">
+<tr>
+<td style="vertical-align:middle; width:35%;">Memory</td>
+<td>4 GB RAM (recommended)</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Disk Space</td>
+<td>1 GB HDD for the installation. Additional storage is required to store the build workspace for each project.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Operating System Version</td>
+<td>Can be installed on Windows, Linux, Mac OS X.</td>
+</tr>
+</table>
+<h3>Installation</h3>
+<p><b>Step 1</b> &minus; The official website for TeamCity is<a target="_blank" rel="nofollow" href="https://www.jetbrains.com/teamcity/">https://www.jetbrains.com/teamcity/</a>. If you click the given link, you will go to the home page of the TeamCity official website as shown in the following screenshot. You can browse the page to download the required software for TeamCity.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/teamcity_official_website.jpg" alt="Official Website of Teamcity" />
+<p><b>Step 2</b> &minus; The downloaded .exe is being used for the purpose of executing <b>TeamCity-9.1.6.exe</b>. Double-click the executable and then click Run in the next screen that pops up.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/run_teamcity.jpg" alt="Run TeamCity" />
+<p><b>Step 3</b> &minus; Click Next to start the setup.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/teamcity_setup_wizard.jpg" alt="TeamCity Setup Wizard" />
+<p><b>Step 4</b> &minus; Click the ‘I Agree’ button to accept the license agreement and proceed with the installation.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/i_agree_button.jpg" alt="I Agree Button" />
+<p><b>Step 5</b> &minus; Choose the location for the installation and click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/destination_folder.jpg" alt="Destination Folder" />
+<p><b>Step 6</b> &minus; Choose the default components for the installation and click Next</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/default_components_teamcity_setup.jpg" alt="Default Components TeamCity Setup" />
+<p>This will start the installation process. Once completed the configuration process will follow.</p>
+<p><b>Step 7</b> &minus; Choose a port number for the server to run. Best is to use a different port such as <b>8080</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/port_number.jpg" alt="Port Number" />
+<p><b>Step 8</b> &minus; Next it will ask for which account TeamCity needs to run as. Choose the SYSTEM account and Click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/system_account.jpg" alt="System Account" />
+<p><b>Step 9</b> &minus; Next it will ask for the services which needs to be started. Accept the default ones and then click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/setup_services.jpg" alt="Setup Services" />
+<h2>Configuring TeamCity</h2>
+<p>Once the installation is complete, the next step is the configuration of TeamCity. This software can be opened by browsing on the following URL in the browser &minus;</p>
+<p><b>http://locahost:8080</b></p>
+<p><b>Step 1</b> &minus; The first step is to provide the location of the builds, which will be carried out by TeamCity. Choose the desired location and click the Proceed button.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/location_of_the_builds.jpg" alt="Location of the Builds" />
+<p><b>Step 2</b> &minus; The next step is to specify the database for storing all the TeamCity artefacts. For the purpose of the tutorial, one can choose the <b>Internal (HSQLDB)</b>, which is an internal database that is best suited when using products for testing purposes.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/internal_database.jpg" alt="Internal Database" />
+<p>TeamCity will then process all the necessary steps to get it up and running.</p>
+<p><b>Step 3</b> &minus; Next you will be requested to Accept the license agreement. Accept the same and click Continue.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/accept_license_agreement.jpg" alt="Accept License Agreement" />
+<p><b>Step 4</b> &minus; You need to create an administrator account that will be used to log into the TeamCity software. Enter the required details and click the ‘Create Account’ button.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/teamcity_create_account_button.jpg" alt="TeamCity Create Account Button" />
+<p>You will now be logged into TeamCity.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/teamcity_login.jpg" alt="TeamCity Login" />
+<h2>The Build Tool</h2>
+<p>The Build tool is a tool which ensures that the program is built in a particular way. The tool will normally carry out a list of tasks, which are required for the program to be built in a proper manner. Since in our example, we are going to be looking at a <b>.Net program</b> , we will be looking at <b>MSBuild</b> as the build tool. The MSBuild tool looks at a build file which contains a list of tasks that are used to build the project. Let’s look at a typical Build file for a web configuration project.</p>
+<p>Following are the key sections of the Build file, which need to be considered.</p>
+<h3>IIS Settings</h3>
+<p>Following settings are used to determine which is the port number, what is the path on the web server and what type of authentication is required when the application is run. These are important settings, which will be changed via the MSBuild command when we learn how the deployment will be carried out later on in the tutorial.</p>
+<pre class="prettyprint notranslate">
+&lt;UseIIS&gt;True&lt;/UseIIS&gt;
+&lt;AutoAssignPort&gt;True&lt;/AutoAssignPor&gt;
+&lt;DevelopmentServerPort&gt;61581&lt;/DevelopmentServerPort&gt;
+&lt;DevelopmentServerVPath&gt;/&lt;/DevelopmentServerVPath&gt;
+&lt;IISUrl&gt;http://localhost:61581/&lt;/IISUrl&gt;
+&lt;NTLMAuthentication&gt;False&lt;/NTLMAuthentication&gt;
+</pre>
+<h3>ItemGroup</h3>
+<p>This is used to tell the Build server what are all the dependent binaries that are required to run this project.</p>
+<pre class="prettyprint notranslate">
+&lt;ItemGroup&gt;
+   &lt;Reference Include = "System.Web.ApplicationServices" /&gt;
+   &lt;Reference Include = "System.ComponentModel.DataAnnotations" /&gt;
+</pre>
+<p></p>
+<pre class="prettyprint notranslate">
+&lt;ItemGroup&gt;
+   &lt;Compile Include = "App_Start\BundleConfig.cs" /&gt;
+   &lt;Compile Include = "App_Start\FilterConfig.cs" /&gt;
+</pre>
+<h3>.Net Framework Version</h3>
+<p>The <b>TargetFrameworkVersion</b> tells which is the version of .Net that needs to be present for the project to work. This is absolutely required because if the build server does not have this in place, the build will fail.</p>
+<pre class="prettyprint notranslate">
+&lt;TargetFrameworkVersion&gt;v4.5&lt;/TargetFrameworkVersion&gt;
+</pre>
+<h3>Deployment Environment – Amazon</h3>
+<p>For the purpose of this tutorial, we will ensure our Continuous Integration server has the ability to deploy our application to Amazon. For this, we need to ensure the following artefacts are in place.</p>
+<h2>Database Server</h2>
+<p>Perform the following steps to ensure that the database server is in place in Amazon for the deployment.</p>
+<p><b>Step 1</b> &minus; Go to the Amazon Console &minus; <a target="_blank" rel="nofollow" href="https://aws.amazon.com/console/">https://aws.amazon.com/console/.</a></p>
+<p>Login with your credentials. Note that you can apply for a free id on the amazon site, which will allow you to have a free tier that allows you to use some of the resources on Amazon free of cost.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/aws_management_console.jpg" alt="AWS Management Console" />
+<p><b>Step 2</b> &minus; Go to the RDS Section to create your database.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/rds_section.jpg" alt="RDS Section" />
+<p><b>Step 3</b> &minus; Click Instances in the next screen that pops up.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/instances.jpg" alt="Instances" />
+<p><b>Step 4</b> &minus; Click the <b>Launch DB</b> option in the next screen that comes up.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/launch_db.jpg" alt="Launch DB" />
+<p><b>Step 5</b> &minus; Choose the SQL Server tab and then choose the Select option for SQL Server Express.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/sql_server_tab.jpg" alt="SQL Server Tab" />
+<p><b>Step 6</b> &minus; Ensure that the following details are entered to confirm that you are using the free tier of databases available from Amazon.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/free_tier_of_databases.jpg" alt="Free Tier of DataBases" />
+<p><b>Step 7</b> &minus; Click the Next Step button once all the fields are filled.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/next_button_aws_console.jpg" alt="Next Button AWS Console" />
+<p><b>Step 8</b> &minus; In the next screen that comes up, accept all the default settings and Click <b>Launch DB Instance</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/launch_db_instance.jpg" alt="Launch DB Instance" />
+<p><b>Step 9</b> &minus; You will then be presented with a screen that says that the DB is being successfully launched. On the same page, there will be a button to view the DB Instance. Click the link to see your <b>DB Instance</b> being set up.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/db_launched.jpg" alt="DB Launched" />
+<p></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/db_instance_creation.jpg" alt="DB Instance Creation" />
+<p>After some time, the status of the above screen will change to notify that the DB Instance has been successfully created.</p>
+<h2>Web Server</h2>
+<p>The next step is to create your web server on Amazon, which will host the web application. This can be done by following the subsequent steps to have this in place.</p>
+<p><b>Step 1</b> &minus; Go to Amazon Console &minus; <a target="_blank" rel="nofollow" href="https://aws.amazon.com/console/">https://aws.amazon.com/console/</a>.</p>
+<p>Login with your credentials. Note that you can apply for a <b>free id on the Amazon site</b>, which will allow you to have a free tier that allows you to use some of the resources on Amazon free of cost.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/login.jpg" alt="Login" />
+<p><b>Step 2</b> &minus; Go to the <b>EC2 section</b> to create your web server.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/ec2_section.jpg" alt="EC2 Section" />
+<p><b>Step 3</b> &minus; In the next screen, click Launch Instance.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/launch_instance.jpg" alt="Launch Instance" />
+<p><b>Step 4</b> &minus; Click Windows – <b>Microsoft Windows Server 2010 R2 Base</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/microsoft_windows_server_2010_r2_base.jpg" alt="Microsoft Windows Server 2010 R2 Base" />
+<p><b>Step 5</b> &minus; Choose the <b>t2.micro</b> option, which is a part of the free tier. Click <b>Next: Configure Instance Details</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/t2_micro_option.jpg" alt="T2 Micro Option" />
+<p><b>Step 6</b> &minus; Accept the default settings on the next screen that comes up and then choose the option <b>Next: Add Storage</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/next_add_storage.jpg" alt="Next Add Storage" />
+<p><b>Step 7</b> &minus; Accept the default settings on the next screen and choose the option <b>Next: Tag Instance</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/next_tag_instance.jpg" alt="Next Tag Instance" />
+<p><b>Step 8</b> &minus; Accept the default settings on the next screen and choose the option of <b>Next: Configure Security Group</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/next_configure_security_group.jpg" alt="Next Configure Security Group" />
+<p><b>Step 9</b> &minus; Accept the default settings on the next screen and choose the option of <b>Review and Launch</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/review_launch.jpg" alt="Review and Launch" />
+<p><b>Step 10</b> &minus; Click Launch in the next screen that comes up.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/launch.jpg" alt="Launch" />
+<p><b>Step 11</b> &minus; In the next screen that comes up, you will be prompted to create a key pair. This will be used to log into the server at a later point of time. Just create the key pair and click <b>Launch Instance</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/key_pair_launch_instance.jpg" alt="Key Pair Launch Instance" />
+<p>The instance will now be set up in Amazon.</p>
+<h1>Continuous Integration - Reducing Risks</h1>
+<p>There are chances that things will go wrong on a project. By effectively practicing CI, you find out what happens at every step along the way, rather than later when the project is into the development cycle. CI helps you identify and mitigate risks when they occur, making it easier to evaluate and report on the health of the project based on concrete evidence.</p>
+<p>This section is going to concentrate on the risks that can be avoided by using Continuous Integration.</p>
+<p>On any project, there are many risks that need to be managed. By eliminating the risks earlier in the development lifecycle, there are lesser chances of these risks developing into issues later on, when the system actually goes live.</p>
+<h2>Risk 1 – Lack of Deployable Software</h2>
+<p><b>“It works on my machine but does not work on another”</b> – This is probably one of the most common phrases encountered in any software organization. Because of the number of changes done to software builds on a daily basis, sometimes there is little confidence on whether the build of the software actually works or not. This concern has the following three side effects.</p>
+<ul class="list">
+<li><p>Little or no confidence in whether we could even build the software.</p></li>
+<li><p>Lengthy integration phases before delivering the software internally (i.e., test team) or externally (i.e., customer), during which time nothing else gets done.</p></li>
+<li><p>Inability to produce and reproduce testable builds.</p></li>
+</ul>
+<h3>Solution</h3>
+<p>Eliminating tight coupling between the IDE and the build processes. Use a separate machine solely for integrating the software. Ensure that everything you need to build the software is contained in the version control repository. Finally, create a Continuous Integration system.</p>
+<p>The Continuous Integration server can watch for changes in the version control repository and run the project build script when it detects a change to the repository. The capability of the Continuous Integration system can be increased to include having the build run through tests, perform inspections, and deploy the software in the development and test environments; this way you always have a working software.</p>
+<p><b>“Inability to synchronize with the database”</b> – Sometimes developers are unable to recreate the database quickly during development, and hence find it difficult to make changes. Often this is due to a separation between the database team and the development team. Each team will be focused on their own responsibilities and have little collaboration between each other. This concern has the following three side effects &minus;</p>
+<ul class="list">
+<li><p>Fear of making changes or refactoring the database or source code.</p></li>
+<li><p>Difficulty in populating the database with different sets of test data.</p></li>
+<li><p>Difficulty in maintaining development and testing environments (e.g., Development, Integration, QA, and Test).</p></li>
+</ul>
+<h3>Solution</h3>
+<p>The solution to the above issue is to ensure that the placement of all database artifacts in the version control repository are carried out. This means everything that is required to recreate the database schema and data: database creation scripts, data manipulation scripts, stored procedures, triggers, and any other database assets are needed.</p>
+<p>Rebuild the database and data from your build script, by dropping and recreating your database and tables. Next, apply the stored procedures and triggers, and finally, insert the test data.</p>
+<p>Test (and inspect) your database. Typically, you will use the component tests to test the database and data. In some cases, you’ll need to write database-specific tests.</p>
+<h2>Risk 2 – Discovering Defects Late in the Lifecycle</h2>
+<p>Since there are so many changes which happen frequently by multiple developers to the source code, there are always chances that a defect can be introduced in the code that could only be detected at a later stage. In such cases, this can cause a big impact because the later the defect is detected in the software, the more expensive it becomes to remove the defect.</p>
+<h3>Solution</h3>
+<p><b>Regression Testing</b> &minus; This is the most important aspect of any software development cycle, test and test again. If there is any major change to the software code, it is absolutely mandatory to ensure that all the tests are run. And this can be automated with the help of the Continuous Integration server.</p>
+<p><b>Test Coverage</b> &minus; There is no point in testing if the test cases do not cover the entire functionality of the code. It is important to ensure that the test cases created to test the application are complete and that all code paths are tested.</p>
+<p>For example, if you have a login screen which needs to be tested, you just can’t have a test case that has the scenario of a successful login. You need to have a negative test case wherein a user enters a different combination of user names and passwords and then it is required to see what happens in such scenarios.</p>
+<h2>Risk 3 – Lack of Project Visibility</h2>
+<p>Manual communication mechanisms require a lot of coordination to ensure the dissemination of project information to the right people in a timely manner. Leaning over to the developer next to you and letting them know that the latest build is on the shared drive is rather effective, yet it doesn’t scale very well.</p>
+<p>What if there are other developers who need this information and they are on a break or otherwise unavailable? If a server goes down, how are you notified? Some believe they can mitigate this risk by manually sending an e-mail. However, this cannot ensure the information is communicated to the right people at the right time because you may accidentally leave out interested parties, and some may not have access to their e-mail at the time.</p>
+<h3>Solution</h3>
+<p>The Solution to this issue is again the Continuous Integration server. All CI servers have the facility to have automated emails to be triggered whenever the builds fail. By this automatic notification to all key stakeholders, it is also ensured that everyone is on board on what is the current state of the software.</p>
+<h2>Risk 4 – Low Quality Software</h2>
+<p>There are defects and then there are potential defects. You can have potential defects when your software is not well designed or if it is not following the project standards, or is complex to maintain. Sometimes people refer to this as code or design smells — “a symptom that something may be wrong.”</p>
+<p>Some believe that lower-quality software is solely a deferred project cost (after delivery). It can be a deferred project cost, but it also leads to many other problems before you deliver the software to the users. Overly complex code, code that does not follow the architecture, and duplicated code - all usually lead to defects in the software. Finding these code and design smells before they manifest into defects can save both time and money, and can lead to higher-quality software.</p>
+<h3>Solution</h3>
+<p>There are software components to carry out a code quality check which can be integrated with the CI software. This can be run after the code is built to ensure that the code actually conforms to proper coding guidelines.</p>
+<h1>Continuous Integration - Version Control</h1>
+<p>Version control systems, also known as source control, source code management systems, or revision control systems, are a mechanism for keeping multiple versions of your files, so that when you modify a file you can still access the previous revisions.</p>
+<p>The first popular version control system was a proprietary UNIX tool called <b>SCCS</b> (Source Code Control System) which dates back to the 1970s. This was superseded by <b>RCS</b>, the Revision Control System, and later <b>CVS</b>, Concurrent Versions System.</p>
+<p>Now the most popular version control system used are <b>Subversion</b> and <b>Git</b>. Let’s first look at why we need to use a versioning control system and next let’s look at putting our source code in <b>Git source code repository system</b>.</p>
+<h2>Purpose of the Version Control System</h2>
+<p>One reason that we use the term version control in preference to source control is that version control isn’t just for source code. Every single artifact related to the creation of your software should be under version control.</p>
+<ul class="list">
+<p><b>Developers should use it for source code</b> &minus; By default all source code needs to be stored in the versioning control system</p>
+<p><b>Related artefacts</b> &minus; Every system would be having related artefacts to the source code such as database scripts, build and deployment scripts, documentation, libraries and configuration files for your application, your compiler and collection of tools, and so on. All of these compliment the entire development and deployment process and also needs to be stored in the versioning control system.</p>
+</ul>
+<p>By storing all the information for the application in source control, it becomes easier to re-create the testing and production environments that your application runs on. This should include configuration information for your application’s software stack and the operating systems that comprise the environment, DNS Zone Files, Firewall Configuration, and so forth.</p>
+<p>At the bare minimum, you need everything required to re-create your application’s binaries and the environments in which they run. The objective is to have everything that can possibly change at any point in the life of the project stored in a controlled manner. This allows you to recover an exact snapshot of the state of the entire system, from development environment to production environment, at any point in the project’s history.</p>
+<p>It is even helpful to keep the configuration files for the development team’s development environments in version control since it makes it easy for everyone on the team to use the same settings. Analysts should store requirements documents. Testers should keep their test scripts and procedures in version control. Project managers should save their release plans, progress charts, and risk logs here.</p>
+<p>In short, every member of the team should store any document or file related to the project in version control.</p>
+<h2>Working with Git for Source Code Versioning Control System</h2>
+<p>This section will now focus on how Git can be used as a versioning control system. It will focus on how you can upload your code to the versioning control system and manage changes in it.</p>
+<h3>Our Demo Application</h3>
+<p>For the purpose of this entire tutorial we are going to look at a simple <b>Web ASP.Net</b> application which will be used for the entire Continuous Integration Process. We don’t need to focus on the entire code details for this exercise, just having an overview of what the project does is sufficient for understanding the entire continuous integration process. This .Net application was built using the <b>Visual Studio Integrated Development Environment</b>.</p>
+<p>The following screenshot is the structure of the solution in the Visual Studio environment. It is a very simple Web application which has the main code in the <b>Demo.aspx</b> file.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_aspx.jpg" alt="Demo ASPX" />
+<p>The code in the Demo.aspx file is shown in the following program &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"&gt;
+   &lt;head runat = "server"&gt;
+      &lt;title&gt;TutorialsPoint&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;form id = "form1" runat="server"&gt;
+         &lt;div&gt;&lt;%Response.Write("Continuous Integration"); %&gt;&lt;/div&gt;
+      &lt;/form&gt;
+   &lt;/body&gt;
+   
+&lt;/html&gt;
+</pre>
+<p>The code is very simple and just outputs the string “Continuous Integration” to the browser.</p>
+<p>When you run the project in Google Chrome, the output will be as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/run_the_project.jpg" alt="Run the Project" />
+<h2>Moving Source Code to Git</h2>
+<p>We are going to show how to move the source code to Git from the command line interface, so that the knowledge of how Git can be used is clearer to the end user.</p>
+<p><b>Step 1</b> &minus; Initialize the <b>Git Repository</b>. Go to the command prompt, go to your project folder and issue the command <b>git init</b>. This command will add the necessary Git files to the project folder, so that it can be recognized by Git when it needs to be uploaded to the repository.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git_repository.jpg" alt="GIT Repository" />
+<p><b>Step 2</b> &minus; Adding your files which need to be added to the Git repository. This can be done by issuing the <b>git add command</b>. The dot option tells Git that all files in the project folder need to be added to the Git repository.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git_add_command.jpg" alt="GIT Add Command" />
+<p><b>Step 3</b> &minus; The final step is to commit the project files to the Git repository. This step is required to ensure all files are now a part of Git. The command to be issued is given in the following screenshot. The <b>–m option</b> is to provide a comment to the upload of files.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/-m_option.jpg" alt="-M Option" />
+<p>Your solution is now available in Git.</p>
+<h1>Continuous Integration - Features</h1>
+<p>Following are some of the main features or practices for Continuous Integration.</p>
+<ul class="list">
+<li><p><b>Maintain a single source repository</b> &minus; All source code is maintained in a single repository. This avoids having source code being scattered across multiple locations. Tools such as <b>Subversion and Git</b> are the most popular tools for maintaining source code.</p></li>
+<li><p><b>Automate the build</b> &minus; The build of the software should be carried out in such a way that it can be automated. If there are multiple steps that need to be carried out, then the build tool needs to be capable of doing this. For .Net, MSBuild is the default build tool and for Java based applications you have tools such as <b>Maven and Grunt</b>.</p></li>
+<li><p><b>Make your build self-testing</b> &minus; The build should be testable. Directly after the build occurs, test cases should be run to ensure that testing can be carried out for the various functionality of the software.</p></li>
+<li><p><b>Every commit should build on an integration machine</b> &minus; The integration machine is the build server and it should be ensured that the build runs on this machine. This means that all dependent components should exist on the Continuous Integration server.</p></li>
+<li><p><b>Keep the build fast</b> &minus; The build should happen in minutes. The build should not take hours to happen, because this would mean the build steps are not properly configured.</p></li>
+<li><p><b>Test in a clone of the production environment</b> &minus; The build environment should be close in nature to the production environment. If there are vast differences between these environments, then there can be a case that the build may fail in production even though it passes on the build server.</p></li>
+<li><p><b>Everyone can see what is happening</b> &minus; The entire process of build and testing and deployment should be visible to all.</p></li>
+<li><p><b>Automate deployment</b> &minus; Continuous Integration leads to Continuous deployment. It is absolutely necessary to ensure that the build should be easy to deploy onto either a staging or production environment.</p></li>
+</ul>
+<h1>Continuous Integration - Requirements</h1>
+<p>Following is the list of the most significant requirements for Continuous Integration.</p>
+<ul class="list">
+<li><p><b>Check-In Regularly</b> &minus; The most important practice for continuous integration to work properly is frequent check-ins to trunk or mainline of the source code repository. The check-in of code should happen at least a couple of times a day. Checking in regularly brings lots of other benefits. It makes changes smaller and thus less likely to break the build. It means the recent most version of the software to revert to is known when a mistake is made in any subsequent build.</p>
+<p>It also helps to be more disciplined about refactoring code and to stick to small changes that preserve behavior. It helps to ensure that changes altering a lot of files are less likely to conflict with other people’s work. It allows the developers to be more explorative, trying out ideas and discarding them by reverting back to the last committed version.</p>
+</li>
+<li><p><b>Create a Comprehensive Automated Test Suite</b> &minus; If you don’t have a comprehensive suite of automated tests, a passing build only means that the application could be compiled and assembled. While for some teams this is a big step, it’s essential to have some level of automated testing to provide confidence that your application is actually working.</p>
+<p>Normally, there are 3 types of tests conducted in Continuous Integration namely <b>unit tests, component tests</b>, and <b>acceptance tests</b>.</p>
+<p>Unit tests are written to test the behavior of small pieces of your application in isolation. They can usually be run without starting the whole application. They do not hit the database (if your application has one), the filesystem, or the network. They don’t require your application to be running in a production-like environment. Unit tests should run very fast — your whole suite, even for a large application, should be able to run in under ten minutes.</p>
+<p>Component tests test the behavior of several components of your application. Like unit tests, they don’t always require starting the whole application. However, they may hit the database, the filesystem, or other systems (which may be stubbed out). Component tests typically take longer to run.</p></li>
+<li><p><b>Keep the Build and Test Process Short</b> &minus; If it takes too long to build the code and run the unit tests, you will run into the following problems.</p>
+<ul class="list">
+<li><p>People will stop doing a full build and will run the tests before they check-in. You will start to get more failing builds.</p></li>
+<li><p>The Continuous Integration process will take so long that multiple commits would have taken place by the time you can run the build again, so you won’t know which check-in broke the build.</p></li>
+<li><p>People will check-in less often because they have to sit around for ages waiting for the software to build and the tests to run.</p></li>
+</ul>
+</li>
+<li><p><b>Don’t Check-In on a Broken Build</b> &minus; The biggest blunder of continuous integration is checking in on a broken build. If the build breaks, the developers responsible are waiting to fix it. They identify the cause of the breakage as soon as possible and fix it. If we adopt this strategy, we will always be in the best position to work out what caused the breakage and fix it immediately.</p>
+<p>If one of our colleagues has made a check-in and has as a result broken the build, then to have the best chance of fixing it, they will need a clear run at the problem. When this rule is broken, it inevitably takes much longer for the build to be fixed. People get used to seeing the build broken, and very quickly you get into a situation where the build stays broken all of the time.</p>
+</li>
+<li><p><b>Always Run All Commit Tests Locally Before Committing</b> &minus; Always ensure that the tests designed for the application are run first on a local machine before running them on the CI server. This is to ensure the right test cases are written and if there is any failure in the CI process, it is because of the failed test results.</p></li>
+<li><p><b>Take Responsibility for All Breakages that Result from Your Changes</b> &minus; If you commit a change and all the tests you wrote pass, but others break, the build is still broken. Usually this means that you have introduced a regression bug into the application. It is your responsibility — because you made the change — to fix all tests that are not passing as a result of your changes. In the context of CI this seems obvious, but actually it is not a common practice in many projects.</p></li>
+</ul>
+<h1>Continuous Integration - Building a Solution</h1>
+<p>There are a variety of build tools available for a variety of programming languages. Some of the most popular build tools include <b>Ant for Java</b> and <b>MSBuild for .NET</b>. Using a scripting tool designed specifically for building software, instead of a custom set of shell or batch scripts, is the most effective manner for developing a consistent, repeatable build solution.</p>
+<p>So why do we need a build process to start with. Well for starters, for a Continuous Integration server, the build process should be easy to work with and should be seamless to implement.</p>
+<p>Let’s take a simple example of what a build file can look like for .Net &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?xml version = "1.0" encoding = "utf-8"?&gt;
+&lt;project xmlns = "http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+   &lt;Target Name = "Build"&gt;
+      &lt;Message Text = "Building Project" /&gt;
+      &lt;MSBuild Projects = "project.csproj" Targets = "Build/&gt;"
+   &lt;/Target&gt;
+&lt;/project&gt;
+</pre>
+<p>The following aspects need to be noted about the above code &minus;</p>
+<ul class="list">
+<li><p>A target is specified with a name of the Build. Wherein, a target is a collection of logical steps which need to be performed in a build process. You can have multiple targets and have dependencies between targets.</p></li>
+<li><p>In our target, we keep an option message which will be shown when the build process starts.</p></li>
+<li><p>The <b>MSBuild task</b> is used to specify which .Net project needs to be built.</p></li>
+</ul>
+<p>The above example is a case of a very simple build file. In Continuous Integration, it is ensured that this file is kept up-to-date to ensure that the entire build process is seamless.</p>
+<h2>Building a Solution in .Net</h2>
+<p>The default build tool for .Net is MSBuild and is something that comes shipped with the .Net framework. Depending on the framework on your system, you will have the relevant MSbuild version available. As an example, if you have the .Net framework installed in the default location, you will find the <b>MSBuild.exe</b> file in the following location &minus;</p>
+<pre class="result notranslate">
+C:\Windows\Microsoft.NET\Framework\v4.0.30319
+</pre>
+<p>Let’s see how we can go about building our sample project. Let’s assume our Sample project is located in a folder called <b>C:\Demo\Simple</b>.</p>
+<p>In order to use MSBuild to build the above solution, we need to open the command prompt and use the MSBuild option as shown in the following program.</p>
+<pre class="result notranslate">
+msbuild C:\Demo\Simple\Simple.csproj
+</pre>
+<p>In the above example, <b>csproj</b> is the project file which is specific to .Net. The csproj file contains all the relevant information to ensure that the required information is present for the software to build properly. Following is the screenshot of the output of the MSBuild command.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/ms_build_command.jpg" alt="MS Build Command" />
+<p>You don’t need to worry about the output warnings as long as the Build was successful and there were no errors.</p>
+<h1>Continuous Integration - Build Scripts</h1>
+<p>Now let’s look at certain aspects of the MSBuild file to see what they mean. These aspects are important to know from a Continuous Integration Cycle.</p>
+<p>Build scripts are used to build the solution which will be a part of the entire continuous Integration cycle. Let’s look at the general build script which is created as a part of Visual Studio in <b>.Net</b> for our sample solution. The build script is a pretty big one, even for a simple solution, so we will go through the most important parts of it. By default, the build script will be stored in a file with the same name as the main solution in Visual Studio. So in our case, if you open the file <b>Simple.csproj</b>, you will see all the settings which will be used to build the solution.</p>
+<ul class="list">
+<li><p>Dependency on the MSBuild version used &minus; The following settings will use the MSBuild files installed on the CI server.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;VisualStudioVersion Condition = "'$(VisualStudioVersion)' == 
+   ''"&gt;10.0&lt;/VisualStudioVersion&gt;
+
+&lt;VSToolsPath Condition = "'$(VSToolsPath)' == ''"&gt; 
+   $(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)
+&lt;/VSToolsPath&gt;
+
+&lt;TargetFrameworkVersion&gt;v4.5&lt;/TargetFrameworkVersion&gt;
+
+&lt;Import Project = "$(MSBuildBinPath)\Microsoft.CSharp.targets" /&gt;
+&lt;Import Project = "$(VSToolsPath)\WebApplications\
+   Microsoft.WebApplication.targets" Condition = "'$(VSToolsPath)' ! = ''" /&gt;
+
+&lt;Import Project = "$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\
+   WebApplications\Microsoft.WebApplication.targets" Condition = "false" /&gt;
+</pre>
+<ul class="list">
+<li><p>What files are required to build the solution properly – The <b>ItemGroup</b> tag will contain all the necessary .Net files which are required for the project to build successfully. These files will need to reside on the build server accordingly.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;ItemGroup&gt;
+   &lt;Reference Include = "Microsoft.CSharp" /&gt;
+   &lt;Reference Include = "System.Web.DynamicData" /&gt;
+   &lt;Reference Include = "System.Web.Entity" /&gt;
+   &lt;Reference Include = "System.Web.ApplicationServices" /&gt;
+   &lt;Reference Include = "System.ComponentModel.DataAnnotations" /&gt;
+   &lt;Reference Include = "System" /&gt;
+   &lt;Reference Include = "System.Data" /&gt;
+   &lt;Reference Include = "System.Core" /&gt;
+   &lt;Reference Include = "System.Data.DataSetExtensions" /&gt;
+   &lt;Reference Include = "System.Web.Extensions" /&gt;
+   &lt;Reference Include = "System.Xml.Linq" /&gt;
+   &lt;Reference Include = "System.Drawing" /&gt;
+   &lt;Reference Include = "System.Web" /&gt;
+   &lt;Reference Include = "System.Xml" /&gt;
+   &lt;Reference Include = "System.Configuration" /&gt;
+   &lt;Reference Include = "System.Web.Services" /&gt;
+   &lt;Reference Include = "System.EnterpriseServices"/&gt;
+&lt;/ItemGroup&gt;
+</pre>
+<ul class="list">
+<li><p>What are the Web server settings to be used &minus; When we visit our topic of Continuous Deployment, you will see how MSBuild will be used to override these settings and deploy this to our server of choice.</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+&lt;UseIIS&gt;True&lt;/UseIIS&gt;
+&lt;AutoAssignPort&gt;True&lt;/AutoAssignPort&gt;
+&lt;DevelopmentServerPort&gt;59495&lt;/DevelopmentServerPort&gt;
+&lt;DevelopmentServerVPath&gt;/&lt;/DevelopmentServerVPath&gt;
+&lt;IISUrl&gt;&lt;/IISUrl&gt;
+&lt;NTLMAuthentication&gt;False&lt;/NTLMAuthentication&gt;
+&lt;UseCustomServer&gt;False&lt;/UseCustomServer&gt;
+</pre>
+<h1>CI - Building On the Server</h1>
+<p>The next important step is to ensure that the solution builds on the build server. The first part is a manual step, because before the continuous integration tool is used, we first must ensure that the build gets run on the build server in the same manner as what was done on the client machine. To do this, we must implement the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Copy the entire solution file to the server. We had created an Amazon instance server which would be used as our build server. So, do a manual copy to the server of the entire <b>.Net</b> solution onto the server.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/manual_copy.jpg" alt="Manual Copy" />
+<p><b>Step 2</b> &minus; Ensure that the framework is present on the server. If you have compiled your application in .Net framework 4.0 on your client machine, you have to ensure that it is installed on the server machine as well. So go to the location <b>C:\Windows\Microsoft.NET\Framework</b> on your server and ensure the desired framework is present.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/frame_work_location.jpg" alt="Framework Location" />
+<p><b>Step 3</b> &minus; Now let’s just run MSBuild on the server and see what happens.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/run_msbuild.jpg" alt="MS Build" />
+<p>Ok, so it looks like we have hit an error. There is one important lesson in Continuous Integration and that is you need to ensure that the Build works on the build server. For this you need to ensure that all prerequisite software is installed on the build server.</p>
+<p>For .Net, we need to install a component called <b>Visual Studio Redistributable package</b>. This package contains all the necessary files which are required for a <b>.Net</b> application to build on a server. So let’s carry out the following installation steps on the build server.</p>
+<p><b>Step 4</b> &minus; Double-click the executable file to start the installation.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/double_click_start_installation.jpg" alt="Double Click to Start Installation" />
+<p><b>Step 5</b> &minus; In the next step, agree to the License Terms and click Install.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/license_terms.jpg" alt="License Terms" />
+<p><b>Step 6</b> &minus; Now when running MSBuild, we need to ensure that we include an additional parameter when calling MSBuild which is – <b>p:VisualStudioversion = 12.0</b>. This ensures that MSBuild references those files that were downloaded in the earlier step.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/running_msbuild.jpg" alt="Running MsBuild" />
+<p>Now we can see that the solution has been built properly and we also know our baseline project builds correctly on the server.</p>
+<h1>CI - Checking in Source Code</h1>
+<p>The next key aspect is to ensure our baseline code is checked into our source code repository management server which is Git. To do this, we need to follow these steps.</p>
+<p><b>Step 1</b> &minus; Initialize the repository so that it can be uploaded to Git. This is done with the <b>git</b> init command. So you need to go to your project folder and issue the <b>git init</b> command.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git_init_command.jpg" alt="GIT init Command" />
+<p><b>Step 2</b> &minus; The next step is called staging files in Git. This prepares all the files in the project folder, which need to be added to Git. You do this with the <b>git add</b> command as shown in the following screenshot. The ‘.’ notation is used to say that all files in the directory and subdirectory should be included in the commit.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/staging_files.jpg" alt="Staging Files" />
+<p><b>Step 3</b> &minus; The final step is to commit the files to the Git repository, so that it is now a full-fledged Git repository.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/full_fledged_git_repository.jpg" alt="Full Fledged Git Repository" />
+<h1>CI - Creating a Project in TeamCity</h1>
+<p>Now that we have our source code in the Git repository and all of our initial code works on the build server, it is time to create a project in our Continuous Integration server. This can be done via the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Login to the TeamCity software. Go to the url on your Continuous Integration server &minus; <b>http://localhost:8080/login.html</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/teamcity_software.jpg" alt="TeamCity Software" />
+<p>Enter the admin credentials and login to the server.</p>
+<p><b>Step 2</b> &minus; Once logged in, you will be presented with the home screen. Click <b>Create Project</b> to start a new project.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/create_project.jpg" alt="Create Project" />
+<p><b>Step 3</b> &minus; Give a name for the project and click Create to start the project. In our case, we are giving the name as ‘Demo’ to our project as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/project_name_demo.jpg" alt="Project Name Demo" />
+<p><b>Step 4</b> &minus; The next step is to mention the Git repository which will be used in our project. Remember that in a Continuous Integration environment, the CI server needs to pick up the code from the Git enabled repository. We have already enabled our project folder to be a Git enabled repository in the earlier step. In TeamCity, you need to create a VCS root. For this, click <b>VCS Roots</b> in the project’s main screen.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/vcs_root.jpg" alt="VCS Root" />
+<p><b>Step 5</b> &minus; In the screen that comes up next, click <b>Create VCS root</b> as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/create_vcs_root.jpg" alt="Create VCS Root" />
+<p><b>Step 6</b> &minus; In the next screen that comes up, perform the following steps &minus;</p>
+<ul class="list">
+<li><p>Mention the type of VCS as Git.</p></li>
+<li><p>Give a name for the VCS root, this can be any friendly name. We have given the name as <b>App</b>.</p></li>
+<li><p>Give the Fetch url as <b>C:\Demo\Simple</b> – This is <b>out git</b> enabled repository.</p></li>
+<li><p>If you scroll down the screen, you will get a Test connection button. Click it to ensure that you can successfully connect to the Git enabled repository.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/test_connection_button.jpg" alt="Test Connection Button" />
+<p></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/test_connection_button_appears.jpg" alt="Test Connection Button Appears" />
+<p><b>Step 7</b> &minus; Click Create and you will now see your repository registered as shown in the following image.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/repository_registered.jpg" alt="Repository Registered" />
+<p><b>Step 8</b> &minus; The next step is to create a build configuration which will be used to build the project. Go to your project screen in <b>TeamCity &rarr; General Settings</b>. Click Create Build Configuration.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/team_city_general_settings.jpg" alt="Team City General settings" />
+<p><b>Step 9</b> &minus; In the following screen, give a name for the Build Configuration. In our case we have named it as <b>DemoBuild</b> and then click Create.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_build.jpg" alt="Demo Build" />
+<p><b>Step 10</b> &minus; In the next screen that comes up, you will be asked to choose the <b>VCS repository</b> which was created in the earlier steps. So choose the name <b>‘App’</b> and click Attach.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/vcs_repository.jpg" alt="VCS Repository" />
+<p><b>Step 11</b> &minus; Now in the next screen that pops up, we need to configure the build steps. So click the ‘<b>configure build steps manually</b>’ hyperlink.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/configure_build_steps_manually.jpg" alt="Configure Build Steps Manually" />
+<p><b>Step 12</b> &minus; In the next build screen, we need to enter the following details &minus;</p>
+<ul class="list">
+<li><p>Choose the Runner type as MSBuild.</p></li>
+<li><p>Give an optional name for the step name.</p></li>
+<li><p>Give the name of the file which needs to be built. When we specify MSbuild in the earlier sections, we normally see that we give the option of <b>Simple.csproj</b>. The same thing is needed to be specified here.</p></li>
+<li><p>Choose the MSBuild version as ‘Microsoft Build Tools 2013’.</p></li>
+<li><p>Choose the <b>MSBuild ToolsVersion</b> as 12.0.</p></li>
+<li><p>Scroll down the page to Save the settings.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/ms_build_tool_version.jpg" alt="MS Build Tool Version" />
+<p></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/ms_build_tool_version_12.jpg" alt="MS Build Tool Version 12.0" />
+<p><b>Step 13</b> &minus; In the next screen, click Run.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/click_run.jpg" alt="Click Run" />
+<p>You will see the build of your application now in progress.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/application_in_progress.jpg" alt="Application in Progress" />
+<p>You should get a successful screen, which is a good sign that your solution is building properly.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/successful_screen.jpg" alt="Successful Screen" />
+<p>You can also go to your build log to see all the steps that were covered by the Continuous Integration server as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/continuous_integration_server.jpg" alt="Continuous Integration Server" />
+<h1>Continuous Integration - Defining Tasks</h1>
+<p>Now that we have our base code in Git and a link to the Continuous Integration server, its finally time to see the first step of Continuous Integration in action. This is done by defining tasks in the Continuous Integration server such as triggers, which makes the entire Continuous Integration Process as seamless as possible. Let’s make a change to our code in Visual Studio.</p>
+<p><b>Step 1</b> &minus; Go to the <b>Demo.aspx</b> page in Visual Studio and make a change to the title of the page.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_aspx_page_visual_studio.jpg" alt="Demo.Aspx Page in Visual Studio" />
+<p><b>Step 2</b> &minus; If we query our Git repository via the <b>git status</b> command, you will in fact see that the <b>Demo.aspx</b> file has been modified.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git_status_command.jpg" alt="Git Status Command" />
+<p>Now we need to ensure that every change in our code should trigger a build in our continuous integration server. For this we need to do the following changes.</p>
+<p><b>Step 3</b> &minus; Go to your project dashboard and click the triggers section and click <b>Add new trigger</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/add_new_trigger.jpg" alt="Add New Trigger" />
+<p><b>Step 4</b> &minus; In the next screen that comes up, choose <b>VCS trigger</b>, which will be used to create a trigger so that when a check-in is made to the repository, a build will be triggered.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/vcs_trigger.jpg" alt="VCS Trigger" />
+<p><b>Step 5</b> &minus; Click <b>Show Advanced Options</b> and ensure the options shown in the following screenshot are selected.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/show_advance_options.jpg" alt="Show Advanced Options" />
+<p><b>Step 6</b> &minus; Click Save. You will now see the trigger successfully registered as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/click_save.jpg" alt="Click and Save" />
+<p><b>Step 7</b> &minus; Now it’s time to check in our code into the Git repository and see what happens. So let’s go to our command prompt and issue the <b>git add</b> command to stage our changed files.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/simple_git_add.jpg" alt="Simple Git Add" />
+<p><b>Step 8</b> &minus; Now issue the <b>git commit</b> command, and it will push the changes into the Git repository.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/defining_tasks_git_commit.jpg" />
+<p><b>Step 9</b> &minus; If you now go to your Projects Overview screen, you will now see a new build would have been triggered and run.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/new_build.jpg" alt="New Build" />
+<p>If you see the <b>Change log Tab</b>, you will see the <b>git comment</b> which triggered the build.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/change_log_tab.jpg" alt="Change Log tab" />
+<p>Let’s try it one more time. Let’s make another change to the <b>Demo.aspx</b> file. Let’s carry out a <b>git add</b> command and a <b>git commit</b> command with the following commit message.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/git_add_git_commit.jpg" alt="Git Add Git Command" />
+<p></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/defining_tasks_demo_build.jpg" alt="Defining Tasks Demo Build" />
+<p>You will now see a build being automatically triggered in the Project dashboard in TeamCity.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/project_dashboard_teamcity.jpg" alt="Project Dashboard TeamCity" />
+<p>The build will show a success message.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/success_message.jpg" alt="Success Message" />
+<p>You will now see the message of ‘Second commit’ which was used when the change was committed to the <b>git repository</b>.</p>
+<p>We have now successfully completed the first part of the Continuous Integration process.</p>
+<h1>CI - Build Failure Notifications</h1>
+<p>A Build Failure Notification is an event which is triggered whenever a build fails. The notification is sent to all key people whenever a build fails. The first important thing to do in such a case is to ensure time is spent on the failed build to ensure the build passed. The following steps are used to ensure that the build notifications are put in place in TeamCity.</p>
+<p>Following are the steps to set up email notifications in TeamCity.</p>
+<p><b>Step 1</b> &minus; In TeamCity, go to your Project dashboard, click on Administration in the top right hand corner. You will then see the <b>Email Notifier</b> link in the left hand side. Click on this link to bring up the general settings for Email.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/email_notifier.jpg" alt="Email Notifier" />
+<p><b>Step 2</b> &minus; Next step is to enter the details of a valid <b>SMTP Server</b>. Gmail provides a free SMTP facility, which can be used by anyone. So we can enter those details in the next screen that comes up as shown in the following screenshot.</p>
+<ul class="list">
+<li>SMTP Host – smtp.gmail.com</li>
+<li>SMTP port no – 465</li>
+<li>Send email messages from and SMTP login – This should be a valid Gmail id</li>
+<li>SMTP password – Valid password for that Gmail id</li>
+<li>Secure connection – Put this as SSL</li>
+</ul>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/smpt_server.jpg" alt="SMPT Server" />
+<p><b>Step 3</b> &minus; Click <b>Test Connection</b> just to ensure that the settings are working properly. Then click <b>Save</b> to save the settings.</p>
+<p><b>Step 4</b> &minus; The next step is to enable build notifications for a user. The first task is to create a user which will receive these build notifications. Go to your project dashboard and choose the <b>Users Option</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/users_option.jpg" alt="Users Option" />
+<p><b>Step 5</b> &minus; Create a new user. Enter the required username and password. Then Click the Create User button, which will be located at the bottom of the screen.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/create_user_button.jpg" alt="Create User Button" />
+<p><b>Step 6</b> &minus; Now login to the TeamCity system with this new user id and password.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/teamcity_user_id_password.jpg" alt="Team City User Id and Password" />
+<p><b>Step 7</b> &minus; After you log in, you will be presented with the General settings of the user. In the Email Notifier section, click Edit.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/general_settings_of_user.jpg" alt="General Settings of the User" />
+<p><b>Step 8</b> &minus; In the next screen that comes up, click <b>Add new rule</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/add_new_rule.jpg" alt="Add New Rule" />
+<p><b>Step 9</b> &minus; In Add new rule, choose the following two options and then click Save.</p>
+<ul class="list">
+<li><p>Builds from select projects – Choose the Demo project.</p></li>
+<li><p>Enable the checkbox for ‘Build fails’.</p></li>
+</ul>
+<p>By enabling these two options, now whenever a build fails for the Demo project, an email notification will be sent to the user – <b>demouser</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_project.jpg" alt="Demo Project" />
+<p><b>Step 10</b> &minus; Now let’s trigger a wrong build to see this in action. In Visual Studio, go to the <b>demo.aspx.cs</b> file and add a wrong line of code.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_aspx_cs.jpg" alt="Demo ASPX Cs" />
+<p><b>Step 11</b> &minus; Now check-in the code from Git by doing a <b>git add</b> and <b>git commit</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/build_failure_git_add_command.jpg" alt="Build Failure Git Add Command" />
+<p>Now in the Project Dashboard, the build will automatically be triggered and you will see that the build would have failed as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/project_dashboard_build_failure.jpg" alt="Project Dashboard Build Failure" />
+<p>If you login into the Gmail id of the <b>demouser</b>, you will actually see a build failure notification in it as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/team_city_build_demo.jpg" alt="Team City Build Failure" />
+<h1>CI - Documentation and Feedback</h1>
+<p>One of the key aspects of Continuous Integration is always to see how the builds are performing, gathering important metrics, documenting those outcomes and generating continuous feedback through continuous builds.</p>
+<p>What are the benefits of having these metrics in place?</p>
+<ul class="list">
+<li><p><b>Not Committing Code Enough</b> &minus; If developers are not committing code to a version control repository frequently, the reason may be a slow integration build. To begin to reduce build duration, perform a high-level analysis of the integration build environment to determine the bottlenecks.</p>
+<p>Next, analyze the findings and determine the most appropriate improvement, then attempt to make changes in the build process to reduce the build’s duration. Lastly, reevaluate the build duration to determine if further improvements are warranted.</p>
+</li>
+<li><p><b>Improve Test Performance</b> &minus; Even in a well-functioning CI system, a bulk of the integration build time will be taken up by the execution of automated tests. Evaluating and improving the performance of these tests can dramatically reduce build duration.</p></li>
+<li><p><b>Infrastructure Issues</b> &minus; You may discover that integration builds are slow because of the system infrastructure. Perhaps network performance is slow or there is a slow-performing virtual private network connection.</p>
+<p>Geographically dispersed systems and unreliable hardware or software can also induce performance issues. Investigate and improve any infrastructure resources to reduce the build duration.</p>
+</li>
+</ul>
+<h2>Metrics</h2>
+<p>Following are some of the metrics which are available in a Continuous Integration server.</p>
+<p>Let’s look at what TeamCity has to offer &minus;</p>
+<p>One of the simplest form of metrics is what is available in the project dashboard. The key element here is to note the duration of each build. If the duration of each build starts increasing disproportionally to the code being built, then this could be an issue. So, this is one feedback that can be taken and the causes of this could be that the CI server is low on resources and maybe the capacity of the server needs to be increased.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/metrics.jpg" alt="Metrics" />
+<p>TeamCity has the facility to see if the CI server is in fact having any sort of issues with regards to infrastructure. In the <b>admin dashboard</b> in TeamCity, one can click on <b>Disk Usage</b> to see how much disk space is being consumed by each build.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/admin_dashboard.jpg" alt="Admin Dashboard" />
+<p>If any more details are required, then TeamCity has the <b>diagnostics button</b>, which can give more information on the <b>CPU and Memory</b> being utilized by the CI Server.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/diagnostics_button.jpg" alt="Diagnostics Button" />
+<h2>Detailed View of Build Metrics</h2>
+<p>If one wants to see a detailed view of the builds of a particular project over time, then this is available as a part of the project builds. In the Project build screen, go to the Statistics screen, this will provide various statistics and charts on how the build is performing.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/detailed_view_build_metrics.jpg" alt="Detailed View of Build Metrics" />
+<h1>Continuous Integration - Testing</h1>
+<p>One of the key features of Continuous Integration is to ensure that the <b>on-going testing</b> holds all the code which gets built by the CI server. After a build is carried out by the CI Server, it has to be ensured that the test cases are in place to get the required code tested. Every CI server has the ability to run unit test cases as part of the <b>CI suite</b>. In <b>.Net</b>, the unit testing is a feature which is inbuilt into the <b>.Net framework</b> and the same thing can be incorporated into the CI Server as well.</p>
+<p>This chapter will see how we can define a test case in <b>.Net</b> and then let our TeamCity server run this test case after the build is completed. For this, we first need to ensure that we have a unit test defined for our sample project.</p>
+<p>To do this, we must follow the ensuing steps with utmost carefulness.</p>
+<p><b>Step 1</b> &minus; Let’s add a new class to our solution, which will be used in our Unit Test. This class will have a name variable, which will hold the string “Continuous Integration”. This string will be displayed on the web page. Right-click on the Simple Project and choose the menu option <b>Add &rarr; Class</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/add_class.jpg" alt="Add Class" />
+<p><b>Step 2</b> &minus; Give a name for the class as <b>Tutorial.cs</b> and click the Add button at the bottom of the screen.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/tutorial_cs.jpg" alt="Tutorial CS" />
+<p><b>Step 3</b> &minus; Open the Tutorial.cs file and add the following code in it. This code just creates a string called <b>Name</b>, and in the Constructor assign the name to a string value as <b>Continuous Integration</b>.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Simple {
+   public class Tutorial {
+      public String Name;
+      public Tutorial() {
+         Name = "Continuous Integration";
+      }
+   }
+}
+</pre>
+<p><b>Step 4</b> &minus; Let us make the change to our <b>Demo.aspx.cs</b> file to use this new class. Update the code in this file with the following code. So this code will now create a new instance of the class created above.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Simple {
+   public partial class Demo : System.Web.UI.Page {
+      Tutorial tp = new Tutorial();
+      protected void Page_Load(object sender, EventArgs e) {
+         tp.Name = "Continuous Integration";
+      }
+   }
+}
+</pre>
+<p><b>Step 5</b> &minus; In our <b>demo.aspx</b> file, let us now reference the <b>tp.Name</b> variable, which was created in the <b>aspx.cs</b> file.</p>
+<pre class="prettyprint notranslate">
+&lt;%@ Page Language = "C#" AutoEventWireup = "true" 
+   CodeBehind = "Demo.aspx.cs" Inherits = "Simple.Demo" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns = "http://www.w3.org/1999/xhtml"&gt;
+   
+   &lt;head runat = "server"&gt;
+      &lt;title&gt;TutorialsPoint1&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;form id = "form1" runat = "server"&gt;
+         &lt;div&gt;
+            &lt;% = tp.Name%&gt;)
+         &lt;/div&gt;
+      &lt;/form&gt;
+   &lt;/body&gt;
+   
+&lt;/html&gt;
+</pre>
+<p>Just to ensure our code works fine with these changes, you can run the code in Visual Studio. You should get the following output once the compilation is complete.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/continuous-integration_output.jpg" alt="Continuous Integration Output" />
+<p><b>Step 6</b> &minus; Now it is time to add our Unit tests to the project. Right-click on <b>Solution</b> and choose the menu option <b>Add &rarr; New Project</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/right_click_on_solution.jpg" alt="Right Click on Solution" />
+<p><b>Step 7</b> &minus; Navigate to <b>Test</b> and on the right hand side, choose <b>Unit Test Project</b>. Give a name as <b>DemoTest</b> and then click OK.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/unit_test_project.jpg" alt="Unit Test Project" />
+<p><b>Step 8</b> &minus; In your <b>Demo Test project</b>, you need to add a reference to the Simple project and to the necessary <b>testing assemblies</b>. Right-click on the project and choose the menu option <b>Add Reference</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/add_reference.jpg" alt="Add Reference" />
+<p><b>Step 9</b> &minus; In the next screen that comes up, go to Projects, choose <b>Simple Reference</b> and click OK.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/simple_reference.jpg" alt="Simple Reference" />
+<p><b>Step 10</b> &minus; Click <b>Add Reference</b> again, go to Assemblies and type <b>Web</b> in the Search box. Then add a reference of <b>System.Web</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/system_web.jpg" alt="System Web" />
+<p><b>Step 11</b> &minus; In the <b>Unit Test file</b>, add the following code. This code will ensure that the Tutorial class has a string name variable. It will also assert the fact that the Name should equal a value of “Continuous Integration”. This will be our simple Test case.</p>
+<pre class="prettyprint notranslate">
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Simple;
+
+namespace DemoTest {
+   [TestClass]
+   public class UnitTest1 {
+      [TestMethod]
+      public void TestMethod1() {
+         Tutorial tp = new Tutorial();
+         Assert.AreEqual(tp.Name, "Continuous Integration");
+      }
+   }
+}
+</pre>
+<p><b>Step 12</b> &minus; Now let’s run our test in Visual Studio to make sure it works. In Visual Studio, choose the menu option <b>Test &rarr; Run &rarr; All Tests</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/test_run_alltests.jpg" alt="Test Run Alltests" />
+<p>After running the test, you will see the Test successfully run on the left hand side of Visual Studio.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/test_successful.jpg" alt="Test Successful" />
+<p>Enabling Continuous Testing within TeamCity – Now that all the test cases are in place, it is time to integrate these into our Team City server.</p>
+<p><b>Step 13</b> &minus; For this, we need to create a build step in our Project configuration. Go to your project home and click Edit Configuration Settings.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/edit_configuration_settings.jpg" alt="Edit Configuration Settings" />
+<p><b>step 14</b> &minus; Then go to Build Step &rarr; MS Build and click Add build step as depicted in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/build_step_msbuild.jpg" alt="Build Step Ms Build" />
+<p>In the next screen that comes up, add the following values &minus;</p>
+<ul class="list">
+<li><p>Choose the runner type as Visual Studio Tests.</p></li>
+<li><p>Enter an optional Test step name.</p></li>
+<li><p>Choose the Test Engine type as <b>VSTest</b>.</p></li>
+<li><p>Choose the Test Engine version as <b>VSTest2013</b>.</p></li>
+<li><p>In the Test files name, provide the location as <b>DemoTest\bin\Debug\DemoTest.dll</b> – Remember that <b>DemoTest</b> is the name of our project which contains our Unit Tests. The <b>DemoTest.dll</b> will be generated by our first build step.</p></li>
+<li><p>Click Save which will be available at the end of the screen.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/save_button.jpg" alt="Save Button" />
+<p>Now you will have 2 build steps for your project. The first is the Build step which will build your application code and your test project. And the next will be used to run your test cases.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/build_steps.jpg" alt="Build steps" />
+<p><b>Step 15</b> &minus; Now it is time to check-in all your code in Git, so that the entire build process can be triggered. The only difference is this time, you need to run the <b>git add</b> and <b>git commit</b> command from the <b>Demo parent folder</b> as shown in the following screenshot.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_parent_folder.jpg" alt="Demo Parent Folder" />
+<p>Now when the build is triggered, you will see an initial output which will say that the test passed.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/initial_output.jpg" alt="Initial output" />
+<p><b>Step 16</b> &minus; If you click on the Test passed result and go to the Test tab, you will now see that the UnitTest1 was executed and that it is passed.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/unit_test_1.jpg" alt="Unit Test 1" />
+<h1>Continuous Integration - Inspection</h1>
+<p>Continuous Inspection is the process of an automated code review of inspection conducted for your code before the actual tests are run. There are subtle differences between inspecting and testing software. Testing is dynamic and executes the software in order to test the functionality. Inspection analyzes the code based on a set of predefined rules.</p>
+<p>Inspectors (or static and dynamic analysis tools) are directed by identified standards that teams should adhere to (usually coding or design metrics). Examples of inspection targets include coding “grammar” standards, architectural layering adherence, code duplication, and many others.</p>
+<p>Continuous Inspection reduces the time between a discovery and a fix. There are a number of Continuous Inspection tools available. For this example, we are going to be using <b>NCover 3.x</b> which has an integration with TeamCity. Let’s see how we can carry out Continuous Inspection and what it can do for us.</p>
+<h2>Download and Install NCover</h2>
+<p>NCover is a separate product which needs to be downloaded and installed. To Download NCover, please click on the following link and download the 32-bit installer &minus; <a target="_blank" rel="nofollow" href="http://www.ncover.com/info/download">http://www.ncover.com/info/download.</a></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/32_bit_installer.jpg" alt="32 Bit Installer" />
+<p>Run the downloaded installer and then click Next after the installer is started.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/next.jpg" alt="Next" />
+<p>Accept the License agreement and then click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/license_agreement.jpg" alt="License Agreement" />
+<p>Accept the default components and click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/custom_setup_default_components.jpg" alt="Custom Setup Default Components" />
+<p>Click on the Install button to begin the installation.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/install_button.jpg" alt="Install Button" />
+<p>Click the Finish button to complete the installation.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/finish_button.jpg" alt="Finish Button" />
+<p>Launch the NCover installation for the first time by going to <b>C:\Program Files (x86)\NCover\ NCover.Explorer.exe</b>. You will just need to install a trial key for the first time, which is a straightforward process.</p>
+<h2>Configure the Project in TeamCity to Use NCover</h2>
+<p><b>Step 1</b> &minus; Go to your project home screen and click Edit Configuration Settings.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/project_home_page.jpg" alt="Project Home Page" />
+<p><b>Step 2</b> &minus; Go to Build Steps and click Edit for the <b>TestStep</b>. Continuous Inspection needs to run along with the Unit tests which are defined.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/test_step.jpg" alt="Test Step" />
+<p><b>Step 3</b> &minus; In the .Net Coverage section, click on <b>.Net Coverage Tool</b>. And then choose the following settings.</p>
+<ul class="list">
+<li>Choose the .Net Coverage tool as NCover(3.x)</li>
+<li>Platform as x86</li>
+<li>Version as v4.0</li>
+<li>Path to NCover as C:\Program Files (x86)\NCover</li>
+<li>Leave the other settings as they are</li>
+</ul>
+<p><b>Step 4</b> &minus; Click Save.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/.net_coverage_section.jpg" alt=".net Coverage Section" />
+<p></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/save.jpg" alt="Save" />
+<p><b>Step 5</b> &minus; Now go to the main screen of your project and click Run.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/main_screen_run_project.jpg" alt="Main Screen Click Run" />
+<p></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/tests_passed.jpg" alt="Tests passed" />
+<p><b>Step 6</b> &minus; Once the build is run, click on the Test passed. You will now see a Code Coverage screen and you will see many metric indicators.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/code_coverage.jpg" alt="Code Coverage" />
+<p><b>Step 7</b> &minus; You can now click the Code Coverage tab to get more information on the Code Analysis.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/code_analysis.jpg" alt="Code Analysis" />
+<p><b>Step 8</b> &minus; Click the <b>fullcoveragereport.html</b>. You will now get a full comprehensive report on the inspection carried out for the <b>.Net code</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/full_coverage_report_html.jpg" alt="Full Coverage Report Html" />
+<h1>Continuous Integration - Database</h1>
+<p>Continuous Database Integration is the process of rebuilding your database and test data any time a change is applied to a project’s version control repository.</p>
+<p>In Database Integration, generally all the artifacts related to the database integration &minus;</p>
+<ul class="list">
+<li>Should reside in a version control system.</li>
+<li>Can be tested for rigor and inspected for policy compliance.</li>
+<li>Can be generated using your build scripts.</li>
+</ul>
+<p>Activities that can be involved in Continuous Database Integration can be any one of the following &minus;</p>
+<p><b>Drop a Database</b> &minus; Drop the database and remove the associated data, so that you can create a new database with the same name</p>
+<p><b>Create a new Database</b> &minus; Create a new database using Data Definition Language (DDL).</p>
+<p><b>Insert the Initial Data</b> &minus; Insert any initial data (e.g., lookup tables) that your system is expected to contain when delivered.</p>
+<p><b>Migrate Database and Data</b> &minus; Migrate the database schema and data on a periodic basis (if you are creating a system based on an existing database).</p>
+<p><b>Modify Column Attributes</b> &minus; Modify table column attributes and constraints based on requirements and refactoring.</p>
+<p><b>Modify Test Data</b> &minus; Alter test data as needed for multiple environments.</p>
+<p>So in our Continuous Database example, we are going to do the following steps &minus;</p>
+<ul class="list">
+<li><p>We will create a MS SQL Server database and a corresponding table.</p></li>
+<li><p>We will create a script out of SQL Server Management Studio. This database script will be used to set up our table in the database.</p></li>
+<li><p>We will write a code in our ASP.Net project to access this database.</p></li>
+<li><p>We will create a step in our project in TeamCity to run this script.</p></li>
+<li><p>We will check in our script into Git.</p></li>
+</ul>
+<p>Steps to do this in the AWS database which was created in an earlier section.</p>
+<p><b>Step 1</b> &minus; Create an MS SQL Server database and a corresponding table. Let’s open SQL Server Management Studio and create a simple database and table. Right-click databases and click on <b>New Database</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/new_database.jpg" alt="New Database" />
+<p><b>Step 2</b> &minus; Name it as <b>Demodb</b> and click OK</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_db.jpg" alt="Demo DB" />
+<p><b>Step 3</b> &minus; In the new database, right-click and create a new table.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/tables_create_new_table.jpg" alt="Tables Create New Table" />
+<p><b>Step 4</b> &minus; You can add your desired columns to the table.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/add_desired_columns.jpg" alt="Add Desired Columns" />
+<p><b>Step 5</b> &minus; Save the table and name it as <b>Demotb</b>.</p>
+<p><b>Step 6</b> &minus; Now right-click on the table and choose the menu option <b>Script Table as &rarr; Drop and Create to &rarr; File</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/menu_option.jpg" alt="Menu Option" />
+<p><b>Step 7</b> &minus; Save the file to the demo project folder as <b>Sample.sql</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/save_as_sample.jpg" alt="Save As Sample" />
+<p>This is what the database script would look like. It would first drop an existing table if present and then re-create the table.</p>
+<pre class="prettyprint notranslate">
+USE [Demodb]
+GO
+
+/****** Object: Table [dbo].[Demotb] Script Date: 3/22/2016 7:03:25 AM
+
+******
+
+DROP TABLE [dbo].[Demotb]
+GO
+
+/****** Object: Table [dbo].[Demotb] Script Date: 3/22/2016 7:03:25 AM
+
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Demotb](
+   [TutorialName] [nvarchar](max) NULL,
+   [TutorialID] [smallint] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+</pre>
+<p><b>Step 8</b> &minus; Now let’s quickly change our <b>ASP.Net code</b> to refer to the new database.</p>
+<p><b>Step 9</b> &minus; In the <b>Tutorial.cs</b> file in your <b>Demo project</b>, add the following lines of code. These lines of code will connect to your database, take the Server version and store the version name in the Name variable. We can display this Name variable in our <b>Demo.aspx.cs</b> file through a <b>Response.write</b> command.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+
+namespace Simple {
+   public class Tutorial {
+      public String Name;
+      
+      public Tutorial() {
+         string connectionString = "Data Source = WIN-50GP30FGO75;
+         Initial Catalog = Demodb;
+         Integrated Security = true;";
+         
+         using (SqlConnection connection = new SqlConnection()) {
+            connection.ConnectionString = connectionString;
+            connection.Open();
+            Name = connection.ServerVersion;
+            connection.Close();
+         }
+      }
+   }
+}
+</pre>
+<p><b>Step 10</b> &minus; Add the following code to the <b>Demo.aspx.cs</b> file to ensure that it displays the SQL Server version.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Simple {
+   public partial class Demo : System.Web.UI.Page {
+      Tutorial tp = new Tutorial();
+      
+      protected void Page_Load(object sender, EventArgs e){
+         Response.Write(tp.Name);
+      }
+   }
+}
+</pre>
+<p>Now if we run the code, you will get the following output in the browser.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/output.jpg" alt="Output" />
+<p><b>Step 11</b> &minus; Now let us add our step in TeamCity which will invoke the database script. Go to your project dashboard and click <b>Edit Configuration Settings</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/click_edit_configuration_settings.jpg" alt="Click Edit Configuration Settings" />
+<p><b>Step 12</b> &minus; Go to Build Steps and click <b>Add build step</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/add_build_step.jpg" alt="Add Build Step" />
+<p>Choose the following options (Note that MS SQL Server client should be installed on the CI Server).</p>
+<ul class="list">
+<li><p>Runner type should be the Command Line.</p></li>
+<li><p>Give an optional Step Name.</p></li>
+<li><p>Run should be Executable with parameters.</p></li>
+<li><p>Command executable should be <b>C:\Program Files\Microsoft SQL Server\110\Tools\Binn\sqlcmd.exe</b></p></li>
+<li><p>Command parameters should be <b>-S WIN-50GP30FGO75 -i Sample.sql</b>. Where –S gives the name of the SQL Server instance.</p></li>
+</ul>
+<p><b>Step 13</b> &minus; Click Save.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/build_order.jpg" alt="Build Order" />
+<p>Now what needs to be ensured is the build order. You have to ensure the build order is as follows.</p>
+<p><b>Step 14</b> &minus; You can change the build order by choosing the option to reorder build steps.</p>
+<ul class="list">
+<li><p>The database setup should be first – So this will be used to recreate your database from fresh.</p></li>
+<li><p>Next is the build of your application.</p></li>
+<li><p>Finally your test setup.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/test_setup.jpg" alt="Test Setup" />
+<p><b>Step 15</b> &minus; Now run the <b>git add</b> and <b>git commit</b> command so that the <b>Sample.sql</b> file is checked into Git. This will trigger a build automatically. And this build should pass.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/sample_sql.jpg" alt="Sample SQL" />
+<p>You now have a full-fledged build cycle with a continuous database integration aspect as well in your cycle. In the next section, let’s take this further and look at Continuous Deployment.</p>
+<p>Now that you have done this with a local SQL Server, we can repeat the same steps for a <b>AWS MS SQL</b> Server which was created in one of the earlier sections. To connect to a Microsoft SQL Server, you need to connect via the following convention.</p>
+<p><b>Step 16</b> &minus; First see what is the name assigned to your database instance in AWS. When you log-in to the AWS, go to the RDS section under the database section.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/rds_section_under_database_section.jpg" alt="RDS Section Under Database Section" />
+<p><b>Step 17</b> &minus; Click on DB Instances in the next screen that comes up.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/db_instances_in_next_screen.jpg" alt="DB Instances in Next Screen" />
+<p><b>step 18</b> &minus; Click on your database and make a note of the endpoint. In the following screenshot, it is <b>demodb.cypphcv1d87e.ap-southeast-1.rds.amazonaws.com:1433</b></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/endpoint.jpg" alt="Endpoint" />
+<p><b>Step 19</b> &minus; Now to connect to the database from <b>SQL Server Management Studio</b>, you need to specify the connection as <b>demodb.cypphcv1d87e.ap-southeast-1.rds.amazonaws.com,1433</b> (Note the comma used between instance name and port no).</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/connect_to_server.jpg" alt="Connect to Server" />
+<p>The following screenshot shows a successful connection to the database.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/successful_connection.jpg" alt="Successful Connection" />
+<p>Then you can repeat all the same steps. The <b>Sqlcmd command</b> will be as follows &minus;</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/sql_cmd_command.jpg" alt="Sql cmd Command" />
+<p>This same command can be replaced in the Database build step in TeamCity. When you execute the <b>sqlcmd command</b>, the table will be created automatically in your SQL Server database in AWS.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/database_build_step.jpg" alt="Database Build Step" />
+<h1>Continuous Integration - Deployment</h1>
+<p>Automated builds and repeatable builds. Automated tests and repeatable tests. Test categories and test frequencies. Continuous inspections. Continuous database integration. These string of tasks in creating an effective CI environment primarily enables one key benefit: releasing working software at any point in time, in any environment.</p>
+<p>In our previous chapters, we have accomplished all of the following segments &minus;</p>
+<ul class="list">
+<li>Created our code.</li>
+<li>Ensured a proper build in TeamCity.</li>
+<li>Created a Database Integration process.</li>
+<li>Conducted successful testing.</li>
+</ul>
+<p>Now the only thing remaining is to carry out an automated deployment, so that our entire process is complete.</p>
+<p>For an automated deployment in our case, we need to follow these steps &minus;</p>
+<ul class="list">
+<li><p>In our deployment server, ensure that IIS is installed.</p></li>
+<li><p>Ensure that IIS user is given access to our database.</p></li>
+<li><p>Create a publish profile which will be used to publish the site when it is built.</p></li>
+<li><p>Ensure we change our MSBuild command to do an automatic deployment.</p></li>
+<li><p>Automate TeamCity to do an automatic publish.</p></li>
+<li><p>Do a <b>git commit</b> to ensure all your files are in Git.</p></li>
+</ul>
+<p><b>Step 1</b> &minus; Configure a local IIS Server. If you have a local or remote IIS Server, the following configuration can be carried out to deploy our application. It’s always a good practice to see if a deployment can be done manually before it is done in an automated fashion.</p>
+<p><b>Step 2</b> &minus; On a Windows 2012 server, go to your Server Manager and click on Add Roles and Features.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/server_manager.jpg" alt="Server Manager" />
+<p><b>Step 3</b> &minus; Click Next on the following screen that comes up.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/add_roles_features_wizard.jpg" alt="Add Roles and Features Wizard" />
+<p><b>Step 4</b> &minus; Choose roles-based or feature-based installation on the next screen and click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/installation_type.jpg" alt="Installation Type" />
+<p><b>Step 5</b> &minus; Select the default server and click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/default_server.jpg" alt="Default Server" />
+<p><b>Step 6</b> &minus; Choose the Web server role and click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/web_server_role.jpg" alt="Web Server Role" />
+<p><b>Step 7</b> &minus; In the next screen that comes up, click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/click_next.jpg" alt="Click Next" />
+<p><b>Step 8</b> &minus; Click Next again on the following screen that appears.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/web_server_role_click_next.jpg" alt="Web Server Role Click Next" />
+<p><b>Step 9</b> &minus; In the next screen that pops up, click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/role_services.jpg" alt="Role Services" />
+<p><b>Step 10</b> &minus; In the final screen, you can click the Install button to install the IIS.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/install_iis.jpg" alt="Install IIS" />
+<p>Once you have IIS installed, you can open it by opening the Internet Information Services.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/internet_information_services.jpg" alt="Internet Information Services" />
+<p><b>Step 11</b> &minus; Click Application Pools, you will see a pool with the name of <b>DefaultAppPool</b>. This needs to have access to SQL Server in the next step.</p>
+<p><b>Step 12</b> &minus; If we need to connect a ASP.Net application to a MS SQL Server application, we have to give access to the default application pool to the SQL Server instance, so that it can connect to our <b>Demodb</b> database.</p>
+<p><b>Step 13</b> &minus; Open SQL Server Management Studio. Go to Logins, right-click and choose the menu option <b>New Login</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/new_login.jpg" alt="New Login" />
+<p>In the next screen, update the following parameters and click OK.</p>
+<ul class="list">
+<li>Login name as IIS APPPOOL\DefaultAppPool.</li>
+<li>Default database – This should be our database, which is demodb.</li>
+</ul>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/parameters.jpg" alt="Parameters" />
+<p><b>Step 14</b> &minus; Creating a <b>Publish Profile</b>. The publish profile is used in Visual Studio to create a deployment package that can then be used with MS Build and in any CI Server accordingly. To do this, from Visual Studio, right-click on the project and click the menu option of Publish</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/publish_profile.jpg" alt="Publish Profile" />
+<p><b>Step 15</b> &minus; In the next screen that comes up, choose to create a new Publish profile, give it a name – <b>DemoDeployment</b>. Then click the Next button.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/demo_deployment.jpg" alt="Demo Deployment" />
+<p>In the ensuing screen that shows up, add the following values &minus;</p>
+<ul class="list">
+<li>Choose the Publish method as Web Deploy.</li>
+<li>Enter the server as localhost.</li>
+<li>Enter the site name as Default Web Site/Demo.</li>
+<li>Put the destination url as <b>http://localhost/Demo</b></li>
+</ul>
+<p>Then click the Next button.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/publish_web_next_button.jpg" alt="Publish Web Next Button" />
+<p><b>Step 16</b> &minus; In the next screen, click Next.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/publish_web_configuration.jpg" alt="Publish Web Configuration" />
+<p><b>Step 17</b> &minus; In the final screen that comes up, click the Publish button.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/final_screen.jpg" alt="Final Screen" />
+<p>Now if you go to the <b>C:\Demo\Simple\Properties\PublishProfiles</b> location of your project, you will see a new <b>publish profile xml file</b> created. This publish profile file will have all the details required to publish your application to the local IIS server.</p>
+<p><b>Step 18</b> &minus; Now let’s customize our MSBuild command and use the above publish profile and see what happens. In our MSBuild command, we specify the following parameters &minus;</p>
+<ul class="list">
+<li><p>Deploy on Build is true – this will trigger an automatic deployment once a successful build is done.</p></li>
+<li><p>We are then mentioning to use the Publish profile which was used in the above step.</p></li>
+<li><p>The Visual Studio version is just to be mentioned to the MSBuild deployment capability on what is the version of the Visual Studio being used.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/visual_studio_version.jpg" alt="Visual Studio Version" />
+<p>When you run the above command, MSBuild will trigger a build and deployment process. What you will note that, it is deploying it to our <b>Default Website</b> in our IIS Server.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/default_website.jpg" alt="Default Website" />
+<p>Now if we browse to the site – <b>http://localhost/Demo/Demo.aspx</b> we will see the following output, which means that the MSBuild did a successful deployment to our website.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/localhost.jpg" alt="Localhost" />
+<p><b>Step 19</b> &minus; Automating through TeamCity – Now it is time to add a task to our TeamCity server to automatically use MSBuild to deploy our application, based on the above mentioned steps.</p>
+<p><b>Step 20</b> &minus; Go to your project dashboard and click <b>Edit Configuration Settings</b>.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/project_dashboard_edit_configuration_settings.jpg" alt="Project Dashboard Configuration Settings" />
+<p><b>Step 21</b> &minus; Go to Build Steps and click Add a Build step.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/build_steps_add_build_step.jpg" alt="Build Steps Add Build Steps" />
+<p>Choose the following options &minus;</p>
+<ul class="list">
+<li><p>The runner type should be MSBuild</p></li>
+<li><p>Give an optional Step name</p></li>
+<li><p>Enter the build path as Simple/Simple.csproj</p></li>
+<li><p>Keep the MSBuild version as Microsoft Build Tools 2013</p></li>
+<li><p>Keep the MSBuild Toolsversion as 12.0</p></li>
+<li><p>Put the command line as /p:DeployOnBuild = true /p:PublishProfile = DemoDeployement /p:VisualStudioVersion = 12.0</p></li>
+</ul>
+<p><b>Step 22</b> &minus; Click Save.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/build_configuartion_settings_click_save.jpg" alt="Build Configuration Settings Click Save" />
+<p></p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/ms_build_version.jpg" alt="MS Build Version" />
+<p>Make sure that in the build steps, the Deploy step is the last step in the chain.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/deploy_step.jpg" alt="Deploy Step" />
+<p><b>Step 23</b> &minus; Now let’s do a final <b>git commit</b>, to ensure all the files are in Git and can be used by TeamCity.</p>
+<img src="https://www.tutorialspoint.com/continuous_integration/images/final_git_command.jpg" alt="Final Git Command" />
+<p>Congratulations, you have successfully set up a complete Continuous Integration Cycle for your application, which can be run at any point in time.</p>
+<h1>Continuous Integration - Best Practices</h1>
+<p>Let’s have a final review of the best practices of Continuous Integration based on all the lessons we have learnt so far &minus;</p>
+<ul class="list">
+<li><p><b>Maintain a code repository</b> &minus; This is the most basic step. In all our examples, everything is maintained in a Git repository right from the code base to the Publish profiles, to the database scripts. It must always be ensured that everything is kept in the code repository.</p></li>
+<li><p><b>Automate the build</b> &minus; We have seen how to use MSBuild to automate a build along with using a publish profile. This is again a key step in the continuous Integration process.</p></li>
+<li><p><b>Make the build self-testing</b> &minus; Ensure that you can test the build by keeping unit test cases in place and these test cases should be in such a way that it can be run by the Continuous Integration server.</p></li>
+<li><p><b>Everyone commits to the baseline every day</b> &minus; This is a key principle of Continuous Integration. There is no point staying till the end of the entire process to see who breaks the build.</p></li>
+<li><p><b>Every commit (to baseline) should be built</b> &minus; Every commit made to the application, needs to be successfully built. If the build fails for whatever reason, then the code needs to be changed to ensure the build passes.</p></li>
+<li><p><b>Keep the build fast</b> &minus; If the build is slow, then it would indicate a problem in the entire Continuous Integration process. Ensure that the builds are always limited to a duration, preferably should never go beyond 10 minutes.</p></li>
+<li><p><b>Everyone can see the results of the latest build</b> &minus; The TeamCity dashboard gives everyone a view of all the builds, which have either passed or failed. This gives a good insight to all the people who are involved in the Continuous Integration process.</p></li>
+</ul>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_best_practices.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/continuous_integration/continuous_integration_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/continuous_integration/continuous_integration_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:23:01 GMT -->
+</html>

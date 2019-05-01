@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:19:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Convex Optimization Quick Guide</title>
+<meta name="description" content="Convex Optimization Quick Guide - Learn Convex Optimization in simple and easy steps starting from basic to advanced concepts with examples including Introduction, Linear Programming, Norm, Inner Product, Minima and Maxima, Convex Set, Affine Set, Convex Hull, Caratheodory Theorem, Weierstrass Theorem, Closest Point Theorem, Fundamental Separation Theorem, Convex Cones, Polar Cone, Conic Combination, Polyhedral Set, Extreme point of a convex set, Direction, Convex and Concave Function, Jensen's Inequality, Differentiable Convex Function, Sufficient and Necessary Conditions for Global Optima, Quasiconvex and Quasiconcave functions, Differentiable Quasiconvex Function, Strictly Quasiconvex Function, Strongly Quasiconvex Function, Pseudoconvex Function, Convex Programming Problem, Fritz-John Conditions, Karush-Kuhn-Tucker Optimality Necessary Conditions, Algorithms for Convex Problems." />
+<meta name="keywords" content="Convex Optimization, Tutorial, Introduction, Linear Programming, Norm, Inner Product, Minima and Maxima, Convex Set, Affine Set, Convex Hull, Caratheodory Theorem, Weierstrass Theorem, Closest Point Theorem, Fundamental Separation Theorem, Convex Cones, Polar Cone, Conic Combination, Polyhedral Set, Extreme point of a convex set, Direction, Convex and Concave Function, Jensen's Inequality, Differentiable Convex Function, Sufficient and Necessary Conditions for Global Optima, Quasiconvex and Quasiconcave functions, Differentiable Quasiconvex Function, Strictly Quasiconvex Function, Strongly Quasiconvex Function, Pseudoconvex Function, Convex Programming Problem, Fritz-John Conditions, Karush-Kuhn-Tucker Optimality Necessary Conditions, Algorithms for Convex Problems." />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+"HTML-CSS": {
+linebreaks: { automatic: true, width: "container" } 
+} 
+});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>`
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #bf330d url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #bf330d !important;}
+.submenu-item{ border-bottom: 2px solid #bf330d !important; border-top: 2px solid #bf330d !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/convex_optimization/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/convex_optimization/images/convex-optimization-mini-logo.jpg" alt="Convex Optimization Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Convex Optimization Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/index.htm">Home</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_introduction.htm">Introduction</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_linear_programming.htm">Linear Programming</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_norm.htm">Norm</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_inner_product.htm">Inner Product</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_minima_maxima.htm">Minima and Maxima</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_set.htm"
+>Convex Set</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_affine_set.htm">Affine Set</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_hull.htm">Convex Hull</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_caratheodory_theorem.htm">Caratheodory Theorem</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_weierstrass_theorem.htm">Weierstrass Theorem</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_closest_point_theorem.htm">Closest Point Theorem</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_fundamental_separation_theorem.htm">Fundamental Separation Theorem</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_cones.htm">Convex Cones</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_polar_cone.htm">Polar Cone</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_conic_combination.htm">Conic Combination</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_polyhedral_set.htm">Polyhedral Set</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/extreme_point_of_convex_set.htm">Extreme point of a convex set</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_direction.htm">Direction</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_concave_function.htm">Convex &amp; Concave Function</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_jensens_inequality.htm">Jensen's Inequality</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_differentiable_function.htm">Differentiable Convex Function</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_sufficient_necessary_conditions_for_global_optima.htm">Sufficient &amp; Necessary Conditions for Global Optima</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_quasiconvex_quasiconcave_functions.htm">Quasiconvex &amp; Quasiconcave functions</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_differentiable_quasiconvex_function.htm">Differentiable Quasiconvex Function</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_strictly_quasiconvex_function.htm">Strictly Quasiconvex Function</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_strongly_quasiconvex_function.htm">Strongly Quasiconvex Function</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_pseudoconvex_function.htm">Pseudoconvex Function</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_programming_problem.htm">Convex Programming Problem</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_fritz_john_conditions.htm">Fritz-John Conditions</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_karush_kuhn_tucker_optimality_necessary_conditions.htm">Karush-Kuhn-Tucker Optimality Necessary Conditions
+</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_algorithms_for_convex_problems.htm">Algorithms for Convex Problems</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Convex Optimization Resources</li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm">Convex Optimization - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_useful_resources.htm">Convex Optimization -  Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_discussion.htm">Convex Optimization - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Convex Optimization - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_algorithms_for_convex_problems.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Convex Optimization - Introduction</h1>
+<p>This course is useful for the students who want to solve non-linear optimization problems that arise in various engineering and scientific applications. This course starts with basic theory of linear programming and will introduce the concepts of convex sets and functions and related terminologies to explain various theorems that are required to solve the non linear programming problems. This course will introduce various algorithms that are used to solve such problems. These type of problems arise in various applications including machine learning, optimization problems in electrical engineering, etc. It requires the students to have prior knowledge of high school maths concepts and calculus.</p>
+<p>In this course, the students will learn to solve the optimization problems like $min f\left ( x \right )$ subject to some constraints.</p>
+<p>These problems are easily solvable if the function $f\left ( x \right )$ is a linear function and if the constraints are linear. Then it is called a linear programming problem (LPP). But if the constraints are non-linear, then it is difficult to solve the above problem. Unless we can plot the functions in a graph, then try to analyse the optimization can be one way, but we can't plot a function if it's beyond three dimensions. Hence there comes the techniques of non-linear programming or convex programming to solve such problems. In these tutorial, we will focus on learning such techniques and in the end, a few algorithms to solve such problems. first we will bring the notion of convex sets which is the base of the convex programming problems. Then with the introduction of convex functions, we will some important theorems to solve these problems and some algorithms based on these theorems.</p>
+<h2>Terminologies</h2>
+<ul class="list">
+<li><p>The space $\mathbb{R}^n$ &minus; It is an n-dimensional vector with real numbers, defined as follows &minus; $\mathbb{R}^n=\left \{ \left ( x_1,x_2,...,x_n \right )^{\tau }:x_1,x_2,....,x_n \in \mathbb{R} \right \}$</p></li>
+<li><p>The space $\mathbb{R}^{mXn}$ &minus; It is a set of all real values matrices of order $mXn$.</p></li>
+</ul>
+<h1>Convex Optimization - Linear Programming</h1>
+<h2>Methodology</h2>
+<p>Linear Programming also called Linear Optimization, is a technique which is used to solve mathematical problems in which the relationships are linear in nature. the basic nature of Linear Programming is to maximize or minimize an <b>objective function</b> with subject to some <b>constraints</b>. The objective function is a linear function which is obtained from the mathematical model of the problem. The constraints are the conditions which are imposed on the model and are also linear.</p>
+<ul class="list">
+<li>From the given question, find the objective function.</li>
+<li>find the constraints.</li>
+<li>Draw the constraints on a graph.</li>
+<li>find the feasible region, which is formed by the intersection of all the constraints.</li>
+<li>find the vertices of the feasible region.</li>
+<li>find the value of the objective function at these vertices.</li>
+<li>The vertice which either maximizes or minimizes the objective function (according to the question) is the answer.</li>
+</ul>
+<h3>Examples</h3>
+<p><b>Step 1</b> &minus; Maximize $5x+3y$ subject to</p>
+<p>$x+y\leq 2$,</p>
+<p>$3x+y\leq 3$,</p>
+<p>$x\geq 0 \:and \:y\geq 0$</p>
+<p><b>Solution</b> &minus;</p>
+<p>The first step is to find the feasible region on a graph.</p>
+<img src="https://www.tutorialspoint.com/convex_optimization/images/example1.jpg" alt="Example 1" />
+<p>Clearly from the graph, the vertices of the feasible region are</p>
+<p>$\left ( 0, 0 \right )\left ( 0, 2 \right )\left ( 1, 0 \right )\left ( \frac{1}{2}, \frac{3}{2} \right )$</p>
+<p>Let $f\left ( x, y \right )=5x+3y$</p>
+<p>Putting these values in the objective function, we get &minus;</p>
+<p>$f\left ( 0, 0 \right )$=0</p>
+<p>$f\left ( 0, 2 \right )$=6</p>
+<p>$f\left ( 1, 0 \right )$=5</p>
+<p>$f\left ( \frac{1}{2}, \frac{3}{2} \right )$=7</p>
+<p>Therefore, the function maximizes at $\left ( \frac{1}{2}, \frac{3}{2} \right )$</p>
+<p><b>Step 2</b> &minus; A watch company produces a digital and a mechanical watch. Long-term projections indicate an expected demand of at least 100 digital and 80 mechanical watches each day. Because of limitations on production capacity, no more than 200 digital and 170 mechanical watches can be made daily. To satisfy a shipping contract, a total of at least 200 watches much be shipped each day.</p> 
+<p>If each digital watch sold results in a $\$2$ loss, but each mechanical watch produces a $\$5$ profit, how many of each type should be made daily to maximize net profits?</p>
+<p><b>Solution</b> &minus;</p>
+<p>Let $x$ be the number of digital watches produced</p>
+<p>$y$ be the number of mechanical watches produced</p>
+<p>According to the question, at least 100 digital watches are to be made daily and maximaum 200 digital watches can be made.</p>
+<p>$\Rightarrow 100 \leq \:x\leq 200$</p>
+<p>Similarly, at least 80 mechanical watches are to be made daily and maximum 170 mechanical watches can be made.</p>
+<p>$\Rightarrow 80 \leq \:y\leq 170$</p>
+<p>Since at least 200 watches are to be produced each day.</p>
+<p>$\Rightarrow x +y\leq 200$</p>
+<p>Since each digital watch sold results in a $\$2$ loss, but each mechanical watch produces a $\$5$ profit,</p>
+<p>Total profit can be calculated as</p>
+<p>$Profit =-2x + 5y$</p>
+<p>And we have to maximize the profit, Therefore, the question can be formulated as &minus;</p>
+<p>Maximize  $-2x + 5y$ subject to</p>
+<p>$100 \:\leq x\:\leq 200$</p>
+<p>$80 \:\leq y\:\leq 170$</p>
+<p>$x+y\:\leq 200$</p>
+<p>Plotting the above equations in a graph, we get,</p>
+<img src="https://www.tutorialspoint.com/convex_optimization/images/example2.jpg" alt="Example 2" />
+<p>The vertices of the feasible region are</p>
+<p>$\left ( 100, 170\right )\left ( 200, 170\right )\left ( 200, 180\right )\left ( 120, 80\right ) and \left ( 100, 100\right )$</p>
+<p>The maximum value of the objective function is obtained at $\left ( 100, 170\right )$ Thus, to maximize the net profits, 100 units of digital watches and 170 units of mechanical watches should be produced.</p>
+<h1>Convex Optimization - Norm</h1>
+<p>A norm is a function that gives a strictly positive value to a vector or a variable.</p>
+<p>Norm is a function $f:\mathbb{R}^n\rightarrow \mathbb{R}$</p>
+<p>The basic characteristics of a norm are &minus;</p>
+<p>Let $X$ be a vector such that $X\in \mathbb{R}^n$</p>
+<ul class="list">
+<li><p>$\left \| x \right \|\geq 0$</p></li>
+<li><p>$\left \| x \right \|= 0 \Leftrightarrow x= 0\forall x \in X$</p></li>
+<li><p>$\left \|\alpha x  \right \|=\left | \alpha  \right |\left \| x \right \|\forall \:x \in X and \:\alpha \:is \:a \:scalar$</p></li>
+<li><p>$\left \| x+y \right \|\leq \left \| x \right \|+\left \| y \right \| \forall x,y \in X$</p></li>
+<li><p>$\left \| x-y \right \|\geq \left \| \left \| x \right \|-\left \| y \right \| \right \|$</p></li>
+</ul>
+<p>By definition, norm is calculated as follows &minus;</p>
+<ul class="list">
+<li><p>$\left \| x \right \|_1=\displaystyle\sum\limits_{i=1}^n\left | x_i \right |$</p></li>
+<li><p>$\left \| x \right \|_2=\left ( \displaystyle\sum\limits_{i=1}^n\left | x_i \right |^2 \right )^{\frac{1}{2}}$</p></li>
+<li><p>$\left \| x \right \|_p=\left ( \displaystyle\sum\limits_{i=1}^n\left | x_i \right |^p \right )^{\frac{1}{p}},1 \leq p \leq \infty$</p></li>
+</ul>
+<p>Norm is a continuous function.</p>
+<h2>Proof</h2>
+<p>By definition, if $x_n\rightarrow x$ in $X\Rightarrow f\left ( x_n \right )\rightarrow f\left ( x \right ) $ then $f\left ( x \right )$ is a constant function.</p>
+<p>Let $f\left ( x \right )=\left \| x \right \|$</p>
+<p>Therefore, $\left | f\left ( x_n \right )-f\left ( x \right ) \right |=\left | \left \| x_n \right \| -\left \| x \right \|\right |\leq \left | \left | x_n-x \right | \:\right |$</p>
+<p>Since $x_n \rightarrow x$ thus, $\left \| x_n-x \right \|\rightarrow 0$</p>
+<p>Therefore $\left | f\left ( x_n \right )-f\left ( x \right ) \right |\leq 0\Rightarrow \left | f\left ( x_n \right )-f\left ( x \right ) \right |=0\Rightarrow f\left ( x_n \right )\rightarrow f\left ( x \right )$</p>
+<p>Hence, norm is a continuous function.</p>
+<h1>Convex Optimization - Inner Product</h1>
+<p>Inner product is a function which gives a scalar to a pair of vectors.</p>
+<p>Inner Product &minus; $f:\mathbb{R}^n \times \mathbb{R}^n\rightarrow \kappa$ where $\kappa$ is a scalar.</p>
+<p>The basic characteristics of inner product are as follows &minus;</p>
+<p>Let $X \in \mathbb{R}^n$</p>
+<ul class="list">
+<li><p>$\left \langle x,x \right \rangle\geq 0, \forall x \in X$</p></li>
+<li><p>$\left \langle x,x \right \rangle=0\Leftrightarrow x=0, \forall x \in X$</p></li>
+<li><p>$\left \langle \alpha x,y \right \rangle=\alpha \left \langle x,y \right \rangle,\forall \alpha \in \kappa \: and\: \forall x,y \in X$</p></li>
+<li><p>$\left \langle x+y,z \right \rangle =\left \langle x,z \right \rangle +\left \langle y,z \right \rangle, \forall x,y,z \in X$</p></li>
+<li><p>$\left \langle \overline{y,x} \right \rangle=\left ( x,y \right ), \forall x, y \in X$</p></li>
+</ul>
+<p><b>Note</b> &minus;</p>
+<ul class="list">
+<li><p>Relationship between norm and inner product: $\left \| x \right \|=\sqrt{\left ( x,x \right )}$</p></li>
+<li><p>$\forall x,y \in \mathbb{R}^n,\left \langle x,y \right \rangle=x_1y_1+x_2y_2+...+x_ny_n$</p></li>
+</ul>
+<h2>Examples</h2>
+<p>1. find the inner product of $x=\left ( 1,2,1 \right )\: and \: y=\left ( 3,-1,3 \right )$</p>
+<h3>Solution</h3>
+<p>$\left \langle x,y \right \rangle =x_1y_1+x_2y_2+x_3y_3$</p>
+<p>$\left \langle x,y \right \rangle=\left ( 1\times3 \right )+\left ( 2\times-1 \right )+\left ( 1\times3 \right )$</p>
+<p>$\left \langle x,y \right \rangle=3+\left ( -2 \right )+3$</p>
+<p>$\left \langle x,y \right \rangle=4$</p>
+<p>2. If $x=\left ( 4,9,1 \right ),y=\left ( -3,5,1 \right )$ and $z=\left ( 2,4,1 \right )$, find $\left ( x+y,z \right )$</p>
+<h3>Solution</h3>
+<p>As we know, $\left \langle x+y,z \right \rangle=\left \langle x,z \right \rangle+\left \langle y,z \right \rangle$</p>
+<p>$\left \langle x+y,z \right \rangle=\left ( x_1z_1+x_2z_2+x_3z_3 \right )+\left ( y_1z_1+y_2z_2+y_3z_3 \right )$</p>
+<p>$\left \langle x+y,z \right \rangle=\left \{ \left ( 4\times 2 \right )+\left ( 9\times 4 \right )+\left ( 1\times1 \right ) \right \}+$</p>
+<p style="text-align:center">$\left \{ \left ( -3\times2 \right )+\left ( 5\times4 \right )+\left ( 1\times 1\right ) \right \}$</p>
+<p>$\left \langle x+y,z \right \rangle=\left ( 8+36+1 \right )+\left ( -6+20+1 \right )$</p>
+<p>$\left \langle x+y,z \right \rangle=45+15$</p>
+<p>$\left \langle x+y,z \right \rangle=60$</p>
+<h1>Convex Optimization - Minima and Maxima</h1>
+<h2>Local Minima or Minimize</h2>
+<p>$\bar{x}\in \:S$ is said to be local minima of a function $f$ if $f\left ( \bar{x} \right )\leq f\left ( x \right ),\forall x \in N_\varepsilon \left ( \bar{x} \right )$ where $N_\varepsilon \left ( \bar{x} \right )$ means  neighbourhood of $\bar{x}$, i.e., $N_\varepsilon \left ( \bar{x} \right )$ means $\left \| x-\bar{x} \right \|< \varepsilon$</p>
+<h2>Local Maxima or Maximizer</h2>
+<p>$\bar{x}\in \:S$  is said to be local maxima of a function  $f$ if $f\left ( \bar{x} \right )\geq f\left ( x \right ), \forall x \in N_\varepsilon \left ( \bar{x} \right )$ where $N_\varepsilon \left ( \bar{x} \right )$ means  neighbourhood of $\bar{x}$, i.e., $N_\varepsilon \left ( \bar{x} \right )$ means $\left \| x-\bar{x} \right \|< \varepsilon$</p>
+<h2>Global minima</h2>
+<p>$\bar{x}\in \:S$ is said to be global minima of a function $f$ if $f\left ( \bar{x} \right )\leq f\left ( x \right ), \forall x \in S$</p>
+<h2>Global maxima</h2>
+<p>$\bar{x}\in \:S$  is said to be global maxima of a function $f$ if $f\left ( \bar{x} \right )\geq f\left ( x \right ), \forall x \in S$</p>
+<h3>Examples</h3>
+<p><b>Step 1</b> &minus; find the local minima and maxima of $f\left ( \bar{x} \right )=\left | x^2-4 \right |$</p>
+<p><b>Solution</b> &minus;</p>
+<img src="https://www.tutorialspoint.com/convex_optimization/images/min.jpg" alt="Min" />
+<p>From the graph of the above function, it is clear that the local minima occurs at $x= \pm 2$ and local maxima at $x = 0$</p>
+<p><b>Step 2</b> &minus; find the global minima af the function $f\left (x \right )=\left | 4x^3-3x^2+7 \right |$</p>
+<p><b>Solution</b> &minus;</p>
+<img src="https://www.tutorialspoint.com/convex_optimization/images/min2.jpg" alt="Min 2" />
+<p>From the graph of the above function, it is clear that the global minima occurs at $x=-1$.</p>
+<h1>Convex Optimization - Convex Set</h1>
+<p>Let $S\subseteq \mathbb{R}^n$ A set S is said to be convex if the line segment joining any two points of the set S also belongs to the S, i.e., if $x_1,x_2 \in S$, then $\lambda x_1+\left ( 1-\lambda  \right )x_2 \in S$  where $\lambda \in\left ( 0,1 \right )$.</p> 
+<p><b>Note</b> &minus;</p>
+<ul class="list">
+<li>The union of two convex sets may or may not be convex.</li>
+<li>The intersection of two convex sets is always convex.</li>
+</ul>
+<p><b>Proof</b></p>
+<p>Let $S_1$ and $S_2$ be two convex set.</p>
+<p>Let $S_3=S_1 \cap S_2$</p>
+<p>Let $x_1,x_2 \in S_3$</p>
+<p>Since $S_3=S_1 \cap S_2$ thus $x_1,x_2 \in S_1$and $x_1,x_2 \in S_2$</p>
+<p>Since $S_i$ is convex set, $\forall$  $i \in 1,2,$</p>
+<p>Thus $\lambda x_1+\left ( 1-\lambda  \right )x_2 \in S_i$ where $\lambda \in \left ( 0,1  \right )$</p>
+<p>Therfore, $\lambda x_1+\left ( 1-\lambda  \right )x_2 \in S_1\cap S_2$</p>
+<p>$\Rightarrow \lambda x_1+\left ( 1-\lambda \right )x_2 \in S_3$</p>
+<p>Hence, $S_3$ is a convex set.</p>
+<ul class="list">
+<li><p>Weighted average of the form $\displaystyle\sum\limits_{i=1}^k \lambda_ix_i$,where $\displaystyle\sum\limits_{i=1}^k \lambda_i=1$ and $\lambda_i\geq 0,\forall i \in \left [ 1,k \right ]$ is called conic combination of $x_1,x_2,....x_k.$</p></li>
+<li><p>Weighted average of the form $\displaystyle\sum\limits_{i=1}^k \lambda_ix_i$, where $\displaystyle\sum\limits_{i=1}^k \lambda_i=1$ is called affine combination of $x_1,x_2,....x_k.$</p></li>
+<li><p>Weighted average of the form $\displaystyle\sum\limits_{i=1}^k \lambda_ix_i$ is called linear combination of $x_1,x_2,....x_k.$</p></li>
+</ul>
+<h2>Examples</h2>
+<p><b>Step 1</b> &minus; Prove that the set $S=\left \{ x \in \mathbb{R}^n:Cx\leq \alpha  \right \}$ is a convex set.</p>
+<h3>Solution</h3>
+<p>Let $x_1$ and $x_2 \in S$</p>
+<p>$\Rightarrow Cx_1\leq \alpha$ and $\:and \:Cx_2\leq \alpha$</p>
+<p>To show:$\:\:y=\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )\in S \:\forall \:\lambda \in\left ( 0,1 \right )$</p>
+<p style="padding-left:11%">$Cy=C\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )=\lambda Cx_1+\left ( 1-\lambda \right )Cx_2$</p>
+<p style="padding-left:11%">$\Rightarrow Cy\leq \lambda \alpha+\left ( 1-\lambda  \right )\alpha$</p>
+<p style="padding-left:11%">$\Rightarrow Cy\leq \alpha$</p>
+<p style="padding-left:11%">$\Rightarrow y\in S$</p>
+<p>Therefore, $S$ is a convex set.</p>
+<p><b>Step 2</b> &minus; Prove that the set $S=\left \{ \left ( x_1,x_2 \right )\in \mathbb{R}^2:x_{1}^{2}\leq 8x_2 \right \}$  is a convex set.</p>
+<h3>Solution</h3>
+<p>Let $x,y \in S$</p>
+<p>Let $x=\left ( x_1,x_2 \right )$ and $y=\left ( y_1,y_2 \right )$</p>
+<p>$\Rightarrow x_{1}^{2}\leq 8x_2$ and $y_{1}^{2}\leq 8y_2$</p>
+<p>To show &minus; $\lambda x+\left ( 1-\lambda  \right )y\in S\Rightarrow \lambda \left ( x_1,x_2 \right )+\left (1-\lambda  \right )\left ( y_1,y_2 \right ) \in S\Rightarrow \left [ \lambda x_1+\left ( 1- \lambda)y_2] \in S\right ) \right ]$ </p>
+<p>$Now, \left [\lambda x_1+\left ( 1-\lambda  \right )y_1  \right ]^{2}=\lambda ^2x_{1}^{2}+\left ( 1-\lambda  \right )^2y_{1}^{2}+2 \lambda\left ( 1-\lambda \right )x_1y_1$</p>
+<p>But $2x_1y_1\leq x_{1}^{2}+y_{1}^{2}$</p>
+<p>Therefore,</p>
+<p>$\left [ \lambda x_1 +\left ( 1-\lambda  \right )y_1\right ]^{2}\leq \lambda ^2x_{1}^{2}+\left ( 1- \lambda \right )^2y_{1}^{2}+2 \lambda\left ( 1- \lambda \right )\left ( x_{1}^{2}+y_{1}^{2} \right )$</p>
+<p>$\Rightarrow \left [ \lambda x_1+\left ( 1-\lambda \right )y_1 \right ]^{2}\leq \lambda x_{1}^{2}+\left ( 1- \lambda \right )y_{1}^{2}$</p>
+<p>$\Rightarrow \left [ \lambda x_1+\left ( 1-\lambda \right )y_1 \right ]^{2}\leq 8\lambda x_2+8\left ( 1- \lambda \right )y_2$</p>
+<p>$\Rightarrow \left [ \lambda x_1+\left ( 1-\lambda \right )y_1 \right ]^{2}\leq 8\left [\lambda x_2+\left ( 1- \lambda \right )y_2  \right ]$</p>
+<p>$\Rightarrow \lambda x+\left ( 1- \lambda \right )y \in S$</p>
+<p><b>Step 3</b> &minus; Show that a set $S \in \mathbb{R}^n$ is convex if and only if for each integer k, every convex combination of any k points of  $S$ is in $S$.</p>
+<h3>Solution</h3>
+<p>Let $S$ be a convex set. then, to show;</p>
+<p>$c_1x_1+c_2x_2+.....+c_kx_k \in S, \displaystyle\sum\limits_{1}^k c_i=1,c_i\geq 0, \forall i \in 1,2,....,k$</p>
+<p>Proof by induction</p>
+<p>For $k=1,x_1 \in S, c_1=1 \Rightarrow c_1x_1 \in S$</p>
+<p>For $k=2,x_1,x_2 \in S, c_1+c_2=1$ and Since S is a convex set</p>
+<p>$\Rightarrow c_1x_1+c_2x_2 \in S.$</p>
+<p>Let the convex combination of m points of S is in S i.e.,</p>
+<p>$c_1x_1+c_2x_2+...+c_mx_m \in S,\displaystyle\sum\limits_{1}^m c_i=1 ,c_i \geq 0, \forall i \in 1,2,...,m$</p>
+<p>Now, Let $x_1,x_2....,x_m,x_{m+1} \in S$</p>
+<p>Let $x=\mu_1x_1+\mu_2x_2+...+\mu_mx_m+\mu_{m+1}x_{m+1}$</p>
+<p>Let $x=\left ( \mu_1+\mu_2+...+\mu_m \right )\frac{\mu_1x_1+\mu_2x_2+\mu_mx_m}{\mu_1+\mu_2+.........+\mu_m}+\mu_{m+1}x_{m+1}$</p>
+<p>Let $y=\frac{\mu_1x_1+\mu_2x_2+...+\mu_mx_m}{\mu_1+\mu_2+.........+\mu_m}$</p>
+<p>$\Rightarrow x=\left ( \mu_1+\mu_2+...+\mu_m \right )y+\mu_{m+1}x_{m+1}$</p>
+<p>Now $y \in S$ because the sum of the coeﬀicients is 1.</p>
+<p>$\Rightarrow x \in S$ since S is a convex set and $y,x_{m+1} \in S$</p>
+<p>Hence proved by induction.</p>
+<h1>Convex Optimization - affine Set</h1>
+<p>A set $A$ is said to be an affine set if for any two distinct points, the line passing through these points lie in the set $A$.</p>
+<p><b>Note</b> &minus;</p>
+<ul class="list">
+<li><p>$S$ is an affine set if and only if it contains every affine combination of its points.</p></li>
+<li><p>Empty and singleton sets are both affine and convex set.</p> 
+<p>For example, solution of a linear equation is an affine set.</p></li>
+</ul>
+<h2>Proof</h2>
+<p>Let S be the solution of a linear equation.</p>
+<p>By definition, $S=\left \{ x \in \mathbb{R}^n:Ax=b \right \}$</p>
+<p>Let $x_1,x_2 \in S\Rightarrow Ax_1=b$ and $Ax_2=b$</p>
+<p>To prove : $A\left [ \theta x_1+\left ( 1-\theta  \right )x_2 \right ]=b, \forall \theta \in\left ( 0,1 \right )$</p>
+<p>$A\left [ \theta x_1+\left ( 1-\theta  \right )x_2 \right ]=\theta Ax_1+\left ( 1-\theta  \right )Ax_2=\theta b+\left ( 1-\theta  \right )b=b$</p>
+<p>Thus S is an affine set.</p>
+<h2>Theorem</h2>
+<p>If $C$ is an affine set and $x_0 \in C$, then the set $V= C-x_0=\left \{ x-x_0:x \in C \right \}$ is a subspace of C.</p>
+<h2>Proof</h2>
+<p>Let $x_1,x_2 \in V$</p>
+<p>To show: $\alpha x_1+\beta x_2 \in V$ for some $\alpha,\beta$</p>
+<p>Now, $x_1+x_0 \in C$ and $x_2+x_0 \in C$ by definition of V</p>
+<p>Now, $\alpha x_1+\beta x_2+x_0=\alpha \left ( x_1+x_0 \right )+\beta \left ( x_2+x_0 \right )+\left ( 1-\alpha -\beta  \right )x_0$</p>
+<p>But $\alpha \left ( x_1+x_0 \right )+\beta \left ( x_2+x_0 \right )+\left ( 1-\alpha -\beta  \right )x_0 \in C$ because C is an affine set.</p>
+<p>Therefore, $\alpha x_1+\beta x_2 \in V$</p>
+<p>Hence proved.</p>
+<h1>Convex Optimization - Hull</h1>
+<p>The convex hull of a set of points in S is the boundary of the smallest convex region that contain all the points of S inside it or on its boundary.</p>
+<p style="text-align:center">OR</p>
+<p>Let $S\subseteq \mathbb{R}^n$ The convex hull of S, denoted $Co\left ( S \right )$ by  is the collection of all convex combination of S, i.e., $x \in Co\left ( S \right )$ if and only if $x \in \displaystyle\sum\limits_{i=1}^n \lambda_ix_i$, where $\displaystyle\sum\limits_{1}^n \lambda_i=1$ and $\lambda_i \geq 0 \forall x_i \in S$</p>
+<p><b>Remark</b> &minus; Conves hull of a set of points in S in the plane defines a convex polygon and the points of S on the boundary of the polygon defines the vertices of the polygon.</p>
+<p><b>Theorem </b>$Co\left ( S \right )= \left \{ x:x=\displaystyle\sum\limits_{i=1}^n \lambda_ix_i,x_i \in S,  \displaystyle\sum\limits_{i=1}^n \lambda_i=1,\lambda_i \geq 0 \right \}$  Show that a convex hull is a convex set.</p>
+<h2>Proof</h2>
+<p>Let $x_1,x_2 \in Co\left ( S \right )$, then $x_1=\displaystyle\sum\limits_{i=1}^n \lambda_ix_i$ and $x_2=\displaystyle\sum\limits_{i=1}^n \lambda_\gamma x_i$ where $\displaystyle\sum\limits_{i=1}^n \lambda_i=1, \lambda_i\geq 0$ and $\displaystyle\sum\limits_{i=1}^n \gamma_i=1,\gamma_i\geq0$</p>
+<p>For $\theta \in \left ( 0,1 \right ),\theta x_1+\left ( 1-\theta  \right )x_2=\theta \displaystyle\sum\limits_{i=1}^n \lambda_ix_i+\left ( 1-\theta \right )\displaystyle\sum\limits_{i=1}^n \gamma_ix_i$</p>
+<p>$\theta x_1+\left ( 1-\theta  \right )x_2=\displaystyle\sum\limits_{i=1}^n \lambda_i \theta x_i+\displaystyle\sum\limits_{i=1}^n \gamma_i\left ( 1-\theta \right )x_i$</p>
+<p>$\theta x_1+\left ( 1-\theta  \right )x_2=\displaystyle\sum\limits_{i=1}^n\left [ \lambda_i\theta +\gamma_i\left ( 1-\theta  \right ) \right ]x_i$</p>
+<p>Considering the coefficients,</p>
+<p>$\displaystyle\sum\limits_{i=1}^n\left [ \lambda_i\theta +\gamma_i\left ( 1-\theta  \right ) \right ]=\theta \displaystyle\sum\limits_{i=1}^n \lambda_i+\left ( 1-\theta  \right )\displaystyle\sum\limits_{i=1}^n\gamma_i=\theta +\left ( 1-\theta  \right )=1$</p>
+<p>Hence, $\theta x_1+\left ( 1-\theta  \right )x_2 \in Co\left ( S \right )$</p>
+<p>Thus, a convex hull is a convex set.</p>
+<h1>Caratheodory Theorem</h1>
+<p>Let S be an arbitrary set in  $\mathbb{R}^n$.If $x \in Co\left ( S \right )$, then $x \in Co\left ( x_1,x_2,....,x_n,x_{n+1} \right )$.</p>
+<h2>Proof</h2>
+<p>Since $x \in Co\left ( S\right )$, then $x$ is representated by a convex combination of a finite number of points in S, i.e.,</p>
+<p>$x=\displaystyle\sum\limits_{j=1}^k \lambda_jx_j,\displaystyle\sum\limits_{j=1}^k \lambda_j=1, \lambda_j \geq 0$ and $x_j \in S, \forall j \in \left ( 1,k \right )$</p>
+<p>If $k \leq n+1$, the result obtained is obviously true.</p>
+<p>If $k \geq n+1$, then $\left ( x_2-x_1 \right )\left ( x_3-x_1 \right ),....., \left ( x_k-x_1 \right )$ are linearly dependent.</p>
+<p>$\Rightarrow \exists \mu _j \in \mathbb{R}, 2\leq j\leq k$ (not all zero) such that $\displaystyle\sum\limits_{j=2}^k \mu _j\left ( x_j-x_1 \right )=0$</p>
+<p>Define $\mu_1=-\displaystyle\sum\limits_{j=2}^k \mu _j$, then $\displaystyle\sum\limits_{j=1}^k \mu_j x_j=0, \displaystyle\sum\limits_{j=1}^k \mu_j=0$</p>
+<p>where not all $\mu_j's$ are equal to zero. Since $\displaystyle\sum\limits_{j=1}^k \mu_j=0$, at least one of the $\mu_j > 0,1 \leq j \leq k$</p>
+<p>Then, $x=\displaystyle\sum\limits_{1}^k \lambda_j x_j+0$</p>
+<p>$x=\displaystyle\sum\limits_{1}^k \lambda_j x_j- \alpha \displaystyle\sum\limits_{1}^k \mu_j x_j$</p>
+<p>$x=\displaystyle\sum\limits_{1}^k\left ( \lambda_j- \alpha\mu_j \right )x_j $</p>
+<p>Choose $\alpha$ such that $\alpha=min\left \{ \frac{\lambda_j}{\mu_j}, \mu_j\geq 0 \right \}=\frac{\lambda_j}{\mu _j},$ for some $i=1,2,...,k$</p>
+<p>If $\mu_j\leq 0, \lambda_j-\alpha \mu_j\geq 0$</p>
+<p>If $\mu_j> 0, then \:\frac{\lambda _j}{\mu_j}\geq \frac{\lambda_i}{\mu _i}=\alpha \Rightarrow \lambda_j-\alpha \mu_j\geq 0, j=1,2,...k$</p>
+<p>In particular, $\lambda_i-\alpha \mu_i=0$, by definition of $\alpha$</p>
+<p>$x=\displaystyle\sum\limits_{j=1}^k \left ( \lambda_j- \alpha\mu_j\right )x_j$,where</p>
+<p>$\lambda_j- \alpha\mu_j\geq0$ and $\displaystyle\sum\limits_{j=1}^k\left ( \lambda_j- \alpha\mu_j\right )=1$ and $\lambda_i- \alpha\mu_i=0$</p>
+<p>Thus, x can be representated as a convex combination of at most (k-1) points.</p>
+<p>This reduction process can be repeated until x is representated as a convex combination of (n+1) elements.</p>
+<h1>Convex Optimization - Weierstrass Theorem</h1>
+<p>Let S be a non empty, closed and bounded set (also called compact set) in $\mathbb{R}^n$ and let $f:S\rightarrow \mathbb{R} $ be a continuous function on S, then the problem min $\left \{ f\left ( x \right ):x \in S \right \}$ attains its minimum.</p>
+<h2>Proof</h2>
+<p>Since S is non-empty and bounded, there exists a lower bound.</p>
+<p>$\alpha =Inf\left \{ f\left ( x \right ):x \in S \right \}$</p>
+<p>Now let $S_j=\left \{ x \in S:\alpha \leq f\left ( x \right ) \leq \alpha +\delta ^j\right \} \forall j=1,2,...$ and $\delta \in \left ( 0,1 \right )$</p>
+<p>By the definition of infimium, $S_j$ is non-empty, for each $j$.</p>
+<p>Choose some $x_j \in S_j$ to get a sequence $\left \{ x_j \right \}$ for $j=1,2,...$</p>
+<p>Since S is bounded, the sequence is also bounded and there is a convergent subsequence $\left \{ y_j \right \}$, which converges to $\hat{x}$. Hence $\hat{x}$ is a limit point and S is closed, therefore, $\hat{x} \in S$. Since f is continuous, $f\left ( y_i \right )\rightarrow f\left ( \hat{x} \right )$.</p>
+<p>Since $\alpha \leq f\left ( y_i \right )\leq \alpha+\delta^k, \alpha=\displaystyle\lim_{k\rightarrow \infty}f\left ( y_i \right )=f\left ( \hat{x} \right )$</p>
+<p>Thus, $\hat{x}$ is the minimizing solution.</p>
+<h2>Remarks</h2>
+<p>There are two important necessary conditions for Weierstrass Theorem to hold. These are as follows &minus;</p>
+<ul class="list">
+<li><p><b>Step 1</b> &minus; The set S should be a bounded set.</p> 
+<p>Consider the function f\left ( x \right )=x$.</p> 
+<p>It is an unbounded set and it does have a minima at any point in its domain.</p>
+<p>Thus, for minima to obtain, S should be bounded.</p></li>
+<li><p><b>Step 2</b> &minus; The set S should be closed.</p> 
+<p>Consider the function $f\left ( x \right )=\frac{1}{x}$ in the domain \left ( 0,1 \right ).</p> 
+<p>This function is not closed in the given domain and its minima also does not exist.</p>
+<p>Hence, for minima to obtain, S should be closed.</p></li>
+</ul>
+<h1>Convex Optimization - Closest Point Theorem</h1>
+<p>Let S be a non-empty closed convex set in $\mathbb{R}^n$ and let $y\notin S$, then $\exists$ a point $\bar{x}\in S$ with minimum distance from y, i.e.,$\left \| y-\bar{x} \right \| \leq \left \| y-x \right \| \forall x \in S.$</p>
+<p>Furthermore, $\bar{x}$ is a minimizing point if and only if $\left ( y-\hat{x} \right )^{T}\left ( x-\hat{x} \right )\leq 0$ or $\left ( y-\hat{x}, x-\hat{x} \right )\leq 0$</p>
+<h2>Proof</h2>
+<h3>Existence of closest point</h3>
+<p>Since $S\ne \phi,\exists$ a point $\hat{x}\in S$ such that the minimum distance of S from y is less than or equal to $\left \| y-\hat{x} \right \|$.</p>
+<p>Define $\hat{S}=S \cap \left \{ x:\left \| y-x \right \|\leq \left \| y-\hat{x} \right \| \right \}$</p>
+<p>Since $ \hat{S}$ is closed and bounded, and since norm is a continuous function, then by Weierstrass theorem, there exists a minimum point $\hat{x} \in S$ such that $\left \| y-\hat{x} \right \|=Inf\left \{ \left \| y-x \right \|,x \in S \right \}$</p>
+<h3>Uniqueness</h3>
+<p>Suppose $\bar{x} \in S$ such that $\left \| y-\hat{x} \right \|=\left \| y-\hat{x} \right \|= \alpha$</p>
+<p>Since S is convex, $\frac{\hat{x}+\bar{x}}{2} \in S$</p>
+<p>But, $\left \| y-\frac{\hat{x}-\bar{x}}{2} \right \|\leq \frac{1}{2}\left \| y-\hat{x} \right \|+\frac{1}{2}\left \| y-\bar{x} \right \|=\alpha$</p>
+<p>It can't be strict inequality because $\hat{x}$ is closest to y.</p>
+<p>Therefore, $\left \| y-\hat{x} \right \|=\mu \left \| y-\hat{x} \right \|$, for some $\mu$</p>
+<p>Now $\left \| \mu \right \|=1.$ If $\mu=-1$, then $\left ( y-\hat{x} \right )=-\left ( y-\hat{x} \right )\Rightarrow y=\frac{\hat{x}+\bar{x}}{2} \in S$</p>
+<p>But $y \in S$. Hence contradiction. Thus $\mu=1 \Rightarrow \hat{x}=\bar{x}$</p>
+<p>Thus, minimizing point is unique.</p>
+<p>For the second part of the proof, assume $\left ( y-\hat{x} \right )^{\tau }\left ( x-\bar{x} \right )\leq 0$ for all $x\in S$</p>
+<p>Now,</p>
+<p>$\left \| y-x \right \|^{2}=\left \| y-\hat{x}+ \hat{x}-x\right \|^{2}=\left \| y-\hat{x} \right \|^{2}+\left \|\hat{x}-x \right \|^{2}+2\left (\hat{x}-x \right )^{\tau }\left ( y-\hat{x} \right )$</p>
+<p>$\Rightarrow \left \| y-x \right \|^{2}\geq \left \| y-\hat{x} \right \|^{2}$ because $\left \| \hat{x}-x \right \|^{2}\geq 0$ and $\left ( \hat{x}- x\right )^{T}\left ( y-\hat{x} \right )\geq 0$</p>
+<p>Thus, $\hat{x}$ is minimizing point.</p>
+<p>Conversely, assume $\hat{x}$ is minimizimg point.</p>
+<p>$\Rightarrow \left \| y-x \right \|^{2}\geq \left \| y-\hat{x} \right \|^2 \forall x \in S$</p>
+<p>Since S is convex set.</p>
+<p>$\Rightarrow \lambda x+\left ( 1-\lambda \right )\hat{x}=\hat{x}+\lambda\left ( x-\hat{x} \right ) \in S$ for $x \in S$ and $\lambda \in \left ( 0,1 \right )$</p>
+<p>Now, $\left \| y-\hat{x}-\lambda\left ( x-\hat{x} \right ) \right \|^{2}\geq \left \| y-\hat{x} \right \|^2$</p>
+<p>And</p>
+<p>$\left \| y-\hat{x}-\lambda\left ( x-\hat{x} \right ) \right \|^{2}=\left \| y-\hat{x} \right \|^{2}+\lambda^2\left \| x-\hat{x} \right \|^{2}-2\lambda\left ( y-\hat{x} \right )^{T}\left ( x-\hat{x} \right )$</p>
+<p>$\Rightarrow \left \| y-\hat{x} \right \|^{2}+\lambda^{2}\left \| x-\hat{x} \right \|-2 \lambda\left ( y-\hat{x} \right )^{T}\left ( x-\hat{x} \right )\geq \left \| y-\hat{x} \right \|^{2}$</p>
+<p>$\Rightarrow 2 \lambda\left ( y-\hat{x} \right )^{T}\left ( x-\hat{x} \right )\leq \lambda^2\left \| x-\hat{x} \right \|^2$</p>
+<p>$\Rightarrow \left ( y-\hat{x} \right )^{T}\left ( x-\hat{x} \right )\leq 0$</p>
+<p>Hence Proved.</p>
+<h1>Fundamental Separation Theorem</h1>
+<p>Let S be a non-empty closed, convex set in $\mathbb{R}^n$ and $y \notin S$. Then, there exists a non zero vector $p$ and scalar $\beta$ such that $p^T y>\beta$ and $p^T x < \beta$ for each $x \in S$</p>
+<h2>Proof</h2>
+<p>Since S is non empty closed convex set and $y \notin S$ thus by closest point theorem, there exists a unique minimizing point $\hat{x} \in S$ such that</p>
+<p>$\left ( x-\hat{x} \right )^T\left ( y-\hat{x} \right )\leq 0 \forall x \in S$</p>
+<p>Let $p=\left ( y-\hat{x} \right )\neq 0$ and $\beta=\hat{x}^T\left ( y-\hat{x} \right )=p^T\hat{x}$.</p>
+<p>Then $\left ( x-\hat{x} \right )^T\left ( y-\hat{x} \right )\leq 0$</p>
+<p>$\Rightarrow \left ( y-\hat{x} \right )^T\left ( x-\hat{x} \right )\leq 0$</p>
+<p>$\Rightarrow \left ( y-\hat{x} \right )^Tx\leq \left ( y-\hat{x} \right )^T \hat{x}=\hat{x}^T\left ( y-\hat{x} \right )$ i,e., $p^Tx \leq \beta$</p>
+<p>Also, $p^Ty-\beta=\left ( y-\hat{x} \right )^Ty-\hat{x}^T \left ( y-\hat{x} \right )$</p>
+<p>$=\left ( y-\hat{x} \right )^T \left ( y-x \right )=\left \| y-\hat{x} \right \|^{2}>0$</p>
+<p>$\Rightarrow p^Ty> \beta$</p>
+<p>This theorem results in separating hyperplanes. The hyperplanes based on the above theorem can be defined as follows &minus;</p>
+<p>Let $S_1$ and $S_2$ are be non-empty subsets of $\mathbb{R}$ and $H=\left \{ X:A^TX=b \right \}$ be a hyperplane.</p>
+<ul class="list">
+<li><p>The hyperplane H is said to separate $S_1$ and $S_2$ if $A^TX \leq b \forall X \in S_1$ and $A_TX \geq b \forall X \in S_2$</p></li>
+<li><p>The hyperplane H is said to strictly separate $S_1$ and $S_2$ if $A^TX < b \forall X \in S_1$ and $A_TX > b \forall X \in S_2$</p></li>
+<li><p>The hyperplane H is said to strongly separate $S_1$ and $S_2$ if $A^TX \leq b \forall X \in S_1$ and $A_TX \geq b+ \varepsilon \forall X \in S_2$, where  $\varepsilon$ is a positive scalar.</p></li>
+</ul>
+<h1>Convex Optimization - Cones</h1>
+<p>A non empty set C in $\mathbb{R}^n$ is said to be cone with vertex 0 if $x \in C\Rightarrow \lambda x \in C \forall \lambda \geq 0$.</p>
+<p>A set C is a convex cone if it convex as well as cone.</p>
+<p>For example, $y=\left | x \right |$ is not a convex cone because it is not convex.</p>
+<p>But, $y \geq \left | x \right |$ is a convex cone because it is convex as well as cone.</p>
+<p><b>Note</b> &minus; A cone C is convex if and only if for any $x,y \in C, x+y \in C$.</p>
+<h2>Proof</h2>
+<p>Since C is cone, for $x,y \in C \Rightarrow \lambda x \in C$ and $\mu y \in C \:\forall \:\lambda, \mu \geq 0$</p>
+<p>C is convex if $\lambda x + \left ( 1-\lambda \right )y \in C \: \forall \:\lambda \in \left ( 0, 1 \right )$</p>
+<p>Since C is cone, $\lambda x \in C$ and $\left ( 1-\lambda \right )y \in C \Leftrightarrow x,y \in C$</p>
+<p>Thus C is convex if $x+y \in C$</p>
+<p>In general, if $x_1,x_2 \in C$, then, $\lambda_1x_1+\lambda_2x_2 \in C, \forall \lambda_1,\lambda_2 \geq 0$</p>
+<h2>Examples</h2>
+<ul class="list">
+<li><p>The conic combination of infinite set of vectors in $\mathbb{R}^n$ is a convex cone.</p></li>
+<li><p>Any empty set is a convex cone.</p></li>
+<li><p>Any linear function is a convex cone.</p></li>
+<li><p>Since a hyperplane is linear, it is also a convex cone.</p></li>
+<li><p>Closed half spaces are also convex cones.</p></li>
+</ul>
+<p><b>Note</b> &minus; The intersection of two convex cones is a convex cone but their union may or may not be a convex cone.</p>
+<h1>Convex Optimization - Polar Cone</h1>
+<p>Let S be a non empty set in $\mathbb{R}^n$ Then, the polar cone of S denoted by $S^*$ is given by $S^*=\left \{p \in \mathbb{R}^n, p^Tx \leq 0 \: \forall x \in S \right \}$.</p>
+<h3>Remark</h3>
+<ul class="list">
+<li><p>Polar cone is always convex even if S is not convex.</p></li>
+<li><p>If S is empty set, $S^*=\mathbb{R}^n$.</p></li>
+<li><p>Polarity may be seen as a generalisation of orthogonality.</p></li>
+</ul>
+<p>Let $C\subseteq \mathbb{R}^n$ then the orthogonal space of C, denoted by $C^\perp =\left \{ y \in \mathbb{R}^n:\left \langle x,y \right \rangle=0 \forall x \in C \right \}$.</p>
+<h3>Lemma</h3> 
+<p>Let $S,S_1$ and $S_2$ be non empty sets in $\mathbb{R}^n$ then the following statements are true &minus;</p>
+<ul class="list">
+<li><p>$S^*$ is a closed convex cone.</p></li>
+<li><p>$S \subseteq S^{**}$ where $S^{**}$ is a polar cone of $S^*$.</p></li>
+<li><p>$S_1 \subseteq S_2 \Rightarrow S_{2}^{*} \subseteq S_{1}^{*}$.</p></li>
+</ul>
+<h2>Proof</h2>
+<p><b>Step 1</b> &minus; $S^*=\left \{ p \in \mathbb{R}^n,p^Tx\leq 0 \: \forall \:x \in S \right \}$</p>
+<ul class="list">
+<li><p>Let $x_1,x_2 \in S^*\Rightarrow x_{1}^{T}x\leq 0 $ and $x_{2}^{T}x \leq 0,\forall x \in S$</p>
+<p>For $\lambda \in \left ( 0, 1 \right ),\left [ \lambda x_1+\left ( 1-\lambda  \right )x_2 \right ]^Tx=\left [ \left ( \lambda x_1  \right )^T+ \left \{\left ( 1-\lambda  \right )x_{2}  \right \}^{T}\right ]x, \forall x \in S$</p>
+<p>$=\left [ \lambda x_{1}^{T} +\left ( 1-\lambda  \right )x_{2}^{T}\right ]x=\lambda x_{1}^{T}x+\left ( 1-\lambda  \right )x_{2}^{T}\leq 0$</p>
+<p>Thus $\lambda x_1+\left ( 1-\lambda  \right )x_{2} \in S^*$</p>
+<p>Therefore $S^*$ is a convex set.</p>
+</li>
+<li><p>For $\lambda \geq 0,p^{T}x \leq 0, \forall \:x \in S$</p>
+<p>Therefore, $\lambda p^T x \leq 0,$</p>
+<p>$\Rightarrow \left ( \lambda p \right )^T x \leq 0$</p>
+<p>$\Rightarrow \lambda p \in S^*$</p>
+<p>Thus, $S^*$ is a cone.</p>
+</li>
+<li><p>To show $S^*$  is closed, i.e., to show if $p_n \rightarrow p$ as $n \rightarrow \infty$, then $p \in S^*$</p>
+<p>$\forall x \in S, p_{n}^{T}x-p^T x=\left ( p_n-p \right )^T x$</p>
+<p>As $p_n \rightarrow p$ as $n \rightarrow \infty \Rightarrow \left ( p_n \rightarrow p \right )\rightarrow 0$</p>
+<p>Therefore $p_{n}^{T}x \rightarrow p^{T}x$. But $p_{n}^{T}x \leq 0, \: \forall x \in S$</p>
+<p>Thus, $p^Tx \leq 0, \forall x \in S$</p>
+<p>$\Rightarrow p \in S^*$</p>
+<p>Hence, $S^*$ is closed.</p>
+</li>
+</ul>
+<p><b>Step 2</b> &minus; $S^{**}=\left \{ q \in \mathbb{R}^n:q^T p \leq  0, \forall p \in S^*\right \}$</p>
+<p>Let $x \in S$, then $ \forall p \in S^*, p^T x \leq 0 \Rightarrow x^Tp \leq 0 \Rightarrow x \in S^{**}$</p> 
+<p>Thus, $S \subseteq S^{**}$</p>
+<p><b>Step 3</b> &minus; $S_2^*=\left \{ p \in \mathbb{R}^n:p^Tx\leq 0, \forall x \in S_2 \right \}$</p>
+<p>Since $S_1 \subseteq S_2 \Rightarrow \forall x \in S_2 \Rightarrow \forall x \in S_1$</p>
+<p>Therefore, if $\hat{p} \in S_2^*, $then $\hat{p}^Tx \leq 0,\forall x \in S_2$</p>
+<p>$\Rightarrow \hat{p}^Tx\leq 0, \forall x \in S_1$</p>
+<p>$\Rightarrow \hat{p}^T \in S_1^*$</p>
+<p>$\Rightarrow S_2^* \subseteq S_1^*$</p>
+<h2>Theorem</h2> 
+<p>Let C be a non empty closed convex cone, then $C=C^**$</p>
+<h2>Proof</h2>
+<p>$C=C^{**}$ by previous lemma.</p>
+<p>To prove : $x \in C^{**} \subseteq C$</p>
+<p>Let $x \in C^{**}$ and let $x \notin C$</p>
+<p>Then by fundamental separation theorem, there exists a vector $p \neq 0$ and a scalar $\alpha$ such that $p^Ty \leq \alpha, \forall y \in C$</p>
+<p>Therefore, $p^Tx > \alpha$</p>
+<p>But since $\left ( y=0 \right ) \in C$ and $p^Ty\leq \alpha, \forall y \in C \Rightarrow \alpha\geq 0$ and $p^Tx>0$</p>
+<p>If $p \notin C^*$,  then there exists some $\bar{y} \in C$ such that $p^T \bar{y}>0$ and $p^T\left ( \lambda \bar{y} \right )$ can be made arbitrarily large by taking $\lambda$ sufficiently large.</p>
+<p>This contradicts with the fact that $p^Ty \leq \alpha, \forall y \in C$</p>
+<p>Therefore,$p \in C^*$</p>
+<p>Since $x \in C^*=\left \{ q:q^Tp\leq 0, \forall p \in C^* \right \}$</p>
+<p>Therefore, $x^Tp \leq 0 \Rightarrow p^Tx \leq 0$</p>
+<p>But $p^Tx> \alpha$</p>
+<p>Thus is contardiction.</p>
+<p>Thus, $x \in C$</p>
+<p>Hence $C=C^{**}$.</p>
+<h1>Convex Optimization - Conic Combination</h1>
+<p>A point of the form $\alpha_1x_1+\alpha_2x_2+....+\alpha_nx_n$ with $\alpha_1, \alpha_2,...,\alpha_n\geq 0$ is called conic combination of $x_1, x_2,...,x_n.$</p>
+<ul class="list">
+<li><p>If $x_i$ are in convex cone C, then every conic combination of $x_i$  is also in C.</p></li>
+<li><p>A set C is a convex cone if it contains all the conic combination of its elements.</p></li>
+</ul>
+<h2>Conic Hull</h2>
+<p>A conic hull is defined as a set of all conic combinations of a given set S and is denoted by coni(S).</p>
+<p>Thus, $coni\left ( S \right )=\left \{ \displaystyle\sum\limits_{i=1}^k \lambda_ix_i:x_i \in S,\lambda_i\in \mathbb{R}, \lambda_i\geq 0,i=1,2,...\right \}$</p>
+<ul class="list">
+<li>The conic hull is a convex set.</li>
+<li>The origin always belong to the conic hull.</li>
+</ul>
+<h1>Convex Optimization - Polyhedral Set</h1>
+<p>A set in $\mathbb{R}^n$ is said to be polyhedral if it is the intersection of a finite number of closed half spaces, i.e.,</p>
+<p>$S=\left \{ x \in \mathbb{R}^n:p_{i}^{T}x\leq \alpha_i, i=1,2,....,n \right \}$</p>
+<p>For example,</p>
+<ul class="list">
+<li><p>$\left \{ x \in \mathbb{R}^n:AX=b \right \}$</p></li>
+<li><p>$\left \{ x \in \mathbb{R}^n:AX\leq b \right \}$</p></li>
+<li><p>$\left \{ x \in \mathbb{R}^n:AX\geq b \right \}$</p></li>
+</ul>
+<h2>Polyhedral Cone</h2>
+<p>A set in $\mathbb{R}^n$ is said to be polyhedral cone if it is the intersection of a finite number of half spaces that contain the origin, i.e., $S=\left \{ x \in \mathbb{R}^n:p_{i}^{T}x\leq 0, i=1, 2,... \right \}$</p>
+<h2>Polytope</h2>
+<p>A polytope is a polyhedral set which is bounded.</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li>A polytope is a convex hull of a finite set of points.</li>
+<li>A polyhedral cone is generated by a finite set of vectors.</li>
+<li>A polyhedral set is a closed set.</li>
+<li>A polyhedral set is a convex set.</li>
+</ul>
+<h1>Extreme point of a convex set</h1>
+<p>Let S be a convex set in $\mathbb{R}^n$. A vector $x \in S$ is said to be a extreme point of S if $x= \lambda x_1+\left ( 1-\lambda  \right )x_2$ with $x_1, x_2 \in S$ and $\lambda \in\left ( 0, 1 \right )\Rightarrow x=x_1=x_2$.</p>
+<h2>Example</h2>
+<p><b>Step 1</b> &minus; $S=\left \{ \left ( x_1,x_2 \right ) \in \mathbb{R}^2:x_{1}^{2}+x_{2}^{2}\leq 1 \right \}$</p>
+<p>Extreme point, $E=\left \{ \left ( x_1, x_2 \right )\in \mathbb{R}^2:x_{1}^{2}+x_{2}^{2}= 1 \right \}$</p>
+<p><b>Step 2</b> &minus; $S=\left \{ \left ( x_1,x_2 \right )\in \mathbb{R}^2:x_1+x_2< 2, -x_1+2x_2\leq 2, x_1,x_2\geq 0 \right \}$</p>
+<p>Extreme point, $E=\left \{ \left ( 0, 0 \right), \left ( 2, 0 \right), \left ( 0, 1 \right), \left ( \frac{2}{3}, \frac{4}{3} \right) \right \}$</p>
+<p><b>Step 3</b> &minus; S is the polytope made by the points $\left \{ \left ( 0,0 \right ), \left ( 1,1 \right ), \left ( 1,3 \right ), \left ( -2,4 \right ),\left ( 0,2 \right ) \right \}$</p>
+<p>Extreme point, $E=\left \{ \left ( 0,0 \right ), \left ( 1,1 \right ),\left ( 1,3 \right ),\left ( -2,4 \right ) \right \}$</p>
+<h2>Remarks</h2>
+<ul class="list">
+<li><p>Any point of the convex set S, can be represented as a convex combination of its extreme points.</p></li>
+<li><p>It is only true for closed and bounded sets in $\mathbb{R}^n$.</p></li>
+<li><p>It may not be true for unbounded sets.</p></li>
+</ul>
+<h2>k extreme points</h2>
+<p>A point in a convex set is called k extreme if and only if it is the interior point of a k-dimensional convex set within S, and it is not an interior point of a (k+1)- dimensional convex set within S. Basically, for a convex set S, k extreme points make k-dimensional open faces.</p>
+<h1>Convex Optimization - Direction</h1>
+<p>Let S be a closed convex set in $\mathbb{R}^n$. A non zero vector $d \in \mathbb{R}^n$ is called a direction of S if for each $x \in S,x+\lambda d \in S, \forall \lambda \geq 0.$</p>
+<ul class="list">
+<li><p>Two directions $d_1$ and $d_2$ of S are called distinct if $d \neq \alpha d_2$ for $ \alpha>0$.</p></li>
+<li><p>A direction $d$ of $S$ is said to be extreme direction if it cannot be written as a positive linear combination of two distinct directions, i.e., if $d=\lambda _1d_1+\lambda _2d_2$ for $\lambda _1, \lambda _2>0$, then $d_1= \alpha d_2$ for some $\alpha$.</p></li>
+<li><p>Any other direction can be expressed as a positive combination of extreme directions.</p></li>
+<li><p>For a convex set $S$, the direction d such that $x+\lambda d \in S$ for some $x \in S$ and all $\lambda \geq0$ is called <b>recessive</b> for $S$. </p></li>
+<li><p>Let E be the set of the points where a certain function $f:S \rightarrow$ over a non-empty convex set S in $\mathbb{R}^n$ attains its maximum, then $E$ is called exposed face of $S$. The directions of exposed faces are called exposed directions.</p></li>
+<li><p>A ray whose direction is an extreme direction is called an extreme ray.</p></li>
+</ul>
+<h2>Example</h2>
+<p>Consider the function $f\left ( x \right )=y=\left |x  \right |$,  where $x \in \mathbb{R}^n$.  Let d be unit vector in $\mathbb{R}^n$</p>
+<p>Then, d is the direction for the function f because for any $\lambda \geq 0, x+\lambda d \in f\left ( x \right )$.</p>
+<h1>Convex and Concave Function</h1>
+<p>Let $f:S \rightarrow \mathbb{R}$, where S is non empty convex set in $\mathbb{R}^n$, then $f\left ( x \right )$ is said to be convex on S if $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )\leq \lambda f\left ( x_1 \right )+\left ( 1-\lambda  \right )f\left ( x_2 \right ), \forall \lambda \in \left ( 0,1 \right )$.</p>
+<p>On the other hand, Let $f:S\rightarrow \mathbb{R}$, where S is non empty convex set in $\mathbb{R}^n$, then $f\left ( x \right )$ is said to be concave on S if $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )\geq \lambda f\left ( x_1 \right )+\left ( 1-\lambda  \right )f\left ( x_2 \right ), \forall \lambda \in \left ( 0, 1 \right )$.</p>
+<p>Let $f:S \rightarrow \mathbb{R}$ where S is non empty convex set in $\mathbb{R}^n$, then $f\left ( x\right )$ is said to be strictly convex on S if $f\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )< \lambda f\left ( x_1 \right )+\left ( 1-\lambda \right )f\left ( x_2 \right ), \forall \lambda \in \left ( 0, 1 \right )$.</p>
+<p>Let $f:S \rightarrow \mathbb{R}$ where S is non empty convex set in $\mathbb{R}^n$, then $f\left ( x\right )$ is said to be strictly concave on S if $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )> \lambda f\left ( x_1 \right )+\left ( 1-\lambda \right )f\left ( x_2 \right ), \forall \lambda \in \left ( 0, 1 \right )$.</p>
+<h3>Examples</h3>
+<ul class="list">
+<li><p>A linear function is both convex and concave.</p></li>
+<li><p>$f\left ( x \right )=\left | x \right |$ is a convex function.</p></li>
+<li><p>$f\left ( x \right )= \frac{1}{x}$ is a convex function.</p></li>
+</ul>
+<h2>Theorem</h2>
+<p>Let $f_1,f_2,...,f_k:\mathbb{R}^n \rightarrow \mathbb{R}$ be convex functions. Consider the function $f\left ( x \right )=\displaystyle\sum\limits_{j=1}^k \alpha_jf_j\left ( x \right )$ where $\alpha_j>0,j=1, 2, ...k,$ then $f\left ( x \right )$is a convex function.</p>
+<h3>Proof</h3>
+<p>Since $f_1,f_2,...f_k$ are convex functions</p>
+<p>Therefore, $f_i\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )\leq \lambda f_i\left ( x_1 \right )+\left ( 1-\lambda  \right )f_i\left ( x_2 \right ), \forall \lambda \in \left ( 0, 1 \right )$ and $i=1, 2,....,k$</p>
+<p>Consider the function $f\left ( x \right )$.</p>
+<p>Therefore,</p>
+<p>$ f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )$</p>
+<p style="padding-left:10%">$=\displaystyle\sum\limits_{j=1}^k \alpha_jf_j\left ( \lambda x_1 +1-\lambda  \right )x_2\leq \displaystyle\sum\limits_{j=1}^k\alpha_j\lambda f_j\left ( x_1 \right )+\left ( 1-\lambda \right )f_j\left ( x_2 \right )$</p>
+<p style="padding-left:10%">$\Rightarrow f\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )\leq \lambda \left ( \displaystyle\sum\limits_{j=1}^k \alpha _jf_j\left ( x_1 \right ) \right )+\left ( \displaystyle\sum\limits_{j=1}^k \alpha _jf_j\left ( x_2 \right ) \right )$</p>
+<p style="padding-left:10%">$\Rightarrow f\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )\leq \lambda f\left ( x_2 \right )\leq \left ( 1-\lambda \right )f\left ( x_2 \right )$</p>
+<p>Hence, $f\left ( x\right )$ is a convex function.</p>
+<h2>Theorem</h2>
+<p>Let $f\left ( x\right )$ be a convex function on a convex set $S\subset \mathbb{R}^n$ then a local minima of $f\left ( x\right )$ on S is a global minima.</p>
+<h3>Proof</h3>
+<p>Let $\hat{x}$ be a local minima for $f\left ( x \right )$ and $\hat{x}$ is not global minima.</p>
+<p>therefore, $\exists \hat{x} \in S$ such that $f\left ( \bar{x} \right )< f\left ( \hat{x} \right )$</p>
+<p>Since $\hat{x}$ is a local minima, there exists neighbourhood $N_\varepsilon \left ( \hat{x} \right )$ such that $f\left ( \hat{x} \right )\leq f\left ( x \right ), \forall x \in N_\varepsilon \left ( \hat{x} \right )\cap S$</p>
+<p>But $f\left ( x \right )$ is a convex function on S, therefore for $\lambda \in \left ( 0, 1 \right )$</p>
+<p>we have $\lambda \hat{x}+\left ( 1-\lambda  \right )\bar{x}\leq \lambda f\left ( \hat{x} \right )+\left ( 1-\lambda  \right )f\left ( \bar{x} \right )$</p>
+<p>$\Rightarrow \lambda \hat{x}+\left ( 1-\lambda  \right )\bar{x}< \lambda f\left ( \hat{x} \right )+\left ( 1-\lambda  \right )f\left (\hat{x} \right )$</p>
+<p>$\Rightarrow \lambda \hat{x}+\left ( 1-\lambda  \right )\bar{x}< f\left (\hat{x} \right ), \forall \lambda \in \left ( 0,1 \right )$</p>
+<p>But for some $\lambda<1$ but close to 1, we have</p>
+<p>$\lambda \hat{x}+\left ( 1-\lambda  \right )\bar{x} \in N_\varepsilon \left ( \hat{x} \right )\cap S$ and $f\left ( \lambda \hat{x}+\left ( 1-\lambda \right )\bar{x} \right )< f\left ( \bar{x} \right )$</p>
+<p>which is a contradiction.</p>
+<p>Hence, $\bar{x}$ is a global minima.</p>
+<h3>Epigraph</h3>
+<p>let S be a non-empty subset in $\mathbb{R}^n$ and let $f:S \rightarrow \mathbb{R}$ then the epigraph of f denoted by epi(f) or $E_f$ is a subset of $\mathbb{R}^n+1$ defined by $E_f=\left \{ \left ( x,\alpha \right ):x \in \mathbb{R}^n, \alpha \in \mathbb{R}, f\left ( x \right )\leq \alpha \right \}$</p>
+<h3>Hypograph</h3>
+<p>let S be a non-empty subset in $\mathbb{R}^n$ and let $f:S \rightarrow \mathbb{R}$, then the hypograph of f denoted by  hyp(f) or $H_f=\left \{ \left ( x, \alpha \right ):x \in \mathbb{R}^n, \alpha \in \mathbb{R}^n, \alpha \in \mathbb{R}, f\left ( x \right )\geq \alpha \right \}$</p>
+<h2>Theorem</h2>
+<p>Let S be a non-empty convex set in $\mathbb{R}^n$ and let $f:S \rightarrow \mathbb{R}^n$, then f is convex if and only if its epigraph $E_f$ is a convex set.</p>
+<h3>Proof</h3>
+<p>Let f is a convex function.</p>
+<p>To show $E_f$ is a convex set.</p>
+<p>Let $\left ( x_1, \alpha_1 \right ),\left ( x_2, \alpha_2 \right ) \in E_f,\lambda \in\left ( 0, 1 \right )$</p>
+<p>To show $\lambda \left ( x_1,\alpha_1 \right )+\left ( 1-\lambda  \right )\left ( x_2, \alpha_2 \right ) \in E_f$</p>
+<p>$\Rightarrow \left [ \lambda x_1+\left ( 1-\lambda  \right )x_2, \lambda \alpha_1+\left ( 1-\lambda \right )\alpha_2  \right ]\in E_f$</p>
+<p>$f\left ( x_1 \right )\leq \alpha _1, f\left ( x_2\right )\leq \alpha _2$</p>
+<p>Therefore, $f\left (\lambda x_1+\left ( 1-\lambda  \right )x_2 \right )\leq \lambda f\left ( x_1 \right )+\left ( 1-\lambda  \right )f \left ( x_2 \right )$</p>
+<p>$\Rightarrow f\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )\leq \lambda \alpha_1+\left ( 1-\lambda \right )\alpha_2$</p>
+<h3>Converse</h3>
+<p>Let $E_f$ is a convex set.</p>
+<p>To show f is convex.</p>
+<p>i.e., to show if $x_1, x_2 \in S,\lambda \left ( 0, 1\right )$</p>
+<p>$f\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )\leq \lambda f\left ( x_1 \right )+\left ( 1-\lambda  \right )f\left ( x_2 \right )$</p>
+<p>Let $x_1,x_2 \in S, \lambda \in \left ( 0, 1 \right ),f\left ( x_1 \right ), f\left ( x_2 \right ) \in \mathbb{R}$</p>
+<p>Since $E_f$ is a convex set, $\left ( \lambda x_1+\left ( 1-\lambda \right )x_2, \lambda f\left ( x_1 \right )+\left ( 1-\lambda  \right )\right )f\left ( x_2 \right )\in E_f$</p>
+<p>Therefore, $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )\leq \lambda f\left ( x_1 \right )+\left ( 1-\lambda \right )f\left ( x_2 \right )$</p>
+<h1>Convex Optimization - Jensen's Inequality</h1>
+<p>Let S be a non-empty convex set in $\mathbb{R}^n$ and $f:S \rightarrow \mathbb{R}^n$. Then f is convex if and only if for each integer $k>0$</p>
+<p>$x_1,x_2,...x_k \in S, \displaystyle\sum\limits_{i=1}^k \lambda_i=1, \lambda_i\geq 0, \forall i=1,2,s,k$, we have $f\left ( \displaystyle\sum\limits_{i=1}^k \lambda_ix_i \right )\leq \displaystyle\sum\limits_{i=1}^k \lambda _if\left ( x \right )$</p>
+<h2>Proof</h2>
+<p>By induction on k.</p>
+<p>$k=1:x_1 \in S$ Therefore $f\left ( \lambda_1 x_1\right ) \leq \lambda_i f\left (x_1\right )$ because $\lambda_i=1$.</p>
+<p>$k=2:\lambda_1+\lambda_2=1$ and $x_1, x_2 \in S$</p>
+<p>Therefore, $\lambda_1x_1+\lambda_2x_2 \in S$</p>
+<p>Hence by definition, $f\left ( \lambda_1 x_1 +\lambda_2 x_2 \right )\leq \lambda _1f\left ( x_1 \right )+\lambda _2f\left ( x_2 \right )$</p>
+<p>Let the statement is true for $n < k$</p>
+<p>Therefore,</p>
+<p>$f\left ( \lambda_1 x_1+ \lambda_2 x_2+....+\lambda_k x_k\right )\leq \lambda_1 f\left (x_1 \right )+\lambda_2 f\left (x_2 \right )+...+\lambda_k f\left (x_k  \right )$</p>
+<p>$k=n+1:$ Let $x_1, x_2,....x_n,x_{n+1} \in S$ and  $\displaystyle\sum\limits_{i=1}^{n+1}=1$</p>
+<p>Therefore $\mu_1x_1+\mu_2x_2+.......+\mu_nx_n+\mu_{n+1} x_{n+1} \in S$</p>
+<p style="padding-left:10%">thus,$f\left (\mu_1x_1+\mu_2x_2+...+\mu_nx_n+\mu_{n+1} x_{n+1} \right )$</p>
+<p style="padding-left:25%">$=f\left ( \left ( \mu_1+\mu_2+...+\mu_n \right)\frac{\mu_1x_1+\mu_2x_2+...+\mu_nx_n}{\mu_1+\mu_2+\mu_3}+\mu_{n+1}x_{n+1} \right)$</p>
+<p style="padding-left:25%">$=f\left ( \mu_y+\mu_{n+1}x_{n+1} \right )$ where $\mu=\mu_1+\mu_2+...+\mu_n$ and</p> 
+<p style="padding-left:10%">$y=\frac{\mu_1x_1+\mu_2x_2+...+\mu_nx_n}{\mu_1+\mu_2+...+\mu_n}$ and also $\mu_1+\mu_{n+1}=1,y \in S$</p>
+<p>$\Rightarrow f\left ( \mu_1x_1+\mu_2x_2+...+\mu_nx_n+\mu_{n+1}x_{n+1}\right ) \leq \mu f\left ( y \right )+\mu_{n+1} f\left ( x_{n+1} \right )$</p>
+<p>$\Rightarrow f\left ( \mu_1x_1+\mu_2x_2+...+\mu_nx_n+\mu_{n+1}x_{n+1}\right ) \leq$</p> 
+<p style="padding-left:15%">$\left ( \mu_1+\mu_2+...+\mu_n \right )f\left ( \frac{\mu_1x_1+\mu_2x_2+...+\mu_nx_n}{\mu_1+\mu_2+...+\mu_n} \right )+\mu_{n+1}f\left ( x_{n+1} \right )$</p>
+<p>$\Rightarrow f\left ( \mu_1x_1+\mu_2x_2+...+\mu_nx_n +\mu_{n+1}x_{n+1}\right )\leq \left ( \mu_1+ \mu_2+ ...+\mu_n \right )$</p> 
+<p style="padding-left:15%">$\left [ \frac{\mu_1}{\mu_1+ \mu_2+ ...+\mu_n}f\left ( x_1 \right )+...+\frac{\mu_n}{\mu_1+ \mu_2+ ...+\mu_n}f\left ( x_n \right ) \right ]+\mu_{n+1}f\left ( x_{n+1} \right )$</p>
+<p>$\Rightarrow f\left ( \mu_1x_1+\mu_2x_2+...+\mu_nx_n+\mu_{n+1}x_{n+1}\right )\leq \mu_1f\left ( x_1 \right )+\mu_2f\left ( x_2 \right )+....$</p>
+<p>Hence Proved.</p>
+<h1>Convex Optimization - Differentiable Function</h1>
+<p>Let S be a non-empty open set in $\mathbb{R}^n$,then $f:S\rightarrow \mathbb{R}$ is said to be differentiable at $\hat{x} \in S$ if there exist a vector $\bigtriangledown f\left ( \hat{x} \right )$ called gradient vector and a function $\alpha :\mathbb{R}^n\rightarrow \mathbb{R}$ such that</p>
+<p>$f\left ( x \right )=f\left ( \hat{x} \right )+\bigtriangledown f\left ( \hat{x} \right )^T\left ( x-\hat{x} \right )+\left \| x=\hat{x} \right \|\alpha \left ( \hat{x}, x-\hat{x} \right ), \forall x \in S$ where</p>
+<p style="padding-left:15%">$\alpha \left (\hat{x}, x-\hat{x} \right )\rightarrow 0 \bigtriangledown f\left ( \hat{x} \right )=\left [ \frac{\partial f}{\partial x_1}\frac{\partial f}{\partial x_2}...\frac{\partial f}{\partial x_n} \right ]_{x=\hat{x}}^{T}$</p>
+<h2>Theorem</h2>
+<p>let S be a non-empty, open convexset in $\mathbb{R}^n$ and let $f:S\rightarrow \mathbb{R}$ be differentiable on S. Then, f is convex if and only if for $x_1,x_2 \in S, \bigtriangledown f\left ( x_2 \right )^T \left ( x_1-x_2 \right ) \leq f\left ( x_1 \right )-f\left ( x_2 \right )$</p>
+<h3>Proof</h3>
+<p>Let f be a convex function. i.e., for $x_1,x_2 \in S, \lambda \in \left ( 0, 1 \right )$</p>
+<p style="padding-left:15%">$f\left [ \lambda x_1+\left ( 1-\lambda  \right )x_2 \right ]\leq \lambda f\left ( x_1 \right )+\left ( 1-\lambda  \right )f\left ( x_2 \right )$</p>
+<p style="padding-left:10%">$ \Rightarrow f\left [ \lambda x_1+\left ( 1-\lambda  \right )x_2 \right ]\leq \lambda \left ( f\left ( x_1 \right )-f\left ( x_2 \right ) \right )+f\left ( x_2 \right )$</p>
+<p style="padding-left:10%">$ \Rightarrow\lambda \left ( f\left ( x_1 \right )-f\left ( x_2 \right ) \right )\geq f\left ( x_2+\lambda \left ( x_1-x_2 \right ) \right )-f\left ( x_2 \right )$</p>
+<p style="padding-left:10%">$\Rightarrow \lambda \left ( f\left ( x_1 \right )-f\left ( x_2 \right )  \right )\geq f\left ( x_2 \right )+\bigtriangledown f\left ( x_2 \right )^T\left ( x_1-x_2 \right )\lambda +$</p>
+<p style="padding-left:35%">$\left \| \lambda \left ( x_1-x_2 \right ) \right \|\alpha \left ( x_2,\lambda\left (x_1 - x_2 \right )-f\left ( x_2 \right ) \right )$</p>
+<p style="padding-left:15%">where $\alpha\left ( x_2, \lambda\left (x_1 - x_2 \right ) \right )\rightarrow 0$ as$\lambda \rightarrow 0$</p>
+<p>Dividing by $\lambda$ on both sides, we get &minus;</p>
+<p style="text-align:center">$f\left ( x_1 \right )-f\left ( x_2 \right ) \geq \bigtriangledown f\left ( x_2 \right )^T \left ( x_1-x_2 \right )$</p>
+<h3>Converse</h3>
+<p>Let for $x_1,x_2 \in S, \bigtriangledown f\left ( x_2 \right )^T \left ( x_1-x_2 \right ) \leq f\left ( x_1 \right )-f \left ( x_2 \right )$</p>
+<p>To show that f is convex.</p>
+<p>Since S is convex, $x_3=\lambda x_1+\left (1-\lambda \right )x_2 \in S, \lambda \in \left ( 0, 1 \right )$</p>
+<p>Since $x_1, x_3 \in S$, therefore</p>
+<p style="text-align:center">$f\left ( x_1 \right )-f \left ( x_3 \right ) \geq \bigtriangledown f\left ( x_3 \right )^T \left ( x_1 -x_3\right )$</p>
+<p style="text-align:center">$ \Rightarrow f\left ( x_1 \right )-f \left ( x_3 \right )\geq \bigtriangledown f\left ( x_3 \right )^T \left ( x_1 - \lambda x_1-\left (1-\lambda \right )x_2\right )$</p>
+<p style="text-align:center">$ \Rightarrow f\left ( x_1 \right )-f \left ( x_3 \right )\geq \left ( 1- \lambda\right )\bigtriangledown f\left ( x_3 \right )^T \left ( x_1 - x_2\right )$</p>
+<p>Since, $x_2, x_3 \in S$ therefore</p>
+<p style="text-align:center">$f\left ( x_2 \right )-f\left ( x_3 \right )\geq \bigtriangledown f\left ( x_3 \right )^T\left ( x_2-x_3 \right )$</p>
+<p style="text-align:center">$\Rightarrow f\left ( x_2 \right )-f\left ( x_3 \right )\geq \bigtriangledown f\left ( x_3 \right )^T\left ( x_2-\lambda x_1-\left ( 1-\lambda  \right )x_2 \right )$</p>
+<p style="text-align:center">$\Rightarrow f\left ( x_2 \right )-f\left ( x_3 \right )\geq \left ( -\lambda \right )\bigtriangledown f\left ( x_3 \right )^T\left ( x_1-x_2 \right )$</p>
+<p>Thus, combining the above equations, we get &minus;</p>
+<p style="text-align:center">$\lambda \left ( f\left ( x_1 \right )-f\left ( x_3 \right ) \right )+\left ( 1- \lambda \right )\left ( f\left ( x_2 \right )-f\left ( x_3 \right ) \right )\geq 0$</p>
+<p style="text-align:center">$\Rightarrow f\left ( x_3\right )\leq \lambda f\left ( x_1 \right )+\left ( 1-\lambda \right )f\left ( x_2 \right )$</p>
+<h2>Theorem</h2>
+<p>let S be a non-empty open convex set in $\mathbb{R}^n$ and let $f:S \rightarrow \mathbb{R}$ be differentiable on S, then f is convex on S if and only if for any $x_1,x_2 \in S,\left ( \bigtriangledown f \left ( x_2 \right )-\bigtriangledown f \left ( x_1 \right ) \right )^T \left ( x_2-x_1 \right ) \geq 0$</p>
+<h3>Proof</h3>
+<p>let f be a convex function, then using the previous theorem &minus;</p>
+<p style="text-align:center">$\bigtriangledown f\left ( x_2 \right )^T\left ( x_1-x_2 \right )\leq f\left ( x_1 \right )-f\left ( x_2 \right )$ and</p>
+<p style="text-align:center">$\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )\leq f\left ( x_2 \right )-f\left ( x_1 \right )$</p>
+<p>Adding the above two equations, we get &minus;</p>
+<p style="text-align:center">$\bigtriangledown f\left ( x_2 \right )^T\left ( x_1-x_2 \right )+\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )\leq 0$</p>
+<p style="text-align:center">$\Rightarrow \left ( \bigtriangledown f\left ( x_2 \right )-\bigtriangledown f\left ( x_1 \right ) \right )^T\left ( x_1-x_2 \right )\leq 0$</p>
+<p style="text-align:center">$\Rightarrow \left ( \bigtriangledown f\left ( x_2 \right )-\bigtriangledown f\left ( x_1 \right ) \right )^T\left ( x_2-x_1 \right )\geq 0$</p>
+<h3>Converse</h3>
+<p>Let for any $x_1,x_2 \in S,\left (\bigtriangledown f \left ( x_2\right )- \bigtriangledown f \left ( x_1\right )\right )^T \left ( x_2-x_1\right )\geq 0$</p>
+<p>To show that f is convex.</p>
+<p>Let $x_1,x_2 \in S$, thus by mean value theorem, $\frac{f\left ( x_1\right )-f\left ( x_2\right )}{x_1-x_2}=\bigtriangledown f\left ( x\right ),x \in \left ( x_1-x_2\right ) \Rightarrow x= \lambda x_1+\left ( 1-\lambda\right )x_2$ because S is a convex set.</p>
+<p style="text-align:center">$\Rightarrow f\left ( x_1 \right )- f\left ( x_2 \right )=\left ( \bigtriangledown f\left ( x \right )^T \right )\left ( x_1-x_2 \right )$</p>
+<p>for $x,x_1$, we know &minus;</p>
+<p style="text-align:center">$\left ( \bigtriangledown f\left ( x \right )-\bigtriangledown f\left ( x_1 \right ) \right )^T\left ( x-x_1 \right )\geq 0$</p>
+<p style="text-align:center">$\Rightarrow \left ( \bigtriangledown f\left ( x \right )-\bigtriangledown f\left ( x_1 \right ) \right )^T\left ( \lambda x_1+\left ( 1-\lambda \right )x_2-x_1 \right )\geq 0$</p>
+<p style="text-align:center">$\Rightarrow \left ( \bigtriangledown f\left ( x \right )- \bigtriangledown f\left ( x_1 \right )\right )^T\left ( 1- \lambda \right )\left ( x_2-x_1 \right )\geq 0$</p>
+<p style="text-align:center">$\Rightarrow \bigtriangledown f\left ( x \right )^T\left ( x_2-x_1 \right )\geq \bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )$</p>
+<p>Combining the above equations, we get &minus;</p>
+<p style="text-align:center">$\Rightarrow \bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )\leq f\left ( x_2 \right )-f\left ( x_1 \right )$</p>
+<p>Hence using the last theorem, f is a convex function.</p>
+<h3>Twice Differentiable function</h3>
+<p>Let S be a non-empty subset of $\mathbb{R}^n$ and let $f:S\rightarrow \mathbb{R}$  then f is said to be twice differentiable at $\bar{x} \in S$ if there exists a vector $\bigtriangledown f\left (\bar{x}\right ), a \:nXn$ matrix $H\left (x\right )$(called Hessian matrix) and a function $\alpha:\mathbb{R}^n \rightarrow \mathbb{R}$ such that $f\left ( x \right )=f\left ( \bar{x}+x-\bar{x} \right )=f\left ( \bar{x} \right )+\bigtriangledown f\left ( \bar{x} \right )^T\left ( x-\bar{x} \right )+\frac{1}{2}\left ( x-\bar{x} \right )H\left ( \bar{x} \right )\left ( x-\bar{x} \right )$</p>
+<p>where $ \alpha \left ( \bar{x}, x-\bar{x} \right )\rightarrow Oasx\rightarrow \bar{x}$</p>
+<h1>Sufficient &amp; Necessary Conditions for Global Optima</h1>
+<h2>Theorem</h2>
+<p>Let f be twice differentiable function. If $\bar{x}$ is a local minima, then $\bigtriangledown f\left ( \bar{x} \right )=0$ and the Hessian matrix $H\left ( \bar{x} \right )$ is a positive semidefinite.</p>
+<h3>Proof</h3>
+<p>Let $d \in \mathbb{R}^n$. Since f is twice differentiable at $\bar{x}$.</p>
+<p>Therefore,</p>
+<p style="padding-left:5%">$f\left ( \bar{x} +\lambda d\right )=f\left ( \bar{x} \right )+\lambda \bigtriangledown f\left ( \bar{x} \right )^T d+\lambda^2d^TH\left ( \bar{x} \right )d+\lambda^2d^TH\left ( \bar{x} \right )d+$</p>
+<p style="padding-left:45%">$\lambda^2\left \| d \right \|^2\beta \left ( \bar{x}, \lambda d \right )$</p>
+<p style="text-align:center">But $\bigtriangledown f\left ( \bar{x} \right )=0$ and $\beta\left ( \bar{x}, \lambda d \right )\rightarrow 0$ as $\lambda \rightarrow 0$</p>
+<p style="text-align:center">$\Rightarrow f\left ( \bar{x} +\lambda d \right )-f\left ( \bar{x} \right )=\lambda ^2d^TH\left ( \bar{x} \right )d$</p>
+<p>Since $\bar{x }$ is a local minima, there exists a $\delta > 0$ such that $f\left ( x \right )\leq f\left ( \bar{x}+\lambda d \right ), \forall \lambda \in \left ( 0,\delta \right )$</p>
+<h2>Theorem</h2>
+<p>Let $f:S \rightarrow \mathbb{R}^n$ where $S \subset \mathbb{R}^n$ be twice differentiable over S. If $\bigtriangledown f\left ( x\right )=0$ and $H\left ( \bar{x} \right )$ is positive semi-definite, for all $x \in S$, then $\bar{x}$ is a global optimal solution.</p>
+<h3>Proof</h3>
+<p>Since $H\left ( \bar{x} \right )$ is positive semi-definite, f is convex function over S. Since f is differentiable and convex at $\bar{x}$</p>
+<p style="text-align:center">$\bigtriangledown f\left ( \bar{x} \right )^T \left ( x-\bar{x} \right ) \leq f\left (x\right )-f\left (\bar{x}\right ),\forall x \in S$</p>
+<p>Since $\bigtriangledown f\left ( \bar{x} \right )=0, f\left ( x \right )\geq f\left ( \bar{x} \right )$</p>
+<p>Hence, $\bar{x}$ is a global optima.</p>
+<h2>Theorem</h2>
+<p>Suppose $\bar{x} \in S$ is a local optimal solution to the problem $f:S \rightarrow \mathbb{R}$ where S is a non-empty subset of $\mathbb{R}^n$ and S is convex. $min \:f\left ( x \right )$ where $x \in S$.</p>
+<p>Then:</p>
+<ul class="list">
+<li><p>$\bar{x}$ is a global optimal solution.</p></li>
+<li><p>If either $\bar{x}$  is strictly local minima or f is strictly convex function, then $\bar{x}$ is the unique global optimal solution and is also strong local minima.</p></li>
+</ul>
+<h3>Proof</h3>
+<p>Let $\bar{x}$ be another global optimal solution to the problem such that $x \neq \bar{x}$ and $f\left ( \bar{x} \right )=f\left ( \hat{x} \right )$</p>
+<p>Since $\hat{x},\bar{x} \in S$ and S is convex, then $\frac{\hat{x}+\bar{x}}{2} \in S$ and f is strictly convex.</p>
+<p>$\Rightarrow f\left ( \frac{\hat{x}+\bar{x}}{2} \right )< \frac{1}{2} f\left (\bar{x}\right )+\frac{1}{2} f\left (\hat{x}\right )=f\left (\hat{x}\right )$</p>
+<p>This is contradiction.</p>
+<p>Hence, $\hat{x}$ is a unique global optimal solution.</p>
+<h2>Corollary</h2>
+<p>Let $f:S \subset \mathbb{R}^n \rightarrow \mathbb{R}$ be a differentiable convex function where $\phi \neq S\subset \mathbb{R}^n$ is a convex set. Consider the problem $min f\left (x\right ),x \in S$,then $\bar{x}$ is an optimal solution if $\bigtriangledown f\left (\bar{x}\right )^T\left (x-\bar{x}\right ) \geq 0,\forall x \in S.$</p>
+<h3>Proof</h3>
+<p>Let $\bar{x}$ is an optimal solution, i.e, $f\left (\bar{x}\right )\leq f\left (x\right ),\forall x \in S$</p>
+<p style="text-align:center">$\Rightarrow f\left (x\right )=f\left (\bar{x}\right )\geq 0$</p>
+<p>$f\left (x\right )=f\left (\bar{x}\right )+\bigtriangledown f\left (\bar{x}\right )^T\left (x-\bar{x}\right )+\left \| x-\bar{x} \right \|\alpha \left ( \bar{x},x-\bar{x} \right )$</p> 
+<p style="padding-left:15%">where $\alpha \left ( \bar{x},x-\bar{x} \right )\rightarrow 0$ as $x \rightarrow \bar{x}$</p>
+<p style="text-align:center">$\Rightarrow f\left (x\right )-f\left (\bar{x}\right )=\bigtriangledown f\left (\bar{x}\right )^T\left (x-\bar{x}\right )\geq 0$</p>
+<h2>Corollary</h2>
+<p>Let f be a differentiable convex function at $\bar{x}$,then $\bar{x}$ is global minimum iff $\bigtriangledown f\left (\bar{x}\right )=0$</p>
+<h3>Examples</h3>
+<ul class="list">
+<li><p>$f\left (x\right )=\left (x^2-1\right )^{3}, x \in \mathbb{R}$.</p>
+<p>$\bigtriangledown f\left (x\right )=0 \Rightarrow x= -1,0,1$.</p>
+<p>$\bigtriangledown^2f\left (\pm 1 \right )=0, \bigtriangledown^2 f\left (0 \right )=6>0$.</p>
+<p>$f\left (\pm 1 \right )=0,f\left (0 \right )=-1$</p>
+<p>Hence, $f\left (x \right ) \geq -1=f\left (0 \right )\Rightarrow f\left (0 \right ) \leq f \left (x \right)\forall x \in \mathbb{R}$</p>
+</li>
+<li><p>$f\left (x \right )=x\log x$ defined on $S=\left \{ x \in \mathbb{R}, x> 0 \right \}$.</p>
+<p>${f}'x=1+\log x$</p>
+<p>${f}''x=\frac{1}{x}>0$</p>
+<p>Thus, this function is strictly convex.</p>
+</li>
+<li><p>$f \left (x \right )=e^{x},x \in \mathbb{R}$ is strictly convex.</p></li>
+</ul>
+<h1>Quasiconvex and Quasiconcave functions</h1>
+<p>Let $f:S \rightarrow \mathbb{R}$ where $S \subset \mathbb{R}^n$ is a non-empty convex set. The function f is said to be quasiconvex if for each $x_1,x_2 \in S$, we have $f\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )\leq max\left \{ f\left ( x_1 \right ),f\left ( x_2 \right ) \right \},\lambda \in \left ( 0, 1 \right )$</p>
+<p>For example, $f\left ( x \right )=x^{3}$</p>
+<p>Let $f:S\rightarrow R $ where $S\subset \mathbb{R}^n$ is a non-empty convex set. The function f is said to be quasiconvex if for each $x_1, x_2 \in S$, we have $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )\geq  min\left \{ f\left ( x_1 \right ),f\left ( x_2 \right ) \right \}, \lambda \in \left ( 0, 1 \right )$</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li>Every convex function is quasiconvex but the converse is not true.</li>
+<li>A function which is both quasiconvex and quasiconcave is called quasimonotone.</li>
+</ul>
+<h2>Theorem</h2>
+<p>Let $f:S\rightarrow \mathbb{R}$ and S is a non empty convex set in $\mathbb{R}^n$. The function f is quasiconvex if and only if $S_{\alpha} =\left ( x \in S:f\left ( x \right )\leq \alpha \right \}$ is convex for each real number \alpha$</p>
+<h3>Proof</h3>
+<p>Let f is quasiconvex on S.</p>
+<p>Let $x_1,x_2 \in S_{\alpha}$ therefore $x_1,x_2 \in S$ and $max \left \{ f\left ( x_1 \right ),f\left ( x_2 \right ) \right \}\leq \alpha$</p>
+<p>Let $\lambda \in \left (0, 1 \right )$ and let $x=\lambda x_1+\left ( 1-\lambda  \right )x_2\leq max \left \{ f\left ( x_1 \right ),f\left ( x_2 \right ) \right \}\Rightarrow x \in S$</p>
+<p>Thus, $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )\leq max\left \{ f\left ( x_1 \right ), f\left ( x_2 \right ) \right \}\leq \alpha$</p>
+<p>Therefore, $S_{\alpha}$ is convex.</p>
+<h3>Converse</h3>
+<p>Let $S_{\alpha}$ is convex for each $\alpha$</p>
+<p>$x_1,x_2 \in S, \lambda \in \left ( 0,1\right )$</p>
+<p>$x=\lambda x_1+\left ( 1-\lambda  \right )x_2$</p>
+<p>Let $x=\lambda x_1+\left ( 1-\lambda \right )x_2$</p>
+<p>For $x_1, x_2 \in S_{\alpha}, \alpha= max \left \{ f\left ( x_1 \right ), f\left ( x_2 \right ) \right \}$</p>
+<p>$\Rightarrow \lambda x_1+\left (1-\lambda \right )x_2 \in S_{\alpha}$</p>
+<p>$\Rightarrow f \left (\lambda x_1+\left (1-\lambda \right )x_2 \right )\leq \alpha$</p>
+<p>Hence proved.</p>
+<h2>Theorem</h2>
+<p>Let $f:S\rightarrow \mathbb{R}$ and S is a non empty convex set in $\mathbb{R}^n$. The function f is quasiconcave if and only if $S_{\alpha} =\left \{ x \in S:f\left ( x \right )\geq \alpha \right \}$ is convex for each real number $\alpha$.</p>
+<h2>Theorem</h2>
+<p>Let $f:S\rightarrow \mathbb{R}$ and S is a non empty convex set in $\mathbb{R}^n$. The function f is quasimonotone if and only if $S_{\alpha} =\left \{ x \in S:f\left ( x \right )= \alpha \right \}$ is convex for each real number $\alpha$.</p>
+<h1>Differentiable Quasiconvex Function</h1>
+<h2>Theorem</h2>
+<p>Let S be a non empty convex set in $\mathbb{R}^n$ and $f:S \rightarrow \mathbb{R}$ be differentiable on S, then f is quasiconvex if and only if for any $x_1,x_2 \in S$ and $f\left ( x_1 \right )\leq f\left ( x_2 \right )$, we have $\bigtriangledown f\left ( x_2 \right )^T\left ( x_2-x_1 \right )\leq 0$</p>
+<h3>Proof</h3>
+<p>Let f be a quasiconvex function.</p>
+<p>Let $x_1,x_2 \in S$ such that $f\left ( x_1 \right ) \leq f\left ( x_2 \right )$</p>
+<p>By differentiability of f at $x_2, \lambda \in \left ( 0, 1 \right )$</p>
+<p>$f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )=f\left ( x_2+\lambda \left (x_1-x_2  \right ) \right )=f\left ( x_2 \right )+\bigtriangledown f\left ( x_2 \right )^T\left ( x_1-x_2 \right )$</p>
+<p style="padding-left:25%">$+\lambda \left \| x_1-x_2 \right \|\alpha \left ( x_2,\lambda \left ( x_1-x_2 \right ) \right )$</p>
+<p>$\Rightarrow f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )-f\left ( x_2 \right )-f\left ( x_2 \right )=\bigtriangledown f\left ( x_2 \right )^T\left ( x_1-x_2 \right )$</p>
+<p style="padding-left:25%">$+\lambda \left \| x_1-x_2 \right \|\alpha \left ( x2, \lambda\left ( x_1-x_2 \right )\right )$</p>
+<p>But since f is quasiconvex, $f \left ( \lambda x_1+ \left ( 1- \lambda  \right )x_2 \right )\leq f \left (x_2 \right )$</p>
+<p>$\bigtriangledown f\left ( x_2 \right )^T\left ( x_1-x_2 \right )+\lambda \left \| x_1-x_2 \right \|\alpha \left ( x_2,\lambda \left ( x_1,x_2 \right ) \right )\leq 0$</p>
+<p>But $\alpha \left ( x_2,\lambda \left ( x_1,x_2 \right )\right )\rightarrow 0$ as $\lambda \rightarrow 0$</p>
+<p>Therefore, $\bigtriangledown f\left ( x_2 \right )^T\left ( x_1-x_2 \right ) \leq 0$</p>
+<h3>Converse</h3>
+<p>let for $x_1,x_2 \in S$ and $f\left ( x_1 \right )\leq f\left ( x_2 \right )$, $\bigtriangledown f\left ( x_2 \right )^T \left ( x_1,x_2 \right ) \leq 0$</p>
+<p>To show that f is quasiconvex,ie, $f\left ( \lambda x_1+\left ( 1-\lambda \right )x_2 \right )\leq f\left ( x_2 \right )$</p>
+<p><b>Proof by contradiction</b></p>
+<p>Suppose there exists an $x_3= \lambda x_1+\left ( 1-\lambda \right )x_2$ such that $f\left ( x_2 \right )< f \left ( x_3 \right )$ for some $ \lambda \in \left ( 0, 1 \right )$</p>
+<p>For $x_2$ and $x_3,\bigtriangledown f\left ( x_3 \right )^T \left ( x_2-x_3 \right ) \leq 0$</p>
+<p style="text-align:center">$\Rightarrow -\lambda \bigtriangledown f\left ( x_3 \right )^T\left ( x_2-x_3 \right )\leq 0$</p>
+<p style="text-align:center">$\Rightarrow \bigtriangledown f\left ( x_3 \right )^T \left ( x_1-x_2 \right )\geq 0$</p>
+<p>For $x_1$ and $x_3,\bigtriangledown f\left ( x_3 \right )^T \left ( x_1-x_3 \right ) \leq 0$</p>
+<p style="text-align:center">$\Rightarrow \left ( 1- \lambda \right )\bigtriangledown f\left ( x_3 \right )^T\left ( x_1-x_2 \right )\leq 0$</p>
+<p style="text-align:center">$\Rightarrow \bigtriangledown f\left ( x_3 \right )^T \left ( x_1-x_2 \right )\leq 0$</p>
+<p>thus, from the above equations, $\bigtriangledown f\left ( x_3 \right )^T \left ( x_1-x_2 \right )=0$</p>
+<p>Define $U=\left \{ x:f\left ( x \right )\leq f\left ( x_2 \right ),x=\mu x_2+\left ( 1-\mu  \right )x_3, \mu \in \left ( 0,1 \right ) \right \}$</p>
+<p>Thus we can find $x_0 \in U$ such that $x_0 = \mu_0 x_2= \mu x_2+\left ( 1- \mu \right )x_3$ for some $\mu _0 \in \left ( 0,1 \right )$ which is nearest to $x_3$ and $\hat{x} \in \left ( x_0,x_1 \right )$ such that by mean value theorem,</p>
+<p>$$\frac{f\left ( x_3\right )-f\left ( x_0\right )}{x_3-x_0}= \bigtriangledown f\left ( \hat{x}\right )$$</p>
+<p>$$\Rightarrow f\left ( x_3 \right )=f\left ( x_0 \right )+\bigtriangledown f\left ( \hat{x} \right )^T\left ( x_3-x_0 \right )$$</p>
+<p>$$\Rightarrow f\left ( x_3 \right )=f\left ( x_0 \right )+\mu_0 \lambda f\left ( \hat{x}\right )^T \left ( x_1-x_2 \right )$$</p>
+<p>Since $x_0$ is a combination of $x_1$ and $x_2$ and $f\left (x_2 \right )< f\left ( \hat{x}\right )$</p>
+<p>By repeating the starting procedure, $\bigtriangledown f \left ( \hat{x}\right )^T \left ( x_1-x_2\right )=0$</p>
+<p>Thus, combining the above equations, we get:</p>
+<p>$$f\left ( x_3\right )=f\left ( x_0 \right ) \leq f\left ( x_2\right )$$</p>
+<p>$$\Rightarrow f\left ( x_3\right )\leq f\left ( x_2\right )$$</p>
+<p>Hence, it is contradiction.</p>
+<h3>Examples</h3>
+<p><b>Step 1</b> &minus; $f\left ( x\right )=X^3$</p>
+<p> $Let f \left ( x_1\right )\leq f\left ( x_2\right )$</p>
+<p>$\Rightarrow x_{1}^{3}\leq x_{2}^{3}\Rightarrow x_1\leq x_2$</p>
+<p>$\bigtriangledown f\left ( x_2 \right )\left ( x_1-x_2 \right )=3x_{2}^{2}\left ( x_1-x_2 \right )\leq 0$</p>
+<p>Thus, $f\left ( x\right )$ is quasiconvex.</p>
+<p><b>Step 2</b> &minus; $f\left ( x\right )=x_{1}^{3}+x_{2}^{3}$</p>
+<p>Let $\hat{x_1}=\left ( 2, -2\right )$ and $\hat{x_2}=\left ( 1, 0\right )$</p>
+<p>thus, $f\left ( \hat{x_1}\right )=0,f\left ( \hat{x_2}\right )=1 \Rightarrow f\left ( \hat{x_1}\right )\setminus < f \left ( \hat{x_2}\right )$</p>
+<p>Thus, $\bigtriangledown f \left ( \hat{x_2}\right )^T \left ( \hat{x_1}- \hat{x_2}\right )= \left ( 3, 0\right )^T \left ( 1, -2\right )=3 >0$</p>
+<p>Hence $f\left ( x\right )$ is not quasiconvex.</p>
+<h1>Strictly Quasiconvex Function</h1>
+<p>Let $f:S\rightarrow \mathbb{R}^n$ and S be a non-empty convex set in $\mathbb{R}^n$ then f is said to be strictly quasicovex function if for each $x_1,x_2 \in S$ with $f\left ( x_1 \right ) \neq f\left ( x_2 \right )$, we have $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )< max \:\left \{ f\left ( x_1 \right ),f\left ( x_2 \right ) \right \}$</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li>Every strictly quasiconvex function is strictly convex.</li>
+<li>Strictly quasiconvex function does not imply quasiconvexity.</li>
+<li>Strictly quasiconvex function may not be strongly quasiconvex.</li>
+<li>Pseudoconvex function is a strictly quasiconvex function.</li>
+</ul>
+<h2>Theorem</h2>
+<p>Let $f:S\rightarrow \mathbb{R}^n$ be strictly quasiconvex function and S be a non-empty convex set in $\mathbb{R}^n$.Consider the problem: $min \:f\left ( x \right ), x \in S$. If $\hat{x}$ is local optimal solution, then $\bar{x}$ is global optimal solution.</p>
+<h3>Proof</h3>
+<p>Let there exists $ \bar{x} \in S$ such that $f\left ( \bar{x}\right )\leq f \left ( \hat{x}\right )$</p>
+<p>Since $\bar{x},\hat{x} \in S$ and S is convex set, therefore,</p>
+<p>$$\lambda \bar{x}+\left ( 1-\lambda \right )\hat{x}\in S, \forall \lambda \in \left ( 0,1 \right )$$</p>
+<p>Since $\hat{x}$ is local minima, $f\left ( \hat{x} \right ) \leq f\left ( \lambda \bar{x}+\left ( 1-\lambda \right )\hat{x} \right ), \forall \lambda \in \left ( 0,\delta \right )$</p>
+<p>Since f is strictly quasiconvex.</p>
+<p>$$f\left ( \lambda \bar{x}+\left ( 1-\lambda \right )\hat{x} \right )< max \left \{ f\left ( \hat{x} \right ),f\left ( \bar{x} \right ) \right \}=f\left ( \hat{x} \right )$$</p>
+<p>Hence, it is contradiction.</p>
+<h2>Strictly quasiconcave function</h2>
+<p>Let $f:S\rightarrow \mathbb{R}^n$ and S be a non-empty convex set in $\mathbb{R}^n$, then f is saud to be strictly quasicovex function if for each $x_1,x_2 \in S$ with $f\left (x_1\right )\neq f\left (x_2\right )$, we have</p>
+<p>$$f\left (\lambda x_1+\left (1-\lambda\right )x_2\right )> min \left \{ f \left (x_1\right ),f\left (x_2\right )\right \}$$.</p>
+<h3>Examples</h3>
+<ul class="list">
+<li><p>$f\left (x\right )=x^2-2$</p>
+<p>It is a strictly quasiconvex function because if we take any two points $x_1,x_2$ in the domain that satisfy the constraints in the definition $f\left (\lambda x_1+\left (1- \lambda\right )x_2\right )< max \left \{ f \left (x_1\right ),f\left (x_2\right )\right \}$ As the function is decreasing in the negative x-axis and it is increasing in the positive x-axis (since it is a parabola).</p></li>
+<li><p>$f\left (x\right )=-x^2$</p>
+<p>It is not a strictly quasiconvex function because if we take take $x_1=1$ and $x_2=-1$ and $\lambda=0.5$, then $f\left (x_1\right )=-1=f\left (x_2\right )$ but $f\left (\lambda x_1+\left (1- \lambda\right )x_2\right )=0$ Therefore it does not satisfy the conditions stated in the definition. But it is a quasiconcave function because if we take any two points in the domain that satisfy the constraints in the definition $f\left ( \lambda x_1+\left (1-\lambda\right )x_2\right )> min \left \{ f \left (x_1\right ),f\left (x_2\right )\right \}$. As the function is increasing in the negative x-axis and it is decreasing in the positive x-axis.</p>
+</li>
+</ul>
+<h1>Strongly Quasiconvex Function</h1>
+<p>Let $f:S\rightarrow \mathbb{R}^n$ and S be a non-empty convex set in $\mathbb{R}^n$ then f is strongly quasiconvex function if for any $x_1,x_2 \in S$ with $\left ( x_1 \right ) \neq \left ( x_2 \right )$, we have $f\left ( \lambda x_1+\left ( 1-\lambda  \right )x_2 \right )< max \:\left \{ f\left ( x_1 \right ),f\left ( x_2 \right ) \right \},\forall \lambda \in \left ( 0,1\right )$</p>
+<h2>Theorem</h2>
+<p>A quasiconvex function $f:S\rightarrow \mathbb{R}^n$ on a non-empty convex set S in $\mathbb{R}^n$ is strongly quasiconvex function if it is not constant on a line segment joining any points of S.</p>
+<h3>Proof</h3>
+<p>Let f is quasiconvex function and it is not constant on a line segment joining any points of S.</p>
+<p>Suppose f is not strongly quasiconvex function.</p>
+<p>There exist $x_1,x_2 \in S$ with $x_1 \neq x_2$ such that</p>
+<p>$$f\left ( z \right )\geq max\left \{ f\left ( x_1 \right ), f\left ( x_2 \right ) \right \}, \forall z= \lambda x_1+\left ( 1-\lambda  \right )x_2, \lambda \in \left ( 0,1 \right )$$</p>
+<p style="padding-left:30%">$\Rightarrow f\left ( x_1 \right )\leq f\left ( z \right )$ and $f\left ( x_2 \right )\leq f\left ( z \right )$</p>
+<p>Since f is not constant in $\left [ x_1,z \right ]$ and $\left [z,x_2 \right ] $</p>
+<p>So there exists $u \in \left [ x_1,z \right ]$ and $v=\left [ z,x_2 \right ]$</p>
+<p>$$\Rightarrow u= \mu_1x_1+\left ( 1-\mu_1\right )z,v=\mu_2z+\left ( 1- \mu_2\right )x_2$$</p>
+<p>Since f is quasiconvex,</p>
+<p>$$\Rightarrow f\left ( u \right )\leq max\left \{ f\left ( x_1 \right ),f \left ( z \right ) \right \}=f\left ( z \right )\:\: and \:\:f \left ( v \right ) \leq max \left \{ f\left ( z \right ),f\left ( x_2 \right ) \right \}$$</p>
+<p>$$\Rightarrow f\left ( u \right )\leq f\left ( z \right ) \:\: and \:\: f\left ( v \right )\leq f\left ( z \right )$$</p>
+<p>$$\Rightarrow max \left \{ f\left ( u \right ),f\left ( v \right ) \right \} \leq f\left ( z \right )$$</p>
+<p>But z is any point between u and v, if any of them are equal, then f is constant.</p>
+<p>Therefore, $max \left \{ f\left ( u \right ),f\left ( v \right ) \right \} \leq f\left ( z \right )$</p>
+<p>which contradicts the quasiconvexity of f as $z \in \left [ u,v \right ]$.</p>
+<p>Hence f is strongly quasiconvex function.</p>
+<h2>Theorem</h2>
+<p>Let $f:S\rightarrow \mathbb{R}^n$ and S be a non-empty convex set in $\mathbb{R}^n$. If $\hat{x}$ is local optimal solution, then $\hat{x}$ is unique global optimal solution.</p>
+<h3>Proof</h3>
+<p>Since a strong quasiconvex function is also strictly quasiconvex function, thus a local optimal solution is global optimal solution.</p>
+<p><b>Uniqueness</b> &minus; Let f attains global optimal solution at two points $u,v \in S$</p>
+<p>$$\Rightarrow f\left ( u \right ) \leq f\left ( x \right ).\forall x \in S\:\: and \:\:f\left ( v \right ) \leq f\left ( x \right ).\forall x \in S$$</p>
+<p>If u is global optimal solution, $f\left ( u \right )\leq f\left ( v \right )$ and $f\left ( v \right )\leq f\left ( u\right )\Rightarrow f\left ( u \right )=f\left ( v\right )$</p>
+<p>$$f\left ( \lambda u+\left ( 1-\lambda\right )v\right )< max \left \{f\left ( u \right ),f\left ( v \right )  \right \}=f\left ( u \right )$$</p>
+<p>which is a contradiction.</p>
+<p>Hence there exists only one global optimal solution.</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li>A strongly quasiconvex function is also strictly quasiconvex fucntion.</li>
+<li>A strictly convex function may or may not be strongly quasiconvex.</li>
+<li>A differentiable strictly convex is strongly quasiconvex.</li>
+</ul>
+<h1>Pseudoconvex Function</h1>
+<p>Let $f:S\rightarrow \mathbb{R}$ be a differentiable function and S be a non-empty convex set in $\mathbb{R}^n$, then f is said to be pseudoconvex if for each $x_1,x_2 \in S$ with $\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )\geq 0$, we have $f\left ( x_2 \right )\geq f\left ( x_1 \right )$, or equivalently if $f\left ( x_1 \right )>f\left ( x_2 \right )$ then $\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )<0$</p>
+<h2>Pseudoconcave function</h2>
+<p>Let $f:S\rightarrow \mathbb{R}$ be a differentiable function and S be a non-empty convex set in $\mathbb{R}^n$, then f is said to be pseudoconvex if for each $x_1, x_2 \in S$ with $\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )\geq 0$, we have $f\left ( x_2 \right )\leq f\left ( x_1 \right )$, or equivalently if $f\left ( x_1 \right )>f\left ( x_2 \right )$ then $\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )>0$</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li><p>If a function is both pseudoconvex and pseudoconcave, then is is called pseudolinear.</p></li>
+<li><p>A differentiable convex function is also pseudoconvex.</p></li>
+<li><p>A pseudoconvex function may not be convex. For example,</p>
+<p>$f\left ( x \right )=x+x^3$ is not convex. If $x_1 \leq x_2,x_{1}^{3} \leq x_{2}^{3}$</p>
+<p>Thus,$\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )=\left ( 1+3x_{1}^{2} \right )\left ( x_2-x_1 \right ) \geq 0$</p>
+<p>And, $f\left ( x_2 \right )-f\left ( x_1 \right )=\left ( x_2-x_1 \right )+\left ( x_{2}^{3} -x_{1}^{3}\right )\geq 0$</p>
+<p>$\Rightarrow f\left ( x_2 \right )\geq f\left ( x_1 \right )$</p>
+<p>Thus, it is pseudoconvex.</p>
+<p>A pseudoconvex function is strictly quasiconvex. Thus, every local minima of pseudoconvex is also global minima.</p>
+</li>
+</ul>
+<h2>Strictly pseudoconvex function</h2>
+<p>Let $f:S\rightarrow \mathbb{R}$ be a differentiable function and S be a non-empty convex set in $\mathbb{R}^n$, then f is said to be pseudoconvex if for each $x_1,x_2 \in S$ with $\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )\geq 0$, we have $f\left ( x_2 \right )> f\left ( x_1 \right )$,or equivalently if $f\left ( x_1 \right )\geq f\left ( x_2 \right )$ then $\bigtriangledown f\left ( x_1 \right )^T\left ( x_2-x_1 \right )<0$</p>
+<h2>Theorem</h2>
+<p>Let f be a pseudoconvex function and suppose $\bigtriangledown f\left ( \hat{x}\right )=0$ for some $\hat{x} \in S$, then $\hat{x}$ is global optimal solution of f over S.</p>
+<h3>Proof</h3>
+<p>Let $\hat{x}$ be a critical point of f, ie, $\bigtriangledown f\left ( \hat{x}\right )=0$</p>
+<p>Since f is pseudoconvex function, for $x \in S,$ we have</p>
+<p>$$\bigtriangledown f\left ( \hat{x}\right )\left ( x-\hat{x}\right )=0 \Rightarrow f\left ( \hat{x}\right )\leq f\left ( x\right ), \forall x \in S$$</p>
+<p>Hence, $\hat{x}$ is global optimal solution.</p>
+<h3>Remark</h3>
+<p>If f is strictly pseudoconvex function, $\hat{x}$ is unique global optimal solution.</p>
+<h2>Theorem</h2>
+<p>If f is differentiable pseudoconvex function over S, then f is both strictly quasiconvex as well as quasiconvex function.</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li><p>The sum of two pseudoconvex fucntions defined on an open set S of $\mathbb{R}^n$ may not be pseudoconvex.</p></li>
+<li><p>Let $f:S\rightarrow \mathbb{R}$ be a quasiconvex function and S be a non-empty convex subset of $\mathbb{R}^n$ then f is pseudoconvex if and only if every critical point is a global minima of f over S.</p></li>
+<li><p>Let S be a non-empty convex subset of $\mathbb{R}^n$ and $f:S\rightarrow \mathbb{R}$ be a function such that $\bigtriangledown f\left ( x\right )\neq 0$ for every $x \in S$ then f is pseudoconvex if and only if it is a quasiconvex function.</p></li>
+</ul>
+<h1>Convex Optimization - Programming Problem</h1>
+<p>There are four types of convex programming problems &minus;</p>
+<p><b>Step 1</b> &minus; $min \:f\left ( x \right )$, where $x \in S$ and S be a non-empty convex set in $\mathbb{R}^n$ and $f\left ( x \right )$ is convex function.</p>
+<p><b>Step 2</b> &minus; $min \: f\left ( x \right ), x \in \mathbb{R}^n$ subject to</p>
+<p>$g_i\left ( x \right ) \geq 0, 1 \leq m_1$ and $g_i\left ( x \right )$ is a convex function.</p>
+<p>$g_i\left ( x \right ) \leq 0,m_1+1 \leq m_2$ and $g_i\left ( x \right )$ is a concave function.</p>
+<p>$g_i\left ( x \right ) = 0, m_2+1 \leq m$ and $g_i\left ( x \right )$ is a linear function.</p>
+<p>where $f\left ( x \right )$ is a convex fucntion.</p>
+<p><b>Step 3</b> &minus; $max \:f\left ( x \right )$ where $x \in S$ and S be a non-empty convex set in $\mathbb{R}^n$ and $f\left ( x \right )$ is concave function.</p>
+<p><b>Step 4</b> &minus; $min \:f\left ( x \right )$, where $x \in \mathbb{R}^n$ subject to</p>
+<p>$g_i\left ( x \right ) \geq 0, 1 \leq m_1$ and $g_i\left ( x \right )$ is a convex function.</p>
+<p>$g_i\left ( x \right ) \leq 0, m_1+1 \leq m_2$ and $g_i\left ( x \right )$ is a concave function.</p>
+<p>$g_i\left ( x \right ) = 0,m_2+1 \leq m$ and $g_i\left ( x \right )$ is a linear function.</p>
+<p>where $f\left ( x \right )$ is a concave function.</p>
+<h2>Cone of feasible direction</h2>
+<p>Let S be a non-empty set in $\mathbb{R}^n$ and let $\hat{x} \in \:Closure\left ( S \right )$, then the cone of feasible direction of S at $\hat{x}$, denoted by D, is defined as $D=\left \{ d:d\neq 0,\hat{x}+\lambda d \in S, \lambda \in \left ( 0, \delta \right ), \delta > 0 \right \}$</p>
+<p>Each non-zero vector $d \in D$ is called feasible direction.</p>
+<p>For a given function $f:\mathbb{R}^n \Rightarrow \mathbb{R}$ the cone of improving direction at $\hat{x}$ is denoted by F and is given by</p>
+<p>$$F=\left \{ d:f\left ( \hat{x}+\lambda d \right )\leq f\left ( \hat{x} \right ),\forall \lambda \in \left ( 0,\delta \right ), \delta >0 \right \}$$</p>
+<p>Each direction $d \in F$ is called an improving direction or descent direction of f at $\hat{x}$</p>
+<h2>Theorem</h2>
+<p><b>Necessary Condition</b></p>
+<p>Consider the problem $min f\left ( x \right )$ such that $x \in S$ where S be a non-empty set in $\mathbb{R}^n$. Suppose f is differentiable at a point $\hat{x} \in S$. If $\hat{x}$ is a local optimal solution, then $F_0 \cap D= \phi$ where $F_0=\left \{ d:\bigtriangledown f\left ( \hat{x} \right )^T d < 0 \right \}$ and D is a cone of feasible direction.</p>
+<p><b>Sufficient Condition</b></p>
+<p>If $F_0 \cap D= \phi$ f is a pseudoconvex function at $\hat{x}$ and there exists a neighbourhood of $\hat{x},N_\varepsilon \left ( \hat{x} \right ), \varepsilon > 0$ such that $d=x-\hat{x}\in D$ for any $x \in S \cap N_\varepsilon \left ( \hat{x} \right )$, then $\hat{x}$ is local optimal solution.</p>
+<h3>Proof</h3>
+<p><b>Necessary Condition</b></p>
+<p>Let $F_0 \cap D\neq \phi$, ie, there exists a $d \in F_0 \cap D$ such that $d \in F_0$ and $d\in D$</p>
+<p>Since $d \in D$, therefore there exists $\delta_1 >0$ such that $\hat{x}+\lambda d \in S, \lambda \in \left ( 0,\delta_1 \right ).$</p>
+<p>Since $d \in F_0$, therefore $\bigtriangledown f \left ( \hat{x}\right )^T d <0$</p>
+<p>Thus, there exists $\delta_2>0$ such that $f\left ( \hat{x}+\lambda d\right )< f\left ( \hat{x}\right ),\forall \lambda \in f \left ( 0,\delta_2 \right )$</p>
+<p>Let $\delta=min \left \{\delta_1,\delta_2 \right \}$</p>
+<p>Then $\hat{x}+\lambda d \in S, f\left (\hat{x}+\lambda d  \right ) < f\left ( \hat{x} \right ),\forall \lambda \in f \left ( 0,\delta \right )$</p>
+<p>But $\hat{x}$ is local optimal solution.</p>
+<p>Hence it is contradiction.</p>
+<p>Thus $F_0\cap D=\phi$</p>
+<p><b>Sufficient Condition</b></p>
+<p>Let $F_0 \cap D\neq \phi$ nd let f be a pseudoconvex function.</p>
+<p>Let there exists a neighbourhood of $\hat{x}, N_{\varepsilon}\left ( \hat{x} \right )$ such that $d=x-\hat{x}, \forall x \in S \cap N_\varepsilon\left ( \hat{x} \right )$</p>
+<p>Let $\hat{x}$ is not a local optimal solution.</p>
+<p>Thus, there exists $\bar{x} \in S \cap N_\varepsilon \left ( \hat{x} \right )$ such that $f \left ( \bar{x} \right )< f \left ( \hat{x} \right )$</p>
+<p>By assumption on $S \cap N_\varepsilon \left ( \hat{x} \right ),d=\left ( \bar{x}-\hat{x} \right )\in D$</p>
+<p>By pseudoconvex of f,</p>
+<p>$$f\left ( \hat{x} \right )>f\left ( \bar{x} \right )\Rightarrow \bigtriangledown f\left ( \hat{x} \right )^T\left ( \bar{x}-\hat{x} \right )<0$$</p>
+<p style="padding-left:43%">$\Rightarrow \bigtriangledown f\left ( \hat{x} \right) ^T d <0$</p>
+<p style="padding-left:43%">$\Rightarrow d \in F_0$</p>
+<p>hence $F_0\cap D \neq \phi$</p>
+<p>which is a contradiction.</p>
+<p>Hence, $\hat{x}$ is local optimal solution.</p>
+<p>Consider the following problem:$min \:f\left ( x\right )$ where $x \in X$ such that $g_x\left ( x\right ) \leq 0, i=1,2,...,m$</p>
+<p>$f:X \rightarrow \mathbb{R},g_i:X \rightarrow \mathbb{R}^n$ and X is an open set in $\mathbb{R}^n$</p>
+<p>Let $S=\left \{x:g_i\left ( x\right )\leq 0,\forall i  \right \}$</p>
+<p>Let $\hat{x} \in X$, then $M=\left \{1,2,...,m \right \}$</p>
+<p>Let $I=\left \{i:g_i\left ( \hat{x}\right )=0, i \in M\right \}$ where I is called index set for all active constraints at $\hat{x}$</p>
+<p>Let $J=\left \{i:g_i\left ( \hat{x}\right )<0,i \in M\right \}$ where J is called index set for all active constraints at $\hat{x}$.</p>
+<p>Let $F_0=\left \{ d \in \mathbb{R}^m:\bigtriangledown f\left ( \hat{x} \right )^T d <0 \right \}$</p>
+<p>Let $G_0=\left \{ d \in \mathbb{R}^m:\bigtriangledown gI\left ( \hat{x} \right )^T d <0 \right \}$</p>
+<p>or $G_0=\left \{ d \in \mathbb{R}^m:\bigtriangledown gi\left ( \hat{x} \right )^T d <0 ,\forall i \in I \right \}$</p>
+<h3>Lemma</h3>
+<p>If $S=\left \{ x \in X:g_i\left ( x\right ) \leq 0, \forall i \in I\right \}$ and X is non-empty open set in $\mathbb{R}^n$. Let $\hat{x}\in S$ and $g_i$ are different at $\hat{x}, i \in I$ and let $g_i$ where $i \in J$ are continuous at $\hat{x}$, then $G_0 \subseteq D$.</p>
+<h3>Proof</h3>
+<p>Let $d \in G_0$</p>
+<p>Since $\hat{x} \in X$ and X is an open set, thus there exists $\delta_1 >0$ such that $\hat{x}+\lambda d \in X$ for $\lambda \in \left ( 0, \delta_1\right )$</p>
+<p>Also since $g_\hat{x}<0$ and $g_i$ are continuous at $\hat{x}, \forall i \in J$, there exists $\delta_2>0$, $g_i\left ( \hat{x}+\lambda d\right )<0, \lambda \in \left ( 0, \delta_2\right )$</p>
+<p>Since $d \in G_0$, therefore, $\bigtriangledown g_i\left ( \hat{x}\right )^T d <0, \forall i \in I$ thus there exists $\delta_3 >0, g_i\left ( \hat{x}+\lambda d\right )< g_i\left ( \hat{x}\right )=0$, for $\lambda \in \left ( 0, \delta_3\right ) i \in J$</p> 
+<p>Let $\delta=min\left \{ \delta_1, \delta_2, \delta_3 \right \}$</p>
+<p>therefore, $\hat{x}+\lambda d \in X, g_i\left ( \hat{x}+\lambda d\right )< 0, i \in M$</p>
+<p>$\Rightarrow \hat{x}+\lambda d \in S$</p>
+<p>$\Rightarrow d \in D$</p>
+<p>$\Rightarrow G_0 \subseteq D$</p>
+<p>Hence Proved.</p>
+<h2>Theorem</h2>
+<p><b>Necessary Condition</b></p>
+<p>Let $f$ and $g_i, i \in I$, are different at $\hat{x} \in S,$ and $g_j$ are continous at $\hat{x} \in S$. If $\hat{x}$ is local minima of $S$, then $F_0 \cap G_0=\phi$.</p>
+<p><b>Sufficient Condition</b></p>
+<p>If $F_0 \cap G_0= \phi$ and f is a pseudoconvex function at $\left (\hat{x}, g_i 9x \right ), i \in I$ are strictly pseudoconvex functions over some $\varepsilon$ - neighbourhood of $\hat{x}, \hat{x}$ is a local optimal solution.</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li><p>Let $\hat{x}$ be a feasible point such that $\bigtriangledown f\left(\hat{x} \right)=0$, then $F_0 = \phi$. Thus, $F_0 \cap G_0= \phi$ but $\hat{x}$ is not an optimal solution</p></li>
+<li><p>But if $\bigtriangledown g\left(\hat{x} \right)=0$, then $G_0=\phi$, thus $F_0 \cap G_0= \phi$</p></li>
+<li><p>Consider the problem : min $f\left(x \right)$ such that $g\left(x \right)=0$.</p>
+<p>Since $g\left(x \right)=0$, thus $g_1\left(x \right)=g\left(x \right)<0$ and $g_2\left(x \right)=-g\left(x \right) \leq 0$.</p>
+<p>Let $\hat{x} \in S$, then $g_1\left(\hat{x} \right)=0$ and $g_2\left(\hat{x} \right)=0$.</p>
+<p>But $\bigtriangledown g_1\left(\hat{x} \right)= - \bigtriangledown g_2\left(\hat{x}\right)$</p>
+<p>Thus, $G_0= \phi$ and $F_0 \cap G_0= \phi$.</p> 
+</li>
+</ul>
+<h1>Convex Optimization - Fritz-John Conditions</h1>
+<h2>Necessary Conditions</h2>
+<h3>Theorem</h3>
+<p>Consider the problem &minus; $min f\left ( x \right )$ such that $x \in X$ where X is an open set in $\mathbb{R}^n$ and let $g_i \left ( x \right ) \leq 0, \forall i =1,2,....m$.</p>
+<p>Let $f:X \rightarrow \mathbb{R}$ and $g_i:X \rightarrow \mathbb{R}$ </p>
+<p>Let $\hat{x}$ be a feasible solution and let f and $g_i, i \in I$ are differentiable at $\hat{x}$ and $g_i, i \in J$ are continuous at $\hat{x}$.</p>
+<p>If $\hat{x}$ solves the above problem locally, then there exists $u_0, u_i \in \mathbb{R}, i \in I$ such that $u_0 \bigtriangledown f\left ( \hat{x} \right )+\displaystyle\sum\limits_{i\in I} u_i \bigtriangledown g_i \left ( \hat{x} \right )$=0</p>
+<p>where $u_0,u_i \geq 0,i \in I$ and $\left ( u_0, u_I \right ) \neq \left ( 0,0 \right )$</p>
+<p>Furthermore, if $g_i,i \in J$ are also differentiable at $\hat{x}$, then above conditions can be written as &minus;</p>
+<p>$u_0 \bigtriangledown f\left ( \hat{x}\right )+\displaystyle\sum\limits_{i=1}^m u_i \bigtriangledown g_i\left ( \hat{x} \right )=0$</p>
+<p>$u_ig_i\left (\hat{x} \right )$=0</p>
+<p>$u_0,u_i \geq 0, \forall i=1,2,....,m$</p>
+<p>$\left (u_0,u \right ) \neq \left ( 0,0 \right ), u=\left ( u_1,u_2,s,u_m \right ) \in \mathbb{R}^m$</p>
+<h3>Remarks</h3>
+<ul class="list">
+<li><p>$u_i$ are called Lagrangian multipliers.</p></li>
+<li><p>The condition that $\hat{x}$  be feasible to the given problem is called primal feasible condition.</p></li>
+<li><p>The requirement $u_0 \bigtriangledown f\left (\hat{x} \right )+\displaystyle\sum\limits_{i=1}^m u-i \bigtriangledown g_i\left ( x \right )=0$ is called dual feasibility condition.</p></li>
+<li><p>The condition $u_ig_i\left ( \hat{x} \right )=0, i=1, 2, ...m$ is called complimentary slackness condition. This condition requires $u_i=0, i \in J$</p></li>
+<li><p>Together the primal feasible condition, dual feasibility condition and complimentary slackness are called Fritz-John Conditions.</p></li>
+</ul>
+<h2>Sufficient Conditions</h2>
+<h3>Theorem</h3>
+<p>If there exists an $\varepsilon$-neighbourhood of $\hat{x}N_\varepsilon \left ( \hat{x} \right ),\varepsilon >0$ such that f is pseudoconvex over $N_\varepsilon \left ( \hat{x} \right )\cap S$ and $g_i,i \in I$ are strictly pseudoconvex over $N_\varepsilon \left ( \hat{x}\right )\cap S$, then $\hat{x}$ is local optimal solution to problem described above. If f is pseudoconvex at $\hat{x}$ and if $g_i, i \in I$ are both strictly pseudoconvex and quasiconvex function at $\hat{x},\hat{x}$ is global optimal solution to the problem described above.</p>
+<h3>Example</h3>
+<ul class="list">
+<li><p>$min \:f\left ( x_1,x_2 \right )=\left ( x_1-3 \right )^2+\left ( x_2-2 \right )^2$</p>
+<p>such that $x_{1}^{2}+x_{2}^{2} \leq 5, x_1+2x_2 \leq 4, x_1,x_2 \geq 0$ And $\hat{x}=\left ( 2,1 \right )$</p>
+<p>Let $g_1\left (x_1,x_2 \right )=x_{1}^{2}+x_{2}^{2} -5,$</p>
+<p>$g_2\left (x_1,x_2 \right )=x_1+2x_2-4,$</p>
+<p>$g_3\left (x_1,x_2 \right )=-x_1$ and $g_4\left ( x_1, x_2 \right )= -x_2$.</p>
+<p>Thus the above constraints can be written as &minus;</p>
+<p>$g_1\left (x_1,x_2 \right )\leq 0,$</p>
+<p>$g_2\left (x_1,x_2 \right )\leq 0,$</p>
+<p>$g_3\left (x_1,x_2 \right )\leq 0$ and</p>
+<p>$g_4\left (x_1,x_2 \right )\leq 0$ Thus, $I = \left \{1,2 \right \}$ therefore, $u_3=0,u_4=0$</p>
+<p>$\bigtriangledown f \left (\hat{x} \right )=\left (2,-2 \right ),\bigtriangledown g_1\left (\hat{x} \right )=\left (4,2 \right )$ and $\bigtriangledown g_2\left (\hat{x} \right )=\left (1,2 \right )$</p>
+<p>Thus putting these values in the first condition of Fritz-John conditions, we get &minus;</p>
+<p>$u_0=\frac{3}{2} u_2, \:\:u_1= \frac{1}{2}u_2,$ and let $u_2=1$, therefore $u_0= \frac{3}{2},\:\:u_1= \frac{1}{2}$</p>
+<p>Thus Fritz John conditions are satisfied.</p>
+</li>
+<li><p>$min f\left (x_1,x_2\right )=-x_1$.</p>
+<p>such that $x_2-\left (1-x_1\right )^3 \leq 0$,</p>
+<p>$-x_2 \leq 0$ and $\hat{x}=\left (1,0\right )$</p>
+<p>Let $g_1\left (x_1,x_2 \right )=x_2-\left (1-x_1\right )^3$,</p>
+<p>$g_2\left (x_1,x_2 \right )=-x_2$</p>
+<p>Thus the above constraints can be wriiten as &minus;</p>
+<p>$g_1\left (x_1,x_2 \right )\leq 0,$</p>
+<p>$g_2\left (x_1,x_2 \right )\leq 0,$</p>
+<p>Thus, $I=\left \{1,2  \right \}$</p>
+<p>$\bigtriangledown f\left (\hat{x} \right )=\left (-1,0\right )$</p>
+<p>$\bigtriangledown g_1 \left (\hat{x} \right )=\left (0,1\right )$ and $g_2 \left (\hat{x} \right )=\left (0, -1 \right )$</p>
+<p>Thus putting these values in the first condition of Fritz-John conditions, we get &minus;</p>
+<p>$u_0=0,\:\: u_1=u_2=a>0$</p>
+<p>Thus Fritz John conditions are satisfied.</p>
+</li>
+</ul>
+<h1>Karush-Kuhn-Tucker Optimality Necessary Conditions</h1>
+<p>Consider the problem &minus;</p>
+<p>$min \:f\left ( x \right )$ such that $x \in X$, where X is an open set in $\mathbb{R}^n$ and $g_i \left ( x \right )\leq 0, i=1, 2,...,m$</p>
+<p>Let $S=\left \{ x \in X:g_i\left ( x \right )\leq 0, \forall i \right \}$</p>
+<p>Let $\hat{x} \in S$ and let $f$ and $g_i,i \in I$ are differentiable at $\hat{x}$ and $g_i, i \in J$ are continuous at $\hat{x}$. Furthermore, $\bigtriangledown g_i\left ( \hat{x} \right), i \in I$ are linearly independent. If $\hat{x}$ solves the above problem locally, then there exists $u_i,i \in I$ such that</p>
+<p>$\bigtriangledown f\left ( x\right)+\displaystyle\sum\limits_{i\in I} u_i \bigtriangledown g_i\left ( \hat{x} \right)=0$, $\:\:u_i \geq 0, i \in I$</p>
+<p>If $g_i,i \in J$ are also differentiable at $\hat{x}$. then $\hat{x}$, then</p>
+<p>$\bigtriangledown f\left ( \hat{x}\right)+\displaystyle\sum\limits_{i= 1}^m u_i \bigtriangledown g_i\left ( \hat{x} \right)=0$</p>
+<p>$u_ig_i\left ( \hat{x} \right)=0, \forall i=1,2,...,m$</p>
+<p>$u_i \geq 0 \forall i=1,2,...,m$</p>
+<h2>Example</h2>
+<p>Consider the following problem &minus;</p>
+<p>$min \:f\left ( x_1,x_2 \right )=\left ( x_1-3\right )^2+\left ( x_2-2\right )^2$</p>
+<p>such that $x_{1}^{2}+x_{2}^{2}\leq 5$,</p>
+<p>$x_1,2x_2 \geq 0$ and $\hat{x}=\left ( 2,1 \right )$</p>
+<p>Let $g_1\left ( x_1, x_2 \right)=x_{1}^{2}+x_{2}^{2}-5$,</p>
+<p>$g_2\left ( x_1, x_2 \right)=x_{1}+2x_2-4$</p>
+<p>$g_3\left ( x_1, x_2 \right)=-x_{1}$ and $g_4\left ( x_1,x_2 \right )=-x_2$</p>
+<p>Thus the above constraints can be written as &minus;</p>
+<p>$g_1 \left ( x_1,x_2 \right)\leq 0, g_2 \left ( x_1,x_2 \right) \leq 0$</p>
+<p>$g_3 \left ( x_1,x_2 \right)\leq 0,$ and  $g_4 \left ( x_1,x_2 \right) \leq 0$ Thus, $I=\left \{ 1,2 \right \}$ therefore, $ u_3=0,\:\: u_4=0$</p>
+<p>$\bigtriangledown f \left ( \hat{x} \right)=\left ( 2,-2 \right), \bigtriangledown g_1 \left ( \hat{x} \right)= \left ( 4,2 \right)$ and</p>
+<p>$\bigtriangledown g_2\left ( \hat{x} \right ) =\left ( 1,2 \right )$</p>
+<p>Thus putting these values in the first condition of Karush-Kuhn-Tucker conditions, we get &minus;</p>
+<p>$u_1=\frac{1}{3}$ and $u_2=\frac{2}{3}$</p>
+<p>Thus Karush-Kuhn-Tucker conditions are satisfied.</p>
+<h1>Algorithms for Convex Problem</h1>
+<h2>Method of Steepest Descent</h2>
+<p>This method is also called Gradient method or Cauchy's method. This method involves the following terminologies &minus;</p>
+<p>$$x_{k+1}=x_k+\alpha_kd_k$$</p>
+<p>$d_k= - \bigtriangledown f\left ( x_k \right )$ or $ d_k= -\frac{\bigtriangledown f\left ( x_k \right )}{\left \| \bigtriangledown f\left ( x_k \right ) \right \|}$</p>
+<p>Let $\phi \left (\alpha \right )=f\left ( x_k +\alpha d_k\right )$</p>
+<p>By differentiating $\phi$ and equating it to zero, we can get $\alpha$.</p>
+<p>So the algorithm goes as follows &minus;</p>
+<ul class="list">
+<li><p>Initialize $x_0$,$\varepsilon_1$,$\varepsilon_2$ and set $k=0$.</p></li>
+<li><p>Set $d_k=-\bigtriangledown f\left ( x_k \right ) $or $d_k=-\frac{\bigtriangledown f\left (x_k \right )}{\left \|\bigtriangledown f\left (x_k \right )  \right \|}$.</p></li>
+<li><p>find $\alpha_k$ such that it minimizes $\phi\left ( \alpha \right )=f\left ( x_k+\alpha d_k \right )$.</p></li>
+<li><p>Set $x_{k+1}=x_k+\alpha_kd_k$.</p></li>
+<li><p>If $\left \| x_{k+1-x_k} \right \| <\varepsilon_1$ or  $\left \| \bigtriangledown f\left ( x_{k+1} \right ) \right \| \leq \varepsilon_2$, go to step 6, otherwise set $k=k+1$ and go to step 2.</p></li>
+<li><p>The optimal solution is $\hat{x}=x_{k+1}$.</p></li>
+</ul>
+<h3>Newton Method</h3>
+<p>Newton Method works on the following principle &minus;</p>
+<p>$f\left ( x \right )=y\left ( x \right )=f\left ( x_k \right )+\left ( x-x_k \right )^T \bigtriangledown f\left ( x_k \right )+\frac{1}{2}\left ( x-x_k \right )^T H\left ( x_k \right )\left ( x-x_k \right )$</p>
+<p>$\bigtriangledown y\left ( x \right )=\bigtriangledown f\left ( x_k \right )+H\left ( x_k \right )\left ( x-x_k \right )$</p>
+<p>At $x_{k+1}, \bigtriangledown y\left ( x_{k+1} \right )=\bigtriangledown f\left ( x_k \right )+H\left ( x_k \right )\left ( x_{k+1}-x_k \right )$</p>
+<p>For $x_{k+1}$ to be optimal solution $\bigtriangledown y\left ( x_k+1 \right )=0$</p>
+<p>Thus, $x_{k+1}=x_k-H\left ( x_k \right )^{-1} \bigtriangledown f\left ( x_k \right )$</p>
+<p>Here $H\left ( x_k \right )$ should be non-singular.</p>
+<p>Hence the algorithm goes as follows &minus;</p>
+<p><b>Step 1</b> &minus; Initialize $x_0,\varepsilon$ and set $k=0$.</p>
+<p><b>Step 2</b> &minus; find $H\left ( x_k \right ) \bigtriangledown f\left ( x_k \right )$.</p>
+<p><b>Step 3</b> &minus; Solve for the linear system $H\left ( x_k \right )h\left ( x_k \right )=\bigtriangledown f\left ( x_k \right )$ for $h\left ( x_k \right )$.</p>
+<p><b>Step 4</b> &minus; find $x_{k+1}=x_k-h\left ( x_k \right )$.</p>
+<p><b>Step 5</b> &minus; If $\left \| x_{k+1}-x_k \right \|< \varepsilon$ or $\left \| \bigtriangledown f\left ( x_k \right ) \right \| \leq \varepsilon$  then go to step 6, else set $k=k+1$ and go to step 2.</p>
+<p><b>Step 6</b> &minus; The optimal solution is $\hat{x}=x_{k+1}$.</p>
+<h3>Conjugate Gradient Method</h3>
+<p>This method is used for solving problems of the following types &minus;</p>
+<p>$min f\left ( x \right )=\frac{1}{2}x^T Qx-bx$</p>
+<p>where Q is a positive definite nXn matrix and b is constant.</p>
+<p>Given $x_0,\varepsilon,$ compute $g_0=Qx_0-b$</p>
+<p>Set $d_0=-g_0$ for $k=0,1,2,...,$</p>
+<p>Set $\alpha_k=\frac{g_{k}^{T}g_k}{d_{k}^{T}Q d_k}$</p>
+<p>Compute $x_{k+1}=x_k+\alpha_kd_k$</p>
+<p>Set $g_{k+1}=g_k+\alpha_kd_k$</p>
+<p>Compute $\beta_k=\frac{g_{k}^{T}g_k}{d_{k}^{T}Qd_k}$</p>
+<p>Compute $x_{k+1}=x_k+\alpha_kd_k$</p>
+<p>Set $g_{k+1}=x_k+\alpha_kQd_k$</p>
+<p>Compute $\beta_k=\frac{g_{k+1}^{T}g_{k+1}}{g_{k}^{T}gk}$</p>
+<p>Set $d_{k+1}=-g_{k+1}+\beta_kd_k$.</p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_algorithms_for_convex_problems.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/convex_optimization/convex_optimization_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/convex_optimization/convex_optimization_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:19:38 GMT -->
+</html>

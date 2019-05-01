@@ -1,0 +1,4303 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/erlang/erlang_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:07:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Erlang Quick Guide</title>
+<meta name="description" content="Erlang Quick Guide - Learn Erlang in simple and easy steps starting from Overview, Environment, Basic Syntax, Shell, Data Types, Variables, Operators, Loops, Decision Making, Functions, Modules, Recursion, Numbers, Strings, Lists, File I/O, Atoms, Maps, Tuples, Records, Exceptions, Macros, Header Files, Preprocessors, Pattern Matching, Guards, Bifs, Binaries, funs, Processes, Emails, Databases, Ports, Distributed Programming, Otp, Concurrency, Performance, Drivers, Web Programming." />
+<meta name="keywords" content="Erlang, Tutorial, Overview, Environment, Basic Syntax, Shell, Data Types, Variables, Operators, Loops, Decision Making, Functions, Modules, Recursion, Numbers, Strings, Lists, File I/O, Atoms, Maps, Tuples, Records, Exceptions, Macros, Header Files, Preprocessors, Pattern Matching, Guards, Bifs, Binaries, funs, Processes, Emails, Databases, Ports, Distributed Programming, Otp, Concurrency, Performance, Drivers, Web Programming." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+pre.prettyprint.tryit {min-height:37px; background: #eee url(images/try-it.jpg) top right no-repeat !important}select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #8c002f url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #8c002f !important;}
+.submenu-item{ border-bottom: 2px solid #8c002f !important; border-top: 2px solid #8c002f !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/erlang-mini-logo.jpg" alt="Erlang Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Erlang Tutorial</li>
+<li><a href="index.html">Erlang - Home</a></li>
+<li><a href="erlang_overview.html">Erlang - Overview</a></li>
+<li><a href="erlang_environment.html">Erlang - Environment</a></li>
+<li><a href="erlang_basic_syntax.html">Erlang - Basic Syntax</a></li>
+<li><a href="erlang_shell.html">Erlang - Shell</a></li>
+<li><a href="erlang_data_types.html">Erlang - Data Types</a></li>
+<li><a href="erlang_variables.html">Erlang - Variables</a></li>
+<li><a href="erlang_operators.html">Erlang - Operators</a></li>
+<li><a href="erlang_loops.html">Erlang - Loops</a></li>
+<li><a href="erlang_decision_making.html">Erlang - Decision Making</a></li>
+<li><a href="erlang_functions.html">Erlang - Functions</a></li>
+<li><a href="erlang_modules.html">Erlang - Modules</a></li>
+<li><a href="erlang_recursion.html">Erlang - Recursion</a></li>
+<li><a href="erlang_numbers.html">Erlang - Numbers</a></li>
+<li><a href="erlang_strings.html">Erlang - Strings</a></li>
+<li><a href="erlang_lists.html">Erlang - Lists</a></li>
+<li><a href="erlang_file_input_output.html">Erlang - File I/O</a></li>
+<li><a href="erlang_atoms.html">Erlang - Atoms</a></li>
+<li><a href="erlang_maps.html">Erlang - Maps</a></li>
+<li><a href="erlang_tuples.html">Erlang - Tuples</a></li>
+<li><a href="erlang_records.html">Erlang - Records</a></li>
+<li><a href="erlang_exceptions.html">Erlang - Exceptions</a></li>
+<li><a href="erlang_macros.html">Erlang - Macros</a></li>
+<li><a href="erlang_header_files.html">Erlang - Header Files</a></li>
+<li><a href="erlang_preprocessors.html">Erlang - Preprocessors</a></li>
+<li><a href="erlang_pattern_matching.html">Erlang - Pattern Matching</a></li>
+<li><a href="erlang_guards.html">Erlang - Guards</a></li>
+<li><a href="erlang_bifs.html">Erlang - BIFS</a></li>
+<li><a href="erlang_binaries.html">Erlang - Binaries</a></li>
+<li><a href="erlang_funs.html">Erlang - Funs</a></li>
+<li><a href="erlang_processes.html">Erlang - Processes</a></li>
+<li><a href="erlang_email.html">Erlang - Emails</a></li>
+<li><a href="erlang_databases.html">Erlang - Databases</a></li>
+<li><a href="erlang_ports.html">Erlang - Ports</a></li>
+<li><a href="erlang_distributed_programming.html">Erlang - Distributed Programming</a></li>
+<li><a href="erlang_otp.html">Erlang - OTP</a></li>
+<li><a href="erlang_concurrency.html">Erlang - Concurrency</a></li>
+<li><a href="erlang_performance.html">Erlang - Performance</a></li>
+<li><a href="erlang_drivers.html">Erlang - Drivers</a></li>
+<li><a href="erlang_web_programming.html">Erlang - Web Programming</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Erlang Useful Resources</li>
+<li><a href="erlang_quick_guide.html">Erlang - Quick Guide</a></li>
+<li><a href="erlang_useful_resources.html">Erlang - Useful Resources</a></li>
+<li><a href="erlang_discussion.html">Erlang - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Erlang - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="erlang_web_programming.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="erlang_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Erlang - Overview</h1>
+<p>Erlang is a functional programming language which also has a runtime environment. It was built in such a way that it had integrated support for concurrency, distribution and fault tolerance. Erlang was originally developed to be used in several large telecommunication systems from Ericsson.</p>
+<p>The first version of Erlang was developed by Joe Armstrong, Robert Virding and Mike Williams in 1986. It was originally a proprietary language within Ericsson. It was later released as an open source language in year 1998. Erlang, along with OTP, a collection of middleware and libraries in Erlang, are now supported and maintained by the OTP product unit at Ericsson and widely referred to as <b>Erlang/OTP</b>.</p>
+<h2>Why Erlang?</h2>
+<p>Erlang should be used to develop your application, if you have the following requirements &minus;</p>
+<ul class="list">
+<li><p>The application needs to handle a large number of concurrent activities.</p></li>
+<li><p>It should be easily distributable over a network of computers.</p></li>
+<li><p>There should be a facility to make the application fault-tolerant to both software and hardware errors.</p></li>
+<li><p>The application should be scalable. This means that it should have the ability to span across multiple servers with little or no change.</p></li>
+<li><p>It should be easily upgradable and reconfigurable without having to stop and restart the application itself.</p></li>
+<li><p>The application should be responsive to users within certain strict timeframes.</p></li>
+</ul>
+<p>The official website for Erlang is <a target="_blank" rel="nofollow" href="http://www.erlang.org/">http://www.erlang.org/</a></p>
+<img src="images/erlang_official_website.jpg" alt="Erlang Official Website" />
+<h1>Erlang - Environment</h1>
+<blockquote>
+<h2>Try it Option Online</h2>
+<p>You really do not need to set up your own environment to start learning Erlang programming language. Reason is very simple, we have already set up Erlang Programming environment online, so that you can compile and execute all the available examples online at the same time when you are doing your theory work. This gives you confidence in what you are reading and to check the result with different options. Feel free to modify any example and execute it online.</p>
+<p>Try the following example using our online compiler option available at <a rel="nofollow" target="_blank" href="../codingground.html">CodingGround</a></p>
+<pre class="prettyprint notranslate tryit">
+% hello world program
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("Hello, world!\n").
+</pre>
+<p>For most of the examples given in this tutorial, you will find <b>Try it</b> option in our website code sections at the top right corner that will take you to the online compiler. So just make use of it and enjoy your learning.</p>
+</blockquote>
+<p>Now before you can start working on Erlang, you need to ensure that you have a fully functional version of Erlang running on your system. This section will look into the installation of Erlang and its subsequent configuration on a windows machine to get started with Erlang.</p>
+<p>Ensure that the following system requirements are met before proceeding with the installation.</p>
+<p><b>System Requirements</b></p>
+<table class="table table-bordered">
+<tr>
+<td style="width:34%">Memory</td>
+<td>2 GB RAM (recommended)</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; width:34%">Disk Space</td>
+<td>No minimum requirement. Preferably to have enough storage to store the applications which will be created using Erlang.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle; width:34%">Operating System Version</td>
+<td>Erlang can be installed on Windows, Ubuntu/Debian, Mac OS X.</td>
+</tr>
+</table>
+<h2>Downloading Erlang</h2>
+<p>To download Erlang, one must go to the following url &minus; <a target="_blank" rel="nofollow" href="http://www.erlang.org/downloads">http://www.erlang.org/downloads</a></p>
+<p>This page has a variety of downloads and also the steps required to download and install the language on Linux and Mac platforms.</p>
+<img src="images/erlang_download.jpg" alt="Erlang Download" />
+<p>Click on the ‘OTP 18.3 Windows 32-bit Binary File’ to begin the download of the Erlang Windows Installation file.</p>
+<h2>Erlang Installation</h2>
+<p>The following steps detail how Erlang can be installed on Windows &minus;</p>
+<p><b>Step 1</b> &minus; Launch the Installer downloaded in the earlier section. After the installer starts, click Run.</p>
+<img src="images/erlang_installation.jpg" alt="Erlang Installation" />
+<p><b>Step 2</b> &minus; Click Next on the following screen to accept the default components, which will be installed.</p>
+<img src="images/select_components.jpg" alt="Select Components" />
+<p><b>Step 3</b> &minus; Accept the default installation path and click Next.</p>
+<img src="images/installation_path.jpg" alt="Installation Path" />
+<p><b>Step 4</b> &minus; Accept the default Start Menu item, which will be created and click Next.</p>
+<img src="images/start_menu_item.jpg" alt="Start Menu Item" />
+<p><b>Step 5</b> &minus; After the installation is complete, click Close to complete the installation.</p>
+<img src="images/installation_completed.jpg" alt="Installation Completed" />
+<h2>Erlang Configuration</h2>
+<p>After the installation is complete the following configuration needs to be carried out to ensure that Erlang starts working on the system.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">OS</th>
+<th style="text-align:center;">Output</th>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Windows</td>
+<td>Append the String; C:\Program Files(x86)\erl7.2.1\bin OR C:\Program Files\erl7.2.1\bin to the end of the system variable PATH.</td>
+</tr>
+</table>
+<p>If you now open the command prompt and type <b>erl</b>, you should be able to get the erl command prompt.</p>
+<img src="images/erlang_configuration.jpg" alt="Erlang Configuration" />
+<p>Congratulations, you now have erl successfully configured on your laptop.</p>
+<h2>Installation of Plugin-ins on Popular IDE’s</h2>
+<p>Erlang as a programming language is also available in popular IDE’s such as <b>Eclipse and IntelliJ</b>. Let’s look at how we can get the required plugin’s in these IDE’s so that you have more choices in working with Erlang.</p>
+<h3>Installation in Eclipse</h3>
+<p><b>Step 1</b> &minus; Open Eclipse and click the Menu item, <b>Help &rarr; Install New Software</b>.</p>
+<img src="images/installation_in_eclipse.jpg" alt="Installation in Eclipse" />
+<p><b>Step 2</b> &minus; Enter the Work with link as <a target="_blank" rel="nofollow" href="http://download.erlide.org/update/">http://download.erlide.org/update</a></p>
+<p>Then click Add.</p>
+<img src="images/enter_work.jpg" alt="Enter Work" />
+<p><b>Step 3</b> &minus; You will then be prompted to enter a Name for the plugin, enter the name as <b>Erlide</b>. Click Ok.</p>
+<img src="images/enter_plugin_name.jpg" alt="Enter Plugin Name" />
+<p><b>Step 4</b> &minus; Eclipse will then scan the link provided and get the required plugins. Check the plugins and click Next.</p>
+<img src="images/get_required_plugin.jpg" alt="Get Required Plugin" />
+<p><b>Step 5</b> &minus; In the next dialog box, Eclipse will show all the components which will be installed. Click Next.</p>
+<img src="images/installed_components.jpg" alt="Installed Components" />
+<p><b>Step 6</b> &minus; In the next dialog box, Eclipse will just ask to review the components being installed. Click Next.</p>
+<img src="images/review_installed_components.jpg" alt="Review Installed Components" />
+<p><b>Step 7</b> &minus; In the next dialog box, you just need to accept the license agreement. Finally, click the Finish button.</p>
+<img src="images/accept_license_agreement.jpg" alt="Accept License Agreement" />
+<p>The installation will then begin, and once completed, it will prompt you to restart Eclipse.</p>
+<p>Once Eclipse is restarted, when you create a project, you will be able to see Erlang as an option as well.</p>
+<img src="images/erlang_option.jpg" alt="Erlang Option" />
+<h3>Installation in IntelliJ</h3>
+<p>Please follow the subsequent steps to install IntelliJ in your computer.</p>
+<p><b>Step 1</b> &minus; Open IntelliJ and click Configure &rarr; Plugins.</p>
+<img src="images/intellij.jpg" alt="IntelliJ" />
+<p><b>Step 2</b> &minus; Type Erlang in the search box. You will get Erlang plugin on the right hand side of the screen. Click the Install button.</p>
+<img src="images/erlang_plugin.jpg" alt="Erlang Plugin" />
+<p><b>Step 3</b> &minus; After the Erlang plugin is installed, you will be prompted to restart the IDE.</p>
+<img src="images/restart_ide.jpg" alt="Restart IDE" />
+<p>When you restart the IDE and try to create a new project, you will see the option to create an Erlang project.</p>
+<img src="images/erlang_project_option.jpg" alt="Erlang Project Option" />
+<h1>Erlang - Basic Syntax</h1>
+<p>In order to understand the basic syntax of Erlang, let’s first look at a simple <b>Hello World</b> program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+% hello world program
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("Hello, world!\n").
+</pre>
+<p>The following things need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>The % sign is used to add comments to the program.</p></li>
+<li><p>The module statement is like adding a namespace as in any programming language. So over here, we are mentioning that this code will part of a module called <b>helloworld</b>.</p></li>
+<li><p>The export function is used so that any function defined within the program can be used. We are defining a function called start and in order to use the start function, we have to use the export statement. The <b>/0</b> means that our function ‘start’ accepts 0 parameters.</p></li>
+<li><p>We finally define our start function. Here we use another module called <b>io</b> which has all the required Input Output functions in Erlang. We used the <b>fwrite</b> function to output “Hello World” to the console.</p></li>
+</ul>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello, world!
+</pre>
+<h2>General Form of a Statement</h2>
+<p>In Erlang, you have seen that there are different symbols used in Erlang language. Let’s go through what we have seen from a simple Hello World program &minus;</p>
+<ul class="list">
+<li><p>The hyphen symbol <b>(–)</b> is generally used along with the module, import and export statement. The hyphen symbol is used to give meaning to each statement accordingly. So examples from the Hello world program are shown in the following program &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+-module(helloworld).
+-export([start/0]).
+</pre>
+<p>Each statement is delimited with the dot <b>(.)</b> symbol. Each statement in Erlang needs to end with this delimiter. An example from the Hello world program is as shown in the following program &minus;</p>
+<pre class="result notranslate">
+io:fwrite("Hello, world!\n").
+</pre>
+<ul class="list">
+<li><p>The slash <b>(/)</b> symbol is used along with the function to define the number of parameters which is accepted by the function.</p></li>
+</ul>
+<pre class="result notranslate">
+-export([start/0]).
+</pre>
+<h2>Modules</h2>
+<p>In Erlang, all the code is divided into modules. A module consists of a sequence of attributes and function declarations. It is just like a concept of a namespace in other programming languages which is used to logically separate different units of code.</p>
+<h3>Defining a module</h3>
+<p>A module is defined with the module identifier. The general syntax and example is as follows.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+-module(ModuleName)
+</pre>
+<p>The <b>ModuleName</b> needs to be same as the file name minus the extension <b>.erl</b>. Otherwise code loading will not work as intended.</p>
+<h3>Example</h3>
+<pre class="result notranslate">
+-module(helloworld)
+</pre>
+<p>These Modules will be covered in detail in the ensuing chapters, this was just to get you at a basic understanding of how a module should be defined.</p>
+<h2>Import Statement in Erlang</h2>
+<p>In Erlang, if one wants to use the functionality of an existing Erlang module, one can use the import statement. The general form of the import statement is depicted in the following program &minus;</p>
+<h3>Example</h3>
+<pre class="result notranslate">
+-import (modulename, [functionname/parameter]).
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>Modulename</b> &minus; This is the name of the module which needs to be imported.</p></li>
+<li><p><b>functionname/parameter</b> &minus; The function in the module which needs to be imported.</p></li>
+</ul>
+<p>Let’s change the way we write our hello world program to use an import statement. The example would be as shown in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+% hello world program
+-module(helloworld).
+-import(io,[fwrite/1]).
+-export([start/0]).
+
+start() -&gt;
+   fwrite("Hello, world!\n").
+</pre>
+<p>In the above code, we are using the import keyword to import the library ‘io’ and specifically the <b>fwrite</b> function. So now whenever we invoke the fwrite function, we don’t have to mention the <b>io</b> module name everywhere.</p>
+<h2>Keywords in Erlang</h2>
+<p>A Keyword is a reserved word in Erlang which should not be used for any different purposes other than the purpose which it has been intended for. Following are the list of keywords in Erlang.</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<td>after</td>
+<td>and</td>
+<td>andalso</td>
+<td>band</td>
+</tr>
+<tr>
+<td>begin</td>
+<td>bnot</td>
+<td>bor</td>
+<td>bsl</td>
+</tr>
+<tr>
+<td>bsr</td>
+<td>bxor</td>
+<td>case</td>
+<td>catch</td>
+</tr>
+<tr>
+<td>cond</td>
+<td>div</td>
+<td>end</td>
+<td>fun</td>
+</tr>
+<tr>
+<td>if</td>
+<td>let</td>
+<td>not</td>
+<td>of</td>
+</tr>
+<tr>
+<td>or</td>
+<td>orelse</td>
+<td>receive</td>
+<td>rem</td>
+</tr>
+<tr>
+<td>try</td>
+<td>when</td>
+<td>xor</td>
+<td></td>
+</tr>
+</table>
+<h2>Comments in Erlang</h2>
+<p>Comments are used to document your code. Single line comments are identified by using the <b>%</b> symbol at any position in the line. Following is an example for the same &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+% hello world program
+-module(helloworld).
+% import function used to import the io module
+-import(io,[fwrite/1]).
+% export function used to ensure the start function can be accessed.
+-export([start/0]).
+
+start() -&gt;
+   fwrite("Hello, world!\n").
+</pre>
+<h1>Erlang - Shell</h1>
+<p>The Erlang shell is used for testing of expressions. Hence, testing can be carried out in the shell very easily before it actually gets tested in the application itself.</p>
+<p>The following example showcases how the addition expression can be used in the shell. What needs to be noted here is that the expression needs to end with the dot (.) delimiter.</p>
+<img src="images/shell.jpg" alt="Shell" />
+<p>After the command is executed, the shell prints out another prompt, this time for Command Number 2 (because the command number increases each time a new command is entered).</p>
+<p>The following functions are the most common one’s used in the Erlang shell.</p>
+<ul class="list">
+<li><p><b>b()</b> &minus; Prints the current variable bindings.</p></li>
+<li><p><b>Syntax</b> &minus; b().</p></li>
+<li><p><b>For example</b> &minus; Following is an example of how the function is used. First a variable called <b>Str</b> is defined, which has the value <b>abcd</b>. Then <b>b()</b> is used to display all the binded variables.</p></li>
+</ul>
+<img src="images/erlang_shell_b_function.jpg" alt="Erlang Shell b()" />
+<ul class="list">
+<li><p><b>f()</b> &minus; Removes all current variable bindings.</p></li>
+<li><p><b>Syntax</b> &minus; f().</p></li>
+<li><p><b>For example</b> &minus; Following is an example of how the function is used. First a variable called Str is defined which has the value abcd. The f() is then used to remove the Str variable binding. The b() is then called to ensure the binding has been successfully removed.</p>
+</li>
+</ul>
+<img src="images/erlang_shell_f_function.jpg" alt="Erlang Shell f()" />
+<ul class="list">
+<li><p><b>f(x)</b> &minus; Removes the binding for a particular variable.</p></li>
+<li><p><b>Syntax</b> &minus; f(x). Where, x – is the variable for which the binding needs to be removed.</p></li>
+<li><p><b>For example</b> &minus; Following is an example of how the function is used. First a variable called Str and Str1 are defined. The f(Str) is then used to remove the Str variable binding. The b() is then called to ensure the binding has been successfully removed.</p>
+</li>
+</ul>
+<img src="images/erlang_shell_fofx_function.jpg" alt="Erlang Shell f(x)" />
+<ul class="list">
+<li><p><b>h()</b> &minus; Prints the history list of all the commands executed in the shell.</p></li>
+<li><p><b>Syntax</b> &minus; h().</p></li>
+<li><p><b>For example</b> &minus; An example of the h() command, which prints the history of commands executed in the shell is shown in the following screenshot.</p>
+</li>
+</ul>
+<img src="images/erlang_shell_h_function.jpg" alt="Erlang Shell h()" />
+<ul class="list">
+<li><p><b>history(N)</b> &minus; Sets the number of previous commands to keep in the history list to N. The previous number is returned. The default number is 20.</p></li>
+<li><p><b>Syntax</b> &minus; history(N). Where, N – is the number to which the command history list needs to be limited to.</p></li>
+<li><p><b>For example</b> &minus; An example of the history(N) command is shown in the following screenshot.</p>
+</li>
+</ul>
+<img src="images/erlang_shell_historyofn_function.jpg" alt="Erlang Shell history(N)" />
+<ul class="list">
+<li><p><b>e(N)</b> &minus; Repeats the command N, if N is positive. If it is negative, the Nth previous command is repeated (i.e., e(-1) repeats the previous command).</p></li>
+<li><p><b>Syntax</b> &minus; e(N). Where, N –is the command at the Nth position in the list.</p></li>
+<li><p><b>For example</b> &minus; An example of the e(N) command is shown below. Since we have executed the e(-1) command, it will execute the previous command which was history(5).</p>
+</li>
+</ul>
+<img src="images/erlang_shell_eofn_function.jpg" alt="Erlang Shell e(N)" />
+<h1>Erlang - Data Types</h1>
+<p>In any programming language, you need to use several variables to store various types of information. Variables are nothing but reserved memory locations to store values. This means that when you create a variable you reserve some space in the memory to store the value associated with that variable.</p>
+<p>You may like to store information of various data types like string, character, wide character, integer, floating point, Boolean, etc. Based on the data type of a variable, the operating system allocates memory and decides what can be stored in the reserved memory.</p>
+<h2>Built-in Data Types</h2>
+<p>Erlang offers a wide variety of built-in data types. Following is a list of data types which are defined in Erlang &minus;</p>
+<ul class="list">
+<li><p><b>Number</b> &minus; In Erlang, there are 2 types of numeric literals which are integers and floats.</p></li>
+<li><p><b>Atom</b> &minus; An atom is a literal, a constant with name. An atom is to be enclosed in single quotes (') if it does not begin with a lower-case letter or if it contains other characters than alphanumeric characters, underscore (_), or &commat;.</p></li>
+<li><p><b>Boolean</b> &minus; Boolean data types in Erlang are the two reserved atoms: true and false.</p></li>
+<li><p><b>Bit String</b> &minus; A bit string is used to store an area of un-typed memory.</p></li>
+<li><p><b>Tuple</b> &minus; A tuple is a compound data type with a fixed number of terms. Each Term in the tuple is called as an element. The number of elements is said to be the size of the tuple.</p></li>
+<li><p><b>Map</b> &minus; A map is a compound data type with a variable number of key-value associations. Each key-value association in the map is called an association pair. The key and value parts of the pair are called elements. The number of association pairs is said to be the size of the map.</p></li>
+<li><p><b>List</b> &minus; A list is a compound data type with a variable number of terms. Each term in the list is called an element. The number of elements is said to be the length of the list.</p></li>
+</ul>
+<p><b>Note</b> &minus; You will be surprised to see that you cannot see the String type anywhere in the list above. That’s because there is no string data type exclusively defined in Erlang. But we will see how we can work with strings in a subsequent chapter.</p>
+<p>Following are the examples of how each data type can be used. Again each data type will be discussed in detail in the ensuing chapters. This is just to get you acquainted with a brief description of the above-mentioned data types.</p>
+<h3>Number</h3>
+<p>An example of how the number data type can be used is shown in the following program. This program shows the addition of 2 Integers.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld).
+-export([start/0]).
+
+start() -&gt;
+   io:fwrite("~w",[1&plus;1]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+2
+</pre>
+<h3>Atom</h3>
+<p>Atoms should begin with a lowercase letter and can contain lowercase and uppercase characters, digits, underscore <b>(_)</b> and the “at” sign <b>(&commat;)</b>. We can also enclose an atom in single quotes.</p>
+<p>An example of how the atom data type can be used is shown in the following program. In this program, we are creating an atom which is called atom1.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld).
+-export([start/0]).
+
+start() -&gt;
+   io:fwrite(atom1).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+atom1
+</pre>
+<h3>Boolean</h3>
+<p>An example of how the Boolean data type can be used is shown in the following program. This example does a comparison between 2 integers and prints the resultant Boolean to the console.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld).
+-export([start/0]).
+
+start() -&gt;
+   io:fwrite(2 =&lt; 3).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+true
+</pre>
+<h3>Bit String</h3>
+<p>An example of how the Bit String data type can be used is shown in the following program. This program defines a Bit String consisting of 2 bits. The <b>binary_to_list</b> is an inbuilt function defined in Erlang which can be used to convert a Bit String to a list.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld).
+-export([start/0]).
+
+start() -&gt;
+   Bin1 = &lt;&lt;10,20&gt;&gt;,
+   X = binary_to_list(Bin1),
+   io:fwrite("~w",[X]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+[10,20]
+</pre>
+<h3>Tuple</h3>
+<p>An example of how the Tuple data type can be used is shown in the following program.</p>
+<p>Here we are defining a <b>Tuple P</b> which has 3 terms. The <b>tuple_size</b> is an inbuilt function defined in Erlang, which can be used to determine the size of the tuple.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   P = {john,24,{june,25}} , 
+   io:fwrite("~w",[tuple_size(P)]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+3
+</pre>
+<h3>Map</h3>
+<p>An example of how the Map data type can be used is shown in the following program.</p>
+<p>Here we are defining a <b>Map M1</b> which has 2 mappings. The <b>map_size</b> is an inbuilt function defined in Erlang, which can be used to determine the size of the map.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   M1 = #{name=&gt;john,age=&gt;25}, 
+   io:fwrite("~w",[map_size(M1)]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+2
+</pre>
+<h3>List</h3>
+<p>An example of how the List data type can be used is shown in the following program.</p>
+<p>Here we are defining a <b>List L</b> which has 3 items. The length is an inbuilt function defined in Erlang, which can be used to determine the size of the list.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   L = [10,20,30] , 
+   io:fwrite("~w",[length(L)]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+3
+</pre>
+<h1>Erlang - Variables</h1>
+<p>In Erlang, all the variables are bound with the ‘=’ statement. All variables need to start with the upper case character. In other programming languages, the ‘=’ sign is used for the assignment, but not in the case of Erlang. As stated, variables are defined with the use of the ‘=’ statement.</p>
+<p>One key thing to note in Erlang is that variables are immutable, which means that in order for the value of the variable to change, it needs to be destroyed and recreated again.</p>
+<p>The following basic variables in Erlang are explained in the last chapter &minus;</p>
+<ul class="list">
+<li><p><b>Numbers</b> &minus; This is used to represent an integer or a float. An example is 10.</p></li>
+<li><p><b>Boolean</b> &minus; This represents a Boolean value which can either be true or false.</p></li>
+<li><p><b>Bit String</b> &minus; A bit string is used to store an area of un-typed memory. An example is &lt;&lt;40,50&gt;&gt;.</p></li>
+<li><p><b>Tuple</b> &minus; A tuple is a compound data type with a fixed number of terms. An example is {40,50}.</p></li>
+<li><p><b>Map</b> &minus; A map is a compound data type with a variable number of key-value associations. Each key-value association in the map is called an association pair. An example is {type=&gt;person,age=&gt;25}.</p></li>
+<li><p><b>List</b> &minus; A list is a compound data type with a variable number of terms. An example is [40,40].</p></li>
+</ul>
+<h2>Variable Declarations</h2>
+<p>The general syntax of defining a variable is as follows &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+var-name = var-value
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>var-name</b> &minus; This is the name of the variable.</p></li>
+<li><p><b>var-value</b> &minus; This is the value bound to the variable.</p></li>
+</ul>
+<p>Following is an example of variable declaration &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notraslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   X = 40, 
+   Y = 50, 
+   Result = X + Y, 
+   io:fwrite("~w",[Result]).
+</pre>
+<p>In the above example, we have 2 variables, one is X which is bound to the value 40 and the next is Y which is bound to the value of 50. Another variable called Result is bound to the addition of X and Y.</p>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notraslate">
+90
+</pre>
+<h2>Naming Variables</h2>
+<p>As discussed, variable names have to start with uppercase. Let’s take an example of a variable declared in lower case.</p>
+<h3>Example</h3>
+<pre class="prettyprint notraslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   X = 40, 
+   Y = 50, 
+   result = X + Y, 
+   io:fwrite("~w",[Result]).
+</pre>
+<p>If you try to compile the above program, you will get the following compile time error.</p>
+<h3>Output</h3>
+<pre class="result notraslate">
+helloworld.erl:8: variable 'Result' is unbound
+</pre>
+<p>Secondly, all variables can only be assigned once. Let’s take an example of assigning a variable more than once.</p>
+<h3>Example</h3>
+<pre class="prettyprint notraslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   X = 40, 
+   Y = 50, 
+   X = 60, 
+   io:fwrite("~w",[X]).
+</pre>
+<p>If you try to compile the above program, you will receive the following compile time error.</p>
+<h3>Output</h3>
+<pre class="result notraslate">
+helloworld.erl:6: Warning: variable 'Y' is unused
+helloworld.erl:7: Warning: no clause will ever match
+helloworld.erl:7: Warning: the guard for this clause evaluates to 'false'
+</pre>
+<h2>Printing Variables</h2>
+<p>In this section we will discuss how to use the various functions of printing variables.</p>
+<h3>Using the io:fwrite function</h3>
+<p>You would have seen this (io:fwrite) used in all of the above programs. The <b>fwrite</b> function is part of the ‘io’ module or Erlang, which can be used to output the value of variables in the program.</p>
+<p>The following example shows a few more parameters which can be used with the fwrite statement.</p>
+<h3>Example</h3>
+<pre class="prettyprint notraslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   X = 40.00, 
+   Y = 50.00, 
+   io:fwrite("~f~n",[X]), 
+   io:fwrite("~e",[Y]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notraslate">
+40.000000
+5.00000e+1
+</pre>
+<p>The following pointers should be noted about the above program.</p>
+<ul class="list">
+<li><p><b>&#126;</b> &minus; This character symbolizes that some formatting needs to be carried out for the output.</p></li>
+<li><p><b>&#126;f</b> &minus; The argument is a float which is written as [-]ddd.ddd, where the precision is the number of digits after the decimal point. The default precision is 6 and it cannot be less than 1.</p></li>
+<li><p><b>&#126;n</b> &minus; This is to <b>println</b> to a new line.</p></li>
+<li><p><b>&#126;e</b> &minus; The argument is a float which is written as [-]d.ddde&plus;-ddd, where the precision is the number of digits written. The default precision is 6 and it cannot be less than 2.</p></li>
+</ul>
+<h1>Erlang - Operators</h1>
+<p>An operator is a symbol that tells the compiler to perform specific mathematical or logical manipulations.</p>
+<p>Erlang has the following type of operators &minus;</p>
+<ul class="list">
+<li>Arithmetic operators</li>
+<li>Relational operators</li>
+<li>Logical operators</li>
+<li>Bitwise operators</li>
+</ul>
+<h2>Arithmetic Operators</h2>
+<p>Erlang language supports the normal Arithmetic operators as any the language. Following are the Arithmetic operators available in Erlang.</p>
+<p><a href="erlang_arithmatic_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operator</th>
+<th style="text-align:center;">Description</th>
+<th style="text-align:center;width:25%;">Example</th>
+</tr>
+<tr>
+<td style="text-align:center;">&plus;</td>
+<td>Addition of two operands</td>
+<td>1 &plus; 2 will give 3</td>
+</tr>
+<tr>
+<td style="text-align:center;">−</td>
+<td>Subtracts second operand from the first</td>
+<td>1 - 2 will give -1</td>
+</tr>
+<tr>
+<td style="text-align:center;">*</td>
+<td>Multiplication of both operands</td>
+<td>2 * 2 will give 4</td>
+</tr>
+<tr>
+<td style="text-align:center;">/</td>
+<td>Division of numerator by denominator</td>
+<td>2 / 2 will give 1</td>
+</tr>
+<tr>
+<td style="text-align:center;">rem</td>
+<td>Remainder of dividing the first number by the second</td>
+<td>3 rem 2 will give 1</td>
+</tr>
+<tr>
+<td style="text-align:center;">div</td>
+<td>The div component will perform the division and return the integer component.</td>
+<td>3 div 2 will give 1</td>
+</tr>
+</table>
+<h2>Relational Operators</h2>
+<p>The Relational Operators allow the comparison of objects. Following are the relational operators available in Erlang.</p>
+<p><a href="erlang_relational_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operator</th>
+<th style="text-align:center;">Description</th>
+<th style="text-align:center;width:28%;">Example</th>
+</tr>
+<tr>
+<td style="text-align:center;">==</td>
+<td>Tests the equality between two objects</td>
+<td>2 = 2 will give true</td>
+</tr>
+<tr>
+<td style="text-align:center;">/=</td>
+<td>Tests the difference between two objects</td>
+<td>3 /= 2 will give true</td>
+</tr>
+<tr>
+<td style="text-align:center;">&lt;</td>
+<td>Checks to see if the left object is less than the right operand.</td>
+<td>2 &lt; 3 will give true</td>
+</tr>
+<tr>
+<td style="text-align:center;">=&lt;</td>
+<td>Checks to see if the left object is less than or equal to the right operand.</td>
+<td>2 =&lt;3 will give true</td>
+</tr>
+<tr>
+<td style="text-align:center;">&gt;</td>
+<td>Checks to see if the left object is greater than the right operand.</td>
+<td>3 &gt; 2 will give true</td>
+</tr>
+<tr>
+<td style="text-align:center;">&gt;=</td>
+<td>Checks to see if the left object is greater than or equal to the right operand.</td>
+<td>3 &gt;= 2 will give true</td>
+</tr>
+</table>
+<h2>Logical Operators</h2>
+<p>These Logical Operators are used to evaluate Boolean expressions. Following are the logical operators available in Erlang.</p>
+<p><a href="erlang_logical_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operator</th>
+<th style="text-align:center;">Description</th>
+<th style="text-align:center;width:34%;">Example</th>
+</tr>
+<tr>
+<td style="text-align:center;">or</td>
+<td>This is the logical “and” operator</td>
+<td>true or true will give true</td>
+</tr>
+<tr>
+<td style="text-align:center;">and</td>
+<td>This is the logical “or” operator</td>
+<td>True and false will give false</td>
+</tr>
+<tr>
+<td style="text-align:center;">not</td>
+<td>This is the logical “not” operator</td>
+<td>not false will give true</td>
+</tr>
+<tr>
+<td style="text-align:center;">xor</td>
+<td>This is the logical exclusive “xor” operator</td>
+<td>True xor false will give true</td>
+</tr>
+</table>
+<h2>Bitwise Operators</h2>
+<p>Erlang provides four bitwise operators. Following are the bitwise operators available in Erlang.</p>
+<p><a href="erlang_bitwise_operators.html">Show Examples</a></p>
+<table class="table table-bordered">
+<tr>
+<th style="width:5%">S.No.</th>
+<th style="text-align:center;">Operator &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">1
+</td>
+<td>
+<p><b>band</b></p>
+<p>This is the bitwise “and” operator</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">2</td>
+<td>
+<p><b>bor</b></p>
+<p>This is the bitwise “or” operator</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">3</td>
+<td>
+<p><b>bxor</b></p>
+<p>This is the bitwise “xor” or Exclusive or operator</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">4</td>
+<td>
+<p><b>bnot</b></p>
+<p>This is the bitwise negation operator</p>
+</td>
+</tr>
+</table>
+<p>Following is the truth table showcasing these operators &minus;</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<th style="text-align:center;width:20%">p</th>
+<th style="text-align:center;width:20%">q</th>
+<th style="text-align:center;width:20%">p &amp; q</th>
+<th style="text-align:center;width:20%">p &#124; q</th>
+<th style="text-align:center;width:20%">p &#94; q</th>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</table>
+<h2>Operator Precedence</h2>
+<p>The following table shows the Operator Precedence for the Erlang operators in order of descending priority together with their associativity. Operator precedence and associativity are used to determine the evaluation order in un-parenthesized expressions.</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<th style="text-align:center;width:50%">Operators</th>
+<th style="text-align:center;width:50%">Associativity</th>
+</tr>
+<tr>
+<td>:</td>
+<td></td>
+</tr>
+<tr>
+<td>#</td>
+<td></td>
+</tr>
+<tr>
+<td>bnot,not</td>
+<td></td>
+</tr>
+<tr>
+<td>/,*,div,rem,band,and</td>
+<td>Left associative</td>
+</tr>
+<tr>
+<td>&plus;,-,bor,bxor,or,xor</td>
+<td>Left associative</td>
+</tr>
+<tr>
+<td>==,/=,=&lt;,&lt;,&gt;=,&gt;</td>
+<td></td>
+</tr>
+</table>
+<h1>Erlang - Loops</h1>
+<p>Erlang is a functional programming language and what needs to be remembered about all functional programming languages is that they don’t offer any constructs for loops. Instead, functional programming depends on a concept called recursion.</p>
+<h2>while Statement Implementation</h2>
+<p>Since there is no direct while statement available in Erlang, one has to use the recursion techniques available in Erlang to carry out a while statement implementation.</p>
+<p>We will try to follow the same implementation of the while loop as is followed in other programming languages. Following is the general flow which will be followed.</p>
+<img src="images/while_statement_implementation.jpg" alt="while Statement Implementation" />
+<p>Let’s look at an example of how we can use recursion to implement the <b>while</b> loop in Erlang.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([while/1,while/2, start/0]). 
+
+while(L) -&gt; while(L,0). 
+while([], Acc) -&gt; Acc;
+
+while([_|T], Acc) -&gt;
+   io:fwrite("~w~n",[Acc]), 
+   while(T,Acc+1). 
+   
+   start() -&gt; 
+   X = [1,2,3,4], 
+   while(X).
+</pre>
+<p>The following key points need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>Define a recursive function called while which would simulate the implementation of our while loop.</p></li>
+<li><p>Input a list of values defined in the variable X to our while function as an example.</p></li>
+<li><p>The while function takes each list value and stores the intermediate value in the variable ‘Acc’.</p></li>
+<li><p>The while loop is then called recursively for each value in the list.</p></li>
+</ul>
+<p>The output of the above code will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+0
+1
+2
+3
+</pre>
+<h2>for Statement</h2>
+<p>Since there is no direct <b>for</b> statement available in Erlang, one has to use the recursion techniques available in Erlang to carry out a <b>for</b> statement implementation.</p>
+<p>We will try to follow the same implementation of the <b>for</b> loop as is followed in other programming languages. Following is the general flow which should be adhered to.</p>
+<img src="images/for_statement.jpg" alt="for Statement" />
+<p>Let’s look at an example of how we can use recursion to implement the <b>for</b> loop in Erlang.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([for/2,start/0]). 
+
+for(0,_) -&gt; 
+   []; 
+   
+   for(N,Term) when N &gt; 0 -&gt; 
+   io:fwrite("Hello~n"), 
+   [Term|for(N-1,Term)]. 
+   
+start() -&gt; 
+   for(5,1).
+</pre>
+<p>The following key points need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>We are defining a recursive function which would simulate the implementation of our <b>for loop</b>.</p></li>
+<li><p>We are using a guard within the ‘for’ function to ensure that the value of N or the limit is a positive value.</p></li>
+<li><p>We recursively call the for function, by reducing the value of N at each recursion.</p></li>
+</ul>
+<p>The output of the above code will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello
+Hello
+Hello
+Hello
+Hello
+</pre>
+<h1>Erlang - Decision Making</h1>
+<p>Decision making structures requires that the programmer should specify one or more conditions to be evaluated or tested by the program, along with a statement or statements to be executed if the condition is determined to be <b>true</b>, and optionally, other statements to be executed if the condition is determined to be <b>false</b>.</p>
+<p>Following is the general form of a typical decision making structure found in most of the programming languages &minus;</p>
+<img src="images/decision_making.jpg" alt="Decision Making" />
+<p>Erlang programming language provides the following types of decision making statements.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:5%;">S.No.</th>
+<th style="text-align:center;">Statement &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><a href="erlang_if_statement.html">If statement</a>
+<p>An <b>if statement</b> consists of a Boolean expression followed by one or more statements.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><a href="erlang_multiple_expression.html">Multiple Expression</a>
+<p>The <b>if</b> expression also allows for multiple expressions to be evaluated at once.</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><a href="erlang_nested_if_statements.html">Nested if Statements</a>
+<p>You can use one <b>if</b> or <b>else if</b> statement inside another <b>if</b> or <b>else if</b> statement(s).</p></td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><a href="erlang_case_statements.html">Case Statements</a>
+<p>It can be used to execute expressions based on the output of the case statement.</p></td>
+</tr>
+</table>
+<h1>Erlang - Functions</h1>
+<p>Erlang is known as a functional programming language, hence you would expect to see a lot of emphasis on how functions work in Erlang. This chapter covers what all can be done with the functions in Erlang.</p>
+<h2>Defining a Function</h2>
+<p>The syntax of a function declaration is as follows &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+FunctionName(Pattern1… PatternN) -&gt;
+Body;
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>FunctionName</b> &minus; The function name is an atom.</p></li>
+<li><p><b>Pattern1… PatternN</b> &minus; Each argument is a pattern. The number of arguments N is the arity of the function. A function is uniquely defined by the module name, function name, and arity. That is, two functions with the same name and in the same module, but with different arities are two different functions.</p></li>
+<li><p><b>Body</b> &minus; A clause body consists of a sequence of expressions separated by comma (,):</p></li>
+</ul>
+<p>The following program is a simple example of the use of functions &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([add/2,start/0]). 
+
+add(X,Y) -&gt; 
+   Z = X+Y, 
+   io:fwrite("~w~n",[Z]). 
+   
+start() -&gt; 
+   add(5,6).
+</pre>
+<p>The following pointers should be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>We are defining two functions, one is called <b>add</b> which takes 2 parameters and the other is the <b>start</b> function.</p></li>
+<li><p>Both functions are defined with the export function. If we don’t do this, we will not be able to use the function.</p></li>
+<li><p>One function can be called inside another. Here we are calling the add function from the start function.</p></li>
+</ul>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+11
+</pre>
+<h2>Anonymous Functions</h2>
+<p>An anonymous function is a function, which has no name associated with it. Erlang has the facility to define anonymous functions. The following program is an example of an anonymous function.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   Fn = fun() -&gt; 
+      io:fwrite("Anonymous Function") end, 
+   Fn().
+</pre>
+<p>The following points need to be noted about the above example &minus;</p>
+<ul class="list">
+<li><p>The anonymous function is defined with the <b>fun()</b> keyword.</p></li>
+<li><p>The Function is assigned to a variable called Fn.</p></li>
+<li><p>The Function is called via the variable name.</p></li>
+</ul>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Anonymous Function
+</pre>
+<h2>Functions with Multiple Arguments</h2>
+<p>Erlang functions can be defined with zero or more parameters. Function overloading is also possible, wherein you can define a function with the same name multiple times, as long as they have different number of parameters.</p>
+<p>In the following example, the function demo is defined with multiple arguments for each function definition.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([add/2,add/3,start/0]). 
+
+add(X,Y) -&gt; 
+   Z = X+Y, 
+   io:fwrite("~w~n",[Z]). 
+   
+add(X,Y,Z) -&gt; 
+   A = X+Y+Z, 
+   io:fwrite("~w~n",[A]). 
+ 
+start() -&gt;
+   add(5,6), 
+   add(5,6,6).
+</pre>
+<p>In the above program, we are defining the add function twice. But the definition of the first add function takes in two parameters and the second one takes in three parameters.</p>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+11
+17
+</pre>
+<h2>Functions with Guard Sequences</h2>
+<p>Functions in Erlang also have the capability of having guard sequences. These are nothing but expressions which only when evaluated to true will cause the function to run.</p>
+<p>The syntax of a function with a guard sequence is shown in the following program.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+FunctionName(Pattern1… PatternN) [when GuardSeq1]->
+Body;
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>FunctionName</b> &minus; The function name is an atom.</p></li>
+<li><p><b>Pattern1… PatternN</b> &minus; Each argument is a pattern. The number of arguments N is the arity of the function. A function is uniquely defined by the module name, function name, and arity. That is, two functions with the same name and in the same module, but with different arities are two different functions.</p></li>
+<li><p><b>Body</b> &minus; A clause body consists of a sequence of expressions which are separated by a comma (,).</p></li>
+<li><p><b>GuardSeq1</b> &minus; This is the expression which gets evaluated when the function is called.</p></li>
+</ul>
+<p>The following program is a simple example of the use of a function with a guard sequence.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([add/1,start/0]). 
+
+add(X) when X&gt;3 -&gt; 
+   io:fwrite("~w~n",[X]). 
+
+start() -&gt; 
+   add(4).
+</pre>
+<p>The output of the above program is &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+4
+</pre>
+<p>If the add function was called as <b>add(3)</b>, the program will result in an error.</p>
+<h1>Erlang - Modules</h1>
+<p>Modules are a bunch of functions regrouped in a single file, under a single name. Additionally, all functions in Erlang must be defined in modules.</p>
+<p>Most of the basic functionality like arithmetic, logic and Boolean operators are already available because the default modules are loaded when a program is run. Every other function defined in a module you will ever use needs to be called with the form <b>Module:Function</b> (Arguments).</p>
+<h2>Defining a Module</h2>
+<p>With a module, you can declare two kinds of things: functions and attributes. Attributes are metadata describing the module itself such as its name, the functions that should be visible to the outside world, the author of the code, and so on. This kind of metadata is useful because it gives hints to the compiler on how it should do its job, and also because it lets people retrieve useful information from compiled code without having to consult the source.</p>
+<p>The syntax of a function declaration is as follows &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+-module(modulename)
+</pre>
+<p>Where, <b>modulename</b> is the name of the module. This has to be the first line of the code in the module.</p>
+<p>The following program shows an example of a module called <b>helloworld</b>.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("Hello World").
+</pre>
+<p>The output of the above program is &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello World
+</pre>
+<h2>Module Attributes</h2>
+<p>A module attribute defines a certain property of a module. A module attribute consists of a tag and a value.</p>
+<p>The general syntax of an attribute is &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+-Tag(Value)
+</pre>
+<p>An example of how the attribute can be used is shown in the following program &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-author("TutorialPoint"). 
+-version("1.0"). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("Hello World").
+</pre>
+<p>The above program defines 2 custom attributes called author and version which contains the program author and program version number respectively.</p>
+<p>The output of the above program is &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello World
+</pre>
+<h2>Pre-built Attributes</h2>
+<p>Erlang has some pre-built attributes which can be attached to modules. Let’s take a look at them.</p>
+<h3>Export</h3>
+<p>The exports attribute will take a list of functions and arity to export for consumption by other modules. It will define the module interface. We have already seen this in all of our previous examples.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+export([FunctionName1/FunctionArity1,.,FunctionNameN/FunctionArityN])
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>FunctionName</b> &minus; This is the name of the function in the program.</p></li>
+<li><p><b>FunctionArity</b> &minus; This is the number of parameters associated with the function.</p></li>
+</ul>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-author("TutorialPoint"). 
+-version("1.0"). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("Hello World").
+</pre>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello World
+</pre>
+<h3>Import</h3>
+<p>The import attribute is used to import functions from another module to use it as local.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+-import (modulename , [functionname/parameter]).
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>Modulename</b> &minus; This is the name of the module which needs to be imported.</p></li>
+<li><p><b>functionname/parameter</b> &minus; the function in the module which needs to be imported.</p></li>
+</ul>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-import(io,[fwrite/1]). 
+-export([start/0]). 
+
+start() -&gt; 
+   fwrite("Hello, world!\n").
+</pre>
+<p>In the above code, we are using the import keyword to import the library ‘io’ and specifically the fwrite function. So, now whenever we invoke the fwrite function, we don’t have to mention the io module name everywhere.</p>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Hello, world! 
+</pre>
+<h1>Erlang - Recursion</h1>
+<p>Recursion is an important part of Erlang. First let’s see how we can implement simple recursion by implementing the factorial program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([fac/1,start/0]). 
+
+fac(N) when N == 0 -&gt; 1; 
+fac(N) when N &gt; 0 -&gt; N*fac(N-1). 
+
+start() -&gt; 
+   X = fac(4), 
+   io:fwrite("~w",[X]).
+</pre>
+<p>The following things need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>We are first defining a function called fac(N).</p></li>
+<li><p>We are able to define the recursive function by calling fac(N) recursively.</p></li>
+</ul>
+<p>The output of the above program is &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+24
+</pre>
+<h2>Practical Approach to Recursion</h2>
+<p>In this section, we will understand in detail the different types of recursions and its usage in Erlang.</p>
+<h3>Length Recursion</h3>
+<p>A more practical approach to recursion can be seen with a simple example which is used to determine the length of a list. A list can have multiple values such as [1,2,3,4]. Let’s use recursion to see how we can get the length of a list.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([len/1,start/0]). 
+
+len([]) -&gt; 0; 
+len([_|T]) -&gt; 1 + len(T). 
+
+start() -&gt; 
+   X = [1,2,3,4], 
+   Y = len(X), 
+   io:fwrite("~w",[Y]).
+</pre>
+<p>The following things need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>The first function <b>len([])</b> is used for the special case condition if the list is empty.</p></li>
+<li><p>The <b>[H|T]</b> pattern to match against lists of one or more elements, as a list of length one will be defined as <b>[X|[]]</b> and a list of length two will be defined as <b>[X|[Y|[]]]</b>. Note that the second element is a list itself. This means we only need to count the first one and the function can call itself on the second element. Given each value in a list counts as a length of 1.</p></li>
+</ul>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+4
+</pre>
+<h3>Tail Recursion</h3>
+<p>To understand how the tail recursion works, let’s understand how the following code in the previous section works.</p>
+<p><b>Syntax</b></p>
+<pre class="result notranslate">
+len([]) -&gt; 0; 
+len([_|T]) -&gt; 1 + len(T).
+</pre>
+<p>The answer to 1 + len(Rest) needs the answer of len(Rest) to be found. The function len(Rest) itself then needed the result of another function call to be found. The additions would get stacked until the last one is found, and only then would the final result be calculated.</p>
+<p>Tail recursion aims to eliminate this stacking of operation by reducing them as they happen.</p>
+<p>In order to achieve this, we will need to hold an extra temporary variable as a parameter in our function. The aforementioned temporary variable is sometimes called accumulator and acts as a place to store the results of our computations as they happen in order to limit the growth of our calls.</p>
+<p>Let’s look at an example of tail recursion &minus;</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld).
+-export([tail_len/1,tail_len/2,start/0]). 
+
+tail_len(L) -&gt; tail_len(L,0). 
+tail_len([], Acc) -&gt; Acc; 
+tail_len([_|T], Acc) -&gt; tail_len(T,Acc+1). 
+
+start() -&gt; 
+   X = [1,2,3,4], 
+   Y = tail_len(X), 
+   io:fwrite("~w",[Y]).
+</pre>
+<p>The output of the above program is &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+4
+</pre>
+<h2>Duplicate</h2>
+<p>Let’s look at an example of recursion. This time around let’s write a function which takes an integer as its first parameter and then any other term as its second parameter. It will then create a list of as many copies of the term as specified by the integer.</p>
+<p>Let’s look at how an example of this would look like &minus;</p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([duplicate/2,start/0]). 
+
+duplicate(0,_) -&gt; 
+   []; 
+duplicate(N,Term) when N &gt; 0 -&gt;
+   io:fwrite("~w,~n",[Term]),
+   [Term|duplicate(N-1,Term)]. 
+start() -&gt; 
+   duplicate(5,1).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+1,
+1,
+1,
+1,
+1,
+</pre>
+<h2>List Reversal</h2>
+<p>There are no bounds to which you can use recursion in Erlang. Let’s quickly now look at how we can reverse the elements of a list using recursion. The following program can be used to accomplish this.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([tail_reverse/2,start/0]). 
+
+tail_reverse(L) -&gt; tail_reverse(L,[]).
+
+tail_reverse([],Acc) -&gt; Acc; 
+tail_reverse([H|T],Acc) -&gt; tail_reverse(T, [H|Acc]).
+
+start() -&gt; 
+   X = [1,2,3,4], 
+   Y = tail_reverse(X), 
+   io:fwrite("~w",[Y]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+[4,3,2,1]
+</pre>
+<p>The following things need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>We are again using the concept of temporary variables to store each element of the List in a variable called Acc.</p></li>
+<li><p>We then call <b>tail_reverse</b> recursively, but this time around, we ensure that the last element is put in the new list first.</p></li>
+<li><p>We then recursively call tail_reverse for each element in the list.</p></li>
+</ul>
+<h1>Erlang - Numbers</h1>
+<p>In Erlang there are 2 types of numeric literals which are integers and floats. Following are some examples which show how integers and floats can be used in Erlang.</p>
+<p><b>Integer</b> &minus; An example of how the number data type can be used as an integer is shown in the following program. This program shows the addition of 2 Integers.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("~w",[1+1]).
+</pre>
+<p>The output of the above program will be as follows &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+2
+</pre>
+<p><b>Float</b> &minus; An example of how the number data type can be used as a float is shown in the following program. This program shows the addition of 2 Integers.</p>
+<h3>Example</h3>
+<pre class="result notranslate">
+-module(helloworld).
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("~w",[1.1+1.2]).
+</pre>
+<p>The output of the above program will be as follows</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+2.3
+</pre>
+<h2>Displaying Float and Exponential Numbers</h2>
+<p>When using the <b>fwrite</b> method to output values to the console, there are formatting parameters available which can be used to output numbers as float or exponential numbers. Let’s look at how we can achieve this.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("~f~n",[1.1+1.2]), 
+   io:fwrite("~e~n",[1.1+1.2]).
+</pre>
+<p>The output of the above program will be as follows &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+2.300000
+2.30000e+0
+</pre>
+<p>The following key things need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>When the ~f option is specified it means that the argument is a float which is written as <b>[-]ddd.ddd</b>, where the precision is the number of digits after the decimal point. The default precision is 6.</p></li>
+<li><p>When the ~e option is specified it means that the argument is a float which is written as <b>[-]d.ddde+-ddd</b>, where the precision is the number of digits written. The default precision is 6.</p></li>
+</ul>
+<h2>Mathematical Functions for Numbers</h2>
+<p>The following mathematical functions are available in Erlang for numbers. Note that all the mathematical functions for Erlang are present in the math library. So all of the below examples will use the import statement to import all the methods in the math library.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th>Mathematical Functions &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_sin.html">sin</a>
+<p>This method returns the sine of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_cos.html">cos</a>
+<p>This method returns the cosine of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_tan.html">tan</a>
+<p>This method returns the tangent of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_asin.html">asin</a>
+<p>The method returns the arcsine of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_acos.html">acos</a>
+<p>The method returns the arccosine of the specified value.</p>
+</td>
+<tr>
+<td>6</td>
+<td>
+<a href="erlang_atan.html">atan</a>
+<p>The method returns the arctangent of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<a href="erlang_exp.html">exp</a>
+<p>The method returns the exponential of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<a href="erlang_log.html">log</a>
+<p>The method returns the logarithmic of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<a href="erlang_exp.html">exp</a>
+<p>The method returns the exponential of the specified value.</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<a href="erlang_abs.html">abs</a>
+<p>The method returns the absolute value of the specified number.</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td>
+<a href="erlang_float.html">float</a>
+<p>The method converts a number to a float value.</p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td>
+<a href="erlang_is_float.html">Is_float</a>
+<p>The method checks if a number is a float value.</p>
+</td>
+</tr>
+<tr>
+<td>13</td>
+<td>
+<a href="erlang_is_integer.html">Is_Integer</a>
+<p>The method checks if a number is a Integer value.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Strings</h1>
+<p>A String literal is constructed in Erlang by enclosing the string text in quotations. Strings in Erlang need to be constructed using the double quotation marks such as “Hello World”.</p>
+<p>Following is an example of the usage of strings in Erlang &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   Str1 = "This is a string", 
+   io:fwrite("~p~n",[Str1]).
+</pre>
+<p>The above example creates a string variable called <b>Str1</b>. The string “This is a string” is assigned to the variable and displayed accordingly.</p>
+<p>The output of the above program will be &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+“This is a string”
+</pre>
+<p>Next, we will discuss the various <b>operations available for Strings</b>. Note that for string operations, you need to include the string library as well.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">String Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_len.html">len</a>
+<p>The method returns the length of a particular string.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_equal.html">equal</a>
+<p>The method returns a Boolean value on whether one string is equal to another.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_concat.html">concat</a>
+<p>The method concats 2 strings and returns the concatenated string.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_chr.html">chr</a>
+<p>The method returns the index position of a character in a string.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_str.html">str</a>
+<p>The method returns the index position of a sub string in a string.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<a href="erlang_substr.html">substr</a>
+<p>The method returns the sub string from the original string based on the starting position and number of characters from the starting position.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<a href="erlang_left.html">left</a>
+<p>The method returns the sub string from the original string based on the starting position and number of characters from the starting position.</p>
+</td>
+</tr>
+</table>
+<h2>left with trailing character</h2>
+<p>The method returns the sub string from the left of the string based on the number of characters. But with the option to include a trailing character if the number is greater than the length of the string.</p>
+<h3>Syntax</h3>
+<pre class="result notransalte">
+left(str1,number,$character)
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>str1</b> &minus; This is the string from which the sub string needs to be extracted.</p></li>
+<li><p><b>Number</b> &minus; This is the number of characters which need to be present in the substring.</p></li>
+<li><p><b>$Character</b> &minus; The character to include as the trailing character.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>Returns the sub string from the original string based on the left hand side of the string and the number.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-import(string,[left/3]). 
+-export([start/0]). 
+
+start() -&gt; 
+   Str1 = "hello", 
+   Str2 = left(Str1,10,$.), 
+   io:fwrite("~p~n",[Str2]).
+</pre>
+<h3>Output</h3>
+<p>When we run the above program, we will get the following result.</p>
+<pre class="result notranslate">
+"hello....."
+</pre>
+<h2>right</h2>
+<p>The method returns the sub string from the right of the string based on the number of characters.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+right(str1,number)
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>str1</b> &minus; This is the string from which the sub string needs to be extracted.</p></li>
+<li><p><b>Number</b> &minus; This is the number of characters which need to be present in the substring.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>Returns the substring from the original string based on the right hand side of the string and the number.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-import(string,[right/2]). 
+-export([start/0]). 
+
+start() -&gt; 
+   Str1 = "hello World", 
+   Str2 = right(Str1,2), 
+   io:fwrite("~p~n",[Str2]).
+</pre>
+<h3>Output</h3>
+<p>When we run the above program, we will get the following result.</p>
+<pre class="result notranslate">
+“ld”
+</pre>
+<h2>right with trailing character</h2>
+<p>The method returns the substring from the right of the string based on the number of characters. But with the option to include a trailing character if the number is greater than the length of the string.</p>
+<h3>Syntax</h3>
+<pre class="result notransalte">
+right(str1,number,$character)
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>str1</b> &minus; This is the string from which the sub string needs to be extracted.</p></li>
+<li><p><b>Number</b> &minus; This is the number of characters which need to be present in the substring.</p></li>
+<li><p><b>$Character</b> &minus; The character to include as the trailing character.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>Returns the sub string from the original string based on the right hand side of the string and the number.</p>
+<h3>For example</h3>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-import(string,[right/3]). 
+-export([start/0]). 
+
+start() -&gt; 
+   Str1 = "hello", 
+   Str2 = right(Str1,10,$.), 
+   io:fwrite("~p~n",[Str2]).
+</pre>
+<h3>Output</h3>
+<p>When we run the above program, we will get the following result.</p>
+<pre class="result notransalte">
+".....hello"
+</pre>
+<h2>to_lower</h2>
+<p>The method returns the string in lower case.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+to_lower(str1)
+</pre>
+<h3>Parameters</h3>
+<p><b>str1</b> &minus; This is the string from which needs to be converted to lower case.</p>
+<h3>Return Value</h3>
+<p>Returns the string in lower case.</p>
+<h3>For example</h3>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-import(string,[to_lower/1]). 
+-export([start/0]). 
+
+start() -&gt; 
+   Str1 = "HELLO WORLD", 
+   Str2 = to_lower(Str1), 
+   io:fwrite("~p~n",[Str2]).
+</pre>
+<h3>Output</h3>
+<p>When we run the above program, we will get the following result.</p>
+<pre class="result notranslate">
+"hello world"
+</pre>
+<h2>to_upper</h2>
+<p>The method returns the string in upper case.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+to_upper(str1)
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>str1</b> &minus; This is the string from which needs to be converted to upper case.</p></li>
+<li><p><b>Return Value</b> &minus; Returns the string in upper case.</p></li>
+</ul>
+<h3>For example</h3>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-import(string,[to_upper/1]). 
+-export([start/0]). 
+
+start() -&gt; 
+   Str1 = "hello world", 
+   Str2 = to_upper(Str1), 
+   io:fwrite("~p~n",[Str2]).
+</pre>
+<h3>Output</h3>
+<p>When we run the above program, we will get the following result.</p>
+<pre class="result notranslate">
+"HELLO WORLD"
+</pre>
+<h2>sub_string</h2>
+<p>Returns a substring of String, starting at the position Start to the end of the string, or to and including the Stop position.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+sub_string(str1,start,stop)
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>str1</b> &minus; This is the string from which the sub string needs to be returned.</p></li>
+<li><p><b>start</b> &minus; This is the start position of the sub string</p></li>
+<li><p><b>stop</b> &minus; This is the stop position of the sub string</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>Returns a substring of String, starting at the position Start to the end of the string, or to and including the Stop position.</p>
+<h3>For example</h3>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-import(string,[sub_string/3]). 
+-export([start/0]). 
+
+start() -&gt; 
+   Str1 = "hello world", 
+   Str2 = sub_string(Str1,1,5), 
+   io:fwrite("~p~n",[Str2]).
+</pre>
+<h3>Output</h3>
+<p>When we run the above program, we will get the following result.</p>
+<pre class="result notranslate">
+"hello"
+</pre>
+<h1>Erlang - Lists</h1>
+<p>The List is a structure used to store a collection of data items. In Erlang, Lists are created by enclosing the values in square brackets.</p>
+<p>Following is a simple example of creating a list of numbers in Erlang.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   Lst1 = [1,2,3], 
+   io:fwrite("~w~n",[Lst1]).
+</pre>
+<p>The output of the above example will be &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+[1 2 3]
+</pre>
+<p>Let us now discuss the <b>various methods available for Lists</b>. Note that the lists library needs to be imported for these methods to work.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Method and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_all.html">all</a>
+<p>Returns true if Pred(Elem) returns true for all elements Elem in List, otherwise false.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_any.html">any</a>
+<p>Returns true if Pred(Elem) returns true for at least one element Elem in List.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_append.html">append</a>
+<p>Returns a new list List3 which is made from the elements of List1 followed by the elements of List2.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_lists_delete.html">delete</a>
+<p>Deletes an element from the list and returns a new list.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_droplast.html">droplast</a>
+<p>Drops the last element of a List.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<a href="../erlang_duplicate.html">duplicate</a>
+<p>Returns a list which contains N copies of the term Elem</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<a href="erlang_last.html">last</a>
+<p>Returns the last element of the list</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<a href="erlang_max.html">max</a>
+<p>Returns the element of the list which has the maximum value.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<a href="erlang_member.html">member</a>
+<p>Checks if an element is present in the list or not.</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<a href="erlang_min.html">min</a>
+<p>Returns the element of the list which has the minimum value.</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td>
+<a href="erlang_merge.html">merge</a>
+<p>Returns the sorted list formed by merging all the sub-lists of ListOfLists.</p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td>
+<a href="erlang_nth.html">nth</a>
+<p>Returns the Nth element of List.</p>
+</td>
+</tr>
+<tr>
+<td>13</td>
+<td>
+<a href="erlang_nthtail.html">nthtail</a>
+<p>Returns the Nth tail of the List.</p>
+</td>
+</tr>
+<tr>
+<td>14</td>
+<td>
+<a href="erlang_reverse.html">reverse</a>
+<p>Reverses a list of elements.</p>
+</td>
+</tr>
+<tr>
+<td>15</td>
+<td>
+<a href="erlang_sort.html">sort</a>
+<p>Sorts a list of elements.</p>
+</td>
+</tr>
+<tr>
+<td>16</td>
+<td>
+<a href="erlang_sublist.html">sublist</a>
+<p>Returns a sublist of elements.</p>
+</td>
+</tr>
+<tr>
+<td>17</td>
+<td>
+<a href="erlang_sum.html">sum</a>
+<p>Returns the sum of elements in the list.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - File I/O</h1>
+<p>Erlang provides a number of methods when working with I/O. It has easier classes to provide the following functionalities for files &minus;</p>
+<ul class="list">
+<li>Reading files</li>
+<li>Writing to files</li>
+<li>Seeing whether a file is a file or directory</li>
+</ul>
+<h2>File Operation Methods in Erlang</h2>
+<p>Let’s explore some of the file operations Erlang has to offer. For the purposes of these examples, we are going to assume that there is a file called <b>NewFile.txt</b> which contains the following lines of text</p>
+<p style="padding-left:40%"><b>Example1</b></p>
+<p style="padding-left:40%"><b>Example2</b></p>
+<p style="padding-left:40%"><b>Example3</b></p>
+<p>This file will be used for the read and write operations in the following examples.</p>
+<h2>Reading the Contents of a File One Line at a Time</h2>
+<p>The general operations on files are carried out by using the methods available in the file library. For the reading of files, we would need to first use the open operation and then use the read operation which is available as a part of the file library. Following is the syntax for both of these methods.</p>
+<h3>Syntax</h3>
+<ul class="list">
+<li>Opening a file – Open(File,Mode)</li>
+<li>Reading a file – read(FileHandler,NumberofBytes)</li>
+</ul>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>File</b> &minus; This is the location of the file which needs to be opened.</p></li>
+<li><p><b>Mode</b> &minus; This is the mode in which the file needs to be opened in.</p></li>
+</ul>
+<p>Following are some of the available modes &minus;</p>
+<ul class="list">
+<ul class="list">
+<li><p><b>Read</b> &minus; The file, which must exist, is opened for reading.</p></li>
+<li><p><b>Write</b> &minus; The file is opened for writing. It is created if it does not exist. If the file exists, and if write is not combined with read, the file will be truncated.</p></li>
+<li><p><b>Append</b> &minus; The file will be opened for writing, and it will be created if it does not exist. Every write operation to a file opened with append will take place at the end of the file.</p></li>
+<li><p><b>Exclusive</b> &minus; The file, when opened for writing, is created if it does not exist. If the file exists, open will return {error, exist}.</p></li>
+</ul>
+</ul>
+<ul class="list">
+<li><p><b>FileHandler</b> &minus; This is the handle to a file. This handle is the one that would be returned when the <b>file:open</b> operation is used.</p></li>
+<li><p><b>NumberofByte</b> &minus; This is the number of bytes of information that needs to be read from the file.</p></li>
+</ul>
+<h3>Return Value</h3>
+<ul class="list">
+<li><p><b>Open(File,Mode)</b> &minus; Returns a handle to the file, if the operation is successful.</p></li>
+<li><p><b>read(FileHandler,NumberofBytes)</b> &minus; Returns the requested read information from the file.</p></li>
+</ul>
+<h3>For example</h3>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   {ok, File} = file:open("Newfile.txt",[read]),
+   Txt = file:read(File,1024 * 1024), 
+   io:fwrite("~p~n",[Txt]).
+</pre>
+<p><b>Output</b> &minus; When we run the above program, we will get the following result.</p>
+<pre class="result notranslate">
+Example1
+</pre>
+<p>Let us now discuss some other methods available for file operations &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Method &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_file_read.html">file_read</a>
+<p>Available to allow the reading of all the contents of a file at one time.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_write.html">write</a>
+<p>Used to write the contents to a file.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_copy.html">copy</a>
+<p>used to make a copy of an existing file.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_delete.html">delete</a>
+<p>This method is used to delete an existing file.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_list_dir.html">list_dir</a>
+<p>This method is used to list down the contents of a particular directory.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<a href="erlang_make_dir.html">make_dir</a>
+<p>This method is used to create a new directory.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<a href="erlang_rename.html">rename</a>
+<p>This method is used to rename an existing file.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<a href="erlang_file_size.html">file_size</a>
+<p>This method is used to determine the size of the file.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<a href="erlang_is_file.html">is_file</a>
+<p>This method is used to determine if a file is indeed a file.</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<a href="erlang_is_dir.html">is_dir</a>
+<p>This method is used to determine if a directory is indeed a directory.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Atoms</h1>
+<p>An atom is a literal, a constant with name. An atom is to be enclosed in single quotes (') if it does not begin with a lower-case letter or if it contains other characters than alphanumeric characters, underscore (_), or @.</p>
+<p>The following program is an example of how atoms can be used in Erlang. This program declares 3 atoms, atom1, atom_1 and ‘atom 1’ respectively. So you can see the different ways an atom can be declared.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite(atom1), 
+   io:fwrite("~n"), 
+   io:fwrite(atom_1), 
+   io:fwrite("~n"), 
+   io:fwrite('atom 1'), 
+   io:fwrite("~n").
+</pre> 
+<p>The output of the above program would be follows &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+atom1
+
+atom_1
+
+atom 1
+</pre>
+<p>Let’s see some of the methods available in Erlang to work with atoms.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods and Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="erlang_is_atom.html">is_atom</a>
+<p>This method is used to determine if a term is indeed an atom.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="erlang_atom_to_list.html">atom_to_list</a>
+<p>This method is used to convert an atom to a list.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="erlang_list_to_atom.html">list_to_atom</a>
+<p>This method is used to convert a list item to an atom.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="erlang_atom_to_binary.html">atom_to_binary</a>
+<p>This method is used to convert an atom to a binary value.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="erlang_binary_to_atom.html">binary_to_atom</a>
+<p>This method is used to convert a binary value to an atom value.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Maps</h1>
+<p>A map is a compound data type with a variable number of key-value associations. Each key-value association in the map is called an association pair. The key and value parts of the pair are called elements. The number of association pairs is said to be the size of the map.</p>
+<p>An example of how the Map data type can be used is shown in the following program.</p>
+<p>Here we are defining a Map M1 which has 2 mappings. The <b>map_size</b> is an inbuilt function defined in Erlang which can be used to determine the size of the map.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   M1 = #{name=&gt;john,age=&gt;25}, 
+   io:fwrite("~w",[map_size(M1)]).
+</pre>
+<p>The output of the above program will be as follows.</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+2
+</pre>
+<p>Some of the other methods available for maps are as follows.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="erlang_from_list.html">from_list</a>
+<p>This method is used to generate a map from a list.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="erlang_find.html">find</a>
+<p>This method is used to find if a particular key exists in the map.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="erlang_get.html">get</a>
+<p>This method is used to get the value of a particular key in the map.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="erlang_is_key.html">is_key</a>
+<p>This method is used to determine if a particular key is defined as a key in the map.</p>
+</td>
+<tr>
+<td>5</td>
+<td><a href="erlang_keys.html">keys</a>
+<p>This method is used to return all the keys from a map.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="erlang_maps_merge.html">merge</a>
+<p>This method is used to merge 2 maps.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="erlang_put.html">put</a>
+<p>This method is used to add a key value pair to the map.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="erlang_values.html">values</a>
+<p>This method is used to return all the values from a map.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="erlang_remove.html">remove</a>
+<p>This method is used to remove a key value from the map.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Tuples</h1>
+<p>A tuple is a compound data type with a fixed number of terms. Each term in the Tuple is called an element. The number of elements is said to be the size of the Tuple.</p>
+<p>An example of how the Tuple data type can be used is shown in the following program.</p>
+<p>Here we are defining a <b>Tuple P</b> which has 3 terms. The <b>tuple_size</b> is an inbuilt function defined in Erlang which can be used to determine the size of the Tuple.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   P = {john,24,{june,25}} , 
+   io:fwrite("~w",[tuple_size(P)]).
+</pre>
+<p>The output of the above program will be as follows.</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+3
+</pre>
+<p>Let’s look at some more operations which are available for tuples.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_is_tuple.html">is_tuple</a>
+<p>This method is used to determine is the term provided is indeed a tuple.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_list_to_tuple.html">list_to_tuple</a>
+<p>This method is to convert a list to a tuple.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_tuple_to_list.html">tuple_to_list</a>
+<p>This method is convert a tuple to a list.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Records</h1>
+<p>Erlang has the extra facility to create records. These records consist of fields. For example, you can define a personal record which has 2 fields, one is the id and the other is the name field. In Erlang, you can then create various instances of this record to define multiple people with various names and id’s.</p>
+<p>Let’s explore how we can work with records.</p>
+<h2>Creating a Record</h2>
+<p>A record is created using the Record Identifier. In this record identifier, you specify the various fields which constitute the record. The general syntax and example are given below.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+record(recordname , {Field1,Field2 ..Fieldn})
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>recordname</b> &minus; This is the name given to the record.</p></li>
+<li><p><b>Field1,Field2 ..Fieldn</b> &minus; These are the list of various fields which constitute the record.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>None</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+-record(person, {name = "", id}). 
+
+start() -&gt; 
+   P = #person{name="John",id=1}.
+</pre>
+<p>The above example shows the definition of a record with 2 fields, one is the id and the other is the name. Also, a record is constructed in the following way &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+#recordname {fieldName1 = value1, fieldName2 = value2 .. fieldNameN = valueN}
+</pre>
+<p>Where in you assign values to the respective fields when an instance of the record is defined.</p>
+<h2>Accessing a Value of the Record</h2>
+<p>To access the fields and values of a particular record, the following syntax should be used.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+#recordname.Fieldname
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>recordname</b> &minus; This is the name given to the record.</p></li>
+<li><p><b>Fieldname</b> &minus; This is the name of the field which needs to be accessed.</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The value assigned to the field.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+-record(person, {name = "", id}). 
+
+start() -&gt; 
+   P = #person{name = "John",id = 1}, 
+   io:fwrite("~p~n",[P#person.id]), 
+   io:fwrite("~p~n",[P#person.name]).
+</pre>
+<h3>Output</h3>
+<p>The output of the above program is as follows.</p>
+<pre class="result notranslate">
+1
+“John”
+</pre>
+<h2>Updating a Value of the Record</h2>
+<p>The updation of a record value is done by changing the value to a particular field and then assigning the record to a new variable name. The general syntax and example is given below.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+#recordname.Fieldname = newvalue
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>recordname</b> &minus; This is the name given to the record.</p></li>
+<li><p><b>Fieldname</b> &minus; This is the name of the field which needs to be accessed.</p></li>
+<li><p><b>newvalue</b> &minus; This is the new value which needs to be assigned to the field</p></li>
+</ul>
+<h3>Return Value</h3>
+<p>The new record with the new values assigned to the fields.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+-record(person, {name = "", id}). 
+
+start() -&gt; 
+   P = #person{name = "John",id = 1}, 
+   P1 = P#person{name = "Dan"}, 
+   io:fwrite("~p~n",[P1#person.id]), 
+   io:fwrite("~p~n",[P1#person.name]).
+</pre>
+<h3>Output</h3>
+<p>The output of the above program is as follows &minus;</p>
+<pre class="result notranslate">
+1
+“Dan”
+</pre>
+<h2>Nested Records</h2>
+<p>Erlang also has the facility to have nested records. The following example shows how these nested records can be created.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+-record(person, {name = "", address}). 
+-record(employee, {person, id}). 
+
+start() -&gt; 
+   P =#employee{person=#person{name="John",address="A"},id=1}, 
+   io:fwrite("~p~n",[P#employee.id]).
+</pre>
+<p>In the above example the following things need to be noted &minus;</p>
+<ul class="list">
+<li><p>We are first creating a person’s record which has the field values of name and address.</p></li>
+<li><p>We then define an employee record which has the person as a field and an additional field called id.</p></li>
+</ul>
+<h3>Output</h3>
+<p>The output of the above program is as follows.</p>
+<pre class="result notranslate">
+1
+</pre>
+<h1>Erlang - Exceptions</h1>
+<p>Exception handling is required in any programming language to handle the runtime errors so that normal flow of the application can be maintained. Exception normally disrupts the normal flow of the application, which is the reason why we need to use Exception handling in our application.</p>
+<p>Normally when an exception or error occurs in Erlang, the following message will be displayed.</p>
+<pre class="result notranslate">
+{"init terminating in do_boot", {undef,[{helloworld,start,[],[]}, 
+{init,start_it,1,[]},{init,start_em,1,[]}]}}
+</pre>
+<p>Crash dump will be written to &minus;</p>
+<pre class="result notranslate">
+erl_crash.dump
+init terminating in do_boot ()
+</pre>
+<p>In Erlang, there are 3 types of exceptions &minus;</p>
+<ul class="list">
+<li><p><b>Error</b> &minus; Calling <b>erlang:error(Reason)</b> will end the execution in the current process and include a stack trace of the last functions called with their arguments when you catch it. These are the kind of exceptions that provoke the runtime errors above.</p></li>
+<li><p><b>Exists</b> &minus; There are two kinds of exits: 'internal' exits and 'external' exits. The internal exits are triggered by calling the function <b>exit/1</b> and make the current process stop its execution. The external exits are called with <b>exit/2</b> and have to do with multiple processes in the concurrent aspect of Erlang.</p></li>
+<li><p><b>Thow</b> &minus; A throw is a class of exception used for cases that the programmer can be expected to handle. In comparison with exits and errors, they don't really carry any 'crash that process!' intent behind them, but rather they control the flow. As you use throws while expecting the programmer to handle them, it's usually a good idea to document their use within a module using them.</p></li>
+</ul>
+<p>A <b>try ... catch</b> is a way to evaluate an expression while letting you handle the successful case as well as the errors encountered.</p>
+<p>The general syntax of a try catch expression is as follows.</p>
+<h2>Syntax</h2>
+<pre class="prettyprint notranslate">
+<b>try</b> Expression of 
+SuccessfulPattern1 [Guards] -&gt; 
+Expression1; 
+SuccessfulPattern2 [Guards] -&gt; 
+Expression2 
+
+<b>catch</b> 
+TypeOfError:ExceptionPattern1 -&gt; 
+Expression3; 
+TypeOfError:ExceptionPattern2 -&gt; 
+Expression4 
+<b>end</b>.
+</pre>
+<p>The Expression in between <b>try and of</b> is said to be protected. This means that any kind of exception happening within that call will be caught. The patterns and expressions in between the <b>try ... of and catch</b> behave in exactly the same manner as a <b>case ... of</b>.</p>
+<p>Finally, the catch part – here, you can replace <b>TypeOfError</b> by either error, throw or exit, for each respective type we've seen in this chapter. If no type is provided, a throw is assumed.</p>
+<p>Following are some of the errors and the error reasons in Erlang &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center">Error</th>
+<th style="text-align:center">Type of Error</th>
+</tr>
+<tr>
+<td>badarg</td>
+<td>Bad argument. The argument is of wrong data type, or is otherwise badly formed.</td>
+</tr>
+<tr>
+<td>badarith</td>
+<td>Bad argument in an arithmetic expression.</td>
+</tr>
+<tr>
+<td>{badmatch,V}</td>
+<td>Evaluation of a match expression failed. The value V did not match.</td>
+</tr>
+<tr>
+<td>function_clause</td>
+<td>No matching function clause is found when evaluating a function call.</td>
+</tr>
+<tr>
+<td>{case_clause,V}</td>
+<td>No matching branch is found when evaluating a case expression. The value V did not match.</td>
+</tr>
+<tr>
+<td>if_clause</td>
+<td>No true branch is found when evaluating an if expression.</td>
+</tr>
+<tr>
+<td>{try_clause,V}</td>
+<td>No matching branch is found when evaluating the of-section of a try expression. The value V did not match.</td>
+</tr>
+<tr>
+<td>undef</td>
+<td>The function cannot be found when evaluating a function call..</td>
+</tr>
+<tr>
+<td>{badfun,F}</td>
+<td>Something is wrong with a fun F</td>
+</tr>
+<tr>
+<td>{badarity,F}</td>
+<td>A fun is applied to the wrong number of arguments. F describes the fun and the arguments.</td>
+</tr>
+<tr>
+<td>timeout_value</td>
+<td>The timeout value in a receive..after expression is evaluated to something else than an integer or infinity.</td>
+</tr>
+<tr>
+<td>noproc</td>
+<td>Trying to link to a non-existing process.</td>
+</tr>
+</table>
+<p>Following is an example of how these exceptions can be used and how things are done.</p>
+<ul class="list">
+<li><p>The first function generates all possible types of an exception.</p></li>
+<li><p>Then we write a wrapper function to call <b>generate_exception</b> in a try...catch expression.</p></li>
+</ul>
+<h2>Example</h2>
+<pre class="prettyprint notransalte">
+-module(helloworld). 
+-compile(export_all). 
+
+generate_exception(1) -&gt; a; 
+generate_exception(2) -&gt; throw(a); 
+generate_exception(3) -&gt; exit(a); 
+generate_exception(4) -&gt; {'EXIT', a}; 
+generate_exception(5) -&gt; erlang:error(a). 
+
+demo1() -&gt; 
+   [catcher(I) || I &lt;- [1,2,3,4,5]]. 
+catcher(N) -&gt; 
+   try generate_exception(N) of 
+      Val -&gt; {N, normal, Val} 
+   catch 
+      throw:X -&gt; {N, caught, thrown, X}; 
+      exit:X -&gt; {N, caught, exited, X}; 
+      error:X -&gt; {N, caught, error, X} 
+   end. 
+      
+demo2() -&gt; 
+   [{I, (catch generate_exception(I))} || I &lt;- [1,2,3,4,5]]. 
+demo3() -&gt; 
+   try generate_exception(5) 
+   catch 
+      error:X -&gt; 
+         {X, erlang:get_stacktrace()} 
+   end. 
+   
+lookup(N) -&gt; 
+   case(N) of 
+      1 -&gt; {'EXIT', a}; 
+      2 -&gt; exit(a) 
+   end.
+</pre>
+<p>if we run the program as helloworld:demo(). , we will get the following output</p>  
+<h2>Output</h2> 
+<pre class="result notranslate">
+[{1,normal,a},
+{2,caught,thrown,a},
+{3,caught,exited,a},
+{4,normal,{'EXIT',a}},
+{5,caught,error,a}]
+</pre>
+<h1>Erlang - Macros</h1>
+<p>Macros are generally used for inline code replacements. In Erlang, macros are defined via the following statements</p>
+<ul class="list">
+<li>-define(Constant, Replacement).</li>
+<li>-define(Func(Var1, Var2,.., Var), Replacement).</li>
+</ul>
+<p>Following is an example of macros using the first syntax &minus;</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+-define(a,1). 
+
+start() -&gt; 
+   io:fwrite("~w",[?a]).
+</pre>
+<p>From the above program you can see that the macro gets expanded by using the ‘?’ symbol. The constant gets replaced in place by the value defined in the macro.</p>
+<p>The output of the above program will be &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+1
+</pre>
+<p>An example of a macro using the function class is as follows &minus;</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+-define(macro1(X,Y),{X+Y}). 
+
+start() -&gt;
+   io:fwrite("~w",[?macro1(1,2)]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+{3}
+</pre>
+<p>The following additional statements are available for macros &minus;</p>
+<ul class="list">
+<li><p><b>undef(Macro)</b> &minus; Undefines the macro; after this you cannot call the macro.</p></li>
+<li><p><b>ifdef(Macro)</b> &minus; Evaluates the following lines only if the Macro has been defined.</p></li>
+<li><p><b>ifndef(Macro)</b> &minus; Evaluates the following lines only if Macro is undefined.</p></li>
+<li><p><b>else</b> &minus; Allowed after an ifdef or ifndef statement. If the condition was false, the statements following else are evaluated.</p></li>
+<li><p><b>endif</b> &minus; Marks the end of an ifdef or ifndef statement.</p></li>
+</ul>
+<p>When using the above statements, it should be used in the proper way as shown in the following program.</p>
+<pre class="result notranslate">
+-ifdef(&lt;FlagName&gt;).
+
+-define(...).
+-else.
+-define(...).
+-endif.
+</pre>
+<h1>Erlang - Header Files</h1>
+<p>Header files are like include files in any other programming language. It is useful for splitting modules into different files and then accessing these header files into separate programs. To see header files in action, let’s look at one of our earlier examples of records.</p>
+<p>Let’s first create a file called <b>user.hrl</b> and add the following code &minus;</p>
+<pre class="result notranslate">
+-record(person, {name = "", id}).
+</pre>
+<p>Now in our main program file, let’s add the following code &minus;</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+-include("user.hrl"). 
+
+start() -&gt; 
+   P = #person{name = "John",id = 1}, 
+   io:fwrite("~p~n",[P#person.id]), 
+   io:fwrite("~p~n",[P#person.name]).
+</pre>
+<p>As you can see from the above program, we are actually just including the user.hrl file which automatically inserts the <b>–record</b> code in it.</p>
+<p>If you execute the above program, you will get the following output.</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+1
+“John”
+</pre>
+<p>You can also do the same thing with macros, you can define the macro inside the header file and reference it in the main file. Let’ see an example of this  &minus;</p>
+<p>Let’s first create a file called <b>user.hrl</b> and add the following code &minus;</p>
+<pre class="result notranslate">
+-define(macro1(X,Y),{X+Y}).
+</pre>
+<p>Now in our main program file, let’s add the following code &minus;</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+-include("user.hrl"). 
+
+start() -&gt; 
+   io:fwrite("~w",[?macro1(1,2)]).
+</pre>
+<p>If you execute the above program, you will get the following output &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+{3}
+</pre>
+<h1>Erlang - Preprocessors</h1>
+<p>Before an Erlang module is compiled, it is automatically processed by the Erlang Preprocessor. The preprocessor expands any macros that might be in the source file and inserts any necessary include files.</p>
+<p>Ordinarily, you won’t need to look at the output of the preprocessor, but in exceptional circumstances (for example, when debugging a faulty macro), you might want to save the output of the preprocessor. To see the result of preprocessing the module <b>some_module.erl</b> give the OS shell command.</p>
+<pre class="result notranslate">
+erlc -P some_module.erl
+</pre>
+<p>For example, suppose if we had the following code file &minus;</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+-include("user.hrl"). 
+
+start() -&gt; 
+   io:fwrite("~w",[?macro1(1,2)]).
+</pre>
+<p>And if we executed the following command from the command line &minus;</p>
+<pre class="result notranslate">
+erlc –P helloworld.erl
+</pre>
+<p>A file called <b>helloworld.P</b> would be generated. If you open this file, you would find the following contents which is what the preprocessor would compile.</p>
+<pre class="result notranslate">
+-file("helloworld.erl", 1). -module(helloworld).
+
+-export([start/0]).
+
+-file("user.hrl", 1).
+
+-file("helloworld.erl", 3).
+
+start() -&gt;
+   io:fwrite("~w", [{1 + 2}]).
+</pre>
+<h1>Erlang - Pattern Matching</h1>
+<p>Patterns look the same as terms – they can be simple literals like atoms and numbers, compound like tuples and lists, or a mixture of both. They can also contain variables, which are alphanumeric strings that begin with a capital letter or underscore. A special "anonymous variable", _ (the underscore) is used when you don't care about the value to be matched, and won't be using it.</p>
+<p>A pattern matches if it has the same "shape" as the term being matched, and atoms encountered are the same. For example, the following matches succeed &minus;</p>
+<ul class="list">
+<li>B = 1.</li>
+<li>2 = 2.</li>
+<li>{ok, C} = {ok, 40}.</li>
+<li>[H|T] = [1, 2, 3,4].</li>
+</ul>
+<p>Note that in the fourth example, the pipe (|) signifying the head and tail of the list as described in Terms. Also note that the left hand side should match the right hand side which is the normal case for patterns.</p>
+<p>The following examples of pattern matching will fail.</p>
+<ul class="list">
+<li>1 = 2.</li>
+<li>{ok, A} = {failure, "Don't know the question"}.</li>
+<li>[H|T] = [].</li>
+</ul>
+<p>In the case of the pattern-matching operator, a failure generates an error and the process exits. How this can be trapped and handled is covered in Errors. Patterns are used to select which clause of a function will be executed.</p>
+<h1>Erlang - Guards</h1>
+<p>Guards are constructs that we can use to increase the power of pattern matching. Using guards, we can perform simple tests and comparisons on the variables in a pattern.</p>
+<p>The general syntax of the guard statement is as follows &minus;</p>
+<pre class="result notransalte">
+function(parameter) when condition -&gt;
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>Function(parameter)</b> &minus; this is the function declaration that is used in the guard condition.</p></li>
+<li><p><b>Parameter</b> &minus; Generally the guard condition is based on the parameter.</p></li>
+<li><p><b>Condition</b> &minus; The condition which should be evaluated to see if the function should be executed or not.</p></li>
+<li><p>The when statement must be used when a guard condition is specified.</p></li>
+</ul>
+<p>Let’s look at a quick example of how guards can be used &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([display/1,start/0]). 
+
+display(N) when N &gt; 10 -&gt;   
+   io:fwrite("greater then 10"); 
+display(N) when N &lt; 10 -&gt; io:fwrite("Less 
+   than 10"). 
+
+start() -&gt; 
+   display(11).
+</pre>
+<p>The following things need to be noted about the above example &minus;</p>
+<ul class="list">
+<li><p>The display function is defined along with a guard. The first display declaration has a guard of when the parameter N is greater than 10. So if the parameter is greater than 10, that function will be called.</p></li>
+<li><p>The display function is defined again, but this time with the guard of less than 10. In this way, you can define the same function multiple times, each with a separate guard condition.</p></li>
+</ul>
+<p>The output of the above program will be as follows &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+greater than 10
+</pre>
+<p>The guard conditions can also be used for <b>if else</b> and <b>case</b> statements. Let’s see how we can carry out the guard operations on these statements.</p>
+<h2>Guards for ‘if’ Statements</h2>
+<p>Guards can also be used for if statements so that the series of statements executed is based on the guard condition. Let’s see how we can achieve this.</p>
+<h3>Example</h3>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   N = 9, 
+   if 
+      N &gt; 10 -&gt; 
+         io:fwrite("N is greater than 10"); 
+      true -&gt; 
+         io:fwrite("N is less than 10") 
+   end.
+</pre>
+<p>The following things need to be noted about the above example &minus;</p>
+<ul class="list">
+<li><p>The guard function is used along with the if statement. If the guard function evaluates to true, then the statement “N is greater than 10” is displayed.</p></li>
+<li><p>If the guard function evaluates to false, then the statement “N is less than 10” is displayed.</p></li>
+</ul>
+<p>The output of the above program will be as follows &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+N is less than 10
+</pre>
+<h2>Guards for ‘case’ Statements</h2>
+<p>Guards can also be used for case statements so that the series of statements executed is based on the guard condition. Let’s see how we can achieve this.</p>
+<h3>Example</h3>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   A = 9, 
+   case A of {A} when A&gt;10 -&gt; 
+      io:fwrite("The value of A is greater than 10"); _ -&gt; 
+      io:fwrite("The value of A is less than 10") 
+   end.
+</pre>
+<p>The following things need to be noted about the above example &minus;</p>
+<ul class="list">
+<li><p>The guard function is used along with the case statement. If the guard function evaluates to true, then the statement “The value of A is greater than 10” is displayed.</p></li>
+<li><p>If the guard function evaluates to anything else, then the statement “The value of A is less than 10” is displayed.</p></li>
+</ul>
+<p>The output of the above program will be as follows &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+The value of A is less than 10
+</pre>
+<h2>Multiple Guard Conditions</h2>
+<p>Multiple guard conditions can also be specified for a function. The general syntax of the guard statement with multiple guard conditions is given below &minus;</p>
+<pre class="result notranslate">
+function(parameter) when condition1 , condition1 , .. conditionN -&gt;
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p><b>Function(parameter)</b> &minus; this is the function declaration that used the guard condition.</p></li>
+<li><p><b>Parameter</b> &minus; Generally the guard condition is based on the parameter.</p></li>
+<li><p><b>condition1, condition1, .. conditionN</b> &minus; These are the multiple guard conditions which are applied to functions.</p></li>
+<li><p>The when statement must be used when a guard condition is specified.</p></li>
+</ul>
+<p>Let’s look at a quick example of how multiple guards can be used &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-export([display/1,start/0]). 
+
+display(N) when N &gt; 10 , is_integer(N) -&gt; 
+   io:fwrite("greater then 10"); 
+display(N) when N &lt; 10 -&gt; 
+   io:fwrite("Less than 10"). 
+   
+start() -&gt; 
+   display(11).
+</pre>
+<p>The following point needs to be noted about the above example &minus;</p>
+<ul class="list">
+<li><p>You will notice that for the first display function declaration, in addition to the condition for N&gt;10, the condition for <b>is_integer</b> is also specified. So only if the value of N is an integer and greater than 10, this function will be executed.</p></li>
+</ul>
+<p>The output of the above program will be as follows &minus;</p>
+<h3>Output</h3>
+<pre class="result notransalte">
+Greater than 10
+</pre>
+<h1>Erlang - BIFS</h1>
+<p>BIFs are functions that are built into Erlang. They usually do tasks that are impossible to program in Erlang. For example, it’s impossible to turn a list into a tuple or to find the current time and date. To perform such an operation, we call a BIF.</p>
+<p>Let’s take an example of how BIF’s are used &minus;</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;   
+   io:fwrite("~p~n",[tuple_to_list({1,2,3})]), 
+   io:fwrite("~p~n",[time()]).
+</pre>
+<p>The following things need to be noted about the above example &minus;</p>
+<ul class="list">
+<li><p>In the first example, we are using the BIF called <b>tuple_to_list</b> to convert a tuple to a list.</p></li>
+<li><p>In the second BIF function, we are using the <b>time function</b> to output the system time.</p></li>
+</ul>
+<p>The output of the above program will be as follows &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+[1,2,3]
+{10,54,56}
+</pre>
+<p>Let’s look at some of the more BIF functions available in Erlang.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">BIF Functions &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_date.html">date</a>
+<p>This method returns the current system date.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_byte_size.html">byte_size</a>
+<p>This method returns the number of bytes contained in a Bitstring.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_element.html">element</a>
+<p>The method returns the Nth element in the tuple.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_bifs_float.html">float</a>
+<p>This method returns the float value of a particular number.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_bifs_get.html">get</a>
+<p>The method returns the process dictionary as a list.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<a href="erlang_bifs_put.html">put</a>
+<p>This method is used to put a <b>key,value</b> pair in the process dictionary.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<a href="erlang_localtime.html">localtime</a>
+<p>The method is used to give the local date and time in the system.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<a href="erlang_memory.html">memory</a>
+<p>Returns a list containing information about memory dynamically allocated by the Erlang emulator.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<a href="erlang_now.html">now</a>
+<p>This method returns the tuple {MegaSecs, Secs, MicroSecs} which is the elapsed time since 00:00 GMT, January 1, 1970.</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<a href="erlang_bifs_ports.html">ports</a>
+<p>Returns a list of all ports on the local node</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td>
+<a href="erlang_bifs_processes.html">processes</a>
+<p>Returns a list of process identifiers corresponding to all the processes currently existing on the local node.</p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td>
+<a href="erlang_universaltime.html">universaltime</a>
+<p>Returns the current date and time according to Universal Time Coordinated (UTC).</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Binaries</h1>
+<p>Use a data structure called a binary to store large quantities of raw data. Binaries store data in a much more space efficient manner than in lists or tuples, and the runtime system is optimized for the efficient input and output of binaries.</p>
+<p>Binaries are written and printed as sequences of integers or strings, enclosed in double less than and greater than brackets.</p>
+<p>Following is an example of binaries in Erlang &minus;</p>
+<h2>Example</h2>
+<pre class="prettyprint notransalte tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   io:fwrite("~p~n",[&lt;&lt;5,10,20&gt;&gt;]), 
+   io:fwrite("~p~n",[&lt;&lt;"hello"&gt;&gt;]).
+</pre>
+<p>When we run the above program, we will get the following result.</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+&lt;&lt;5,10,20&gt;&gt;
+&lt;&lt;"hello"&gt;&gt;
+</pre>
+<p>Let’s look at the Erlang functions which are available to work with Binaries &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_list_to_binary.html">list_to_binary</a>
+<p>This method is used to convert an existing list to a list of binaries.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_split_binary.html">split_binary</a>
+<p>This method is used to split the binary list based on the index position specified.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_term_to_binary.html">term_to_binary</a>
+<p>This method is used to convert a term to binary.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_is_binary.html">is_binary</a>
+<p>This method is used to check if a bitstring is indeed a binary value.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_binary_part.html">binary_part</a>
+<p>This method is used to extract a part of the binary string</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<a href="erlang_binary_to_float.html">binary_to_float</a>
+<p>This method is used to convert a binary value to a float value.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<a href="erlang_binary_to_integer.html">binary_to_integer</a>
+<p>This method is used to convert a binary value to a integer value.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<a href="erlang_binary_to_list.html">binary_to_list</a>
+<p>This method is used to convert a binary value to a list.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<a href="erlang_binaries_binary_to_atom.html">binary_to_atom</a>
+<p>This method is used to convert a binary value to an atom.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Funs</h1>
+<p>Funs are used to define anonymous functions in Erlang. The general syntax of an anonymous function is given below</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+F = fun (Arg1, Arg2, ... ArgN) -&gt;
+      ...
+   End
+</pre>
+<p>Where</p>
+<ul class="list">
+<li><p><b>F</b> &minus; This is the variable name assigned to the anonymous function.</p></li>
+<li><p><b>Arg1, Arg2, ... ArgN</b> &minus; These are the arguments which are passed to the anonymous function.</p></li>
+</ul>
+<p>The following example showcases how the anonymous function can be used.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   A = fun() -&gt; io:fwrite("Hello") end, 
+   A().
+</pre>
+<p>The following things need to be noted about the above program.</p>
+<ul class="list">
+<li>The anonymous function is assigned to the variable A.</li>
+<li>The anonymous function via the variable A().</li>
+</ul>
+<p>When we run the above program we will get the following result.</p>
+<pre class="result notranslate">
+“Hello”
+</pre>
+<p>Another example of anonymous function is as follows, but this is with the use of parameters.</p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   A = fun(X) -&gt; 
+      io:fwrite("~p~n",[X]) 
+      end, 
+   A(5).
+</pre>
+<p>When we run the above program we will get the following result.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+5
+</pre>
+<h2>Using Variables</h2>
+<p>The Anonymous function have the ability to access the variables which are outside of the scope of the anonymous function. Let’s look at an example of this &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   B = 6, 
+   A = fun(X) -&gt; 
+      io:fwrite("~p~n",[X]), 
+      io:fwrite("~p~n",[B]) 
+      end, 
+   A(5).
+</pre>
+<p>The following things need to be noted about the above program.</p>
+<ul class="list">
+<li>The variable B is outside of the scope of the anonymous function.</li>
+<li>The anonymous function can still access the variable defined in the global scope.</li>
+</ul>
+<p>When we run the above program we will get the following result.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+5
+
+6
+</pre>
+<h2>Functions within Functions</h2>
+<p>One of the other most powerful aspects of higher order functions, is that you can define a function within a function. Let’s see an example of how we can achieve this.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   Adder = fun(X) -&gt; fun(Y) -&gt; io:fwrite("~p~n",[X + Y]) end end, 
+   A = Adder(6), 
+   A(10).
+</pre>
+<p>The following things need to be noted about the above program.</p>
+<ul class="list">
+<li>Adder is a higher order function defined as fun(X).</li>
+<li>The Adder function fun(X) has a reference to another function fun(Y).</li>
+</ul>
+<p>When we run the above program we will get the following result.</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+16
+</pre>
+<h1>Erlang - Processes</h1>
+<p>The granularity of concurrency in Erlang is a process. A process is an activity/task that runs concurrently with and is independent from the other processes. These processes in Erlang are different than the processes and threads most people are familiar with. Erlang processes are lightweight, operate in (memory) isolation from other processes, and are scheduled by Erlang’s Virtual Machine (VM). The creation time of process is very low, the memory footprint of a just spawned process is very small, and a single Erlang VM can have millions of processes running.</p>
+<p>A process is created with the help of the spawn method. The general syntax of the method is given below.</p>
+<h2>Syntax</h2>
+<pre class="result notranslate">
+spawn(Module, Name, Args)
+</pre>
+<h2>Parameters</h2>
+<ul class="list">
+<li><p><b>Module</b> &minus; this is a predefined atom value which must be ?MODULE</p></li>
+<li><p><b>Name</b> &minus; This is the name of the function to be called when the process is defined.</p></li>
+<li><p><b>Args</b> &minus; These are the arguments which need to be sent to the function.</p></li>
+</ul>
+<h2>Return Value</h2>
+<p>Returns the process id of the new process created.</p>
+<h2>For example</h2>
+<p>An example of the spawn method is shown in the following program.</p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0, call/2]). 
+
+call(Arg1, Arg2) -&gt; 
+   io:format("~p ~p~n", [Arg1, Arg2]). 
+start() -&gt; 
+   Pid = spawn(?MODULE, call, ["hello", "process"]), 
+   io:fwrite("~p",[Pid]).
+</pre>
+<p>The following things need to be noted about the above program</p>
+<ul class="list">
+<li><p>A function called call is defined and will be used to create the process.</p></li>
+<li><p>The spawn method calls the call function with the parameters hello and process.</p></li>
+</ul>
+<h2>Output</h2>
+<p>When we run the above program we will get the following result.</p>
+<pre class="result notranslate">
+&lt;0.29.0&gt;"hello" "process"
+</pre>
+<p>Now let’s look at the other functions which are available with processes.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_is_pid.html">is_pid</a>
+<p>This method is used to determine if a process id exists</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_is_process_alive.html">is_process_alive</a>
+<p>This is called as is_process_alive(Pid). A Pid must refer to a process at the local node.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_pid_to_list.html">pid_to_list</a>
+<p>It converts a process id to a list.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_registered.html">registered</a>
+<p>Returns a list with the names of all registered processes.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_self.html">self</a>
+<p>One of the most commonly used BIF, returns the pid of the calling processes.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<a href="erlang_register.html">register</a>
+<p>This is used to register a process in the system.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<a href="erlang_whereis.html">whereis</a>
+<p>It is called as whereis(Name). Returns the pid of the process that is registered with the name.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<a href="erlang_unregister.html">unregister</a>
+<p>This is used to unregister a process in the system.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - Email</h1>
+<p>To send an email using Erlang, you need to use a package available from <b>github</b> for the same. The github link is – <a href="https://github.com/Vagabond/gen_smtp" target="_blank" rel="nofollow">https://github.com/Vagabond/gen_smtp</a></p>
+<p>This link contains an <b>smtp utility</b> which can be used for sending email from an Erlang application. Follow the steps to have the ability to send an email from Erlang</p>
+<p><b>Step 1</b> &minus; Download the <b>erl files</b> from the <b>github site</b>. The files should be downloaded to the directory where your <b>helloworld.erl</b> application resides.</p>
+<p><b>Step 2</b> &minus; Compile all the <b>smtp related files</b> shown in the following list using the <b>erlc command</b>. The following files need to be compiled.</p>
+<ul class="list">
+<li>smtp_util</li>
+<li>gen_smtp_client</li>
+<li>gen_smtp_server</li>
+<li>gen_smtp_server_session</li>
+<li>binstr</li>
+<li>gen_smtp_application</li>
+<li>socket</li>
+</ul>
+<p><b>Step 3</b> &minus; The following code can be written to send an email using smtp.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   gen_smtp_client:send({"sender@gmail.com", ["receiver@gmail.com"], "Subject: testing"},
+   
+   [{relay, "smtp.gmail.com"}, {ssl, true}, {username, "sender@gmail.com"}, 
+      {password, "senderpassword"}]).
+</pre>
+<p>The following things need to be noted about the above program</p>
+<ul class="list">
+<li><p>The above smtp function is being used along with the smtp server available from google.</p></li>
+<li><p>Since we wanted to send using a secure smtp, we specify the ssl parameter as true.</p></li>
+<li><p>You need to specify the relay as <b>smtp.gmail.com</b>.</p></li>
+<li><p>You need to mention a user name and password which has access to send the email.</p></li>
+</ul>
+<p>Once you configure all the above settings and execute the program, the receiver will successfully receive an email.</p>
+<h1>Erlang - Databases</h1>
+<p>Erlang has the ability to connect to the traditional databases such as SQL Server and Oracle. Erlang has an <b>inbuilt odbc library</b> that can be used to work with databases.</p>
+<h2>Database Connection</h2>
+<p>In our example, we are going to make use of the Microsoft SQL Server. Before connecting to a Microsoft SQL Server database, make sure that the following pointers are checked.</p>
+<ul class="list">
+<li><p>You have created a database TESTDB.</p></li>
+<li><p>You have created a table EMPLOYEE in TESTDB.</p></li>
+<li><p>This table has fields FIRST_NAME, LAST_NAME, AGE, SEX and INCOME.</p></li>
+<li><p>User ID "testuser" and password "test123" are set to access TESTDB.</p></li>
+<li><p>Ensure that you have created an ODBC DSN called <b>usersqlserver</b> which creates an ODBC connection to the database</p></li>
+</ul>
+<h3>Establishing a Connection</h3>
+<p>To establish a connection to the database, the following code example can be used.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver;UID = testuser;PWD = test123", []), 
+   io:fwrite("~p",[Ref]).
+</pre>
+<p>The output of the above program is as follows</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+&lt;0.33.0&gt;
+</pre>
+<p>The following things need to be noted about the above program.</p>
+<ul class="list">
+<li><p>The start method of the odbc library is used to indicate the beginning of the database operation.</p></li>
+<li><p>The connect method requires a DSN, user name and password to connect.</p></li>
+</ul>
+<h3>Creating a Database Table</h3>
+<p>The next step after connecting to the database is to create the tables in our database. The following example shows how to create a table in the database using Erlang.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver; UID = testuser;PWD = test123, []), 
+   odbc:sql_query(Ref, "CREATE TABLE EMPLOYEE (FIRSTNAME char varying(20), 
+   LASTNAME char varying(20), AGE integer, SEX char(1), INCOME integer)")
+</pre>
+<p>If you now check the database, you will see that a table called <b>EMPLOYEE</b> will be created.</p>
+<h3>Inserting a Record into the Database</h3>
+<p>It is required when you want to create your records into a database table.</p>
+<p>The following example will insert a record in the employee table. If the table is successfully updated, the record and the statement will return the value of the updated record and the number of records that were updated.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver; UID = testuser;PWD = test123", []), 
+   io:fwrite("~p",[odbc:sql_query(Ref, 
+   "INSERT INTO EMPLOYEE VALUES('Mac', 'Mohan', 20, 'M', 2000)")]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+{updated,1}
+</pre>
+<h3>Fetching Records from the Database</h3>
+<p>Erlang also has the capability to fetch records from the database. This is done via the <b>sql_query method</b>.</p>
+<p>An example is shown in the following program &minus;</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver; UID = testuser;PWD = test123", []), 
+   io:fwrite("~p",[odbc:sql_query(Ref, "SELECT * FROM EMPLOYEE") ]).
+</pre>
+<p>The output of the above program will be as follows &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+{selected,["FIRSTNAME","LASTNAME","AGE","SEX","INCOME"],
+[{"Mac","Mohan",20,"M",2000}]}
+</pre>
+<p>So you can see that the insert command in the last section worked and the select command returned the right data.</p>
+<h3>Fetching Records from the Database Based on Parameters</h3>
+<p>Erlang also has the capability to fetch records from the database based on certain filter criteria.</p>
+<p>An example is as follows &minus;</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN=usersqlserver; UID=testuser;PWD=test123", []), 
+   io:fwrite("~p",[ odbc:param_query(Ref, "SELECT * FROM EMPLOYEE WHERE SEX=?", 
+   [{{sql_char, 1}, ["M"]}])]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+{selected,["FIRSTNAME","LASTNAME","AGE","SEX","INCOME"],
+         [{"Mac","Mohan",20,"M",2000}]}
+</pre>
+<h3>Updating Records from the Database</h3>
+<p>Erlang also has the capability to update records from the database.</p>
+<p>An example for the same is as follows &minus;</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver; UID = testuser;PWD = test123", []), 
+   
+   io:fwrite("~p",[ odbc:sql_query(Ref, "
+      UPDATE EMPLOYEE SET AGE = 5 WHERE INCOME= 2000")]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+{updated,1}
+</pre>
+<h3>Deleting Records from the Database</h3>
+<p>Erlang also has the capability to delete records from the database.</p>
+<p>An example for the same is as follows &minus;</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver; UID = testuser;PWD = test123", []), 
+   io:fwrite("~p",[ odbc:sql_query(Ref, "DELETE EMPLOYEE WHERE INCOME= 2000")]).
+</pre>
+<p>The output of the above program will be as follows &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+{updated,1}
+</pre>
+<h3>Table Structure</h3>
+<p>Erlang also has the capability to describe a table structure.</p>
+<p>An example is as follows &minus;</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver; UID = testuser;PWD = test123", []), 
+   io:fwrite("~p",[odbc:describe_table(Ref, "EMPLOYEE")]).
+</pre>
+<p>The output of the above program will be as follows &minus;</p>
+<p><b>Output</b></p>
+<pre class="result notranslate">
+{ok,[{"FIRSTNAME",{sql_varchar,20}},
+   {"LASTNAME",{sql_varchar,20}},
+   {"AGE",sql_integer},
+   {"SEX",{sql_char,1}},
+   {"INCOME",sql_integer}]}
+</pre>
+<h3>Record Count</h3>
+<p>Erlang also has the capability to fetch the total count of the records in a table.</p>
+<p>An example for the same is shown in the following program.</p>
+<p><b>Example</b></p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   odbc:start(), 
+   {ok, Ref} = odbc:connect("DSN = usersqlserver; UID = sa;PWD = demo123", []), 
+   io:fwrite("~p",[odbc:select_count(Ref, "SELECT * FROM EMPLOYEE")]).
+</pre>
+<p>The output of the above program will be &minus;</p>
+<pre class="result notranslate">
+{ok,1}
+</pre>
+<h1>Erlang - Ports</h1>
+<p>In Erlang, ports are used for communication between different programs. A socket is a communication endpoint that allows machines to communicate over the Internet by using the Internet Protocol (IP).</p>
+<h2>Types of Protocols Used in Ports</h2>
+<p>There are 2 types of protocols available for communication. One is UDP and the other is TCP. UDP lets applications send short messages (called datagrams) to each other, but there is no guarantee of delivery for these messages. They can also arrive out of order. TCP, on the other hand, provides a reliable stream of bytes that are delivered in order as long as the connection is established.</p>
+<p>Let’s look at a simple example of opening a port using UDP.</p>
+<h3>Example</h3>
+<pre class="prettyprint noranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt; 
+   {ok, Socket} = gen_udp:open(8789), 
+   io:fwrite("~p",[Socket]).
+</pre>
+<p>The following things need to be noted about the above program</p>
+<ul class="list">
+<li><p>The <b>gen_udp</b> contains the modules in Erlang used for UDP communication.</p></li>
+<li><p>Here 8789 is the port number which is being opened in Erlang. You need to make sure this port number is available and can be used.</p></li>
+</ul>
+<p>The output of the above program is &minus;</p>
+<pre class="result notranslate">
+#Port&lt;0.376&gt;
+</pre>
+<h2>Sending a Message on the Port</h2>
+<p>Once the port has been opened a message can be sent on the port. This is done via the send method. Let’s look at the syntax and the following example.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+send(Socket, Address, Port, Packet)
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>Socket</b> &minus; This is the socket created with the gen_udp:open command.</p></li>
+<li><p><b>Address</b> &minus; This is machine address to where the message has to be sent to.</p></li>
+<li><p><b>port</b> &minus; This is the port no on which the message needs to be sent.</p></li>
+<li><p><b>Packet</b> &minus; This is the packet or message details which needs to be sent.</p></li>
+</ul>
+<h3>Return Values</h3>
+<p>An ok message is returned if the message was sent properly.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   {ok, Socket} = gen_udp:open(8789), 
+   io:fwrite("~p",[Socket]), 
+   io:fwrite("~p",[gen_udp:send 
+   (Socket,"localhost",8789,"Hello")]).
+</pre>
+<h3>Output</h3>
+<p>The output of the above program will be as follows.</p>
+<pre class="result notranslate">
+#Port&lt;0.376&gt;ok
+</pre>
+<h2>Receiving a Message on the Port</h2>
+<p>Once the port has been opened a message can also be received on the port. This is done via the <b>recv method</b>. Let’s look at the syntax and the following example.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+recv(Socket, length)
+</pre>
+<h3>Parameters</h3>
+<ul class="list">
+<li><p><b>Socket</b> &minus; This is the socket created with the gen_udp:open command.</p></li>
+<li><p><b>Length</b> &minus; This is the length of the message which needs to be received.</p></li>
+</ul>
+<h3>Return Values</h3>
+<p>An ok message is returned if the message was sent properly.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   {ok, Socket} = gen_udp:open(8789), 
+   io:fwrite("~p",[Socket]), 
+   io:fwrite("~p",[gen_udp:send(Socket,"localhost",8789,"Hello")]),
+   io:fwrite("~p",[gen_udp:recv(Socket, 20)]).
+</pre>
+<h2>The Complete Program</h2>
+<p>Now obviously we cannot have the same send and receive message in the same program. You need to have them defined in different programs. So let create the following code which creates a server component that listens to messages and a client component which sends messages.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0,client/1]). 
+
+start() -&gt; 
+   spawn(fun() -&gt; server(4000) end).
+
+server(Port) -&gt;
+   {ok, Socket} = gen_udp:open(Port, [binary, {active, false}]), 
+   io:format("server opened socket:~p~n",[Socket]), 
+   loop(Socket). 
+
+loop(Socket) -&gt;
+   inet:setopts(Socket, [{active, once}]), 
+   receive 
+      {udp, Socket, Host, Port, Bin} -&gt; 
+      io:format("server received:~p~n",[Bin]), 
+      gen_udp:send(Socket, Host, Port, Bin), 
+      loop(Socket) 
+   end. 
+
+client(N) -&gt; 
+   {ok, Socket} = gen_udp:open(0, [binary]), 
+   io:format("client opened socket=~p~n",[Socket]), 
+   ok = gen_udp:send(Socket, "localhost", 4000, N), Value = receive 
+      {udp, Socket, _, _, Bin} -&gt;
+         io:format("client received:~p~n",[Bin]) after 2000 -&gt;
+      0 
+   end, 
+   
+gen_udp:close(Socket), 
+Value.
+</pre>
+<p>The following things need to be noted about the above program.</p>
+<ul class="list">
+<li><p>We define 2 functions, the first is server. This will be used to listen on the port 4000. The second is the client which will be used to send the message “Hello” to the server component.</p></li>
+<li><p>The receive loop is used to read the messages sent within a define loop.</p></li>
+</ul>
+<h3>Output</h3>
+<p>Now you need to run the program from 2 windows. The first window will be used to run the server component by running the following code in the <b>erl command line window</b>.</p>
+<pre class="result notranslate">
+helloworld:start().
+</pre>
+<p>This will display the following output in the command line window.</p>
+<pre class="result notranslate">
+server opened socket:#Port&lt;0.2314&gt;
+</pre>
+<p>Now in the second erl command line window, run the following command.</p>
+<pre class="result notranslate">
+Helloworld:client(“&lt;&lt;Hello&gt;&gt;”).
+</pre>
+<p>When you issue this command, the following output will be displayed in the first command line window.</p>
+<pre class="result notranslate">
+server received:&lt;&lt;"Hello"&gt;&gt;
+</pre>
+<h1>Erlang - Distributed Programming</h1>
+<p>Distributed Programs are those programs that are designed to run on networks of computers and that can coordinate their activities only by message passing.</p>
+<p>There are a number of reasons why we might want to write distributed applications. Here are some of them.</p>
+<ul class="list">
+<li><p><b>Performance</b> &minus; We can make our programs go faster by arranging that different parts of the program are run parallel on different machines.</p></li>
+<li><p><b>Reliability</b> &minus; We can make fault-tolerant systems by structuring the system to run on several machines. If one machine fails, we can continue on another machine.</p></li>
+<li><p><b>Scalability</b> &minus; As we scale up an application, sooner or later we will exhaust the capabilities of even the most powerful machine. At this stage we have to add more machines to add capacity. Adding a new machine should be a simple operation that does not require large changes to the application architecture.</p></li>
+</ul>
+<p>The central concept in distributed Erlang is the node. A node is a self-contained.</p>
+<p>The Erlang system contains a complete virtual machine with its own address space and own set of processes.</p>
+<p>Let’s look at the different <b>methods</b> which are used for <b>Distributed Programming</b>.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No</th>
+<th style="text-align:center">Methods &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<a href="erlang_spawn.html">spawn</a></p>
+<p>This is used to create a new process and initialize it.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<a href="erlang_node.html">node</a>
+<p>This is used to determine the value of the node on which the process needs to run.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<a href="erlang_spawn_on_node.html">spawn on Node</a>
+<p>This is used to create a new process on a node.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<a href="erlang_is_alive.html">is_alive</a>
+<p>This returns true if the local node is alive and can be part of a distributed system.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<a href="erlang_spawnlink.html">spawnlink</a>
+<p>This is used to create a new process link on a node.</p>
+</td>
+</tr>
+</table>
+<h1>Erlang - OTP</h1>
+<p>OTP stands for Open Telecom Platform. It’s an application operating system and a set of libraries and procedures used for building large-scale, fault-tolerant, distributed applications. If you want to program your own applications using OTP, then the central concept that you will find very useful is the OTP behavior. A behavior encapsulates common behavioral patterns — think of it as an application framework that is parameterized by a callback module.</p>
+<p>The power of OTP comes from the properties such as fault tolerance, scalability, dynamic-code upgrade, and so on, can be provided by the behavior itself. So the first basic concept is to create a server component that mimics the basics of an OTP environment, let’s look at the following example for the same.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+-module(server). 
+-export([start/2, rpc/2]). 
+
+start(Name, Mod) -&gt; 
+   register(Name, spawn(fun() -&gt; loop(Name, Mod, Mod:init()) end)). 
+rpc(Name, Request) -&gt; 
+   Name ! {self(), Request}, 
+   receive 
+      {Name, Response} -&gt; Response 
+   end. 
+   
+loop(Name, Mod, State) -&gt;
+   receive 
+      {From, Request} -&gt;
+         {Response, State1} = Mod:handle(Request, State), 
+         From ! {Name, Response}, 
+         loop(Name, Mod, State1) 
+   end.
+</pre>
+<p>The following things need to be noted about the above program</p>
+<ul class="list">
+<li><p>The process if registered with the system using the register function.</p></li>
+<li><p>The process spawns a loop function which handles the processing.</p></li>
+</ul>
+<p>Now let’s write a client program that will utilize the server program.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+-module(name_server). 
+-export([init/0, add/2, whereis/1, handle/2]). 
+-import(server1, [rpc/2]). 
+
+add(Name, Place) -&gt; rpc(name_server, {add, Name, Place}). 
+whereis(Name) -&gt; rpc(name_server, {whereis, Name}). 
+
+init() -&gt; dict:new().
+handle({add, Name, Place}, Dict) -&gt; {ok, dict:store(Name, Place, Dict)}; 
+handle({whereis, Name}, Dict) -&gt; {dict:find(Name, Dict), Dict}.
+</pre>
+<p>This code actually performs two tasks. It serves as a callback module that is called from the server framework code, and at the same time, it contains the interfacing routines that will be called by the client. The usual OTP convention is to combine both functions in the same module.</p>
+<p>So here is how the above program needs to be run &minus;</p>
+<p>In <b>erl</b>, first run the server program by running the following command.</p>
+<pre class="result notranslate">
+server(name_server,name_server)
+</pre>
+<p>You will get the following output &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+true
+</pre>
+<p>Then, run the following command</p>
+<pre class="result notranslate">
+name_server.add(erlang,”Tutorialspoint”).
+</pre>
+<p>You will get the following output &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+Ok
+</pre>
+<p>Then, run the following command &minus;</p>
+<pre class="result notranslate">
+name_server.whereis(erlang).
+</pre>
+<p>You will get the following output &minus;</p>
+<h2>Output</h2>
+<pre class="result notranslate">
+{ok,"Tutorialspoint"}
+</pre>
+<h1>Erlang - Concurrency</h1>
+<p>Concurrent programming in Erlang needs to have the following basic principles or processes.</p>
+<p>The list includes the following principles &minus;</p>
+<h2>piD = spawn(Fun)</h2>
+<p>Creates a new concurrent process that evaluates Fun. The new process runs in parallel with the caller. An example is as follows &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   spawn(fun() -&gt; server("Hello") end). 
+
+server(Message) -&gt;
+   io:fwrite("~p",[Message]).
+</pre>
+<p>The output of the above program is  &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+“Hello”
+</pre>
+<h2>Pid ! Message</h2>
+<p>Sends a message to the process with identifier Pid. Message sending is asynchronous. The sender does not wait but continues with what it was doing. <b>‘!’</b> is called the send operator.</p>
+<p>An example is as follows &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([start/0]). 
+start() -&gt; 
+   Pid = spawn(fun() -&gt; server("Hello") end), 
+   Pid ! {hello}. 
+
+server(Message) -&gt;
+   io:fwrite("~p",[Message]).
+</pre>
+<h2>Receive…end</h2>
+<p>Receives a message that has been sent to a process. It has the following syntax &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+receive
+
+Pattern1 [when Guard1] -&gt;
+
+Expressions1;
+
+Pattern2 [when Guard2] -&gt;
+
+Expressions2;
+...
+End
+</pre>
+<p>When a message arrives at the process, the system tries to match it against Pattern1 (with possible guard Guard1); if this succeeds, it evaluates Expressions1. If the first pattern does not match, it tries Pattern2, and so on. If none of the patterns matches, the message is saved for later processing, and the process waits for the next message.</p>
+<p>An example of the entire process with all 3 commands is shown in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([loop/0,start/0]). 
+
+loop() -&gt;
+   receive 
+      {rectangle, Width, Ht} -&gt; 
+         io:fwrite("Area of rectangle is ~p~n" ,[Width * Ht]), 
+         loop(); 
+      {circle, R} -&gt;
+      io:fwrite("Area of circle is ~p~n" , [3.14159 * R * R]), 
+      loop(); 
+   Other -&gt;
+      io:fwrite("Unknown"), 
+      loop() 
+   end. 
+
+start() -&gt;
+   Pid = spawn(fun() -&gt; loop() end), 
+   Pid ! {rectangle, 6, 10}.
+</pre>
+<p>The following things need to be noted about the above program &minus;</p>
+<ul class="list">
+<li><p>The loop function has the receive end loop. So when a message is sent , it will processed by the receive end loop.</p></li>
+<li><p>A new process is spawned which goes to the loop function.</p></li>
+<li><p>The message is sent to the spawned process via the Pid ! message command.</p></li>
+</ul>
+<p>The output of the above program is &minus;</p>
+<h3>Output</h3>
+<pre class="result notranslate">
+Area of the Rectangle is 60
+</pre>
+<h2>Maximum Number of Processes</h2>
+<p>In concurrency it is important to determine the maximum number of processes that are allowed on a system. You should then be able to understand how many process can execute concurrently on a system.</p>
+<p>Let’s see an example of how we can determine what is the maximum number of processes that can execute on a system.</p>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([max/1,start/0]). 
+
+max(N) -&gt; 
+   Max = erlang:system_info(process_limit), 
+   io:format("Maximum allowed processes:~p~n" ,[Max]), 
+   
+   statistics(runtime), 
+   statistics(wall_clock), 
+   
+   L = for(1, N, fun() -&gt; spawn(fun() -&gt; wait() end) end), 
+   {_, Time1} = statistics(runtime), 
+   {_, Time2} = statistics(wall_clock), lists:foreach(fun(Pid) -&gt; Pid ! die end, L), 
+   
+   U1 = Time1 * 1000 / N, 
+   U2 = Time2 * 1000 / N, 
+   io:format("Process spawn time=~p (~p) microseconds~n" , [U1, U2]).
+   wait() -&gt; 
+   
+   receive 
+      die -&gt; void 
+   end. 
+ 
+for(N, N, F) -&gt; [F()]; 
+for(I, N, F) -&gt; [F()|for(I+1, N, F)]. 
+
+start()-&gt;
+   max(1000), 
+   max(100000).
+</pre>
+<p>On any machine which has a good processing power, both of the above max functions will pass. Following is a sample output from the above program.</p>
+<pre class="result notranslate">
+Maximum allowed processes:262144
+
+Process spawn time=47.0 (16.0) microseconds
+
+Maximum allowed processes:262144
+
+Process spawn time=12.81 (10.15) microseconds
+</pre>
+<h2>Receive with a Timeout</h2>
+<p>Sometimes a receive statement might wait forever for a message that never comes. This could be for a number of reasons. For example, there might be a logical error in our program, or the process that was going to send us a message might have crashed before it sent the message. To avoid this problem, we can add a timeout to the receive statement. This sets a maximum time that the process will wait to receive a message.</p>
+<p>Following is the syntax of the receive message with a timeout specified</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+receive 
+Pattern1 [when Guard1] -&gt; 
+Expressions1; 
+
+Pattern2 [when Guard2] -&gt;
+Expressions2; 
+... 
+after Time -&gt; 
+Expressions 
+end
+</pre>
+<p>The simplest example is to create a sleeper function as shown in the following program.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate tryit">
+-module(helloworld). 
+-export([sleep/1,start/0]). 
+
+sleep(T) -&gt;
+   receive 
+   after T -&gt; 
+      true 
+   end. 
+   
+start()-&gt;
+   sleep(1000).
+</pre>
+<p>The above code will sleep for 1000 Ms before actually exiting.</p>
+<h2>Selective Receive</h2>
+<p>Each process in Erlang has an associated mailbox. When you send a message to the process, the message is put into the mailbox. The only time this mailbox is examined is when your program evaluates a receive statement.</p>
+<p>Following is the general syntax of the Selective receive statement.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+receive 
+Pattern1 [when Guard1] -&gt;
+Expressions1; 
+
+Pattern2 [when Guard1] -&gt;
+Expressions1; 
+... 
+after 
+Time -&gt;
+ExpressionTimeout 
+end
+</pre>
+<p>This is how the above receive statement works &minus;</p>
+<ul class="list">
+<li><p>When we enter a receive statement, we start a timer (but only if an after section is present in the expression).</p></li>
+<li><p>Take the first message in the mailbox and try to match it against Pattern1, Pattern2, and so on. If the match succeeds, the message is removed from the mailbox, and the expressions following the pattern are evaluated.</p></li>
+<li><p>If none of the patterns in the receive statement matches the first message in the mailbox, then the first message is removed from the mailbox and put into a “save queue.” The second message in the mailbox is then tried. This procedure is repeated until a matching message is found or until all the messages in the mailbox have been examined.</p></li>
+<li><p>If none of the messages in the mailbox matches, then the process is suspended and will be rescheduled for execution the next time a new message is put in the mailbox. Note that when a new message arrives, the messages in the save queue are not rematched; only the new message is matched.</p></li>
+<li><p>As soon as a message has been matched, then all messages that have been put into the save queue are reentered into the mailbox in the order in which they arrived at the process. If a timer was set, it is cleared.</p></li>
+<li><p>If the timer elapses when we are waiting for a message, then evaluate the expressions ExpressionsTimeout and put any saved messages back into the mailbox in the order in which they arrived at the process.</p></li>
+</ul>
+<h1>Erlang - Performance</h1>
+<p>When talking about performance the following points need to be noted about Erlang.</p>
+<ul class="list">
+<li><p><b>Funs are very fast</b> &minus; Funs was given its own data type in R6B and was further optimized in R7B.</p></li>
+<li><p><b>Using the ++ operator</b> &minus; This operator needs to be used in the proper way. The following example is the wrong way to do a ++ operation.</p></li>
+</ul>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start()-&gt;
+   fun_reverse([H|T]) -&gt;
+   fun_reverse(T)++[H]; 
+   fun_reverse([]) -&gt;
+   [].
+</pre>
+<p>As the ++ operator copies its left operand, the result is copied repeatedly, leading to quadratic complexity.</p>
+<ul class="list">
+<li><p><b>Using Strings</b> &minus; String handling can be slow if done improperly. In Erlang, you need to think a little more about how the strings are used and choose an appropriate representation. If you use regular expressions, use the re-module in STDLIB instead of the <b>obsolete regexp module</b>.</p></li>
+<li><p><b>BEAM is a Stack-Based Byte-Code Virtual Machine</b> &minus; BEAM is a register-based virtual machine. It has 1024 virtual registers that are used for holding temporary values and for passing arguments when calling functions. Variables that need to survive a function call are saved to the stack. BEAM is a threaded-code interpreter. Each instruction is word pointing directly to executable C-code, making instruction dispatching very fast.</p></li>
+</ul>
+<h1>Erlang - Drivers</h1>
+<p>Sometimes we want to run a foreign-language program inside the Erlang Runtime System. In this case, the program is written as a shared library that is dynamically linked into the Erlang runtime system. The linked-in driver appears to the programmer as a port program and obeys exactly the same protocol as for a port program.</p>
+<h2>Creating a Driver</h2>
+<p>Creating a linked-in driver is the most efficient way of interfacing foreign-language code with Erlang, but it is also the most dangerous. Any fatal error in the linked-in driver will crash the Erlang System.</p>
+<p>Following is an example of a driver implementation in Erlang &minus;</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0, stop/0]). 
+-export([twice/1, sum/2]). 
+
+start() -&gt;
+   start("example1_drv" ). 
+start(SharedLib) -&gt;
+   case erl_ddll:load_driver("." , SharedLib) of 
+   ok -&gt; ok; 
+      {error, already_loaded} -&gt; ok; 
+      _ -&gt; exit({error, could_not_load_driver}) 
+   end, 
+   
+   spawn(fun() -&gt; init(SharedLib) end). 
+
+init(SharedLib) -&gt; 
+   register(example1_lid, self()), 
+   Port = open_port({spawn, SharedLib}, []), 
+   loop(Port). 
+
+stop() -&gt; 
+   example1_lid ! stop. 
+
+twice(X) -&gt; call_port({twice, X}). 
+sum(X,Y) -&gt; call_port({sum, X, Y}). call_port(Msg) -&gt; 
+   example1_lid ! {call, self(), Msg}, receive 
+      {example1_lid, Result} -&gt; 
+      Result 
+   end. 
+
+LINKED-IN DRIVERS 223 
+loop(Port) -&gt; 
+receive 
+   {call, Caller, Msg} -&gt; 
+   Port ! {self(), {command, encode(Msg)}}, receive 
+   {Port, {data, Data}} -&gt;
+   Caller ! {example1_lid, decode(Data)} 
+   end, 
+
+loop(Port); 
+stop -&gt; Port ! 
+   {self(), close}, 
+   receive 
+      {Port, closed} -&gt; 
+      exit(normal) 
+   end; 
+   
+      {'EXIT', Port, Reason} -&gt; 
+      io:format("~p ~n" , [Reason]), 
+      exit(port_terminated) 
+   end. 
+
+encode({twice, X}) -&gt; [1, X]; 
+encode({sum, X, Y}) -&gt; [2, X, Y]. decode([Int]) -&gt; Int.
+</pre>
+<p>Please note that working with drivers is extremely complex and care should be taken when working with drivers.</p>
+<h1>Erlang - Web Programming</h1>
+<p>In Erlang, the <b>inets library</b> is available to build web servers in Erlang. Let’s look at some of the functions available in Erlang for web programming. One can implement the HTTP server, also referred to as httpd to handle HTTP requests.</p>
+<p>The server implements numerous features, such as &minus;</p>
+<ul class="list">
+<li>Secure Sockets Layer (SSL)</li>
+<li>Erlang Scripting Interface (ESI)</li>
+<li>Common Gateway Interface (CGI)</li>
+<li>User Authentication (using Mnesia, Dets or plain text database)</li>
+<li>Common Logfile Format (with or without disk_log(3) support)</li>
+<li>URL Aliasing</li>
+<li>Action Mappings</li>
+<li>Directory Listings</li>
+</ul>
+<p>The first job is to start the web library via the command.</p>
+<pre class="result notranslate">
+inets:start()
+</pre>
+<p>The next step is to implement the start function of the inets library so that the web server can be implemented.</p>
+<p>Following is an example of creating a web server process in Erlang.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0]). 
+
+start() -&gt;
+   inets:start(), 
+   Pid = inets:start(httpd, [{port, 8081}, {server_name,"httpd_test"}, 
+   {server_root,"D://tmp"},{document_root,"D://tmp/htdocs"},
+   {bind_address, "localhost"}]), io:fwrite("~p",[Pid]).
+</pre>
+<p>The following points need to be noted about the above program.</p>
+<ul class="list">
+<li><p>The port number needs to be unique and not used by any other program. The <b>httpd service</b> would be started on this port no.</p></li>
+<li><p>The <b>server_root</b> and <b>document_root</b> are mandatory parameters.</p></li>
+</ul>
+<h3>Output</h3>
+<p>Following is the output of the above program.</p>
+<pre class="result notranslate">
+{ok,&lt;0.42.0&gt;}
+</pre>
+<p>To implement a <b>Hello world web server</b> in Erlang, perform the following steps &minus;</p>
+<p><b>Step 1</b> &minus; Implement the following code &minus;</p>
+<pre class="prettyprint notranslate">
+-module(helloworld). 
+-export([start/0,service/3]). 
+
+start() -&gt;
+   inets:start(httpd, [ 
+      {modules, [ 
+         mod_alias, 
+         mod_auth, 
+         mod_esi, 
+         mod_actions, 
+         mod_cgi, 
+         mod_dir,
+         mod_get, 
+         mod_head, 
+         mod_log, 
+         mod_disk_log 
+      ]}, 
+      
+      {port,8081}, 
+      {server_name,"helloworld"}, 
+      {server_root,"D://tmp"}, 
+      {document_root,"D://tmp/htdocs"}, 
+      {erl_script_alias, {"/erl", [helloworld]}}, 
+      {error_log, "error.log"}, 
+      {security_log, "security.log"}, 
+      {transfer_log, "transfer.log"}, 
+      
+      {mime_types,[ 
+         {"html","text/html"}, {"css","text/css"}, {"js","application/x-javascript"} ]} 
+   ]). 
+         
+service(SessionID, _Env, _Input) -&gt; mod_esi:deliver(SessionID, [ 
+   "Content-Type: text/html\r\n\r\n", "&lt;html&gt;&lt;body&gt;Hello, World!&lt;/body&gt;&lt;/html&gt;" ]).
+</pre>
+<p><b>Step 2</b> &minus; Run the code as follows. Compile the above file and then run the following commands in <b>erl</b></p>
+<pre class="result notranslate">
+c(helloworld).
+</pre>
+<p>You will get the following output.</p>
+<pre class="result notranslate">
+{ok,helloworld}
+</pre>
+<p>The next command is &minus;</p>
+<pre class="result notranslate">
+inets:start().
+</pre>
+<p>You will get the following output</p>
+<pre class="result notranslate">
+ok
+</pre>
+<p>The next command is &minus;</p>
+<pre class="result notranslate">
+helloworld:start().
+</pre>
+<p>You will get the following output.</p>
+<pre class="result notranslate">
+{ok,&lt;0.50.0&gt;}
+</pre>
+<p><b>Step 3</b> &minus; You can now access the url - <b>http://localhost:8081/erl/hello_world:service</b></p>
+<hr />
+<div class="pre-btn">
+<a href="erlang_web_programming.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="erlang_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/erlang/erlang_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/erlang/erlang_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/erlang/erlang_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/erlang/erlang_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/erlang/erlang_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/erlang/erlang_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="text/javascript" src="../theme/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+   var tryit = new $.TryIt('try_erlang.html');
+   tryit.compile();
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Erlang Quick Guide",
+    "name": "Erlang Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/erlang/erlang_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/erlang/images/erlang_official_website.jpg",
+        "width": 600,
+        "height": 314
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:49.",
+    "dateModified": "July 23 2017 03:34:49.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Erlang is a functional programming language which also has a runtime environment. It was built in such a way that it had integrated support for concurrency, distribution and fault tolerance. Erlang was originally developed to be used in several large tele..."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Computer Programming",
+                "@id": "https://www.tutorialspoint.com/computer_programming_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Erlang",
+                "@id": "https://www.tutorialspoint.com/erlang"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "Erlang - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/erlang/erlang_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:07:41 GMT -->
+</html>

@@ -1,0 +1,2865 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:30:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>MongoDB Quick Guide</title>
+<meta name="description" content="MongoDB Quick Guide - Learn MongoDB in simple and easy steps starting from basic to advanced concepts with examples including what is mongoD?, why and where you should use it?, Environment Setup, creating collection, document." />
+<meta name="keywords" content="Mongodb, overview, Advantages, Environment, Data Modelling, Create Database, Drop Database, Create Collection, Drop Collection, Data Types, Insert Document, Query Document, Update Document, Delete Document, Projection, Limiting Records, Sorting, Records, Indexing, Aggregration, Replication, Sharding, Create Backup, Deployment, Java, PHP, Relationships, Database References, Covered Queries, Analyzing Queries, Atomic Operations, Advanced Indexing, Indexing Limitations, ObjectId, Map Reduce, Text Search, Regular Expression, Rockmongo, GridFS, Capped Collections, Auto-Increment Sequence." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #459e36 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #459e36 !important;}
+.submenu-item{ border-bottom: 2px solid #459e36 !important; border-top: 2px solid #459e36 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/mongodb-mini-logo.jpg" alt="MongoDB Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">MongoDB Tutorial</li>
+<li><a href="index.html">MongoDB - Home</a></li>
+<li><a href="mongodb_overview.html">MongoDB - Overview</a></li>
+<li><a href="mongodb_advantages.html">MongoDB - Advantages</a></li>
+<li><a href="mongodb_environment.html">MongoDB - Environment</a></li>
+<li><a href="mongodb_data_modeling.html">MongoDB - Data Modeling</a></li>
+<li><a href="mongodb_create_database.html">MongoDB - Create Database</a></li>
+<li><a href="mongodb_drop_database.html">MongoDB - Drop Database</a></li>
+<li><a href="mongodb_create_collection.html">MongoDB - Create Collection</a></li>
+<li><a href="mongodb_drop_collection.html">MongoDB - Drop Collection</a></li>
+<li><a href="mongodb_datatype.html">MongoDB - Data Types</a></li>
+<li><a href="mongodb_insert_document.html">MongoDB - Insert Document</a></li>
+<li><a href="mongodb_query_document.html">MongoDB - Query Document</a></li>
+<li><a href="mongodb_update_document.html">MongoDB - Update Document</a></li>
+<li><a href="mongodb_delete_document.html">MongoDB - Delete Document</a></li>
+<li><a href="mongodb_projection.html">MongoDB - Projection</a></li>
+<li><a href="mongodb_limit_record.html">MongoDB - Limiting Records</a></li>
+<li><a href="mongodb_sort_record.html">MongoDB - Sorting Records</a></li>
+<li><a href="mongodb_indexing.html">MongoDB - Indexing</a></li>
+<li><a href="mongodb_aggregation.html">MongoDB - Aggregation</a></li>
+<li><a href="mongodb_replication.html">MongoDB - Replication</a></li>
+<li><a href="mongodb_sharding.html">MongoDB - Sharding</a></li>
+<li><a href="mongodb_create_backup.html">MongoDB - Create Backup</a></li>
+<li><a href="mongodb_deployment.html">MongoDB - Deployment</a></li>
+<li><a href="mongodb_java.html">MongoDB - Java</a></li>
+<li><a href="mongodb_php.html">MongoDB - PHP</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Advanced MongoDB</li>
+<li><a href="mongodb_relationships.html">MongoDB - Relationships</a></li>
+<li><a href="mongodb_database_references.html">MongoDB - Database References</a></li>
+<li><a href="mongodb_covered_queries.html">MongoDB - Covered Queries</a></li>
+<li><a href="mongodb_analyzing_queries.html">MongoDB - Analyzing Queries</a></li>
+<li><a href="mongodb_atomic_operations.html">MongoDB - Atomic Operations</a></li>
+<li><a href="mongodb_advanced_indexing.html">MongoDB - Advanced Indexing</a></li>
+<li><a href="mongodb_indexing_limitations.html">MongoDB - Indexing Limitations</a></li>
+<li><a href="mongodb_objectid.html">MongoDB - ObjectId</a></li>
+<li><a href="mongodb_map_reduce.html">MongoDB - Map Reduce</a></li>
+<li><a href="mongodb_text_search.html">MongoDB - Text Search</a></li>
+<li><a href="mongodb_regular_expression.html">MongoDB - Regular Expression</a></li>
+<li><a href="working_with_rockmongo.html">Working with Rockmongo</a></li>
+<li><a href="mongodb_gridfs.html">MongoDB - GridFS</a></li>
+<li><a href="mongodb_capped_collections.html">MongoDB - Capped Collections</a></li>
+<li><a href="mongodb_autoincrement_sequence.html">Auto-Increment Sequence</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">MongoDB Useful Resources</li>
+<li><a href="mongodb_questions_answers.html">MongoDB - Questions and Answers</a></li>
+<li><a href="mongodb_quick_guide.html">MongoDB - Quick Guide</a></li>
+<li><a href="mongodb_useful_resources.html">MongoDB - Useful Resources</a></li>
+<li><a href="mongodb_discussion.html">MongoDB - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+ </aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>MongoDB - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="mongodb_questions_answers.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="mongodb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>MongoDB - Overview</h1>
+<p>MongoDB is a cross-platform, document oriented database that provides, high performance, high availability, and easy scalability. MongoDB works on concept of collection and document.</p>
+<h2>Database</h2>
+<p>Database is a physical container for collections. Each database gets its own set of files on the file system. A single MongoDB server typically has multiple databases.</p>
+<h2>Collection</h2>
+<p>Collection is a group of MongoDB documents. It is the equivalent of an RDBMS table. A collection exists within a single database. Collections do not enforce a schema. Documents within a collection can have different fields. Typically, all documents in a collection are of similar or related purpose.</p>
+<h2>Document</h2>
+<p>A document is a set of key-value pairs. Documents have dynamic schema. Dynamic schema means that documents in the same collection do not need to have the same set of fields or structure, and common fields in a collection's documents may hold different types of data.</p>
+<p>The following table shows the relationship of RDBMS terminology with MongoDB.</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<th style="text-align:center;width:50%;">RDBMS</th>
+<th style="text-align:center;">MongoDB</th>
+</tr>
+<tr>
+<td>Database</td>
+<td>Database</td>
+</tr>
+<tr>
+<td>Table</td>
+<td>Collection</td>
+</tr>
+<tr>
+<td>Tuple/Row</td>
+<td>Document</td>
+</tr>
+<tr>
+<td>column</td>
+<td>Field</td>
+</tr>
+<tr>
+<td>Table Join</td>
+<td>Embedded Documents</td>
+</tr>
+<tr>
+<td>Primary Key</td>
+<td>Primary Key (Default key _id provided by mongodb itself)</td>
+</tr>
+<tr>
+<th colspan="2" style="text-align:center;">Database Server and Client</th>
+</tr>
+<tr>
+<td>Mysqld/Oracle</td>
+<td>mongod</td>
+</tr>
+<tr>
+<td>mysql/sqlplus</td>
+<td>mongo</td>
+</tr>
+</table>
+<h2>Sample Document</h2>
+<p>Following example shows the document structure of a blog site, which is simply a comma separated key value pair.</p>
+<pre class="prettyprint notranslate">
+{
+   _id: ObjectId(7df78ad8902c)
+   title: 'MongoDB Overview', 
+   description: 'MongoDB is no sql database',
+   by: 'tutorials point',
+   url: 'http://www.tutorialspoint.com',
+   tags: ['mongodb', 'database', 'NoSQL'],
+   likes: 100, 
+   comments: [	
+      {
+         user:'user1',
+         message: 'My first comment',
+         dateCreated: new Date(2011,1,20,2,15),
+         like: 0 
+      },
+      {
+         user:'user2',
+         message: 'My second comments',
+         dateCreated: new Date(2011,1,25,7,45),
+         like: 5
+      }
+   ]
+}
+</pre>
+<p><b>_id</b> is a 12 bytes hexadecimal number which assures the uniqueness of every document. You can provide _id while inserting the document. If you don’t provide then MongoDB provides a unique id for every document. These 12 bytes first 4 bytes for the current timestamp, next 3 bytes for machine id, next 2 bytes for process id of MongoDB server and remaining 3 bytes are simple incremental VALUE.</p>
+<h1>MongoDB - Advantages</h1>
+<p>Any relational database has a typical schema design that shows number of tables and the relationship between these tables. While in MongoDB, there is no concept of relationship.</p>
+<h2>Advantages of MongoDB over RDBMS</h2>
+<ul class="list">
+<li><p><b>Schema less</b> &minus; MongoDB is a document database in which one collection holds different documents. Number of fields, content and size of the document can differ from one document to another.</p></li>
+<li><p>Structure of a single object is clear.</p></li>
+<li><p>No complex joins.</p></li>
+<li><p>Deep query-ability. MongoDB supports dynamic queries on documents using a document-based query language that's nearly as powerful as SQL.</p></li>
+<li><p>Tuning.</p></li>
+<li><p><b>Ease of scale-out</b> &minus; MongoDB is easy to scale.</p></li>
+<li><p>Conversion/mapping of application objects to database objects not needed.</p></li>
+<li><p>Uses internal memory for storing the (windowed) working set, enabling faster access of data.</p></li>
+</ul>
+<h2>Why Use MongoDB?</h2>
+<ul class="list">
+<li><p><b>Document Oriented Storage</b> &minus; Data is stored in the form of JSON style documents.</p></li>
+<li><p>Index on any attribute</p></li>
+<li><p>Replication and high availability</p></li>
+<li><p>Auto-sharding</p></li>
+<li><p>Rich queries</p></li>
+<li><p>Fast in-place updates</p></li>
+<li><p>Professional support by MongoDB</p></li>
+</ul>
+<h2>Where to Use MongoDB?</h2>
+<ul class="list">
+<li>Big Data</li>
+<li>Content Management and Delivery</li>
+<li>Mobile and Social Infrastructure</li>
+<li>User Data Management</li>
+<li>Data Hub</li>
+</ul>
+<h1>MongoDB - Environment</h1>
+<p>Let us now see how to install MongoDB on Windows.</p>
+<h2>Install MongoDB On Windows</h2>
+<p>To install MongoDB on Windows, first download the latest release of MongoDB from <a target="_blank" rel="nofollow" href="https://www.mongodb.org/downloads">https://www.mongodb.org/downloads</a>. Make sure you get correct version of MongoDB depending upon your Windows version. To get your Windows version, open command prompt and execute the following command.</p>
+<pre class="result notranslate">
+C:\&gt;wmic os get osarchitecture
+OSArchitecture
+64-bit
+C:\&gt;
+</pre>
+<p>32-bit versions of MongoDB only support databases smaller than 2GB and suitable only for testing and evaluation purposes.</p>
+<p>Now extract your downloaded file to c:\ drive or any other location. Make sure the name of the extracted folder is mongodb-win32-i386-[version] or mongodb-win32-x86_64-[version]. Here [version] is the version of MongoDB download.</p>
+<p>Next, open the command prompt and run the following command.</p>
+<pre class="result notranslate">
+C:\&gt;move mongodb-win64-* mongodb
+   1 dir(s) moved.
+C:\&gt;
+</pre>
+<p>In case you have extracted the MongoDB at different location, then go to that path by using command <b>cd FOLDER/DIR</b> and now run the above given process.</p>
+<p>MongoDB requires a data folder to store its files. The default location for the MongoDB data directory is c:\data\db. So you need to create this folder using the Command Prompt. Execute the following command sequence.</p> 
+<pre class="result notranslate">
+C:\&gt;md data
+C:\md data\db
+</pre>
+<p>If you have to install the MongoDB at a different location, then you need to specify an alternate path for <b>\data\db</b> by setting the path <b>dbpath</b> in <b>mongod.exe</b>. For the same, issue the following commands.</p>
+<p>In the command prompt, navigate to the bin directory present in the MongoDB installation folder. Suppose my installation folder is <b>D:\set up\mongodb</b></p>
+<pre class="result notranslate">
+C:\Users\XYZ&gt;d:
+D:\&gt;cd "set up"
+D:\set up&gt;cd mongodb
+D:\set up\mongodb&gt;cd bin
+D:\set up\mongodb\bin&gt;mongod.exe --dbpath "d:\set up\mongodb\data" 
+</pre>
+<p>This will show <b>waiting for connections</b> message on the console output, which indicates that the mongod.exe process is running successfully.</p>
+<p>Now to run the MongoDB, you need to open another command prompt and issue the following command.</p>
+<pre class="result notranslate">
+D:\set up\mongodb\bin&gt;mongo.exe
+MongoDB shell version: 2.4.6
+connecting to: test
+&gt;db.test.save( { a: 1 } )
+&gt;db.test.find()
+{ "_id" : ObjectId(5879b0f65a56a454), "a" : 1 }
+&gt;
+</pre>
+<p>This will show that MongoDB is installed and run successfully. Next time when you run MongoDB, you need to issue only commands.</p>
+<pre class="result notranslate">
+D:\set up\mongodb\bin&gt;mongod.exe --dbpath "d:\set up\mongodb\data" 
+D:\set up\mongodb\bin&gt;mongo.exe
+</pre>
+<h2>Install MongoDB on Ubuntu</h2>
+<p>Run the following command to import the MongoDB public GPG key &minus;</p>
+<pre class="result notranslate">
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+</pre>
+<p>Create a /etc/apt/sources.list.d/mongodb.list file using the following command.</p>
+<pre class="result notranslate">
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' 
+   | sudo tee /etc/apt/sources.list.d/mongodb.list
+</pre>
+<p>Now issue the following command to update the repository &minus;</p>
+<pre class="result notranslate">
+sudo apt-get update
+</pre>
+<p>Next install the MongoDB by using the following command &minus;</p>
+<pre class="result notranslate">
+apt-get install mongodb-10gen = 2.2.3
+</pre>
+<p>In the above installation, 2.2.3 is currently released MongoDB version. Make sure to install the latest version always. Now MongoDB is installed successfully.</p>
+<h2>Start MongoDB</h2>
+<pre class="result notranslate">
+sudo service mongodb start
+</pre>
+<h2>Stop MongoDB</h2>
+<pre class="result notranslate">
+sudo service mongodb stop
+</pre>
+<h2>Restart MongoDB</h2>
+<pre class="result notranslate">
+sudo service mongodb restart
+</pre>
+<p>To use MongoDB run the following command.</p>
+<pre class="result notranslate">
+mongo
+</pre>
+<p>This will connect you to running MongoDB instance.</p>
+<h2>MongoDB Help</h2>
+<p>To get a list of commands, type <b>db.help()</b> in MongoDB client. This will give you a list of commands as shown in the following screenshot.</p>
+<img src="images/db_help.png" alt="DB Help" />
+<h2>MongoDB Statistics</h2>
+<p>To get stats about MongoDB server, type the command <b>db.stats()</b> in MongoDB client. This will show the database name, number of collection and documents in the database. Output of the command is shown in the following screenshot.</p>
+<img src="images/db_stats.png" alt="DB Stats" />
+<h1>MongoDB - Data Modelling</h1>
+<p>Data in MongoDB has a flexible schema.documents in the same collection. They do not need to have the same set of fields or structure, and common fields in a collection’s documents may hold different types of data.</p>
+<h2 style="font-size:22px;">Some considerations while designing Schema in MongoDB</h2>
+<ul class="list">
+<li><p>Design your schema according to user requirements.</p></li>
+<li><p>Combine objects into one document if you will use them together. Otherwise separate them (but make sure there should not be need of joins).</p></li>
+<li><p>Duplicate the data (but limited) because disk space is cheap as compare to compute time.</p></li>
+<li><p>Do joins while write, not on read.</p></li>
+<li><p>Optimize your schema for most frequent use cases.</p></li>
+<li><p>Do complex aggregation in the schema.</p></li>
+</ul>
+<h2>Example</h2>
+<p>Suppose a client needs a database design for his blog/website and see the differences between RDBMS and MongoDB schema design. Website has the following requirements.</p>
+<ul class="list">
+<li>Every post has the unique title, description and url.</li>
+<li>Every post can have one or more tags.</li>
+<li>Every post has the name of its publisher and total number of likes.</li>
+<li>Every post has comments given by users along with their name, message, data-time and likes.</li>
+<li>On each post, there can be zero or more comments.</li>
+</ul>
+<p>In RDBMS schema, design for above requirements will have minimum three tables.</p>
+<img src="images/rdbms.png" alt="RDBMS Schema Design" />
+<p>While in MongoDB schema, design will have one collection post and the following structure &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   _id: POST_ID
+   title: TITLE_OF_POST, 
+   description: POST_DESCRIPTION,
+   by: POST_BY,
+   url: URL_OF_POST,
+   tags: [TAG1, TAG2, TAG3],
+   likes: TOTAL_LIKES, 
+   comments: [	
+      {
+         user:'COMMENT_BY',
+         message: TEXT,
+         dateCreated: DATE_TIME,
+         like: LIKES 
+      },
+      {
+         user:'COMMENT_BY',
+         message: TEXT,
+         dateCreated: DATE_TIME,
+         like: LIKES
+      }
+   ]
+}
+</pre>
+<p>So while showing the data, in RDBMS you need to join three tables and in MongoDB, data will be shown from one collection only.</p>
+<h1>MongoDB - Create Database</h1>
+<p>In this chapter, we will see how to create a database in MongoDB.</p>
+<h2>The use Command</h2>
+<p>MongoDB <b>use DATABASE_NAME</b> is used to create database. The command will create a new database if it doesn't exist, otherwise it will return the existing database.</p>
+<h3>Syntax</h3>
+<p>Basic syntax of <b>use DATABASE</b> statement is as follows &minus;</p>
+<pre class="result notranslate">
+use DATABASE_NAME
+</pre>
+<h3>Example</h3>
+<p>If you want to create a database with name <b>&lt;mydb&gt;</b>, then <b>use DATABASE</b> statement would be as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;use mydb
+switched to db mydb
+</pre>
+<p>To check your currently selected database, use the command <b>db</b></p>
+<pre class="result notranslate">
+&gt;db
+mydb
+</pre>
+<p>If you want to check your databases list, use the command <b>show dbs</b>.</p>
+<pre class="result notranslate">
+&gt;show dbs
+local     0.78125GB
+test      0.23012GB
+</pre>
+<p>Your created database (mydb) is not present in list. To display database, you need to insert at least one document into it.</p>
+<pre class="prettyprint notranslate">
+&gt;db.movie.insert({"name":"tutorials point"})
+&gt;show dbs
+local      0.78125GB
+mydb       0.23012GB
+test       0.23012GB
+</pre>
+<p>In MongoDB default database is test. If you didn't create any database, then collections will be stored in test database.</p>
+<h1>MongoDB - Drop Database</h1>
+<p>In this chapter, we will see how to drop a database using MongoDB command.</p>
+<h2>The dropDatabase() Method</h2>
+<p>MongoDB <b>db.dropDatabase()</b> command is used to drop a existing database.</p>
+<h3>Syntax</h3>
+<p>Basic syntax of <b>dropDatabase()</b> command is as follows &minus;</p>
+<pre class="result notranslate">
+db.dropDatabase()
+</pre>
+<p>This will delete the selected database. If you have not selected any database, then it will delete default 'test' database.</p>
+<h3>Example</h3>
+<p>First, check the list of available databases by using the command, <b>show dbs</b>.</p>
+<pre class="prettyprint notranslate">
+&gt;show dbs
+local      0.78125GB
+mydb       0.23012GB
+test       0.23012GB
+&gt;
+</pre>
+<p>If you want to delete new database <b>&lt;mydb&gt;</b>, then <b>dropDatabase()</b> command would be as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;use mydb
+switched to db mydb
+&gt;db.dropDatabase()
+&gt;{ "dropped" : "mydb", "ok" : 1 }
+&gt;
+</pre>
+<p>Now check list of databases.</p>
+<pre class="prettyprint notranslate">
+&gt;show dbs
+local      0.78125GB
+test       0.23012GB
+&gt;
+</pre>
+<h1>MongoDB - Create Collection</h1>
+<p>In this chapter, we will see how to create a collection using MongoDB.</p>
+<h2>The createCollection() Method</h2>
+<p>MongoDB <b>db.createCollection(name, options)</b> is used to create collection.</p>
+<h3>Syntax</h3>
+<p>Basic syntax of <b>createCollection()</b> command is as follows &minus;</p>
+<pre class="result notranslate">
+db.createCollection(name, options)
+</pre>
+<p>In the command, <b>name</b> is name of collection to be created. <b>Options</b> is a document and is used to specify configuration of collection.</p>
+<table style="text-align:center;" class="table table-bordered">
+<tr>
+<th style="width:25%;text-align:center;">Parameter</th>
+<th style="width:25%;text-align:center;">Type</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td>Name</td>
+<td>String</td>
+<td>Name of the collection to be created</td>
+</tr>
+<tr>
+<td>Options</td>
+<td>Document</td>
+<td>(Optional) Specify options about memory size and indexing</td>
+</tr>
+</table>
+<p>Options parameter is optional, so you need to specify only the name of the collection. Following is the list of options you can use &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:15%;text-align:center;">Field</th>
+<th style="width:15%;text-align:center;">Type</th>
+<th style="text-align:center;">Description</th></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">capped</td>
+<td style="text-align:center;vertical-align:middle;">Boolean</td>
+<td>(Optional) If true, enables a capped collection. Capped collection is a fixed size collection that automatically overwrites its oldest entries when it reaches its maximum size. <b>If you specify true, you need to specify size parameter also.</b></td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">autoIndexId</td>
+<td style="text-align:center;vertical-align:middle;">Boolean</td>
+<td>(Optional) If true, automatically create index on _id field.s Default value is false.</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">size</td>
+<td style="text-align:center;vertical-align:middle;">number</td>
+<td>(Optional) Specifies a maximum size in bytes for a capped collection. <b>If capped is true, then you need to specify this field also.</b></td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">max</td>
+<td style="text-align:center;vertical-align:middle;">number</td>
+<td>(Optional) Specifies the maximum number of documents allowed in the capped collection.</td>
+</tr>
+</table>
+<p>While inserting the document, MongoDB first checks size field of capped collection, then it checks max field.</p>
+<h3>Examples</h3>
+<p>Basic syntax of <b>createCollection()</b> method without options is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;use test
+switched to db test
+&gt;db.createCollection("mycollection")
+{ "ok" : 1 }
+&gt;
+</pre>
+<p>You can check the created collection by using the command <b>show collections</b>.</p>
+<pre class="prettyprint notranslate">
+&gt;show collections
+mycollection
+system.indexes
+</pre>
+<p>The following example shows the syntax of <b>createCollection()</b> method with few important options &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.createCollection("mycol", { capped : true, autoIndexId : true, size : 
+   6142800, max : 10000 } )
+{ "ok" : 1 }
+&gt;
+</pre>
+<p>In MongoDB, you don't need to create collection. MongoDB creates collection automatically, when you insert some document.</p>
+<pre class="prettyprint notranslate">
+&gt;db.tutorialspoint.insert({"name" : "tutorialspoint"})
+&gt;show collections
+mycol
+mycollection
+system.indexes
+tutorialspoint
+&gt;
+</pre>
+<h1>MongoDB - Drop Collection</h1>
+<p>In this chapter, we will see how to drop a collection using MongoDB.</p>
+<h2>The drop() Method</h2>
+<p>MongoDB's <b>db.collection.drop()</b> is used to drop a collection from the database.</p>
+<h3>Syntax</h3>
+<p>Basic syntax of <b>drop()</b> command is as follows &minus;</p>
+<pre class="result notranslate">
+db.COLLECTION_NAME.drop()
+</pre>
+<h3>Example</h3>
+<p>First, check the available collections into your database <b>mydb</b>.</p>
+<pre class="prettyprint notranslate">
+&gt;use mydb
+switched to db mydb
+&gt;show collections
+mycol
+mycollection
+system.indexes
+tutorialspoint
+&gt;
+</pre>
+<p>Now drop the collection with the name <b>mycollection</b>.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycollection.drop()
+true
+&gt;
+</pre>
+<p>Again check the list of collections into database.</p>
+<pre class="prettyprint notranslate">
+&gt;show collections
+mycol
+system.indexes
+tutorialspoint
+&gt;
+</pre>
+<p>drop() method will return true, if the selected collection is dropped successfully, otherwise it will return false.</p>
+<h1>MongoDB - Datatypes</h1>
+<p>MongoDB supports many datatypes. Some of them are &minus;</p>
+<ul class="list">
+<li><p><b>String</b> &minus; This is the most commonly used datatype to store the data. String in MongoDB must be UTF-8 valid.</p></li>
+<li><p><b>Integer</b> &minus; This type is used to store a numerical value. Integer can be 32 bit or 64 bit depending upon your server.</p></li>
+<li><p><b>Boolean</b> &minus; This type is used to store a boolean (true/ false) value.</li>
+<li><p><b>Double</b> &minus; This type is used to store floating point values.</p></li>
+<li><p><b>Min/ Max keys</b> &minus; This type is used to compare a value against the lowest and highest BSON elements.</p></li>
+<li><p><b>Arrays</b> &minus; This type is used to store arrays or list or multiple values into one key.</p></li>
+<li><p><b>Timestamp</b> &minus; ctimestamp. This can be handy for recording when a document has been modified or added.</p></li>
+<li><p><b>Object</b> &minus; This datatype is used for embedded documents.</p></li>
+<li><p><b>Null</b> &minus; This type is used to store a Null value.</p></li>
+<li><p><b>Symbol</b> &minus; This datatype is used identically to a string; however, it's generally reserved for languages that use a specific symbol type.</p></li>
+<li><p><b>Date </b> &minus; This datatype is used to store the current date or time in UNIX time format. You can specify your own date time by creating object of Date and passing day, month, year into it.</p></li>
+<li><p><b>Object ID</b> &minus; This datatype is used to store the document’s ID.</p></li>
+<li><p><b>Binary data</b> &minus; This datatype is used to store binary data.</p></li>
+<li><p><b>Code</b> &minus; This datatype is used to store JavaScript code into the document.</p></li>
+<li><p><b>Regular expression</b> &minus; This datatype is used to store regular expression.</p></li>
+</ul>
+<h1>MongoDB - Insert Document</h1>
+<p>In this chapter, we will learn how to insert document in MongoDB collection.</p>
+<h2>The insert() Method</h2>
+<p>To insert data into MongoDB collection, you need to use MongoDB's <b>insert()</b> or <b>save()</b> method.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>insert()</b> command is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.insert(document)
+</pre>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.insert({
+   _id: ObjectId(7df78ad8902c),
+   title: 'MongoDB Overview', 
+   description: 'MongoDB is no sql database',
+   by: 'tutorials point',
+   url: 'http://www.tutorialspoint.com',
+   tags: ['mongodb', 'database', 'NoSQL'],
+   likes: 100
+})
+</pre>
+<p>Here <b>mycol</b> is our collection name, as created in the previous chapter. If the collection doesn't exist in the database, then MongoDB will create this collection and then insert a document into it.</p>
+<p>In the inserted document, if we don't specify the _id parameter, then MongoDB assigns a unique ObjectId for this document.</p>
+<p>_id is 12 bytes hexadecimal number unique for every document in a collection. 12 bytes are divided as follows &minus;</p>
+<pre class="result notranslate">
+_id: ObjectId(4 bytes timestamp, 3 bytes machine id, 2 bytes process id, 
+   3 bytes incrementer)
+</pre>
+<p>To insert multiple documents in a single query, you can pass an array of documents in insert() command.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+&gt;db.post.insert([
+   {
+      title: 'MongoDB Overview', 
+      description: 'MongoDB is no sql database',
+      by: 'tutorials point',
+      url: 'http://www.tutorialspoint.com',
+      tags: ['mongodb', 'database', 'NoSQL'],
+      likes: 100
+   },
+	
+   {
+      title: 'NoSQL Database', 
+      description: 'NoSQL database doesn't have tables',
+      by: 'tutorials point',
+      url: 'http://www.tutorialspoint.com',
+      tags: ['mongodb', 'database', 'NoSQL'],
+      likes: 20, 
+      comments: [	
+         {
+            user:'user1',
+            message: 'My first comment',
+            dateCreated: new Date(2013,11,10,2,35),
+            like: 0 
+         }
+      ]
+   }
+])
+</pre>
+<p>To insert the document you can use <b>db.post.save(document)</b> also. If you don't specify <b>_id</b> in the document then <b>save()</b> method will work same as <b>insert()</b> method. If you specify _id then it will replace whole data of document containing _id as specified in save() method.</p>
+<h1>MongoDB - Query Document</h1>
+<p>In this chapter, we will learn how to query document from MongoDB collection.</p>
+<h2>The find() Method</h2>
+<p>To query data from MongoDB collection, you need to use MongoDB's <b>find()</b> method.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>find()</b> method is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.find()
+</pre>
+<p><b>find()</b> method will display all the documents in a non-structured way.</p>
+<h2>The pretty() Method</h2>
+<p>To display the results in a formatted way, you can use <b>pretty()</b> method.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+&gt;db.mycol.find().pretty()
+</pre>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find().pretty()
+{
+   "_id": ObjectId(7df78ad8902c),
+   "title": "MongoDB Overview", 
+   "description": "MongoDB is no sql database",
+   "by": "tutorials point",
+   "url": "http://www.tutorialspoint.com",
+   "tags": ["mongodb", "database", "NoSQL"],
+   "likes": "100"
+}
+&gt;
+</pre>
+<p>Apart from find() method, there is <b>findOne()</b> method, that returns only one document.</p>
+<h2>RDBMS Where Clause Equivalents in MongoDB</h2>
+<p>To query the document on the basis of some condition, you can use following operations.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Operation</th>
+<th style="text-align:center;">Syntax</th>
+<th style="text-align:center;">Example</th>
+<th style="width:35%; text-align:center;">RDBMS Equivalent</th>
+</tr>
+<tr>
+<td>Equality</td>
+<td>{&lt;key&gt;:&lt;value&gt;}</td>
+<td>db.mycol.find({"by":"tutorials point"}).pretty()</td>
+<td>where by = 'tutorials point'</td>
+</tr>
+<tr>
+<td>Less Than</td>
+<td>{&lt;key&gt;:{$lt:&lt;value&gt;}}</td>
+<td>db.mycol.find({"likes":{$lt:50}}).pretty()</td>
+<td>where likes &lt; 50</td>
+</tr>
+<tr>
+<td style="width:35%;">Less Than Equals</td>
+<td>{&lt;key&gt;:{$lte:&lt;value&gt;}}</td>
+<td>db.mycol.find({"likes":{$lte:50}}).pretty()</td>
+<td>where likes &lt;= 50</td>
+</tr>
+<tr>
+<td>Greater Than</td>
+<td>{&lt;key&gt;:{$gt:&lt;value&gt;}}</td>
+<td>db.mycol.find({"likes":{$gt:50}}).pretty()</td>
+<td>where likes &gt; 50</td>
+</tr>
+<tr>
+<td>Greater Than Equals</td>
+<td>{&lt;key&gt;:{$gte:&lt;value&gt;}}</td>
+<td>db.mycol.find({"likes":{$gte:50}}).pretty()</td>
+<td>where likes &gt;= 50</td>
+</tr>
+<tr>
+<td>Not Equals</td>
+<td>{&lt;key&gt;:{$ne:&lt;value&gt;}}</td>
+<td>db.mycol.find({"likes":{$ne:50}}).pretty()</td>
+<td>where likes != 50</td>
+</tr>
+</table>
+<h2>AND in MongoDB</h2>
+<h3>Syntax</h3>
+<p>In the <b>find()</b> method, if you pass multiple keys by separating them by ',' then MongoDB treats it as <b>AND</b> condition. Following is the basic syntax of <b>AND</b> &minus;</p>
+<pre class="result notranslate">
+&gt;db.mycol.find(
+   {
+      $and: [
+         {key1: value1}, {key2:value2}
+      ]
+   }
+).pretty()
+</pre>
+<h3>Example</h3>
+<p>Following example will show all the tutorials written by 'tutorials point' and whose title is 'MongoDB Overview'.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find({$and:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty() {
+   "_id": ObjectId(7df78ad8902c),
+   "title": "MongoDB Overview", 
+   "description": "MongoDB is no sql database",
+   "by": "tutorials point",
+   "url": "http://www.tutorialspoint.com",
+   "tags": ["mongodb", "database", "NoSQL"],
+   "likes": "100"
+}
+</pre>
+<p>For the above given example, equivalent where clause will be <b>' where by = 'tutorials point' AND title = 'MongoDB Overview' '</b>. You can pass any number of key, value pairs in find clause.</p>
+<h2>OR in MongoDB</h2>
+<h3>Syntax</h3>
+<p>To query documents based on the OR condition, you need to use <b>$or</b> keyword. Following is the basic syntax of <b>OR</b> &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find(
+   {
+      $or: [
+         {key1: value1}, {key2:value2}
+      ]
+   }
+).pretty()
+</pre>
+<h3>Example</h3>
+<p>Following example will show all the tutorials written by 'tutorials point' or whose title is 'MongoDB Overview'.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find({$or:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
+{
+   "_id": ObjectId(7df78ad8902c),
+   "title": "MongoDB Overview", 
+   "description": "MongoDB is no sql database",
+   "by": "tutorials point",
+   "url": "http://www.tutorialspoint.com",
+   "tags": ["mongodb", "database", "NoSQL"],
+   "likes": "100"
+}
+&gt;
+</pre>
+<h2>Using AND and OR Together</h2>
+<h3>Example</h3>
+<p>The following example will show the documents that have likes greater than 10 and whose title is either 'MongoDB Overview' or by is 'tutorials point'. Equivalent SQL where clause is <b>'where likes&gt;10 AND (by = 'tutorials point' OR title = 'MongoDB Overview')'</b></p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find({"likes": {$gt:10}, $or: [{"by": "tutorials point"},
+   {"title": "MongoDB Overview"}]}).pretty()
+{
+   "_id": ObjectId(7df78ad8902c),
+   "title": "MongoDB Overview", 
+   "description": "MongoDB is no sql database",
+   "by": "tutorials point",
+   "url": "http://www.tutorialspoint.com",
+   "tags": ["mongodb", "database", "NoSQL"],
+   "likes": "100"
+}
+&gt;
+</pre>
+<h1>MongoDB - Update Document</h1>
+<p>MongoDB's <b>update()</b> and <b>save()</b> methods are used to update document into a collection. The update() method updates the values in the existing document while the save() method replaces the existing document with the document passed in save() method.</p>
+<h2>MongoDB Update() Method</h2>
+<p>The update() method updates the values in the existing document.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>update()</b> method is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.update(SELECTION_CRITERIA, UPDATED_DATA)
+</pre>
+<h3>Example</h3>
+<p>Consider the mycol collection has the following data.</p>
+<pre class="prettyprint notranslate">
+{ "_id" : ObjectId(5983548781331adf45ec5), "title":"MongoDB Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+</pre>
+<p>Following example will set the new title 'New MongoDB Tutorial' of the documents whose title is 'MongoDB Overview'.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
+&gt;db.mycol.find()
+{ "_id" : ObjectId(5983548781331adf45ec5), "title":"New MongoDB Tutorial"}
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+&gt;
+</pre>
+<p>By default, MongoDB will update only a single document. To update multiple documents, you need to set a parameter 'multi' to true.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.update({'title':'MongoDB Overview'},
+   {$set:{'title':'New MongoDB Tutorial'}},{multi:true})
+</pre>
+<h2>MongoDB Save() Method</h2>
+<p>The <b>save()</b> method replaces the existing document with the new document passed in the save() method.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of MongoDB <b>save()</b> method is shown below &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})
+</pre>
+<h3>Example</h3>
+<p>Following example will replace the document with the _id '5983548781331adf45ec7'.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.save(
+   {
+      "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point New Topic",
+         "by":"Tutorials Point"
+   }
+)
+&gt;db.mycol.find()
+{ "_id" : ObjectId(5983548781331adf45ec5), "title":"Tutorials Point New Topic",
+   "by":"Tutorials Point"}
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+&gt;
+</pre>
+<h1>MongoDB - Delete Document</h1>
+<p>In this chapter, we will learn how to delete a document using MongoDB.</p>
+<h2>The remove() Method</h2>
+<p>MongoDB's <b>remove()</b> method is used to remove a document from the collection. remove() method accepts two parameters. One is deletion criteria and second is justOne flag.</p>
+<ul class="list">
+<li><p><b>deletion criteria</b> &minus; (Optional) deletion criteria according to documents will be removed.</p></li>
+<li><p><b>justOne</b> &minus; (Optional) if set to true or 1, then remove only one document.</p></li>
+</ul>
+<h3>Syntax</h3>
+<p>Basic syntax of <b>remove()</b> method is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.remove(DELLETION_CRITTERIA)
+</pre>
+<h3>Example</h3>
+<p>Consider the mycol collection has the following data.</p>
+<pre class="prettyprint notranslate">
+{ "_id" : ObjectId(5983548781331adf45ec5), "title":"MongoDB Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+</pre>
+<p>Following example will remove all the documents whose title is 'MongoDB Overview'.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.remove({'title':'MongoDB Overview'})
+&gt;db.mycol.find()
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+&gt;
+</pre>
+<h2>Remove Only One</h2>
+<p>If there are multiple records and you want to delete only the first record, then set <b>justOne</b> parameter in <b>remove()</b> method.</p>
+<pre class="prettyprint notranslate">
+&gt;db.COLLECTION_NAME.remove(DELETION_CRITERIA,1)
+</pre>
+<h2>Remove All Documents</h2>
+<p>If you don't specify deletion criteria, then MongoDB will delete whole documents from the collection. <b>This is equivalent of SQL's truncate command.</b></p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.remove()
+&gt;db.mycol.find()
+&gt;
+</pre>
+<h1>MongoDB - Projection</h1>
+<p>In MongoDB, projection means selecting only the necessary data rather than selecting whole of the data of a document. If a document has 5 fields and you need to show only 3, then select only 3 fields from them.</p>
+<h2>The find() Method</h2>
+<p>MongoDB's <b>find()</b> method, explained in <a target="_blank" rel="nofollow" href="mongodb_query_document.html">MongoDB Query Document</a> accepts second optional parameter that is list of fields that you want to retrieve. In MongoDB, when you execute <b>find()</b> method, then it displays all fields of a document. To limit this, you need to set a list of fields with value 1 or 0. 1 is used to show the field while 0 is used to hide the fields.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>find()</b> method with projection is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.find({},{KEY:1})
+</pre>
+<h3>Example</h3>
+<p>Consider the collection mycol has the following data &minus;</p>
+<pre class="prettyprint notranslate">
+{ "_id" : ObjectId(5983548781331adf45ec5), "title":"MongoDB Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+</pre>
+<p>Following example will display the title of the document while querying the document.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find({},{"title":1,_id:0})
+{"title":"MongoDB Overview"}
+{"title":"NoSQL Overview"}
+{"title":"Tutorials Point Overview"}
+&gt;
+</pre>
+<p>Please note <b>_id</b> field is always displayed while executing <b>find()</b> method, if you don't want this field, then you need to set it as 0.</p>
+<h1>MongoDB - Limit Records</h1>
+<p>In this chapter, we will learn how to limit records using MongoDB.</p>
+<h2>The Limit() Method</h2>
+<p>To limit the records in MongoDB, you need to use <b>limit()</b> method. The method accepts one number type argument, which is the number of documents that you want to be displayed.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>limit()</b> method is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.find().limit(NUMBER)
+</pre>
+<h3>Example</h3>
+<p>Consider the collection myycol has the following data.</p>
+<pre class="prettyprint notranslate">
+{ "_id" : ObjectId(5983548781331adf45ec5), "title":"MongoDB Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+</pre>
+<p>Following example will display only two documents while querying the document.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find({},{"title":1,_id:0}).limit(2)
+{"title":"MongoDB Overview"}
+{"title":"NoSQL Overview"}
+&gt;
+</pre>
+<p>If you don't specify the number argument in <b>limit()</b> method then it will display all documents from the collection.</p>
+<h2>MongoDB Skip() Method</h2>
+<p>Apart from limit() method, there is one more method <b>skip()</b> which also accepts number type argument and is used to skip the number of documents.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>skip()</b> method is as follows &minus;</p>
+<pre class="result notranslate">
+>db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)
+</pre>
+<h3>Example</h3>
+<p>Following example will display only the second document.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find({},{"title":1,_id:0}).limit(1).skip(1)
+{"title":"NoSQL Overview"}
+&gt;
+</pre>
+<p>Please note, the default value in <b>skip()</b> method is 0.</p>
+<h1>MongoDB - Sort Records</h1>
+<p>In this chapter, we will learn how to sort records in MongoDB.</p>
+<h2>The sort() Method</h2>
+<p>To sort documents in MongoDB, you need to use <b>sort()</b> method. The method accepts a document containing a list of fields along with their sorting order. To specify sorting order 1 and -1 are used. 1 is used for ascending order while -1 is used for descending order.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>sort()</b> method is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.COLLECTION_NAME.find().sort({KEY:1})
+</pre>
+<h3>Example</h3>
+<p>Consider the collection myycol has the following data.</p>
+<pre class="prettyprint notranslate">
+{ "_id" : ObjectId(5983548781331adf45ec5), "title":"MongoDB Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec6), "title":"NoSQL Overview"}
+{ "_id" : ObjectId(5983548781331adf45ec7), "title":"Tutorials Point Overview"}
+</pre>
+<p>Following example will display the documents sorted by title in the descending order.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.find({},{"title":1,_id:0}).sort({"title":-1})
+{"title":"Tutorials Point Overview"}
+{"title":"NoSQL Overview"}
+{"title":"MongoDB Overview"}
+&gt;
+</pre>
+<p>Please note, if you don't specify the sorting preference, then <b>sort()</b> method will display the documents in ascending order.</p>
+<h1>MongoDB - Indexing</h1>
+<p>Indexes support the efficient resolution of queries. Without indexes, MongoDB must scan every document of a collection to select those documents that match the query statement. This scan is highly inefficient and require MongoDB to process a large volume of data.</p>
+<p>Indexes are special data structures, that store a small portion of the data set in an easy-to-traverse form. The index stores the value of a specific field or set of fields, ordered by the value of the field as specified in the index.</p>
+<h2>The ensureIndex() Method</h2>
+<p>To create an index you need to use ensureIndex() method of MongoDB.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>ensureIndex()</b> method is as follows().</p>
+<pre class="prettyprint notranslate">
+&gt;db.COLLECTION_NAME.ensureIndex({KEY:1})
+</pre>
+<p>Here key is the name of the field on which you want to create index and 1 is for ascending order. To create index in descending order you need to use -1.</p>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.ensureIndex({"title":1})
+&gt;
+</pre>
+<p>In <b>ensureIndex()</b> method you can pass multiple fields, to create index on multiple fields.</p>
+<pre class="prettyprint notranslate">
+&gt;db.mycol.ensureIndex({"title":1,"description":-1})
+&gt;
+</pre>
+<p><b>ensureIndex()</b> method also accepts list of options (which are optional). Following is the list &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:10%;text-align:center;">Parameter</th>
+<th style="width:10%;text-align:center;">Type</th>
+<th style="text-align:center;">Description</th></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">background</td>
+<td style="text-align:center;vertical-align:middle;">Boolean</td>
+<td>Builds the index in the background so that building an index does not block other database activities. Specify true to build in the background. The default value is <b>false</b>.</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">unique</td>
+<td style="text-align:center;vertical-align:middle;">Boolean</td>
+<td>Creates a unique index so that the collection will not accept insertion of documents where the index key or keys match an existing value in the index. Specify true to create a unique index. The default value is <b>false</b>.</td></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">name</td>
+<td style="text-align:center;vertical-align:middle;">string</td>
+<td>The name of the index. If unspecified, MongoDB generates an index name by concatenating the names of the indexed fields and the sort order.</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">dropDups</td>
+<td style="text-align:center;vertical-align:middle;">Boolean</td>
+<td>Creates a unique index on a field that may have duplicates. MongoDB indexes only the first occurrence of a key and removes all documents from the collection that contain subsequent occurrences of that key. Specify true to create unique index. The default value is <b>false</b>.</td></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">sparse</td>
+<td style="text-align:center;vertical-align:middle;">Boolean</td>
+<td>If true, the index only references documents with the specified field. These indexes use less space but behave differently in some situations (particularly sorts). The default value is <b>false</b>.</td></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">expireAfterSeconds</td>
+<td style="text-align:center;vertical-align:middle;">integer</td>
+<td>Specifies a value, in seconds, as a TTL to control how long MongoDB retains documents in this collection.</td></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">v</td>
+<td style="text-align:center;vertical-align:middle;">index version</td>
+<td>The index version number. The default index version depends on the version of MongoDB running when creating the index.</td></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">weights</td>
+<td style="text-align:center;vertical-align:middle;">document</td>
+<td>The weight is a number ranging from 1 to 99,999 and denotes the significance of the field relative to the other indexed fields in terms of the score.</td></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">default_language</td>
+<td style="text-align:center;vertical-align:middle;">string</td>
+<td>For a text index, the language that determines the list of stop words and the rules for the stemmer and tokenizer. The default value is <b>english</b>.</td></tr>
+<tr>
+<td style="text-align:center;vertical-align:middle;">language_override</td>
+<td style="text-align:center;vertical-align:middle;">string</td>
+<td>For a text index, specify the name of the field in the document that contains, the language to override the default language. The default value is language.</td></tr>
+</table>
+<h1>MongoDB - Aggregation</h1>
+<p>Aggregations operations process data records and return computed results. Aggregation operations group values from multiple documents together, and can perform a variety of operations on the grouped data to return a single result. In SQL count(*) and with group by is an equivalent of mongodb aggregation.</p>
+<h2>The aggregate() Method</h2>
+<p>For the aggregation in MongoDB, you should use <b>aggregate()</b> method.</p>
+<h3>Syntax</h3>
+<p>Basic syntax of <b>aggregate()</b> method is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;db.COLLECTION_NAME.aggregate(AGGREGATE_OPERATION)
+</pre>
+<h3>Example</h3>
+<P>In the collection you have the following data &minus;</P>
+<pre class="prettyprint notranslate">
+{
+   _id: ObjectId(7df78ad8902c)
+   title: 'MongoDB Overview', 
+   description: 'MongoDB is no sql database',
+   by_user: 'tutorials point',
+   url: 'http://www.tutorialspoint.com',
+   tags: ['mongodb', 'database', 'NoSQL'],
+   likes: 100
+},
+{
+   _id: ObjectId(7df78ad8902d)
+   title: 'NoSQL Overview', 
+   description: 'No sql database is very fast',
+   by_user: 'tutorials point',
+   url: 'http://www.tutorialspoint.com',
+   tags: ['mongodb', 'database', 'NoSQL'],
+   likes: 10
+},
+{
+   _id: ObjectId(7df78ad8902e)
+   title: 'Neo4j Overview', 
+   description: 'Neo4j is no sql database',
+   by_user: 'Neo4j',
+   url: 'http://www.neo4j.com',
+   tags: ['neo4j', 'database', 'NoSQL'],
+   likes: 750
+},
+</pre>
+<p>Now from the above collection, if you want to display a list stating how many tutorials are written by each user, then you will use the following <b>aggregate()</b> method &minus;</p>
+<pre class="prettyprint notranslate">
+&gt; db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
+{
+   "result" : [
+      {
+         "_id" : "tutorials point",
+         "num_tutorial" : 2
+      },
+      {
+         "_id" : "Neo4j",
+         "num_tutorial" : 1
+      }
+   ],
+   "ok" : 1
+}
+&gt;
+</pre>
+<p>Sql equivalent query for the above use case will be <b>select by_user, count(*) from mycol group by by_user</b>.</p>
+<p>In the above example, we have grouped documents by field <b>by_user</b> and on each occurrence of by_user previous value of sum is incremented. Following is a list of available aggregation expressions.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:10%; text-align:center;">Expression</th>
+<th style="width:50%; text-align:center;">Description</th>
+<th style="text-align:center;">Example</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$sum</td>
+<td>Sums up the defined value from all documents in the collection.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : "$likes"}}}])</td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$avg</td>
+<td>Calculates the average of all given values from all documents in the collection.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])</td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$min</td>
+<td>Gets the minimum of the corresponding values from all documents in the collection.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$min : "$likes"}}}])</td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$max</td>
+<td>Gets the maximum of the corresponding values from all documents in the collection.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$max : "$likes"}}}])</td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$push</td>
+<td>Inserts the value to an array in the resulting document.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", url : {$push: "$url"}}}])</td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$addToSet</td>
+<td>Inserts the value to an array in the resulting document but does not create duplicates.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", url : {$addToSet : "$url"}}}])</td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$first</td>
+<td>Gets the first document from the source documents according to the grouping. Typically this makes only sense together with some previously applied “$sort”-stage.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", first_url : {$first : "$url"}}}])</td></tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">$last</td>
+<td>Gets the last document from the source documents according to the grouping. Typically this makes only sense together with some previously applied “$sort”-stage.</td>
+<td>db.mycol.aggregate([{$group : {_id : "$by_user", last_url : {$last : "$url"}}}])</td></tr>
+</table>
+<h2>Pipeline Concept</h2>
+<p>In UNIX command, shell pipeline means the possibility to execute an operation on some input and use the output as the input for the next command and so on. MongoDB also supports same concept in aggregation framework. There is a set of possible stages and each of those is taken as a set of documents as an input and produces a resulting set of documents (or the final resulting JSON document at the end of the pipeline). This can then in turn be used for the next stage and so on.</p>
+<p>Following are the possible stages in aggregation framework &minus;</p>
+<ul class="list">
+<li><p><b>$project</b> &minus; Used to select some specific fields from a collection.</p></li>
+<li><p><b>$match</b> &minus; This is a filtering operation and thus this can reduce the amount of documents that are given as input to the next stage.</p></li>
+<li><p><b>$group</b> &minus; This does the actual aggregation as discussed above.</p></li>
+<li><p><b>$sort</b> &minus; Sorts the documents.</p></li>
+<li><p><b>$skip</b> &minus; With this, it is possible to skip forward in the list of documents for a given amount of documents.</p></li>
+<li><p><b>$limit</b> &minus; This limits the amount of documents to look at, by the given number starting from the current positions.</p></li>
+<li><p><b>$unwind</b> &minus; This is used to unwind document that are using arrays. When using an array, the data is kind of pre-joined and this operation will be undone with this to have individual documents again. Thus with this stage we will increase the amount of documents for the next stage.</p></li>
+</ul>
+<h1>MongoDB - Replication</h1>
+<p>Replication is the process of synchronizing data across multiple servers. Replication provides redundancy and increases data availability with multiple copies of data on different database servers. Replication protects a database from the loss of a single server. Replication also allows you to recover from hardware failure and service interruptions. With additional copies of the data, you can dedicate one to disaster recovery, reporting, or backup.</p>
+<h2>Why Replication?</h2>
+<ul class="list">
+<li>To keep your data safe</li>
+<li>High (24*7) availability of data</li>
+<li>Disaster recovery</li>
+<li>No downtime for maintenance (like backups, index rebuilds, compaction)</li>
+<li>Read scaling (extra copies to read from)</li>
+<li>Replica set is transparent to the application</li>
+</ul>
+<h2>How Replication Works in MongoDB</h2>
+<p>MongoDB achieves replication by the use of replica set. A replica set is a group of <b>mongod</b> instances that host the same data set. In a replica, one node is primary node that receives all write operations. All other instances, such as secondaries, apply operations from the primary so that they have the same data set. Replica set can have only one primary node.</p>
+<ul class="list">
+<li><p>Replica set is a group of two or more nodes (generally minimum 3 nodes are required).</p></li>
+<li><p>In a replica set, one node is primary node and remaining nodes are secondary.</p></li>
+<li><p>All data replicates from primary to secondary node.</p></li>
+<li><p>At the time of automatic failover or maintenance, election establishes for primary and a new primary node is elected.</p></li>
+<li><p>After the recovery of failed node, it again join the replica set and works as a secondary node.</p></li>
+</ul>
+<p>A typical diagram of MongoDB replication is shown in which client application always interact with the primary node and the primary node then replicates the data to the secondary nodes.</p>
+<img src="images/replication.png" alt="MongoDB Replication" />
+<h2>Replica Set Features</h2>
+<ul class="list">
+<li>A cluster of N nodes</li>
+<li>Any one node can be primary</li>
+<li>All write operations go to primary</li>
+<li>Automatic failover</li>
+<li>Automatic recovery</li>
+<li>Consensus election of primary</li>
+</ul>
+<h2>Set Up a Replica Set</h2>
+<p>In this tutorial, we will convert standalone MongoDB instance to a replica set. To convert to replica set, following are the steps &minus;</p>
+<ul class="list">
+<li><p>Shutdown already running MongoDB server.</p></li>
+<li>
+<li><p>Start the MongoDB server by specifying -- replSet option. Following is the basic syntax of --replSet &minus;</p></li>
+</ul>
+<pre class="result notranslate">
+mongod --port "PORT" --dbpath "YOUR_DB_DATA_PATH" --replSet "REPLICA_SET_INSTANCE_NAME"
+</pre>
+<h3>Example</h3>
+<pre class="prettyprint notranslate">
+mongod --port 27017 --dbpath "D:\set up\mongodb\data" --replSet rs0
+</pre>
+<ul class="list">
+<li><p>It will start a mongod instance with the name rs0, on port 27017.</p></li>
+<li><p>Now start the command prompt and connect to this mongod instance.</p></li>
+<li><p>In Mongo client, issue the command <b>rs.initiate()</b> to initiate a new replica set.</p></li>
+<li><p>To check the replica set configuration, issue the command <b>rs.conf()</b>. To check the status of replica set issue the command <b>rs.status()</b>.</p></li>
+</ul>
+<h2>Add Members to Replica Set</h2>
+<p>To add members to replica set, start mongod instances on multiple machines. Now start a mongo client and issue a command <b>rs.add()</b>.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>rs.add()</b> command is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;rs.add(HOST_NAME:PORT)
+</pre>
+<h3>Example</h3>
+<p>Suppose your mongod instance name is <b>mongod1.net</b> and it is running on port <b>27017</b>. To add this instance to replica set, issue the command <b>rs.add()</b> in Mongo client.</p>
+<pre class="prettyprint notranslate">
+&gt;rs.add("mongod1.net:27017")
+&gt;
+</pre>
+<p>You can add mongod instance to replica set only when you are connected to primary node. To check whether you are connected to primary or not, issue the command <b>db.isMaster()</b> in mongo client.</p>
+<h1>MongoDB - Sharding</h1>
+<p>Sharding is the process of storing data records across multiple machines and it is MongoDB's approach to meeting the demands of data growth. As the size of the data increases, a single machine may not be sufficient to store the data nor provide an acceptable read and write throughput. Sharding solves the problem with horizontal scaling. With sharding, you add more machines to support data growth and the demands of read and write operations.</p>
+<h2>Why Sharding?</h2>
+<ul class="list">
+<li>In replication, all writes go to master node</li>
+<li>Latency sensitive queries still go to master</li>
+<li>Single replica set has limitation of 12 nodes</li>
+<li>Memory can't be large enough when active dataset is big</li>
+<li>Local disk is not big enough</li>
+<li>Vertical scaling is too expensive</li>
+</ul>
+<h2>Sharding in MongoDB</h2>
+<p>The following diagram shows the sharding in MongoDB using sharded cluster.</p>
+<img src="images/sharding.png" alt="MongoDB Sharding" />
+<p>In the following diagram, there are three main components &minus;</p>
+<ul class="list">
+<li><p><b>Shards</b> &minus; Shards are used to store data. They provide high availability and data consistency. In production environment, each shard is a separate replica set.</p></li>
+<li><p><b>Config Servers</b> &minus; Config servers store the cluster's metadata. This data contains a mapping of the cluster's data set to the shards. The query router uses this metadata to target operations to specific shards. In production environment, sharded clusters have exactly 3 config servers.</p></li>
+<li><p><b>Query Routers</b> &minus; Query routers are basically mongo instances, interface with client applications and direct operations to the appropriate shard. The query router processes and targets the operations to shards and then returns results to the clients. A sharded cluster can contain more than one query router to divide the client request load. A client sends requests to one query router. Generally, a sharded cluster have many query routers.</p></li>
+</ul>
+<h1>MongoDB - Create Backup</h1>
+<p>In this chapter, we will see how to create a backup in MongoDB.</p>
+<h2>Dump MongoDB Data</h2>
+<p>To create backup of database in MongoDB, you should use <b>mongodump</b> command. This command will dump the entire data of your server into the dump directory. There are many options available by which you can limit the amount of data or create backup of your remote server.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>mongodump</b> command is as follows &minus;</p>
+<pre class="result notranslate">
+&gt;mongodump
+</pre>
+<h3>Example</h3>
+<p>Start your mongod server. Assuming that your mongod server is running on the localhost and port 27017, open a command prompt and go to the bin directory of your mongodb instance and type the command <b>mongodump</b></p>
+<p>Consider the mycol collection has the following data.</p>
+<pre class="prettyprint notranslate">
+&gt;mongodump
+</pre>
+<p>The command will connect to the server running at <b>127.0.0.1</b> and port <b>27017</b> and back all data of the server to directory <b>/bin/dump/</b>. Following is the output of the command &minus;</p>
+<img src="images/mongodump.png" alt="DB Stats" />
+<p>Following is a list of available options that can be used with the <b>mongodump</b> command.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:40%;">Syntax</th>
+<th style="width:30%;">Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td>mongodump --host HOST_NAME --port PORT_NUMBER</td>
+<td>This commmand will backup all databases of specified mongod instance.</td>
+<td>mongodump --host tutorialspoint.com --port 27017</td></tr>
+<tr>
+<td>mongodump --dbpath DB_PATH --out BACKUP_DIRECTORY</td>
+<td>This command will backup only specified database at specified path.</td>
+<td>mongodump --dbpath /data/db/ --out /data/backup/</td></tr>
+<tr>
+<td>mongodump --collection COLLECTION --db DB_NAME</td>
+<td>This command will backup only specified collection of specified database.</td>
+<td>mongodump --collection mycol --db test</td></tr>
+</table>
+<h2>Restore data</h2>
+<p>To restore backup data MongoDB's <b>mongorestore</b> command is used. This command restores all of the data from the backup directory.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>mongorestore</b> command is &minus;</p>
+<pre class="result notranslate">
+&gt;mongorestore
+</pre>
+<p>Following is the output of the command &minus;</p>
+<img src="images/mongorestore.png" alt="DB Stats" />
+<h1>MongoDB - Deployment</h1>
+<p>When you are preparing a MongoDB deployment, you should try to understand how your application is going to hold up in production. It’s a good idea to develop a consistent, repeatable approach to managing your deployment environment so that you can minimize any surprises once you’re in production.</p>
+<p>The best approach incorporates prototyping your set up, conducting load testing, monitoring key metrics, and using that information to scale your set up. The key part of the approach is to proactively monitor your entire system - this will help you understand how your production system will hold up before deploying, and determine where you will need to add capacity. Having insight into potential spikes in your memory usage, for example, could help put out a write-lock fire before it starts.</p>
+<p>To monitor your deployment, MongoDB provides some of the following commands &minus;</p>
+<h2>mongostat</h2>
+<p>This command checks the status of all running mongod instances and return counters of database operations. These counters include inserts, queries, updates, deletes, and cursors. Command also shows when you’re hitting page faults, and showcase your lock percentage. This means that you're running low on memory, hitting write capacity or have some performance issue.</p>
+<p>To run the command, start your mongod instance. In another command prompt, go to <b>bin</b> directory of your mongodb installation and type <b>mongostat</b>.</p>
+<pre class="result notranslate">
+D:\set up\mongodb\bin&gt;mongostat
+</pre>
+<p>Following is the output of the command &minus;</p>
+<img src="images/mongostat.png" alt="mongostat" />
+<h2>mongotop</h2>
+<p>This command tracks and reports the read and write activity of MongoDB instance on a collection basis. By default, <b>mongotop</b> returns information in each second, which you can change it accordingly. You should check that this read and write activity matches your application intention, and you’re not firing too many writes to the database at a time, reading too frequently from a disk, or are exceeding your working set size.</p>
+<p>To run the command, start your mongod instance. In another command prompt, go to <b>bin</b> directory of your mongodb installation and type <b>mongotop</b>.</p>
+<pre class="result notranslate">
+D:\set up\mongodb\bin&gt;mongotop
+</pre>
+<p>Following is the output of the command &minus;</p>
+<img src="images/mongotop.png" alt="mongotop" />
+<p>To change <b>mongotop</b> command to return information less frequently, specify a specific number after the mongotop command.</p>
+<pre class="result notranslate">
+D:\set up\mongodb\bin&gt;mongotop 30
+</pre>
+<p>The above example will return values every 30 seconds.</p> 
+<p>Apart from the MongoDB tools, 10gen provides a free, hosted monitoring service, MongoDB Management Service (MMS), that provides a dashboard and gives you a view of the metrics from your entire cluster.</p>
+<h1>MongoDB - Java</h1>
+<p>In this chapter, we will learn how to set up MongoDB JDBC driver.</p>
+<h2>Installation</h2>
+<p>Before you start using MongoDB in your Java programs, you need to make sure that you have MongoDB JDBC driver and Java set up on the machine. You can check Java tutorial for Java installation on your machine. Now, let us check how to set up MongoDB JDBC driver.</p>
+<ul class="list">
+<li><p>You need to download the jar from the path <a target="_blank" rel="nofollow" href="https://github.com/mongodb/mongo-java-driver/downloads">Download mongo.jar</a>. Make sure to download latest release of it.</p></li>
+<li><p>You need to include the mongo.jar into your classpath.</p></li>
+</ul>
+<h2>Connect to Database</h2>
+<p>To connect database, you need to specify the database name, if the database doesn't exist then MongoDB creates it automatically.</p>
+<p>Following is the code snippet to connect to the database &minus;</p>
+<pre class="prettyprint notranslate">
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+
+import com.mongodb.ServerAddress;
+import java.util.Arrays;
+
+public class MongoDBJDBC {
+
+   public static void main( String args[] ) {
+	
+      try{
+		
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "test" );
+         System.out.println("Connect to database successfully");
+         boolean auth = db.authenticate(myUserName, myPassword);
+         System.out.println("Authentication: "+auth);
+			
+      }catch(Exception e){
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      }
+   }
+}
+</pre>
+<p>Now, let's compile and run the above program to create our database test. You can change your path as per your requirement. We are assuming the current version of JDBC driver mongo-2.10.1.jar is available in the current path.</p>
+<pre class="result notranslate">
+$javac MongoDBJDBC.java
+$java -classpath ".:mongo-2.10.1.jar" MongoDBJDBC
+Connect to database successfully
+Authentication: true
+</pre>
+<p>If you are going to use Windows machine, then you can compile and run your code as follows &minus;</p>
+<pre class="result notranslate">
+$javac MongoDBJDBC.java
+$java -classpath ".;mongo-2.10.1.jar" MongoDBJDBC
+Connect to database successfully
+Authentication: true
+</pre>
+<p>Value of <b>auth</b> will be true, if the username and password are valid for the selected database.</p>
+<h2>Create a Collection</h2>
+<p>To create a collection, <b>createCollection()</b> method of <b>com.mongodb.DB</b> class is used.</p>
+<p>Following is the code snippet to create a collection &minus;</p>
+<pre class="prettyprint notranslate">
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+
+import com.mongodb.ServerAddress;
+import java.util.Arrays;
+
+public class MongoDBJDBC {
+
+   public static void main( String args[] ) {
+	
+      try{   
+		
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "test" );
+         System.out.println("Connect to database successfully");
+			
+         boolean auth = db.authenticate(myUserName, myPassword);
+         System.out.println("Authentication: "+auth);
+			
+         DBCollection coll = db.createCollection("mycol");
+         System.out.println("Collection created successfully");
+      }catch(Exception e){
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      }
+   }
+}
+</pre>
+<p>When program is compiled and executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connect to database successfully
+Authentication: true
+Collection created successfully
+</pre>
+<h2>Getting/ selecting a collection</h2>
+<p>To get/select a collection from the database, <b>getCollection()</b> method of <b>com.mongodb.DBCollection</b> class is used.</p>
+<p>Code snippets to get/select a collection &minus;</p>
+<pre class="prettyprint notranslate">
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+
+import com.mongodb.ServerAddress;
+import java.util.Arrays;
+
+public class MongoDBJDBC {
+
+   public static void main( String args[] ) {
+	
+      try{   
+		
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "test" );
+         System.out.println("Connect to database successfully");
+			
+         boolean auth = db.authenticate(myUserName, myPassword);
+         System.out.println("Authentication: "+auth);
+			
+         DBCollection coll = db.createCollection("mycol");
+         System.out.println("Collection created successfully");
+			
+         DBCollection coll = db.getCollection("mycol");
+         System.out.println("Collection mycol selected successfully");
+      }catch(Exception e){
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      }
+   }
+}
+</pre>
+<p>When the program is compiled and executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connect to database successfully
+Authentication: true
+Collection created successfully
+Collection mycol selected successfully
+</pre>
+<h2>Insert a document</h2>
+<p>To insert a document into MongoDB, <b>insert()</b> method of <b>com.mongodb.DBCollection</b> class is used.</p>
+<p>Following is the code snippet to insert a document &minus;</p>
+<pre class="prettyprint notranslate">
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+
+import com.mongodb.ServerAddress;
+import java.util.Arrays;
+
+public class MongoDBJDBC {
+
+   public static void main( String args[] ) {
+	
+      try{   
+		
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "test" );
+         System.out.println("Connect to database successfully");
+			
+         boolean auth = db.authenticate(myUserName, myPassword);
+         System.out.println("Authentication: "+auth);         
+         DBCollection coll = db.getCollection("mycol");
+         System.out.println("Collection mycol selected successfully");
+			
+         BasicDBObject doc = new BasicDBObject("title", "MongoDB").
+            append("description", "database").
+            append("likes", 100).
+            append("url", "http://www.tutorialspoint.com/mongodb/").
+            append("by", "tutorials point");
+				
+         coll.insert(doc);
+         System.out.println("Document inserted successfully");
+      }catch(Exception e){
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      }
+   }
+}
+</pre>
+<p>When the program is compiled and executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connect to database successfully
+Authentication: true
+Collection mycol selected successfully
+Document inserted successfully
+</pre>
+<h2>Retrieve All Documents</h2>
+<p>To select all documents from the collection, <b>find()</b> method of <b>com.mongodb.DBCollection</b> class is used. This method returns a cursor, so you need to iterate this cursor.</p>
+<p>Following is the code snippet to select all documents &minus;</p>
+<pre class="prettyprint notranslate">
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+
+import com.mongodb.ServerAddress;
+import java.util.Arrays;
+
+public class MongoDBJDBC {
+
+   public static void main( String args[] ) {
+	
+      try{   
+		
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "test" );
+         System.out.println("Connect to database successfully");
+			
+         boolean auth = db.authenticate(myUserName, myPassword);
+         System.out.println("Authentication: "+auth);         
+			
+         DBCollection coll = db.getCollection("mycol");
+         System.out.println("Collection mycol selected successfully");
+			
+         DBCursor cursor = coll.find();
+         int i = 1;
+			
+         while (cursor.hasNext()) { 
+            System.out.println("Inserted Document: "+i); 
+            System.out.println(cursor.next()); 
+            i++;
+         }
+			
+      }catch(Exception e){
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      }
+   }
+}
+</pre>
+<p>When the program is compiled and executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connect to database successfully
+Authentication: true
+Collection mycol selected successfully
+Inserted Document: 1 {
+   "_id" : ObjectId(7df78ad8902c),
+   "title": "MongoDB",
+   "description": "database",
+   "likes": 100,
+   "url": "http://www.tutorialspoint.com/mongodb/",
+   "by": "tutorials point"
+}
+</pre>
+<h2>Update Document</h2>
+<p>To update a document from the collection, <b>update()</b> method of <b>com.mongodb.DBCollection</b> class is used.</p>
+<p>Following is the code snippet to select the first document &minus;</p>
+<pre class="prettyprint notranslate">
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+
+import com.mongodb.ServerAddress;
+import java.util.Arrays;
+
+public class MongoDBJDBC {
+
+   public static void main( String args[] ) {
+	
+      try{   
+		
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "test" );
+         System.out.println("Connect to database successfully");
+			
+         boolean auth = db.authenticate(myUserName, myPassword);
+         System.out.println("Authentication: "+auth);   
+			
+         DBCollection coll = db.getCollection("mycol");
+         System.out.println("Collection mycol selected successfully");
+			
+         DBCursor cursor = coll.find();
+			
+         while (cursor.hasNext()) { 
+            DBObject updateDocument = cursor.next();
+            updateDocument.put("likes","200")
+            col1.update(updateDocument); 
+         }
+			
+         System.out.println("Document updated successfully");
+         cursor = coll.find();
+			
+         int i = 1;
+			
+         while (cursor.hasNext()) { 
+            System.out.println("Updated Document: "+i); 
+            System.out.println(cursor.next()); 
+            i++;
+         }
+			
+      }catch(Exception e){
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      }
+   }
+}
+</pre>
+<p>When a program is compiled and executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connect to database successfully
+Authentication: true
+Collection mycol selected successfully
+Document updated successfully
+Updated Document: 1 {
+   "_id" : ObjectId(7df78ad8902c),
+   "title": "MongoDB",
+   "description": "database",
+   "likes": 100,
+   "url": "http://www.tutorialspoint.com/mongodb/",
+   "by": "tutorials point"
+}
+</pre>
+<h2>Delete First Document</h2>
+<p>To delete the first document from the collection, you need to first select the documents using <b>findOne()</b> method and then <b>remove</b> method of <b>com.mongodb.DBCollection</b> class.</p>
+<p>Following is the code snippets to delete the first document &minus;</p>
+<pre class="prettyprint notranslate">
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+
+import com.mongodb.ServerAddress;
+import java.util.Arrays;
+
+public class MongoDBJDBC {
+
+   public static void main( String args[] ) {
+	
+      try{   
+		
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "test" );
+         System.out.println("Connect to database successfully");
+			
+         boolean auth = db.authenticate(myUserName, myPassword);
+         System.out.println("Authentication: "+auth);     
+			
+         DBCollection coll = db.getCollection("mycol");
+         System.out.println("Collection mycol selected successfully");
+			
+         DBObject myDoc = coll.findOne();
+         col1.remove(myDoc);
+         DBCursor cursor = coll.find();
+         int i = 1;
+			
+         while (cursor.hasNext()) { 
+            System.out.println("Inserted Document: "+i); 
+            System.out.println(cursor.next()); 
+            i++;
+         }
+			
+         System.out.println("Document deleted successfully");
+      }catch(Exception e){
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      }
+   }
+}
+</pre>
+<p>When the program is compiled and executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connect to database successfully
+Authentication: true
+Collection mycol selected successfully
+Document deleted successfully
+</pre>
+<p>Remaining MongoDB methods <b>save(), limit(), skip(), sort()</b> etc. works same as explained in the subsequent tutorial.</p>
+<h1>MongoDB - PHP</h1>
+<p>To use MongoDB with PHP, you need to use MongoDB PHP driver. Download the driver from the url <a target="_blank" rel="nofollow" href="https://s3.amazonaws.com/drivers.mongodb.org/php/index.html">Download PHP Driver</a>. Make sure to download the latest release of it. Now unzip the archive and put php_mongo.dll in your PHP extension directory ("ext" by default) and add the following line to your php.ini file &minus;</p>
+<pre class="result notranslate">
+extension = php_mongo.dll
+</pre>
+<h2>Make a Connection and Select a Database</h2>
+<p>To make a connection, you need to specify the database name, if the database doesn't exist then MongoDB creates it automatically.</p>
+<p>Following is the code snippet to connect to the database &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   // connect to mongodb
+   $m = new MongoClient();
+	
+   echo "Connection to database successfully";
+   // select a database
+   $db = $m-&gt;mydb;
+	
+   echo "Database mydb selected";
+?&gt;
+</pre>
+<p>When the program is executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connection to database successfully
+Database mydb selected
+</pre>
+<h2>Create a Collection</h2>
+<p>Following is the code snippet to create a collection &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   // connect to mongodb
+   $m = new MongoClient();
+   echo "Connection to database successfully";
+	
+   // select a database
+   $db = $m-&gt;mydb;
+   echo "Database mydb selected";
+   $collection = $db-&gt;createCollection("mycol");
+   echo "Collection created succsessfully";
+?&gt;
+</pre>
+<p>When the program is executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connection to database successfully
+Database mydb selected
+Collection created succsessfully
+</pre>
+<h2>Insert a Document</h2>
+<p>To insert a document into MongoDB, <b>insert()</b> method is used.</p>
+<p>Following is the code snippet to insert a document &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   // connect to mongodb
+   $m = new MongoClient();
+   echo "Connection to database successfully";
+	
+   // select a database
+   $db = $m-&gt;mydb;
+   echo "Database mydb selected";
+   $collection = $db-&gt;mycol;
+   echo "Collection selected succsessfully";
+	
+   $document = array( 
+      "title" =&gt; "MongoDB", 
+      "description" =&gt; "database", 
+      "likes" =&gt; 100,
+      "url" =&gt; "http://www.tutorialspoint.com/mongodb/",
+      "by", "tutorials point"
+   );
+	
+   $collection-&gt;insert($document);
+   echo "Document inserted successfully";
+?&gt;
+</pre>
+<p>When the program is executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connection to database successfully
+Database mydb selected
+Collection selected succsessfully
+Document inserted successfully
+</pre>
+<h2>Find All Documents</h2>
+<p>To select all documents from the collection, find() method is used.</p>
+<p>Following is the code snippet to select all documents &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   // connect to mongodb
+   $m = new MongoClient();
+   echo "Connection to database successfully";
+	
+   // select a database
+   $db = $m-&gt;mydb;
+   echo "Database mydb selected";
+   $collection = $db-&gt;mycol;
+   echo "Collection selected succsessfully";
+
+   $cursor = $collection-&gt;find();
+   // iterate cursor to display title of documents
+	
+   foreach ($cursor as $document) {
+      echo $document["title"] . "\n";
+   }
+?&gt;
+</pre>
+<p>When the program is executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connection to database successfully
+Database mydb selected
+Collection selected succsessfully {
+   "title": "MongoDB"
+}
+</pre>
+<h2>Update a Document</h2>
+<p>To update a document, you need to use the update() method.</p>
+<p>In the following example, we will update the title of inserted document to <b>MongoDB Tutorial</b>. Following is the code snippet to update a document &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   // connect to mongodb
+   $m = new MongoClient();
+   echo "Connection to database successfully";
+	
+   // select a database
+   $db = $m-&gt;mydb;
+   echo "Database mydb selected";
+   $collection = $db-&gt;mycol;
+   echo "Collection selected succsessfully";
+
+   // now update the document
+   $collection-&gt;update(array("title"=&gt;"MongoDB"), 
+      array('$set'=&gt;array("title"=&gt;"MongoDB Tutorial")));
+   echo "Document updated successfully";
+	
+   // now display the updated document
+   $cursor = $collection-&gt;find();
+	
+   // iterate cursor to display title of documents
+   echo "Updated document";
+	
+   foreach ($cursor as $document) {
+      echo $document["title"] . "\n";
+   }
+?&gt;
+</pre>
+<p>When the program is executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connection to database successfully
+Database mydb selected
+Collection selected succsessfully
+Document updated successfully
+Updated document {
+   "title": "MongoDB Tutorial"
+}
+</pre>
+<h2>Delete a Document</h2>
+<p>To delete a document, you need to use remove() method.</p>
+<p>In the following example, we will remove the documents that has the title <b>MongoDB Tutorial</b>. Following is the code snippet to delete a document &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;?php
+   // connect to mongodb
+   $m = new MongoClient();
+   echo "Connection to database successfully";
+	
+   // select a database
+   $db = $m-&gt;mydb;
+   echo "Database mydb selected";
+   $collection = $db-&gt;mycol;
+   echo "Collection selected succsessfully";
+   
+   // now remove the document
+   $collection-&gt;remove(array("title"=&gt;"MongoDB Tutorial"),false);
+   echo "Documents deleted successfully";
+   
+   // now display the available documents
+   $cursor = $collection-&gt;find();
+	
+   // iterate cursor to display title of documents
+   echo "Updated document";
+	
+   foreach ($cursor as $document) {
+      echo $document["title"] . "\n";
+   }
+?&gt;
+</pre>
+<p>When the program is executed, it will produce the following result &minus;</p>
+<pre class="result notranslate">
+Connection to database successfully
+Database mydb selected
+Collection selected succsessfully
+Documents deleted successfully
+</pre>
+<p>In the above example, the second parameter is boolean type and used for <b>justOne</b> field of <b>remove()</b> method.</p>
+<p>Remaining MongoDB methods <b>findOne(), save(), limit(), skip(), sort()</b> etc. works same as explained above.</p>
+<h1>MongoDB - Relationships</h1>
+<p>Relationships in MongoDB represent how various documents are logically related to each other. Relationships can be modeled via <b>Embedded</b> and <b>Referenced</b> approaches. Such relationships can be either 1:1, 1:N, N:1 or N:N.</p>
+<p>Let us consider the case of storing addresses for users. So, one user can have multiple addresses making this a 1:N relationship.</p>
+<p>Following is the sample document structure of <b>user</b> document &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "_id":ObjectId("52ffc33cd85242f436000001"),
+   "name": "Tom Hanks",
+   "contact": "987654321",
+   "dob": "01-01-1991"
+}
+</pre>
+<p>Following is the sample document structure of <b>address</b> document &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "_id":ObjectId("52ffc4a5d85242602e000000"),
+   "building": "22 A, Indiana Apt",
+   "pincode": 123456,
+   "city": "Los Angeles",
+   "state": "California"
+} 
+</pre>
+<h2>Modeling Embedded Relationships</h2>
+<p>In the embedded approach, we will embed the address document inside the user document.</p>
+<pre class="prettyprint notranslate">
+{
+   "_id":ObjectId("52ffc33cd85242f436000001"),
+   "contact": "987654321",
+   "dob": "01-01-1991",
+   "name": "Tom Benzamin",
+   "address": [
+      {
+         "building": "22 A, Indiana Apt",
+         "pincode": 123456,
+         "city": "Los Angeles",
+         "state": "California"
+      },
+      {
+         "building": "170 A, Acropolis Apt",
+         "pincode": 456789,
+         "city": "Chicago",
+         "state": "Illinois"
+      }
+   ]
+} 
+</pre>
+<p>This approach maintains all the related data in a single document, which makes it easy to retrieve and maintain. The whole document can be retrieved in a single query such as &minus;</p> 
+<pre class="result notranslate">
+&gt;db.users.findOne({"name":"Tom Benzamin"},{"address":1})
+</pre>
+<p>Note that in the above query, <b>db</b> and <b>users</b> are the database and collection respectively.</p>
+<p>The drawback is that if the embedded document keeps on growing too much in size, it can impact the read/write performance.</p>
+<h2>Modeling Referenced Relationships</h2>
+<p>This is the approach of designing normalized relationship. In this approach, both the user and address documents will be maintained separately but the user document will contain a field that will reference the address document's <b>id</b> field.</p>
+<pre class="prettyprint notranslate">
+{
+   "_id":ObjectId("52ffc33cd85242f436000001"),
+   "contact": "987654321",
+   "dob": "01-01-1991",
+   "name": "Tom Benzamin",
+   "address_ids": [
+      ObjectId("52ffc4a5d85242602e000000"),
+      ObjectId("52ffc4a5d85242602e000001")
+   ]
+}
+</pre>
+<p>As shown above, the user document contains the array field <b>address_ids</b> which contains ObjectIds of corresponding addresses. Using these ObjectIds, we can query the address documents and get address details from there. With this approach, we will need two queries: first to fetch the <b>address_ids</b> fields from <b>user</b> document and second to fetch these addresses from <b>address</b> collection.</p>
+<pre class="result notranslate">
+&gt;var result = db.users.findOne({"name":"Tom Benzamin"},{"address_ids":1})
+&gt;var addresses = db.address.find({"_id":{"$in":result["address_ids"]}})
+</pre>
+<h1>MongoDB - Database References</h1>
+<p>As seen in the last chapter of MongoDB relationships, to implement a normalized database structure in MongoDB, we use the concept of <b>Referenced Relationships</b> also referred to as <b>Manual References</b> in which we manually store the referenced document's id inside other document. However, in cases where a document contains references from different collections, we can use <b>MongoDB DBRefs</b>.</p>
+<h2>DBRefs vs Manual References</h2>
+<p>As an example scenario, where we would use DBRefs instead of manual references, consider a database where we are storing different types of addresses (home, office, mailing, etc.) in different collections (address_home, address_office, address_mailing, etc). Now, when a <b>user</b> collection's document references an address, it also needs to specify which collection to look into based on the address type. In such scenarios where a document references documents from many collections, we should use DBRefs.</p>
+<h2>Using DBRefs</h2>
+<p>There are three fields in DBRefs &minus;</p>
+<ul class="list">
+<li><p><b>$ref</b> &minus; This field specifies the collection of the referenced document</p></li>
+<li><p><b>$id</b> &minus; This field specifies the _id field of the referenced document</p></li>
+<li><p><b>$db</b> &minus; This is an optional field and contains the name of the database in which the referenced document lies</p></li>
+</ul>
+<p>Consider a sample user document having DBRef field <b>address</b> as shown in the code snippet &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "_id":ObjectId("53402597d852426020000002"),
+   "address": {
+   "$ref": "address_home",
+   "$id": ObjectId("534009e4d852427820000002"),
+   "$db": "tutorialspoint"},
+   "contact": "987654321",
+   "dob": "01-01-1991",
+   "name": "Tom Benzamin"
+}
+</pre>
+<p>The <b>address</b> DBRef field here specifies that the referenced address document lies in <b>address_home</b> collection under <b>tutorialspoint</b> database and has an id of 534009e4d852427820000002.</p> 
+<p>The following code dynamically looks in the collection specified by <b>$ref</b> parameter (<b>address_home</b> in our case) for a document with id as specified by <b>$id</b> parameter in DBRef.</p>
+<pre class="prettyprint notranslate">
+&gt;var user = db.users.findOne({"name":"Tom Benzamin"})
+&gt;var dbRef = user.address
+&gt;db[dbRef.$ref].findOne({"_id":(dbRef.$id)})
+</pre>
+<p>The above code returns the following address document present in <b>address_home</b> collection &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "_id" : ObjectId("534009e4d852427820000002"),
+   "building" : "22 A, Indiana Apt",
+   "pincode" : 123456,
+   "city" : "Los Angeles",
+   "state" : "California"
+}
+</pre>
+<h1>MongoDB - Covered Queries</h1>
+<p>In this chapter, we will learn about covered queries.</p>
+<h2>What is a Covered Query?</h2>
+<p>As per the official MongoDB documentation, a covered query is a query in which &minus;</p>
+<ul class="list">
+<li>All the fields in the query are part of an index.</li>
+<li>All the fields returned in the query are in the same index.</li>
+</ul>
+<p>Since all the fields present in the query are part of an index, MongoDB matches the query conditions and returns the result using the same index without actually looking inside the documents. Since indexes are present in RAM, fetching data from indexes is much faster as compared to fetching data by scanning documents.</p>
+<h2>Using Covered Queries</h2>
+<p>To test covered queries, consider the following document in the <b>users</b> collection &minus;</p>
+ <pre class="prettyprint notranslate">
+{
+   "_id": ObjectId("53402597d852426020000002"),
+   "contact": "987654321",
+   "dob": "01-01-1991",
+   "gender": "M",
+   "name": "Tom Benzamin",
+   "user_name": "tombenzamin"
+}
+</pre>
+<p>We will first create a compound index for the <b>users</b> collection on the fields <b>gender</b> and <b>user_name</b> using the following query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.ensureIndex({gender:1,user_name:1})
+</pre>
+<p>Now, this index will cover the following query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({gender:"M"},{user_name:1,_id:0})
+</pre>
+<p>That is to say that for the above query, MongoDB would not go looking into database documents. Instead it would fetch the required data from indexed data which is very fast.</p>
+<p>Since our index does not include <b>_id</b> field, we have explicitly excluded it from result set of our query, as MongoDB by default returns _id field in every query. So the following query would not have been covered inside the index created above &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({gender:"M"},{user_name:1})
+</pre>
+<p>Lastly, remember that an index cannot cover a query if &minus;</p>
+<ul class="list">
+<li>Any of the indexed fields is an array</li>
+<li>Any of the indexed fields is a subdocument</li>
+</ul>
+<h1>MongoDB - Analyzing Queries</h1>
+<p>Analyzing queries is a very important aspect of measuring how effective the database and indexing design is. We will learn about the frequently used <b>$explain</b> and <b>$hint</b> queries.</p>
+<h2>Using $explain</h2>
+<p>The <b>$explain</b> operator provides information on the query, indexes used in a query and other statistics. It is very useful when analyzing how well your indexes are optimized.</p>
+<p>In the last chapter, we had already created an index for the <b>users</b> collection on fields <b>gender</b> and <b>user_name</b> using the following query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.ensureIndex({gender:1,user_name:1})
+</pre>
+<p>We will now use <b>$explain</b> on the following query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({gender:"M"},{user_name:1,_id:0}).explain()
+</pre>
+<p>The above explain() query returns the following analyzed result &minus;</p>
+<pre class="result notranslate">
+{
+   "cursor" : "BtreeCursor gender_1_user_name_1",
+   "isMultiKey" : false,
+   "n" : 1,
+   "nscannedObjects" : 0,
+   "nscanned" : 1,
+   "nscannedObjectsAllPlans" : 0,
+   "nscannedAllPlans" : 1,
+   "scanAndOrder" : false,
+   "indexOnly" : true,
+   "nYields" : 0,
+   "nChunkSkips" : 0,
+   "millis" : 0,
+   "indexBounds" : {
+      "gender" : [
+         [
+            "M",
+            "M"
+         ]
+      ],
+      "user_name" : [
+         [
+            {
+               "$minElement" : 1
+            },
+            {
+               "$maxElement" : 1
+            }
+         ]
+      ]
+   }
+}
+</pre>
+<p>We will now look at the fields in this result set &minus;</p>
+<ul class="list">
+<li><p>The true value of <b>indexOnly</b> indicates that this query has used indexing.</p></li>
+<li><p>The <b>cursor</b> field specifies the type of cursor used. BTreeCursor type indicates that an index was used and also gives the name of the index used. BasicCursor indicates that a full scan was made without using any indexes.</p></li>
+<li><p><b>n</b> indicates the number of documents matching returned.</p></li>
+<li><p><b>nscannedObjects</b> indicates the total number of documents scanned.</p></li>
+<li><p><b>nscanned</b> indicates the total number of documents or index entries scanned.</p></li>
+</ul>
+<h2>Using $hint</h2>
+<p>The <b>$hint</b> operator forces the query optimizer to use the specified index to run a query. This is particularly useful when you want to test performance of a query with different indexes. For example, the following query specifies the index on fields <b>gender</b> and <b>user_name</b> to be used for this query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({gender:"M"},{user_name:1,_id:0}).hint({gender:1,user_name:1})
+</pre>
+<p>To analyze the above query using $explain &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({gender:"M"},{user_name:1,_id:0}).hint({gender:1,user_name:1}).explain()
+</pre>
+<h1>MongoDB - Atomic Operations</h1>
+<p>MongoDB does not support <b>multi-document atomic transactions</b>. However, it does provide atomic operations on a single document. So if a document has hundred fields the update statement will either update all the fields or none, hence maintaining atomicity at the document-level.</p>
+<h2>Model Data for Atomic Operations</h2>
+<p>The recommended approach to maintain atomicity would be to keep all the related information, which is frequently updated together in a single document using <b>embedded documents</b>. This would make sure that all the updates for a single document are atomic.</p>
+<p>Consider the following products document &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "_id":1,
+   "product_name": "Samsung S3",
+   "category": "mobiles",
+   "product_total": 5,
+   "product_available": 3,
+   "product_bought_by": [
+      {
+         "customer": "john",
+         "date": "7-Jan-2014"
+      },
+      {
+         "customer": "mark",
+         "date": "8-Jan-2014"
+      }
+   ]
+}
+</pre>
+<p>In this document, we have embedded the information of the customer who buys the product in the <b>product_bought_by</b> field. Now, whenever a new customer buys the product, we will first check if the product is still available using <b>product_available</b> field. If available, we will reduce the value of product_available field as well as insert the new customer's embedded document in the product_bought_by field. We will use <b>findAndModify</b> command for this functionality because it searches and updates the document in the same go.</p>
+<pre class="prettyprint notranslate">
+&gt;db.products.findAndModify({ 
+   query:{_id:2,product_available:{$gt:0}}, 
+   update:{ 
+      $inc:{product_available:-1}, 
+      $push:{product_bought_by:{customer:"rob",date:"9-Jan-2014"}} 
+   }    
+})
+</pre>
+<p>Our approach of embedded document and using findAndModify query makes sure that the product purchase information is updated only if it the product is available. And the whole of this transaction being in the same query, is atomic.</p>
+<p>In contrast to this, consider the scenario where we may have kept the product availability and the information on who has bought the product, separately. In this case, we will first check if the product is available using the first query. Then in the second query we will update the purchase information. However, it is possible that between the executions of these two queries, some other user has purchased the product and it is no more available. Without knowing this, our second query will update the purchase information based on the result of our first query. This will make the database inconsistent because we have sold a product which is not available.</p>
+<h1>MongoDB - Advanced Indexing</h1>
+<p>Consider the following document of the <b>users</b> collection &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "address": {
+      "city": "Los Angeles",
+      "state": "California",
+      "pincode": "123"
+   },
+   "tags": [
+      "music",
+      "cricket",
+      "blogs"
+   ],
+   "name": "Tom Benzamin"
+}
+</pre>
+<p>The above document contains an <b>address sub-document</b> and a <b>tags array</b>.</p>
+<h2>Indexing Array Fields</h2>
+<p>Suppose we want to search user documents based on the user’s tags. For this, we will create an index on tags array in the collection.</p>
+<p>Creating an index on array in turn creates separate index entries for each of its fields. So in our case when we create an index on tags array, separate indexes will be created for its values music, cricket and blogs.</p>
+<p>To create an index on tags array, use the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.ensureIndex({"tags":1})
+</pre>
+<p>After creating the index, we can search on the tags field of the collection like this &minus;</p>
+<pre class="prettyprint notranslate">
+>db.users.find({tags:"cricket"})
+</pre>
+<p>To verify that proper indexing is used, use the following <b>explain</b> command &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({tags:"cricket"}).explain()
+</pre>
+<p>The above command resulted in "cursor" : "BtreeCursor tags_1" which confirms that proper indexing is used.</p>
+<h2>Indexing Sub-Document Fields</h2>
+<p>Suppose that we want to search documents based on city, state and pincode fields. Since all these fields are part of address sub-document field, we will create an index on all the fields of the sub-document.</p>
+<p>For creating an index on all the three fields of the sub-document, use the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.ensureIndex({"address.city":1,"address.state":1,"address.pincode":1})
+</pre>
+<p>Once the index is created, we can search for any of the sub-document fields utilizing this index as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({"address.city":"Los Angeles"})   
+</pre>
+<p>Remember that the query expression has to follow the order of the index specified. So the index created above would support the following queries &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({"address.city":"Los Angeles","address.state":"California"}) 
+</pre>
+<p>It will also support the following query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.users.find({"address.city":"LosAngeles","address.state":"California",
+   "address.pincode":"123"})
+</pre>
+<h1>MongoDB - Indexing Limitations</h1>
+<p>In this chapter, we will learn about Indexing Limitations and its other components.</p>
+<h2>Extra Overhead</h2>
+<p>Every index occupies some space as well as causes an overhead on each insert, update and delete. So if you rarely use your collection for read operations, it makes sense not to use indexes.</p>
+<h2>RAM Usage</h2>
+<p>Since indexes are stored in RAM, you should make sure that the total size of the index does not exceed the RAM limit. If the total size increases the RAM size, it will start deleting some indexes, causing performance loss.</p>
+<h2>Query Limitations</h2>
+<p>Indexing can't be used in queries which use &minus;</p>
+<ul class="list">
+<li>Regular expressions or negation operators like $nin, $not, etc.</li>
+<li>Arithmetic operators like $mod, etc.</li>
+<li>$where clause</li>
+</ul>
+<p>Hence, it is always advisable to check the index usage for your queries.</p>
+<h2>Index Key Limits</h2>
+<p>Starting from version 2.6, MongoDB will not create an index if the value of existing index field exceeds the index key limit.</p>
+<h2>Inserting Documents Exceeding Index Key Limit</h2>
+<p>MongoDB will not insert any document into an indexed collection if the indexed field value of this document exceeds the index key limit. Same is the case with mongorestore and mongoimport utilities.</p>
+<h2>Maximum Ranges</h2>
+<ul class="list">
+<li>A collection cannot have more than 64 indexes.</li>
+<li>The length of the index name cannot be longer than 125 characters.</li>
+<li>A compound index can have maximum 31 fields indexed.</li>
+</ul>
+<h1>MongoDB - ObjectId</h1>
+<p>We have been using MongoDB Object Id in all the previous chapters. In this chapter, we will understand the structure of ObjectId.</p>
+<p>An <b>ObjectId</b> is a 12-byte BSON type having the following structure &minus;</p>
+<ul class="list">
+<li>The first 4 bytes representing the seconds since the unix epoch</li>
+<li>The next 3 bytes are the machine identifier</li>
+<li>The next 2 bytes consists of <b>process id</b></li>
+<li>The last 3 bytes are a random counter value</li>
+</ul>
+<p>MongoDB uses ObjectIds as the default value of <b>_id</b> field of each document, which is generated while the creation of any document. The complex combination of ObjectId makes all the _id fields unique.</p>
+<h2>Creating New ObjectId</h2>
+<p>To generate a new ObjectId use the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;newObjectId = ObjectId()
+</pre>
+<p>The above statement returned the following uniquely generated id &minus;</p>
+<pre class="prettyprint notranslate">
+ObjectId("5349b4ddd2781d08c09890f3")
+</pre>
+<p>Instead of MongoDB generating the ObjectId, you can also provide a 12-byte id &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;myObjectId = ObjectId("5349b4ddd2781d08c09890f4")
+</pre>
+<h2>Creating Timestamp of a Document</h2>
+<p>Since the _id ObjectId by default stores the 4-byte timestamp, in most cases you do not need to store the creation time of any document. You can fetch the creation time of a document using getTimestamp method &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;ObjectId("5349b4ddd2781d08c09890f4").getTimestamp()
+</pre>
+<p>This will return the creation time of this document in ISO date format &minus;</p>
+<pre class="prettyprint notranslate">
+ISODate("2014-04-12T21:49:17Z")
+</pre>
+<h2>Converting ObjectId to String</h2>
+<p>In some cases, you may need the value of ObjectId in a string format. To convert the ObjectId in string, use the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;newObjectId.str
+</pre>
+<p>The above code will return the string format of the Guid &minus;</p>
+<pre class="result notranslate">
+5349b4ddd2781d08c09890f3
+</pre>
+<h1>MongoDB - Map Reduce</h1>
+<p>As per the MongoDB documentation, <b>Map-reduce</b> is a data processing paradigm for condensing large volumes of data into useful aggregated results. MongoDB uses <b>mapReduce</b> command for map-reduce operations. MapReduce is generally used for processing large data sets.</p>
+<h2>MapReduce Command</h2>
+<p>Following is the syntax of the basic mapReduce command &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.collection.mapReduce(
+   function() {emit(key,value);},  //map function
+   function(key,values) {return reduceFunction}, {   //reduce function
+      out: collection,
+      query: document,
+      sort: document,
+      limit: number
+   }
+)
+</pre>
+<p>The map-reduce function first queries the collection, then maps the result documents to emit key-value pairs, which is then reduced based on the keys that have multiple values.</p>
+<p>In the above syntax &minus;</p>
+<ul class="list">
+<li><p><b>map</b> is a javascript function that maps a value with a key and emits a key-value pair</p></li>
+<li><p><b>reduce</b> is a javascript function that reduces or groups all the documents having the same key</p></li>
+<li><p><b>out</b> specifies the location of the map-reduce query result</p></li>
+<li><p><b>query</b> specifies the optional selection criteria for selecting documents</p></li>
+<li><p><b>sort</b> specifies the optional sort criteria</p></li>
+<li><p><b>limit</b> specifies the optional maximum number of documents to be returned</p></li>
+</ul>
+<h2>Using MapReduce</h2>
+<p>Consider the following document structure storing user posts. The document stores user_name of the user and the status of post.</p>
+<pre class="prettyprint notranslate">
+{
+   "post_text": "tutorialspoint is an awesome website for tutorials",
+   "user_name": "mark",
+   "status":"active"
+}
+</pre>
+<p>Now, we will use a mapReduce function on our <b>posts</b> collection to select all the active posts, group them on the basis of user_name and then count the number of posts by each user using the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.mapReduce( 
+   function() { emit(this.user_id,1); }, 
+	
+   function(key, values) {return Array.sum(values)}, {  
+      query:{status:"active"},  
+      out:"post_total" 
+   }
+)
+</pre>
+<p>The above mapReduce query outputs the following result &minus;</p>
+<pre class="result notranslate">
+{
+   "result" : "post_total",
+   "timeMillis" : 9,
+   "counts" : {
+      "input" : 4,
+      "emit" : 4,
+      "reduce" : 2,
+      "output" : 2
+   },
+   "ok" : 1,
+}
+</pre>
+<p>The result shows that a total of 4 documents matched the query (status:"active"), the map function emitted 4 documents with key-value pairs and finally the reduce function grouped mapped documents having the same keys into 2.</p>
+<p>To see the result of this mapReduce query, use the find operator &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.mapReduce( 
+   function() { emit(this.user_id,1); }, 
+   function(key, values) {return Array.sum(values)}, {  
+      query:{status:"active"},  
+      out:"post_total" 
+   }
+	
+).find()
+</pre>
+<p>The above query gives the following result which indicates that both users <b>tom</b> and <b>mark</b> have two posts in active states &minus;</p>
+<pre class="prettyprint notranslate">
+{ "_id" : "tom", "value" : 2 }
+{ "_id" : "mark", "value" : 2 }
+</pre>
+<p>In a similar manner, MapReduce queries can be used to construct large complex aggregation queries. The use of custom Javascript functions make use of MapReduce which is very flexible and powerful.</p>
+<h1>MongoDB - Text Search</h1>
+<p>Starting from version 2.4, MongoDB started supporting text indexes to search inside string content. The <b>Text Search</b> uses stemming techniques to look for specified words in the string fields by dropping stemming stop words like <b>a, an, the,</b> etc. At present, MongoDB supports around 15 languages.</p>
+<h2>Enabling Text Search</h2>
+<p>Initially, Text Search was an experimental feature but starting from version 2.6, the configuration is enabled by default. But if you are using the previous version of MongoDB, you have to enable text search with the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.adminCommand({setParameter:true,textSearchEnabled:true})
+</pre>
+<h2>Creating Text Index</h2>
+<p>Consider the following document under <b>posts</b> collection containing the post text and its tags &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "post_text": "enjoy the mongodb articles on tutorialspoint",
+   "tags": [
+      "mongodb",
+      "tutorialspoint"
+   ]
+}
+</pre>
+<p>We will create a text index on post_text field so that we can search inside our posts' text &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.ensureIndex({post_text:"text"})
+</pre>
+<h2>Using Text Index</h2>
+<p>Now that we have created the text index on post_text field, we will search for all the posts having the word <b>tutorialspoint</b> in their text.</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.find({$text:{$search:"tutorialspoint"}})
+</pre>
+<p>The above command returned the following result documents having the word <b>tutorialspoint</b> in their post text &minus;</p>
+<pre class="result notranslate">
+{ 
+   "_id" : ObjectId("53493d14d852429c10000002"), 
+   "post_text" : "enjoy the mongodb articles on tutorialspoint", 
+   "tags" : [ "mongodb", "tutorialspoint" ]
+}
+{
+   "_id" : ObjectId("53493d1fd852429c10000003"), 
+   "post_text" : "writing tutorials on mongodb",
+   "tags" : [ "mongodb", "tutorial" ] 
+}
+</pre>
+<p>If you are using old versions of MongoDB, you have to use the following command &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.runCommand("text",{search:" tutorialspoint "})
+</pre>
+<p>Using Text Search highly improves the search efficiency as compared to normal search.</p>
+<h2>Deleting Text Index</h2>
+<p>To delete an existing text index, first find the name of index using the following query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.getIndexes()
+</pre>
+<p>After getting the name of your index from above query, run the following command. Here, <b>post_text_text</b> is the name of the index.</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.dropIndex("post_text_text")
+</pre>
+<h1>MongoDB - Regular Expression</h1>
+<p>Regular Expressions are frequently used in all languages to search for a pattern or word in any string. MongoDB also provides functionality of regular expression for string pattern matching using the <b>$regex</b> operator. MongoDB uses PCRE (Perl Compatible Regular Expression) as regular expression language.</p>
+<p>Unlike text search, we do not need to do any configuration or command to use regular expressions.</p>
+<p>Consider the following document structure under <b>posts</b> collection containing the post text and its tags &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "post_text": "enjoy the mongodb articles on tutorialspoint",
+   "tags": [
+      "mongodb",
+      "tutorialspoint"
+   ]
+}
+</pre>
+<h2>Using regex Expression</h2>
+<p>The following regex query searches for all the posts containing string <b>tutorialspoint</b> in it &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.find({post_text:{$regex:"tutorialspoint"}})
+</pre>
+<p>The same query can also be written as &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.find({post_text:/tutorialspoint/})
+</pre>
+<h2>Using regex Expression with Case Insensitive</h2>
+<p>To make the search case insensitive, we use the <b>$options</b> parameter with value <b>$i</b>. The following command will look for strings having the word <b>tutorialspoint</b>, irrespective of smaller or capital case &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.find({post_text:{$regex:"tutorialspoint",$options:"$i"}})
+</pre>
+<p>One of the results returned from this query is the following document which contains the word <b>tutorialspoint</b> in different cases &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "_id" : ObjectId("53493d37d852429c10000004"),
+   "post_text" : "hey! this is my post on TutorialsPoint", 
+   "tags" : [ "tutorialspoint" ]
+} 
+ </pre>
+<h2>Using regex for Array Elements</h2>
+<p>We can also use the concept of regex on array field. This is particularly very important when we implement the functionality of tags. So, if you want to search for all the posts having tags beginning from the word tutorial (either tutorial or tutorials or tutorialpoint or tutorialphp), you can use the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.posts.find({tags:{$regex:"tutorial"}})
+</pre>
+<h2>Optimizing Regular Expression Queries</h2>
+<ul class="list">
+<li><p>If the document fields are <b>indexed</b>, the query will use make use of indexed values to match the regular expression. This makes the search very fast as compared to the regular expression scanning the whole collection.</p></li>
+<li><p>If the regular expression is a <b>prefix expression</b>, all the matches are meant to start with a certain string characters. For e.g., if the regex expression is <b>&#94;tut</b>, then the query has to search for only those strings that begin with <b>tut</b>.</p></li>
+</ul>
+<h1>Working with RockMongo</h1>
+<p>RockMongo is a MongoDB administration tool using which you can manage your server, databases, collections, documents, indexes, and a lot more. It provides a very user-friendly way for reading, writing, and creating documents. It is similar to PHPMyAdmin tool for PHP and MySQL.</p>
+<h2>Downloading RockMongo</h2>
+<p>You can download the latest version of RockMongo from here: <a target="_blank" rel="nofollow" href="http://rockmongo.com/downloads">http://rockmongo.com/downloads</a></p>
+<h2>Installing RockMongo</h2>
+<p>Once downloaded, you can unzip the package in your server root folder and rename the extracted folder to <b>rockmongo</b>. Open any web browser and access the <b>index.php</b> page from the folder rockmongo. Enter admin/admin as username/password respectively.</p>
+<h2>Working with RockMongo</h2>
+<p>We will now be looking at some basic operations that you can perform with RockMongo.</p>
+<h2>Creating New Database</h2>
+<p>To create a new database, click <b>Databases</b> tab. Click <b>Create New Database</b>. On the next screen, provide the name of the new database and click on <b>Create</b>. You will see a new database getting added in the left panel.</p>
+<h2>Creating New Collection</h2>
+<p>To create a new collection inside a database, click on that database from the left panel. Click on the <b>New Collection</b> link on top. Provide the required name of the collection. Do not worry about the other fields of Is Capped, Size and Max. Click on <b>Create</b>. A new collection will be created and you will be able to see it in the left panel.</p>
+<h2>Creating New Document</h2>
+<p>To create a new document, click on the collection under which you want to add documents. When you click on a collection, you will be able to see all the documents within that collection listed there. To create a new document, click on the <b>Insert</b> link at the top. You can enter the document's data either in JSON or array format and click on <b>Save</b>.</p>
+<h2>Export/Import Data</h2>
+<p>To import/export data of any collection, click on that collection and then click on <b>Export/Import</b> link on the top panel. Follow the next instructions to export your data in a zip format and then import the same zip file to import back data.</p>
+<h1>MongoDB - GridFS</h1>
+<p><b>GridFS</b> is the MongoDB specification for storing and retrieving large files such as images, audio files, video files, etc. It is kind of a file system to store files but its data is stored within MongoDB collections. GridFS has the capability to store files even greater than its document size limit of 16MB.</p>
+<p>GridFS divides a file into chunks and stores each chunk of data in a separate document, each of maximum size 255k.</p>
+<p>GridFS by default uses two collections <b>fs.files</b> and <b>fs.chunks</b> to store the file's metadata and the chunks. Each chunk is identified by its unique _id ObjectId field. The fs.files severs as a parent document. The <b>files_id</b> field in the fs.chunks document links the chunk to its parent.</p>
+<p>Following is a sample document of fs.files collection &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "filename": "test.txt",
+   "chunkSize": NumberInt(261120),
+   "uploadDate": ISODate("2014-04-13T11:32:33.557Z"),
+   "md5": "7b762939321e146569b07f72c62cca4f",
+   "length": NumberInt(646)
+}
+</pre>
+<p>The document specifies the file name, chunk size, uploaded date, and length.</p>
+<p>Following is a sample document of fs.chunks document &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   "files_id": ObjectId("534a75d19f54bfec8a2fe44b"),
+   "n": NumberInt(0),
+   "data": "Mongo Binary Data"
+}
+</pre>
+<h2>Adding Files to GridFS</h2>
+<p>Now, we will store an mp3 file using GridFS using the <b>put</b> command. For this, we will use the <b>mongofiles.exe</b> utility present in the bin folder of the MongoDB installation folder.</p>
+<p>Open your command prompt, navigate to the mongofiles.exe in the bin folder of MongoDB installation folder and type the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;mongofiles.exe -d gridfs put song.mp3
+</pre>
+<p>Here, <b>gridfs</b> is the name of the database in which the file will be stored. If the database is not present, MongoDB will automatically create a new document on the fly. Song.mp3 is the name of the file uploaded. To see the file's document in database, you can use find query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.fs.files.find()
+</pre>
+<p>The above command returned the following document &minus;</p>
+<pre class="prettyprint notranslate">
+{
+   _id: ObjectId('534a811bf8b4aa4d33fdf94d'), 
+   filename: "song.mp3", 
+   chunkSize: 261120, 
+   uploadDate: new Date(1397391643474), md5: "e4f53379c909f7bed2e9d631e15c1c41",
+   length: 10401959 
+}
+</pre>
+<p>We can also see all the chunks present in fs.chunks collection related to the stored file with the following code, using the document id returned in the previous query &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.fs.chunks.find({files_id:ObjectId('534a811bf8b4aa4d33fdf94d')})
+</pre>
+<p>In my case, the query returned 40 documents meaning that the whole mp3 document was divided in 40 chunks of data.</p>
+<h1>MongoDB - Capped Collections</h1>
+<p><b>Capped collections</b> are fixed-size circular collections that follow the insertion order to support high performance for create, read, and delete operations. By circular, it means that when the fixed size allocated to the collection is exhausted, it will start deleting the oldest document in the collection without providing any explicit commands.</p>
+<p>Capped collections restrict updates to the documents if the update results in increased document size. Since capped collections store documents in the order of the disk storage, it ensures that the document size does not increase the size allocated on the disk. Capped collections are best for storing log information, cache data, or any other high volume data.</p>
+<h2>Creating Capped Collection</h2>
+<p>To create a capped collection, we use the normal createCollection command but with <b>capped</b> option as <b>true</b> and specifying the maximum size of collection in bytes.</p>
+<pre class="prettyprint notranslate">
+&gt;db.createCollection("cappedLogCollection",{capped:true,size:10000})
+</pre>
+<p>In addition to collection size, we can also limit the number of documents in the collection using the <b>max</b> parameter &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.createCollection("cappedLogCollection",{capped:true,size:10000,max:1000})
+</pre>
+<p>If you want to check whether a collection is capped or not, use the following <b>isCapped</b> command &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.cappedLogCollection.isCapped()
+</pre>
+<p>If there is an existing collection which you are planning to convert to capped, you can do it with the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.runCommand({"convertToCapped":"posts",size:10000})
+</pre>
+<p>This code would convert our existing collection <b>posts</b> to a capped collection.</p>
+<h2>Querying Capped Collection</h2>
+<p>By default, a find query on a capped collection will display results in insertion order. But if you want the documents to be retrieved in reverse order, use the <b>sort</b> command as shown in the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.cappedLogCollection.find().sort({$natural:-1})
+</pre>
+<p>There are few other important points regarding capped collections worth knowing &minus;</p>
+<ul class="list">
+<li><p>We cannot delete documents from a capped collection.</p></li>
+<li><p>There are no default indexes present in a capped collection, not even on _id field.</p></li>
+<li><p>While inserting a new document, MongoDB does not have to actually look for a place to accommodate new document on the disk. It can blindly insert the new document at the tail of the collection. This makes insert operations in capped collections very fast.</p></li>
+<li><p>Similarly, while reading documents MongoDB returns the documents in the same order as present on disk. This makes the read operation very fast.</p></li>
+</ul>
+<h1>MongoDB - Auto-Increment Sequence</h1>
+<p>MongoDB does not have out-of-the-box auto-increment functionality, like SQL databases. By default, it uses the 12-byte ObjectId for the <b>_id</b> field as the primary key to uniquely identify the documents. However, there may be scenarios where we may want the _id field to have some auto-incremented value other than the ObjectId.</p>
+<p>Since this is not a default feature in MongoDB, we will programmatically achieve this functionality by using a <b>counters</b> collection as suggested by the MongoDB documentation.</p>
+<h2>Using Counter Collection</h2>
+<p>Consider the following <b>products</b> document. We want the _id field to be an <b>auto-incremented integer sequence</b> starting from 1,2,3,4 upto n.</p>
+<pre class="prettyprint notranslate">
+{
+  "_id":1,
+  "product_name": "Apple iPhone",
+  "category": "mobiles"
+}
+</pre>
+<p>For this, create a <b>counters</b> collection, which will keep track of the last sequence value for all the sequence fields.</p>
+<pre class="result notranslate">
+&gt;db.createCollection("counters")
+</pre>
+<p>Now, we will insert the following document in the counters collection with <b>productid</b> as its key &minus;</p>
+<pre class="prettyprint notranslate">
+{
+  "_id":"productid",
+  "sequence_value": 0
+}
+</pre>
+<p>The field <b>sequence_value</b> keeps track of the last value of the sequence.</p>
+<p>Use the following code to insert this sequence document in the counters collection &minus;</p>
+<pre class="result notranslate">
+&gt;db.counters.insert({_id:"productid",sequence_value:0})
+</pre>
+<h2>Creating Javascript Function</h2>
+<p>Now, we will create a function <b>getNextSequenceValue</b> which will take the sequence name as its input, increment the sequence number by 1 and return the updated sequence number. In our case, the sequence name is <b>productid</b>.</p>
+<pre class="prettyprint notranslate">
+&gt;function getNextSequenceValue(sequenceName){
+
+   var sequenceDocument = db.counters.findAndModify({
+      query:{_id: sequenceName },
+      update: {$inc:{sequence_value:1}},
+      new:true
+   });
+	
+   return sequenceDocument.sequence_value;
+}
+</pre>
+<h2>Using the Javascript Function</h2>
+<p>We will now use the function getNextSequenceValue while creating a new document and assigning the returned sequence value as document's _id field.</p>
+<p>Insert two sample documents using the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;db.products.insert({
+   "_id":getNextSequenceValue("productid"),
+   "product_name":"Apple iPhone",
+   "category":"mobiles"
+})
+
+&gt;db.products.insert({
+   "_id":getNextSequenceValue("productid"),
+   "product_name":"Samsung S3",
+   "category":"mobiles"
+})
+</pre>
+<p>As you can see, we have used the getNextSequenceValue function to set value for the _id field.</p>
+<p>To verify the functionality, let us fetch the documents using find command &minus;</p>
+<pre class="result notranslate">
+&gt;db.products.find()
+</pre>
+<p>The above query returned the following documents having the auto-incremented _id field &minus;</p>
+<pre class="prettyprint notranslate">
+{ "_id" : 1, "product_name" : "Apple iPhone", "category" : "mobiles"}
+
+{ "_id" : 2, "product_name" : "Samsung S3", "category" : "mobiles" }
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="mongodb_questions_answers.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="mongodb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/mongodb/mongodb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:30:05 GMT -->
+</html>

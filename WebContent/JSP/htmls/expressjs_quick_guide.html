@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->  <html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:01:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>ExpressJS Quick Guide</title>
+<meta name="description" content="ExpressJS Quick Guide - Learn ExpressJS starting from Overview, Environment, Hello World, Routing, HTTP Methods, URL Building, Middleware, Templating, Serving Static Files, Form Data, Database, Cookies, Authentication, Sessions, RESTful APIs, Scaffolding, Error handling, Debugging, Best Practices, Resources." />
+<meta name="keywords" content="ExpressJS, Tutorial, Learning, Overview, Environment, Hello World, Routing, HTTP Methods, URL Building, Middleware, Templating, Serving Static Files, Form Data, Database, Cookies, Authentication, Sessions, RESTful APIs, Scaffolding, Error handling, Debugging, Best Practices, Resources." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #87bb38 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #87bb38 !important;}
+.submenu-item{ border-bottom: 2px solid #87bb38 !important; border-top: 2px solid #87bb38 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<style>
+.ts {
+   text-align:center !important; 
+   vertical-align:middle !important;
+}
+</style>
+<div class="mini-logo">
+<img src="images/expressjs-mini-logo.jpg" alt="ExpressJS Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li><a class="videolink" href="../expressjs_online_training/index.html" target="_blank"><img src="images/expressjs-video-tutorials.jpg" alt="ExpressJS Video Tutorials" /></a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">ExpressJS Tutorial</li>
+<li><a href="index.html">ExpressJS - Home</a></li>
+<li><a href="expressjs_overview.html">ExpressJS - Overview</a></li>
+<li><a href="expressjs_environment.html">ExpressJS - Environment</a></li>
+<li><a href="expressjs_hello_world.html">ExpressJS - Hello World</a></li>
+<li><a href="expressjs_routing.html">ExpressJS - Routing</a></li>
+<li><a href="expressjs_http_methods.html">ExpressJS - HTTP Methods</a></li>
+<li><a href="expressjs_url_building.html">ExpressJS - URL Building</a></li>
+<li><a href="expressjs_middleware.html">ExpressJS - Middleware</a></li>
+<li><a href="expressjs_templating.html">ExpressJS - Templating</a></li>
+<li><a href="expressjs_static_files.html">ExpressJS - Static Files</a></li>
+<li><a href="expressjs_form_data.html">ExpressJS - Form Data</a></li>
+<li><a href="expressjs_database.html">ExpressJS - Database</a></li>
+<li><a href="expressjs_cookies.html">ExpressJS - Cookies</a></li>
+<li><a href="expressjs_sessions.html">ExpressJS - Sessions</a></li>
+<li><a href="expressjs_authentication.html">ExpressJS - Authentication</a></li>
+<li><a href="expressjs_restful_apis.html">ExpressJS - RESTful APIs</a></li>
+<li><a href="expressjs_scaffolding.html">ExpressJS - Scaffolding</a></li>
+<li><a href="expressjs_error_handling.html">ExpressJS - Error handling</a></li>
+<li><a href="expressjs_debugging.html">ExpressJS - Debugging</a></li>
+<li><a href="expressjs_best_practices.html">ExpressJS - Best Practices</a></li>
+<li><a href="expressjs_resources.html">ExpressJS - Resources</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">ExpressJS Useful Resources</li>
+<li><a href="expressjs_quick_guide.html">ExpressJS - Quick Guide</a></li>
+<li><a href="expressjs_useful_resources.html">ExpressJS - Useful Resources</a></li>
+<li><a href="expressjs_discussion.html">ExpressJS - Discussion</a></li>
+<!--<ul class="nav nav-list primary left-menu" >
+<li class="heading">ExpressJS Useful Resources</li>
+<li><a href="/expressjs/expressjs_quick_guide.htm">ExpressJS - Quick Guide</a></li>
+<li><a href="/expressjs/expressjs_useful_resources.htm">ExpressJS - Useful Resources</a></li>
+<li><a href="/expressjs/expressjs_discussion.htm">ExpressJS - Discussion</a></li>
+</ul>-->
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content"> 
+<div class="col-md-7 middle-col">
+<h1>ExpressJS - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="expressjs_resources.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="expressjs_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>ExpressJS - Overview</h1>
+<p>ExpressJS is a web application framework that provides you with a simple API to build websites, web apps and back ends. With ExpressJS, you need not worry about low level protocols, processes, etc.</p>
+<h2>What is Express?</h2>
+<p>Express provides a minimal interface to build our applications. It provides us the tools that are required to build our app. It is flexible as there are numerous modules available on <b>npm</b>, which can be directly plugged into Express.</p>
+<p>Express was developed by <b>TJ Holowaychuk</b> and is maintained by the <a href="https://nodejs.org/en/" target="_blank" rel="nofollow">Node.js</a> foundation and numerous open source contributors.</p>
+<h2>Why Express?</h2>
+<p>Unlike its competitors like Rails and Django, which have an opinionated way of building applications, Express has no "best way" to do something. It is very flexible and pluggable.</p>
+<h2>Pug</h2>
+<p>Pug (earlier known as Jade) is a terse language for writing HTML templates. It &minus;</p>
+<ul class="list">
+<li>Produces HTML</li>
+<li>Supports dynamic code</li>
+<p><li>Supports reusability (DRY)</li>
+</ul>
+<p>It is one of the most popular template language used with Express.</p>
+<h2>MongoDB and Mongoose</h2>
+<p>MongoDB is an open-source, document database designed for ease of development and scaling. This database is also used to store data.</p>
+<p>Mongoose is a client API for <b>node.js</b> which makes it easy to access our database from our Express application.</p>
+<h1>ExpressJS - Environment</h1>
+<p>In this chapter, we will learn how to start developing and using the Express Framework. To start with, you should have the Node and the npm (node package manager) installed. If you don’t already have these, go to the <a href="../nodejs/nodejs_environment_setup.html">Node setup</a> to install node on your local system. Confirm that node and npm are installed by running the following commands in your terminal.</p> 
+<pre class="result notranslate">
+node --version
+npm --version
+</pre>
+<p>You should get an output similar to the following.</p>
+<pre class="result notranslate">
+v5.0.0
+3.5.2
+</pre>
+<p>Now that we have Node and <b>npm</b> set up, let us understand what <b>npm</b> is and how to use it.</p>
+<h2>Node Package Manager(npm)</h2>
+<p>npm is the package manager for node. The npm Registry is a public collection of packages of open-source code for Node.js, front-end web apps, mobile apps, robots, routers, and countless other needs of the JavaScript community. npm allows us to access all these packages and install them locally. You can browse through the list of packages available on npm at <a href="https://www.npmjs.com/" target="_blank" rel="nofollow">npmJS</a>.</p>
+<h3>How to use npm?</h3>
+<p>There are two ways to install a package using npm: globally and locally.</p>
+<ul class="list">
+<li><p><b>Globally</b> &minus; This method is generally used to install development tools and CLI based packages. To install a package globally, use the following code.</p></li>
+</ul>
+<pre class="result notranslate">
+npm install -g &lt;package-name&gt;
+</pre>
+<ul class="list">	
+<li><p><b>Locally</b> &minus; This method is generally used to install frameworks and libraries. A locally installed package can be used only within the directory it is installed. To install a package locally, use the same command as above without the <b>-g</b> flag.</p></li>
+</ul>
+<pre class="result notranslate">
+npm install &lt;package-name&gt;
+</pre>
+<p>Whenever we create a project using npm, we need to provide a <b>package.json</b> file, which has all the details about our project. npm makes it easy for us to set up this file. Let us set up our development project.</p>
+<p><b>Step 1</b> &minus; Start your terminal/cmd, create a new folder named hello-world and cd (create directory) into it &minus;</p>
+<img src="images/environment_mkdir.jpg" alt="npm init info" />
+<p><b>Step 2</b> &minus; Now to create the package.json file using npm, use the following code.</p>
+<pre class="result notranslate">
+npm init
+</pre>
+<p>It will ask you for the following information.</p>
+<img src="images/environment_npm.jpg" alt="npm init info" />
+<p>Just keep pressing enter, and enter your name at the “author name” field.</p>
+<p><b>Step 3</b> &minus; Now we have our package.json file set up, we will further install Express. To install Express and add it to our package.json file, use the following command &minus;</p>
+<pre class="result notranslate">
+npm install --save express
+</pre>
+<p>To confirm that Express has installed correctly, run the following code.</p>
+<pre class="result notranslate">
+ls node_modules #(dir node_modules for windows)
+</pre>
+<p><b>Tip</b> &minus; The --<b>save</b> flag can be replaced by the <b>-S</b> flag. This flag ensures that Express is added as a dependency to our <b>package.json</b> file. This has an advantage, the next time we need to install all the dependencies of our project we can just run the command <i>npm install</i> and it will find the dependencies in this file and install them for us.</p>
+<p>This is all we need to start development using the Express framework. To make our development process a lot easier, we will install a tool from npm, nodemon. This tool restarts our server as soon as we make a change in any of our files, otherwise we need to restart the server manually after each file modification. To install nodemon, use the following command &minus;</p>
+<pre class="result notranslate">
+npm install -g nodemon
+</pre>
+<p>You can now start working on Express.</p>
+<h1>ExpressJS - Hello World</h1>
+<p>We have set up the development, now it is time to start developing our first app using Express. Create a new file called <b>index.js</b> and type the following in it.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/', function(req, res){
+   res.send("Hello world!");
+});
+
+app.listen(3000);
+</pre>
+<p>Save the file, go to your terminal and type the following.</p>
+<pre class="result notranslate">
+nodemon index.js
+</pre> 
+<p>This will start the server. To test this app, open your browser and go to <b>http://localhost:3000</b> and a message will be displayed as in the following screenshot.</p>
+<img src="images/hello_world.jpg" alt="Hello world" />
+<h2>How the App Works?</h2>
+<p>The first line imports Express in our file, we have access to it through the variable Express. We use it to create an application and assign it to var app.</p>
+<h3>app.get(route, callback)</h3>
+<p>This function tells what to do when a <b>get</b> request at the given route is called. The callback function has 2 parameters, <i><b>request(req)</b></i> and <i><b>response(res)</b></i>. The request <b>object(req)</b> represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, etc. Similarly, the response object represents the HTTP response that the Express app sends when it receives an HTTP request.</p>
+<h3>res.send()</h3>
+<p>This function takes an object as input and it sends this to the requesting client. Here we are sending the string <i>"Hello World!"</i>.</p>
+<h3>app.listen(port, [host], [backlog], [callback]])</h3>
+<p>This function binds and listens for connections on the specified host and port. Port is the only required parameter here.</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Argument &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td class="ts"><p><b>port</b></p>
+<p>A port number on which the server should accept incoming requests.</p></td>
+</tr>
+<tr>
+<td>2</ts>
+<td class="ts"><p><b>host</b></p>
+<p>Name of the domain. You need to set it when you deploy your apps to the cloud.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td class="ts"><p><b>backlog</b></p>
+<p>The maximum number of queued pending connections. The default is 511.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td class="ts"><p><b>callback</b></p>
+<p>An asynchronous function that is called when the server starts listening for requests.</p></td>
+</tr>
+</table>
+<h1>ExpressJS - Routing</h1>
+<p>Web frameworks provide resources such as HTML pages, scripts, images, etc. at different routes.</p>
+<p>The following function is used to define routes in an Express application &minus;</p>
+<h2>app.method(path, handler)</h2>
+<p>This METHOD can be applied to any one of the HTTP verbs – get, set, put, delete. An alternate method also exists, which executes independent of the request type.</p>
+<p>Path is the route at which the request will run.</p>
+<p>Handler is a callback function that executes when a matching request type is found on the relevant route. For example,</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/hello', function(req, res){
+   res.send("Hello World!");
+});
+
+app.listen(3000);
+</pre>
+<p>If we run our application and go to <b>localhost:3000/hello</b>, the server receives a get request at route <b>"/hello"</b>, our Express app executes the <b>callback</b> function attached to this route and sends <b>"Hello World!"</b> as the response.</p>
+<img src="images/routing_hello.jpg" alt="Hello" />
+<p>We can also have multiple different methods at the same route. For example,</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/hello', function(req, res){
+   res.send("Hello World!");
+});
+
+app.post('/hello', function(req, res){
+   res.send("You just called the post method at '/hello'!\n");
+});
+
+app.listen(3000);
+</pre>
+<p>To test this request, open up your terminal and use cURL to execute the following request &minus;</p>
+<pre class="result notranslate">
+curl -X POST "http://localhost:3000/hello"
+</pre>
+<p></p>
+<img src="images/routing_curl.jpg" alt="Curl request" />
+<p>A special method, <i><b>all</b></i>, is provided by Express to handle all types of http methods at a particular route using the same function. To use this method, try the following.</p>
+<pre class="prettyprint notranslate">
+app.all('/test', function(req, res){
+   res.send("HTTP method doesn't have any effect on this route!");
+});
+</pre>
+<p>This method is generally used for defining middleware, which we'll discuss in the middleware chapter.</p>
+<h2>Routers</h2>
+<p>Defining routes like above is very tedious to maintain. To separate the routes from our main <b>index.js</b> file, we will use <b>Express.Router</b>. Create a new file called <b>things.js</b> and type the following in it.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var router = express.Router();
+
+router.get('/', function(req, res){
+   res.send('GET route on things.');
+});
+router.post('/', function(req, res){
+   res.send('POST route on things.');
+});
+
+//export this router to use in our index.js
+module.exports = router;
+</pre>
+<p>Now to use this router in our <b>index.js</b>, type in the following before the <b>app.listen</b> function call.</p>
+<pre class="prettyprint notranslate">
+var express = require('Express');
+var app = express();
+
+var things = require('./things.js');
+
+//both index.js and things.js should be in same directory
+app.use('/things', things);
+
+app.listen(3000);
+</pre>
+<p>The <i><b>app.use</b></i> function call on route <b>'/things'</b> attaches the <b>things</b> router with this route. Now whatever requests our app gets at the '/things', will be handled by our things.js router. The <b>'/'</b> route in things.js is actually a subroute of '/things'. Visit localhost:3000/things/ and you will see the following output.</p>
+<img src="images/router_things.jpg" alt="Router Things" />
+<p>Routers are very helpful in separating concerns and keep relevant portions of our code together. They help in building maintainable code. You should define your routes relating to an entity in a single file and include it using the above method in your <b>index.js</b> file.</p>
+<h1>ExpressJS - HTTP Methods</h1>
+<p>The HTTP method is supplied in the request and specifies the operation that the client has requested. The following table lists the most used HTTP methods &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>S.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td class="ts"><p><b>GET</b></p>
+<p>The GET method requests a representation of the specified resource. Requests using GET should only retrieve data and should have no other effect.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td class="ts"><p><b>POST</b></p>
+<p>The POST method requests that the server accept the data enclosed in the request as a new object/entity of the resource identified by the URI.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td class="ts"><p><b>PUT</b></p>
+<p>The PUT method requests that the server accept the data enclosed in the request as a modification to existing object identified by the URI. If it does not exist then the PUT method should create one.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td class="ts"><p><b>DELETE</b></p>
+<p>The DELETE method requests that the server delete the specified resource.</p></td>
+</tr>
+</table>
+<p>These are the most common HTTP methods. To learn more about the methods, visit <a href="../http/http_methods.html">http://www.tutorialspoint.com/http/http_methods.htm</a>.</p>
+<h1>ExpressJS - URL Building</h1>
+<p>We can now define routes, but those are static or fixed. To use the dynamic routes, we SHOULD provide different types of routes. Using dynamic routes allows us to pass parameters and process based on them.</p>
+<p>Here is an example of a dynamic route &minus;</p>
+<pre class="result notranslate prettyprint">
+var express = require('express');
+var app = express();
+
+app.get('/:id', function(req, res){
+   res.send('The id you specified is ' + req.params.id);
+});
+app.listen(3000);
+</pre>
+<p>To test this go to <b>http://localhost:3000/123</b>. The following response will be displayed.</p>
+<img src="images/url_building_id.jpg" alt="URL Building 1" />
+<p>You can replace '123' in the URL with anything else and the change will reflect in the response. A more complex example of the above is &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/things/:name/:id', function(req, res) {
+   res.send('id: ' + req.params.id + ' and name: ' + req.params.name);
+});
+app.listen(3000);
+</pre>
+<p>To test the above code, go to <b>http://localhost:3000/things/tutorialspoint/12345</b>.</p>
+<img src="images/url_building_complex.jpg" alt="URL Building 2" />
+<p>You can use the <i><b>req.params</b></i> object to access all the parameters you pass in the url. Note that the above 2 are different paths. They will never overlap. Also if you want to execute code when you get <b>'/things'</b> then you need to define it separately.</p>
+<h2>Pattern Matched Routes</h2>
+<p>You can also use <b>regex</b> to restrict URL parameter matching. Let us assume you need the <b>id</b> to be a 5-digit long number. You can use the following route definition &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/things/:id([0-9]{5})', function(req, res){
+   res.send('id: ' + req.params.id);
+});
+
+app.listen(3000);
+</pre>
+<p>Note that this will <b>only</b> match the requests that have a 5-digit long <b>id</b>. You can use more complex regexes to match/validate your routes. If none of your routes match the request, you'll get a <i><b>"Cannot GET &lt;your-request-route&gt;"</b></i> message as response. This message be replaced by a 404 not found page using this simple route &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+//Other routes here
+app.get('*', function(req, res){
+   res.send('Sorry, this is an invalid URL.');
+});
+app.listen(3000);
+</pre>
+<p><b>Important</b> &minus; This should be placed after all your routes, as Express matches routes from start to end of the <b>index.js</b> file, including the external routers you required.</p>
+<p>For example, if we define the same routes as above, on requesting with a valid URL, the following output is displayed. &minus;</p>
+<img src="images/url_matching_correct.jpg" alt="Correct regex" />
+<p>While for an incorrect URL request, the following output is displayed.</p>
+<img src="images/url_pattern_invalid.jpg" alt="Invalid regex(404)" />
+<h1>ExpressJS - Middleware</h1>
+<p>Middleware functions are functions that have access to the <b>request object (req)</b>, the <b>response object (res)</b>, and the next middleware function in the application’s request-response cycle. These functions are used to modify <b>req</b> and <b>res</b> objects for tasks like parsing request bodies, adding response headers, etc.</p>
+<p>Here is a simple example of a middleware function in action &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+//Simple request time logger
+app.use(function(req, res, next){
+   console.log("A new request received at " + Date.now());
+   
+   //This function call is very important. It tells that more processing is
+   //required for the current request and is in the next middleware
+   function/route handler.
+   next();
+});
+
+app.listen(3000);
+</pre>
+<p>The above middleware is called for every request on the server. So after every request, we will get the following message in the console &minus;</p>
+<pre class="result notranslate">
+A new request received at 1467267512545
+</pre>
+<p>To restrict it to a specific route (and all its subroutes), provide that route as the first argument of <b><i>app.use()</i></b>. For Example,</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+//Middleware function to log request protocol
+app.use('/things', function(req, res, next){
+   console.log("A request for things received at " + Date.now());
+   next();
+});
+
+// Route handler that sends the response
+app.get('/things', function(req, res){
+   res.send('Things');
+});
+
+app.listen(3000);
+</pre>
+<p>Now whenever you request any subroute of '/things', only then it will log the time.</p>
+<h3>Order of Middleware Calls</h3>
+<p>One of the most important things about middleware in Express is the order in which they are written/included in your file; the order in which they are executed, given that the route matches also needs to be considered.</p>
+<p>For example, in the following code snippet, the first function executes first, then the route handler and then the end function. This example summarizes how to use middleware before and after route handler; also how a route handler can be used as a middleware itself.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+//First middleware before response is sent
+app.use(function(req, res, next){
+   console.log("Start");
+   next();
+});
+
+//Route handler
+app.get('/', function(req, res, next){
+   res.send("Middle");
+   next();
+});
+
+app.use('/', function(req, res){
+   console.log('End');
+});
+
+app.listen(3000);
+</pre>
+<p>When we visit '/' after running this code, we receive the response as <b>Middle</b> and on our console &minus;</p>
+<pre class="result notranslate">
+Start
+End
+</pre>
+<p>The following diagram summarizes what we have learnt about middleware &minus;</p>
+<img src="images/middleware_desc.jpg" alt="Middleware" />
+<p>Now that we have covered how to create our own middleware, let us discuss some of the most commonly used community created middleware.</p>
+<h2>Third Party Middleware</h2>
+<p>A list of Third party middleware for Express is available <a href="http://expressjs.com/en/resources/middleware.html" target="_blank" rel="nofollow">here</a>. Following are some of the most commonly used middleware; we will also learn how to use/mount these &minus;</p>
+<h3>body-parser</h3>
+<p>This is used to parse the body of requests which have payloads attached to them. To mount body parser, we need to install it using <b>npm install</b> --save body-parser and to mount it, include the following lines in your index.js &minus;</p>
+<pre class="prettyprint notranslate">
+var bodyParser = require('body-parser');
+
+//To parse URL encoded data
+app.use(bodyParser.urlencoded({ extended: false }))
+
+//To parse json data
+app.use(bodyParser.json())
+</pre>
+<p>To view all available options for body-parser, visit its github page.</p>
+<h3>cookie-parser</h3>
+<p>It parses <i>Cookie</i> header and populate req.cookies with an object keyed by cookie names. To mount cookie parser, we need to install it using npm install --save cookie-parser and to mount it, include the following lines in your index.js &minus;</p>
+<pre class="prettyprint notranslate">
+var bodyParser = require('cookie-parser');
+app.use(cookieParser())
+</pre>
+<h3>express-session</h3>
+<p>It creates a session middleware with the given options. We will discuss its usage in the Sessions section.</p>
+<p>We have many other third party middleware in ExpressJS. However, we have discussed only a few important ones here.</p>
+<h1>ExpressJS - Templating</h1>
+<p>Pug is a templating engine for Express. Templating engines are used to remove the cluttering of our server code with HTML, concatenating strings wildly to existing HTML templates. Pug is a very powerful templating engine which has a variety of features including <b>filters, includes, inheritance, interpolation</b>, etc. There is a lot of ground to cover on this.</p>
+<p>To use Pug with Express, we need to install it,</p>
+<pre class="result notranslate">
+npm install --save pug
+</pre>
+<p>Now that Pug is installed, set it as the templating engine for your app. You <b>don't</b> need to 'require' it. Add the following code to your <b>index.js</b> file.</p>
+<pre class="prettyprint notranslate">
+app.set('view engine', 'pug');
+app.set('views','./views');
+</pre>
+<p>Now create a new directory called views. Inside that create a file called <b>first_view.pug</b>, and enter the following data in it.</p>
+<pre class="prettyprint notranslate">
+doctype html
+html
+   head
+      title = "Hello Pug"
+   body
+      p.greetings#people Hello World!
+</pre>
+<p>To run this page, add the following route to your app &minus;</p>
+<pre class="prettyprint notranslate">
+app.get('/first_template', function(req, res){
+   res.render('first_view');
+});
+</pre>
+<p>You will get the output as &minus; <b>Hello World!</b> Pug converts this very simple looking markup to html. We don’t need to keep track of closing our tags, no need to use class and id keywords, rather use '.' and <b>'#'</b> to define them. The above code first gets converted to &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Hello Pug&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;p class = "greetings" id = "people"&gt;Hello World!&lt;/p&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Pug is capable of doing much more than simplifying HTML markup.</p>
+<h2>Important Features of Pug</h2>
+<p>Let us now explore a few important features of Pug.</p>
+<h3>Simple Tags</h3>
+<p>Tags are nested according to their indentation. Like in the above example, <b>&lt;title&gt;</b> was indented within the <b>&lt;head&gt;</b> tag, so it was inside it. But the <b>&lt;body&gt;</b> tag was on the same indentation, so it was a sibling of the <b>&lt;head&gt;</b> tag.</p>
+<p>We don’t need to close tags, as soon as Pug encounters the next tag on same or outer indentation level, it closes the tag for us.</p>
+<p>To put text inside of a tag, we have 3 methods &minus;</p>
+<ul class="list">
+<li><p><b>Space seperated</b></p></li>
+</ul>
+<pre class="result notranslate">
+h1 Welcome to Pug
+</pre>
+<ul class="list">
+<li><p><b>Piped text</b></p></li>
+</ul>
+<pre class="result notranslate">
+div
+   | To insert multiline text, 
+   | You can use the pipe operator.
+</pre>
+<ul class="list">
+<li><p><b>Block of text</b></p></li>
+</ul>
+<pre class="result notranslate">
+div.
+   But that gets tedious if you have a lot of text.
+   You can use "." at the end of tag to denote block of text.
+   To put tags inside this block, simply enter tag in a new line and 
+   indent it accordingly.
+</pre>
+<h3>Comments</h3>
+<p>Pug uses the same syntax as <b>JavaScript(//)</b> for creating comments. These comments are converted to the html comments(&lt;!--comment--&gt;). For example,</p>
+<pre class="result notranslate">
+//This is a Pug comment
+</pre>
+<p>This comment gets converted to the following.</p>
+<pre class="result notranslate">
+&lt;!--This is a Pug comment--&gt;
+</pre>
+<h3>Attributes</h3>
+<p>To define attributes, we use a comma separated list of attributes, in parenthesis. Class and ID attributes have special representations. The following line of code covers defining attributes, classes and id for a given html tag.</p>
+<pre class="result notranslate">
+div.container.column.main#division(width = "100", height = "100")
+</pre>
+<p>This line of code, gets converted to the following. &minus;</p>
+<pre class="result notranslate">
+&lt;div class = "container column main" id = "division" width = "100" height = "100"&gt;&lt;/div&gt;</pre>
+<h3>Passing Values to Templates</h3>
+<p>When we render a Pug template, we can actually pass it a value from our route handler, which we can then use in our template. Create a new route handler with the following.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/dynamic_view', function(req, res){
+   res.render('dynamic', {
+      name: "TutorialsPoint", 
+      url:"http://www.tutorialspoint.com"
+   });
+});
+
+app.listen(3000);
+</pre>
+<p>And create a new view file in views directory, called <b>dynamic.pug</b>, with the following code &minus;</p>
+<pre class="result notranslate">
+html
+   head
+      title=name
+   body
+      h1=name
+      a(href = url) URL
+</pre>
+<p>Open localhost:3000/dynamic in your browser; You should get the following output &minus;</p>
+<img src="images/templating_variables.jpg" alt="Variables in template" />
+<p>We can also use these passed variables within text. To insert passed variables in between text of a tag, we use <b>#{variableName}</b> syntax. For example, in the above example, if we wanted to put Greetings from TutorialsPoint, then we could have done the following.</p>
+<pre class="result notranslate">
+html
+   head
+      title = name
+   body
+      h1 Greetings from #{name}
+      a(href = url) URL
+</pre>
+<p>This method of using values is called <b>interpolation</b>. The above code will display the following output. &minus;</p>
+<img src="images/templating_inter.jpg" alt="Templating Inter" />
+<h3>Conditionals</h3>
+<p>We can use conditional statements and looping constructs as well.</p>
+<p>Consider the following &minus;</p>
+<p>If a User is logged in, the page should display <b>"Hi, User"</b> and if not, then the <b>"Login/Sign Up"</b> link. To achieve this, we can define a simple template like &minus;</p>
+<pre class="result notranslate">
+html
+   head
+      title Simple template
+   body
+      if(user)
+         h1 Hi, #{user.name}
+      else
+         a(href = "/sign_up") Sign Up
+</pre>
+<p>When we render this using our routes, we can pass an object as in the following program &minus;</p>
+<pre class="result notranslate">
+res.render('/dynamic',{
+   user: {name: "Ayush", age: "20"}
+});
+</pre>
+<p>You will receive a message &minus; <b>Hi, Ayush</b>. But if we don’t pass any object or pass one with no user key, then we will get a signup link.</p>
+<h3>Include and Components</h3>
+<p>Pug provides a very intuitive way to create components for a web page. For example, if you see a news website, the header with logo and categories is always fixed. Instead of copying that to every view we create, we can use the <b>include</b> feature. Following example shows how we can use this feature &minus;</p>
+<p>Create 3 views with the following code &minus;</p>
+<p><b>HEADER.PUG</b></p>
+<pre class="result notranslate">
+div.header.
+   I'm the header for this website.
+</pre>
+<p><b>CONTENT.PUG</b></p>
+<pre class="result notranslate">
+html
+   head
+      title Simple template
+   body
+      include ./header.pug
+      h3 I'm the main content
+      include ./footer.pug
+</pre>
+<p><b>FOOTER.PUG</b></p>
+<pre class="result notranslate">
+div.footer.
+   I'm the footer for this website.
+</pre>
+<p>Create a route for this as follows &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/components', function(req, res){
+    res.render('content');
+});
+
+app.listen(3000);</pre>
+<p>Go to localhost:3000/components, you will receive the following output &minus;</p>
+<img src="images/templating_components.jpg" alt="templating components">
+<p><b><i>include</i></b> can also be used to include plaintext, css and JavaScript.</p>
+<p>There are many more features of Pug. But those are out of the scope for this tutorial. You can further explore Pug at <a href="http://jade-lang.com/" target="_blank" rel="nofollow">Pug</a>.</p>
+<h1>ExpressJS - Serving static files</h1>
+<p>Static files are files that clients download as they are from the server. Create a new directory, <b>public</b>. Express, by default does not allow you to serve static files. You need to enable it using the following built-in middleware.</p>
+<pre class="result notranslate">
+app.use(express.static('public'));
+</pre>
+<p><b>Note</b> &minus; Express looks up the files relative to the static directory, so the name of the static directory is not part of the URL.</p>
+<p>Note that the root route is now set to your public dir, so all static files you load will be considering public as root. To test that this is working fine, add any image file in your new <b>public</b> dir and change its name to "<b>testimage.jpg</b>". In your views, create a new view and include this file like &minus;</p>
+<pre class="result notranslate">
+html
+   head
+   body
+      h3 Testing static file serving:
+      img(src = "/testimage.jpg", alt = "Testing Image
+</pre>
+<p>You should get the following output &minus;</p>
+<img src="images/serve_static.jpg" alt="Static Files Example">
+<h2>Multiple Static Directories</h2>
+<p>We can also set multiple static assets directories using the following program &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.use(express.static('public'));
+app.use(express.static('images'));
+
+app.listen(3000);
+</pre>
+<h2>Virtual Path Prefix</h2>
+<p>We can also provide a path prefix for serving static files. For example, if you want to provide a path prefix like <b>'/static'</b>, you need to include the following code in your <b>index.js</b> file &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.use('/static', express.static('public'));
+
+app.listen(3000);
+</pre>
+<p>Now whenever you need to include a file, for example, a script file called main.js residing in your public directory, use the following script tag &minus;</p>
+<pre class="result notranslate">
+&lt;script src = "/static/main.js" /&gt;
+</pre>
+<p>This technique can come in handy when providing multiple directories as static files. These prefixes can help distinguish between multiple directories.</p>
+<h1>ExpressJS - Form data</h1>
+<p>Forms are an integral part of the web. Almost every website we visit offers us forms that submit or fetch some information for us. To get started with forms, we will first install the <i>body-parser</i>(for parsing JSON and url-encoded data) and multer(for parsing multipart/form data) middleware.</p>
+<p>To install the <i>body-parser</i> and <i>multer</i>, go to your terminal and use &minus;</p>
+<pre class="result notranslate">
+npm install --save body-parser multer
+</pre>
+<p>Replace your <b>index.js</b> file contents with the following code &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
+var app = express();
+
+app.get('/', function(req, res){
+   res.render('form');
+});
+
+app.set('view engine', 'pug');
+app.set('views', './views');
+
+// for parsing application/json
+app.use(bodyParser.json()); 
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true })); 
+form-urlencoded
+
+// for parsing multipart/form-data
+app.use(upload.array()); 
+app.use(express.static('public'));
+
+app.post('/', function(req, res){
+   console.log(req.body);
+   res.send("recieved your request!");
+});
+app.listen(3000);
+</pre>
+<p>After importing the body parser and multer, we will use the <b>body-parser</b> for parsing json and x-www-form-urlencoded header requests, while we will use <b>multer</b> for parsing multipart/form-data.</p>
+<p>Let us create an html form to test this out. Create a new view called <b>form.pug</b> with the following code &minus;</p>
+<pre class="result notranslate">html
+html
+   head
+      title Form Tester
+   body
+      form(action = "/", method = "POST")
+         div
+            label(for = "say") Say:
+            input(name = "say" value = "Hi")
+         br
+         div
+            label(for = "to") To:
+            input(name = "to" value = "Express forms")
+         br
+         button(type = "submit") Send my greetings
+</pre>
+<p>Run your server using the following.</p>
+<pre class="result notranslate">
+nodemon index.js
+</pre>
+<p>Now go to localhost:3000/ and fill the form as you like, and submit it. The following response will be displayed &minus;</p>
+<img src="images/form_received.jpg" alt="Response to form submission" />
+<p>Have a look at your console; it will show you the body of your request as a JavaScript object as in the following screenshot &minus;</p>
+<img src="images/form_console.jpg" alt="Console output for form" />
+<p>The <b>req.body</b> object contains your parsed request body. To use fields from that object, just use them like normal JS objects.</p>
+<p>This is the most recommended way to send a request. There are many other ways, but those are irrelevant to cover here, because our Express app will handle all those requests in the same way. To read more about different ways to make a request, have a look at <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript" target="_blank" rel="nofollow">this</a> page.</p>
+<h1>ExpressJS - Database</h1>
+<p>We keep receiving requests, but end up not storing them anywhere. We need a Database to store the data. For this, we will make use of the NoSQL database called <b>MongoDB</b>.</p>
+<p>To install and read about Mongo, follow <a href="../mongodb/mongodb_environment.html" target="_blank" rel="nofollow">this link.</a></p>
+<p>In order to use Mongo with Express, we need a client API for node. There are multiple options for us, but for this tutorial, we will stick to <a href="http://mongoosejs.com/" target="_blank" rel="nofollow">mongoose</a>. Mongoose is used for <b>document Modeling</b> in Node for MongoDB. For document modeling, we create a <b>Model</b> (much like a <b>class</b> in document oriented programming), and then we produce <b>documents</b> using this Model (like we create <b>documents of a class</b> in OOP). All our processing will be done on these "documents", then finally, we will write these documents in our database.</p>
+<h2>Setting up Mongoose</h2>
+<p>Now that you have installed Mongo, let us install Mongoose, the same way we have been installing our other node packages &minus;</p>
+<pre class="result notranslate">
+npm install --save mongoose
+</pre>
+<p>Before we start using mongoose, we have to create a database using the Mongo shell. To create a new database, open your terminal and enter "mongo". A Mongo shell will start, enter the following code &minus;</p>
+<pre class="result notranslate">
+use my_db
+</pre>
+<p>A new database will be created for you. Whenever you open up the mongo shell, it will default to "test" db and you will have to change to your database using the same command as above.</p>
+<p>To use Mongoose, we will require it in our <b>index.js</b> file and then connect to the <b>mongodb</b> service running on <b>mongodb://localhost</b>.</p>
+<pre class="result notranslate">
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/my_db');
+</pre>
+<p>Now our app is connected to our database, let us create a new Model. This model will act as a collection in our database. To create a new Model, use the following code, before defining any route &minus;</p>
+<pre class="prettyprint notranslate">
+var personSchema = mongoose.Schema({
+   name: String,
+   age: Number,
+   nationality: String
+});
+var Person = mongoose.model("Person", personSchema);
+</pre>
+<p>The above code defines the schema for a person and is used to create a Mongoose Mode <b>Person</b>.</p>
+<h2>Saving Documents</h2>
+<p>Now, we will create a new html form; this form will help you get the details of a person and save it to our database. To create the form, create a new view file called <b>person.pug</b> in views directory with the following content &minus;</p>
+<pre class="result notranslate">html
+head
+   title Person
+   body
+      form(action = "/person", method = "POST")
+      div
+         label(for = "name") Name: 
+         input(name = "name")
+      br
+      div
+         label(for = "age") Age: 
+         input(name = "age")
+      br
+      div
+         label(for = "nationality") Nationality: 
+         input(name = "nationality")
+      br
+      button(type = "submit") Create new person
+</pre>
+<p>Also add a <b>new get route</b> in <b>index.js</b> to render this document &minus;</p>
+<pre class="prettyprint notranslate">
+app.get('/person', function(req, res){
+   res.render('person');
+});
+</pre>
+<p>Go to "<b>localhost:3000/person</b>" to check if the form is displaying the correct output. Note that this is just the UI, it is not working yet. The following screenshot shows how the form is displayed &minus;</p>
+<img src="images/mongoose_create.jpg" alt="Mongoose Create"/>
+<p>We will now define a post route handler at <b>'/person'</b> which will handle this request</p>
+<pre class="prettyprint notranslate">
+app.post('/person', function(req, res){
+   var personInfo = req.body; //Get the parsed information
+   
+   if(!personInfo.name || !personInfo.age || !personInfo.nationality){
+      res.render('show_message', {
+         message: "Sorry, you provided worng info", type: "error"});
+   } else {
+      var newPerson = new Person({
+         name: personInfo.name,
+         age: personInfo.age,
+         nationality: personInfo.nationality
+      });
+		
+      newPerson.save(function(err, Person){
+         if(err)
+            res.render('show_message', {message: "Database error", type: "error"});
+         else
+            res.render('show_message', {
+               message: "New person added", type: "success", person: personInfo});
+      });
+   }
+});
+</pre>
+<p>In the above code, if we receive any empty field or do not receive any field, we will send an error response. But if we receive a well-formed document, then we create a <b>newPerson</b> document from Person model and save it to our DB using the <b>newPerson.save()</b> function. This is defined in Mongoose and accepts a callback as argument. This callback has 2 arguments – error and response. These arguments will render the <b>show_message</b> view.</p>
+<p>To show the response from this route, we will also need to create a <b>show_message</b> view. Create a new view with the following code &minus;</p>
+<pre class="result notranslate">
+html
+   head
+      title Person
+   body
+      if(type == "error")
+         h3(style = "color:red") #{message}
+      else
+         h3 New person, 
+            name: #{person.name}, 
+            age: #{person.age} and 
+            nationality: #{person.nationality} added!
+</pre>
+<p>We will receive the following response on successfully submitting the <b>form(show_message.pug)</b> &minus;</p>
+<img src="images/mongoose_response.jpg" alt="Mongoose Response" />
+<p>We now have an interface to create <b>persons</b>.</p>
+<h2>Retrieving Documents</h2>
+<p>Mongoose provides a lot of functions for retrieving documents, we will focus on 3 of those. All these functions also take a callback as the last parameter, and just like the save function, their arguments are error and response. The three functions are as follows &minus;</p>
+<h3>Model.find(conditions, callback)</h3>
+<p>This function finds all the documents matching the fields in conditions object. Same operators used in Mongo also work in mongoose. For example,</p>
+<pre class="prettyprint notranslate">
+Person.find(function(err, response){
+   console.log(response);
+});
+</pre>
+<p>This will fetch all the documents from the person's collection.</p>
+<pre class="prettyprint notranslate">
+Person.find({name: "Ayush", age: 20}, 
+   function(err, response){
+      console.log(response);
+});
+</pre>
+<p>This will fetch all documents where field name is "Ayush" and age is 20.</p>
+<p>We can also provide projection we need, i.e., the fields we need. For example, if we want only the <b>names</b> of people whose <b>nationality</b> is <i>"Indian"</i>, we use &minus;</p>
+<pre class="prettyprint notranslate">
+Person.find({nationality: "Indian"}, "name", function(err, response){
+   console.log(response);
+});
+</pre>
+<h3>Model.findOne(conditions, callback)</h3>
+<p>This function always fetches a single, most relevant document. It has the same exact arguments as <b>Model.find()</b>.</p>
+<h3>Model.findById(id, callback)</h3>
+<p>This function takes in the <b>_id</b>(defined by mongo) as the first argument, an optional projection string and a callback to handle the response. For example,</p>
+<pre class="prettyprint notranslate">
+Person.findById("507f1f77bcf86cd799439011", function(err, response){
+   console.log(response);
+});
+</pre>
+<p>Let us now create a route to view all people records &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/my_db');
+
+var personSchema = mongoose.Schema({
+   name: String,
+   age: Number,
+   nationality: String
+});
+
+var Person = mongoose.model("Person", personSchema);
+
+app.get('/people', function(req, res){
+   Person.find(function(err, response){
+      res.json(response);
+   });
+});
+
+app.listen(3000);
+</pre>
+<h2>Updating Documents</h2>
+<p>Mongoose provides 3 functions to update documents. The functions are described below &minus;</p>
+<h3>Model.update(condition, updates, callback)</h3>
+<p>This function takes a conditions and updates an object as input and applies the changes to all the documents matching the conditions in the collection. For example, following code will update the nationality "American" in all Person documents &minus;</p> 
+<pre class="prettyprint notranslate">
+Person.update({age: 25}, {nationality: "American"}, function(err, response){
+   console.log(response);
+});
+</pre>
+<h3>Model.findOneAndUpdate(condition, updates, callback)</h3>
+<p>It finds one document based on the query and updates that according to the second argument. It also takes a callback as last argument. Let us perform the following example to understand the function</p>
+<pre class="prettyprint notranslate">
+Person.findOneAndUpdate({name: "Ayush"}, {age: 40}, function(err, response) {
+   console.log(response);
+});
+</pre>
+<h3>Model.findByIdAndUpdate(id, updates, callback)</h3>
+<p>This function updates a single document identified by its id. For example,</p>
+<pre class="prettyprint notranslate">
+Person.findByIdAndUpdate("507f1f77bcf86cd799439011", {name: "James"}, 
+   function(err, response){
+      console.log(response);
+});
+</pre>
+<p>Let us now create a route to update people. This will be a <b>PUT</b> route with the id as a parameter and details in the payload.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/my_db');
+
+var personSchema = mongoose.Schema({
+   name: String,
+   age: Number,
+   nationality: String
+});
+
+var Person = mongoose.model("Person", personSchema);
+
+app.put('/people/:id', function(req, res){
+   Person.findByIdAndUpdate(req.params.id, req.body, function(err, response){
+      if(err) res.json({message: "Error in updating person with id " + req.params.id});
+      res.json(response);
+   });
+});
+
+app.listen(3000);
+</pre>
+<p>To test this route, enter the following in your terminal (replace the id with an id from your created <b>people</b>) &minus;</p>
+<pre class="result notranslate">
+curl -X PUT --data "name = James&amp;age = 20&amp;nationality = American
+"http://localhost:3000/people/507f1f77bcf86cd799439011
+</pre>
+<p>This will update the document associated with the id provided in the route with the above details.</p>
+<h2>Deleting Documents</h2>
+<p>We have covered <b>Create, Read</b> and <b>Update</b>, now we will see how Mongoose can be used to <b>Delete</b> documents. We have 3 functions here, exactly like update.</p>
+<h3>Model.remove(condition, [callback])</h3>
+<p>This function takes a condition object as input and removes all documents matching the conditions. For example, if we need to remove all people aged 20, use the following syntax &minus;</p>
+<pre class="result notranslate">
+Person.remove({age:20});
+</pre>
+<h3>Model.findOneAndRemove(condition, [callback])</h3>
+<p>This functions removes a <b>single</b>, most relevant document according to conditions object. Let us execute the following code to understand the same.</p>
+<pre class="result notranslate">
+Person.findOneAndRemove({name: "Ayush"});
+</pre>
+<h3>Model.findByIdAndRemove(id, [callback])</h3>
+<p>This function removes a single document identified by its id. For example,</p>
+<pre class="result notranslate">
+Person.findByIdAndRemove("507f1f77bcf86cd799439011");</pre>
+<p>Let us now create a route to delete people from our database.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/my_db');
+
+var personSchema = mongoose.Schema({
+   name: String,
+   age: Number,
+   nationality: String
+});
+
+var Person = mongoose.model("Person", personSchema);
+
+app.delete('/people/:id', function(req, res){
+   Person.findByIdAndRemove(req.params.id, function(err, response){
+      if(err) res.json({message: "Error in deleting record id " + req.params.id});
+      else res.json({message: "Person with id " + req.params.id + " removed."});
+   });
+});
+
+app.listen(3000);
+</pre>
+<p>To check the output, use the following curl command &minus; </p>
+<pre class="result notranslate">
+curl -X DELETE http://localhost:3000/people/507f1f77bcf86cd799439011
+</pre>
+<p>This will remove the person with given id producing the following message &minus;</p>
+<pre class="result notranslate">
+{message: "Person with id 507f1f77bcf86cd799439011 removed."}
+</pre>
+<p>This wraps up how we can create simple CRUD applications using MongoDB, Mongoose and Express. To explore Mongoose further, read the <a rel="nofollow" target="_blank" href="http://mongoosejs.com/">API docs.</a></p>
+<h1>ExpressJS - Cookies</h1>
+<p>Cookies are simple, small files/data that are sent to client with a server request and stored on the client side. Every time the user loads the website back, this cookie is sent with the request. This helps us keep track of the user’s actions.</p>
+<p>The following are the numerous uses of the HTTP Cookies &minus;</p>
+<ul class="list">
+<li>Session management</li>
+<li>Personalization(Recommendation systems)</li>
+<li>User tracking</li>
+</ul>
+<p>To use cookies with Express, we need the cookie-parser middleware. To install it, use the following code &minus;</p>
+<pre class="result notranslate">
+npm install --save cookie-parser
+</pre>
+<p>Now to use cookies with Express, we will require the <b>cookie-parser</b>. cookie-parser is a middleware which <i>parses cookies attached to the client request object</i>. To use it, we will require it in our <b>index.js</b> file; this can be used the same way as we use other middleware. Here, we will use the following code.</p>
+<pre class="prettyprint notranslate">
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+</pre>
+<p>cookie-parser parses Cookie header and populates <b>req.cookies</b> with an object keyed by the cookie names. To set a new cookie, let us define a new route in your Express app like &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/', function(req, res){
+   res.cookie('name', 'express').send('cookie set'); //Sets name = express
+});
+
+app.listen(3000);
+</pre>
+<p>To check if your cookie is set or not, just go to your browser, fire up the console, and enter &minus;</p>
+<pre class="result notranslate">
+console.log(document.cookie);
+</pre>
+<p>You will get the output like (you may have more cookies set maybe due to extensions in your browser) &minus;</p>
+<pre class="result notranslate">
+"name = express"
+</pre>
+<p>The browser also sends back cookies every time it queries the server. To view cookies from your server, on the server console in a route, add the following code to that route. </p>
+<pre class="result notranslate">
+console.log('Cookies: ', req.cookies);
+</pre>
+<p>Next time you send a request to this route, you will receive the following output.</p>
+<pre class="result notranslate">
+Cookies: { name: 'express' }
+</pre>
+<h2>Adding Cookies with Expiration Time</h2>
+<p>You can add cookies that expire. To add a cookie that expires, just pass an object with property 'expire' set to the time when you want it to expire. For example,</p>
+<pre class="prettyprint notranslate">
+//Expires after 360000 ms from the time it is set.
+res.cookie(name, 'value', {expire: 360000 + Date.now()}); 
+</pre>
+<p>Another way to set expiration time is using <b>'maxAge'</b> property. Using this property, we can provide relative time instead of absolute time. Following is an example of this method.</p>
+<pre class="prettyprint notranslate">
+//This cookie also expires after 360000 ms from the time it is set.
+res.cookie(name, 'value', {maxAge: 360000});
+</pre>
+<h2>Deleting Existing Cookies</h2>
+<p>To delete a cookie, use the clearCookie function. For example, if you need to clear a cookie named <b>foo</b>, use the following code.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/clear_cookie_foo', function(req, res){
+   clearCookie('foo');
+   res.send('cookie foo cleared');
+});
+
+app.listen(3000);
+</pre>
+<p>In the next chapter, we will see how to use cookies to manage sessions.</p>
+<h1>ExpressJS - Sessions</h1>
+<p>HTTP is stateless; in order to associate a request to any other request, you need a way to store user data between HTTP requests. Cookies and URL parameters are both suitable ways to transport data between the client and the server. But they are both readable and on the client side. Sessions solve exactly this problem. You assign the client an ID and it makes all further requests using that ID. Information associated with the client is stored on the server linked to this ID.</p>
+<p>We will need the <i>Express-session</i>, so install it using the following code.</p>
+<pre class="result notranslate">
+npm install --save express-session
+</pre>
+<p>We will put the <b>session</b> and <b>cookie-parser</b> middleware in place. In this example, we will  use the default store for storing sessions, i.e., MemoryStore. Never use this in production environments. The session middleware handles all things for us, i.e., creating the session, setting the session cookie and creating the session object in <b>req</b> object.</p>
+<p>Whenever we make a request from the same client again, we will have their session information stored with us (given that the server was not restarted). We can add more properties to the session object. In the following example, we will create a view counter for a client.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
+var app = express();
+
+app.use(cookieParser());
+app.use(session({secret: "Shh, its a secret!"}));
+
+app.get('/', function(req, res){
+   if(req.session.page_views){
+      req.session.page_views++;
+      res.send("You visited this page " + req.session.page_views + " times");
+   } else {
+      req.session.page_views = 1;
+      res.send("Welcome to this page for the first time!");
+   }
+});
+app.listen(3000);
+</pre>
+<p>What the above code does is, when a user visits the site, it creates a new session for the user and assigns them a cookie. Next time the user comes, the cookie is checked and the <b>page_view</b> session variable is updated accordingly.</p>
+<p>Now if you run the app and go to <b>localhost:3000</b>, the following output will be displayed.</p>
+<img src="images/session_first.jpg" alt="First visit" />
+<p>If you revisit the page, the page counter will increase. The page in the following screenshot was refreshed 42 times.</p>
+<img src="images/session_42.jpg" alt="First visit" />
+<h1>ExpressJS - Authentication</h1>
+<p>Authentication is a process in which the credentials provided are compared to those on file in a database of authorized users' information on a local operating system or within an authentication server. If the credentials match, the process is completed and the user is granted authorization for access.</p>
+<p>For us to create an authentication system, we will need to create a sign up page and a user-password store. The following code creates an account for us and stores it in memory. This is just for the purpose of demo; it is recommended that a persistent storage (database or files) is always used to store user information.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer(); 
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+
+app.set('view engine', 'pug');
+app.set('views','./views');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(upload.array());
+app.use(cookieParser());
+app.use(session({secret: "Your secret key"}));
+
+var Users = [];
+
+app.get('/signup', function(req, res){
+   res.render('signup');
+});
+
+app.post('/signup', function(req, res){
+   if(!req.body.id || !req.body.password){
+      res.status("400");
+      res.send("Invalid details!");
+   } else {
+      Users.filter(function(user){
+         if(user.id === req.body.id){
+            res.render('signup', {
+               message: "User Already Exists! Login or choose another user id"});
+         }
+      });
+      var newUser = {id: req.body.id, password: req.body.password};
+      Users.push(newUser);
+      req.session.user = newUser;
+      res.redirect('/protected_page');
+   }
+});
+
+app.listen(3000);
+</pre>
+<p>Now for the signup form, create a new view called <b>signup.jade.</b></p>
+<h3>SIGNUP.JADE</h3>
+<pre class="prettyprint notranslate">
+html
+   head
+      title Signup
+   body
+      if(message)
+         h4 #{message}
+         form(action = "/signup" method = "POST")
+         input(name = "id" type = "text" required placeholder = "User ID")
+         input(name = "password" type = "password" required placeholder = "Password")
+         button(type = "Submit") Sign me up!
+</pre>
+<p>Check if this page loads by visiting localhost:3000/signup.</p>
+<img src="images/auth_signup.jpg" alt="Signup form" />
+<p>We have set the required attribute for both fields, so HTML5 enabled browsers will not let us submit this form until we provide both id and password. If someone tries to register using a curl request without a User ID or Password, an error will be displayed. Create a new file called <b>protected_page.pug</b> in views with the following content &minus;</p>
+<pre class="prettyprint notranslate">
+html
+   head
+      title Protected page
+   body
+      div Hey #{id}, How are you doing today?
+      div Want to log out?
+      div Logout
+</pre>
+<p>This page should only be visible if the user has just signed up or logged in. Let us now define its route and also routes to log in and log out &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer(); 
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+
+app.set('view engine', 'pug');
+app.set('views','./views');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(upload.array());
+app.use(cookieParser());
+app.use(session({secret: "Your secret key"}));
+
+var Users = [];
+
+app.get('/signup', function(req, res){
+   res.render('signup');
+});
+
+app.post('/signup', function(req, res){
+   if(!req.body.id || !req.body.password){
+      res.status("400");
+      res.send("Invalid details!");
+   } else {
+      Users.filter(function(user){
+         if(user.id === req.body.id){
+            res.render('signup', {
+               message: "User Already Exists! Login or choose another user id"});
+         }
+      });
+      var newUser = {id: req.body.id, password: req.body.password};
+      Users.push(newUser);
+      req.session.user = newUser;
+      res.redirect('/protected_page');
+   }
+});
+function checkSignIn(req, res){
+   if(req.session.user){
+      next();     //If session exists, proceed to page
+   } else {
+      var err = new Error("Not logged in!");
+      console.log(req.session.user);
+      next(err);  //Error, trying to access unauthorized page!
+   }
+}
+app.get('/protected_page', checkSignIn, function(req, res){
+   res.render('protected_page', {id: req.session.user.id})
+});
+
+app.get('/login', function(req, res){
+   res.render('login');
+});
+
+app.post('/login', function(req, res){
+   console.log(Users);
+   if(!req.body.id || !req.body.password){
+      res.render('login', {message: "Please enter both id and password"});
+   } else {
+      Users.filter(function(user){
+         if(user.id === req.body.id && user.password === req.body.password){
+            req.session.user = user;
+            res.redirect('/protected_page');
+         }
+      });
+      res.render('login', {message: "Invalid credentials!"});
+   }
+});
+
+app.get('/logout', function(req, res){
+   req.session.destroy(function(){
+      console.log("user logged out.")
+   });
+   res.redirect('/login');
+});
+
+app.use('/protected_page', function(err, req, res, next){
+console.log(err);
+   //User should be authenticated! Redirect him to log in.
+   res.redirect('/login');
+});
+
+app.listen(3000);
+</pre>
+<p>We have created a middleware function <i>checkSignIn</i> to check if the user is signed in. The <b>protected_page</b> uses this function. To log the user out, we destroy the session.</p>
+<p>Let us now create the login page. Name the view as <b>login.pug</b> and enter the contents &minus;</p>
+<pre class="prettyprint notranslate">
+html
+   head
+      title Signup
+   body
+      if(message)
+         h4 #{message}
+         form(action = "/login" method = "POST")
+         input(name = "id" type = "text" required placeholder = "User ID")
+         input(name = "password" type = "password" required placeholder = "Password")
+         button(type = "Submit") Log in
+</pre>
+<p>Our simple authentication application is now complete; let us now test the application. Run the app using <i>nodemon index.js</i>, and proceed to localhost:3000/signup.</p>
+<p>Enter a Username and a password and click sign up. You will be redirected to the <b>protected_page</b> if details are valid/unique &minus;</p>
+<img src="images/auth_protected.jpg" alt="Protected page" />
+<p>Now log out of the app. This will redirect us to the login page &minus;</p>
+<img src="images/auth_login.jpg" alt="Auth login" />
+<p>This route is protected such that if an unauthenticated person tries to visit it, he will be edirected to our login page. This was all about basic user authentication. It is always recommended that we use a persistent session system and use hashes for password transport. There are much better ways to authenticate users now, leveraging JSON tokens.</p>
+<h1>ExpressJS - RESTFul APIs</h1>
+<p>An API is always needed to create mobile applications, single page applications, use AJAX calls and provide data to clients. An popular architectural style of how to structure and name these APIs and the endpoints is called <b>REST(Representational Transfer State)</b>. <b>HTTP 1.1</b> was designed keeping REST principles in mind. REST was introduced by <b>Roy Fielding</b> in 2000 in his Paper Fielding Dissertations.</p>
+<p>RESTful URIs and methods provide us with almost all information we need to process a request. The table given below summarizes how the various verbs should be used and how URIs should be named. We will be creating a movies API towards the end; let us now discuss how it will be structured.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Method</th>
+<th style="text-align:center;">URI</th>
+<th style="text-align:center;">Details</th>
+<th style="text-align:center;">Function</th>
+</tr>
+<tr>
+<td>GET</td>
+<td>/movies</td>
+<td>Safe, cachable</td>
+<td>Gets the list of all movies and their details</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/movies/1234</td>
+<td>Safe, cachable</td>
+<td>Gets the details of Movie id 1234</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/movies</td>
+<td>N/A</td>
+<td>Creates a new movie with the details provided. Response contains the URI for this newly created resource.</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>/movies/1234</td>
+<td>Idempotent</td>
+<td>Modifies movie id 1234(creates one if it doesn't already exist). Response contains the URI for this newly created resource.</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/movies/1234</td>
+<td>Idempotent</td>
+<td>Movie id 1234 should be deleted, if it exists. Response should contain the status of the request.</td>
+</tr>
+<tr>
+<td>DELETE or PUT</td>
+<td>/movies</td>
+<td>Invalid</td>
+<td>Should be invalid. <b>DELETE</b> and <b>PUT</b> should specify which resource they are working on.</td>
+</tr>
+</table>
+<p>Let us now create this API in Express. We will be using JSON as our transport data format as it is easy to work with in JavaScript and has other benefits. Replace your <b>index.js</b> file with the <b>movies.js</b> file as in the following program.</p>
+<h2>index.js</h2>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
+
+var app = express();
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(upload.array());
+
+//Require the Router we defined in movies.js
+var movies = require('./movies.js');
+
+//Use the Router on the sub route /movies
+app.use('/movies', movies);
+
+app.listen(3000);
+</pre>
+<p>Now that we have our application set up, let us concentrate on creating the API.</p>
+<p>Start by setting up the movies.js file. We are not using a database to store the movies but are storing them in memory; so every time the server restarts, the movies added by us will vanish. This can easily be mimicked using a database or a file (using node fs module).</p>
+<p>Once you import Express then, create a Router and export it using <i>module.exports</i> &minus;</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var router = express.Router();
+var movies = [
+   {id: 101, name: "Fight Club", year: 1999, rating: 8.1},
+   {id: 102, name: "Inception", year: 2010, rating: 8.7},
+   {id: 103, name: "The Dark Knight", year: 2008, rating: 9},
+   {id: 104, name: "12 Angry Men", year: 1957, rating: 8.9}
+];
+
+//Routes will go here
+module.exports = router;</pre>
+<h2>GET routes</h2>
+<p>Let us define the GET route for getting all the movies &minus;</p>
+<pre class="prettyprint notranslate">
+router.get('/', function(req, res){
+   res.json(movies);
+});
+</pre>
+<p>To test out if this is working fine, run your app, then open your terminal and enter &minus;</p>
+<pre class="result notranslate">
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET 
+localhost:3000/movies
+</pre>
+<p>The following response will be displayed &minus;</p>
+<pre class="result notranslate">
+[{"id":101,"name":"Fight Club","year":1999,"rating":8.1},
+{"id":102,"name":"Inception","year":2010,"rating":8.7},
+{"id":103,"name":"The Dark Knight","year":2008,"rating":9},
+{"id":104,"name":"12 Angry Men","year":1957,"rating":8.9}]
+</pre>
+<p>We have a route to get all the movies. Let us now create a route to get a specific movie by its id.</p>
+<pre class="prettyprint notranslate">
+router.get('/:id([0-9]{3,})', function(req, res){
+   var currMovie = movies.filter(function(movie){
+      if(movie.id == req.params.id){
+         return true;
+      }
+   });
+   if(currMovie.length == 1){
+      res.json(currMovie[0])
+   } else {
+      res.status(404);//Set status to 404 as movie was not found
+      res.json({message: "Not Found"});
+   }
+});
+</pre>
+<p>This will get us the movies according to the id that we provided. To check the output, use the following command in your terminal &minus;</p>
+<pre class="result notranslate">
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET 
+localhost:3000/movies/101
+</pre>
+<p>You'll get the following response &minus;</p>
+<pre class="result notranslate">
+{"id":101,"name":"Fight Club","year":1999,"rating":8.1}
+</pre>
+<p>If you visit an invalid route, it will produce a <b>cannot GET error</b> while if you visit a valid route with an id that doesn’t exist, it will produce a 404 error.</p>
+<p>We are done with the GET routes, let us now move on to the <b>POST</b> route.</p>
+<h3>POST route</h3>
+<p>Use the following route to handle the <b>POSTed</b> data &minus;</p>
+<pre class="prettyprint notranslate">
+router.post('/', function(req, res){
+   //Check if all fields are provided and are valid:
+   if(!req.body.name ||
+      !req.body.year.toString().match(/^[0-9]{4}$/g) ||
+      !req.body.rating.toString().match(/^[0-9]\.[0-9]$/g)){
+      
+      res.status(400);
+      res.json({message: "Bad Request"});
+   } else {
+      var newId = movies[movies.length-1].id+1;
+      movies.push({
+         id: newId,
+         name: req.body.name,
+         year: req.body.year,
+         rating: req.body.rating
+      });
+      res.json({message: "New movie created.", location: "/movies/" + newId});
+   }
+});
+</pre>
+<p>This will create a new movie and store it in the movies variable. To check this route, enter the following code in your terminal &minus;</p>
+<pre class="result notranslate">
+curl -X POST --data "name = Toy%20story&amp;year = 1995&amp;rating = 8.5" http://localhost:3000/movies
+</pre>
+<p>The following response will be displayed &minus;</p>
+<pre class="result notranslate">
+{"message":"New movie created.","location":"/movies/105"}
+</pre>
+<p>To test if this was added to the movies object, Run the get request for <b>/movies/105</b> again. The following response will be displayed &minus;</p>
+<pre class="result notranslate">
+{"id":105,"name":"Toy story","year":"1995","rating":"8.5"}
+</pre>
+<p>Let us move on to create the PUT and DELETE routes.</p>
+<h2>PUT route</h2>
+<p>The PUT route is almost the same as the POST route. We will be specifying the id for the object that'll be updated/created. Create the route in the following way.</p>
+<pre class="prettyprint notranslate">
+router.put('/:id', function(req, res){
+   //Check if all fields are provided and are valid:
+   if(!req.body.name ||
+      !req.body.year.toString().match(/^[0-9]{4}$/g) ||
+      !req.body.rating.toString().match(/^[0-9]\.[0-9]$/g) ||
+      !req.params.id.toString().match(/^[0-9]{3,}$/g)){
+      
+      res.status(400);
+      res.json({message: "Bad Request"});
+   } else {
+      //Gets us the index of movie with given id.
+      var updateIndex = movies.map(function(movie){
+         return movie.id;
+      }).indexOf(parseInt(req.params.id));
+      
+      if(updateIndex === -1){
+         //Movie not found, create new
+         movies.push({
+            id: req.params.id,
+            name: req.body.name,
+            year: req.body.year,
+            rating: req.body.rating
+         });
+         res.json({message: "New movie created.", location: "/movies/" + req.params.id});
+      } else {
+         //Update existing movie
+         movies[updateIndex] = {
+            id: req.params.id,
+            name: req.body.name,
+            year: req.body.year,
+            rating: req.body.rating
+         };
+         res.json({message: "Movie id " + req.params.id + " updated.", 
+            location: "/movies/" + req.params.id});
+      }
+   }
+});
+</pre>
+<p>This route will perform the function specified in the above table. It will update the object with new details if it exists. If it doesn't exist, it will create a new object. To check the route, use the following curl command. This will update an existing movie. To create a new Movie, just change the id to a non-existing id.</p>
+<pre class="result notranslate">
+curl -X PUT --data "name = Toy%20story&amp;year = 1995&amp;rating = 8.5" 
+http://localhost:3000/movies/101
+</pre>
+<p><b>Response</b></p>
+<pre class="result notranslate">
+{"message":"Movie id 101 updated.","location":"/movies/101"}
+</pre>
+<h2>DELETE route</h2>
+<p>Use the following code to create a delete route. &minus;</p>
+<pre class="prettyprint notranslate">
+router.delete('/:id', function(req, res){
+   var removeIndex = movies.map(function(movie){
+      return movie.id;
+   }).indexOf(req.params.id); //Gets us the index of movie with given id.
+   
+   if(removeIndex === -1){
+      res.json({message: "Not found"});
+   } else {
+      movies.splice(removeIndex, 1);
+      res.send({message: "Movie id " + req.params.id + " removed."});
+   }
+});
+</pre>
+<p>Check the route in the same way as we checked the other routes. On successful deletion(for example id 105), you will get the following output &minus;</p>
+<pre class="result notranslate">
+{message: "Movie id 105 removed."}
+</pre>
+<p>Finally, our <b>movies.js</b> file will look like the following.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var router = express.Router();
+var movies = [
+   {id: 101, name: "Fight Club", year: 1999, rating: 8.1},
+   {id: 102, name: "Inception", year: 2010, rating: 8.7},
+   {id: 103, name: "The Dark Knight", year: 2008, rating: 9},
+   {id: 104, name: "12 Angry Men", year: 1957, rating: 8.9}
+];
+router.get('/:id([0-9]{3,})', function(req, res){
+   var currMovie = movies.filter(function(movie){
+      if(movie.id == req.params.id){
+         return true;
+      }
+   });
+   
+   if(currMovie.length == 1){
+      res.json(currMovie[0])
+   } else {
+      res.status(404);  //Set status to 404 as movie was not found
+      res.json({message: "Not Found"});
+   }
+});
+router.post('/', function(req, res){
+   //Check if all fields are provided and are valid:
+   if(!req.body.name ||
+      !req.body.year.toString().match(/^[0-9]{4}$/g) ||
+      !req.body.rating.toString().match(/^[0-9]\.[0-9]$/g)){
+      res.status(400);
+      res.json({message: "Bad Request"});
+   } else {
+      var newId = movies[movies.length-1].id+1;
+      movies.push({
+         id: newId,
+         name: req.body.name,
+         year: req.body.year,
+         rating: req.body.rating
+      });
+      res.json({message: "New movie created.", location: "/movies/" + newId});
+   }
+});
+
+router.put('/:id', function(req, res) {
+   //Check if all fields are provided and are valid:
+   if(!req.body.name ||
+      !req.body.year.toString().match(/^[0-9]{4}$/g) ||
+      !req.body.rating.toString().match(/^[0-9]\.[0-9]$/g) ||
+      !req.params.id.toString().match(/^[0-9]{3,}$/g)){
+      res.status(400);
+      res.json({message: "Bad Request"});
+   } else {
+      //Gets us the index of movie with given id.
+      var updateIndex = movies.map(function(movie){
+         return movie.id;
+      }).indexOf(parseInt(req.params.id));
+      
+      if(updateIndex === -1){
+         //Movie not found, create new
+         movies.push({
+            id: req.params.id,
+            name: req.body.name,
+            year: req.body.year,
+            rating: req.body.rating
+         });
+         res.json({
+            message: "New movie created.", location: "/movies/" + req.params.id});
+      } else {
+         //Update existing movie
+         movies[updateIndex] = {
+            id: req.params.id,
+            name: req.body.name,
+            year: req.body.year,
+            rating: req.body.rating
+         };
+         res.json({message: "Movie id " + req.params.id + " updated.",
+            location: "/movies/" + req.params.id});
+      }
+   }
+});
+
+router.delete('/:id', function(req, res){
+   var removeIndex = movies.map(function(movie){
+      return movie.id;
+   }).indexOf(req.params.id); //Gets us the index of movie with given id.
+   
+   if(removeIndex === -1){
+      res.json({message: "Not found"});
+   } else {
+      movies.splice(removeIndex, 1);
+      res.send({message: "Movie id " + req.params.id + " removed."});
+   }
+});
+module.exports = router;
+</pre>
+<p>This completes our REST API. Now you can create much more complex applications using this simple architectural style and Express.</p>
+<h1>ExpressJS - Scaffolding</h1>
+<p>Scaffolding allows us to easily create a <b>skeleton for a web application</b>. We manually create our public directory, add middleware, create separate route files, etc. A scaffolding tool sets up all these things for us so that we can directly get started with building our application. </p>
+<p>The scaffolder we will use is called <b>Yeoman</b>. It is a scaffolding tool built for <b>Node.js</b> but also has generators for several other frameworks (like flask, rails, django, etc.). To install Yeoman, enter the following command in your terminal &minus;</p>
+<pre class="result notranslate">
+npm install -g yeoman
+</pre>
+<p>Yeoman uses generators to scaffold out applications. To check out the generators available on <b>npm</b> to use with Yeoman, you can click on this <a href="http://yeoman.io/generators/" target="_blank" rel="nofollow">link</a>. In this tutorial, we will use the <i>'generator-Express-simple'</i>. To install this generator, enter the following command in your terminal &minus;</p>
+<pre class="result notranslate">
+npm install -g generator-express-simple
+</pre>
+<p>To use this generator, enter the following command &minus;</p>
+<pre class="result notranslate">
+yo express-simple test-app
+</pre>
+<p>You will be asked a few simple questions like what things you want to use with your app. Select the following answers, or if you already know about these technologies then go about choosing how you want them to be.</p>
+<pre class="result notranslate">
+express-simple comes with bootstrap and jquery
+[?] Select the express version you want: 4.x
+[?] Do you want an mvc express app: Yes
+[?] Select the css preprocessor you would like to use: sass
+[?] Select view engine you would like to use: jade
+[?] Select the build tool you want to use for this project: gulp
+[?] Select the build tool you want to use for this project: gulp
+[?] Select the language you want to use for the build tool: javascript
+   create public/sass/styles.scss
+   create public/js/main.js
+   create views/layout.jade
+   create views/index.jade
+   create views/404.jade
+   create app.js
+   create config.js
+   create routes/index.js
+   create package.json
+   create bower.json
+identical .bowerrc
+identical .editorconfig
+identical .gitignore
+identical .jshintrc
+   create gulpfile.js
+
+I'm all done. Running bower install &amp; npm install for you to install the
+required dependencies. If this fails, try running the command yourself.
+</pre>
+<p>It will then create a new application for you, install all the dependencies, add few pages to your application(home page, 404 not found page, etc.) and give you a directory structure to work on.</p>
+<p>This generator creates a very simple structure for us. Explore the many generators available for Express and choose the one that fits you right. Steps to working with all generators is the same. You will need to install a generator, run it using Yeoman; it will ask you some questions and then create a skeleton for your application based on your answers.</p>
+<h1>ExpressJS - Error Handling</h1>
+<p>Error handling in Express is done using middleware. But this middleware has special properties. The error handling middleware are defined in the same way as other middleware functions, except that error-handling functions <b>MUST have four arguments</b> instead of three – <b>err, req, res, next</b>. For example, to send a response on any error, we can use &minus;</p>
+<pre class="prettyprint notranslate">
+app.use(function(err, req, res, next) {
+   console.error(err.stack);
+   res.status(500).send('Something broke!');
+});
+</pre>
+<p>Till now we were handling errors in the routes itself. The error handling middleware allows us to separate our error logic and send responses accordingly. The next() method we discussed in middleware takes us to next <b>middleware/route handler</b>.</p>
+<p>For error handling, we have the <b>next(err)</b> function. A call to this function skips all middleware and matches us to the next error handler for that route. Let us understand this through an example.</p>
+<pre class="prettyprint notranslate">
+var express = require('express');
+var app = express();
+
+app.get('/', function(req, res){
+   //Create an error and pass it to the next function
+   var err = new Error("Something went wrong");
+   next(err);
+});
+
+/*
+ * other route handlers and middleware here
+ * ....
+ */
+
+//An error handling middleware
+app.use(function(err, req, res, next) {
+   res.status(500);
+   res.send("Oops, something went wrong.")
+});
+
+app.listen(3000);
+</pre>
+<p>This error handling middleware can be strategically placed after routes or contain conditions to detect error types and respond to the clients accordingly. The above program will display the following output.</p>
+<img src="images/error_handling.jpg" alt="Error handling" />
+<h1>ExpressJS - Debugging</h1>
+<p>Express uses the <a href="https://www.npmjs.com/package/debug" target="_blank" rel="nofollow">Debug</a> module to internally log information about route matching, middleware functions, application mode, etc.</p>
+<p>To see all internal logs used in Express, set the DEBUG environment variable to <b>Express:*</b> when starting the app &minus;</p>
+<pre class="result notranslate">
+DEBUG = express:* node index.js
+</pre>
+<p>The following output will be displayed.</p>
+<img src="images/debugging.jpg" alt="Debug log" />
+<p>These logs are very helpful when a component of your app is not functioning right. This verbose output might be a little overwhelming. You can also restrict the DEBUG variable to specific area to be logged. For example, if you wish to restrict the logger to application and router, you can use the following code.</p>
+<pre class="result notranslate">
+DEBUG = express:application,express:router node index.js
+</pre>
+<p>Debug is turned off by default and is automatically turned on in production environment. Debug can also be extended to meet your needs, you can read more about it at <a href="https://www.npmjs.com/package/debug" target="_blank" rel="nofollow">its npm page.</a></p>
+<h1>ExpressJS - Best Practices</h1>
+<p>Unlike Django and Rails which have a defined way of doing things, file structure, etc., Express does not follow a defined way. This means you can structure the application the way you like. But as your application grows in size, it is very difficult to maintain it if it doesn't have a well-defined structure. In this chapter, we will look at the generally used directory structures and separation of concerns to build our applications.</p>
+<p>First, we will discuss the best practices for creating node and Express applications.</p>
+<ul class="list">
+<li><p>Always begin a node project using <b>npm init</b>.</p></li>
+<li><p>Always install dependencies with a <b>--save</b> or <b>--save-dev</b>. This will ensure that if you move to a different platform, you can just run <i>npm install</i> to install all dependencies.</p></li>
+<li><p>Stick with lowercase file names and camelCase variables. If you look at any npm module, its named in lowercase and separated with dashes. Whenever you require these modules, use camelCase.</p></li>
+<li><p>Don’t push node_modules to your repositories. Instead npm installs everything on development machines.</p></li>
+<li><p>Use a <b>config</b> file to store variables</p></li>
+<li><p>Group and isolate routes to their own file. For example, take the CRUD operations in the movies example we saw in the REST API page.</p></li>
+</ul>
+<h2>Directory Structure</h2>
+<p>Let us now discuss the Express’ Directory Structure.</p>
+<h3>Websites</h3>
+<p>Express does not have a community defined structure for creating applications. The following is a majorly used project structure for a website.</p>
+<pre class="prettyprint notranslate">
+test-project/
+   node_modules/
+   config/
+      db.js                //Database connection and configuration
+      credentials.js       //Passwords/API keys for external services used by your app
+      config.js            //Other environment variables
+   models/                 //For mongoose schemas
+      users.js
+      things.js
+   routes/                 //All routes for different entities in different files 
+      users.js
+      things.js
+   views/
+      index.pug
+      404.pug
+        ...
+   public/                 //All static content being served
+      images/
+      css/
+      javascript/
+   app.js
+   routes.js               //Require all routes in this and then require this file in 
+   app.js 
+   package.json
+</pre>
+<p>There are other approaches to build websites with Express as well. You can build a website using the MVC design pattern. For more information, you can visit the following links.</p>
+<p><a rel="nofollow" target="_blank" href="https://code.tutsplus.com/tutorials/build-a-complete-mvc-website-with-expressjs--net-34168">https://code.tutsplus.com/tutorials/build-a-complete-mvc-website-with-expressjs--net-34168</a></p> 
+<p>and,</p> 
+<p><a rel="nofollow" target="_blank" href="https://www.terlici.com/2014/08/25/best-practices-express-structure.html">https://www.terlici.com/2014/08/25/best-practices-express-structure.html</a>.</p>
+<h3>RESTful APIs</h3>
+<p>APIs are simpler to design; they don't need a public or a views directory. Use the following structure to build APIs &minus;</p>
+<pre class="prettyprint notranslate">
+test-project/
+   node_modules/
+   config/
+      db.js                //Database connection and configuration
+      credentials.js       //Passwords/API keys for external services used by your app
+   models/                 //For mongoose schemas
+      users.js
+      things.js
+   routes/                 //All routes for different entities in different files 
+      users.js
+      things.js
+   app.js
+   routes.js               //Require all routes in this and then require this file in 
+   app.js 
+   package.json
+</pre>
+<p>You can also use a <a rel="nofollow" target="_blank" href="https://github.com/trwalker/generator-express-rest-api">yeoman generator</a> to get a similar structure.</p>
+<h1>ExpressJS - Resources</h1>
+<p>This chapter lists down the various resources we used for this tutorial.</p>
+<ul class="list">
+<li><p>The most important link is of course the Express API docs &minus; <a href="https://expressjs.com/en/4x/api.html">https://expressjs.com/en/4x/api.html</a></p></li>
+<li><p>The guides provided on the Express website on different aspects are also quite helpful &minus;</p>
+<ul class="list">
+<li><p><a rel="nofollow" target="_blank" href="https://expressjs.com/en/guide/routing.html" target="_blank" rel="nofollow">Routing</a></p></li>
+<li><p><a rel="nofollow" target="_blank" href="https://expressjs.com/en/guide/writing-middleware.html" target="_blank" rel="nofollow">Middleware</a></p></li>
+<li><p><a rel="nofollow" target="_blank" href="https://expressjs.com/en/guide/error-handling.html" target="_blank" rel="nofollow">Error Handling</a></p></li>
+<li><p><a rel="nofollow" target="_blank" href="https://expressjs.com/en/guide/debugging.html" target="_blank" rel="nofollow">Debugging</a></p></li>
+</ul>
+</li>
+<li><p>A list of useful books and blogs on Express is available at <a rel="nofollow" target="_blank" href="https://expressjs.com/en/resources/books-blogs.html" target="_blank" rel="nofollow">https://expressjs.com/en/resources/books-blogs.html</a></p></li>
+<li><p>A list of mostly used middleware with Express is available at <a rel="nofollow" target="_blank" href="https://expressjs.com/en/resources/middleware.html" target="_blank" rel="nofollow">https://expressjs.com/en/resources/middleware.html</a></p></li>
+<li><p>These blogs with Express tips and tricks may prove helpful &minus;</p>
+<ul class="list">
+<li><p><a rel="nofollow" target="_blank" href="https://derickbailey.com/categories/tips-and-tricks/" target="_blank" rel="nofollow">https://derickbailey.com/categories/tips-and-tricks/</a></p></li>
+<!--<li><p><a rel="nofollow" target="_blank" href="https://medium.com/@grillorafael/tips-and-tricks-for-expressjs-4-x- 372ed86566af#.fovz60rvn" target="_blank" rel="nofollow">https://medium.com/@grillorafael/tips-and-tricks-for-expressjs-4-x-372ed86566af#.fovz60rvn</a></p></li>-->
+<li><p><a rel="nofollow" target="_blank" href="https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4">https://scotch.io/tutorials/learn-to-use-the-new-router-in+-expressjs-4</a></p></li>
+</ul>
+</li>
+<li><p>Application structure &minus; <a rel="nofollow" target="_blank" href="https://www.terlici.com/2014/08/25/best-practices-express-structure.html" target="_blank" rel="nofollow">https://www.terlici.com/2014/08/25/best-practices-express-structure.html</a></p></li>
+<li><p>RESTful APIs &minus;</p> 
+<ul class="list">
+<li><p><a rel="nofollow" target="_blank" href="https://www.thepolyglotdeveloper.com/2015/10/create-a-simple-restful-api-with-node-js/" target="_blank" rel="nofollow">https://www.thepolyglotdeveloper.com/2015/10/create-a-simple-restful-api-with-node-js/</a></p></li>
+<li><p><a rel="nofollow" target="_blank" href="https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4" target="_blank" rel="nofollow">https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4</a></p></li>
+<li><p><a rel="nofollow" target="_blank" href="https://devcenter.heroku.com/articles/mean-apps-restful-api" target="_blank" rel="nofollow">https://devcenter.heroku.com/articles/mean-apps-restful-api</a></p></li>
+<li><p><a rel="nofollow" target="_blank" href="https://pixelhandler.com/posts/develop-a-restful-api-using-nodejs-with-express-and-mongoose" target="_blank" rel="nofollow">https://pixelhandler.com/posts/develop-a-restful-api-using-nodejs-with-express-and-mongoose</a></p></li>
+<li><p><a rel="nofollow" target="_blank" href="http://cwbuecheler.com/web/tutorials/2014/restful-web-app-node-express-mongodb/" target="_blank" rel="nofollow">http://cwbuecheler.com/web/tutorials/2014/restful-web-app-node-express-mongodb/</a></p></li>
+</ul>
+</li>
+<li><p>For advanced authentication, use PassportJS &minus; <a href="http://passportjs.org/" target="_blank" rel="nofollow">http://passportjs.org</a></p></li>
+</ul>
+<hr />
+<div class="pre-btn">
+<a href="expressjs_resources.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="expressjs_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ExpressJS Quick Guide",
+    "name": "ExpressJS Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/expressjs/images/environment_mkdir.jpg",
+        "width": 600,
+        "height": 44
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:51.",
+    "dateModified": "July 23 2017 03:34:51.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "ExpressJS is a web application framework that provides you with a simple API to build websites, web apps and back ends. With ExpressJS, you need not worry about low level protocols, processes, etc...."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Web Development",
+                "@id": "https://www.tutorialspoint.com/web_development_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Expressjs",
+                "@id": "https://www.tutorialspoint.com/expressjs"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "ExpressJS - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/expressjs/expressjs_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:01:14 GMT -->
+</html>

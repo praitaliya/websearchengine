@@ -1,0 +1,2467 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:29:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>HSQLDB Quick Guide</title>
+<meta name="description" content="HSQLDB Quick Guide - Learn HSQLDB in simple and easy steps starting from basic to advanced concepts with examples including Introduction, Installation, Connect, Data Types, Create Table, Drop Table, Insert Query, Select Query, Where Clause, Update Query, Delete Clause, LIKE Clause, Sorting Results, Joins, Null Values, Regular Expressions, Transactions, Alter Command, Indexes." />
+<meta name="keywords" content="HSQLDB, Tutorial, Introduction, Installation, Connect, Data Types, Create Table, Drop Table, Insert Query, Select Query, Where Clause, Update Query, Delete Clause, LIKE Clause, Sorting Results, Joins, Null Values, Regular Expressions, Transactions, Alter Command, Indexes." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #cf6254 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #cf6254 !important;}
+.submenu-item{ border-bottom: 2px solid #cf6254 !important; border-top: 2px solid #cf6254 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/hsqldb-mini-logo.jpg" alt="HSQLDB Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">HSQLDB Tutorial</li>
+<li><a href="index.html">HSQLDB - Home</a></li>
+<li><a href="hsqldb_introduction.html">HSQLDB - Introduction</a></li>
+<li><a href="hsqldb_installation.html">HSQLDB - Installation</a></li>
+<li><a href="hsqldb_connect.html">HSQLDB - Connect</a></li>
+<li><a href="hsqldb_data_types.html">HSQLDB - Data Types</a></li>
+<li><a href="hsqldb_create_table.html">HSQLDB - Create Table</a></li>
+<li><a href="hsqldb_drop_table.html">HSQLDB - Drop Table</a></li>
+<li><a href="hsqldb_insert_query.html">HSQLDB - Insert Query</a></li>
+<li><a href="hsqldb_select_query.html">HSQLDB - Select Query</a></li>
+<li><a href="hsqldb_where_clause.html">HSQLDB - Where Clause</a></li>
+<li><a href="hsqldb_update_query.html">HSQLDB - Update Query</a></li>
+<li><a href="hsqldb_delete_clause.html">HSQLDB - Delete Clause</a></li>
+<li><a href="hsqldb_like_clause.html">HSQLDB - Like Clause</a></li>
+<li><a href="hsqldb_sorting_results.html">HSQLDB - Sorting Results</a></li>
+<li><a href="hsqldb_joins.html">HSQLDB - Joins</a></li>
+<li><a href="hsqldb_null_values.html">HSQLDB - Null Values</a></li>
+<li><a href="hsqldb_regular_expressions.html">HSQLDB - Regular Expressions</a></li>
+<li><a href="hsqldb_transactions.html">HSQLDB - Transactions</a></li>
+<li><a href="hsqldb_alter_command.html">HSQLDB - Alter Command</a></li>
+<li><a href="hsqldb_indexes.html">HSQLDB - Indexes</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">HSQLDB Useful Resources</li>
+<li><a href="hsqldb_quick_guide.html">HSQLDB - Quick Guide</a></li>
+<li><a href="hsqldb_useful_resources.html">HSQLDB - Useful Resources</a></li>
+<li><a href="hsqldb_discussion.html">HSQLDB - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>HSQLDB - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="hsqldb_indexes.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="hsqldb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>HSQLDB - Introduction</h1>
+<p>HyperSQL Database (HSQLDB) is a modern relational database manager that conforms closely to the SQL:2011 standard and JDBC 4 specifications. It supports all core features and RDBMS. HSQLDB is used for development, testing, and deployment of database applications.</p>
+<p>The main and unique feature of HSQLDB is Standard Compliance. It can provide database access within the user's application process, within an application server, or as a separate server process.</p>
+<h2>Features of HSQLDB</h2>
+<ul class="list">
+<li><p>HSQLDB uses in-memory structure for fast operations against DB server. It uses disk persistence as per user flexibility, with a reliable crash recovery.</p></li>
+<li><p>HSQLDB is also suitable for business intelligence, ETL, and other applications that process large data sets.</p></li>
+<li><p>HSQLDB has a wide range of enterprise deployment options, such as XA transactions, connection pooling data sources, and remote authentication.</p></li>
+<li><p>HSQLDB is written in the Java programming language and runs in a Java Virtual Machine (JVM). It supports the JDBC interface for database access.</p></li>
+</ul>
+<h2>Components of HSQLDB</h2>
+<p>There are three different components in HSQLDB jar package.</p>
+<ul class="list">
+<li><p>HyperSQL RDBMS Engine (HSQLDB)</p></li>
+<li><p>HyperSQL JDBC Driver</p></li>
+<li><p>Database Manager (GUI database access tool, with Swing and AWT versions)</p></li>
+</ul>
+<p>HyperSQL RDBMS and JDBC Driver provide the core functionality. Database Managers are general-purpose database access tools that can be used with any database engine having a JDBC driver.</p>
+<p>An additional jar called sqltool.jar, contains Sql Tool, which is a command line database access tool. This is a general purpose command. Line database access tool that can be used with other database engines as well.</p>
+<h1>HSQlDB - Installation</h1>
+<p>HSQLDB is a relational database management system implemented in pure Java. You can easily embed this database to your application using JDBC. Or you can use the operations separately.</p>
+<h2>Prerequisites</h2>
+<p>Follow the prerequisite software installations for HSQLDB.</p>
+<h3>Verify Java Installation</h3>
+<p>Since HSQLDB is a relational database management system implemented in pure Java, you must install JDK (Java Development Kit) software before installing HSQLDB. If you already have JDK installation in your system, then try the following command to verify the Java version.</p>
+<pre class="result notranslate">
+java –version
+</pre>
+<p>If JDK is successfully installed in your system, you will get the following output.</p>
+<pre class="result notranslate">
+java version "1.8.0_91"
+Java(TM) SE Runtime Environment (build 1.8.0_91-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.91-b14, mixed mode)
+</pre>
+<p>If you don’t have JDK installed in your system, then visit the following link to <a href="../java/java_environment_setup.html">Install JDK.</a></p>
+<h2>HSQLDB Installation</h2>
+<p>Following are the steps to install HSQLDB.</p>
+<p><b>Step 1 &minus; Download HSQLDB bundle</b></p>
+<p>Download the latest version of HSQLDB database from the following link <a href="https://sourceforge.net/projects/hsqldb/files/" rel="nofollow" target="_blank">https://sourceforge.net/projects/hsqldb/files/.</a> Once you click the link, you will get the following screenshot.</p>
+<img src="images/download_hsqldb.jpg" alt="Download HsqlDB" />
+<p>Click HSQLDB and the download will start immediately. Finally, you will get the zip file named <b>hsqldb-2.3.4.zip</b>.</p>
+<p><b>Step 2 &minus; Extract the HSQLDB zip file</b></p>
+<p>Extract the zip file and place it into the <b>C:\</b> directory. After extraction, you will get a file structure as shown in the following screenshot.</p>
+<img src="images/extract_hsqldb.jpg" alt="Extract HsqlDB" />
+<p><b>Step 3 &minus; Create a default database</b></p>
+<p>There is no default database for HSQLDB, therefore, you need to create a database for HSQLDB. Let us create a properties file named <b>server.properties</b> which defines a new database named <b>demodb</b>. Take a look at the following database server properties.</p>
+<pre class="result notranslate">
+server.database.0 = file:hsqldb/demodb
+server.dbname.0 = testdb
+</pre>
+<p>Place this server.properties file into HSQLDB home directory that is <b>C:\hsqldb- 2.3.4\hsqldb\</b>.</p>
+<p>Now execute the following command on command prompt.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server
+</pre>
+<p>After execution of the above command, you will receive the server status as shown in the following screenshot.</p>
+<img src="images/default_database.jpg" alt="Default Database" />
+<p>Later, you will get to find the following folder structure of the hsqldb directory in the HSQLDB home directory that is <b>C:\hsqldb-2.3.4\hsqldb</b>. Those files are temp file, lck file, log file, properties file, and script file of demodb database created by HSQLDB database server.</p>
+<img src="images/create_database.jpg" alt="Create Database" />
+<p><b>Step 4 &minus; Start the database server</b></p>
+<p>Once you are done creating a database, you have to start the database by using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>After execution of the above command, you get the following status.</p>
+<img src="images/start_database_server.jpg" alt="Start Database Server" />
+<p>Now, you can open the database home screen that is <b>runManagerSwing.bat</b> from <b>C:\hsqldb-2.3.4\hsqldb\bin</b> location. This bat file will open the GUI file for HSQLDB database. Before that it will ask you for database settings through a dialog box. Take a look at the following screenshot. In this dialog box, enter the Setting Name, URL as shown above and click Ok.</p>
+<img src="images/run_manager_swing.jpg" alt="Run ManagerSwing" />
+<p>You will get the GUI screen of HSQLDB database as shown in the following screenshot.</p>
+<img src="images/hsql_database.jpg" alt="Hsql Database" />
+<h1>HSQlDB - Connect</h1>
+<p>In the installation chapter, we discussed how to connect the database manually. In this chapter, we will discuss how to connect the database programmatically (using Java programming).</p>
+<p>Take a look at the following program, which will start the server and create a connection between the Java application and the database.</p>
+<h2>Example</h2>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class ConnectDatabase {
+   public static void main(String[] args) {
+      Connection con = null;
+      
+      try {
+         //Registering the HSQLDB JDBC driver
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         //Creating the connection with HSQLDB
+         con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         if (con!= null){
+            System.out.println("Connection created successfully");
+            
+         }else{
+            System.out.println("Problem with creating connection");
+         }
+      
+      }  catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+   }
+}
+</pre>
+<p>Save this code into <b>ConnectDatabase.java</b> file. You will have to start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>You can use the following command to compile and execute the code.</p>
+<pre class="result notranslate">
+\&gt;javac ConnectDatabase.java
+\&gt;java ConnectDatabase
+</pre>
+<p>After execution of the above command, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+Connection created successfully
+</pre>
+<h1>HSQLDB - Data Types</h1>
+<p>This chapter explains the different datatypes of HSQLDB. HSQLDB server offers six categories of data types.</p>
+<h2>Exact Numeric Data Types</h2>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Data Type</th>
+<th style="text-align:center">From</th>
+<th style="text-align:center">To</th>
+</tr>
+<tr>
+<td>bigint</td>
+<td>-9,223,372,036,854,775,808</td>
+<td>9,223,372,036,854,775,807</td>
+</tr>
+<tr>
+<td>int</td>
+<td>-2,147,483,648</td>
+<td>2,147,483,647</td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>-32,768</td>
+<td>32,767</td>
+</tr>
+<tr>
+<td>tinyint</td>
+<td>0</td>
+<td>255</td>
+</tr>
+<tr>
+<td>bit</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>-10^38 +1</td>
+<td>10^38 -1</td>
+</tr>
+<tr>
+<td>numeric</td>
+<td>-10^38 +1</td>
+<td>10^38 -1</td>
+</tr>
+<tr>
+<td>money</td>
+<td>-922,337,203,685,477.5808</td>
+<td>+922,337,203,685,477.5807</td>
+</tr>
+<tr>
+<td>smallmoney</td>
+<td>-214,748.3648</td>
+<td>+214,748.3647</td>
+</tr>
+</table>
+<h2>Approximate Numeric Data Types</h2>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Data Type</th>
+<th style="text-align:center">From</th>
+<th style="text-align:center">To</th>
+</tr>
+<tr>
+<td>float</td>
+<td>-1.79E + 308</td>
+<td>1.79E + 308</td>
+</tr>
+<tr>
+<td>real</td>
+<td>-3.40E + 38</td>
+<td>3.40E + 38</td>
+</tr>
+</table>
+<h2>Date and Time Data Types</h2>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Data Type</th>
+<th style="text-align:center">From</th>
+<th style="text-align:center">To</th>
+</tr>
+<tr>
+<td>datetime</td>
+<td>Jan 1, 1753</td>
+<td>Dec 31, 9999</td>
+</tr>
+<tr>
+<td>smalldatetime</td>
+<td>Jan 1, 1900</td>
+<td>Jun 6, 2079</td>
+</tr>
+<tr>
+<td>date</td>
+<td colspan="2">Stores a date like June 30, 1991</td>
+</tr>
+<tr>
+<td>time</td>
+<td colspan="2">Stores a time of day like 12:30 P.M.</td>
+</tr>
+</table>
+<p><b>Note</b> &minus; Here, datetime has 3.33 milliseconds accuracy whereas small datetime has 1- minute accuracy.</p>
+<h2>Character Strings Data Types</h2>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center">Data Type</th>
+<th style="text-align:center">Description</th>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td>Maximum length of 8,000 characters (Fixed length non-Unicode characters)</td>
+</tr>
+<tr>
+<td style="text-align:center">varchar</td>
+<td>Maximum of 8,000 characters (Variable-length non-Unicode data)</td>
+</tr>
+<tr>
+<td style="text-align:center">varchar(max)</td>
+<td>Maximum length of 231 characters, variable-length non-Unicode data (SQL Server 2005 only)</td>
+</tr>
+<tr>
+<td style="text-align:center">text</td>
+<td>Variable-length non-Unicode data with a maximum length of 2,147,483,647 characters</td>
+</tr>
+</table>
+<h2>Unicode Character Strings Data Types</h2>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center">Data Type</th>
+<th style="text-align:center">Description</th>
+</tr>
+<tr>
+<td style="text-align:center">nchar</td>
+<td>Maximum length of 4,000 characters (Fixed length Unicode)</td>
+</tr>
+<tr>
+<td style="text-align:center">nvarchar</td>
+<td>Maximum length of 4,000 characters (Variable length Unicode)</td>
+</tr>
+<tr>
+<td style="text-align:center">nvarchar(max)</td>
+<td>Maximum length of 231 characters (SQL Server 2005 only),(Variable length Unicode)</td>
+</tr>
+<tr>
+<td style="text-align:center">ntext</td>
+<td>Maximum length of 1,073,741,823 characters (Variable length Unicode)</td>
+</tr>
+</table>
+<h2>Binary Data Types</h2>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center">Data Type</th>
+<th style="text-align:center">Description</th>
+</tr>
+<tr>
+<td style="text-align:center">binary</td>
+<td>Maximum length of 8,000 bytes (Fixed length binary data)</td>
+</tr>
+<tr>
+<td style="text-align:center">varbinary</td>
+<td>Maximum length of 8,000 bytes (Variable length binary data)</td>
+</tr>
+<tr>
+<td style="text-align:center">varbinary(max)</td>
+<td>Maximum length of 231 bytes (SQL Server 2005 only), (Variable length Binary data)</td>
+</tr>
+<tr>
+<td style="text-align:center">image</td>
+<td>Maximum length of 2,147,483,647 bytes (Variable length Binary Data)</td>
+</tr>
+</table>
+<h2>Misc Data Types</h2>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center">Data Type</th>
+<th style="text-align:center">Description</th>
+</tr>
+<tr>
+<td style="text-align:center">sql_variant</td>
+<td>Stores values of various SQL Server-supported data types, except text, ntext, and timestamp</td>
+</tr>
+<tr>
+<td style="text-align:center">timestamp</td>
+<td>Stores a database-wide unique number that gets updated every time a row gets updated</td>
+</tr>
+<tr>
+<td style="text-align:center">uniqueidentifier</td>
+<td>Stores a globally unique identifier (GUID)</td>
+</tr>
+<tr>
+<td style="text-align:center">xml</td>
+<td>Stores XML data. You can store xml instances in a column or a variable (SQL Server 2005 only)</td>
+</tr>
+<tr>
+<td style="text-align:center">cursor</td>
+<td>Reference to a cursor object</td>
+</tr>
+<tr>
+<td style="text-align:center">table</td>
+<td>Stores a result set for later processing</td>
+</tr>
+</table>
+<h1>HSQLDB - Create Table</h1>
+<p>The basic mandatory requirements to create a table are table name, field names, and the data types to those fields. Optionally, you can also provide the key constraints to the table.</p>
+<h2>Syntax</h2>
+<p>Take a look at the following syntax.</p>
+<pre class="result notranslate">
+CREATE TABLE table_name (column_name column_type);
+</pre>
+<h2>Example</h2>
+<p>Let us create a table named tutorials_tbl with the field-names such as id, title, author, and submission_date. Take a look at the following query.</p>
+<pre class="prettyprint notranslate">
+CREATE TABLE tutorials_tbl (
+   id INT NOT NULL,
+   title VARCHAR(50) NOT NULL,
+   author VARCHAR(20) NOT NULL,
+   submission_date DATE,
+   PRIMARY KEY (id) 
+);
+</pre>
+<p>After execution of the above query, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+(0) rows effected
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Following is the JDBC program used to create a table named tutorials_tbl into the HSQLDB database. Save the program into <b>CreateTable.java</b> file.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class CreateTable {
+   
+   public static void main(String[] args) {
+      
+      Connection con = null;
+      Statement stmt = null;
+      int result = 0;
+      
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         
+         result = stmt.executeUpdate("CREATE TABLE tutorials_tbl (
+            id INT NOT NULL, title VARCHAR(50) NOT NULL,
+            author VARCHAR(20) NOT NULL, submission_date DATE,
+            PRIMARY KEY (id));
+         ");
+			
+      }  catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+      System.out.println("Table created successfully");
+   }
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb</pre>
+<p>Compile and execute the above program using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac CreateTable.java
+\&gt;java CreateTable
+</pre>
+<p>After execution of the above command, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+Table created successfully
+</pre>
+<h1>HSQLDB - Drop Table</h1>
+<p>It is very easy to drop an existing HSQLDB table. However, you need to be very careful while deleting any existing table as any data lost will not be recovered after deleting a table.</p>
+<h2>Syntax</h2>
+<p>Following is a generic SQL syntax to drop a HSQLDB table.</p>
+<pre class="result notranslate">
+DROP TABLE table_name;
+</pre>
+<h2>Example</h2>
+<p>Let us consider an example to drop a table named employee from the HSQLDB server. Following is the query to drop a table named employee.</p>
+<pre class="result notranslate">
+DROP TABLE employee;
+</pre>
+<p>After execution of the above query, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+(0) rows effected
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Following is the JDBC program used to drop the table employee from the HSQLDB server.</p>
+<p>Save the following code into <b>DropTable.java</b> file.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class DropTable {
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt = null;
+      int result = 0;
+      
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         result = stmt.executeUpdate("DROP TABLE employee");
+      }catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+      
+      System.out.println("Table dropped successfully");
+   }
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>Compile and execute the above program using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac DropTable.java
+\&gt;java DropTable
+</pre>
+<p>After execution of the above command, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+Table dropped successfully
+</pre>
+<h1>HSQLDB - Insert Query</h1>
+<p>You can achieve Insert query statement in HSQLDB by using the INSERT INTO command. You have to provide the user-defined data following the column field order from the table.</p>
+<h2>Syntax</h2>
+<p>Following is the generic syntax to <b>INSERT</b> a query.</p>
+<pre class="result notranslate">
+INSERT INTO table_name (field1, field2,...fieldN)
+VALUES (value1, value2,...valueN );
+</pre>
+<p>To insert a string type data into a table, you will have to use double or single quotes to provide string value into the insert query statement.</p>
+<h2>Example</h2>
+<p>Let us consider an example that inserts a record into a table named <b>tutorials_tbl</b> with the values id = 100, title = Learn PHP, Author = John Poul, and the submission date is current date.</p>
+<p>Following is the query for the given example.</p>
+<pre class="result notranslate">
+INSERT INTO tutorials_tbl VALUES (100,'Learn PHP', 'John Poul', NOW());
+</pre>
+<p>After execution of the above query, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+1 row effected
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Here is the JDBC program to insert the record into the table with the given values, id =100, title = Learn PHP, Author = John Poul, and the submission date is current date. Take a look at the given program. Save the code into the <b>InserQuery.java</b> file.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection; 
+import java.sql.DriverManager; 
+import java.sql.Statement;  
+
+public class InsertQuery {
+   public static void main(String[] args) { 
+      Connection con = null; 
+      Statement stmt = null; 
+      int result = 0; 
+      try { 
+         Class.forName("org.hsqldb.jdbc.JDBCDriver"); 
+         con = DriverManager.getConnection( 
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", ""); 
+         stmt = con.createStatement(); 
+         result = stmt.executeUpdate("INSERT INTO tutorials_tbl 
+            VALUES (100,'Learn PHP', 'John Poul', NOW())"); 
+         con.commit(); 
+      }catch (Exception e) { 
+         e.printStackTrace(System.out); 
+      } 
+      System.out.println(result+" rows effected"); 
+      System.out.println("Rows inserted successfully"); 
+   } 
+} 
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb 
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0 
+file:hsqldb/demodb --dbname.0 testdb 
+</pre>
+<p>Compile and execute the above program using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac InsertQuery.java 
+\&gt;java InsertQuery 
+</pre>
+<p>After execution of the above command, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+1 rows effected 
+Rows inserted successfully 
+</pre>
+<p>Try to insert the following records into the <b>tutorials_tbl</b> table by using the <b>INSERT INTO</b> command.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Id</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Author</th>
+<th style="text-align:center">Submission Date</th>
+</tr>
+<tr>
+<td>101</td>
+<td>Learn C</td>
+<td>Yaswanth</td>
+<td>Now()</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Learn MySQL</td>
+<td>Abdul S</td>
+<td>Now()</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Learn Excell</td>
+<td>Bavya kanna</td>
+<td>Now()</td>
+</tr>
+<tr>
+<td>104</td>
+<td>Learn JDB</td>
+<td>Ajith kumar</td>
+<td>Now()</td>
+</tr>
+<tr>
+<td>105</td>
+<td>Learn Junit</td>
+<td>Sathya Murthi</td>
+<td>Now()</td>
+</tr>
+</table>
+<h1>HSQLDB - Select Query</h1>
+<p>The SELECT command is used to fetch the record data from HSQLDB database. Here, you need to mention the required fields list in the Select statement.</p>
+<h2>Syntax</h2>
+<p>Here is the generic syntax for Select query.</p>
+<pre class="result notranslate">
+SELECT field1, field2,...fieldN table_name1, table_name2...
+[WHERE Clause]
+[OFFSET M ][LIMIT N]
+</pre>
+<ul class="list">
+<li><p>You can fetch one or more fields in a single SELECT command.</p></li>
+<li><p>You can specify star (*) in place of fields. In this case, SELECT will return all the fields.</p></li>
+<li><p>You can specify any condition using WHERE clause.</p></li>
+<li><p>You can specify an offset using OFFSET from where SELECT will start returning records. By default, offset is zero.</p></li>
+<li><p>You can limit the number of returns using LIMIT attribute.</p></li>
+</ul>
+<h2>Example</h2>
+<p>Here is an example that fetches id, title, and author fields of all records from <b>tutorials_tbl</b> table. We can achieve this by using the SELECT statement. Following is the query for the example.</p>
+<pre class="result notranslate">
+SELECT id, title, author FROM tutorials_tbl
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++------+----------------+-----------------+
+|  id  |      title     |    author       |
++------+----------------+-----------------+
+| 100  |     Learn PHP  |    John Poul    |
+| 101  |     Learn C    |    Yaswanth     |
+| 102  |   Learn MySQL  |     Abdul S     |
+| 103  |   Learn Excell |   Bavya kanna   |
+| 104  |   Learn JDB    |    Ajith kumar  |
+| 105  |   Learn Junit  |   Sathya Murthi |
++------+----------------+-----------------+
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Here is the JDBC program that will fetch id, title, and author fields of all records from <b>tutorials_tbl</b> table. Save the following code into the <b>SelectQuery.java</b> file.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class SelectQuery {
+   
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt = null;
+      ResultSet result = null;
+      
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection(
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         result = stmt.executeQuery(
+            "SELECT id, title, author FROM tutorials_tbl");
+         
+         while(result.next()){
+            System.out.println(result.getInt("id")+" | "+
+               result.getString("title")+" | "+
+               result.getString("author"));
+         }
+      } catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+   }
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>Compile and execute the above code using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac SelectQuery.java
+\&gt;java SelectQuery
+</pre>
+<p>After execution of the above command, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+100 | Learn PHP | John Poul
+101 | Learn C | Yaswanth
+102 | Learn MySQL | Abdul S
+103 | Learn Excell | Bavya Kanna
+104 | Learn JDB | Ajith kumar
+105 | Learn Junit | Sathya Murthi
+</pre>
+<h1>HSQLDB - Where Clause</h1>
+<p>Generally, we use SELECT command to fetch data from HSQLDB table. We can use WHERE conditional clause to filter the resultant data. Using WHERE we can specify the selection criteria to select the required records from a table.</p>
+<h2>Syntax</h2>
+<p>Following is the syntax of SELECT command WHERE clause to fetch data from HSQLDB table.</p>
+<pre class="result notranslate">
+SELECT field1, field2,...fieldN table_name1, table_name2...
+[WHERE condition1 [AND [OR]] condition2.....
+</pre>
+<ul class="list">
+<li><p>You can use one or more tables separated by comma to include various conditions using a WHERE clause, but WHERE clause is an optional part of SELECT command.</p></li>
+<li><p>You can specify any condition using WHERE clause.</p></li>
+<li><p>You can specify more than one conditions using AND or OR operators.</p></li>
+<li><p>A WHERE clause can also be used along with DELETE or UPDATE SQL command to specify a condition.</p></li>
+</ul>
+<p>We can filter the record data by using conditions. We are using different operators in conditional WHERE clause. Here is the list of operators, which can be used with WHERE clause.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Operator</th>
+<th style="text-align:center" width="60%">Description</th>
+<th style="text-align:center">Example</th>
+</tr>
+<tr>
+<td>=</td>
+<td>Checks if the values of two operands are equal or not, if yes then the condition becomes true.</td>
+<td>(A = B) is not true</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>Checks if the values of two operands are equal or not, if values are not equal then the condition becomes true.</td>
+<td>(A != B) is true</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>Checks if the value of the left operand is greater than the value of the right operand, if yes then the condition becomes true.</td>
+<td>(A &gt; B) is not true</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>Checks if the value of the left operand is less than the value of the right operand, if yes then the condition becomes true.</td>
+<td>(A &lt; B) is true</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>Checks if the value of the left operand is greater than or equal to the value of the right operand, if yes then the condition becomes true.</td>
+<td>(A &gt;= B) is not true</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>Checks if the value of the left operand is less than or equal to the value of the right operand, if yes then the condition becomes true.</td>
+<td>(A &lt;= B) is true</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>Here is an example that retrieves the details such as id, title, and the author of the book titled "Learn C". It is possible by using WHERE clause in the SELECT command. Following is the query for the same.</p>
+<pre class="result notranslate">
+SELECT id, title, author FROM tutorials_tbl WHERE title = 'Learn C';
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++------+----------------+-----------------+
+| id   |      title     |    author       |
++------+----------------+-----------------+
+| 101  |      Learn C   |   Yaswanth      |
++------+----------------+-----------------+
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Here is the JDBC program that retrieves the record data from the table tutorials_tblhaving the title <b>Learn C</b>. Save the following code into <b>WhereClause.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class WhereClause {
+   
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt = null;
+      ResultSet result = null;
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection(
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         result = stmt.executeQuery(
+            "SELECT id, title, author FROM tutorials_tbl
+            WHERE title = 'Learn C'");
+         
+         while(result.next()){
+            System.out.println(result.getInt("id")+" |
+               "+result.getString("title")+" |
+               "+result.getString("author"));
+         }
+      } catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+   }
+
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>Compile and execute the above code using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac WhereClause.java
+\&gt;java WhereClause
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
+101 | Learn C | Yaswanth
+</pre>
+<h1>HSQLDB - Update Query</h1>
+<p>Whenever you want to modify the values of a table, you can use the UPDATE command. This will modify any field value from any HSQLDB table.</p>
+<h2>Syntax</h2>
+<p>Here is the generic syntax for UPDATE command.</p>
+<pre class="result notranslate">
+UPDATE table_name SET field1 = new-value1, field2 = new-value2 [WHERE Clause]
+</pre>
+<ul class="list">
+<li>You can update one or more field altogether.</li>
+<li>You can specify any condition using WHERE clause.</li>
+<li>You can update values in a single table at a time.</li>
+</ul>
+<h2>Example</h2>
+<p>Let us consider an example that updates the title of the tutorial from "Learn C" to "C and Data Structures" having an id "101". Following is the query for the update.</p>
+<pre class="result notranslate">
+UPDATE tutorials_tbl SET title = 'C and Data Structures' WHERE id = 101;
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
+(1) Rows effected
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Here is the JDBC program that will update a tutorial title from <b>Learn C</b> to <b>C and Data Structures</b> having an id <b>101</b>. Save the following program into the <b>UpdateQuery.java</b> file.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class UpdateQuery {
+   
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt = null;
+      int result = 0;
+      
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection(
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         result = stmt.executeUpdate(
+            "UPDATE tutorials_tbl SET title = 'C and Data Structures' WHERE id = 101");
+      } catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+      System.out.println(result+" Rows effected");
+   }
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>Compile and execute the above program using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac UpdateQuery.java
+\&gt;java UpdateQuery
+</pre>
+<p>After execution of the above command, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+1 Rows effected
+</pre>
+<h1>HSQLDB - Delete Clause</h1>
+<p>Whenever you want to delete a record from any HSQLDB table, you can use the DELETE FROM command.</p>
+<h2>Syntax</h2>
+<p>Here is the generic syntax for DELETE command to delete data from a HSQLDB table.</p>
+<pre class="result notranslate">
+DELETE FROM table_name [WHERE Clause]
+</pre>
+<ul class="list">
+<li><p>If WHERE clause is not specified, then all the records will be deleted from the given MySQL table.</p></li>
+<li><p>You can specify any condition using WHERE clause.</p></li>
+<li><p>You can delete records in a single table at a time.</p></li>
+</ul>
+<h2>Example</h2>
+<p>Let us consider an example that deletes the record data from the table named <b>tutorials_tbl</b> having id <b>105</b>. Following is the query that implements the given example.</p>
+<pre class="result notranslate">
+DELETE FROM tutorials_tbl WHERE id = 105;
+</pre>
+<p>After execution of the above query, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+(1) rows effected
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Here is the JDBC program that implements the given example. Save the following program into <b>DeleteQuery.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class DeleteQuery {
+   
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt = null;
+      int result = 0;
+      
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection(
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         result = stmt.executeUpdate(
+            "DELETE FROM tutorials_tbl   WHERE id=105");
+      } catch (Exception e) {
+      
+         e.printStackTrace(System.out);
+      }
+      System.out.println(result+" Rows effected");
+   }
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>Compile and execute the above program using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac DeleteQuery.java
+\&gt;java DeleteQuery
+</pre>
+<p>After execution of the above command, you will receive the following output &minus;</p>
+<pre class="result notranslate">
+1 Rows effected
+</pre>
+<h1>HSQLDB - LIKE Clause</h1>
+<p>There is a WHERE clause in the RDBMS structure. You can use the WHERE clause with an equal to sign (=) where we want to do an exact match. But there may be a requirement where we want to filter out all the results where the author name should contain "john". This can be handled using the SQL LIKE clause along with the WHERE clause.</p>
+<p>If the SQL LIKE clause is used along with % characters, then it will work like a metacharacter (*) in UNIX while listing out all the files or directories at command prompt.</p>
+<h2>Syntax</h2>
+<p>Following is the generic SQL syntax of the LIKE clause.</p>
+<pre class="result notranslate">
+SELECT field1, field2,...fieldN table_name1, table_name2...
+WHERE field1 LIKE condition1 [AND [OR]] filed2 = 'somevalue'
+</pre>
+<ul class="list">
+<li><p>You can specify any condition using the WHERE clause.</p></li>
+<li><p>You can use the LIKE clause along with the WHERE clause.</p></li>
+<li><p>You can use the LIKE clause in place of the equal to sign.</p></li>
+<li><p>When the LIKE clause is used along with the % sign, then it will work like a metacharacter search.</p></li>
+<li><p>You can specify more than one conditions using AND or OR operators.</p></li>
+<li><p>A WHERE...LIKE clause can be used along with the DELETE or the UPDATE SQL command to specify a condition.</p></li>
+</ul>
+<h2>Example</h2>
+<p>Let us consider an example that retrieves the list of tutorials data where the author name starts with <b>John</b>. Following is the HSQLDB query for the given example.</p>
+<pre class="result notranslate">
+SELECT * from tutorials_tbl WHERE author LIKE 'John%';
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++-----+----------------+-----------+-----------------+
+|  id |      title     |   author  | submission_date |
++-----+----------------+-----------+-----------------+
+| 100 |    Learn PHP   | John Poul | 2016-06-20      |
++-----+----------------+-----------+-----------------+
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Following is the JDBC program that retrieves the list of tutorials data where the author name starts with <b>John</b>. Save the code into <b>LikeClause.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class LikeClause {
+   
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt = null;
+      ResultSet result = null;
+      
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection(
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         result = stmt.executeQuery(
+            "SELECT * from tutorials_tbl WHERE author LIKE 'John%';");
+         
+         while(result.next()){
+            System.out.println(result.getInt("id")+" |
+               "+result.getString("title")+" |
+               "+result.getString("author")+" |
+               "+result.getDate("submission_date"));
+         }
+      } catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+   }
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>Compile and execute the above code using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac LikeClause.java
+\&gt;java LikeClause
+</pre>
+<p>After execution of the following command, you will receive the following output.</p>
+<pre class="result notranslate">
+100 | Learn PHP | John Poul | 2016-06-20
+</pre>
+<h1>HSQLDB - Sorting Results</h1>
+<p>The SQL SELECT command fetches data from the HSQLDB table whenever there is a requirement that follows a particular order while retrieving and displaying records. In that case, we can use the <b>ORDER BY</b> clause.</p>
+<h2>Syntax</h2>
+<p>Here is the syntax of the SELECT command along with ORDER BY clause to sort data from HSQLDB.</p>
+<pre class="result notranslate">
+SELECT field1, field2,...fieldN table_name1, table_name2...
+ORDER BY field1, [field2...] [ASC [DESC]]
+</pre>
+<ul class="list">
+<li><p>You can sort the returned result on any field provided that field is being listed out.</p></li>
+<li><p>You can sort the result on more than one field.</p></li>
+<li><p>You can use the keyword ASC or DESC to get the result in an ascending or descending order. By default, it's in an ascending order.</p></li>
+<li><p>You can use the WHERE...LIKE clause in a usual way to put a condition.</p></li>
+</ul>
+<h2>Example</h2>
+<p>Let us consider an example that fetches and sorts the records of <b>tutorials_tbl</b> table by ordering the author name in an ascending order. Following is the query for the same.</p>
+<pre class="result notranslate">
+SELECT id, title, author from tutorials_tbl ORDER BY author ASC;
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++------+----------------+-----------------+
+| id   |     title      |     author      |
++------+----------------+-----------------+
+| 102  |  Learn MySQL   |     Abdul S     | 
+| 104  |  Learn JDB     |    Ajith kumar  |
+| 103  |  Learn Excell  |    Bavya kanna  |
+| 100  |  Learn PHP     |    John Poul    |
+| 105  |  Learn Junit   |   Sathya Murthi |
+| 101  |  Learn C       |    Yaswanth     |
++------+----------------+-----------------+
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Here is the JDBC program that fetches and sorts the records of <b>tutorials_tbl</b> table by ordering the author name in an ascending order. Save the following program into <b>OrderBy.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class OrderBy {
+   
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt = null;
+      ResultSet result = null;
+      
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection(
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt = con.createStatement();
+         result = stmt.executeQuery(
+            "SELECT id, title, author from tutorials_tbl
+            ORDER BY author ASC");
+         
+         while(result.next()){
+            System.out.println(result.getInt("id")+" |
+            "+result.getString("title")+" |
+            "+result.getString("author"));
+         }
+      } catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+   }
+}
+</pre>
+<p>You can start the database using the following command.</p>
+<pre class="result notranslate">
+\&gt;cd C:\hsqldb-2.3.4\hsqldb
+hsqldb&gt;java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0
+file:hsqldb/demodb --dbname.0 testdb
+</pre>
+<p>Compile and execute the above program using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac OrderBy.java
+\&gt;java OrderBy
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
+102 | Learn MySQL           | Abdul S
+104 | Learn JDB             | Ajith kumar
+103 | Learn Excell          | Bavya Kanna
+100 | Learn PHP             | John Poul
+105 | Learn Junit           | Sathya Murthi
+101 | C and Data Structures | Yaswanth
+</pre>
+<h1>HSQLDB - Joins</h1>
+<p>Whenever there is a requirement to retrieve data from multiple tables using a single query, you can use JOINS from RDBMS. You can use multiple tables in your single SQL query. The act of joining in HSQLDB refers to smashing two or more tables into a single table.</p>
+<p>Consider the following Customers and Orders tables.</p>
+<pre class="result notranslate">
+Customer:
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |  ADDRESS  |  SALARY  |
++----+----------+-----+-----------+----------+
+| 1  |  Ramesh  | 32  | Ahmedabad |  2000.00 |
+| 2  |  Khilan  | 25  |   Delhi   |  1500.00 |
+| 3  |  kaushik | 23  |   Kota    |  2000.00 |
+| 4  | Chaitali | 25  |   Mumbai  |  6500.00 |
+| 5  |  Hardik  | 27  |   Bhopal  |  8500.00 |
+| 6  |  Komal   | 22  |    MP     |  4500.00 |
+| 7  |  Muffy   | 24  |   Indore  | 10000.00 |
++----+----------+-----+-----------+----------+
+Orders:
++-----+---------------------+-------------+--------+
+|OID  |         DATE        | CUSTOMER_ID | AMOUNT |
++-----+---------------------+-------------+--------+
+| 102 | 2009-10-08 00:00:00 |      3      |  3000  |
+| 100 | 2009-10-08 00:00:00 |      3      |  1500  |
+| 101 | 2009-11-20 00:00:00 |      2      |  1560  |
+| 103 | 2008-05-20 00:00:00 |      4      |  2060  |
++-----+---------------------+-------------+--------+
+</pre>
+<p>Now, let us try to retrieve the data of the customers and the order amount that the respective customer placed. This means we are retrieving the record data from both customers and orders table. We can achieve this by using the JOINS concept in HSQLDB. Following is the JOIN query for the same.</p>
+<pre class="prettyprint notranslate">
+SELECT ID, NAME, AGE, AMOUNT FROM CUSTOMERS, ORDERS WHERE CUSTOMERS.ID =
+ORDERS.CUSTOMER_ID;
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++----+----------+-----+--------+
+| ID |   NAME   | AGE | AMOUNT |
++----+----------+-----+--------+
+|  3 | kaushik  |  23 |  3000  |
+|  3 | kaushik  |  23 |  1500  |
+|  2 | Khilan   |  25 |  1560  |
+|  4 | Chaitali |  25 |  2060  |
++----+----------+-----+--------+
+</pre>
+<h2>JOIN Types</h2>
+<p>There are different types of joins available in HSQLDB.</p>
+<ul class="list">
+<li><p><b>INNER JOIN</b> &minus; Returns the rows when there is a match in both tables.</p></li>
+<li><p><b>LEFT JOIN</b> &minus; Returns all rows from the left table, even if there are no matches in the right table.</p></li>
+<li><p><b>RIGHT JOIN</b> &minus; Returns all rows from the right table, even if there are no matches in the left table.</p></li>
+<li><p><b>FULL JOIN</b> &minus; Returns the rows when there is a match in one of the tables.</p></li>
+<li><p><b>SELF JOIN</b> &minus; Used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement.</p></li>
+</ul>
+<h2>Inner Join</h2>
+<p>The most frequently used and important of the joins is the INNER JOIN. It is also referred to as an EQUIJOIN.</p>
+<p>The INNER JOIN creates a new result table by combining the column values of two tables (table1 and table2) based upon the join-predicate. The query compares each row of table1 with each row of table2 to find all pairs of rows, which satisfy the join-predicate. When the join-predicate is satisfied, the column values for each matched pair of rows A and B are combined into a result row.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of INNER JOIN is as follows.</p>
+<pre class="prettyprint notranslate">
+SELECT table1.column1, table2.column2...
+FROM table1
+INNER JOIN table2
+ON table1.common_field = table2.common_field;
+</pre>
+<h3>Example</h3>
+<p>Consider the following two tables, one titled as CUSTOMERS table and another titled as ORDERS table as follows &minus;</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |  ADDRESS  | SALARY   |
++----+----------+-----+-----------+----------+
+| 1  |  Ramesh  | 32  | Ahmedabad | 2000.00  |
+| 2  |  Khilan  | 25  |   Delhi   | 1500.00  |
+| 3  |  kaushik | 23  |   Kota    | 2000.00  |
+| 4  | Chaitali | 25  |   Mumbai  | 6500.00  |
+| 5  |  Hardik  | 27  |   Bhopal  | 8500.00  |
+| 6  |  Komal   | 22  |     MP    | 4500.00  |
+| 7  |  Muffy   | 24  |   Indore  | 10000.00 |
++----+----------+-----+-----------+----------+
+</pre>
+<p></p>
+<pre class="result notranslate">
++-----+---------------------+-------------+--------+
+| OID |         DATE        | CUSTOMER_ID | AMOUNT |
++-----+---------------------+-------------+--------+
+| 102 | 2009-10-08 00:00:00 |      3      | 3000   |
+| 100 | 2009-10-08 00:00:00 |      3      | 1500   |
+| 101 | 2009-11-20 00:00:00 |      2      | 1560   |
+| 103 | 2008-05-20 00:00:00 |      4      | 2060   |
++-----+---------------------+-------------+--------+
+</pre>
+<p>Now, let us join these two tables using INNER JOIN query as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT ID, NAME, AMOUNT, DATE FROM CUSTOMERS
+INNER JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++----+----------+--------+---------------------+
+| ID |   NAME   | AMOUNT |         DATE        |
++----+----------+--------+---------------------+
+| 3  |  kaushik |  3000  | 2009-10-08 00:00:00 |
+| 3  |  kaushik |  1500  | 2009-10-08 00:00:00 |
+| 2  |  Khilan  |  1560  | 2009-11-20 00:00:00 |
+| 4  | Chaitali |  2060  | 2008-05-20 00:00:00 |
++----+----------+--------+---------------------+
+</pre>
+<h2>Left Join</h2>
+<p>The HSQLDB LEFT JOIN returns all rows from the left table, even if there are no matches in the right table. This means that if the ON clause matches 0 (zero) records in the right table, the join will still return a row in the result, but with NULL in each column from the right table.</p>
+<p>This means that a left join returns all the values from the left table, plus matched values from the right table or NULL in case of no matching join predicate.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of LEFT JOIN is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT table1.column1, table2.column2...
+FROM table1
+LEFT JOIN table2
+ON table1.common_field = table2.common_field;
+</pre>
+<p>Here the given condition could be any given expression based on your requirement.</p>
+<h3>Example</h3>
+<p>Consider the following two tables, one titled as CUSTOMERS table and another titled as ORDERS table as follows &minus;</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |  ADDRESS  | SALARY   |
++----+----------+-----+-----------+----------+
+| 1  |  Ramesh  | 32  | Ahmedabad | 2000.00  |
+| 2  |  Khilan  | 25  |   Delhi   | 1500.00  |
+| 3  |  kaushik | 23  |   Kota    | 2000.00  |
+| 4  | Chaitali | 25  |   Mumbai  | 6500.00  |
+| 5  |  Hardik  | 27  |   Bhopal  | 8500.00  |
+| 6  |  Komal   | 22  |    MP     | 4500.00  |
+| 7  |  Muffy   | 24  |  Indore   | 10000.00 |
++----+----------+-----+-----------+----------+
+</pre>
+<p></p>
+<pre class="result notranslate">
++-----+---------------------+-------------+--------+
+| OID |        DATE         | CUSTOMER_ID | AMOUNT |
++-----+---------------------+-------------+--------+
+| 102 | 2009-10-08 00:00:00 |     3       | 3000   |
+| 100 | 2009-10-08 00:00:00 |     3       | 1500   |
+| 101 | 2009-11-20 00:00:00 |     2       | 1560   |
+| 103 | 2008-05-20 00:00:00 |     4       | 2060   |
++-----+---------------------+-------------+--------+
+</pre>
+<p>Now, let us join these two tables using the LEFT JOIN query as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT ID, NAME, AMOUNT, DATE FROM CUSTOMERS
+LEFT JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+</pre>
+<p>After execution of the above query, you will receive the following output &minus;</p>
+<pre class="result notranslate">
++----+----------+--------+---------------------+
+| ID |   NAME   | AMOUNT |         DATE        |
++----+----------+--------+---------------------+
+|  1 |  Ramesh  |  NULL  |        NULL         |
+|  2 |  Khilan  |  1560  | 2009-11-20 00:00:00 |
+|  3 |  kaushik |  3000  | 2009-10-08 00:00:00 |
+|  3 |  kaushik |  1500  | 2009-10-08 00:00:00 |
+|  4 | Chaitali |  2060  | 2008-05-20 00:00:00 |
+|  5 |  Hardik  |  NULL  |        NULL         |
+|  6 |  Komal   |  NULL  |        NULL         |
+|  7 |  Muffy   |  NULL  |        NULL         |
++----+----------+--------+---------------------+
+</pre>
+<h2>Right Join</h2>
+<p>The HSQLDB RIGHT JOIN returns all rows from the right table, even if there are no matches in the left table. This means that if the ON clause matches 0 (zero) records in the left table, the join will still return a row in the result, but with NULL in each column from the left table.</p>
+<p>This means that a right join returns all the values from the right table, plus matched values from the left table or NULL in case of no matching join predicate.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of <b>RIGHT JOIN</b> is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT table1.column1, table2.column2...
+FROM table1
+RIGHT JOIN table2
+ON table1.common_field = table2.common_field;
+</pre>
+<h3>Example</h3>
+<p>Consider the following two tables, one titled as CUSTOMERS table and another titled as ORDERS table as follows &minus;</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |  ADDRESS  |  SALARY  |
++----+----------+-----+-----------+----------+
+| 1  |  Ramesh  | 32  | Ahmedabad |  2000.00 |
+| 2  |  Khilan  | 25  |   Delhi   |  1500.00 |
+| 3  |  kaushik | 23  |   Kota    |  2000.00 |
+| 4  | Chaitali | 25  |   Mumbai  |  6500.00 |
+| 5  |  Hardik  | 27  |   Bhopal  |  8500.00 |
+| 6  |  Komal   | 22  |     MP    |  4500.00 |
+| 7  |  Muffy   | 24  |   Indore  | 10000.00 |
++----+----------+-----+-----------+----------+
+</pre>
+<p></p>
+<pre class="result notranslate">
++-----+---------------------+-------------+--------+
+| OID |       DATE          | CUSTOMER_ID | AMOUNT |
++-----+---------------------+-------------+--------+
+| 102 | 2009-10-08 00:00:00 |      3      |  3000  |
+| 100 | 2009-10-08 00:00:00 |      3      |  1500  |
+| 101 | 2009-11-20 00:00:00 |      2      |  1560  |
+| 103 | 2008-05-20 00:00:00 |      4      |  2060  |
++-----+---------------------+-------------+--------+
+</pre>
+<p>Now, let us join these two tables using the RIGHT JOIN query as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT ID, NAME, AMOUNT, DATE FROM CUSTOMERS
+RIGHT JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+</pre>
+<p>After execution of the above query, you will receive the following result.</p>
+<pre class="result notranslate">
++------+----------+--------+---------------------+
+|  ID  |   NAME   | AMOUNT |        DATE         |
++------+----------+--------+---------------------+
+|  3   |  kaushik |  3000  | 2009-10-08 00:00:00 |
+|  3   |  kaushik |  1500  | 2009-10-08 00:00:00 |
+|  2   |  Khilan  |  1560  | 2009-11-20 00:00:00 |
+|  4   | Chaitali |  2060  | 2008-05-20 00:00:00 |
++------+----------+--------+---------------------+
+</pre>
+<h2>Full Join</h2>
+<p>The HSQLDB FULL JOIN combines the results of both left and right outer joins.</p>
+<p>The joined table will contain all records from both tables, and fill in NULLs for the missing matches on either side.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of FULL JOIN is as follows &minus;</p>
+<pre class="result notranslate">
+SELECT table1.column1, table2.column2...
+FROM table1
+FULL JOIN table2
+ON table1.common_field = table2.common_field;
+</pre>
+<p>Here the given condition could be any given expression based on your requirement.</p>
+<h3>Example</h3>
+<p>Consider the following two tables, one titled as CUSTOMERS table and another titled as
+ORDERS table as follows &minus;</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |  ADDRESS  |  SALARY  |
++----+----------+-----+-----------+----------+
+|  1 |  Ramesh  | 32  | Ahmedabad | 2000.00  |
+|  2 |  Khilan  | 25  |   Delhi   | 1500.00  |
+|  3 |  kaushik | 23  |   Kota    | 2000.00  |
+|  4 | Chaitali | 25  |   Mumbai  | 6500.00  |
+|  5 |  Hardik  | 27  |   Bhopal  | 8500.00  |
+|  6 |  Komal   | 22  |   MP      | 4500.00  |
+|  7 |  Muffy   | 24  |   Indore  | 10000.00 |
++----+----------+-----+-----------+----------+
+</pre>
+<p></p>
+<pre class="result notranslate">
++-----+---------------------+-------------+--------+
+| OID |         DATE        | CUSTOMER_ID | AMOUNT |
++-----+---------------------+-------------+--------+
+| 102 | 2009-10-08 00:00:00 |    3        | 3000   |
+| 100 | 2009-10-08 00:00:00 |    3        | 1500   |
+| 101 | 2009-11-20 00:00:00 |    2        | 1560   |
+| 103 | 2008-05-20 00:00:00 |    4        | 2060   |
++-----+---------------------+-------------+--------+
+</pre>
+<p>Now, let us join these two tables using the FULL JOIN query as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT ID, NAME, AMOUNT, DATE FROM CUSTOMERS
+FULL JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+</pre>
+<p>After execution of the above query, you will receive the following result.</p>
+<pre class="result notranslate">
++------+----------+--------+---------------------+
+|  ID  |    NAME  | AMOUNT |        DATE         |
++------+----------+--------+---------------------+
+|   1  |  Ramesh  |  NULL  |        NULL         |
+|   2  |  Khilan  |  1560  | 2009-11-20 00:00:00 |
+|   3  |  kaushik |  3000  | 2009-10-08 00:00:00 |
+|   3  |  kaushik |  1500  | 2009-10-08 00:00:00 |
+|   4  | Chaitali |  2060  | 2008-05-20 00:00:00 |
+|   5  |  Hardik  |  NULL  |        NULL         |
+|   6  |   Komal  |  NULL  |        NULL         |
+|   7  |   Muffy  |  NULL  |        NULL         |
+|   3  |  kaushik |  3000  | 2009-10-08 00:00:00 |
+|   3  |  kaushik |  1500  | 2009-10-08 00:00:00 |
+|   2  |  Khilan  |  1560  | 2009-11-20 00:00:00 |
+|   4  | Chaitali |  2060  | 2008-05-20 00:00:00 |
++------+----------+--------+---------------------+
+</pre>
+<h2>Self Join</h2>
+<p>The SQL SELF JOIN is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement.</p>
+<h3>Syntax</h3>
+<p>The basic syntax of SELF JOIN is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT a.column_name, b.column_name...
+FROM table1 a, table1 b
+WHERE a.common_field = b.common_field;
+</pre>
+<p>Here, the WHERE clause could be any given expression based on your requirement.</p>
+<h3>Example</h3>
+<p>Consider the following two tables, one titled as CUSTOMERS table and another titled as ORDERS table as follows &minus;</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |    NAME  | AGE |   ADDRESS |   SALARY |
++----+----------+-----+-----------+----------+
+|  1 |  Ramesh  |  32 | Ahmedabad | 2000.00  |
+|  2 |  Khilan  |  25 |   Delhi   | 1500.00  |
+|  3 |  kaushik |  23 |   Kota    | 2000.00  |
+|  4 | Chaitali |  25 |   Mumbai  | 6500.00  |
+|  5 |  Hardik  |  27 |   Bhopal  | 8500.00  |
+|  6 |  Komal   |  22 |   MP      | 4500.00  |
+|  7 |  Muffy   |  24 |   Indore  | 10000.00 |
++----+----------+-----+-----------+----------+
+</pre>
+<p>Now, let us join this table using the SELF JOIN query as follows &minus;</p>
+<pre class="result notranslate">
+SELECT a.ID, b.NAME, a.SALARY FROM CUSTOMERS a, CUSTOMERS b
+WHERE a.SALARY &gt; b.SALARY;
+</pre>
+<p>After execution of the above query, you will receive the following output &minus;</p>
+<pre class="result notranslate">
++----+----------+---------+
+| ID |   NAME   | SALARY  |
++----+----------+---------+
+| 2  |  Ramesh  | 1500.00 |
+| 2  |  kaushik | 1500.00 |
+| 1  | Chaitali | 2000.00 |
+| 2  | Chaitali | 1500.00 |
+| 3  | Chaitali | 2000.00 |
+| 6  | Chaitali | 4500.00 |
+| 1  |  Hardik  | 2000.00 |
+| 2  |  Hardik  | 1500.00 |
+| 3  |  Hardik  | 2000.00 |
+| 4  |  Hardik  | 6500.00 |
+| 6  |  Hardik  | 4500.00 |
+| 1  |  Komal   | 2000.00 |
+| 2  |  Komal   | 1500.00 |
+| 3  |  Komal   | 2000.00 |
+| 1  |  Muffy   | 2000.00 |
+| 2  |  Muffy   | 1500.00 |
+| 3  |  Muffy   | 2000.00 |
+| 4  |  Muffy   | 6500.00 |
+| 5  |  Muffy   | 8500.00 |
+| 6  |  Muffy   | 4500.00 |
++----+----------+---------+
+</pre>
+<h1>HsqlDB - Null Values</h1>
+<p>SQL NULL is a term used to represent a missing value. A NULL value in a table is a value in a field that appears to be blank. Whenever we try to give a condition, which compare the field or column value to NULL, it does not work properly.</p>
+<p>We can handle the NULL values by using the three things.</p>
+<ul class="list">
+<li><p><b>IS NULL</b> &minus; The operator returns true if the column value is NULL.</p></li>
+<li><p><b>IS NOT NULL</b> &minus; The operator returns true if the column value is NOT NULL.</p></li>
+<li><p><b>&lt;=&gt;</b> &minus; The operator compares values, which (unlike the = operator) is true even for two NULL values.</p></li>
+</ul>
+<p>To look for columns that are NULL or NOT NULL, use IS NULL or IS NOT NULL respectively.</p>
+<h2>Example</h2>
+<p>Let us consider an example where there is a table <b>tcount_tbl</b> that contains two columns, author and tutorial_count. We can provide NULL values to the tutorial_count indicates that the author did not publish even one tutorial. Therefore, the tutorial_count value for that respective author is NULL.</p>
+<p>Execute the following queries.</p>
+<pre class="result notranslate">
+create table tcount_tbl(author varchar(40) NOT NULL, tutorial_count INT);
+INSERT INTO tcount_tbl values ('Abdul S', 20);
+INSERT INTO tcount_tbl values ('Ajith kumar', 5);
+INSERT INTO tcount_tbl values ('Jen', NULL);
+INSERT INTO tcount_tbl values ('Bavya kanna', 8);
+INSERT INTO tcount_tbl values ('mahran', NULL);
+INSERT INTO tcount_tbl values ('John Poul', 10);
+INSERT INTO tcount_tbl values ('Sathya Murthi', 6);
+</pre>
+<p>Use the following command to display all the records from the <b>tcount_tbl</b> table.</p>
+<pre class="result notranslate">
+select * from tcount_tbl;
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
++-----------------+----------------+
+|     author      | tutorial_count |
++-----------------+----------------+
+|      Abdul S    |      20        |
+|    Ajith kumar  |      5         |
+|        Jen      |     NULL       |
+|    Bavya kanna  |      8         |
+|       mahran    |     NULL       |
+|     John Poul   |      10        |
+|   Sathya Murthi |      6         |
++-----------------+----------------+
+</pre>
+<p>To find the records where the tutorial_count column IS NULL, following is the query.</p>
+<pre class="result notranslate">
+SELECT * FROM tcount_tbl WHERE tutorial_count IS NULL;
+</pre>
+<p>After execution of the query, you will receive the following output.</p>
+<pre class="result notranslate">
++-----------------+----------------+
+|     author      | tutorial_count |
++-----------------+----------------+
+|       Jen       |     NULL       |
+|      mahran     |     NULL       |
++-----------------+----------------+
+</pre>
+<p>To find the records where the tutorial_count column IS NOT NULL, following is the query.</p>
+<pre class="result notranslate">
+SELECT * FROM tcount_tbl WHERE tutorial_count IS NOT NULL;
+</pre>
+<p>After execution of the query, you will receive the following output.</p>
+<pre class="result notranslate">
++-----------------+----------------+
+|      author     | tutorial_count |
++-----------------+----------------+
+|      Abdul S    |      20        |
+|     Ajith kumar |       5        |
+|     Bavya kanna |       8        |
+|     John Poul   |      10        |
+|   Sathya Murthi |       6        |
++-----------------+----------------+
+</pre>
+<h2>HSQLDB – JDBC Program</h2>
+<p>Here is the JDBC program that retrieves the records separately from the table tcount_tbl where the tutorial_ count is NULL and the tutorial_count is NOT NULL. Save the following program into <b>NullValues.java</b>.</p>
+<pre class="prettyprint notranslate">
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class NullValues {
+   public static void main(String[] args) {
+      Connection con = null;
+      Statement stmt_is_null = null;
+      Statement stmt_is_not_null = null;
+      ResultSet result = null;
+      try {
+         Class.forName("org.hsqldb.jdbc.JDBCDriver");
+         con = DriverManager.getConnection(
+            "jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
+         stmt_is_null = con.createStatement();
+         stmt_is_not_null = con.createStatement();
+         result = stmt_is_null.executeQuery(
+            "SELECT * FROM tcount_tbl WHERE tutorial_count IS NULL;");
+         System.out.println("Records where the tutorial_count is NULL");
+         
+         while(result.next()){
+            System.out.println(result.getString("author")+" |
+            "+result.getInt("tutorial_count"));
+         }
+         result = stmt_is_not_null.executeQuery(
+            "SELECT * FROM tcount_tbl WHERE tutorial_count IS NOT NULL;");
+         System.out.println("Records where the tutorial_count is NOT NULL");
+         
+         while(result.next()){
+            System.out.println(result.getString("author")+" |
+            "+result.getInt("tutorial_count"));
+         }
+      } catch (Exception e) {
+         e.printStackTrace(System.out);
+      }
+   }
+}
+</pre>
+<p>Compile and execute the above program using the following command.</p>
+<pre class="result notranslate">
+\&gt;javac NullValues.java
+\&gt;Java NullValues
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
+Records where the tutorial_count is NULL
+Jen         | 0
+mahran      | 0
+
+Records where the tutorial_count is NOT NULL
+Abdul S        | 20
+Ajith kumar    | 5
+Bavya kanna    | 8
+John Poul      | 10
+Sathya Murthi  | 6
+</pre>
+<h1>HSQLDB - Regular Expressions</h1>
+<p>HSQLDB supports some special symbols for pattern matching operation based on regular expressions and the REGEXP operator.</p>
+<p>Following is the table of pattern, which can be used along with REGEXP operator.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Pattern</th>
+<th style="text-align:center">What the Pattern Matches</th>
+</tr>
+<tr>
+<td>^</td>
+<td>Beginning of the string</td>
+</tr>
+<tr>
+<td>$</td>
+<td>End of the string</td>
+</tr>
+<tr>
+<td>.</td>
+<td>Any single character</td>
+</tr>
+<tr>
+<td>[...]</td>
+<td>Any character listed between the square brackets</td>
+</tr>
+<tr>
+<td>[^...]</td>
+<td>Any character not listed between the square brackets</td>
+</tr>
+<tr>
+<td>p1|p2|p3</td>
+<td>Alternation; matches any of the patterns p1, p2, or p3</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Zero or more instances of the preceding element</td>
+</tr>
+<tr>
+<td>+</td>
+<td>One or more instances of the preceding element</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n instances of the preceding element</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>m through n instances of the preceding element</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>Let us try different example queries to meet our requirements. Take a look at the following given queries.</p>
+<p>Try this Query to find all the authors whose name starts with '^A'.</p>
+<pre class="result notranslate">
+SELECT author FROM tcount_tbl WHERE REGEXP_MATCHES(author,'^A.*');
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++-----------------+
+|     author      |
++-----------------+
+|     Abdul S     |
+|    Ajith kumar  |
++-----------------+
+</pre>
+<p>Try this Query to find all the authors whose name ends with 'ul$'.</p>
+<pre class="result notranslate">
+SELECT author FROM tcount_tbl WHERE REGEXP_MATCHES(author,'.*ul$');
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++-----------------+
+|     author      |
++-----------------+
+|    John Poul    |
++-----------------+
+</pre>
+<p>Try this Query to find all the authors whose name contains 'th'.</p>
+<pre class="result notranslate">
+SELECT author FROM tcount_tbl WHERE REGEXP_MATCHES(author,'.*th.*');
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++-----------------+
+|     author      |
++-----------------+
+|    Ajith kumar  | 
+|     Abdul S     |
++-----------------+
+</pre>
+<p>Try this query to find all the authors whose name starts with vowel (a, e, i, o, u).</p>
+<pre class="result notranslate">
+SELECT author FROM tcount_tbl WHERE REGEXP_MATCHES(author,'^[AEIOU].*');
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++-----------------+
+|     author      |
++-----------------+
+|     Abdul S     |
+|    Ajith kumar  |
++-----------------+
+</pre>
+<h1>HSQLDB - Transactions</h1>
+<p>A <b>Transaction</b> is a sequential group of database manipulation operations, which is performed and considered as one single work unit. In other words, when all the operations are successfully executed, only then the entire transaction will be complete. If any operation within the transaction fails, then the entire transaction will fail.</p>
+<h2>Properties of Transactions</h2>
+<p>Basically, transaction supports 4 standard properties. They can be referred to as ACID properties.</p>
+<p><b>Atomicity</b> &minus; All the operations in the transactions are executed successfully, otherwise the transaction gets aborted at the point of failure and the previous operations are rolled back to their previous position.</p>
+<p><b>Consistency</b> &minus; The database properly changes states upon a successfully committed transaction.</p>
+<p><b>Isolation</b> &minus; It enables the transaction to operate independently on and transparent to each other.</p>
+<p><b>Durability</b> &minus; The result or effect of a committed transaction persists in case of a system failure.</p>
+<h2>Commit, Rollback, and Savepoint</h2>
+<p>These keywords are mainly used for HSQLDB transactions.</p>
+<p><b>Commit</b>&minus; Always the successful transaction should be completed by executing the COMMIT command.</p>
+<p><b>Rollback</b> &minus; If a failure occurs in the transaction, then the ROLLBACK command should be executed to return every table referenced in the transaction to its previous state.</p>
+<p><b>Savepoint</b> &minus; Creates a point within the group of transactions in which to rollback.</p>
+<h3>Example</h3>
+<p>The following example explains the transactions concept along with commit, rollback, and Savepoint. Let us consider the table Customers with the columns id, name, age, address, and salary.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Id</th>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Age</th>
+<th style="text-align:center">Address</th>
+<th style="text-align:center" >Salary</th>
+</tr>
+<tr>
+<td>1</td>
+<td>Ramesh</td>
+<td>32</td>
+<td>Ahmedabad</td>
+<td>2000.00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Karun</td>
+<td>25</td>
+<td>Delhi</td>
+<td>1500.00</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Kaushik</td>
+<td>23</td>
+<td>Kota</td>
+<td>2000.00</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chaitanya</td>
+<td>25</td>
+<td>Mumbai</td>
+<td>6500.00</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Harish</td>
+<td>27</td>
+<td>Bhopal</td>
+<td>8500.00</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Kamesh</td>
+<td>22</td>
+<td>MP</td>
+<td>1500.00</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Murali</td>
+<td>24</td>
+<td>Indore</td>
+<td>10000.00</td>
+</tr>
+</table>
+<p>Use the following commands to create the customer table along the lines of the above data.</p>
+<pre class="result notranslate">
+CREATE TABLE Customer (id INT NOT NULL, name VARCHAR(100) NOT NULL, age INT NOT
+NULL, address VARCHAR(20), Salary INT, PRIMARY KEY (id));
+Insert into Customer values (1, "Ramesh", 32, "Ahmedabad", 2000);
+Insert into Customer values (2, "Karun", 25, "Delhi", 1500);
+Insert into Customer values (3, "Kaushik", 23, "Kota", 2000);
+Insert into Customer values (4, "Chaitanya", 25, "Mumbai", 6500);
+Insert into Customer values (5, "Harish", 27, "Bhopal", 8500);
+Insert into Customer values (6, "Kamesh", 22, "MP", 1500);
+Insert into Customer values (7, "Murali", 24, "Indore", 10000);
+</pre>
+<h3>Example for COMMIT</h3>
+<p>The following query deletes rows from the table having age = 25 and uses the COMMIT command to apply those changes in the database.</p>
+<pre class="result notranslate">
+DELETE FROM CUSTOMERS WHERE AGE = 25;
+COMMIT;
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
+2 rows effected
+</pre>
+<p>After successful execution of the above command, check the records of the customer table by executing the below given command.</p>
+<pre class="result notranslate">
+Select * from Customer;
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |   ADDRESS |  SALARY  |
++----+----------+-----+-----------+----------+
+| 1  |  Ramesh  |  32 | Ahmedabad |   2000   |
+| 3  |  kaushik |  23 |   Kota    |   2000   |
+| 5  |  Harish  |  27 |   Bhopal  |   8500   |
+| 6  |  Kamesh  |  22 |    MP     |   4500   |
+| 7  |  Murali  |  24 |   Indore  |   10000  |
++----+----------+-----+-----------+----------+
+</pre>
+<h3>Example for Rollback</h3>
+<p>Let us consider the same Customer table as input.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Id</th>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Age</th>
+<th style="text-align:center">Address</th>
+<th style="text-align:center">Salary</th>
+</tr>
+<tr>
+<td>1</td>
+<td>Ramesh</td>
+<td>32</td>
+<td>Ahmedabad</td>
+<td>2000.00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Karun</td>
+<td>25</td>
+<td>Delhi</td>
+<td>1500.00</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Kaushik</td>
+<td>23</td>
+<td>Kota</td>
+<td>2000.00</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chaitanya</td>
+<td>25</td>
+<td>Mumbai</td>
+<td>6500.00</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Harish</td>
+<td>27</td>
+<td>Bhopal</td>
+<td>8500.00</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Kamesh</td>
+<td>22</td>
+<td>MP</td>
+<td>1500.00</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Murali</td>
+<td>24</td>
+<td>Indore</td>
+<td>10000.00</td>
+</tr>
+</table>
+<p>Here is the example query that explains about Rollback functionality by deleting records from the table having age = 25 and then ROLLBACK the changes in the database.</p>
+<pre class="result notranslate">
+DELETE FROM CUSTOMERS WHERE AGE = 25;
+ROLLBACK;
+</pre>
+<p>After successful execution of the above two queries, you can view the record data in the Customer table using the following command.</p>
+<pre class="result notranslate">
+Select * from Customer;
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |   ADDRESS |  SALARY  |
++----+----------+-----+-----------+----------+
+|  1 |  Ramesh  |  32 | Ahmedabad |   2000   |
+|  2 |  Karun   |  25 |   Delhi   |   1500   |
+|  3 |  Kaushik |  23 |   Kota    |   2000   |
+|  4 | Chaitanya|  25 |   Mumbai  |   6500   |
+|  5 |  Harish  |  27 |   Bhopal  |   8500   |
+|  6 |  Kamesh  |  22 |     MP    |   4500   |
+|  7 |  Murali  |  24 |    Indore |   10000  |
++----+----------+-----+-----------+----------+
+</pre>
+<p>The delete query deletes the record data of customers whose age = 25. The Rollback command, rolls back those changes on the Customer table.</p>
+<h3>Example for Savepoint</h3>
+<p>Savepoint is a point in a transaction when you can roll the transaction back to a certain point without rolling back the entire transaction.</p>
+<p>Let us consider the same Customer table as input.</p>
+<table style="text-align:center" class="table table-bordered">
+<tr>
+<th style="text-align:center">Id</th>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Age</th>
+<th style="text-align:center">Address</th>
+<th style="text-align:center">Salary</th>
+</tr>
+<tr>
+<td>1</td>
+<td>Ramesh</td>
+<td>32</td>
+<td>Ahmedabad</td>
+<td>2000.00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Karun</td>
+<td>25</td>
+<td>Delhi</td>
+<td>1500.00</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Kaushik</td>
+<td>23</td>
+<td>Kota</td>
+<td>2000.00</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chaitanya</td>
+<td>25</td>
+<td>Mumbai</td>
+<td>6500.00</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Harish</td>
+<td>27</td>
+<td>Bhopal</td>
+<td>8500.00</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Kamesh</td>
+<td>22</td>
+<td>MP</td>
+<td>1500.00</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Murali</td>
+<td>24</td>
+<td>Indore</td>
+<td>10000.00</td>
+</tr>
+</table>
+<p>Let us consider in this example, you plan to delete the three different records from the Customers table. You want to create a Savepoint before each delete, so that you can roll back to any Savepoint at any time to return the appropriate data to its original state.</p>
+<p>Here is the series of operations.</p>
+<pre class="result notranslate">
+SAVEPOINT SP1;
+DELETE FROM CUSTOMERS WHERE ID = 1;
+SAVEPOINT SP2;
+DELETE FROM CUSTOMERS WHERE ID = 2;
+SAVEPOINT SP3;
+DELETE FROM CUSTOMERS WHERE ID = 3;
+</pre>
+<p>Now, you have created three Savepoint and deleted three records. In this situation, if you want to roll back the records having Id 2 and 3 then use the following Rollback command.</p>
+<pre class="result notranslate">
+ROLLBACK TO SP2;
+</pre>
+<p>Notice that only the first deletion took place since you rolled back to SP2. Use the following query to display all the records of the customers.</p>
+<pre class="result notranslate">
+Select * from Customer;
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++----+----------+-----+-----------+----------+
+| ID |   NAME   | AGE |   ADDRESS |  SALARY  |
++----+----------+-----+-----------+----------+
+|  2 |   Karun  |  25 |  Delhi    |   1500   |
+|  3 |  Kaushik |  23 |  Kota     |   2000   |
+|  4 | Chaitanya|  25 |  Mumbai   |   6500   |
+|  5 |  Harish  |  27 |  Bhopal   |   8500   |
+|  6 |  Kamesh  |  22 |  MP       |   4500   |
+|  7 |  Murali  |  24 |  Indore   |  10000   |
++----+----------+-----+-----------+----------+
+</pre>
+<h2>Release Savepoint</h2>
+<p>We can release the Savepoint using the RELEASE command. Following is the generic syntax.</p>
+<pre class="result notranslate">
+RELEASE SAVEPOINT SAVEPOINT_NAME;
+</pre>
+
+<h1>HsqlDB - Alter Command</h1>
+<p>Whenever there is a need to change the name of a table or a field, change the order of fields, change the datatype of fields, or any table structure, you can achieve the same using the ALTER command.</p>
+<h3>Example</h3>
+<p>Let us consider an example that explains the ALTER command using different scenarios.</p>
+<p>Use the following query to create a table named <b>testalter_tbl</b> with the fields’ <b>id</b> and <b>name</b>.</p>
+<pre class="result notranslate">
+//below given query is to create a table testalter_tbl table.
+create table testalter_tbl(id INT, name VARCHAR(10));
+
+//below given query is to verify the table structure testalter_tbl.
+Select * From INFORMATION_SCHEMA.SYSTEM_COLUMNS as C Where C.TABLE_SCHEM =
+   'PUBLIC' AND C.TABLE_NAME = 'TESTALTER_TBL';
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++------------+-------------+------------+-----------+-----------+------------+
+|TABLE_SCHEM |  TABLE_NAME | COLUMN_NAME| DATA_TYPE | TYPE_NAME | COLUMN_SIZE|
++------------+-------------+------------+-----------+-----------+------------+
+|   PUBLIC   |TESTALTER_TBL|     ID     |     4     |   INTEGER |     4      |
+|   PUBLIC   |TESTALTER_TBL|    NAME    |     12    |   VARCHAR |     10     |
++------------+-------------+------------+-----------+-----------+------------+
+</pre>
+<h2>Dropping or Adding a Column</h2>
+<p>Whenever you want to DROP an existing column from the HSQLDB table, then you can use the DROP clause along with the ALTER command.</p>
+<p>Use the following query to drop a column (<b>name</b>) from the table testalter_tbl.</p>
+<pre class="result notranslate">
+ALTER TABLE testalter_tbl DROP name;
+</pre>
+<p>After successful execution of the above query, you can get to know if the name field is dropped from the table testalter_tbl using the following command.</p>
+<pre class="result notranslate">
+Select * From INFORMATION_SCHEMA.SYSTEM_COLUMNS as C Where C.TABLE_SCHEM =
+   'PUBLIC' AND C.TABLE_NAME = 'TESTALTER_TBL';
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
++------------+-------------+------------+-----------+-----------+------------+
+|TABLE_SCHEM |  TABLE_NAME | COLUMN_NAME| DATA_TYPE | TYPE_NAME | COLUMN_SIZE|
++------------+-------------+------------+-----------+-----------+------------+
+|  PUBLIC    |TESTALTER_TBL|      ID    |      4    |   INTEGER |     4      |
++------------+-------------+------------+-----------+-----------+------------+
+</pre>
+<p>Whenever you want to add any column into the HSQLDB table, you can use the ADD clause along with the ALTER command.</p>
+<p>Use the following query to add a column named <b>NAME</b> to the table <b>testalter_tbl</b>.</p>
+<pre class="result notranslate">
+ALTER TABLE testalter_tbl ADD name VARCHAR(10);
+</pre>
+<p>After successful execution of the above query, you can get to know if the name field is added to the table <b>testalter_tbl</b> using the following command.</p>
+<pre class="result notranslate">
+Select * From INFORMATION_SCHEMA.SYSTEM_COLUMNS as C Where C.TABLE_SCHEM =
+   'PUBLIC' AND C.TABLE_NAME = 'TESTALTER_TBL';
+</pre>
+<p>After execution of the above query, you will receive the following output.</p>
+<pre class="result notranslate">
++------------+-------------+------------+-----------+-----------+------------+
+|TABLE_SCHEM |  TABLE_NAME | COLUMN_NAME| DATA_TYPE | TYPE_NAME | COLUMN_SIZE|
++------------+-------------+------------+-----------+-----------+------------+
+|  PUBLIC    |TESTALTER_TBL|      ID    |     4     |   INTEGER |     4      |
+|  PUBLIC    |TESTALTER_TBL|     NAME   |     12    |   VARCHAR |     10     |
++------------+-------------+------------+-----------+-----------+------------+
+</pre>
+<h2>Changing a Column Definition or Name</h2>
+<p>Whenever there is a requirement of changing the column definition, use the <b>MODIFY</b> or <b>CHANGE</b> clause along with the <b>ALTER</b> command.</p>
+<p>Let us consider an example that will explain how to use the CHANGE clause. The table <b>testalter_tbl</b> contains two fields - id and name - having datatypes int and varchar respectively. Now let us try to change the datatype of id from INT to BIGINT. Following is the query to make the change.</p>
+<pre class="result notranslate">
+ALTER TABLE testalter_tbl CHANGE id id BIGINT;
+</pre>
+<p>After successful execution of the above query, the table structure can be verified using the following command.</p>
+<pre class="result notranslate">
+Select * From INFORMATION_SCHEMA.SYSTEM_COLUMNS as C Where C.TABLE_SCHEM =
+   'PUBLIC' AND C.TABLE_NAME = 'TESTALTER_TBL';
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
++------------+-------------+------------+-----------+-----------+------------+
+|TABLE_SCHEM |  TABLE_NAME | COLUMN_NAME| DATA_TYPE | TYPE_NAME | COLUMN_SIZE|
++------------+-------------+------------+-----------+-----------+------------+
+|  PUBLIC    |TESTALTER_TBL|      ID    |     4     |   BIGINT  |     4      |
+|  PUBLIC    |TESTALTER_TBL|     NAME   |     12    |   VARCHAR |     10     |
++------------+-------------+------------+-----------+-----------+------------+
+</pre>
+<p>Now let us try to increase the size of a column NAME from 10 to 20 in the <b>testalter_tbl</b> table. Following is the query to achieve this using the MODIFY clause along with the ALTER command.</p>
+<pre class="result notranslate">
+ALTER TABLE testalter_tbl MODIFY name VARCHAR(20);
+</pre>
+<p>After successful execution of the above query, the table structure can be verified using the following command.</p>
+<pre class="result notranslate">
+Select * From INFORMATION_SCHEMA.SYSTEM_COLUMNS as C Where C.TABLE_SCHEM =
+   'PUBLIC' AND C.TABLE_NAME = 'TESTALTER_TBL';
+</pre>
+<p>After execution of the above command, you will receive the following output.</p>
+<pre class="result notranslate">
++------------+-------------+------------+-----------+-----------+------------+
+|TABLE_SCHEM |  TABLE_NAME | COLUMN_NAME| DATA_TYPE | TYPE_NAME | COLUMN_SIZE|
++------------+-------------+------------+-----------+-----------+------------+
+|  PUBLIC    |TESTALTER_TBL|    ID      |      4    |    BIGINT |     4      |
+|  PUBLIC    |TESTALTER_TBL|    NAME    |     12    |   VARCHAR |    20      |
++------------+-------------+------------+-----------+-----------+------------+
+</pre>
+
+<h1>HSQLDB - Indexes</h1>
+<p>A <b>database index</b> is a data structure that improves the speed of operations in a table. Indexes can be created using one or more columns, providing the basis for both rapid random lookups and efficient ordering of access to the records.</p>
+<p>While creating an index, it should be considered what are the columns which will be used to make SQL queries, and create one or more indexes on those columns.</p>
+<p>Practically, indexes are also type of tables, which keep the primary key or the index field and a pointer to each record into the actual table.</p>
+<p>The users cannot see the indexes. They are just used to speed up queries and will be used by the Database Search Engine to quickly locate records.</p>
+<p>The INSERT and UPDATE statements take more time on tables having indexes, whereas SELECT statements run faster on those tables. The reason being while inserting or updating, the database needs to insert or update the index values as well.</p>
+<h2>Simple &amp; Unique Index</h2>
+<p>You can create a unique index on a table. A <b>unique index</b> means that two rows cannot have the same index value. Following is the syntax to create an Index on a table.</p>
+<pre class="result notranslate">
+CREATE UNIQUE INDEX index_name
+ON table_name (column1, column2,...);
+</pre>
+<p>You can use one or more columns to create an index. For example, create an index on tutorials_tbl using tutorial_author.</p>
+<pre class="result notranslate">
+CREATE UNIQUE INDEX AUTHOR_INDEX
+ON tutorials_tbl (tutorial_author)
+</pre>
+<p>You can create a simple index on a table. Just omit the UNIQUE keyword from the query to create a simple index. A <b>simple index</b> allows duplicate values in a table.</p>
+<p>If you want to index the values in a column in a descending order, you can add the reserved word DESC after the column name.</p>
+<pre class="result notranslate">
+CREATE UNIQUE INDEX AUTHOR_INDEX
+ON tutorials_tbl (tutorial_author DESC)
+</pre>
+<h2>ALTER Command to Add &amp; Drop INDEX</h2>
+<p>There are four types of statements for adding indexes to a table &minus;</p>
+<ul class="list">
+<li><p><b>ALTER TABLE tbl_name ADD PRIMARY KEY (column_list)</b> &minus; This statement adds a PRIMARY KEY, which means that indexed values must be unique and cannot be NULL.</p></li>
+<li><p><b>ALTER TABLE tbl_name ADD UNIQUE index_name (column_list)</b> &minus; This statement creates an index for which the values must be unique (with the exception of NULL values, which may appear multiple times).</p></li>
+<li><p><b>ALTER TABLE tbl_name ADD INDEX index_name (column_list)</b> &minus; This adds an ordinary index in which any value may appear more than once.</p></li>
+<li><p><b>ALTER TABLE tbl_name ADD FULLTEXT index_name (column_list)</b> &minus; This creates a special FULLTEXT index that is used for text-searching purposes.</p></li>
+</ul>
+<p>Following is the query to add index in an existing table.</p>
+<pre class="result notranslate">
+ALTER TABLE testalter_tbl ADD INDEX (c);
+</pre>
+<p>You can drop any INDEX by using the DROP clause along with the ALTER command. Following is the query to drop the above-created index.</p>
+<pre class="result notranslate">
+ALTER TABLE testalter_tbl DROP INDEX (c);
+</pre>
+<h2>Displaying INDEX Information</h2>
+<p>You can use the SHOW INDEX command to list out all the indexes associated with a table. Vertical-format output (specified by \G) often is useful with this statement, to avoid long line wraparound.</p>
+<p>Following is the generic syntax to display the index information about a table.</p>
+<pre class="result notranslate">
+SHOW INDEX FROM table_name\G
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="hsqldb_indexes.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="hsqldb_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "HSQLDB Quick Guide",
+    "name": "HSQLDB Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/hsqldb/images/download_hsqldb.jpg",
+        "width": 600,
+        "height": 319
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:51.",
+    "dateModified": "July 23 2017 03:34:51.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "HyperSQL Database (HSQLDB) is a modern relational database manager that conforms closely to the SQL:2011 standard and JDBC 4 specifications. It supports all core features and RDBMS. HSQLDB is used for development, testing, and deployment of database appli..."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Database Tutorials",
+                "@id": "https://www.tutorialspoint.com/database_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Hsqldb",
+                "@id": "https://www.tutorialspoint.com/hsqldb"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "HSQLDB - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/hsqldb/hsqldb_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:29:27 GMT -->
+</html>

@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/wcf/wcf_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 17:09:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>WCF - Quick Guide</title>
+<meta name="description" content="WCF Quick Guide - Learn WCF in simple and easy steps starting from Overview, Versus web service, Developers tools, Architecture, Creating wcf service, Hosting wcf service, IIS hosting, Self-hosting, WAS hosting, windows service hosting, consuming wcf service, service binding, instance management, transactions, ria services, security, exception handling." />
+<meta name="keywords" content="WCF, Overview, versus web service, developers tools, architecture, creating wcf service, hosting wcf service, iis hosting, self-hosting, was hosting, windows service hosting, consuming wcf service, service binding, instance management, transactions, ria services, security, exception handling." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #0C6AC4 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #0C6AC4 !important;}
+.submenu-item{ border-bottom: 2px solid #0C6AC4 !important; border-top: 2px solid #0C6AC4 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/wcf-mini-logo.jpg" alt="WCF Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">WCF Tutorial</li>
+<li><a href="index.html">WCF - Home</a></li>
+<li><a href="wcf_overview.html">WCF - Overview</a></li>
+<li><a href="wcf_versus_web_service.html">WCF - Versus Web Service</a></li>
+<li><a href="wcf_developers_tools.html">WCF - Developers Tools</a></li>
+<li><a href="wcf_architecture.html">WCF - Architecture</a></li>
+<li><a href="wcf_creating_service.html">WCF - Creating WCF Service</a></li>
+<li><a href="wcf_hosting_service.html">WCF - Hosting WCF Service</a></li>
+<li><a href="wcf_iis_hosting.html">WCS - IIS Hosting</a></li>
+<li><a href="wcf_self_hosting.html">WCF - Self-Hosting</a></li>
+<li><a href="wcf_was_hosting.html">WCF - WAS Hosting</a></li>
+<li><a href="wcf_windows_service_hosting.html">WCF - Windows Service Hosting</a></li>
+<li><a href="wcf_consuming_service.html">WCF - Consuming WCF Service</a></li>
+<li><a href="wcf_service_binding.html">WCF - Service Binding</a></li>
+<li><a href="wcf_instance_management.html">WCF - Instance Management</a></li>
+<li><a href="wcf_transaction.html">WCF - Transactions</a></li>
+<li><a href="wcf_ria_services.html">WCF - RIA Services</a></li>
+<li><a href="wcf_security.html">WCF - Security</a></li>
+<li><a href="wcf_exception_handling.html">WCF - Exception Handling</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">WCF Resources</li>
+<li><a href="wcf_quick_guide.html">WCF - Quick Guide</a></li>
+<li><a href="wcf_useful_resources.html">WCF - Useful Resources</a></li>
+<li><a href="wcf_discussion.html">WCF - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>WCF - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr>
+<div class="pre-btn">
+<a href="wcf_exception_handling.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="wcf_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>WCF - Overview</h1>
+<p>WCF stands for Windows Communication Foundation. The elementary feature of WCF is interoperability. It is one of the latest technologies of Microsoft that is used to build service-oriented applications. Based on the concept of message-based communication, in which an HTTP request is represented uniformly, WCF makes it possible to have a unified API irrespective of diverse transport mechanisms.</p>
+<p>WCF was released for the first time in 2006 as a part of the .NET framework with Windows Vista, and then got updated several times. WCF 4.5 is the most recent version that is now widely used.</p>
+<p>A WCF application consists of three components:</p>
+<ul class="list">
+<li>WCF service,</li>
+<li>WCF service host, and</li>
+<li>WCF service client.</li>
+</ul>
+<p>WCF platform is also known as the Service Model.</p>
+<h2>Fundamental Concepts of WCF</h2>
+<h3>Message</h3>
+<p>This is a communication unit that comprises of several parts apart from the body. Message instances are sent as well as received for all types of communication between the client and the service.</p>
+<h3>Endpoint</h3>
+<p>It defines the address where a message is to be sent or received. It also specifies the communication mechanism to describe how the messages will be sent along with defining the set of messages. A structure of an endpoint comprises of the following parts:</p>
+<ul class="list">
+<li><p><b>Address</b> - Address specifies the exact location to receive the messages and is specified as a Uniform Resource Identifier (URI). It is expressed as scheme://domain[:port]/[path]. Take a look at the address mentioned below:</p>
+<pre class="prettyprint notranslate">
+
+		net.tcp://localhost:9000/ServiceA
+</pre>
+</li>
+</ul>
+<p>Here, 'net.tcp' is the scheme for the TCP protocol. The domain is 'localhost' which can be the name of a machine or a web domain, and the path is 'ServiceA'.</p>
+<ul class="list">
+<li><p><b>Binding</b> - It defines the way an endpoint communicates. It comprises of some binding elements that make the infrastructure for communication. For example, a binding states the protocols used for transport like TCP, HTTP, etc., the format of message encoding, and the protocols related to security as well as reliability.</p></li>
+<li><p><b>Contracts</b> - It is a collection of operations that specifies what functionality the endpoint exposes to the client. It generally consists of an interface name.</p></li>
+</ul>
+<h3>Hosting</h3>
+<p>Hosting from the viewpoint of WCF refers to the WCF service hosting which can be done through many available options like self-hosting, IIS hosting, and WAS hosting.</p>
+<h3>Metadata</h3>
+<p>This is a significant concept of WCF, as it facilitates easy interaction between a client application and a WCF service. Normally, metadata for a WCF service is generated automatically when enabled, and this is done by inspection of service and its endpoints.</p>
+<h3>WCF Client</h3>
+<p>A client application that gets created for exposing the service operations in the form of methods is known as a WCF client. This can be hosted by any application, even the one that does service hosting.</p>
+<h3>Channel</h3>
+<p>Channel is a medium through which a client communicates with a service. Different types of channels get stacked and are known as Channel Stacks.</p>
+<h3>SOAP</h3>
+<p>Although termed as ‘Simple Object Access Protocol’, SOAP is not a transport protocol; instead it is an XML document comprising of a header and body section.</p>
+<h2>Advantages of WCF</h2>
+<ul class="list">
+<li><p>It is interoperable with respect to other services. This is in sharp contrast to .NET Remoting in which both the client and the service must have .Net.</p></li>
+<li><p>WCF services offer enhanced reliability as well as security in comparison to ASMX (Active Server Methods) web services.</p></li>
+<li><p>Implementing the security model and binding change in WCF do not require a major change in coding. Just a few configuration changes is required to meet the constraints.</p></li>
+<li><p>WCF has built-in logging mechanism whereas in other technologies, it is essential to do the requisite coding.</p></li>
+<li><p>WCF has integrated AJAX and support for JSON (JavaScript object notation).</p></li>
+<li><p>It offers scalability and support for up-coming web service standards.</p></li>
+<li><p>It has a default security mechanism which is extremely robust.</p></li>
+</ul>
+<h1>WCF - Versus Web Service</h1>
+<p>There are some major differences that exist between WCF and a Web service which are listed below.</p>
+<ul class="list">
+<li><p><b>Attributes</b> - WCF service is defined by ServiceContract and OperationContract attributes, whereas a web service is defined by WebService and WebMethod attributes.</p></li>
+<li><p><b>Protocols</b> - WCF supports a range of protocols, i.e., HTTP, Named Pipes, TCP, and MSMQ, whereas a web service only supports HTTP protocol.</p></li>
+<li><p><b>Hosting Mechanisms</b> - Various activation mechanisms are there for WCF hosting, i.e., IIS (Internet Information Service), WAS (Windows Activation Service), Self-hosting and Windows Service, but a web service is hosted only by IIS.</p></li>
+<li><p><b>Services</b> - WCF supports a robust security, trustworthy messaging, transaction and interoperability, while a web service only supports security services.</p></li>
+<li><p><b>Serializer</b> - WCF Supports DataContract serializer by employing System.Runtime.Serialization, whereas a web service supports XML serializer by making use of System.Xml.Serialization.</p></li>
+<li><p><b>Tools</b> - ServiceMetadata tool (svcutil.exe) is used for client generation for a WCF service, while WSDL.EXE tool is used for generating the same for a web service.</p></li>
+<li><p><b>Exception Handling</b> - In WCF, unhandled exceptions are handled in a better way by making use of FaultContract. They do not return to the client like in a web service as SOAP faults.</p></li>
+<li><p><b>Hash Table</b> - It is possible to serialize a Hash Table in WCF, but this is not the case in a web service.</p></li>
+<li><p><b>Bindings</b> - WCF supports several types of bindings like BasicHttpBinding, WSDualHttpBinding, WSHttpBinding, etc., while a web service supports only SOAP or XML.</p></li>
+<li><p><b>Multithreading</b> - WCF supports multithreading by using the ServiceBehavior Class, whereas this is not supported in a web service.</p></li>
+<li><p><b>Duplex Service Operations</b> -	WCF supports duplex service operations apart from supporting one-way and request-response service operations, whereas a web service does not support duplex service operations.</p></li>
+</ul>
+<h1>WCF - Developers Tools</h1>
+<p>For developing a WCF service application, there are mainly two tools – Microsoft Visual Studio and CodePlex. Microsoft Visual Studio is a complete package of development tools, necessary for developing a large number of diverse applications like ASP.NET web applications, desktop applications, mobile applications, and many more.</p>
+<p>Microsoft Visual Studio uses the .NET framework functionality. CodePlex on the other hand is an open-source project hosting site of Microsoft that offers several free tools for WCF service application development.</p>
+<h2>Microsoft Visual Studio</h2>
+<p>There are many editions of Microsoft Visual Studio and initially it (Visual Studio 2005) was not an ardent supporter of WCF development. At present, Visual Studio 2008 is the only Microsoft IDE available for the development of WCF service applications.</p>
+<p>Nowadays, the latest version of Microsoft Visual Studio 2010 is also a preferred tool for developing WCF service application. There is also a readymade template in Visual Studio for developing WCF service application.</p>
+<p>Selection of such a template leads to addition of files for the following purposes:</p>
+<ul class="list">
+<li>Service contract</li>
+<li>Service implementation</li>
+<li>Service configuration</li>
+</ul>
+<p>Requisite attributes get added automatically and a simple "Hello World" service gets created by Microsoft Visual Studio without even writing any code.</p>
+<h2>CodePlex</h2>
+<p>CodePlex was launched by Microsoft in June 2006 and since then, it has been used by a large number of developers across the world to create .NET projects successfully. Some of the tools offered by CodePlex for developing WCF service applications are as follows:</p>
+<ul class="list">
+<li><p><b>wscf.blue</b> - This is a Microsoft Visual Studio add-in, and also "contract-first" development toolset that facilitates the defining of the WCF service operations, and generating a code skeleton accordingly. An important link for the same is : <a href="http://wscfblue.codeplex.com/." rel="nofollow" target="_blank">http://wscfblue.codeplex.com/.</a></p></li>
+<li><p><b>WCFProxyGenerator</b> - This is also a Microsoft Visual Studio add-in. The tool is used to extend the client-side generation and offer additional error handling. For having more information regarding this particular development tool, visit <a href="http://wcfproxygenerator.codeplex.com./" rel="nofollow" target="_blank">http://wcfproxygenerator.codeplex.com</a></p></li>
+<li><p><b>WCFMock</b> - Testing of WCF service can be a complicating task and this development tool offers a convenient solution for the unit testing of WCF services by its useful classes. For more information regarding this tool, visit <a href="http://wcfmock.codeplex.com/" rel="nofollow" target="_blank">http://wcfmock.codeplex.com/</a></p></li>
+</ul>
+<p>Another free tool for the development of WCF service applications in an easy manner is WCFStorm. Its LITE version offers many striking features for dynamically invoking and testing WCF services, editing the service binding, modifying WCF URL endpoint, etc.</p>
+<h1>WCF - Architecture</h1>
+<p>WCF has a layered architecture that offers ample support for developing various distributed applications. The architecture is explained below in detail.</p>
+<img src="images/wcf_architecture.jpg" alt="WCF Architecture" />
+<h2>Contracts</h2>
+<p>The contracts layer is just next to the application layer and contains information similar to that of a real-world contract that specifies the operation of a service and the kind of accessible information it will make. Contracts are basically of four types discussed below in brief:</p>
+<ul class="list">
+<li><p><b>Service contract</b> - This contract provides information to the client as well as to the outer world about the offerings of the endpoint, and the protocols to be used in the communication process.</p></li>
+<li><p><b>Data contract</b> - The data exchanged by a service is defined by a data contract. Both the client and the service has to be in agreement with the data contract.</p></li>
+<li><p><b>Message contract</b> -	A data contract is controlled by a message contract. It primarily does the customization of the type formatting of the SOAP message parameters. Here, it should be mentioned that WCF employs SOAP format for the purpose of communication. SOAP stands for Simple Object Access Protocol.</p></li>
+<li><p><b>Policy and Binding</b> - There are certain pre-conditions for communication with a service, and such conditions are defined by policy and binding contract. A client needs to follow this contract.</p></li>
+</ul>
+<h2>Service Runtime</h2>
+<p>The service runtime layer is just below the contracts layer. It specifies the various service behaviors that occur during runtime. There are many types of behaviors that can undergo configuration and come under the service runtime.</p>
+<ul class="list">
+<li><p><b>Throttling Behavior</b> - Manages the number of messages processed.</p></li>
+<li><p><b>Error Behavior</b> - Defines the result of any internal service error occurrence.</p></li>
+<li><p><b>Metadata Behavior</b> - Specifies the availability of metadata to the outside world.</p></li>
+<li><p><b>Instance Behavior</b> - Defines the number of instances that needs to be created to make them available for the client.</p></li>
+<li><p><b>Transaction Behavior</b> - Enables a change in transaction state in case of any failure.</p></li>
+<li><p><b>Dispatch Behavior</b> - Controls the way by which a message gets processed by the infrastructure of WCF.</p></li>
+<li><p><b>Concurrency Behavior</b> - Controls the functions that run parallel during a client-server communication.</p></li>
+<li><p><b>Parameter Filtering</b> - Features the process of validation of parameters to a method before it gets invoked.</p></li>
+</ul>
+<h2>Messaging</h2>
+<p>This layer, composed of several channels, mainly deals with the message content to be communicated between two endpoints. A set of channels form a channel stack and the two major types of channels that comprise the channel stack are the following ones:</p>
+<ul class="list">
+<li><p><b>Transport Channels</b> - These channels are present at the bottom of a stack and are accountable for sending and receiving messages using transport protocols like HTTP, TCP, Peer-to-Peer, Named Pipes, and MSMQ.</p></li>
+<li><p><b>Protocol Channels</b> - Present at the top of a stack, these channels also known as layered channels, implement wire-level protocols by modifying messages.</p></li>
+</ul>
+<h2>Activation and Hosting</h2>
+<p>The last layer of WCF architecture is the place where services are actually hosted or can be executed for easy access by the client. This is done by various mechanisms discussed below in brief.</p>
+<ul class="list">
+<li><p><b>IIS</b> - IIS stands for Internet Information Service. It offers a myriad of advantages using the HTTP protocol by a service. Here, it is not required to have the host code for activating the service code; instead, the service code gets activated automatically.</p></li>
+<li><p><b>Windows Activation Service</b> - This is popularly known as WAS and comes with IIS 7.0. Both HTTP and non-HTTP based communication is possible here by using TCP or Namedpipe protocols.</p></li>
+<li><p><b>Self-hosting</b>This is a mechanism by which a WCF service gets self-hosted as a console application. This mechanism offers amazing flexibility in terms of choosing the desired protocols and setting own addressing scheme.</p></li>
+<li><p><b>Windows Service</b> - Hosting a WCF service with this mechanism is advantageous, as the services then remain activated and accessible to the client due to no runtime activation.</p></li>
+</ul>
+<h1>WCF - Creating wcf service</h1>
+<p>Creating a WCF service is a simple task using Microsoft Visual Studio 2012. Given below is the step-by-step method for creating a WCF service along with all the requisite coding, to understand the concept in a better way.</p>
+<ul class="list">
+<li>Launch Visual Studio 2012.</li>
+<li>Click on new project, then in Visual C# tab, select WCF option.</li>
+</ul>
+<img src="images/wcf_creating_services_1.jpg" alt="WCF Creating Service1" />
+<p>A WCF service is created that performs basic arithmetic operations like addition, subtraction, multiplication, and division. The main code is in two different files – one interface and one class.</p> 
+<p>A WCF contains one or more interfaces and its implemented classes.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+
+namespace WcfServiceLibrary1
+{
+   // NOTE: You can use the "Rename" command on the "Refactor" menu to 
+   // change the interface name "IService1" in both code and config file // together.
+
+   [ServiceContract]
+   Public interface IService1
+   {
+      [OperationContract]
+      int sum(int num1, int num2);
+
+      [OperationContract]
+      int Subtract(int num1, int num2);
+
+      [OperationContract]
+      int Multiply(int num1, int num2);
+
+      [OperationContract]
+      int Divide(int num1, int num2);
+   }
+
+   // Use a data contract as illustrated in the sample below to add 
+   // composite types to service operations.
+
+   [DataContract]
+   Public class CompositeType
+   {
+      Bool boolValue = true;
+      String stringValue = "Hello ";
+
+      [DataMember]
+      Public bool BoolValue
+      {
+         get { return boolValue; }
+         set { boolValue = value; }
+      }
+
+      [DataMember]
+      
+      Public string StringValue
+      {
+        get { return stringValue; }
+        set { stringValue = value; }
+      }
+   }
+}
+
+The code behind its class is given below.
+
+using System;
+usingSystem.Collections.Generic;
+usingSystem.Linq;
+usingSystem.Runtime.Serialization;
+usingSystem.ServiceModel;
+usingSystem.Text;
+
+namespace WcfServiceLibrary1
+{
+   // NOTE: You can use the "Rename" command on the "Refactor" menu to // change the class name "Service1" in both code and config file 
+   // together.
+
+   publicclassService1 :IService1
+   {
+      /// This Function Return summation of two integer numbers
+
+      publicint sum(int num1, int num2)
+      {
+         return num1 + num2;
+      }
+      // This function returns subtraction of two numbers. 
+      // If num1 is smaller than number two then this function returns 0
+
+      publicint Subtract(int num1, int num2)
+      {
+         if (num1 > num2)
+         {
+            return num1 - num2;
+         }
+         else
+         {
+            return 0;
+         }
+      }
+      // This function returns multiplication of two integer numbers.
+
+      publicint Multiply(int num1, int num2)
+      {
+         return num1 * num2;
+      }
+      // This function returns integer value of two integer number. 
+      // If num2 is 0 then this function returns 1.
+
+      publicintDivide(int num1, int num2)
+      {
+         if (num2 != 0)
+         {
+            return (num1 / num2);
+         }
+         else
+         {
+            return 1;
+         }
+      }
+   }
+}
+</pre>
+<p>To run this service, click the Start button in Visual Studio.</p>
+<img src="images/wcf_creating_services_4.jpg" alt="Wcf Creating Service4" />
+<p>While we run this service, the following screen appears.</p>
+<img src="images/wcf_creating_services_5.jpg" alt="Wcf Creating Service5" />
+<p>On clicking the sum method, the following page opens. Here, you can enter any two integer numbers and click on the Invoke button. The service will return the summation of those two numbers.</p>
+<img src="images/wcf_creating_services_6.jpg" alt="Wcf Creating Service6" />
+<img src="images/wcf_creating_services_7.jpg" alt="Wcf Creating Service7" />
+<p>Like summation, we can perform all other arithmetic operations which are listed in the menu. And here are the snaps for them.</p>  
+<p>The following page appears on clicking the Subtract method. Enter the integer numbers, click the Invoke button, and get the output as shown here:</p>
+<img src="images/wcf_creating_services_8.jpg" alt="Wcf Creating Service8" />
+<p>The following page appears on clicking the Multiply method. Enter the integer numbers, click the Invoke button, and get the output as shown here:</p>
+<img src="images/wcf_creating_services_9.jpg" alt="Wcf Creating Service9" />
+<p>The following page appears on clicking the Divide method. Enter the integer numbers, click the Invoke button, and get the output as shown here:</p>
+<img src="images/wcf_creating_services_10.jpg" alt="Wcf Creating Service10" />
+<p>Once the service is called, you can switch between them directly from here.</p>
+<img src="images/wcf_creating_services_11.jpg" alt="Wcf Creating Service11" />
+<h1>WCF - Hosting wcf service</h1>
+<p>After creating a WCF service, the next step is to host it so that the client applications can consume it. This is known as WCF service hosting. A WCF service can be hosted by using any of the four ways given below:</p>
+<ul class="list">
+<li><p><b>IIS Hosting</b> - IIS stands for Internet Information Services. Its working model is similar to that of ASP.NET while hosting a WCF service. The best feature of IIS hosting is that the service activation is processed automatically. IIS hosting also offers process health monitoring, idle shutdown, process recycling, and many more features to facilitate a WCF service hosting.</p></li>
+<li><p><b>Self-Hosting</b> - When a WCF service is hosted in a managed application, it is known as self-hosting. It requires a developer to write the requisite coding for ServiceHost initialization. In self-hosting, a WCF service can be hosted in a variety of applications like Console application, Windows form, etc.</p></li>
+<li><p><b>WAS Hosting</b> - Hosting a WCF service in Windows Activation Service (WAS) is most advantageous because of its features such as process recycling, idle time management, common configuration system, and support for HTTP, TCP, etc.</p></li>
+<li><p><b>Windows Service Hosting</b> - For local system clients, it is best to host WCF service as a window service and this is known as Window Service Hosting. All the versions of Windows support this type of hosting and here, the Service Control Manager can control the process lifecycle of the WCF service.</p></li>
+</ul>
+<h1>WCF - IIS Hosting</h1>
+<p>Hosting a WCF service in IIS (Internet Information Services) is a step-by-step process. IIS Hosting is illustrated below in detail with the desired coding as well as screenshots to understand the process.</p>  
+<p><b>Step 1</b> : Start Visual Studio 2012 and click File -> New -> Web site. Select “WCF Service” and Location as http. This will host the service in IIS. Click OK.</p>
+<img src="images/wcf_hosting_services_IIS_1.jpg" alt="Wcf Hosting Services IIS 1" />
+<p><b>Step 2</b> : The code behind the interface is given below.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+// NOTE: You can use the "Rename" command on the "Refactor" menu to 
+// change the interface name "IService" in both code and config file 
+// together.
+[ServiceContract]
+Public interface IService
+{
+   [OperationContract]
+   String GetData(int value);
+
+   [OperationContract]
+   CompositeType GetDataUsingDataContract(CompositeType composite);
+
+   // TODO: Add your service operations here
+}
+
+// Use a data contract as illustrated in the sample below to add 
+// composite types to service operations.
+
+[DataContract]
+Public class CompositeType
+{
+   Bool boolValue = true;
+   String stringValue = "Hello ";
+
+   [DataMember]
+   Public bool BoolValue
+   {
+      get { return boolValue; }
+      set { boolValue = value; }
+   }
+
+   [DataMember]
+   Public string StringValue
+   {
+      get { return stringValue; }
+      set { stringValue = value; }
+   }
+}
+</pre>
+<p><b>Step 3</b> : The code behind the class file is given below.</p>
+<pre class="prettyprint notranslate">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+// NOTE: You can use the "Rename" command on the "Refactor" menu to 
+// change the class name "Service" in code, svc and config file 
+// together.
+
+Public class Service : IService
+{
+   Public string GetData(int value)
+   {
+      Return string.Format("You entered: {0}", value);
+   }
+
+   Public CompositeType GetDataUsingDataContract(CompositeType composite)
+   {
+      if (composite == null)
+      {
+         thrownewArgumentNullException("composite");
+      }
+      if (composite.BoolValue)
+      {
+         composite.StringValue += "Suffix";
+      }
+      return composite;
+   }
+}
+</pre>
+<p><b>Step 4</b> : Service file (.svc) contains the name of the service and the code behind the file name. This file is used to know about the service.</p>
+<img src="images/wcf_hosting_services_IIS_4.jpg" alt="Wcf Hosting Services IIS 4" />
+<p>&lt;%@ ServiceHost Language="C#" Debug="true" Service="Service" CodeBehind="~/App_Code/Service.cs" %&gt;</p>
+<p><b>Step 5</b> : Server-side configurations are mentioned in the config file. Here, there is a mention of only one end-point which is configured to 'wsHttpBinding'; we can also have multiple endpoints with different bindings. Since we are going to host in IIS, we have to use only http binding.</p>
+<pre class="prettyprint notranslate">
+
+&lt;?xml version="1.0"?&gt;
+&lt;configuration&gt;
+   &lt;!-- 
+      Note: As an alternative to hand editing this file you can use the 
+      web admin tool to configure settings for your application. Use
+      the Website-&gt;Asp.Net Configuration option in Visual Studio.
+      A full list of settings and comments can be found in 
+      machine.config.comments usually located in 
+      \Windows\Microsoft.Net\Framework\vx.x\Config 
+   --&gt;
+   &lt;configSections&gt;
+      &lt;sectionGroup name="system.web.extensions"  
+      ype="System.Web.Configuration.SystemWebExtensionsSectionGroup, 
+      System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+      PublicKeyToken=31BF3856AD364E35"&gt;
+      
+      &lt;sectionGroup name="scripting" 
+      type="System.Web.Configuration.ScriptingSectionGroup, 
+      System.Web.Extensions, Version=3.5.0.0, Culture=neutral,     
+      PublicKeyToken=31BF3856AD364E35"&gt;
+      
+         &lt;section name="scriptResourceHandler" 
+         type="System.Web.Configuration.ScriptingScriptResourceHandlerSection, 
+         System.Web.Extensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=31BF3856AD364E35" 
+         requirePermission="false" 
+         allowDefinition="MachineToApplication"/&gt;
+      
+      &lt;sectionGroup name="webServices" 
+      type="System.Web.Configuration.ScriptingWebServicesSectionGroup, 
+      System.Web.Extensions, Version=3.5.0.0, 
+      Culture=neutral, PublicKeyToken=31BF3856AD364E35"&gt;
+   
+	      &lt;section name="jsonSerialization" 
+         type="System.Web.Configuration.ScriptingJsonSerializationSection, 
+         System.Web.Extensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=31BF3856AD364E35" 
+         requirePermission="false" allowDefinition="Everywhere"/&gt;
+      
+         &lt;section name="profileService" 
+         type="System.Web.Configuration.ScriptingProfileServiceSection, 
+         System.Web.Extensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=31BF3856AD364E35" 
+         requirePermission="false" 
+         allowDefinition="MachineToApplication"/&gt;
+      
+         &lt;section name="authenticationService" 
+         type="System.Web.Configuration.ScriptingAuthenticationServiceSection, 
+         System.Web.Extensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=31BF3856AD364E35" 
+         requirePermission="false" 
+         allowDefinition="MachineToApplication"/&gt;
+      
+         &lt;section name="roleService" 
+         type="System.Web.Configuration.ScriptingRoleServiceSection, 
+         System.Web.Extensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=31BF3856AD364E35" 
+         requirePermission="false" 
+         allowDefinition="MachineToApplication"/&gt;
+      
+      &lt;/sectionGroup&gt;
+      &lt;/sectionGroup&gt;
+      &lt;/sectionGroup&gt;
+   &lt;/configSections&gt;
+   
+&lt;appSettings/&gt;
+   &lt;connectionStrings/&gt;
+   &lt;system.web&gt;
+      &lt;!-- 
+         Set compilation debug="true" to insert debugging 
+         symbols into the compiled page. Because this 
+         affects performance, set this value to true only 
+         during development.
+      --&gt;
+   &lt;compilation debug="true"&gt;
+      &lt;assemblies&gt; 
+         &lt;add assembly="System.Core, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=B77A5C561934E089"/&gt;
+         &lt;add assembly="System.Web.Extensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add assembly="System.Data.DataSetExtensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=B77A5C561934E089"/&gt;
+         &lt;add assembly="System.Web.Extensions, Version=3.5.0.0, 
+         Culture=neutral, PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add assembly="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=B77A5C561934E089"/&gt;
+      &lt;/assemblies&gt;
+   &lt;/compilation&gt;
+      &lt;!--
+         The &lt;authentication&gt; section enables configuration 
+         of the security authentication mode used by 
+         ASP.NET to identify an incoming user. 
+      --&gt;
+   &lt;authentication mode="Windows"/&gt;
+      &lt;!--
+         The &lt;customErrors&gt; section enables configuration 
+         of what to do if/when an unhandled error occurs 
+         during the execution of a request. Specifically, 
+         it enables developers to configure html error pages 
+         to be displayed in place of a error stack trace.
+
+         &lt;customErrors mode="RemoteOnly" 
+         defaultRedirect="GenericErrorPage.htm"&gt;
+            &lt;error statusCode="403" redirect="NoAccess.htm" /&gt;
+            &lt;error statusCode="404" redirect="FileNotFound.htm" /&gt;
+         &lt;/customErrors&gt;
+      --&gt;
+      &lt;pages&gt;
+         &lt;controls&gt;
+            &lt;add tagPrefix="asp" namespace="System.Web.UI" 
+            assembly="System.Web.Extensions, Version=3.5.0.0, 
+            Culture=neutral, PublicKeyToken=31BF3856AD364E35"/&gt;
+            &lt;add tagPrefix="asp" namespace="System.Web.UI.WebControls" 
+            assembly="System.Web.Extensions, Version=3.5.0.0, 
+            Culture=neutral, PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;/controls&gt;
+      &lt;/pages&gt;
+      &lt;httpHandlers&gt;
+         &lt;remove verb="*" path="*.asmx"/&gt;
+         &lt;add verb="*" path="*.asmx" validate="false" 
+         type="System.Web.Script.Services.ScriptHandlerFactory, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add verb="*" path="*_AppService.axd" validate="false" 
+         type="System.Web.Script.Services.ScriptHandlerFactory, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral,
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add verb="GET,HEAD" path="ScriptResource.axd" 
+         type="System.Web.Handlers.ScriptResourceHandler, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35" validate="false"/&gt;
+      &lt;/httpHandlers&gt;
+      &lt;httpModules&gt;
+         &lt;add name="ScriptModule" 
+         type="System.Web.Handlers.ScriptModule, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+      &lt;/httpModules&gt;
+   &lt;/system.web&gt;
+   &lt;system.codedom&gt;
+      &lt;compilers&gt;
+         &lt;compiler language="c#;cs;csharp" extension=".cs" 
+         warningLevel="4" type="Microsoft.CSharp.CSharpCodeProvider, 
+         System, Version=2.0.0.0, Culture=neutral, 
+         PublicKeyToken=b77a5c561934e089"&gt;
+         &lt;providerOption name="CompilerVersion" value="v3.5"/&gt;
+         &lt;providerOption name="WarnAsError" value="false"/&gt;
+      &lt;/compiler&gt;
+        
+      &lt;compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" 
+      warningLevel="4" type="Microsoft.VisualBasic.VBCodeProvider, 
+      System, Version=2.0.0.0, Culture=neutral, 
+      PublicKeyToken=b77a5c561934e089"&gt;
+            &lt;providerOption name="CompilerVersion" value="v3.5"/&gt;
+            &lt;providerOption name="OptionInfer" value="true"/&gt;
+            &lt;providerOption name="WarnAsError" value="false"/&gt;
+      &lt;/compiler&gt;
+      &lt;/compilers&gt;
+   &lt;/system.codedom&gt;
+   &lt;!-- 
+      The system.webServer section is required for running ASP.NET AJAX 
+      under Internet Information Services 7.0.  
+      It is not necessary for previous version of IIS.
+   --&gt;
+   &lt;system.webServer&gt;
+      &lt;validation validateIntegratedModeConfiguration="false"/&gt;
+      &lt;modules&gt;
+         &lt;remove name="ScriptModule"/&gt;
+         &lt;add name="ScriptModule" preCondition="managedHandler" 
+         type="System.Web.Handlers.ScriptModule, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+      &lt;/modules&gt;
+      &lt;handlers&gt;
+         &lt;remove name="WebServiceHandlerFactory-Integrated"/&gt;
+         &lt;remove name="ScriptHandlerFactory"/&gt;
+         &lt;remove name="ScriptHandlerFactoryAppServices"/&gt;
+         &lt;remove name="ScriptResource"/&gt;
+         &lt;add name="ScriptHandlerFactory" verb="*" path="*.asmx" 
+         preCondition="integratedMode" 
+         type="System.Web.Script.Services.ScriptHandlerFactory, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;    
+         &lt;add name="ScriptHandlerFactoryAppServices" 
+         verb="*" path="*_AppService.axd" preCondition="integratedMode" 
+         type="System.Web.Script.Services.ScriptHandlerFactory, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt'
+         &lt;add name="ScriptResource" preCondition="integratedMode" 
+         verb="GET,HEAD" path="ScriptResource.axd" 
+         type="System.Web.Handlers.ScriptResourceHandler, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+      &lt;/handlers&gt;
+      
+      &lt;!--To browse web app root directory during debugging, 
+      set the value below to true. Set to false before deployment to 
+      avoid disclosing web app folder information.--&gt;
+      
+   &lt;directoryBrowse enabled="true"/&gt;  &lt;/system.webServer&gt;
+   &lt;runtime&gt;
+      &lt;assemblyBinding appliesTo="v2.0.05727" xmlns="urn:schemas-microsoft-com:asm.v1"&gt;
+         &lt;dependentAssembly&gt;
+         &lt;assemblyIdentity name="System.Web.Extensions" 
+         publicKeyToken="31bf3856ad364e35"/&gt;
+         &lt;bindingRedirect oldVersion="1.0.0.0-1.1.0.0" 
+         newVersion="3.5.0.0"/&gt;
+         &lt;/dependentAssembly&gt;
+         &lt;dependentAssembly&gt;
+            &lt;assemblyIdentity name="System.Web.Extensions.Design" 
+            publicKeyToken="31bf3856ad364e35"/&gt;
+         &lt;bindingRedirect oldVersion="1.0.0.0-1.1.0.0" 
+         newVersion="3.5.0.0"/&gt;
+         &lt;/dependentAssembly&gt;
+      &lt;/assemblyBinding&gt;
+   &lt;/runtime&gt;
+   &lt;system.serviceModel&gt;
+      &lt;services&gt;
+         &lt;service name="Service" behaviorConfiguration="ServiceBehavior"&gt;
+         &lt;!-- Service Endpoints --&gt;
+         &lt;endpoint address="" binding="basicHttpBinding" contract="IService"&gt;
+         &lt;!-- 
+            Upon deployment, the following identity element should be removed or replaced 
+            to reflect the identity under which the deployed service runs. If removed, 
+            WCF will infer an appropriate identity automatically.
+         --&gt;
+         &lt;identity&gt;
+            &lt;dns value="localhost"/&gt;
+         &lt;/identity&gt;
+         &lt;/endpoint&gt;
+         &lt;endpoint address="mex" binding="mexHttpBinding" contract="IMetadataExchange"/&gt;
+        &lt;/service&gt;
+      &lt;/services&gt;
+      &lt;behaviors&gt;
+         &lt;serviceBehaviors&gt;
+            &lt;behavior name="ServiceBehavior"&gt;
+               &lt;!-- To avoid disclosing metadata information, set the value below 
+               to false before deployment --&gt;
+               &lt;serviceMetadata httpGetEnabled="true"/&gt;
+               &lt;!-- To receive exception details in faults for debugging purposes, 
+               set the value below to true. Set to false before deployment t
+					avoid 
+               disclosing exception information --&gt;
+               &lt;serviceDebug includeExceptionDetailInFaults="false"/&gt;
+            &lt;/behavior&gt;
+         &lt;/serviceBehaviors&gt;
+      &lt;/behaviors&gt;
+   &lt;/system.serviceModel&gt;
+&lt;/configuration&gt;
+</pre>
+<p><b>Step 6:</b></p>
+<ul class="list">
+<li><p>You need to mention the service file name, along with the Address mentioned in the config file. The screenshot of IIS is given here.</p></li>
+<li><p>Click Start -> run -> inetmgr which will open the following window.</p></li>
+</ul>
+<img src="images/wcf_hosting_services_IIS_6.jpg" alt="Wcf Hosting Service IIS 6" />
+<p><b>Step 7</b> : Run the application which will produce the following screen.</p>
+<img src="images/wcf_hosting_services_IIS_7.jpg" alt="Wcf Hosting Service IIS 7" />
+<h1>WCF - Self Hosting</h1>
+<p>Here, the WCF service is hosted in a console application. Given below is the process with suitable steps in a sequential manner that explains the entire process.</p>  
+<p><b>Step 1</b> : First, let's create the Service contract and its implementation. Create a console application and name it as MyCalculatorService. This is a simple service to return the addition of two numbers.</p>
+<img src="images/wcf_hosting_services_Self_1.jpg" alt="Wcf Hosting Services Self 1" />
+<p><b>Step 2</b> : Now, right click on the References in the Solution Explorer and click Add References. The following window opens; add System.ServiceModel reference to the project.</p>
+<img src="images/wcf_hosting_services_Self_2.jpg" alt="Wcf Hosting Services Self 2" />
+<p><b>Step 3</b> : Create an ISimpleCalculator interface, Add ServiceContract and OperationContract attribute to the class and function as shown below. You will know more about these contracts in the later session. These contracts will expose the method to the outside world for using this service.</p>  
+<p><b>Step 4</b> : The code behind this file is as follows:</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ServiceModel;
+
+namespace MyCalculatorWCFService
+{
+   [ServiceContract()]
+   Public interface ISimpleCalculator
+   {
+      [OperationContract()]
+      int Add(int num1, int num2);
+   }
+}
+</pre>
+<p><b>Step 5</b> : MyCalculatorService is the implementation class for IMyCalculatorService interface as shown below.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MyCalculatorWCFService
+{
+   Class SimpleCalculator : ISimpleCalculator
+   {
+      Public int Add(int num1, int num2)
+      {
+         return num1 + num2;
+      }
+   }
+}
+</pre>
+<p><b>Step 6</b> : Now, we are ready with the service. Let's go for implementing the hosting process. Create a new console application and name it as 'MyCalculatorWCFServiceHost'.</p>
+<img src="images/wcf_hosting_services_Self_5.jpg" alt="Wcf Hosting Services Self 5" />
+<p><b>Step 7</b> : Add the reference of system.servicemodel and the project MyCalculatorWCFService.</p>
+<img src="images/wcf_hosting_services_Self_6.jpg" alt="Wcf Hosting Services 6" />
+<p>The code behind this is as follows:</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MyCalculatorWCFService;
+using System.ServiceModel;
+using System.ServiceModel.Description;
+
+namespace MyCalculatorWCFServiceHost
+{
+   class Program
+   {
+      static void Main(string[] args)
+      {
+         //Create a URI to serve as the base address
+         UrihttpUrl = newUri("http://localhost:8090/MyCalculatorWCFService/SimpleCalculator");
+         
+         //Create ServiceHost
+         ServiceHost host = newServiceHost(typeof(MyCalculatorWCFService.ISimpleCalculator), httpUrl);
+         
+         //Add a service endpoint
+          host.AddServiceEndpoint(typeof(MyCalculatorWCFService.ISimpleCal  culator), newWSHttpBinding(), "");
+         
+         //Enable metadata exchange
+         ServiceMetadataBehaviorsmb = newServiceMetadataBehavior();
+         smb.HttpGetEnabled = true;
+         host.Description.Behaviors.Add(smb);
+
+         //Start the Service
+         host.Open();
+         Console.WriteLine("Service is host at " +DateTime.Now.ToString());
+         Console.WriteLine("Host is running... Press  key to stop");
+         Console.ReadLine();
+      }
+   }
+}
+</pre>
+<img src="images/wcf_hosting_services_Self_8.jpg" alt="Wcf Hosting Services Self 8" />
+<h1>WCF - WAS Hosting</h1>
+<p>To understand the concept of WAS hosting, we need to comprehend how a system is configured and how a service contract is created, enabling different binding to the hosted service.</p>   
+<p>First of all, enable WCF for non-protocols. Before we start creating the service, we need to configure the system to support WAS. Following are the steps to configure WAS:</p>
+<ul class="list">
+<li><p>Click Start -> Control Panel -> Programs and Features, and click "Turn Windows Components On or Off" in the left pane.</p></li>
+<li><p>Expand "Microsoft .Net Framework 3.0" and enable "Windows Communication Foundation HTTP Activation" and "Windows Communication Foundation Non- HTTP Activation".</p></li>
+<li><p>Next, we need to add Binding to the default website. As an example, we will bind the default website to the TCP protocol. Go to Start menu -> Programs ->Accessories. Right click on the "Command Prompt", and select "Run as administrator" from the context menu.</p></li>
+<li><p>Execute the following command:</p></li>
+</ul>
+<p>C:\Windows\system32\inetsrv> appcmd.exe set site "Default Web Site" -+bindings. [protocol='net.tcp',bindingInformation='808:*']</p>
+<p>This command adds the net.tcp site binding to the default website by modifying the applicationHost.config file located in the "C:\Windows\system32\inetsrv\config" directory. Similarly, we can add different protocols to the default website.</p>
+<h2>Create WAS Hosted Service</h2>
+<p><b>Step 1</b> : Open Visual Studio 2008 and click New -> WebSite and select WCF Service from the template and Location as HTTP, as shown below:</p>
+<img src="images/wcf_hosting_services_WAS_1.jpg" alt="Wcf Hosting Services WAS 1" />
+<p><b>Step 2</b> : Create the Contract by creating an interface IMathService. Add the ServiceContract attribute to the interface and the OperationContract attribute to the method declaration.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+
+// NOTE: You can use the "Rename" command on the "Refactor" menu to 
+// change the interface name "IService" in both code and config file 
+// together.
+
+[ServiceContract]
+
+Public interface IMathService
+{
+  [OperationContract]
+  int Add(int num1, int num2);
+
+  [OperationContract]
+  int Subtract(int num1, int num2);
+} 
+</pre>
+<p><b>Step 3</b> : The implementation of the IMathService interface is shown below:</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+// NOTE: You can use the "Rename" command on the "Refactor" menu to 
+// change the class name "Service" in code, svc and config file 
+// together.
+
+Public class MathService : IMathService
+{
+  Public int Add(int num1, int num2)
+  {
+     return num1 + num2;
+  }
+
+  Public int Subtract(int num1, int num2)
+  {
+     return num1 - num2;
+  }
+}
+</pre>
+<p><b>Step 4</b> : The Service file is shown below.</p>
+<img src="images/wcf_hosting_services_WAS_2.jpg" alt="Wcf Hosting Services WAS 2" />
+<p>&lt;%@ServiceHostLanguage="C#"Debug="true"Service=
+"MathService"CodeBehind="~/App_Code/MathService.cs"%&gt;</p>
+<p><b>Step 5</b> : In the web.Config file, create endpoint with 'netTcpBinding' binding and the service metadata will be published using the Metadata Exchange point. So create the Metadata Exchange end-point with the address as 'mex' and the binding as 'mexTcpBinding'. Without publishing the service metadata, we cannot create the proxy using the net.tcp address (e.g. svcutil.exe net.tcp://localhost/WASHostedService/MathService.svc).</p>
+<pre class="prettyprint notranslate">
+&lt;?xml version="1.0" ?&gt;
+&lt;configuration&gt;
+   &lt;!--
+      Note: As an alternative to hand editing this file you can use the 
+      web admin tool to configure settings for your application. Use
+      the Website-&gt;Asp.Net Configuration option in Visual Studio.
+      A full list of settings and comments can be found in 
+      machine.config.comments usually located in 
+      \Windows\Microsoft.Net\Framework\vx.x\Config 
+   --&gt;
+   &lt;configSections&gt;
+      &lt;sectionGroup name="system.web.extensions" 
+      type="System.Web.Configuration.SystemWebExtensionsSectionGroup, 
+      System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+      PublicKeyToken=31BF3856AD364E35"&gt;
+		
+      &lt;sectionGroup name="scripting" 
+      type="System.Web.Configuration.ScriptingSectionGroup, 
+      System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+      PublicKeyToken=31BF3856AD364E35"&gt;
+		
+         &lt;section name="scriptResourceHandler" 
+         type="System.Web.Configuration.ScriptingScriptResourceHandlerSection, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35" 
+         requirePermission="false" 
+         allowDefinition="MachineToApplication"/&gt;
+			
+      &lt;sectionGroup name="webServices" 
+      type="System.Web.Configuration.ScriptingWebServicesSectionGroup, 
+      System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+      PublicKeyToken=31BF3856AD364E35"&gt;
+		
+         &lt;section name="jsonSerialization" 
+         type="System.Web.Configuration.ScriptingJsonSerializationSection, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35" requirePermission="false" 
+         allowDefinition="Everywhere"/&gt;
+			
+         &lt;section name="profileService" 		     
+         type="System.Web.Configuration.ScriptingProfileServiceSection, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35" requirePermission="false" 
+         allowDefinition="MachineToApplication"/&gt;
+			
+         &lt;section name="authenticationService" 			     
+         type="System.Web.Configuration.ScriptingAuthenticationServiceSection, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35" requirePermission="false" 
+         allowDefinition="MachineToApplication"/&gt;
+			
+         &lt;section name="roleService"	
+         type="System.Web.Configuration.ScriptingRoleServiceSection, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35" requirePermission="false"
+         allowDefinition="MachineToApplication"/&gt;
+			
+      &lt;/sectionGroup&gt;
+      &lt;/sectionGroup&gt;
+      &lt;/sectionGroup&gt;
+   &lt;/configSections&gt;
+   &lt;appSettings/&gt;
+   &lt;connectionStrings/&gt;
+   &lt;system.web&gt;
+      &lt;!--
+         Set compilation debug="true" to insert debugging 
+         symbols into the compiled page. Because this 
+         affects performance, set this value to true only 
+         during development.
+      --&gt;
+      &lt;compilation debug="true"&gt;
+         &lt;assemblies&gt;
+            &lt;add assembly="System.Core, Version=3.5.0.0, 
+            Culture=neutral, PublicKeyToken=B77A5C561934E089"/&gt;
+            &lt;add assembly="System.Web.Extensions, Version=3.5.0.0, 
+            Culture=neutral, PublicKeyToken=31BF3856AD364E35"/&gt;
+            &lt;add assembly="System.Data.DataSetExtensions, 
+            Version=3.5.0.0, Culture=neutral,                  
+            PublicKeyToken=B77A5C561934E089"/&gt;
+            &lt;add assembly="System.Web.Extensions, Version=3.5.0.0, 
+            Culture=neutral, PublicKeyToken=31BF3856AD364E35"/&gt;
+            &lt;add assembly="System.Xml.Linq, 
+            Version=3.5.0.0, Culture=neutral, 
+            PublicKeyToken=B77A5C561934E089"/&gt;
+         &lt;/assemblies&gt;
+      &lt;/compilation&gt;
+      &lt;!--
+         The &lt;authentication&gt; section enables configuration          
+         of the security authentication mode used by 
+         ASP.NET to identify an incoming user. 
+      --&gt;
+      &lt;authentication mode="Windows"/&gt;
+      &lt;!--
+         The &lt;customErrors&gt; section enables configuration 
+         of what to do if/when an unhandled error occurs 
+         during the execution of a request. Specifically, 
+         it enables developers to configure html error pages 
+         to be displayed in place of a error stack trace.
+         &lt;customErrors mode="RemoteOnly" defaultRedirect="GenericErrorPage.htm"&gt;
+         &lt;error statusCode="403" redirect="NoAccess.htm" /&gt;
+         &lt;error statusCode="404" redirect="FileNotFound.htm" /&gt;
+         &lt;/customErrors&gt;
+      --&gt;
+      &lt;pages&gt;
+         &lt;controls&gt;
+            &lt;add tagPrefix="asp" namespace="System.Web.UI" 
+            assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+            PublicKeyToken=31BF3856AD364E35"/&gt;
+            &lt;add tagPrefix="asp" namespace="System.Web.UI.WebControls"
+               assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+               PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;/controls&gt;
+      &lt;/pages&gt;
+      &lt;httpHandlers&gt;
+         &lt;remove verb="*" path="*.asmx"/&gt;
+         &lt;add verb="*" path="*.asmx" validate="false"         
+         type="System.Web.Script.Services.ScriptHandlerFactory, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add verb="*" path="*_AppService.axd" validate="false" 
+         type="System.Web.Script.Services.ScriptHandlerFactory,System.Web.Extensions, 
+         Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add verb="GET,HEAD" path="ScriptResource.axd"        
+         type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, 
+         Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35" validate="false"/&gt;
+      &lt;/httpHandlers&gt;
+      &lt;httpModules&gt;
+         &lt;add name="ScriptModule" 
+         type="System.Web.Handlers.ScriptModule, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+      &lt;/httpModules&gt;
+   &lt;/system.web&gt;
+   &lt;system.codedom&gt;
+      &lt;compilers&gt;
+         &lt;compiler language="c#;cs;csharp" extension=".cs" warningLevel="4" 
+         type="Microsoft.CSharp.CSharpCodeProvider, System, 
+         Version=2.0.0.0, Culture=neutral,                 
+         PublicKeyToken=b77a5c561934e089"&gt;
+         &lt;providerOption name="CompilerVersion" value="v3.5"/&gt;
+         &lt;providerOption name="WarnAsError" value="false"/&gt;
+         &lt;/compiler&gt;
+         &lt;compiler language="vb;vbs;visualbasic;vbscript" 
+         extension=".vb" warningLevel="4" 
+         type="Microsoft.VisualBasic.VBCodeProvider, System, 
+         Version=2.0.0.0, Culture=neutral,                  
+         PublicKeyToken=b77a5c561934e089"&gt;
+         &lt;providerOption name="CompilerVersion" value="v3.5"/&gt;
+         &lt;providerOption name="OptionInfer" value="true"/&gt;
+         &lt;providerOption name="WarnAsError" value="false"/&gt;
+         &lt;/compiler&gt;
+      &lt;/compilers&gt;
+   &lt;/system.codedom&gt;
+   &lt;!--     The system.webServer section is required for running ASP.NET AJAX under 
+   Internet Information Services 7.0. It is not necessary for previous version of IIS.
+   --&gt;
+   &lt;system.webServer&gt;
+      &lt;validation validateIntegratedModeConfiguration="false"/&gt;
+      &lt;modules&gt;
+         &lt;remove name="ScriptModule"/&gt;
+         &lt;add name="ScriptModule" preCondition="managedHandler"         
+         type="System.Web.Handlers.ScriptModule, System.Web.Extensions, 
+         Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+      &lt;/modules&gt;
+      &lt;handlers&gt;
+         &lt;remove name="WebServiceHandlerFactory-Integrated"/&gt;
+         &lt;remove name="ScriptHandlerFactory"/&gt;
+         &lt;remove name="ScriptHandlerFactoryAppServices"/&gt;
+         &lt;remove name="ScriptResource"/&gt;
+         &lt;add name="ScriptHandlerFactory" 
+         verb="*" path="*.asmx" preCondition="integratedMode"        type="System.Web.Script.Services.ScriptHandlerFactory, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add name="ScriptHandlerFactoryAppServices" 
+         verb="*" path="*_AppService.axd" preCondition="integratedMode" 
+         type="System.Web.Script.Services.ScriptHandlerFactory, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+         &lt;add name="ScriptResource" preCondition="integratedMode" 
+         verb="GET,HEAD" path="ScriptResource.axd" 
+         type="System.Web.Handlers.ScriptResourceHandler, 
+         System.Web.Extensions, Version=3.5.0.0, Culture=neutral, 
+         PublicKeyToken=31BF3856AD364E35"/&gt;
+      &lt;/handlers&gt;
+      &lt;!--
+         To browse web app root directory during debugging, set the value below to true. 
+         Set to false before deployment to avoid disclosing web app folder information.
+      --&gt;
+      &lt;directoryBrowse enabled="true"/&gt;
+   &lt;/system.webServer&gt;
+   &lt;runtime&gt;
+      &lt;assemblyBinding appliesTo="v2.0.05727" xmlns="urn:schemas-microsoft-com:asm.v1"&gt;
+         &lt;dependentAssembly&gt;
+            &lt;assemblyIdentity name="System.Web.Extensions" 
+            publicKeyToken="31bf3856ad364e35"/&gt;
+            &lt;bindingRedirect oldVersion="1.0.0.0-1.1.0.0" newVersion="3.5.0.0"/&gt;
+         &lt;/dependentAssembly&gt;
+         &lt;dependentAssembly&gt;
+            &lt;assemblyIdentity name="System.Web.Extensions.Design" 
+            publicKeyToken="31bf3856ad364e35"/&gt;
+            &lt;bindingRedirect oldVersion="1.0.0.0-1.1.0.0" newVersion="3.5.0.0"/&gt;
+         &lt;/dependentAssembly&gt;
+      &lt;/assemblyBinding&gt;
+   &lt;/runtime&gt;
+   &lt;system.serviceModel&gt;
+      &lt;services&gt;
+         &lt;service behaviorConfiguration="ServiceBehavior" name="Service"&gt;
+            &lt;endpoint address="" binding="basicHttpBinding" contract="IMathService"&gt;
+            &lt;identity&gt;
+               &lt;dns value="localhost" /&gt;
+            &lt;/identity&gt;
+            &lt;/endpoint&gt;
+            &lt;endpoint address="mex" binding="mexHttpBinding" contract="IMetadataExchange"/&gt;
+         &lt;/service&gt;
+      &lt;/services&gt;
+      &lt;behaviors&gt;
+         &lt;serviceBehaviors&gt;
+            &lt;behavior name="ServiceBehavior"&gt;
+            &lt;!-- To avoid disclosing metadata information, set the value below to false before deployment. 
+            --&gt;
+            &lt;serviceMetadata httpGetEnabled="true"/&gt;
+            &lt;!-- To receive exception details in faults for debugging purposes, 
+            set the value below to true. Set to false before deployment to avoid 
+            disclosing exception information 
+            --&gt;
+            &lt;serviceDebug includeExceptionDetailInFaults="false"/&gt;
+            &lt;/behavior&gt;
+         &lt;/serviceBehaviors&gt;
+      &lt;/behaviors&gt;
+   &lt;/system.serviceModel&gt;
+&lt;/configuration&gt;
+</pre>
+<h2>Enable Different Bindings to the Hosted Service</h2>
+<ul class="list">
+<li><p>Go to Start menu -> Programs -> Accessories. Right click on the "Command Prompt", and select "Run as administrator" from the context menu.</p></li>
+<li><p>Execute the following command C:\Windows\system32\inetsrv>appcmd set app "Default Web Site/WASHostedService" /enabledProtocols:http,net.tcp</p></li>
+</ul>
+<p>It will produce the following output:</p>
+<img src="images/wcf_hosting_services_WAS_6.jpg" alt="Wcf Hosting Services WAS 6" />
+<h1>WCF - Windows service hosting</h1>
+<p>The operation of Windows service hosting is a simple one. Given below are the steps with requisite coding and screenshots that explain the process in an easy way.</p>
+<p><b>Step 1</b> : Now let’s create a WCF service. Open Visual Studio 2008 and click New -> Project and select Class Library from the template.</p>
+<img src="images/wcf_hosting_services_Windows_Service_1.jpg" alt="Wcf Hosting Services Windows Service 1" />
+<p><b>Step 2</b> : Add reference System.ServiceModel to the project. This is the core assembly used for creating the WCF service.</p> 
+<p><b>Step 3</b> : Next, we can create the ISimpleCalulator interface. Add the Service and Operation Contract attribute as shown below:</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ServiceModel;
+
+namespace WindowsServiceHostedService
+{
+  [ServiceContract]
+  public interfaceISimpleCalculator
+   {
+      [OperationContract]
+      int Add(int num1, int num2);
+
+      [OperationContract]
+      int Subtract(int num1, int num2);
+
+      [OperationContract]
+      int Multiply(int num1, int num2);
+
+      [OperationContract]
+      double Divide(int num1, int num2);
+   }
+}
+</pre>
+<p><b>Step 4</b> : Implement the ISimpleCalculator interface as shown below:</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace WindowsServiceHostedService
+{
+  Class SimpleCalulator : ISimpleCalculator
+   {
+      Public int Add(int num1, int num2)
+      {
+         return num1 + num2;
+      }
+      Public int Subtract(int num1, int num2)
+      {
+         return num1 - num2;
+      }
+
+      Public int Multiply(int num1, int num2)
+      {
+         return num1 * num2;
+      }
+
+      Public double Divide(int num1, int num2)
+      {
+         if (num2 != 0)
+         return num1 / num2;
+         else
+         return 0;
+      }
+   }
+}
+</pre>
+<p><b>Step 5</b> : Build the Project and get the dll. Now, we are ready with the WCF service. We are going to see how to host the WCF service in Windows service.</p>
+<p><b>Note</b> : In this project, it is mentioned that we are creating both Contract and Service (implementation) in the same project. However it is always a good practice if you have both in different projects.</p>
+<p><b>Step 6</b> : Open Visual Studio 2008 and Click New -> Project and select Windows Service.</p>
+<img src="images/wcf_hosting_services_Windows_Service_1.jpg" alt="Wcf Hosting Services Windows Service 1" />
+<p><b>Step 7</b> : Add 'WindowsServiceHostedService.dll' as reference to the project. This assembly is going to act as service.</p>
+<img src="images/wcf_hosting_services_Windows_Service_4.jpg" alt="Wcf Hosting Services Windows Service 4" />
+<p><b>Step 8</b> : The OnStart method of the service can be used to write the hosting code for WCF. We have to make sure that we are using only one service host object. OnStop method is used to close the Service Host. The following code shows how to host the WCF service in Windows service.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.ServiceProcess;
+using System.Text;
+using System.ServiceModel;
+using System.ServiceModel.Description;
+
+namespace WCFHostedWindowsService
+{
+  Partial class WCFHostedWindowsService : ServiceBase
+   {
+      ServiceHostm_Host;
+
+      Public WCFHostedWindowsService()
+      {
+         InitializeComponent();
+      }
+
+      Private void InitializeComponent()
+      {
+         thrownewNotImplementedException();
+      }
+
+      protectedoverridevoidOnStart(string[] args)
+      {
+         if (m_Host != null)
+         {
+            m_Host.Close();
+         }
+        
+         //Create a URI to serve as the base address
+         UrihttpUrl = newUri("http://localhost:8090/WindowsServiceHostedService/SimpleCalculator");
+        
+         //Create ServiceHost
+         m_Host = newServiceHost typeof(WindowsServiceHostedService.SimpleCalulator), httpUrl);
+        
+         //Add a service endpoint
+         m_Host.AddServiceEndpoint (typeof(WindowsServiceHostedService.ISimpleCalculator), newWSHttpBinding(), "");
+        
+         //Enable metadata exchange
+         ServiceMetadataBehaviorsmb = newServiceMetadataBehavior();
+         smb.HttpGetEnabled = true;
+         m_Host.Description.Behaviors.Add(smb);
+        
+         //Start the Service
+         m_Host.Open();
+      }
+
+      protectedoverridevoidOnStop()
+      {
+         if (m_Host != null)
+         {
+            m_Host.Close();
+            m_Host = null;
+         }
+      }
+      staticvoid Main()
+      {
+         ServiceBase[] ServicesToRun;
+         ServicesToRun = newServiceBase[]
+      { 
+         newWCFHostedWindowsService();
+      }   
+         ServiceBase.Run(ServicesToRun);
+      }
+   }
+}
+</pre>
+<p><b>Step 9</b> : In order to install the service, we need to have the Installer class for the Windows service. So add a new Installer class to the project, which is inherited from the Installer class. Given below is the code that shows the Service name, StartUp type, etc. of the service.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.ServiceProcess;
+using System.Configuration.Install;
+using System.ComponentModel;
+using System.Configuration;
+
+namespace WCFHostedWindowsService
+{
+   [RunInstaller(true)]
+   Public class WinServiceInstaller : Installer
+   {
+      Private ServiceProcessInstaller process;
+      Private ServiceInstaller service;
+
+      Public WinServiceInstaller()
+      {
+         process = newServiceProcessInstaller();
+         process.Account = ServiceAccount.NetworkService;
+         service = newServiceInstaller();
+         service.ServiceName = "WCFHostedWindowsService";
+         service.DisplayName = "WCFHostedWindowsService";
+         service.Description = "WCF Service Hosted";
+         service.StartType = ServiceStartMode.Automatic;
+         Installers.Add(process);
+         Installers.Add(service);
+      }
+   }
+}
+</pre>
+<p><b>Step 10</b> : Build the project to get the executable file WCFHostedWindowsService.exe. Next, we need to install the service using the Visual Studio Command Prompt. So open the command prompt by clicking Start->All Programs->Microsoft Visual Studio 2008->Visual Studio Tools-> Visual Studio Command Prompt. Using the install util utility application, you can install the service as shown below.</p>
+<img src="images/wcf_hosting_services_Windows_Service_7.jpg" alt="Wcf Hosting Services Windows Service 7" />
+<h1>WCF - Consuming wcf service</h1>
+<p>WCF services allow other applications to access or consume them. A WCF service can be consumed by many ways depending on the hosting type. Here, we are explaining the step-by-step method to consume a WCF service for each of the following popular hosting options:</p>
+<ul class="list">
+<li>Consuming WCF Service hosted in IIS 5/6</li>
+<li>Consuming WCF Service that is self-hosted</li>
+<li>Consuming WCF Service hosted in Windows Activation Service</li>
+<li>Consuming WCF Service hosted in Windows Service</li>
+</ul>
+<h2>Consuming WCF Service Hosted in IIS 5/6</h2>
+<p>The process of consumption of a WCF service hosted in IIS 5/6 is discussed below in detail. In addition, the discussion includes how to create proxy and console applications.</p>
+<p><b>Step 1</b>:	Once a service is hosted in IIS, we have to consume it in client applications. Before creating the client application, we need to create a proxy for the service. This proxy is used by the client application to interact with the service. To create a proxy, run Visual Studio 2008 command prompt. Using service utility, we can create the proxy class and its configuration information.</p>
+<p>svcutilhttp://localhost/IISHostedService/Service.svc</p>
+<img src="images/wcf_consuming_services_IIS_1.jpg" alt="Wcf Consuming Services IIS 1" />
+<p>After executing this command, we will get two files generated in the default location.</p>
+<ul class="list">
+<li><p><b>MyService.cs</b> – Proxy class for the WCF service</p></li>
+<li><p><b>output.config</b> – Configuration information about the service</p></li>
+</ul>
+<p><b>Step 2</b> : Now, we will start creating the Console application using Visual Studio 2008 (Client application).</p>
+<img src="images/wcf_consuming_services_IIS_2.jpg" alt="Wcf Consuming Services IIS 2" />
+<p><b>Step 3</b> : Add the reference 'System.ServiceModel'; this is the core dll for WCF.</p>
+<p><b>Step 4</b> : Create a Proxy class.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MyServiceClient
+{
+   Class Program
+   {
+      Static void Main(string[] args)
+      {
+         // Creating Proxy for the MyService
+         ServiceClient Client = newServiceClient();
+         Console.WriteLine("Client calling the service...");
+         Console.WriteLine("Hello Ram");
+         Console.Read();
+      }
+   }
+}
+</pre>
+<p>The output appears as follows:</p>
+<img src="images/wcf_consuming_services_IIS_4.jpg" alt="Wcf Consuming Services IIS 4" />
+<h2>Consuming Self-hosted WCF Service</h2> 
+<p>Here, the entire process of consuming a self-hosted WCF Service is explained step-by-step along with ample coding and screenshots wherever necessary.</p>
+<p><b>Step 1</b> : Service is hosted, now we need to implement the proxy class for the client. There are different ways of creating the proxy.</p>
+<ul class="list">
+<li><p>Using SvcUtil.exe, we can create the proxy class and its configuration file with end-points.</p></li>
+<li><p>Adding Service reference to the client application.</p></li>
+<li><p>Implementing ClientBase&lt;T&gt; class</p></li>
+</ul>
+<p>Of these three methods, Implementing ClientBase&lt;T&gt; is the best practice. If you are using the other two methods, we need to create a proxy class every time we make any changes in the Service implementation. But this is not the case for ClientBase&lt;T&gt;. It will create the proxy only at runtime and so it will take care of everything.</p>
+<p>For this purpose, create one proxy class, which includes the references of System.ServiceModel and MyCalculatorService.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ServiceModel;
+using MyCalculatorService;
+
+namespace MyCalculatorServiceProxy
+{
+   Public class MyCalculatorServiceProxy : 
+   // WCF create proxy for ISimpleCalculator using ClientBase
+   ClientBase&lt;ISimpleCalculator&gt;,
+   ISimpleCalculator
+   {
+      Public int Add(int num1, int num2)
+      {
+         //Call base to do funtion
+         returnbase.Channel.Add(num1, num2);
+      }
+   }
+}
+</pre>
+<p>Now, create one console application, which includes the references of System.ServiceModel and MyCalculatorServiceProxy.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ServiceModel;
+using MyCalculatorServiceProxy;
+
+namespace MyCalculatorServiceClient
+{
+   classProgram
+   {
+      Static void Main(string[] args)
+      {
+         MyCalculatorServiceProxy.MyCalculatorServiceProxy proxy = newMyCalculatorServiceProxy.MyCalculatorServiceProxy();
+         Console.WriteLine("Client is running at " + DateTime.Now.ToString());
+         Console.WriteLine("Sum of two numbers. 5+5 =" + proxy.Add(5,5));
+         Console.ReadLine();
+      }
+   }
+}
+</pre>
+<p><b>Step 2</b> : End-point (same as service) information should be added to the configuration file of the client application.</p>
+<pre class="prettyprint notranslate">
+&lt;?xmlversion="1.0"encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+   &lt;system.serviceModel&gt;
+      &lt;client&gt;
+            &lt;endpoint address ="http://localhost:8090/MyCalculatorServiceProxy/ISimpleCalculator" binding ="wsHttpBinding" contract "MyCalculatorServiceProxy.ISimpleCalculator"&gt;
+            &lt;/endpoint&gt;
+      &lt;/client&gt;
+   &lt;/system.serviceModel&gt;
+&lt;/configuration&gt;
+</pre>
+<p><b>Step 3</b> : Before running the client application, you need to run the service. Shown below is the output of the client application.</p>
+<img src="images/wcf_consuming_services_Self_3.jpg" alt="Wcf Consuming Services Self 3" />
+<h2>Consuming WCF Service Hosted in WAS</h2>
+<p>Consuming a WCF service that is hosted in WAS is a simple process involving only a few steps. The steps are as follows:</p>
+<ul class="list">
+<li>Add the proxy class and the configuration file to the client application.</li>
+<li>Create the object for the MathServiceClient and call the method.</li>
+</ul>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespaceWASHostedClient
+{
+   classProgram
+   {
+      staticvoid Main(string[] args)
+      {
+         MathServiceClient client = newMathServiceClient();
+         Console.WriteLine("Sum of two number 5,6");
+         Console.WriteLine(client.Add(5, 6));
+         Console.ReadLine();
+      }
+   }
+}
+</pre>
+<p>The output appears as shown below.</p>
+<img src="images/wcf_consuming_services_WAS_2.jpg" alt="Wcf Consuming Services WAS 2" />
+<h2>Consuming WCF Service Hosted in Windows Service</h2>
+<p>The step-by-step process of how to consume a WCF service hosted in Windows Service is expressed below in detail with coding and instructions.</p>
+<p>Once it is hosted successfully, we can create a proxy class for the service and start using in the client application. Here, it is shown with the IIS hosting type consuming.</p>
+<img src="images/wcf_consuming_services_Windows_Service_1.jpg" alt="Wcf Consuming Services Windows Service 1" />
+<p>Add the reference of ServiceModel.</p>
+<pre class="prettyprint notranslate">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespaceWindowServiceClient
+{
+   classProgram
+   {
+      staticvoid Main(string[] args)
+      {
+         //Creating Proxy for the MyService
+         MyServiceClient client = newMyServiceClient();
+         Console.WriteLine("Client calling the service...");
+         Console.WriteLine("Sum of two numbers 5,6");
+         Console.WriteLine(client.Add(5, 6));
+        
+         Console.WriteLine("Subtraction of two numbers 6,5");
+         Console.WriteLine(client.Sub(6, 5));
+        
+         Console.WriteLine("Multiplication of two numbers 6,5");
+         Console.WriteLine(client.Mul(6, 5));
+        
+         Console.WriteLine("Division of two numbers 6,3");
+         Console.WriteLine(client.Div(6, 3));
+
+         Console.Read();
+      }
+   }
+}
+</pre>
+<p>The output appears as follows:</p>
+<img src="images/wcf_consuming_services_Windows_Service_3.jpg" alt="Wcf Consuming Services Windows Service 3" />
+<h1>WCF - Service binding</h1>
+<p>WCF service binding is a set of several elements in which each element defines the way the service is communicating with the client. A transport element and a message encoding element are the two most vital components of each binding. In this chapter, we will discuss various WCF service bindings that are commonly used.</p>
+<h2>Basic Binding</h2>
+<p>Basic binding is offered by the BasicHttpBinding class. It uses the HTTP protocol to transport and represent a WCF service as an ASP.NET web service (ASMX web service), so that old clients who use ASMX web services can consume the new services conveniently.</p>
+<p>Basic binding is set as default binding in a WCF web service enabled by Silverlight and is a standard binding for communications in web service style. It does not support reliable messaging.</p>
+<p>Given below is a code snippet depicting the default settings for basic binding.</p>
+<pre class="prettyprint notranslate">
+&lt;basicHttpBinding&gt;
+   &lt;binding name="basicHttpBindingDefaults" allowCookies="false" 
+   bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard" 
+   maxBufferPoolSize="524288" maxBufferSize="65536" 
+   maxReceivedMessageSize="65536" messageEncoding="Text" proxyAddress="" 
+   textEncoding="utf-8" transferMode="Buffer" useDefaultWebProxy="true" 
+   closeTimeout="00:01:00" openTimeout="00:01:00" receiveTimeout="00:10:00" 
+   sendTimeout="00:01:00"&gt;
+         &lt;readerQuotas maxArrayLength="16384" maxBytesPerRead="4096" 
+         maxDepth="32"
+         maxNameTableCharCount="16384" maxStringContentLength="8192"/&gt;
+         &lt;security mode="None"&gt;
+            &lt;transport clientCredentialType="None" proxyCredentialType="None" realm=""/&gt;
+            &lt;message algorithmSuite="Basic256" clientCredentialType="UserName" /&gt;
+         &lt;/security&gt;       
+   &lt;/binding&gt;
+&lt;/basicHttpBinding&gt;        	
+</pre>
+<p>The above default settings have their obvious limitations, as the message size is limited and there is no security mode. However, customization of basic binding solves this problem like the one below.</p>
+<pre class="prettyprint notranslate">
+&lt;basicHttpBinding&gt;
+   &lt;binding name="basicHttpSecure" maxBufferSize="100000" maxReceivedMessageSize="100000"&gt;
+   &lt;readerQuotas maxArrayLength="100000" maxStringContentLength="100000"/&gt;
+      &lt;security mode="TransportWithMessageCredential" /&gt;
+   &lt;/binding&gt;
+&lt;/basicHttpBinding&gt;
+</pre>
+<h2>Web Service Binding</h2>
+<p>Web Service (WS) binding is provided by the WSHttpBinding class. It is quite similar to basic binding and uses the same protocols for transport, but offers several WS–* specifications such as WS–Reliable Messaging, WS–Transactions, WS–Security, and many more. In a nutshell, WSHttpBinding equals to the sum of basicHttpBinding and WS–* specifications. Given below is a code snippet depicting the default settings for WS Binding:</p>
+<pre class="prettyprint notranslate">
+&lt;wsHttpBinding&gt;
+   &lt;binding name="wsHttpBindingDefaults" allowCookies="false" 
+   bypassProxyOnLocal="false" closeTimeout="00:01:00" 
+   hostNameComparisonMode="StrongWildcard" 
+   maxBufferPoolSize="524288" maxReceivedMessageSize="65536" 
+   messageEncoding="Text" openTimeout="00:01:00" 
+   receiveTimeout="00:10:00" proxyAddress="" sendTimeout="00:01:00" 
+   textEncoding="utf-8" transactionFlow="false" 
+   useDefaultWebProxy="true" &gt; 
+   &lt;readerQuotas maxArrayLength="16384" maxBytesPerRead="4096" 
+   maxDepth="32" maxNameTableCharCount="16384" 
+   maxStringContentLength="8192"/&gt;
+   &lt;reliableSession enabled="false" ordered="true" 
+   inactivityTimeout="oo:10:00" /&gt; 
+   &lt;security mode="Message"&gt;
+            &lt;message algorithmSuite="Basic256" clientCredentialType="Windows" 
+            esatalishSecurityContext="true" 
+            negotiateServiceCredential="true" /&gt;
+            &lt;transport clientCredentialType="Windows"
+            proxyCredentialType="None" realm=""/&gt;        	
+   &lt;/security&gt;
+   &lt;/binding&gt;
+&lt;/wsHttpBinding&gt;
+</pre>
+<h2>IPC Binding</h2>
+<p>IPC binding makes use of named pipe and is offered by the netNamedPipeBinding class. This is the fastest binding and the most secure one amidst all the available bindings. Although message-level security is not supported here, messages are secure by default because of a robust transport security. Given below is the code snippet depicting the default settings for IPC binding:</p>
+<pre class="prettyprint notranslate">
+&lt;netNamedPipeBinding&gt;
+   &lt;binding name="netPipeDefaults" closeTimeout="00:01:00" 
+   hostNameComparisonMode="StrongWildcard" maxBufferPoolSize="524288" 
+   maxBufferSize="65536" maxConnections="10" 
+   maxReceivedMessageSize="65536" openTimeout="00:01:00" 
+   receiveTimeout="00:10:00" sendTimeout="00:01:00" transactionFlow="false" 
+   transactionProtocol="OleTransactions" transferMode="Buffered"&gt;  
+         &lt;readerQuotas maxArrayLength="16384" maxBytesPerRead="4096" 
+         maxDepth="32" maxNameTableCharCount="16384" 
+         maxStringContentLength="8192"/&gt;
+         &lt;security mode="Transport"&gt;        	
+         &lt;/security&gt;
+   &lt;/binding&gt;
+&lt;/netNamedPipeBinding&gt;
+</pre>
+<h2>Other Types of Service Bindings</h2>
+<ul class="list">
+<li><p><b>TCP Binding</b> - Provided by the NetTCPBinding class, this binding makes use of the TCP protocol for communication within the same network and does the message encoding in binary format. This binding is considered as the most reliable in contrast to others.</p></li>
+<li><p><b>WS Dual Binding</b> - This type of binding is more like WSHttpBinding with the only exception that it facilitates bidirectional communication, i.e., messages can be sent and received by both clients and services. It is offered by the WSDualHttpBinding class.</p></li>
+<li><p><b>Web binding</b> - Web binding is designed to represent WCF services in the form of HTTP requests by the use of HTTP-GET, HTTP-POST, etc. It is offered by the WebHttpBinding class and is used commonly with social networks.</p></li>
+<li><p><b>MSMQ Binding</b> - It is offered by the NetMsmqBinding class and is used to provide solutions in case the service processes a message at a distinct time than that sent by the client. MSMQ binding makes use of MSMQ for transportation and provides support to detached message queued. MSMQ is an implementation for message queuing offered by Microsoft.</p></li>
+<li><p><b>Federated WS Binding</b> - It is a specific form of WS binding and offers support for federated security. It is offered by the WSFederationHttpBinding class.</p></li>
+<li><p><b>Peer Network Binding</b> - Offered by the NetPeerTCPBinding class, it is mainly used in file sharing systems. It uses TCP protocol but makes use of peer networking as transport. In this networking, each machine (node) acts as a client and a server to the other nodes. Peer network binding is used in file sharing systems like torrent.</p></li>
+<li><p><b>MSMQ Integration Binding</b> - Offered by the MsmqIntegrationBinding class, it helps communicate with existing systems that communicate via MSMQ (Microsoft Message Queuing).</p></li>
+</ul>
+<p>Apart from these, it is also possible to create custom bindings. However, since it is possible to tweak the configuration properties of each WCF binding, the need for creating custom bindings arises rarely.</p>
+<h1>WCF - Instance management</h1>
+<p>The set of techniques employed by WCF for binding a set of messages (client requests) to service instances is known as Instance Management. WCF supports three types of instance activation and they are discussed in this chapter.</p>
+<h2>Per-Call Service</h2>
+<p>Per-call service is the default instance activation mode of WCF. When a WCF service is configured for a per-call service, a CLR object is created for the timespan a client call or request is in progress. CLR stands for Common Language Runtime and it includes service instances in WCF.</p>
+<p>In per-call service, every client request achieves a new dedicated service instance and its memory consumption is less as compared to other types of instance activation.</p>
+<p>The InstanceContextMode property is required to be set to InstanceContextMode.PerCall, in order to indicate a WCF service to act as a per-call service. The InstanceContextMode property belongs to the ServiceBehavior attribute. Hence, a per-call service can be configured as follows:</p>
+<pre class="prettyprint notranslate">
+[ServiceContract]
+interface IMyContract
+{...}
+[ServiceBehavior (InstanceContextMode = InstanceContextMode.PerCall)]
+class MyService : IMyContract
+{...} 
+</pre>
+<p>A service is here expressed as IMyContract. The following figure shows the process of per-call service instance activation.</p>
+<img src="images/wcf_instance_management_per_call_service.jpg" alt="Wcf Instance Management Per Call Service" />
+<h3>Implementing a Per-Call Service</h3>
+<pre class="prettyprint notranslate">
+[DataContract]
+class Param {....}
+[ServiceContract]
+interface IMyContract
+{
+   [OperationContract]
+   void MyMethod(Param objectIdentifier);
+}
+class MyPerCallService : IMyContract, IDisposable
+{
+   public void MyMethod(Param objectIdentifier)
+   {
+      GetState(objectIdentifier); 
+      DoWork();
+      SaveState(objectIdentifier);
+   }
+   void GetState(Param objectIdentifier) {....}
+   void DoWork() {....}
+   void SaveState(Param objectIdentifier) {....}
+   public void Dispose() {....}
+}
+</pre>
+<p>Here, Param is the pseudo type parameter invented for the above example.</p>
+<h2>Per-Session Service</h2>
+<p>In this activation mode of WCF, a private or we can say a confidential session is maintained between the two entities, i.e., the client and a particular service instance. Also known as the private session service, the per-session service offers a new service instance which remains dedicated to each client request and autonomous of all the other instances pertaining to that session-aware service.</p>
+<p>To initiate a per-session service, the InstanceContextMode property is required to set to PerSession. Here, the service instance stays in memory all through the session duration.</p>
+<p>The activation mode suffers from scalability as the configured service is unable to support any additional outstanding clients other than a few (or maybe up to some hundred) because of the cost involved in each of this dedicated service instance.</p>
+<p>A per-session service can be configured as:</p>
+<pre class="prettyprint notranslate">
+[ServiceBehavior (InstanceContextMode = InstanceContextMode.PerSession)]
+class MyService : IMyContract
+{...}
+</pre>
+<p>The process of per-session service can be described as shown in the following figure:</p>
+<img src="images/wcf_instance_management_per_session_service.jpg" alt="Wcf Instance Management Per Session Service" />
+<p>The following code shows a contract and service configured for the usage of a private session. The output indicates that the client indeed got a dedicated service instance.</p>
+<h3>Service code</h3>
+<pre class="prettyprint notranslate">
+[ServiceContract(Session = true)]
+interface IMyContract
+{
+   [OperationContract]
+   void MyMethod();
+}
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+class MyService : IMyContract, IDisposable
+{
+   int m_Counter = 0; MyService() {Console.WriteLine("MyService.MyService()"); }
+   public void MyMethod()
+   {
+      m_Counter++;
+      Console.WriteLine("Counter = " + m_Counter);
+   }
+   public void Dispose() 
+   { 
+      Console.WriteLine("MyService.Dispose()"); 
+   }
+}
+</pre>
+<h3>Client Code</h3>
+<pre class="prettyprint notranslate">
+MyContractProxy proxy = new MyContractProxy(); proxy.MyMethod(); proxy.MyMethod(); 
+proxy.Close();
+</pre>
+<h3>Output</h3>
+<pre class="prettyprint notranslate">
+MyService.MyService() Counter = 1 Counter = 2 MyService.Dispose()
+</pre>
+<h2>Singleton Service</h2>
+<p>In this activation mode of WCF, all client requests independent to each other get connected to the same well-known single instance, irrespective of their connection to the service endpoints. The singleton service gets disposed only when the host closes down.</p>
+<p>This service is created just for once when the host is created. In case, the host is not provided with any singleton instance, the service returns as NULL. The activation mode is at its best when the work amount in each method call is little and no pending operations are there in the background.</p>
+<p>The InstanceContextMode property is required to set to InstanceContextMode.Single to initiate this Singleton service.</p>
+<p>Hence, a Singleton service can be configured as:</p>
+<pre class="prettyprint notranslate">
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+class MySingleton : ...
+{...}
+</pre>
+<p>The process of Singleton service is shown in the following figure:</p>
+<img src="images/wcf_instance_management_singleton_service.jpg" alt="Wcf Instance Management Singleton Service" />
+<p>The following code is used for initializing and hosting a singleton instance.</p>
+<h3>Service code</h3>
+<pre class="prettyprint notranslate">
+[ServiceContract]
+interface IMyContract
+{
+   [OperationContract]
+   void MyMethod( );
+}
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+class MySingleton : IMyContract
+{
+   int m_Counter = 0;
+   public int Counter
+   {
+      get
+      {
+         return m_Counter;
+      }
+      set
+      {
+         m_Counter = value;
+      }
+   }
+   public void MyMethod( )
+   {
+      m_Counter++;
+      Trace.WriteLine("Counter = " + Counter);
+   }
+}
+</pre>
+<h3>Host code</h3>
+<pre class="prettyprint notranslate">
+MySingleton singleton = new MySingleton( );
+singleton.Counter = 42;
+ServiceHost host = new ServiceHost(singleton);
+host.Open( );
+//Do some blocking calls then
+host.Close( );
+</pre>
+<h3>Client code</h3>
+<pre class="prettyprint notranslate">
+MyContractClient proxy = new MyContractClient( );
+proxy.MyMethod( );
+proxy.Close( );
+</pre>
+<h3>Output</h3>
+<p>Counter = 43</p>
+<h1>WCF - Transactions</h1>
+<p>A transaction in WCF is a set of operations that follow some properties, collectively known as ACID. Here, if a single operation fails, the entire system fails automatically. When an order is placed online, a transaction takes place. The following example can be helpful to understand the process of transaction in simpler terms.</p>
+<h2>Example</h2>
+<p>Suppose you have ordered an LCD television from an online store and you are going to pay the amount by your credit card. When you enter the requisite information to place the order, two operations occur simultaneously.</p>
+<p>One, the specified amount gets debited from your bank account and second, the vendor account is credited with the same amount. Both the operations must execute successfully in order to have a successful transaction.</p>
+<h2>WCF Transaction Properties</h2>
+<p>The four properties followed by a WCF transaction are the following:</p>
+<ul class="list">
+<li><p><b>Atomic</b> - All the operations must act as a single indivisible operation at the completion of a transaction.</p></li>
+<li><p><b>Consistency</b> - Whatever may be the operation set, the system is always in a state of consistency, i.e., the outcome of the transaction is always as per the expectation.</p></li>
+<li><p><b>Isolation</b> - The intermediary state of system is not visible to any entities of the outer world till the transaction is completed.</p></li>
+<li><p><b>Durability</b> - Committed state is maintained regardless of any kind of failure (hardware, power outage, etc.)</p></li>
+</ul>
+<p>While configuring a WCF transaction, there are some factors that demand consideration. These are binding and operation behavior.</p>
+<p><b>Binding</b> - The bindings that support transaction in WCF are only a few and it is vital to make a choice from only these bindings, which remain disabled by default and should be enabled to get the requisite support for transaction. These bindings are as follows:</p>
+<ul class="list"> 
+<li>NetTcpBinding</li>
+<li>NetNamedPipeBinding</li>
+<li>WSHttpBinding</li>
+<li>WSDualHttpBinding</li>
+<li>WSFederationHttpBinding</li>
+</ul>
+<p><b>Operation behavior</b> - While a binding facilitates the path for transaction propagation, an operation takes care of transaction processing as well as operation configuration. Operation behavior primarily uses two attributes: TransactionFlow and TransactionScopeRequired. Here, it should be noted that TransactionFlow has mainly three values and these are: Allowed, Mandatory, and NotAllowed.</p>
+<p>The following code shows whether or not changing the configuration of binding and operation contract facilitates the propagation of client.</p>
+<pre class="prettyprint notranslate">
+&lt;bindings&gt; 
+   &lt;wsHttpBinding&gt; 
+      &lt;binding name ="MandatoryTransBinding" transactionFlow ="true"&gt; 
+         &lt;reliableSession enabled ="true"/&gt;
+      &lt;/binding&gt;
+   &lt;/wsHttpBinding&gt; 
+&lt;/bindings&gt;
+</pre>
+<h2>Transaction Protocol</h2>
+<p>WCF uses three types of protocols for transaction:</p>
+<ul class="list">
+<li>Lightweight</li>
+<li>Ole Transaction</li>
+<li>WS-Atomic Transaction (WS-AT)</li>
+</ul>
+<p>Of all the three, WS-AT is an interoperable protocol and enables the flow of distributed transaction across firewalls. However, this protocol should not be used when the transaction is strictly based on Microsoft technology.</p>
+<h2>Phases of WCF Transaction</h2>
+<p>There are two phases in a WCF transaction as shown in the following figure.</p>
+<img src="images/wcf_transactions_phases_1.jpg" alt="Wcf Transaction Phases 1" />
+<ul class="list">
+<li><p><b>Prepare Phase</b> - In this phase, the transaction manager checks whether all the entities are ready to commit for the transaction or not.</p></li>
+<li><p><b>Commit Phase</b> - In this phase, the commitment of entities get started in reality.</p></li>
+</ul>
+<p>The following figure illustrates the functions of both the phases of a WCF transaction.</p>
+<img src="images/wcf_transactions_phases_2.jpg" alt="Wcf Transaction Phases 2" />
+<h2>Enabling a WCF Transaction</h2>
+<p>To enable a WCF transaction successfully, one needs to follow a series of six steps in a sequential manner. The requisite steps are discussed below.</p>
+<p><b>Step 1</b> : Creation of two WCF Services</p>
+<p>The foremost step in this regard is to build two service projects in WCF to participate in a single transaction. Database transactions will be performed on both these services and it will be understood that how they are unified by a WCF transaction. A web application of WCFTransactions has also been created to consume the two created services in a single transaction scope.</p>
+<img src="images/wcf_transactions_enable_1.jpg" alt="Wcf Transaction Enable 1" />
+<p><b>Step 2</b> : Method creation and its attribution with TransactionFlow attribute</p>
+<p>Here, an UpdateData method will be created for both the WCF services to insert into the database with OperationContract attribute. To accomplish this task, an interface class is first created with the help of the ServiceContract attribute. For enabling the transaction in the newly created method, it is attributed with TransactionFlow and transactions are permitted using is Allowed value.</p>
+<pre class="prettyprint notranslate">
+[ServiceContract]
+public interface IService1
+{
+   [OperationContract]
+   [TransactionFlow(TransactionFlowOption.Allowed)]
+   void UpdateData();
+}
+</pre>
+<p><b>Step 3</b> : Implementation of WCF service with TransactionScopeRequired attribute</p>
+<p>It is done by using the code shown below:</p>
+<pre class="prettyprint notranslate">
+[OperationBehavior(TransactionScopeRequired = true)]
+public void UpdateData()
+{
+   try
+   {
+      SqlConnection objConnection = new SqlConnection(strConnection);
+      objConnection.Open();
+      using(SqlTransaction transaction = Program.dbConnection.BeginTransaction())
+      {
+     	   Boolean doRollback = false;
+     	   using(SqlCommand cmd = new SqlCommand("insert into Customer (Customer name, Customer code) values ('sss', 'sss')"objConnection))
+     	   try
+     	   {
+            cmd.ExecuteNonQuery();
+     	   }
+           catch(SqlException)
+     	   {
+            doRollback = true;
+            break;
+     	   }
+      }
+      if(doRollback)
+      transaction.Rollback();
+      else
+      transaction.Commit();
+     
+   }
+   finally
+   {
+      objConection.Close();
+   }
+}
+</pre>
+<p><b>Step 4</b> : Enabling Transaction Flow by WCF Service Config File</p>
+<p>Its coding is done as follows:</p> 
+<pre class="prettyprint notranslate">
+&lt;bindings&gt;
+   &lt;wsHttpBinding&gt;
+      &lt;binding name="TransactionalBind" transactionFlow="true"/&gt;
+   &lt;/wsHttpBinding&gt;
+&lt;/bindings&gt;
+</pre>
+<p>It is vital to attach the transaction permissible binding with the endpoint to expose the WCF service.</p>
+<pre class="prettyprint notranslate">
+&lt;endpoint address="" binding="wsHttpBinding" bindingConfiguration="TransactionalBind" contract="WcfService1.IService1"&gt;
+</pre>
+<p><b>Step 5</b> : Calling both the services in a single transaction</p>
+<p>Here, the above two services are called in one transaction and for this purpose, the TransactionScope object is used to group both the services. The Complete method of the above object is called to commit a WCF transaction. To rollback, the Dispose method is to be called.</p>
+<pre class="prettyprint notranslate">
+using (TransactionScope ts = new TransactionScope(TransactionScopeOption.RequiresNew))
+{
+   try
+   {
+      // Call your webservice transactions here
+      ts.Complete();
+   }
+   catch (Exception ex)
+   {
+      ts.Dispose();
+   }
+}
+</pre>
+<p>The small piece of the complete code in which WCF transactions have been grouped in one scope is depicted below:</p>
+<pre class="prettyprint notranslate">
+using (TransactionScope ts = new TransactionScope(TransactionScopeOption.RequiresNew))
+{
+   try
+   {
+      ServiceReference1.Service1Client obj = newServiceReference1.Service1Client();
+      obj.UpdateData();
+      ServiceReference2.Service1Client obj1 = new ServiceReference2.Service1Client();
+      obj1.UpdateData();
+      ts.Complete();
+   }
+   catch (Exception ex)
+   {
+      ts.Dispose();
+   }
+}
+</pre>
+<p><b>Step 6</b> : Testing WCF transaction</p>
+<p>Testing is done in the 6th and final step and after calling the 1st WCF service, an exception is forced.</p>
+<img src="images/wcf_transactions_enable_2.jpg" alt="Wcf Transaction Enable 2" />
+<h1>WCF - Ria services</h1>
+<p>WCF RIA Service is a higher-level framework and a new component of frameworks like .NET 4 and Silverlight 4 that eases the procedure of building a complex business application in Silverlight by offering client-side validation. RIA stands for Rich Internet Applications.</p>
+<p>It must be noted here that Silverlight is a framework offered by Microsoft, ideal for rich internet applications and is available for use as a browser plug-in, just like Adobe Flash.</p>
+<p>WCF RIA Service is mainly based on the standard version of WCF service. The following figure illustrates a part of the WCF architecture, where WCF RIA services has its focus in general.</p>
+<img src="images/wcf_ria_services_1.jpg" alt="Wcf RIA Services 1" />
+<p>Creating a WCF RIA Service is the next step to have a better understanding of the concept. The step-by-step procedure is given below.</p>
+<p><b>Step 1</b> : Create a new web project of the name SLWCFRiaServices.Web using Silverlight 5 and then add a new item by selecting ADO.NET Entity Data Model to the same.</p>
+<img src="images/wcf_ria_services_2.jpg" alt="Wcf RIA Services 2" />
+<img src="images/wcf_ria_services_3.jpg" alt="Wcf RIA Services 3" />
+<p><b>Step 2</b> : Now choose model contents from the Entity Data Model Wizard by generating the model from the database.</p>
+<img src="images/wcf_ria_services_4.jpg" alt="Wcf RIA Services 4" />
+<p><b>Step 3</b> : From the same wizard, choose your data connection and database objects.</p>
+<img src="images/wcf_ria_services_5.jpg" alt="Wcf RIA Services 5" />
+<img src="images/wcf_ria_services_6.jpg" alt="Wcf RIA Services 6" />
+<p><b>Step 4</b> : Build the solution so that in future, recognizing the data model will not a problem for the domain service you are going to create.</p>
+<img src="images/wcf_ria_services_7.jpg" alt="Wcf RIA Services 7" />
+<p><b>Step 5</b> : Now create a domain service in the web project by adding a new item and make sure to enable client access.</p>
+<img src="images/wcf_ria_services_8.jpg" alt="Wcf RIA Services 8" />
+<img src="images/wcf_ria_services_9.jpg" alt="Wcf RIA Services 9" />
+<p><b>Step 6</b> : In the very next step, some classes will be generated and it is essential to build them again.</p>
+<img src="images/wcf_ria_services_10.jpg" alt="Wcf RIA Services 10" />
+<img src="images/wcf_ria_services_11.jpg" alt="Wcf RIA Services 11" />
+<p><b>Step 7</b> : In this step, DataDomainContext is displayed by the Data Sources Panel.</p>
+<img src="images/wcf_ria_services_12.jpg" alt="Wcf RIA Services 12" />
+<p><b>Step 8</b> : In this step, the article below the DataDomainContext should be selected and customized.</p>
+<img src="images/wcf_ria_services_13.jpg" alt="Wcf RIA Services 13" />
+<p><b>Step 9</b> : Attaching the DataGrid Control with the Data Source is the step committed here, along with selection of themes. Here BureauBlue theme has been selected.</p>
+<img src="images/wcf_ria_services_14.jpg" alt="Wcf RIA Services 14" />
+<img src="images/wcf_ria_services_15.jpg" alt="Wcf RIA Services 15" />
+<p><b>Step 10</b> : The last and the final step comprises of going to the design screen and adding entity in the layout area of the MainPage by simple drag and drop. It is also vital to ensure AutoGenerateColumns = "True" and to run it to view the output.</p>
+<img src="images/wcf_ria_services_16.jpg" alt="Wcf RIA Services 16" />
+<img src="images/wcf_ria_services_17.jpg" alt="Wcf RIA Services 17" />
+<h2>Prerequisites</h2>
+<p>There are some prerequisites for experiencing the full potential of WCF RIA services:</p>
+<ul class="list">
+<li>Visual Studio 2010 / Visual Studio 2012</li>
+<li>Silverlight Developer Runtime</li>
+<li>Latest version of RIA Services Toolkit</li>
+<li>SDK (Software Development Kit)</li>
+</ul>
+<h2>WCF RIA Domain Service</h2>
+<p>A domain service comprises of a set of data operations related to business. It is nothing but a WCF service that exposes any WCF RIA Service application’s business logic.</p>
+<p>A WCF RIA Domain Service has the hosting class DomainServiceHost internally, which in turn uses the WCF ServiceHost class for hosting the application. To make the domain service accessible for the client project, it should have the EnableClientAccessAttribute attribute. The attribute is applied automatically whenever a new domain service class is added.</p>
+<p>The following figure shows the architecture of a WCF RIA Domain Service:</p>
+<img src="images/wcf_ria_services_18.jpg" alt="Wcf RIA Services 18" />
+<h2>WCF RIA Services – Querying Data</h2>
+<p>The following figure shows how a query is created on the client side and executed on the server side to return queryable results. DAL stands for Data Access Layer.</p>
+<img src="images/wcf_ria_services_19.jpg" alt="Wcf RIA Services 19" />
+<h2>WCF RIA Services – Updating Data</h2>
+<p>The following figure shows how data is updated by executing the CUD (Create Update Delete) operation on the server side. It should be noted here that WCF RIA service is always stateless on the server side.</p>
+<img src="images/wcf_ria_services_20.jpg" alt="Wcf RIA Services 20" />
+<h1>WCF - Security</h1>
+<p>A WCF service boasts of a robust security system with two security modes or levels so that only an intended client can access the services. The security threats that are common in a distributed transaction are moderated to a large extent by WCF.</p>
+<h2>Key Security Features</h2>
+<p>WCF service has four key security features as depicted in the figure below.</p>
+<img src="images/wcf_security.jpg" alt="Wcf Security" />
+<ul class="list">
+<li><p><b>Authentication</b> - Here, authentication is not limited to identifying the sender of the message, but is mutual, i.e., authentication of the message receiver is required to rule out the possibility of any kind of middleman attack.</p></li>
+<li><p><b>Authorization</b> - This is the next step taken by a WCF service to ensure security and it is here determined whether the service should authorize the caller to proceed further or not. Although authorization is not dependent on authentication, it normally follows authentication.</p></li> 
+<li><p><b>Confidentiality</b> - The exchange of information between a caller and a service is kept confidential to restrict its interpretation by others for whom the message is not intended. To make this possible, encryption is used along with a wide variety of other mechanisms.</p></li>
+<li><p><b>Integrity</b> - The final key concept is maintaining integrity, i.e., offering the assurance that the message has not been tampered by anyone in its journey from the sender to the receiver.</p></li>
+</ul>
+<h2>Transfer Security Mode</h2>
+<p>WCF offers the following transfer security modes to ensure a secured communication between a client and a server. The diverse transfer security modes are mentioned below.</p>
+<ul class="list">
+<li><p><b>None</b> - This mode does not guarantee any kind of message security and the service does not get any credentials about the client. This mode is highly risky, as it may allow message tampering and hence not recommended.</p>
+<pre class="prettyprint notranslate">
+&lt;wsHttpBinding&gt;
+   &lt;binding name="WCFSecurityExample"&gt;
+      &lt;security mode="None"/&gt;
+   &lt;/binding&gt;
+&lt;/wsHttpBinding&gt;
+</pre>
+</li>
+<li><p><b>Transport</b> - This mode is the easiest way to achieve a secured transfer of message via the use of communication protocols such as TCP, IPC, Https, and MSMQ. This mode is more effective when the transfer is point-to-point and is used mostly in a controlled environment, i.e., intranet applications.</p>
+<pre class="prettyprint notranslate">
+&lt;wsHttpBinding&gt;
+   &lt;binding name="WCFSecurityExample"&gt;
+      &lt;security mode="Transport"/&gt;
+   &lt;/binding&gt;
+&lt;/wsHttpBinding&gt;
+</pre>
+</li>
+<li><p><b>Message</b> - The security mode allows mutual authentication and offers privacy to a great extent as the messages are encrypted and can be transported through http, which is not considered as a secure protocol. Here the security is provided end-to-end without considering how many intermediaries are involved in a message transfer and whether there is a secured transport or not. The mode is used typically by internet applications.</p>
+<pre class="prettyprint notranslate"> 
+&lt;wsHttpBinding&gt;
+   &lt;binding name="WCFSecurityExample"&gt;
+      &lt;security mode="Message"/&gt;
+   &lt;/binding&gt;
+&lt;/wsHttpBinding&gt;
+</pre>
+</li>
+<li><p><b>Mixed</b> - This security mode is not used frequently and client authentication is offered only at the client level.</p>
+<pre class="prettyprint notranslate"> 
+&lt;wsHttpBinding&gt;
+   &lt;binding name="WCFSecurityExample"&gt;
+      &lt;security mode="TransportWithMessageCredential"/&gt;
+   &lt;/binding&gt;
+&lt;/wsHttpBinding&gt;
+</pre>
+</li>	    
+<li><p><b>Both</b> - This security mode comprises of both transport security and message security to offer a robust security cover, but often results in overloading the overall performance. This one is supported by only MSMQ.</p>
+<pre class="prettyprint notranslate"> 
+&lt;netMsmqBinding&gt;
+   &lt;binding name="WCFSecurityExample"&gt;
+      &lt;security mode="Both"/&gt;
+   &lt;/binding&gt;
+&lt;/netMsmqBinding&gt;
+</pre>
+</li>
+</ul>	    
+<p>All WCF bindings except BasicHttpBinding have some extent of transfer security by default.</p>
+<h2>Message Security Level</h2>
+<p>Message level security is not dependent on WCF protocols. It is employed with message data itself by encrypting the data by using a standard algorithm. A number of client credentials are available for different bindings for the message security level and these are discussed below.</p>
+<p><b>Client credentials for message level security in WCF</b></p>
+<p><b>None</b> : Here, encryption is used to secure the message, whereas no client authentication is performed which means that the service can be accessed by an anonymous client. Except for BasicHttpBinding, all WCF bindings support this client credential. However it should be noted that for NetNamedPipeBinding, this client credential is not available at all.</p>
+<ul class="list">
+<li><p><b>Windows</b> - Here, both message encryption and client authentication take place for a real-time logged-in user. In this case too, unlike all other WCF bindings, NetNamedPipeBinding is not available and BasicHttpBinding does not lend its support.</p></li>
+<li><p><b>UserName</b> - Here, messages are encrypted as well as secured by offering a UserName, and clients are authenticated as they need to offer a password. BasicHttpBinding just like the above two client credentials, does not support UserName and it is not available for NetNamedPipeBinding.</p></li>
+<li><p><b>Certificate</b> - Along with message encryption, both the client and the service get an authentication with certificate. This client credential is available and is supported by all WCF bindings except NetNamedPipeBinding.</p></li>
+<li><p><b>IssuedToken</b> - Issued Tokens from an authority like Cardspace are used to authenticate the messages. Encryption of messages are also performed here.</p></li>
+</ul>
+<p>The following code shows how client credentials are configured in the WCF message security level/mode.</p>
+<pre class="prettyprint notranslate">
+&lt;netTcpBinding&gt;
+   &lt;binding name="WCFMessageSecurityExample"&gt;
+      &lt;security mode="Message"&gt;
+         &lt;message clientCredentialType="None"/&gt;
+      &lt;/security&gt;   
+   &lt;/binding&gt;
+&lt;/netTcpBinding&gt;
+&lt;netMsmqBinding&gt;...&lt;/netMsmqBinding&gt;
+&lt;/bindings&gt;
+&lt;behaviors&gt;...&lt;/behaviors&gt;
+</pre>
+<p>Here, it must be noted that the transport security mode has an edge over the message security level, as the former is faster. It does not require any additional coding and offers interoperability support, and thus does not reduce the overall performance.</p>
+<p>However, from security point of view, the message security mode is more robust and is independent of protocols and offers end-to end security.</p>
+<h1>WCF - Exception handling</h1>
+<p>A WCF service developer may encounter some unforeseen errors which require reporting to the client in a suitable manner. Such errors, known as exceptions, are normally handled by using try/catch blocks, but again, this is very technology specific.</p>
+<p>Since a client’s concern area is not about how an error occurred or the factors contributing to an error, SOAP Fault contract is used to communicate the error message from the service to the client in WCF.</p>
+<p>A Fault contract enables the client to have a documented view of the errors occurred in a service. The following example gives a better understanding.</p>
+<p><b>Step 1</b> : An easy calculator service is created with divide operation which will generate general exceptions.</p>
+<pre class="prettyprint notranslate">
+using System;
+usingSystem.Collections.Generic;
+usingSystem.Linq;
+usingSystem.Runtime.Serialization;
+usingSystem.ServiceModel;
+usingSystem.Text;
+
+namespace Calculator
+{
+   // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
+   [ServiceContract]
+   public interface IService1
+   {
+      [OperationContract]
+      int divide(int num1, int num2);
+      // TODO: Add your service operations here
+   }
+}
+</pre>
+<p>The coding for the class file is show below:</p>
+<img src="images/wcf_exception_handling_2.jpg" alt="Wcf Exception Handling 2" />
+<p>Now, when we try to divide the number 10 by zero, the calculator service will throw an exception.</p>
+<img src="images/wcf_exception_handling_3.jpg" alt="Wcf Exception Handling 3" />
+<img src="images/wcf_exception_handling_4.jpg" alt="Wcf Exception Handling 4" />
+<p>The exception can be handled by try/catch block.</p>
+<img src="images/wcf_exception_handling_5.jpg" alt="Wcf Exception Handling 5" />
+<p>Now, when we try to divide any integer number by 0, it will return the value 10 because we have handled it in the catch block.</p>
+<img src="images/wcf_exception_handling_6.jpg" alt="Wcf Exception Handling 6" />
+<p><b>Step 2</b> : FaultException is used in this step to communicate the exception information to the client from the service.</p>
+<pre class="prettyprint notranslate">
+public int Divide(int num1, int num2) 
+{ 
+   //Do something 
+   throw new FaultException("Error while dividing number"); 
+}
+</pre>
+<img src="images/wcf_exception_handling_7.jpg" alt="Wcf Exception Handling 7" />
+<hr />
+<div class="pre-btn">
+<a href="wcf_exception_handling.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="pdf-btn">
+<a href="pdf/wcf_quick_guide.pdf" title="WCF - Quick Guide" target="_blank"><i class="icon icon-file-pdf-o big-font"></i> PDF</a>
+</div>
+<div class="nxt-btn">
+<a href="wcf_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/wcf/wcf_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/wcf/wcf_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/wcf/wcf_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/wcf/wcf_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/wcf/wcf_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/wcf/wcf_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "WCF - Quick Guide",
+    "name": "WCF - Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/wcf/wcf_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/wcf/images/wcf_architecture.jpg",
+        "width": 507,
+        "height": 681
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:49.",
+    "dateModified": "July 23 2017 03:34:49.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "WCF stands for Windows Communication Foundation. The elementary feature of WCF is interoperability. It is one of the latest technologies of Microsoft that is used to build service-oriented applications. Based on the concept of message-based communication,..."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Microsoft Technologies",
+                "@id": "https://www.tutorialspoint.com/microsoft_technologies_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Wcf",
+                "@id": "https://www.tutorialspoint.com/wcf"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "WCF - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/wcf/wcf_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 17:09:44 GMT -->
+</html>

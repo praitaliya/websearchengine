@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:39:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>HCatalog Quick Guide</title>
+<meta name="description" content="HCatalog Quick Guide - Learn HCatalog starting from Introduction, Installation, CLI, Create Table, Alter Table, View, Show Tables, Show Partitions, Indexes, Reader Writer, Input Output Format, Loader and Storer." />
+<meta name="keywords" content="HCatalog, Tutorial, Introduction, Installation, CLI, Create Table, Alter Table, View, Show Tables, Show Partitions, Indexes, Reader Writer, Input Output Format, Loader and Storer." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #f19b06 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #f19b06 !important;}
+.submenu-item{ border-bottom: 2px solid #f19b06 !important; border-top: 2px solid #f19b06 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/hcatalog-mini-logo.jpg" alt="HCatalog Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">HCatalog Tutorial</li>
+<li><a href="index.html">HCatalog - Home</a></li>
+<li><a href="hcatalog_introduction.html">HCatalog - Introduction</a></li>
+<li><a href="hcatalog_installation.html">HCatalog - Installation</a></li>
+<li><a href="hcatalog_cli.html">HCatalog - CLI</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">HCatalog CLI Commands</li>
+<li><a href="hcatalog_create_table.html">HCatalog - Create Table</a></li>
+<li><a href="hcatalog_alter_table.html">HCatalog - Alter Table</a></li>
+<li><a href="hcatalog_view.html">HCatalog - View</a></li>
+<li><a href="hcatalog_show_tables.html">HCatalog - Show Tables</a></li>
+<li><a href="hcatalog_show_partitions.html">HCatalog - Show Partitions</a></li>
+<li><a href="hcatalog_indexes.html">HCatalog - Indexes</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">HCatalog APIS</li>
+<li><a href="hcatalog_reader_writer.html">HCatalog - Reader Writer</a></li>
+<li><a href="hcatalog_input_output_format.html">HCatalog - Input Output Format</a></li>
+<li><a href="hcatalog_loader_and_storer.html">HCatalog - Loader and Storer</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">HCatalog Useful Resources</li>
+<li><a href="hcatalog_quick_guide.html">HCatalog - Quick Guide</a></li>
+<li><a href="hcatalog_useful_resources.html">HCatalog - Useful Resources</a></li>
+<li><a href="hcatalog_discussion.html">HCatalog - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>HCatalog - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript" 
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="hcatalog_loader_and_storer.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="hcatalog_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>HCatalog - Introduction</h1>
+<h2>What is HCatalog?</h2>
+<p>HCatalog is a table storage management tool for Hadoop. It exposes the tabular data of Hive metastore to other Hadoop applications. It enables users with different data processing tools (Pig, MapReduce) to easily write data onto a grid. It ensures that users don’t have to worry about where or in what format their data is stored.</p>
+<p>HCatalog works like a key component of Hive and it enables the users to store their data in any format and any structure.</p>
+<h2>Why HCatalog?</h2>
+<h3>Enabling right tool for right Job</h3>
+<p>Hadoop ecosystem contains different tools for data processing such as Hive, Pig, and MapReduce. Although these tools do not require metadata, they can still benefit from it when it is present. Sharing a metadata store also enables users across tools to share data more easily. A workflow where data is loaded and normalized using MapReduce or Pig and then analyzed via Hive is very common. If all these tools share one metastore, then the users of each tool have immediate access to data created with another tool. No loading or transfer steps are required.</p>
+<h3>Capture processing states to enable sharing</h3>
+<p>HCatalog can publish your analytics results. So the other programmer can access your analytics platform via “REST”. The schemas which are published by you are also useful to other data scientists. The other data scientists use your discoveries as inputs into a subsequent discovery.</p>
+<h3>Integrate Hadoop with everything</h3>
+<p>Hadoop as a processing and storage environment opens up a lot of opportunity for the enterprise; however, to fuel adoption, it must work with and augment existing tools. Hadoop should serve as input into your analytics platform or integrate with your operational data stores and web applications. The organization should enjoy the value of Hadoop without having to learn an entirely new toolset. REST services opens up the platform to the enterprise with a familiar API and SQL-like language. Enterprise data management systems use HCatalog to more deeply integrate with the Hadoop platform.</p>
+<h2>HCatalog Architecture</h2>
+<p>The following illustration shows the overall architecture of HCatalog.</p>
+<img src="images/architecture.jpg" alt="Architecture" />
+<p>HCatalog supports reading and writing files in any format for which a <b>SerDe</b> (serializer-deserializer) can be written. By default, HCatalog supports RCFile, CSV, JSON, SequenceFile, and ORC file formats. To use a custom format, you must provide the InputFormat, OutputFormat, and SerDe.</p>
+<p>HCatalog is built on top of the Hive metastore and incorporates Hive's DDL. HCatalog provides read and write interfaces for Pig and MapReduce and uses Hive's command line interface for issuing data definition and metadata exploration commands.</p>
+<h1>HCatalog - Installation</h1>
+<p>All Hadoop sub-projects such as Hive, Pig, and HBase support Linux operating system. Therefore, you need to install a Linux flavor on your system. HCatalog is merged with Hive Installation on March 26, 2013. From the version Hive-0.11.0 onwards, HCatalog comes with Hive installation. Therefore, follow the steps given below to install Hive which in turn will automatically install HCatalog on your system.</p>
+<h2>Step 1: Verifying JAVA Installation</h2>
+<p>Java must be installed on your system before installing Hive. You can use the following command to check whether you have Java already installed on your system &minus;</p>
+<pre class="result notranslate">
+$ java –version
+</pre>
+<p>If Java is already installed on your system, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+java version "1.7.0_71"
+Java(TM) SE Runtime Environment (build 1.7.0_71-b13)
+Java HotSpot(TM) Client VM (build 25.0-b02, mixed mode)
+</pre>
+<p>If you don’t have Java installed on your system, then you need to follow the steps given below.</p>
+<h2>Step 2: Installing Java</h2>
+<p>Download Java (JDK &lt;latest version&gt; - X64.tar.gz) by visiting the following link <a target="_blank" rel="nofollow" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">http://www.oracle.com/</a></p>
+<p>Then <b>jdk-7u71-linux-x64.tar.gz</b> will be downloaded onto your system.</p>
+<p>Generally you will find the downloaded Java file in the Downloads folder. Verify it and extract the <b>jdk-7u71-linux-x64.gz</b> file using the following commands.</p>
+<pre class="result notranslate">
+$ cd Downloads/
+$ ls
+jdk-7u71-linux-x64.gz
+
+$ tar zxf jdk-7u71-linux-x64.gz
+$ ls
+jdk1.7.0_71 jdk-7u71-linux-x64.gz
+</pre>
+<p>To make Java available to all the users, you have to move it to the location “/usr/local/”. Open root, and type the following commands.</p>
+<pre class="result notranslate">
+$ su
+password:
+# mv jdk1.7.0_71 /usr/local/
+# exit
+</pre>
+<p>For setting up <b>PATH</b> and <b>JAVA_HOME</b> variables, add the following commands to <b>~/.bashrc</b> file.</p>
+<pre class="prettyprint notranslate">
+export JAVA_HOME=/usr/local/jdk1.7.0_71
+export PATH=PATH:$JAVA_HOME/bin
+</pre>
+<p>Now verify the installation using the command <b>java -version</b> from the terminal as explained above.</p>
+<h2>Step 3: Verifying Hadoop Installation</h2>
+<p>Hadoop must be installed on your system before installing Hive. Let us verify the Hadoop installation using the following command &minus;</p>
+<pre class="result notranslate">
+$ hadoop version
+</pre>
+<p>If Hadoop is already installed on your system, then you will get the following response &minus;</p>
+<pre class="result notranslate">
+Hadoop 2.4.1
+Subversion https://svn.apache.org/repos/asf/hadoop/common -r 1529768
+Compiled by hortonmu on 2013-10-07T06:28Z
+Compiled with protoc 2.5.0
+From source with checksum 79e53ce7994d1628b240f09af91e1af4
+</pre>
+<p>If Hadoop is not installed on your system, then proceed with the following steps &minus;</p>
+<h2>Step 4: Downloading Hadoop</h2>
+<p>Download and extract Hadoop 2.4.1 from Apache Software Foundation using the following commands.</p>
+<pre class="result notranslate">
+$ su
+password:
+# cd /usr/local
+# wget http://apache.claz.org/hadoop/common/hadoop-2.4.1/
+hadoop-2.4.1.tar.gz
+# tar xzf hadoop-2.4.1.tar.gz
+# mv hadoop-2.4.1/* to hadoop/
+# exit
+</pre>
+<h2>Step 5: Installing Hadoop in Pseudo Distributed Mode</h2>
+<p>The following steps are used to install <b>Hadoop 2.4.1</b> in pseudo distributed mode.</p>
+<h3>Setting up Hadoop</h3>
+<p>You can set Hadoop environment variables by appending the following commands to <b>~/.bashrc</b> file.</p>
+<pre class="result notranslate">
+export HADOOP_HOME=/usr/local/hadoop
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME 
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+</pre>
+<p>Now apply all the changes into the current running system.</p>
+<pre class="result notranslate">
+$ source ~/.bashrc
+</pre>
+<h3>Hadoop Configuration</h3>
+<p>You can find all the Hadoop configuration files in the location “$HADOOP_HOME/etc/hadoop”. You need to make suitable changes in those configuration files according to your Hadoop infrastructure.</p>
+<pre class="result notranslate">
+$ cd $HADOOP_HOME/etc/hadoop
+</pre>
+<p>In order to develop Hadoop programs using Java, you have to reset the Java environment variables in <b>hadoop-env.sh</b> file by replacing <b>JAVA_HOME</b> value with the location of Java in your system.</p>
+<pre class="result notranslate">
+export JAVA_HOME=/usr/local/jdk1.7.0_71
+</pre>
+<p>Given below are the list of files that you have to edit to configure Hadoop.</p>
+<h3>core-site.xml</h3>
+<p>The <b>core-site.xml</b> file contains information such as the port number used for Hadoop instance, memory allocated for the file system, memory limit for storing the data, and the size of Read/Write buffers.</p>
+<p>Open the core-site.xml and add the following properties in between the &lt;configuration&gt; and &lt;/configuration&gt; tags.</p>
+<pre class="prettyprint notranslate">
+&lt;configuration&gt;
+   &lt;property&gt;
+      &lt;name&gt;fs.default.name&lt;/name&gt;
+      &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+   &lt;/property&gt;
+&lt;/configuration&gt;
+</pre>
+<h3>hdfs-site.xml</h3>
+<p>The <b>hdfs-site.xml</b> file contains information such as the value of replication data, the namenode path, and the datanode path of your local file systems. It means the place where you want to store the Hadoop infrastructure.</p>
+<p>Let us assume the following data.</p>
+<pre class="prettyprint notranslate">
+dfs.replication (data replication value) = 1
+
+(In the following path /hadoop/ is the user name.
+hadoopinfra/hdfs/namenode is the directory created by hdfs file system.)
+
+namenode path = //home/hadoop/hadoopinfra/hdfs/namenode
+
+(hadoopinfra/hdfs/datanode is the directory created by hdfs file system.)
+datanode path = //home/hadoop/hadoopinfra/hdfs/datanode
+</pre>
+<p>Open this file and add the following properties in between the &lt;configuration&gt;, &lt;/configuration&gt; tags in this file.</p>
+<pre class="prettyprint notranslate">
+&lt;configuration&gt;
+   &lt;property&gt;
+      &lt;name&gt;dfs.replication&lt;/name&gt;
+      &lt;value&gt;1&lt;/value&gt;
+   &lt;/property&gt; 
+   
+   &lt;property&gt;
+      &lt;name&gt;dfs.name.dir&lt;/name&gt;
+      &lt;value&gt;file:///home/hadoop/hadoopinfra/hdfs/namenode&lt;/value&gt; 
+   &lt;/property&gt; 
+
+   &lt;property&gt;
+      &lt;name&gt;dfs.data.dir&lt;/name&gt;
+      &lt;value&gt;file:///home/hadoop/hadoopinfra/hdfs/datanode&lt;/value&gt; 
+   &lt;/property&gt;
+&lt;/configuration&gt;
+</pre>
+<p><b>Note</b> &minus; In the above file, all the property values are user-defined and you can make changes according to your Hadoop infrastructure.</p>
+<h3>yarn-site.xml</h3>
+<p>This file is used to configure yarn into Hadoop. Open the yarn-site.xml file and add the following properties in between the &lt;configuration&gt;, &lt;/configuration&gt; tags in this file.</p>
+<pre class="prettyprint notranslate">
+&lt;configuration&gt;
+   &lt;property&gt;
+      &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+      &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+   &lt;/property&gt;
+&lt;/configuration&gt;
+</pre>
+<h3>mapred-site.xml</h3>
+<p>This file is used to specify which MapReduce framework we are using. By default, Hadoop contains a template of yarn-site.xml. First of all, you need to copy the file from <b>mapred-site,xml.template</b> to <b>mapred-site.xml</b> file using the following command.</p>
+<pre class="result notranslate">
+$ cp mapred-site.xml.template mapred-site.xml
+</pre>
+<p>Open mapred-site.xml file and add the following properties in between the &lt;configuration&gt;, &lt;/configuration&gt; tags in this file.</p>
+<pre class="prettyprint notranslate">
+&lt;configuration&gt;
+   &lt;property&gt;
+      &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+      &lt;value&gt;yarn&lt;/value&gt;
+   &lt;/property&gt;
+&lt;/configuration&gt;
+</pre>
+<h2>Step 6: Verifying Hadoop Installation</h2>
+<p>The following steps are used to verify the Hadoop installation.</p>
+<h3>Namenode Setup</h3>
+<p>Set up the namenode using the command “hdfs namenode -format” as follows &minus;</p>
+<pre class="prettyprint notranslate">
+$ cd ~
+$ hdfs namenode -format
+</pre>
+<p>The expected result is as follows &minus;</p>
+<pre class="result notranslate">
+10/24/14 21:30:55 INFO namenode.NameNode: STARTUP_MSG:
+/************************************************************
+STARTUP_MSG: Starting NameNode
+STARTUP_MSG: host = localhost/192.168.1.11
+STARTUP_MSG: args = [-format]
+STARTUP_MSG: version = 2.4.1
+...
+...
+10/24/14 21:30:56 INFO common.Storage: Storage directory
+/home/hadoop/hadoopinfra/hdfs/namenode has been successfully formatted.
+10/24/14 21:30:56 INFO namenode.NNStorageRetentionManager: Going to retain 1
+images with txid &gt;= 0 10/24/14 21:30:56 INFO util.ExitUtil: Exiting with status 0
+10/24/14 21:30:56 INFO namenode.NameNode: SHUTDOWN_MSG:
+/************************************************************
+SHUTDOWN_MSG: Shutting down NameNode at localhost/192.168.1.11
+************************************************************/
+</pre>
+<h3>Verifying Hadoop DFS</h3>
+<p>The following command is used to start the DFS. Executing this command will start your Hadoop file system.</p>
+<pre class="prettyprint notranslate">
+$ start-dfs.sh
+</pre>
+<p>The expected output is as follows &minus;</p>
+<pre class="result notranslate">
+10/24/14 21:37:56 Starting namenodes on [localhost]
+localhost: starting namenode, logging to
+/home/hadoop/hadoop-2.4.1/logs/hadoop-hadoop-namenode-localhost.out localhost:
+starting datanode, logging to
+   /home/hadoop/hadoop-2.4.1/logs/hadoop-hadoop-datanode-localhost.out
+Starting secondary namenodes [0.0.0.0]
+</pre>
+<h3>Verifying Yarn Script</h3>
+<p>The following command is used to start the Yarn script. Executing this command will start your Yarn daemons.</p>
+<pre class="prettyprint notranslate">
+$ start-yarn.sh
+</pre>
+<p>The expected output is as follows &minus;</p>
+<pre class="result notranslate">
+starting yarn daemons
+starting resourcemanager, logging to /home/hadoop/hadoop-2.4.1/logs/
+yarn-hadoop-resourcemanager-localhost.out
+localhost: starting nodemanager, logging to
+   /home/hadoop/hadoop-2.4.1/logs/yarn-hadoop-nodemanager-localhost.out
+</pre>
+<h3>Accessing Hadoop on Browser</h3>
+<p>The default port number to access Hadoop is 50070. Use the following URL to get Hadoop services on your browser.</p>
+<pre class="result notranslate">
+http://localhost:50070/
+</pre>
+<p></p>
+<img src="images/accessing_hadoop.jpg" alt="Accessing HADOOP" />
+<h3>Verify all applications for cluster</h3>
+<p>The default port number to access all applications of cluster is 8088. Use the following url to visit this service.</p>
+<pre class="result notranslate">
+http://localhost:8088/
+</pre>
+<p></p>
+<img src="images/cluster.jpg" alt="Cluster" />
+<p>Once you are done with the installation of Hadoop, proceed to the next step and install Hive on your system.</p>
+<h2>Step 7: Downloading Hive</h2>
+<p>We use hive-0.14.0 in this tutorial. You can download it by visiting the following link <b>http://apache.petsads.us/hive/hive-0.14.0/</b>. Let us assume it gets downloaded onto the <b>/Downloads</b> directory. Here, we download Hive archive named “<b>apache-hive-0.14.0-bin.tar.gz</b>” for this tutorial. The following command is used to verify the download &minus;</p>
+<pre class="result notranslate">
+$ cd Downloads
+$ ls
+</pre>
+<p>On successful download, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+apache-hive-0.14.0-bin.tar.gz
+</pre>
+<h2>Step 8: Installing Hive</h2>
+<p>The following steps are required for installing Hive on your system. Let us assume the Hive archive is downloaded onto the <b>/Downloads</b> directory.</p>
+<h3>Extracting and Verifying Hive Archive</h3>
+<p>The following command is used to verify the download and extract the Hive archive &minus;</p>
+<pre class="result notranslate">
+$ tar zxvf apache-hive-0.14.0-bin.tar.gz
+$ ls
+</pre>
+<p>On successful download, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+apache-hive-0.14.0-bin apache-hive-0.14.0-bin.tar.gz
+</pre>
+<h3>Copying files to /usr/local/hive directory</h3>
+<p>We need to copy the files from the superuser “su -”. The following commands are used to copy the files from the extracted directory to the <b>/usr/local/hive</b>” directory.</p>
+<pre class="result notranslate">
+$ su -
+passwd:
+# cd /home/user/Download
+# mv apache-hive-0.14.0-bin /usr/local/hive
+# exit
+</pre>
+<h3>Setting up the environment for Hive</h3>
+<p>You can set up the Hive environment by appending the following lines to <b>~/.bashrc</b> file &minus;</p>
+<pre class="result notranslate">
+export HIVE_HOME=/usr/local/hive
+export PATH=$PATH:$HIVE_HOME/bin
+export CLASSPATH=$CLASSPATH:/usr/local/Hadoop/lib/*:.
+export CLASSPATH=$CLASSPATH:/usr/local/hive/lib/*:.
+</pre>
+<p>The following command is used to execute ~/.bashrc file.</p>
+<pre class="result notranslate">
+$ source ~/.bashrc
+</pre>
+<h2>Step 9: Configuring Hive</h2>
+<p>To configure Hive with Hadoop, you need to edit the <b>hive-env.sh</b> file, which is placed in the <b>$HIVE_HOME/conf</b> directory. The following commands redirect to Hive <b>config</b> folder and copy the template file &minus;</p>
+<pre class="result notranslate">
+$ cd $HIVE_HOME/conf
+$ cp hive-env.sh.template hive-env.sh
+</pre>
+<p>Edit the <b>hive-env.sh</b> file by appending the following line &minus;</p>
+<pre class="result notranslate">
+export HADOOP_HOME=/usr/local/hadoop
+</pre>
+<p>With this, the Hive installation is complete. Now you require an external database server to configure Metastore. We use Apache Derby database.</p>
+<h2>Step 10: Downloading and Installing Apache Derby</h2>
+<p>Follow the steps given below to download and install Apache Derby &minus;</p>
+<h3>Downloading Apache Derby</h3>
+<p>The following command is used to download Apache Derby. It takes some time to download.</p>
+<pre class="prettyprint notranslate">
+$ cd ~
+$ wget http://archive.apache.org/dist/db/derby/db-derby-10.4.2.0/db-derby-10.4.2.0-bin.tar.gz
+</pre>
+<p>The following command is used to verify the download &minus;</p>
+<pre class="result notranslate">
+$ ls
+</pre>
+<p>On successful download, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+db-derby-10.4.2.0-bin.tar.gz
+</pre>
+<h3>Extracting and Verifying Derby Archive</h3>
+<p>The following commands are used for extracting and verifying the Derby archive &minus;</p>
+<pre class="result notranslate">
+$ tar zxvf db-derby-10.4.2.0-bin.tar.gz
+$ ls
+</pre>
+<p>On successful download, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+db-derby-10.4.2.0-bin db-derby-10.4.2.0-bin.tar.gz
+</pre>
+<h3>Copying Files to /usr/local/derby Directory</h3>
+<p>We need to copy from the superuser “su -”. The following commands are used to copy the files from the extracted directory to the <b>/usr/local/derby</b> directory &minus;</p>
+<pre class="result notranslate">
+$ su -
+passwd:
+# cd /home/user
+# mv db-derby-10.4.2.0-bin /usr/local/derby
+# exit
+</pre>
+<h3>Setting up the Environment for Derby</h3>
+<p>You can set up the Derby environment by appending the following lines to <b>~/.bashrc</b> file &minus;</p>
+<pre class="result notranslate">
+export DERBY_HOME=/usr/local/derby
+export PATH=$PATH:$DERBY_HOME/bin
+export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar
+</pre>
+<p>The following command is used to execute <b>~/.bashrc file</b> &minus;</p>
+<pre class="result notranslate">
+$ source ~/.bashrc
+</pre>
+<h3>Create a Directory for Metastore</h3>
+<p>Create a directory named <b>data</b> in $DERBY_HOME directory to store Metastore data.</p>
+<pre class="result notranslate">
+$ mkdir $DERBY_HOME/data
+</pre>
+<p>Derby installation and environmental setup is now complete.</p>
+<h2>Step 11: Configuring the Hive Metastore</h2>
+<p>Configuring Metastore means specifying to Hive where the database is stored. You can do this by editing the <b>hive-site.xml</b> file, which is in the <b>$HIVE_HOME/conf</b> directory. First of all, copy the template file using the following command &minus;</p>
+<pre class="result notranslate">
+$ cd $HIVE_HOME/conf
+$ cp hive-default.xml.template hive-site.xml
+</pre>
+<p>Edit <b>hive-site.xml</b> and append the following lines between the &lt;configuration&gt; and &lt;/configuration&gt; tags &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;property&gt;
+   &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+   &lt;value&gt;jdbc:derby://localhost:1527/metastore_db;create = true&lt;/value&gt;
+   &lt;description&gt;JDBC connect string for a JDBC metastore&lt;/description&gt;
+&lt;/property&gt;
+</pre>
+<p>Create a file named <b>jpox.properties</b> and add the following lines into it &minus;</p>
+<pre class="prettyprint notranslate">
+javax.jdo.PersistenceManagerFactoryClass = org.jpox.PersistenceManagerFactoryImpl
+
+org.jpox.autoCreateSchema = false
+org.jpox.validateTables = false
+org.jpox.validateColumns = false
+org.jpox.validateConstraints = false
+
+org.jpox.storeManagerType = rdbms
+org.jpox.autoCreateSchema = true
+org.jpox.autoStartMechanismMode = checked
+org.jpox.transactionIsolation = read_committed
+
+javax.jdo.option.DetachAllOnCommit = true
+javax.jdo.option.NontransactionalRead = true
+javax.jdo.option.ConnectionDriverName = org.apache.derby.jdbc.ClientDriver
+javax.jdo.option.ConnectionURL = jdbc:derby://hadoop1:1527/metastore_db;create = true
+javax.jdo.option.ConnectionUserName = APP
+javax.jdo.option.ConnectionPassword = mine
+</pre>
+<h2>Step 12: Verifying Hive Installation</h2>
+<p>Before running Hive, you need to create the <b>/tmp</b> folder and a separate Hive folder in HDFS. Here, we use the <b>/user/hive/warehouse</b> folder. You need to set write permission for these newly created folders as shown below &minus;</p>
+<pre class="result notranslate">
+chmod g+w
+</pre>
+<p>Now set them in HDFS before verifying Hive. Use the following commands &minus;</p>
+<pre class="result notranslate">
+$ $HADOOP_HOME/bin/hadoop fs -mkdir /tmp
+$ $HADOOP_HOME/bin/hadoop fs -mkdir /user/hive/warehouse
+$ $HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp
+$ $HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
+</pre>
+<p>The following commands are used to verify Hive installation &minus;</p>
+<pre class="result notranslate">
+$ cd $HIVE_HOME
+$ bin/hive
+</pre>
+<p>On successful installation of Hive, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+Logging initialized using configuration in 
+   jar:file:/home/hadoop/hive-0.9.0/lib/hive-common-0.9.0.jar!/
+hive-log4j.properties Hive history
+   =/tmp/hadoop/hive_job_log_hadoop_201312121621_1494929084.txt
+………………….
+hive&gt;
+</pre>
+<p>You can execute the following sample command to display all the tables &minus;</p>
+<pre class="result notranslate">
+hive&gt; show tables;
+OK Time taken: 2.798 seconds
+hive&gt;
+</pre>
+<h2>Step 13: Verify HCatalog Installation</h2>
+<p>Use the following command to set a system variable <b>HCAT_HOME</b> for HCatalog Home.</p>
+<pre class="result notranslate">
+export HCAT_HOME = $HiVE_HOME/HCatalog
+</pre>
+<p>Use the following command to verify the HCatalog installation.</p>
+<pre class="result notranslate">
+cd $HCAT_HOME/bin
+./hcat
+</pre>
+<p>If the installation is successful, you will get to see the following output &minus;</p>
+<pre class="result notranslate">
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+usage: hcat { -e "&lt;query&gt;" | -f "&lt;filepath&gt;" } 
+   [ -g "&lt;group&gt;" ] [ -p "&lt;perms&gt;" ] 
+   [ -D"&lt;name&gt; = &lt;value&gt;" ]
+	
+-D &lt;property = value&gt;    use hadoop value for given property
+-e &lt;exec&gt;                hcat command given from command line
+-f &lt;file&gt;                hcat commands in file
+-g &lt;group&gt;               group for the db/table specified in CREATE statement
+-h,--help                Print help information
+-p &lt;perms&gt;               permissions for the db/table specified in CREATE statement
+</pre>
+<h1>HCatalog - CLI</h1>
+<p>HCatalog Command Line Interface (CLI) can be invoked from the command <b>$HIVE_HOME/HCatalog/bin/hcat</b> where $HIVE_HOME is the home directory of Hive. <b>hcat</b> is a command used to initialize the HCatalog server.</p>
+<p>Use the following command to initialize HCatalog command line.</p>
+<pre class="result notranslate">
+cd $HCAT_HOME/bin
+./hcat
+</pre>
+<p>If the installation has been done correctly, then you will get the following output &minus;</p>
+<pre class="result notranslate">
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+usage: hcat { -e "&lt;query&gt;" | -f "&lt;filepath&gt;" } 
+   [ -g "&lt;group&gt;" ] [ -p "&lt;perms&gt;" ] 
+   [ -D"&lt;name&gt; = &lt;value&gt;" ]
+	
+-D &lt;property = value&gt;    use hadoop value for given property
+-e &lt;exec&gt;                hcat command given from command line
+-f &lt;file&gt;                hcat commands in file
+-g &lt;group&gt;               group for the db/table specified in CREATE statement
+-h,--help                Print help information
+-p &lt;perms&gt;               permissions for the db/table specified in CREATE statement
+</pre>
+<p>The HCatalog CLI supports these command line options &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th>Option</th>
+<th style="text-align:center;">Example &amp; Description</th>
+</tr>
+<tr>
+<td style="vertical-align:middle;">1</td>
+<td style="vertical-align:middle;text-align:center">-g</td>
+<td><p><b>hcat -g mygroup ...</b></p>
+<p>The table to be created must have the group "mygroup".</p></td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">2</td>
+<td style="vertical-align:middle;text-align:center">-p</td>
+<td><p><b>hcat -p rwxr-xr-x ...</b></p>
+<p>The table to be created must have read, write, and execute permissions.</p></td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">3</td>
+<td style="vertical-align:middle;text-align:center">-f</td>
+<td><p><b>hcat -f myscript.HCatalog ...</b></p>
+<p>myscript.HCatalog is a script file containing DDL commands to execute.</p></td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">4</td>
+<td style="vertical-align:middle;text-align:center">-e</td>
+<td><p><b>hcat -e 'create table mytable(a int);' ...</b></p>
+<p>Treat the following string as a DDL command and execute it.</p></td>
+</tr>
+<tr style="vertical-align:middle;">
+<td>5</td>
+<td style="vertical-align:middle;text-align:center">-D</td>
+<td><p><b>hcat -Dkey = value ...</b></p>
+<p>Passes the key-value pair to HCatalog as a Java system property.</p></td>
+</tr>
+<tr style="vertical-align:middle;">
+<td>6</td>
+<td style="vertical-align:middle;text-align:center">-</td>
+<td><p><b>hcat</b></p>
+<p>Prints a usage message.</p></td>
+</tr>
+</table>
+<h3>Note &minus;</h3> 
+<ul class="list">
+<li><p>The <b>-g</b> and <b>-p</b> options are not mandatory.</p></li>
+<li><p>At one time, either <b>-e</b> or <b>-f</b> option can be provided, not both.</p></li>
+<li><p>The order of options is immaterial; you can specify the options in any order.</p></li>
+</ul>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">DDL Command &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>CREATE TABLE</b></p>
+<p>Create a table using HCatalog. If you create a table with a CLUSTERED BY clause, you will not be able to write to it with Pig or MapReduce.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>ALTER TABLE</b></p>
+<p>Supported except for the REBUILD and CONCATENATE options. Its behavior remains same as in Hive.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>DROP TABLE</b></p>
+<p>Supported. Behavior the same as Hive (Drop the complete table and structure).</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>CREATE/ALTER/DROP VIEW</b></p>
+<p>Supported. Behavior same as Hive.</p>
+<p><b>Note</b> &minus; Pig and MapReduce cannot read from or write to views.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>SHOW TABLES</b></p>
+<p>Display a list of tables.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>SHOW PARTITIONS</b></p>
+<p>Display a list of partitions.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>Create/Drop Index</b></p>
+<p>CREATE and DROP FUNCTION operations are supported, but the created functions must still be registered in Pig and placed in CLASSPATH for MapReduce.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>DESCRIBE</b></p>
+<p>Supported. Behavior same as Hive. Describe the structure.</p></td>
+</tr>
+</table>
+<p>Some of the commands from the above table are explained in subsequent chapters.</p>
+<h1>HCatalog - Create Table</h1>
+<p>This chapter explains how to create a table and how to insert data into it. The conventions of creating a table in HCatalog is quite similar to creating a table using Hive.</p>
+<h2>Create Table Statement</h2>
+<p>Create Table is a statement used to create a table in Hive metastore using HCatalog. Its syntax and example are as follows &minus;</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.] table_name
+[(col_name data_type [COMMENT col_comment], ...)]
+[COMMENT table_comment]
+[ROW FORMAT row_format]
+[STORED AS file_format]
+</pre>
+<h3>Example</h3>
+<p>Let us assume you need to create a table named <b>employee</b> using <b>CREATE TABLE</b> statement. The following table lists the fields and their data types in the <b>employee</b> table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Field Name</th>
+<th style="text-align:center;">Data Type</th>
+</tr>
+<tr style="text-align:center;">
+<td>1</td>
+<td>Eid</td>
+<td>int</td>
+</tr>
+<tr style="text-align:center;">
+<td>2</td>
+<td>Name</td>
+<td>String</td>
+</tr>
+<tr style="text-align:center;">
+<td>3</td>
+<td>Salary</td>
+<td>Float</td>
+</tr>
+<tr style="text-align:center;">
+<td>4</td>
+<td>Designation</td>
+<td>string</td>
+</tr>
+</table>
+<p>The following data defines the supported fields such as <b>Comment</b>, Row formatted fields such as <b>Field terminator</b>, <b>Lines terminator</b>, and <b>Stored File type</b>.</p>
+<pre class="prettyprint notranslate">
+COMMENT ‘Employee details’
+FIELDS TERMINATED BY ‘\t’
+LINES TERMINATED BY ‘\n’
+STORED IN TEXT FILE
+</pre>
+<p>The following query creates a table named <b>employee</b> using the above data.</p>
+<pre class="result notranslate">
+./hcat –e "CREATE TABLE IF NOT EXISTS employee ( eid int, name String, 
+   salary String, destination String) \
+COMMENT 'Employee details' \
+ROW FORMAT DELIMITED \
+FIELDS TERMINATED BY ‘\t’ \
+LINES TERMINATED BY ‘\n’ \
+STORED AS TEXTFILE;"
+</pre>
+<p>If you add the option <b>IF NOT EXISTS</b>, HCatalog ignores the statement in case the table already exists.</p>
+<p>On successful creation of table, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+OK
+Time taken: 5.905 seconds
+</pre>
+<h2>Load Data Statement</h2>
+<p>Generally, after creating a table in SQL, we can insert data using the Insert statement. But in HCatalog, we insert data using the LOAD DATA statement.</p>
+<p>While inserting data into HCatalog, it is better to use LOAD DATA to store bulk records. There are two ways to load data: one is from <b>local file system</b> and second is from <b>Hadoop file system</b>.</p>
+<h3>Syntax</h3>
+<p>The syntax for LOAD DATA is as follows &minus;</p>
+<pre class="result notranslate">
+LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename
+[PARTITION (partcol1=val1, partcol2=val2 ...)]
+</pre>
+<ul class="list">
+<li>LOCAL is the identifier to specify the local path. It is optional.</li>
+<li>OVERWRITE is optional to overwrite the data in the table.</li>
+<li>PARTITION is optional.</li>
+</ul>
+<h3>Example</h3>
+<p>We will insert the following data into the table. It is a text file named <b>sample.txt</b> in <b>/home/user</b> directory.</p>
+<pre class="result notranslate">
+1201  Gopal        45000    Technical manager
+1202  Manisha      45000    Proof reader
+1203  Masthanvali  40000    Technical writer
+1204  Kiran        40000    Hr Admin
+1205  Kranthi      30000    Op Admin
+</pre>
+<p>The following query loads the given text into the table.</p>
+<pre class="prettyprint notranslate">
+./hcat –e "LOAD DATA LOCAL INPATH '/home/user/sample.txt'
+OVERWRITE INTO TABLE employee;"
+</pre>
+<p>On successful download, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+OK
+Time taken: 15.905 seconds
+</pre>
+<h1>HCatalog - Alter Table</h1>
+<p>This chapter explains how to alter the attributes of a table such as changing its table name, changing column names, adding columns, and deleting or replacing columns.</p>
+<h2>Alter Table Statement</h2>
+<p>You can use the ALTER TABLE statement to alter a table in Hive.</p>
+<h3>Syntax</h3>
+<p>The statement takes any of the following syntaxes based on what attributes we wish to modify in a table.</p>
+<pre class="prettyprint notranslate">
+ALTER TABLE name RENAME TO new_name
+ALTER TABLE name ADD COLUMNS (col_spec[, col_spec ...])
+ALTER TABLE name DROP [COLUMN] column_name
+ALTER TABLE name CHANGE column_name new_name new_type
+ALTER TABLE name REPLACE COLUMNS (col_spec[, col_spec ...])
+</pre>
+<p>Some of the scenarios are explained below.</p>
+<h2>Rename To… Statement</h2>
+<p>The following query renames a table from <b>employee</b> to <b>emp</b>.</p>
+<pre class="result notranslate">
+./hcat –e "ALTER TABLE employee RENAME TO emp;"
+</pre>
+<h2>Change Statement</h2>
+<p>The following table contains the fields of <b>employee</b> table and it shows the fields to be changed (in bold).</p>
+<table class="table table-bordered">
+<tr>
+<th>Field Name</th>
+<th>Convert from Data Type</th>
+<th>Change Field Name</th>
+<th>Convert to Data Type</th>
+</tr>
+<tr style="text-align:center;">
+<td>eid</td>
+<td>int</td>
+<td>eid</td>
+<td>int</td>
+</tr>
+<tr style="text-align:center;">
+<td>name</td>
+<td>String</td>
+<td>ename</td>
+<td>String</td>
+</tr>
+<tr style="text-align:center;">
+<td>salary</td>
+<td>Float</td>
+<td>salary</td>
+<td>Double</td>
+</tr>
+<tr style="text-align:center;">
+<td>designation</td>
+<td>String</td>
+<td>designation</td>
+<td>String</td>
+</tr>
+</table>
+<p>The following queries rename the column name and column data type using the above data &minus;</p>
+<pre class="result notranslate">
+./hcat –e "ALTER TABLE employee CHANGE name ename String;"
+./hcat –e "ALTER TABLE employee CHANGE salary salary Double;"
+</pre>
+<h2>Add Columns Statement</h2>
+<p>The following query adds a column named <b>dept</b> to the <b>employee</b> table.</p>
+<pre class="result notranslate">
+./hcat –e "ALTER TABLE employee ADD COLUMNS (dept STRING COMMENT 'Department name');"
+</pre>
+<h2>Replace Statement</h2>
+<p>The following query deletes all the columns from the <b>employee</b> table and replaces it with <b>emp</b> and <b>name</b> columns &minus;</p>
+<pre class="result notranslate">
+./hcat – e "ALTER TABLE employee REPLACE COLUMNS ( eid INT empid Int, ename STRING name String);"
+</pre>
+<h2>Drop Table Statement</h2>
+<p>This chapter describes how to drop a table in HCatalog. When you drop a table from the metastore, it removes the table/column data and their metadata. It can be a normal table (stored in metastore) or an external table (stored in local file system); HCatalog treats both in the same manner, irrespective of their types.</p>
+<p>The syntax is as follows &minus;</p>
+<pre class="result notranslate">
+DROP TABLE [IF EXISTS] table_name;
+</pre>
+<p>The following query drops a table named <b>employee</b> &minus;</p>
+<pre class="result notranslate">
+./hcat –e "DROP TABLE IF EXISTS employee;"
+</pre>
+<p>On successful execution of the query, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+OK
+Time taken: 5.3 seconds
+</pre>
+<h1>HCatalog - View</h1>
+<p>This chapter describes how to create and manage a <b>view</b> in HCatalog. Database views are created using the <b>CREATE VIEW</b> statement. Views can be created from a single table, multiple tables, or another view.</p>
+<p>To create a view, a user must have appropriate system privileges according to the specific implementation.</p>
+<h2>Create View Statement</h2>
+<p><b>CREATE VIEW</b> creates a view with the given name. An error is thrown if a table or view with the same name already exists. You can use <b>IF NOT EXISTS</b> to skip the error.</p>
+<p>If no column names are supplied, the names of the view's columns will be derived automatically from the <b>defining SELECT expression</b>.</p>
+<p><b>Note</b> &minus; If the SELECT contains un-aliased scalar expressions such as x+y, the resulting view column names will be generated in the form _C0, _C1, etc.</p>
+<p>When renaming columns, column comments can also be supplied. Comments are not automatically inherited from the underlying columns.</p>
+<p>A CREATE VIEW statement will fail if the view's <b>defining SELECT expression</b> is invalid.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+CREATE VIEW [IF NOT EXISTS] [db_name.]view_name [(column_name [COMMENT column_comment], ...) ]
+[COMMENT view_comment]
+[TBLPROPERTIES (property_name = property_value, ...)]
+AS SELECT ...;
+</pre>
+<h3>Example</h3>
+<p>The following is the employee table data. Now let us see how to create a view named <b>Emp_Deg_View</b> containing the fields id, name, Designation, and salary of an employee having a salary greater than 35,000.</p>
+<pre class="result notranslate">
++------+-------------+--------+-------------------+-------+
+|  ID  |    Name     | Salary |    Designation    | Dept  |
++------+-------------+--------+-------------------+-------+
+| 1201 |    Gopal    | 45000  | Technical manager |  TP   |
+| 1202 |   Manisha   | 45000  | Proofreader       |  PR   |
+| 1203 | Masthanvali | 30000  | Technical writer  |  TP   |
+| 1204 |    Kiran    | 40000  | Hr Admin          |  HR   |
+| 1205 |   Kranthi   | 30000  | Op Admin          | Admin |
++------+-------------+--------+-------------------+-------+
+</pre>
+<p>The following is the command to create a view based on the above given data.</p>
+<pre class="result notranslate">
+./hcat –e "CREATE VIEW Emp_Deg_View (salary COMMENT ' salary more than 35,000')
+   AS SELECT id, name, salary, designation FROM employee WHERE salary &ge; 35000;"
+</pre>
+<h3>Output</h3>
+<pre class="result notranslate">
+OK
+Time taken: 5.3 seconds
+</pre>
+<h2>Drop View Statement</h2>
+<p>DROP VIEW removes metadata for the specified view. When dropping a view referenced by other views, no warning is given (the dependent views are left dangling as invalid and must be dropped or recreated by the user).</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+DROP VIEW [IF EXISTS] view_name;
+</pre>
+<h3>Example</h3>
+<p>The following command is used to drop a view named <b>Emp_Deg_View</b>.</p>
+<pre class="prettyprint notranslate">
+DROP VIEW Emp_Deg_View;
+</pre>
+<h1>HCatalog - Show Tables</h1>
+<p>You often want to list all the tables in a database or list all the columns in a table. Obviously, every database has its own syntax to list the tables and columns.</p>
+<p><b>Show Tables</b> statement displays the names of all tables. By default, it lists tables from the current database, or with the <b>IN</b> clause, in a specified database.</p>
+<p>This chapter describes how to list out all tables from the current database in HCatalog.</p>
+<h2>Show Tables Statement</h2>
+<p>The syntax of SHOW TABLES is as follows &minus;</p>
+<pre class="result notranslate">
+SHOW TABLES [IN database_name] ['identifier_with_wildcards'];
+</pre>
+<p>The following query displays a list of tables &minus;</p>
+<pre class="prettyprint notranslate">
+./hcat –e "Show tables;"
+</pre>
+<p>On successful execution of the query, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+OK
+emp
+employee
+Time taken: 5.3 seconds
+</pre>
+<h1>HCatalog - Show Partitions</h1>
+<p>A partition is a condition for tabular data which is used for creating a separate table or view. SHOW PARTITIONS lists all the existing partitions for a given base table. Partitions are listed in alphabetical order. After Hive 0.6, it is also possible to specify parts of a partition specification to filter the resulting list.</p>
+<p>You can use the SHOW PARTITIONS command to see the partitions that exist in a particular table. This chapter describes how to list out the partitions of a particular table in HCatalog.</p>
+<h2>Show Partitions Statement</h2>
+<p>The syntax is as follows &minus;</p>
+<pre class="result notranslate">
+SHOW PARTITIONS table_name;
+</pre>
+<p>The following query drops a table named <b>employee</b> &minus;</p>
+<pre class="prettyprint notranslate">
+./hcat –e "Show partitions employee;"
+</pre>
+<p>On successful execution of the query, you get to see the following response &minus;</p>
+<pre class="result notranslate">
+OK
+Designation = IT
+Time taken: 5.3 seconds
+</pre>
+<h2>Dynamic Partition</h2>
+<p>HCatalog organizes tables into partitions. It is a way of dividing a table into related parts based on the values of partitioned columns such as date, city, and department. Using partitions, it is easy to query a portion of the data.</p>
+<p>For example, a table named <b>Tab1</b> contains employee data such as id, name, dept, and yoj (i.e., year of joining). Suppose you need to retrieve the details of all employees who joined in 2012. A query searches the whole table for the required information. However, if you partition the employee data with the year and store it in a separate file, it reduces the query processing time. The following example shows how to partition a file and its data &minus;</p>
+<p>The following file contains <b>employeedata</b> table.</p>
+<h3>/tab1/employeedata/file1</h3>
+<pre class="result notranslate">
+id, name,   dept, yoj
+1,  gopal,   TP, 2012
+2,  kiran,   HR, 2012
+3,  kaleel,  SC, 2013
+4, Prasanth, SC, 2013
+</pre>
+<p>The above data is partitioned into two files using year.</p>
+<h3>/tab1/employeedata/2012/file2</h3>
+<pre class="result notranslate">
+1, gopal, TP, 2012
+2, kiran, HR, 2012
+</pre>
+<h3>/tab1/employeedata/2013/file3</h3>
+<pre class="result notranslate">
+3, kaleel,   SC, 2013
+4, Prasanth, SC, 2013
+</pre>
+<h2>Adding a Partition</h2>
+<p>We can add partitions to a table by altering the table. Let us assume we have a table called <b>employee</b> with fields such as Id, Name, Salary, Designation, Dept, and yoj.</p>
+<h3>Syntax</h3>
+<pre class="result notranslate">
+ALTER TABLE table_name ADD [IF NOT EXISTS] PARTITION partition_spec
+[LOCATION 'location1'] partition_spec [LOCATION 'location2'] ...;
+partition_spec:
+: (p_column = p_col_value, p_column = p_col_value, ...)
+</pre>
+<p>The following query is used to add a partition to the <b>employee</b> table.</p>
+<pre class="prettyprint notranslate">
+./hcat –e "ALTER TABLE employee ADD PARTITION (year = '2013') location '/2012/part2012';"
+</pre>
+<h2>Renaming a Partition</h2>
+<p>You can use the RENAME-TO command to rename a partition. Its syntax is as follows &minus;</p>
+<pre class="result notranslate">
+./hact –e "ALTER TABLE table_name PARTITION partition_spec RENAME TO PARTITION partition_spec;"
+</pre>
+<p>The following query is used to rename a partition &minus;</p>
+<pre class="prettyprint notranslate">
+./hcat –e "ALTER TABLE employee PARTITION (year=’1203’) RENAME TO PARTITION (Yoj='1203');"
+</pre>
+<h2>Dropping a Partition</h2>
+<p>The syntax of the command that is used to drop a partition is as follows &minus;</p>
+<pre class="result notranslate">
+./hcat –e "ALTER TABLE table_name DROP [IF EXISTS] PARTITION partition_spec,.
+   PARTITION partition_spec,...;"
+</pre>
+<p>The following query is used to drop a partition &minus;</p>
+<pre class="prettyprint notranslate">
+./hcat –e "ALTER TABLE employee DROP [IF EXISTS] PARTITION (year=’1203’);"
+</pre>
+<h1>HCatalog - Indexes</h1>
+<h2>Creating an Index</h2>
+<p>An Index is nothing but a pointer on a particular column of a table. Creating an index means creating a pointer on a particular column of a table. Its syntax is as follows &minus;</p>
+<pre class="result notranslate">
+CREATE INDEX index_name
+ON TABLE base_table_name (col_name, ...)
+AS 'index.handler.class.name'
+[WITH DEFERRED REBUILD]
+[IDXPROPERTIES (property_name = property_value, ...)]
+[IN TABLE index_table_name]
+[PARTITIONED BY (col_name, ...)][
+   [ ROW FORMAT ...] STORED AS ...
+   | STORED BY ...
+]
+[LOCATION hdfs_path]
+[TBLPROPERTIES (...)]
+</pre>
+<h3>Example</h3>
+<p>Let us take an example to understand the concept of index. Use the same <b>employee</b> table that we have used earlier with the fields Id, Name, Salary, Designation, and Dept. Create an index named <b>index_salary</b> on the <b>salary</b> column of the <b>employee</b> table.</p>
+<p>The following query creates an index &minus;</p>
+<pre class="result notranslate">
+./hcat –e "CREATE INDEX inedx_salary ON TABLE employee(salary)
+AS 'org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler';"
+</pre>
+<p>It is a pointer to the <b>salary</b> column. If the column is modified, the changes are stored using an index value.</p>
+<h2>Dropping an Index</h2>
+<p>The following syntax is used to drop an index &minus;</p>
+<pre class="result notranslate">
+DROP INDEX &lt;index_name&gt; ON &lt;table_name&gt;
+</pre>
+<p>The following query drops the index index_salary &minus;</p>
+<pre class="prettyprint notranslate">
+./hcat –e "DROP INDEX index_salary ON employee;"
+</pre>
+<h1>HCatalog - Reader Writer</h1>
+<p>HCatalog contains a data transfer API for parallel input and output without using MapReduce. This API uses a basic storage abstraction of tables and rows to read data from Hadoop cluster and write data into it.</p>
+<p>The Data Transfer API contains mainly three classes; those are &minus;</p>
+<ul class="list">
+<li><p><b>HCatReader</b> &minus; Reads data from a Hadoop cluster.</p></li>
+<li><p><b>HCatWriter</b> &minus; Writes data into a Hadoop cluster.</p></li>
+<li><p><b>DataTransferFactory</b> &minus; Generates reader and writer instances.</p></li>
+</ul>
+<p>This API is suitable for master-slave node setup. Let us discuss more on <b>HCatReader</b> and <b>HCatWriter</b>.</p>
+<h2>HCatReader</h2>
+<p>HCatReader is an abstract class internal to HCatalog and abstracts away the complexities of the underlying system from where the records are to be retrieved.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:12%;">S. No.</th>
+<th style="text-align:center;">Method Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Public abstract ReaderContext prepareRead() throws HCatException</b></p>
+<p>This should be called at master node to obtain ReaderContext which then should be serialized and sent slave nodes.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>Public abstract Iterator &lt;HCatRecorder&gt; read() throws HCaException</b></p>
+<p>This should be called at slaves nodes to read HCatRecords.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Public Configuration getConf()</b></p>
+<p>It will return the configuration class object.</p></td>
+</tr>
+</table>
+<p>The HCatReader class is used to read the data from HDFS. Reading is a two-step process in which the first step occurs on the master node of an external system. The second step is carried out in parallel on multiple slave nodes.</p>
+<p>Reads are done on a <b>ReadEntity</b>. Before you start to read, you need to define a ReadEntity from which to read. This can be done through <b>ReadEntity.Builder</b>. You can specify a database name, table name, partition, and filter string. For example &minus;</p>
+<pre class="prettyprint notranslate">
+ReadEntity.Builder builder = new ReadEntity.Builder();
+ReadEntity entity = builder.withDatabase("mydb").withTable("mytbl").build(); 10. 
+</pre>
+<p>The above code snippet defines a ReadEntity object (“entity”), comprising a table named <b>mytbl</b> in a database named <b>mydb</b>, which can be used to read all the rows of this table. Note that this table must exist in HCatalog prior to the start of this operation.</p>
+<p>After defining a ReadEntity, you obtain an instance of HCatReader using the ReadEntity and cluster configuration &minus;</p>
+<pre class="prettyprint notranslate">
+HCatReader reader = DataTransferFactory.getHCatReader(entity, config);
+</pre>
+<p>The next step is to obtain a ReaderContext from reader as follows &minus;</p>
+<pre class="prettyprint notranslate">
+ReaderContext cntxt = reader.prepareRead();
+</pre>
+<h2>HCatWriter</h2>
+<p>This abstraction is internal to HCatalog. This is to facilitate writing to HCatalog from external systems. Don't try to instantiate this directly. Instead, use DataTransferFactory.</p>
+<table class="table table-bordered">
+<tr>
+<th width="10%">Sr.No.</th>
+<th style="text-align:center;">Method Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Public abstract WriterContext prepareRead() throws HCatException</b></p>
+<p>External system should invoke this method exactly once from a master node. It returns a <b>WriterContext</b>. This should be serialized and sent to slave nodes to construct <b>HCatWriter</b> there.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>Public abstract void write(Iterator&lt;HCatRecord&gt; recordItr) throws HCaException</b></p>
+<p>This method should be used at slave nodes to perform writes. The recordItr is an iterator object that contains the collection of records to be written into HCatalog.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Public abstract void abort(WriterContext cntxt) throws HCatException</b></p>
+<p>This method should be called at the master node. The primary purpose of this method is to do cleanups in case of failures.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>public abstract void commit(WriterContext cntxt) throws HCatException</b></p>
+<p>This method should be called at the master node. The purpose of this method is to do metadata commit.</p></td>
+</tr>
+</table>
+<p>Similar to reading, writing is also a two-step process in which the first step occurs on the master node. Subsequently, the second step occurs in parallel on slave nodes.</p>
+<p>Writes are done on a <b>WriteEntity</b> which can be constructed in a fashion similar to reads &minus;</p>
+<pre class="prettyprint notranslate">
+WriteEntity.Builder builder = new WriteEntity.Builder();
+WriteEntity entity = builder.withDatabase("mydb").withTable("mytbl").build();
+</pre>
+<p>The above code creates a WriteEntity object <code>entity</code> which can be used to write into a table named <b>mytbl</b> in the database <b>mydb</b>.</p>
+<p>After creating a WriteEntity, the next step is to obtain a WriterContext &minus;</p>
+<pre class="prettyprint notranslate">
+HCatWriter writer = DataTransferFactory.getHCatWriter(entity, config);
+WriterContext info = writer.prepareWrite();
+</pre>
+<p>All of the above steps occur on the master node. The master node then serializes the WriterContext object and makes it available to all the slaves.</p>
+<p>On slave nodes, you need to obtain an HCatWriter using WriterContext as follows &minus;</p>
+<pre class="prettyprint notranslate">
+HCatWriter writer = DataTransferFactory.getHCatWriter(context);
+</pre>
+<p>Then, the <b>writer</b> takes an iterator as the argument for the <code>write</code> method &minus;</p>
+<pre class="result notranslate">
+writer.write(hCatRecordItr);
+</pre>
+<p>The <b>writer</b> then calls <b>getNext()</b> on this iterator in a loop and writes out all the records attached to the iterator.</p>
+<p>The <b>TestReaderWriter.java</b> file is used to test the HCatreader and HCatWriter classes. The following program demonstrates how to use HCatReader and HCatWriter API to read data from a source file and subsequently write it onto a destination file.</p>
+<pre class="prettyprint notranslate">
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hive.metastore.api.MetaException;
+import org.apache.hadoop.hive.ql.CommandNeedRetryException;
+import org.apache.hadoop.mapreduce.InputSplit;
+
+import org.apache.hive.HCatalog.common.HCatException;
+import org.apache.hive.HCatalog.data.transfer.DataTransferFactory;
+import org.apache.hive.HCatalog.data.transfer.HCatReader;
+import org.apache.hive.HCatalog.data.transfer.HCatWriter;
+import org.apache.hive.HCatalog.data.transfer.ReadEntity;
+import org.apache.hive.HCatalog.data.transfer.ReaderContext;
+import org.apache.hive.HCatalog.data.transfer.WriteEntity;
+import org.apache.hive.HCatalog.data.transfer.WriterContext;
+import org.apache.hive.HCatalog.mapreduce.HCatBaseTest;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class TestReaderWriter extends HCatBaseTest {
+   @Test
+   public void test() throws MetaException, CommandNeedRetryException,
+      IOException, ClassNotFoundException {
+		
+      driver.run("drop table mytbl");
+      driver.run("create table mytbl (a string, b int)");
+		
+      Iterator&lt;Entry&lt;String, String&gt;&gt; itr = hiveConf.iterator();
+      Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+		
+      while (itr.hasNext()) {
+         Entry&lt;String, String&gt; kv = itr.next();
+         map.put(kv.getKey(), kv.getValue());
+      }
+		
+      WriterContext cntxt = runsInMaster(map);
+      File writeCntxtFile = File.createTempFile("hcat-write", "temp");
+      writeCntxtFile.deleteOnExit();
+		
+      // Serialize context.
+      ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(writeCntxtFile));
+      oos.writeObject(cntxt);
+      oos.flush();
+      oos.close();
+		
+      // Now, deserialize it.
+      ObjectInputStream ois = new ObjectInputStream(new FileInputStream(writeCntxtFile));
+      cntxt = (WriterContext) ois.readObject();
+      ois.close();
+      runsInSlave(cntxt);
+      commit(map, true, cntxt);
+		
+      ReaderContext readCntxt = runsInMaster(map, false);
+      File readCntxtFile = File.createTempFile("hcat-read", "temp");
+      readCntxtFile.deleteOnExit();
+      oos = new ObjectOutputStream(new FileOutputStream(readCntxtFile));
+      oos.writeObject(readCntxt);
+      oos.flush();
+      oos.close();
+		
+      ois = new ObjectInputStream(new FileInputStream(readCntxtFile));
+      readCntxt = (ReaderContext) ois.readObject();
+      ois.close();
+		
+      for (int i = 0; i &lt; readCntxt.numSplits(); i++) {
+         runsInSlave(readCntxt, i);
+      }
+   }
+	
+   private WriterContext runsInMaster(Map&lt;String, String&gt; config) throws HCatException {
+      WriteEntity.Builder builder = new WriteEntity.Builder();
+      WriteEntity entity = builder.withTable("mytbl").build();
+		
+      HCatWriter writer = DataTransferFactory.getHCatWriter(entity, config);
+      WriterContext info = writer.prepareWrite();
+      return info;
+   }
+	
+   private ReaderContext runsInMaster(Map&lt;String, String&gt; config, 
+      boolean bogus) throws HCatException {
+      ReadEntity entity = new ReadEntity.Builder().withTable("mytbl").build();
+      HCatReader reader = DataTransferFactory.getHCatReader(entity, config);
+      ReaderContext cntxt = reader.prepareRead();
+      return cntxt;
+   }
+	
+   private void runsInSlave(ReaderContext cntxt, int slaveNum) throws HCatException {
+      HCatReader reader = DataTransferFactory.getHCatReader(cntxt, slaveNum);
+      Iterator&lt;HCatRecord&gt; itr = reader.read();
+      int i = 1;
+		
+      while (itr.hasNext()) {
+         HCatRecord read = itr.next();
+         HCatRecord written = getRecord(i++);
+			
+         // Argh, HCatRecord doesnt implement equals()
+         Assert.assertTrue("Read: " + read.get(0) + "Written: " + written.get(0),
+         written.get(0).equals(read.get(0)));
+			
+         Assert.assertTrue("Read: " + read.get(1) + "Written: " + written.get(1),
+         written.get(1).equals(read.get(1)));
+			
+         Assert.assertEquals(2, read.size());
+      }
+		
+      //Assert.assertFalse(itr.hasNext());
+   }
+	
+   private void runsInSlave(WriterContext context) throws HCatException {
+      HCatWriter writer = DataTransferFactory.getHCatWriter(context);
+      writer.write(new HCatRecordItr());
+   }
+	
+   private void commit(Map&lt;String, String&gt; config, boolean status,
+      WriterContext context) throws IOException {
+      WriteEntity.Builder builder = new WriteEntity.Builder();
+      WriteEntity entity = builder.withTable("mytbl").build();
+      HCatWriter writer = DataTransferFactory.getHCatWriter(entity, config);
+		
+      if (status) {
+         writer.commit(context);
+      } else {
+         writer.abort(context);
+      }
+   }
+	
+   private static HCatRecord getRecord(int i) {
+      List&lt;Object&gt; list = new ArrayList&lt;Object&gt;(2);
+      list.add("Row #: " + i);
+      list.add(i);
+      return new DefaultHCatRecord(list);
+   }
+	
+   private static class HCatRecordItr implements Iterator&lt;HCatRecord&gt; {
+      int i = 0;
+		
+      @Override
+      public boolean hasNext() {
+         return i++ &lt; 100 ? true : false;
+      }
+		
+      @Override
+      public HCatRecord next() {
+         return getRecord(i);
+      }
+		
+      @Override
+      public void remove() {
+         throw new RuntimeException();
+      }
+   }
+}
+</pre>
+<p>The above program reads the data from the HDFS in the form of records and writes the record data into <b>mytable</b></p>
+<h1>HCatalog - Input Output Format</h1>
+<p>The <b>HCatInputFormat</b> and <b>HCatOutputFormat</b> interfaces are used to read data from HDFS and after processing, write the resultant data into HDFS using MapReduce job. Let us elaborate the Input and Output format interfaces.</p>
+<h2>HCatInputFormat</h2>
+<p>The <b>HCatInputFormat</b> is used with MapReduce jobs to read data from HCatalog-managed tables. HCatInputFormat exposes a Hadoop 0.20 MapReduce API for reading data as if it had been published to a table.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:12%;">Sr.No.</th>
+<th style="text-align:center;">Method Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>public static HCatInputFormat setInput(Job job, String dbName, String tableName)throws IOException</b></p>
+<p>Set inputs to use for the job. It queries the metastore with the given input specification and serializes matching partitions into the job configuration for MapReduce tasks.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>public static HCatInputFormat setInput(Configuration conf, String dbName, String tableName) throws IOException</b></p>
+<p>Set inputs to use for the job. It queries the metastore with the given input specification and serializes matching partitions into the job configuration for MapReduce tasks.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>public HCatInputFormat setFilter(String filter)throws IOException</b></p>
+<p>Set a filter on the input table.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>public HCatInputFormat setProperties(Properties properties) throws IOException</b></p>
+<p>Set properties for the input format.</p></td>
+</tr>
+</table>
+<p>The HCatInputFormat API includes the following methods &minus;</p>
+<ul class="list">
+<li>setInput</li>
+<li>setOutputSchema</li>
+<li>getTableSchema</li>
+</ul>
+<p>To use <b>HCatInputFormat</b> to read data, first instantiate an <b>InputJobInfo</b> with the necessary information from the table being read and then call <b>setInput</b> with the <b>InputJobInfo</b>.</p>
+<p>You can use the <b>setOutputSchema</b> method to include a <b>projection schema</b>, to specify the output fields. If a schema is not specified, all the columns in the table will be returned. You can use the getTableSchema method to determine the table schema for a specified input table.</p>
+<h2>HCatOutputFormat</h2>
+<p>HCatOutputFormat is used with MapReduce jobs to write data to HCatalog-managed tables. HCatOutputFormat exposes a Hadoop 0.20 MapReduce API for writing data to a table. When a MapReduce job uses HCatOutputFormat to write output, the default OutputFormat configured for the table is used and the new partition is published to the table after the job completes.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:12%;">Sr.No.</th>
+<th style="text-align:center;">Method Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>public static void setOutput (Configuration conf, Credentials credentials, OutputJobInfo outputJobInfo) throws IOException</b></p>
+<p>Set the information about the output to write for the job. It queries the metadata server to find the StorageHandler to use for the table. It throws an error if the partition is already published.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>public static void setSchema (Configuration conf, HCatSchema schema) throws IOException</b></p>
+<p>Set the schema for the data being written out to the partition. The table schema is used by default for the partition if this is not called.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>public RecordWriter &lt;WritableComparable&lt;?&gt;, HCatRecord &gt; getRecordWriter (TaskAttemptContext context)throws IOException, InterruptedException</b></p>
+<p>Get the record writer for the job. It uses the StorageHandler's default OutputFormat to get the record writer.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>public OutputCommitter getOutputCommitter (TaskAttemptContext context) throws IOException, InterruptedException</b></p>
+<p>Get the output committer for this output format. It ensures that the output is committed correctly.</p></td>
+</tr>
+</table>
+<p>The <b>HCatOutputFormat</b> API includes the following methods &minus;</p>
+<ul class="list">
+<li>setOutput</li>
+<li>setSchema</li>
+<li>getTableSchema</li>
+</ul>
+<p>The first call on the HCatOutputFormat must be <b>setOutput</b>; any other call will throw an exception saying the output format is not initialized.</p>
+<p>The schema for the data being written out is specified by the <b>setSchema</b> method. You must call this method, providing the schema of data you are writing. If your data has the same schema as the table schema, you can use <b>HCatOutputFormat.getTableSchema()</b> to get the table schema and then pass that along to <b>setSchema()</b>.</p>
+<h3>Example</h3>
+<p>The following MapReduce program reads data from one table which it assumes to have an integer in the second column ("column 1"), and counts how many instances of each distinct value it finds. That is, it does the equivalent of "<b>select col1, count(*) from $table group by col1;</b>".</p>
+<p>For example, if the values in the second column are {1, 1, 1, 3, 3, 5}, then the program will produce the following output of values and counts &minus;</p>
+<pre class="result notranslate">
+1, 3
+3, 2
+5, 1
+</pre>
+<p>Let us now take a look at the program code &minus;</p>
+<pre class="prettyprint notranslate">
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.WritableComparable;
+
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
+
+import org.apache.hadoop.util.GenericOptionsParser;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
+
+import org.apache.HCatalog.common.HCatConstants;
+import org.apache.HCatalog.data.DefaultHCatRecord;
+import org.apache.HCatalog.data.HCatRecord;
+import org.apache.HCatalog.data.schema.HCatSchema;
+
+import org.apache.HCatalog.mapreduce.HCatInputFormat;
+import org.apache.HCatalog.mapreduce.HCatOutputFormat;
+import org.apache.HCatalog.mapreduce.InputJobInfo;
+import org.apache.HCatalog.mapreduce.OutputJobInfo;
+
+public class GroupByAge extends Configured implements Tool {
+
+   public static class Map extends Mapper&lt;WritableComparable, 
+      HCatRecord, IntWritable, IntWritable&gt; {
+      int age;
+		
+      @Override
+      protected void map(
+         WritableComparable key, HCatRecord value,
+         org.apache.hadoop.mapreduce.Mapper&lt;WritableComparable,
+         HCatRecord, IntWritable, IntWritable&gt;.Context context
+      )throws IOException, InterruptedException {
+         age = (Integer) value.get(1);
+         context.write(new IntWritable(age), new IntWritable(1));
+      }
+   }
+	
+   public static class Reduce extends Reducer&lt;IntWritable, IntWritable,
+      WritableComparable, HCatRecord&gt; {
+      @Override
+      protected void reduce(
+         IntWritable key, java.lang.Iterable&lt;IntWritable&gt; values,
+         org.apache.hadoop.mapreduce.Reducer&lt;IntWritable, IntWritable,
+         WritableComparable, HCatRecord&gt;.Context context
+      )throws IOException ,InterruptedException {
+         int sum = 0;
+         Iterator&lt;IntWritable&gt; iter = values.iterator();
+			
+         while (iter.hasNext()) {
+            sum++;
+            iter.next();
+         }
+			
+         HCatRecord record = new DefaultHCatRecord(2);
+         record.set(0, key.get());
+         record.set(1, sum);
+         context.write(null, record);
+      }
+   }
+	
+   public int run(String[] args) throws Exception {
+      Configuration conf = getConf();
+      args = new GenericOptionsParser(conf, args).getRemainingArgs();
+		
+      String serverUri = args[0];
+      String inputTableName = args[1];
+      String outputTableName = args[2];
+      String dbName = null;
+      String principalID = System
+		
+      .getProperty(HCatConstants.HCAT_METASTORE_PRINCIPAL);
+      if (principalID != null)
+      conf.set(HCatConstants.HCAT_METASTORE_PRINCIPAL, principalID);
+      Job job = new Job(conf, "GroupByAge");
+      HCatInputFormat.setInput(job, InputJobInfo.create(dbName, inputTableName, null));
+
+      // initialize HCatOutputFormat
+      job.setInputFormatClass(HCatInputFormat.class);
+      job.setJarByClass(GroupByAge.class);
+      job.setMapperClass(Map.class);
+      job.setReducerClass(Reduce.class);
+		
+      job.setMapOutputKeyClass(IntWritable.class);
+      job.setMapOutputValueClass(IntWritable.class);
+      job.setOutputKeyClass(WritableComparable.class);
+      job.setOutputValueClass(DefaultHCatRecord.class);
+		
+      HCatOutputFormat.setOutput(job, OutputJobInfo.create(dbName, outputTableName, null));
+      HCatSchema s = HCatOutputFormat.getTableSchema(job);
+      System.err.println("INFO: output schema explicitly set for writing:" + s);
+      HCatOutputFormat.setSchema(job, s);
+      job.setOutputFormatClass(HCatOutputFormat.class);
+      return (job.waitForCompletion(true) ? 0 : 1);
+   }
+	
+   public static void main(String[] args) throws Exception {
+      int exitCode = ToolRunner.run(new GroupByAge(), args);
+      System.exit(exitCode);
+   }
+}
+</pre>
+<p>Before compiling the above program, you have to download some <b>jars</b> and add those to the <b>classpath</b> for this application. You need to download all the Hive jars and HCatalog jars (HCatalog-core-0.5.0.jar, hive-metastore-0.10.0.jar, libthrift-0.7.0.jar, hive-exec-0.10.0.jar, libfb303-0.7.0.jar, jdo2-api-2.3-ec.jar, slf4j-api-1.6.1.jar).</p>
+<p>Use the following commands to copy those <b>jar</b> files from <b>local</b> to <b>HDFS</b> and add those to the <b>classpath</b>.</p>
+<pre class="result notranslate">
+bin/hadoop fs -copyFromLocal $HCAT_HOME/share/HCatalog/HCatalog-core-0.5.0.jar /tmp
+bin/hadoop fs -copyFromLocal $HIVE_HOME/lib/hive-metastore-0.10.0.jar /tmp
+bin/hadoop fs -copyFromLocal $HIVE_HOME/lib/libthrift-0.7.0.jar /tmp
+bin/hadoop fs -copyFromLocal $HIVE_HOME/lib/hive-exec-0.10.0.jar /tmp
+bin/hadoop fs -copyFromLocal $HIVE_HOME/lib/libfb303-0.7.0.jar /tmp
+bin/hadoop fs -copyFromLocal $HIVE_HOME/lib/jdo2-api-2.3-ec.jar /tmp
+bin/hadoop fs -copyFromLocal $HIVE_HOME/lib/slf4j-api-1.6.1.jar /tmp
+
+export LIB_JARS=hdfs:///tmp/HCatalog-core-0.5.0.jar,
+hdfs:///tmp/hive-metastore-0.10.0.jar,
+hdfs:///tmp/libthrift-0.7.0.jar,
+hdfs:///tmp/hive-exec-0.10.0.jar,
+hdfs:///tmp/libfb303-0.7.0.jar,
+hdfs:///tmp/jdo2-api-2.3-ec.jar,
+hdfs:///tmp/slf4j-api-1.6.1.jar
+</pre>
+<p>Use the following command to compile and execute the given program.</p>
+<pre class="result notranslate">
+$HADOOP_HOME/bin/hadoop jar GroupByAge tmp/hive
+</pre>
+<p>Now, check your output directory (hdfs: user/tmp/hive) for the output (part_0000, part_0001).</p>
+<h1>HCatalog - Loader &amp; Storer</h1>
+<p>The <b>HCatLoader</b> and <b>HCatStorer</b> APIs are used with Pig scripts to read and write data in HCatalog-managed tables. No HCatalog-specific setup is required for these interfaces.</p>
+<p>It is better to have some knowledge on Apache Pig scripts to understand this chapter better. For further reference, please go through our <a href="../apache_pig/index.html">Apache Pig</a> tutorial.</p>
+<h2>HCatloader</h2>
+<p>HCatLoader is used with Pig scripts to read data from HCatalog-managed tables. Use the following syntax to load data into HDFS using HCatloader.</p>
+<pre class="result notranslate">
+A = LOAD 'tablename' USING org.apache.HCatalog.pig.HCatLoader();
+</pre>
+<p>You must specify the table name in single quotes: <b>LOAD 'tablename'</b>. If you are using a non-default database, then you must specify your input as '<b>dbname.tablename'</b>.</p>
+<p>The Hive metastore lets you create tables without specifying a database. If you created tables this way, then the database name is <b>'default'</b> and is not required when specifying the table for HCatLoader.</p>
+<p>The following table contains the important methods and description of the HCatloader class.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:12%;">Sr.No.</th>
+<th style="text-align:center;">Method Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>public InputFormat&lt;?,?&gt; getInputFormat()throws IOException</b></p>
+<p>Read the input format of the loading data using the HCatloader class.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>public String relativeToAbsolutePath(String location, Path curDir) throws IOException</b></p>
+<p>It returns the String format of the <b>Absolute path</b>.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>public void setLocation(String location, Job job) throws IOException</b></p>
+<p>It sets the location where the job can be executed.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>public Tuple getNext() throws IOException</b></p>
+<p>Returns the current tuple (<b>key</b> and <b>value</b>) from the loop.</p></td>
+</tr>
+</table>
+<h2>HCatStorer</h2>
+<p>HCatStorer is used with Pig scripts to write data to HCatalog-managed tables. Use the following syntax for Storing operation.</p>
+<pre class="result notranslate">
+A = LOAD ...
+B = FOREACH A ...
+...
+...
+my_processed_data = ...
+
+STORE my_processed_data INTO 'tablename' USING org.apache.HCatalog.pig.HCatStorer();
+</pre>
+<p>You must specify the table name in single quotes: <b>LOAD 'tablename'</b>. Both the database and the table must be created prior to running your Pig script. If you are using a non-default database, then you must specify your input as <b>'dbname.tablename'</b>.</p>
+<p>The Hive metastore lets you create tables without specifying a database. If you created tables this way, then the database name is <b>'default'</b> and you do not need to specify the database name in the <b>store</b> statement.</p>
+<p>For the <b>USING</b> clause, you can have a string argument that represents key/value pairs for partitions. This is a mandatory argument when you are writing to a partitioned table and the partition column is not in the output column. The values for partition keys should NOT be quoted.</p>
+<p>The following table contains the important methods and description of the HCatStorer class.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:12%;">Sr.No.</th>
+<th style="text-align:center;">Method Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>public OutputFormat getOutputFormat() throws IOException</b></p>
+<p>Read the output format of the stored data using the HCatStorer class.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>public void setStoreLocation (String location, Job job) throws IOException</b></p>
+<p>Sets the location where to execute this <b>store</b> application.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>public void storeSchema (ResourceSchema schema, String arg1, Job job) throws IOException</b></p>
+<p>Store the schema.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>public void prepareToWrite (RecordWriter writer) throws IOException</b></p>
+<p>It helps to write data into a particular file using RecordWriter.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>public void putNext (Tuple tuple) throws IOException</b></p>
+<p>Writes the tuple data into the file.</p></td>
+</tr>
+</table>
+<h2>Running Pig with HCatalog</h2>
+<p>Pig does not automatically pick up HCatalog jars. To bring in the necessary jars, you can either use a flag in the Pig command or set the environment variables <b>PIG_CLASSPATH</b> and <b>PIG_OPTS</b> as described below.</p>
+<p>To bring in the appropriate jars for working with HCatalog, simply include the following flag &minus;</p>
+<pre class="result notranslate">
+pig –useHCatalog &lt;Sample pig scripts file&gt;
+</pre>
+<h2>Setting the CLASSPATH for Execution</h2>
+<p>Use the following CLASSPATH setting for synchronizing the HCatalog with Apache Pig.</p>
+<pre class="prettyprint notranslate">
+export HADOOP_HOME = &lt;path_to_hadoop_install&gt;
+export HIVE_HOME = &lt;path_to_hive_install&gt;
+export HCAT_HOME = &lt;path_to_hcat_install&gt;
+
+export PIG_CLASSPATH = $HCAT_HOME/share/HCatalog/HCatalog-core*.jar:\
+$HCAT_HOME/share/HCatalog/HCatalog-pig-adapter*.jar:\
+$HIVE_HOME/lib/hive-metastore-*.jar:$HIVE_HOME/lib/libthrift-*.jar:\
+$HIVE_HOME/lib/hive-exec-*.jar:$HIVE_HOME/lib/libfb303-*.jar:\
+$HIVE_HOME/lib/jdo2-api-*-ec.jar:$HIVE_HOME/conf:$HADOOP_HOME/conf:\
+$HIVE_HOME/lib/slf4j-api-*.jar
+</pre>
+<h3>Example</h3>
+<p>Assume we have a file <b>student_details.txt</b> in HDFS with the following content.</p>
+<p><b>student_details.txt</b></p>
+<pre class="result notranslate">
+001, Rajiv,    Reddy,       21, 9848022337, Hyderabad
+002, siddarth, Battacharya, 22, 9848022338, Kolkata
+003, Rajesh,   Khanna,      22, 9848022339, Delhi
+004, Preethi,  Agarwal,     21, 9848022330, Pune
+005, Trupthi,  Mohanthy,    23, 9848022336, Bhuwaneshwar
+006, Archana,  Mishra,      23, 9848022335, Chennai
+007, Komal,    Nayak,       24, 9848022334, trivendram
+008, Bharathi, Nambiayar,   24, 9848022333, Chennai
+</pre>
+<p>We also have a sample script with the name <b>sample_script.pig</b>, in the same HDFS directory. This file contains statements performing operations and transformations on the <b>student</b> relation, as shown below.</p>
+<pre class="prettyprint notranslate">
+student = LOAD 'hdfs://localhost:9000/pig_data/student_details.txt' USING 
+   PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,
+   phone:chararray, city:chararray);
+	
+student_order = ORDER student BY age DESC;
+STORE student_order INTO 'student_order_table' USING org.apache.HCatalog.pig.HCatStorer();
+student_limit = LIMIT student_order 4;
+Dump student_limit;
+</pre>
+<ul class="list">
+<li><p>The first statement of the script will load the data in the file named <b>student_details.txt</b> as a relation named <b>student</b>.</p></li>
+<li><p>The second statement of the script will arrange the tuples of the relation in descending order, based on age, and store it as <b>student_order</b>.</p></li>
+<li><p>The third statement stores the processed data <b>student_order</b> results in a separate table named <b>student_order_table</b>.</p></li>
+<li><p>The fourth statement of the script will store the first four tuples of <b>student_order</b> as <b>student_limit</b>.</p></li>
+<li><p>Finally the fifth statement will dump the content of the relation <b>student_limit</b>.</p></li>
+</ul>
+<p>Let us now execute the <b>sample_script.pig</b> as shown below.</p>
+<pre class="result notranslate">
+$./pig -useHCatalog hdfs://localhost:9000/pig_data/sample_script.pig
+</pre>
+<p>Now, check your output directory (hdfs: user/tmp/hive) for the output (part_0000, part_0001).</p>
+<hr />
+<div class="pre-btn">
+<a href="hcatalog_loader_and_storer.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="hcatalog_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "HCatalog Quick Guide",
+    "name": "HCatalog Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/hcatalog/images/architecture.jpg",
+        "width": 550,
+        "height": 281
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "July 23 2017 03:34:49.",
+    "dateModified": "July 23 2017 03:34:49.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "HCatalog is a table storage management tool for Hadoop. It exposes the tabular data of Hive metastore to other Hadoop applications. It enables users with different data processing tools (Pig, MapReduce) to easily write data onto a grid. It ensures that us..."
+}
+</script><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Big Data Analytics",
+                "@id": "https://www.tutorialspoint.com/big_data_tutorials.htm"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Hcatalog",
+                "@id": "https://www.tutorialspoint.com/hcatalog"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "name": "HCatalog - Quick Guide"
+            }
+        }
+    ]
+}
+</script></div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/hcatalog/hcatalog_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:39:15 GMT -->
+</html>

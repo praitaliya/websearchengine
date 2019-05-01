@@ -1,0 +1,3690 @@
+<!doctype html> 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/maven/maven_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:19:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Maven Quick Guide</title>
+<meta name="description" content="Maven Quick Guide - Learn Maven in simple and easy steps starting from basic to advanced concepts with examples including Overview, Environment Setup, POM, Build Life Cycle, Build profiles, Repositories, Plug-ins, Creating Project, Build &amp; Test Project, External Dependencies, Project Documents, Project Templates, Snapshot, Build Automation, Dependency Management, Deployment Automation, Web Application, Eclipse IDE, Netbeans IDE, IntelliJ IDEA." />
+<meta name="keywords" content="Apache, Maven tutorial, Beginners, Overview, Environment Setup, POM, Build Life Cycle, Build profiles, Repositories, Plug-ins, Creating Project, Build &amp; Test Project, External Dependencies, Project Documents, Project Templates, Snapshot, Build Automation, Dependency Management, Deployment Automation, Web Application, Eclipse IDE, Netbeans IDE, IntelliJ IDEA." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #fda803 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #fda803 !important;}
+.submenu-item{ border-bottom: 2px solid #fda803 !important; border-top: 2px solid #fda803 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/maven-mini-logo.jpg" alt="Maven Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Maven Tutorial</li>
+<li><a  href="index.html">Maven - Home</a></li>
+<li><a  href="maven_overview.html">Maven - Overview</a></li>
+<li><a  href="maven_environment_setup.html">Maven - Environment Setup</a></li>
+<li><a  href="maven_pom.html">Maven - POM</a></li>
+<li><a  href="maven_build_life_cycle.html">Maven - Build Life Cycle</a></li>
+<li><a  href="maven_build_profiles.html">Maven - Build Profiles</a></li>
+<li><a  href="maven_repositories.html">Maven - Repositories</a></li>
+<li><a  href="maven_plugins.html">Maven - Plug-ins</a></li>
+<li><a  href="maven_creating_project.html">Maven - Creating Project</a></li>
+<li><a  href="maven_build_test_project.html">Maven - Build &amp; Test Project</a></li>
+<li><a  href="maven_external_dependencies.html">Maven - External Dependencies</a></li>
+<li><a  href="maven_project_documents.html">Maven - Project Documents</a></li>
+<li><a  href="maven_project_templates.html">Maven - Project Templates</a></li>
+<li><a  href="maven_snapshots.html">Maven - Snapshots</a></li>
+<li><a  href="maven_build_automation.html">Maven - Build Automation</a></li>
+<li><a  href="maven_manage_dependencies.html">Maven - Manage Dependencies</a></li>
+<li><a  href="maven_deployment_automation.html">Maven - Deployment Automation</a></li>
+<li><a  href="maven_web_application.html">Maven - Web Application</a></li>
+<li><a  href="maven_eclispe_ide.html">Maven - Eclipse IDE</a></li>
+<li><a  href="maven_netbeans.html">Maven - NetBeans</a></li>
+<li><a  href="maven_intellij_idea.html">Maven - IntelliJ IDEA</a></li>
+<li class="heading">Maven Useful Resources</li>
+<li><a  href="maven_questions_answers.html">Maven - Questions and Answers</a></li>
+<li><a  href="maven_quick_guide.html">Maven - Quick Guide</a></li>
+<li><a  href="maven_useful_resources.html">Maven - Useful Resources</a></li>
+<li><a  href="maven_discussion.html">Maven - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Maven - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="maven_questions_answers.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="maven_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Maven - Overview</h1>
+<h2>What is Maven?</h2>
+<p>Maven is a project management and comprehension tool that provides developers a complete build lifecycle framework. Development team can automate the project's build infrastructure in almost no time as Maven uses a standard directory layout and a default build lifecycle.</p>
+<p>In case of multiple development teams environment, Maven can set-up the way to work as per standards in a very short time. As most of the project setups are simple and reusable, Maven makes life of developer easy while creating reports, checks, build and testing automation setups.</p>
+<p>Maven provides developers ways to manage the following &minus;</p>
+<ul class="list">
+<li>Builds</li>
+<li>Documentation</li>
+<li>Reporting</li>
+<li>Dependencies</li>
+<li>SCMs</li>
+<li>Releases</li>
+<li>Distribution</li>
+<li>Mailing list</li>
+</ul>
+<p>To summarize, Maven simplifies and standardizes the project build process. It handles compilation, distribution, documentation, team collaboration and other tasks seamlessly. Maven increases reusability and takes care of most of the build related tasks.</p>
+<h2>Maven Evolution</h2>
+<p>Maven was originally designed to simplify building processes in Jakarta Turbine project. There were several projects and each project contained slightly different ANT build files. JARs were checked into CVS.</p>
+<p>Apache group then developed <b>Maven</b> which can build multiple projects together, publish projects information, deploy projects, share JARs across several projects and help in collaboration of teams.</p>
+<h2>Objective</h2>
+<p>The primary goal of Maven is to provide developer with the following &minus;</p>
+<ul class="list">
+<li><p>A comprehensive model for projects, which is reusable, maintainable, and easier to comprehend.</p></li>
+<li><p>Plugins or tools that interact with this declarative model.</p></li>
+</ul>
+<p>Maven project structure and contents are declared in an xml file, pom.xml, referred as Project Object Model (POM), which is the fundamental unit of the entire Maven system. In later chapters, we will explain POM in detail.</p>
+<h2>Convention over Configuration</h2>
+<p>Maven uses <b>Convention</b> over <b>Configuration</b>, which means developers are not required to create build process themselves.</p>
+<p>Developers do not have to mention each and every configuration detail. Maven provides sensible default behavior for projects. When a Maven project is created, Maven creates default project structure. Developer is only required to place files accordingly and he/she need not to define any configuration in pom.xml.</p>
+<p>As an example, following table shows the default values for project source code files, resource files and other configurations. Assuming, <b>${basedir}</b> denotes the project location &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center; width:30%;">Item</th>
+<th style="text-align:center;">Default</th>
+</tr>
+<tr>
+<td>source code</td>
+<td>${basedir}/src/main/java</td>
+</tr>
+<tr>
+<td>Resources</td>
+<td>${basedir}/src/main/resources</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td>${basedir}/src/test</td>
+</tr>
+<tr>
+<td>Complied byte code</td>
+<td>${basedir}/target</td>
+</tr>
+<tr>
+<td>distributable JAR</td>
+<td>${basedir}/target/classes</td>
+</tr>
+</table>
+<p>In order to build the project, Maven provides developers with options to mention life-cycle goals and project dependencies (that rely on Maven plugin capabilities and on its default conventions). Much of the project management and build related tasks are maintained by Maven plugins.</p>
+<p>Developers can build any given Maven project without the need to understand how the individual plugins work. We will discuss Maven Plugins in detail in the later chapters.</p>
+<h2>Features of Maven</h2>
+<ul class="list">
+<li><p>Simple project setup that follows best practices.</p></li>
+<li><p>Consistent usage across all projects.</p></li>
+<li><p>Dependency management including automatic updating.</p></li>
+<li><p>A large and growing repository of libraries.</p></li>
+<li><p>Extensible, with the ability to easily write plugins in Java or scripting languages.</p></li>
+<li><p>Instant access to new features with little or no extra configuration.</p></li>
+<li><p><b>Model-based builds</b> &minus; Maven is able to build any number of projects into predefined output types such as jar, war, metadata.</p></li>
+<li><p><b>Coherent site of project information</b> &minus; Using the same metadata as per the build process, maven is able to generate a website and a PDF including complete documentation.</p></li>
+<li><p><b>Release management and distribution publication</b> &minus; Without additional configuration, maven will integrate with your source control system such as CVS and manages the release of a project.</p></li>
+<li><p><b>Backward Compatibility</b> &minus; You can easily port the multiple modules of a project into Maven 3 from older versions of Maven. It can support the older versions also.</p></li>
+<li><p><b>Automatic parent versioning</b> &minus; No need to specify the parent in the sub module for maintenance.</p></li>
+<li><p><b>Parallel builds</b> &minus; It analyzes the project dependency graph and enables you to build schedule modules in parallel. Using this, you can achieve the performance improvements of 20-50%.</p></li>
+<li><p><b>Better Error and Integrity Reporting</b> &minus; Maven improved error reporting, and it provides you with a link to the Maven wiki page where you will get full description of the error.</p></li>
+</ul>
+<h1>Maven - Environment Setup</h1>
+<p>Maven is a Java based tool, so the very first requirement is to have JDK installed on your machine.</p>
+<h2>System Requirement</h2>
+<table class="table table-bordered">
+<tr>
+<th>JDK</th>
+<td>1.7 or above.</td>
+</tr>
+<tr>
+<th>Memory</th>
+<td>No minimum requirement.</td>
+</tr>
+<tr>
+<th>Disk Space</th>
+<td>No minimum requirement.</td>
+</tr>
+<tr><th>Operating System</th>
+<td>No minimum requirement.</td>
+</tr>
+</table>
+<h2>Step 1 - Verify Java Installation on your Machine</h2>
+<p>Open console and execute the following <b>java</b> command.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center;">OS</th>
+<th style="text-align:center;">Task</th>
+<th style="text-align:center;">Command</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Open Command Console</td>
+<td>c:\> java -version</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>Open Command Terminal</td>
+<td>$ java -version</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>Open Terminal</td>
+<td>machine:~ joseph$ java -version</td>
+</tr>
+</table>
+<p>Let's verify the output for all the operating systems &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center;">OS</th>
+<th style="text-align:center;">Output</th>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Windows</td>
+<td><p>java version "1.7.0_60"</p>
+<p>Java(TM) SE Runtime Environment (build 1.7.0_60-b19)</p>
+<p>Java HotSpot(TM) 64-Bit Server VM (build 24.60-b09, mixed mode)</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Linux</td>
+<td><p>java version "1.7.0_60"</p>
+<p>Java(TM) SE Runtime Environment (build 1.7.0_60-b19)</p>
+<p>Java HotSpot(TM) 64-Bit Server VM (build 24.60-b09, mixed mode)</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Mac</td>
+<td><p>java version "1.7.0_60"</p>
+<p>Java(TM) SE Runtime Environment (build 1.7.0_60-b19)</p>
+<p>Java HotSpot(TM) 64-Bit Server VM (build 24.60-b09, mixed mode)</p>
+</td>
+</tr>
+</table>
+<p>If you do not have Java installed, install the Java Software Development Kit (SDK) from <a target="_blank" rel="nofollow" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">https://www.oracle.com/technetwork/java/javase/downloads/index.html</a>. We are assuming Java 1.7.0.60 as installed version for this tutorial.</p>
+<h2>Step 2 - Set JAVA Environment</h2>
+<p>Set the <b>JAVA_HOME</b> environment variable to point to the base directory location where Java is installed on your machine. For example &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center;">OS</th>
+<th style="text-align:center;">Output</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Set the environment variable JAVA_HOME to C:\Program Files\Java\jdk1.7.0_60</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>export JAVA_HOME=/usr/local/java-current</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>export JAVA_HOME=/Library/Java/Home</td>
+</tr>
+</table>
+<p>Append Java compiler location to System Path.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20% text-align:center;">OS</th>
+<th style="text-align:center;">Output</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Append the string “;C:\Program Files\Java\jdk1.7.0.60\bin” to the end of the system variable, Path.</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>export PATH=$PATH:$JAVA_HOME/bin/</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>not required</td>
+</tr>
+</table>
+<p>Verify Java Installation using <b>java -version</b> command as explained above.</p>
+<h2>Step 3 - Download Maven Archive</h2>
+<p>Download Maven 2.2.1 from <a target="_blank" rel="nofollow" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a>.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center">OS</th>
+<th style="text-align:center">Archive name</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>apache-maven-3.3.1-bin.zip</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>apache-maven-3.3.1-bin.tar.gz</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>apache-maven-3.3.1-bin.tar.gz</td>
+</tr>
+</table>
+<h2>Step 4 - Extract the Maven Archive</h2>
+<p>Extract the archive, to the directory you wish to install Maven 3.3.1. The subdirectory apache-maven-3.3.1 will be created from the archive.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center;">OS</th>
+<th>Location (can be different based on your installation)</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>C:\Program Files\Apache Software Foundation\apache-maven-3.3.1</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>/usr/local/apache-maven</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>/usr/local/apache-maven</td>
+</tr>
+</table>
+<h2>Step 5 - Set Maven Environment Variables</h2>
+<p>Add M2_HOME, M2, MAVEN_OPTS to environment variables.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center;">OS</th>
+<th style="text-align:center;">Output</th>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Windows</td>
+<td><p>Set the environment variables using system properties.</p>
+<p>M2_HOME=C:\Program Files\Apache Software Foundation\apache-maven-3.3.1 M2=%M2_HOME%\bin MAVEN_OPTS=-Xms256m -Xmx512m</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Linux</td>
+<td><p>Open command terminal and set environment variables. </p>
+<p>export M2_HOME=/usr/local/apache-maven/apache-maven-3.3.1 export M2=$M2_HOME/bin</p>
+<p>export MAVEN_OPTS=-Xms256m -Xmx512m</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Mac</td>
+<td><p>Open command terminal and set environment variables.</p>
+<p>export M2_HOME=/usr/local/apache-maven/apache-maven-3.3.1</p>
+<p>export M2=$M2_HOME/bin</p>
+<p>export MAVEN_OPTS=-Xms256m -Xmx512m</p>
+</td>
+</tr>
+</table>
+<h2>Step 6 - Add Maven bin Directory Location to System Path</h2>
+<p>Now append M2 variable to System Path.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center;">OS</th>
+<th style="text-align:center;">Output</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Append the string ;%M2% to the end of the system variable, Path.</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>export PATH=$M2:$PATH</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>export PATH=$M2:$PATH</td>
+</tr>
+</table>
+<h2>Step 7 - Verify Maven Installation</h2>
+<p>Now open console and execute the following <b>mvn</b> command.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center; width:20%;">OS</th>
+<th style="text-align:center;">Task</th>
+<th style="text-align:center;">Command</th>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Open Command Console</td>
+<td>c:\> mvn --version</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>Open Command Terminal</td>
+<td>$ mvn --version</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>Open Terminal</td>
+<td>machine:~ joseph$ mvn --version</td>
+</tr>
+</table>
+<p>Finally, verify the output of the above commands, which should be as follows &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:20%; text-align:center;">OS</th>
+<th style="text-align:center;">Output</th>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Windows</td>
+<td><p>Apache Maven 3.3.1 (r801777; 2009-08-07 00:46:01+0530)</p>
+<p>Java version: 1.7.0_60</p>
+<p>Java home: C:\Program Files\Java\jdk1.7.0_60 \jre</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Linux</td>
+<td><p>Apache Maven 3.3.1 (r801777; 2009-08-07 00:46:01+0530)</p>
+<p>Java version: 1.7.0_60</p>
+<p>Java home: C:\Program Files\Java\jdk1.7.0_60 \jre</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Mac</td>
+<td><p>Apache Maven 3.3.1 (r801777; 2009-08-07 00:46:01+0530)</p>
+<p>Java version: 1.7.0_60</p>
+<p>Java home: C:\Program Files\Java\jdk1.7.0_60 \jre</p>
+</td>
+</tr>
+</table>
+<h1>Maven - POM</h1>
+<p>POM stands for Project Object Model. It is fundamental unit of work in Maven. It is an XML file that resides in the base directory of the project as pom.xml.</p>
+<p>The POM contains information about the project and various configuration detail used by Maven to build the project(s).</p>
+<p>POM also contains the goals and plugins. While executing a task or goal, Maven looks for the POM in the current directory. It reads the POM, gets the needed configuration information, and then executes the goal. Some of the configuration that can be specified in the POM are following &minus;</p>
+<ul class="list">
+<li>project dependencies</li>
+<li>plugins</li>
+<li>goals</li>
+<li>build profiles</li>
+<li>project version</li>
+<li>developers</li>
+<li>mailing list</li>
+</ul>
+<p>Before creating a POM, we should first decide the project <b>group</b> (groupId), its <b>name</b> (artifactId) and its version as these attributes help in uniquely identifying the project in repository.</p>
+<h2>POM Example</h2>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+   &lt;groupId&gt;com.companyname.project-group&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+&lt;/project&gt;
+</pre>
+<p>It should be noted that there should be a single POM file for each project.</p>
+<ul class="list">
+<li><p>All POM files require the <b>project</b> element and three mandatory fields: <b>groupId, artifactId, version</b>.</p></li>
+<li><p>Projects notation in repository is <b>groupId:artifactId:version</b>.</p></li>
+<li><p>Minimal requirements for a POM &minus;</p></li>
+</ul>
+<table class="table table-bordered">
+<tr>
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Node &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td style="vertical-align:middle;"><p><b>Project root</b></p>
+<p>This is project root tag. You need to specify the basic schema settings such as apache schema and w3.org specification.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td style="vertical-align:middle;"><p><b>Model version</b></p>
+<p>Model version should be 4.0.0.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td style="vertical-align:middle;"><p><b>groupId</b></p>
+<p>This is an Id of project's group. This is generally unique amongst an organization or a project. For example, a banking group com.company.bank has all bank related projects.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td style="vertical-align:middle;"><p><b>artifactId</b></p>
+<p>This is an Id of the project. This is generally name of the project. For example, consumer-banking. Along with the groupId, the artifactId defines the artifact's location within the repository.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td style="vertical-align:middle;"><p><b>version</b></p>
+<p>This is the version of the project. Along with the groupId, It is used within an artifact's repository to separate versions from each other. For example &minus;</p>
+<p><b>com.company.bank:consumer-banking:1.0</b></p>
+<p><b>com.company.bank:consumer-banking:1.1.</b></p>
+</td>
+</tr>
+</table>
+<h2>Super POM</h2>
+<p>The Super POM is Maven’s default POM. All POMs inherit from a parent or default (despite explicitly defined or not). This base POM is known as the <b>Super POM</b>, and contains values inherited by default.</p>
+<p>Maven use the effective POM (configuration from super pom plus project configuration) to execute relevant goal. It helps developers to specify minimum configuration detail in his/her pom.xml. Although configurations can be overridden easily.</p>
+<p>An easy way to look at the default configurations of the super POM is by running the following command: <b>mvn help:effective-pom</b></p>
+<p>Create a pom.xml in any directory on your computer.Use the content of above mentioned example pom.</p>
+<p>In example below, We've created a pom.xml in C:\MVN\project folder. </p>
+<p>Now open command console, go the folder containing pom.xml and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn help:effective-pom
+</pre>
+<p>Maven will start processing and display the effective-pom.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'help'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Unnamed - com.companyname.project-group:project-name:jar:1.0
+[INFO]    task-segment: [help:effective-pom] (aggregator-style)
+[INFO] ------------------------------------------------------------------------
+[INFO] [help:effective-pom {execution: default-cli}]
+[INFO]
+
+.....
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: &lt; 1 second
+[INFO] Finished at: Thu Jul 05 11:41:51 IST 2012
+[INFO] Final Memory: 6M/15M
+[INFO] ------------------------------------------------------------------------
+</pre>
+<p>Effective POM displayed as result in console, after inheritance, interpolation, and profiles are applied.</p>
+<pre class="prettyprint notranslate">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- ============================================== --&gt;
+&lt;!-- --&gt;
+&lt;!-- Generated by Maven Help Plugin on 2015-04-09T11:41:51 --&gt;
+&lt;!-- See: http://maven.apache.org/plugins/maven-help-plugin/ --&gt;
+&lt;!-- --&gt;
+&lt;!-- ==============================================--&gt;
+
+&lt;!-- ==============================================--&gt;
+&lt;!-- --&gt;
+&lt;!-- Effective POM for project --&gt;
+&lt;!-- 'com.companyname.project-group:project-name:jar:1.0' --&gt;
+&lt;!-- --&gt;
+&lt;!-- ============================================== --&gt;
+
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" xmlns:xsi = "http://www.w3.org/
+
+2001/XMLSchema-instance" xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+
+http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.project-group&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;build&gt;
+      &lt;sourceDirectory&gt;C:\MVN\project\src\main\java&lt;/sourceDirectory&gt;
+      &lt;scriptSourceDirectory&gt;src/main/scripts&lt;/scriptSourceDirectory&gt;
+
+      &lt;testSourceDirectory&gt;C:\MVN\project\src\test\java&lt;/testSourceDirectory&gt;
+      &lt;outputDirectory&gt;C:\MVN\project\target\classes&lt;/outputDirectory&gt;
+      &lt;testOutputDirectory&gt;C:\MVN\project\target\test-classes&lt;/testOutputDirectory&gt;
+      &lt;resources&gt;
+         &lt;resource&gt;
+            &lt;mergeId&gt;resource-0&lt;/mergeId&gt;
+            &lt;directory&gt;C:\MVN\project\src\main\resources&lt;/directory&gt;
+         &lt;/resource&gt;
+      &lt;/resources&gt;
+      &lt;testResources&gt;
+         &lt;testResource&gt;
+            &lt;mergeId&gt;resource-1&lt;/mergeId&gt;
+            &lt;directory&gt;C:\MVN\project\src\test\resources&lt;/directory&gt;
+         &lt;/testResource&gt;
+      &lt;/testResources&gt;
+      &lt;directory&gt;C:\MVN\project\target&lt;/directory&gt;
+      &lt;finalName&gt;project-1.0&lt;/finalName&gt;
+   
+      &lt;pluginManagement&gt;
+         &lt;plugins&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;
+               &lt;version&gt;1.3&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-assembly-plugin&lt;  /artifactId&gt;
+               &lt;version&gt;2.2-beta-2&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-clean-plugin&lt;  /artifactId&gt;
+               &lt;version&gt;2.2&lt;/version&gt;
+            &lt;/plugin&gt;
+         
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.0.2&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;     
+               &lt;version&gt;2.0&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.4&lt;/version&gt;
+            &lt;/plugin&gt;
+         
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-ear-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.3.1&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-ejb-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.1&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-install-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.2&lt;/version&gt;
+            &lt;/plugin&gt;
+         
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.2&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.5&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-plugin-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.4.3&lt;/version&gt;
+            &lt;/plugin&gt;
+         
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-rar-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.2&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.0-beta-8&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.3&lt;/version&gt;
+            &lt;/plugin&gt;
+         
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-site-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.0-beta-7&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.0.4&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.4.3&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+               &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+               &lt;version&gt;2.1-alpha-2&lt;/version&gt;
+            &lt;/plugin&gt;
+         &lt;/plugins&gt;
+      &lt;/pluginManagement&gt;
+   
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;artifactId&gt;maven-help-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.1.1&lt;/version&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+   
+   &lt;repositories&gt;
+      &lt;repository&gt;
+         &lt;snapshots&gt;
+            &lt;enabled&gt;false&lt;/enabled&gt;
+         &lt;/snapshots&gt;
+         &lt;id&gt;central&lt;/id&gt;
+         &lt;name&gt;Maven Repository Switchboard&lt;/name&gt;
+         &lt;url&gt;http://repo1.maven.org/maven2&lt;/url&gt;
+      &lt;/repository&gt;
+   &lt;/repositories&gt;
+   &lt;pluginRepositories&gt;
+      &lt;pluginRepository&gt;
+         &lt;releases&gt;
+            &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;
+         &lt;/releases&gt;
+         &lt;snapshots&gt;
+            &lt;enabled&gt;false&lt;/enabled&gt;
+         &lt;/snapshots&gt;
+         &lt;id&gt;central&lt;/id&gt;
+         &lt;name&gt;Maven Plugin Repository&lt;/name&gt;
+         &lt;url&gt;http://repo1.maven.org/maven2&lt;/url&gt;
+      &lt;/pluginRepository&gt;
+   &lt;/pluginRepositories&gt;
+   &lt;reporting&gt;
+      &lt;outputDirectory&gt;C:\MVN\project\target/site&lt;/outputDirectory&gt;
+   &lt;/reporting&gt;
+&lt;/project&gt;
+</pre>
+<p>In above pom.xml, you can see the default project source folders structure, output directory, plug-ins required, repositories, reporting directory, which Maven will be using while executing the desired goals.</p>
+<p>Maven pom.xml is also not required to be written manually. Maven provides numerous archetype plugins to create projects, which in order, create the project structure and pom.xml</p>
+<h1>Maven - Build Life Cycle</h1>
+<h2>What is Build Lifecycle?</h2>
+<p>A Build Lifecycle is a well-defined sequence of phases, which define the order in which the goals are to be executed. Here phase represents a stage in life cycle. As an example, a typical <b>Maven Build Lifecycle</b> consists of the following sequence of phases.</p>
+<table class=" table table-bordered">
+<tr>
+<th style="text-align:center; width:25%;">Phase</th>
+<th style="text-align:center; width:25%;">Handles</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td style="vertical-align:middle">prepare-resources</td>
+<td style="vertical-align:middle">resource copying</td>
+<td>Resource copying can be customized in this phase.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle">validate</td>
+<td style="vertical-align:middle">Validating the information</td>
+<td>Validates if the project is correct and if all necessary information is available.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle">compile</td>
+<td style="vertical-align:middle">compilation</td>
+<td>Source code compilation is done in this phase.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle">Test</td>
+<td style="vertical-align:middle">Testing</td>
+<td>Tests the compiled source code suitable for testing framework.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle">package</td>
+<td style="vertical-align:middle">packaging</td>
+<td>This phase creates the JAR/WAR package as mentioned in the packaging in POM.xml.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle">install</td>
+<td style="vertical-align:middle">installation</td>
+<td>This phase installs the package in local/remote maven repository.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle">Deploy</td>
+<td style="vertical-align:middle">Deploying</td>
+<td>Copies the final package to the remote repository.</td>
+</tr>
+</table>
+<p>There are always <b>pre</b> and <b>post</b> phases to register <b>goals</b>, which must run prior to, or after a particular phase.</p>
+<p>When Maven starts building a project, it steps through a defined sequence of phases and executes goals, which are registered with each phase.</p>
+<p>Maven has the following three standard lifecycles &minus;</p>
+<ul class="list">
+<li>clean</li>
+<li>default(or build)</li>
+<li>site</li>
+</ul>
+<p>A <b>goal</b> represents a specific task which contributes to the building and managing of a project. It may be bound to zero or more build phases. A goal not bound to any build phase could be executed outside of the build lifecycle by direct invocation.</p>
+<p>The order of execution depends on the order in which the goal(s) and the build phase(s) are invoked. For example, consider the command below. The <b>clean</b> and <b>package</b> arguments are build phases while the <b>dependency:copy-dependencies</b> is a goal.</p>
+<pre class="result notranslate">
+mvn clean dependency:copy-dependencies package
+</pre>
+<p>Here the <i>clean</i> phase will be executed first, followed by the <b>dependency:copy-dependencies goal</b>, and finally <i>package</i> phase will be executed.</p>
+<h2>Clean Lifecycle</h2>
+<p>When we execute <i>mvn post-clean</i> command, Maven invokes the clean lifecycle consisting of the following phases.</p>
+<ul class="list">
+<li>pre-clean</li>
+<li>clean</li>
+<li>post-clean</li>
+</ul>
+<p>Maven clean goal (clean:clean) is bound to the <i>clean</i> phase in the clean lifecycle. Its <b>clean:cleangoal</b> deletes the output of a build by deleting the build directory. Thus, when <i>mvn clean</i> command executes, Maven deletes the build directory.</p>
+<p>We can customize this behavior by mentioning goals in any of the above phases of clean life cycle.</p>
+<p>In the following example, We'll attach maven-antrun-plugin:run goal to the pre-clean, clean, and post-clean phases. This will allow us to echo text messages displaying the phases of the clean lifecycle.</p>
+<p>We've created a pom.xml in C:\MVN\project folder.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.projectgroup&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;
+            &lt;version&gt;1.1&lt;/version&gt;
+            &lt;executions&gt;
+               &lt;execution&gt;
+                  &lt;id&gt;id.pre-clean&lt;/id&gt;
+                  &lt;phase&gt;pre-clean&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;pre-clean phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            
+               &lt;execution&gt;
+                  &lt;id&gt;id.clean&lt;/id&gt;
+                  &lt;phase&gt;clean&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;clean phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            
+               &lt;execution&gt;
+                  &lt;id&gt;id.post-clean&lt;/id&gt;
+                  &lt;phase&gt;post-clean&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;post-clean phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            &lt;/executions&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+<p>Now open command console, go to the folder containing pom.xml and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn post-clean
+</pre>
+<p>Maven will start processing and displaying all the phases of clean life cycle.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] -----------------------------------------------------------------
+-
+[INFO] Building Unnamed - com.companyname.projectgroup:project:jar:1.0
+[INFO] task-segment: [post-clean]
+[INFO] ------------------------------------------------------------------
+[INFO] [antrun:run {execution: id.pre-clean}]
+[INFO] Executing tasks
+[echo] pre-clean phase
+[INFO] Executed tasks
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] [antrun:run {execution: id.clean}]
+[INFO] Executing tasks
+[echo] clean phase
+[INFO] Executed tasks
+[INFO] [antrun:run {execution: id.post-clean}]
+[INFO] Executing tasks
+[echo] post-clean phase
+[INFO] Executed tasks
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+[INFO] Total time: &gt; 1 second
+[INFO] Finished at: Sat Jul 07 13:38:59 IST 2012
+[INFO] Final Memory: 4M/44M
+[INFO] ------------------------------------------------------------------
+</pre>
+<p>You can try tuning <b>mvn clean</b> command, which will display <b>pre-clean</b> and clean. Nothing will be executed for <b>post-clean</b> phase.</p>
+<h2>Default (or Build) Lifecycle</h2>
+<p>This is the primary life cycle of Maven and is used to build the application. It has the following 23 phases.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Lifecycle Phase &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>validate</b></p>
+<p>Validates whether project is correct and all necessary information is available to complete the build process.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>initialize</b></p>
+<p>Initializes build state, for example set properties.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>generate-sources</b></p>
+<p>Generate any source code to be included in compilation phase.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>process-sources</b></p>
+<p>Process the source code, for example, filter any value.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>generate-resources</b></p>
+<p>Generate resources to be included in the package.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>process-resources</b></p>
+<p>Copy and process the resources into the destination directory, ready for packaging phase.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>compile</b></p>
+<p>Compile the source code of the project.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>process-classes</b></p>
+<p>Post-process the generated files from compilation, for example to do bytecode enhancement/optimization on Java classes.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>generate-test-sources</b></p>
+<p>Generate any test source code to be included in compilation phase.</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><p><b>process-test-sources</b></p>
+<p>Process the test source code, for example, filter any values.</p></td>
+</tr>
+<tr>
+<td>11</td>
+<td><p><b>test-compile</b></p>
+<p>Compile the test source code into the test destination directory.</p></td>
+</tr>
+<tr>
+<td>12</td>
+<td><p><b>process-test-classes</b></p>
+<p>Process the generated files from test code file compilation.</p></td>
+</tr>
+<tr>
+<td>13</td>
+<td><p><b>test</b></p>
+<p>Run tests using a suitable unit testing framework (Junit is one).</p></td>
+</tr>
+<tr>
+<td>14</td>
+<td><p><b>prepare-package</b></p>
+<p>Perform any operations necessary to prepare a package before the actual packaging.</p></td>
+</tr>
+<tr>
+<td>15</td>
+<td><p><b>package</b></p>
+<p>Take the compiled code and package it in its distributable format, such as a JAR, WAR, or EAR file.</p></td>
+</tr>
+<tr>
+<td>16</td>
+<td><p><b>pre-integration-test</b></p>
+<p>Perform actions required before integration tests are executed. For example, setting up the required environment.</p></td>
+</tr>
+<tr>
+<td>17</td>
+<td><p><b>integration-test</b></p>
+<p>Process and deploy the package if necessary into an environment where integration tests can be run.</p></td>
+</tr>
+<tr>
+<td>18</td>
+<td><p><b>post-integration-test</b></p>
+<p>Perform actions required after integration tests have been executed. For example, cleaning up the environment.</p></td>
+</tr>
+<tr>
+<td>19</td>
+<td><p><b>verify</b></p>
+<p>Run any check-ups to verify the package is valid and meets quality criteria.</p></td>
+</tr>
+<tr>
+<td>20</td>
+<td><p><b>install</b></p>
+<p>Install the package into the local repository, which can be used as a dependency in other projects locally.</p></td>
+</tr>
+<tr>
+<td>21</td>
+<td><p><b>deploy</b></p>
+<p>Copies the final package to the remote repository for sharing with other developers and projects.</p></td>
+</tr>
+</table>
+<p>There are few important concepts related to Maven Lifecycles, which are worth to mention &minus;</p>
+<ul class="list">
+<li><p>When a phase is called via Maven command, for example <b>mvn compile</b>, only phases up to and including that phase will execute.</p></li>
+<li><p>Different maven goals will be bound to different phases of Maven lifecycle depending upon the type of packaging (JAR / WAR / EAR).</p></li>
+</ul>
+<p>In the following example, we will attach maven-antrun-plugin:run goal to few of the phases of Build lifecycle. This will allow us to echo text messages displaying the phases of the lifecycle.</p>
+<p>We've updated pom.xml in C:\MVN\project folder.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.projectgroup&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;
+            &lt;version&gt;1.1&lt;/version&gt;
+            &lt;executions&gt;
+               &lt;execution&gt;
+                  &lt;id&gt;id.validate&lt;/id&gt;
+                  &lt;phase&gt;validate&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;validate phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            
+               &lt;execution&gt;
+                  &lt;id&gt;id.compile&lt;/id&gt;
+                  &lt;phase&gt;compile&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;compile phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            
+               &lt;execution&gt;
+                  &lt;id&gt;id.test&lt;/id&gt;
+                  &lt;phase&gt;test&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;test phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            
+               &lt;execution&gt;
+                  &lt;id&gt;id.package&lt;/id&gt;
+                  &lt;phase&gt;package&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;package phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            
+               &lt;execution&gt;
+                  &lt;id&gt;id.deploy&lt;/id&gt;
+                  &lt;phase&gt;deploy&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;deploy phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+            &lt;/executions&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+<p>Now open command console, go the folder containing pom.xml and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn compile
+</pre>
+<p>Maven will start processing and display phases of build life cycle up to the compile phase.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] -----------------------------------------------------------------
+-
+[INFO] Building Unnamed - com.companyname.projectgroup:project:jar:1.0
+[INFO] task-segment: [compile]
+[INFO] -----------------------------------------------------------------
+-
+[INFO] [antrun:run {execution: id.validate}]
+[INFO] Executing tasks
+[echo] validate phase
+[INFO] Executed tasks
+[INFO] [resources:resources {execution: default-resources}]
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered
+resources,
+i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory
+C:\MVN\project\src\main\resources
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [antrun:run {execution: id.compile}]
+[INFO] Executing tasks
+[echo] compile phase
+[INFO] Executed tasks
+[INFO] -----------------------------------------------------------------
+-
+[INFO] BUILD SUCCESSFUL
+[INFO] -----------------------------------------------------------------
+-
+[INFO] Total time: 2 seconds
+[INFO] Finished at: Sat Jul 07 20:18:25 IST 2012
+[INFO] Final Memory: 7M/64M
+[INFO] -----------------------------------------------------------------
+-
+</pre>
+<h2>Site Lifecycle</h2>
+<p>Maven Site plugin is generally used to create fresh documentation to create reports, deploy site, etc. It has the following phases &minus;</p>
+<ul class="list">
+<li>pre-site</li>
+<li>site</li>
+<li>post-site</li>
+<li>site-deploy</li>
+</ul>
+<p>In the following example, we will attach <b>maven-antrun-plugin:run</b> goal to all the phases of Site lifecycle. This will allow us to echo text messages displaying the phases of the lifecycle.</p>
+<p>We've updated pom.xml in C:\MVN\project folder.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.projectgroup&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;
+            &lt;version&gt;1.1&lt;/version&gt;
+            &lt;executions&gt;
+               &lt;execution&gt;
+                  &lt;id&gt;id.pre-site&lt;/id&gt;
+                  &lt;phase&gt;pre-site&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;pre-site phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+               
+               &lt;execution&gt;
+                  &lt;id&gt;id.site&lt;/id&gt;
+                  &lt;phase&gt;site&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;site phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+               
+               &lt;execution&gt;
+                  &lt;id&gt;id.post-site&lt;/id&gt;
+                  &lt;phase&gt;post-site&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;post-site phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+               
+               &lt;execution&gt;
+                  &lt;id&gt;id.site-deploy&lt;/id&gt;
+                  &lt;phase&gt;site-deploy&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;site-deploy phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;
+               
+            &lt;/executions&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+<p>Now open the command console, go the folder containing pom.xml and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn site
+</pre>
+<p>Maven will start processing and displaying the phases of site life cycle up to site phase.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------
+[INFO] Building Unnamed - com.companyname.projectgroup:project:jar:1.0
+[INFO] task-segment: [site]
+[INFO] ------------------------------------------------------------------
+[INFO] [antrun:run {execution: id.pre-site}]
+[INFO] Executing tasks
+[echo] pre-site phase
+[INFO] Executed tasks
+[INFO] [site:site {execution: default-site}]
+
+[INFO] Generating "About" report.
+[INFO] Generating "Issue Tracking" report.
+[INFO] Generating "Project Team" report.
+[INFO] Generating "Dependencies" report.
+[INFO] Generating "Project Plugins" report.
+[INFO] Generating "Continuous Integration" report.
+[INFO] Generating "Source Repository" report.
+[INFO] Generating "Project License" report.
+[INFO] Generating "Mailing Lists" report.
+[INFO] Generating "Plugin Management" report.
+[INFO] Generating "Project Summary" report.
+
+[INFO] [antrun:run {execution: id.site}]
+[INFO] Executing tasks
+[echo] site phase
+[INFO] Executed tasks
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+[INFO] Total time: 3 seconds
+[INFO] Finished at: Sat Jul 07 15:25:10 IST 2012
+[INFO] Final Memory: 24M/149M
+[INFO] ------------------------------------------------------------------
+</pre>
+<h1>Maven - Build Profiles</h1>
+<h2>What is Build Profile?</h2>
+<p>A Build profile is a set of configuration values, which can be used to set or override default values of Maven build. Using a build profile, you can customize build for different environments such as Production v/s Development environments.</p>
+<p>Profiles are specified in pom.xml file using its activeProfiles/profiles elements and are triggered in variety of ways. Profiles modify the POM at build time, and are used to give parameters different target environments (for example, the path of the database server in the development, testing, and production environments).</p>
+<h2>Types of Build Profile</h2>
+<p>Build profiles are majorly of three types.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center; width:20%;">Type</th>
+<th style="text-align:center;">Where it is defined</th>
+</tr>
+<tr>
+<td>Per Project</td>
+<td>Defined in the project POM file, pom.xml</td>
+</tr>
+<tr>
+<td>Per User</td>
+<td>Defined in Maven settings xml file (%USER_HOME%/.m2/settings.xml)</td>
+</tr>
+<tr>
+<td>Global</td>
+<td>Defined in Maven global settings xml file (%M2_HOME%/conf/settings.xml)</td>
+</tr>
+</table>
+<h2>Profile Activation</h2>
+<p>A Maven Build Profile can be activated in various ways.</p>
+<ul class="list">
+<li>Explicitly using command console input.</li>
+<li>Through maven settings.</li>
+<li>Based on environment variables (User/System variables).</li>
+<li>OS Settings (for example, Windows family).</li>
+<li>Present/missing files.</li>
+</ul>
+<h2>Profile Activation Examples</h2>
+<p>Let us assume the following directory structure of your project &minus;</p>
+<img src="images/structure.jpg" alt="Maven Build Profile" />
+<p>Now, under <b>src/main/resources</b>, there are three environment specific files &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">File Name &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>env.properties</b></p>
+<p>default configuration used if no profile is mentioned.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>env.test.properties</b></p>
+<p>test configuration when test profile is used.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>env.prod.properties</b></p>
+<p>production configuration when prod profile is used.</p></td>
+</tr>
+</table>
+<h2>Explicit Profile Activation</h2>
+<p>In the following example, we will attach maven-antrun-plugin:run goal to test the phase. This will allow us to echo text messages for different profiles. We will be using pom.xml to define different profiles and will activate profile at command console using maven command.</p>
+<p>Assume, we've created the following pom.xml in C:\MVN\project folder.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.projectgroup&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;profiles&gt;
+      &lt;profile&gt;
+         &lt;id&gt;test&lt;/id&gt;
+         &lt;build&gt;
+            &lt;plugins&gt;
+               &lt;plugin&gt;
+                  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                  &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;
+                  &lt;version&gt;1.1&lt;/version&gt;
+                  &lt;executions&gt;
+                     &lt;execution&gt;
+                        &lt;phase&gt;test&lt;/phase&gt;
+                        &lt;goals&gt;
+                           &lt;goal&gt;run&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                           &lt;tasks&gt;
+                              &lt;echo&gt;Using env.test.properties&lt;/echo&gt;
+                              &lt;copy file="src/main/resources/env.test.properties"
+                                 tofile="${project.build.outputDirectory}
+                                 /env.properties"/&gt;
+                           &lt;/tasks&gt;
+                        &lt;/configuration&gt;
+                     &lt;/execution&gt;
+                  &lt;/executions&gt;
+               &lt;/plugin&gt;
+            &lt;/plugins&gt;
+         &lt;/build&gt;
+      &lt;/profile&gt;
+   &lt;/profiles&gt;
+&lt;/project&gt;
+</pre>
+<p>Now open the command console, go to the folder containing pom.xml and execute the following <b>mvn</b> command. Pass the profile name as argument using -P option.</p>
+<pre class="result notranslate">
+C:\MVN\project>mvn test -Ptest
+</pre>
+<p>Maven will start processing and displaying the result of test build profile.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------
+[INFO] Building Unnamed - com.companyname.projectgroup:project:jar:1.0
+[INFO] task-segment: [test]
+[INFO] ------------------------------------------------------------------
+[INFO] [resources:resources {execution: default-resources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+
+[INFO] Copying 3 resources
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources {execution: default-testResources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+
+[INFO] skip non existing resourceDirectory C:\MVN\project\src\test\resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: C:\MVN\project\target\surefire-reports
+
+-------------------------------------------------------
+T E S T S
+-------------------------------------------------------
+
+There are no tests to run.
+Results :
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] [antrun:run {execution: default}]
+[INFO] Executing tasks
+[echo] Using env.test.properties
+[INFO] Executed tasks
+
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+
+[INFO] Total time: 1 second
+[INFO] Finished at: Sun Jul 08 14:55:41 IST 2012
+[INFO] Final Memory: 8M/64M
+[INFO] ------------------------------------------------------------------
+</pre>
+<p>Now as an exercise, you can perform the following steps &minus;</p>
+<ul class="list">
+<li><p>Add another profile element to profiles element of pom.xml (copy existing profile element and paste it where profile elements ends).</p></li>
+<li><p>Update id of this profile element from test to normal.</p></li>
+<li><p>Update task section to echo env.properties and copy env.properties to target directory.</p></li>
+<li><p>Again repeat the above three steps, update id to prod and task section for env.prod.properties.</p></li>
+<li><p>That's all. Now you've three build profiles ready (normal/test/prod).</p></li>
+</ul>
+<p>Now open the command console, go to the folder containing pom.xml and execute the following <b>mvn</b> commands. Pass the profile names as argument using -P option.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn test -Pnormal
+
+C:\MVN\project&gt;mvn test -Pprod
+</pre> 
+<p>Check the output of the build to see the difference.</p>
+<h2>Profile Activation via Maven Settings</h2>
+<p>Open Maven <b>settings.xml</b> file available in %USER_HOME%/.m2 directory where <b>%USER_HOME%</b> represents the user home directory. If settings.xml file is not there, then create a new one.</p>
+<p>Add test profile as an active profile using active Profiles node as shown below in example.</p>
+<pre class="prettyprint notranslate">
+&lt;settings xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+   &lt;mirrors&gt;
+      &lt;mirror&gt;
+         &lt;id&gt;maven.dev.snaponglobal.com&lt;/id&gt;
+         &lt;name&gt;Internal Artifactory Maven repository&lt;/name&gt;
+         &lt;url&gt;http://repo1.maven.org/maven2/&lt;/url&gt;
+         &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+      &lt;/mirror&gt;
+   &lt;/mirrors&gt;
+   &lt;activeProfiles&gt;
+      &lt;activeProfile&gt;test&lt;/activeProfile&gt;
+   &lt;/activeProfiles&gt;
+&lt;/settings&gt;
+</pre>
+<p>Now open command console, go to the folder containing pom.xml and execute the following <b>mvn</b> command. Do not pass the profile name using -P option. Maven will display result of test profile being an active profile.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn test
+</pre>
+<h2>Profile Activation via Environment Variables</h2>
+<p>Now remove active profile from maven settings.xml and update the test profile mentioned in pom.xml. Add activation element to profile element as shown below.</p>
+<p>The test profile will trigger when the system property "env" is specified with the value "test". Create an environment variable "env" and set its value as "test".</p>
+<pre class="prettyprint notranslate">
+&lt;profile&gt;
+   &lt;id&gt;test&lt;/id&gt;
+   &lt;activation&gt;
+      &lt;property&gt;
+         &lt;name&gt;env&lt;/name&gt;
+         &lt;value&gt;test&lt;/value&gt;
+      &lt;/property&gt;
+   &lt;/activation&gt;
+&lt;/profile&gt;
+</pre>
+<p>Let's open command console, go to the folder containing pom.xml and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn test
+</pre>
+<h2>Profile Activation via Operating System</h2>
+<p>Activation element to include os detail as shown below. This test profile will trigger when the system is windows XP.</p>
+<pre class="prettyprint notranslatet">
+&lt;profile&gt;
+   &lt;id&gt;test&lt;/id&gt;
+   &lt;activation&gt;
+      &lt;os&gt;
+         &lt;name&gt;Windows XP&lt;/name&gt;
+         &lt;family&gt;Windows&lt;/family&gt;
+         &lt;arch&gt;x86&lt;/arch&gt;
+         &lt;version&gt;5.1.2600&lt;/version&gt;
+      &lt;/os&gt;
+   &lt;/activation&gt;
+&lt;/profile&gt;
+</pre>
+<p>Now open command console, go to the folder containing pom.xml and execute the following <b>mvn</b> commands. Do not pass the profile name using -P option. Maven will display result of test profile being an active profile.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn test
+</pre>
+<h2>Profile Activation via Present/Missing File</h2>
+<p>Now activation element to include OS details as shown below. The test profile will trigger when <b>target/generated-sources/axistools/wsdl2java/com/companyname/group</b> is missing.</p>
+<pre class="prettyprint notranslate">
+&lt;profile&gt;
+   &lt;id&gt;test&lt;/id&gt;
+   &lt;activation&gt;
+      &lt;file&gt;
+         &lt;missing&gt;target/generated-sources/axistools/wsdl2java/
+           com/companyname/group&lt;/missing&gt;
+      &lt;/file&gt;
+   &lt;/activation&gt;
+&lt;/profile&gt;
+</pre>
+<p>Now open the command console, go to the folder containing pom.xml and execute the following <b>mvn</b> commands. Do not pass the profile name using -P option. Maven will display result of test profile being an active profile.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn test
+</pre>
+<h1>Maven - Repositories</h1>
+<h2>What is a Maven Repository?</h2>
+<p>In Maven terminology, a repository is a directory where all the project jars, library jar, plugins or any other project specific artifacts are stored and can be used by Maven easily.</p>
+<p>Maven repository are of three types. The following illustration will give an idea regarding these three types.</p>
+<ul class="list">
+<li>local</li>
+<li>central</li>
+<li>remote</li>
+</ul>
+<img src="images/repository_structure.jpg" alt="Repository Structure" />
+<h2>Local Repository</h2>
+<p>Maven local repository is a folder location on your machine. It gets created when you run any maven command for the first time.</p>
+<p>Maven local repository keeps your project's all dependencies (library jars, plugin jars etc.). When you run a Maven build, then Maven automatically downloads all the dependency jars into the local repository. It helps to avoid references to dependencies stored on remote machine every time a project is build.</p>
+<p>Maven local repository by default get created by Maven in %USER_HOME% directory. To override the default location, mention another path in Maven settings.xml file available at %M2_HOME%\conf directory.</p>
+<pre class="prettyprint notranslate">
+&lt;settings xmlns = "http://maven.apache.org/SETTINGS/1.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/SETTINGS/1.0.0 
+   http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+   &lt;localRepository&gt;C:/MyLocalRepository&lt;/localRepository&gt;
+&lt;/settings&gt;
+</pre>
+<p>When you run Maven command, Maven will download dependencies to your custom path.</p>
+<h2>Central Repository</h2>
+<p>Maven central repository is repository provided by Maven community. It contains a large number of commonly used libraries.</p>
+<p>When Maven does not find any dependency in local repository, it starts searching in central repository using following URL &minus; <a rel="nofollow" target="_blank" href="https://repo1.maven.org/maven2/">https://repo1.maven.org/maven2/</a></p>
+<p>Key concepts of Central repository are as follows &minus;</p>
+<ul class="list">
+<li>This repository is managed by Maven community.</li>
+<li>It is not required to be configured.</li>
+<li>It requires internet access to be searched.</li>
+</ul>
+<p>To browse the content of central maven repository, maven community has provided a URL &minus; <a rel="nofollow" target="_blank" href="https://search.maven.org/#browse">https://search.maven.org/#browse</a>. Using this library, a developer can search all the available libraries in central repository.</p>
+<h2>Remote Repository</h2>
+<p>Sometimes, Maven does not find a mentioned dependency in central repository as well. It then stops the build process and output error message to console. To prevent such situation, Maven provides concept of <b>Remote Repository</b>, which is developer's own custom repository containing required libraries or other project jars.</p>
+<p>For example, using below mentioned POM.xml, Maven will download dependency (not available in central repository) from Remote Repositories mentioned in the same pom.xml.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.projectgroup&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.companyname.common-lib&lt;/groupId&gt;
+         &lt;artifactId&gt;common-lib&lt;/artifactId&gt;
+         &lt;version&gt;1.0.0&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;dependencies&gt;
+   &lt;repositories&gt;
+      &lt;repository&gt;
+         &lt;id&gt;companyname.lib1&lt;/id&gt;
+         &lt;url&gt;http://download.companyname.org/maven2/lib1&lt;/url&gt;
+      &lt;/repository&gt;
+      &lt;repository&gt;
+         &lt;id&gt;companyname.lib2&lt;/id&gt;
+         &lt;url&gt;http://download.companyname.org/maven2/lib2&lt;/url&gt;
+      &lt;/repository&gt;
+   &lt;/repositories&gt;
+&lt;/project&gt;
+</pre>
+<h2>Maven Dependency Search Sequence</h2>
+<p>When we execute Maven build commands, Maven starts looking for dependency libraries in the following sequence &minus;</p>
+<ul class="list">
+<li><p><b>Step 1</b> &minus; Search dependency in local repository, if not found, move to step 2 else perform the further processing.</p></li>
+<li><p><b>Step 2</b> &minus; Search dependency in central repository, if not found and remote repository/repositories is/are mentioned then move to step 4. Else it is downloaded to local repository for future reference.</p></li>
+<li><p><b>Step 3</b> &minus; If a remote repository has not been mentioned, Maven simply stops the processing and throws error (Unable to find dependency).</p></li>
+<li><p><b>Step 4</b> &minus; Search dependency in remote repository or repositories, if found then it is downloaded to local repository for future reference. Otherwise, Maven stops processing and throws error (Unable to find dependency).</p></li>
+</ul>
+<h1>Maven - Plugins</h1>
+<h2>What are Maven Plugins?</h2>
+<p>Maven is actually a plugin execution framework where every task is actually done by plugins. Maven Plugins are generally used to &minus;</p>
+<ul class="list">
+<li>create jar file</li>
+<li>create war file</li>
+<li>compile code files</li>
+<li>unit testing of code</li>
+<li>create project documentation</li>
+<li>create project reports</li>
+</ul>
+<p>A plugin generally provides a set of goals, which can be executed using the following syntax &minus;</p> 
+<pre class="result notranslate">
+mvn [plugin-name]:[goal-name]
+</pre>
+<p>For example, a Java project can be compiled with the maven-compiler-plugin's compile-goal by running the following command.</p>
+<pre class="result notranslate">
+mvn compiler:compile
+</pre>
+<h2>Plugin Types</h2>
+<p>Maven provided the following two types of Plugins &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Type &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Build plugins</b></p>
+<p>They execute during the build process and should be configured in the &lt;build/&gt; element of pom.xml.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>Reporting plugins</b></p>
+<p>They execute during the site generation process and they should be configured in the &lt;reporting/&gt; element of the pom.xml.</p></td>
+</tr>
+</table>
+<p>Following is the list of few common plugins &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Plugin &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>clean</b></p>
+<p>Cleans up target after the build. Deletes the target directory.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>compiler</b></p>
+<p>Compiles Java source files.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>surefire</b></p>
+<p>Runs the JUnit unit tests. Creates test reports.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>jar</b></p>
+<p>Builds a JAR file from the current project.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>war</b></p>
+<p>Builds a WAR file from the current project.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>javadoc</b></p>
+<p>Generates Javadoc for the project.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>antrun</b></p>
+<p>Runs a set of ant tasks from any phase mentioned of the build.</p></td>
+</tr>
+</table>
+<p><b>Example</b></p>
+<p>We've used <b>maven-antrun-plugin</b> extensively in our examples to print data on console. Refer Build Profiles chapter. Let us understand it in a better way and create a pom.xml in C:\MVN\project folder.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.projectgroup&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;
+            &lt;version&gt;1.1&lt;/version&gt;
+            &lt;executions&gt;
+               &lt;execution&gt;
+                  &lt;id&gt;id.clean&lt;/id&gt;
+                  &lt;phase&gt;clean&lt;/phase&gt;
+                  &lt;goals&gt;
+                     &lt;goal&gt;run&lt;/goal&gt;
+                  &lt;/goals&gt;
+                  &lt;configuration&gt;
+                     &lt;tasks&gt;
+                        &lt;echo&gt;clean phase&lt;/echo&gt;
+                     &lt;/tasks&gt;
+                  &lt;/configuration&gt;
+               &lt;/execution&gt;     
+            &lt;/executions&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+<p>Next, open the command console and go to the folder containing pom.xml and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\project&gt;mvn clean
+</pre>
+<p>Maven will start processing and displaying the clean phase of clean life cycle.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------
+[INFO] Building Unnamed - com.companyname.projectgroup:project:jar:1.0
+[INFO]    task-segment: [post-clean]
+[INFO] ------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] [antrun:run {execution: id.clean}]
+[INFO] Executing tasks
+     [echo] clean phase
+[INFO] Executed tasks
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+[INFO] Total time: &lt; 1 second
+[INFO] Finished at: Sat Jul 07 13:38:59 IST 2012
+[INFO] Final Memory: 4M/44M
+[INFO] ------------------------------------------------------------------
+</pre>
+<p>The above example illustrates the following key concepts &minus;</p>
+<ul class="list">
+<li><p>Plugins are specified in pom.xml using plugins element.</p></li>
+<li><p>Each plugin can have multiple goals.</p></li>
+<li><p>You can define phase from where plugin should starts its processing using its phase element. We've used <b>clean</b> phase.</p></li>
+<li><p>You can configure tasks to be executed by binding them to goals of plugin. We've bound <b>echo</b> task with <b>run</b> goal of <i>maven-antrun-plugin</i>.</p></li>
+<li><p>Maven will then download the plugin if not available in local repository and start its processing.</p></li>
+</ul>
+<h1>Maven - Creating Project</h1>
+<p>Maven uses <b>archetype</b> plugins to create projects. To create a simple java application, we'll use maven-archetype-quickstart plugin. In example below, we'll create a maven based java application project in C:\MVN folder.</p>
+<p>Let's open the command console, go to the C:\MVN directory and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN&gt;mvn archetype:generate
+-DgroupId = com.companyname.bank 
+-DartifactId = consumerBanking 
+-DarchetypeArtifactId = maven-archetype-quickstart 
+-DinteractiveMode = false
+</pre>
+<p>Maven will start processing and will create the complete java application project structure.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'archetype'.
+[INFO] -------------------------------------------------------------------
+[INFO] Building Maven Default Project
+[INFO] task-segment: [archetype:generate] (aggregator-style)
+[INFO] -------------------------------------------------------------------
+[INFO] Preparing archetype:generate
+[INFO] No goals needed for project - skipping
+[INFO] [archetype:generate {execution: default-cli}]
+[INFO] Generating project in Batch mode
+[INFO] -------------------------------------------------------------------
+[INFO] Using following parameters for creating project
+from Old (1.x) Archetype: maven-archetype-quickstart:1.0
+[INFO] -------------------------------------------------------------------
+
+[INFO] Parameter: groupId, Value: com.companyname.bank
+[INFO] Parameter: packageName, Value: com.companyname.bank
+[INFO] Parameter: package, Value: com.companyname.bank
+[INFO] Parameter: artifactId, Value: consumerBanking
+[INFO] Parameter: basedir, Value: C:\MVN
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+
+[INFO] project created from Old (1.x) Archetype in dir: C:\MVN\consumerBanking
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+[INFO] Total time: 14 seconds
+[INFO] Finished at: Tue Jul 10 15:38:58 IST 2012
+[INFO] Final Memory: 21M/124M
+[INFO] ------------------------------------------------------------------
+</pre>
+<p>Now go to C:/MVN directory. You'll see a java application project created, named consumer Banking (as specified in artifactId). Maven uses a standard directory layout as shown below &minus;</p>
+<img src="images/project_structure.jpg" alt="Java application project structure" /> 
+<p>Using the above example, we can understand the following key concepts &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Folder Structure &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>consumerBanking</b></p>
+<p>contains src folder and pom.xml</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>src/main/java</b></p>
+<p>contains java code files under the package structure (com/companyName/bank).</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>src/main/test</b></p>
+<p>contains test java code files under the package structure (com/companyName/bank).</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>src/main/resources</b></p>
+<p>it contains images/properties files (In above example, we need to create this structure manually).</p></td>
+</tr>
+</table>
+<p>If you observe, you will find that Maven also created a sample Java Source file and Java Test file. Open C:\MVN\consumerBanking\src\main\java\com\companyname\bank folder, you will see App.java.</p>
+<pre class="prettyprint notranslate">
+package com.companyname.bank;
+
+/**
+ * Hello world!
+ *
+ */
+public class App {
+   public static void main( String[] args ){
+      System.out.println( "Hello World!" );
+   }
+}
+</pre>
+<p>Open C:\MVN\consumerBanking\src\test\java\com\companyname\bank folder to see AppTest.java.</p>
+<pre class="prettyprint notranslate">
+package com.companyname.bank;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest extends TestCase {
+   /**
+      * Create the test case
+      *
+      * @param testName name of the test case
+   */
+   public AppTest( String testName ) {
+      super( testName );
+   }
+
+   /**
+      * @return the suite of tests being tested
+   */
+   public static Test suite() {
+      return new TestSuite( AppTest.class );
+   }
+
+   /**
+      * Rigourous Test :-)
+   */
+   public void testApp() {
+      assertTrue( true );
+   }
+}
+</pre>
+<p>Developers are required to place their files as mentioned in table above and Maven handles all the build related complexities.</p>
+<p>In the next chapter, we'll discuss how to build and test the project using maven Build and Test Project.</p>
+<h1>Maven - Build &amp; Test Project</h1>
+<p>What we learnt in Project Creation chapter is how to create a Java application using Maven. Now we'll see how to build and test the application.</p>
+<p>Go to C:/MVN directory where you've created your java application. Open <b>consumerBanking</b> folder. You will see the <b>POM.xml</b> file with the following contents.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.projectgroup&lt;/groupId&gt;
+   &lt;artifactId&gt;project&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;junit&lt;/groupId&gt;
+         &lt;artifactId&gt;junit&lt;/artifactId&gt;
+         &lt;version&gt;3.8.1&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;  
+&lt;/project&gt;
+</pre>
+<p>Here you can see, Maven already added Junit as test framework. By default, Maven adds a source file <b>App.java</b> and a test file <b>AppTest.java</b> in its default directory structure, as discussed in the previous chapter.</p>
+<p>Let's open the command console, go the C:\MVN\consumerBanking directory and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\consumerBanking&gt;mvn clean package
+</pre>
+<p>Maven will start building the project.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] -------------------------------------------------------------------
+[INFO] Building consumerBanking
+[INFO] task-segment: [clean, package]
+[INFO] -------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] Deleting directory C:\MVN\consumerBanking\target
+[INFO] [resources:resources {execution: default-resources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+
+[INFO] skip non existing resourceDirectory C:\MVN\consumerBanking\src\main\resources
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Compiling 1 source file to C:\MVN\consumerBanking\target\classes
+[INFO] [resources:testResources {execution: default-testResources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+
+[INFO] skip non existing resourceDirectory C:\MVN\consumerBanking\src\test\resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Compiling 1 source file to C:\MVN\consumerBanking\target\test-classes
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: C:\MVN\consumerBanking\target\surefire-reports
+
+-----------------------------------------------------
+T E S T S
+-----------------------------------------------------
+
+Running com.companyname.bank.AppTest
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: C:\MVN\consumerBanking\target\
+consumerBanking-1.0-SNAPSHOT.jar
+
+[INFO]-----------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO]-----------------------------------------------
+
+[INFO] Total time: 2 seconds
+[INFO] Finished at: Tue Jul 10 16:52:18 IST 2012
+[INFO] Final Memory: 16M/89M
+[INFO]-----------------------------------------------
+</pre>
+<p>You've built your project and created final jar file, following are the key learning concepts &minus;</p>
+<ul class="list">
+<li><p>We give maven two goals, first to clean the target directory (clean) and then package the project build output as jar (package).</p></li>
+<li><p>Packaged jar is available in consumerBanking\target folder as consumerBanking-1.0-SNAPSHOT.jar.</p></li>
+<li><p>Test reports are available in consumerBanking\target\surefire-reports folder.</p></li>
+<li><p>Maven compiles the source code file(s) and then tests the source code file(s).</p></li>
+<li><p>Then Maven runs the test cases.</p></li>
+<li><p>Finally, Maven creates the package.</p></li>
+</ul>
+<p>Now open the command console, go the C:\MVN\consumerBanking\target\classes directory and execute the following java command.</p>
+<pre class="result notranslate">
+&gt;java com.companyname.bank.App
+</pre>
+<p>You will see the result as follows &minus;</p>
+<pre class="result notranslate">
+Hello World!
+</pre>
+<h2>Adding Java Source Files</h2>
+<p>Let's see how we can add additional Java files in our project. Open C:\MVN\consumerBanking\src\main\java\com\companyname\bank folder, create Util class in it as Util.java.</p>
+<pre class="prettyprint notranslate">
+package com.companyname.bank;
+
+public class Util {
+   public static void printMessage(String message){
+      System.out.println(message);
+   }
+}
+</pre>
+<p>Update the App class to use Util class.</p>
+<pre class="prettyprint notranslate">
+package com.companyname.bank;
+
+/**
+   * Hello world!
+   *
+*/
+
+public class App {
+   public static void main( String[] args ){
+      Util.printMessage("Hello World!");
+   }
+}
+</pre>
+<p>Now open the command console, go the <b>C:\MVN\consumerBanking</b> directory and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+&gt;mvn clean compile
+</pre>
+<p>After Maven build is successful, go to the C:\MVN\consumerBanking\target\classes directory and execute the following java command.</p>
+<pre class="prettyprint notranslate">
+&gt;java -cp com.companyname.bank.App
+</pre>
+<p>You will see the result as follows &minus;</p>
+<pre class="result notranslate">
+Hello World!
+</pre>
+<h1>Maven - External Dependencies</h1>
+<p>As you know, Maven does the dependency management using the concept of Repositories. But what happens if dependency is not available in any of remote repositories and central repository? Maven provides answer for such scenario using concept of <b>External Dependency</b>.</p>
+<p>For example, let us do the following changes to the project created in ‘Creating Java Project’ chapter.</p>
+<ul class="list">
+<li><p>Add <b>lib</b> folder to the src folder.</p></li>
+<li><p>Copy any jar into the lib folder. We've used <b>ldapjdk.jar</b>, which is a helper library for LDAP operations.</p></li>
+</ul>
+<p>Now our project structure should look like the following &minus;</p>
+<img src="images/external-project-structure.jpg" alt="external repository project structure"/>
+<p>Here you are having your own library, specific to the project, which is an usual case and it contains jars, which may not be available in any repository for maven to download from. If your code is using this library with Maven, then Maven build will fail as it cannot download or refer to this library during compilation phase.</p>
+<p>To handle the situation, let's add this external dependency to maven <b>pom.xml</b> using the following way.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.bank&lt;/groupId&gt;
+   &lt;artifactId&gt;consumerBanking&lt;/artifactId&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+   &lt;name&gt;consumerBanking&lt;/name&gt;
+   &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;junit&lt;/groupId&gt;
+         &lt;artifactId&gt;junit&lt;/artifactId&gt;
+         &lt;version&gt;3.8.1&lt;/version&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+      &lt;/dependency&gt;
+
+      &lt;dependency&gt;
+         &lt;groupId&gt;ldapjdk&lt;/groupId&gt;
+         &lt;artifactId&gt;ldapjdk&lt;/artifactId&gt;
+         &lt;scope&gt;system&lt;/scope&gt;
+         &lt;version&gt;1.0&lt;/version&gt;
+         &lt;systemPath&gt;${basedir}\src\lib\ldapjdk.jar&lt;/systemPath&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+
+&lt;/project&gt;
+</pre>
+<p>Look at the second dependency element under dependencies in the above example, which clears the following key concepts about <b>External Dependency</b>.</p>
+<ul class="list">
+<li><p>External dependencies (library jar location) can be configured in pom.xml in same way as other dependencies.</p></li>
+<li><p>Specify groupId same as the name of the library.</p></li>
+<li><p>Specify artifactId same as the name of the library.</p></li>
+<li><p>Specify scope as system.</p></li>
+<li><p>Specify system path relative to the project location.</p></li>
+</ul>
+<p>Hope now you are clear about external dependencies and you will be able to specify external dependencies in your Maven project.</p>
+<h1>Maven - Project Documents</h1>
+<p>This tutorial will teach you how to create documentation of the application in one go. So let's start, go to C:/MVN directory where you had created your java <b>consumerBanking</b> application using the examples given in the previous chapters. Open <b>consumerBanking</b> folder and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN&gt;mvn site
+</pre>
+<p>Maven will start building the project.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO]-----------------------------------------------
+[INFO] Building consumerBanking
+[INFO] task-segment: [site]
+[INFO]-----------------------------------------------
+[INFO] [site:site {execution: default-site}]
+[INFO] artifact org.apache.maven.skins:maven-default-skin:
+checking for updates from central
+
+[INFO] Generating "About" report.
+[INFO] Generating "Issue Tracking" report.
+[INFO] Generating "Project Team" report.
+[INFO] Generating "Dependencies" report.
+[INFO] Generating "Continuous Integration" report.
+[INFO] Generating "Source Repository" report.
+[INFO] Generating "Project License" report.
+[INFO] Generating "Mailing Lists" report.
+[INFO] Generating "Plugin Management" report.
+[INFO] Generating "Project Summary" report.
+
+[INFO]-----------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO]-----------------------------------------------
+
+[INFO] Total time: 16 seconds
+[INFO] Finished at: Wed Jul 11 18:11:18 IST 2012
+[INFO] Final Memory: 23M/148M
+[INFO]-----------------------------------------------
+</pre>
+<p>Your project documentation is now ready. Maven has created a site within the target directory.</p>
+<img src="images/site-project-structure.jpg" alt="documentation site pages" />
+<p>Open C:\MVN\consumerBanking\target\site folder. Click on index.html to see the documentation.</p>
+<img src="images/consumer-web-page.jpg" alt="consumer web page" />
+<p>Maven creates the documentation using a documentation-processing engine called <a rel="nofollow" target="_blank" href="https://maven.apache.org/doxia/index.html">Doxia</a> which reads multiple source formats into a common document model. To write documentation for your project, you can write your content in a following few commonly used formats which are parsed by Doxia.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center; width:20%;">Format Name</th>
+<th style="text-align:center;">Description</th>
+<th style="text-align:center;">Reference</th>
+</tr>
+<!--<tr>
+<td>APT</td>
+<td>A Plain Text document format</td>
+<td><p><a rel="nofollow" target="_blank" href="https://maven.apache.org/doxia/format.html">https://maven.apache.org/doxia</a></p></td>
+</tr>-->
+<tr>
+<td>XDoc</td>
+<td>A Maven 1.x documentation format</td>
+<td><p><a rel="nofollow" target="_blank" href="https://jakarta.apache.org/site/jakarta-site2.html">https://jakarta.apache.org/site</a></p></td>
+</tr>
+<tr>
+<td>FML</td>
+<td>Used for FAQ documents</td>
+<td><p><a rel="nofollow" target="_blank" href="https://maven.apache.org/doxia/references/fml-format.html">https://maven.apache.org</a></p></td>
+</tr>
+</table>
+<h1>Maven - Project Templates</h1>
+<p>Maven provides users, a very large list of different types of project templates (614 in numbers) using the concept of <b>Archetype</b>. Maven helps users to quickly start a new java project using the following command.</p>
+<pre class="result notranslate">
+mvn archetype:generate
+</pre>
+<h2>What is Archetype?</h2>
+<p>Archetype is a Maven plugin whose task is to create a project structure as per its template. We are going to use quickstart archetype plugin to create a simple java application here.</p>
+<h2>Using Project Template</h2>
+<p>Let's open the command console, go to the <b>C:\ > MVN</b> directory and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN&gt;mvn archetype:generate 
+</pre>
+<p>Maven will start processing and will ask to choose the required archetype.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'archetype'.
+[INFO] -------------------------------------------------------------------
+[INFO] Building Maven Default Project
+[INFO] task-segment: [archetype:generate] (aggregator-style)
+[INFO] -------------------------------------------------------------------
+[INFO] Preparing archetype:generate
+...
+
+600: remote &minus;&gt; org.trailsframework:trails-archetype (-)
+601: remote &minus;&gt; org.trailsframework:trails-secure-archetype (-)
+602: remote &minus;&gt; org.tynamo:tynamo-archetype (-)
+603: remote &minus;&gt; org.wicketstuff.scala:wicket-scala-archetype (-)
+604: remote &minus;&gt; org.wicketstuff.scala:wicketstuff-scala-archetype
+
+Basic setup for a project that combines Scala and Wicket,
+depending on the Wicket-Scala project.
+Includes an example Specs test.)
+
+605: remote &minus;&gt; org.wikbook:wikbook.archetype (-)
+606: remote &minus;&gt; org.xaloon.archetype:xaloon-archetype-wicket-jpa-glassfish (-)
+607: remote &minus;&gt; org.xaloon.archetype:xaloon-archetype-wicket-jpa-spring (-)
+608: remote &minus;&gt; org.xwiki.commons:xwiki-commons-component-archetype
+   (Make it easy to create a maven project for creating XWiki Components.)
+609: remote &minus;&gt; org.xwiki.rendering:xwiki-rendering-archetype-macro
+   (Make it easy to create a maven project for creating XWiki Rendering Macros.)
+610: remote &minus;&gt; org.zkoss:zk-archetype-component (The ZK Component archetype)
+611: remote &minus;&gt; org.zkoss:zk-archetype-webapp (The ZK wepapp archetype)
+612: remote &minus;&gt; ru.circumflex:circumflex-archetype (-)
+613: remote &minus;&gt; se.vgregion.javg.maven.archetypes:javg-minimal-archetype (-)
+614: remote &minus;&gt; sk.seges.sesam:sesam-annotation-archetype (-)
+Choose a number or apply filter
+(format: [groupId:]artifactId, case sensitive contains): 203:
+</pre>
+<p>Press Enter to choose to default option (203: maven-archetype-quickstart)</p>
+<p>Maven will ask for particular version of archetype.</p>
+<pre class="result notranslate">
+Choose org.apache.maven.archetypes:maven-archetype-quickstart version:
+1: 1.0-alpha-1
+2: 1.0-alpha-2
+3: 1.0-alpha-3
+4: 1.0-alpha-4
+5: 1.0
+6: 1.1
+Choose a number: 6:
+</pre>
+<p>Press Enter to choose to default option (6: maven-archetype-quickstart:1.1)</p>
+<p>Maven will ask for the project detail. Enter project detail as asked. Press Enter if the default value is provided. You can override them by entering your own value.</p>
+<pre class="prettyprint notranslate">
+Define value for property 'groupId': : com.companyname.insurance
+Define value for property 'artifactId': : health
+Define value for property 'version': 1.0-SNAPSHOT:
+Define value for property 'package': com.companyname.insurance:
+</pre>
+<p>Maven will ask for the project detail confirmation. Press enter or press Y.</p>
+<pre class="prettyprint notranslate">
+Confirm properties configuration:
+groupId: com.companyname.insurance
+artifactId: health
+version: 1.0-SNAPSHOT
+package: com.companyname.insurance
+Y:
+</pre>
+<p>Now Maven will start creating the project structure and will display the following &minus;</p>
+<pre class="result notranslate">
+[INFO]-----------------------------------------------
+[INFO] Using following parameters for creating project
+from Old (1.x) Archetype: maven-archetype-quickstart:1.1
+[INFO]-----------------------------------------------
+
+[INFO] Parameter: groupId, Value: com.companyname.insurance
+[INFO] Parameter: packageName, Value: com.companyname.insurance
+[INFO] Parameter: package, Value: com.companyname.insurance
+[INFO] Parameter: artifactId, Value: health
+[INFO] Parameter: basedir, Value: C:\MVN
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+
+[INFO] project created from Old (1.x) Archetype in dir: C:\MVN\health
+[INFO]-----------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO]-----------------------------------------------
+[INFO] Total time: 4 minutes 12 seconds
+[INFO] Finished at: Fri Jul 13 11:10:12 IST 2012
+[INFO] Final Memory: 20M/90M
+[INFO]-----------------------------------------------
+</pre>
+<h2>Created Project</h2>
+<p>Now go to <b>C:\ > MVN</b> directory. You'll see a java application project created, named <b>health</b>, which was given as <b>artifactId</b> at the time of project creation. Maven will create a standard directory layout for the project as shown below &minus;</p>
+<img src="../images/template_project_structure.jpg" alt="project structure" />
+<h2>Created POM.xml</h2>
+<p>Maven generates a POM.xml file for the project as listed below &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.insurance&lt;/groupId&gt;
+   &lt;artifactId&gt;health&lt;/artifactId&gt;
+   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;name&gt;health&lt;/name&gt;
+   &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+   &lt;properties&gt;
+      &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+   &lt;/properties&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+         &lt;artifactId&gt;junit&lt;/artifactId&gt;
+         &lt;version&gt;3.8.1&lt;/version&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+<h2>Created App.java</h2>
+<p>Maven generates sample java source file, App.java for the project as listed below &minus;</p>
+<p>Location: <b>C:\ > MVN > health > src > main > java > com > companyname > insurance > App.java</b>.</p>
+<pre class="prettyprint notranslate">
+package com.companyname.insurance;
+
+/**
+   * Hello world!
+   *
+*/
+public class App {
+   public static void main( String[] args ) {
+      System.out.println( "Hello World!" );
+   }
+}
+</pre>
+<h2>Created AppTest.java</h2>
+<p>Maven generates sample java source test file, AppTest.java for the project as listed below &minus;</p>
+<p>Location: <b>C:\ > MVN > health > src > test > java > com > companyname > insurance > AppTest.java</b>.</p>
+<pre class="prettyprint notranslate">
+package com.companyname.insurance;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+/**
+   * Unit test for simple App.
+*/
+public class AppTest extends TestCase {
+   /**
+      * Create the test case
+      *
+     * @param testName name of the test case
+   */
+   public AppTest( String testName ) {
+      super( testName );
+   }
+   /**
+      * @return the suite of tests being tested
+   */
+   public static Test suite() {
+      return new TestSuite( AppTest.class );
+   }
+   /**
+      * Rigourous Test :-)
+   */
+   public void testApp() {
+      assertTrue( true );
+   }
+}
+</pre>
+<p>Now you can see the power of Maven. You can create any kind of project using single command in maven and can kick-start your development.</p>
+<h2>Different Archetypes</h2>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Archetype ArtifactIds &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>maven-archetype-archetype</b></p>
+<p>An archetype, which contains a sample archetype.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>maven-archetype-j2ee-simple</b></p>
+<p>An archetype, which contains a simplified sample J2EE application.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>maven-archetype-mojo</b></p>
+<p>An archetype, which contains a sample a sample Maven plugin.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>maven-archetype-plugin</b></p>
+<p>An archetype, which contains a sample Maven plugin.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>maven-archetype-plugin-site</b></p>
+<p>An archetype, which contains a sample Maven plugin site.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>maven-archetype-portlet</b></p>
+<p>An archetype, which contains a sample JSR-268 Portlet.</p></td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>maven-archetype-quickstart</b></p>
+<p>An archetype, which contains a sample Maven project.</p></td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>maven-archetype-simple</b></p>
+<p>An archetype, which contains a simple Maven project.</p></td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>maven-archetype-site</b></p>
+<p>An archetype, which contains a sample Maven site to demonstrates some of the supported document types like APT, XDoc, and FML and demonstrates how to i18n your site.</p></td>
+</tr>
+<tr>
+<td>10</td>
+<td><p><b>maven-archetype-site-simple</b></p>
+<p>An archetype, which contains a sample Maven site.</p></td>
+</tr>
+<tr>
+<td>11</td>
+<td><p><b>maven-archetype-webapp</b></p>
+<p>An archetype, which contains a sample Maven Webapp project.</p></td>
+</tr>
+</table>
+<h1>Maven - Snapshots</h1>
+<p>A large software application generally consists of multiple modules and it is common scenario where multiple teams are working on different modules of same application. For example, consider a team is working on the front end of the application as app-ui project (app-ui.jar:1.0) and they are using data-service project (data-service.jar:1.0).</p>
+<p>Now it may happen that team working on data-service is undergoing bug fixing or enhancements at rapid pace and they are releasing the library to remote repository almost every other day.</p>
+<p>Now if data-service team uploads a new version every other day, then following problems will arise &minus;</p>
+<ul class="list">
+<li><p>data-service team should tell app-ui team every time when they have released an updated code.</p></li>
+<li><p>app-ui team required to update their pom.xml regularly to get the updated version.</p></li>
+</ul>
+<p>To handle such kind of situation, <b>SNAPSHOT</b> concept comes into play.</p>
+<h2>What is SNAPSHOT?</h2>
+<p>SNAPSHOT is a special version that indicates a current development copy. Unlike regular versions, Maven checks for a new SNAPSHOT version in a remote repository for every build.</p>
+<p>Now data-service team will release SNAPSHOT of its updated code every time to repository, say data-service: 1.0-SNAPSHOT, replacing an older SNAPSHOT jar.</p>
+<h2>Snapshot vs Version</h2>
+<p>In case of Version, if Maven once downloaded the mentioned version, say data-service:1.0, it will never try to download a newer 1.0 available in repository. To download the updated code, data-service version is be upgraded to 1.1.</p>
+<p>In case of SNAPSHOT, Maven will automatically fetch the latest SNAPSHOT (data-service:1.0-SNAPSHOT) every time app-ui team build their project.</p>
+<h2>app-ui pom.xml</h2>
+<p><b>app-ui</b> project is using 1.0-SNAPSHOT of data-service.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;app-ui&lt;/groupId&gt;
+   &lt;artifactId&gt;app-ui&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;name&gt;health&lt;/name&gt;
+   &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+   &lt;properties&gt;
+      &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+   &lt;/properties&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+      &lt;groupId&gt;data-service&lt;/groupId&gt;
+         &lt;artifactId&gt;data-service&lt;/artifactId&gt;
+         &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+<h2>data-service pom.xml</h2>
+<p><b>data-service</b> project is releasing 1.0-SNAPSHOT for every minor change.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;data-service&lt;/groupId&gt;
+   &lt;artifactId&gt;data-service&lt;/artifactId&gt;
+   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;name&gt;health&lt;/name&gt;
+   &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+   &lt;properties&gt;
+      &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+   &lt;/properties&gt;
+&lt;/project&gt;
+</pre>
+<p>Although, in case of SNAPSHOT, Maven automatically fetches the latest SNAPSHOT on daily basis, you can force maven to download latest snapshot build using -U switch to any maven command.</p>
+<pre class="result notranslate">
+mvn clean package -U
+</pre>
+<p>Let's open the command console, go to the <b>C:\ > MVN > app-ui</b> directory and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+C:\MVN\app-ui&gt;mvn clean package -U
+</pre>
+<p>Maven will start building the project after downloading the latest SNAPSHOT of data-service.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO]--------------------------------------------
+[INFO] Building consumerBanking
+[INFO]    task-segment: [clean, package]
+[INFO]--------------------------------------------
+[INFO] Downloading data-service:1.0-SNAPSHOT
+[INFO] 290K downloaded.
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] Deleting directory C:\MVN\app-ui\target
+[INFO] [resources:resources {execution: default-resources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+
+[INFO] skip non existing resourceDirectory C:\MVN\app-ui\src\main\resources
+[INFO] [compiler:compile {execution:default-compile}]
+[INFO] Compiling 1 source file to C:\MVN\app-ui\target\classes
+[INFO] [resources:testResources {execution: default-testResources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources,
+i.e. build is platform dependent!
+
+[INFO] skip non existing resourceDirectory C:\MVN\app-ui\src\test\resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Compiling 1 source file to C:\MVN\app-ui\target\test-classes
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: C:\MVN\app-ui\target\
+surefire-reports
+
+--------------------------------------------------
+ T E S T S
+--------------------------------------------------
+
+Running com.companyname.bank.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: C:\MVN\app-ui\target\
+app-ui-1.0-SNAPSHOT.jar
+[INFO]--------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO]--------------------------------------------------------
+[INFO] Total time: 2 seconds
+[INFO] Finished at: 2015-09-27T12:30:02+05:30
+[INFO] Final Memory: 16M/89M
+[INFO]------------------------------------------------------------------------
+</pre>
+<h1>Maven - Build Automation</h1>
+<p>Build Automation defines the scenario where dependent project(s) build process gets started once the project build is successfully completed, in order to ensure that dependent project(s) is/are stable.</p>
+<p><b>Example</b></p>
+<p>Consider a team is developing a project <b>bus-core-api</b> on which two other projects <b>app-web-ui</b> and <b>app-desktop-ui</b> are dependent.</p>
+<p><b>app-web-ui</b> project is using 1.0-SNAPSHOT of <b>bus-core-api</b> project.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;app-web-ui&lt;/groupId&gt;
+   &lt;artifactId&gt;app-web-ui&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;bus-core-api&lt;/groupId&gt;
+            &lt;artifactId&gt;bus-core-api&lt;/artifactId&gt;
+            &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+<p><b>app-desktop-ui</b> project is using 1.0-SNAPSHOT of <b>bus-core-api</b> project.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;app_desktop_ui&lt;/groupId&gt;
+   &lt;artifactId&gt;app_desktop_ui&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;name&gt;app_desktop_ui&lt;/name&gt;
+   &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+   &lt;properties&gt;
+      &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+   &lt;/properties&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;junit&lt;/groupId&gt;
+         &lt;artifactId&gt;junit&lt;/artifactId&gt;
+         &lt;version&gt;3.8.1&lt;/version&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;bus_core_api&lt;/groupId&gt;
+         &lt;artifactId&gt;bus_core_api&lt;/artifactId&gt;
+         &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+         &lt;scope&gt;system&lt;/scope&gt;
+         &lt;systemPath&gt;C:\MVN\bus_core_api\target\bus_core_api-1.0-SNAPSHOT.jar&lt;/systemPath&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+<p><b>bus-core-api</b> project &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;bus_core_api&lt;/groupId&gt;
+   &lt;artifactId&gt;bus_core_api&lt;/artifactId&gt;
+   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;   
+&lt;/project&gt;
+</pre>
+<p>Now, teams of <b>app-web-ui</b> and <b>app-desktop-ui</b> projects require that their build process should kick off whenever <b>bus-core-api</b> project changes.</p>
+<p>Using snapshot, ensures that the latest <b>bus-core-api</b> project should be used but to meet the above requirement we need to do something extra.</p>
+<p>We can proceed with the following two ways &minus;</p>
+<ul class="list">
+<li><p>Add a post-build goal in bus-core-api pom to kick-off <b>app-web-ui</b> and <b>app-desktop-ui</b> builds.</p></li>
+<li><p>Use a Continuous Integration (CI) Server like Hudson to manage build automation automatically.</p></li>
+</ul>
+<h2>Using Maven</h2>
+<p>Update <b>bus-core-api</b> project pom.xml.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;bus-core-api&lt;/groupId&gt;
+   &lt;artifactId&gt;bus-core-api&lt;/artifactId&gt;
+   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+         &lt;artifactId&gt;maven-invoker-plugin&lt;/artifactId&gt;
+         &lt;version&gt;1.6&lt;/version&gt;
+         &lt;configuration&gt;
+            &lt;debug&gt;true&lt;/debug&gt;
+            &lt;pomIncludes&gt;
+               &lt;pomInclude&gt;app-web-ui/pom.xml&lt;/pomInclude&gt;
+               &lt;pomInclude&gt;app-desktop-ui/pom.xml&lt;/pomInclude&gt;
+            &lt;/pomIncludes&gt;
+         &lt;/configuration&gt;
+         &lt;executions&gt;
+            &lt;execution&gt;
+               &lt;id&gt;build&lt;/id&gt;
+               &lt;goals&gt;
+                  &lt;goal&gt;run&lt;/goal&gt;
+               &lt;/goals&gt;
+            &lt;/execution&gt;
+         &lt;/executions&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;build&gt;
+&lt;/project&gt;
+</pre>
+<p>Let's open the command console, go to the <b>C:\ > MVN > bus-core-api</b> directory and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+&gt;mvn clean package -U
+</pre>
+<p>Maven will start building the project <b>bus-core-api</b>.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------
+[INFO] Building bus-core-api
+[INFO] task-segment: [clean, package]
+[INFO] ------------------------------------------------------------------
+...
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: C:\MVN\bus-core-ui\target\
+bus-core-ui-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+</pre>
+<p>Once <b>bus-core-api</b> build is successful, Maven will start building the <b>app-web-ui</b> project.</p>
+<pre class="result notranslate">
+[INFO] ------------------------------------------------------------------
+[INFO] Building app-web-ui
+[INFO] task-segment: [package]
+[INFO] ------------------------------------------------------------------
+...
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: C:\MVN\app-web-ui\target\
+app-web-ui-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+</pre>
+<p>Once <b>app-web-ui</b> build is successful, Maven will start building the <b>app-desktop-ui</b> project.</p>
+<pre class="result notranslate">
+[INFO] ------------------------------------------------------------------
+[INFO] Building app-desktop-ui
+[INFO] task-segment: [package]
+[INFO] ------------------------------------------------------------------
+...
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: C:\MVN\app-desktop-ui\target\
+app-desktop-ui-1.0-SNAPSHOT.jar
+[INFO] -------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] -------------------------------------------------------------------
+</pre>
+<h2>Using Continuous Integration Service with Maven</h2>
+<p>Using a CI Server is more preferable to developers. It is not required to update the <b>bus-core-api</b> project, every time a new project (for example, app-mobile-ui) is added, as dependent project on <b>bus-core-api</b> project. Hudsion is a continuous integration tool written in java, which in a servlet container, such as, Apache tomcat and glassfish application server. Hudson automatically manages build automation using Maven dependency management. The following snapshot will define the role of Hudson tool.</p>
+<img src="images/hudson_maven_job.jpg" alt="automated build" />
+<p>Hudson considers each project build as job. Once a project code is checked-in to SVN (or any Source Management Tool mapped to Hudson), Hudson starts its build job and once this job gets completed, it start other dependent jobs (other dependent projects) automatically.</p>
+<p>In the above example, when <b>bus-core-ui</b> source code is updated in SVN, Hudson starts its build. Once build is successful, Hudson looks for dependent projects automatically, and starts building <b>app-web-ui</b> and <b>app-desktop-ui</b> projects.</p>
+<h1>Maven - Manage Dependencies</h1>
+<p>One of the core features of Maven is Dependency Management. Managing dependencies is a difficult task once we've to deal with multi-module projects (consisting of hundreds of modules/sub-projects). Maven provides a high degree of control to manage such scenarios.</p>
+<h2>Transitive Dependencies Discovery</h2>
+<p>It is pretty often a case, when a library, say A, depends upon other library, say B. In case another project C wants to use A, then that project requires to use library B too.</p>
+<p>Maven helps to avoid such requirements to discover all the libraries required. Maven does so by reading project files (pom.xml) of dependencies, figure out their dependencies and so on.</p>
+<p>We only need to define direct dependency in each project pom. Maven handles the rest automatically.</p>
+<p>With transitive dependencies, the graph of included libraries can quickly grow to a large extent. Cases can arise when there are duplicate libraries. Maven provides few features to control extent of transitive dependencies.</p>
+<table class=" table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Feature &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>Dependency mediation</b></p>
+<p>Determines what version of a dependency is to be used when multiple versions of an artifact are encountered. If two dependency versions are at the same depth in the dependency tree, the first declared dependency will be used.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>Dependency management</b></p>
+<p>Directly specify the versions of artifacts to be used when they are encountered in transitive dependencies. For an example project C can include B as a dependency in its dependency Management section and directly control which version of B is to be used when it is ever referenced.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Dependency scope</b></p>
+<p>Includes dependencies as per the current stage of the build.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>Excluded dependencies</b></p>
+<p>Any transitive dependency can be excluded using "exclusion" element. As example, A depends upon B and B depends upon C, then A can mark C as excluded.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>Optional dependencies</b></p>
+<p>Any transitive dependency can be marked as optional using "optional" element. As example, A depends upon B and B depends upon C. Now B marked C as optional. Then A will not use C.</p></td>
+</tr>
+</table>
+<h2>Dependency Scope</h2>
+<p>Transitive Dependencies Discovery can be restricted using various Dependency Scope as mentioned below.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Scope &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>compile</b></p>
+<p>This scope indicates that dependency is available in classpath of project. It is default scope.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>provided</b></p>
+<p>This scope indicates that dependency is to be provided by JDK or web-Server/Container at runtime.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>runtime</b></p>
+<p>This scope indicates that dependency is not required for compilation, but is required during execution.</p></td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>test</b></p>
+<p>This scope indicates that the dependency is only available for the test compilation and execution phases.</p></td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>system</b></p>
+<p>This scope indicates that you have to provide the system path.</p></td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>import</b></p>
+<p>This scope is only used when dependency is of type pom. This scope indicates that the specified POM should be replaced with the dependencies in that POM's &lt;dependencyManagement&gt; section.</p></td>
+</tr>
+</table>
+<h2>Dependency Management</h2>
+<p>Usually, we have a set of project under a common project. In such case, we can create a common pom having all the common dependencies and then make this pom, the parent of sub-project's poms. Following example will help you understand this concept.</p>
+<img src="../images/dependency_graph.jpg" alt="dependency graph" />
+<p>Following are the detail of the above dependency graph &minus;</p>
+<ul class="list">
+<li>App-UI-WAR depends upon App-Core-lib and App-Data-lib.</li>
+<li>Root is parent of App-Core-lib and App-Data-lib.</li>
+<li>Root defines Lib1, lib2, Lib3 as dependencies in its dependency section.</li>
+</ul>
+<p><b>App-UI-WAR</b></p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+   &lt;artifactId&gt;App-UI-WAR&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;packaging&gt;war&lt;/packaging&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+         &lt;artifactId&gt;App-Core-lib&lt;/artifactId&gt;
+         &lt;version&gt;1.0&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;  
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+         &lt;artifactId&gt;App-Data-lib&lt;/artifactId&gt;
+         &lt;version&gt;1.0&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;  
+&lt;/project&gt;
+</pre>
+<p><b>App-Core-lib</b></p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;parent&gt;
+      &lt;artifactId&gt;Root&lt;/artifactId&gt;
+      &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+   &lt;/parent&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+   &lt;artifactId&gt;App-Core-lib&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt; 
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+&lt;/project&gt;
+</pre>
+<p><b>App-Data-lib</b></p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;parent&gt;
+      &lt;artifactId&gt;Root&lt;/artifactId&gt;
+      &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+   &lt;/parent&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+   &lt;artifactId&gt;App-Data-lib&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;   
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+&lt;/project&gt;
+</pre>
+<p><b>Root</b></p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.groupname&lt;/groupId&gt;
+   &lt;artifactId&gt;Root&lt;/artifactId&gt;
+   &lt;version&gt;1.0&lt;/version&gt;
+   &lt;packaging&gt;pom&lt;/packaging&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.companyname.groupname1&lt;/groupId&gt;
+         &lt;artifactId&gt;Lib1&lt;/artifactId&gt;
+         &lt;version&gt;1.0&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;  
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.companyname.groupname2&lt;/groupId&gt;
+         &lt;artifactId&gt;Lib2&lt;/artifactId&gt;
+         &lt;version&gt;2.1&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;  
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.companyname.groupname3&lt;/groupId&gt;
+         &lt;artifactId&gt;Lib3&lt;/artifactId&gt;
+         &lt;version&gt;1.1&lt;/version&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;  
+&lt;/project&gt;
+</pre>
+<p>Now when we build App-UI-WAR project, Maven will discover all the dependencies by traversing the dependency graph and build the application.</p>
+<p>From above example, we can learn the following key concepts &minus;</p>
+<ul class="list">
+<li><p>Common dependencies can be placed at single place using concept of parent pom. Dependencies of <b>App-Data-lib</b> and <b>App-Core-lib</b> project are listed in <i>Root</i> project (See the packaging type of Root. It is POM).</p></li>
+<li><p>There is no need to specify Lib1, lib2, Lib3 as dependency in App-UI-WAR. Maven use the <b>Transitive Dependency Mechanism</b> to manage such detail.</p></li>
+</ul>
+<h1>Maven - Deployment Automation</h1>
+<p>In project development, normally a deployment process consists of the following steps &minus;</p>
+<ul class="list">
+<li><p>Check-in the code from all project in progress into the SVN (version control system) or source code repository and tag it.</p></li>
+<li><p>Download the complete source code from SVN.</p></li>
+<li><p>Build the application.</p></li>
+<li><p>Store the build output either WAR or EAR file to a common network location.</p></li>
+<li><p>Get the file from network and deploy the file to the production site.</p></li>
+<li><p>Updated the documentation with date and updated version number of the application.</p></li>
+</ul>
+<h2>Problem Statement</h2>
+<p>There are normally multiple people involved in the above mentioned deployment process. One team may handle check-in of code, other may handle build and so on. It is very likely that any step may be missed out due to manual efforts involved and owing to multi-team environment. For example, older build may not be replaced on network machine and deployment team deployed the older build again.</p>
+<h2>Solution</h2>
+<p>Automate the deployment process by combining the following &minus;</p>
+<ul class="list">
+<li>Maven, to build and release projects.</li>
+<li>SubVersion, source code repository, to manage source code.</li>
+<li>Remote Repository Manager (Jfrog/Nexus) to manage project binaries.</li>
+</ul>
+<h2>Update Project POM.xml</h2>
+<p>We will be using Maven Release plug-in to create an automated release process.</p>
+<p>For Example: bus-core-api project POM.xml.</p>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;bus-core-api&lt;/groupId&gt;
+   &lt;artifactId&gt;bus-core-api&lt;/artifactId&gt;
+   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt; 
+   &lt;scm&gt;
+      &lt;url&gt;http://www.svn.com&lt;/url&gt;
+      &lt;connection&gt;scm:svn:http://localhost:8080/svn/jrepo/trunk/
+      Framework&lt;/connection&gt;
+      &lt;developerConnection&gt;scm:svn:${username}/${password}@localhost:8080:
+      common_core_api:1101:code&lt;/developerConnection&gt;
+   &lt;/scm&gt;
+   &lt;distributionManagement&gt;
+      &lt;repository&gt;
+         &lt;id&gt;Core-API-Java-Release&lt;/id&gt;
+         &lt;name&gt;Release repository&lt;/name&gt;
+         &lt;url&gt;http://localhost:8081/nexus/content/repositories/
+         Core-Api-Release&lt;/url&gt;
+      &lt;/repository&gt;
+   &lt;/distributionManagement&gt;
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.0-beta-9&lt;/version&gt;
+            &lt;configuration&gt;
+               &lt;useReleaseProfile&gt;false&lt;/useReleaseProfile&gt;
+               &lt;goals&gt;deploy&lt;/goals&gt;
+               &lt;scmCommentPrefix&gt;[bus-core-api-release-checkin]-&lt;
+               /scmCommentPrefix&gt;
+            &lt;/configuration&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+<p>In Pom.xml, following are the important elements we have used &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Element &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>SCM</b></p>
+<p>Configures the SVN location from where Maven will check out the source code.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>Repositories</b></p>
+<p>Location where built WAR/EAR/JAR or any other artifact will be stored after code build is successful.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>Plugin</b></p>
+<p>maven-release-plugin is configured to automate the deployment process.</p></td>
+</tr>
+</table>
+<h2>Maven Release Plug-in</h2>
+<p>The Maven does the following useful tasks using <b>maven-release-plugin</b>.</p>
+<pre class="result notranslate">
+mvn release:clean
+</pre>
+<p>It cleans the workspace in case the last release process was not successful.</p>
+<pre class="result notranslate">
+mvn release:rollback
+</pre>
+<p>Rollback the changes done to workspace code and configuration in case the last release process was not successful.</p>
+<pre class="result notranslate">
+mvn release:prepare
+</pre>
+<p>Performs multiple number of operations, such as &minus;</p>
+<ul class="list">
+<li><p>Checks whether there are any uncommitted local changes or not.</p></li>
+<li><p>Ensures that there are no SNAPSHOT dependencies.</p></li>
+<li><p>Changes the version of the application and removes SNAPSHOT from the version to make release.</p></li>
+<li><p>Update pom files to SVN.</p></li>
+<li><p>Run test cases.</p></li>
+<li><p>Commit the modified POM files.</p></li>
+<li><p>Tag the code in subversion</p></li>
+<li><p>Increment the version number and append SNAPSHOT for future release.</p></li>
+<li><p>Commit the modified POM files to SVN.</p></li>
+</ul>
+<pre class="result notranslate">
+mvn release:perform
+</pre>
+<p>Checks out the code using the previously defined tag and run the Maven deploy goal, to deploy the war or built artifact to repository.</p>
+<p>Let's open the command console, go to the <b>C:\ > MVN >bus-core-api</b> directory and execute the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+&gt;mvn release:prepare
+</pre>
+<p>Maven will start building the project. Once build is successful run the following <b>mvn</b> command.</p>
+<pre class="result notranslate">
+&gt;mvn release:perform
+</pre>
+<p>Once build is successful you can verify the uploaded JAR file in your repository.</p>
+<h1>Maven - Web Application</h1>
+<p>This chapter teaches you how to manage a web based project using <b>Maven</b>. Here you will learn how to create/build/deploy and run a web application.</p>
+<h2>Create Web Application</h2>
+<p>To create a simple java web application, we will use <b>maven-archetype-webapp</b> plugin. So, let's open the command console, go to the <b>C:\MVN</b> directory and execute the following <b>mvn</b> command.</p>
+<pre class="prettyprint notranslate">
+C:\MVN&gt;mvn archetype:generate 
+-DgroupId = com.companyname.automobile 
+-DartifactId = trucks
+-DarchetypeArtifactId = maven-archetype-webapp 
+-DinteractiveMode = false
+</pre>
+<p>Maven will start processing and will create the complete web based java application project structure as follows &minus;</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'archetype'.
+[INFO] -------------------------------------------------------------------
+[INFO] Building Maven Default Project
+[INFO] task-segment: [archetype:generate] (aggregator-style)
+[INFO] -------------------------------------------------------------------
+[INFO] Preparing archetype:generate
+[INFO] No goals needed for project - skipping
+[INFO] [archetype:generate {execution: default-cli}]
+[INFO] Generating project in Batch mode
+[INFO] --------------------------------------------------------------------
+[INFO] Using following parameters for creating project
+from Old (1.x) Archetype: maven-archetype-webapp:1.0
+[INFO] --------------------------------------------------------------------
+
+[INFO] Parameter: groupId, Value: com.companyname.automobile
+[INFO] Parameter: packageName, Value: com.companyname.automobile
+[INFO] Parameter: package, Value: com.companyname.automobile
+[INFO] Parameter: artifactId, Value: trucks
+[INFO] Parameter: basedir, Value: C:\MVN
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+
+[INFO] project created from Old (1.x) Archetype in dir: C:\MVN\trucks
+
+[INFO] -------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] -------------------------------------------------------------------
+
+[INFO] Total time: 16 seconds
+[INFO] Finished at: Tue Jul 17 11:00:00 IST 2012
+[INFO] Final Memory: 20M/89M
+[INFO] -------------------------------------------------------------------
+</pre>
+<p>Now go to C:/MVN directory. You'll see a java application project created, named trucks (as specified in artifactId) as specified in the following snapshot. The following directory structure is generally used for web applications &minus;</p>
+<img src="images/web-project-structure.jpg" alt="Java web application project structure" /> 
+<p>Maven uses a standard directory layout. Using the above example, we can understand the following key concepts &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Folder Structure &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>trucks</b></p>
+<p>contains src folder and pom.xml.</p></td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>src/main/webapp</b></p>
+<p>contains index.jsp and WEB-INF folder.</p></td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>src/main/webapp/WEB-INF</b></p>
+<p>contains web.xml</p></td></tr>
+<tr>
+<td>4</td>
+<td><p><b>src/main/resources</b></p>
+<p>it contains images/properties files.</p></td>
+</tr>
+</table>
+<h2>POM.xml</h2>
+<pre class="prettyprint notranslate">
+&lt;project xmlns = "http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 
+   http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;com.companyname.automobile&lt;/groupId&gt;
+   &lt;artifactId&gt;trucks&lt;/artifactId&gt;
+   &lt;packaging&gt;war&lt;/packaging&gt;
+   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+   &lt;name&gt;trucks Maven Webapp&lt;/name&gt;
+   &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;junit&lt;/groupId&gt;
+         &lt;artifactId&gt;junit&lt;/artifactId&gt;
+         &lt;version&gt;3.8.1&lt;/version&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+       &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+   &lt;build&gt;
+      &lt;finalName&gt;trucks&lt;/finalName&gt;
+   &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+<p>If you observe, you will find that Maven also created a sample JSP Source file.</p>
+<p>Open <b>C:\ > MVN > trucks > src > main > webapp ></b> folder to see index.jsp with the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;body&gt;
+      &lt;h2&gt;Hello World!&lt;/h2&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h2>Build Web Application</h2>
+<p>Let's open the command console, go to the C:\MVN\trucks directory and execute the following <b>mvn</b> command.</p>
+<pre class="prettyprint notranslate">
+C:\MVN\trucks&gt;mvn clean package
+</pre>
+<p>Maven will start building the project.</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] -------------------------------------------------------------------
+[INFO] Building trucks Maven Webapp
+[INFO] task-segment: [clean, package]
+[INFO] -------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] [resources:resources {execution: default-resources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to
+copy filtered resources,i.e. build is platform dependent!
+
+[INFO] Copying 0 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] No sources to compile
+[INFO] [resources:testResources {execution: default-testResources}]
+
+[WARNING] Using platform encoding (Cp1252 actually) to
+copy filtered resources,i.e. build is platform dependent!
+
+[INFO] skip non existing resourceDirectory
+C:\MVN\trucks\src\test\resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] No sources to compile
+[INFO] [surefire:test {execution: default-test}]
+[INFO] No tests to run.
+[INFO] [war:war {execution: default-war}]
+[INFO] Packaging webapp
+[INFO] Assembling webapp[trucks] in [C:\MVN\trucks\target\trucks]
+[INFO] Processing war project
+[INFO] Copying webapp resources[C:\MVN\trucks\src\main\webapp]
+[INFO] Webapp assembled in[77 msecs]
+[INFO] Building war: C:\MVN\trucks\target\trucks.war
+[INFO] -------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] -------------------------------------------------------------------
+[INFO] Total time: 3 seconds
+[INFO] Finished at: Tue Jul 17 11:22:45 IST 2012
+[INFO] Final Memory: 11M/85M
+[INFO] -------------------------------------------------------------------
+</pre>
+<h2>Deploy Web Application</h2>
+<p>Now copy the <b>trucks.war</b> created in <b>C:\ > MVN > trucks &gt; target &gt;</b> folder to your webserver webapp directory and restart the webserver.</p>
+<h2>Test Web Application</h2>
+<p>Run the web-application using URL: <b>http://&lt;server-name&gt;:&lt;port-number&gt;/trucks/index.jsp</b>.</p>
+<p>Verify the output.</p>
+<img src="images/web-page.jpg" alt="web page" />
+<h1>Maven - Eclipse IDE</h1>
+<p>Eclipse provides an excellent plugin <a rel="nofollow" target="_blank" href="https://www.eclipse.org/m2e/">m2eclipse</a> which seamlessly integrates Maven and Eclipse together.</p>
+<p>Some of features of m2eclipse are listed below &minus;</p>
+<ul class="list">
+<li><p>You can run Maven goals from Eclipse.</p></li>
+<li><p>You can view the output of Maven commands inside the Eclipse, using its own console.</p></li>
+<li><p>You can update maven dependencies with IDE.</p></li>
+<li><p>You can Launch Maven builds from within Eclipse.</p></li>
+<li><p>It does the dependency management for Eclipse build path based on Maven's pom.xml.</p></li>
+<li><p>It resolves Maven dependencies from the Eclipse workspace without installing to local Maven repository (requires dependency project be in same workspace).</p></li>
+<li><p>It automatic downloads the required dependencies and sources from the remote Maven repositories.</p></li>
+<li><p>It provides wizards for creating new Maven projects, pom.xml and to enable Maven support on existing projects</p></li>
+<li><p>It provides quick search for dependencies in remote Maven repositories.</p></li>
+</ul>
+<h2>Installing m2eclipse plugin</h2>
+<p>Use one of the following links to install m2eclipse &minus;</p> 
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center; width:30%;">Eclipse</th style="text-align:center;">
+<th>URL</th>
+</tr>
+<tr>
+<td>Eclipse 3.5 (Gallileo)</td>
+<td><p><a rel="nofollow" target="_blank" href="https://www.sonatype.com/books/m2eclipse-book/reference/ch02s03.html">Installing m2eclipse in Eclipse 3.5 (Gallileo)</a></p></td>
+</tr>
+<tr>
+<td>Eclipse 3.6 (Helios)</td>
+<td><p><a rel="nofollow" target="_blank" href="https://www.sonatype.com/books/m2eclipse-book/reference/install-sect-marketplace.html">Installing m2eclipse in Eclipse 3.6 (Helios)</a></p></td>
+</tr>
+</table>
+<p>Following example will help you to leverage benefits of integrating Eclipse and maven.</p>
+<h2>Import a maven project in Eclipse</h2>
+<ul class="list">
+<li><p>Open Eclipse.</p></li>
+<li><p>Select <b>File &gt; Import &gt;</b> option.</p></li>
+<li><p>Select Maven Projects Option. Click on Next Button.</p></li>
+</ul>
+<img src="images/import_project.jpg" alt="Import a maven project in Eclipse." />
+<ul class="list">
+<li><p>Select Project location, where a project was created using Maven. We've created a Java Project consumer Banking in the previous chapters. Go to ‘Creating Java Project’ chapter, to see how to create a project using Maven.</p></li>
+<li><p>Click Finish Button.</p></li>
+</ul>
+<img src="images/import_project2.jpg" alt="Import a maven project in Eclipse." />
+<p>Now, you can see the maven project in eclipse.</p>
+<img src="images/eclipse_project_structure.jpg" alt="maven project in Eclipse." />
+<p>Now, have a look at <b>consumer Banking</b> project properties. You can see that Eclipse has added Maven dependencies to java build path.</p>
+<img src="images/java_build_path2.jpg" alt="Java Build Path having Maven dependencies." />
+<p>Now, it is time to build this project using maven capability of eclipse.</p>
+<ul class="list">
+<li>Right Click on consumerBanking project to open context menu.</li>
+<li>Select Run as option.</li>
+<li>Then maven package option.</li>
+</ul>
+<p>Maven will start building the project. You can see the output in Eclipse Console as follows &minus;</p>
+<pre class="result notranslate">
+[INFO] Scanning for projects...
+[INFO] -------------------------------------------------------------------
+[INFO] Building consumerBanking
+[INFO]
+[INFO] Id: com.companyname.bank:consumerBanking:jar:1.0-SNAPSHOT
+[INFO] task-segment: [package]
+[INFO] -------------------------------------------------------------------
+[INFO] [resources:resources]
+[INFO] Using default encoding to copy filtered resources.
+[INFO] [compiler:compile]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources]
+[INFO] Using default encoding to copy filtered resources.
+[INFO] [compiler:testCompile]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [surefire:test]
+[INFO] Surefire report directory:
+C:\MVN\consumerBanking\target\surefire-reports
+
+-------------------------------------------------------
+T E S T S
+-------------------------------------------------------
+
+Running com.companyname.bank.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 sec
+Results :
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] [jar:jar]
+
+[INFO] -------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] -------------------------------------------------------------------
+
+[INFO] Total time: 1 second
+[INFO] Finished at: Thu Jul 12 18:18:24 IST 2012
+[INFO] Final Memory: 2M/15M
+[INFO] -------------------------------------------------------------------
+</pre>
+<p>Now, right click on App.java. Select <b>Run As</b> option. Then select <b>Java Application</b>.</p>
+<img src="images/run_maven_build.jpg" alt="Run maven command using run as option."/>
+<p>You will see the result as follows &minus;</p>
+<pre class="result notranslate">
+Hello World!
+</pre>
+<h1>Maven - NetBeans</h1>
+<p>NetBeans 6.7 and newer has in-built support for Maven. In case of previous version, Maven plugin is available in plugin Manager. We are using NetBeans 6.9 in this example.</p>
+<p>Some of features of NetBeans are listed below &minus;</p>
+<ul class="list">
+<li><p>You can run Maven goals from NetBeans.</p></li>
+<li><p>You can view the output of Maven commands inside the NetBeans using its own console.</p></li>
+<li><p>You can update maven dependencies with IDE.</p></li>
+<li><p>You can Launch Maven builds from within NetBeans.</p></li>
+<li><p>NetBeans does the dependency management automatically based on Maven's pom.xml.</p></li>
+<li><p>NetBeans resolves Maven dependencies from its workspace without installing to local Maven repository (requires dependency project be in same workspace).</p></li>
+<li><p>NetBeans automatic downloads required dependencies and sources from the remote Maven repositories.</p></li>
+<li><p>NetBeans provides wizards for creating new Maven projects, pom.xml.</p></li>
+<li><p>NetBeans provides a Maven Repository browser that enables you to view your local repository and registered external Maven repositories.</p></li>
+</ul>
+<p>Following example will help you to leverage benefits of integrating NetBeans and Maven.</p>
+<h2>Open a maven project in NetBeans</h2>
+<ul class="list">
+<li><p>Open NetBeans.</p></li>
+<li><p>Select <b>File Menu &gt; Open Project</b> option.</p></li>
+<li><p>Select Project location, where a project was created using Maven. We've created a Java Project consumerBanking. Go to ‘Creating Java Project’ chapter, to see how to create a project using Maven.</p></li>
+</ul>
+<img src="images/nb_open_project.jpg" alt="Open a Maven project in NetBeans." />
+<p>Now, you can see the maven project in NetBeans. Have a look at consumerBanking project Libraries and Test Libraries. You can see that NetBeans has added Maven dependencies to its build path.</p>
+<img src="images/nb_project_structure.jpg" alt="Maven project in NetBeans." />
+<h2>Build a maven project in NetBeans</h2>
+<p>Now, Its time to build this project using maven capability of NetBeans.</p>
+<ul class="list">
+<li>Right Click on consumerBanking project to open context menu.</li>
+<li>Select Clean and Build as option.</li>
+</ul>
+<img src="images/nb_build_options.jpg" alt="Build a Maven project in NetBeans." />
+<p>Maven will start building the project. You can see the output in NetBeans Console as follows &minus;</p>
+<pre class="prettyprint notranslate">
+NetBeans: Executing 'mvn.bat -Dnetbeans.execution = true clean install'
+NetBeans:      JAVA_HOME = C:\Program Files\Java\jdk1.6.0_21
+Scanning for projects...
+------------------------------------------------------------------------
+Building consumerBanking
+   task-segment: [clean, install]
+------------------------------------------------------------------------
+[clean:clean]
+[resources:resources]
+[WARNING] Using platform encoding (Cp1252 actually)
+to copy filtered resources, i.e. build is platform dependent!
+skip non existing resourceDirectory C:\MVN\consumerBanking\src\main\resources
+[compiler:compile]
+Compiling 2 source files to C:\MVN\consumerBanking\target\classes
+[resources:testResources]
+[WARNING] Using platform encoding (Cp1252 actually)
+to copy filtered resources, i.e. build is platform dependent!
+skip non existing resourceDirectory C:\MVN\consumerBanking\src\test\resources
+[compiler:testCompile]
+Compiling 1 source file to C:\MVN\consumerBanking\target\test-classes
+[surefire:test]
+Surefire report directory: C:\MVN\consumerBanking\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.companyname.bank.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[jar:jar]
+Building jar: C:\MVN\consumerBanking\target\consumerBanking-1.0-SNAPSHOT.jar
+[install:install]
+Installing C:\MVN\consumerBanking\target\consumerBanking-1.0-SNAPSHOT.jar
+to C:\Users\GB3824\.m2\repository\com\companyname\bank\consumerBanking\
+1.0-SNAPSHOT\consumerBanking-1.0-SNAPSHOT.jar
+------------------------------------------------------------------------
+BUILD SUCCESSFUL
+------------------------------------------------------------------------
+Total time: 9 seconds
+Finished at: Thu Jul 19 12:57:28 IST 2012
+Final Memory: 16M/85M
+------------------------------------------------------------------------
+</pre>
+<h2>Run Application in NetBeans</h2>
+<p>Now, right click on App.java. Select <b>Run File</b> as option. You will see the result in the NetBeans Console.</p>
+<pre class="result notranslate">
+NetBeans: Executing 'mvn.bat -Dexec.classpathScope = runtime 
+-Dexec.args = -classpath %classpath com.companyname.bank.App 
+-Dexec.executable = C:\Program Files\Java\jdk1.6.0_21\bin\java.exe 
+-Dnetbeans.execution = true process-classes 
+org.codehaus.mojo:exec-maven-plugin:1.1.1:exec'
+NetBeans:      JAVA_HOME = C:\Program Files\Java\jdk1.6.0_21
+Scanning for projects...
+------------------------------------------------------------------------
+Building consumerBanking
+   task-segment: [process-classes, 
+   org.codehaus.mojo:exec-maven-plugin:1.1.1:exec]
+------------------------------------------------------------------------
+[resources:resources]
+[WARNING] Using platform encoding (Cp1252 actually) 
+to copy filtered resources, i.e. build is platform dependent!
+skip non existing resourceDirectory C:\MVN\consumerBanking\src\main\resources
+[compiler:compile]
+Nothing to compile - all classes are up to date
+[exec:exec]
+<b>Hello World!</b>
+------------------------------------------------------------------------
+BUILD SUCCESSFUL
+------------------------------------------------------------------------
+Total time: 1 second
+Finished at: Thu Jul 19 14:18:13 IST 2012
+Final Memory: 7M/64M
+------------------------------------------------------------------------
+</pre>
+<h1>Maven - IntelliJ IDEA IDE Integration</h1>
+<p>IntelliJ IDEA has in-built support for Maven. We are using IntelliJ IDEA Community Edition 11.1 in this example.</p>
+<p>Some of the features of IntelliJ IDEA are listed below &minus;</p>
+<ul class="list">
+<li><p>You can run Maven goals from IntelliJ IDEA.</p></li>
+<li><p>You can view the output of Maven commands inside the IntelliJ IDEA using its own console.</p></li>
+<li><p>You can update maven dependencies within IDE.</p></li>
+<li><p>You can Launch Maven builds from within IntelliJ IDEA.</p></li>
+<li><p>IntelliJ IDEA does the dependency management automatically based on Maven's pom.xml.</p></li>
+<li><p>IntelliJ IDEA resolves Maven dependencies from its workspace without installing to local Maven repository (requires dependency project be in same workspace).</p></li>
+<li><p>IntelliJ IDEA automatically downloads the required dependencies and sources from the remote Maven repositories.</p></li>
+<li><p>IntelliJ IDEA provides wizards for creating new Maven projects, pom.xml.</p></li>
+</ul>
+<p>Following example will help you to leverage benefits of integrating IntelliJ IDEA and Maven.</p>
+<h2>Create a new project in IntelliJ IDEA</h2>
+<p>We will import Maven project using New Project Wizard.</p>
+<ul class="list">
+<li><p>Open IntelliJ IDEA.</p></li>
+<li><p>Select <b>File Menu &gt; New Project</b> Option.</p></li>
+<li><p>Select import project from existing model.</p></li>
+</ul>
+<img src="images/ij_new_project_step1.jpg" alt="New Project in IntelliJ IDEA, step 1." />
+<ul class="list">
+<li>Select Maven option</li>
+</ul>
+<img src="images/ij_new_project_step2.jpg" alt="New Project in IntelliJ IDEA, step 2." />
+<ul class="list">
+<li><p>Select Project location, where a project was created using Maven. We have created a Java Project consumerBanking. Go to ‘Creating Java Project' chapter, to see how to create a project using Maven.</p></li>
+</ul>
+<img src="images/ij_new_project_step3.jpg" alt="New Project in IntelliJ IDEA, step 3." />
+<ul class="list">
+<li>Select Maven project to import.</li>
+</ul>
+<img src="images/ij_new_project_step4.jpg" alt="New Project in IntelliJ IDEA, step 4." />
+<ul class="list">
+<li>Enter name of the project and click finish.</li>
+</ul>
+<img src="images/ij_new_project_step5.jpg" alt="New Project in IntelliJ IDEA, step 5." />
+<ul class="list">
+<li><p>Now, you can see the maven project in IntelliJ IDEA. Have a look at consumerBanking project external libraries. You can see that IntelliJ IDEA has added Maven dependencies to its build path under Maven section.</p></li>
+</ul>
+<img src="images/ij_project_structure.jpg" alt="Maven project in IntelliJ IDEA." />
+<h2>Build a maven project in IntelliJ IDEA</h2>
+<p>Now, it is time to build this project using capability of IntelliJ IDEA.</p>
+<ul class="list">
+<li><p>Select consumerBanking project.</p></li>
+<li><p>Select <b>Buid menu &gt; Rebuild Project</b> Option</p></li>
+</ul>
+<p>You can see the output in IntelliJ IDEA Console</p>
+<pre class="result notranslate">
+4:01:56 PM Compilation completed successfully
+</pre>
+<h2>Run Application in IntelliJ IDEA</h2>
+<ul class="list">
+<li><p>Select consumerBanking project.</p></li>
+<li><p>Right click on App.java to open context menu.</p></li>
+<li><p>select <b>Run App.main()</b></p></li>
+</ul>
+<img src="images/ij_run_app.jpg" alt="Maven project in IntelliJ IDEA." />
+<p>You will see the result in IntelliJ IDEA Console.</p>
+<pre class="result notranslate">
+"C:\Program Files\Java\jdk1.6.0_21\bin\java"
+-Didea.launcher.port=7533 
+"-Didea.launcher.bin.path=
+C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 11.1.2\bin"
+-Dfile.encoding=UTF-8 
+-classpath "C:\Program Files\Java\jdk1.6.0_21\jre\lib\charsets.jar;
+
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\deploy.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\javaws.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\jce.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\jsse.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\management-agent.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\plugin.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\resources.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\rt.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\ext\dnsns.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\ext\localedata.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\ext\sunjce_provider.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\ext\sunmscapi.jar;
+C:\Program Files\Java\jdk1.6.0_21\jre\lib\ext\sunpkcs11.jar
+
+C:\MVN\consumerBanking\target\classes;
+C:\Program Files\JetBrains\
+IntelliJ IDEA Community Edition 11.1.2\lib\idea_rt.jar" 
+com.intellij.rt.execution.application.AppMain com.companyname.bank.App
+<b>Hello World!</b>
+
+Process finished with exit code 0
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="maven_questions_answers.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="maven_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/maven/maven_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/maven/maven_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/maven/maven_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/maven/maven_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/maven/maven_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/maven/maven_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Maven Quick Guide",
+    "name": "Maven Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/maven/maven_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/maven/images/structure.jpg",
+        "width": 253,
+        "height": 348
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "August 03 2017 00:37:05.",
+    "dateModified": "July 28 2017 06:55:44.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "Maven is a project management and comprehension tool that provides developers a complete build lifecycle framework. Development team can automate the project's build infrastructure in almost no time as Maven uses a standard directory layout and a default ..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Maven",
+                "@id": "https://www.tutorialspoint.com/maven"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Maven - Quick Guide"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/maven/maven_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:19:34 GMT -->
+</html>

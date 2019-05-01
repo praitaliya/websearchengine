@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:20:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Distributed DBMS Quick Guide</title>
+<meta name="description" content="Distributed DBMS Quick Guide - Learn Distributed DBMS in simple and easy steps starting from DBMS Concepts, Distributed Databases, Environments, Design Strategies, Distribution Transparency, Database Control, Relational Algebra for Query Optimization, Query Optimization in Centralized Systems, Distributed Systems, Transaction Processing Systems, Controlling Concurrency, Deadlock Handling, Replication Control, Failure and Commit, Database Recovery, Distributed Commit Protocols, Database Security and Cryptography, Security in Distributed Databases." /> 
+<meta name="keywords" content="Distributed DBMS, Tutorial, Learning, Beginners, DBMS Concepts, Distributed Databases, Environments, Design Strategies, Distribution Transparency, Database Control, Relational Algebra for Query Optimization, Query Optimization in Centralized Systems, Distributed Systems, Transaction Processing Systems, Controlling Concurrency, Deadlock Handling, Replication Control, Failure and Commit, Database Recovery, Distributed Commit Protocols, Database Security and Cryptography, Security in Distributed Databases." />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+"HTML-CSS": {
+  linebreaks: { automatic: true, width: "container" }          
+}              
+});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #003333 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #003333 !important;}
+.submenu-item{ border-bottom: 2px solid #003333 !important; border-top: 2px solid #003333 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/distributed_dbms/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/distributed-dbms-mini-logo.jpg" alt="Distributed DBMS Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Distributed DBMS Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/index.htm">DDBMS - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_concepts.htm">DDBMS - DBMS Concepts</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_databases.htm">DDBMS - Distributed Databases</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Distributed Database Design</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_environments.htm">Distributed Database Environments</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm">DDBMS - Design Strategies</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_distribution_transparency.htm">DDBMS - Distribution Transparency</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_control.htm">DDBMS - Database Control</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Query Optimization</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_relational_algebra_query_optimization.htm">Relational Algebra Query</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_query_optimization_centralized_systems.htm">Query Optimization Centralized</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_query_optimization_distributed_systems.htm">Query Optimization in Distributed</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Concurrency Control</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_transaction_processing_systems.htm">Transaction Processing Systems</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_controlling_concurrency.htm">DDBMS - Controlling Concurrency</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_deadlock_handling.htm">DDBMS - Deadlock Handling</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Failure and Recovery</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_replication_control.htm">DDBMS - Replication Control</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_failure_commit.htm">DDBMS - Failure &amp; Commit</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_recovery.htm">DDBMS - Database Recovery</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_commit_protocols.htm">Distributed Commit Protocols</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Distributed DBMS Security</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_security_cryptography.htm">Database Security &amp; Cryptography</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_security_distributed_databases.htm">Security in Distributed Databases</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Distributed DBMS Resources</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm">DDBMS - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_useful_resources.htm">DDBMS - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_discussion.htm">DDBMS - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Distributed DBMS - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_security_distributed_databases.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Distributed DBMS - Concepts</h1>
+<p>For proper functioning of any organization, there’s a need for a well-maintained database. In the recent past, databases used to be centralized in nature. However, with the increase in globalization, organizations tend to be diversified across the globe. They may choose to distribute data over local servers instead of a central database. Thus, arrived the concept of <b>Distributed Databases</b>.</p> 
+<p>This chapter gives an overview of databases and Database Management Systems (DBMS). A database is an ordered collection of related data. A DBMS is a software package to work upon a database. A detailed study of DBMS is available in our tutorial named “Learn DBMS”. In this chapter, we revise the main concepts so that the study of DDBMS can be done with ease. The three topics covered are database schemas, types of databases and operations on databases.</p>
+<h2>Database and Database Management System</h2>
+<p>A <b>database</b> is an ordered collection of related data that is built for a specific purpose. A database may be organized as a collection of multiple tables, where a table represents a real world element or entity. Each table has several different fields that represent the characteristic features of the entity.</p>
+<p>For example, a company database may include tables for projects, employees, departments, products and financial records. The fields in the Employee table may be Name, Company_Id, Date_of_Joining, and so forth.</p>
+<p>A <b>database management system</b> is a collection of programs that enables creation and maintenance of a database. DBMS is available as a software package that facilitates definition, construction, manipulation and sharing of data in a database. Definition of a database includes description of the structure of a database. Construction of a database involves actual storing of the data in any storage medium. Manipulation refers to the retrieving information from the database, updating the database and generating reports. Sharing of data facilitates data to be accessed by different users or programs.</p> 
+<h3>Examples of DBMS Application Areas</h3>
+<ul class="list">
+<li>Automatic Teller Machines</li>
+<li>Train Reservation System</li>
+<li>Employee Management System</li>
+<li>Student Information System</li>
+</ul>
+<h3>Examples of DBMS Packages</h3>
+<ul class="list">
+<li>MySQL</li>
+<li>Oracle</li>
+<li>SQL Server</li>
+<li>dBASE</li>
+<li>FoxPro</li>
+<li>PostgreSQL, etc.</li>
+</ul>
+<h2>Database Schemas</h2>
+<p>A database schema is a description of the database which is specified during database design and subject to infrequent alterations. It defines the organization of the data, the relationships among them, and the constraints associated with them.</p>
+<p>Databases are often represented through the <b>three-schema architecture</b> or <b>ANSISPARC architecture</b>. The goal of this architecture is to separate the user application from the physical database. The three levels are &minus;</p>
+<ul class="list">
+<li><p><b>Internal Level having Internal Schema</b> &minus; It describes the physical structure, details of internal storage and access paths for the database.</p></li>
+<li><p><b>Conceptual Level having Conceptual Schema</b> &minus; It describes the structure of the whole database while hiding the details of physical storage of data. This illustrates the entities, attributes with their data types and constraints, user operations and relationships.</p></li>
+<li><p><b>External or View Level having External Schemas or Views</b> &minus; It describes the portion of a database relevant to a particular user or a group of users while hiding the rest of database.</p></li>
+</ul>
+<h2>Types of DBMS</h2>
+<p>There are four types of DBMS.</p>
+<h3>Hierarchical DBMS</h3>
+<p>In hierarchical DBMS, the relationships among data in the database are established so that one data element exists as a subordinate of another. The data elements have parent-child relationships and are modelled using the “tree” data structure. These are very fast and simple.</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/hierarchical_dbms.jpg" alt="Hierarchical DBMS" />
+<h3>Network DBMS</h3>
+<p>Network DBMS in one where the relationships among data in the database are of type many-to-many in the form of a network. The structure is generally complicated due to the existence of numerous many-to-many relationships. Network DBMS is modelled using “graph” data structure.</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/network_dbms.jpg" alt="Network DBMS" />
+<h3>Relational DBMS</h3>
+<p>In relational databases, the database is represented in the form of relations. Each relation models an entity and is represented as a table of values. In the relation or table, a row is called a tuple and denotes a single record. A column is called a field or an attribute and denotes a characteristic property of the entity. RDBMS is the most popular database management system.</p>
+<p>For example &minus; A Student Relation &minus;</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/relational_dbms.jpg" alt="Relational DBMS" />
+<h3>Object Oriented DBMS</h3>
+<p>Object-oriented DBMS is derived from the model of the object-oriented programming paradigm. They are helpful in representing both consistent data as stored in databases, as well as transient data, as found in executing programs. They use small, reusable elements called objects. Each object contains a data part and a set of operations which works upon the data. The object and its attributes are accessed through pointers instead of being stored in relational table models.</p>
+<p>For example &minus; A simplified Bank Account object-oriented database &minus;</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/object_oriented_dbms.jpg" alt="Object-oriented DBMS" />
+<h3>Distributed DBMS</h3>
+<p>A distributed database is a set of interconnected databases that is distributed over the computer network or internet. A Distributed Database Management System (DDBMS) manages the distributed database and provides mechanisms so as to make the databases transparent to the users. In these systems, data is intentionally distributed among multiple nodes so that all computing resources of the organization can be optimally used.</p>
+<h2>Operations on DBMS</h2>
+<p>The four basic operations on a database are Create, Retrieve, Update and Delete.</p>
+<ul class="list">
+<li><p><b>CREATE</b> database structure and populate it with data &minus; Creation of a database relation involves specifying the data structures, data types and the constraints of the data to be stored.</p>
+<p><b>Example</b> &minus; SQL command to create a student table &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+CREATE TABLE STUDENT ( 
+   ROLL INTEGER PRIMARY KEY, 
+   NAME VARCHAR2(25), 
+   YEAR INTEGER, 
+   STREAM VARCHAR2(10) 
+);
+</pre>
+<ul class="list">
+<li><p>Once the data format is defined, the actual data is stored in accordance with the format in some storage medium.</p>
+<p><b>Example</b> SQL command to insert a single tuple into the student table &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+INSERT INTO STUDENT ( ROLL, NAME, YEAR, STREAM) 
+VALUES ( 1, 'ANKIT JHA', 1, 'COMPUTER SCIENCE');
+</pre>
+<ul class="list">
+<li><p><b>RETRIEVE</b> information from the database – Retrieving information generally involves selecting a subset of a table or displaying data from the table after some computations have been done. It is done by querying upon the table.</p>
+<p><b>Example</b> &minus; To retrieve the names of all students of the Computer Science stream, the following SQL query needs to be executed &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+SELECT NAME FROM STUDENT 
+WHERE STREAM = 'COMPUTER SCIENCE';
+</pre>
+<ul class="list">
+<li><p><b>UPDATE</b> information stored and modify database structure – Updating a table involves changing old values in the existing table’s rows with new values.</p>
+<p><b>Example</b> &minus; SQL command to change stream from Electronics to Electronics and Communications &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+UPDATE STUDENT 
+SET STREAM = 'ELECTRONICS AND COMMUNICATIONS' 
+WHERE STREAM = 'ELECTRONICS';
+</pre>
+<ul class="list">
+<li><p>Modifying database means to change the structure of the table. However, modification of the table is subject to a number of restrictions.</p>
+<p><b>Example</b> &minus; To add a new field or column, say address to the Student table, we use the following SQL command &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+ALTER TABLE STUDENT 
+ADD ( ADDRESS VARCHAR2(50) ); 
+</pre>
+<ul class="list">
+<li><p><b>DELETE</b> information stored or delete a table as a whole – Deletion of specific information involves removal of selected rows from the table that satisfies certain conditions.</p>
+<p><b>Example</b> &minus; To delete all students who are in 4<sup>th</sup> year currently when they are passing out, we use the SQL command &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+DELETE FROM STUDENT 
+WHERE YEAR = 4;
+</pre>
+<ul class="list">
+<li><p>Alternatively, the whole table may be removed from the database.</p>
+<p><b>Example</b> &minus; To remove the student table completely, the SQL command used is &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+DROP TABLE STUDENT;
+</pre>
+<h1>Distributed DBMS - Distributed Databases</h1>
+<p>This chapter introduces the concept of DDBMS. In a distributed database, there are a number of databases that may be geographically distributed all over the world. A distributed DBMS manages the distributed database in a manner so that it appears as one single database to users. In the later part of the chapter, we go on to study the factors that lead to distributed databases, its advantages and disadvantages.</p>
+<p>A <b>distributed database</b> is a collection of multiple interconnected databases, which are spread physically across various locations that communicate via a computer network.</p>
+<h2>Features</h2>
+<ul class="list">
+<li><p>Databases in the collection are logically interrelated with each other. Often they represent a single logical database.</p></li>
+<li><p>Data is physically stored across multiple sites. Data in each site can be managed by a DBMS independent of the other sites.</p></li>
+<li><p>The processors in the sites are connected via a network. They do not have any multiprocessor configuration.</p></li>
+<li><p>A distributed database is not a loosely connected file system.</p></li>
+<li><p>A distributed database incorporates transaction processing, but it is not synonymous with a transaction processing system.</p></li>
+</ul>
+<h2>Distributed Database Management System</h2>
+<p>A distributed database management system (DDBMS) is a centralized software system that manages a distributed database in a manner as if it were all stored in a single location.</p>
+<h3>Features</h3>
+<ul class="list">
+<li><p>It is used to create, retrieve, update and delete distributed databases.</p></li>
+<li><p>It synchronizes the database periodically and provides access mechanisms by the virtue of which the distribution becomes transparent to the users.</p></li>
+<li><p>It ensures that the data modified at any site is universally updated.</p></li>
+<li><p>It is used in application areas where large volumes of data are processed and accessed by numerous users simultaneously.</p></li>
+<li><p>It is designed for heterogeneous database platforms.</p></li>
+<li><p>It maintains confidentiality and data integrity of the databases.</p></li>
+</ul>
+<h2>Factors Encouraging DDBMS</h2>
+<p>The following factors encourage moving over to DDBMS &minus;</p>
+<ul class="list">
+<li><p><b>Distributed Nature of Organizational Units</b> &minus; Most organizations in the current times are subdivided into multiple units that are physically distributed over the globe. Each unit requires its own set of local data. Thus, the overall database of the organization becomes distributed.</p></li>
+<li><p><b>Need for Sharing of Data</b> &minus; The multiple organizational units often need to communicate with each other and share their data and resources. This demands common databases or replicated databases that should be used in a synchronized manner.</p></li>
+<li><p><b>Support for Both OLTP and OLAP</b> &minus; Online Transaction Processing (OLTP) and Online Analytical Processing (OLAP) work upon diversified systems which may have common data. Distributed database systems aid both these processing by providing synchronized data.</p></li>
+<li><p><b>Database Recovery</b> &minus; One of the common techniques used in DDBMS is replication of data across different sites. Replication of data automatically helps in data recovery if database in any site is damaged. Users can access data from other sites while the damaged site is being reconstructed. Thus, database failure may become almost inconspicuous to users.</p></li>
+<li><p><b>Support for Multiple Application Software</b> &minus; Most organizations use a variety of application software each with its specific database support. DDBMS provides a uniform functionality for using the same data among different platforms.</p></li>
+</ul>
+<h2>Advantages of Distributed Databases</h2>
+<p>Following are the advantages of distributed databases over centralized databases.</p>
+<p><b>Modular Development</b> &minus; If the system needs to be expanded to new locations or new units, in centralized database systems, the action requires substantial efforts and disruption in the existing functioning. However, in distributed databases, the work simply requires adding new computers and local data to the new site and finally connecting them to the distributed system, with no interruption in current functions.</p>
+<p><b>More Reliable</b> &minus; In case of database failures, the total system of centralized databases comes to a halt. However, in distributed systems, when a component fails, the functioning of the system continues may be at a reduced performance. Hence DDBMS is more reliable.</p>
+<p><b>Better Response</b> &minus; If data is distributed in an efficient manner, then user requests can be met from local data itself, thus providing faster response. On the other hand, in centralized systems, all queries have to pass through the central computer for processing, which increases the response time.</p>
+<p><b>Lower Communication Cost</b> &minus; In distributed database systems, if data is located locally where it is mostly used, then the communication costs for data manipulation can be minimized. This is not feasible in centralized systems.</p>
+<h2>Adversities of Distributed Databases</h2>
+<p>Following are some of the adversities associated with distributed databases.</p>
+<ul class="list">
+<li><p><b>Need for complex and expensive software</b> &minus; DDBMS demands complex and often expensive software to provide data transparency and co-ordination across the several sites.</p></li>
+<li><p><b>Processing overhead</b> &minus; Even simple operations may require a large number of communications and additional calculations to provide uniformity in data across the sites.</p></li>
+<li><p><b>Data integrity</b> &minus; The need for updating data in multiple sites pose problems of data integrity.</p></li>
+<li><p><b>Overheads for improper data distribution</b> &minus; Responsiveness of queries is largely dependent upon proper data distribution. Improper data distribution often leads to very slow response to user requests.</p></li>
+</ul>
+<h1>Distributed DBMS - Database Environments</h1>
+<p>In this part of the tutorial, we will study the different aspects that aid in designing distributed database environments. This chapter starts with the types of distributed databases. Distributed databases can be classified into homogeneous and heterogeneous databases having further divisions. The next section of this chapter discusses the distributed architectures namely client – server, peer – to – peer and multi – DBMS. Finally, the different design alternatives like replication and fragmentation are introduced.</p>
+<h2>Types of Distributed Databases</h2>
+<p>Distributed databases can be broadly classified into homogeneous and heterogeneous distributed database environments, each with further sub-divisions, as shown in the following illustration.</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/distributed_database_environments.jpg" alt="Distributed Database Environments" />
+<h3>Homogeneous Distributed Databases</h3>
+<p>In a homogeneous distributed database, all the sites use identical DBMS and operating systems. Its properties are &minus;</p>
+<ul class="list">
+<li><p>The sites use very similar software.</p></li>
+<li><p>The sites use identical DBMS or DBMS from the same vendor.</p></li>
+<li><p>Each site is aware of all other sites and cooperates with other sites to process user requests.</p></li>
+<li><p>The database is accessed through a single interface as if it is a single database.</p></li>
+</ul>
+<h3>Types of Homogeneous Distributed Database</h3>
+<p>There are two types of homogeneous distributed database &minus;</p>
+<ul class="list">
+<li><p><b>Autonomous</b> &minus; Each database is independent that functions on its own. They are integrated by a controlling application and use message passing to share data updates.</p></li>
+<li><p><b>Non-autonomous</b> &minus; Data is distributed across the homogeneous nodes and a central or master DBMS co-ordinates data updates across the sites.</p></li>
+</ul>
+<h3>Heterogeneous Distributed Databases</h3>
+<p>In a heterogeneous distributed database, different sites have different operating systems, DBMS products and data models. Its properties are &minus;</p>
+<ul class="list">
+<li><p>Different sites use dissimilar schemas and software.</p></li>
+<li><p>The system may be composed of a variety of DBMSs like relational, network, hierarchical or object oriented.</p></li>
+<li><p>Query processing is complex due to dissimilar schemas.</p></li>
+<li><p>Transaction processing is complex due to dissimilar software.</p></li>
+<li><p>A site may not be aware of other sites and so there is limited co-operation in processing user requests.</p></li>
+</ul>
+<h3>Types of Heterogeneous Distributed Databases</h3>
+<ul class="list">
+<li><p><b>Federated</b> &minus; The heterogeneous database systems are independent in nature and integrated together so that they function as a single database system.</p></li>
+<li><p><b>Un-federated</b> &minus; The database systems employ a central coordinating module through which the databases are accessed.</p></li>
+</ul>
+<h2>Distributed DBMS Architectures</h2>
+<p>DDBMS architectures are generally developed depending on three parameters &minus;</p>
+<ul class="list">
+<li><p><b>Distribution</b> &minus; It states the physical distribution of data across the different sites.</p></li>
+<li><p><b>Autonomy</b> &minus; It indicates the distribution of control of the database system and the degree to which each constituent DBMS can operate independently.</p></li>
+<li><p><b>Heterogeneity</b> &minus; It refers to the uniformity or dissimilarity of the data models, system components and databases.</p></li>
+</ul>
+<h2>Architectural Models</h2>
+<p>Some of the common architectural models are &minus;</p>
+<ul class="list">
+<li>Client - Server Architecture for DDBMS</li>
+<li>Peer - to - Peer Architecture for DDBMS</li>
+<li>Multi - DBMS Architecture</li>
+</ul>
+<h3>Client - Server Architecture for DDBMS</h3>
+<p>This is a two-level architecture where the functionality is divided into servers and clients. The server functions primarily encompass data management, query processing, optimization and transaction management. Client functions include mainly user interface. However, they have some functions like consistency checking and transaction management.</p>
+<p>The two different client - server architecture are &minus;</p>
+<ul class="list">
+<li>Single Server Multiple Client</li>
+<li>Multiple Server Multiple Client (shown in the following diagram)</li>
+</ul>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/server_architecture.jpg" alt="Server Architecture" />
+<h3>Peer- to-Peer Architecture for DDBMS</h3>
+<p>In these systems, each peer acts both as a client and a server for imparting database services. The peers share their resource with other peers and co-ordinate their activities.</p>
+<p>This architecture generally has four levels of schemas &minus;</p>
+<ul class="list">
+<li><p><b>Global Conceptual Schema</b> &minus; Depicts the global logical view of data.</p></li>
+<li><p><b>Local Conceptual Schema</b> &minus; Depicts logical data organization at each site.</p></li>
+<li><p><b>Local Internal Schema</b> &minus; Depicts physical data organization at each site.</p></li>
+<li><p><b>External Schema</b> &minus; Depicts user view of data.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/peer_to_peer_architecture.jpg" alt="Peer- to-Peer Architecture" />
+<h3>Multi - DBMS Architectures</h3>
+<p>This is an integrated database system formed by a collection of two or more autonomous database systems.</p>
+<p>Multi-DBMS can be expressed through six levels of schemas &minus;</p>
+<ul class="list">
+<li><p><b>Multi-database View Level</b> &minus; Depicts multiple user views comprising of subsets of the integrated distributed database.</p></li>
+<li><p><b>Multi-database Conceptual Level</b> &minus; Depicts integrated multi-database that comprises of global logical multi-database structure definitions.</p></li>
+<li><p><b>Multi-database Internal Level</b> &minus; Depicts the data distribution across different sites and multi-database to local data mapping.</p></li>
+<li><p><b>Local database View Level</b> &minus; Depicts public view of local data.</p></li>
+<li><p><b>Local database Conceptual Level</b> &minus; Depicts local data organization at each site.</p></li>
+<li><p><b>Local database Internal Level</b> &minus; Depicts physical data organization at each site.</p></li>
+</ul>
+<p>There are two design alternatives for multi-DBMS &minus;</p>
+<ul class="list">
+<li>Model with multi-database conceptual level.</li>
+<li>Model without multi-database conceptual level.</li>
+</ul>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/multi_database_conceptual_level.jpg" alt="Multi-database Conceptual Level" />
+<p></p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/without_multi_database_conceptual.jpg" alt=" Without Multi-database Conceptual Level" />
+<h2>Design Alternatives</h2>
+<p>The distribution design alternatives for the tables in a DDBMS are as follows &minus;</p>
+<ul class="list">
+<li>Non-replicated and non-fragmented</li>
+<li>Fully replicated</li>
+<li>Partially replicated</li>
+<li>Fragmented</li>
+<li>Mixed</li>
+</ul>
+<h3>Non-replicated &amp; Non-fragmented</h3>
+<p>In this design alternative, different tables are placed at different sites. Data is placed so that it is at a close proximity to the site where it is used most. It is most suitable for database systems where the percentage of queries needed to join information in tables placed at different sites is low. If an appropriate distribution strategy is adopted, then this design alternative helps to reduce the communication cost during data processing.</p>
+<h3>Fully Replicated</h3>
+<p>In this design alternative, at each site, one copy of all the database tables is stored. Since, each site has its own copy of the entire database, queries are very fast requiring negligible communication cost. On the contrary, the massive redundancy in data requires huge cost during update operations. Hence, this is suitable for systems where a large number of queries is required to be handled whereas the number of database updates is low.</p>
+<h3>Partially Replicated</h3>
+<p>Copies of tables or portions of tables are stored at different sites. The distribution of the tables is done in accordance to the frequency of access. This takes into consideration the fact that the frequency of accessing the tables vary considerably from site to site. The number of copies of the tables (or portions) depends on how frequently the access queries execute and the site which generate the access queries.</p>
+<h3>Fragmented</h3>
+<p>In this design, a table is divided into two or more pieces referred to as fragments or partitions, and each fragment can be stored at different sites. This considers the fact that it seldom happens that all data stored in a table is required at a given site. Moreover, fragmentation increases parallelism and provides better disaster recovery. Here, there is only one copy of each fragment in the system, i.e. no redundant data.</p>
+<p>The three fragmentation techniques are &minus;</p>
+<ul class="list">
+<li>Vertical fragmentation</li>
+<li>Horizontal fragmentation</li>
+<li>Hybrid fragmentation</li>
+</ul>
+<h3>Mixed Distribution</h3>
+<p>This is a combination of fragmentation and partial replications. Here, the tables are initially fragmented in any form (horizontal or vertical), and then these fragments are partially replicated across the different sites according to the frequency of accessing the fragments.</p>
+<h1>Distributed DBMS - Design Strategies</h1>
+<p>In the last chapter, we had introduced different design alternatives. In this chapter, we will study the strategies that aid in adopting the designs. The strategies can be broadly divided into replication and fragmentation. However, in most cases, a combination of the two is used.</p>
+<h2>Data Replication</h2>
+<p>Data replication is the process of storing separate copies of the database at two or more sites. It is a popular fault tolerance technique of distributed databases.</p> 
+<h3>Advantages of Data Replication</h3>
+<ul class="list">
+<li><p><b>Reliability</b> &minus; In case of failure of any site, the database system continues to work since a copy is available at another site(s).</p></li>
+<li><p><b>Reduction in Network Load</b> &minus; Since local copies of data are available, query processing can be done with reduced network usage, particularly during prime hours. Data updating can be done at non-prime hours.</p></li>
+<li><p><b>Quicker Response</b> &minus; Availability of local copies of data ensures quick query processing and consequently quick response time.</p></li>
+<li><p><b>Simpler Transactions</b> &minus; Transactions require less number of joins of tables located at different sites and minimal coordination across the network. Thus, they become simpler in nature.</p></li>
+</ul>
+<h3>Disadvantages of Data Replication</h3>
+<ul class="list">
+<li><p><b>Increased Storage Requirements</b> &minus; Maintaining multiple copies of data is associated with increased storage costs. The storage space required is in multiples of the storage required for a centralized system.</p></li>
+<li><p><b>Increased Cost and Complexity of Data Updating</b> &minus; Each time a data item is updated, the update needs to be reflected in all the copies of the data at the different sites. This requires complex synchronization techniques and protocols.</p></li>
+<li><p><b>Undesirable Application – Database coupling</b> &minus; If complex update mechanisms are not used, removing data inconsistency requires complex  co-ordination at application level. This results in undesirable application – database coupling.</p></li>
+</ul>
+<p>Some commonly used replication techniques are &minus;</p>
+<ul class="list">
+<li>Snapshot replication</li>
+<li>Near-real-time replication</li>
+<li>Pull replication</li>
+</ul>
+<h2>Fragmentation</h2>
+<p>Fragmentation is the task of dividing a table into a set of smaller tables. The subsets of the table are called <b>fragments</b>. Fragmentation can be of three types: horizontal, vertical, and hybrid (combination of horizontal and vertical). Horizontal fragmentation can further be classified into two techniques: primary horizontal fragmentation and derived horizontal fragmentation.</p>
+<p>Fragmentation should be done in a way so that the original table can be reconstructed from the fragments. This is needed so that the original table can be reconstructed from the fragments whenever required. This requirement is called “reconstructiveness.”</p>
+<h3>Advantages of Fragmentation</h3>
+<ul class="list">
+<li><p>Since data is stored close to the site of usage, efficiency of the database system is increased.</p></li>
+<li><p>Local query optimization techniques are sufficient for most queries since data is locally available.</p></li>
+<li><p>Since irrelevant data is not available at the sites, security and privacy of the database system can be maintained.</p></li>
+</ul>
+<h3>Disadvantages of Fragmentation</h3>
+<ul class="list">
+<li><p>When data from different fragments are required, the access speeds may be very high.</p></li>
+<li><p>In case of recursive fragmentations, the job of reconstruction will need expensive techniques.</p></li>
+<li><p>Lack of back-up copies of data in different sites may render the database ineffective in case of failure of a site.</p></li>
+</ul>
+<h2>Vertical Fragmentation</h2>
+<p>In vertical fragmentation, the fields or columns of a table are grouped into fragments. In order to maintain reconstructiveness, each fragment should contain the primary key field(s) of the table. Vertical fragmentation can be used to enforce privacy of data.</p>
+<p>For example, let us consider that a University database keeps records of all registered students in a Student table having the following schema.</p>
+<p>STUDENT</p>
+<table class="table table-bordered">
+<tr>
+<td>Regd_No</td>
+<td>Name</td>
+<td>Course</td>
+<td>Address</td>
+<td>Semester</td>
+<td>Fees</td>
+<td>Marks</td>
+</tr>
+</table>
+<p>Now, the fees details are maintained in the accounts section. In this case, the designer will fragment the database as follows &minus;</p>
+<pre class="prettyprint notranslate">
+CREATE TABLE STD_FEES AS 
+   SELECT Regd_No, Fees 
+   FROM STUDENT;
+</pre>
+<h2>Horizontal Fragmentation</h2>
+<p>Horizontal fragmentation groups the tuples of a table in accordance to values of one or more fields. Horizontal fragmentation should also confirm to the rule of reconstructiveness. Each horizontal fragment must have all columns of the original base table.</p>
+<p>For example, in the student schema, if the details of all students of Computer Science Course needs to be maintained at the School of Computer Science, then the designer will horizontally fragment the database as follows &minus;</p>
+<pre class="prettyprint notranslate">
+CREATE COMP_STD AS 
+   SELECT * FROM STUDENT  
+   WHERE COURSE = "Computer Science";
+</pre>
+<h2>Hybrid Fragmentation</h2>
+<p>In hybrid fragmentation, a combination of horizontal and vertical fragmentation techniques are used. This is the most flexible fragmentation technique since it generates fragments with minimal extraneous information. However, reconstruction of the original table is often an expensive task.</p>
+<p>Hybrid fragmentation can be done in two alternative ways &minus;</p>
+<ul class="list">
+<li><p>At first, generate a set of horizontal fragments; then generate vertical fragments from one or more of the horizontal fragments.</p></li>
+<li><p>At first, generate a set of vertical fragments; then generate horizontal fragments from one or more of the vertical fragments.</p></li>
+</ul>
+<h1>DDBMS - Distribution Transparency</h1>
+<p>Distribution transparency is the property of distributed databases by the virtue of which the internal details of the distribution are hidden from the users. The DDBMS designer may choose to fragment tables, replicate the fragments and store them at different sites. However, since users are oblivious of these details, they find the distributed database easy to use like any centralized database.</p>
+<p>The three dimensions of distribution transparency are &minus;</p>
+<ul class="list">
+<li>Location transparency</li>
+<li>Fragmentation transparency</li>
+<li>Replication transparency</li>
+</ul>
+<h2>Location Transparency</h2>
+<p>Location transparency ensures that the user can query on any table(s) or fragment(s) of a table as if they were stored locally in the user’s site. The fact that the table or its fragments are stored at remote site in the distributed database system, should be completely oblivious to the end user. The address of the remote site(s) and the access mechanisms are completely hidden.</p>
+<p>In order to incorporate location transparency, DDBMS should have access to updated and accurate data dictionary and DDBMS directory which contains the details of locations of data.</p>
+<h2>Fragmentation Transparency</h2>
+<p>Fragmentation transparency enables users to query upon any table as if it were unfragmented. Thus, it hides the fact that the table the user is querying on is actually a fragment or union of some fragments. It also conceals the fact that the fragments are located at diverse sites.</p>
+<p>This is somewhat similar to users of SQL views, where the user may not know that they are using a view of a table instead of the table itself.</p>
+<h2>Replication Transparency</h2>
+<p>Replication transparency ensures that replication of databases are hidden from the users. It enables users to query upon a table as if only a single copy of the table exists.</p>
+<p>Replication transparency is associated with concurrency transparency and failure transparency. Whenever a user updates a data item, the update is reflected in all the copies of the table. However, this operation should not be known to the user. This is concurrency transparency. Also, in case of failure of a site, the user can still proceed with his queries using replicated copies without any knowledge of failure. This is failure transparency.</p>
+<h2>Combination of  Transparencies</h2>
+<p>In any distributed database system, the designer should ensure that all the stated transparencies are maintained to a considerable extent. The designer may choose to fragment tables, replicate them and store them at different sites; all oblivious to the end user. However, complete distribution transparency is a tough task and requires considerable design efforts.</p>
+<h1>Distributed DBMS - Database Control</h1>
+<p>Database control refers to the task of enforcing regulations so as to provide correct data to authentic users and applications of a database. In order that correct data is available to users, all data should conform to the integrity constraints defined in the database. Besides, data should be screened away from unauthorized users so as to maintain security and privacy of the database. Database control is one of the primary tasks of the database administrator (DBA).</p>
+<p>The three dimensions of database control are &minus;</p>
+<ul class="list">
+<li>Authentication</li>
+<li>Access rights</li>
+<li>Integrity constraints</li>
+</ul>
+<h2>Authentication</h2>
+<p>In a distributed database system, authentication is the process through which only legitimate users can gain access to the data resources.</p>
+<p>Authentication can be enforced in two levels &minus;</p>
+<ul class="list">
+<li><p><b>Controlling Access to Client Computer</b> &minus; At this level, user access is restricted while login to the client computer that provides user-interface to the database server. The most common method is a username/password combination. However, more sophisticated methods like biometric authentication may be used for high security data.</p></li>
+<li><p><b>Controlling Access to the Database Software</b> &minus; At this level, the database software/administrator assigns some credentials to the user. The user gains access to the database using these credentials. One of the methods is to create a login account within the database server.</p></li>
+</ul>
+<h2>Access Rights</h2>
+<p>A user’s access rights refers to the privileges that the user is given regarding DBMS operations such as the rights to create a table, drop a table, add/delete/update tuples in a table or query upon the table.</p>
+<p>In distributed environments, since there are large number of tables and yet larger number of users, it is not feasible to assign individual access rights to users. So, DDBMS defines certain roles. A role is a construct with certain privileges within a database system. Once the different roles are defined, the individual users are assigned one of these roles. Often a hierarchy of roles are defined according to the organization’s hierarchy of authority and responsibility.</p>
+<p>For example, the following SQL statements create a role "Accountant" and then assigns this role to user "ABC".</p>
+<pre class="prettyprint notranslate">
+CREATE ROLE ACCOUNTANT; 
+GRANT SELECT, INSERT, UPDATE ON EMP_SAL TO ACCOUNTANT; 
+GRANT INSERT, UPDATE, DELETE ON TENDER TO ACCOUNTANT; 
+GRANT INSERT, SELECT ON EXPENSE TO ACCOUNTANT; 
+COMMIT; 
+GRANT ACCOUNTANT TO ABC; 
+COMMIT;
+</pre>
+<h2>Semantic Integrity Control</h2>
+<p>Semantic integrity control defines and enforces the integrity constraints of the database system.</p>
+<p>The integrity constraints are as follows &minus;</p>
+<ul class="list">
+<li>Data type integrity constraint</li>
+<li>Entity integrity constraint</li>
+<li>Referential integrity constraint</li> 
+</ul>
+<h3>Data Type Integrity Constraint</h3>
+<p>A data type constraint restricts the range of values and the type of operations that can be applied to the field with the specified data type.</p>
+<p>For example, let us consider that a table "HOSTEL" has three fields - the hostel number, hostel name and capacity. The hostel number should start with capital letter "H" and cannot be NULL, and the capacity should not be more than 150. The following SQL command can be used for data definition &minus;</p>
+<pre class="prettyprint notranslate">
+CREATE TABLE HOSTEL ( 
+   H_NO VARCHAR2(5) NOT NULL, 
+   H_NAME VARCHAR2(15), 
+   CAPACITY INTEGER, 
+   CHECK ( H_NO LIKE 'H%'), 
+   CHECK ( CAPACITY &lt;= 150) 
+); 
+</pre>
+<h3>Entity Integrity Control</h3>
+<p>Entity integrity control enforces the rules so that each tuple can be uniquely identified from other tuples. For this a primary key is defined. A primary key is a set of minimal fields that can uniquely identify a tuple. Entity integrity constraint states that no two tuples in a table can have identical values for primary keys and that no field which is a part of the primary key can have NULL value.</p>
+<p>For example, in the above hostel table, the hostel number can be assigned as the primary key through the following SQL statement (ignoring the checks) &minus;</p>
+<pre class="prettyprint notranslate">
+CREATE TABLE HOSTEL ( 
+   H_NO VARCHAR2(5) PRIMARY KEY, 
+   H_NAME VARCHAR2(15), 
+   CAPACITY INTEGER 
+); 
+</pre>
+<h3>Referential Integrity Constraint</h3>
+<p>Referential integrity constraint lays down the rules of foreign keys. A foreign key is a field in a data table that is the primary key of a related table. The referential integrity constraint lays down the rule that the value of the foreign key field should either be among the values of the primary key of the referenced table or be entirely NULL.</p>
+<p>For example, let us consider a student table where a student may opt to live in a hostel. To include this, the primary key of hostel table should be included as a foreign key in the student table. The following SQL statement incorporates this &minus;</p>
+<pre class="prettyprint notranslate">
+CREATE TABLE STUDENT (  
+   S_ROLL INTEGER PRIMARY KEY, 
+   S_NAME VARCHAR2(25) NOT NULL, 
+   S_COURSE VARCHAR2(10), 
+   S_HOSTEL VARCHAR2(5) REFERENCES HOSTEL 
+); 
+</pre>
+<h1>Relational Algebra for Query Optimization</h1>
+<p>When a query is placed, it is at first scanned, parsed and validated. An internal representation of the query is then created such as a query tree or a query graph. Then alternative execution strategies are devised for retrieving results from the database tables. The process of choosing the most appropriate execution strategy for query processing is called query optimization.</p>
+<h2>Query Optimization Issues in DDBMS</h2>
+<p>In DDBMS, query optimization is a crucial task. The complexity is high since number of alternative strategies may increase exponentially due to the following factors &minus;</p>
+<ul class="list">
+<li>The presence of a number of fragments.</li>
+<li>Distribution of the fragments or tables across various sites.</li>
+<li>The speed of communication links.</li>
+<li>Disparity in local processing capabilities.</li> 
+</ul>
+<p>Hence, in a distributed system, the target is often to find a good execution strategy for query processing rather than the best one. The time to execute a query is the sum of the following &minus;</p>
+<ul class="list">
+<li>Time to communicate queries to databases.</li>
+<li>Time to execute local query fragments.</li>
+<li>Time to assemble data from different sites.</li>
+<li>Time to display results to the application.</li> 
+</ul>
+<h2>Query Processing</h2>
+<p>Query processing is a set of all activities starting from query placement to displaying the results of the query. The steps are as shown in the following diagram &minus;</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/query_processing.jpg" alt="Query Processing" />
+<h2>Relational Algebra</h2>
+<p>Relational algebra defines the basic set of operations of relational database model. A sequence of relational algebra operations forms a relational algebra expression. The result of this expression represents the result of a database query.</p>
+<p>The basic operations are &minus;</p>
+<ul class="list">
+<li>Projection</li>
+<li>Selection</li>
+<li>Union</li>
+<li>Intersection</li>
+<li>Minus</li>
+<li>Join </li> 
+</ul>
+<h3>Projection</h3>
+<p>Projection operation displays a subset of fields of a table. This gives a vertical partition of the table.</p>
+<p><b>Syntax in Relational Algebra</b></p>
+<p>$$\pi_{<{AttributeList}>}{(<{Table Name}>)}$$</p>
+<p>For example, let us consider the following Student database &minus;</p>
+<table class="table table-bordered">
+<tr>
+<td colspan="5"><center><b>STUDENT</b></center></td>
+</tr>
+<tr style="text-align:center;">
+<td><b>Roll_No</b></td>
+<td><b>Name</b></td>
+<td><b>Course</b></td>
+<td><b>Semester</b></td>
+<td><b>Gender</b></td>
+</tr>
+<tr style="text-align:center;">
+<td>2</td>
+<td>Amit Prasad</td>
+<td>BCA</td>
+<td>1</td>
+<td>Male</td>
+</tr>
+<tr style="text-align:center;">
+<td>4</td>
+<td>Varsha Tiwari</td>
+<td>BCA</td>
+<td>1</td>
+<td>Female</td>
+</tr>
+<tr style="text-align:center;">
+<td>5</td>
+<td>Asif Ali</td>
+<td>MCA</td>
+<td>2</td>
+<td>Male</td>
+</tr>
+<tr style="text-align:center;">
+<td>6</td>
+<td>Joe Wallace</td>
+<td>MCA</td>
+<td>1</td>
+<td>Male</td>
+</tr>
+<tr style="text-align:center;">
+<td>8</td>
+<td>Shivani Iyengar</td>
+<td>BCA</td>
+<td>1</td>
+<td>Female</td>
+</tr>
+</table>
+<p>If we want to display the names and courses of all students, we will use the following relational algebra expression &minus;</p>
+<p>$$\pi_{Name,Course}{(STUDENT)}$$</p>
+<h3>Selection</h3>
+<p>Selection operation displays a subset of tuples of a table that satisfies certain conditions. This gives a horizontal partition of the table.</p>
+<p><b>Syntax in Relational Algebra</b></p>
+<p>$$\sigma_{<{Conditions}>}{(<{Table Name}>)}$$</p>
+<p>For example, in the Student table, if we want to display the details of all students who have opted for MCA course, we will use the following relational algebra expression &minus;</p>
+<p>$$\sigma_{Course} = {\small "BCA"}^{(STUDENT)}$$</p>
+<h3>Combination of Projection and Selection Operations</h3>
+<p>For most queries, we need a combination of projection and selection operations. There are two ways to write these expressions &minus;</p>
+<ul class="list">
+<li>Using sequence of projection and selection operations.</li>
+<li>Using rename operation to generate intermediate results.</li> 
+</ul>
+<p>For example, to display names of all female students of the BCA course &minus;</p>
+<ul class="list">
+<li>Relational algebra expression using sequence of projection and selection operations</li>
+</ul>
+<p>$$\pi_{Name}(\sigma_{Gender = \small "Female" AND \: Course = \small "BCA"}{(STUDENT)})$$</p>
+<ul class="list">
+<li>Relational algebra expression using rename operation to generate intermediate results</li>
+</ul>
+<p>$$FemaleBCAStudent \leftarrow \sigma_{Gender = \small "Female" AND \: Course = \small "BCA"} {(STUDENT)}$$</p>
+<p>$$Result \leftarrow \pi_{Name}{(FemaleBCAStudent)}$$</p>
+<h3>Union</h3>
+<p>If P is a result of an operation and Q is a result of another operation, the union of P and Q ($p \cup Q$) is the set of all tuples that is either in P or in Q or in both without duplicates.</p>
+<p>For example, to display all students who are either in Semester 1 or are in BCA course &minus;</p>
+<p>$$Sem1Student \leftarrow \sigma_{Semester = 1}{(STUDENT)}$$</p>
+<p>$$BCAStudent \leftarrow \sigma_{Course = \small "BCA"}{(STUDENT)}$$</p>
+<p>$$Result \leftarrow Sem1Student \cup BCAStudent$$</p>
+<h3>Intersection</h3>
+<p>If P is a result of an operation and Q is a result of another operation, the intersection of P and Q ( $p \cap Q$ ) is the set of all tuples that are in P and Q both.</p>
+<p>For example, given the following two schemas &minus;</p>
+<p><b>EMPLOYEE</b></p>
+<table class="table table-bordered">
+<tr>
+<td>EmpID</td>
+<td>Name</td>
+<td>City</td>
+<td>Department</td>
+<td>Salary</td>
+</tr>
+</table>
+<p><b>PROJECT</b></p>
+<table class="table table-bordered">
+<tr>
+<td>PId</td>
+<td>City</td>
+<td>Department</td>
+<td>Status</td>
+</tr>
+</table>
+<p>To display the names of all cities where a project is located and also an employee resides &minus;</p>
+<p>$$CityEmp \leftarrow \pi_{City}{(EMPLOYEE)}$$</p>
+<p>$$CityProject \leftarrow \pi_{City}{(PROJECT)}$$</p>
+<p>$$Result \leftarrow CityEmp \cap CityProject$$</p>
+<h3>Minus</h3>
+<p>If P is a result of an operation and Q is a result of another operation, P - Q  is the set of all tuples that are in P and not in Q.</p>
+<p>For example, to list all the departments which do not have an ongoing project (projects with status = ongoing) &minus;</p>
+<p>$$AllDept \leftarrow \pi_{Department}{(EMPLOYEE)}$$</p>
+<p>$$ProjectDept \leftarrow \pi_{Department} (\sigma_{Status = \small "ongoing"}{(PROJECT)})$$</p>
+<p>$$Result \leftarrow AllDept - ProjectDept$$</p>
+<h3>Join</h3>
+<p>Join operation combines related tuples of two different tables (results of queries) into a single table.</p>
+<p>For example, consider two schemas, Customer and Branch in a Bank database as follows &minus;</p>
+<p><b>CUSTOMER</b></p>
+<table class="table table-bordered">
+<tr>
+<td>CustID</td>
+<td>AccNo</td>
+<td>TypeOfAc</td>
+<td>BranchID</td>
+<td>DateOfOpening</td>
+</tr>
+</table>
+<p></p>
+<p><b>BRANCH</b></p>
+<table class="table table-bordered">
+<tr>
+<td>BranchID</td>
+<td>BranchName</td>
+<td>IFSCcode</td>
+<td>Address</td>
+</tr>
+</table>
+<p>To list the employee details along with branch details &minus;</p>
+<p>$$Result \leftarrow CUSTOMER \bowtie_{Customer.BranchID=Branch.BranchID}{BRANCH}$$</p>
+<h2>Translating SQL Queries into Relational Algebra</h2>
+<p>SQL queries are translated into equivalent relational algebra expressions before optimization. A query is at first decomposed into smaller query blocks. These blocks are translated to equivalent relational algebra expressions. Optimization includes optimization of each block and then optimization of the query as a whole.</p>
+<h3>Examples</h3>
+<p>Let us consider the following schemas &minus;</p>
+<p>EMPLOYEE</p>
+<table class="table table-bordered">
+<tr>
+<td>EmpID</td>
+<td>Name</td>
+<td>City</td>
+<td>Department</td>
+<td>Salary</td>
+</tr>
+</table>
+<p>PROJECT</p>
+<table class="table table-bordered">
+<tr>
+<td>PId</td>
+<td>City</td>
+<td>Department</td>
+<td>Status</td>
+</tr>
+</table>
+<p>WORKS</p>
+<table class="table table-bordered">
+<tr>
+<td>EmpID</td>
+<td>PID</td>
+<td>Hours</td>
+</tr>
+</table>
+<h3>Example 1</h3>
+<p>To display the details of all employees who earn a salary LESS than the average salary, we write the SQL query &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT * FROM EMPLOYEE 
+WHERE SALARY &lt; ( SELECT AVERAGE(SALARY) FROM EMPLOYEE ) ;
+</pre>
+<p>This query contains one nested sub-query. So, this can be broken down into two blocks.</p>
+<p>The inner block is &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT AVERAGE(SALARY)FROM EMPLOYEE ;
+</pre>
+<p>If the result of this query is AvgSal, then outer block is &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT * FROM EMPLOYEE WHERE SALARY &lt; AvgSal;
+</pre>
+<p>Relational algebra expression for inner block &minus;</p>
+<p>$$AvgSal \leftarrow \Im_{AVERAGE(Salary)}{EMPLOYEE}$$</p>
+<p>Relational algebra expression for outer block &minus;</p>
+<p>$$\sigma_{Salary <{AvgSal}>}{EMPLOYEE}$$</p>
+<h3>Example 2</h3>
+<p>To display the project ID and status of all projects of employee 'Arun Kumar', we write the SQL query &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT PID, STATUS FROM PROJECT 
+WHERE PID = ( SELECT FROM WORKS  WHERE EMPID = ( SELECT EMPID FROM EMPLOYEE 
+            WHERE NAME = 'ARUN KUMAR'));
+</pre>
+<p>This query contains two nested sub-queries. Thus, can be broken down into three blocks, as follows &minus;</p>
+<pre class="prettyprint notranslate">
+SELECT EMPID FROM EMPLOYEE WHERE NAME = 'ARUN KUMAR'; 
+SELECT PID FROM WORKS WHERE EMPID = ArunEmpID; 
+SELECT PID, STATUS FROM PROJECT WHERE PID = ArunPID;
+</pre>
+<p>(Here ArunEmpID and ArunPID are the results of inner queries)</p>
+<p>Relational algebra expressions for the three blocks are &minus;</p>
+<p>$$ArunEmpID \leftarrow \pi_{EmpID}(\sigma_{Name = \small "Arun Kumar"} {(EMPLOYEE)})$$</p>
+<p>$$ArunPID \leftarrow \pi_{PID}(\sigma_{EmpID = \small "ArunEmpID"} {(WORKS)})$$</p>
+<p>$$Result \leftarrow \pi_{PID, Status}(\sigma_{PID = \small "ArunPID"} {(PROJECT)})$$</p>
+<h3>Computation of Relational Algebra Operators</h3>
+<p>The computation of relational algebra operators can be done in many different ways, and each alternative is called an <b>access path</b>.</p>
+<p>The computation alternative depends upon three main factors &minus;</p>
+<ul class="list">
+<li>Operator type</li>
+<li>Available memory</li>
+<li>Disk structures</li> 
+</ul>
+<p>The time to perform execution of a relational algebra operation is the sum of &minus;</p>
+<ul class="list">
+<li>Time to process the tuples.</li>
+<li>Time to fetch the tuples of the table from disk to memory.</li> 
+</ul>
+<p>Since the time to process a tuple is very much smaller than the time to fetch the tuple from the storage, particularly in a distributed system, disk access is very often considered as the metric for calculating cost of relational expression.</p>
+<h2>Computation of Selection</h2>
+<p>Computation of selection operation depends upon the complexity of the selection condition and the availability of indexes on the attributes of the table.</p>
+<p>Following are the computation alternatives depending upon the indexes &minus;</p>
+<ul class="list">
+<li><p><b>No Index</b> &minus; If the table is unsorted and has no indexes, then the selection process involves scanning all the disk blocks of the table. Each block is brought into the memory and each tuple in the block is examined to see whether it satisfies the selection condition. If the condition is satisfied, it is displayed as output. This is the costliest approach since each tuple is brought into memory and each tuple is processed.</p></li>
+<li><p><b>B+ Tree Index</b> &minus; Most database systems are built upon the B+ Tree index. If the selection condition is based upon the field, which is the key of this B+ Tree index, then this index is used for retrieving results. However, processing selection statements with complex conditions may involve a larger number of disk block accesses and in some cases complete scanning of the table.</p></li>
+<li><p><b>Hash Index</b> &minus; If hash indexes are used and its key field is used in the selection condition, then retrieving tuples using the hash index becomes a simple process. A hash index uses a hash function to find the address of a bucket where the key value corresponding to the hash value is stored. In order to find a key value in the index, the hash function is executed and the bucket address is found. The key values in the bucket are searched. If a match is found, the actual tuple is fetched from the disk block into the memory.</p></li> 
+</ul>
+<h2>Computation of Joins</h2>
+<p>When we want to join two tables, say P and Q, each tuple in P has to be compared with each tuple in Q to test if the join condition is satisfied. If the condition is satisfied, the corresponding tuples are concatenated, eliminating duplicate fields and appended to the result relation. Consequently, this is the most expensive operation.</p>
+<p>The common approaches for computing joins are &minus;</p> 
+<h3>Nested-loop Approach</h3>
+<p>This is the conventional join approach. It can be illustrated through the following pseudocode (Tables P and Q, with tuples tuple_p and tuple_q and joining attribute a) &minus;</p>
+<pre class="prettyprint notranslate">
+For each tuple_p in P 
+For each tuple_q in Q
+If tuple_p.a = tuple_q.a Then 
+   Concatenate tuple_p and tuple_q and append to Result 
+End If 
+Next tuple_q 
+Next tuple-p 
+</pre>
+<h3>Sort-merge Approach</h3>
+<p>In this approach, the two tables are individually sorted based upon the joining attribute and then the sorted tables are merged. External sorting techniques are adopted since the number of records is very high and cannot be accommodated in the memory. Once the individual tables are sorted, one page each of the sorted tables are brought to the memory, merged based upon the joining attribute and the joined tuples are written out.</p>
+<h3>Hash-join Approach</h3>
+<p>This approach comprises of two phases: partitioning phase and probing phase. In partitioning phase, the tables P and Q are broken into two sets of disjoint partitions. A common hash function is decided upon. This hash function is used to assign tuples to partitions. In the probing phase, tuples in a partition of P are compared with the tuples of corresponding partition of Q. If they match, then they are written out.</p>
+<h1>Query Optimization in Centralized Systems</h1>
+<p>Once the alternative access paths for computation of a relational algebra expression are derived, the optimal access path is determined. In this chapter, we will look into query optimization in centralized system while in the next chapter we will study query optimization in a distributed system.</p>
+<p>In a centralized system, query processing is done with the following aim &minus;</p>
+<ul class="list">
+<li><p>Minimization of response time of query (time taken to produce the results to user’s query).</p></li>
+<li><p>Maximize system throughput (the number of requests that are processed in a given amount of time).</p></li>
+<li><p>Reduce the amount of memory and storage required for processing.</p></li>
+<li><p>Increase parallelism.</p></li> 
+</ul>
+<h2>Query Parsing and Translation</h2>
+<p>Initially, the SQL query is scanned. Then it is parsed to look for syntactical errors and correctness of data types. If the query passes this step, the query is decomposed into smaller query blocks. Each block is then translated to equivalent relational algebra expression.</p>
+<h3>Steps for Query Optimization</h3> 
+<p>Query optimization involves three steps, namely query tree generation, plan generation, and query plan code generation.</p>
+<p><b>Step 1 &minus; Query Tree Generation</b></p>
+<p>A query tree is a tree data structure representing a relational algebra expression. The tables of the query are represented as leaf nodes. The relational algebra operations are represented as the internal nodes. The root represents the query as a whole.</p>
+<p>During execution, an internal node is executed whenever its operand tables are available. The node is then replaced by the result table. This process continues for all internal nodes until the root node is executed and replaced by the result table.</p> 
+<p>For example, let us consider the following schemas &minus;</p>
+<p>EMPLOYEE</p>
+<table class="table table-bordered">
+<tr>
+<td>EmpID</td>
+<td>EName</td>
+<td>Salary</td>
+<td>DeptNo</td>
+<td>DateOfJoining</td>
+</tr>
+</table>
+<p>DEPARTMENT</p>
+<table class="table table-bordered">
+<tr>
+<td>DNo</td>
+<td>DName</td>
+<td>Location </td>
+</tr>
+</table>
+<h3>Example 1</h3>
+<p>Let us consider the query as the following.</p>
+<p>$$\pi_{EmpID} (\sigma_{EName = \small "ArunKumar"} {(EMPLOYEE)})$$</p>
+<p>The corresponding query tree will be &minus;</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/corresponding_query_tree.jpg" alt="Corresponding Query Tree" />
+<h3>Example 2</h3>
+<p>Let us consider another query involving a join.</p>
+<p>$\pi_{EName, Salary} (\sigma_{DName = \small "Marketing"} {(DEPARTMENT)}) \bowtie_{DNo=DeptNo}{(EMPLOYEE)}$</p>
+<p>Following is the query tree for the above query.</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/query_tree.jpg" alt="Query Tree" />
+<p><b>Step 2 &minus; Query Plan Generation</b></p>
+<p>After the query tree is generated, a query plan is made. A query plan is an extended query tree that includes access paths for all operations in the query tree. Access paths specify how the relational operations in the tree should be performed. For example, a selection operation can have an access path that gives details about the use of B+ tree index for selection.</p>
+<p>Besides, a query plan also states how the intermediate tables should be passed from one operator to the next, how temporary tables should be used and how operations should be pipelined/combined.</p>
+<p><b>Step 3&minus; Code Generation</b></p>
+<p>Code generation is the final step in query optimization. It is the executable form of the query, whose form depends upon the type of the underlying operating system. Once the query code is generated, the Execution Manager runs it and produces the results.</p>
+<h2>Approaches to Query Optimization </h2>
+<p>Among the approaches for query optimization, exhaustive search and heuristics-based algorithms are mostly used.</p>
+<h3>Exhaustive Search Optimization</h3>
+<p>In these techniques, for a query, all possible query plans are initially generated and then the best plan is selected. Though these techniques provide the best solution, it has an exponential time and space complexity owing to the large solution space. For example, dynamic programming technique.</p>
+<h3>Heuristic Based Optimization</h3> 
+<p>Heuristic based optimization uses rule-based optimization approaches for query optimization. These algorithms have polynomial time and space complexity, which is lower than the exponential complexity of exhaustive search-based algorithms. However, these algorithms do not necessarily produce the best query plan.</p>
+<p>Some of the common heuristic rules are &minus;</p>
+<ul class="list">
+<li><p>Perform select and project operations before join operations. This is done by moving the select and project operations down the query tree. This reduces the number of tuples available for join.</p></li>
+<li><p>Perform the most restrictive select/project operations at first before the other operations.</p></li>
+<li><p>Avoid cross-product operation since they result in very large-sized intermediate tables.</p></li>
+</ul>
+<h1>Query Optimization in Distributed Systems</h1>
+<p>This chapter discusses query optimization in distributed database system.</p> 
+<h2>Distributed Query Processing Architecture</h2>
+<p>In a distributed database system, processing a query comprises of optimization at both the global and the local level. The query enters the database system at the client or controlling site. Here, the user is validated, the query is checked, translated, and optimized at a global level.</p>
+<p>The architecture can be represented as &minus;</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/distributed_query_architecture.jpg" alt="Distributed Query Processing Architecture" />
+<h2>Mapping Global Queries into Local Queries</h2>
+<p>The process of mapping global queries to local ones can be realized as follows &minus;</p>
+<ul class="list">
+<li><p>The tables required in a global query have fragments distributed across multiple sites. The local databases have information only about local data. The controlling site uses the global data dictionary to gather information about the distribution and reconstructs the global view from the fragments.</p></li>
+<li><p>If there is no replication, the global optimizer runs local queries at the sites where the fragments are stored. If there is replication, the global optimizer selects the site based upon communication cost, workload, and server speed.</p></li>
+<li><p>The global optimizer generates a distributed execution plan so that least amount of data transfer occurs across the sites. The plan states the location of the fragments, order in which query steps needs to be executed and the processes involved in transferring intermediate results.</p></li>
+<li><p>The local queries are optimized by the local database servers. Finally, the local query results are merged together through union operation in case of horizontal fragments and join operation for vertical fragments.</p></li>
+</ul>
+<p>For example, let us consider that the following Project schema is horizontally fragmented according to City, the cities being New Delhi, Kolkata and Hyderabad.</p>
+<p>PROJECT</p>
+<table class="table table-bordered">
+<tr>
+<td>PId</td>
+<td>City</td>
+<td>Department</td>
+<td>Status</td>
+</tr>
+</table>
+<p>Suppose there is a query to retrieve details of all projects whose status is “Ongoing”.</p>
+<p>The global query will be &inus;</p>
+<p>$$\sigma_{status}  = {\small "ongoing"}^{(PROJECT)}$$</p>
+<p>Query in New Delhi’s server will be &minus;</p>
+<p>$$\sigma_{status}  = {\small "ongoing"}^{({NewD}_-{PROJECT})}$$</p>
+<p>Query in Kolkata’s server will be &minus;</p>
+<p>$$\sigma_{status}  = {\small "ongoing"}^{({Kol}_-{PROJECT})}$$</p>
+<p>Query in Hyderabad’s server will be &minus;</p>
+<p>$$\sigma_{status}  = {\small "ongoing"}^{({Hyd}_-{PROJECT})}$$</p>
+<p>In order to get the overall result, we need to union the results of the three queries as follows &minus;</p>
+<p>$\sigma_{status}  = {\small "ongoing"}^{({NewD}_-{PROJECT})} \cup \sigma_{status}  = {\small "ongoing"}^{({kol}_-{PROJECT})} \cup \sigma_{status}  = {\small "ongoing"}^{({Hyd}_-{PROJECT})}$</p>
+<h2>Distributed Query Optimization</h2>
+<p>Distributed query optimization requires evaluation of a large number of query trees each of which produce the required results of a query. This is primarily due to the presence of large amount of replicated and fragmented data. Hence, the target is to find an optimal solution instead of the best solution.</p>
+<p>The main issues for distributed query optimization are &minus;</p>
+<ul class="list">
+<li>Optimal utilization of resources in the distributed system.</li>
+<li>Query trading.</li>
+<li>Reduction of solution space of the query.</li>
+</ul>
+<h3>Optimal Utilization of Resources in the Distributed System</h3>
+<p>A distributed system has a number of database servers in the various sites to perform the operations pertaining to a query. Following are the approaches for optimal resource utilization &minus;</p>
+<p><b>Operation Shipping</b> &minus; In operation shipping, the operation is run at the site where the data is stored and not at the client site. The results are then transferred to the client site. This is appropriate for operations where the operands are available at the same site. Example: Select and Project operations.</p>
+<p><b>Data Shipping</b> &minus; In data shipping, the data fragments are transferred to the database server, where the operations are executed. This is used in operations where the operands are distributed at different sites. This is also appropriate in systems where the communication costs are low, and local processors are much slower than the client server.</p>
+<p><b>Hybrid Shipping</b> &minus; This is a combination of data and operation shipping. Here, data fragments are transferred to the high-speed processors, where the operation runs. The results are then sent to the client site.</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/optimal_utilization_distributed_system.jpg" alt="Optimal Utilization Distributed System" />
+<h3>Query Trading</h3>
+<p>In query trading algorithm for distributed database systems, the controlling/client site for a distributed query is called the buyer and the sites where the local queries execute are called sellers. The buyer formulates a number of alternatives for choosing sellers and for reconstructing the global results. The target of the buyer is to achieve the optimal cost.</p>
+<p>The algorithm starts with the buyer assigning sub-queries to the seller sites. The optimal plan is created from local optimized query plans proposed by the sellers combined with the communication cost for reconstructing the final result. Once the global optimal plan is formulated, the query is executed.</p>
+<h3>Reduction of Solution Space of the Query</h3>
+<p>Optimal solution generally involves reduction of solution space so that the cost of query and data transfer is reduced. This can be achieved through a set of heuristic rules, just as heuristics in centralized systems.</p>
+<p>Following are some of the rules &minus;</p>
+<ul class="list">
+<li><p>Perform selection and projection operations as early as possible. This reduces the data flow over communication network.</p></li>
+<li><p>Simplify operations on horizontal fragments by eliminating selection conditions which are not relevant to a particular site.</p></li>
+<li><p>In case of join and union operations comprising of fragments located in multiple sites, transfer fragmented data to the site where most of the data is present and perform operation there.</p></li>
+<li><p>Use semi-join operation to qualify tuples that are to be joined. This reduces the amount of data transfer which in turn reduces communication cost.</p></li>
+<li><p>Merge the common leaves and sub-trees in a distributed query tree.</p></li>
+</ul>
+<h1>DDBMS - Transaction Processing Systems</h1>
+<p>This chapter discusses the various aspects of transaction processing. We’ll also study the low level tasks included in a transaction, the transaction states and properties of a transaction. In the last portion, we will look over schedules and serializability of schedules.</p>
+<h2>Transactions</h2>
+<p>A transaction is a program including a collection of database operations, executed as a logical unit of data processing. The operations performed in a transaction include one or more of database operations like insert, delete, update or retrieve data. It is an atomic process that is either performed into completion entirely or is not performed at all. A transaction involving only data retrieval without any data update is called read-only transaction.</p>
+<p>Each high level operation can be divided into a number of low level tasks or operations. For example, a data update operation can be divided into three tasks &minus;</p>
+<ul class="list">
+<li><p><b>read_item()</b> &minus; reads data item from storage to main memory.</p></li>
+<li><p><b>modify_item()</b> &minus; change value of item in the main memory.</p></li>
+<li><p><b>write_item()</b> &minus; write the modified value from main memory to storage.</p></li>
+</ul>
+<p>Database access is restricted to read_item() and write_item() operations. Likewise, for all transactions, read and write forms the basic database operations.</p>
+<h2>Transaction Operations</h2>
+<p>The low level operations performed in a transaction are &minus;</p>
+<ul class="list">
+<li><p><b>begin_transaction</b> &minus; A marker that specifies start of transaction execution.</p></li>
+<li><p><b>read_item or write_item</b> &minus; Database operations that may be interleaved with main memory operations as a part of transaction.</p></li>
+<li><p><b>end_transaction</b> &minus; A marker that specifies end of transaction.</p></li>
+<li><p><b>commit</b> &minus; A signal to specify that the transaction has been successfully completed in its entirety and will not be undone.</p></li>
+<li><p><b>rollback</b> &minus; A signal to specify that the transaction has been unsuccessful and so all temporary changes in the database are undone. A committed transaction cannot be rolled back.</p></li>
+</ul>
+<h2>Transaction States</h2>
+<p>A transaction may go through a subset of five states, active, partially committed, committed, failed and aborted.</p>
+<ul class="list">
+<li><p><b>Active</b> &minus; The initial state where the transaction enters is the active state. The transaction remains in this state while it is executing read, write or other operations.</p></li>
+<li><p><b>Partially Committed</b> &minus; The transaction enters this state after the last statement of the transaction has been executed.</p></li>
+<li><p><b>Committed</b> &minus; The transaction enters this state after successful completion of the transaction and system checks have issued commit signal.</p></li>
+<li><p><b>Failed</b> &minus; The transaction goes from partially committed state or active state to failed state when it is discovered that normal execution can no longer proceed or system checks fail.</p></li>
+<li><p><b>Aborted</b> &minus; This is the state after the transaction has been rolled back after failure and the database has been restored to its state that was before the transaction began.</p></li>
+</ul>
+<p>The following state transition diagram depicts the states in the transaction and the low level transaction operations that causes change in states.</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/state_transition.jpg" alt="State Transition Diagram" />
+<h2>Desirable Properties of Transactions</h2>
+<p>Any transaction must maintain the ACID properties, viz. Atomicity, Consistency, Isolation, and Durability.</p>
+<ul class="list">
+<li><p><b>Atomicity</b> &minus; This property states that a transaction is an atomic unit of processing, that is, either it is performed in its entirety or not performed at all. No partial update should exist.</p></li>
+<li><p><b>Consistency</b> &minus; A transaction should take the database from one consistent state to another consistent state. It should not adversely affect any data item in the database.</p></li>
+<li><p><b>Isolation</b> &minus; A transaction should be executed as if it is the only one in the system. There should not be any interference from the other concurrent transactions that are simultaneously running.</p></li>
+<li><p><b>Durability</b> &minus; If a committed transaction brings about a change, that change should be durable in the database and not lost in case of any failure.</p></li>
+</ul>
+<h2>Schedules and Conflicts</h2>
+<p>In a system with a number of simultaneous transactions, a <b>schedule</b> is the total order of execution of operations. Given a schedule S comprising of n transactions, say T1, T2, T3………..Tn; for any transaction Ti, the operations in Ti must execute as laid down in the schedule S.</p>
+<h3>Types of Schedules</h3>
+<p>There are two types of schedules &minus;</p>
+<ul class="list">
+<li><p><b>Serial Schedules</b> &minus; In a serial schedule, at any point of time, only one transaction is active, i.e. there is no overlapping of transactions. This is depicted in the following graph &minus;</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/serial_schedules.jpg" alt="Serial Schedules" />
+<ul class="list">
+<li><p><b>Parallel Schedules</b> &minus; In parallel schedules, more than one transactions are active simultaneously, i.e. the transactions contain operations that overlap at time. This is depicted in the following graph &minus;</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/parallel_schedules.jpg" alt="Parallel Schedules" />
+<h3>Conflicts in Schedules</h3>
+<p>In a schedule comprising of multiple transactions, a <b>conflict</b> occurs when two active transactions perform non-compatible operations. Two operations are said to be in conflict, when all of the following three conditions exists simultaneously &minus;</p>
+<ul class="list">
+<li><p>The two operations are parts of different transactions.</p></li>
+<li><p>Both the operations access the same data item.</p></li>
+<li><p>At least one of the operations is a write_item() operation, i.e. it tries to modify the data item.</p></li>
+</ul>
+<h2>Serializability</h2>
+<p>A <b>serializable schedule</b> of ‘n’ transactions is a parallel schedule which is equivalent to a serial schedule comprising of the same ‘n’ transactions. A serializable schedule contains the correctness of serial schedule while ascertaining better CPU utilization of parallel schedule.</p>
+<h3>Equivalence of Schedules</h3>
+<p>Equivalence of two schedules can be of the following types &minus;</p>
+<ul class="list">
+<li><p><b>Result equivalence</b> &minus; Two schedules producing identical results are said to be result equivalent.</p></li>
+<li><p><b>View equivalence</b> &minus; Two schedules that perform similar action in a similar manner are said to be view equivalent.</p></li>
+<li><p><b>Conflict equivalence</b> &minus; Two schedules are said to be conflict equivalent if both contain the same set of transactions and has the same order of conflicting pairs of operations.</p></li>
+</ul>
+<h1>Distributed DBMS - Controlling Concurrency</h1>
+<p>Concurrency controlling techniques ensure that multiple transactions are executed simultaneously while maintaining the ACID properties of the transactions and serializability in the schedules.</p>
+<p>In this chapter, we will study the various approaches for concurrency control.</p>
+<h2>Locking Based Concurrency Control Protocols</h2>
+<p>Locking-based concurrency control protocols use the concept of locking data items. A <b>lock</b> is a variable associated with a data item that determines whether read/write operations can be performed on that data item. Generally, a lock compatibility matrix is used which states whether a data item can be locked by two transactions at the same time.</p>
+<p>Locking-based concurrency control systems can use either one-phase or two-phase locking protocols.</p>
+<h3>One-phase Locking Protocol</h3>
+<p>In this method, each transaction locks an item before use and releases the lock as soon as it has finished using it. This locking method provides for maximum concurrency but does not always enforce serializability.</p>
+<h3>Two-phase Locking Protocol</h3>
+<p>In this method, all locking operations precede the first lock-release or unlock operation. The transaction comprise of two phases. In the first phase, a transaction only acquires all the locks it needs and do not release any lock. This is called the expanding or the <b>growing phase</b>. In the second phase, the transaction releases the locks and cannot request any new locks. This is called the <b>shrinking phase</b>.</p>
+<p>Every transaction that follows two-phase locking protocol is guaranteed to be serializable. However, this approach provides low parallelism between two conflicting transactions.</p>
+<h2>Timestamp Concurrency Control Algorithms</h2>
+<p>Timestamp-based concurrency control algorithms use a transaction’s timestamp to coordinate concurrent access to a data item to ensure serializability. A timestamp is a unique identifier given by DBMS to a transaction that represents the transaction’s start time.</p>
+<p>These algorithms ensure that transactions commit in the order dictated by their timestamps. An older transaction should commit before a younger transaction, since the older transaction enters the system before the younger one.</p>
+<p>Timestamp-based concurrency control techniques generate serializable schedules such that the equivalent serial schedule is arranged in order of the age of the participating transactions.</p>
+<p>Some of timestamp based concurrency control algorithms are &minus;</p>
+<ul class="list">
+<li>Basic timestamp ordering algorithm.</li>
+<li>Conservative timestamp ordering algorithm.</li>
+<li>Multiversion algorithm based upon timestamp ordering.</li>
+</ul>
+<p>Timestamp based ordering follow three rules to enforce serializability &minus;</p>
+<ul class="list">
+<li><p><b>Access Rule</b> &minus; When two transactions try to access the same data item simultaneously, for conflicting operations, priority is given to the older transaction. This causes the younger transaction to wait for the older transaction to commit first.</p></li>
+<li><p><b>Late Transaction Rule</b> &minus; If a younger transaction has written a data item, then an older transaction is not allowed to read or write that data item. This rule prevents the older transaction from committing after the younger transaction has already committed.</p></li>
+<li><p><b>Younger Transaction Rule</b> &minus; A younger transaction can read or write a data item that has already been written by an older transaction.</p></li> 
+</ul>
+<h2>Optimistic Concurrency Control Algorithm</h2>
+<p>In systems with low conflict rates, the task of validating every transaction for serializability may lower performance. In these cases, the test for serializability is postponed to just before commit. Since the conflict rate is low, the probability of aborting transactions which are not serializable is also low. This approach is called optimistic concurrency control technique.</p>
+<p>In this approach, a transaction’s life cycle is divided into the following three phases &minus;</p>
+<ul class="list">
+<li><p><b>Execution Phase</b> &minus; A transaction fetches data items to memory and performs operations upon them.</p></li>
+<li><p><b>Validation Phase</b> &minus; A transaction performs checks to ensure that committing its changes to the database passes serializability test.</p></li>
+<li><p><b>Commit Phase</b> &minus; A transaction writes back modified data item in memory to the disk.</p></li> 
+</ul>
+<p>This algorithm uses three rules to enforce serializability in validation phase &minus;</p>
+<p><b>Rule 1</b> &minus; Given two transactions T<sub>i</sub> and T<sub>j</sub>, if T<sub>i</sub> is reading the data item which T<sub>j</sub> is writing, then T<sub>i</sub>’s execution phase cannot overlap with T<sub>j</sub>’s commit phase. T<sub>j</sub> can commit only after T<sub>i</sub> has finished execution.</p>
+<p><b>Rule 2</b> &minus; Given two transactions T<sub>i</sub> and T<sub>j</sub>, if T<sub>i</sub> is writing the data item that T<sub>j</sub> is reading, then T<sub>i</sub>’s commit phase cannot overlap with T<sub>j</sub>’s execution phase. T<sub>j</sub> can start executing only after T<sub>i</sub> has already committed.</p>
+<p><b>Rule 3</b> &minus; Given two transactions T<sub>i</sub> and T<sub>j</sub>, if T<sub>i</sub> is writing the data item which T<sub>j</sub> is also writing, then T<sub>i</sub>’s commit phase cannot overlap with T<sub>j</sub>’s commit phase. T<sub>j</sub> can start to commit only after T<sub>i</sub> has already committed.</p>
+<h2>Concurrency Control in Distributed Systems</h2>
+<p>In this section, we will see how the above techniques are implemented in a distributed database system.</p>
+<h3>Distributed Two-phase Locking Algorithm</h3>
+<p>The basic principle of distributed two-phase locking is same as the basic two-phase locking protocol. However, in a distributed system there are sites designated as lock managers. A lock manager controls lock acquisition requests from transaction monitors. In order to enforce co-ordination between the lock managers in various sites, at least one site is given the authority to see all transactions and detect lock conflicts.</p>
+<p>Depending upon the number of sites who can detect lock conflicts, distributed two-phase locking approaches can be of three types &minus;</p>
+<ul class="list">
+<li><p><b>Centralized two-phase locking</b> &minus; In this approach, one site is designated as the central lock manager. All the sites in the environment know the location of the central lock manager and obtain lock from it during transactions.</p></li>
+<li><p><b>Primary copy two-phase locking</b> &minus; In this approach, a number of sites are designated as lock control centers. Each of these sites has the responsibility of managing a defined set of locks. All the sites know which lock control center is responsible for managing lock of which data table/fragment item.</p></li>
+<li><p><b>Distributed two-phase locking</b> &minus; In this approach, there are a number of lock managers, where each lock manager controls locks of data items stored at its local site. The location of the lock manager is based upon data distribution and replication.</p></li>
+</ul>
+<h3>Distributed Timestamp Concurrency Control</h3>
+<p>In a centralized system, timestamp of any transaction is determined by the physical clock reading. But, in a distributed system, any site’s local physical/logical clock readings cannot be used as global timestamps, since they are not globally unique. So, a timestamp comprises of a combination of site ID and that site’s clock reading.</p>
+<p>For implementing timestamp ordering algorithms, each site has a scheduler that maintains a separate queue for each transaction manager. During transaction, a transaction manager sends a lock request to the site’s scheduler. The scheduler puts the request to the corresponding queue in increasing timestamp order. Requests are processed from the front of the queues in the order of their timestamps, i.e. the oldest first.</p>
+<h3>Conflict Graphs</h3>
+<p>Another method is to create conflict graphs. For this transaction classes are defined. A transaction class contains two set of data items called read set and write set. A transaction belongs to a particular class if the transaction’s read set is a subset of the class’ read set and the transaction’s write set is a subset of the class’ write set. In the read phase, each transaction issues its read requests for the data items in its read set. In the write phase, each transaction issues its write requests.</p>
+<p>A conflict graph is created for the classes to which active transactions belong. This contains a set of vertical, horizontal, and diagonal edges. A vertical edge connects two nodes within a class and denotes conflicts within the class. A horizontal edge connects two nodes across two classes and denotes a write-write conflict among different classes. A diagonal edge connects two nodes across two classes and denotes a write-read or a read-write conflict among two classes.</p>
+<p>The conflict graphs are analyzed to ascertain whether two transactions within the same class or across two different classes can be run in parallel.</p>
+<h3>Distributed Optimistic Concurrency Control Algorithm</h3>
+<p>Distributed optimistic concurrency control algorithm extends optimistic concurrency control algorithm. For this extension, two rules are applied &minus;</p>
+<p><b>Rule 1</b> &minus; According to this rule, a transaction must be validated locally at all sites when it executes. If a transaction is found to be invalid at any site, it is aborted. Local validation guarantees that the transaction maintains serializability at the sites where it has been executed. After a transaction passes local validation test, it is globally validated.</p>
+<p><b>Rule 2</b> &minus; According to this rule, after a transaction passes local validation test, it should be globally validated. Global validation ensures that if two conflicting transactions run together at more than one site, they should commit in the same relative order at all the sites they run together. This may require a transaction to wait for the other conflicting transaction, after validation before commit. This requirement makes the algorithm less optimistic since a transaction may not be able to commit as soon as it is validated at a site.</p>
+<h1>Distributed DBMS - Deadlock Handling</h1>
+<p>This chapter overviews deadlock handling mechanisms in database systems. We’ll study the deadlock handling mechanisms in both centralized and distributed database system.</p>
+<h2>What are Deadlocks?</h2>
+<p>Deadlock is a state of a database system having two or more transactions, when each transaction is waiting for a data item that is being locked by some other transaction. A deadlock can be indicated by a cycle in the wait-for-graph. This is a directed graph in which the vertices denote transactions and the edges denote waits for data items.</p>
+<p>For example, in the following wait-for-graph, transaction T1 is waiting for data item X which is locked by T3. T3 is waiting for Y which is locked by T2 and T2 is waiting for Z which is locked by T1. Hence, a waiting cycle is formed, and none of the transactions can proceed executing.</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/wait_for_graph.jpg" alt="Wait-For-Graph" />
+<h2>Deadlock Handling in Centralized Systems</h2>
+<p>There are three classical approaches for deadlock handling, namely &minus;</p>
+<ul class="list">
+<li>Deadlock prevention.</li>
+<li>Deadlock avoidance.</li>
+<li>Deadlock detection and removal.</li> 
+</ul>
+<p>All of the three approaches can be incorporated in both a centralized and a distributed database system.</p>
+<h3>Deadlock Prevention</h3>
+<p>The deadlock prevention approach does not allow any transaction to acquire locks that will lead to deadlocks. The convention is that when more than one transactions request for locking the same data item, only one of them is granted the lock.</p>
+<p>One of the most popular deadlock prevention methods is pre-acquisition of all the locks. In this method, a transaction acquires all the locks before starting to execute and retains the locks for the entire duration of transaction. If another transaction needs any of the already acquired locks, it has to wait until all the locks it needs are available. Using this approach, the system is prevented from being deadlocked since none of the waiting transactions are holding any lock.</p>
+<h3>Deadlock Avoidance</h3>
+<p>The deadlock avoidance approach handles deadlocks before they occur. It analyzes the transactions and the locks to determine whether or not waiting leads to a deadlock.</p>
+<p>The method can be briefly stated as follows. Transactions start executing and request data items that they need to lock. The lock manager checks whether the lock is available. If it is available, the lock manager allocates the data item and the transaction acquires the lock. However, if the item is locked by some other transaction in incompatible mode, the lock manager runs an algorithm to test whether keeping the transaction in waiting state will cause a deadlock or not. Accordingly, the algorithm decides whether the transaction can wait or one of the transactions should be aborted.</p>
+<p>There are two algorithms for this purpose, namely <b>wait-die</b> and <b>wound-wait</b>. Let us assume that there are two transactions, T1 and T2, where T1 tries to lock a data item which is already locked by T2. The algorithms are as follows &minus;</p>
+<ul class="list">
+<li><p><b>Wait-Die</b> &minus; If T1 is older than T2, T1 is allowed to wait. Otherwise, if T1 is younger than T2, T1 is aborted and later restarted.</p></li>
+<li><p><b>Wound-Wait</b> &minus; If T1 is older than T2, T2 is aborted and later restarted. Otherwise, if T1 is younger than T2, T1 is allowed to wait.</p></li>
+</ul>
+<h3>Deadlock Detection and Removal</h3>
+<p>The deadlock detection and removal approach runs a deadlock detection algorithm periodically and removes deadlock in case there is one. It does not check for deadlock when a transaction places a request for a lock. When a transaction requests a lock, the lock manager checks whether it is available. If it is available, the transaction is allowed to lock the data item; otherwise the transaction is allowed to wait.</p>
+<p>Since there are no precautions while granting lock requests, some of the transactions may be deadlocked. To detect deadlocks, the lock manager periodically checks if the wait-forgraph has cycles. If the system is deadlocked, the lock manager chooses a victim transaction from each cycle. The victim is aborted and rolled back; and then restarted later. Some of the methods used for victim selection are &minus;</p>
+<ul class="list">
+<li>Choose the youngest transaction.</li>
+<li>Choose the transaction with fewest data items.</li>
+<li>Choose the transaction that has performed least number of updates.</li>
+<li>Choose the transaction having least restart overhead.</li>
+<li>Choose the transaction which is common to two or more cycles.</li> 
+</ul>
+<p>This approach is primarily suited for systems having transactions low and where fast response to lock requests is needed.</p>
+<h2>Deadlock Handling in Distributed Systems</h2>
+<p>Transaction processing in a distributed database system is also distributed, i.e. the same transaction may be processing at more than one site. The two main deadlock handling concerns in a distributed database system that are not present in a centralized system are <b>transaction location</b> and <b>transaction control</b>. Once these concerns are addressed, deadlocks are handled through any of deadlock prevention, deadlock avoidance or deadlock detection and removal.</p>
+<h3>Transaction Location</h3>
+<p>Transactions in a distributed database system are processed in multiple sites and use data items in multiple sites. The amount of data processing is not uniformly distributed among these sites. The time period of processing also varies. Thus the same transaction may be active at some sites and inactive at others. When two conflicting transactions are located in a site, it may happen that one of them is in inactive state. This condition does not arise in a centralized system. This concern is called transaction location issue.</p>
+<p>This concern may be addressed by Daisy Chain model. In this model, a transaction carries certain details when it moves from one site to another. Some of the details are the list of tables required, the list of sites required, the list of visited tables and sites, the list of tables and sites that are yet to be visited and the list of acquired locks with types. After a transaction terminates by either commit or abort, the information should be sent to all the concerned sites.</p>
+<h3>Transaction Control</h3>
+<p>Transaction control is concerned with designating and controlling the sites required for processing a transaction in a distributed database system. There are many options regarding the choice of where to process the transaction and how to designate the center of control, like &minus;</p>
+<ul class="list">
+<li>One server may be selected as the center of control.</li>
+<li>The center of control may travel from one server to another.</li>
+<li>The responsibility of controlling may be shared by a number of servers.</li> 
+</ul>
+<h3>Distributed Deadlock Prevention</h3>
+<p>Just like in centralized deadlock prevention, in distributed deadlock prevention approach, a transaction should acquire all the locks before starting to execute. This prevents deadlocks.</p>
+<p>The site where the transaction enters is designated as the controlling site. The controlling site sends messages to the sites where the data items are located to lock the items. Then it waits for confirmation. When all the sites have confirmed that they have locked the data items, transaction starts. If any site or communication link fails, the transaction has to wait until they have been repaired.</p>
+<p>Though the implementation is simple, this approach has some drawbacks &minus;</p>
+<ul class="list">
+<li><p>Pre-acquisition of locks requires a long time for communication delays. This increases the time required for transaction.</p></li>
+<li><p>In case of site or link failure, a transaction has to wait for a long time so that the sites recover. Meanwhile, in the running sites, the items are locked. This may prevent other transactions from executing.</p></li>
+<li><p>If the controlling site fails, it cannot communicate with the other sites. These sites continue to keep the locked data items in their locked state, thus resulting in blocking.</p></li>
+</ul>
+<h3>Distributed Deadlock Avoidance</h3>
+<p>As in centralized system, distributed deadlock avoidance handles deadlock prior to occurrence. Additionally, in distributed systems, transaction location and transaction control issues needs to be addressed. Due to the distributed nature of the transaction, the following conflicts may occur &minus;</p>
+<ul class="list">
+<li>Conflict between two transactions in the same site.</li>
+<li>Conflict between two transactions in different sites.</li>
+</ul>
+<p>In case of conflict, one of the transactions may be aborted or allowed to wait as per distributed wait-die or distributed wound-wait algorithms.</p>
+<p>Let us assume that there are two transactions, T1 and T2. T1 arrives at Site P and tries to lock a data item which is already locked by T2 at that site. Hence, there is a conflict at Site P. The algorithms are as follows &minus;</p>
+<ul class="list">
+<li><p><b>Distributed Wound-Die</b></p>
+<ul class="list">
+<li><p>If T1 is older than T2, T1 is allowed to wait. T1 can resume execution after Site P receives a message that T2 has either committed or aborted successfully at all sites.</p></li>
+<li><p>If T1 is younger than T2, T1 is aborted. The concurrency control at Site P sends a message to all sites where T1 has visited to abort T1. The controlling site notifies the user when T1 has been successfully aborted in all the sites.</p></li>
+</ul>
+</li>
+<li><p><b>Distributed Wait-Wait</b></p>
+<ul class="list">
+<li><p>If T1 is older than T2, T2 needs to be aborted. If T2 is active at Site P, Site P aborts and rolls back T2 and then broadcasts this message to other relevant sites. If T2 has left Site P but is active at Site Q, Site P broadcasts that T2 has been aborted; Site L then aborts and rolls back T2 and sends this message to all sites.</p></li>
+<li><p>If T1 is younger than T1, T1 is allowed to wait. T1 can resume execution after Site P receives a message that T2 has completed processing.</p></li>
+</ul>
+</li> 
+</ul>
+<h3>Distributed Deadlock Detection</h3>
+<p>Just like centralized deadlock detection approach, deadlocks are allowed to occur and are removed if detected. The system does not perform any checks when a transaction places a lock request. For implementation, global wait-for-graphs are created. Existence of a cycle in the global wait-for-graph indicates deadlocks. However, it is difficult to spot deadlocks since transaction waits for resources across the network.</p>
+<p>Alternatively, deadlock detection algorithms can use timers. Each transaction is associated with a timer which is set to a time period in which a transaction is expected to finish. If a transaction does not finish within this time period, the timer goes off, indicating a possible deadlock.</p>
+<p>Another tool used for deadlock handling is a deadlock detector. In a centralized system, there is one deadlock detector. In a distributed system, there can be more than one deadlock detectors. A deadlock detector can find deadlocks for the sites under its control. There are three alternatives for deadlock detection in a distributed system, namely.</p>
+<ul class="list">
+<li><p><b>Centralized Deadlock Detector</b> &minus; One site is designated as the central deadlock detector.</p></li>
+<li><p><b>Hierarchical Deadlock Detector</b> &minus; A number of deadlock detectors are arranged in hierarchy.</p></li>
+<li><p><b>Distributed Deadlock Detector</b> &minus; All the sites participate in detecting deadlocks and removing them.</p></li> 
+</ul>
+<h1>Distributed DBMS - Replication Control</h1>
+<p>This chapter looks into replication control, which is required to maintain consistent data in all sites. We will study the replication control techniques and the algorithms required for replication control.</p>
+<p>As discussed earlier, <b>replication</b> is a technique used in distributed databases to store multiple copies of a data table at different sites. The problem with having multiple copies in multiple sites is the overhead of maintaining data consistency, particularly during update operations.</p>
+<p>In order to maintain mutually consistent data in all sites, replication control techniques need to be adopted. There are two approaches for replication control, namely &minus;</p>
+<ul class="list">
+<li>Synchronous Replication Control</li>
+<li>Asynchronous Replication Control</li>
+</ul>
+<h2>Synchronous Replication Control</h2>
+<p>In synchronous replication approach, the database is synchronized so that all the replications always have the same value. A transaction requesting a data item will have access to the same value in all the sites. To ensure this uniformity, a transaction that updates a data item is expanded so that it makes the update in all the copies of the data item. Generally, two-phase commit protocol is used for the purpose.</p>
+<p>For example, let us consider a data table PROJECT(PId, PName, PLocation). We need to run a transaction T1 that updates PLocation to ‘Mumbai’, if PLocation is ‘Bombay’. If no replications are there, the operations in transaction T1 will be &minus;</p>
+<pre class="prettyprint notranslate">
+Begin T1: 
+   Update PROJECT Set PLocation = 'Mumbai' 
+   Where PLocation = 'Bombay'; 
+End T1;
+</pre>
+<p>If the data table has two replicas in Site A and Site B, T1 needs to spawn two children T1A and T1B corresponding to the two sites. The expanded transaction T1 will be &minus;</p>
+<pre class="prettyprint notranslate">
+Begin T1: 
+   Begin T1A : 
+      Update PROJECT Set PLocation = 'Mumbai' 
+      Where PLocation = 'Bombay'; 
+   End T1A;  
+	
+   Begin T2A : 
+      Update PROJECT Set PLocation = 'Mumbai'
+      Where PLocation = 'Bombay'; 
+   End T2A; 
+	
+End T1;
+</pre>
+<h2>Asynchronous Replication Control</h2>
+<p>In asynchronous replication approach, the replicas do not always maintain the same value. One or more replicas may store an outdated value, and a transaction can see the different values. The process of bringing all the replicas to the current value is called <b>synchronization</b>.</p>
+<p>A popular method of synchronization is store and forward method. In this method, one site is designated as the primary site and the other sites are secondary sites. The primary site always contains updated values. All the transactions first enter the primary site. These transactions are then queued for application in the secondary sites. The secondary sites are updated using rollout method only when a transaction is scheduled to execute on it.</p>
+<h2>Replication Control Algorithms</h2>
+<p>Some of the replication control algorithms are &minus;</p>
+<ul class="list">
+<li>Master-slave replication control algorithm.</li>
+<li>Distributed voting algorithm.</li>
+<li>Majority consensus algorithm.</li>
+<li>Circulating token algorithm.</li> 
+</ul>
+<h3>Master-Slave Replication Control Algorithm</h3>
+<p>There is one master site and ‘N’ slave sites. A master algorithm runs at the master site to detect conflicts. A copy of slave algorithm runs at each slave site. The overall algorithm executes in the following two phases &minus;</p>
+<ul class="list">
+<li><p><b>Transaction acceptance/rejection phase</b> &minus; When a transaction enters the transaction monitor of a slave site, the slave site sends a request to the master site. The master site checks for conflicts. If there aren’t any conflicts, the master sends an “ACK+” message to the slave site which then starts the transaction application phase. Otherwise, the master sends an “ACK-” message to the slave which then rejects the transaction.</p></li>
+<li><p><b>Transaction application phase</b> &minus; Upon entering this phase, the slave site where transaction has entered broadcasts a request to all slaves for executing the transaction. On receiving the requests, the peer slaves execute the transaction and send an “ACK” to the requesting slave on completion. After the requesting slave has received “ACK” messages from all its peers, it sends a “DONE” message to the master site. The master understands that the transaction has been completed and removes it from the pending queue.</p></li>
+</ul>
+<h3>Distributed Voting Algorithm</h3>
+<p>This comprises of ‘N’ peer sites, all of whom must “OK” a transaction before it starts executing. Following are the two phases of this algorithm &minus;</p>
+<ul class="list">
+<li><p><b>Distributed transaction acceptance phase</b> &minus; When a transaction enters the transaction manager of a site, it sends a transaction request to all other sites. On receiving a request, a peer site resolves conflicts using priority based voting rules. If all the peer sites are “OK” with the transaction, the requesting site starts application phase. If any of the peer sites does not “OK” a transaction, the requesting site rejects the transaction.</p></li>
+<li><p><b>Distributed transaction application phase</b> &minus; Upon entering this phase, the site where the transaction has entered, broadcasts a request to all slaves for executing the transaction. On receiving the requests, the peer slaves execute the transaction and send an “ACK” message to the requesting slave on completion. After the requesting slave has received “ACK” messages from all its peers, it lets the transaction manager know that the transaction has been completed.</p></li>
+</ul>
+<h3>Majority Consensus Algorithm</h3>
+<p>This is a variation from the distributed voting algorithm, where a transaction is allowed to execute when a majority of the peers “OK” a transaction. This is divided into three phases &minus;</p>
+<ul class="list">
+<li><p><b>Voting phase</b> &minus; When a transaction enters the transaction manager of a site, it sends a transaction request to all other sites. On receiving a request, a peer site tests for conflicts using voting rules and keeps the conflicting transactions, if any, in pending queue. Then, it sends either an “OK” or a “NOT OK” message.</p></li>
+<li><p><b>Transaction acceptance/rejection phase</b> &minus; If the requesting site receives a majority “OK” on the transaction, it accepts the transaction and broadcasts “ACCEPT” to all the sites. Otherwise, it broadcasts “REJECT” to all the sites and rejects the transaction.</p></li>
+<li><p><b>Transaction application phase</b> &minus; When a peer site receives a “REJECT” message, it removes this transaction from its pending list and reconsiders all deferred transactions. When a peer site receives an “ACCEPT” message, it applies the transaction and rejects all the deferred transactions in the pending queue which are in conflict with this transaction. It sends an “ACK” to the requesting slave on completion.</p></li>
+</ul>
+<h3>Circulating Token Algorithm</h3>
+<p>In this approach the transactions in the system are serialized using a circulating token and executed accordingly against every replica of the database. Thus, all the transactions are accepted, i.e. none is rejected. This has two phases &minus;</p>
+<ul class="list">
+<li><p><b>Transaction serialization phase</b> &minus; In this phase, all transactions are scheduled to run in a serialization order. Each transaction in each site is assigned a unique ticket from a sequential series, indicating the order of transaction. Once a transaction has been assigned a ticket, it is broadcasted to all the sites.</p></li>
+<li><p><b>Transaction application phase</b> &minus; When a site receives a transaction along with its ticket, it places the transaction for execution according to its ticket. After the transaction has finished execution, this site broadcasts an appropriate message. A transaction ends when it has completed execution in all the sites.</p></li>
+</ul>
+<h1>Distributed DBMS - Failure &amp; Commit</h1>
+<p>A database management system is susceptible to a number of failures. In this chapter we will study the failure types and commit protocols. In a distributed database system, failures can be broadly categorized into soft failures, hard failures and network failures.</p>
+<h2>Soft Failure</h2>
+<p>Soft failure is the type of failure that causes the loss in volatile memory of the computer and not in the persistent storage. Here, the information stored in the non-persistent storage like main memory, buffers, caches or registers, is lost. They are also known as system crash. The various types of soft failures are as follows &minus;</p>
+<ul class="list">
+<li>Operating system failure.</li>
+<li>Main memory crash.</li>
+<li>Transaction failure or abortion.</li>
+<li>System generated error like integer overflow or divide-by-zero error.</li>
+<li>Failure of supporting software.</li>
+<li>Power failure.</li> 
+</ul>
+<h2>Hard Failure</h2>
+<p>A hard failure is the type of failure that causes loss of data in the persistent or non-volatile storage like disk. Disk failure may cause corruption of data in some disk blocks or failure of the total disk. The causes of a hard failure are &minus;</p>
+<ul class="list">
+<li>Power failure.</li>
+<li>Faults in media.</li>
+<li>Read-write malfunction.</li>
+<li>Corruption of information on the disk.</li>
+<li>Read/write head crash of disk.</li> 
+</ul>
+<p>Recovery from disk failures can be short, if there is a new, formatted, and ready-to-use disk on reserve. Otherwise, duration includes the time it takes to get a purchase order, buy the disk, and prepare it.</p>
+<h2>Network Failure</h2>
+<p>Network failures are prevalent in distributed or network databases. These comprises of the errors induced in the database system due to the distributed nature of the data and transferring data over the network. The causes of network failure are as follows &minus;</p>
+<ul class="list">
+<li>Communication link failure.</li>
+<li>Network congestion.</li>
+<li>Information corruption during transfer.</li>
+<li>Site failures.</li>
+<li>Network partitioning.</li>
+</ul>
+<h2>Commit Protocols</h2>
+<p>Any database system should guarantee that the desirable properties of a transaction are maintained even after failures. If a failure occurs during the execution of a transaction, it may happen that all the changes brought about by the transaction are not committed. This makes the database inconsistent. Commit protocols prevent this scenario using either transaction undo (rollback) or transaction redo (roll forward).</p>
+<h3>Commit Point</h3>
+<p>The point of time at which the decision is made whether to commit or abort a transaction, is known as commit point. Following are the properties of a commit point.</p>
+<ul class="list">
+<li><p>It is a point of time when the database is consistent.</p></li>
+<li><p>At this point, the modifications brought about by the database can be seen by the other transactions. All transactions can have a consistent view of the database.</p></li>
+<li><p>At this point, all the operations of transaction have been successfully executed and their effects have been recorded in transaction log.</p></li>
+<li><p>At this point, a transaction can be safely undone, if required.</p></li>
+<li><p>At this point, a transaction releases all the locks held by it.</p></li> 
+</ul>
+<h3>Transaction Undo</h3>
+<p>The process of undoing all the changes made to a database by a transaction is called transaction undo or transaction rollback. This is mostly applied in case of soft failure.</p>
+<h3>Transaction Redo</h3>
+<p>The process of reapplying the changes made to a database by a transaction is called transaction redo or transaction roll forward. This is mostly applied for recovery from a hard failure.</p>
+<h2>Transaction Log</h2>
+<p>A transaction log is a sequential file that keeps track of transaction operations on database items. As the log is sequential in nature, it is processed sequentially either from the beginning or from the end.</p>
+<p>Purposes of a transaction log &minus;</p>
+<ul class="list">
+<li>To support commit protocols to commit or support transactions.</li>
+<li>To aid database recovery after failure.</li>
+</ul>
+<p>A transaction log is usually kept on the disk, so that it is not affected by soft failures. Additionally, the log is periodically backed up to an archival storage like magnetic tape to protect it from disk failures as well.</p>
+<h3>Lists in Transaction Logs</h3>
+<p>The transaction log maintains five types of lists depending upon the status of the transaction. This list aids the recovery manager to ascertain the status of a transaction. The status and the corresponding lists are as follows &minus;</p>
+<ul class="list">
+<li><p>A transaction that has a transaction start record and a transaction commit record, is a committed transaction – maintained in commit list.</p></li>
+<li><p>A transaction that has a transaction start record and a transaction failed record but not a transaction abort record, is a failed transaction – maintained in failed list.</p></li>
+<li><p>A transaction that has a transaction start record and a transaction abort record is an aborted transaction – maintained in abort list.</p></li>
+<li><p>A transaction that has a transaction start record and a transaction before-commit record is a before-commit transaction, i.e. a transaction where all the operations have been executed but not committed – maintained in before-commit list.</p></li> 
+<li><p>A transaction that has a transaction start record but no records of before-commit, commit, abort or failed, is an active transaction – maintained in active list.</p></li>
+</ul>
+<h3>Immediate Update and Deferred Update</h3>
+<p>Immediate Update and Deferred Update are two methods for maintaining transaction logs.</p>
+<p>In <b>immediate update</b> mode, when a transaction executes, the updates made by the transaction are written directly onto the disk. The old values and the updates values are written onto the log before writing to the database in disk. On commit, the changes made to the disk are made permanent. On rollback, changes made by the transaction in the database are discarded and the old values are restored into the database from the old values stored in the log.</p>
+<p>In <b>deferred update</b> mode, when a transaction executes, the updates made to the database by the transaction are recorded in the log file. On commit, the changes in the log are written onto the disk. On rollback, the changes in the log are discarded and no changes are applied to the database.</p>
+<h1>Distributed DBMS - Database Recovery</h1>
+<p>In order to recuperate from database failure, database management systems resort to a number of recovery management techniques. In this chapter, we will study the different approaches for database recovery.</p>
+<p>The typical strategies for database recovery are &minus;</p>
+<ul class="list">
+<li><p>In case of soft failures that result in inconsistency of database, recovery strategy includes transaction undo or rollback. However, sometimes, transaction redo may also be adopted to recover to a consistent state of the transaction.</p></li>
+<li><p>In case of hard failures resulting in extensive damage to database, recovery strategies encompass restoring a past copy of the database from archival backup. A more current state of the database is obtained through redoing operations of committed transactions from transaction log.</p></li>
+</ul>
+<h2>Recovery from Power Failure</h2>
+<p>Power failure causes loss of information in the non-persistent memory. When power is restored, the operating system and the database management system restart. Recovery manager initiates recovery from the transaction logs.</p>
+<p>In case of immediate update mode, the recovery manager takes the following actions &minus;</p>
+<ul class="list">
+<li><p>Transactions which are in active list and failed list are undone and written on the abort list.</p></li>
+<li><p>Transactions which are in before-commit list are redone.</p></li>
+<li><p>No action is taken for transactions in commit or abort lists.</p></li> 
+</ul>
+<p>In case of deferred update mode, the recovery manager takes the following actions &minus;</p>
+<ul class="list">
+<li><p>Transactions which are in the active list and failed list are written onto the abort list. No undo operations are required since the changes have not been written to the disk yet.</p></li>
+<li><p>Transactions which are in before-commit list are redone.</p></li>
+<li><p>No action is taken for transactions in commit or abort lists.</p></li> 
+</ul>
+<h2>Recovery from Disk Failure</h2>
+<p>A disk failure or hard crash causes a total database loss. To recover from this hard crash, a new disk is prepared, then the operating system is restored, and finally the database is recovered using the database backup and transaction log. The recovery method is same for both immediate and deferred update modes.</p>
+<p>The recovery manager takes the following actions &minus;</p>
+<ul class="list">
+<li><p>The transactions in the commit list and before-commit list are redone and written onto the commit list in the transaction log.</p></li>
+<li><p>The transactions in the active list and failed list are undone and written onto the abort list in the transaction log.</p></li> 
+</ul>
+<h2>Checkpointing</h2>
+<p><b>Checkpoint</b> is a point of time at which a record is written onto the database from the buffers. As a consequence, in case of a system crash, the recovery manager does not have to redo the transactions that have been committed before checkpoint. Periodical checkpointing shortens the recovery process.</p>
+<p>The two types of checkpointing techniques are &minus;</p>
+<ul class="list">
+<li>Consistent checkpointing</li>
+<li>Fuzzy checkpointing</li> 
+</ul>
+<h3>Consistent Checkpointing</h3>
+<p>Consistent checkpointing creates a consistent image of the database at checkpoint. During recovery, only those transactions which are on the right side of the last checkpoint are undone or redone. The transactions to the left side of the last consistent checkpoint are already committed and needn’t be processed again. The actions taken for checkpointing are &minus;</p>
+<ul class="list">
+<li>The active transactions are suspended temporarily.</li>
+<li>All changes in main-memory buffers are written onto the disk.</li>
+<li>A “checkpoint” record is written in the transaction log.</li>
+<li>The transaction log is written to the disk.</li>
+<li>The suspended transactions are resumed.</li> 
+</ul>
+<p>If in step 4, the transaction log is archived as well, then this checkpointing aids in recovery from disk failures and power failures, otherwise it aids recovery from only power failures.</p>
+<h3>Fuzzy Checkpointing</h3> 
+<p>In fuzzy checkpointing, at the time of checkpoint, all the active transactions are written in the log. In case of power failure, the recovery manager processes only those transactions that were active during checkpoint and later. The transactions that have been committed before checkpoint are written to the disk and hence need not be redone.</p>
+<h3>Example of Checkpointing</h3>
+<p>Let us consider that in system the time of checkpointing is tcheck and the time of system crash is tfail. Let there be four transactions T<sub>a</sub>, T<sub>b</sub>, T<sub>c</sub> and T<sub>d</sub> such that &minus;</p>
+<ul class="list">
+<li><p>T<sub>a</sub> commits before checkpoint.</p></li>
+<li><p>T<sub>b</sub> starts before checkpoint and commits before system crash.</p></li>
+<li><p>T<sub>c</sub> starts after checkpoint and commits before system crash.</p></li>
+<li><p>T<sub>d</sub> starts after checkpoint and was active at the time of system crash.</p></li>
+</ul>
+<p>The situation is depicted in the following diagram &minus;</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/depicted_situation.jpg" alt="Depicted Situation" />
+<p>The actions that are taken by the recovery manager are &minus;</p>
+<ul class="list">
+<li>Nothing is done with T<sub>a</sub>.</li>
+<li>Transaction redo is performed for T<sub>b</sub> and T<sub>c</sub>.</li>
+<li>Transaction undo is performed for T<sub>d</sub>.</li> 
+</ul>
+<h2>Transaction Recovery Using UNDO / REDO</h2>
+<p>Transaction recovery is done to eliminate the adverse effects of faulty transactions rather than to recover from a failure. Faulty transactions include all transactions that have changed the database into undesired state and the transactions that have used values written by the faulty transactions.</p>
+<p>Transaction recovery in these cases is a two-step process &minus;</p>
+<ul class="list">
+<li><p>UNDO all faulty transactions and transactions that may be affected by the faulty transactions.</p></li>
+<li><p>REDO all transactions that are not faulty but have been undone due to the faulty transactions.</p></li>
+</ul>
+<p>Steps for the UNDO operation are &minus;</p>
+<ul class="list">
+<li><p>If the faulty transaction has done INSERT, the recovery manager deletes the data item(s) inserted.</p></li>
+<li><p>If the faulty transaction has done DELETE, the recovery manager inserts the deleted data item(s) from the log.</p></li>
+<li><p>If the faulty transaction has done UPDATE, the recovery manager eliminates the value by writing the before-update value from the log.</p></li>
+</ul>
+<p>Steps for the REDO operation are &minus;</p>
+<ul class="list">
+<li><p>If the transaction has done INSERT, the recovery manager generates an insert from the log.</p></li>
+<li><p>If the transaction has done DELETE, the recovery manager generates a delete from the log.</p></li>
+<li><p>If the transaction has done UPDATE, the recovery manager generates an update from the log.</p></li>
+</ul>
+<h1>Distributed DBMS - Commit Protocols</h1>
+<p>In a local database system, for committing a transaction, the transaction manager has to only convey the decision to commit to the recovery manager. However, in a distributed system, the transaction manager should convey the decision to commit to all the servers in the various sites where the transaction is being executed and uniformly enforce the decision. When processing is complete at each site, it reaches the partially committed transaction state and waits for all other transactions to reach their partially committed states. When it receives the message that all the sites are ready to commit, it starts to commit. In a distributed system, either all sites commit or none of them does.</p>
+<p>The different distributed commit protocols are &minus;</p>
+<ul class="list">
+<li>One-phase commit</li>
+<li>Two-phase commit</li>
+<li>Three-phase commit</li>
+</ul>
+<h2>Distributed One-phase Commit</h2>
+<p>Distributed one-phase commit is the simplest commit protocol. Let us consider that there is a controlling site and a number of slave sites where the transaction is being executed. The steps in distributed commit are &minus;</p>
+<ul class="list">
+<li><p>After each slave has locally completed its transaction, it sends a “DONE” message to the controlling site.</p></li>
+<li><p>The slaves wait for “Commit” or “Abort” message from the controlling site. This waiting time is called <b>window of vulnerability</b>.</p></li>
+<li><p>When the controlling site receives “DONE” message from each slave, it makes a decision to commit or abort. This is called the commit point. Then, it sends this message to all the slaves.</p></li>
+<li><p>On receiving this message, a slave either commits or aborts and then sends an acknowledgement message to the controlling site.</p></li> 
+</ul>
+<h2>Distributed Two-phase Commit</h2>
+<p>Distributed two-phase commit reduces the vulnerability of one-phase commit protocols. The steps performed in the two phases are as follows &minus;</p>
+<p><b>Phase 1: Prepare Phase</b></p>
+<ul class="list">
+<li><p>After each slave has locally completed its transaction, it sends a “DONE” message to the controlling site. When the controlling site has received “DONE” message from all slaves, it sends a “Prepare” message to the slaves.</p></li>
+<li><p>The slaves vote on whether they still want to commit or not. If a slave wants to commit, it sends a “Ready” message.</p></li>
+<li><p>A slave that does not want to commit sends a “Not Ready” message. This may happen when the slave has conflicting concurrent transactions or there is a timeout.</p></li>
+</ul>
+<p><b>Phase 2: Commit/Abort Phase</b></p>
+<ul class="list">
+<li><p>After the controlling site has received “Ready” message from all the slaves &minus;</p>
+<ul class="list">
+<li><p>The controlling site sends a “Global Commit” message to the slaves.</p></li>
+<li><p>The slaves apply the transaction and send a “Commit ACK” message to the controlling site.</p></li>
+<li><p>When the controlling site receives “Commit ACK” message from all the slaves, it considers the transaction as committed.</p></li>
+</ul>
+</li>
+<li><p>After the controlling site has received the first “Not Ready” message from any slave &minus;</p>
+<ul class="list">
+<li><p>The controlling site sends a “Global Abort” message to the slaves.</p></li>
+<li><p>The slaves abort the transaction and send a “Abort ACK” message to the controlling site.</p></li>
+<li><p>When the controlling site receives “Abort ACK” message from all the slaves, it considers the transaction as aborted.</p></li>
+</ul>
+</li>
+</ul>
+<h2>Distributed Three-phase Commit</h2>
+<p>The steps in distributed three-phase commit are as follows &minus;</p>
+<p><b>Phase 1: Prepare Phase</b></p>
+<p>The steps are same as in distributed two-phase commit.</p>
+<p><b>Phase 2: Prepare to Commit Phase</b></p>
+<ul class="list">
+<li>The controlling site issues an “Enter Prepared State” broadcast message.</li>
+<li>The slave sites vote “OK” in response.</li>
+</ul>
+<p><b>Phase 3: Commit / Abort Phase</b></p>
+<p>The steps are same as two-phase commit except that “Commit ACK”/”Abort ACK” message is not required.</p>
+<h1>DDBMS - Database Security &amp; Cryptography</h1>
+<p>In this chapter, we will look into the threats that a database system faces and the measures of control. We will also study cryptography as a security tool.</p>
+<h2>Database Security and Threats</h2>
+<p>Data security is an imperative aspect of any database system. It is of particular importance in distributed systems because of large number of users, fragmented and replicated data, multiple sites and distributed control.</p>
+<h3>Threats in a Database</h3>
+<ul class="list">
+<li><p><b>Availability loss</b> &minus; Availability loss refers to non-availability of database objects by legitimate users.</p></li>
+<li><p><b>Integrity loss</b> &minus; Integrity loss occurs when unacceptable operations are performed upon the database either accidentally or maliciously. This may happen while creating, inserting, updating or deleting data. It results in corrupted data leading to incorrect decisions.</p></li>
+<li><p><b>Confidentiality loss</b> &minus; Confidentiality loss occurs due to unauthorized or unintentional disclosure of confidential information. It may result in illegal actions, security threats and loss in public confidence.</p></li> 
+</ul>
+<h2>Measures of Control</h2>
+<p>The measures of control can be broadly divided into the following categories &minus;</p>
+<ul class="list">
+<li><p><b>Access Control</b> &minus; Access control includes security mechanisms in a database management system to protect against unauthorized access. A user can gain access to the database after clearing the login process through only valid user accounts. Each user account is password protected.</p></li>
+<li><p><b>Flow Control</b> &minus; Distributed systems encompass a lot of data flow from one site to another and also within a site. Flow control prevents data from being transferred in such a way that it can be accessed by unauthorized agents. A flow policy lists out the channels through which information can flow. It also defines security classes for data as well as transactions.</p></li>
+<li><p><b>Data Encryption</b> &minus; Data encryption refers to coding data when sensitive data is to be communicated over public channels. Even if an unauthorized agent gains access of the data, he cannot understand it since it is in an incomprehensible format.</p></li> 
+</ul>
+<h2>What is Cryptography?</h2>
+<p><b>Cryptography</b> is the science of encoding information before sending via unreliable communication paths so that only an authorized receiver can decode and use it.</p>
+<p>The coded message is called <b>cipher text</b> and the original message is called <b>plain text</b>. The process of converting plain text to cipher text by the sender is called encoding or <b>encryption</b>. The process of converting cipher text to plain text by the receiver is called decoding or <b>decryption</b>.</p>
+<p>The entire procedure of communicating using cryptography can be illustrated through the following diagram &minus;</p>
+<img src="https://www.tutorialspoint.com/distributed_dbms/images/cryptography.jpg" alt="Cryptography" /> 
+<h2>Conventional Encryption Methods</h2>
+<p>In conventional cryptography, the encryption and decryption is done using the same secret key. Here, the sender encrypts the message with an encryption algorithm using a copy of the secret key. The encrypted message is then send over public communication channels. On receiving the encrypted message, the receiver decrypts it with a corresponding decryption algorithm using the same secret key.</p>
+<p>Security in conventional cryptography depends on two factors &minus;</p>
+<ul class="list">
+<li><p>A sound algorithm which is known to all.</p></li>
+<li><p>A randomly generated, preferably long secret key known only by the sender and the receiver.</p></li>
+</ul>
+<p>The most famous conventional cryptography algorithm is <b>Data Encryption Standard</b> or <b>DES</b>.</p>
+<p>The advantage of this method is its easy applicability. However, the greatest problem of conventional cryptography is sharing the secret key between the communicating parties. The ways to send the key are cumbersome and highly susceptible to eavesdropping.</p>
+<h2>Public Key Cryptography</h2>
+<p>In contrast to conventional cryptography, public key cryptography uses two different keys, referred to as public key and the private key. Each user generates the pair of public key and private key. The user then puts the public key in an accessible place. When a sender wants to sends a message, he encrypts it using the public key of the receiver. On receiving the encrypted message, the receiver decrypts it using his private key. Since the private key is not known to anyone but the receiver, no other person who receives the message can decrypt it.</p>
+<p>The most popular public key cryptography algorithms are <b>RSA</b> algorithm and <b>Diffie– Hellman</b> algorithm. This method is very secure to send private messages. However, the problem is, it involves a lot of computations and so proves to be inefficient for long messages.</p>
+<p>The solution is to use a combination of conventional and public key cryptography. The secret key is encrypted using public key cryptography before sharing between the communicating parties. Then, the message is send using conventional cryptography with the aid of the shared secret key.</p>
+<h2>Digital Signatures</h2>
+<p>A Digital Signature (DS) is an authentication technique based on public key cryptography used in e-commerce applications. It associates a unique mark to an individual within the body of his message. This helps others to authenticate valid senders of messages.</p>
+<p>Typically, a user’s digital signature varies from message to message in order to provide security against counterfeiting. The method is as follows &minus;</p>
+<ul class="list">
+<li><p>The sender takes a message, calculates the message digest of the message and signs it digest with a private key.</p></li>
+<li><p>The sender then appends the signed digest along with the plaintext message.</p></li>
+<li><p>The message is sent over communication channel.</p></li>
+<li><p>The receiver removes the appended signed digest and verifies the digest using the corresponding public key.</p></li>
+<li><p>The receiver then takes the plaintext message and runs it through the same message digest algorithm.</p></li>
+<li><p>If the results of step 4 and step 5 match, then the receiver knows that the message has integrity and authentic.</p></li> 
+</ul>
+<h1>DDBMS - Security in Distributed Databases</h1>
+<p>A distributed system needs additional security measures than centralized system, since there are many users, diversified data, multiple sites and distributed control. In this chapter, we will look into the various facets of distributed database security.</p>
+<p>In distributed communication systems, there are two types of intruders &minus;</p>
+<ul class="list">
+<li><p><b>Passive eavesdroppers</b> &minus; They monitor the messages and get hold of private information.</p></li>
+<li><p><b>Active attackers</b> &minus; They not only monitor the messages but also corrupt data by inserting new data or modifying existing data.</p></li> 
+</ul>
+<p>Security measures encompass security in communications, security in data and data auditing.</p>
+<h2>Communications Security</h2>
+<p>In a distributed database, a lot of data communication takes place owing to the diversified location of data, users and transactions. So, it demands secure communication between users and databases and between the different database environments.</p>
+<p>Security in communication encompasses the following &minus;</p>
+<ul class="list">
+<li><p>Data should not be corrupt during transfer.</p></li>
+<li><p>The communication channel should be protected against both passive eavesdroppers and active attackers.</p></li>
+<li><p>In order to achieve the above stated requirements, well-defined security algorithms and protocols should be adopted.</p></li> 
+</ul>
+<p>Two popular, consistent technologies for achieving end-to-end secure communications are &minus;</p>
+<ul class="list">
+<li>Secure Socket Layer Protocol or Transport Layer Security Protocol.</li>
+<li>Virtual Private Networks (VPN).</li>
+</ul>
+<h2>Data Security</h2>
+<p>In distributed systems, it is imperative to adopt measure to secure data apart from communications. The data security measures are &minus;</p>
+<ul class="list">
+<li><p><b>Authentication and authorization</b> &minus; These are the access control measures adopted to ensure that only authentic users can use the database. To provide authentication digital certificates are used. Besides, login is restricted through username/password combination.</p></li>
+<li><p><b>Data encryption</b> &minus; The two approaches for data encryption in distributed systems are &minus;</p>
+<ul class="list">
+<li><p>Internal to distributed database approach: The user applications encrypt the data and then store the encrypted data in the database. For using the stored data, the applications fetch the encrypted data from the database and then decrypt it.</p></li>
+<li><p>External to distributed database: The distributed database system has its own encryption capabilities. The user applications store data and retrieve them without realizing that the data is stored in an encrypted form in the database.</p></li>
+</ul>
+</li>
+<li><p><b>Validated input</b> &minus; In this security measure, the user application checks for each input before it can be used for updating the database. An un-validated input can cause a wide range of exploits like buffer overrun, command injection, cross-site scripting and corruption in data.</p></li>
+</ul>
+<h2>Data Auditing</h2>
+<p>A database security system needs to detect and monitor security violations, in order to ascertain the security measures it should adopt. It is often very difficult to detect breach of security at the time of occurrences. One method to identify security violations is to examine audit logs. Audit logs contain information such as &minus;</p>
+<ul class="list">
+<li>Date, time and site of failed access attempts.</li>
+<li>Details of successful access attempts.</li>
+<li>Vital modifications in the database system.</li>
+<li>Access of huge amounts of data, particularly from databases in multiple sites.</li> 
+</ul>
+<p>All the above information gives an insight of the activities in the database. A periodical analysis of the log helps to identify any unnatural activity along with its site and time of occurrence. This log is ideally stored in a separate server so that it is inaccessible to attackers.</p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_security_distributed_databases.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:20:30 GMT -->
+</html>

@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>SaltStack Quick Guide</title>
+<meta name="description" content="SaltStack Quick Guide - Learn SaltStack in simple and easy steps starting from basic to advanced concepts with examples including Overview, Architecture, Competitors, Installation, Creating a Simple Environment, Access Control System, Job Management, Salt File Server, Git as a File Server, Using MinionFS as the File Server, Using Cron with Salt, Remote Execution, Configuration Management, Logging, Salt through SSH, Salt for Cloud Infrastructure, Salt Proxy Minions, Event system, Orchestration, Salt Package Manager, Python API, Working Example." />
+<meta name="keywords" content="SaltStack, Tutorial, Overview, Architecture, Competitors, Installation, Creating a Simple Environment, Access Control System, Job Management, Salt File Server, Git as a File Server, Using MinionFS as the File Server, Using Cron with Salt, Remote Execution, Configuration Management, Logging, Salt through SSH, Salt for Cloud Infrastructure, Salt Proxy Minions, Event system, Orchestration, Salt Package Manager, Python API, Working Example." />
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #3b9c84 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #3b9c84 !important;}
+.submenu-item{ border-bottom: 2px solid #3b9c84 !important; border-top: 2px solid #3b9c84 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/saltstack/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/saltstack/images/saltstack-mini-logo.jpg" alt="SaltStack Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">SaltStack Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/saltstack/index.htm">SaltStack - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_overview.htm">SaltStack - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_architecture.htm">SaltStack - Architecture</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_competitors.htm">SaltStack - Competitors</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_installation.htm">SaltStack - Installation</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_creating_simple_environment.htm">Creating a Simple Environment</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_access_control_system.htm">SaltStack - Access Control System</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_job_management.htm">SaltStack - Job Management</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_salt_file_server.htm">SaltStack - Salt File Server</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_git_as_file_server.htm">SaltStack - Git as a File Server</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_using_minionfs_as_the_file_server.htm">Using MinionFS as the File Server</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_using_cron_with_salt.htm">SaltStack - Using Cron with Salt</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_remote_execution.htm">SaltStack - Remote Execution</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_configuration_management.htm">Configuration Management</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_logging.htm">SaltStack - Logging</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_salt_through_ssh.htm">SaltStack - Salt through SSH</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_salt_for_cloud_infrastructure.htm">Salt for Cloud Infrastructure</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_salt_proxy_minions.htm">SaltStack - Salt Proxy Minions</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_event_system.htm">SaltStack - Event system</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_orchestration.htm">SaltStack - Orchestration</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_salt_package_manager.htm">SaltStack - Salt Package Manager</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_python_api.htm">SaltStack - Python API</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_working_example.htm">SaltStack - Working Example</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">SaltStack Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm">SaltStack - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_useful_resources.htm">SaltStack - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/saltstack_discussion.htm">SaltStack - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>SaltStack - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/saltstack/saltstack_working_example.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/saltstack/saltstack_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>SaltStack - Overview</h1>
+<p>In this chapter, we will learn the basics of SaltStack. SaltStack’s remote execution capabilities allow administrators to run commands on various machines in parallel with a flexible targeting system. Salt configuration management establishes a master-minion model to quickly, very easily, flexibly and securely bringing infrastructure components in line with a given policy.</p>
+<h2>What is SaltStack?</h2>
+<p>Salt is a very powerful automation framework. Salt architecture is based on the idea of executing commands remotely. All networking is designed around some aspect of remote execution. This could be as simple as asking a <b>Remote Web Server</b> to display a static Web page, or as complex as using a shell session to interactively issue commands against a remote server. Salt is an example of one of the more complex types of remote execution.</p>
+<p>Salt is designed to allow users to explicitly target and issue commands to multiple machines directly. Salt is based around the idea of a Master, which controls one or more <b>Minions</b>. Commands are normally issued from the Master to a target group of Minions, which then execute the tasks specified in the commands and then return the resulting data back to the Master. Communications between a master and minions occur over the <b>ZeroMQ message bus</b>.</p>
+<p>SaltStack modules communicate with the supported minion operating systems. The <b>Salt Master</b> runs on Linux by default, but any operating system can be a minion, and currently Windows, VMware vSphere and BSD Unix variants are well supported. The Salt Master and the minions use keys to communicate. When a minion connects to a master for the first time, it automatically stores keys on the master. SaltStack also offers <b>Salt SSH</b>, which provides an “agent less” systems management.</p>
+<h2>Need for SaltStack</h2>
+<p>SaltStack is built for speed and scale. This is why it is used to manage large infrastructures with tens of thousands of servers at LinkedIn, WikiMedia and Google.</p>
+<p>Imagine that you have multiple servers and want to do things to those servers. You would need to login to each one and do those things one at a time on each one and then you might want to do complicated things like installing software and then configuring that software based on some specific criteria.</p>
+<p>Let us assume you have ten or maybe even 100 servers. Imagine logging in one at a time to each server individually, issuing the same commands on those 100 machines and then editing the configuration files on all 100 machines becomes very tedious task. To overcome those issues, you would love to update all your servers at once, just by typing one single command. SaltStack provides you exactly the solution for all such problems.</p>
+<h2>Features of SaltStack</h2>
+<p>SaltStack is an open-source configuration management software and remote execution engine. Salt is a command-line tool. While written in Python, SaltStack configuration management is language agnostic and simple. Salt platform uses the push model for executing commands via the SSH protocol. The default configuration system is <b>YAML</b> and <b>Jinja templates</b>. Salt is primarily competing with <b>Puppet</b>, <b>Chef</b> and <b>Ansible</b>.</p>
+<p>Salt provides many features when compared to other competing tools. Some of these important features are listed below.</p>
+<ul class="list">
+<li><p><b>Fault tolerance</b> &minus; Salt minions can connect to multiple masters at one time by configuring the master configuration parameter as a YAML list of all the available masters. Any master can direct commands to the Salt infrastructure.</p></li>
+<li><p><b>Flexible</b> &minus; The entire management approach of Salt is very flexible. It can be implemented to follow the most popular systems management models such as Agent and Server, Agent-only, Server-only or all of the above in the same environment.</p></li>
+<li><p><b>Scalable Configuration Management</b> &minus; SaltStack is designed to handle ten thousand minions per master.</p></li>
+<li><p><b>Parallel Execution model</b> &minus; Salt can enable commands to execute remote systems in a parallel manner.</p></li>
+<li><p><b>Python API</b> &minus; Salt provides a simple programming interface and it was designed to be modular and easily extensible, to make it easy to mold to diverse applications.</p></li>
+<li><p><b>Easy to Setup</b> &minus; Salt is easy to setup and provides a single remote execution architecture that can manage the diverse requirements of any number of servers.</p></li>
+<li><p><b>Language Agnostic</b> &minus; Salt state configuration files, templating engine or file type supports any type of language.</p></li>
+</ul>
+<h2>Benefits of SaltStack</h2>
+<p>Being simple as well as a feature-rich system, Salt provides many benefits and they can be summarized as below &minus;</p>
+<ul class="list">
+<li><p><b>Robust</b> &minus; Salt is powerful and robust configuration management framework and works around tens of thousands of systems.</p></li>
+<li><p><b>Authentication</b> &minus; Salt manages simple SSH key pairs for authentication.</p></li>
+<li><p><b>Secure</b> &minus; Salt manages secure data using an encrypted protocol.</p></li>
+<li><p><b>Fast</b> &minus; Salt is very fast, lightweight communication bus to provide the foundation for a remote execution engine.</p></li>
+<li><p><b>Virtual Machine Automation</b> &minus; The Salt Virt Cloud Controller capability is used for automation.</p></li>
+<li><p><b>Infrastructure as data, not code</b> &minus; Salt provides a simple deployment, model driven configuration management and command execution framework.</p></li>
+</ul>
+<h2>Introduction to ZeroMQ</h2>
+<p><b>Salt</b> is based on the <b>ZeroMQ</b> library and it is an embeddable networking library. It is lightweight and a fast messaging library. The basic implementation is in <b>C/C++</b> and native implementations for several languages including <b>Java</b> and <b>.Net</b> is available.</p>
+<p>ZeroMQ is a broker-less peer-peer message processing. ZeroMQ allows you to design a complex communication system easily.</p>
+<p>ZeroMQ comes with the following five basic patterns &minus;</p>
+<ul class="list">
+<li><p><b>Synchronous Request/Response</b> &minus; Used for sending a request and receiving subsequent replies for each one sent.</p></li>
+<li><p><b>Asynchronous Request/Response</b> &minus; Requestor initiates the conversation by sending a Request message and waits for a Response message. Provider waits for the incoming Request messages and replies with the Response messages.</p></li>
+<li><p><b>Publish/Subscribe</b> &minus; Used for distributing data from a single process (e.g. publisher) to multiple recipients (e.g. subscribers).</p></li>
+<li><p><b>Push/Pull</b> &minus; Used for distributing data to connected nodes.</p></li>
+<li><p><b>Exclusive Pair</b> &minus; Used for connecting two peers together, forming a pair.</p></li>
+</ul>
+<p>ZeroMQ is a highly flexible networking tool for exchanging messages among clusters, cloud and other multi system environments. ZeroMQ is the <b>default transport library</b> presented in SaltStack.</p>
+<h1>SaltStack - Architecture</h1>
+<p>The architecture of SaltStack is designed to work with any number of servers, from local network systems to other deployments across different data centers. Architecture is a simple server/client model with the needed functionality built into a single set of daemons.</p>
+<p>Take a look at the following illustration. It shows the different components of SaltStack architecture.</p>
+<img src="https://www.tutorialspoint.com/saltstack/images/salt_diskusage.jpg" alt="Salt disk.usage" />
+<ul class="list">
+<li><p><b>SaltMaster</b> &minus; SaltMaster is the master daemon. A SaltMaster is used to send commands and configurations to the Salt slaves. A single master can manage multiple masters.</p></li>
+<li><p><b>SaltMinions</b> &minus; SaltMinion is the slave daemon. A Salt minion receives commands and configuration from the SaltMaster.</p></li>
+<li><p><b>Execution</b> &minus; Modules and Adhoc commands executed from the command line against one or more minions. It performs Real-time Monitoring.</p></li>
+<li><p><b>Formulas</b> &minus; Formulas are pre-written Salt States. They are as open-ended as Salt States themselves and can be used for tasks such as installing a package, configuring and starting a service, setting up users or permissions and many other common tasks.</p></li>
+<li><p><b>Grains</b> &minus; Grains is an interface that provides information specific to a minion. The information available through the grains interface is static. Grains get loaded when the Salt minion starts. This means that the information in grains is unchanging. Therefore, grains information could be about the running kernel or the operating system. It is case insensitive.</p></li>
+<li><p><b>Pillar</b> &minus; A pillar is an interface that generates and stores highly sensitive data specific to a particular minion, such as cryptographic keys and passwords. It stores data in a key/value pair and the data is managed in a similar way as the Salt State Tree.</p></li>
+<li><p><b>Top File</b> &minus; Matches Salt states and pillar data to Salt minions.</p></li>
+<li><p><b>Runners</b> &minus; It is a module located inside the SaltMaster and performs tasks such as job status, connection status, read data from external APIs, query connected salt minions and more.</p></li>
+<li><p><b>Returners</b> &minus; Returns data from Salt minions to another system.</p></li>
+<li><p><b>Reactor</b> &minus; It is responsible for triggering reactions when events occur in your SaltStack environment.</p></li>
+<li><p><b>SaltCloud</b> &minus; Salt Cloud provides a powerful interface to interact with cloud hosts.</p></li>
+<li><p><b>SaltSSH</b> &minus; Run Salt commands over SSH on systems without using Salt minion.</p></li>
+</ul>
+<p>In the next chapter, we will learn in detail about the various competitors of SaltStack and their features.</p>
+<h1>SaltStack - Competitors</h1>
+<p>Salt, Puppet, Chef, and Ansible are the leading configuration management and orchestration tools, each of which takes a different path to server automation. They were built to make it easier to configure and maintain dozens, hundreds or even thousands of servers.</p>
+<p>Let us understand how SaltStack competes primarily with Puppet, Chef, and Ansible.</p>
+<h2>Platforms and Support</h2>
+<p>Following is a list of all the platforms that support SaltStack and its competitors.</p>
+<ul class="list">
+<li><p><b>SaltStack</b> &minus; SaltStack software runs on and manages many versions of Linux, Windows, Mac OS X and UNIX.</p></li>
+<li><p><b>Puppet</b> &minus; Red Hat Enterprise Linux, CentOS, Oracle Linux, Scientific Linux, SUSE Linux Enterprise Server and Ubuntu.</p></li>
+<li><p><b>Chef</b> &minus; Chef is supported on multiple platforms such as AIX, RHEL/CentOS, FreeBSD, OS X, Solaris, Microsoft Windows and Ubuntu.</p></li>
+<li><p><b>Ansible</b> &minus; Fedora distribution of Linux, CentOS, and Scientific Linux via Extra Packages for Enterprise Linux (EPEL) as well as for other operating systems.</p></li>
+</ul>
+<h2>Origin Language</h2>
+<ul class="list">
+<li><p><b>SaltStack</b>  &minus; Python</p></li>
+<li><p><b>Puppet</b>  &minus; Ruby</p></li>
+<li><p><b>Chef</b>  &minus; Ruby and its CLI uses ruby-based DSL</p></li>
+<li><p><b>Ansible</b>  &minus; Python</p></li>
+</ul>
+<h2>Supported Language</h2>
+<ul class="list">
+<li><p><b>SaltStack</b> &minus; Any language</p></li>
+<li><p><b>Puppet</b> &minus; Ruby</p></li>
+<li><p><b>Chef</b> &minus; Ruby and its CLI uses ruby-based DSL</p></li>
+<li><p><b>Ansible</b> &minus; Any language</p></li>
+</ul>
+<h2>Web UI</h2>
+<ul class="list">
+<li><p><b>SaltStack</b> &minus; Web UI offers views of running jobs, minion status and event logs.</p></li>
+<li><p><b>Puppet</b> &minus; Web UI handles reporting, inventorying and real-time node management.</p></li>
+<li><p><b>Chef</b> &minus; Web UI lets you search and inventory nodes, view node activity and assign Cookbooks, roles and nodes.</p></li>
+<li><p><b>Ansible</b> &minus; Web UI lets you configure users, teams and inventories and apply Playbooks to inventories.</p></li>
+</ul>
+<h2>Management Tools</h2>
+<ul class="list">
+<li><p><b>SaltStack</b> &minus; SaltStack Enterprise is positioned as the main tool for managing the orchestration of cloud and IT operations, as well as <b>DevOps</b>.</p></li>
+<li><p><b>Puppet</b> &minus; Puppet comes in two flavors, Puppet Enterprise and Open Source Puppet. In addition to providing functionalities of the Open Source Puppet, Puppet Enterprise also provides GUI, API and command line tools for node management.</p></li>
+<li><p><b>Chef</b> &minus; CFEngine is the configuration management tool.</p></li>
+<li><p><b>Ansible</b> &minus; Ansible 1.3 is the main tool for management.</p></li>
+</ul>
+<h2>Performance</h2>
+<ul class="list">
+<li><p><b>SaltStack</b> &minus; Salt is designed for high-performance and scalability. Salt’s communication system establishes a persistent data pipe between the Salt master and minions using ZeroMQ.</p></li>
+<li><p><b>Puppet</b> &minus; Secure as well as high-performance and no agents required.</p></li>
+<li><p><b>Chef</b> &minus; The most apparent struggle for Chef Server is search; Search is slow and is not requested concurrently from clients.</p></li>
+<li><p><b>Ansible</b> &minus; Secure, high-performance and no agents required.</p></li>
+</ul>
+<h2>Price and Value</h2>
+<ul class="list">
+<li><p><b>SaltStack</b> &minus; Free open source version. SaltStack Enterprise costs $150 per machine per year.</p></li>
+<li><p><b>Puppet</b> &minus; Free open source version. Puppet Enterprise costs $100 per machine per year.</p></li>
+<li><p><b>Chef</b> &minus; Free open source version; Enterprise Chef free for 5 machines, $120 per month for 20 machines, $300 per month for 50 machines.</p></li>
+<li><p><b>Ansible</b> &minus; Free open source version; Ansible free for 10 machines, then $100 or $250 per machine per year depending on the support you needed.</p></li>
+</ul>
+<h2>Usage</h2>
+<ul class="list">
+<li><p><b>SaltStack</b> &minus; SaltStack is used by Cisco and Rackspace. It can integrate with any cloud-based platform.</p></li>
+<li><p><b>Puppet</b> &minus; Puppet is used by Zynga, Twitter, the New York Stock Exchange, PayPal, Disney, Google and so on.</p></li>
+<li><p><b>Chef</b> &minus; Chef can integrate with cloud-based platforms such as Internap, Amazon EC2, Google Cloud Platform, OpenStack, Microsoft Azure and Rackspace.</p></li>
+<li><p><b>Ansible</b> &minus; Ansible can deploy to virtualization environments, cloud environments including Amazon Web Services, Cloud Stack, DigitalOcean, and Google Cloud Platform and so on.</p></li>
+</ul>
+<h1>SaltStack - Installation</h1>
+<p>Before moving to installation, you need to have the following requirements &minus;</p>
+<ul class="list">
+<li><p>A Linux server (latest Ubuntu server).</p></li>
+<li><p><b>sudo</b> or <b>root access</b> to this server.</p></li>
+</ul>
+<p>Install all the updates using the following command &minus;</p>
+<pre class="result notranslate">
+sudo apt-get update
+</pre>
+<h2>Install SaltMaster</h2>
+<p>Install the SaltMaster from the repository with the following apt-get command.</p>
+<pre class="result notranslate">
+sudo apt-get install salt-master
+</pre>
+<h2>Install Salt Minion</h2>
+<p>Install the Salt minion from the repository with the following apt-get command.</p>
+<pre class="result notranslate">
+sudo apt-get install salt-minion 
+</pre>
+<h2>Install Salt syndic</h2>
+<p>Install the Salt syndic from the repository with the following apt-get command.</p>
+<pre class="result notranslate">
+sudo apt-get install salt-syndic
+</pre>
+<h2>Master Configuration</h2>
+<p>Salt configuration is very simple. The default configuration for the master will work for most installations. The configuration files are installed in the ‘/etc/salt’ directory and are named after their respective components, such as &minus; /etc/salt/master and /etc/salt/minion.</p>
+<pre class="result notranslate">
+#interface: 0.0.0.0
+interface: &lt;local ip address&gt;
+</pre>
+<p>After updating the configuration file, restart the Salt master using the following command.</p>
+<pre class="result notranslate">
+sudo service salt-master restart
+</pre>
+<h2>Minion Configuration</h2>
+<p>Configuring a Salt Minion is very simple. By default a Salt Minion will try to connect to the DNS name “salt”; if the Minion is able to resolve that name correctly, no configuration is required. Redefine the “master” directive in the minion configuration file, which is typically <b>/etc/salt/minion</b>, as shown in the code below &minus;</p>
+<pre class="result notranslate">
+#master: salt
+master: &lt;local ip address&gt;
+</pre>
+<p>After updating the configuration file, restart the Salt minion using the command below.</p>
+<pre class="result notranslate">
+sudo service salt-minion restart
+</pre>
+<h2>Key Management</h2>
+<p>Salt uses <b>AES Encryption</b> for all the communication between the Master and the Minion. The communication between Master and Minion is authenticated through trusted, accepted keys.</p>
+<pre class="prettyprint notranslate">
+salt-key -L
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+Accepted Keys:
+Denied Keys:
+Unaccepted Keys:
+&lt;local system name&gt;
+Rejected Keys:
+</pre>
+<p>Accept all keys by issuing the command below.</p>
+<pre class="prettyprint notranslate">
+sudo salt-key -A
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+The following keys are going to be accepted:
+Unaccepted Keys:
+&lt;local system name&gt;
+Proceed? [n/Y] y
+Key for minion bala-Inspiron-N4010 accepted.
+</pre>
+<p>Now again issue the <b>salt key listing</b> command,</p>
+<pre class="prettyprint notranslate">
+salt-key -L
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+Accepted Keys:
+&lt;local system name&gt;
+Denied Keys:
+Unaccepted Keys:
+Rejected Keys:
+</pre>
+<h2>Sending Commands</h2>
+<p>The communication between the Master and a Minion must be verified by running the test.ping command.</p>
+<pre class="result notranslate">
+sudo salt '*' test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+&lt;local system name&gt;
+   True
+</pre>
+<p>Here, ‘*’ refers to all the minions. Since, we only have one minion – test.ping, it executes the <b>ping</b> command and returns whether the ping is successful or not.</p>
+<h1>SaltStack - Creating a Simple Environment</h1>
+<p>In this chapter, we will create a simple SaltStack environment, one salt master and two salt minions. This environment will help us to learn the salt concept in the upcoming chapters.</p>
+<p>Let us adhere to the following steps to create the SaltStack environment.</p>
+<h2>Install the VirtualBox Environment</h2>
+<p>VirtualBox is a cross-platform virtualization application. VirtualBox allows you to run more than one operating system at a time. VirtualBox runs on Windows, Linux, Macintosh and Solaris. It hosts and supports a large number of <b>Guest Operating Systems</b>.</p>
+<p>You can download and install VirtualBox by visiting the following link &minus; <a rel="nofollow" target="_blank" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></p>
+<p>We will create three virtual machines and run it using the VirtualBox.</p>
+<h2>Install Vagrant</h2>
+<p>Vagrant provides easy to configure, reproducible and portable work environments.</p>
+<p>You can download and install the Vagrant by visiting the following link &minus; <a rel="nofollow" target="_blank" href="https://www.vagrantup.com/">https://www.vagrantup.com</a></p>
+<p>After the successful installation of Vagrant, you need to configure it. Create a single file named as <b>Vagrantfile</b> in a folder and describe the type of machine and its properties.</p>
+<p><b>Run Vagrant</b> &minus; To run the Vagrant, issue the following command &minus;</p>
+<pre class="result notranslate">
+vagrant up
+</pre>
+<p>After you run vagrant up, Vagrant creates and starts those machines, which are defined in the <b>Vagrantfile</b> using the VirtualBox in the background. These machines will be running until you close them.</p>
+<p><b>Stop Vagrant</b> &minus; To stop all the running machines in the VirtualBox, type the following command &minus;</p>
+<pre class="result notranslate">
+vagrant halt
+</pre>
+<h2>Download the Demo Environment</h2>
+<p>SaltStack provides a simple demo environment as Vagrant setup and it is hosted in the <b>github</b>. Let us download the setup using the following command &minus;</p>
+<pre class="result notranslate">
+cd /cd/to/path
+
+git clone https://github.com/UtahDave/salt-vagrant-demo
+</pre>
+<h2>Start Environment</h2>
+<p>Now, start the demo environment using the following command &minus;</p>
+<pre class="result notranslate">
+cd /cd/to/path/salt-vagrant-demo
+vagrant up
+</pre>
+<p>After this command, you will see the following response &minus;</p>
+<pre class="result notranslate">
+result
+</pre>
+<p>Now, three servers are running, one with the salt master configured and two with the salt minion configured.</p>
+<h2>Run Salt master</h2>
+<p>Login to the Salt master using the following command &minus;</p>
+<pre class="result notranslate">
+vagrant ssh master
+</pre>
+<p>Now, move to the root user using the command below &minus;</p>
+<pre class="result notranslate">
+sudo su
+</pre>
+<p>Now we have successfully connected to the Salt master.</p>
+<p>Let us now go through some of the basic commands in SaltStack.</p>
+<h2>List out all the Keys</h2>
+<p>The following command is to verify the Salt minion connections and view whether the connection is accepted, rejected or pending.</p>
+<pre class="prettyprint notranslate">
+salt-key —list-all
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+Accepted Keys:
+minion1
+minion2
+Denied Keys:
+
+Unaccepted Keys:
+Rejected Keys:
+</pre>
+<h2>Verify Salt Minions</h2>
+<p>Now, we have accepted all the keys, you can send a command from Salt master to check whether Salt minions are listening or not,</p>
+<pre class="result notranslate">
+salt '*' test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+   True
+minion2:
+   True
+</pre>
+<p>From the above result, list out minion 1 and minion 2, which means minions are listening properly, otherwise minions might now respond properly.</p>
+<h1>SaltStack - Access Control System</h1>
+<p>An Access Control System provides options for a user for a group to execute a task with permissions. A Salt access control system is used to configure access to non-administrative control interfaces. You can apply this process to all the systems. This control helps the non-administrative users to execute the Salt commands.</p>
+<p>Salt interfaces are of the following three types &minus;</p>
+<ul class="list">
+<li>Publisher ACL system</li>
+<li>External Auth system</li>
+<li>Peer system</li>
+</ul>
+<p>Let us understand go through each of these interfaces in detail.</p>
+<h2>Publisher ACL System</h2>
+<p>A Publisher ACL system allows access to the users other than root to execute Salt commands on minions from the master. The publisher ACL system is configured in the master configuration file via the <b>publisher_acl</b> configuration option. It is defined as follows &minus;</p>
+<pre class="result notranslate">
+publisher_acl:
+   user1:
+      - .*
+
+   user2:
+      - web*:
+         - test.*
+         - pkg.*
+</pre>
+<p>Here,</p>
+<ul class="list">
+<li><p><b>user1</b> is allowed to execute anything.</p></li>
+<li><p><b>user2</b> is allowed to use <b>test</b> and <b>pkg</b>, but only on “web*” minions.</p></li>
+</ul>
+<h2>External Auth System</h2>
+<p>The <b>external auth system</b> is used to provide access to execute salt commands on specific minions through external authorization system like <b>PAM, LDAP</b>, etc. This configuration file is defined in the master file as described below.</p>
+<pre class="result notranslate">
+external_auth:
+   pam:
+      user1:
+         - 'web*':
+            - test.*
+            - network.*
+      user2:
+         - .*
+</pre>
+<p>Here,</p>
+<ul class="list">
+<li><p><b>user1</b> is allowed to execute functions in the <b>test</b> and <b>network modules</b> on the minions that match the <b>web*</b> target.</p></li>
+<li><p><b>user2</b> is allowed to execute all the functions.</p></li>
+</ul>
+<h3>Enable the External Auth System in Command</h3>
+<p>Salt server provides an option ‘–a’ to enable external authentication.</p>
+<pre class="result notranslate">
+salt -a pam web\* test.ping
+</pre>
+<p>Here, the <b>-a pam</b> option is used to enable PAM external authentication. Salt Server will ask for authentication details whenever we execute the command. To restrict Salt Server from asking the authentication details for the first time only, we can use the  T option. This <b>-T option</b> caches the authentication details for the next 12 hours (default setting) and use it to authenticate the users.</p>
+<pre class="result notranslate">
+salt -T -a pam web\* test.ping
+</pre>
+<h2>Peer System</h2>
+<p>Salt minions can pass commands using the peer interface. The peer interface is configured through the master configuration file either to allow minions to send commands from the master using the <b>peer</b> configuration section or to allow minions to execute runners from the master using the <b>peer_run</b> configuration.</p>
+<p>Let us understand both these configurations in detail.</p>
+<h3>Peer configuration</h3>
+<p>The simple configuration to be defined in master file is as below &minus;</p>
+<pre class="result notranslate">
+peer:
+   .*:
+      - .*
+</pre>
+<p>Here, It enables communication for all minions, but it is only recommended for very secure environments.</p>
+<p>To assign minions to specific ID’s, the configuration needs to be defined as shown below: peer &minus;</p>
+<pre class="result notranslate">
+.*domain.com:
+   - test.*
+</pre>
+<h3>peer_run Configuration</h3>
+<p>This configuration is to allow minions to execute runners from the master using the peer_run option on the master file. The following example is to allow access to all minions and to all the runners.</p>
+<pre class="result notranslate">
+peer_run:
+   .*:
+      - .*
+</pre>
+<p>To assign minions to a specific ID, the configuration needs to be defined as given below &minus;</p>
+<pre class="result notranslate">
+peer_run:
+   .*domain.com:
+      - test.*
+</pre>
+<h3>How to Execute Commands</h3>
+<p>To execute <b>test.ping</b> on all the minions, use the <b>salt-call</b> command along with the <b>publish.publish</b> module.</p>
+<pre class="result notranslate">
+salt-call publish.publish \* test.ping
+</pre>
+<p>To execute <b>runner</b>, use the salt-call command along with the <b>publish.runner</b> module.</p>
+<pre class="result notranslate">
+salt-call publish.runner manage.up
+</pre>
+<h1>SaltStack - Job Management</h1>
+<p>Salt has the capability of high-speed communication with a large number of systems. This approach helps Salt to make a powerful multitasking system. Salt can run jobs on more than one systems, so Salt uses job management technique to manage each job running on all the systems. This chapter explains about job management in detail.</p>
+<h3>What is a Job ID?</h3>
+<p>Salt has cache directory, <b>cachedir</b>. Inside this, a directory that minions maintain is called as the <b>proc</b> directory. It is located in the following directory /var/cache/salt/proc.</p>
+<p>The proc directory is used to maintain all the files. When these files are executed, they assign with a unique job ID. This job id helps to identify the current running jobs on the minion and allow the jobs to be looked up.</p>
+<h3>SALTUTIL Module</h3>
+<p>Salt introduces a new module that is called as the Saltutil job management process. This module contains different functions to manage jobs. These functions are used to manage jobs at the minion level. The functions are described in brief as follows &minus;</p>
+<ul class="list">
+<li><p><b>running</b> &minus; Returns all the running jobs data that are found in the proc directory.</p></li>
+<li><p><b>find_job</b> &minus; Returns specific data about a certain job based on the job id.</p></li>
+<li><p><b>signal_job</b> &minus; Allows a given job id(jid) to be sent a signal.</p></li>
+<li><p><b>term_job</b> &minus; Sends a termination signal for the specified job.</p></li>
+<li><p><b>kill_job</b> &minus; Sends a kill signal for the specified job.</p></li>
+</ul>
+<h2>Jobs Runner</h2>
+<p>The jobs runner contains functions to make viewing data easier and cleaner. It has different functions. Let us discuss each of these functions in detail.</p>
+<h3>ACTIVE Function</h3>
+<p>The Active function is used to identify which jobs are still running and check what systems have completed a job and what systems are still being waited on. It is executed using the following command,</p>
+<pre class="result notranslate">
+salt-run jobs.active
+</pre>
+<h3>LOOKUP_JID Function</h3>
+<p>The lookup_jid runner will display the data for the current looking job. These jobs are configured via the <b>keep_jobs</b> option in the master configuration. It is executed using the following command.</p>
+<pre class="result notranslate">
+salt-run jobs.lookup_jid &lt;job id number&gt;
+</pre>
+<h3>LIST_JOBS Function</h3>
+<p>The List_jobs function is used to list out the job data for jobs. It is expressed by the following command &minus;</p>
+<pre class="result notranslate">
+salt-run jobs.list_jobs
+</pre>
+<h2>Job Scheduling</h2>
+<p>The schedule system exposes the execution of any execution function on minions or any runner on the master.</p>
+<p>It is performed by the following methods &minus;</p>
+<ul class="list">
+<li><p><b>Schedule</b> &minus; The schedule option in either the master or the minion <b>config</b> files.</p></li>
+<li><p><b>Minion pillar data</b> &minus; It refreshes the minion pillar data using the saltutil.refresh_pillar command.</p></li>
+<li><p>The schedule state or schedule module.</p></li>
+</ul>
+<p>Salt states are executed on the minion. You can pass the positional arguments and provide a <b>YAML dict</b> of the named arguments in the <b>config file</b> as shown below.</p>
+<pre class="result notranslate">
+schedule:
+   job1:
+      function: saltstate.sls
+      seconds: 3600
+      args:
+         - httpd
+      kwargs:
+         test: True
+</pre>
+<p>Here, <b>job1</b> will execute the function <b>saltstate.sls</b> with the specified arguments, <b>httpd</b> for every hour. The <b>test: True</b> is the additional argument for the <b>httpd</b> command that is defined in <b>saltstate.sls</b>.</p>
+<h1>SaltStack - Salt File Server</h1>
+<p>The Salt file server is a stateless ZeroMQ server. It is built into the Salt master. A Salt file server is used for distributing files from master to minions. It contains different modules. Let us understand the salt file server, its configuration, modules related to the salt file server, how to access the salt file server in python, etc., in this chapter.</p>
+<h2>File Server Backend</h2>
+<p>The file server backend allows the Salt file server to act as a transparent interface to other file server like a local file system, Git version control system, etc.</p>
+<p>A Git file server backend can be enabled by using the following configuration in the master file.</p>
+<pre class="result notranslate">
+fileserver_backend:
+   - git
+</pre>
+<p>To enable multiple backend file system, we can use the following configuration.</p>
+<pre class="result notranslate">
+fileserver_backend:
+   - roots
+   - git
+</pre>
+<p>We can also specify the additional option for a different backend server using the specific section of the corresponding backend server.</p>
+<h3>Local File System</h3>
+<p>For using this system, we have to use the following code.</p>
+<pre class="result notranslate">
+file_roots:
+   base:
+      - /srv/salt/prod
+</pre>
+<h3>Git File System</h3>
+<p>For using this system, we have to use the following code.</p>
+<pre class="result notranslate">
+gitfs_remotes:
+   - https://github.com/sample/sample1.git
+</pre>
+<h3>Requesting Files</h3>
+<p>Salt has the option to request files for specific environments.</p>
+<pre class="result notranslate">
+salt://path/to/file?saltenv = base
+</pre>
+<p>Here, the environment is defined using the roots option.</p>
+<h2>File Server Configuration</h2>
+<p>Salt files can be allocated within many root directories and accessed by specifying both the file path and the environment to search. The individual environments can span across multiple directory roots.</p>
+<h3>Environment</h3>
+<p>The default environment is base. This environment is defined and is used to download files when no other environment is specified.</p>
+<pre class="result notranslate">
+file_roots:
+   base:
+      - /srv/salt/base
+</pre>
+<p>You can also use multiple environments as shown in the code below.</p>
+<pre class="result notranslate">
+file_roots:
+   base:
+      - /srv/salt/base
+   dev:
+      - /srv/salt/dev
+      - /srv/salt/base
+</pre>
+<h2>CP Module</h2>
+<p>The CP module is the main module to manipulate the <b>Salt file server</b>. The <b>salt-cp</b> command can also be used to distribute files presented by the Salt file server.</p>
+<h3>GET_FILE</h3>
+<p>The <b>cp.get_file</b> function can be used on the minion to download a file from the master. It is defined as shown in the following code block.</p>
+<pre class="result notranslate">
+salt '*' cp.get_file salt://vimrc /etc/vimrc
+</pre>
+<p>The above command instructs all Salt minions to download the <b>vimrc</b> file and copy it to <b>/etc/vimrc</b>.</p>
+<h3>Enable Template</h3>
+<p>You can enable template option in get_file as follows &minus;</p>
+<pre class="result notranslate">
+salt '*' cp.get_file "salt://vimrc" /etc/vimrc template = jinja
+</pre>
+<h3>Apply Compression</h3>
+<p>To use compression, use the <b>gzip</b> named argument. The valid values are integers from 1 to 9, where 1 is the minimum compression and 9 is maximum value.</p>
+<p>The command is defined as follows &minus;</p>
+<pre class="result notranslate">
+salt '*' cp.get_file salt://vimrc /etc/vimrc gzip = 5
+</pre>
+<h3>GET_DIR</h3>
+<p>The <b>cp.get_dir</b> function can be used on the minion to download an entire directory from the master. It is defined in the following code block.</p>
+<pre class="result notranslate">
+salt '*' cp.get_dir salt://etc/mysql /etc
+</pre>
+<p>The <b>cp.get_dir</b> supports template rendering and gzip compression arguments. If you want, you can assign as well.</p>
+<h2>FILECLIENT Module</h2>
+<p>Salt provides a python module that helps to access the salt file server. The <b>salt/fileclient.py</b> module is used to set up the communication from the minion to the master.</p>
+<p>The sample code to get files is as follows &minus;</p>
+<pre class="prettyprint notranslate">
+import salt.minion
+import salt.fileclient
+
+def get_file(path, dest, saltenv = ‘base'):
+   client = salt.fileclient.get_file_client(__opts__)
+   return client.get_file(path, dest, true, saltenv)
+</pre>
+<p>Here,</p>
+<ul class="list">
+<li><p>opts is available when the module is run in the salt environment. Otherwise, we should provide the configuration path – <b>/etc/salt/minion</b>.</p></li>
+<li><p><b>path</b> refers to the path of the source file in salt file server.</p></li>
+<li><p><b>dest</b> refers the destination path of the file.</p></li>
+<li><p><b>saltenv</b> refers to the environment</p></li>
+</ul>
+<p>In the next chapter, we will understand how to use <b>Git</b> as the file server.</p>
+<h1>SaltStack - Git as a File Server</h1>
+<p><b>Git</b> is an open-source distributed version control system. It can be used to keep a track of changes in any files. Salt sends files from Git repositories using the Git file server. You can configure Git to the <b>fileserver_backend</b> list option and if you need to configure one or more repositories, you can do so by using the <b>gitfs_remotes</b> option.</p>
+<p>This chapter explains about how to install and configure the Git file server. Before moving towards the installation, you must have the following prerequisites.</p>
+<h2>Salt Server Prerequisites for Using Git</h2>
+<p>The minimal requirement for the salt server to use Git as the file server is as follows &minus;</p>
+<ul class="list">
+<li>pygit2</li>
+<li>Dulwich</li>
+</ul>
+<p>Pygit2 and Dulwich are configured using the <b>gitfs_provider</b> parameter in the master config file. If <b>gitfs_provider</b> is not configured in the master file then Salt will prefer pygit2, if the suitable version is available, followed by <b>GitPython</b> and <b>Dulwich</b>.</p>
+<h3>Install pygit2</h3>
+<p>The following commands are used to install pygit2 in the Fedora and Ubuntu based systems &minus;</p>
+<ul class="list">
+<li><p><b>Fedora-based system</b></p></li>
+</ul>
+<pre class="result notranslate">
+yum install python-pygit2
+</pre>
+<ul class="list">
+<li><p><b>Ubuntu-based system</b></p></li>
+</ul>
+<pre class="result notranslate">
+apt-get install python-pygit2
+</pre>
+<p>Here, the minimum supported version of pygit2 is 0.20.3.</p>
+<h3>Install GitPYTHON</h3>
+<p>GitPython can be easily installed on the master using the <b>yum / apt command</b> as shown below.</p>
+<ul class="list">
+<li><p><b>Fedora-based system</b></p></li>
+</ul>
+<pre class="result notranslate">
+yum install GitPython
+</pre>
+<ul class="list">
+<li><p><b>Ubuntu-based system</b></p></li>
+</ul>
+<pre class="result notranslate">
+apt-get install python-git
+</pre>
+<h3>Install DULWICH</h3>
+<p>Dulwich can be easily installed on the master using the yum command.</p>
+<ul class="list">
+<li><p><b>Fedora-based system</b></p></li>
+</ul>
+<pre class="result notranslate">
+yum install python-dulwich
+</pre>
+<ul class="list">
+<li><p><b>Ubuntu-based system</b></p></li>
+</ul>
+<pre class="result notranslate">
+apt-get install python-dulwich
+</pre>
+<p>Now, we have installed all the dependencies for the Git file server. Let us now configure this Git file server using the <b>fileserver_backend</b> section in the <b>master config</b> file.</p>
+<h2>Backend Configuration</h2>
+<p>In order to use the Git file server, you need to add Git in the fileserver_backend list in the master config file. It is described as follows &minus;</p>
+<pre class="result notranslate">
+fileserver_backend:
+   - git
+</pre>
+<p>Let us further understand how to configure the Git file server in a remote configuration.</p>
+<h3>gitfs_remotes Configuration</h3>
+<p>You can specify any one or all of the URLs such as git://, https://, file://, or ssh:// for the gitfs_remotes configuration in the master file. This is used to search for the requested files.</p>
+<p>The simple https URL specification is defined below.</p>
+<pre class="result notranslate">
+gitfs_remotes:
+   - https://github.com
+</pre>
+<p>The <b>ssh</b> configuration can be done as shown below.</p>
+<pre class="result notranslate">
+gitfs_remotes:
+   - git@github.com:user1/sample.git
+   - ssh://user@domain.tld/path/to/sample.git
+</pre>
+<p>Now, we have configured the Git file server using the two options <b>fileserver_backend</b> and <b>gitfs_remotes</b>.</p>
+<h3>Restart Master</h3>
+<p>After making all the changes in the master file, now restart the master to load all the configurations in the Git file server.</p>
+<h2>Multiple Remotes Configuration</h2>
+<p>The following command is used for multiple configuration in <b>gitfs_remotes</b> in the master file.</p>
+<pre class="result notranslate">
+gitfs_remotes:
+   - git://github.com/sample/sample1.git
+   - https://github.com/sample/sample2.git
+   - file:///root/user/sample
+</pre>
+<p>Here, the repositories <b>sample1.git, sample2.git,</b> and <b>sample.doc</b> may have the following files.</p>
+<pre class="result notranslate">
+sample1.git:
+   top.sls
+   
+sample2.git
+   edit/vimrc
+   
+sample.doc
+   edit/vimrc
+</pre>
+<h1>SaltStack - Using MinionFS as the File Server</h1>
+<p>The <b>MinionFS</b> is a special file server provided by Salt for the minions to exchange the files between them. The files served by the MinionFS are the files intentionally shared by minions. To share the files, a Minion has to follow steps given below.</p>
+<ul class="list">
+<li><p>Source minion has to push the file to the salt master using the <b>cp.push</b> function.</p></li>
+<li><p>Once the files are pushed by the source minion, the deployed files can be accessed by any other minion using the MinionFS file server.</p></li>
+</ul>
+<h2>Enable Pushing</h2>
+<p>By default, pushing the files by minions to a master is disabled. To accept the files from minions, the master needs to have the “file_recv” option in the config file and its value must be set to <b>True</b>. By default, the value if “file_recv” is <b>false</b>.</p>
+<pre class="result notranslate">
+file_recv: True
+</pre>
+<p>Once the option is enabled, restart the master service.</p>
+<h2>Pushing Files</h2>
+<p>Minions can push the files to the master. It is performed by the <b>cp.push</b> function. This cp.push function provides an easy mechanism to push the files by minion using the minion id.</p>
+<pre class="result notranslate">
+salt 'minion-id' cp.push /path/to/the/file
+</pre>
+<p>Here, the minion-id is used to identify which minion is pushing the file. This command will store the file in a subdirectory named <b>minions</b> under the <b>master's cachedir</b>. Usually, the path is – /var/cache/salt/master/minions.</p>
+<p>For minion, <b>m1</b> and the file – /var/log/mylog.txt, the file will be stored in the – /var/cache/salt/master/minions/m1/var/log/mylog.txt.</p>
+<h3>Enable MinionFS</h3>
+<p>To enable the MinionFS, simply add <b>minion</b> in the fileserver backend setting as shown in the following code block.</p>
+<pre class="result notranslate">
+fileserver_backend:
+   - roots
+   - minion
+</pre>
+<p>Once MinionFS is enabled, the minion pushed files are available as &minus;</p>
+<pre class="result notranslate">
+salt://&lt;minion-id&gt;/path/to/pushed/file
+</pre>
+<p>For minion, <b>m1</b> and the pushed file – /var/log/mylog.txt, the pushed file will be served from salt://m1/var/log/mylog.txt.</p>
+<p>This minionFS can be mounted in a special directory using the following configuration. It will separate the minionFS files from other files and will help in organizing the minion files.</p>
+<pre class="result notranslate">
+minionfs_mountpoint: salt://minionfs
+</pre>
+<p>For the above configuration, the file will available under the <b>minionfs</b> directory as – salt://minionfs/m1/var/log/mylog.txt</p>
+<h2>MinionFS Advanced Options</h2>
+<p>The MinionFS also provides an option to enable / disable the availability of pushed files from a certain minion. The options are <b>minionfs_whitelist</b>, to enable minions and <b>minionfs_blacklist</b>, to disable the minions.</p>
+<pre class="result notranslate">
+minionfs_whitelist:
+   - webserver
+   - develop*
+   - ‘mail\d+.mysite.com'
+
+minionfs_blacklist:
+   - testing
+</pre>
+<p>In the above configuration, all minions except <b>testing</b> are allowed to share the file using minionFS.</p>
+<ul class="list">
+<li><p>Webserver1</p></li>
+<li><p>Minions whose ids matches the regular expression <i>develop</i> *</p></li>
+<li><p>Minions whose ids matches the regular expression <b>mail\d+.mysite.com</b>.</p></li>
+<li><p>Testing</p></li>
+</ul>
+<p>In the next chapter, we will learn how to use Cron with Salt.</p>
+<h1>SaltStack - Using Cron with Salt</h1>
+<p>Salt can be used along with the <b>Cron</b> application. Using both applications together provides a great opportunity to automate Salt. While Salt provides an option to execute commands remotely, Cron enables it to run in a pre-scheduled or automated manner. Let us learn how to use Cron and Salt together in this chapter.</p>
+<h2>What is Cron?</h2>
+<p>Cron is very useful application in the Linux Environment. It enables to preset a command or script to run in a specific date and time. It also enables to run an application in a regular interval, say daily, weekly or every first day of the month.</p>
+<p>Cron starts when the system starts and check the <b>/etc/crontab</b> file for configuration details. The /etc/crontab has every application and its schedule in a separate line as shown below.</p>
+<pre class="result notranslate">
+15 * * * * root echo "This command runs at 15 minutes past every hour"
+15 10 * * * root echo "This command is run daily at 10:15 am"
+</pre>
+<p>Every line has the following seven entry points, which are separated by space and they are as follows &minus;</p>
+<ul class="list">
+<li><p><b>minute</b> &minus; minute of the hour and is between ‘0’ and ‘59’.</p></li>
+<li><p><b>hour</b> &minus; hour and is specified in the 24-hour clock.</p></li>
+<li><p><b>day_of_month</b> &minus; Day of the Month and is between 1 and 31. For example, the 10<sup>th</sup> of each month is 10.</p></li>
+<li><p><b>month</b> &minus; A month specified and is specified numerically (0-12), or as the name of the month (e.g. May).</p></li>
+<li><p><b>day_of_week</b> &minus; Day of the week is specified numerically (0-7) or as the name of the day (e.g. Sun).</p></li>
+<li><p><b>user</b> &minus; User account under which the command runs.</p></li>
+<li><p><b>cmd</b> &minus; The actual command and its arguments.</p></li>
+</ul>
+<p>Here, * replaces, if nothing is assigned.</p>
+<h2>Salt Caller (salt-call)</h2>
+<p>Salt provides a CLI (Command Line Interface), <b>salt-call</b> to run the modules in the local minion system itself instead of from the master server using the salt command. The salt call CLI supports all the options supported by salt command, but run locally.</p>
+<p>Salt Caller was initially designed to support debugging, but now, it can be used as a standalone application.</p>
+<pre class="result notranslate">
+salt-call test.ping
+</pre>
+<h3>Using salt-call in cron</h3>
+<p>The salt-call CLI is useful to schedule salt operation using Cron. For example, to check the state of the minion every day at midnight, we can use salt-call along with the option – state.apply as shown below.</p>
+<p><b>/etc/crontab</b></p>
+<pre class="result notranslate">
+PATH = /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/opt/bin
+0 0 * * * salt-call state.apply
+</pre>
+<p>Here,</p>
+<ul class="list">
+<li><p>The <b>state.apply</b> function will check the salt configuration file for the minion and check whether all action defined for the minion is properly configured.</p></li>
+<li><p>Setting the path is a good practice because sometimes the salt command may not be available in the system path.</p></li>
+</ul>
+<p>In the next chapter, we will learn Remote Execution, which is a core concept of Salt.</p>
+<h1>SaltStack - Remote Execution</h1>
+<p>One of the core concepts of Salt is remote execution. Salt can execute commands across thousands of systems in a matter of seconds. Salt uses its own command to do this functionality. Let us now understand the different Salt commands for remote execution in the chapter.</p>
+<h2>Salt Command</h2>
+<p>Salt command enables the Salt master to communicate with one or more <b>Salt minions</b>. The basic syntax is as follows,</p>
+<pre class="result notranslate">
+salt '&lt;target&gt;' &lt;module.function&gt; [arguments]
+</pre>
+<p>The above command syntax consists of the following three main components.</p>
+<ul class="list">
+<li><p><b>target</b> &minus; It determines which systems is applied by the command.</p></li>
+<li><p><b>module.function</b> &minus; It is a command. Commands consists of a module and function.</p></li>
+<li><p><b>arguments</b> &minus; Additional data needed for calling the function.</p></li>
+</ul>
+<p>Let us understand each of the components in detail.</p>
+<h2>What is the Target Component?</h2>
+<p>Target is a component, which allows you to filter minions (managed system) to run the function. A simple command using the target component is defined below.</p>
+<pre class="result notranslate">
+salt '*' test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   True
+minion1:
+   True
+</pre>
+<p>Here, the target <b>‘*’</b> represents all the managed systems. The ‘<b>test</b>’ here is a module and <b>ping</b> is a function. This is used to test the ping service in the remote system. We will learn about the different modules and its functions in subsequent chapters.</p>
+<h3>Targets using ID (minion)</h3>
+<p>You can send a command to a specific minion using its <b>id</b> in the target. Instead of using <b>'*'</b>, you can replace it using <b>minion id</b>. It is defined below.</p>
+<pre class="result notranslate">
+salt 'minion1’ test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+   True
+</pre>
+<h3>Targets using Regular Expression</h3>
+<p>Targets can be filtered by specific regular expression. It is defined below.</p>
+<pre class="result notranslate">
+salt -E 'minion[0-9]' test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   True
+minion1:
+   True
+</pre>
+<h3>Targets using List</h3>
+<p>Targets can be explicitly specified in a list. It is defined in the following code block.</p>
+<pre class="result notranslate">
+salt -L 'minion1,minion2' test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   True
+minion1:
+   True
+</pre>
+<h3>Targets by Condition</h3>
+<p>Targets can be combined in one command as shown in the code block below.</p>
+<pre class="result notranslate">
+salt -C 'G@os:Ubuntu and minion* or S@192.168.50.*' test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+   True
+minion2:
+   True
+</pre>
+<h2>Module and Functions (module.function)</h2>
+<p>Salt can execute shell commands; update packages and distribute files, etc., in all of its managed systems simultaneously. Salt does these operations using modules. Salt has special modules for all the available functionalities. Let us understand the different Salt modules using some simple example in this chapter.</p>
+<h2>Shell Command</h2>
+<p>Salt executes shell commands remotely across multiple systems using the <b>cmd.run</b> command. The <b>cmd</b> is the main module and <b>run</b> is one of the function available in the <b>cmd</b> module. The <b>run</b> function enables any shell command to be executed in the remote system as shown in the code block below.</p>
+<pre class="result notranslate">
+salt '*' cmd.run 'ls -l /etc'
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   total 868
+   drwxr-xr-x 7 root root    4096 Jan 26 22:10 X11
+   drwxr-xr-x 3 root root    4096 Jan 26 21:02 acpi
+   -rw-r--r-- 1 root root    2981 Jan 26 20:48 adduser.conf
+   -rw-r--r-- 1 root root      10 Jan 26 21:04 adjtime
+   drwxr-xr-x 2 root root    4096 Jan 26 22:10 alternatives
+   drwxr-xr-x 3 root root    4096 Jan 26 20:53 apm
+   drwxr-xr-x 3 root root    4096 Jan 26 21:02 apparmor
+   drwxr-xr-x 9 root root    4096 Jan 26 21:02 apparmor.d
+   drwxr-xr-x 3 root root    4096 Jan 26 21:02 apport
+   drwxr-xr-x 6 root root    4096 Jan 29 07:14 apt
+   drwxr-xr-x 2 root root    4096 Jan 26 22:10 at-spi2
+……………
+……………
+minion1:
+   total 868
+   drwxr-xr-x 7 root root    4096 Jan 26 22:10 X11
+   drwxr-xr-x 3 root root    4096 Jan 26 21:02 acpi
+   -rw-r--r-- 1 root root    2981 Jan 26 20:48 adduser.conf
+   -rw-r--r-- 1 root root      10 Jan 26 21:04 adjtime
+   drwxr-xr-x 2 root root    4096 Jan 26 22:10 alternatives
+   drwxr-xr-x 3 root root    4096 Jan 26 20:53 apm
+
+   drwxr-xr-x 3 root root    4096 Jan 26 21:02 apparmor
+   drwxr-xr-x 9 root root    4096 Jan 26 21:02 apparmor.d
+   drwxr-xr-x 3 root root    4096 Jan 26 21:02 apport
+   drwxr-xr-x 6 root root    4096 Jan 29 07:09 apt
+   drwxr-xr-x 2 root root    4096 Jan 26 22:10 at-spi2
+   -rw-r----- 1 root daemon   144 Oct 21  2013 at.deny
+   -rw-r--r-- 1 root root    2177 Apr  9  2014 bash.bashrc
+   -rw-r--r-- 1 root root      45 Mar 22  2014 bash_completion
+……………
+……………
+</pre>
+<h2>Show Disk Usage</h2>
+<p>Salt provides a special module, <b>disk</b> to get the complete disk details of the managed system. The <b>diskmodule</b> has a <b>usage</b> function to query the details.</p>
+<pre class="result notranslate">
+salt '*' disk.usage
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+   ----------
+   /:
+      ----------
+      1K-blocks:
+         41251136
+      available:
+         37852804
+      capacity:
+         5%
+      filesystem:
+         /dev/sda1
+      used:
+         1662420
+   /dev:
+      ----------
+      1K-blocks:
+         503908
+      available:
+         503896
+      capacity:
+         1%
+      filesystem:
+         udev
+      used:
+         12
+   /run:
+      ----------
+      1K-blocks:
+         101780
+      available:
+         101412
+      capacity:
+         1%
+      filesystem:
+         tmpfs
+      used:
+         368
+   /run/lock:
+      ----------
+      1K-blocks:
+         5120
+      available:
+         5120
+      capacity:
+         0%
+      filesystem:
+         none
+      used:
+         0
+   /run/shm:
+      ----------
+      1K-blocks:
+         508884
+      available:
+         508872
+      capacity:
+         1%
+      filesystem:
+         none
+      used:
+         12
+   /run/user:
+      ----------
+      1K-blocks:
+         102400
+      available:
+         102400
+      capacity:
+         0%
+      filesystem:
+         none
+      used:
+         0
+   /sys/fs/cgroup:
+      ----------
+      1K-blocks:
+         4
+      available:
+         4
+      capacity:
+         0%
+      filesystem:
+         none
+      used:
+         0
+   /vagrant:
+      ----------
+      1K-blocks:
+         303114632
+      available:
+         252331440
+      capacity:
+         17%
+      filesystem:
+         none
+      used:
+         50783192
+minion2:
+   ----------
+   /:
+      ----------
+      1K-blocks:
+         41251136
+      available:
+         37852804
+      capacity:
+         5%
+      filesystem:
+         /dev/sda1
+      used:
+         1662420
+   /dev:
+      ----------
+      1K-blocks:
+         503908
+      available:
+         503896
+      capacity:
+         1%
+      filesystem:
+         udev
+      used:
+         12
+   /run:
+      ----------
+      1K-blocks:
+         101780
+      available:
+         101412
+      capacity:
+         1%
+      filesystem:
+         tmpfs
+      used:
+         368
+   /run/lock:
+      ----------
+      1K-blocks:
+         5120
+      available:
+         5120
+      capacity:
+         0%
+      filesystem:
+         none
+      used:
+         0
+   /run/shm:
+      ----------
+      1K-blocks:
+         508884
+      available:
+         508872
+      capacity:
+         1%
+      filesystem:
+         none
+      used:
+         12
+   /run/user:
+      ----------
+      1K-blocks:
+         102400
+      available:
+         102400
+      capacity:
+         0%
+      filesystem:
+         none
+      used:
+            0
+   /sys/fs/cgroup:
+      ----------
+      1K-blocks:
+         4
+      available:
+         4
+      capacity:
+         0%
+      filesystem:
+         none
+      used:
+         0
+   /vagrant:
+      ----------
+      1K-blocks:
+         303114632
+      available:
+         252331440
+      capacity:
+         17%
+      filesystem:
+         none
+      used:
+         50783192
+</pre>
+<h2>Network Interfaces</h2>
+<p>Salt provides a separate module, network and function, interfaces inside the module to query the network interface information about the managed systems.</p>
+<pre class="result notranslate">
+salt '*' network.interfaces
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+   ----------
+   eth0:
+      ----------
+      hwaddr:
+         08:00:27:04:3e:28
+      inet:
+         |_
+            ----------
+            address:
+               10.0.2.15
+            broadcast:
+               10.0.2.255
+            label:
+               eth0
+            netmask:
+               255.255.255.0
+      inet6:
+         |_
+            ----------
+            address:
+               fe80::a00:27ff:fe04:3e28
+            prefixlen:
+               64
+            scope:
+               link
+      up:
+         True
+   eth1:
+      ----------
+      hwaddr:
+         08:00:27:34:10:52
+      inet:
+         |_
+            ----------
+            address:
+               192.168.50.11
+            broadcast:
+               192.168.50.255
+            label:
+               eth1
+            netmask:
+               255.255.255.0
+      inet6:
+         |_
+            ----------
+            address:
+               fe80::a00:27ff:fe34:1052
+            prefixlen:
+               64
+            scope:
+               link
+      up:
+         True
+   lo:
+      ----------
+      hwaddr:
+         00:00:00:00:00:00
+      inet:
+         |_
+            ----------
+            address:
+               127.0.0.1
+            broadcast:
+               None
+            label:
+               lo
+            netmask:
+               255.0.0.0
+      inet6:
+         |_
+            ----------
+            address:
+               ::1
+            prefixlen:
+               128
+            scope:
+               host
+      up:
+         True
+minion2:
+   ----------
+   eth0:
+      ----------
+      hwaddr:
+         08:00:27:04:3e:28
+      inet:
+         |_
+            ----------
+            address:
+               10.0.2.15
+            broadcast:
+               10.0.2.255
+            label:
+               eth0
+            netmask:
+               255.255.255.0
+      inet6:
+         |_
+            ----------
+            address:
+               fe80::a00:27ff:fe04:3e28
+            prefixlen:
+               64
+            scope:
+               link
+      up:
+         True
+   eth1:
+      ----------
+      hwaddr:
+         08:00:27:a7:31:8e
+      inet:
+         |_
+            ----------
+            address:
+               192.168.50.12
+            broadcast:
+               192.168.50.255
+            label:
+               eth1
+            netmask:
+               255.255.255.0
+      inet6:
+         |_
+            ----------
+            address:
+               fe80::a00:27ff:fea7:318e
+            prefixlen:
+               64
+            scope:
+               link
+      up:
+         True
+   lo:
+      ----------
+      hwaddr:
+         00:00:00:00:00:00
+      inet:
+         |_
+            ----------
+            address:
+               127.0.0.1
+            broadcast:
+               None
+            label:
+               lo
+            netmask:
+               255.0.0.0
+      inet6:
+         |_
+            ----------
+            address:
+               ::1
+            prefixlen:
+               128
+            scope:
+               host
+      up:
+         True
+</pre>
+<h3>sys.doc Execution Module</h3>
+<p>Salt functions can be sent to the <b>sys.doc</b> execution module. This is used to get the details on any module directly from the command line. The Salt functions are self-documenting. All the function documentation can be retrieved from the minions via the sys.doc() function, which is defined below.</p>
+<pre class="result notranslate">
+salt '*' sys.doc
+</pre>
+<h2>Arguments for a Function Call</h2>
+<p>Arguments are used to provide additional data for the function call. A simple argument example is given below.</p>
+<pre class="prettyprint notranslate">
+salt '*' sys.doc pkg.install
+</pre>
+<p>Here, the argument <b>pkg.install</b> is a module to install specific packages.</p>
+<h3>Python Function</h3>
+<p>Arguments are space-delimited parameters to the function. It allows the python code to be passed as arguments as given below.</p>
+<pre class="prettyprint notranslate">
+salt '*' cmd.exec_code python 'import sys;print sys.version'
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   2.7.6 (default, Oct 26 2016, 20:30:19) 
+   [GCC 4.8.4]
+minion1:
+   2.7.6 (default, Oct 26 2016, 20:30:19) 
+   [GCC 4.8.4]
+</pre>
+<p>Similarly, you can use optional keywords and the <b>YAML</b> format as well.</p>
+<h1>SaltStack - Configuration Management</h1>
+<p>Configuration management is one of the most significant concept in SaltStack. It is used to create a reusable configuration template, called a <b>state</b>. The state describes everything required to put a system component or an application into a known configuration.</p>
+<h2>Salt State</h2>
+<p>Salt state is a reusable configuration for a specific part of a system. States are easier to understand and described using a simple YAML.</p>
+<h3>Create a Salt State</h3>
+<p>Salt states are easy to create. Let us create a simple state in this chapter. Move to the directory “salt-vagrant-demo/saltstack/salt/” and create a file named <b>samples.sls</b> and add the following lines in it.</p>
+<p><b>samples.sls</b></p>
+<pre class="result notranslate">
+install_network_packages:
+   pkg.installed:
+      - pkgs:
+         - rsync
+         - lftp
+         - curl
+</pre>
+<p>Now, save the file and run the following command in the Salt master.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt 'minion1’ state.apply samples
+</pre>
+<p>Here, we installed <b>rsync, lftp</b> and <b>curl</b> through the <b>pkg.installed</b> module using the Salt state in a salt minion, <b>minion1</b>. If it works properly, you could see the response as shown below.</p>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+----------
+   ID: install_network_packages
+   Function: pkg.installed
+   Result: True
+   Comment: All specified packages are already installed
+   Started: 08:08:48.612336
+   Duration: 545.385 ms
+   Changes:
+
+Summary for minion1
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 545.385 ms
+</pre>
+<h3>Apply Salt State</h3>
+<p>Now that we have created a state using the ‘.sls’ file and applied it by specifically calling it. Salt has a default state file called as the <b>top.sls</b> file. The top file is used to apply multiple state files to Salt minions. The top file describes where states should be applied. Well, <b>States</b> and the <b>Top file</b> work together to create the core of SaltStack’s configuration management capability.</p>
+<p>Let us now create a simple top.sls file in the directory <b>saltstack/salt</b> and add the following.</p>
+<p><b>top.sls</b></p>
+<pre class="result notranslate">
+base:
+  '*':
+      - common
+   'minion1':
+      - samples
+</pre>
+<p>Here, the <b>state</b>, commonly <b>applies</b> to <b>all system</b> state, <b>samples</b> applies to <b>minion1</b>.</p>
+<p>Next, run the Salt master and apply the state as shown below.</p>
+<pre class="prettyprint notranslate">
+root@saltmaster:/home/vagrant# salt '*' state.apply
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+----------
+   ID: common_packages
+   Function: pkg.installed
+   Result: True
+   Comment: All specified packages are already installed
+   Started: 09:33:35.642355
+   Duration: 588.21 ms
+   Changes:
+
+Summary for minion1
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 588.210 ms
+minion2:
+----------
+   ID: common_packages
+   Function: pkg.installed
+   Result: True
+   Comment: All specified packages are already installed
+   Started: 09:33:35.890331
+   Duration: 602.79 ms
+   Changes:
+
+Summary for minion2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 602.790 ms
+</pre>
+<h3>Apply Batch Size</h3>
+<p>If you have a large number of connected minions, then you can limit how many systems are updated at once. It is performed by using the <b>–batch-size</b> option, which is defined below.</p>
+<pre class="prettyprint notranslate">
+root@saltmaster:/home/vagrant# salt --batch-size 5 '*' state.apply
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+Executing run on ['minion2', 'minion1']
+jid:
+   20170314094638482664
+minion1:
+----------
+   ID: common_packages
+   Function: pkg.installed
+   Result: True
+   Comment: All specified packages are already installed
+   Started: 09:46:41.228519
+   Duration: 582.24 ms
+   Changes:
+
+Summary for minion1
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 582.240 ms
+retcode:
+   0
+jid:
+   20170314094638482664
+minion2:
+----------
+   ID: common_packages
+   Function: pkg.installed
+   Result: True
+   Comment: All specified packages are already installed
+   Started: 09:46:41.153609
+   Duration: 605.235 ms
+   Changes:
+
+Summary for minion2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 605.235 ms
+retcode:
+   0
+</pre>
+<h2>Salt State Functions</h2>
+<p>Salt state functions are used to install and configure applications on your remote system. Let us install a “Vim” package using the Salt state function.</p>
+<h3>Create and Apply State Function</h3>
+<p>Create a file named “sample.sls” under the directory “salt-vagrant-demo/saltstack/salt/sample.sls” and add the following &minus;</p>
+<p><b>sample.sls</b></p>
+<pre class="result notranslate">
+install vim:
+   pkg.installed:
+      - name: vim
+</pre>
+<p>Once, Vagrant environment is up, run the salt master and apply the sample.sls by running the following command.</p>
+<pre class="prettyprint notranslate">
+root@saltmaster:/home/vagrant# sudo salt 'minion2’ state.apply sample
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+----------
+   ID: install vim
+   Function: pkg.installed
+   Name: vim
+   Result: True
+   Comment: Package vim is installed
+   Started: 15:07:45.752764
+   Duration: 553.506 ms
+   Changes:
+
+Summary for minion2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 553.506 ms
+</pre>
+<p>Now, we have added a package “Vim”. Let us now test the package using the Salt testing method.</p>
+<h3>Salt State Testing</h3>
+<p>The test run is mandated by adding the “test = True” option to the states. The return information will show states that will be applied in yellow and the result is reported as ‘None’.</p>
+<p>The following command is used to test the state &minus;</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# sudo salt 'minion2’ state.apply sample test = True
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+----------
+   ID: install vim
+   Function: pkg.installed
+   Name: vim
+   Result: True
+   Comment: Package vim is already installed
+   Started: 15:07:45.752764
+   Duration: 553.506 ms
+   Changes:
+
+Summary for minion2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 553.506 ms
+</pre>
+<h2>SaltStack ─ Pillar Component</h2>
+<p>Pillar is an essential component to make Salt states reusable. It is used to define secure data for minions assigned using targets. Salt pillar data stores values such as ports, file paths, configuration parameters and passwords.</p>
+<h3>Pillar config File</h3>
+<p>The configuration for the <b>pillar_roots</b> in the master config file is shown below &minus;</p>
+<pre class="result notranslate">
+pillar_roots:
+   base:
+      - /srv/pillar
+</pre>
+<p>Here, the file is in the “/srv/pillar” directory.</p>
+<p>Consider, the top file located in /srv/pillar/top.sls has the following structure &minus;</p>
+<pre class="result notranslate">
+base:
+   '*':
+      - default
+</pre>
+<p>Now, move to the default.sls file located in /srv/pillar/default.sls and add the following code.</p>
+<pre class="result notranslate">
+# Default pillar values
+apache
+git
+</pre>
+<p>After saving the file, refresh the pillar to update all the changes.</p>
+<h3>Refreshing the Pillar</h3>
+<p>You can refresh the pillar using the following command.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt '*' saltutil.refresh_pillar
+</pre>
+<p>The above command is used to refresh the Salt pillar data on all the minions.</p>
+<h3>List Pillar Data</h3>
+<p>To list out the pillar data, you can use the command given below.</p>
+<pre class="prettyprint notranslate">
+root@saltmaster:/home/vagrant# salt '*' pillar.ls
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   - apache
+   - git
+minion1:
+   - apache
+   - git
+</pre>
+<h3>Pillar Items</h3>
+<p>Once the pillar is setup, the data can be viewed on the minion via the pillar module. It can be accessed through the function <b>pillar.items</b>, which is defined below.</p>
+<pre class="prettyprint notranslate">
+root@saltmaster:/home/vagrant# salt '*' pillar.items
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   ----------
+   apache:
+      httpd
+   git:
+      git
+minion1:
+   ----------
+   apache:
+      httpd
+   git:
+      git
+</pre>
+<h2>SaltStack – Include Component</h2>
+<p>The ‘Include’ component is used to define the same configuration task in multiple places. It is easy to perform. At the top of your state file, add an include using the following format &minus;</p>
+<pre class="result notranslate">
+include:
+   - state file 1 
+   - state file 2
+</pre>
+<p>Here, <b>state file 1</b> and <b>state file 2</b> are the names of the SLS files that you want to include. No need to include the <b>.sls</b> extension. The Included Salt states are inserted at the top of the current file.</p>
+<h3>State File in the Subdirectory</h3>
+<p>You can include subdirectory state file using a dot (.). It acts as a directory separator.</p>
+<pre class="result notranslate">
+include:
+   - dir.sls1 
+</pre>
+<h2>Grains Interface</h2>
+<p>Grains is an interface used to derive the information about the underlying system. Grains are collected for the operating system, domain name, IP address, kernel, OS type, memory and many other system properties.</p>
+<h3>Grains Targeting</h3>
+<p>Grain data can be used when targeting minions, which is defined in the following code block.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt -G 'os:Ubuntu' test.ping
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion1:
+   True
+minion2:
+   True
+</pre>
+<h3>Listing Grains</h3>
+<p>Grains can be listed by using the ‘grains.ls’ module, which is defined below.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt '*' grains.ls
+</pre>
+<h3>List Items</h3>
+<p>Like Pillar, Grains data can also be listed by using the 'grains.items’.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt '*' grains.items
+</pre>
+<h1>SaltStack - Logging</h1>
+<p>Logging is used to track the running software events. An event is described by a descriptive message, which can optionally contain variable data. Salt logging approach is used to get any issues, you may face. You can check out with specific log levels.</p>
+<h2>Configuration Settings</h2>
+<p>Let us understand the different configuration settings for logging, in detail.</p>
+<h3>LOG_FILE</h3>
+<p>Salt log records are passed through the file, which contains the local path name or the network location for identification. This file is considered as the log file.</p>
+<pre class="result notranslate">
+log_file: /var/log/salt/master
+</pre>
+<p>Here, the file dependent of the binary being executed in master. Similarly, you can execute in the minion as well, which is shown below.</p>
+<pre class="result notranslate">
+log_file: /var/log/salt/minion
+</pre>
+<p>You can also use remote address. The syntax for using the remote address is &minus; &lt;file|udp|tcp&gt;://&lt;host|socketpath&gt;:&lt;port-if-required&gt;/&lt;log-facility&gt;.</p>
+<pre class="result notranslate">
+log_file: udp://loghost:port
+</pre>
+<p>Here, the Log-facility defaults to LOG_USER.</p>
+<h3>LOG_LEVEL</h3>
+<p>The log levels are ordered in a numerically assigned value. Python library has defined most of the logging levels by default. In addition to that, Salt uses some more levels. Some of the levels are explained below.</p>
+<ul class="list">
+<li><p><b>log_level: error; level value is 40</b> &minus; It indicates log statement record at error.</p></li>
+<li><p><b>log_level: quiet; level value is 1000</b> &minus; It indicates that nothing should be logged at this level.</p></li>
+<li><p><b>log_level: info; level value is 20</b> &minus; It indicates the normal log information.</p></li>
+<li><p><b>log_level: warn; level value is 30</b> &minus; It indicates log statement record at warning.</p></li>
+<li><p><b>log_level: debug; level value is 10</b> &minus; Information useful for debugging both salt implementations and salt code.</p></li>
+<li><p><b>log_level: trace; level value is 5</b> &minus; More detailed code-debugging information.</p></li>
+</ul>
+<h3>LOG_LEVEL_LOGFILE</h3>
+<p>It defines the level of messages to send to the log file.</p>
+<pre class="result notranslate">
+log_level_logfile: info
+</pre>
+<h3>LOG_DATEFMT</h3>
+<p>It defines the log date format. By default, it is represented as &percnt;Y-&percnt;m-&percnt;d &percnt;H:&percnt;M:&percnt;S.</p>
+<pre class="result notranslate">
+log_datefmt_logfile: '&percnt;Y-&percnt;m-&percnt;d &percnt;H:&percnt;M:&percnt;S'
+</pre>
+<h3>LOG_FMT_CONSOLE</h3>
+<p>It defines the format of the console logging the messages. Salt uses a custom <b>LogRecord</b> attributes to colorize the console log output. It follows the following syntax &minus;</p>
+<pre class="result notranslate">
+'%(colorlevel)s'       # log level name colorized by level
+'%(colorname)s'        # colorized module name
+'%(colorprocess)s'     # colorized process number
+'%(colormsg)s'         # colorized messages name
+</pre>
+<h3>LOG_FMT_LOGFILE</h3>
+<p>It defines the format of the log file logging the messages. The basic syntax is as follows &minus;</p>
+<pre class="result notranslate">
+%(asctime)s,%(msecs)03d [%(name)-17s][%(levelname)-8s] %(message)s
+</pre>
+<h3>LOG_GRANULAR_LEVELS</h3>
+<p>This level is used to control logging levels more specifically.</p>
+<pre class="result notranslate">
+log_granular_levels:
+   'salt': 'info'
+   'salt.modules': ‘trace'
+</pre>
+<p>Here, the Main salt library at the ‘info’ level sets the <b>salt.modules</b> to log at the trace level.</p>
+<h2>External Logging Handler</h2>
+<p>Salt uses LogStash and Sentry external log handler for logging. Let us understand about it in detail in this chapter.</p>
+<h3>LOGSTASH Handler</h3>
+<p>LogStash is an open source; server-side secure data processing pipeline. Let us consider a simple UDP logging handler in Salt that uses LogStash.</p>
+<p>Specify the following changes in the Salt master file &minus;</p>
+<pre class="result notranslate">
+logstash_udp_handler:
+   host: 127.0.0.1
+   port: 9999
+   version: 1
+   msg_type: logstash
+</pre>
+<p>Then add the changes in the Logstash configuration file &minus;</p>
+<pre class="result notranslate">
+input {
+   udp {
+      port &rArr; 9999
+      codec &rArr; json
+   }
+}
+</pre>
+<p>Here, <b>UDP</b> – is the input that needs to have a format as <b>json_event</b>, which is what we send over the wire.</p>
+<h3>SENTRY Logging Handler</h3>
+<p>Sentry is real-time error tracking in production deployments and information to reproduce and fix crashes. The default configuration in the master file is defined below.</p>
+<pre class="result notranslate">
+sentry_handler:
+   dsn: https://pub-key:secret-key@app.getsentry.com/app-id
+   log_level: debug
+</pre>
+<p>Here, the default logging level for the sentry handler is ERROR, but we defined the debug <b>log_level</b> under the sentry_handler configuration key.</p>
+<h1>SaltStack - Salt through SSH</h1>
+<p>Salt executes commands in a remote system by using <b>salt-minion</b>. This is the normal behavior. In some scenarios, the remote system can be accessed only by the SSH protocol. For these scenarios, Salt provides an option to connect the remote system using the SSH protocol only and execute the command through the SSH layer.</p>
+<p><b>Salt SSH</b> is very easy to configure. The only needed configuration is to specify the remote system details in a special file called as the <b>Roster file</b>. This roster file is normally located in <b>/etc/salt/roster</b>. The roster file will have all the information regarding the remote system and how can we connect to it. Once the roster files are configured, all the Salt commands are executed using the <b>salt-ssh</b> instead of the salt command.</p>
+<h2>Roster File</h2>
+<p>The Roster System is designed specifically for Salt SSH. This is designed as a pluggable system. The sole purpose of the roster system is to gather information about the remote system. The roster file is a <b>YAML based configuration file</b> containing remote system information as <b>targets</b>. These targets are a special data structure with a predefined set of attributes. A roster file contains one or more targets and each target is identified by a <b>Salt ID</b>.</p>
+<p>The basic structure of the roster file is as follows &minus;</p>
+<pre class="result notranslate">
+&lt;Salt ID&gt;:
+   host: &lt;host name&gt;
+   user: &lt;user name&gt;
+   passwd: &lt;password of the user&gt;
+</pre>
+<p>All the other attributes supported by the roster file is optional. They are as follows &minus;</p>
+<ul class="list">
+<li><p><b>port</b> &minus; SSH port number.</p></li>
+<li><p><b>sudo</b> &minus; whether to run the command via sudo.</p></li>
+<li><p><b>sudo_user</b> &minus; sudo user name.</p></li>
+<li><p><b>tty</b> &minus; true if sudo is enabled.</p></li>
+<li><p><b>priv</b> &minus; private key.</p></li>
+<li><p><b>timeout</b> &minus; timeout for an SSH connection.</p></li>
+<li><p><b>minion_opts</b> &minus; dictionary of minion opts.</p></li>
+<li><p><b>thin_dir</b> &minus; target system's storage directory for salt components.</p></li>
+<li><p><b>cmd_umask</b> &minus; umask to force for the salt-call command.</p></li>
+</ul>
+<p>The sample roster file is as follows &minus;</p>
+<pre class="result notranslate">
+web:
+   host: 192.168.2.1
+   user: webuser
+   passwd: secret
+   sudo: True   
+db:
+   host: 192.168.2.2
+</pre>
+<h2>Deploy SSH Keys</h2>
+<p>Salt SSH will generate a default public/private key pairs for SSH logins. The default path will be /etc/salt/pki/master/ssh/salt-ssh.rsa. This key can be deployed to the remote system using the <b>ssh-copy-id</b> command as shown below.</p>
+<pre class="result notranslate">
+ssh-copy-id -i /etc/salt/pki/master/ssh/salt-ssh.rsa.pub user@web.company.com
+</pre>
+<h3>Execute Command</h3>
+<p>Executing a salt command is as simple as changing the <b>salt cli</b> command into <b>salt-ssh</b> as shown below.</p>
+<pre class="result notranslate">
+salt-ssh '*' test.ping
+</pre>
+<h3>Raw Shell Command</h3>
+<p>Salt SSH provides an option (-r) to execute a raw command in the remote system bypassing the salt module and functions.</p>
+<pre class="result notranslate">
+salt-ssh '*' -r 'ls'
+</pre>
+<h3>Targeting with Salt SSH</h3>
+<p>Targeting the remote system in Salt SSH supports only glob and regex targets. Since Salt SSH is a separate module, it provides only limited options as of now and will provide more features in the near future.</p>
+<h1>SaltStack - Salt for Cloud Infrastructure</h1>
+<p>Salt provides a separate module, <b>Salt Cloud</b> to provide virtual machines of various cloud providers like Amazon AWS, Google Compute, etc. Salt Cloud is a generic interface to configure and manage VMs of various cloud providers.</p>
+<ul class="list">
+<li><p><b>Cloud Config</b> &minus; The main configuration file for Salt Cloud is /etc/salt/cloud and it applies to all the VMs. The main configuration file is called <b>Cloud Config</b>.</p></li>
+<li><p><b>Cloud Providers</b> &minus; To target specific cloud providers, we can use specific configuration file and they are located in /etc/salt/cloud.providers.d/*.conf, these are called as <b>Cloud Providers</b>.</p></li>
+<li><p><b>Cloud Profiles</b> &minus; To target a specific VM, we can also use a special configuration file, which applies to that particular VM only and they are located at /etc/salt/cloud.profiles.d/*.conf, these are called as <b>Cloud Profiles</b>.</p></li>
+</ul>
+<p>For a virtual machine, settings in the <b>Cloud Config</b> is applied first and then in the <b>Cloud Providers</b> and finally override is done by the <b>Cloud Profiles</b>.</p>
+<h2>Installation of Salt Cloud</h2>
+<p>By default, Salt Cloud is built into the Salt and is readily available. If it is not available, we can install it by using the command below.</p>
+<pre class="result notranslate">
+pip install salt-cloud
+</pre>
+<p>Since Salt Cloud is a separate module and runs in its own process, it can be installed in the Salt Minion system as well instead of the Salt Master.</p>
+<h3>Provisioning a Virtual Machine</h3>
+<p>To provision a virtual machine, we need to define a cloud provider and a cloud profile. Once both are created, we can provision a new virtual machine for using it.</p>
+<h3>Cloud Provider</h3>
+<p>Cloud host information are configured in the Cloud provider configuration file. Normally, the basic information, which needs to be configured are cloud driver, username, password, private key, etc. Let us create a new cloud provider named as <b>my-amazon-cloud</b>.</p>
+<ul class="list">
+<li><p>Create a file, my-amazon-cloud.conf under /etc/salt/cloud.providers.d/</p></li>
+<li><p>Add a new provider using the <b>ec2</b> driver.</p></li>
+</ul>
+<pre class="result notranslate">
+my-amazon-cloud:
+   driver: ec2
+   id: '&lt;AWS_ID&gt;'
+   key: '&lt;AWS_KEY&gt;'
+   private_key: /path/to/privatekey.pem
+   keyname: &lt;name of the key&gt;
+   securitygroup: default
+
+   minion:
+      master: &lt;master server&gt;
+</pre>
+<p>Salt provides drivers for various cloud host out of the box, such as GoGrid, HP Cloud, Google Compute Engine (GCE), Amazon AWS, Joyent, Linode, OpenNebula, ProfitBricks, Proxmox, Saltify, VexxHost, VMWare, etc.</p>
+<p>Once the cloud providers are configured, we can query the available location of the provider, available machine images, and its various sizes.</p>
+<pre class="result notranslate">
+salt-cloud --list-location my-amazon-cloud
+salt-cloud --list-images my-amazon-cloud
+salt-cloud --list-sizes my-amazon-cloud
+</pre>
+<h3>Cloud Profile</h3>
+<p>A Cloud profile specifies the virtual machine image and size. It can be configured under – /etc/salt/cloud.profiles.d/. Let us create a simple profile, <b>simple.conf</b>.</p>
+<pre class="result notranslate">
+aws_micro:
+   provider: my-amazon-cloud
+   image: &lt;image_id&gt;
+   size: &lt;machine_id e.g. t1.micro&gt;
+</pre>
+<h3>Virtual Machine</h3>
+<p>Once the provider and profiles are configured, we can easily provide a virtual machine using the salt-cloud as shown below.</p>
+<pre class="result notranslate">
+salt-cloud -p aws_micro master minion1 minion2
+</pre>
+<p>Where, <b>p</b> – Profile name master, minion1 and minion2 are the new virtual machines.</p>
+<p>The details of the newly created virtual machine can be obtained by using the following command.</p>
+<pre class="result notranslate">
+salt-cloud --query
+</pre>
+<p>The virtual machines can be destroyed using the following command &minus;</p>
+<pre class="result notranslate">
+slat-cloud -d master minion1
+</pre>
+<h2>Cloud Map</h2>
+<p>A Cloud Map is a special format to create multiple virtual machines at once. The format of the map file is to specify the profile and then add a list of the virtual machines under it.</p>
+<p>A sample map file is as follows &minus;</p>
+<pre class="result notranslate">
+micro:
+   - web1
+   - web2
+large:
+   - db1
+   - db2
+</pre>
+<p>The map file can be passed as an argument to the salt-cloud command to create the virtual machine as follows &minus;</p>
+<pre class="result notranslate">
+salt-cloud -m /path/to/mapfile
+</pre>
+<h1>SaltStack - Salt Proxy Minions</h1>
+<p>There are lot of devices like router, network gear, etc., having custom OS, limited memory and high security considerations. In those devices, we were not able to install the standard <b>salt-minion</b> and subsequently were unable to manage those systems. However, Salt provides an innovative technology to overcome this constrain.</p>
+<p>Salt has a separate module, salt proxy minion that controls the remote system using the REST service running in the remote system. This REST service is a HTTP based web service written using the <b>Representational State Transfer (REST)</b> concept and they are both easy to implement and easy to consume.</p>
+<p>Every device will have its own SDK and development environment to write complex applications. Salt expects a REST service to be developed in the device as per the Salt interface specification. Salt also provides a python module to write the REST web service. If the device supports python, then it will be easy to develop the REST web service.</p>
+<p>Once the REST web service is developed and deployed in the remote system, Salt can be configured to control the remote device using the REST web service instead of the salt minion.</p>
+<h2>Working Example</h2>
+<p>Let us learn the concept of <b>salt proxy minion</b> using a live working environment. For the live environment, we chose a Linux system for both the master and the proxy minion. We are going to control the system using REST web service instead of salt-minion.</p>
+<h3>Install and Configure REST Web Service</h3>
+<p>Salt provides a sample of the REST web service implementation, which is named as proxyminion_rest_example in its contrib module. Let us install the sample web service.</p>
+<ul class="list">
+<li><p>Install <b>‘bottle’</b> using the pip. The <b>bottle</b> command is a python web framework to develop web application.</p></li>
+</ul>
+<pre class="result notranslate">
+pip install bottle = 0.12.8
+</pre>
+<ul class="list">
+<li><p>Download the <b>saltstack/salt-contrib</b> project from github. Otherwise, clone the project using the following command.</p></li>
+</ul>
+<pre class="result notranslate">
+git clone https://github.com/saltstack/salt-contrib
+</pre>
+<ul class="list">
+<li><p>Open a terminal and go to the <b>salt-contrib</b> directory.</p></li>
+<li><p>This salt-contrib directory will have a folder, <b>proxyminion_rest_example</b>. This folder contains sample implementation for the REST web service. Go to the proxyminion_rest_example folder.</p></li>
+<li><p>Run the following command to start the REST web service.</p></li>
+</ul>
+<pre class="result notranslate">
+python rest.py --address &lt;your ip address&gt; --port 8000
+</pre>
+<ul class="list">
+<li><p>Open a browser and load http://«your ip address»:8000. This will show the default page with services and packages as shown in the screenshot below.</p></li>
+</ul>
+<img src="https://www.tutorialspoint.com/saltstack/images/rest_web_service.jpg" alt="REST Web Service" />
+<p>Now, we have configured the REST web service and it will check how to configure salt proxy to query the REST web service and control the system.</p>
+<h3>Configure Salt-Proxy</h3>
+<p>To configure the Salt-Proxy, we have to follow the steps given below.</p>
+<ul class="list">
+<li><p>We have to specify the master node for the salt-proxy. Edit the proxy-configuration file location, which is in/etc/salt /proxy, and enter the following code.</p></li>
+</ul>
+<pre class="result notranslate">
+master: &lt;your ip address&gt;
+</pre>
+<ul class="list">
+<li><p>Modify / create base pillar file in <b>/srv/pillar/top.sls</b> as shown in the following code block.</p></li>
+</ul>
+<pre class="result notranslate">
+base:
+  'p8000':
+      - p8000
+</pre>
+<ul class="list">
+<li><p>Add a new pillar file, <b>p8000.sls</b> in the <b>/srv/pillar</b> as shown in the code block below.</p></li>
+</ul>
+<pre class="result notranslate">
+proxy:
+   proxytype: rest_sample
+   url: http://&lt;your ip address&gt;:8000
+</pre>
+<ul class="list">
+<li><p>Start salt-proxy in the debug mode using the following command.</p></li>
+</ul>
+<pre class="result notranslate">
+salt-proxy --proxyid = p8000 -l debug
+</pre>
+<ul class="list">
+<li><p>Similar to the salt-minion, accept the <b>salt-proxy key</b> as shown below.</p></li>
+</ul>
+<pre class="result notranslate">
+salt-key -y -a p8000
+
+The following keys are going to be accepted:
+Unaccepted Keys:
+p8000
+Key for minion p8000 accepted.
+</pre>
+<h3>Running the Salt</h3>
+<p>Now, run the <b>salt</b> command and call the <b>ping.test</b> function as shown below.</p>
+<pre class="result notranslate">
+salt p8000 test.ping
+</pre>
+<p>We can run any function supported by the REST web service by using <b>salt</b>, which is similar to <b>salt-minion</b>.</p>
+<p>For example, the grain information can be obtained by using the following command.</p>
+<pre class="result notranslate">
+salt p8000 grains.items
+</pre>
+<h1>SaltStack - Event system</h1>
+<p>The event system in Salt is a local ZeroMQ PUB interface, which fires salt events. It is performed by the following components.</p>
+<ul class="list">
+<li><p><b>Event Sockets</b> &minus; It is used to publish events.</p></li>
+<li><p><b>Event library</b> &minus; It is used to listen to events and send the events into the salt system.</p></li>
+</ul>
+<h2>Salt Master Event</h2>
+<p>A Salt master provides different types of events, which are explained in detail below &minus;</p>
+<ul class="list">
+<li>Authentication events</li>
+<li>Start events</li>
+<li>Key events</li>
+<li>Job events</li>
+<li>Runner Events</li>
+<li>Presence Events</li>
+<li>Cloud Events</li>
+</ul>
+<p>Let us go through each of the event types in detail.</p>
+<h3>Authentication Events</h3>
+<p>These authentication events fire when a minion performs an authentication check with the master. It is represented by salt/auth.</p>
+<h3>Start Events</h3>
+<p>The start events fire whenever a minion connects to the Salt master and it is represented by salt/minion//start.</p>
+<h3>Key Events</h3>
+<p>The Key events are fired when the salt master is accepting and rejecting keys on the Salt minion. You can access this event using the salt-key command.</p>
+<h3>Job Events</h3>
+<p>A Job event is fired whenever a new job is going to start. It is represented by <b>salt/job//new</b>. Here, JID - Job id new - new job</p>
+<h3>Runner Events</h3>
+<p>When a runner begins execution, a runner event is fired. It is represented by salt/run//new.</p>
+<h3>Presence Events</h3>
+<p>When minions are connected or newly connected or disconnected, this event is fired on a regular interval. It is represented by – <b>salt/presence/present</b> and <b>salt/presence/change</b>. Here,</p>
+<ul class="list">
+<li><p><b>Present</b> &minus; means the Salt master is currently connected to the minions list.</p></li>
+<li><p><b>Change</b> &minus; used to detect a new minion – connected or disconnected.</p></li>
+</ul>
+<h3>Cloud Events</h3>
+<p>The salt-cloud events are fired on a virtual machine. Unless other events, it is not performed on the minion. You can access it using – <b>salt/cloud//creating</b>. It is fired when a Salt cloud starts the virtual machine execution process.</p>
+<h2>Event Tools</h2>
+<p>Now, let us go through the event tools and scripts. You can access the event bus using CLI. It is accessed by the following command.</p>
+<pre class="result notranslate">
+salt-run state.event pretty = True
+</pre>
+<p>Here, the runner is designed to interact with the event bus from external tools and shell scripts. Salt’s event bus can be accessed remotely via the <b>REST API</b>. It is represented by – (sample URL).</p>
+<pre class="result notranslate">
+curl -SsNk https://salt-api.example.com:8000/events?token = 05A3.
+</pre>
+<p>Similarly, you can access events from the Python scripts as well.</p>
+<h1>SaltStack - Orchestration</h1>
+<p>In general, <b>orchestration</b> is an automated coordination and arrangement of systems. Orchestrate runner is used to perform the orchestration in SaltStack.</p>
+<h2>Orchestrate Runner</h2>
+<p>he Orchestrate Runner offers all the functionality of the <b>OverState</b> (previous system). It is originally called as the <b>state.sls</b> runner. This orchestrate runner is used to generalize the Salt state system to a Salt master context.</p>
+<p>The <b>state.sls</b> and the <b>state.highstate</b> functions are executed on each Salt minion, but the <b>state.orchestrate</b> runner is executed on the master. The <b>state.orchestrate</b> runner allows you to manage your entire infrastructure as state fully. Let us understand how to go through a simple execution process.</p>
+<h3>Simple Execution</h3>
+<p>The Orchestrate Runner command is same as the <b>state.sls</b> function, but you can execute it with the “salt-run” instead of salt.</p>
+<p>Assume that you have a <b>sample.sls</b> file located at <b>/srv/salt/orch/samples.sls</b>. Add the following code in that file.</p>
+<p><b>sample.sls</b></p>
+<pre class="result notranslate">
+install_nginx:
+   salt.state:
+      - tgt: 'web*'
+      - sls:
+         - nginx
+</pre>
+<p>The following command is used to run on the master and it will apply the states defined in that file.</p>
+<pre class="result notranslate">
+salt-run state.orchestrate orch.sample
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+saltmaster.local_master:
+----------
+   ID: install_nginx
+   Function: salt.state
+   Result: True
+   Comment: States ran successfully.
+   Started: 11:54:56.308078
+   Duration: 63.401 ms
+   Changes:
+
+Summary for saltmaster.local_master
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time:  63.401 ms
+root@saltmaster:/home/vagrant#
+</pre>
+<p>Here, according to the Current Version, the runner function was renamed to <b>state.orchestrate</b>. This will be helpful to avoid confusion with the state.sls execution function, but the previous versions of <b>state.sls</b> must be used.</p>
+<h3>Execute Function</h3>
+<p>To execute a function, you should use the <b>salt.function</b>. Consider a file <b>data.sls</b> located at <b>/srv/salt/orch/data.sls</b>. Now, add the following changes in that file.</p>
+<p><b>data.sls</b></p>
+<pre class="result notranslate">
+cmd.run:
+   salt.function:
+      - tgt: '*'
+      - arg:
+         - rm -rf /tmp/data
+</pre>
+<p>The following command is used to execute the Salt function.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt-run state.orchestrate orch.data
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+saltmaster.local_master:
+----------
+   ID: cmd.run
+   Function: salt.function
+   Result: True
+   Comment: Function ran successfully. Function cmd.run ran on minion1, minion2.
+   Started: 12:14:54.791635
+   Duration: 234.615 ms
+   Changes:
+      minion1:
+
+      minion2:
+Summary for saltmaster.local_master
+------------
+Succeeded: 1 (changed = 1)
+Failed:    0
+------------
+Total states run:     1
+Total run time: 234.615 ms
+</pre>
+<h1>SaltStack - Salt Package Manager</h1>
+<p>Salt formulas are packaged and distributed to Salt masters using the package manager. This concept was influenced from <b>RPM</b>, <b>Yum</b> and <b>Pacman</b> packaging systems. Salt state, pillar, file templates and other files are used by the formula and then packaged into a single file.</p> 
+<p>After a formula package is created, it is copied to the Repository System to make it to use for Salt masters. Before moving to the package manager, let us have a look at how to install an “nginx” package using the Salt basic command.</p>
+<p>The following syntax is used to install a “nginx” package.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt '*' pkg.install nginx
+</pre>
+<p>Here, the <b>pkg.install nginx</b> command is used to install a package. After execution, you will see the following response.</p>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+   ----------
+   httpd:
+      ----------
+      new:
+         1
+      old:
+   httpd-cgi:
+      ----------
+      new:
+         1
+      old:
+   libxslt1.1:
+      ----------
+      new:
+         1.1.28-2build1
+      old:
+   nginx:
+      ----------
+      new:
+         1.4.6-1ubuntu3.7
+      old:
+   nginx-common:
+      ----------
+      new:
+         1.4.6-1ubuntu3.7
+      old:
+   nginx-core:
+      ----------
+      new:
+         1.4.6-1ubuntu3.7
+      old:
+minion1:
+   ----------
+   httpd:
+      ----------
+      new:
+         1
+      old:
+   httpd-cgi:
+      ----------
+      new:
+         1
+      old:
+   libxslt1.1:
+      ----------
+      new:
+         1.1.28-2build1
+      old:
+   nginx:
+      ----------
+      new:
+         1.4.6-1ubuntu3.7
+      old:
+   nginx-common:
+      ----------
+      new:
+         1.4.6-1ubuntu3.7
+      old:
+   nginx-core:
+      ----------
+      new:
+         1.4.6-1ubuntu3.7
+      old:
+</pre>
+<p>Now, you have installed a package. To start the services for that package, use the command given below.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt '*' service.start nginx
+</pre>
+<p>After running this command, the result looks as shown in the code block below.</p>
+<pre class="result notranslate">
+minion1:
+   True
+minion2:
+   True
+</pre>
+<p>Therefore, we have installed and started the services for the “nginx” package using the basic command. Let us now discuss how to build and install packages in the Salt package manager.</p>
+<h2>Building Packages</h2>
+<p>Packages can be built on any system where you can install Salt. There are three type of packages and they are follows.</p>
+<ul class="list">
+<li>Formula</li>
+<li>Reactor</li>
+<li>Conf</li>
+</ul>
+<p>Let us now understand how to build packages using the <b>Fomula</b> File.</p>
+<h3>Formula File</h3>
+<p>Most files from the package are located at the – /srv/spm/salt/ directory by default, but the pillar file can be placed in the – /srv/spm/pillar/ directory. The Formula file describes the package.</p>
+<p><b>Example</b></p>
+<pre class="result notranslate">
+name: apache
+os: RedHat
+os_family: RedHat
+version: 201607
+release: 2
+summary: Formula for installing Apache
+description: Formula for installing Apache
+</pre>
+<p>Here,</p>
+<ul class="list">
+<li><p><b>Name</b> &minus; The name of the package. Here, the package name is <b>apache</b>.</p></li>
+<li><p><b>os</b> &minus; It is used to know which operating systems can support this package.</p></li>
+<li><p><b>os_family</b> &minus; It is used to know which operating system families can support this package.</p></li>
+<li><p><b>Version</b> &minus; The version of the package. It is specified in an YYYYMM format.</p></li>
+<li><p><b>Release</b> &minus; This field refers primarily to a release of a version.</p></li>
+<li><p><b>Summary</b> &minus; Short lines description of the package.</p></li>
+<li><p><b>Description</b> &minus; A more detailed description of the package.</p></li>
+</ul>
+<h3>REACTOR</h3>
+<p>The reactor files resides in the <b>/srv/spm/reactor/</b> directory.</p>
+<h3>CONF</h3>
+<p>The files in this type of a package are configuration files for Salt, which normally live in the <b>/etc/salt/</b> directory. Configuration files for packages other than Salt can and should be handled with a Salt State (using a formula type of package).</p>
+<p>Let us continue with the following steps to build a package.</p>
+<ul class="list">
+<li><p>Create a FORMULA file and place it in the root of the package folder.</p></li>
+<li><p>Assemble the formula files in a folder on the build system.</p></li>
+<li><p>Run <b>spm build</b>. The package is built and placed in the /srv/spm_build folder. The following command is used to build a package.</p></li>
+</ul>
+<pre class="result notranslate">
+spm build /path/to/salt-packages-source/formula
+</pre>
+<ul class="list">
+<li><p>Now, copy the <b>.spm</b> file to a folder on the repository system.</p></li>
+<li><p>You can share the <b>srv/spm_build</b> folder on the network, or copy the files to your FTP or the Webserver.</p></li>
+<li><p>Generate repo metadata using the following command.</p></li>
+</ul>
+<pre class="result notranslate">
+spm create_repo /srv/spm_build
+</pre>
+<h2>Installing Packages</h2>
+<p>This section explains about installing Salt package manager packages.</p>
+<h3>Configure Remote Repositories</h3>
+<p>To configure remote repositories, the Salt Master needs to know where the repository is through a configuration process.</p>
+<p>Files are in the <b>/etc/salt/spm.repos.d/spm.repo</b> directory.</p>
+<p><b>Example</b></p>
+<pre class="result notranslate">
+file_repository:
+   url: https://spm.example.com/
+</pre>
+<p>Here, the file contains the name of the repository and the link to the repository. You can also use http, https, ftp, or the file path. To use file path, you can access it using the URL: file:///srv/spm_build.</p>
+<h3>Update Metadata</h3>
+<p>After the repository is configured on the Salt master, repository metadata is downloaded using the command below.</p>
+<pre class="result notranslate">
+spm update_repo
+</pre>
+<h3>Update File Roots</h3>
+<p>The SPM packages are located in the srv/spm/salt directory. Add the following path to the file roots on the Salt master,</p>
+<pre class="result notranslate">
+file_roots:
+   base:
+      1. /srv/salt
+      2. /srv/spm/salt
+</pre>
+<p>Now, restart the salt master.</p>
+<h3>Install Apache Package</h3>
+<p>To install the package apache, use the following command.</p>
+<pre class="result notranslate">
+spm install apache
+</pre>
+<p>You can also install directly from the SPM file using the command below.</p>
+<pre class="result notranslate">
+spm local install /srv/spm/apache-201607-1.spm
+</pre>
+<h3>Removing a Package</h3>
+<p>To remove a package, for example – apache, use the following command,</p>
+<pre class="result notranslate">
+spm remove apache
+</pre>
+<p>Note that, if any files have been modified, they will not be removed.</p>
+<h1>SaltStack - Python API</h1>
+<p>Salt provides programmatic access to all of its commands. Salt provides different modules for every section of the Salt system. Let us learn the basics of the python API and about how to run the basic salt commands in this chapter.</p>
+<h2>Configuration</h2>
+<p>The <b>salt.config</b> module is used to access Salt configuration details.</p>
+<pre class="result notranslate">
+import salt.config
+opts = salt.config.client_config('/etc/salt/master')
+</pre>
+<p>Here, the <b>client_config</b> reads the salt configuration file and returns the configuration details as dictionary.</p>
+<h2>Loader</h2>
+<p>The <b>salt.loader</b> module is used to load each modules in Salt such as grains, minions, etc.</p>
+<pre class="result notranslate">
+import salt.loader
+opts = salt.config.minion_config('/etc/salt/master')
+grains = salt.loader.grains(opts)
+</pre>
+<p>Here, <b>grains</b> reads the details of the grains in the Salt system and returns it.</p>
+<h2>Client Module</h2>
+<p>The <b>salt.client</b> module is used to execute salt, salt-call and the salt-SSH commands programmatically.</p>
+<p>The most important python classes are as follows &minus;</p>
+<ul class="list">
+<li>salt.client.LocalClient</li>
+<li>salt.client.Caller</li>
+<li>salt.client.ssh.client.SSHClient</li>
+</ul>
+<p>The main function provided by most of the client module is <b>cmd</b>. This function wraps the CLI options and executes it, which is similar to the command line and returns the results as python data structures.</p>
+<h3>LocalClient</h3>
+<p>The LocalClient is used to send commands from the master to the salt minions and return the results to the master.</p>
+<pre class="prettyprint notranslate">
+import salt.client
+
+local = salt.client.LocalClient()
+local.cmd('*', 'test.ping')
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+{'minion1': True, 'minion2': True }
+</pre>
+<h3>Caller</h3>
+<p>The Caller is used to run <b>salt-call</b> programmatically and return the results.</p>
+<pre class="prettyprint notranslate">
+import salt.client
+caller = salt.client.Caller()
+caller.cmd('test.ping')
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+True
+</pre>
+<h3>SSHClient</h3>
+<p>The SSHCient is used to run the <b>salt-ssh</b> programmatically and return the results.</p>
+<pre class="result notranslate">
+import salt.client.ssh.client
+ssh = salt.client.ssh.client.SSHClient()
+ssh.cmd('*', 'test.ping')
+</pre>
+<p>It will produce the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+{'minion1': True, 'minion2': True }
+</pre>
+<h3>CloudClient</h3>
+<p>The salt.cloud module is used to execute the salt-cloud commands programmatically.</p>
+<pre class="result notranslate">
+client = salt.cloud.CloudClient(path = '/etc/salt/cloud')
+</pre>
+<p>Cloud module provides functions to create VMs (create), to destroy VMs (destroy), list images provided by a cloud provider (list_images), list locations of a cloud provider (list_locations), list machine sizes of a cloud provider (list_sizes), etc.</p>
+<h1>SaltStack - Working Example</h1>
+<p>In this working example, we will create a Salt formula that will configure the apache web server along with the PHP software. Salt is a great way to execute ad-hoc commands, but you would not really want to continually configure your infrastructure this way. By creating a set of Salt formulas, you can reliably reproduce any configuration over.</p>
+<p>Salt Formulas are simple YAML text files and by default reside on your Salt Master in <b>/srv/salt/*</b>. Let us start by creating a Salt Formula to install the Apache web server and PHP at the same time.</p>
+<p>Create a file named “websetup.sls” under <b>/srv/salt/</b> directory and add the following code.</p>
+<h2>websetup.sls</h2>
+<pre class="result notranslate">
+websetup:
+   pkg:
+      - installed
+      - pkgs:
+         - apache2
+         - php5
+         - php5-mysql
+</pre>
+<p>In this example, notice the “- pkgs:” argument. Each item in the list below “- pkgs:” will be passed together to OS's package manager to be installed together. Whenever you have a large list of packages to install this is the most efficient way to install them.</p>
+<p>Apply this Formula to Salt master using the following command.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt 'minion2' state.sls websetup
+</pre>
+<p>Now, you will see the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+----------
+   ID: websetup
+   Function: pkg.installed
+   Result: True
+   Comment: 3 targeted packages were installed/updated.
+   Started: 01:50:53.978396
+   Duration: 86738.132 ms
+   Changes:
+      ----------
+         apache2:
+            ----------
+            new:
+               2.4.7-1ubuntu4.13
+            old:
+         apache2-api-20120211:
+            ----------
+            new:
+               1
+            old:
+         apache2-bin:
+            ----------
+            new:
+               2.4.7-1ubuntu4.13
+            old:
+         apache2-data:
+            ----------
+            new:
+               2.4.7-1ubuntu4.13
+            old:
+         libapache2-mod-php5:
+            ----------
+            new:
+               5.5.9+dfsg-1ubuntu4.21
+            old:
+         libapr1:
+            ----------
+            new:
+               1.5.0-1
+            old:
+         libaprutil1:
+            ----------
+            new:
+               1.5.3-1
+            old:
+         libaprutil1-dbd-sqlite3:
+            ----------
+            new:
+               1.5.3-1
+            old:
+         libaprutil1-ldap:
+            ----------
+            new:
+               1.5.3-1
+            old:
+         php5:
+            ----------
+            new:
+               5.5.9+dfsg-1ubuntu4.21
+            old:
+         php5-cli:
+            ----------
+            new:
+               5.5.9+dfsg-1ubuntu4.21
+            old:
+         php5-common:
+            ----------
+            new:
+               5.5.9+dfsg-1ubuntu4.21
+            old:
+         php5-json:
+            ----------
+            new:
+               1.3.2-2build1
+            old:
+         php5-mhash:
+            ----------
+            new:
+               1
+            old:
+         php5-mysql:
+            ----------
+            new:
+               5.5.9+dfsg-1ubuntu4.21
+            old:
+         php5-readline:
+            ----------
+            new:
+               5.5.9+dfsg-1ubuntu4.21
+            old:
+         phpapi-20121212:
+            ----------
+            new:
+               1
+            old:
+         ssl-cert:
+            ----------
+            new:
+               1.0.33
+            old:
+Summary for minion2
+------------
+Succeeded: 1 (changed = 1)
+Failed:    0
+------------ 
+Total states run:     1
+Total run time:  86.738 s
+</pre>
+<p>Now, you have installed the packages in <b>minion2</b>.</p>
+<h2>Highstate</h2>
+<p>A “highstate” is a way for Salt to determine which of the Salt Formulas should be applied to a certain minion. Execute a “highstate” using the following command.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt &lt;targets&gt; state.highstate
+</pre>
+<h2>top.sls</h2>
+<p>When the minion request to execute a highstate, as mentioned before, the minion requests the top.sls from the Salt master and searches for formulas that it matches. By default, this file is located at /srv/salt/top.sls. Let us add our formula to the top.sls file and set minion2 as target.</p>
+<pre class="result notranslate">
+base:
+   '*':
+      - common
+   'minion2’:
+      - websetup
+</pre>
+<p>Now, execute the <b>highstate</b> targeting minion2 as shown below.</p>
+<pre class="result notranslate">
+root@saltmaster:/home/vagrant# salt 'minion2' state.highstate
+</pre>
+<p>After applying this, you could see the following <b>output</b> &minus;</p>
+<pre class="result notranslate">
+minion2:
+----------
+   ID: common_packages
+   Function: pkg.installed
+   Result: True
+   Comment: All specified packages are already installed
+   Started: 01:55:17.998824
+   Duration: 461.615 ms
+   Changes:
+
+Summary for minion2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time: 461.615 ms
+</pre>
+<p>Now, Apache web server and PHP is installed in the minion2. In this way, we have to target minions using both <b>top.sls</b> and <b>highstate</b> and install the required software with minimal work and maximum flexibility.</p>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/saltstack/saltstack_working_example.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/saltstack/saltstack_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/saltstack/saltstack_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:37 GMT -->
+</html>

@@ -1,0 +1,4236 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/lisp/lisp_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:10:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>LISP - Quick Guide</title>
+<meta name="description" content="LISP Quick Guide - learn lisp programming in simple and easy steps using this beginner's tutorial starting from basic concepts of the language, environment setup, program structure, basic syntax, variables, constants, data types, macros, operators, loops, decision making, numbers, strings, characters, arrays, functions, predicates, file i/o, sequences, lists, arrays, symbols, vectors, set, tree, hash table, input & output, structures, packages, error handling and Object Oriented LISP." />
+<meta name="keywords" content="LISP, tutorial, beginner, language, environment, setup, program structure, basic syntax, variables, constants, data types, macros, operators, loops, decision making, numbers, strings, characters, arrays, functions, Predicates, file i/o, sequences, lists, arrays, symbols, vectors, set, tree, hash table, input & output, structures, packages, error handling, Object, Oriented." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+pre.prettyprint.tryit {min-height:37px; background: #eee url(images/try-it.jpg) top right no-repeat !important}select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #f8ba30 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #f8ba30 !important;}
+.submenu-item{ border-bottom: 2px solid #f8ba30 !important; border-top: 2px solid #f8ba30 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/lisp-mini-logo.jpg" alt="Lisp Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">LISP Tutorial</li>
+<li><a href="index.html">LISP - Home</a></li>
+<li><a href="lisp_overview.html">LISP - Overview</a></li>
+<li><a href="lisp_environment.html">LISP - Environment</a></li>
+<li><a href="lisp_program_structure.html">LISP - Program Structure</a></li>
+<li><a href="lisp_basic_syntax.html">LISP - Basic Syntax</a></li>
+<li><a href="lisp_data_types.html">LISP - Data Types</a></li>
+<li><a href="lisp_macros.html">LISP - Macros</a></li>
+<li><a href="lisp_variables.html">LISP - Variables</a></li>
+<li><a href="lisp_constants.html">LISP - Constants</a></li>
+<li><a href="lisp_operators.html">LISP - Operators</a></li>
+<li><a href="lisp_decisions.html">LISP - Decisions</a></li>
+<li><a href="lisp_loops.html">LISP - Loops</a></li>
+<li><a href="lisp_functions.html">LISP - Functions</a></li>
+<li><a href="lisp_predicates.html">LISP - Predicates</a></li>
+<li><a href="lisp_numbers.html">LISP - Numbers</a></li>
+<li><a href="lisp_characters.html">LISP - Characters</a></li>
+<li><a href="lisp_arrays.html">LISP - Arrays</a></li>
+<li><a href="lisp_strings.html">LISP - Strings</a></li>
+<li><a href="lisp_sequences.html">LISP - Sequences</a></li>
+<li><a href="lisp_lists.html">LISP - Lists</a></li>
+<li><a href="lisp_symbols.html">LISP - Symbols</a></li>
+<li><a href="lisp_vectors.html">LISP - Vectors</a></li>
+<li><a href="lisp_set.html">LISP - Set</a></li>
+<li><a href="lisp_tree.html">LISP - Tree</a></li>
+<li><a href="lisp_hash_table.html">LISP - Hash Table</a></li>
+<li><a href="lisp_input_output.html">LISP - Input &amp; Output</a></li>
+<li><a href="lisp_file_io.html">LISP - File I/O</a></li>
+<li><a href="lisp_structures.html">LISP - Structures</a></li>
+<li><a href="lisp_packages.html">LISP - Packages</a></li>
+<li><a href="lisp_error_handling.html">LISP - Error Handling</a></li>
+<li><a href="lisp_clos.html">LISP - CLOS</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">LISP Useful Resources</li>
+<li><a href="lisp_quick_guide.html">Lisp - Quick Guide</a></li>
+<li><a href="lisp_useful_resources.html">Lisp - Useful Resources</a></li>
+<li><a href="lisp_discussion.html">Lisp - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>LISP - Quick Guide</h1>
+<div class="topgooglead">
+<hr>
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="lisp_clos.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="lisp_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>LISP - Overview</h1>
+<p>John McCarthy invented LISP in 1958, shortly after the development of FORTRAN. It was first implement by Steve Russell on an IBM 704 computer.</p>
+<p>It is particularly suitable for Artificial Intelligence programs, as it processes symbolic information effectively.</p>
+<p>Common Lisp originated, during the 1980s and 1990s, in an attempt to unify the work of several implementation groups, which were successors to Maclisp like ZetaLisp and NIL (New Implementation of Lisp) etc.</p>
+<p>It serves as a common language, which can be easily extended for specific implementation.</p>
+<p>Programs written in Common LISP do not depend on machine-specific characteristics, such as word length etc.</p>
+<h2>Features of Common LISP</h2>
+<ul class="list">
+<li><p>It is machine-independent</p></li>
+<li><p>It uses iterative design methodology, and easy extensibility.</p></li>
+<li><p>It allows updating the programs dynamically.</p></li>
+<li><p>It provides high level debugging.</p></li>
+<li><p>It provides advanced object-oriented programming.</p></li>
+<li><p>It provides convenient macro system.</p></li>
+<li><p>It provides wide-ranging data types like, objects, structures, lists, vectors, adjustable arrays, hash-tables, and symbols.</p></li>
+<li><p>It is expression-based.</p></li>
+<li><p>It provides an object-oriented condition system.</p></li>
+<li><p>It provides complete I/O library.</p></li>
+<li><p>It provides extensive control structures.</p></li>
+</ul>
+<h2>Applications Built in LISP</h2>
+<p>Large successful applications built in Lisp.</p>
+<ul class="list">
+<li>Emacs</li>
+<li>G2</li>
+<li>AutoCad</li>
+<li>Igor Engraver</li>
+<li>Yahoo Store</li>
+</ul>
+<h1>LISP - Environment</h1>
+<p>CLISP is the GNU Common LISP multi-architechtural compiler used for setting up LISP in Windows. The windows version emulates a unix environment using MingW under windows. The installer takes care of this and automatically adds clisp to the windows PATH variable.</p>
+<p>You can get the latest CLISP for Windows from here - <a href="http://sourceforge.net/projects/clisp/files/latest/download" rel="nofollow" target="_blank">http://sourceforge.net/projects/clisp/files/latest/download</a></p>
+<img src="images/lisp_environment_setup.jpg" alt="List Environment Setup" />
+<p>It creates a shortcut in the Start Menu by default, for the line-by-line interpreter.</p>
+<h2>How to use CLISP</h2>
+<p>During installation, <b>clisp</b> is automatically added to your PATH variable if you select the option (RECOMMENDED)  This means that you can simply open a new Command Prompt window and type “clisp” to bring up the compiler.</p>
+<p>To run a *.lisp or *.lsp file, simply use -</p>
+<pre class="prettyprint notranslate">
+clisp hello.lisp
+</pre>
+<h1>LISP - Program Structure</h1>
+<p>LISP expressions are called symbolic expressions or s-expressions. The s-expressions are composed of three valid objects, atoms, lists and strings.</p>
+<p>Any s-expression is a valid program.</p>
+<p>LISP programs run either on an <b>interpreter</b> or as <b>compiled code.</b></p>
+<p>The interpreter checks the source code in a repeated loop, which is also called the read-evaluate-print loop (REPL). It reads the program code, evaluates it, and prints the values returned by the program.</p>
+<h2>A Simple Program</h2>
+<p>Let us write an s-expression to find the sum of three numbers 7, 9 and 11. To do this, we can type at the interpreter prompt.</p>
+<pre class="prettyprint notranslate">
+(+ 7 9 11)
+</pre>
+<p>LISP returns the result:</p>
+<pre class="result notranslate">
+27
+</pre>
+<p>If you would like to run the same program as a compiled code, then create a LISP source code file named myprog.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (+ 7 9 11))
+
+
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+27
+</pre>
+<h2>LISP Uses Prefix Notation</h2>
+<p>You might have noted that LISP uses <b>prefix notation.</b></p>
+<p>In the above program the + symbol works as the function name for the process of summation of the numbers.</p>
+<p>In prefix notation, operators are written before their operands. For example, the expression,</p>
+<pre class="prettyprint notranslate">
+a * ( b + c ) / d
+</pre>
+<p>will be written as:</p>
+<pre class="prettyprint notranslate">
+(/ (* a (+ b c) ) d)
+</pre>
+<p>Let us take another example, let us write code for converting Fahrenheit temp of 60<sup>o</sup> F to the centigrade scale:</p>
+<p>The mathematical expression for this conversion will be:</p>
+<pre class="prettyprint notranslate">
+(60 * 9 / 5) + 32
+</pre>
+<p>Create a source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write(+ (* (/ 9 5) 60) 32))
+
+
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+140
+</pre>
+<h2>Evaluation of LISP Programs</h2>
+<p>Evaluation of LISP programs has two parts:</p>
+<ul class="list">
+<li><p>Translation of program text into Lisp objects by a reader program</p></li>
+<li><p>Implementation of the semantics of the language in terms of these objects by an evaluator program</p></li>
+</ul>
+<p>The evaluation process takes the following steps:</p>
+<ul class="list">
+<li><p>The reader translates the strings of characters to LISP objects or <b>s-expressions.</b></p></li>
+<li><p>The evaluator defines syntax of Lisp <b>forms</b> that are built from s-expressions. This second level of evaluation defines a syntax that determines which <b>s-expressions</b> are LISP forms.</p></li>
+<li><p>The evaluator works as a function that takes a valid LISP form as an argument and returns a value. This is the reason why we put the LISP expression in parenthesis, because we are sending the entire expression/form to the evaluator as arguments.</p></li>
+</ul>
+<h2>The 'Hello World' Program</h2>
+<p>Learning a new programming language doesn't really take off until you learn how to greet the entire world in that language, right!</p>
+<p>So, please create new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write-line "Hello World")
+
+(write-line "I am at 'Tutorials Point'! Learning LISP")
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+Hello World
+
+I am at 'Tutorials Point'! Learning LISP
+</pre>
+<h1>LISP - Basic Syntax</h1>
+<h2>Basic Building Blocks in LISP</h2>
+<p>LISP programs are made up of three basic building blocks:</p>
+<ul class="list">
+<li>atom</li>
+<li>list</li>
+<li>string</li>
+</ul>
+<p>An <b>atom</b> is a number or string of contiguous characters. It includes numbers and special characters.</p>
+<p>Following are examples of some valid atoms:</p>
+<pre class="prettyprint notranslate">
+hello-from-tutorials-point
+name
+123008907
+*hello*
+Block#221
+abc123
+</pre>
+<p>A <b>list</b> is a sequence of atoms and/or other lists enclosed in parentheses.</p>
+<p>Following are examples of some valid lists:</p>
+<pre class="prettyprint notranslate">
+( i am a list)
+(a ( a b c) d e fgh)
+(father tom ( susan bill joe))
+(sun mon tue wed thur fri sat)
+( )
+</pre>
+<p>A <b>string</b> is a group of characters enclosed in double quotation marks.</p>
+<p>Following are examples of some valid strings:</p>
+<pre class="prettyprint notranslate">
+" I am a string"
+"a ba c d efg #$%^&!"
+"Please enter the following details :"
+"Hello from 'Tutorials Point'! "
+</pre>
+<h2>Adding Comments</h2>
+<p>The semicolon symbol (;) is used for indicating a comment line.</p>
+<p>For Example,</p>
+<pre class="prettyprint notranslate tryit">
+(write-line "Hello World") ; greet the world
+
+; tell them your whereabouts
+
+(write-line "I am at 'Tutorials Point'! Learning LISP")
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+Hello World
+
+I am at 'Tutorials Point'! Learning LISP
+</pre>
+<h2>Some Notable Points before Moving to Next</h2>
+<p>Following are some of the important points to note:</p>
+<ul class="list">
+<li><p>The basic numeric operations in LISP are +, -, *, and /</p></li>
+<li><p>LISP represents a function call f(x) as (f x), for example cos(45) is written as cos 45</p></li>
+<li><p>LISP expressions are case-insensitive, cos 45 or COS 45 are same.</p></li>
+<li><p>LISP tries to evaluate everything, including the arguments of a function. Only three types of elements are constants and always return their own value</p>
+<ul class="list">
+<li><p>Numbers</p></li>
+<li><p>The letter <b>t,</b> that stands for logical true.</p></li>
+<li><p>The value <b>nil,</b> that stands for logical false, as well as an empty list.</p></li>
+</ul>
+</li>
+</ul>
+<h2>Little More about LISP Forms</h2>
+<p>In the previous chapter, we mentioned that the evaluation process of LISP code takes the following steps.</p>
+<ul class="list">
+<li><p>The reader translates the strings of characters to LISP objects or <b>s-expressions.</b></p></li>
+<li><p>The evaluator defines syntax of Lisp <b>forms</b> that are built from s-expressions. This second level of evaluation defines a syntax that determines which s-expressions are LISP forms.</p></li>
+</ul>
+<p>Now, a LISP forms could be.</p>
+<ul class="list">
+<li>An Atom</li>
+<li>An empty or non-list</li>
+<li>Any list that has a symbol as its first element</li>
+</ul>
+<p>The evaluator works as a function that takes a valid LISP form as an argument and returns a value. This is the reason why we put the <b>LISP expression in parenthesis,</b> because we are sending the entire expression/form to the evaluator as arguments.</p>
+<h2>Naming Conventions in LISP</h2>
+<p>Name or symbols can consist of any number of alphanumeric characters other than whitespace, open and closing parentheses, double and single quotes, backslash, comma, colon, semicolon and vertical bar. To use these characters in a name, you need to use escape character (\).</p>
+<p>A name can have digits but not entirely made of digits, because then it would be read as a number. Similarly a name can have periods, but can't be made entirely of periods.</p>
+<h2>Use of Single Quotation Mark</h2>
+<p>LISP evaluates everything including the function arguments and list members.</p>
+<p>At times, we need to take atoms or lists literally and don't want them evaluated or treated as function calls.</p>
+<p>To do this, we need to precede the atom or the list with a single quotation mark.</p>
+<p>The following example demonstrates this.</p>
+<p>Create a file named main.lisp and type the following code into it.</p>
+<pre class="prettyprint notranslate tryit">
+(write-line "single quote used, it inhibits evaluation")
+(write '(* 2 3))
+(write-line " ")
+(write-line "single quote not used, so expression evaluated")
+(write (* 2 3))
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+single quote used, it inhibits evaluation
+(* 2 3) 
+single quote not used, so expression evaluated
+6
+</pre>
+<h1>LISP - Data Types</h1>
+<p>In LISP, variables are not typed, but data objects are.</p>
+<p>LISP data types can be categorized as.</p>
+<ul class="list">
+<li><p><b>Scalar types</b> - for example, number types, characters, symbols etc.</p></li>
+<li><p><b>Data structures</b> - for example, lists, vectors, bit-vectors, and strings.</p></li>
+</ul>
+<p>Any variable can take any LISP object as its value, unless you have declared it explicitly.</p>
+<p>Although, it is not necessary to specify a data type for a LISP variable, however, it helps in certain loop expansions, in method declarations and some other situations that we will discuss in later chapters.</p>
+<p>The data types are arranged into a hierarchy. A data type is a set of LISP objects and many objects may belong to one such set.</p>
+<p>The <b>typep</b> predicate is used for finding whether an object belongs to a specific type.</p>
+<p>The <b>type-of</b> function returns the data type of a given object.</p>
+<h2>Type Specifiers in LISP</h2>
+<p>Type specifiers are system-defined symbols for data types.</p>
+<table class="table table-bordered">
+<tr>
+<td>array</td>
+<td>fixnum</td>
+<td>package</td>
+<td>simple-string</td>
+</tr>
+<tr>
+<td>atom</td>
+<td>float</td>
+<td>pathname</td>
+<td>simple-vector</td>
+</tr>
+<tr>
+<td>bignum</td>
+<td>function</td>
+<td>random-state</td>
+<td>single-float</td>
+</tr>
+<tr>
+<td>bit</td>
+<td>hash-table</td>
+<td>ratio</td>
+<td>standard-char</td>
+</tr>
+<tr>
+<td>bit-vector</td>
+<td>integer</td>
+<td>rational</td>
+<td>stream</td>
+</tr>
+<tr>
+<td>character</td>
+<td>keyword</td>
+<td>readtable</td>
+<td>string</td>
+</tr>
+<tr>
+<td>[common]</td>
+<td>list</td>
+<td>sequence</td>
+<td>[string-char]</td>
+</tr>
+<tr>
+<td style="width:25%;">compiled-function</td>
+<td>long-float</td>
+<td>short-float</td>
+<td>symbol</td>
+</tr>
+<tr>
+<td>complex</td>
+<td>nill</td>
+<td>signed-byte</td>
+<td>t</td>
+</tr>
+<tr>
+<td>cons</td>
+<td>null</td>
+<td>simple-array</td>
+<td>unsigned-byte</td>
+</tr>
+<tr>
+<td>double-float</td>
+<td>number</td>
+<td style="width:24%;">simple-bit-vector</td>
+<td>vector</td>
+</tr>
+</table>
+<p>Apart from these system-defined types, you can create your own data types. When a structure type is defined using <b>defstruct</b> function, the name of the structure type becomes a valid type symbol.</p>
+<h3>Example 1</h3>
+<p>Create new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq x 10)
+(setq y 34.567)
+(setq ch nil)
+(setq n 123.78)
+(setq bg 11.0e+4)
+(setq r 124/2)
+(print x)
+(print y)
+(print n)
+(print ch)
+(print bg)
+(print r)
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+10 
+34.567 
+123.78 
+NIL 
+110000.0 
+62
+</pre>
+<h3>Example 2</h3>
+<p>Next let's check the types of the variables used in the previous example. Create new source code file named main. lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defvar x 10)
+(defvar y 34.567)
+(defvar ch nil)
+(defvar n 123.78)
+(defvar bg 11.0e+4)
+(defvar r 124/2)
+
+(print (type-of x))
+(print (type-of y))
+(print (type-of n))
+(print (type-of ch))
+(print (type-of bg))
+(print (type-of r))
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+(INTEGER 0 281474976710655) 
+SINGLE-FLOAT 
+SINGLE-FLOAT 
+NULL 
+SINGLE-FLOAT 
+(INTEGER 0 281474976710655)
+</pre>
+<h1>LISP - Macros</h1>
+<p>Macros allow you to extend the syntax of standard LISP.</p>
+<p>Technically, a macro is a function that takes an s-expression as arguments and returns a LISP form, which is then evaluated.</p>
+<h2>Defining a Macro</h2>
+<p>In LISP, a named macro is defined using another macro named <b>defmacro.</b> Syntax for defining a macro is:</p>
+<pre class="prettyprint notranslate">
+(defmacro macro-name (parameter-list))
+"Optional documentation string."
+body-form
+</pre>
+<p>The macro definition consists of the name of the macro, a parameter list, an optional documentation string, and a body of Lisp expressions that defines the job to be performed by the macro.</p>
+<h3>Example</h3>
+<p>Let us write a simple macro named setTo10, which will take a number and set its value to 10.</p>
+<p>Create new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defmacro setTo10(num)
+(setq num 10)(print num))
+(setq x 25)
+(print x)
+(setTo10 x)
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+25
+10
+</pre>
+<h1>LISP - Variables</h1>
+<p>In LISP, each variable is represented by a <b>symbol</b>. The variable's name is the name of the symbol and it is stored in the storage cell of the symbol.</p>
+<h2>Global Variables</h2>
+<p>Global variables have permanent values throughout the LISP system and remain in effect until a new value is specified.</p>
+<p>Global variables are generally declared using the <b>defvar</b> construct.</p>
+<h3>For example</h3>
+<pre class="prettyprint notranslate tryit">
+(defvar x 234)
+(write x)
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is</p>
+<pre class="result notranslate">
+234
+</pre>
+<p>Since there is no type declaration for variables in LISP, you directly specify a value for a symbol with the <b>setq</b> construct.</p>
+<h3>For Example</h3>
+<pre class="prettyprint notranslate">
+->(setq x 10)
+</pre>
+<p>The above expression assigns the value 10 to the variable x. You can refer to the variable using the symbol itself as an expression.</p>
+<p>The <b>symbol-value</b> function allows you to extract the value stored at the symbol storage place.</p>
+<h3>For Example</h3>
+<p>Create new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq x 10)
+(setq y 20)
+(format t "x = ~2d y = ~2d ~%" x y)
+(setq x 100)
+(setq y 200)
+(format t "x = ~2d y = ~2d" x y)
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is.</p>
+<pre class="result notranslate">
+x = 10 y = 20 
+x = 100 y = 200
+</pre>
+<h2>Local Variables</h2>
+<p>Local variables are defined within a given procedure. The parameters named as arguments within a function definition are also local variables. Local variables are accessible only within the respective function.</p>
+<p>Like the global variables, local variables can also be created using the <b>setq</b> construct.</p>
+<p>There are two other constructs - <b>let</b> and <b>prog</b> for creating local variables.</p>
+<p>The let construct has the following syntax.</p>
+<pre class="prettyprint notranslate">
+(let ((var1  val1) (var2  val2).. (varn  valn))<s-expressions>)
+</pre>
+<p>Where var1, var2, ..varn are variable names and val1, val2, .. valn are the initial values assigned to the respective variables.</p>
+<p>When <b>let</b> is executed, each variable is assigned the respective value and lastly the <i>s-expression</i> is evaluated. The value of the last expression evaluated is returned.</p>
+<p>If you don't include an initial value for a variable, it is assigned to <b>nil.</b></p>
+<h3>Example</h3>
+<p>Create new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(let ((x 'a) (y 'b)(z 'c))
+(format t "x = ~a y = ~a z = ~a" x y z))
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is.</p>
+<pre class="result notranslate">
+x = A y = B z = C
+</pre>
+<p>The <b>prog</b> construct also has the list of local variables as its first argument, which is followed by the body of the <b>prog,</b> and any number of s-expressions.</p>
+<p>The <b>prog</b> function executes the list of s-expressions in sequence and returns nil unless it encounters a function call named <b>return.</b> Then the argument of the <b>return</b> function is evaluated and returned.</p>
+<h3>Example</h3>
+<p>Create new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(prog ((x '(a b c))(y '(1 2 3))(z '(p q 10)))
+(format t "x = ~a y = ~a z = ~a" x y z))
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is.</p>
+<pre class="result notranslate">
+x = (A B C) y = (1 2 3) z = (P Q 10)
+</pre>
+<h1>LISP - Constants</h1>
+<p>In LISP, constants are variables that never change their values during program execution. Constants are declared using the <b>defconstant</b> construct.</p>
+<h2>Example</h2>
+<p>The following example shows declaring a global constant PI and later using this value inside a function named <i>area-circle</i> that calculates the area of a circle.</p>
+<p>The <b>defun</b> construct is used for defining a function, we will look into it in the <b>Functions</b> chapter.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defconstant PI 3.141592)
+(defun area-circle(rad)
+   (terpri)
+   (format t "Radius: ~5f" rad)
+   (format t "~%Area: ~10f" (* PI rad rad)))
+(area-circle 10)
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is.</p>
+<pre class="result notranslate">
+Radius:  10.0
+Area:   314.1592
+</pre>
+<h1>LISP - Operators</h1>
+<p>An operator is a symbol that tells the compiler to perform specific mathematical or logical manipulations. LISP allows numerous operations on data, supported by various functions, macros and other constructs.</p>
+<p>The operations allowed on data could be categorized as:</p>
+<ul class="list">
+<li>Arithmetic Operations</li>
+<li>Comparison Operations</li>
+<li>Logical Operations</li>
+<li>Bitwise Operations</li>
+</ul>
+<h2>Arithmetic Operations</h2>
+<p>The following table shows all the arithmetic operators supported by LISP. Assume variable <b>A</b> holds 10 and variable <b>B</b> holds 20 then:</p>
+<p><b><a href="lisp_arithmetic_operators.html">Show Examples</a></b></p> 
+<table class="table table-bordered">
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td>+</td>
+<td>Adds two operands</td>
+<td style="width:28%;">(+A B) will give 30</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Subtracts second operand from the first</td>
+<td>(- A B) will give -10</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Multiplies both operands</td>
+<td>(* A B) will give 200</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Divides numerator by de-numerator</td>
+<td>(/ B A) will give 2</td>
+</tr>
+<tr>
+<td>mod,rem</td>
+<td>Modulus Operator and remainder of after an integer division</td>
+<td>(mod B A )will give 0</td>
+</tr>
+<tr>
+<td>incf</td>
+<td>Increments operator increases integer value by the second argument specified</td>
+<td>(incf A 3) will give 13</td>
+</tr>
+<tr>
+<td>decf</td>
+<td>Decrements operator decreases integer value by the second argument specified</td>
+<td>(decf A 4) will give 9</td>
+</tr>
+</table>
+<h2>Comparison Operations</h2>
+<p>Following table shows all the relational operators supported by LISP that compares between numbers. However unlike relational operators in other languages, LISP comparison operators may take more than two operands and they work on numbers only.</p>
+<p>Assume variable <b>A</b> holds 10 and variable <b>B</b> holds 20, then:</p>
+<p><b><a href="lisp_comparison_operators.html">Show Examples</a></b></p>
+<table class="table table-bordered">
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th style="width:28%;">Example</th>
+</tr>
+<tr>
+<td>=</td>
+<td>Checks if the values of the operands are all equal or not, if yes then condition becomes true.</td>
+<td>(= A B) is not true.</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>Checks if the values of the operands are all different or not, if values are not equal then condition becomes true.</td>
+<td>(/= A B) is true.</td>
+</tr>
+<tr>
+<td>></td>
+<td>Checks if the values of the operands are monotonically decreasing.</td>
+<td>(> A  B) is not true.</td>
+</tr>
+<tr>
+<td>&#60;</td>
+<td>Checks if the values of the operands are monotonically increasing.</td>
+<td>(&#60; A B) is true.</td>
+</tr>
+<tr>
+<td>>=</td>
+<td>Checks if the value of any left operand is greater than or equal to the value of next right operand, if yes then condition becomes true.</td>
+<td>(>= A  B) is not true.</td>
+</tr>
+<tr>
+<td>&#60;=</td>
+<td>Checks if the value of any left operand is less than or equal to the value of its right operand, if yes then condition becomes true.</td>
+<td>(&#60;= A  B) is true.</td>
+</tr>
+<tr>
+<td>max</td>
+<td>It compares two or more arguments and returns the maximum value.</td>
+<td>(max A B) returns 20</td>
+</tr>
+<tr>
+<td>min</td>
+<td>It compares two or more arguments and returns the minimum value.</td>
+<td>(min A B) returns 20</td>
+</tr>
+</table>
+<h2>Logical Operations on Boolean Values</h2>
+<p>Common LISP provides three logical operators: <b>and, or,</b> and <b>not</b> that operates on Boolean values. Assume <b>A</b> has value nil and <b>B</b> has value 5, then:</p>
+<p><b><a href="lisp_logical_operators.html">Show Examples</a></b></p>
+<table class="table table-bordered">
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th style="width:33%;">Example</th>
+</tr>
+<tr>
+<td>and</td>
+<td>It takes any number of arguments. The arguments are evaluated left to right. If all arguments evaluate to non-nil, then the value of the last argument is returned. Otherwise nil is returned.</td>
+<td>(and A  B) will return NIL.</td>
+</tr>
+<tr>
+<td>or</td>
+<td>It takes any number of arguments. The arguments are evaluated left to right until one evaluates to non-nil, in such case the argument value is returned, otherwise it returns <b>nil</b>.</td>
+<td>(or A  B) will return 5.</td>
+</tr>
+<tr>
+<td>not</td>
+<td>It takes one argument and returns <b>t</b> if the argument evaluates to <b>nil.</b></td>
+<td>(not A) will return T.</td>
+</tr>
+</table>
+<h2>Bitwise Operations on Numbers</h2>
+<p>Bitwise operators work on bits and perform bit-by-bit operation. The truth tables for bitwise and, or, and xor operations are as follows:</p>
+<p><b><a href="lisp_bitwise_operators.html">Show Examples</a></b></p>
+<table class="table table-bordered">
+<tr>
+<th>p</th>
+<th>q</th>
+<th>p and q</th>
+<th>p or q</th>
+<th>p xor q</th>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</table>
+<pre class="prettyprint notranslate">
+Assume if A = 60; and B = 13; now in binary format they will be as follows:
+A = 0011 1100
+B = 0000 1101
+-----------------
+A and B = 0000 1100
+A or B = 0011 1101
+A xor B = 0011 0001
+not A  = 1100 0011
+</pre>
+<p>The Bitwise operators supported by LISP are listed in the following table. Assume variable <b>A</b> holds 60 and variable <b>B</b> holds 13, then:</p>
+<table class="table table-bordered">
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th style="width:32%;">Example</th>
+</tr>
+<tr>
+<td>logand</td>
+<td>This returns the bit-wise logical AND of its arguments. If no argument is given, then the result is -1, which is an identity for this operation.</td>
+<td>(logand a b)) will give 12</td>
+</tr>
+<tr>
+<td>logior</td>
+<td>This returns the bit-wise logical INCLUSIVE OR of its arguments. If no argument is given, then the result is zero, which is an identity for this operation.</td>
+<td>(logior a b) will give 61</td>
+</tr>
+<tr>
+<td>logxor</td>
+<td>This returns the bit-wise logical EXCLUSIVE OR of its arguments. If no argument is given, then the result is zero, which is an identity for this operation.</td>
+<td>(logxor a b) will give 49</td>
+</tr>
+<tr>
+<td>lognor</td>
+<td>This returns the bit-wise NOT of its arguments. If no argument is given, then the result is -1, which is an identity for this operation.</td>
+<td>(lognor a b) will give -62,</td>
+</tr>
+<tr>
+<td>logeqv</td>
+<td>This returns the bit-wise logical EQUIVALENCE (also known as exclusive nor) of its arguments. If no argument is given, then the result is -1, which is an identity for this operation.</td>
+<td>(logeqv a b) will give -50</td>
+</tr>
+</table>
+<h1>LISP - Decision Making</h1>
+<p>Decision making structures require that the programmer specify one or more conditions to be evaluated or tested by the program, along with a statement or statements to be executed if the condition is determined to be true, and optionally, other statements to be executed if the condition is determined to be false.</p>
+<p>Following is the general form of a typical decision making structure found in most of the programming languages:</p>
+<img src="images/deccons.jpg" alt="Decision Making" />
+<p>LISP provides following types of decision making constructs. Click the following links to check their detail.</p>
+<table class="table table-bordered">
+<tr>
+<th>Construct</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><p><a href="lisp_cond_construct.html">cond</a></p></td>
+<td>This construct is used for used for checking multiple test-action clauses. It can be compared to the nested if statements in other programming languages.</td>
+</tr>
+<tr>
+<td><p><a href="lisp_if_construct.html">if</a></p></td>
+<td>The if construct has various forms. In simplest form it is followed by a test clause, a test action and some other consequent action(s). If the test clause evaluates to true, then the test action is executed otherwise, the consequent clause is evaluated.</td>
+</tr>
+<tr>
+<td><p><a href="lisp_when_construct.html">when</a></p></td>
+<td>In simplest form it is followed by a test clause, and a test action. If the test clause evaluates to true, then the test action is executed otherwise, the consequent clause is evaluated.</td>
+</tr>
+<tr>
+<td><p><a href="lisp_case_construct.html">case</a></p></td>
+<td>This construct implements multiple test-action clauses like the cond construct. However, it evaluates a key form and allows multiple action clauses based on the evaluation of that key form.</td>
+</tr>
+</table>
+<h1>LISP - Loops</h1>
+<p>There may be a situation, when you need to execute a block of code numbers of times. A loop statement allows us to execute a statement or group of statements multiple times and following is the general form of a loop statement in most of the programming languages.</p>
+<img src="images/loop.jpg" alt="Loops" />
+<p>LISP provides the following types of constructs to handle looping requirements. Click the following links to check their detail.</p>
+<table class="table table-bordered">
+<tr>
+<th>Construct</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><p><a href="lisp_loop_construct.html">loop</a></p></td>
+<td>The <b>loop</b> construct is the simplest form of iteration provided by LISP. In its simplest form, it allows you to execute some statement(s) repeatedly until it finds a <b>return</b> statement.</td>
+</tr>
+<tr>
+<td><p><a href="lisp_loop_for.html">loop for</a></p></td>
+<td>The loop for construct allows you to implement a for-loop like iteration as most common in other languages.</td>
+</tr>
+<tr>
+<td><p><a href="lisp_do.html">do</a></p></td>
+<td>The do construct is also used for performing iteration using LISP. It provides a structured form of iteration.</td>
+</tr>
+<tr>
+<td><p><a href="lisp_do_times.html">dotimes</a></p></td>
+<td>The dotimes construct allows looping for some fixed number of iterations.</td>
+</tr>
+<tr>
+<td><p><a href="lisp_do_list.html">dolist</a></p></td>
+<td>The dolist construct allows iteration through each element of a list.</td>
+</tr>
+</table>
+<h2>Gracefully Exiting From a Block</h2>
+<p>The <b>block</b> and <b>return-from</b> allows you to exit gracefully from any nested blocks in case of any error.</p>
+<p>The <b>block</b> function allows you to create a named block with a body composed of zero or more statements. Syntax is:</p>
+<pre class="prettyprint notranslate">
+(block block-name(
+...
+...
+))
+</pre>
+<p>The <b>return-from</b> function takes a block name and an optional (the default is nil) return value.</p>
+<p>The following example demonstrates this:</p>
+<h2>Example</h2>
+<p>Create a new source code file named main.lisp and type the following code in it:</p>
+<pre class="prettyprint notranslate tryit">
+(defun demo-function (flag)
+   (print 'entering-outer-block)
+   (block outer-block
+      (print 'entering-inner-block)
+      (print (block inner-block
+         (if flag
+            (return-from outer-block 3)
+            (return-from inner-block 5)
+         )
+         (print 'This-wil--not-be-printed))
+      )
+      (print 'left-inner-block)
+      (print 'leaving-outer-block)
+   t)
+)
+(demo-function t)
+(terpri)
+(demo-function nil)
+</pre>
+<p>When you click the Execute button, or type Ctrl+E, LISP executes it immediately and the result returned is:</p>
+<pre class="result notranslate">
+ENTERING-OUTER-BLOCK 
+ENTERING-INNER-BLOCK 
+
+ENTERING-OUTER-BLOCK 
+ENTERING-INNER-BLOCK 
+5 
+LEFT-INNER-BLOCK 
+LEAVING-OUTER-BLOCK
+</pre>
+<h1>LISP - Functions</h1>
+<p>A function is a group of statements that together perform a task.</p>
+<p>You can divide up your code into separate functions. How you divide up your code among different functions is up to you, but logically the division usually is so each function performs a specific task.</p>
+<h2>Defining Functions in LISP</h2>
+<p>The macro named <b>defun</b> is used for defining functions. The <b>defun</b> macro needs three arguments:</p>
+<ul class="list">
+<li>Name of the function</li>
+<li>Parameters of the function</li>
+<li>Body of the function</li>
+</ul>
+<p>Syntax for defun is:</p>
+<pre class="prettyprint notranslate">
+(defun name (parameter-list) "Optional documentation string." body)
+</pre>
+<p>Let us illustrate the concept with simple examples.</p>
+<h3>Example 1</h3>
+<p>Let's write a function named <i>averagenum</i> that will print the average of four numbers. We will send these numbers as parameters.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defun averagenum (n1 n2 n3 n4)
+   (/ ( + n1 n2 n3 n4) 4)
+)
+(write(averagenum 10 20 30 40))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+25
+</pre>
+<h3>Example 2</h3>
+<p>Let's define and call a function that would calculate the area of a circle when the radius of the circle is given as an argument.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defun area-circle(rad)
+   "Calculates area of a circle with given radius"
+   (terpri)
+   (format t "Radius: ~5f" rad)
+   (format t "~%Area: ~10f" (* 3.141592 rad rad))
+)
+(area-circle 10)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Radius:  10.0
+Area:   314.1592
+</pre>
+<p>Please note that:</p>
+<ul class="list">
+<li><p>You can provide an empty list as parameters, which means the function takes no arguments, the list is empty, written as ().</p></li>
+<li><p>LISP also allows optional, multiple, and keyword arguments.</p></li>
+<li><p>The documentation string describes the purpose of the function. It is associated with the name of the function and can be obtained using the <b>documentation</b> function.</p></li>
+<li><p>The body of the function may consist of any number of Lisp expressions.</p></li>
+<li><p>The value of the last expression in the body is returned as the value of the function.</p></li>
+<li><p>You can also return a value from the function using the <b>return-from</b> special operator.</p></li>
+</ul>
+<p>Let us discuss the above concepts in brief. Click following links to find details:</p>
+<ul class="list">
+<li><p><a href="lisp_optional_parameters.html">Optional Parameters</a></p></li>
+<li><p><a href="lisp_rest_parameters.html">Rest Parameters</a></p></li>
+<li><p><a href="lisp_keyword_parameters.html">Keyword Parameters</a></p></li>
+<li><p><a href="lisp_returning_values_functions.html">Returning Values from a Function</a></p></li>
+<li><p><a href="lisp_lambda_functions.html">Lambda Functions</a></p></li>
+<li><p><a href="lisp_mapping_functions.html">Mapping Functions</a></p></li>
+</ul>
+<h1>LISP - Predicates</h1>
+<p>Predicates are functions that test their arguments for some specific conditions and returns nil if the condition is false, or some non-nil value is the condition is true.</p>
+<p>The following table shows some of the most commonly used predicates:</p>
+<table class="table table-bordered">
+<tr>
+<th>Predicate</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>atom</td>
+<td>It takes one argument and returns t if the argument is an atom or nil if otherwise.</td>
+</tr>
+<tr>
+<td>equal</td>
+<td>It takes two arguments and returns <b>t</b> if they are structurally equal or <b>nil</b> otherwise</td>
+</tr>
+<tr>
+<td>eq</td>
+<td>It takes two arguments and returns <b>t</b> if they are same identical objects, sharing the same memory location or <b>nil</b> otherwise</td>
+</tr>
+<tr>
+<td>eql</td>
+<td>It takes two arguments and returns <b>t</b> if the arguments are <b>eq</b>, or if they are numbers of the same type with the same value, or if they are character objects that represent the same character, or <b>nil</b> otherwise</td>
+</tr>
+<tr>
+<td>evenp</td>
+<td>It takes one numeric argument and returns <b>t</b> if the argument is even number or <b>nil</b> if otherwise.</td>
+</tr>
+<tr>
+<td>oddp</td>
+<td>It takes one numeric argument and returns <b>t</b> if the argument is odd number or <b>nil</b> if otherwise.</td>
+</tr>
+<tr>
+<td>zerop</td>
+<td>It takes one numeric argument and returns <b>t</b> if the argument is zero or <b>nil</b> if otherwise.</td>
+</tr>
+<tr>
+<td>null</td>
+<td>It takes one argument and returns <b>t</b> if the argument evaluates to nil, otherwise it returns <b>nil.</b></td>
+</tr>
+<tr>
+<td>listp</td>
+<td>It takes one argument and returns <b>t</b> if the argument evaluates to a list otherwise it returns <b>nil.</b></td>
+</tr>
+<tr>
+<td>greaterp</td>
+<td>It takes one or more argument and returns <b>t</b> if either there is a single argument or the arguments are successively larger from left to right, or <b>nil</b> if otherwise.</td>
+</tr>
+<tr>
+<td>lessp</td>
+<td>It takes one or more argument and returns <b>t</b> if either there is a single argument or the arguments are successively smaller from left to right, or <b>nil</b> if otherwise..</td>
+</tr>
+<tr>
+<td>numberp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a number or <b>nil</b> if otherwise.</td>
+</tr>
+<tr>
+<td>symbolp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a symbol otherwise it returns <b>nil</b>.</td>
+</tr>
+<tr>
+<td>integerp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is an integer otherwise it returns <b>nil</b>.</td>
+</tr>
+<tr>
+<td>rationalp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is rational number, either a ratio or a number, otherwise it returns <b>nil</b>.</td>
+</tr>
+<tr>
+<td>floatp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a floating point number otherwise it returns <b>nil.</b></td>
+</tr>
+<tr>
+<td>realp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a real number otherwise it returns <b>nil</b>.</td>
+</tr>
+<tr>
+<td>complexp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a complex number otherwise it returns <b>nil.</b></td>
+</tr>
+<tr>
+<td>characterp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a character otherwise it returns <b>nil</b>.</td>
+</tr>
+<tr>
+<td>stringp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a string object otherwise it returns <b>nil</b>.</td>
+</tr>
+<tr>
+<td>arrayp</td>
+<td>It takes one argument and returns <b>t</b> if the argument is an array object otherwise it returns <b>nil</b>.</td>
+</tr>
+<tr>
+<td>packagep</td>
+<td>It takes one argument and returns <b>t</b> if the argument is a package otherwise it returns <b>nil.</b></td>
+</tr>
+</table>
+<h2>Example 1</h2>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (atom 'abcd))
+(terpri)
+(write (equal 'a 'b))
+(terpri)
+(write (evenp 10))
+(terpri)
+(write (evenp 7 ))
+(terpri)
+(write (oddp 7 ))
+(terpri)
+(write (zerop 0.0000000001))
+(terpri)
+(write (eq 3 3.0 ))
+(terpri)
+(write (equal 3 3.0 ))
+(terpri)
+(write (null nil ))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+T
+NIL
+T
+NIL
+T
+NIL
+NIL
+NIL
+T
+</pre>
+<h2>Example 2</h2>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defun factorial (num)
+   (cond ((zerop num) 1)
+      (t ( * num (factorial (- num 1))))
+   )
+)
+(setq n 6)
+(format t "~% Factorial ~d is: ~d" n (factorial n))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Factorial 6 is: 720
+</pre>
+<h1>LISP - Numbers</h1>
+<p>Common Lisp defines several kinds of numbers. The <b>number</b> data type includes various kinds of numbers supported by LISP.</p>
+<p>The number types supported by LISP are:</p>
+<ul class="list">
+<li>Integers</li>
+<li>Ratios</li>
+<li>Floating-point numbers</li>
+<li>Complex numbers</li>
+</ul>
+<p>The following diagram shows the number hierarchy and various numeric data types available in LISP:</p>
+<img src="images/numerictypes.jpg" alt="Numeric Types" />
+<h2>Various Numeric Types in LISP</h2>
+<p>The following table describes various number type data available in LISP:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:15%;">Data type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>fixnum</td>
+<td>This data type represents integers which are not too large and mostly in the range  -215  to 215-1 (it is machine-dependent)</td>
+</tr>
+<tr>
+<td>bignum</td>
+<td>These are very large numbers with size limited by the amount of memory allocated for LISP, they are not fixnum numbers. </td>
+</tr>
+<tr>
+<td>ratio</td>
+<td>Represents the ratio of two numbers in the numerator/denominator form. The / function always produce the result in ratios, when its arguments are integers.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>It represents non-integer numbers. There are four float data types with increasing precision.</td>
+</tr>
+<tr>
+<td>complex</td>
+<td>It represents complex numbers, which are denoted by #c. The real and imaginary parts could be both either rational or floating point numbers.</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (/ 1 2))
+(terpri)
+(write ( + (/ 1 2) (/ 3 4)))
+(terpri)
+(write ( + #c( 1 2) #c( 3 -4)))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+1/2
+5/4
+#C(4 -2)
+</pre>
+<h2>Number Functions</h2>
+<p>The following table describes some commonly used numeric functions:</p>
+<table class="table table-bordered">
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>+, -, *, /</td>
+<td>Respective arithmetic operations</td>
+</tr>
+<tr>
+<td>sin, cos, tan, acos, asin, atan</td>
+<td>Respective trigonometric functions.</td>
+</tr>
+<tr>
+<td>sinh, cosh, tanh, acosh, asinh, atanh</td>
+<td>Respective hyperbolic functions.</td>
+</tr>
+<tr>
+<td>exp</td>
+<td>Exponentiation function. Calculates e<sup>x</sup></td>
+</tr>
+<tr>
+<td>expt</td>
+<td>Exponentiation function, takes base and power both.</td>
+</tr>
+<tr>
+<td>sqrt</td>
+<td>It calculates the square root of a number.</td>
+</tr>
+<tr>
+<td>log</td>
+<td>Logarithmic function. It one parameter is given, then it calculates its natural logarithm, otherwise the second parameter is used as base.</td>
+</tr>
+<tr>
+<td>conjugate</td>
+<td>It calculates the complex conjugate of a number. In case of a real number, it returns the number itself.</td>
+</tr>
+<tr>
+<td>abs</td>
+<td>It returns the absolute value (or magnitude) of a number.</td>
+</tr>
+<tr>
+<td>gcd</td>
+<td>It calculates the greatest common divisor of the given numbers</td>
+</tr>
+<tr>
+<td>lcm</td>
+<td>It calculates the least common multiple of the given numbers</td>
+</tr>
+<tr>
+<td>isqrt</td>
+<td>It gives the greatest integer less than or equal to the exact square root of a given natural number.</td>
+</tr>
+<tr>
+<td>floor, ceiling, truncate, round</td>
+<td>All these functions take two arguments as a number and returns the quotient; <b>floor</b> returns the largest integer that is not greater than ratio, <b>ceiling</b> chooses the smaller integer that is larger than ratio, <b>truncate</b> chooses the integer of the same sign as ratio with the largest absolute value that is less than absolute value of ratio, and <b>round</b> chooses an integer that is closest to ratio.</td>
+</tr>
+<tr>
+<td>ffloor, fceiling, ftruncate, fround</td>
+<td>Does the same as above, but returns the quotient as a floating point number.</td>
+</tr>
+<tr>
+<td>mod, rem</td>
+<td>Returns the remainder in a division operation.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Converts a real number to a floating point number.</td>
+</tr>
+<tr>
+<td>rational, rationalize</td>
+<td>Converts a real number to rational number.</td>
+</tr>
+<tr>
+<td>numerator, denominator</td>
+<td>Returns the respective parts of a rational number.</td>
+</tr>
+<tr>
+<td>realpart, imagpart</td>
+<td>Returns the real and imaginary part of a complex number.</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (/ 45 78))
+(terpri)
+(write (floor 45 78))
+(terpri)
+(write (/ 3456 75))
+(terpri)
+(write (floor 3456 75))
+(terpri)
+(write (ceiling 3456 75))
+(terpri)
+(write (truncate 3456 75))
+(terpri)
+(write (round 3456 75))
+(terpri)
+(write (ffloor 3456 75))
+(terpri)
+(write (fceiling 3456 75))
+(terpri)
+(write (ftruncate 3456 75))
+(terpri)
+(write (fround 3456 75))
+(terpri)
+(write (mod 3456 75))
+(terpri)
+(setq c (complex 6 7))
+(write c)
+(terpri)
+(write (complex 5 -9))
+(terpri)
+(write (realpart c))
+(terpri)
+(write (imagpart c))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+15/26
+0
+1152/25
+46
+47
+46
+46
+46.0
+47.0
+46.0
+46.0
+6
+#C(6 7)
+#C(5 -9)
+6
+7
+</pre>
+<h1>LISP - Characters</h1>
+<p>In LISP, characters are represented as data objects of type <b>character.</b></p>
+<p>You can denote a character object preceding #\ before the character itself. For example, #\a means the character a.</p>
+<p>Space and other special characters can be denoted by preceding #\ before the name of the character. For example, #\SPACE represents the space character.</p>
+<p>The following example demonstrates this:</p>
+<h2>Example</h2>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write 'a)
+(terpri)
+(write #\a)
+(terpri)
+(write-char #\a)
+(terpri)
+(write-char 'a)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+A
+#\a
+a
+*** - WRITE-CHAR: argument A is not a character
+</pre>
+<h2>Special Characters</h2>
+<p>Common LISP allows using the following special characters in your code. They are called the semi-standard characters.</p>
+<ul class="list">
+<li>#\Backspace</li>
+<li>#\Tab</li>
+<li>#\Linefeed</li>
+<li>#\Page</li>
+<li>#\Return</li>
+<li>#\Rubout</li>
+</ul>
+<h2>Character Comparison Functions</h2>
+<p>Numeric comparison functions and operators, like, &lt; and &gt; do not work on characters. Common LISP provides other two sets of functions for comparing characters in your code.</p>
+<p>One set is case-sensitive and the other case-insensitive.</p>
+<p>The following table provides the functions:</p>
+<table class="table table-bordered">
+<tr>
+<th>Case Sensitive Functions</th>
+<th>Case-insensitive Functions</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>char=</td>
+<td>char-equal</td>
+<td>Checks if the values of the operands are all equal or not, if yes then condition becomes true.</td>
+</tr>
+<tr>
+<td>char/=</td>
+<td>char-not-equal</td>
+<td>Checks if the values of the operands are all different or not, if values are not equal then condition becomes true.</td>
+</tr>
+<tr>
+<td>char&amp;#60;</td>
+<td>char-lessp</td>
+<td>Checks if the values of the operands are monotonically decreasing.</td>
+</tr>
+<tr>
+<td>char></td>
+<td style="width:20%;">char-greaterp</td>
+<td>Checks if the values of the operands are monotonically increasing.</td>
+</tr>
+<tr>
+<td>char&amp;#60;=</td>
+<td style="width:25%;">char-not-greaterp</td>
+<td>Checks if the value of any left operand is greater than or equal to the value of next right operand, if yes then condition becomes true.</td>
+</tr>
+<tr>
+<td>char&gt;=</td>
+<td>char-not-lessp</td>
+<td>Checks if the value of any left operand is less than or equal to the value of its right operand, if yes then condition becomes true.</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+; case-sensitive comparison
+(write (char= #\a #\b))
+(terpri)
+(write (char= #\a #\a))
+(terpri)
+(write (char= #\a #\A))
+(terpri)
+;case-insensitive comparision
+(write (char-equal #\a #\A))
+(terpri)
+(write (char-equal #\a #\b))
+(terpri)
+(write (char-lessp #\a #\b #\c))
+(terpri)
+(write (char-greaterp #\a #\b #\c))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+NIL
+T
+NIL
+T
+NIL
+T
+NIL
+</pre>
+<h1>LISP - Arrays</h1>
+<p>LISP allows you to define single or multiple-dimension arrays using the <b>make-array</b> function. An array can store any LISP object as its elements.</p>
+<p>All arrays consist of contiguous memory locations. The lowest address corresponds to the first element and the highest address to the last element.</p>
+<img src="images/rank.jpg" alt="Rank" />
+<p>The number of dimensions of an array is called its rank.</p>
+<p>In LISP, an array element is specified by a sequence of non-negative integer indices. The length of the sequence must equal the rank of the array. Indexing starts from zero.</p>
+<p>For example, to create an array with 10- cells, named my-array, we can write:</p>
+<pre class="prettyprint notranslate">
+(setf my-array (make-array '(10)))
+</pre>
+<p>The aref function allows accessing the contents of the cells. It takes two arguments, the name of the array and the index value.</p>
+<p>For example, to access the content of the tenth cell, we write:</p>
+<pre class="prettyprint notranslate">
+(aref my-array 9)
+</pre>
+<h2>Example 1</h2>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (setf my-array (make-array '(10))))
+(terpri)
+(setf (aref my-array 0) 25)
+(setf (aref my-array 1) 23)
+(setf (aref my-array 2) 45)
+(setf (aref my-array 3) 10)
+(setf (aref my-array 4) 20)
+(setf (aref my-array 5) 17)
+(setf (aref my-array 6) 25)
+(setf (aref my-array 7) 19)
+(setf (aref my-array 8) 67)
+(setf (aref my-array 9) 30)
+(write my-array)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#(NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL)
+#(25 23 45 10 20 17 25 19 67 30)
+</pre>
+<h2>Example 2</h2>
+<p>Let us create a 3-by-3 array.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setf x (make-array '(3 3) 
+   :initial-contents '((0 1 2 ) (3 4 5) (6 7 8)))
+)
+(write x)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#2A((0 1 2) (3 4 5) (6 7 8))
+</pre>
+<h2>Example 3</h2>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq a (make-array '(4 3)))
+(dotimes (i 4)
+   (dotimes (j 3)
+      (setf (aref a i j) (list i 'x j '= (* i j)))
+   )
+)
+(dotimes (i 4)
+   (dotimes (j 3)
+      (print (aref a i j))
+   )
+)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(0 X 0 = 0) 
+(0 X 1 = 0) 
+(0 X 2 = 0) 
+(1 X 0 = 0) 
+(1 X 1 = 1) 
+(1 X 2 = 2) 
+(2 X 0 = 0) 
+(2 X 1 = 2) 
+(2 X 2 = 4) 
+(3 X 0 = 0) 
+(3 X 1 = 3) 
+(3 X 2 = 6)
+</pre>
+<h2>Complete Syntax for the make-array Function</h2>
+<p>The make-array function takes many other arguments. Let us look at the complete syntax of this function:</p>
+<pre class="prettyprint notranslate">
+make-array dimensions :element-type :initial-element :initial-contents :adjustable :fill-pointer  :displaced-to :displaced-index-offset
+</pre>
+<p>Apart from the <i>dimensions</i> argument, all other arguments are keywords. The following table provides brief description of the arguments.</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:31%;">Argument</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>dimensions</td>
+<td>It gives the dimensions of the array. It is a number for one-dimensional array, and a list for multi-dimensional array.</td>
+</tr>
+<tr>
+<td>:element-type</td>
+<td>It is the type specifier, default value is T, i.e. any type</td>
+</tr>
+<tr>
+<td>:initial-element</td>
+<td>Initial elements value. It will make an array with all the elements initialized to a particular value.</td>
+</tr>
+<tr>
+<td>:initial-content</td>
+<td>Initial content as object.</td>
+</tr>
+<tr>
+<td>:adjustable</td>
+<td>It helps in creating a resizeable (or adjustable) vector whose underlying memory can be resized. The argument is a Boolean value indicating whether the array is adjustable or not, default value being NIL.</td>
+</tr>
+<tr>
+<td>:fill-pointer</td>
+<td>It keeps track of the number of elements actually stored in a resizeable vector.</td>
+</tr>
+<tr>
+<td>:displaced-to</td>
+<td>It helps in creating a displaced array or shared array that shares its contents with the specified array. Both the arrays should have same element type. The :displaced-to option may not be used with the :initial-element or :initial-contents option. This argument defaults to nil.</td>
+</tr>
+<tr>
+<td>:displaced-index-offset</td>
+<td>It gives the index-offset of the created shared array.</td>
+</tr>
+</table>
+<h3>Example 4</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq myarray (make-array '(3 2 3) 
+   :initial-contents 
+   '(((a b c) (1 2 3)) 
+      ((d e f) (4 5 6)) 
+      ((g h i) (7 8 9)) 
+   ))
+) 
+(setq array2 (make-array 4 :displaced-to myarray :displaced-index-offset 2)) 
+(write myarray)
+(terpri)
+(write array2)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#3A(((A B C) (1 2 3)) ((D E F) (4 5 6)) ((G H I) (7 8 9)))
+#(C 1 2 3)
+</pre>
+<p>If the displaced array is two dimensional:</p>
+<pre class="prettyprint notranslate tryit">
+(setq myarray (make-array '(3 2 3) 
+   :initial-contents 
+   '(((a b c) (1 2 3)) 
+      ((d e f) (4 5 6)) 
+      ((g h i) (7 8 9)) 
+   ))
+) 
+(setq array2 (make-array '(3 2) :displaced-to myarray :displaced-index-offset 2)) 
+(write myarray)
+(terpri)
+(write array2)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#3A(((A B C) (1 2 3)) ((D E F) (4 5 6)) ((G H I) (7 8 9)))
+#2A((C 1) (2 3) (D E))
+</pre>
+<p>Let's change the displaced index offset to 5:</p>
+<pre class="prettyprint notranslate tryit">
+(setq myarray (make-array '(3 2 3) 
+   :initial-contents 
+   '(((a b c) (1 2 3)) 
+      ((d e f) (4 5 6)) 
+      ((g h i) (7 8 9)) 
+   ))
+) 
+(setq array2 (make-array '(3 2) :displaced-to myarray :displaced-index-offset 5)) 
+(write myarray)
+(terpri)
+(write array2)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#3A(((A B C) (1 2 3)) ((D E F) (4 5 6)) ((G H I) (7 8 9)))
+#2A((3 D) (E F) (4 5))
+</pre>
+<h3>Example 5</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+;a one dimensional array with 5 elements, 
+;initail value 5
+(write (make-array 5 :initial-element 5))
+(terpri)
+;two dimensional array, with initial element a
+(write (make-array '(2 3) :initial-element 'a))
+(terpri)
+;an array of capacity 14, but fill pointer 5, is 5
+(write(length (make-array 14 :fill-pointer 5)))
+(terpri)
+;however its length is 14
+(write (array-dimensions (make-array 14 :fill-pointer 5)))
+(terpri)
+; a bit array with all initial elements set to 1
+(write(make-array 10 :element-type 'bit :initial-element 1))
+(terpri)
+; a character array with all initial elements set to a
+; is a string actually
+(write(make-array 10 :element-type 'character :initial-element #\a)) 
+(terpri)
+; a two dimensional array with initial values a
+(setq myarray (make-array '(2 2) :initial-element 'a :adjustable t))
+(write myarray)
+(terpri)
+;readjusting the array
+(adjust-array myarray '(1 3) :initial-element 'b) 
+(write myarray)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#(5 5 5 5 5)
+#2A((A A A) (A A A))
+5
+(14)
+#*1111111111
+"aaaaaaaaaa"
+#2A((A A) (A A))
+#2A((A A B))
+</pre>
+<h1>LISP - Strings</h1>
+<p>Strings in Common Lisp are vectors, i.e., one-dimensional array of characters.</p>
+<p>String literals are enclosed in double quotes. Any character supported by the character set can be enclosed within double quotes to make a string, except the double quote character (") and the escape character (\). However, you can include these by escaping them with a backslash (\).</p>
+<h2>Example</h2>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write-line "Hello World")
+(write-line "Welcome to Tutorials Point")
+;escaping the double quote character
+(write-line "Welcome to \"Tutorials Point\"")
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Hello World
+Welcome to Tutorials Point
+Welcome to "Tutorials Point"
+</pre>
+<h2>String Comparison Functions</h2>
+<p>Numeric comparison functions and operators, like, < and > do not work on strings. Common LISP provides other two sets of functions for comparing strings in your code. One set is case-sensitive and the other case-insensitive.</p>
+<p>The following table provides the functions:</p>
+<table class="table table-bordered">
+<tr>
+<th>Case Sensitive Functions</th>
+<th>Case-insensitive Functions</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>string=</td>
+<td>string-equal</td>
+<td>Checks if the values of the operands are all equal or not, if yes then condition becomes true.</td>
+</tr>
+<tr>
+<td>string/=</td>
+<td style="width:28%;">string-not-equal</td>
+<td>Checks if the values of the operands are all different or not, if values are not equal then condition becomes true.</td>
+</tr>
+<tr>
+<td>string&amp;#60;</td>
+<td>string-lessp</td>
+<td>Checks if the values of the operands are monotonically decreasing.</td>
+</tr>
+<tr>
+<td>string&gt;</td>
+<td>string-greaterp</td>
+<td>Checks if the values of the operands are monotonically increasing.</td>
+</tr>
+<tr>
+<td>string&amp;#60;=</td>
+<td>string-not-greaterp</td>
+<td>Checks if the value of any left operand is greater than or equal to the value of next right operand, if yes then condition becomes true.</td>
+</tr>
+<tr>
+<td>string&gt;=</td>
+<td>string-not-lessp</td>
+<td>Checks if the value of any left operand is less than or equal to the value of its right operand, if yes then condition becomes true.</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+; case-sensitive comparison
+(write (string= "this is test" "This is test"))
+(terpri)
+(write (string&gt; "this is test" "This is test"))
+(terpri)
+(write (string&lt; "this is test" "This is test"))
+(terpri)
+;case-insensitive comparision
+(write (string-equal "this is test" "This is test"))
+(terpri)
+(write (string-greaterp "this is test" "This is test"))
+(terpri)
+(write (string-lessp "this is test" "This is test"))
+(terpri)
+;checking non-equal
+(write (string/= "this is test" "this is Test"))
+(terpri)
+(write (string-not-equal "this is test" "This is test"))
+(terpri)
+(write (string/= "lisp" "lisping"))
+(terpri)
+(write (string/= "decent" "decency"))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+NIL
+0
+NIL
+T
+NIL
+NIL
+8
+NIL
+4
+5
+</pre>
+<h2>Case Controlling Functions</h2>
+<p>The following table describes the case controlling functions:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:23%;">Function</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>string-upcase</td>
+<td>Converts the string to upper case</td>
+</tr>
+<tr>
+<td>string-downcase</td>
+<td>Converts the string to lower case</td>
+</tr>
+<tr>
+<td>string-capitalize</td>
+<td>Capitalizes each word in the string</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write-line (string-upcase "a big hello from tutorials point"))
+(write-line (string-capitalize "a big hello from tutorials point"))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+A BIG HELLO FROM TUTORIALS POINT
+A Big Hello From Tutorials Point
+</pre>
+<h2>Trimming Strings</h2>
+<p>The following table describes the string trimming functions:</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:23%;">Function</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>string-trim</td>
+<td>It takes a string of character(s) as first argument and a string as the second argument and returns a substring where all characters that are in the first argument are removed off the argument string.</td>
+</tr>
+<tr>
+<td>String-left-trim</td>
+<td>It takes a string of character(s) as first argument and a string as the second argument and returns a substring where all characters that are in the first argument are removed off the beginning of the argument string.</td>
+</tr>
+<tr>
+<td>String-right-trim</td>
+<td>It takes a string character(s) as first argument and a string as the second argument and returns a substring where all characters that are in the first argument are removed off the end of the argument string</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write-line (string-trim " " "   a big hello from tutorials point   "))
+(write-line (string-left-trim " " "   a big hello from tutorials point   "))
+(write-line (string-right-trim " " "   a big hello from tutorials point   "))
+(write-line (string-trim " a" "   a big hello from tutorials point   "))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+a big hello from tutorials point
+a big hello from tutorials point   
+   a big hello from tutorials point
+big hello from tutorials point
+</pre>
+<h2>Other String Functions</h2>
+<p>Strings in LISP are arrays and thus also sequences. We will cover these data types in coming tutorials. All functions that are applicable to arrays and sequences also apply to strings. However, we will demonstrate some commonly used functions using various examples.</p>
+<h3>Calculating Length</h3>
+<p>The <b>length</b> function calculates the length of a string.</p>
+<h3>Extracting Sub-string</h3>
+<p>The <b>subseq</b> function returns a sub-string (as a string is also a sequence) starting at a particular index and continuing to a particular ending index or the end of the string.</p>
+<h3>Accessing a Character in a String</h3>
+<p>The <b>char</b> function allows accessing individual characters of a string.</p>
+<p><b>Example</b></p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (length "Hello World"))
+(terpri)
+(write-line (subseq "Hello World" 6))
+(write (char "Hello World" 6))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+11
+World
+#\W
+</pre>
+<h3>Sorting and Merging of Strings</h3>
+<p>The <b>sort</b> function allows sorting a string. It takes a sequence (vector or string) and a two-argument predicate and returns a sorted version of the sequence.</p>
+<p>The <b>merge</b> function takes two sequences and a predicate and returns a sequence produced by merging the two sequences, according to the predicate.</p>
+<p><b>Example</b></p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+;sorting the strings
+(write (sort (vector "Amal" "Akbar" "Anthony") #'string&lt;))
+(terpri)
+;merging the strings
+(write (merge 'vector (vector "Rishi" "Zara" "Priyanka") (vector "Anju" "Anuj" "Avni") #'string&lt;))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#("Akbar" "Amal" "Anthony")
+#("Anju" "Anuj" "Avni" "Rishi" "Zara" "Priyanka")
+</pre>
+<h3>Reversing a String</h3>
+<p>The <b>reverse</b> function reverses a string.</p>
+<p>For example, Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write-line (reverse "Are we not drawn onward, we few, drawn onward to new era"))
+
+
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+are wen ot drawno nward ,wef ew ,drawno nward ton ew erA
+</pre>
+<h3>Concatenating Strings</h3>
+<p>The concatenate function concatenates two strings. This is generic sequence function and you must provide the result type as the first argument.</p>
+<p>For example, Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write-line (concatenate 'string "Are we not drawn onward, " "we few, drawn onward to new era"))
+
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Are we not drawn onward, we few, drawn onward to new era
+</pre>
+<h1>LISP - Sequences</h1>
+<p>Sequence is an abstract data type in LISP. Vectors and lists are the two concrete subtypes of this data type. All the functionalities defined on sequence data type are actually applied on all vectors and list types.</p>
+<p>In this section, we will discuss most commonly used functions on sequences.</p>
+<p>Before starting on various ways of manipulating sequences (i.e., vectors and lists), let us have a look at the list of all available functions.</p>
+<h2>Creating a Sequence</h2>
+<p>The function make-sequence allows you to create a sequence of any type. The syntax for this function is:</p>
+<pre class="prettyprint notranslate">
+make-sequence sqtype sqsize &amp;key :initial-element
+</pre>
+<p>It creates a sequence of type <i>sqtype</i> and of length <i>sqsize.</i></p>
+<p>You may optionally specify some value using the <i>:initial-element</i> argument, then each of the elements will be initialized to this value.</p>
+<p>For example, Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (make-sequence '(vector float) 
+   10 
+   :initial-element 1.0))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#(1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0)
+</pre>
+<h2>Generic Functions on Sequences</h2>
+<table class="table table-bordered">
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>elt</td>
+<td>It allows access to individual elements through an integer index.</td>
+</tr>
+<tr>
+<td>length</td>
+<td>It returns the length of a sequence.</td>
+</tr>
+<tr>
+<td>subseq</td>
+<td>It returns a sub-sequence by extracting the subsequence starting at a particular index and continuing to a particular ending index or the end of the sequence.</td>
+</tr>
+<tr>
+<td>copy-seq</td>
+<td>It returns a sequence that contains the same elements as its argument.</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>It is used to set multiple elements of a sequence to a single value.</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>It takes two sequences and the first argument sequence is destructively modified by copying successive elements into it from the second argument sequence.</td>
+</tr>
+<tr>
+<td>count</td>
+<td>It takes an item and a sequence and returns the number of times the item appears in the sequence.</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>It returns a sequence contains the same elements of the argument but in reverse order.</td>
+</tr>
+<tr>
+<td>nreverse</td>
+<td>It returns the same sequence containing the same elements as sequence but in reverse order.</td>
+</tr>
+<tr>
+<td>concatenate</td>
+<td>It creates a new sequence containing the concatenation of any number of sequences.</td>
+</tr>
+<tr>
+<td>position</td>
+<td>It takes an item and a sequence and returns the index of the item in the sequence or nil.</td>
+</tr>
+<tr>
+<td>find</td>
+<td>It takes an item and a sequence. It finds the item in the sequence and returns it, if not found then it returns nil.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>It takes a sequence and a two-argument predicate and returns a sorted version of the sequence.</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>It takes two sequences and a predicate and returns a sequence produced by merging the two sequences, according to the predicate.</td>
+</tr>
+<tr>
+<td>map</td>
+<td>It takes an n-argument function and n sequences and returns a new sequence containing the result of applying the function to subsequent elements of the sequences.</td>
+</tr>
+<tr>
+<td>some</td>
+<td>It takes a predicate as an argument and iterates over the argument sequence, and returns the first non-NIL value returned by the predicate or returns false if the predicate is never satisfied.</td>
+</tr>
+<tr>
+<td>every</td>
+<td>It takes a predicate as an argument and iterate over the argument sequence, it terminates, returning false, as soon as the predicate fails. If the predicate is always satisfied, it returns true.</td>
+</tr>
+<tr>
+<td>notany</td>
+<td>It takes a predicate as an argument and iterate over the argument sequence, and returns false as soon as the predicate is satisfied or true if it never is.</td>
+</tr>
+<tr>
+<td>notevery</td>
+<td>It takes a predicate as an argument and iterate over the argument sequence, and returns true as soon as the predicate fails or false if the predicate is always satisfied.</td>
+</tr>
+<tr>
+<td>reduce</td>
+<td>It maps over a single sequence, applying a two-argument function first to the first two elements of the sequence and then to the value returned by the function and subsequent elements of the sequence.</td>
+</tr>
+<tr>
+<td>search</td>
+<td>It searches a sequence to locate one or more elements satisfying some test.</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>It takes an item and a sequence and returns the sequence with instances of item removed.</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>This also takes an item and a sequence and returns a sequence of the same kind as the argument sequence that has the same elements except the item.</td>
+</tr>
+<tr>
+<td>substitute</td>
+<td>It takes a new item, an existing item, and a sequence and returns a sequence with instances of the existing item replaced with the new item.</td>
+</tr>
+<tr>
+<td>nsubstitute</td>
+<td>It takes a new item, an existing item, and a sequence and returns the same sequence with instances of the existing item replaced with the new item.</td>
+</tr>
+<tr>
+<td>mismatch</td>
+<td>It takes two sequences and returns the index of the first pair of mismatched elements.</td>
+</tr>
+</table>
+<h2>Standard Sequence Function Keyword Arguments</h2>
+<table class="table table-bordered">
+<tr>
+<th>Argument</th>
+<th>Meaning</th>
+<th style="width:20%;">Default Value</th>
+</tr>
+<tr>
+<td>:test</td>
+<td>It is a two-argument function used to compare item (or value extracted by :key function) to element.</td>
+<td>EQL</td>
+</tr>
+<tr>
+<td>:key</td>
+<td>One-argument function to extract key value from actual sequence element. NIL means use element as is.</td>
+<td>NIL</td>
+</tr>
+<tr>
+<td>:start</td>
+<td>Starting index (inclusive) of subsequence.</td>
+<td>0</td>
+</tr>
+<tr>
+<td>:end</td>
+<td>Ending index (exclusive) of subsequence. NIL indicates end of sequence.</td>
+<td>NIL</td>
+</tr>
+<tr>
+<td>:from-end</td>
+<td>If true, the sequence will be traversed in reverse order, from end to start.</td>
+<td>NIL</td>
+</tr>
+<tr>
+<td>:count</td>
+<td>Number indicating the number of elements to remove or substitute or NIL to indicate all (REMOVE and SUBSTITUTE only).</td>
+<td>NIL</td>
+</tr>
+</table>
+<p>We have just discussed various functions and keywords that are used as arguments in these functions working on sequences. In the next sections, we will see how to use these functions using examples.</p>
+<h2>Finding Length and Element</h2>
+<p>The <b>length</b> function returns the length of a sequence, and the <b>elt</b> function allows you to access individual elements using an integer index.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq x (vector 'a 'b 'c 'd 'e))
+(write (length x))
+(terpri)
+(write (elt x 3))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+5
+D
+</pre>
+<h2>Modifying Sequences</h2>
+<p>Some sequence functions allows iterating through the sequence and perform some operations like, searching, removing, counting or filtering specific elements without writing explicit loops.</p>
+<p>The following example demonstrates this:</p>
+<h3>Example 1</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (count 7 '(1 5 6 7 8 9 2 7 3 4 5)))
+(terpri)
+(write (remove 5 '(1 5 6 7 8 9 2 7 3 4 5)))
+(terpri)
+(write (delete 5 '(1 5 6 7 8 9 2 7 3 4 5)))
+(terpri)
+(write (substitute 10 7 '(1 5 6 7 8 9 2 7 3 4 5)))
+(terpri)
+(write (find 7 '(1 5 6 7 8 9 2 7 3 4 5)))
+(terpri)
+(write (position 5 '(1 5 6 7 8 9 2 7 3 4 5)))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+2
+(1 6 7 8 9 2 7 3 4)
+(1 6 7 8 9 2 7 3 4)
+(1 5 6 10 8 9 2 10 3 4 5)
+7
+1
+</pre>
+<h3>Example 2</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (delete-if #'oddp '(1 5 6 7 8 9 2 7 3 4 5)))
+(terpri)
+(write (delete-if #'evenp '(1 5 6 7 8 9 2 7 3 4 5)))
+(terpri)
+(write (remove-if #'evenp '(1 5 6 7 8 9 2 7 3 4 5) :count 1 :from-end t))
+(terpri)
+(setq x (vector 'a 'b 'c 'd 'e 'f 'g))
+(fill x 'p :start 1 :end 4)
+(write x)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(6 8 2 4)
+(1 5 7 9 7 3 5)
+(1 5 6 7 8 9 2 7 3 5)
+#(A P P P E F G)
+</pre>
+<h2>Sorting and Merging Sequences</h2>
+<p>The sorting functions take a sequence and a two-argument predicate and return a sorted version of the sequence.</p>
+<h3>Example 1</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (sort '(2 4 7 3 9 1 5 4 6 3 8) #'&lt;))
+(terpri)
+(write (sort '(2 4 7 3 9 1 5 4 6 3 8) #'&gt;))
+(terpri)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(1 2 3 3 4 4 5 6 7 8 9)
+(9 8 7 6 5 4 4 3 3 2 1)
+</pre>
+<h3>Example 2</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (merge 'vector #(1 3 5) #(2 4 6) #'&lt;))
+(terpri)
+(write (merge 'list #(1 3 5) #(2 4 6) #'&lt;))
+(terpri)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#(1 2 3 4 5 6)
+(1 2 3 4 5 6)
+</pre>
+<h2>Sequence Predicates</h2>
+<p>The functions every, some, notany, and notevery are called the sequence predicates.</p>
+<p>These functions iterate over sequences and test the Boolean predicate.</p>
+<p>All these functions takes a predicate as the first argument and the remaining arguments are sequences.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (every #'evenp #(2 4 6 8 10)))
+(terpri)
+(write (some #'evenp #(2 4 6 8 10 13 14)))
+(terpri)
+(write (every #'evenp #(2 4 6 8 10 13 14)))
+(terpri)
+(write (notany #'evenp #(2 4 6 8 10)))
+(terpri)
+(write (notevery #'evenp #(2 4 6 8 10 13 14)))
+(terpri)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+T
+T
+NIL
+NIL
+T
+</pre>
+<h2>Mapping Sequences</h2>
+<p>We have already discussed the mapping functions. Similarly the <b>map</b> function allows you to apply a function on to subsequent elements of one or more sequences.</p>
+<p>The <b>map</b> function takes a n-argument function and n sequences and returns a new sequence after applying the function to subsequent elements of the sequences.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (map 'vector #'* #(2 3 4 5) #(3 5 4 8)))
+
+
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#(6 15 16 40)
+</pre>
+<h1>LISP - Lists</h1>
+<p>Lists had been the most important and the primary composite data structure in traditional LISP. Present day's Common LISP provides other data structures like, vector, hash table, classes or structures.</p>
+<p>Lists are single linked lists. In LISP, lists are constructed as a chain of a simple record structure named <b>cons</b> linked together.</p>
+<h2>The cons Record Structure</h2>
+<p>A <b>cons</b> is a record structure containing two components called the <b>car</b> and the <b>cdr.</b></p>
+<p>Cons cells or cons are objects are pairs of values that are created using the function <b>cons.</b></p>
+<p>The <b>cons</b> function takes two arguments and returns a new cons cell containing the two values. These values can be references to any kind of object.</p>
+<p>If the second value is not nil, or another cons cell, then the values are printed as a dotted pair enclosed by parentheses.</p>
+<p>The two values in a cons cell are called the <b>car</b> and the <b>cdr.</b> The <b>car</b> function is used to access the first value and the <b>cdr</b> function is used to access the second value.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (cons 1 2))
+(terpri)
+(write (cons 'a 'b))
+(terpri)
+(write (cons 1 nil))
+(terpri)
+(write (cons 1 (cons 2 nil)))
+(terpri)
+(write (cons 1 (cons 2 (cons 3 nil))))
+(terpri)
+(write (cons 'a (cons 'b (cons 'c nil))))
+(terpri)
+(write ( car (cons 'a (cons 'b (cons 'c nil)))))
+(terpri)
+(write ( cdr (cons 'a (cons 'b (cons 'c nil)))))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(1 . 2)
+(A . B)
+(1)
+(1 2)
+(1 2 3)
+(A B C)
+A
+(B C)
+</pre>
+<p>The above example shows how the cons structures could be used to create a single linked list, e.g., the list (A B C) consists of three cons cells linked together by their <i>cdrs.</i></p>
+<p>Diagrammatically, it could be expressed as:</p>
+<img src="#" alt="" />
+<h2>Lists in LISP</h2>
+<p>Although cons cells can be used to create lists, however, constructing a list out of nested <b>cons</b> function calls can't be the best solution. The <b>list</b> function is rather used for creating lists in LISP.</p>
+<p>The list function can take any number of arguments and as it is a function, it evaluates its arguments.</p>
+<p>The <b>first</b> and <b>rest</b> functions give the first element and the rest part of a list. The following examples demonstrate the concepts.</p>
+<h3>Example 1</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (list 1 2))
+(terpri)
+(write (list 'a 'b))
+(terpri)
+(write (list 1 nil))
+(terpri)
+(write (list 1 2 3))
+(terpri)
+(write (list 'a 'b 'c))
+(terpri)
+(write (list 3 4 'a (car '(b . c)) (* 4 -2)))
+(terpri)
+(write (list (list 'a 'b) (list 'c 'd 'e)))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(1 2)
+(A B)
+(1 NIL)
+(1 2 3)
+(A B C)
+(3 4 A B -8)
+((A B) (C D E))
+</pre>
+<h3>Example 2</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defun my-library (title author rating availability)
+   (list :title title :author author :rating rating :availabilty availability)
+)
+(write (getf (my-library "Hunger Game" "Collins" 9 t) :title))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+"Hunger Game"
+</pre>
+<h2>List Manipulating Functions</h2>
+<p>The following table provides some commonly used list manipulating functions.</p>
+<table class="table table-bordered">
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>car</td>
+<td>It takes a list as argument, and returns its first element.</td>
+</tr>
+<tr>
+<td>cdr</td>
+<td>It takes a list as argument, and returns a list without the first element.</td>
+</tr>
+<tr>
+<td>cons</td>
+<td>It takes two arguments, an element and a list and returns a list with the element inserted at the first place.</td>
+</tr>
+<tr>
+<td>list</td>
+<td>It takes any number of arguments and returns a list with the arguments as member elements of the list.</td>
+</tr>
+<tr>
+<td>append</td>
+<td>It merges two or more list into one.</td>
+</tr>
+<tr>
+<td>last</td>
+<td>It takes a list and returns a list containing the last element.</td>
+</tr>
+<tr>
+<td>member</td>
+<td>It takes two arguments of which the second must be a list, if the first argument is a member of the second argument, and then it returns the remainder of the list beginning with the first argument.</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>It takes a list and returns a list with the top elements in reverse order.</td>
+</tr>
+</table>
+<p>Please note that all sequence functions are applicable to lists.</p>
+<h3>Example 3</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (car '(a b c d e f)))
+(terpri)
+(write (cdr '(a b c d e f)))
+(terpri)
+(write (cons 'a '(b c)))
+(terpri)
+(write (list 'a '(b c) '(e f)))
+(terpri)
+(write (append '(b c) '(e f) '(p q) '() '(g)))
+(terpri)
+(write (last '(a b c d (e f))))
+(terpri)
+(write (reverse '(a b c d (e f))))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+A
+(B C D E F)
+(A B C)
+(A (B C) (E F))
+(B C E F P Q G)
+((E F))
+((E F) D C B A)
+</pre>
+<h2>Concatenation of car and cdr Functions</h2>
+<p>The <b>car</b> and <b>cdr</b> functions and their combination allows extracting any particular element/ member of a list.</p>
+<p>However, sequences of car and cdr functions could be abbreviated by concatenating the letter a for car and d for cdr within the letters c and r.</p>
+<p>For example we can write cadadr to abbreviate the sequence of function calls - car cdr car cdr.</p>
+<p>Thus, (cadadr '(a (c d) (e f g))) will return d</p>
+<h3>Example 4</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (cadadr '(a (c d) (e f g))))
+(terpri)
+(write (caar (list (list 'a 'b) 'c)))   
+(terpri)
+(write (cadr (list (list 1 2) (list 3 4))))
+(terpri)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+D
+A
+(3 4)
+</pre>
+<h1>LISP - Symbols</h1>
+<p>In LISP, a symbol is a name that represents data objects and interestingly it is also a data object.</p>
+<p>What makes symbols special is that they have a component called the <b>property list</b>, or <b>plist.</b></p>
+<h2>Property Lists</h2>
+<p>LISP allows you to assign properties to symbols. For example, let us have a 'person' object. We would like this 'person' object to have properties like name, sex, height, weight, address, profession etc. A property is like an attribute name.</p>
+<p>A property list is implemented as a list with an even number (possibly zero) of elements. Each pair of elements in the list constitutes an entry; the first item is the <b>indicator,</b> and the second is the <b>value.</b></p>
+<p>When a symbol is created, its property list is initially empty. Properties are created by using <b>get</b> within a <b>setf</b> form.</p>
+<p>For example, the following statements allow us to assign properties title, author and publisher, and respective values, to an object named (symbol) 'book'.</p>
+<h3>Example 1</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (setf (get 'books'title) '(Gone with the Wind)))
+(terpri)
+(write (setf (get 'books 'author) '(Margaret Michel)))
+(terpri)
+(write (setf (get 'books 'publisher) '(Warner Books)))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(GONE WITH THE WIND)
+(MARGARET MICHEL)
+(WARNER BOOKS)
+</pre>
+<p>Various property list functions allow you to assign properties as well as retrieve, replace or remove the properties of a symbol.</p>
+<p>The <b>get</b> function returns the property list of symbol for a given indicator. It has the following syntax:</p>
+<pre class="prettyprint notranslate">
+get symbol indicator &amp;optional default
+</pre>
+<p>The <b>get</b> function looks for the property list of the given symbol for the specified indicator, if found then it returns the corresponding value; otherwise default is returned (or nil, if a default value is not specified).</p>
+<h3>Example 2</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setf (get 'books 'title) '(Gone with the Wind))
+(setf (get 'books 'author) '(Margaret Micheal))
+(setf (get 'books 'publisher) '(Warner Books))
+(write (get 'books 'title))
+(terpri)
+(write (get 'books 'author))
+(terpri)
+(write (get 'books 'publisher))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(GONE WITH THE WIND)
+(MARGARET MICHEAL)
+(WARNER BOOKS)
+</pre>
+<p>The <b>symbol-plist</b> function allows you to see all the properties of a symbol.</p>
+<h3>Example 3</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setf (get 'annie 'age) 43)
+(setf (get 'annie 'job) 'accountant)
+(setf (get 'annie 'sex) 'female)
+(setf (get 'annie 'children) 3)
+(terpri)
+(write (symbol-plist 'annie))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(CHILDREN 3 SEX FEMALE JOB ACCOUNTANT AGE 43)
+</pre>
+<p>The <b>remprop</b> function removes the specified property from a symbol.</p>
+<h3>Example 4</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setf (get 'annie 'age) 43)
+(setf (get 'annie 'job) 'accountant)
+(setf (get 'annie 'sex) 'female)
+(setf (get 'annie 'children) 3)
+(terpri)
+(write (symbol-plist 'annie))
+(remprop 'annie 'age)
+(terpri)
+(write (symbol-plist 'annie))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(CHILDREN 3 SEX FEMALE JOB ACCOUNTANT AGE 43)
+(CHILDREN 3 SEX FEMALE JOB ACCOUNTANT)
+</pre>
+<h1>LISP - Vectors</h1>
+<p>Vectors are one-dimensional arrays, therefore a subtype of array. Vectors and lists are collectively called sequences. Therefore all sequence generic functions and array functions we have discussed so far, work on vectors.</p>
+<h2>Creating Vectors</h2>
+<p>The vector function allows you to make fixed-size vectors with specific values. It takes any number of arguments and returns a vector containing those arguments.</p>
+<h3>Example 1</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setf v1 (vector 1 2 3 4 5))
+(setf v2 #(a b c d e))
+(setf v3 (vector 'p 'q 'r 's 't))
+(write v1)
+(terpri)
+(write v2)
+(terpri)
+(write v3)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#(1 2 3 4 5)
+#(A B C D E)
+#(P Q R S T)
+</pre>
+<p>Please note that LISP uses the #(...) syntax as the literal notation for vectors. You can use this #(... ) syntax to create and include literal vectors in your code.</p>
+<p>However, these are literal vectors, so modifying them is not defined in LISP. Therefore, for programming, you should always use the <b>vector</b> function, or the more general function <b>make-array</b> to create vectors you plan to modify.</p>
+<p>The <b>make-array</b> function is the more generic way to create a vector. You can access the vector elements using the <b>aref</b> function.</p>
+<h3>Example 2</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq a (make-array 5 :initial-element 0))
+(setq b (make-array 5 :initial-element 2))
+(dotimes (i 5)
+   (setf (aref a i) i))
+(write a)
+(terpri)
+(write b)
+(terpri)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#(0 1 2 3 4)
+#(2 2 2 2 2)
+</pre>
+<h2>Fill Pointer</h2>
+<p>The <b>make-array</b> function allows you to create a resizable vector.</p>
+<p>The <b>fill-pointer</b> argument of the function keeps track of the number of elements actually stored in the vector. It's the index of the next position to be filled when you add an element to the vector.</p>
+<p>The <b>vector-push</b> function allows you to add an element to the end of a resizable vector. It increases the fill-pointer by 1.</p>
+<p>The <b>vector-pop</b> function returns the most recently pushed item and decrements the fill pointer by 1.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq a (make-array 5 :fill-pointer 0))
+(write a)
+(vector-push 'a a)
+(vector-push 'b a)
+(vector-push 'c a)
+(terpri)
+(write a)
+(terpri)
+(vector-push 'd a)
+(vector-push 'e a)
+;this will not be entered as the vector limit is 5
+(vector-push 'f a)
+(write a)
+(terpri)
+(vector-pop a)
+(vector-pop a)
+(vector-pop a)
+(write a)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#()
+#(A B C)
+#(A B C D E)
+#(A B)
+</pre>
+<p>Vectors being sequences, all sequence functions are applicable for vectors. Please consult the sequences chapter, for vector functions.</p>
+<h1>LISP - Set</h1>
+<p>Common Lisp does not provide a set data type. However, it provides number of functions that allows set operations to be performed on a list.</p>
+<p>You can add, remove, and search for items in a list, based on various criteria. You can also perform various set operations like: union, intersection, and set difference.</p>
+<h2>Implementing Sets in LISP</h2>
+<p>Sets, like lists are generally implemented in terms of cons cells. However, for this very reason, the set operations get less and less efficient the bigger the sets get.</p>
+<p>The <b>adjoin</b> function allows you to build up a set. It takes an item and a list representing a set and returns a list representing the set containing the item and all the items in the original set.</p>
+<p>The <b>adjoin</b> function first looks for the item in the given list, if it is found, then it returns the original list; otherwise it creates a new cons cell with its <b>car</b> as the item and <b>cdr</b> pointing to the original list and returns this new list.</p>
+<p>The <b>adjoin</b> function also takes <b>:key</b> and <b>:test</b> keyword arguments. These arguments are used for checking whether the item is present in the original list.</p>
+<p>Since, the adjoin function does not modify the original list, to make a change in the list itself, you must either assign the value returned by adjoin to the original list or, you may use the macro <b>pushnew</b> to add an item to the set.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+; creating myset as an empty list
+(defparameter *myset* ())
+(adjoin 1 *myset*)
+(adjoin 2 *myset*)
+; adjoin didn't change the original set
+;so it remains same
+(write *myset*)
+(terpri)
+(setf *myset* (adjoin 1 *myset*))
+(setf *myset* (adjoin 2 *myset*))
+;now the original set is changed
+(write *myset*)
+(terpri)
+;adding an existing value
+(pushnew 2 *myset*)
+;no duplicate allowed
+(write *myset*)
+(terpri)
+;pushing a new value
+(pushnew 3 *myset*)
+(write *myset*)
+(terpri)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+NIL
+(2 1)
+(2 1)
+(3 2 1)
+</pre>
+<h2>Checking Membership</h2>
+<p>The member group of functions allows you to check whether an element is member of a set or not.</p>
+<p>The following are the syntaxes of these functions:</p>
+<pre class="prettyprint notranslate">
+member item list &amp;key :test :test-not :key 
+member-if predicate list &amp;key :key 
+member-if-not predicate list &amp;key :key
+</pre>
+<p>These functions search the given list for a given item that satisfies the test. If no such item is found, then the functions returns <b>nil.</b> Otherwise, the tail of the list with the element as the first element is returned.</p>
+<p>The search is conducted at the top level only.</p>
+<p>These functions could be used as predicates.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(write (member 'zara '(ayan abdul zara riyan nuha)))
+(terpri)
+(write (member-if #'evenp '(3 7 2 5/3 'a)))
+(terpri)
+(write (member-if-not #'numberp '(3 7 2 5/3 'a 'b 'c)))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(ZARA RIYAN NUHA)
+(2 5/3 'A)
+('A 'B 'C)
+</pre>
+<h2>Set Union</h2>
+<p>The union group of functions allows you to perform set union on two lists provided as arguments to these functions on the basis of a test.</p>
+<p>The following are the syntaxes of these functions:</p>
+<pre class="prettyprint notranslate">
+union list1 list2 &amp;key :test :test-not :key 
+nunion list1 list2 &amp;key :test :test-not :key
+</pre>
+<p>The <b>union</b> function takes two lists and returns a new list containing all the elements present in either of the lists. If there are duplications, then only one copy of the member is retained in the returned list.</p>
+<p>The <b>nunion</b> function performs the same operation but may destroy the argument lists.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq set1 (union '(a b c) '(c d e)))
+(setq set2 (union '(#(a b) #(5 6 7) #(f h)) 
+   '(#(5 6 7) #(a b) #(g h)) :test-not #'mismatch)
+)
+       
+(setq set3 (union '(#(a b) #(5 6 7) #(f h)) 
+   '(#(5 6 7) #(a b) #(g h)))
+)
+(write set1)
+(terpri)
+(write set2)
+(terpri)
+(write set3)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(A B C D E)
+(#(F H) #(5 6 7) #(A B) #(G H))
+(#(A B) #(5 6 7) #(F H) #(5 6 7) #(A B) #(G H))
+</pre>
+<h3>Please Note</h3>
+<p>The union function does not work as expected without <b>:test-not #'mismatch</b> arguments for a list of three vectors. This is because, the lists are made of cons cells and although the values look same to us apparently, the <b>cdr</b> part of cells does not match, so they are not exactly same to LISP interpreter/compiler. This is the reason; implementing big sets are not advised using lists. It works fine for small sets though.</p>
+<h2>Set Intersection</h2>
+<p>The intersection group of functions allows you to perform intersection on two lists provided as arguments to these functions on the basis of a test.</p>
+<p>The following are the syntaxes of these functions:</p>
+<pre class="prettyprint notranslate">
+intersection list1 list2 &amp;key :test :test-not :key 
+nintersection list1 list2 &amp;key :test :test-not :key
+</pre>
+<p>These functions take two lists and return a new list containing all the elements present in both argument lists. If either list has duplicate entries, the redundant entries may or may not appear in the result.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq set1 (intersection '(a b c) '(c d e)))
+(setq set2 (intersection '(#(a b) #(5 6 7) #(f h)) 
+   '(#(5 6 7) #(a b) #(g h)) :test-not #'mismatch)
+)
+       
+(setq set3 (intersection '(#(a b) #(5 6 7) #(f h)) 
+   '(#(5 6 7) #(a b) #(g h)))
+)
+(write set1)
+(terpri)
+(write set2)
+(terpri)
+(write set3)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(C)
+(#(A B) #(5 6 7))
+NIL
+</pre>
+<p>The nintersection function is the destructive version of intersection, i.e., it may destroy the original lists.</p>
+<h2>Set Difference</h2>
+<p>The set-difference group of functions allows you to perform set difference on two lists provided as arguments to these functions on the basis of a test.</p>
+<p>The following are the syntaxes of these functions:</p>
+<pre class="prettyprint notranslate">
+set-difference list1 list2 &amp;key :test :test-not :key 
+nset-difference list1 list2 &amp;key :test :test-not :key
+</pre>
+<p>The set-difference function returns a list of elements of the first list that do not appear in the second list.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq set1 (set-difference '(a b c) '(c d e)))
+(setq set2 (set-difference '(#(a b) #(5 6 7) #(f h)) 
+   '(#(5 6 7) #(a b) #(g h)) :test-not #'mismatch)
+)
+(setq set3 (set-difference '(#(a b) #(5 6 7) #(f h)) 
+   '(#(5 6 7) #(a b) #(g h)))
+)
+(write set1)
+(terpri)
+(write set2)
+(terpri)
+(write set3)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(A B)
+(#(F H))
+(#(A B) #(5 6 7) #(F H))
+</pre>
+<h1>LISP - Tree</h1>
+<p>You can build tree data structures from cons cells, as lists of lists.</p>
+<p>To implement tree structures, you will have to design functionalities that would traverse through the cons cells, in specific order, for example, pre-order, in-order, and post-order for binary trees.</p>
+<h2>Tree as List of Lists</h2>
+<p>Let us consider a tree structure made up of cons cell that form the following list of lists:</p>
+<p>((1 2) (3 4) (5 6)).</p>
+<p>Diagrammatically, it could be expressed as:</p>
+<img src="images/treestructure.jpg" alt="Tree Structure" />
+<h2>Tree Functions in LISP</h2>
+<p>Although mostly you will need to write your own tree-functionalities according to your specific need, LISP provides some tree functions that you can use.</p>
+<p>Apart from all the list functions, the following functions work especially on tree structures:</p>
+<table class="table table-bordered">
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>copy-tree</b> x &amp;#38; optional vecp</td>
+<td>It returns a copy of the tree of cons cells x. It recursively copies both the car and the cdr directions. If x is not a cons cell, the function simply returns x unchanged. If the optional vecp argument is true, this function copies vectors (recursively) as well as cons cells.</td>
+</tr>
+<tr>
+<td>tree-equal x y &amp;#38; key :test :test-not :key</td>
+<td>It compares two trees of cons cells. If x and y are both cons cells, their cars and cdrs are compared recursively. If neither x nor y is a cons cell, they are compared by eql, or according to the specified test. The :key function, if specified, is applied to the elements of both trees.</td>
+</tr>
+<tr>
+<td><b>subst</b> new old tree &amp;#38; key :test :test-not :key</td>
+<td>It substitutes occurrences of given old item with <i>new</i> item, in <i>tree</i>, which is a tree of cons cells.</td>
+</tr>
+<tr>
+<td><b>nsubst</b> new old tree &amp;#38; key :test :test-not :key</td>
+<td>It works same as subst, but it destroys the original tree.</td>
+</tr>
+<tr>
+<td><b>sublis</b> alist tree &amp;#38; key :test :test-not :key</td>
+<td>It works like subst, except that it takes an association list <i>alist</i>  of old-new pairs. Each element of the tree (after applying the :key function, if any), is compared with the cars of alist; if it matches, it is replaced by the corresponding cdr.</td>
+</tr>
+<tr>
+<td><b>nsublis</b> alist tree &amp;#38; key :test :test-not :key</td>
+<td>It works same as sublis, but a destructive version.</td>
+</tr>
+</table>
+<h3>Example 1</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq lst (list '(1 2) '(3 4) '(5 6)))
+(setq mylst (copy-list lst))
+(setq tr (copy-tree lst))
+(write lst)
+(terpri)
+(write mylst)
+(terpri)
+(write tr)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+((1 2) (3 4) (5 6))
+((1 2) (3 4) (5 6))
+((1 2) (3 4) (5 6))
+</pre>
+<h3>Example 2</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq tr '((1 2 (3 4 5) ((7 8) (7 8 9)))))
+(write tr)
+(setq trs (subst 7 1 tr))
+(terpri)
+(write trs)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+((1 2 (3 4 5) ((7 8) (7 8 9))))
+((7 2 (3 4 5) ((7 8) (7 8 9))))
+</pre>
+<h2>Building Your Own Tree</h2>
+<p>Let us try to build our own tree, using the list functions available in LISP.</p>
+<h3>First let us create a new node that contains some data</h3>
+<pre class="prettyprint notranslate">
+(defun make-tree (item)
+   "it creates a new node with item."
+   (cons (cons item nil) nil)
+)
+</pre>
+<p>Next let us add a child node into the tree - it will take two tree nodes and add the second tree as the child of the first.</p>
+<pre class="prettyprint notranslate">
+(defun add-child (tree child)
+   (setf (car tree) (append (car tree) child))
+   tree)
+</pre>
+<p>This function will return the first child a given tree - it will take a tree node and return the first child of that node, or nil, if this node does not have any child node.</p>
+<pre class="prettyprint notranslate">
+(defun first-child (tree)
+   (if (null tree)
+      nil
+      (cdr (car tree))
+   )
+)
+</pre>
+<p>This function will return the next sibling of a given node - it takes a tree node as argument, and returns a reference to the next sibling node, or nil, if the node does not have any.</p>
+<pre class="prettyprint notranslate">
+(defun next-sibling (tree)
+   (cdr tree)
+)
+</pre>
+<p>Lastly we need a function to return the information in a node:</p>
+<pre class="prettyprint notranslate">
+(defun data (tree)
+   (car (car tree))
+)
+</pre>
+<h3>Example</h3>
+<p>This example uses the above functionalities:</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defun make-tree (item)
+   "it creates a new node with item."
+   (cons (cons item nil) nil)
+)
+   (defun first-child (tree)
+      (if (null tree)
+         nil
+         (cdr (car tree))
+      )
+   )
+
+(defun next-sibling (tree)
+   (cdr tree)
+)
+(defun data (tree)
+   (car (car tree))
+)
+(defun add-child (tree child)
+   (setf (car tree) (append (car tree) child))
+   tree
+)
+
+(setq tr '((1 2 (3 4 5) ((7 8) (7 8 9)))))
+(setq mytree (make-tree 10))
+(write (data mytree))
+(terpri)
+(write (first-child tr))
+(terpri)
+(setq newtree (add-child tr mytree))
+(terpri)
+(write newtree)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+10
+(2 (3 4 5) ((7 8) (7 8 9)))
+
+((1 2 (3 4 5) ((7 8) (7 8 9)) (10)))
+</pre>
+<h1>LISP - Hash Table</h1>
+<p>The hash table data structure represents a collection of <b>key-and-value</b> pairs that are organized based on the hash code of the key. It uses the key to access the elements in the collection.</p>
+<p>A hash table is used when you need to access elements by using a key, and you can identify a useful key value. Each item in the hash table has a key/value pair. The key is used to access the items in the collection.</p>
+<h2>Creating Hash Table in LISP</h2>
+<p>In Common LISP, hash table is a general-purpose collection. You can use arbitrary objects as a key or indexes.</p>
+<p>When you store a value in a hash table, you make a key-value pair, and store it under that key. Later you can retrieve the value from the hash table using the same key. Each key maps to a single value, although you can store a new value in a key.</p>
+<p>Hash tables, in LISP, could be categorised into three types, based on the way the keys could be compared - eq, eql or equal. If the hash table is hashed on LISP objects then the keys are compared with eq or eql. If the hash table hash on tree structure, then it would be compared using equal.</p>
+<p>The <b>make-hash-table</b> function is used for creating a hash table. Syntax for this function is:</p>
+<pre class="prettyprint notranslate">
+make-hash-table &amp;key :test :size :rehash-size :rehash-threshold
+</pre>
+<p>Where:</p>
+<ul class="list">
+<li><p>The <b>key</b> argument provides the key.</p></li>
+<li><p>The <b>:test</b> argument determines how keys are compared - it should have one of three values #'eq, #'eql, or #'equal, or one of the three symbols eq, eql, or equal. If not specified, eql is assumed.</p></li>
+<li><p>The <b>:size</b> argument sets the initial size of the hash table. This should be an integer greater than zero.</p></li>
+<li><p>The <b>:rehash-size</b> argument specifies how much to increase the size of the hash table when it becomes full. This can be an integer greater than zero, which is the number of entries to add, or it can be a floating-point number greater than 1, which is the ratio of the new size to the old size. The default value for this argument is implementation-dependent.</p></li>
+<li><p>The <b>:rehash-threshold</b> argument specifies how full the hash table can get before it must grow. This can be an integer greater than zero and less than the :rehash-size (in which case it will be scaled whenever the table is grown), or it can be a floating-point number between zero and 1. The default value for this argument is implementation-dependent.</p></li>
+</ul>
+<p>You can also call the make-hash-table function with no arguments.</p>
+<h2>Retrieving Items from and Adding Items into the Hash Table</h2>
+<p>The <b>gethash</b> function retrieves an item from the hash table by searching for its key. If it does not find the key, then it returns nil.</p>
+<p>It has the following syntax:</p>
+<pre class="prettyprint notranslate">
+gethash key hash-table &amp;optional default
+</pre>
+<p>where:</p>
+<ul class="list">
+<li><p>key: is the associated key</p></li>
+<li><p>hash-table: is the hash-table to be searched</p></li>
+<li><p>default: is the value to be returned, if the entry is not found, which is nil, if not specified.</p></li>
+</ul>
+<p>The <b>gethash</b> function actually returns two values, the second being a predicate value that is true if an entry was found, and false if no entry was found.</p>
+<p>For adding an item to the hash table, you can use the <b>setf</b> function along with the <b>gethash</b> function.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq empList (make-hash-table)) 
+(setf (gethash '001 empList) '(Charlie Brown))
+(setf (gethash '002 empList) '(Freddie Seal)) 
+(write (gethash '001 empList)) 
+(terpri)
+(write (gethash '002 empList))  
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(CHARLIE BROWN)
+(FREDDIE SEAL)
+</pre>
+<h2>Removing an Entry</h2>
+<p>The <b>remhash</b> function removes any entry for a specific key in hash-table. This is a predicate that is true if there was an entry or false if there was not.</p>
+<p>The syntax for this function is:</p>
+<pre class="prettyprint notranslate">
+remhash key hash-table
+</pre>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq empList (make-hash-table)) 
+(setf (gethash '001 empList) '(Charlie Brown))
+(setf (gethash '002 empList) '(Freddie Seal)) 
+(setf (gethash '003 empList) '(Mark Mongoose)) 
+(write (gethash '001 empList)) 
+(terpri)
+(write (gethash '002 empList)) 
+(terpri)
+(write (gethash '003 empList))  
+(remhash '003 empList)
+(terpri)
+(write (gethash '003 empList))  
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+(CHARLIE BROWN)
+(FREDDIE SEAL)
+(MARK MONGOOSE)
+NIL
+</pre>
+<h2>The maphash Function</h2>
+<p>The <b>maphash</b> function allows you to apply a specified function on each key-value pair on a hash table.</p>
+<p>It takes two arguments - the function and a hash table and invokes the function once for each key/value pair in the hash table.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(setq empList (make-hash-table)) 
+(setf (gethash '001 empList) '(Charlie Brown))
+(setf (gethash '002 empList) '(Freddie Seal)) 
+(setf (gethash '003 empList) '(Mark Mongoose)) 
+(maphash #'(lambda (k v) (format t "~a => ~a~%" k v)) empList)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+3 => (MARK MONGOOSE)
+2 => (FREDDIE SEAL)
+1 => (CHARLIE BROWN)
+</pre>
+<h1>LISP - Input &amp; Output</h1>
+<p>Common LISP provides numerous input-output functions. We have already used the format function, and print function for output. In this section, we will look into some of the most commonly used input-output functions provided in LISP.</p>
+<h2>Input Functions</h2>
+<p>The following table provides the most commonly used input functions of LISP:</p>
+<table class="table table-bordered">
+<tr>
+<th>SL No.</th>
+<th>Functions and Descriptions</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>read</b> &amp;#38; optional <i>input-stream eof-error-p eof-value recursive-p</i></p>
+<p>It reads in the printed representation of a Lisp object from input-stream, builds a corresponding Lisp object, and returns the object.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>read-preserving-whitespace</b> &amp;#38; optional <i>in-stream eof-error-p eof-value recursive-p</i></p>
+<p>It is used in some specialized situations where it is desirable to determine precisely what character terminated the extended token.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>read-line</b> &amp;#38; optional <i>input-stream eof-error-p eof-value recursive-p</i></p>
+<p>It reads in a line of text terminated by a newline.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>read-char</b> &amp;#38; optional <i>input-stream eof-error-p eof-value recursive-p</i></p>
+<p>It takes one character from input-stream and returns it as a character object.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>unread-char</b> <i>character &amp;#38; optional input-stream</i></p>
+<p>It puts the character most recently read from the input-stream, onto the front of input-stream.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>peek-char</b> &amp;#38; optional <i>peek-type input-stream eof-error-p eof-value recursive-p</i></p>
+<p>It returns the next character to be read from input-stream, without actually removing it from the input stream.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>listen</b> &amp;#38; optional <i>input-stream</i></p>
+<p>The predicate <b>listen</b> is true if there is a character immediately available from input-stream, and is false if not.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>read-char-no-hang</b> &amp;#38; optional <i>input-stream eof-error-p eof-value recursive-p</i></p>
+<p>It is similar to <b>read-char</b>, but if it does not get a character, it does not wait for a character, but returns nil immediately.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>clear-input</b> &amp;#38; optional <i>input-stream</i></p>
+<p>It clears any buffered input associated with <i>input-stream.</i></p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td><p><b>read-from-string</b> <i>string</i> &amp;#38; optional <i>eof-error-p eof-value &amp;#38; key :start :end :preserve-whitespace</i></p>
+<p>It takes the characters of the string successively and builds a LISP object and returns the object. It also returns the index of the first character in the string not read, or the length of the string (or, length +1), as the case may be.</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td><p><b>parse-integer</b> <i>string &amp;#38; key :start :end :radix :junk-allowed</i></p>
+<p>It examines the substring of string delimited by :start and :end (default to the beginning and end of the string). It skips over whitespace characters and then attempts to parse an integer.</p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td><p><b>read-byte</b> <i>binary-input-stream</i> &amp;#38; optional <i>eof-error-p eof-value</i></p>
+<p>It reads one byte from the binary-input-stream and returns it in the form of an integer.</p>
+</td>
+</tr>
+</table>
+<h2>Reading Input from Keyboard</h2>
+<p>The <b>read</b> function is used for taking input from the keyboard. It may not take any argument.</p>
+<p>For example, consider the code snippet:</p>
+<pre class="prettyprint notranslate">
+(write ( + 15.0 (read)))
+</pre>
+<p>Assume the user enters 10.2 from the STDIN Input, it returns,</p>
+<pre class="prettyprint notranslate">
+25.2
+</pre>
+<p>The read function reads characters from an input stream and interprets them by parsing as representations of Lisp objects.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it:</p>
+<pre class="prettyprint notranslate tryit">
+; the function AreaOfCircle
+; calculates area of a circle
+; when the radius is input from keyboard
+
+(defun AreaOfCircle()
+(terpri)
+(princ "Enter Radius: ")
+(setq radius (read))
+(setq area (* 3.1416 radius radius))
+(princ "Area: ")
+(write area))
+(AreaOfCircle)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Enter Radius: 5 (STDIN Input)
+Area: 78.53999
+</pre>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(with-input-from-string (stream "Welcome to Tutorials Point!")
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (read-char stream))
+   (print (peek-char nil stream nil 'the-end))
+   (values)
+)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#\W 
+#\e 
+#\l 
+#\c 
+#\o 
+#\m 
+#\e 
+#\Space 
+#\t 
+#\o 
+#\Space 
+</pre>
+<h2>The Output Functions</h2>
+<p>All output functions in LISP take an optional argument called <i>output-stream,</i> where the output is sent. If not mentioned or <i>nil,</i> output-stream defaults to the value of the variable *standard-output*.</p>
+<p>The following table provides the most commonly used output functions of LISP:</p>
+<table class="table table-bordered">
+<tr>
+<th>SL No.</th>
+<th>Functions and Descriptions</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>write</b> <i>object</i> &amp;#38; key :stream :escape :radix :base :circle :pretty :level :length :case :gensym :array</p>
+<p><b>write</b> <i>object</i> &amp;#38; key :stream :escape :radix :base :circle :pretty :level :length :case :gensym :array :readably :right-margin :miser-width :lines :pprint-dispatch</p>
+<p>Both write the object to the output stream specified by :stream, which defaults to the value of *standard-output*. Other values default to the corresponding global variables set for printing.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>prin1</b> <i>object</i> &amp;#38; optional <i>output-stream</i></p> 
+<p><b>print</b> <i>object</i> &amp;#38; optional <i>output-stream</i></p>
+<p><b>pprint</b> <i>object</i> &amp;#38; optional <i>output-stream</i></p> 
+<p><b>princ</b> <i>object</i> &amp;#38; optional <i>output-stream</i></p>
+<p>All these functions outputs the printed representation of object to <i>output-stream</i>. However, the following differences are there:</p>
+<ul class="list">
+<li><p>prin1 returns the object as its value.</p></li>
+<li><p>print prints the object with a preceding newline and followed by a space. It returns object.</p></li>
+<li><p>pprint is just like print except that the trailing space is omitted.</p></li>
+<li><p>princ is just like prin1 except that the output has no escape character</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>write-to-string</b> <i>object &amp;#38; key</i> :escape :radix :base :circle :pretty :level :length :case :gensym :array </p>
+<p><b>write-to-string</b> <i>object</i> &amp;#38; key :escape :radix :base :circle :pretty :level :length :case :gensym :array :readably :right-margin :miser-width :lines :pprint-dispatch</p>
+<p><b>prin1-to-string</b> <i>object</i></p> 
+<p><b>princ-to-string</b> <i>object</i></p>
+<p>The object is effectively printed and the output characters are made into a string, which is returned.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td><p><b>write-char</b> <i>character</i> &amp;#38; optional <i>output-stream</i></p>
+<p>It outputs the character to <i>output-stream,</i> and returns character.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td><p><b>write-string</b> <i>string</i> &amp;#38; optional <i>output-stream</i> &amp;#38; key :start :end</p>
+<p>It writes the characters of the specified substring of <i>string</i> to the <i>output-stream.</i></p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td><p><b>write-line</b> <i>string</i> &amp;#38; optional <i>output-stream</i> &amp;#38; key :start :end</p>
+<p>It works the same way as write-string, but outputs a newline afterwards.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td><p><b>terpri</b> &amp;#38; optional <i>output-stream</i></p>
+<p>It outputs a newline to <i>output-stream.</i></p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td><p><b>fresh-line</b> &amp;#38; optional <i>output-stream</i></p>
+<p>it outputs a newline only if the stream is not already at the start of a line.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td><p><b>finish-output</b> &amp;#38; optional <i>output-stream</i></p> 
+<p><b>force-output</b> &amp;#38; optional <i>output-stream</i></p> 
+<p><b>clear-output</b> &amp;#38; optional <i>output-stream</i></p>
+<ul class="list">
+<li><p>The function <b>finish-output</b> attempts to ensure that all output sent to output-stream has reached its destination, and only then returns nil.</p></li>
+<li><p>The function <b>force-output</b> initiates the emptying of any internal buffers but returns nil without waiting for completion or acknowledgment.</p></li>
+<li><p>The function <b>clear-output</b> attempts to abort any outstanding output operation in progress in order to allow as little output as possible to continue to the destination.</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td><p><b>write-byte</b> <i>integer binary-output-stream</i></p>
+<p>It writes one byte, the value of the <i>integer.</i></p>
+</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+; this program inputs a numbers and doubles it
+(defun DoubleNumber()
+(terpri)
+(princ "Enter Number : ")
+(setq n1 (read))
+(setq doubled (* 2.0 n1))
+(princ "The Number: ")
+(write n1)
+(terpri)
+(princ "The Number Doubled: ")
+(write doubled)
+)
+(DoubleNumber)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Enter Number : 3456.78 (STDIN Input)
+The Number: 3456.78
+The Number Doubled: 6913.56
+</pre>
+<h2>Formatted Output</h2>
+<p>The function <b>format</b> is used for producing nicely formatted text. It has the following syntax:</p>
+<pre class="prettyprint notranslate">
+format destination control-string &amp;rest arguments
+</pre>
+<p>where,</p>
+<ul class="list">
+<li>destination is standard output</li>
+<li>control-string holds the characters to be output and the printing directive.</li>
+</ul>
+<p>A <b>format directive</b> consists of a tilde (~), optional prefix parameters separated by commas, optional colon (:) and at-sign (@) modifiers, and a single character indicating what kind of directive this is.</p>
+<p>The prefix parameters are generally integers, notated as optionally signed decimal numbers.</p>
+<p>The following table provides brief description of the commonly used directives:</p>
+<table class="table table-bordered">
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>~A</td>
+<td>Is followed by ASCII arguments</td>
+</tr>
+<tr>
+<td>~S</td>
+<td>Is followed by S-expressions</td>
+</tr>
+<tr>
+<td>~D</td>
+<td>For decimal arguments</td>
+</tr>
+<tr>
+<td>~B</td>
+<td>For binary arguments</td>
+</tr>
+<tr>
+<td>~O</td>
+<td>For octal arguments</td>
+</tr>
+<tr>
+<td>~X</td>
+<td>For hexadecimal arguments</td>
+</tr>
+<tr>
+<td>~C</td>
+<td>For character arguments</td>
+</tr>
+<tr>
+<td>~F</td>
+<td>For Fixed-format floating-point arguments.</td>
+</tr>
+<tr>
+<td>~E</td>
+<td>Exponential floating-point arguments</td>
+</tr>
+<tr>
+<td>~$</td>
+<td>Dollar and floating point arguments.</td>
+</tr>
+<tr>
+<td>~%</td>
+<td>A new line is printed</td>
+</tr>
+<tr>
+<td>~*</td>
+<td>Next argument is ignored</td>
+</tr>
+<tr>
+<td>~?</td>
+<td>Indirection. The next argument must be a string, and the one after it a list.</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Let us rewrite the program calculating a circle's area:</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defun AreaOfCircle()
+   (terpri)
+   (princ "Enter Radius: ")
+   (setq radius (read))
+   (setq area (* 3.1416 radius radius))
+   (format t "Radius: = ~F~% Area = ~F" radius area)
+)
+(AreaOfCircle)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Enter Radius: 10.234 (STDIN Input)
+Radius: = 10.234
+Area = 329.03473
+</pre>
+<h1>LISP - File I/O</h1>
+<p>We have discussed about how standard input and output is handled by common LISP. All these functions work for reading from and writing into text and binary files too. Only difference is in this case the stream we use is not standard input or output, but a stream created for the specific purpose of writing into or reading from files.</p>
+<p>In this chapter we will see how LISP can create, open, close text or binary files for their data storage.</p>
+<p>A file represents a sequence of bytes, does not matter if it is a text file or binary file. This chapter will take you through important functions/macros for the file management.</p>
+<h2>Opening Files</h2>
+<p>You can use the <b>open</b> function to create a new file or to open an existing file. It is the most basic function for opening a file. However, the <b>with-open-file</b> is usually more convenient and more commonly used, as we will see later in this section.</p>
+<p>When a file is opened, a stream object is constructed to represent it in the LISP environment. All operations on the stream are basically equivalent to operations on the file.</p>
+<p>Syntax for the <b>open</b> function is:</p>
+<pre class="prettyprint notranslate">
+open filename &amp;key :direction :element-type :if-exists :if-does-not-exist :external-format
+</pre>
+<p>where,</p>
+<ul class="list">
+<li><p>The <i>filename</i> argument is the name of the file to be opened or created.</p></li>
+<li><p>The <i>keyword</i> arguments specify the type of stream and error handling ways.</p></li>
+<li><p>The <b>:direction</b> keyword specifies whether the stream should handle input, output, or both, it takes the following values:</p>
+<ul class="list">
+<li>:input - for input streams (default value)</li>
+<li>:output - for output streams</li>
+<li>:io - for bidirectional streams</li>
+<li>:probe - for just checking a files existence; the stream is opened and then closed.</li>
+</ul>
+</li>
+<li><p>The <b>:element-type</b> specifies the type of the unit of transaction for the stream.</p></li>
+<li><p>The <b>:if-exists</b> argument specifies the action to be taken if the :direction is :output or :io and a file of the specified name already exists. If the direction is :input or :probe, this argument is ignored. It takes the following values:</p>
+<ul class="list">
+<li>:error - it signals an error.</p></li>
+<li>:new-version - it creates a new file with the same name but larger version number.</p></li>
+<li>:rename - it renames the existing file.</li>
+<li>:rename-and-delete - it renames the existing file and then deletes it.</li>
+<li>:append - it appends to the existing file.</li>
+<li>:supersede - it supersedes the existing file.</li>
+<li>nil - it does not create a file or even a stream just returns nil to indicate failure.</li>
+</ul>
+</li>
+<li><p>The <b>:if-does-not-exist</b> argument specifies the action to be taken if a file of the specified name does not already exist. It takes the following values:</p>
+<ul class="list">
+<li>:error - it signals an error.</li>
+<li>:create - it creates an empty file with the specified name and then uses it.</li>
+<li>nil - it does not create a file or even a stream, but instead simply returns nil to indicate failure.</li>
+</ul>
+</li>
+<li><p>The <b>:external-format</b> argument specifies an implementation-recognized scheme for representing characters in files.</p></li>
+</ul>
+<p>For example, you can open a file named myfile.txt stored in the /tmp folder as:</p>
+<pre class="prettyprint notranslate">
+(open "/tmp/myfile.txt")
+</pre>
+<h2>Writing to and Reading from Files</h2>
+<p>The <b>with-open-file</b> allows reading or writing into a file, using the stream variable associated with the read/write transaction. Once the job is done, it automatically closes the file. It is extremely convenient to use.</p>
+<p>It has the following syntax:</p>
+<pre class="prettyprint notranslate">
+with-open-file (stream filename {options}*)
+   {declaration}* {form}*
+</pre>
+<ul class="list">
+<li><p><i>filename</i> is the name of the file to be opened; it may be a string, a pathname, or a stream.</p></li>
+<li><p>The <i>options</i> are same as the keyword arguments to the function open.</p></li>
+</ul>
+<h3>Example 1</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate">
+(with-open-file (stream "/tmp/myfile.txt" :direction :output)
+   (format stream "Welcome to Tutorials Point!")
+   (terpri stream)
+   (format stream "This is a tutorials database")
+   (terpri stream)
+   (format stream "Submit your Tutorials, White Papers and Articles into our Tutorials   Directory.")
+)
+</pre> 
+<p>Please note that all input-output functions discussed in the previous chapter, such as, terpri and format are working for writing into the file we created here.</p>
+<p>When you execute the code, it does not return anything; however, our data is written into the file. The <b>:direction :output</b> keywords allows us do this.</p>
+<p>However, we can read from this file using the <b>read-line</b> function.</p>
+<h3>Example 2</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(let ((in (open "/tmp/myfile.txt" :if-does-not-exist nil)))
+   (when in
+      (loop for line = (read-line in nil)
+      while line do (format t "~a~%" line))
+      (close in)
+   )
+)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Welcome to Tutorials Point!
+This is a tutorials database
+Submit your Tutorials, White Papers and Articles into our Tutorials Directory.
+</pre>
+<h2>Closing File</h2>
+<p>The <b>close</b> function closes a stream.</p>
+<h1>LISP - Structures</h1>
+<p>Structures are one of the user-defined data type, which allows you to combine data items of different kinds.</p>
+<p>Structures are used to represent a record. Suppose you want to keep track of your books in a library. You might want to track the following attributes about each book:</p>
+<ul class="list">
+<li>Title</li>
+<li>Author</li>
+<li>Subject</li>
+<li>Book ID</li>
+</ul>
+<h2>Defining a Structure</h2>
+<p>The <b>defstruct</b> macro in LISP allows you to define an abstract record structure. The <b>defstruct</b> statement defines a new data type, with more than one member for your program.</p>
+<p>To discuss the format of the <b>defstruct</b> macro, let us write the definition of the Book structure. We could define the book structure as:</p>
+<pre class="prettyprint notranslate">
+(defstruct book 
+   title 
+   author 
+   subject 
+   book-id 
+)
+</pre>
+<h3>Please note</h3>
+<ul class="list">
+<li><p>The above declaration creates a book structure with four <b>named components.</b> So every book created will be an object of this structure.</p></li>
+<li><p>It defines four functions named book-title, book-author, book-subject and book-book-id, which will take one argument, a book structure, and will return the fields title, author, subject and book-id of the book object. These functions are called the <b>access functions.</b></p></li>
+<li><p>The symbol book becomes a data type and you can check it using the <b>typep</b> predicate.</p></li>
+<li><p>There will also be an implicit function named <b>book-p,</b> which is a predicate and will be true if its argument is a book and is false otherwise.</p></li>
+<li><p>Another implicit function named <b>make-book</b> will be created, which is a <b>constructor,</b> which, when invoked, will create a data structure with four components, suitable for use with the access functions.</p></li>
+<li><p>The <b>#S syntax</b> refers to a structure, and you can use it to read or print instances of a book.</p></li>
+<li><p>An implicit function named copy-book of one argument is also defined that. It takes a book object and creates another book object, which is a copy of the first one. This function is called the <b>copier function.</b></p></li>
+<li><p>You can use <b>setf</b> to alter the components of a book, for example</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+(setf (book-book-id book3) 100)
+</pre>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defstruct book 
+   title 
+   author 
+   subject 
+   book-id 
+)
+( setq book1 (make-book :title "C Programming"
+   :author "Nuha Ali" 
+   :subject "C-Programming Tutorial"
+   :book-id "478")
+)
+( setq book2 (make-book :title "Telecom Billing"
+   :author "Zara Ali" 
+   :subject "C-Programming Tutorial"
+   :book-id "501")
+) 
+(write book1)
+(terpri)
+(write book2)
+(setq book3( copy-book book1))
+(setf (book-book-id book3) 100) 
+(terpri)
+(write book3)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+#S(BOOK :TITLE "C Programming" :AUTHOR "Nuha Ali" :SUBJECT "C-Programming Tutorial" :BOOK-ID "478")
+#S(BOOK :TITLE "Telecom Billing" :AUTHOR "Zara Ali" :SUBJECT "C-Programming Tutorial" :BOOK-ID "501")
+#S(BOOK :TITLE "C Programming" :AUTHOR "Nuha Ali" :SUBJECT "C-Programming Tutorial" :BOOK-ID 100)
+</pre>
+<h1>LISP - Packages</h1>
+<p>In general term of programming languages, a package is designed for providing a way to keep one set of names separate from another. The symbols declared in one package will not conflict with the same symbols declared in another. This way packages reduce the naming conflicts between independent code modules.</p>
+<p>The LISP reader maintains a table of all the symbols it has found. When it finds a new character sequence, it creates a new symbol and stores in the symbol table. This table is called a package.</p>
+<p>The current package is referred by the special variable *package*.</p>
+<p>There are two predefined packages in LISP:</p>
+<ul class="list">
+<li><p><b>common-lisp</b> - it contains symbols for all the functions and variables defined.</p></li>
+<li><p><b>common-lisp-user</b> - it uses the common-lisp package and all other packages with editing and debugging tools; it is called cl-user in short</p></li>
+</ul>
+<h2>Package Functions in LISP</h2>
+<p>The following table provides most commonly used functions used for creating, using and manipulating packages:</p>
+<table class="table table-bordered">
+<tr>
+<th>SL No</th>
+<th>Functions and Descriptions</th>
+</tr>
+<tr>
+<td>1</td>
+<td><p><b>make-package</b> <i>package-name</i> &amp;#38;key :nicknames :use</p>
+<p>It creates and returns a new package with the specified package name.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td><p><b>in-package</b> <i>package-name</i> &amp;#38;key :nicknames :use</p>
+<p>Makes the package current.</P>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td><p><b>in-package</b> <i>name</i></p>
+<p>This macro causes *package* to be set to the package named name, which must be a symbol or string.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>find-package</b> <i>name</i></p>
+<p>It searches for a package. The package with that name or nickname is returned; if no such package exists, find-package returns nil</p> 
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>rename-package</b> <i>package new-name</i> &amp;#38;optional <i>new-nicknames</i></p>
+<p>it renames a package.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>list-all-packages</b></p>
+<p>This function returns a list of all packages that currently exist in the Lisp system.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>delete-package</b> <i>package</i></p>
+<p>it deletes a package</p>
+</td>
+</tr>
+</table>
+<h2>Creating a LISP Package</h2>
+<p>The <b>defpackage</b> function is used for creating an user defined package. It has the following syntax:</p>
+<pre class="prettyprint notranslate">
+(defpackage :package-name
+   (:use :common-lisp ...)
+   (:export :symbol1 :symbol2 ...)
+)
+</pre>
+<p>Where,</p>
+<ul class="list">
+<li><p>package-name is the name of the package.</p></li>
+<li><p>The :use keyword specifies the packages that this package needs, i.e., packages that define functions used by code in this package.</p></li>
+<li><p>The :export keyword specifies the symbols that are external in this package.</p></li>
+</ul>
+<p>The <b>make-package</b> function is also used for creating a package. The syntax for this function is:</p>
+<pre class="prettyprint notranslate">
+make-package package-name &amp;key :nicknames :use
+</pre>
+<p>the arguments and keywords has same meaning as before.</p>
+<h2>Using a Package</h2>
+<p>Once you have created a package, you can use the code in this package, by making it the current package. The <b>in-package</b> macro makes a package current in the environment.</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(make-package :tom)
+(make-package :dick)
+(make-package :harry)
+(in-package tom)
+(defun hello () 
+   (write-line "Hello! This is Tom's Tutorials Point")
+)
+(hello)
+(in-package dick)
+(defun hello () 
+   (write-line "Hello! This is Dick's Tutorials Point")
+)
+(hello)
+(in-package harry)
+(defun hello () 
+   (write-line "Hello! This is Harry's Tutorials Point")
+)
+(hello)
+(in-package tom)
+(hello)
+(in-package dick)
+(hello)
+(in-package harry)
+(hello)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Hello! This is Tom's Tutorials Point
+Hello! This is Dick's Tutorials Point
+Hello! This is Harry's Tutorials Point
+</pre>
+<h2>Deleting a Package</h2>
+<p>The <b>delete-package</b> macro allows you to delete a package. The following example demonstrates this:</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(make-package :tom)
+(make-package :dick)
+(make-package :harry)
+(in-package tom)
+(defun hello () 
+   (write-line "Hello! This is Tom's Tutorials Point")
+)
+(in-package dick)
+(defun hello () 
+   (write-line "Hello! This is Dick's Tutorials Point")
+)
+(in-package harry)
+(defun hello () 
+   (write-line "Hello! This is Harry's Tutorials Point")
+)
+(in-package tom)
+(hello)
+(in-package dick)
+(hello)
+(in-package harry)
+(hello)
+(delete-package tom)
+(in-package tom)
+(hello)
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Hello! This is Tom's Tutorials Point
+Hello! This is Dick's Tutorials Point
+Hello! This is Harry's Tutorials Point
+*** - EVAL: variable TOM has no value
+</pre>
+<h1>LISP - Error Handling</h1>
+<p>In Common LISP terminology, exceptions are called conditions.</p>
+<p>In fact, conditions are more general than exceptions in traditional programming languages, because a <b>condition</b> represents any occurrence, error, or not, which might affect various levels of function call stack.</p>
+<p>Condition handling mechanism in LISP, handles such situations in such a way that conditions are used to signal warning (say by printing an warning) while the upper level code on the call stack can continue its work.</p>
+<p>The condition handling system in LISP has three parts:</p>
+<ul class="list">
+<li>Signalling a condition</li>
+<li>Handling the condition</li>
+<li>Restart the process</li>
+</ul>
+<h2>Handling a Condition</h2>
+<p>Let us take up an example of handling a condition arising out of divide by zero condition, to explain the concepts here.</p>
+<p>You need to take the following steps for handling a condition:</p>
+<ul class="list">
+<li><p><b>Define the Condition</b> - "A condition is an object whose class indicates the general nature of the condition and whose instance data carries information about the details of the particular circumstances that lead to the condition being signalled".</p>
+<p>The define-condition macro is used for defining a condition, which has the following syntax:</p>
+<pre class="prettyprint notranslate">
+(define-condition condition-name (error)
+   ((text :initarg :text :reader text))
+)
+</pre>
+<p>New condition objects are created with MAKE-CONDITION macro, which initializes the slots of the new condition based on the <b>:initargs</b> argument.</p>
+<p>In our example, the following code defines the condition:</p>
+<pre class="prettyprint notranslate">
+(define-condition on-division-by-zero (error)
+   ((message :initarg :message :reader message))
+)
+</pre>
+</li>
+<li><p><b>Writing the Handlers</b> - a condition handler is a code that are used for handling the condition signalled thereon. It is generally written in one of the higher level functions that call the erroring function. When a condition is signalled, the signalling mechanism searches for an appropriate handler based on the condition's class.</p>
+<p>Each handler consists of:</p>
+<ul class="list">
+<li>Type specifier, that indicates the type of condition it can handle</li>
+<li>A function that takes a single argument, the condition</li>
+</ul>
+<p>When a condition is signalled, the signalling mechanism finds the most recently established handler that is compatible with the condition type and calls its function.</p>
+<p>The macro <b>handler-case</b> establishes a condition handler. The basic form of a handler-case:</p>
+<pre class="prettyprint notranslate">
+(handler-case expression error-clause*)
+</pre>
+<p>Where, each error clause is of the form:</p>
+<pre class="prettyprint notranslate">
+condition-type ([var]) code)
+</pre>
+</li>
+<li><p><b>Restarting Phase</b></p>
+<p>This is the code that actually recovers your program from errors, and condition handlers can then handle a condition by invoking an appropriate restart. The restart code is generally place in middle-level or low-level functions and the condition handlers are placed into the upper levels of the application.</p>
+<p>The <b>handler-bind</b> macro allows you to provide a restart function, and allows you to continue at the lower level functions without unwinding the function call stack. In other words, the flow of control will still be in the lower level function.</p>
+<p>The basic form of <b>handler-bind</b> is as follows:</p>
+<pre class="prettyprint notranslate">
+(handler-bind (binding*) form*)
+</pre>
+<p>Where each binding is a list of the following:</p>
+<ul class="list">
+<li>a condition type</li>
+<li>a handler function of one argument</li>
+</ul>
+<p>The <b>invoke-restart</b> macro finds and invokes the most recently bound restart function with the specified name as argument.</p>
+<p>You can have multiple restarts.</p>
+</li>
+</ul>
+<h3>Example</h3>
+<p>In this example, we demonstrate the above concepts by writing a function named division-function, which will create an error condition if the divisor argument is zero. We have three anonymous functions that provide three ways to come out of it - by returning a value 1, by sending a divisor 2 and recalculating, or by returning 1.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(define-condition on-division-by-zero (error)
+   ((message :initarg :message :reader message))
+)
+   
+(defun handle-infinity ()
+   (restart-case
+      (let ((result 0))
+         (setf result (division-function 10 0))
+         (format t "Value: ~a~%" result)
+      )
+      (just-continue () nil)
+   )
+)
+     
+(defun division-function (value1 value2)
+   (restart-case
+      (if (/= value2 0)
+         (/ value1 value2)
+         (error 'on-division-by-zero :message "denominator is zero")
+      )
+
+      (return-zero () 0)
+      (return-value (r) r)
+      (recalc-using (d) (division-function value1 d))
+   )
+)
+
+(defun high-level-code ()
+   (handler-bind
+      (
+         (on-division-by-zero
+            #'(lambda (c)
+               (format t "error signaled: ~a~%" (message c))
+               (invoke-restart 'return-zero)
+            )
+         )
+         (handle-infinity)
+      )
+   )
+)
+
+(handler-bind
+   (
+      (on-division-by-zero
+         #'(lambda (c)
+            (format t "error signaled: ~a~%" (message c))
+            (invoke-restart 'return-value 1)
+         )
+      )
+   )
+   (handle-infinity)
+)
+
+(handler-bind
+   (
+      (on-division-by-zero
+         #'(lambda (c)
+            (format t "error signaled: ~a~%" (message c))
+            (invoke-restart 'recalc-using 2)
+         )
+      )
+   )
+   (handle-infinity)
+)
+
+(handler-bind
+   (
+      (on-division-by-zero
+         #'(lambda (c)
+            (format t "error signaled: ~a~%" (message c))
+            (invoke-restart 'just-continue)
+         )
+      )
+   )
+   (handle-infinity)
+)
+
+(format t "Done."))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+error signaled: denominator is zero
+Value: 1
+error signaled: denominator is zero
+Value: 5
+error signaled: denominator is zero
+Done.
+</pre>
+<p>Apart from the 'Condition System', as discussed above, Common LISP also provides various functions that may be called for signalling an error. Handling of an error, when signalled, is however, implementation-dependent.</p>
+<h2>Error Signalling Functions in LISP</h2>
+<p>The following table provides commonly used functions signalling warnings, breaks, non-fatal and fatal errors.</p>
+<p>The user program specifies an error message (a string). The functions process this message and may/may not display it to the user.</p>
+<p>The error messages should be constructed by applying the <b>format</b> function, should not contain a newline character at either the beginning or end, and need not indicate error, as the LISP system will take care of these according to its preferred style.</p>
+<table class="table table-bordered">
+<tr>
+<th>SL No.</th>
+<th>Functions and Descriptions</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>error</b> <i>format-string</i> &amp;#38;rest <i>args</i></p>
+<p>It signals a fatal error. It is impossible to continue from this kind of error; thus error will never return to its caller.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>cerror</b> <i>continue-format-string error-format-string</i> &amp;#38;rest <i>args</i></p>
+<p>It signals an error and enters the debugger. However, it allows the program to be continued from the debugger after resolving the error.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>warn</b> <i>format-string</i> &amp;#38;rest <i>args</i></p>
+<p>it prints an error message but normally doesn't go into the debugger</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>break</b> &amp;#38;optional <i>format-string</i> &amp;#38;rest <i>args</i></p>
+<p>It prints the message and goes directly into the debugger, without allowing any possibility of interception by programmed error-handling facilities</p>
+</td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>In this example, the factorial function calculates factorial of a number; however, if the argument is negative, it raises an error condition.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defun factorial (x)
+   (cond ((or (not (typep x 'integer)) (minusp x))
+      (error "~S is a negative number." x))
+      ((zerop x) 1)
+      (t (* x (factorial (- x 1))))
+   )
+)
+         
+(write(factorial 5))
+(terpri)
+(write(factorial -1))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+120
+*** - -1 is a negative number.
+</pre>
+<h1>LISP - CLOS</h1>
+<p>Common LISP predated the advance of object-oriented programming by couple of decades. However, it object-orientation was incorporated into it at a later stage.</p>
+<h2>Defining Classes</h2>
+<p>The <b>defclass</b> macro allows creating user-defined classes. It establishes a class as a data type. It has the following syntax:</p>
+<pre class="prettyprint notranslate">
+(defclass class-name (superclass-name*)
+   (slot-description*)
+   class-option*))
+</pre>
+<p>The slots are variables that store data, or fields.</p>
+<p>A slot-description has the form (slot-name slot-option*), where each option is a keyword followed by a name, expression and other options. Most commonly used slot options are:</p>
+<ul class="list">
+<li><p><b>:accessor</b> function-name</p></li>
+<li><p><b>:initform</b> expression</p></li>
+<li><p><b>:initarg</b> symbol</p></li>
+</ul>
+<p>For example, let us define a Box class, with three slots length, breadth, and height.</p>
+<pre class="prettyprint notranslate">
+(defclass Box () 
+   (length 
+   breadth 
+   height)
+)
+</pre>
+<h2>Providing Access and Read/Write Control to a Slot</h2>
+<p>Unless the slots have values that can be accessed, read or written to, classes are pretty useless.</p>
+<p>You can specify <b>accessors</b> for each slot when you define a class. For example, take our Box class:</p>
+<pre class="prettyprint notranslate">
+(defclass Box ()
+   ((length :accessor length)
+      (breadth :accessor breadth)
+      (height :accessor height)
+   )
+)
+</pre>
+<p>You can also specify separate <b>accessor</b> names for reading and writing a slot.</p>
+<pre class="prettyprint notranslate">
+(defclass Box ()
+   ((length :reader get-length :writer set-length)
+      (breadth :reader get-breadth :writer set-breadth)
+      (height :reader get-height :writer set-height)
+   )
+)
+</pre>
+<h2>Creating Instance of a Class</h2>
+<p>The generic function <b>make-instance</b> creates and returns a new instance of a class.</p>
+<p>It has the following syntax:</p>
+<pre class="prettyprint notranslate">
+(make-instance class {initarg value}*)
+</pre>
+<h3>Example</h3>
+<p>Let us create a Box class, with three slots, length, breadth and height. We will use three slot accessors to set the values in these fields.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defclass box ()
+   ((length :accessor box-length)
+      (breadth :accessor box-breadth)
+      (height :accessor box-height)
+   )
+)
+(setf item (make-instance 'box))
+(setf (box-length item) 10)
+(setf (box-breadth item) 10)
+(setf (box-height item) 5)
+(format t "Length of the Box is ~d~%" (box-length item))
+(format t "Breadth of the Box is ~d~%" (box-breadth item))
+(format t "Height of the Box is ~d~%" (box-height item))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Length of the Box is 10
+Breadth of the Box is 10
+Height of the Box is 5
+</pre>
+<h2>Defining a Class Method</h2>
+<p>The <b>defmethod</b> macro allows you to define a method inside the class. The following example extends our Box class to include a method named volume.</p>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defclass box ()
+   ((length :accessor box-length)
+      (breadth :accessor box-breadth)
+      (height :accessor box-height)
+      (volume :reader volume)
+   )
+)
+
+; method calculating volume   
+
+(defmethod volume ((object box))
+   (* (box-length object) (box-breadth object)(box-height object))
+)
+
+ ;setting the values 
+
+(setf item (make-instance 'box))
+(setf (box-length item) 10)
+(setf (box-breadth item) 10)
+(setf (box-height item) 5)
+
+; displaying values
+
+(format t "Length of the Box is ~d~%" (box-length item))
+(format t "Breadth of the Box is ~d~%" (box-breadth item))
+(format t "Height of the Box is ~d~%" (box-height item))
+(format t "Volume of the Box is ~d~%" (volume item))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Length of the Box is 10
+Breadth of the Box is 10
+Height of the Box is 5
+Volume of the Box is 500
+</pre>
+<h2>Inheritance</h2>
+<p>LISP allows you to define an object in terms of another object. This is called <b>inheritance.</b> You can create a derived class by adding features that are new or different. The derived class inherits the functionalities of the parent class.</p>
+<p>The following example explains this:</p>
+<h3>Example</h3>
+<p>Create a new source code file named main.lisp and type the following code in it.</p>
+<pre class="prettyprint notranslate tryit">
+(defclass box ()
+   ((length :accessor box-length)
+      (breadth :accessor box-breadth)
+      (height :accessor box-height)
+      (volume :reader volume)
+   )
+)
+; method calculating volume   
+(defmethod volume ((object box))
+   (* (box-length object) (box-breadth object)(box-height object))
+)
+  
+;wooden-box class inherits the box class  
+(defclass wooden-box (box)
+((price :accessor box-price)))
+
+ ;setting the values 
+(setf item (make-instance 'wooden-box))
+(setf (box-length item) 10)
+(setf (box-breadth item) 10)
+(setf (box-height item) 5)
+(setf (box-price item) 1000)
+
+; displaying values
+
+(format t "Length of the Wooden Box is ~d~%" (box-length item))
+(format t "Breadth of the Wooden Box is ~d~%" (box-breadth item))
+(format t "Height of the Wooden Box is ~d~%" (box-height item))
+(format t "Volume of the Wooden Box is ~d~%" (volume item))
+(format t "Price of the Wooden Box is ~d~%" (box-price item))
+</pre>
+<p>When you execute the code, it returns the following result:</p>
+<pre class="result notranslate">
+Length of the Wooden Box is 10
+Breadth of the Wooden Box is 10
+Height of the Wooden Box is 5
+Volume of the Wooden Box is 500
+Price of the Wooden Box is 1000
+</pre>
+<hr />
+<div class="pre-btn">
+<a href="lisp_clos.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="pdf-btn">
+<a href="pdf/lisp_quick_guide.pdf" title="LISP - Quick Guide" target="_blank"><i class="icon icon-file-pdf-o big-font"></i> PDF</a>
+</div>
+<div class="nxt-btn">
+<a href="lisp_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/lisp/lisp_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/lisp/lisp_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/lisp/lisp_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/lisp/lisp_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/lisp/lisp_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/lisp/lisp_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-minae52.js?v=5"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="text/javascript" src="../theme/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+   var tryit = new $.TryIt('try_lisp.html');
+   tryit.compile();
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "LISP - Quick Guide",
+    "name": "LISP - Quick Guide",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/lisp/lisp_quick_guide.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/lisp/images/lisp_environment_setup.jpg",
+        "width": 600,
+        "height": 469
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "August 15 2017 02:44:32.",
+    "dateModified": "August 15 2017 02:34:10.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "John McCarthy invented LISP in 1958, shortly after the development of FORTRAN. It was first implement by Steve Russell on an IBM 704 computer...."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Lisp",
+                "@id": "https://www.tutorialspoint.com/lisp"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Lisp - Quick Guide"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/lisp/lisp_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 16:11:00 GMT -->
+</html>

@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/obiee/obiee_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:31:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>OBIEE Quick Guide</title>
+<meta name="description" content="OBIEE Quick Guide - Learn OBIEE starting from Data Warehouse, Dimensional Modeling, Schema, Basics, Components, Architecture, Repositories, Business Layer, Presentation Layer, Testing Repository, Multiple Logical Table Sources, Calculation Measures, Dimension Hierarchies, Level-Based Measures, Aggregates, Variables, Dashboards, Filters, Views, Prompts, Security, Administration." />
+<meta name="keywords" content="OBIEE, Tutorial, Data Warehouse, Dimensional Modeling, Schema, Basics, Components, Architecture, Repositories, Business Layer, Presentation Layer, Testing Repository, Multiple Logical Table Sources, Calculation Measures, Dimension Hierarchies, Level-Based Measures, Aggregates, Variables, Dashboards, Filters, Views, Prompts, Security, Administration." />
+<base  />
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="../theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="../theme/css/style-min5e1f.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #ea1b22 url(../images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #ea1b22 !important;}
+.submenu-item{ border-bottom: 2px solid #ea1b22 !important; border-top: 2px solid #ea1b22 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="../images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="../index-2.html" title="tutorialspoint">
+      <img alt="tutorialspoint" src="images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="../about/about_careers.html" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="../whiteboard.html"><img src="../theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="../netmeeting.html"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="../online_dev_tools.html"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="../articles/index.html"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="../index-2.html"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../codingground.html"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../tutor_connect/index.html"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="../videotutorials/index.html"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="images/obiee-mini-logo.jpg" alt="OBIEE Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">OBIEE Tutorial</li>
+<li><a href="index.html">OBIEE - Home</a></li>
+<li><a href="obiee_data_warehouse.html">OBIEE - Data Warehouse</a></li>
+<li><a href="obiee_dimensional_modeling.html">OBIEE - Dimensional Modeling</a></li>
+<li><a href="obiee_schema.html">OBIEE - Schema</a></li>
+<li><a href="obiee_basics.html">OBIEE - Basics</a></li>
+<li><a href="obiee_components.html">OBIEE - Components</a></li>
+<li><a href="obiee_architecture.html">OBIEE - Architecture</a></li>
+<li><a href="obiee_repositories.html">OBIEE - Repositories</a></li>
+<li><a href="obiee_business_layer.html">OBIEE - Business Layer</a></li>
+<li><a href="obiee_presentation_layer.html">OBIEE - Presentation Layer</a></li>
+<li><a href="obiee_testing_repository.html">OBIEE - Testing Repository</a></li>
+<li><a href="obiee_multiple_logical_table_sources.html">OBIEE - Multiple Logical Table</a></li>
+<li><a href="obiee_calculation_measures.html">OBIEE - Calculation Measures</a></li>
+<li><a href="obiee_dimension_hierarchies.html">OBIEE - Dimension Hierarchies</a></li>
+<li><a href="obiee_level_based_measures.html">OBIEE - Level-Based Measures</a></li>
+<li><a href="obiee_aggregates.html">OBIEE - Aggregates</a></li>
+<li><a href="obiee_variables.html">OBIEE - Variables</a></li>
+<li><a href="obiee_dashboards.html">OBIEE - Dashboards</a></li>
+<li><a href="obiee_filters.html">OBIEE - Filters</a></li>
+<li><a href="obiee_views.html">OBIEE - Views</a></li>
+<li><a href="obiee_prompts.html">OBIEE - Prompts</a></li>
+<li><a href="obiee_security.html">OBIEE - Security</a></li>
+<li><a href="obiee_administration.html">OBIEE - Administration</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">OBIEE Useful Resources</li>
+<li><a href="obiee_questions_answers.html">OBIEE - Questions Answers</a></li>
+<li><a href="obiee_quick_guide.html">OBIEE - Quick Guide</a></li>
+<li><a href="obiee_useful_resources.html">OBIEE - Useful Resources</a></li>
+<li><a href="obiee_discussion.html">OBIEE - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="../developers_best_practices/index.html">Developer's Best Practices</a></li>
+<li><a target="_top" href="../questions_and_answers.html">Questions and Answers</a></li>
+<li><a target="_top" href="../effective_resume_writing.html">Effective Resume Writing</a></li>
+<li><a target="_top" href="../hr_interview_questions/index.html">HR Interview Questions</a></li>
+<li><a target="_top" href="../computer_glossary.html">Computer Glossary</a></li>
+<li><a target="_top" href="../computer_whoiswho.html">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>OBIEE - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript" 
+src="../../pagead2.googlesyndication.com/pagead/f.txt"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="obiee_questions_answers.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="obiee_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>OBIEE – Data Warehouse</h1>
+<p>In today’s competitive market, most successful companies respond quickly to market changes and opportunities. The requirement to respond quickly is by effective and efficient use of data and information. <b>“Data Warehouse”</b> is a central repository of data that is organized by category to support the organization’s decision makers. Once data is stored in a data warehouse, it can be accessed for analysis.</p>
+<p>The term "Data Warehouse" was first invented by Bill Inmon in 1990. According to him, “Data warehouse is a subject-oriented, integrated, time-variant and non-volatile collection of data in support of management's decision making process.”</p>
+<p>Ralph Kimball provided a definition of data warehouse based on its functionality. He said, “Data warehouse is a copy of transaction data specifically structured for query and analysis.”</p>
+<p>Data Warehouse (DW or DWH) is a system used for analysis of data and reporting purposes. They are repositories that saves data from one or more heterogeneous data sources. They store both current and historical data and are used for creating analytical reports. DW can be used to create interactive dashboards for the senior management.</p>
+<p>For example, analytic reports can contain data for quarterly comparisons or for annual comparison of sales report for a company.</p>
+<p>Data in DW comes from multiple operational systems like sales, human resource, marketing, warehouse management, etc. It contains historical data from different transaction systems but it can also include data from other sources. DW is used to separate data processing and analysis workload from transaction workload and enables to consolidate the data from several data sources.</p>
+<h2>The Need for Data Warehouse</h2>
+<p>For example &minus; You have a home loan agency, where data comes from multiple SAP/non-SAP applications such as marketing, sales, ERP, HRM, etc. This data is extracted, transformed and loaded into DW. If you have to do quarterly/annual sales comparison of a product, you cannot use an operational database as this will hang the transaction system. This is where the need for using DW arises.</p>
+<h2>Characteristics of a Data Warehouse</h2>
+<p>Some of the key characteristics of DW are &minus;</p>
+<ul class="list">
+<li>It is used for reporting and data analysis.</li>
+<li>It provides a central repository with data integrated from one or more sources.</li>
+<li>It stores current and historical data.</li>
+</ul>
+<h2>Data Warehouse vs. Transactional System</h2>
+<p>Following are few differences between Data Warehouse and Operational Database (Transaction System) &minus;</p>
+<ul class="list">
+<li><p>Transactional system is designed for known workloads and transactions like updating a user record, searching a record, etc. However, DW transactions are more complex and present a general form of data.</p></li>
+<li><p>Transactional system contains the current data of an organization whereas DW normally contains historical data.</p></li>
+<li><p>Transactional system supports parallel processing of multiple transactions. Concurrency control and recovery mechanisms are required to maintain consistency of the database.</p></li>
+<li><p>Operational database query allows to read and modify operations (delete and update), while an OLAP query needs only read-only access of stored data (select statement).</p></li>
+<li><p>DW involves data cleaning, data integration, and data consolidations.</p></li>
+</ul>
+<p>DW has a three-layer architecture &minus; Data Source Layer, Integration Layer, and Presentation Layer. The following diagram shows the common architecture of a Data Warehouse system.</p>
+<img src="images/data_warehouse_architecture.jpg" alt="Data Warehouse Architecture" />
+<h2>Types of Data Warehouse System</h2>
+<p>Following are the types of DW system &minus;</p>
+<ul class="list">
+<li>Data Mart</li>
+<li>Online Analytical Processing (OLAP)</li>
+<li>Online Transaction Processing (OLTP)</li>
+<li>Predictive Analysis</li>
+</ul>
+<h2>Data Mart</h2>
+<p>Data Mart is the simplest form of DW and it normally focuses on a single functional area, such as sales, finance or marketing. Hence, data mart usually gets data only from few data sources.</p>
+<p>Sources could be an internal transaction system, a central data warehouse, or an external data source application. De-normalization is the norm for data modeling techniques in this system.</p>
+<img src="images/data_mart.jpg" alt="Data Mart" />
+<h2>Online Analytical Processing (OLAP)</h2>
+<p>An OLAP system contains less number of transactions but involves complex calculations like use of Aggregations &minus; Sum, Count, Average, etc.</p>
+<h3>What is Aggregation?</h3>
+<p>We save tables with aggregated data like yearly (1 row), quarterly (4 rows), monthly (12 rows) and now we want to compare data, like Yearly only 1 row will be processed. However, in an un-aggregated data, all the rows will be processed.</p>
+<p>OLAP system normally stores data in multidimensional schemas like Star Schema, Galaxy schemas (with Fact and Dimensional tables are joined in logical manner).</p>
+<p>In an OLAP system, response time to execute a query is an effectiveness measure. OLAP applications are widely used by Data Mining techniques to get data from OLAP systems. OLAP databases store aggregated historical data in multi-dimensional schemas. OLAP systems have data latency of a few hours as compared to Data Marts where latency is normally closer to few days.</p>
+<h2>Online Transaction Processing (OLTP)</h2>
+<p>An OLTP system is known for large number of short online transactions like insert, update, delete, etc. OLTP systems provide fast query processing and also responsible to provide data integrity in multi-access environment.</p>
+<p>For an OLTP systems, effectiveness is measured by the number of transactions processed per second. OLTP systems normally contain only current data. The schema used to store transactional databases is the entity model. Normalization is used for data modeling techniques in OLTP system.</p>
+<h2>OLTP vs OLAP</h2>
+<p>The following illustration shows the key differences between an OLTP and OLAP system.</p>
+<img src="images/oltp_vs_olap.jpg" alt="OLTP vs OLAP" />
+<p><b>Indexes</b> &minus; In an OLTP system, there are only few indexes while in an OLAP system there are many indexes for performance optimization.</p>
+<p><b>Joins</b> &minus; In an OLTP system, large number of joins and data is normalized; however, in an OLAP system there are less joins and de-normalized.</p>
+<p><b>Aggregation</b> &minus; In an OLTP system, data is not aggregated while in an OLAP database more aggregations are used.</p>
+<h1>OBIEE – Dimensional Modeling</h1>
+<p>Dimensional modeling provides set of methods and concepts that are used in DW design. According to DW consultant, Ralph Kimball, dimensional modeling is a design technique for databases intended to support end-user queries in a data warehouse. It is oriented around understandability and performance. According to him, although transaction-oriented ER is very useful for the transaction capture, it should be avoided for end-user delivery.</p>
+<p>Dimensional modeling always uses facts and dimension tables. Facts are numerical values which can be aggregated and analyzed on the fact values. Dimensions define hierarchies and description on fact values.</p>
+<h2>Dimension Table</h2>
+<p>Dimension table stores the attributes that describe objects in a Fact table. A Dimension table has a primary key that uniquely identifies each dimension row. This key is used to associate the Dimension table to a Fact table.</p>
+<p>Dimension tables are normally de-normalized as they are not created to execute transactions and only used to analyze data in detail.</p>
+<h3>Example</h3>
+<p>In the following dimension table, the customer dimension normally includes the name of customers, address, customer id, gender, income group, education levels, etc.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Customer ID</th>
+<th style="text-align:center;">Name</th>
+<th style="text-align:center;">Gender</th>
+<th style="text-align:center;">Income</th>
+<th style="text-align:center;">Education</th>
+<th style="text-align:center;">Religion</th>
+</tr>
+<tr style="text-align:center;">
+<td>1</td>
+<td>Brian Edge</td>
+<td>M</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr style="text-align:center;">
+<td>2</td>
+<td>Fred Smith</td>
+<td>M</td>
+<td>3</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr style="text-align:center;">
+<td>3</td>
+<td>Sally Jones</td>
+<td>F</td>
+<td>1</td>
+<td>7</td>
+<td>3</td>
+</tr>
+</table>
+<h2>Fact Tables</h2>
+<p>Fact table contains numeric values that are known as measurements. A Fact table has two types of columns &minus; facts and foreign key to dimension tables.</p>
+<p>Measures in Fact table are of three types &minus;</p>
+<ul class="list">
+<li><p><b>Additive</b> &minus; Measures that can be added across any dimension.</p></li>
+<li><p><b>Non-Additive</b> &minus; Measures that cannot be added across any dimension.</p></li>
+<li><p><b>Semi-Additive</b> &minus; Measures that can be added across some dimensions.</p></li>
+</ul>
+<h3>Example</h3>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Time ID</th>
+<th style="text-align:center;">Product ID</th>
+<th style="text-align:center;">Customer ID</th>
+<th style="text-align:center;">Unit Sold</th>
+</tr>
+<tr style="text-align:center;">
+<td>4</td>
+<td>17</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr style="text-align:center;">
+<td>8</td>
+<td>21</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr style="text-align:center;">
+<td>8</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</table>
+<p>This fact tables contains foreign keys for time dimension, product dimension, customer dimension and measurement value unit sold.</p>
+<p>Suppose a company sells products to customers. Every sale is a fact that happens within the company, and the fact table is used to record these facts.</p>
+<p>Common facts are &minus; number of unit sold, margin, sales revenue, etc. The dimension table list factors like customer, time, product, etc. by which we want to analyze the data.</p>
+<p>Now if we consider the above Fact table and Customer dimension then there will also be a Product and time dimension. Given this fact table and these three dimension tables, we can ask questions like: How many watches were sold to male customers in 2010?</p>
+<h3>Difference between Dimension and Fact Table</h3>
+<p>The functional difference between dimension tables and fact tables is that fact tables hold the data we want to analyze and dimension tables hold the information required to allow us to query it.</p>
+<h2>Aggregate Table</h2>
+<p>Aggregate table contains aggregated data which can be calculated by using different aggregate functions.</p>
+<p>An <b>aggregate function</b> is a function where the values of multiple rows are grouped together as input on certain criteria to form a single value of more significant meaning or measurement.</p>
+<p>Common aggregate functions include &minus;</p>
+<ul class="list">
+<li>Average()</li>
+<li>Count()</li>
+<li>Maximum()</li>
+<li>Median()</li>
+<li>Minimum()</li>
+<li>Mode()</li>
+<li>Sum()</li>
+</ul>
+<p>These aggregate tables are used for performance optimization to run complex queries in a data warehouse.</p>
+<h3>Example</h3>
+<p>You save tables with aggregated data like yearly (1 row), quarterly (4 rows), monthly (12 rows) and now you have to do comparison of data, like Yearly only 1 row will be processed. However in an un-aggregated table, all the rows will be processed.</p>
+<table class="table table-bordered">
+<tr style="text-align:center;">
+<td>MIN</td>
+<td>Returns the smallest value in a given column</td>
+</tr>
+<tr style="text-align:center;">
+<td>MAX</td>
+<td>Returns the largest value in a given column</td>
+</tr>
+<tr style="text-align:center;">
+<td>SUM</td>
+<td>Returns the sum of the numeric values in a given column</td>
+</tr>
+<tr style="text-align:center;">
+<td>AVG</td>
+<td>Returns the average value of a given column</td>
+</tr>
+<tr style="text-align:center;">
+<td>COUNT</td>
+<td>Returns the total number of values in a given column</td>
+</tr>
+<tr style="text-align:center;">
+<td>COUNT (*)</td>
+<td>Returns the number of rows in a table</td>
+</tr>
+</table>
+<p>Select Avg (salary) from employee where title = ‘developer’. This statement will return the average salary for all employees whose title is equal to 'Developer'.</p>
+<p>Aggregations can be applied at database level. You can create aggregates and save them in aggregate tables in the database or you can apply aggregate on the fly at the report level.</p>
+<p><b>Note</b> &minus; If you save aggregates at the database level it saves time and provides performance optimization.</p>
+<h1>OBIEE – Schema</h1>
+<p>Schema is a logical description of the entire database. It includes the name and description of records of all types including all associated data-items and aggregates. Much like a database, DW also requires to maintain a schema. Database uses relational model, while DW uses Star, Snowflake, and Fact Constellation schema (Galaxy schema).</p>
+<h2>Star Schema</h2>
+<p>In a Star Schema, there are multiple dimension tables in de-normalized form that are joined to only one fact table. These tables are joined in a logical manner to meet some business requirement for analysis purpose. These schemas are multidimensional structures which are used to create reports using BI reporting tools.</p>
+<p>Dimensions in Star schemas contain a set of attributes and Fact tables contain foreign keys for all dimensions and measurement values.</p>
+<img src="images/star_schema.jpg" alt="Star Schema" />
+<p>In the above Star Schema, there is a fact table “Sales Fact” at the center and is joined to 4 dimension tables using primary keys. Dimension tables are not further normalized and this joining of tables is known as Star Schema in DW.</p>
+<p>Fact table also contains measure values &minus; dollar_sold and units_sold.</p>
+<h2>Snowflakes Schema</h2>
+<p>In a Snowflakes Schema, there are multiple dimension tables in normalized form that are joined to only one fact table. These tables are joined in a logical manner to meet some business requirement for analysis purpose.</p>
+<p>Only difference between a Star and Snowflakes schema is that dimension tables are further normalized. The normalization splits up the data into additional tables. Due to normalization in the Snowflake schema, the data redundancy is reduced without losing any information and therefore it becomes easy to maintain and saves storage space.</p>
+<img src="images/snowflakes_schema.jpg" alt="Snowflakes Schema" />
+<p>In above Snowflakes Schema example, Product and Customer table are further normalized to save storage space. Sometimes, it also provides performance optimization when you execute a query that requires processing of rows directly in normalized table so it doesn’t process rows in primary Dimension table and comes directly to Normalized table in Schema.</p>
+<h2>Granularity</h2>
+<p>Granularity in a table represents the level of information stored in the table. High granularity of data means that data is at or near the transaction level, which has more detail. Low granularity means that data has low level of information.</p>
+<p>A fact table is usually designed at a low level of granularity. This means that we need to find the lowest level of information that can be stored in a fact table. In date dimension, the granularity level could be year, month, quarter, period, week, and day.</p>
+<p>The process of defining granularity consists of two steps &minus;</p>
+<ul class="list">
+<li>Determining the dimensions that are to be included.</li>
+<li>Determining the location to place the hierarchy of each dimension of information.</li>
+</ul>
+<h2>Slowly Changing Dimensions</h2>
+<p>Slowly changing dimensions refer to changing value of an attribute over time. It is one of the common concepts in DW.</p>
+<h3>Example</h3>
+<p>Andy is an employee of XYZ Inc. He was first located in New York City in July 2015. Original entry in the employee lookup table has the following record &minus;</p>
+<table style="width:60%;margin:auto;" class="table table-bordered">
+<tr>
+<th style="text-align:center;">Employee ID</th>
+<td style="text-align:center;">10001</td>
+</tr>
+<tr style="text-align:center;">
+<th style="text-align:center;">Name</th>
+<td>Andy</td>
+</tr>
+<tr style="text-align:center;">
+<th style="text-align:center;">Location</th>
+<td>New York</td>
+</tr>
+</table>
+<p>At a later date, he has relocated to LA, California. How should XYZ Inc. now modify its employee table to reflect this change?</p>
+<p>This is known as "Slowly Changing Dimension" concept.</p>
+<p>There are three ways to solve this type of problem &minus;</p>
+<h3>Solution 1</h3>
+<p>The new record replaces the original record. No trace of the old record exists.</p>
+<p>Slowly Changing Dimension, the new information simply overwrites the original information. In other words, no history is kept.</p>
+<table style="width:60%; margin:auto;" class="table table-bordered">
+<tr style="text-align:center;">
+<th style="text-align:center;">Employee ID</th>
+<td>10001</td>
+</tr>
+<tr style="text-align:center;">
+<th style="text-align:center;">Name</th>
+<td>Andy</td>
+</tr>
+<tr style="text-align:center;">
+<th style="text-align:center;">Location</th>
+<td>LA, California</td>
+</tr>
+</table>
+<ul class="list">
+<li><p><b>Benefit</b> &minus; This is the easiest way to handle the Slowly Changing Dimension problem as there is no need to keep track of the old information.</p></li>
+<li><p><b>Disadvantage</b> &minus; All historical information is lost.</p></li>
+<li><p><b>Use</b> &minus; Solution 1 should be used when it is not required for DW to keep track of historical information.</p></li>
+</ul>
+<h3>Solution 2</h3>
+<p>A new record is entered into the Employee dimension table. So the employee, Andy, is treated as two people.</p>
+<p>A new record is added to the table to represent the new information and both the original and new record will be present. The new record gets its own primary key as follows &minus;</p>
+<table style="width:60%; margin:auto;" class="table table-bordered">
+<tr style="text-align:center;">
+<th style="text-align:center;">Employee ID</th>
+<td>10001</td>
+<td>10002</td>
+</tr>
+<tr style="text-align:center;">
+<th style="text-align:center;">Name</th>
+<td>Andy</td>
+<td>Andy</td>
+</tr>
+<tr style="text-align:center;"> 
+<th style="text-align:center;">Location</th>
+<td>New York</td>
+<td>LA, California</td>
+</tr>
+</table>
+<ul class="list">
+<li><p><b>Benefit</b> &minus; This method allows us to store all the historical information.</p></li>
+<li><p><b>Disadvantage</b> &minus; Size of the table grows faster. When the number of rows for the table is very high, space and performance of table can be a concern.</p></li>
+<li><p><b>Use</b> &minus; Solution 2 should be used when it is necessary for DW to keep historical data.</p></li>
+</ul>
+<h3>Solution 3</h3>
+<p>The original record in Employee dimension is modified to reflect the change.</p>
+<p>There will be two columns to indicate the particular attribute, one indicates original value and other indicates the new value. There will also be a column that indicates when the current value becomes active.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Employee ID</th>
+<th style="text-align:center;">Name</th>
+<th style="text-align:center;">Original Location</th>
+<th style="text-align:center;">New Location</th>
+<th style="text-align:center;">Date Moved</th>
+</tr>
+<tr style="text-align:center;">
+<td>10001</td>
+<td>Andy</td>
+<td>New York</td>
+<td>LA, California</td>
+<td>July 2015</td>
+</tr>
+</table>
+<ul class="list">
+<li><p><b>Benefits</b> &minus; This does not increase the size of the table, since new information is updated. This allows us to keep historical information.</p></li>
+<li><p><b>Disadvantage</b> &minus; This method doesn’t keep all history when an attribute value is changed more than once.</p></li>
+<li><p><b>Use</b> &minus; Solution 3 should only be used when it is required for DW to keep information of historical changes.</p></li>
+</ul>
+<h2>Normalization</h2>
+<p>Normalization is the process of decomposing a table into less redundant smaller tables without losing any information. So Database normalization is the process of organizing the attributes and tables of a database to minimize data redundancy (duplicate data).</p>
+<h3>Purpose of Normalization</h3>
+<ul class="list">
+<li><p>It is used to eliminate certain types of data (redundancy/ replication) to improve consistency.</p></li>
+<li><p>It provides maximum flexibility to meet future information needs by keeping tables corresponding to object types in their simplified forms.</p></li>
+<li><p>It produces a clearer and readable data model.</p></li>
+</ul>
+<h3>Advantages</h3>
+<ul class="list">
+<li>Data integrity.</li>
+<li>Enhances data consistency.</li>
+<li>Reduces data redundancy and space required.</li>
+<li>Reduces update cost.</li>
+<li>Maximum flexibility in responding to ad-hoc queries.</li>
+<li>Reduces the total number of rows per block.</li>
+</ul>
+<h3>Disadvantages</h3>
+<p>Slow performance of queries in database because joins have to be performed to retrieve relevant data from several normalized tables.</p>
+<p>You have to understand the data model in order to perform proper joins among several tables.</p>
+<h3>Example</h3>
+<img src="images/purpose_of_normalization.jpg" alt="Purpose of Normalization" />
+<p>In the above example, the table inside the green block represents a normalized table of the one inside the red block. The table in green block is less redundant and also with less number of rows without losing any information.</p>
+<h1>OBIEE – Basics</h1>
+<p>OBIEE stands for <b>Oracle Business Intelligence Enterprise Edition</b>, a set of Business Intelligence tools and is provided by Oracle Corporation. It enables the user to deliver robust set of reporting, ad-hoc query and analysis, OLAP, dashboard, and scorecard functionality with a rich end-user experience that includes visualization, collaboration, alerts and many more options.</p>
+<h2>Key Points</h2>
+<ul class="list">
+<li><p>OBIEE provides robust reporting which makes data easier for business users to access.</p></li>
+<li><p>OBIEE provides a common infrastructure for producing and delivering enterprise reports, scorecards, dashboards, ad-hoc analysis, and OLAP analysis.</p></li>
+<li><p>OBIEE reduces cost with a proven web-based service-oriented architecture that integrates with existing IT infrastructure.</p></li>
+<li><p>OBIEE enables the user to include rich visualization, interactive dashboards, a vast range of animated charting options, OLAP-style interactions, innovative search, and actionable collaboration capabilities to increase the user adoption. These capabilities enable your organization to make better decisions, take informed actions, and implement more-efficient business processes.</p></li>
+</ul>
+<h2>Competitors in the Market</h2>
+<p>The main competitors of OBIEE are Microsoft BI tools, SAP AG Business Objects, IBM Cognos and SAS Institute Inc.</p>
+<p>As OBIEE enables the user to create interactive dashboards, robust reports, animated charts and also because of its cost-effectiveness, it is widely used by many companies as one of main tool for Business Intelligence solution.</p>
+<h2>Advantages of OBIEE</h2>
+<p>OBIEE provides various types of visualizations to insert in dashboards to make it more interactive. It allows you to create flash reports, report templates, and ad-hoc reporting for end users. It provides close integration with major data sources and can also be integrated with third party vendors like Microsoft to embed data in PowerPoint presentations and word documents.</p>
+<p>Following are the key features and benefits of OBIEE tool &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="width:50%;text-align:center;">Features</td>
+<th style="width:50%;text-align:center;">Key Benefits of OBIEE</th>
+</tr>
+<tr>
+<td>Interactive Dashboards</td>
+<td>Provides fully interactive dashboards and reports with a rich variety of visualizations</td>
+</tr>
+<tr>
+<td>Self-serve Interactive Reporting</td>
+<td>Enable business users to create new analyses from scratch or modify existing analyses without any help from IT</td>
+</tr>
+<tr>
+<td>Enterprise Reporting</td>
+<td>Allows the creation of highly formatted templates, reports, and documents such as flash reports, checks, and more</td>
+</tr>
+<tr>
+<td>Proactive Detection and Alerts</td>
+<td>provides a powerful, near-real-time, multi-step alert engine that can trigger workflows based on business events and notify stakeholders via their preffered medium and channel</td>
+</tr>
+<tr>
+<td>Actionable Intelligence</td>
+<td>Turns insights into actions by providing the ability to invoke business processes from within the business intelligence dashboards and reports</td>
+</tr>
+<tr>
+<td>Microsoft Office Integration</td>
+<td>Enables users to embed up-to-the-minute corporate data in Microsoft PowerPoint, word, and Excel documents</td>
+</tr>
+<tr>
+<td>Spatial Intelligence via Map-based Visualizations</td>
+<td>Allows users to visualize their analytics data using maps, bringing the intuitiveness of spatial visualization to the world of business intelligence</td>
+</tr>
+</table>
+<h2>How to Sign in to OBIEE?</h2>
+<p>To sign into OBIEE, you can use web URL, user name and password.</p>
+<p>To sign into Oracle BI Enterprise Edition &minus;</p>
+<p><b>Step 1</b> &minus; In the Web browser address bar, enter URL to access OBIEE.</p>
+<p>The "Sign In page" is displayed.</p>
+<img src="images/sign_in_to_obiee_step1.jpg" alt="Sign in to OBIEE Step1" />
+<p><b>Step 2</b> &minus; Enter your user name and password &rarr; Select the language (You can change the language by selecting another language in the User Interface Language field in the My Account dialog Preferences tab") &rarr; Click on Sign In tab.</p>
+<p>It will take you to the next page as per configuration: OBIEE homepage as shown in the following image or to My Dashboard page/Personal Dashboard or a Dashboard specific to your job role.</p>
+<img src="images/sign_in_to_obiee_step2.jpg" alt="Sign in to OBIEE Step2" />
+<h1>OBIEE – Components</h1>
+<p>OBIEE components are mainly divided into two types of components &minus;</p>
+<ul class="list">
+<li>Server Components</li>
+<li>Client Components</li>
+</ul>
+<p>Server components are responsible to run OBIEE system and client components interact with user to create reports and dashboards.</p>
+<h2>Server Components</h2>
+<p>Following are the server components &minus;</p>
+<ul class="list">
+<li>Oracle BI (OBIEE) Server</li>
+<li>Oracle Presentation Server</li>
+<li>Application Server</li>
+<li>Scheduler</li>
+<li>Cluster Controller</li>
+</ul>
+<h3>Oracle BI Server</h3>
+<p>This component is the heart of OBIEE system and is responsible to communicate with other components. It generates queries for report request and they are sent to database for execution.</p>
+<p>It is also responsible for managing repository components which are presented to the user for report generation, handles security mechanism, multi user environment, etc.</p>
+<h3>OBIEE Presentation Server</h3>
+<p>It takes the request from users via browser and passes all requests to OBIEE server.</p>
+<h3>OBIEE Application Server</h3>
+<p>OBIEE Application Server helps to work on client components and Oracle provides Oracle10g Application server with OBIEE suite.</p>
+<h3>OBIEE Scheduler</h3>
+<p>It is responsible to schedule jobs in OBIEE repository. When you create a repository, OBIEE also create a table inside the repository which saves all schedule-related information. This component is also mandatory to run agents in 11g.</p>
+<p>All jobs which are scheduled by the Scheduler can be monitored by the job manager.</p>
+<h2>Client Components</h2>
+<p>Following are some client components &minus;</p>
+<h3>Web-based OBIEE Client</h3>
+<p>Following tools are provided in OBIEE web-based client &minus;</p>
+<ul class="list">
+<li>Interactive Dashboards</li>
+<li>Oracle Delivers</li>
+<li>BI Publisher</li>
+<li>BI Presentation Service Administrator</li>
+<li>Answers</li>
+<li>Disconnected Analytics</li>
+<li>MS Office Plugin</li>
+</ul>
+<h3>Non-Web based Client</h3>
+<p>In Non-Web based client, following are the key components &minus;</p>
+<ul class="list">
+<li><p><b>OBIEE Administration</b> &minus; It is used to build repositories and has three layers &minus; Physical, Business, and Presentation.</p></li>
+<li><p><b>ODBC Client</b> &minus; It is used to connect to database and execute SQL commands.</p></li>
+</ul>
+<h1>OBIEE – Architecture</h1>
+<p>OBIEE Architecture involves various BI system components which are required to process the end user’s request.</p>
+<h2>How OBIEE System Actually Works?</h2>
+<p>The initial request from the end user is sent to the Presentation server. The Presentation server converts this request in logical SQL and forwards it to BI server component. BI server converts this into physical SQL and sends it to database to get the required result. This result is presented to the end user through the same way.</p>
+<p>The following diagram shows detailed OBIEE Architecture &minus;</p>
+<p>OBIEE Architecture contains Java and non-Java components. Java components are Web Logic Server components and non-Java components are called Oracle BI system component.</p>
+<img src="images/obiee_system.jpg" alt="OBIEE System" />
+<h3>Web Logic Server</h3>
+<p>This part of OBIEE system contains Admin Server and Managed Server. Admin server is responsible for managing the start and stop processes for Managed server. Managed Server comprises of BI Plugin, Security, Publisher, SOA, BI Office, etc.</p>
+<h3>Node Manager</h3>
+<p>Node Manager triggers the auto start, stop, restart activities and provides process management activities for Admin and Managed server.</p>
+<h3>Oracle Process Manager and Notification Server (OPMN)</h3>
+<p>OPMN is used to start and stop all components of BI system. It is managed and controlled by Fusion Middleware Controller.</p>
+<h3>Oracle BI System Components</h3>
+<p>These are non-Java components in an OBIEE system.</p>
+<h3>Oracle BI Server</h3>
+<p>This is the heart of Oracle BI system and is responsible for providing data and query access capabilities.</p>
+<h3>BI Presentation Server</h3>
+<p>It is responsible to present data from BI server to web clients which is requested by the end users.</p>
+<h3>Scheduler</h3>
+<p>This component provides scheduling capability in BI system and it has its own scheduler to schedule jobs in OBIEE system.</p>
+<h3>Oracle BI Java Host</h3>
+<p>This is responsible for enabling BI Presentation server to support various Java tasks for BI Scheduler, Publisher and graphs.</p>
+<h3>BI Cluster Controller</h3>
+<p>This is used for load balancing purposes to ensure that the load is evenly assigned to all BI server processes.</p>
+<h1>OBIEE – Repositories</h1>
+<p>OBIEE repository contains all metadata of the BI Server and is managed through the administration tool. It is used to store information about the application environment such as &minus;</p>
+<ul class="list">
+<li>Data Modeling</li>
+<li>Aggregate Navigation</li>
+<li>Caching</li>
+<li>Security</li>
+<li>Connectivity Information</li>
+<li>SQL Information</li>
+</ul>
+<p>The BI Server can access multiple repositories. OBIEE Repository can be accessed using the following path &minus;</p>
+<pre class="result notranslate">
+BI_ORACLE_HOME/server/Repository -&gt; Oracle 10g
+ORACLE_INSTANCE/bifoundation/OracleBIServerComponent/coreapplication_obisn/-&gt; Oracle 11g
+</pre>
+<p>OBIEE repository database is also known as a RPD because of its file extension. The RPD file is password protected and you can only open or create RPD files using Oracle BI Administration tool. To deploy an OBIEE application, the RPD file must be uploaded to Oracle Enterprise Manager. After uploading the RPD, the RPD password then must be entered into Enterprise Manager.</p>
+<h2>Designing an OBIEE Repository using Administration Tool</h2>
+<p>It is a three layer process &minus; starting from Physical Layer (Schema Design), Business Model Layer, Presentation Layer.</p>
+<h3>Creating the Physical Layer</h3>
+<p>Following are the common steps involved in creating the Physical Layer &minus;</p>
+<ul class="list">
+<li>Create physical joins between the Dimension and Fact tables.</li>
+<li>Change the names in the physical layer if required.</li>
+</ul>
+<p>The physical layer of repository contains information about the data sources. To create the schema in the physical layer you need to import metadata from databases and other data sources.</p>
+<p><b>Note</b> &minus; Physical layer in OBIEE supports multiple data sources in a single repository - i.e. data sets from 2 different data sources can be performed in OBIEE.</p>
+<h3>Create a New Repository</h3>
+<p>Go to Start &rarr; Programs &rarr; Oracle Business Intelligence &rarr; BI Administration &rarr; Administration Tool &rarr; File &rarr; New Repository.</p>
+<img src="images/new_repository.jpg" alt="New Repository" />
+<p>A new window will open &rarr; Enter the name of Repository &rarr; Location (It tells the default location of Repository directory) &rarr; to import metadata select radio button &rarr; Enter Password &rarr; Click Next.</p>
+<p>Select the connection type &rarr; Enter Data Source name and User name and password to connect to data source &rarr; Click Next.</p>
+<img src="images/select_connection_type.jpg" alt="Select Connection Type" />
+<p>Accept the meta types you want to import &rarr; You can select Tables, Keys, Foreign Keys, System tables, Synonyms, Alias, Views, etc. &rarr; Click Next.</p>
+<img src="images/import_meta_types.jpg" alt="Import Meta Type" />
+<p>Once you click Next, you will see Data Source view and Repository view. Expand the Schema name and select tables you want to add to Repository using Import Selected button &rarr; Click Next.</p>
+<img src="images/import_metadata_objects_to_repository.jpg" alt="Import Metadata Object to Repository" />
+<p>Connection Pool window opens up &rarr; Click OK &rarr; Importing window &rarr; Finish to open the repository as shown in the following image.</p>
+<p>Expand the Data Source &rarr; Schema name to see the list of tables Imported in Physical Layer in the new Repository.</p>
+<img src="images/importing_window.jpg" alt="Importing Window" />
+<h3>Verify Connection and Number of Rows in Tables Under Physical Layer</h3>
+<p>Go to tools &rarr; Update all rows counts &rarr; Once it is completed you can move the cursor on the table and also for individual columns. To see Data of a table, right-click on Table name &rarr; View Data.</p>
+<img src="images/verifying_connection.jpg" alt="Verifying Connection" />
+<h3>Create Alias in Repository</h3>
+<p>It is advisable that you use table aliases frequently in the Physical layer to eliminate extra joins. Right-click on table name and select New Object &rarr; Alias.</p>
+<p>Once you create an Alias of a table it shows up under the same Physical Layer in the Repository.</p>
+<h2>Create Primary Keys and Joins in Repository Design</h2>
+<h3>Physical Joins</h3>
+<p>When you create a repository in OBIEE system, physical join is commonly used in the Physical layer. Physical joins help to understand how two tables should be joined to each other. Physical joins are normally expressed with the use of Equal operator.</p>
+<p>You can also use a physical join in BMM layer, however, it is very rarely seen. The purpose of using a physical join in BMM layer is to override the physical join in the physical layer. It allows users to define more complex joining logic as compared to physical join in the physical layer so it works similar to complex join in the physical layer. Therefore, if we are using a complex join in the physical layer for applying more join conditions, there is no need to use a physical join in BMM layer again.</p>
+<img src="images/physical_joins.jpg" alt="Physical Joins" />
+<p>In the above snapshot, you can see a physical join between two table names &minus; Products and Sales. Physical Join expression tells how the tables should be joined with each other as shown in the snapshot.</p>
+<p>It is always recommended to use a physical join in the physical layer and complex join in BMM layer as much as possible to keep Repository design simple. Only when there is an actual need for a different join, then use a physical join in BMM layer.</p>
+<p>Now to join tables while designing Repository, select all the tables in the Physical layer &rarr; Right-click &rarr; Physical diagram &rarr; Selected objects only option or you can also use Physical Diagram button at the top.</p>
+<img src="images/physical_layer_diagram_objects.jpg" alt="Physical Layer Diagram Objects" />
+<p>Physical Diagram box as shown in the following image appears with all the table names added. Select the new foreign key at the top and select Dim and Fact table to join.</p>
+<img src="images/physical_diagram_box.jpg" alt="Physical Diagram Box" />
+<h3>Foreign Key in Physical Layer</h3>
+<p>A Foreign key in the physical layer is used to define Primary key-Foreign key relation between two tables. When you create it in the physical diagram, you have to point first the dimension and then the fact table.</p>
+<p><b>Note</b> &minus; When you import tables from schema into RPD Physical Layer, you can also select KEY and FOREIGN KEY along with the table data, then the primary key-foreign key joins are automatically defined, however it is not recommended from performance point of view.</p>
+<img src="images/foreign_key.jpg" alt="Foreign Key" />
+<p>The table you click first, it creates one-to-one or one-to-many relationship that joins column in first table with foreign key column in the second table &rarr; Click Ok. The join will be visible in Physical Diagram box between two tables. Once tables are joined, close the Physical diagram box using ‘X’ option.</p>
+<p>To save the new Repository go to File &rarr; Save or click the save button at the top.</p>
+<img src="images/save_repository.jpg" alt="Save Repository" />
+<h2>Creating Business Model and Mapping Layer of a Repository</h2>
+<p>It defines the business or logical model of objects and their mapping between business model and Schema in the physical layer. It simplifies the Physical Schema and maps the user business requirement to physical tables.</p>
+<p>The Business Model and Mapping layer of OBIEE system administration tool can contain one or more business model objects. A business model object defines the business model definitions and the mappings from logical to physical tables for the business model.</p>
+<p>Following are the steps to build the Business Model and Mapping layer of a repository &minus;</p>
+<ul class="list">
+<li>Create a business model</li>
+<li>Examine logical joins</li>
+<li>Examine logical columns</li>
+<li>Examine logical table sources</li>
+<li>Rename logical table objects manually</li>
+<li>Rename logical table objects using the rename wizard and deleting unnecessary logical objects</li>
+<li>Creating measures (Aggregations)</li>
+</ul>
+<h3>Create a Business Model</h3>
+<p>Right-click on Business Model and Mapping Space &rarr; New Business Model.</p>
+<img src="images/business_model.jpg" alt="Business Model" />
+<p>Enter the name of Business Model &rarr; click OK.</p>
+<p>In the physical layer, select all the tables/alias tables to be added to Business Model and drag to Business Model. You can also add tables one by one. If you drag all the tables simultaneously, it will keep keys and joins between them.</p>
+<img src="images/adding_tables_to_business_model.jpg" alt="Adding Tables to Business Model" />
+<p>Also note the difference in icon of Dimension and Fact tables. Last table is Fact table and top 3 are dimension tables.</p>
+<p>Now right-click on Business model &rarr; select Business Model diagram &rarr; Whole diagram &rarr; All tables are dragged simultaneously so it will keep all joins and keys. Now double click on any join to open the logical join box.</p>
+<img src="images/business_model_diagram.jpg" alt="Business Model Diagram" />
+<h2>Logical and Complex Joins in BMM</h2>
+<p>Joins in this layer are logical joins. It doesn’t show expressions and tells the type of join between tables. It helps Oracle BI server to understand the relationships between the various pieces of the business model. When you send a query to Oracle BI server, the server determines how to construct physical queries by examining how the logical model is structured.</p>
+<p>Click Ok &rarr; Click ‘X’ to close the Business model diagram.</p>
+<p>To examine logical columns and logical table sources, first expand the columns under tables in BMM. Logical columns were created for each table when you dragged all tables from the physical layer. To check logical table sources &rarr; Expand the source folder under each table and it points to the table in the physical layer.</p>
+<p>Double-click the logical table source (not the logical table) to open the logical table source dialog box &rarr; General tab &rarr; rename the logical table source. Logical table to physical table mapping is defined under "Map to these tables" option.</p>
+<img src="images/logical_table_source.jpg" alt="Logical Table Source" />
+<p>Next, Column mapping tab defines the logical column to physical column mappings. If mappings are not shown, check the option &rarr; Show mapped columns.</p>
+<img src="images/column_mapping_tab.jpg" alt="Column Mapping Tab" />
+<h3>Complex Joins</h3>
+<p>There is no specific explicit complex join like in OBIEE 11g. It only exists in Oracle 10g.</p>
+<p>Go to Manage &rarr; Joins &rarr; Actions &rarr; New &rarr; Complex Join.</p>
+<p>When complex joins are used in the BMM layer, they act as placeholders. They allow the OBI Server to decide on which are the best joins between fact and dimension logical table source to satisfy the request.</p>
+<h3>Rename Logical Objects Manually</h3>
+<p>To rename logical table objects manually, click the column name under the Logical table in BMM. You can also right-click on column name and select option rename, to rename the object.</p>
+<p>This is known as manual method to rename objects.</p>
+<h3>Rename Objects Using the Rename Wizard</h3>
+<p>Go to Tools &rarr; Utilities &rarr; Rename Wizard &rarr; Execute to open the rename wizard.</p>
+<img src="images/rename_wizard.jpg" alt="Rename Wizard" />
+<p>In the Select Objects screen, click Business Model and Mapping. It will show Business Model name &rarr; Expand Business Model name &rarr; Expand logical tables.</p>
+<img src="images/business_model_and_mapping.jpg" alt="Business Model and Mapping" />
+<p>Select all the columns under the logical table to rename using the Shift key &rarr; Click Add. Similarly, add columns from all other logical Dim and Fact tables &rarr; click Next.</p>
+<img src="images/select_logical_column.jpg" alt="Select Logical Column" />
+<p>It shows all logical columns/tables added to wizard &rarr; Click Next to open Rules screen &rarr; Add rules from the list to rename like : A;; text lower case and change each occurrence of ‘_’ to space as shown in the following snapshot.</p>
+<img src="images/add_rules_to_open_rules.jpg" alt="Add Rules to Open Rules" />
+<p>Click Next &rarr; finish. Now, if you expand Object names under logical tables in Business model and Objects in the physical layer, objects under BMM are renamed as required.</p>
+<h3>Delete Unnecessary Logical Objects</h3>
+<p>In the BMM layer, expand Logical tables &rarr; select objects to be deleted &rarr; right-click &rarr; Delete &rarr; Yes.</p>
+<img src="images/delete_unnecessary_logical_objects.jpg" alt="Delete Unnecessary Logical Objects" />
+<h3>Create Measures (Aggregations)</h3>
+<p>Double-click on the column name in the logical Fact table &rarr; Go to Aggregation tab and select the Aggregate function from the dropdown list &rarr; Click OK.</p>
+<img src="images/create_measures.jpg" alt="Create Measures" />
+<p>Measures represent data that is additive, such as total revenue or total quantity. Click on save option at top to save the repository.</p>
+<h2>Creating the Presentation Layer of a Repository</h2>
+<p>Right-click on Presentation area &rarr; New Subject Area &rarr; In the General tab enter the name of subject area (Recommended similar to Business Model) &rarr; Click OK.</p>
+<img src="images/creating_presentation_layer.jpg" alt="Creating Presentation Layer" />
+<p>Once subject area is created, right click on subject area &rarr; New presentation table &rarr; Enter the name of the presentation table &rarr; Click OK (Add number of presentation tables equal to number of parameters required in the report).</p>
+<img src="images/new_presentation_table.jpg" alt="New Presentation Table" />
+<p>Now, to create columns under Presentation tables &rarr; Select the objects under logical tables in BMM and drag them to Presentation tables under subject area (Use Ctrl key to select multiple objects for dragging). Repeat the process and add the logical columns to the remaining presentation tables.</p>
+<h3>Rename and Reorder Objects in Presentation Layer</h3>
+<p>You can rename the objects in Presentation tables by a double-click on logical objects under subject area.</p>
+<p>In General tab &rarr; Deselect the check box Use Logical column name &rarr; Edit the name field &rarr; Click OK.</p>
+<img src="images/rename_and_reorder_objects.jpg" alt="Rename and Reorder Objects" />
+<p>Similarly, you can rename all the objects in the Presentation layer without changing their name in BMM layer.</p>
+<p>To order the columns in a table, double-click on the table name under Presentation &rarr; Columns &rarr; Use up and down arrows to change the order &rarr; Click OK.</p>
+<img src="images/changing_order_using_arrows.jpg" alt="Changing Order Using Arrows" />
+<p>Similarly, you can change objects order in all presentation tables under Presentation area. Go to File &rarr; Click Save to save the Repository.</p>
+<h3>Check Consistency and Load the Repository for Query Analysis</h3>
+<p>Go to File &rarr; Check Global Consistency &rarr; You will receive the following message &rarr; Click Yes.</p>
+<img src="images/check_consistency_and_load_repository.jpg" alt="Check Consistency and Load Repository" />
+<p>Once you click OK &rarr; Business model under BMM will change to Green &rarr; Click save the repository without checking global consistency again.</p>
+<h3>Disable Caching</h3>
+<p>To improve query performance, it is advised to disable BI server cache option.</p>
+<p>Open a browser and enter the following URL to open Fusion Middleware Control Enterprise Manager: http://&lt;machine name&gt;:7001/em</p>
+<p>Enter the user name and password and click Login.</p>
+<p>On the left side, expand Business Intelligence &rarr; coreapplication &rarr; Capacity Management tab &rarr; Performance.</p>
+<img src="images/disable_caching.jpg" alt="Disable Caching" />
+<p>Enable BI Server Cache section is by default checked &rarr; Click Lock and Edit Configuration &rarr; Click Close.</p>
+<img src="images/enable_bi_server_cache.jpg" alt="Enable BI Server Cache" />
+<p>Now deselect cache enabled option &rarr; It is used to improve query performance &rarr; Apply &rarr; Activate Changes &rarr; Completed Successfully.</p>
+<h3>Loading the Repository</h3>
+<p>Go to Deployment tab &rarr; Repository &rarr; Lock and Edit Configuration &rarr; Completed Successfully.</p>
+<img src="images/loading_the_repository.jpg" alt="Loading the Repository" />
+<p>Click Upload BI Server Repository section &rarr; Browse to open the Choose file dialog box &rarr; Select the Repository .rpd file and click on Open &rarr; Enter Repository password &rarr; Apply &rarr; Activate Changes.</p>
+<img src="images/activate_changes.jpg" alt="Activate Changes" />
+<p>Activate Changes &rarr; Completed Successfully &rarr; Click Restart to apply recent changes option on top of the screen &rarr; Click Yes.</p>
+<img src="images/completed_successfully.jpg" alt="Completed Successfully" />
+<p>Repository is successfully created and loaded for query Analysis.</p>
+<h1>OBIEE – Business Layer</h1>
+<p>Business Layer defines the business or logical model of objects and their mapping between business model and Schema in the physical layer. It simplifies the Physical Schema and maps the user business requirement to physical tables.</p>
+<p>The business model and mapping layer of OBIEE system administration tool can contain one or more business model objects. A business model object defines the business model definitions and the mappings from logical to physical tables for the business model.</p>
+<p>The business model is used to simplify the schema structure and maps the users’ business requirement to physical data source. It involves creation of logical tables and columns in the business model. Each logical table can have one or more physical objects as sources.</p>
+<p>There are two categories of logical tables &minus; fact and dimension. Logical fact tables contain the measures on which analysis is done and Logical dimension tables contain the information about measures and objects in Schema.</p>
+<p>While creating a new repository using OBIEE administration tool, once you define the physical layer, create joins and identify foreign keys. The next step is to create a business model and mapping BMM layer of the repository.</p>
+<p>Steps involved in defining Business Layer &minus;</p>
+<ul class="list">
+<li>Create a business model</li>
+<li>Examine logical joins</li>
+<li>Examine logical columns</li>
+<li>Examine logical table sources</li>
+<li>Rename logical table objects manually</li>
+<li>Rename logical table objects using the rename wizard and delete unnecessary logical object</li>
+<li>Creating measures (Aggregations)</li>
+</ul>
+<h2>Create Business Layer in the Repository</h2>
+<p>To create a business layer in the repository, right-click &rarr; New Business Model &rarr; Enter the name of Business Model and click OK. You can also add description of this Business Model if you want.</p>
+<img src="images/create_business_layer1.jpg" alt="Create Business Layer1" />
+<img src="images/create_business_layer2.jpg" alt="Create Business Layer2" />
+<h2>Logical Tables and Objects in BMM Layer</h2>
+<p>Logical tables in OBIEE repository exist in the Business Model and Mapping BMM layer. The business model diagram should contain at least two logical tables and you need to define relationships between them.</p>
+<p>Each logical table should have one or more logical columns and one or more logical table sources associated with it. You can also change the logical table name, reorder the objects in logical table and define logical joins using primary and foreign keys.</p>
+<h3>Create Logical Tables Under BMM Layer</h3>
+<p>There are two ways of creating logical tables/objects in BMM layer &minus;</p>
+<p><b>First method</b> is dragging physical tables to Business Model which is the fastest way of defining logical tables. When you drag the tables from the physical layer to BMM layer, it also preserves the joins and keys automatically. If you want you can change the joins and keys in logical tables, it doesn’t affect objects in the physical layer.</p>
+<p>Select physical tables/alias tables under the physical layer that you want to add to Business Model Layer and drag those table under BMM layer.</p>
+<p>These tables are known as logical tables and columns are called Logical objects in Business Model and Mapping Layer.</p>
+<img src="images/create_logical_table_under_bmm_layer1.jpg" alt="Create Logical Tables Under BMM Layer1" />
+<p><b>Second method</b> is to create a logical table manually. In the Business Model and Mapping layer, right-click the business model &rarr; Select New Object &rarr; Logical Table &rarr; Logical Table dialog box appears.</p>
+<p>Go to General tab &rarr; Enter name for the logical table &rarr; Type a description of the table &rarr; Click OK.</p>
+<img src="images/create_logical_table_under_bmm_layer2.jpg" alt="Create Logical Tables Under BMM Layer2" />
+<h2>Create Logical Columns</h2>
+<p>Logical columns in BMM layer are automatically created when you drag tables from the physical layer to the business model layer.</p>
+<p>If the logical column is a primary key, this column is displayed with the key icon. If the column has an aggregation function, it is displayed with a sigma icon. You can also reorder logical columns in the Business Model and Mapping layer.</p>
+<h3>Create a Logical Column</h3>
+<p>In BMM layer, right-click on logical table &rarr; select New Object &rarr; Logical Column &rarr; Logical Column dialog box will appear, click General tab.</p>
+<p>Type a name for the logical column. The name of the business model and the logical table appear in the “Belongs to Table” field just below column name &rarr; click OK.</p>
+<img src="images/create_logical_column.jpg" alt="Create Logical Column" />
+<p>You can also apply Aggregations on the logical columns. Click Aggregation tab &rarr; Select Aggregation rule from the dropdown list &rarr; Click OK.</p>
+<p>Once you apply Aggregate function on a column, logical column icon is changed to show Aggregation rule is applied.</p>
+<img src="images/apply_aggregate_function.jpg" alt="Apply Aggregate Function" />
+<p>You can also move or copy logical column in tables &minus;</p>
+<p>In the BMM layer, you can select multiple columns to move. In the Sources for moved columns dialog box, in the Action area, select an action. If you select Ignore, no logical source will be added in the Sources folder of the table.</p>
+<p>If you click on Create new, a copy of the logical source with the logical column will be created in the Sources folder. If you select Use existing option, from the drop-down list, you must select a logical source from the Sources folder of the table.</p>
+<h2>Create Logical Complex Joins / Logical Foreign Keys</h2>
+<p>Logical tables in BMM layer are joined to each other using logical joins. Cardinality is one of the key defining parameter in logical joins. Cardinality relation one-to-many means that each row in first logical dimension table there are 0, 1, many rows in second logical table.</p>
+<h3>Conditions to Create Logical Joins Automatically</h3>
+<p>When you drag all the tables of the physical layer to business model layer, logical joins are automatically created in Repository. This condition rarely happens only in case of simple business models.</p>
+<p>When logical joins are same as physical joins, they are automatically created. Logical joins in BMM layer are created in two ways &minus;</p>
+<ul class="list">
+<li>Business Model Diagram (already covered while designing repository)</li>
+<li>Joins Manager</li>
+</ul>
+<p>Logical joins in BMM layer cannot be specified using expressions or columns on which to create the join like in the physical layer where expressions and column names are shown on which physical joins are defined.</p>
+<h3>Create Logical Joins/Logical Foreign keys Using Join Manager Tool</h3>
+<p>First let us see how to create logical foreign keys using Join Manager.</p>
+<p>In the Administration Tool toolbar, go to Manage &rarr; Joins. The Joins Manager dialog box appears &rarr; Go to Action tab &rarr; New &rarr; Logical Foreign Key.</p>
+<p>Now in the Browse dialog box, double-click a table &rarr; The Logical Foreign Key dialog box appears &rarr; Enter the name for the foreign key &rarr; From Table drop-down list of the dialog box, select the table that the foreign key references &rarr; Select the columns in the left table that the foreign key references &rarr; Select the columns in the right table that make up the foreign key columns &rarr; Select the join type from the Type drop-down list. To open the Expression Builder, click the button to the right of the Expression pane &rarr; The expression displays in the Expression pane &rarr; click OK to save the work.</p>
+<h3>Create a Logical Complex Join using Join Manager</h3>
+<p>Logical complex joins are recommended in Business Model and mapping layer as compared to the use of logical foreign keys.</p>
+<p>In the Administration Tool toolbar, go to Manage &rarr; Join &rarr; Joins Manager dialog box appears &rarr; Go to Action &rarr; Click New &rarr; Logical Complex Join.</p>
+<p>It will open a logical Join dialog box &rarr; Type a name for the complex join &rarr; In the table drop-down lists on the left and right side of the dialog box, select the tables that the complex join references &rarr; Select the join type from the Type drop-down list &rarr; Click OK.</p>
+<p><b>Note</b> &minus; You can also define a table as driving table from the drop-down list. This is used for performance optimization when the table size is too large. If the table size is small, less than 1000 rows, it shouldn’t be defined as driving table as it can result in performance degradation.</p>
+<h2>Dimensions and Hierarchical Levels</h2>
+<p>Logical dimensions exist in BMM and Presentation layer of OBIEE repository. Creating logical dimensions with hierarchies allows you to define aggregation rules that vary with dimensions. It also provides a drill-down option on the charts and tables in analyses and dashboards, and define the content of aggregate sources.</p>
+<h3>Create logical dimension with Hierarchical level</h3>
+<p>Open the Repository in Offline mode &rarr; Go to File &rarr; Open &rarr; Offline &rarr; Select Repository .rpd file and click on open &rarr; Enter Repository password &rarr; click OK.</p>
+<p>Next step is to create logical dimension and logical levels.</p>
+<p>Right click on Business model name in BMM layer &rarr; New Object &rarr; Logical Dimension &rarr; Dimension with level-based hierarchy. It will open the dialogue box &rarr; Enter the name &rarr; click OK.</p>
+<img src="images/logical_dimension.jpg" alt="Logical Dimension" />
+<p>To create a logical level, right-click on logical dimension &rarr; New Object &rarr; Logical Level.</p>
+<img src="images/logical_dimension_new_object.jpg" alt="Logical Dimension New Object" />
+<p>Enter the name of logical level example: Product_Name</p>
+<p>If this level is Grand total level, select the checkbox and the system will set number of element at this level to 1 by default &rarr; Click OK.</p>
+<p>If you want the logical level to roll up to its parent, select the Supports rollup to parent elements checkbox &rarr; click OK.</p>
+<p>If the logical level is not the grand total level and does not roll up, do not select any of the checkbox &rarr; Click OK.</p>
+<img src="images/logical_level.jpg" alt="Logical Level" />
+<h3>Parent-Child Hierarchies</h3>
+<p>You can also add parent-child hierarchies in logical level by following these steps &minus;</p>
+<p>To define child logical levels, click Add in the Browse dialog box, select the child logical levels and click OK.</p>
+<p>You can also right-click on logical level &rarr; New Object &rarr; Child level.</p>
+<img src="images/parent_child_hierarchies.jpg" alt="Parent-Child Hierarchies" />
+<p>Enter the name of child level &rarr; Ok. You can repeat this to add multiple child levels for all logical columns as per requirement. You can also add Time and Region hierarchies in a similar way.</p>
+<p>Now to add logical columns of a table to logical level &rarr; select logical column in BMM layer and drag it to logical level child name to which you want to map. Similarly you can drag all the columns of logical table to create parent-child hierarchies.</p>
+<p>When you create a child level, it can be checked by a double-click on the logical level and it is displayed under child levels list of that level. You can add or delete child levels by using ‘&plus;’ or ‘X’ option on top of this box.</p>
+<img src="images/child_level.jpg" alt="Child Level" />
+<h3>Add Calculation to a Fact Table</h3>
+<p>Double-click on the column name in logical Fact table &rarr; Go to Aggregation tab and select the Aggregate function from the drop-down list &rarr; Click OK.</p>
+<img src="images/add_calculation_to_fact_table.jpg" alt="Add Calculation to Fact Table" />
+<p>Measures represents data that is additive, such as total revenue or total quantity. Click on save option at the top to save the repository.</p>
+<p>There are various Aggregate functions that can be used like Sum, Average, Count, Max, Min, etc.</p>
+<h1>OBIEE – Presentation Layer</h1>
+<p>Presentation layer is used to provide customized views of Business model in BMM layer to users. Subject areas are used in Presentation layer provided by Oracle BI Presentation Services.</p>
+<p>There are various ways you can create subject areas in Presentation layer. Most common and simple method is by dragging Business Model in BMM layer to Presentation Layer and then making changes to it as per requirement.</p>
+<p>You can move columns, remove or add columns in presentation layer so it allows you to make changes in a way that the user shouldn’t see columns that has no meaning for them.</p>
+<p><b>Create Subject Areas/Presentation Catalogues and Presentation Tables in Presentation Layer</b></p>
+<p>Right-click on Presentation area &rarr; New Subject Area &rarr; In General tab enter the name of subject area (Recommended similar to Business Model) &rarr; Click OK.</p>
+<img src="images/presentation_layer.jpg" alt="Presentation Layer" />
+<p>Once Subject area is created, right click on subject area &rarr; New Presentation table &rarr; in General tab, Enter name of presentation table &rarr; OK (Add number of presentation tables equal to number of parameters required in the report).</p>
+<img src="images/new_presentation_layer_table.jpg" alt="New Presentation Layer Table" />
+<p>Click the Permissions tab &rarr; Permissions dialog box, where you can assign user or group permissions to the table.</p>
+<img src="images/permissions_dialog_box.jpg" alt="Permissions Dialog Box" />
+<h3>Delete a Presentation Table</h3>
+<p>In the Presentation layer, right-click on subject Area &rarr; Presentation Catalog dialog box, click the Presentation Tables tab &rarr; Go to Presentation Tables tab, select a table and click Remove.</p>
+<p>A confirmation message appears &rarr; Click Yes to remove the table or No to leave the table in the catalog &rarr; Click OK.</p>
+<h3>Move a Presentation Table</h3>
+<p>Go to Presentation Tables tab by a right-click on Subject Area &rarr; In the Name list, select the table you want to reorder &rarr; Use drag-and-drop to reposition the table or you can also use the Up and Down buttons to reorder the tables.</p>
+<h3>Presentation Columns Under Presentation Table</h3>
+<p>The name of presentation columns are normally same to the logical column names in the Business Model and Mapping layer. However, you can also enter a different name by unchecking Use Logical Column Name and the Display Custom Name in the Presentation Column dialog box.</p>
+<h3>Create Presentation Columns</h3>
+<p>The most simple way to create columns under Presentation tables is by dragging the columns from logical tables in BMM layer.</p>
+<p>Select the objects under logical tables in BMM and drag them to Presentation tables under subject area (Use Ctrl key to select multiple objects for dragging). Repeat the process and add the logical columns to the remaining presentation tables.</p>
+<p><b>Create a New Presentation Column &minus;</b></p>
+<p>Right-click on Presentation table in the Presentation layer &rarr; New Presentation Column.</p>
+<p>Presentation Column dialog box appears. To use the name of the logical column, select the Use Logical Column checkbox.</p>
+<img src="images/new_presentation_column.jpg" alt="New Presentation Column" />
+<p>To specify a name that is different name, uncheck the Use Logical Column check box, and then type a name for the column.</p>
+<p>To assign user or group permissions to the column, click Permissions &rarr; In the Permissions dialog box, assign permissions &rarr; click OK.</p>
+<img src="images/presentation_layer_permissions_dialog_box.jpg" alt="Presentation Layer Permissions Dialog Box" />
+<h3>Delete a Presentation Column</h3>
+<p>Right-click on presentation table in the Presentation layer &rarr; Click on Properties &rarr; Click on the Columns tab &rarr; Select the column you want to delete &rarr; Click Remove or press the Delete key &rarr;Click Yes.</p>
+<h3>To Reorder a Presentation Column</h3>
+<p>Right-click on presentation table in the Presentation layer &rarr; Go to Properties &rarr; Click the Columns tab &rarr; Select the column you want to reorder &rarr; Use drag-and-drop or you can also click Up and Down button &rarr; Click OK.</p>
+<img src="images/reorder_presentation_column.jpg" alt="Reorder Presentation Column" />
+<h1>OBIEE – Testing Repository</h1>
+<p>You can check the repository for errors by using the consistency checking option. Once it is done, next step is to load the repository into Oracle BI Server. Then test the repository by running an Oracle BI analysis and verifying the results.</p>
+<p>Go to File &rarr; click on Check Global Consistency &rarr; You will receive the following message &rarr; Click Yes.</p>
+<img src="images/testing_repository.jpg" alt="Testing Repository" />
+<p>Once you click OK &rarr; Business model under BMM will change to Green &rarr; Click on save the repository without checking global consistency again.</p>
+<h2>Disable Caching</h2>
+<p>To improve query performance, it is advised to disable BI server cache option.</p>
+<p>Open a browser and enter the following URL to open Fusion Middleware Control Enterprise Manager: http://&lt;machine name&gt;:7001/em</p>
+<p>Enter the user name and password. Click Login.</p>
+<p>On the left side, expand Business Intelligence &rarr; coreapplication &rarr; Capacity Management tab &rarr; Performance.</p>
+<img src="images/testing_repository_disable_caching.jpg" alt="Testing Repository Disable Caching" />
+<p>Enable BI Server Cache section is by default checked &rarr; Click on Lock and Edit Configuration &rarr; Close.</p>
+<img src="images/testing_repository_enable_bi_server.jpg" alt="Testing Repository Enable BI Server" />
+<p>Now deselect cache enabled option. It is used to improve query performance. Go to Apply &rarr; Activate Changes &rarr; Completed Successfully.</p>
+<h2>Load the Repository</h2>
+<p>Go to Deployment tab &rarr; Repository &rarr; Lock and Edit Configuration &rarr; Completed Successfully.</p>
+<img src="images/load_testing_repository.jpg" alt="Load Testing Repository" />
+<p>Click on Upload BI Server Repository section &rarr; Browse to open the Choose file dialog box &rarr; select the Repository .rpd file and click Open &rarr; Enter Repository password &rarr; Apply &rarr; Activate Changes.</p>
+<img src="images/upload_bi_server_repository.jpg" alt="Upload BI Server Repository" />
+<p>Activate Changes &rarr; Completed Successfully &rarr; Click on Restart to apply recent changes option at the top &rarr; Click Yes.</p>
+<img src="images/testing_repository_completed_successfully.jpg" alt="Testing Repository Completed Successfully" />
+<p>Repository is successfully created and loaded for query analysis.</p>
+<h2>Enable Query Logging</h2>
+<p>You can set up query logging level for individual users in OBIEE. Logging level controls the information that you will retrieve in log file.</p>
+<h3>Set Up Query Logging</h3>
+<p>Open the Administration tool &rarr; Go to File &rarr; Open &rarr; Online.</p>
+<p>Online mode is used to edit the repository in Oracle BI server. To open a repository in online mode, your Oracle BI server should be running.</p>
+<img src="images/set_up_query_logging.jpg" alt="Set Up Query Logging" />
+<p>Enter the Repository password and user name password to login and click Open to open the repository.</p>
+<img src="images/repository_password.jpg" alt="Repository Password" />
+<p>Go to Manage &rarr; Identity &rarr; Security Manager Window will open. Click BI Repository on the left side and double-click on Administrative user &rarr; User dialogue box will open.</p>
+<img src="images/security_manager.jpg" alt="Security Manager" />
+<p>Click User tab in user dialogue box, you can set logging levels here.</p>
+<p>In normal scenario &minus; The user has a logging level set to 0 and the administrator has a logging level set to 2. Logging level can have values starting from Level 0 to level 5. Level 0 means no logging and Level 5 means maximum logging level information.</p>
+<h3>Logging Level Descriptions</h3>
+<table class="table table-bordered">
+<tr>
+<td style="width:12%;">Level 0</td>
+<td>No logging</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Level 1</td>
+<td><p>Logs the SQL statement issued from the client application</p>
+<p>Logs elapsed times for query compilation, query execution, query cache processing, and back-end database processing</p>
+<p>Logs the query status (success, failure, termination, or timeout). Logs the users ID, session ID, and request ID for each query</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Level 2</td>
+<td><p>Logs everything logged in Level 1</p>
+<p>Additionally, for each query, logs the repository name, business model name, presentation catalog (called Subject Area in Answer) name, SQL for the queries issued against physical databases, queries issued against the cache, number of rows returned from each query against a physical database and from queries issued against the cache, and the number of rows returned to the client application</p></td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Level 3</td>
+<td><p>Logs everything logged in Level 2<p>
+<p>Additionally, adds a log entry for the logical query plan, when a query that was supposed to seed the cache was not inserted into the cache, when existing cache entries are purged to make room for the current query, and when the attempt to udate the exact match hit detector fails</p></td>
+</tr>
+<tr>
+<td style="vertical-align:middle;">Level 4</td>
+<td><p>Logs everything logged in Level 3</p>
+<p>Additionally, logs the query execution plan.</p></td>
+</tr>
+<tr style="vertical-align:middle;">
+<td style="vertical-align:middle;">Level 5</td>
+<td><p>Logs everything logged in Level 4</p>
+<p>Additionally, logs intermediate row counts at various points in the execution plan.</p></td>
+</tr>
+</table>
+<h3>To Set Logging Level</h3>
+<p>In user dialogue box, enter value for logging level.</p>
+<img src="images/set_logging_level.jpg" alt="Set Logging Level" />
+<p>Once you click OK, it will open the checkout dialogue box. Click Checkout. Close the Security Manager.</p>
+<img src="images/check_out_objects.jpg" alt="Check Out Objects" />
+<p>Go to file &rarr; Click on check-in changes &rarr; Save the repository using the Save option at the top &rarr; To take changes in effect &rarr; Click OK.</p>
+<img src="images/check_in_changes.jpg" alt="Check in Changes" />
+<h3>Use Query Log to Verify Queries</h3>
+<p>You can check query logs once query logging level is set by going to Oracle Enterprise Manager and this helps to verify queries.</p>
+<p>To check the query logs to verify queries, go to Oracle Enterprise Manager OEM.</p>
+<p>Go to diagnostic tab &rarr; click Log messages.</p>
+<img src="images/verify_queries_using_query_log.jpg" alt="Verify Queries Using Query Log" />
+<p>Scroll down to bottom in log messages to see Server, Scheduler, Action Services and other log details. Click on Server log to open log messages box.</p>
+<p>You can select various filters &minus; Date Range, Message types and message contains/not contains fields, etc. as shown in the following snapshot &minus;</p>
+<img src="images/log_messages.jpg" alt="Log Messages" />
+<p>Once you click on search, it will show log messages as per filters.</p>
+<img src="images/filter_log_messages.jpg" alt="Filter Log Messages" />
+<p>Clicking on collapse button allows you to check details of all log messages for queries.</p>
+<h1>OBIEE – Multiple Logical Table Sources</h1>
+<p>When you drag and drop a column from a physical table that is not currently being used in your logical table in BMM layer, the physical table containing such column gets added as a new Logical Table Source (LTS).</p>
+<p>When in BMM layer, you use more than one table as source table, it is called multiple logical table sources. You can have a Fact table as multiple logical table sources when it uses different physical tables as source.</p>
+<p><b>Example</b></p>
+<p>Multiple LTS are used to convert Snowflakes schema to Star schemas in BMM layer.</p>
+<p>Let us say you have two dimensions &minus; <b>Dim_Emp</b> and <b>Dim_Dept</b> and one fact table <b>FCT_Attendance</b> in the Physical layer.</p>
+<p>Here your Dim_Emp is normalized to Dim_Dept to implement Snowflakes schema. So in your Physical diagram, it would be like this &minus;</p>
+<pre class="result notranslate">
+Dim_Dept&lt;------Dim_Emp &lt;-------FCT_Attendance
+</pre>
+<p>When we move these table to the BMM layer, we will create a single dimension table Dim_Employee with 2 logical sources corresponding to Dim_Emp and Dim_Dept. In your BMM diagram &minus;</p>
+<pre class="result notranslate">
+Dim_Employee &lt;-----------FCT_Attendance
+</pre>
+<p>This is one approach where you can use concept of multiple LTS in BMM layer.</p>
+<h2>Specifying Content</h2>
+<p>When you use multiple physical tables as sources, you expand table sources in BMM diagram. It shows all multiple LTS from where it is picking up the data in BMM layer.</p>
+<p>To see table mapping in BMM layer, expand the sources under logical table in BMM layer. It will open Logical table source mapping dialogue box. You can check all tables which are mapped to provide data in logical table.</p>
+<img src="images/specifying_content.jpg" alt="Specifying Content" />
+<h1>OBIEE – Calculation Measures</h1>
+<p>Calculated measures is used to perform calculation of facts in logical tables. It defines Aggregation functions in Aggregation tab of logical column in the repository.</p>
+<h2>Create New Measure</h2>
+<p>Measures are defined in logical fact tables in repository. Any column with an aggregation function applied on it is called a measure.</p>
+<p>Common measure examples are &minus; Unit Price, quantity sold, etc.</p>
+<p>Following are the guidelines to create measures in OBIEE &minus;</p>
+<ul class="list">
+<li><p>All aggregation should be performed from a fact logical table and not from a dimension logical table.</p></li>
+<li><p>All columns that cannot be aggregated should be expressed in a dimension logical table and not in a fact logical table.</p></li>
+</ul>
+<p>Calculated measures can be defined in two ways in logical tables at BMM layer in Administration tool &minus;</p>
+<ul class="list">
+<li>Aggregations in logical tables.</li>
+<li>Aggregations in logical table source.</li>
+</ul>
+<h3>Create Calculated Measures in Logical Tables using Administration Tool</h3>
+<p>Double-click on the column name in the logical Fact table, you will see the following dialog box.</p>
+<img src="images/logical_fact_table.jpg" alt="Logical Fact Table" />
+<p>Go to Aggregation tab and select the Aggregate function from the drop-down list &rarr; Click OK.</p>
+<img src="images/aggregation_function.jpg" alt="Aggregation Function" />
+<p>You can add new measures using functions in Expression builder wizard in Column source. Measures represent data that is additive, such as total revenue or total quantity. Click on the save option at the top to save the repository. This is also called creating measures at logical level.</p>
+<h3>Create Calculated Measures in Logical Table Source using Administration Tool</h3>
+<p>You can define Aggregations by a double-click on Logical table source to open logical table dialogue box.</p>
+<img src="images/logical_table_source_using_administration_tool.jpg" alt="Logical Table Source Using Administration Tool" />
+<p>Click on Expression builder wizard to define expression.</p>
+<p>In Expression builder, you can choose multiple options like - Category, functions, and mathematical functions.</p>
+<p>Once you select the category, it will show the subcategories inside it. Select the subcategory and mathematical function, and click on the arrow mark to insert it.</p>
+<img src="images/expression_builder.jpg" alt="Expression Builder" />
+<p>Now to edit the value to create measures, click on source number, enter the calculated value like multiple and divide &rarr; Go to Category and select logical table &rarr; Select column to apply this multiple/division to an existing column value.</p>
+<img src="images/logical_table_category.jpg" alt="Logical Table Category" />
+<p>Click OK to close the Expression builder. Again click OK to close the dialog box.</p>
+<h1>OBIEE – Dimension Hierarchies</h1>
+<p>Hierarchies is a series of many-to-one relationships and can be of different levels. A Region hierarchy consists of: Region &rarr; Country &rarr; State &rarr; City &rarr; Street. Hierarchies follow top-down or bottom-up approach.</p>
+<p>Logical dimensions or dimension hierarchies are created in BMM layer. There are two types of dimensional hierarchies that are possible &minus;</p>
+<ul class="list">
+<li>Dimensions with level-based hierarchies.</li>
+<li>Dimension with Parent-Child hierarchies.</li>
+</ul>
+<p>In level-based hierarchies, members can be of different types and members of the same type come only at single level.</p>
+<p>In Parent-Child hierarchies, all members are of the same type.</p>
+<h2>Dimensions with Level-based Hierarchies</h2>
+<p>Level-based dimension hierarchies can also contain parent-child relationships. The common sequence to create level-based hierarchies is to start with grand total level and then working down to lower levels.</p>
+<p>Level-based hierarchies allows you to perform &minus;</p>
+<ul class="list">
+<li>Level-based calculated measures.</li>
+<li>Aggregate navigation.</li>
+<li>Drill down to child level in dashboards.</li>
+</ul>
+<p>Each dimension can only have one grand total level and it doesn’t have a level key or dimension attributes. You can associate measures with grand total level and default aggregation for these measures are grand total always.</p>
+<p>All lower levels should have at least one column and each dimension contains one or more hierarchies. Each lower level also contains a level key which defines unique value at that level.</p>
+<h2>Types of Level-based Hierarchies</h2>
+<h3>Unbalanced Hierarchies</h3>
+<p>Unbalanced hierarchies are those where all the lower levels don’t have the same depth.</p>
+<p><b>Example</b> &minus; For one product, for one month you can have data for weeks and for other month you can have data available for day level.</p>
+<h3>Skip Level Hierarchies</h3>
+<p>In skip-level hierarchies, few members don’t have values at higher level.</p>
+<p><b>Example</b> &minus; For one city, you have state &rarr; country &rarr; Region. However for other city, you have only state and it doesn’t fall under any country or region.</p>
+<h3>Dimension with Parent-child Hierarchies</h3>
+<p>In parent-child hierarchy, all the members are of the same type. The most common example of parent-child hierarchy is the reporting structure in an organization. Parent-child hierarchy is based on a single logical table. Each row contains two keys – one for the member and another for the parent of the member.</p>
+<h1>OBIEE – Level-Based Measures</h1>
+<p>Level-based measures are created to perform calculation at a specific level of aggregation. They allow to return data at multiple levels of aggregation with one single query. It also allows to create share measures.</p>
+<p><b>Example</b></p>
+<p>Let us say there is a company XYZ Electronics which sells its products in many regions, countries and cities. Now the company President wants to see the total revenue at country level - one level below region and one level above cities. So total revenue measure should be summed up to the country level.</p>
+<p>These type of measures are called level-based measures. Similarly, you can apply level-based measures on the time hierarchies.</p>
+<p>Once the dimension hierarchies are created, level-based measures can be created by double clicking on the total revenue column in the logical table and setting the level in the levels tab.</p>
+<h2>Create Level-Based Measures</h2>
+<p>Open the repository in offline mode. Go to File &rarr; Open &rarr; Offline.</p>
+<p>Select .rpd file and click open &rarr; Enter repository password and click Ok.</p>
+<p>In BMM layer, right-click on Total Revenue column &rarr; New Object &rarr; Logical column.</p>
+<img src="images/create_level_based_measures.jpg" alt="Create Level-Based Measures" />
+<p>It will open the logical column dialog box. Enter the name of logical column total revenue. Go to column source tab &rarr; Check derived from existing columns using an expression.</p>
+<img src="images/logical_column_dialog_box.jpg" alt="Logical Column Dialog Box" />
+<p>Once you select this option, expression edit wizard will be highlighted. In expression builder wizard, select the logical table &rarr; Column name &rarr; Total revenue from the left side menu &rarr; Click OK.</p>
+<p>Now go to level tab in logical column dialog box &rarr; Click on logical dimension to select it as grand total under logical level. This specifies that the measure should be calculated at grand total level in the dimension hierarchy.</p>
+<img src="images/grand_total_level.jpg" alt="Grand Total Level" />
+<p>Once you click OK &rarr; Total Revenue logical table will appear under the logical dimension and Fact tables.</p>
+<p>This column can be dragged to presentation layer in the subject area to be used by end users to generate reports. You can drag this column from fact tables or from logical dimension.</p>
+<h1>OBIEE – Aggregates</h1>
+<p>Aggregations are used to implement query performance optimization while running the reports. This eliminates the time taken by query to run the calculations and delivers the results at fast speed. Aggregate tables has less number of rows as compared to a normal table.</p>
+<h2>How Aggregation Works in OBIEE?</h2>
+<p>When you execute a query in OBIEE, BI server looks for the resources which has information to answer the query. Out of all available sources, the server selects the most aggregated source to answer that query.</p>
+<h2>Adding Aggregation in a Repository</h2>
+<p>Open the Repository in an offline mode in the Administrator tool. Go to File &rarr; Open &rarr; Offline.</p>
+<p>Import the metadata and create logical table source in BMM layer. Expand the table name and click on source table name to open logical table source dialog box.</p>
+<p>Go to column mapping tab to see map columns in Physical table. Go to content tab &rarr; Aggregate content group by selecting the logical level.</p>
+<img src="images/adding_aggregation_in_repository.jpg" alt="Adding Aggregation in Repository" />
+<p>You can select different logical levels as per the columns in fact tables like Product Total, Total Revenue, and Quarter/Year for Time as per dimension hierarchies.</p>
+<img src="images/select_different_logical_levels.jpg" alt="Select Different Logical Levels" />
+<p>Click OK to close dialog box &rarr; save the repository.</p>
+<p>When you define Aggregate in logical fact tables they are defined as per dimension hierarchies.</p>
+<h1>OBIEE – Variables</h1>
+<p>In OBIEE, there are two types of variables that are commonly used &minus;</p>
+<ul class="list">
+<li>Repository variables</li>
+<li>Session variables</li>
+</ul>
+<p>Apart from this you can also define Presentation and Request variables.</p>
+<h2>Repository Variables</h2>
+<p>A Repository variable has a single value at any point of time. Repository variables are defined using Oracle BI Administration tool. Repository variables can be used in place of constants in Expression Builder Wizard.</p>
+<p>There are two types of Repository variables &minus;</p>
+<ul class="list">
+<li>Static repository variables</li>
+<li>Dynamic repository variables</li>
+</ul>
+<p>Static repository variables are defined in variable dialog box and their value exists until they are changed by the administrator.</p>
+<p>Static repository variables contain default initializers that are numeric or character values. In addition, you can use Expression Builder to insert a constant as the default initializer, such as date, time, etc. You cannot use any other value or expression as the default initializer for a static repository variable.</p>
+<p>In older BI versions, the Administrator tool did not limit value of static repository variables. You may get warning in consistency check if your repository has been upgraded from older versions. In such case, update the static repository variables so that default initializers have a constant value.</p>
+<p>Dynamic repository variables are same as static variables but the values are refreshed by data returned from queries. When defining a dynamic repository variable, you create an initialization block or use a preexisting one that contains a SQL query. You can also set up a schedule that the Oracle BI Server will follow to execute the query and refresh the value of the variable periodically.</p>
+<p>When the value of a dynamic repository variable changes, all cache entries associated with a business model are deleted automatically.</p>
+<p>Each query can refresh several variables: one variable for each column in the query. You schedule these queries to be executed by the Oracle BI server.</p>
+<p>Dynamic repository variables are useful for defining the content of logical table sources. For example, suppose you have two sources for information about orders. One source contains current orders and the other contains historical data.</p>
+<h3>Create Repository Variables</h3>
+<p>In the Administration Tool &rarr; Go to Manage &rarr; Select Variables &rarr; Variable Manager &rarr; Go to Action &rarr; New &rarr; Repository &gt; Variable.</p>
+<p>In the Variable dialog, type a name for the variable (Names for all variables should be unique) &rarr; Select the type of variable - Static or Dynamic.</p>
+<p>If you select dynamic variable, use the initialization block list to select an existing initialization block that will be used to refresh the value on a continuing basis.</p>
+<p>To create a new initialization block &rarr; Click New. To add a default initializer value, type the value in the default initializer box, or click the Expression Builder button to use Expression Builder.</p>
+<p>For static repository variables, the value you specify in the default initializer window persists. It will not change unless you change it. If you initialize a variable using a character string, enclose the string in single quotes. Static repository variables must have default initializers that are constant values &rarr; Click OK to close the dialog box.</p>
+<h2>Session Variables</h2>
+<p>Session variables are similar to dynamic repository variables and they obtain their values from initialization blocks. When a user begins a session, the Oracle BI server creates new instances of session variables and initializes them.</p>
+<p>There are as many instances of a session variable as there are active sessions on the Oracle BI server. Each instance of a session variable could be initialized to a different value.</p>
+<p>There are two types of Session variables &minus;</p>
+<ul class="list">
+<li>System session variables</li>
+<li>Non-system session variables</li>
+</ul>
+<p>System session variables are used by Oracle BI and Presentation server for specific purposes. They have predefined reserved names which can’t be used by other variables.</p>
+<table class="table table-bordered">
+<tr>
+<td style="vertical-align:middle;"><p><b>USER</b></p></td>
+<td>This variable holds the value the user enters with login name. This variable is typically populated from the LDAP profile of the user.</td>
+</tr>
+<tr>
+<td><p><b>USERGUID</b></p></td>
+<td>This variable contains the Global Unique Identifier (GUID) of the user and it is populated from the LDAP profile of the user.</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;"><p><b>GROUP</b></p></td>
+<td>It contains the groups to which the user belongs. When a user belongs to multiple groups, include the group names in the same column, separated by semicolons (Example - GroupA;GroupB;GroupC). If a semicolon must be included as part of a group name, precede the semicolon with a backslash character (\).</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;"><p><b>ROLES</b></p></td>
+<td>This variable contains the application roles to which the user belongs. When a user belongs to multiple roles, include the role names in the same column, separated by semicolons (Example - RoleA;RoleB;RoleC). If a semicolon must be included as part of a role name, precede the semicolon with a backslash character (\).</td>
+</tr>
+<tr>
+<td style="vertical-align:middle;"><p><b>ROLEGUIDS</b></p></td>
+<td>It contains the GUIDs for the application roles to which the user belongs. GUIDs for application roles are the same as the application role names.</td>
+</tr>
+<tr>
+<td><p><b>PERMISSIONS</b></p></td>
+<td>It contains the permissions held by the user. Example - oracle.bi.server.manageRepositories.</td>
+</tr>
+</table>
+<p>Non-system session variables are used for setting the user filters. Example, you could define a non-system variable called Sale_Region that would be initialized to the name of the sale_region of the user.</p>
+<h3>Create Session Variables</h3>
+<p>In the Administration Tool &rarr; Go to Manage &rarr; Select Variables.</p>
+<p>In the Variable Manager dialog, click Action &rarr; New &rarr; Session &rarr; Variable.</p>
+<p>In the Session Variable dialog, enter variable name (Names for all variables should be unique and names of system session variables are reserved and cannot be used for other types of variables).</p>
+<p>For session variables, you can select the following options &minus;</p>
+<ul class="list">
+<li><p><b>Enable any user to set the value</b> &minus; This option is used to set session variables after the initialization block has populated the value. Example - this option lets non-administrators set this variable for sampling.</p></li>
+<li><p><b>Security sensitive</b> &minus; This is used to identify the variable as sensitive to security when using a row-level database security strategy, such as a Virtual Private Database (VPD).</p></li>
+</ul>
+<p>You can use the initialization block list option to choose an initialization block that will be used to refresh the value regularly. You can also create a new initialization block.</p>
+<p>To add a default initializer value, enter the value in the default initializer box or click the Expression Builder button to use Expression Builder. Click OK to close the dialog box.</p>
+<p>The administrator can create non-system session variables using Oracle BI Administration tool.</p>
+<h2>Presentation Variables</h2>
+<p>Presentation variables are created with creation of Dashboard prompts. There are two types of dashboard prompts that can be used &minus;</p>
+<h3>Column Prompt</h3>
+<p>Presentation variable created with column prompt is associated with a column, and the values that it can take comes from the column values.</p>
+<p>To create a presentation variable go to New Prompt dialog or Edit Prompt dialog &rarr; Select Presentation Variable in the Set of a variable field &rarr; Enter the name for the variable.</p>
+<h3>Variable Prompt</h3>
+<p>Presentation variable created as variable prompt is not associated with any column and you need to define its values.</p>
+<p>To create a presentation variable as part of a variable prompt, in the New Prompt dialog or Edit Prompt dialog &rarr; Select Presentation Variable in the Prompt for field &rarr; Enter the name for the variable.</p>
+<p>The value of a presentation variable is populated by the column or variable prompt with which it is created. Each time a user selects a value in the column or variable prompt, the value of the presentation variable is set to the value that the user selects.</p>
+<h3>Initialization Blocks</h3>
+<p>Initialization blocks are used to initialize OBIEE variables: Dynamic Repository variables, system session variables and non-system session variables.</p>
+<p>It contains SQL statement that are executed to initialize or refresh the variables associated with that block. The SQL statement that are executed points to physical tables that can be accessed using the connection pool. Connection pool is defined in the initialization block dialog.</p>
+<p>If you want the query for an initialization block to have database-specific SQL, you can select a database type for that query.</p>
+<h3>Initialize Dynamic Repository Variables using Initialization Block</h3>
+<p>Default initiation string field of initialization block is used to set value of dynamic repository variables. You also define a schedule which is followed by Oracle BI server to execute the query and refresh the value of variable. If you set the logging level to 2 or higher, log information for all SQL queries executed to retrieve the value of variable is saved in nqquery.log file.</p>
+<p>Location of this file on BI Server &minus;</p>
+<p>ORACLE_INSTANCE\diagnostics\logs\OracleBIServerComponent\coreapplication_obisn</p>
+<h3>Initialize Session Variables using Initialization Block</h3>
+<p>Session variables also take their values from initialization block but their value never changes with time intervals. When a user begins a new session, Oracle BI server creates a new instance of session variables.</p>
+<p>All SQL queries executed to retrieve session variable information by BI server if the logging level is set to 2 or higher in the Identity Manager User object or the LOGLEVEL system session variable is set to 2 or higher in the Variable Manager is saved in nqquery.log file.</p>
+<p>Location of this file on BI Server &minus;</p>
+<p>ORACLE_INSTANCE\diagnostics\logs\OracleBIServerComponent\coreapplication_obisn</p>
+<h3>Create Initialization Blocks in Administrator Tool</h3>
+<p>Go to Manager &rarr; Variables &rarr; Variable Manager Dialog box appears. Go to Action menu &rarr; Click New &rarr; Repository &rarr; Initialization Block &rarr; Enter the name of initialization block.</p>
+<p>Go to Schedule tab &rarr; Select start date and time and refresh interval.</p>
+<p>You can choose the following options for Initialization Blocks &minus;</p>
+<ul class="list">
+<li><p><b>Disable</b> &minus; If you select this option, initialization block is disabled. To enable an initialization block, right-click an existing initialization block in the Variable Manager and choose Enable. This option enables you to change this property without opening the initialization block dialog.</p></li>
+<li><p><b>Allow deferred execution</b> &minus; This allows you to defer the execution of the initialization block until an associated session variable is accessed for the first time during the session.</p></li>
+<li><p><b>Required for authentication</b> &minus; If you select this, initialization block must execute for users to log in. Users are denied access to Oracle BI if the initialization block doesn’t execute.</p></li>
+</ul>
+<h1>OBIEE – Dashboards</h1>
+<p>OBIEE dashboard is a tool that enables end users to run ad-hoc reports and analysis as per business requirement model. Interactive dashboards are pixel perfect reports which can be directly viewed or printed by end users.</p>
+<p>OBIEE dashboard is part of Oracle BI Presentation layer services. If your end user is not interested in seeing all the data in the dashboard, it allows you to add prompts to the dashboard that allows the end user to enter what he wants to see. Dashboards also allow end users to select from drop-down lists, multi-select boxes and selection of columns to display in the reports.</p>
+<h2>Dashboard Alerts</h2>
+<p>Oracle BI dashboard allows you to set up alerts for sales executives that comes up on the interactive dashboard whenever the company’s projected sales is going to be below forecast.</p>
+<h2>Create a New Dashboard</h2>
+<p>To create a new Dashboard, go to New &rarr; Dashboard or you can also click on Dashboard option under create on the left side.</p>
+<img src="images/create_new_dashboard.jpg" alt="Create New Dashboard" />
+<p>Once you click on Dashboard, new dashboard dialog box opens up. Enter the name of Dashboard and description and select the location where you want Dashboard to save &rarr; click OK.</p>
+<img src="images/new_dashboard.jpg" alt="New Dashboard" />
+<p>If you save the dashboard in the Dashboards subfolder directly under the /Shared Folders/first level subfolder &rarr; dashboard will be listed in the Dashboard menu on the global header.</p>
+<p>If you save it in a Dashboards subfolder at any other level (such as /Shared Folders/Sales/Eastern), it will not be listed.</p>
+<p>If you choose a folder in the Dashboards subfolder directly under the /Shared Folders/first level subfolder in which no dashboards have been saved, a new Dashboards folder is automatically created for you.</p>
+<p>Once you enter the above fields, Dashboard builder will open up as shown in the following snapshot &minus;</p>
+<img src="images/dashboard_builder.jpg" alt="Dashboard Builder" />
+<p>Expand the catalog tab, select analysis to add to Dashboard and drag to page layout pane. Save and run the dashboard.</p>
+<img src="images/catalog_tab.jpg" alt="Catalog Tab" />
+<h3>Edit a Dashboard</h3>
+<p>Go to Dashboard &rarr; My Dashboard &rarr; Edit Dashboard.</p>
+<img src="images/edit_dashboard.jpg" alt="Edit Dashboard" />
+<p>To edit Dashboard. Click on below icon &rarr; Dashboard properties.</p>
+<img src="images/dashboard_properties_window.jpg" alt="Dashboard Properties Window" />
+<p>A new dialog box will appear as shown in the following snapshot. You can perform the following tasks &minus;</p>
+<p>Change the styles (Styles control how dashboards and results are formatted for display, such as the color of text and links, the font and size of text, the borders in tables, the colors and attributes of graphs, and so on). You can add a description.</p>
+<p>You can add hidden prompts, filters, and variables. Specify the links that will display with analyses on a dashboard page. You can rename, hide, reorder, set permissions for, and delete dashboard pages.</p>
+<img src="images/dashboard_properties.jpg" alt="Dashboard Properties" />
+<p>You can also edit Dashboard page properties by selecting page in the dialog box. You can make the following changes &minus;</p>
+<ul class="list">
+<li><p>You can change the name of your dashboard page.</p></li>
+<li><p>You can add a hidden prompt. Hidden prompts are used to set default values for all corresponding prompts on a dashboard page.</p></li>
+<li><p>You can add permissions for the dashboard and can also delete the selected page. Dashboard pages are permanently deleted.</p></li>
+<li><p>If more than one dashboard page is in this dashboard, the arrange order icons are enabled using up and down arrows.</p></li>
+</ul>
+<img src="images/dashboard_pages.jpg" alt="Dashboard Pages" />
+<img src="images/dashboard_rename_page.jpg" alt="Dashboard Rename Page" />
+<p>To set the report links at the dashboard level, dashboard page, or analysis level click the edit option of Dashboard reporting links.</p>
+<img src="images/dashboard_general_properties.jpg" alt="Dashboard General Properties" />
+<img src="images/report_links.jpg" alt="Report Links" />
+<p>To add a dashboard page, click on new Dashboard page icon &rarr; Enter the name of dashboard page and click OK.</p>
+<img src="images/add_new_dashboard_page.jpg" alt="Add New Dashboard Page" />
+<p>In Catalog tab, you can add the new another analysis and drag it to page layout area of new dashboard page.</p>
+<p>To edit the properties of dashboard like cell width, border, and height, click on column properties. You can set background color, wrap text and additional formatting options.</p>
+<img src="images/column_properties.jpg" alt="Column Properties" />
+<p>You can also add a condition on dashboard data display by clicking on condition option in column properties &minus;</p>
+<img src="images/add_condition.jpg" alt="Add Condition" />
+<p>To add a condition, click on &plus; sign in condition dialog box. You can add a condition based on analysis.</p>
+<p>Select the condition data and enter the condition parameter.</p>
+<img src="images/section_condition.jpg" alt="Section Condition" />
+<p>You can also test, edit or remove the condition by clicking on ‘more’ sign next to &plus; button.</p>
+<h2>Save a Customized Dashboard</h2>
+<p>You can save your customized dashboard by going to page options &rarr; Save current customizations &rarr; Enter the name of customization &rarr; Click OK.</p>
+<img src="images/save_customized_dashboard.jpg" alt="Save Customized Dashboard" />
+<p>To apply customization to a dashboard page, go to page option &rarr; Apply saved customization &rarr; Select name &rarr; Click OK.</p>
+<p>It allows you to save and view dashboard pages in their current state such as filters, prompts, column sorts, drills in analyses, and section expansion and collapse. By saving customizations, you do not need to make these choices manually each time you access the dashboard page.</p>
+<h1>OBIEE – Filters</h1>
+<p>Filters are used to limit the results that are displayed when an analysis is run, so that the results answer a particular question. Based on the filters, only those results are shown that matches the criteria passed in the filter condition.</p>
+<p>Filters are applied directly to attribute and measure columns. Filters are applied before the query is aggregated and affect the query and thus the resulting values for measures.</p>
+<p>For example, you have a list of members in which the aggregate sums to 100. Over time, more members meet the set filter criteria, which increases the aggregate sum to 200.</p>
+<h2>Column Filters</h2>
+<p>Following are the ways to create filters &minus;</p>
+<h3>Create a Named Column Filter</h3>
+<p>Go to Oracle Business Intelligence homepage &rarr; New menu &rarr; Select filter. The Select Subject Area dialog is displayed.</p>
+<p>From the Select Subject Area dialog, choose the subject area for which you want to create a filter. The "Filter editor" is displayed from the "Subject Areas pane". Double-click the column for which you want to create the filter. New Filter dialog is displayed.</p>
+<h3>Create an Inline Filter</h3>
+<p>Either create an analysis or access an existing analysis for which you want to create a filter.</p>
+<p>Click the Criteria tab &rarr; Locate the "Filters pane" &rarr; Click create a filter for the current subject area button. The analysis selected columns are displayed in the cascading menu.</p>
+<p>Select a column name from the menu or select the More Columns option to access the “Select Column dialog" from which you can select any column from the subject area.</p>
+<p>Once you select a column, the "New Filter dialog" is displayed.</p>
+<h1>OBIEE – Views</h1>
+<p>Oracle BI Enterprise Edition enables you to look at results of analyses in a meaningful way using its presentation capabilities. Different types of views can be added, such as graphs and pivot tables that allow drilling down to more detailed information and many more options like using filters, etc.</p>
+<p>The results of the analysis is displayed using a table/Pivot table view and depends on the type of columns that the analysis contains &minus;</p>
+<ul class="list">
+<li><p><b>Table view</b> is used if the analysis contains only attribute columns/only measure columns or a combination of both.</p></li>
+<li><p><b>Pivot table</b> is the default view if the analysis contains at least one hierarchical column.</p></li>
+<li><p>A <b>title view</b> displays the name of the saved analysis.</p></li>
+<li><p>You can edit or delete an existing view, add another view to an analysis and can also combine views.</p></li>
+</ul>
+<h2>Types of Views</h2>
+<section class="toggle">
+<label>There are different types of views available &minus;</label>
+<div class="toggle-content">
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th>Views &amp; Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>Title</b></p>
+<p>Title view displays a title, a subtitle, a logo, a link to a custom online help page and timestamps to the results.</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>Table</b></p>
+<p>Table view is used to display results in a visual representation of data organized by rows and columns. It provides a summary view of data and enables users to see different views of data by dragging and dropping rows and columns.</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>Pivot Table</b></p>
+<p>It displays results in a pivot table, which provides a summary view of data in cross-tab format and enables users to see different views of data by dragging and dropping rows and columns.</p>
+<p>Pivot tables and standard tables are similar in structure but Pivot table can contain column groups and can also display multiple levels of both row and column headings.</p>
+<p>Pivot table cell contains a unique value. Pivot table is more efficient than a row-based table. It is best suited for displaying a large quantity of data, for browsing data hierarchically, and for trend analysis.</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>Performance Tile</b></p>
+<p>Performance tiles are used to display a single aggregate measure value in a manner that is visually simple but provides a summary metrics to the user that will likely be presented in more detail within a dashboard view.</p>
+<p>Performance tiles are used to focus the user's attention on simple, need-to-know facts directly and prominently on the tile.</p>
+<p>Communicate status through simple formatting by using color, labels, and limited styles, or through conditional formatting of the background color or measure value to make the tile visually prominent. For example, if revenue is not tracking to target, the revenue value may appear in red.</p>
+<p>Respond to prompts, filters, and user roles and permissions by making them relevant to the user and their context.</p>
+<p>Support a single, aggregate or calculated value.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>Treemap</b></p>
+<p>Tree map are used to display a space-constrained, 2-d visualization for hierarchical structures with multiple levels.</p>
+<p>Treemaps are limited by a predefined area and display two levels of data.</p>
+<p>Contain rectangular tiles. The size of the tile is based on a measure, and the color of the tile is based on a second measure.</p>
+<p>Treemap are similar to a scatter plot graphs in that the map area is constrained, and the graph allows you to visualize large quantities of data and quickly identify trends and anomalies within that data.</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>Trellis</b></p>
+<p>Trellis displays multi-dimensional data shown as a set of cells in a grid form and where each cell represents a subset of data using a particular graph type.</p>
+<p>The trellis view has two subtypes &minus; Simple Trellis and Advanced Trellis.</p>
+<p>Simple trellis views are ideal for displaying multiple graphs that enable comparison of like to like. Advanced trellis views are ideal for displaying spark graphs that show a trend.</p>
+<p>A simple trellis displays a single inner graph type, Example &minus; a grid of multiple Bar graphs.</p>
+<p>An advanced trellis displays a different inner graph type for each measure. Example: A mixture of Spark Line graphs and Spark Bar graphs, alongside numbers.</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>Graph</b></p>
+<p>Graph displays numeric information visually which makes it easier to understand large quantities of data. Graphs often reveal patterns and trends that text-based displays cannot.</p>
+<p>A graph is displayed on a background, called the graph canvas.</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<p><b>Gauge</b></p>
+<p>Gauge are used to show a single data value. Cos of its compact size, a gauge is often more effective than a graph for displaying a single data value</p>
+<p>Gauges identify problems in data. A gauge usually plots one data point with an indication of whether that point falls in an acceptable or unacceptable range. Thus, gauges are useful for showing performance against goals.</p>
+<p>A gauge or gauge set is displayed on a background, called the gauge canvas.</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<p><b>Funnel</b></p>
+<p>Funnel displays results in 3D graph that represents target and actual values using volume, level, and color. Funnel graphs are used to graphically represent data that changes over different periods or stages. Example: Funnel graphs are often used to represent the volume of sales over a quarter.</p>
+<p>Funnel graphs are well suited for showing actual compared to targets for data where the target is known to decrease (or increase) significantly per stage, such as a sales pipeline.</p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<p><b>Map view</b></p>
+<p>Map view is used to display results overlain on a map. Depending on the data, the results can be overlain on top of a map as formats such as images, color fill areas, bar and pie graphs, and variably sized markers.</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td>
+<p><b>Filters</b></p>
+<p>Filter are used to displays the filters in effect for an analysis. Filters allows you to add condition to an analysis to obtain results that answer a particular question. Filters are applied before the query is aggregated.</p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td>
+<p><b>Selection Steps</b></p>
+<p>Selection steps are used to displays the selection steps in effect for an analysis. Selection steps, like filters, allow you to obtain results that answer particular questions. Selection steps are applied after the query is aggregated.</p>
+</td>
+</tr>
+<tr>
+<td>13</td>
+<td>
+<p><b>Column Selector</b></p>
+<p>Column selector is a set of drop-down lists that contain pre-selected columns. Users can dynamically select columns and change the data that is displayed in the views of the analysis.</p>
+</td>
+</tr>
+<tr>
+<td>14</td>
+<td>
+<p><b>View Selector</b></p>
+<p>A view selector is a drop-down list from which users can select a specific view of the results from among the saved views.</p>
+</td>
+</tr>
+<tr>
+<td>15</td>
+<td>
+<p><b>Legend</b></p>
+<p>It enables you to document the meaning of special formatting used in results-meaning of custom colors applied to gauges.</p>
+</td>
+</tr>
+<tr>
+<td>16</td>
+<td>
+<p><b>Narrative</b></p>
+<p>It displays the results as one or more paragraphs of text.</p>
+</td>
+</tr>
+<tr>
+<td>17</td>
+<td>
+<p><b>Ticker</b></p>
+<p>It displays the results as a ticker or marquee, similar in style to the stock tickers that run across many financial and news sites on the Internet. You can also control what information is presented and how it scrolls across the page.</p>
+</td>
+</tr>
+<tr>
+<td>18</td>
+<td>
+<p><b>Static Text</b></p>
+<p>You can use HTML to add banners, tickers, ActiveX objects, Java applets, links, instructions, descriptions, graphics, etc. in the results.</p>
+</td>
+</tr>
+<tr>
+<td>19</td>
+<td>
+<p><b>Logical SQL</b></p>
+<p>It displays the SQL statement that is generated for an analysis. This view is useful for trainers and administrators, and is usually not included in results for typical users.</p>
+<p>You cannot modify this view, except to format its container or to delete it.</p>
+</td>
+</tr>
+<tr>
+<td>20</td>
+<td>
+<p><b>Create Segment</b></p>
+<p>It is used to display a Create Segment link in the results.</p>
+</td>
+</tr>
+<tr>
+<td>21</td>
+<td>
+<p><b>Create Target List</b></p>
+<p>It is used to display a create target list link in the results. Users can click this link to create a target list, based on the results data, in their Oracle's Siebel operational application.</p>
+<p>This view is for users of Oracle's Siebel Life Sciences operational application integrated with Oracle's Siebel Life Sciences Analytics applications.</p>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<p>All view types except logical SQL view can be edited. Each view has its own editor in which you can perform edit task.</p>
+<p>Each view editor contains a unique functionality for that view type but might also contain functionality that is the same across view types.</p>
+<h3>Edit a View</h3>
+<p>Open the analysis that contains the view to edit. Click the "Analysis editor: Results tab."</p>
+<p>Click the Edit View button for the view. View editors is displayed. Now, using the editor for the view, make the required edits. Click done and then save the view.</p>
+<h3>Delete a View</h3>
+<p>You can delete a view from &minus;</p>
+<ul class="list">
+<li><p><b>A compound layout</b> &minus; If you remove a view from a compound layout, it is only removed from the compound layout and not from the analysis.</p></li>
+<li><p><b>An analysis</b> &minus; If you remove a view from an analysis, it removes the view from the analysis and also from any compound layout to which it had been added.</p></li>
+</ul>
+<h3>Remove a View</h3>
+<p>If you want to remove a view from &minus;</p>
+<ul class="list">
+<li><p><b>A compound layout</b> &minus; In the view in the Compound Layout &rarr; click the Remove View from Compound Layout button.</p></li>
+<li><p><b>An analysis</b> &minus; In the Views pane &rarr; select the view and then click the Remove View from Analysis toolbar button.</p></li>
+</ul>
+<h1>OBIEE – Prompts</h1>
+<p>A Prompt is a special type of filter that is used to filter analyses embedded in a dashboard. The main reason to use a dashboard prompt is that it allows the user to customize analysis output and also allows flexibility to change parameters of a report. There are three types of prompts that can be used &minus;</p>
+<h2>Named Prompts</h2>
+<p>The prompt created at the dashboard level is called a Named prompt. This Prompt is created outside of a specific dashboard and stored in the catalog as a prompt. You can apply a named prompt to any dashboard or dashboard page that contains the columns, mentioned in the prompt. It can filter one or any number of analyses embedded on the same dashboard page. You can create and save these named prompts to a private folder or a shared folder.</p>
+<p>A named prompt always appears on the dashboard page and the user can prompt for different values without having to rerun the dashboard. A named prompt can also interact with selection steps. You can specify a dashboard prompt to override a specific selection step.</p>
+<p>The step will be processed against the dashboard column with the user-specified data values collected by the dashboard column prompt, whereas all other steps will be processed as originally specified.</p>
+<h2>Inline Prompts</h2>
+<p>Inline prompts are embedded in an analysis and are not stored in the catalog for reuse. Inline prompt provides general filtering of a column within the analysis, depending on how it is configured.</p>
+<p>Inline prompt works independently from a dashboard filter, which determines values for all matching columns on the dashboard. An inline prompt is an initial prompt. When the user selects the prompt value, the prompt field disappears from the analysis.</p>
+<p>To select different prompt values, you need to rerun the analysis. Your input determines the content of the analyses embedded in the dashboard.</p>
+<p>Named Prompt can be applied to any dashboard or dashboard page which contains the column specified in the Prompt.</p>
+<h2>Column Prompts</h2>
+<p>A column prompt is the most common and flexible prompt type. A column prompt enables you to build very specific value prompts to either stand alone on the dashboard or analysis or to expand or refine existing dashboard and analysis filters. Column prompts can be created for hierarchical, measure, or attribute columns at the analysis or dashboard level.</p>
+<p>Go to New &rarr; Dashboard Prompt &rarr; Select subject area.</p>
+<img src="images/column_prompts.jpg" alt="Column Prompts" />
+<p>Dashboard prompt dialog box appears. Go to ‘&plus;’ sign, select the prompt type. Click on the column prompt &rarr; Select column &rarr; Click OK.</p>
+<img src="images/dashboard_prompt.jpg" alt="Dashboard Prompt" />
+<p>New Prompt dialog box appears (this appears only for column prompts). Enter the label name that will appear on dashboard next to Prompt &rarr; Select the Operator &rarr; User Input.</p>
+<img src="images/new_prompt.jpg" alt="New Prompt" />
+<p>The User Input field's drop-down list appears for column and variable prompts, and provides you with the option to determine the User Input method for the user interface. You can select any of the following &minus; checkboxes, radio buttons, a choice list, or a list box.</p>
+<p><b>Example</b> &minus; If you select the User Input method of Choice List and Choice List Values item of all Column Values, the user will select the prompt's data value from a list that contains all of the data values contained in the data source.</p>
+<p>You can also further make a selection by expanding the Options tab.</p>
+<img src="images/options_tab.jpg" alt="Options Tab" />
+<p>These series of checkboxes allow you to restrict the amount of data returned in output. Once selection is made, click OK.</p>
+<p>The Prompt is added to Definition &rarr; Save the prompt using the save option at the top right corner &rarr; Enter the name &rarr; Click OK.</p>
+<img src="images/save_prompt.jpg" alt="Save Prompt" />
+<p>To test the Prompt, go to My Dashboard &rarr; Catalog and drag the prompt to column 1. This prompt can be applied to full dashboard or on a single page by clicking on Properties &rarr; Scope.</p>
+<img src="images/test_prompt.jpg" alt="Test Prompt" />
+<p>Save and run the Dashboard, select the value for a Prompt. Apply and Output value will change as per prompt value.</p>
+<h2>Other Prompts</h2>
+<h3>Currency Prompt</h3>
+<p>A currency prompt enables the user to change the currency type that is displayed in the currency columns on an analysis or dashboard.</p>
+<p><b>Example</b> &minus; Suppose that an analysis contains the sales totals for a certain region of US in US dollars. However, because the users viewing the analysis reside in Canada, they can use the currency prompt to change the sales totals from USD to Canada dollars.</p>
+<p>The prompt's currency selection list is populated with the currency preferences from the user’s &rarr; My Account dialog &rarr; Preferences tab. Currency prompt option is available only if the administrator has configured the userpref_currencies.xml file.</p>
+<h3>Image Prompt</h3>
+<p>An image prompt provides an image that users click to select values for an analysis or dashboard.</p>
+<p><b>Example</b> &minus; In a sales organization, users can click their territories from an image of a map to see sales information, or click a product image to see sales information about that product. If you know how to use the HTML &lt;map&gt; tag, then you can create an image map definition.</p>
+<h3>Variable Prompt</h3>
+<p>A variable prompt enables the user to select a value that is specified in the variable prompt to display on dashboard. A variable prompt is not dependent upon a column, but can still use a column.</p>
+<h3>Add Reports to BI Dashboard Pages</h3>
+<p>You can add one or more existing reports to a dashboard page. The advantage is that you can share reports with other users and schedule the dashboard pages using agents. An agent sends the entire dashboard to the user, including all data pages that the report references.</p>
+<p>When configuring an agent for a dashboard page that contains a BI Publisher report, ensure that the following criteria are met &minus;</p>
+<ul class="list">
+<li>The output format of the BI Publisher report must be PDF.</li>
+<li>The agent must be set to deliver PDF.</li>
+</ul>
+<p>You can add reports to a dashboard page as embedded content and as a link. Embedded means that the report is displayed directly on the dashboard page. The link opens the report in BI Publisher within Oracle BIEE.</p>
+<p>If you modify the report in BI Publisher and save your changes, then refresh the dashboard page to see the modifications. Navigate to the page to which you want to add a report.</p>
+<h3>Add a BI Report to a Dashboard Page</h3>
+<p>Select a report in one of the following ways &minus;</p>
+<ul class="list">
+<li><p>Select the report from the Catalog pane and drag and drop it into a section on the dashboard page.</p></li>
+<li><p>To add a report from a dashboard page, select the report from the folder that contains its dashboard in the Catalog pane.</p></li>
+</ul>
+<p>Set the properties of the object. To do so, hover the mouse pointer over the object in the page layout area to display the object's toolbar, and click the Properties button.</p>
+<p>The "BI Publisher Report Properties dialog" is displayed. Complete the fields in the properties dialog as appropriate. Click OK and then click Save.</p>
+<p>If required, add a prompt to the dashboard page to filter the results of an embedded parameterized report.</p>
+<h1>OBIEE – Security</h1>
+<p>OBIEE security is defined by the use of a role-based access control model. It is defined in terms of roles that are aligned to different directory <b>server groups and users</b>. In this chapter, we will be discussing the components defined to compose a <b>security policy</b>.</p>
+<p>One can define a <b>Security structure</b> with the following components</p>
+<ul class="list">
+<li><p>The directory <b>Server User and Group</b> managed by the <b>Authentication provider</b>.</p></li>
+<li><p>The application roles managed by the <b>Policy store</b> provide Security policy with the following components: Presentation catalog, repository, policy store.</p></li>
+</ul>
+<img src="images/obiee_security.jpg" alt="OBIEE Security" />
+<h2>Security Providers</h2>
+<p>Security provider is called in order to get the security information. Following types of security providers are used by OBIEE &minus;</p>
+<ul class="list">
+<li><p>Authentication provider to authenticate users.</p></li>
+<li><p>Policy store provider is used to give privileges on all applications except for BI Presentation Services.</p></li>
+<li><p>Credential store provider is used to store credentials used internally by the BI application.</p></li>
+</ul>
+<h2>Security Policy</h2>
+<p>Security policy in OBIEE is divided into the following components &minus;</p>
+<ul class="list">
+<li>Presentation Catalog</li>
+<li>Repository</li>
+<li>Policy Store</li>
+</ul>
+<h3>Presentation Catalog</h3>
+<p>It defines the catalog objects and Oracle BI Presentation Services functionality.</p>
+<h3>Oracle BI Presentation Services Administration</h3>
+<p>It enables you to set privileges for users to access features and functions such as editing views and creating agents and prompts.</p>
+<p>Presentation Catalog privileges access to presentation catalog objects defined in the Permission dialog.</p>
+<p>Presentation Services administration does not have its own authentication system and it relies on the authentication system that it inherits from the Oracle BI Server. All users who sign in to Presentation Services are granted the Authenticated User role and any other roles that they were assigned in Fusion Middleware Control.</p>
+<p>You can assign permissions in one of the following ways &minus;</p>
+<ul class="list">
+<li><p><b>To application roles</b> &minus; Most recommended way of assigning permissions and privileges.</p></li>
+<li><p><b>To individual users</b> &minus; This is difficult to manage where you can assign permissions and privileges to specific users.</p></li>
+<li><p><b>To Catalog groups</b> &minus; It was used in previous releases for backward compatibility maintenance.</p></li>
+</ul>
+<h3>Repository</h3>
+<p>This defines which application roles and users have access to which items of metadata within the repository. The Oracle BI Administration Tool through the security manager is used and enables you to perform the following tasks &minus;</p>
+<ul class="list">
+<li>Set permissions for business models, tables, columns, and subject areas.</li>
+<li>Specify database access for each user.</li>
+<li>Specify filters to limit the data accessible by users.</li>
+<li>Set authentication options.</li>
+</ul>
+<h3>Policy Store</h3>
+<p>It defines BI Server, BI Publisher, and Real Time Decisions functionality that can be accessed by given users or users with given Application Roles.</p>
+<h2>Authentication and Authorization</h2>
+<h3>Authentication</h3>
+<p>Authenticator Provider in Oracle WebLogic Server domain is used for user authentication. This authentication provider accesses users and group information stored in the LDAP server in the Oracle Business Intelligence's Oracle WebLogic Server domain.</p>
+<p>To create and manage users and groups in an LDAP server, Oracle WebLogic Server Administration Console is used. You can also choose to configure an authentication provider for an alternative directory. In this case, Oracle WebLogic Server Administration Console enables you to view the users and groups in your directory; however, you need to continue to use the appropriate tools to make any modifications to the directory.</p>
+<p>Example &minus; If you reconfigure Oracle Business Intelligence to use OID, you can view users and groups in Oracle WebLogic Server Administration Console but you must manage them in OID Console.</p>
+<h3>Authorization</h3>
+<p>Once authentication is done, the next step in security is to ensure that the user can do and see what they are authorized to do. Authorization for Oracle Business Intelligence 11g is managed by a security policy in terms of Applications Roles.</p>
+<h3>Application Roles</h3>
+<p>Security is normally defined in terms of Application roles that are assigned to directory server users and groups. Example: the default Application roles are <b>BIAdministrator</b>, <b>BIConsumer</b>, and <b>BIAuthor</b>.</p>
+<p>Application roles are defined as functional role assigned to a user, which gives that user the privileges required to perform that role. Example: Marketing Analyst Application role might grant a user access to view, edit and create reports on a company's marketing pipeline.</p>
+<p>This communication between Application roles and directory server users and groups allows the administrator to define the Application roles and policies without creating additional users or groups in LDAP server. Application roles allows business intelligence system to be easily moved between development, test and production environments.</p>
+<p>This doesn’t require any change in security policy and all that is required is to assign the Application roles to the users and groups available in the target environment.</p>
+<img src="images/application_roles.jpg" alt="Application Roles" />
+<p>The group named 'BIConsumers' contains user1, user2, and user3. Users in the group 'BIConsumers' are assigned the Application role 'BIConsumer', which enables the users to view reports.</p>
+<p>The group named 'BIAuthors' contains user4 and user5. Users in the group 'BIAuthors' are assigned the Application role 'BIAuthor', which enables the users to create reports.</p>
+<p>The group named 'BIAdministrators' contains user6 and user7, user 8. Users in the group 'BIAdministrators' are assigned the Application role 'BIAdministrator', which enables the users to manage repositories.</p>
+<h1>OBIEE – Administration</h1>
+<p>In OBIEE 10g, most of OBIEE administration tasks were mostly performed either through the Administration tool, the web-based Presentation Server administration screen, or through editing files in the filesystem. There were around 700 or so configuration options spread over multiple tools and configuration files, with some options like users and groups were embedded in unrelated repositories (the RPD).</p>
+<p>In OBIEE 11g, all administration and configuration tasks are moved into Fusion Middleware Control also called as Enterprise Manager.</p>
+<p>Administration tool that was present in OBIEE 10g is also present in 11g and is used to maintain the semantic model used by the BI Server. It has few enhancements in terms of dimension handling and new data sources. A major change is around security - when you open the Security Manager dialog &minus;</p>
+<p>Go to Manage &rarr; Identity &rarr; Security Manager Dialog box appears.</p>
+<img src="images/administration.jpg" alt="Administration" />
+<p>Users and Application Roles are now defined in the WebLogic Server admin console. You use the Security Manager to define additional links through to other LDAP servers, register custom authenticators and set up filters, etc. In the above screenshot, the users shown in the users list are those that are held in WebLogic Server’s JPS (Java Platform Security) service, and there are no longer any users and groups in the RPD itself.</p>
+<p>There is no administrator user in above snapshot. It has standard administrator user that you set up as the WebLogic Server administrator when you install OBIEE, which typically has the username weblogic.</p>
+<p>There are also two additional default users: OracleSystemUser - this user is used by the various OBIEE web services to communicate with the BI Server and BISystemUser is used by BI Publisher to connect to the BI Server as a data source.</p>
+<p>In Application Roles tab, you can see a list default application roles - BISystem, BIAdministrator, BIAuthor and BIConsumer - which are used to grant access to Presentation Server functionality.</p>
+<h2>Create a User in OBIEE</h2>
+<p>To create a new user, log on to the WebLogic Server admin console &rarr; Go to Security Realms from the Fusion Middleware Control menu &rarr; Select myrealm &rarr; Select Users and Groups. Click on Users tab, it will show you a list of existing users.</p>
+<p>Click the New. &rarr; New user dialog box opens up &rarr; enter the user’s details. You can also use the Groups tab to define a group for the user, or assign the user to an existing group.</p>
+<img src="images/create_user_in_obiee.jpg" alt="Create User in OBIEE" />
+<h2>Configuration and Metadata Files</h2>
+<p>Following are the key file locations In OBIEE 11g &minus;</p>
+<h3>RPD Directory</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\bifoundation\OracleBIServerComponent\
+coreapplication_obis1\repository
+</pre>
+<h3>NQSConfig.INI</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\config\OracleBIServerComponent\coreapplication_obis1\
+nqsconfig.INI
+</pre>
+<h3>NQClusterConfig.INI</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\config\OracleBIApplication\coreapplication\
+NQClusterConfig.INI
+</pre>
+<h3>nqquery.log</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\diagnostics\logs\OracleBIServerComponent\
+coreapplication_obis1\nqquery.log
+</pre>
+<h3>nqserver.log</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\diagnostics\logs\OracleBIServerComponent\
+coreapplication_obis1\nqserver.log
+</pre>
+<h3>nqsserver.exe</h3>
+<pre class="result notranslate">
+C:\Middleware\Oracle_BI1\bifoundation\server\bin\nqsserver.exe
+</pre>
+<h3>WebCat Directory</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\bifoundation\OracleBIPresentationServicesComponent\
+coreapplication_obips1\catalog\
+</pre>
+<h3>instanceconfig.xml</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\config\OracleBIPresentationServicesComponent\
+coreapplication_obips1\instanceconfig.xml
+</pre>
+<h3>xdo.cfg</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\config\OracleBIPresentationServicesComponent\
+coreapplication_obips1\xdo.cfg
+</pre>
+<h3>sawlog0.log</h3>
+<pre class="result notranslate">
+C:\Middleware\instances\instance1\diagnostics\logs\OracleBIPresentationServicesComponent\
+coreapplication_obips1\sawlog0.log
+</pre>
+<h3>sawserver.exe</h3>
+<pre class="result notranslate">
+C:\Middleware\Oracle_BI1\bifoundation\web\bin\sawserver.exe
+</pre>
+<p>Go to Overview. You can also stop, start and restart all of the system components like BI Server, Presentation Server etc. via OPMN.</p>
+<img src="images/configuration_and_metadata_files.jpg" alt="Configuration and Metadata Files" />
+<p>You can click the Capacity Management, Diagnostics, Security or Deployment tabs to perform further maintenance.</p>
+<h2>Capacity Management</h2>
+<p>We have the following four options available for capacity management &minus;</p>
+<ul class="list">
+<li><p>Metrics gathered via DMS.</p></li>
+<li><p>Availability of all the individual system components (allowing you to stop, start and restart them individually).</p></li>
+<li><p>Scalability is used to increase the number of BI Servers, Presentation Servers, Cluster Controllers and Schedulers in the cluster in conjunction with the “scale out” install option.</p></li>
+<li><p>Performance option allows you to turn caching on or off and modify other parameters associated with response time.</p></li>
+</ul>
+<img src="images/capacity_management.jpg" alt="Capacity Management" />
+<p><b>Diagnostics</b> &minus; <b>Log Messages</b> show you view of all server errors and warnings. <b>Log Configuration</b> allows you to limit the size of logs and information gets included in them.</p>
+<p><b>Security</b> &minus; It is used for enabling SSO and selecting the SSO provider.</p>
+<p><b>Deployment</b> &minus; <b>Presentation</b> allows you to set dashboard defaults, section headings, etc. <b>Scheduler</b> is used to set the connection details for the scheduler schema. <b>Marketing</b> is for configuring the Siebel Marketing Content Server connection. <b>Mail</b> option is used for setting up the mail server to deliver for email alerts. <b>Repository</b> is used to upload new RPDs for use by the BI Server.</p>
+<hr />
+<div class="pre-btn">
+<a href="obiee_questions_answers.html"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="../cgi-bin/printpage.html" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="obiee_useful_resources.html">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/obiee/obiee_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/obiee/obiee_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/obiee/obiee_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/obiee/obiee_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/obiee/obiee_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/obiee/obiee_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="../images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="../index-2.html" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="../scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="../about/tutorials_writing.html">Write for us</a></li>
+         <li><a href="../about/faq.html">FAQ's</a></li>
+         <li><a href="../about/about_helping.html">Helping</a></li>
+         <li><a href="../about/contact_us.html">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="../theme/js/custom-min7b30.js?v=4"></script>
+<script src="../../www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/obiee/obiee_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 15:31:03 GMT -->
+</html>

@@ -1,0 +1,4212 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+
+<!-- Mirrored from www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Scrapy Quick Guide</title>
+<meta name="description" content="Scrapy Quick Guide - Learn Scrapy in simple and easy steps starting from Overview, Environment, Command Line Tools, Spiders, Selectors, Items, Item Loaders, Shell, Item Pipeline, Feed Exports, Requests and Responses, Link Extractors, Settings, Exceptions, Create Project, Define Item, First Spider, Crawling, Extracting Items, Using Item, Following Links, Scraped Data, Logging, Stats Collection, Sending e-mail, Telnet Console, Web Services." />
+<meta name="keywords" content="Scrapy, Tutorial, Learning, Overview, Environment, Command Line Tools, Spiders, Selectors, Items, Item Loaders, Shell, Item Pipeline, Feed Exports, Requests and Responses, Link Extractors, Settings, Exceptions, Create Project, Define Item, First Spider, Crawling, Extracting Items, Using Item, Following Links, Scraped Data, Logging, Stats Collection, Sending e-mail, Telnet Console, Web Services." /> 
+<base  />
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css?v=2">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #60a839 url(https://www.tutorialspoint.com/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #60a839 !important;}
+.submenu-item{ border-bottom: 2px solid #60a839 !important; border-top: 2px solid #60a839 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="https://www.tutorialspoint.com/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="https://www.tutorialspoint.com/scrapy/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net/"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="https://www.tutorialspoint.com/theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<style>
+.ts {
+   text-align:center !important;
+   vertical-align:middle !important;
+}
+</style>
+<div class="mini-logo">
+<img src="https://www.tutorialspoint.com/scrapy/images/scrapy-mini-logo.jpg" alt="Scrapy Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Scrapy Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/scrapy/index.htm">Scrapy - Home</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Scrapy Basic Concepts</li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_overview.htm">Scrapy - Overview</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_environment.htm">Scrapy - Environment</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_command_line_tools.htm">Scrapy - Command Line Tools</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_spiders.htm">Scrapy - Spiders</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_selectors.htm">Scrapy - Selectors</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_items.htm">Scrapy - Items</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_item_loaders.htm">Scrapy - Item Loaders</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_shell.htm">Scrapy - Shell</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_item_pipeline.htm">Scrapy - Item Pipeline</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_feed_exports.htm">Scrapy - Feed exports</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_requests_and_responses.htm">Scrapy - Requests &amp; Responses</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_link_extractors.htm">Scrapy - Link Extractors</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_settings.htm">Scrapy - Settings</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_exceptions.htm">Scrapy - Exceptions</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Scrapy Live Project</li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_create_project.htm">Scrapy - Create a Project</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_define_item.htm">Scrapy - Define an Item</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_first_spider.htm">Scrapy - First Spider</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_crawling.htm">Scrapy - Crawling</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_extracting_items.htm">Scrapy - Extracting Items</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_using_item.htm">Scrapy - Using an Item</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_following_links.htm">Scrapy - Following Links</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_scraped_data.htm">Scrapy - Scraped Data</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Scrapy Built In Services</li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_logging.htm">Scrapy - Logging</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_stats_collection.htm">Scrapy - Stats Collection</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_sending_e-mail.htm">Scrapy - Sending an E-mail</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_telnet_console.htm">Scrapy - Telnet Console</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_web_services.htm">Scrapy - Web Services</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu" >
+<li class="heading">Scrapy Useful Resources</li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm">Scrapy - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_useful_resources.htm">Scrapy - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/scrapy/scrapy_discussion.htm">Scrapy - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Scrapy - Quick Guide</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/scrapy/scrapy_web_services.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/scrapy/scrapy_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<h1>Scrapy - Overview</h1>
+<p>Scrapy is a fast, open-source web crawling framework written in Python, used to extract the data from the web page with the help of selectors based on XPath.</p>
+<p>Scrapy was first released on June 26, 2008 licensed under BSD, with a milestone 1.0 releasing in June 2015.</p>
+<h2>Why Use Scrapy?</h2>
+<ul class="list">
+<li><p>It is easier to build and scale large crawling projects.</p></li>
+<li><p>It has a built-in mechanism called Selectors, for extracting the data from websites.</p></li>
+<li><p>It handles the requests asynchronously and it is fast.</p></li>
+<li><p>It automatically adjusts crawling speed using <a href="https://doc.scrapy.org/en/latest/topics/autothrottle.html" target="_blank" rel="nofollow">Auto-throttling mechanism</a>.</p></li>
+<li><p>Ensures developer accessibility.</p></li>
+</ul>
+<h2>Features of Scrapy</h2>
+<ul class="list">
+<li><p>Scrapy is an open source and free to use web crawling framework.</p></li>
+<li><p>Scrapy generates feed exports in formats such as JSON, CSV, and XML.</p></li>
+<li><p>Scrapy has built-in support for selecting and extracting data from sources either by XPath or CSS expressions.</p></li>
+<li><p>Scrapy based on crawler, allows extracting data from the web pages automatically.</p></li>
+</ul>
+<h2>Advantages</h2>
+<ul class="list">
+<li><p>Scrapy is easily extensible, fast, and powerful.</p></li>
+<li><p>It is a cross-platform application framework (Windows, Linux, Mac OS and BSD).</p></li>
+<li><p>Scrapy requests are scheduled and processed asynchronously.</p></li>
+<li><p>Scrapy comes with built-in service called <b>Scrapyd</b> which allows to upload projects and control spiders using JSON web service.</p></li>
+<li><p>It is possible to scrap any website, though that website does not have API for raw data access.</p></li>
+</ul>
+<h2>Disadvantages</h2>
+<ul class="list">
+<li><p>Scrapy is only for Python 2.7. +</p></li>
+<li><p>Installation is different for different operating systems.</p></li>
+</ul>
+<h1>Scrapy - Environment</h1>
+<p>In this chapter, we will discuss how to install and set up Scrapy. Scrapy must be installed with Python.</p>
+<p>Scrapy can be installed by using <b>pip</b>. To install, run the following command &minus;</p>
+<pre class="result notranslate">
+pip install Scrapy
+</pre>
+<h2>Windows</h2>
+<p><b>Note</b> &minus; Python 3 is not supported on Windows OS.</p>
+<p><b>Step 1</b> &minus; Install Python 2.7 from <a href="https://www.python.org/downloads/" rel="nofollow" target="_blank">Python</a></p>
+<p>Set environmental variables by adding the following paths to the PATH &minus;</p>
+<pre class="result notranslate">
+C:\Python27\;C:\Python27\Scripts\; 
+</pre>
+<p>You can check the Python version using the following command &minus;</p>
+<pre class="result notranslate">
+python --version
+</pre>
+<p><b>Step 2</b> &minus; Install  <a href="https://slproweb.com/products/Win32OpenSSL.html" rel="nofollow" target="_blank">OpenSSL</a>.</p>
+<p>Add C:\OpenSSL-Win32\bin in your environmental variables.</p>
+<p><b>Note</b> &minus; OpenSSL comes preinstalled in all operating systems except Windows.</p>
+<p><b>Step 3</b> &minus; Install <a href="https://www.microsoft.com/downloads/details.aspx?familyid=9B2DA534-3E03-4391-8A4D-074B9F2BC1BF" rel="nofollow" target="_blank">Visual C++ 2008</a> redistributables.</p>
+<p><b>Step 4</b> &minus; Install <a href="https://sourceforge.net/projects/pywin32/" rel="nofollow" target="_blank">pywin32</a>.</p>
+<p><b>Step 5</b> &minus; Install <a href="https://pip.pypa.io/en/latest/installing/" rel="nofollow" target="_blank">pip</a> for Python versions older than 2.7.9.</p>
+<p>You can check the pip version using the following command &minus;</p>
+<pre class="result notranslate">
+pip --version
+</pre>
+<p><b>Step 6</b> &minus; To install scrapy, run the following command &minus;</p>
+<pre class="result notranslate">
+pip install Scrapy
+</pre>
+<h2>Anaconda</h2>
+<p>If you have <a href="https://docs.continuum.io/anaconda/" rel="nofollow" target="_blank">anaconda</a> or <a href="https://conda.pydata.org/docs/install/quick.html" rel="nofollow" target="_blank">miniconda</a> installed on your machine, run the below command to install Scrapy using conda &minus;</p>
+<pre class="result notranslate">
+conda install -c scrapinghub scrapy 
+</pre>
+<p><a href="https://scrapinghub.com/" rel="nofollow" target="_blank">Scrapinghub</a> company supports official conda packages for Linux, Windows, and OS X.</p>
+<p><b>Note</b> &minus; It is recommended to install Scrapy using the above command if you have issues installing via pip.</p>
+<h2>Ubuntu 9.10 or Above</h2>
+<p>The latest version of Python is pre-installed on Ubuntu OS. Use the Ubuntu packages aptgettable provided by Scrapinghub. To use the packages &minus;</p>
+<p><b>Step 1</b> &minus; You need to import the GPG key used to sign Scrapy packages into APT keyring &minus;</p>
+<pre class="result notranslate">
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 627220E7
+</pre>
+<p><b>Step 2</b> &minus; Next, use the following command to create /etc/apt/sources.list.d/scrapy.list file &minus;</p>
+<pre class="result notranslate">
+echo 'deb http://archive.scrapy.org/ubuntu scrapy main' | sudo tee 
+/etc/apt/sources.list.d/scrapy.list
+</pre>
+<p><b>Step 3</b> &minus; Update package list and install scrapy &minus;</p>
+<pre class="result notranslate">
+sudo apt-get update &amp;&amp; sudo apt-get install scrapy
+</pre>
+<h2>Archlinux</h2>
+<p>You can install Scrapy from AUR Scrapy package using the following command &minus;</p>
+<pre class="result notranslate">
+yaourt -S scrapy
+</pre>
+<h2>Mac OS X </h2>
+<p>Use the following command to install Xcode command line tools &minus;</p>
+<pre class="result notranslate">
+xcode-select --install 
+</pre>
+<p>Instead of using system Python, install a new updated version that doesn't conflict with the rest of your system.</p>
+<p><b>Step 1</b> &minus; Install <a href="https://brew.sh/" rel="nofollow" target="_blank">homebrew</a>.</p>
+<p><b>Step 2</b> &minus; Set environmental PATH variable to specify that homebrew packages should be used before system packages &minus;</p>
+<pre class="result notranslate">
+echo "export PATH = /usr/local/bin:/usr/local/sbin:$PATH" &gt;&gt; ~/.bashrc
+</pre>
+<p><b>Step 3</b> &minus; To make sure the changes are done, reload <b>.bashrc</b> using the following command &minus;</p>
+<pre class="result notranslate">
+source ~/.bashrc 
+</pre>
+<p><b>Step 4</b> &minus; Next, install Python using the following command &minus;</p>
+<pre class="result notranslate">
+brew install python
+</pre>
+<p><b>Step 5</b> &minus; Install Scrapy using the following command &minus;</p>
+<pre class="result notranslate">
+pip install Scrapy
+</pre>
+<h1>Scrapy - Command Line Tools</h1>
+<h3>Description</h3>
+<p>The Scrapy command line tool is used for controlling Scrapy, which is often referred to as <b>'Scrapy tool'</b>. It includes the commands for various objects with a group of arguments and options.</p>
+<h2>Configuration Settings</h2>
+<p>Scrapy will find configuration settings in the <b>scrapy.cfg</b> file. Following are a few locations &minus;</p>
+<ul class="list">
+<li><p>C:\scrapy(project folder)\scrapy.cfg in the system</p></li>
+<li><p>~/.config/scrapy.cfg ($XDG_CONFIG_HOME) and ~/.scrapy.cfg ($HOME) for global settings</p></li>
+<li><p>You can find the scrapy.cfg inside the root of the project.</p></li>
+</ul>
+<p>Scrapy can also be configured using the following environment variables &minus;</p>
+<ul class="list">
+<li>SCRAPY_SETTINGS_MODULE</li>
+<li>SCRAPY_PROJECT</li>
+<li>SCRAPY_PYTHON_SHELL</li>
+</ul>
+<h2>Default Structure Scrapy Project</h2>
+<p>The following structure shows the default file structure of the Scrapy project.</p>
+<pre class="result notranslate">
+scrapy.cfg                - Deploy the configuration file
+project_name/             - Name of the project
+   _init_.py
+   items.py               - It is project's items file
+   pipelines.py           - It is project's pipelines file
+   settings.py            - It is project's settings file
+   spiders                - It is the spiders directory
+      _init_.py
+      spider_name.py
+      . . .
+</pre>
+<p>The <b>scrapy.cfg</b> file is a project root directory, which includes the project name with the project settings.</p>
+<p>For instance &minus;</p>
+<pre class="result notranslate">
+[settings] 
+default = [name of the project].settings  
+
+[deploy] 
+#url = http://localhost:6800/ 
+project = [name of the project] 
+</pre>
+<h2>Using Scrapy Tool</h2>
+<p>Scrapy tool provides some usage and available commands as follows &minus;</p>
+<pre class="result notranslate">
+Scrapy X.Y  - no active project 
+Usage: 
+   scrapy  [options] [arguments] 
+Available commands: 
+   crawl      It puts spider (handle the URL) to work for crawling data 
+   fetch      It fetches the response from the given URL
+</pre>
+<h3>Creating a Project</h3>
+<p>You can use the following command to create the project in Scrapy &minus;</p>
+<pre class="result notranslate">
+scrapy startproject project_name
+</pre>
+<p>This will create the project called <b>project_name</b> directory. Next, go to the newly created project, using the following command &minus;</p>
+<pre class="result notranslate">
+cd  project_name
+</pre>
+<h3>Controlling Projects</h3>
+<p>You can control the project and manage them using the Scrapy tool and also create the new spider, using the following command &minus;</p>
+<pre class="result notranslate">
+scrapy genspider mydomain mydomain.com
+</pre>
+<p>The commands such as crawl, etc. must be used inside the Scrapy project. You will come to know which commands must run inside the Scrapy project in the coming section.</p>
+<p>Scrapy contains some built-in commands, which can be used for your project. To see the list of available commands, use the following command &minus;</p>
+<pre class="result notranslate">
+scrapy -h
+</pre>
+<p>When you run the following command, Scrapy will display the list of available commands as listed &minus;</p>
+<ul class="list">
+<li><p><b>fetch</b> &minus; It fetches the URL using Scrapy downloader.</p></li>
+<li><p><b>runspider</b> &minus; It is used to run self-contained spider without creating a project.</p></li>
+<li><p><b>settings</b> &minus; It specifies the project setting value.</p></li>
+<li><p><b>shell</b> &minus; It is an interactive scraping module for the given URL.</p></li>
+<li><p><b>startproject</b> &minus; It creates a new Scrapy project.</p></li>
+<li><p><b>version</b> &minus; It displays the Scrapy version.</p></li>
+<li><p><b>view</b> &minus; It fetches the URL using Scrapy downloader and show the contents in a browser.</p></li>
+</ul>
+<p>You can have some project related commands as listed &minus;</p>
+<ul class="list">
+<li><p><b>crawl</b> &minus; It is used to crawl data using the spider.</p></li>
+<li><p><b>check</b> &minus; It checks the items returned by the crawled command.</p></li>
+<li><p><b>list</b> &minus; It displays the list of available spiders present in the project.</p></li>
+<li><p><b>edit</b> &minus; You can edit the spiders by using the editor.</p></li>
+<li><p><b>parse</b> &minus; It parses the given URL with the spider.</p></li>
+<li><p><b>bench</b> &minus; It is used to run quick benchmark test (Benchmark tells how many number of pages can be crawled per minute by Scrapy).</p></li>
+</ul>
+<h2>Custom Project Commands</h2>
+<p>You can build a custom project command with <b>COMMANDS_MODULE</b> setting in Scrapy project. It includes a default empty string in the setting. You can add the following custom command &minus;</p>
+<pre class="result notranslate">
+COMMANDS_MODULE = 'mycmd.commands'
+</pre>
+<p>Scrapy commands can be added using the scrapy.commands section in the setup.py file shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+from setuptools import setup, find_packages  
+
+setup(name = 'scrapy-module_demo', 
+   entry_points = { 
+      'scrapy.commands': [ 
+         'cmd_demo = my_module.commands:CmdDemo', 
+      ], 
+   }, 
+)
+</pre>
+<p>The above code adds <b>cmd_demo</b> command in the <b>setup.py</b> file.</p>
+<h1>Scrapy - Spiders</h1>
+<h3>Description</h3>
+<p>Spider is a class responsible for defining how to follow the links through a website and extract the information from the pages.</p>
+<p>The default spiders of Scrapy are as follows &minus;</p>
+<h3>scrapy.Spider</h3>
+<p>It is a spider from which every other spiders must inherit. It has the following class &minus;</p>
+<pre class="result notranslate">
+class scrapy.spiders.Spider
+</pre>
+<p>The following table shows the fields of scrapy.Spider class &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Field &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>name</b></p>
+<p>It is the name of your spider.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>allowed_domains</b></p>
+<p>It is a list of domains on which the spider crawls.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>start_urls</b></p>
+<p>It is a list of URLs, which will be the roots for later crawls, where the spider will begin to crawl from.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>custom_settings</b></p>
+<p>These are the settings, when running the spider, will be overridden from project wide configuration.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>crawler</b></p>
+<p>It is an attribute that links to Crawler object to which the spider instance is bound.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>settings</b></p>
+<p>These are the settings for running a spider.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>logger</b></p>
+<p>It is a Python logger used to send log messages.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>from_crawler(crawler,*args,**kwargs)</b></p>
+<p>It is a class method, which creates your spider. The parameters are &minus;</p>
+<ul class="list">
+<li><p><b>crawler</b> &minus; A crawler to which the spider instance will be bound.</p></li>
+<li><p><b>args(list)</b> &minus; These arguments are passed to the method <i>_init_()</i>.</p></li>
+<li><p><b>kwargs(dict)</b> &minus; These keyword arguments are passed to the method <i>_init_()</i>.</p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>start_requests()</b></p>
+<p>When no particular URLs are specified and the spider is opened for scrapping, Scrapy calls <i>start_requests()</i> method.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>make_requests_from_url(url)</b></p>
+<p>It is a method used to convert urls to requests.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>parse(response)</b></p>
+<p>This method processes the response and returns scrapped data following more URLs.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td><p><b>log(message[,level,component])</b></p>
+<p>It is a method that sends a log message through spiders logger.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">13</td>
+<td><p><b>closed(reason)</b></p>
+<p>This method is called when the spider closes.</p>
+</td>
+</tr>
+</table>
+<h2>Spider Arguments</h2>
+<p>Spider arguments are used to specify start URLs and are passed using crawl command with <b>-a</b> option, shown as follows &minus;</p>
+<pre class="result notranslate">
+scrapy crawl first_scrapy -a group = accessories
+</pre>
+<p>The following code demonstrates how a spider receives arguments &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy 
+
+class FirstSpider(scrapy.Spider): 
+   name = "first" 
+   
+   def __init__(self, group = None, *args, **kwargs): 
+      super(FirstSpider, self).__init__(*args, **kwargs) 
+      self.start_urls = ["http://www.example.com/group/%s" % group]
+</pre>
+<h2>Generic Spiders</h2>
+<p>You can use generic spiders to subclass your spiders from. Their aim is to follow all links on the website based on certain rules to extract data from all pages.</p>
+<p>For the examples used in the following spiders, let’s assume we have a project with the following fields &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy 
+from scrapy.item import Item, Field 
+  
+class First_scrapyItem(scrapy.Item): 
+   product_title = Field() 
+   product_link = Field() 
+   product_description = Field() 
+</pre>
+<h2>CrawlSpider</h2>
+<p>CrawlSpider defines a set of rules to follow the links and scrap more than one page. It has the following class &minus;</p>
+<pre class="result notranslate">
+class scrapy.spiders.CrawlSpider
+</pre>
+<p>Following are the attributes of CrawlSpider class &minus;</p>
+<h3>rules</h3> 
+<p>It is a list of rule objects that defines how the crawler follows the link.</p>
+<p>The following table shows the rules of CrawlSpider class &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Rule &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>LinkExtractor</b></p>
+<p>It specifies how spider follows the links and extracts the data.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>callback</b></p>
+<p>It is to be called after each page is scraped.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>follow</b></p>
+<p>It specifies whether to continue following links or not.</p>
+</td>
+</tr>
+</table>
+<h3>parse_start_url(response)</h3>
+<p>It returns either item or request object by allowing to parse initial responses.</p>
+<p><b>Note</b> &minus; Make sure you rename parse function other than parse while writing the rules because the parse function is used by CrawlSpider to implement its logic.</p>
+<p>Let’s take a look at the following example, where spider starts crawling demoexample.com's home page, collecting all pages, links, and parses with the <i>parse_items</i> method &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy
+from scrapy.spiders import CrawlSpider, Rule
+from scrapy.linkextractors import LinkExtractor
+
+class DemoSpider(CrawlSpider):
+   name = "demo"
+   allowed_domains = ["www.demoexample.com"]
+   start_urls = ["http://www.demoexample.com"]
+      
+   rules = ( 
+      Rule(LinkExtractor(allow =(), restrict_xpaths = ("//div[@class = 'next']",)),
+         callback = "parse_item", follow = True),
+   )
+   
+   def parse_item(self, response):
+   item = DemoItem()
+   item["product_title"] = response.xpath("a/text()").extract()
+   item["product_link"] = response.xpath("a/@href").extract()
+   item["product_description"] = response.xpath("div[@class = 'desc']/text()").extract()
+   return items
+</pre> 
+<h2>XMLFeedSpider</h2>
+<p>It is the base class for spiders that scrape from XML feeds and iterates over nodes. It has the following class &minus;</p> 
+<pre class="result notranslate">
+class scrapy.spiders.XMLFeedSpider
+</pre>
+<p>The following table shows the class attributes used to set an iterator and a tag name &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Attribute &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>iterator</b></p>
+<p>It defines the iterator to be used. It can be either <i>iternodes, html</i> or <i>xml</i>. Default is <i>iternodes</i>.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>itertag</b></p>
+<p>It is a string with node name to iterate.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>namespaces</b></p>
+<p>It is defined by list of (prefix, uri) tuples that automatically registers namespaces using <i>register_namespace()</i> method.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>adapt_response(response)</b></p>
+<p>It receives the response and modifies the response body as soon as it arrives from spider middleware, before spider starts parsing it.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>parse_node(response,selector)</b></p>
+<p>It receives the response and a selector when called for each node matching the provided tag name.</p>
+<p><b>Note</b> &minus; Your spider won't work if you don't override this method.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>process_results(response,results)</b></p>
+<p>It returns a list of results and response returned by the spider.</p>
+</td>
+</tr>
+</table>
+<h2>CSVFeedSpider</h2>
+<p>It iterates through each of its rows, receives a CSV file as a response, and calls <i>parse_row()</i> method. It has the following class &minus;</p>
+<pre class="result notranslate">
+class scrapy.spiders.CSVFeedSpider
+</pre>
+<p>The following table shows the options that can be set regarding the CSV file &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Option &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>delimiter</b></p>
+<p>It is a string containing a comma(',') separator for each field.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>quotechar</b></p>
+<p>It is a string containing quotation mark('"') for each field.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>headers</b></p>
+<p>It is a list of statements from where the fields can be extracted.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>parse_row(response,row)</b></p>
+<p>It receives a response and each row along with a key for header.</p>
+</td>
+</tr>
+</table>
+<h3>CSVFeedSpider Example</h3>
+<pre class="prettyprint notranslate">
+from scrapy.spiders import CSVFeedSpider
+from demoproject.items import DemoItem  
+
+class DemoSpider(CSVFeedSpider): 
+   name = "demo" 
+   allowed_domains = ["www.demoexample.com"] 
+   start_urls = ["http://www.demoexample.com/feed.csv"] 
+   delimiter = ";" 
+   quotechar = "'" 
+   headers = ["product_title", "product_link", "product_description"]  
+   
+   def parse_row(self, response, row): 
+      self.logger.info("This is row: %r", row)  
+      item = DemoItem() 
+      item["product_title"] = row["product_title"] 
+      item["product_link"] = row["product_link"] 
+      item["product_description"] = row["product_description"] 
+      return item
+</pre>
+<h2>SitemapSpider</h2>
+<p>SitemapSpider with the help of <a href="http://www.sitemaps.org/" rel="nofollow" target="_blank">Sitemaps</a> crawl a website by locating the URLs from robots.txt. It has the following class &minus;</p>
+<pre class="result notranslate">
+class scrapy.spiders.SitemapSpider
+</pre>
+<p>The following table shows the fields of SitemapSpider &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Field &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>sitemap_urls</b></p>
+<p>A list of URLs which you want to crawl pointing to the sitemaps.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>sitemap_rules</b></p>
+<p>It is a list of tuples (regex, callback), where regex is a regular expression, and callback is used to process URLs matching a regular expression.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>sitemap_follow</b></p>
+<p>It is a list of sitemap's regexes to follow.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>sitemap_alternate_links</b></p>
+<p>Specifies alternate links to be followed for a single url.</p>
+</td>
+</tr>
+</table>
+<h3>SitemapSpider Example</h3>
+<p>The following SitemapSpider processes all the URLs &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.spiders import SitemapSpider  
+
+class DemoSpider(SitemapSpider): 
+   urls = ["http://www.demoexample.com/sitemap.xml"]  
+   
+   def parse(self, response): 
+      # You can scrap items here
+</pre>
+<p>The following SitemapSpider processes some URLs with callback &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.spiders import SitemapSpider  
+
+class DemoSpider(SitemapSpider): 
+   urls = ["http://www.demoexample.com/sitemap.xml"] 
+   
+   rules = [ 
+      ("/item/", "parse_item"), 
+      ("/group/", "parse_group"), 
+   ]  
+   
+   def parse_item(self, response): 
+      # you can scrap item here  
+   
+   def parse_group(self, response): 
+      # you can scrap group here 
+</pre>
+<p>The following code shows sitemaps in the robots.txt whose url has <b>/sitemap_company</b> &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.spiders import SitemapSpider
+
+class DemoSpider(SitemapSpider): 
+   urls = ["http://www.demoexample.com/robots.txt"] 
+   rules = [ 
+      ("/company/", "parse_company"), 
+   ] 
+   sitemap_follow = ["/sitemap_company"]  
+   
+   def parse_company(self, response): 
+      # you can scrap company here 
+</pre>
+<p>You can even combine SitemapSpider with other URLs as shown in the following command.</p>
+<pre class="prettyprint notranslate">
+from scrapy.spiders import SitemapSpider  
+
+class DemoSpider(SitemapSpider): 
+   urls = ["http://www.demoexample.com/robots.txt"] 
+   rules = [ 
+      ("/company/", "parse_company"), 
+   ]  
+   
+   other_urls = ["http://www.demoexample.com/contact-us"] 
+   def start_requests(self): 
+      requests = list(super(DemoSpider, self).start_requests()) 
+      requests += [scrapy.Request(x, self.parse_other) for x in self.other_urls] 
+      return requests 
+
+   def parse_company(self, response): 
+      # you can scrap company here... 
+
+   def parse_other(self, response): 
+      # you can scrap other here... 
+</pre>
+<h1>Scrapy - Selectors</h1>
+<h3>Description</h3>
+<p>When you are scraping the web pages, you need to extract a certain part of the HTML source by using the mechanism called <b>selectors</b>, achieved by using either XPath or CSS expressions. Selectors are built upon the lxml library, which processes the XML and HTML in Python language.</p>
+<p>Use the following code snippet to define different concepts of selectors &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;My Website&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;span&gt;Hello world!!!&lt;/span&gt;
+      &lt;div class = 'links'&gt;
+         &lt;a href = 'one.html'&gt;Link 1&lt;img src = 'image1.jpg'/&gt;&lt;/a&gt;
+         &lt;a href = 'two.html'&gt;Link 2&lt;img src = 'image2.jpg'/&gt;&lt;/a&gt;
+         &lt;a href = 'three.html'&gt;Link 3&lt;img src = 'image3.jpg'/&gt;&lt;/a&gt;
+      &lt;/div&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h2>Constructing Selectors</h2>
+<p>You can construct the selector class instances by passing the <b>text</b> or <b>TextResponse</b> object. Based on the provided input type, the selector chooses the following rules &minus;</p>
+<pre class="result notranslate">
+from scrapy.selector import Selector 
+from scrapy.http import HtmlResponse
+</pre>
+<p>Using the above code, you can construct from the text as &minus;</p>
+<pre class="result notranslate">
+Selector(text = body).xpath('//span/text()').extract() 
+</pre>
+<p>It will display the result as &minus;</p>
+<pre class="result notranslate">
+[u'Hello world!!!'] 
+</pre>
+<p>You can construct from the response as &minus;</p>
+<pre class="prettyprint notranslate">
+response = HtmlResponse(url = 'http://mysite.com', body = body) 
+Selector(response = response).xpath('//span/text()').extract()
+</pre>
+<p>It will display the result as &minus;</p>
+<pre class="result notranslate">
+[u'Hello world!!!']
+</pre>
+<h2>Using Selectors</h2>
+<p>Using the above simple code snippet, you can construct the XPath for selecting the text which is defined in the title tag as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;response.selector.xpath('//title/text()')
+</pre>
+<p>Now, you can extract the textual data using the <b>.extract()</b> method shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;response.xpath('//title/text()').extract()
+</pre>
+<p>It will produce the result as &minus;</p>
+<pre class="result notranslate">
+[u'My Website']
+</pre>
+<p>You can display the name of all elements shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;response.xpath('//div[@class = "links"]/a/text()').extract() 
+</pre>
+<p>It will display the elements as &minus;</p>
+<pre class="result notranslate">
+Link 1
+Link 2
+Link 3
+</pre>
+<p>If you want to extract the first element, then use the method <b>.extract_first()</b>, shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;response.xpath('//div[@class = "links"]/a/text()').extract_first()
+</pre>
+<p>It will display the element as &minus;</p>
+<pre class="result notranslate">
+Link 1
+</pre>
+<h2>Nesting Selectors</h2>
+<p>Using the above code, you can nest the selectors to display the page link and image source using the <b>.xpath()</b> method, shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+links = response.xpath('//a[contains(@href, "image")]') 
+
+for index, link in enumerate(links): 
+   args = (index, link.xpath('@href').extract(), link.xpath('img/@src').extract()) 
+   print 'The link %d pointing to url %s and image %s' % args 
+</pre>
+<p>It will display the result as &minus;</p>
+<pre class="result notranslate">
+Link 1 pointing to url [u'one.html'] and image [u'image1.jpg']
+Link 2 pointing to url [u'two.html'] and image [u'image2.jpg']
+Link 3 pointing to url [u'three.html'] and image [u'image3.jpg']
+</pre>
+<h2>Selectors Using Regular Expressions</h2>
+<p>Scrapy allows to extract the data using regular expressions, which uses the <b>.re()</b> method. From the above HTML code, we will extract the image names shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;response.xpath('//a[contains(@href, "image")]/text()').re(r'Name:\s*(.*)')
+</pre>
+<p>The above line displays the image names as &minus;</p>
+<pre class="result notranslate">
+[u'Link 1', 
+u'Link 2', 
+u'Link 3'] 
+</pre>
+<h2>Using Relative XPaths</h2>
+<p>When you are working with XPaths, which starts with the <b>/</b>, nested selectors and XPath are related to absolute path of the document, and not the relative path of the selector.</p>
+<p>If you want to extract the <b>&lt;p&gt;</b> elements, then first gain all div elements &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;mydiv = response.xpath('//div')
+</pre>
+<p>Next, you can extract all the <b>'p'</b> elements inside, by prefixing the XPath with a dot as <b>.//p</b> as shown below &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;for p in mydiv.xpath('.//p').extract() 
+</pre>
+<h2>Using EXSLT Extensions</h2>
+<p>The EXSLT is a community that issues the extensions to the XSLT (Extensible Stylesheet Language Transformations) which converts XML documents to XHTML documents. You can use the EXSLT extensions with the registered namespace in the XPath expressions as shown in the following table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Prefix &amp; Usage</th>
+<th style="text-align:center;">Namespace</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>re</b></p>
+<p>regular expressions</p>
+</td>
+<td style="vertical-align:middle;"><p><a href="http://exslt.org/regexp/index.html" target="_blank" rel="nofollow">http://exslt.org/regexp/index.html</a></p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>set</b></p>
+<p>set manipulation</p>
+</td>
+<td style="vertical-align:middle;"><p><a href="http://exslt.org/set/index.html" target="_blank" rel="nofollow">http://exslt.org/set/index.html</p></td>
+</tr>
+</table>
+<p>You can check the simple code format for extracting data using regular expressions in the previous section.</p>
+<p>There are some XPath tips, which are useful when using XPath with Scrapy selectors. For more information, click this <a href="https://www.tutorialspoint.com/scrapy/xpth_tips.htm">link</a>.</p>
+<h1>Scrapy - Items</h1>
+<h3>Description</h3>
+<p>Scrapy process can be used to extract the data from sources such as web pages using the spiders. Scrapy uses <b>Item</b> class to produce the output whose objects are used to gather the scraped data.</p>
+<h2>Declaring Items</h2>
+<p>You can declare the items using the class definition syntax along with the field objects shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy 
+class MyProducts(scrapy.Item): 
+   productName = Field() 
+   productLink = Field() 
+   imageURL = Field() 
+   price = Field() 
+   size = Field() 
+</pre>
+<h2>Item Fields</h2>
+<p>The item fields are used to display the metadata for each field. As there is no limitation of values on the field objects, the accessible metadata keys does not ontain any reference list of the metadata. The field objects are used to specify all the field metadata and you can specify any other field key as per your requirement in the project. The field objects can be accessed using the Item.fields attribute.</p>
+<h3>Working with Items</h3>
+<p>There are some common functions which can be defined when you are working with the items. For more information, click this <a href="https://www.tutorialspoint.com/scrapy/working_with_items.htm">link</a>.</p>
+<h2>Extending Items</h2>
+<p>The items can be extended by stating the subclass of the original item. For instance &minus;</p>
+<pre class="prettyprint notranslate">
+class MyProductDetails(Product): 
+   original_rate = scrapy.Field(serializer = str) 
+   discount_rate = scrapy.Field()
+</pre>
+<p>You can use the existing field metadata to extend the field metadata by adding more values or changing the existing values as shown in the following code &minus;</p>
+<pre class="prettyprint notranslate">
+class MyProductPackage(Product): 
+   name = scrapy.Field(Product.fields['name'], serializer = serializer_demo)
+</pre>
+<h3>Item Objects</h3>
+<p>The item objects can be specified using the following class which provides the new initialized item from the given argument &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.item.Item([arg])
+</pre>
+<p>The Item provides a copy of the constructor and provides an extra attribute that is given by the items in the fields.</p>
+<h3>Field Objects</h3>
+<p>The field objects can be specified using the following class in which the Field class doesn't issue the additional process or attributes &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.item.Field([arg])
+</pre>
+<h1>Scrapy - Item Loaders</h1>
+<h3>Description</h3>
+<p>Item loaders provide a convenient way to fill the items that are scraped from the websites.</p>
+<h2>Declaring Item Loaders</h2>
+<p>The declaration of Item Loaders is like Items.</p>
+<p>For example &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.loader import ItemLoader 
+from scrapy.loader.processors import TakeFirst, MapCompose, Join  
+
+class DemoLoader(ItemLoader):  
+   default_output_processor = TakeFirst()  
+   title_in = MapCompose(unicode.title) 
+   title_out = Join()  
+   size_in = MapCompose(unicode.strip)  
+   # you can continue scraping here
+</pre>
+<p>In the above code, you can see that input processors are declared using <b>_in</b> suffix and output processors are declared using <b>_out</b> suffix.</p>
+<p>The <b>ItemLoader.default_input_processor</b> and <b>ItemLoader.default_output_processor</b> attributes are used to declare default input/output processors.</p>
+<h2>Using Item Loaders to Populate Items</h2>
+<p>To use Item Loader, first instantiate with dict-like object or without one where the item uses Item class specified in <b>ItemLoader.default_item_class</b> attribute.</p>
+<ul class="list">
+<li><p>You can use selectors to collect values into the Item Loader.</p></li>
+<li><p>You can add more values in the same item field, where Item Loader will use an appropriate handler to add these values.</p></li>
+</ul>
+<p>The following code demonstrates how items are populated using Item Loaders &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.loader import ItemLoader 
+from demoproject.items import Demo  
+
+def parse(self, response): 
+   l = ItemLoader(item = Product(), response = response)
+   l.add_xpath("title", "//div[@class = 'product_title']")
+   l.add_xpath("title", "//div[@class = 'product_name']")
+   l.add_xpath("desc", "//div[@class = 'desc']")
+   l.add_css("size", "div#size]")
+   l.add_value("last_updated", "yesterday")
+   return l.load_item()
+</pre>
+<p>As shown above, there are two different XPaths from which the <b>title</b> field is extracted using <b>add_xpath()</b> method &minus;</p>
+<pre class="result notranslate">
+1. //div[@class = "product_title"] <br>
+2. //div[@class = "product_name"]
+</pre>
+<p>Thereafter, a similar request is used for <b>desc</b> field. The size data is extracted using <b>add_css()</b> method and <b>last_updated</b> is filled with a value "yesterday" using <b>add_value()</b> method.</p>
+<p>Once all the data is collected, call <b>ItemLoader.load_item()</b> method which returns the items filled with data extracted using <b>add_xpath()</b>, <b>add_css()</b> and <b>add_value()</b> methods.</p>
+<h2>Input and Output Processors</h2>
+<p>Each field of an Item Loader contains one input processor and one output processor.</p> 
+<ul class="list">
+<li><p>When data is extracted, input processor processes it and its result is stored in ItemLoader.</p></li> 
+<li><p>Next, after collecting the data, call ItemLoader.load_item() method to get the populated Item object.</p></li>
+<li><p>Finally, you can assign the result of the output processor to the item.</p></li>
+</ul>
+<p>The following code demonstrates how to call input and output processors for a specific field &minus;</p>
+<pre class="prettyprint notranslate">
+l = ItemLoader(Product(), some_selector)
+l.add_xpath("title", xpath1) # [1]
+l.add_xpath("title", xpath2) # [2]
+l.add_css("title", css)      # [3]
+l.add_value("title", "demo") # [4]
+return l.load_item()         # [5]
+</pre>
+<p><b>Line 1</b> &minus; The data of title is extracted from xpath1 and passed through the input processor and its result is collected and stored in ItemLoader.</p>
+<p><b>Line 2</b> &minus; Similarly, the title is extracted from xpath2 and passed through the same input processor and its result is added to the data collected for [1].</p>
+<p><b>Line 3</b> &minus; The title is extracted from css selector and passed through the same input processor and the result is added to the data collected for [1] and [2].</p>
+<p><b>Line 4</b> &minus; Next, the value "demo" is assigned and passed through the input processors.</p>
+<p><b>Line 5</b> &minus; Finally, the data is collected internally from all the fields and passed to the output processor and the final value is assigned to the Item.</p>
+<h2>Declaring Input and Output Processors</h2>
+<p>The input and output processors are declared in the ItemLoader definition. Apart from this, they can also be specified in the <b>Item Field</b> metadata.</p>
+<p>For example &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy 
+from scrapy.loader.processors import Join, MapCompose, TakeFirst 
+from w3lib.html import remove_tags  
+
+def filter_size(value): 
+   if value.isdigit(): 
+      return value  
+
+class Item(scrapy.Item): 
+   name = scrapy.Field( 
+      input_processor = MapCompose(remove_tags), 
+      output_processor = Join(), 
+   )
+   size = scrapy.Field( 
+      input_processor = MapCompose(remove_tags, filter_price), 
+      output_processor = TakeFirst(), 
+   ) 
+
+&gt;&gt;&gt; from scrapy.loader import ItemLoader 
+&gt;&gt;&gt; il = ItemLoader(item = Product()) 
+&gt;&gt;&gt; il.add_value('title', [u'Hello', u'&lt;strong&gt;world&lt;/strong&gt;']) 
+&gt;&gt;&gt; il.add_value('size', [u'&lt;span&gt;100 kg&lt;/span&gt;']) 
+&gt;&gt;&gt; il.load_item()
+</pre>
+<p>It displays an output as &minus;</p>
+<pre class="result notranslate">
+{'title': u'Hello world', 'size': u'100 kg'}
+</pre>
+<h2>Item Loader Context</h2>
+<p>The Item Loader Context is a dict of arbitrary key values shared among input and output processors.</p>
+<p>For example, assume you have a function <i>parse_length</i> &minus;</p>
+<pre class="prettyprint notranslate">
+def parse_length(text, loader_context): 
+   unit = loader_context.get('unit', 'cm') 
+   
+   # You can write parsing code of length here  
+   return parsed_length
+</pre>
+<p>By receiving loader_context arguements, it tells the Item Loader it can receive Item Loader context. There are several ways to change the value of Item Loader context &minus;</p>
+<ul class="list">
+<li><p>Modify current active Item Loader context &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+loader = ItemLoader (product)
+loader.context ["unit"] = "mm"
+</pre>
+<ul class="list">
+<li><p>On Item Loader instantiation &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+loader = ItemLoader(product, unit = "mm")
+</pre>
+<ul class="list">
+<li><p>On Item Loader declaration for input/output processors that instantiates with Item Loader context &minus;</p></li>
+</ul>
+<pre class="prettyprint notranslate">
+class ProductLoader(ItemLoader):
+   length_out = MapCompose(parse_length, unit = "mm")
+</pre>
+<h2>ItemLoader Objects</h2>
+<p>It is an object which returns a new item loader to populate the given item. It has the following class &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.loader.ItemLoader([item, selector, response, ]**kwargs)
+</pre>
+<p>The following table shows the parameters of ItemLoader objects &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>item</b></p>
+<p>It is the item to populate by calling add_xpath(), add_css() or add_value().</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>selector</b></p>
+<p>It is used to extract data from websites.</p>
+</td>
+</tr><tr>
+<td class="ts">3</td>
+<td><p><b>response</b></p>
+<p>It is used to construct selector using default_selector_class.</p>
+</td>
+</tr>
+</table>
+<p>Following table shows the methods of ItemLoader objects &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+<th style="text-align:center;width:40%">Example</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>get_value(value, *processors, **kwargs)</b></p>
+<p>By a given processor and keyword arguments, the value is processed by get_value() method.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; from scrapy.loader.processors import TakeFirst
+&gt;&gt;&gt; loader.get_value(u'title: demoweb', TakeFirst(), unicode.upper, re = 'title: (.+)')
+'DEMOWEB`
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>add_value(field_name, value, *processors, **kwargs)</b></p>
+<p>It processes the value and adds to the field where it is first passed through get_value by giving processors and keyword arguments before passing through field input processor.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+loader.add_value('title', u'DVD')
+loader.add_value('colors', [u'black', u'white'])
+loader.add_value('length', u'80')
+loader.add_value('price', u'2500')
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>replace_value(field_name, value, *processors, **kwargs)</b></p>
+<p>It replaces the collected data with a new value.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+loader.replace_value('title', u'DVD')
+loader.replace_value('colors', [u'black', u'white'])
+loader.replace_value('length', u'80')
+loader.replace_value('price', u'2500')
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>get_xpath(xpath, *processors, **kwargs)</b></p>
+<p>It is used to extract unicode strings by giving processors and keyword arguments by receiving <i>XPath</i>.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+# HTML code: &lt;div class = "item-name"&gt;DVD&lt;/div&gt;
+loader.get_xpath("//div[@class = 'item-name']")
+
+# HTML code: &lt;div id = "length"&gt;the length is 45cm&lt;/div&gt;
+loader.get_xpath("//div[@id = 'length']", TakeFirst(), re = "the length is (.*)")
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>add_xpath(field_name, xpath, *processors, **kwargs)</b></p>
+<p>It receives <i>XPath</i> to the field which extracts unicode strings.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+# HTML code: &lt;div class = "item-name"&gt;DVD&lt;/div&gt;
+loader.add_xpath('name', '//div[@class = "item-name"]')
+
+# HTML code: &lt;div id = "length"&gt;the length is 45cm&lt;/div&gt;
+loader.add_xpath('length', '//div[@id = "length"]', re = 'the length is (.*)')
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>replace_xpath(field_name, xpath, *processors, **kwargs)</b></p>
+<p>It replaces the collected data using <i>XPath</i> from sites.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+# HTML code: &lt;div class = "item-name"&gt;DVD&lt;/div&gt;
+loader.replace_xpath('name', '//div[@class = "item-name"]')
+
+# HTML code: &lt;div id = "length"&gt;the length is 45cm&lt;/div&gt;
+loader.replace_xpath('length', '//div[@id = "length"]', re = 'the length is (.*)')
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>get_css(css, *processors, **kwargs)</b></p>
+<p>It receives CSS selector used to extract the unicode strings.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+loader.get_css("div.item-name")
+loader.get_css("div#length", TakeFirst(), re = "the length is (.*)")
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>add_css(field_name, css, *processors, **kwargs)</b></p>
+<p>It is similar to add_value() method with one difference that it adds CSS selector to the field.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+loader.add_css('name', 'div.item-name')
+loader.add_css('length', 'div#length', re = 'the length is (.*)')
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>replace_css(field_name, css, *processors, **kwargs)</b></p>
+<p>It replaces the extracted data using CSS selector.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+loader.replace_css('name', 'div.item-name')
+loader.replace_css('length', 'div#length', re = 'the length is (.*)')
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>load_item()</b></p>
+<p>When the data is collected, this method fills the item with collected data and returns it.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+def parse(self, response):
+l = ItemLoader(item = Product(), response = response)
+l.add_xpath('title', '//div[@class = "product_title"]')
+loader.load_item()
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>nested_xpath(xpath)</b></p>
+<p>It is used to create nested loaders with an XPath selector.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+loader = ItemLoader(item = Item())
+loader.add_xpath('social', 'a[@class = "social"]/@href')
+loader.add_xpath('email', 'a[@class = "email"]/@href')
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td><p><b>nested_css(css)</b></p>
+<p>It is used to create nested loaders with a CSS selector.</p>
+</td>
+<td>
+<pre class="prettyprint notranslate">
+loader = ItemLoader(item = Item())
+loader.add_css('social', 'a[@class = "social"]/@href')
+loader.add_css('email', 'a[@class = "email"]/@href')	
+</pre>
+</td>
+</tr>
+</table>
+<p>Following table shows the attributes of ItemLoader objects &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Attribute &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>item</b></p>
+<p>It is an object on which the Item Loader performs parsing.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>context</b></p>
+<p>It is the current context of Item Loader that is active.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>default_item_class</b></p>
+<p>It is used to represent the items, if not given in the constructor.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>default_input_processor</b></p>
+<p>The fields which don't specify input processor are the only ones for which default_input_processors are used.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>default_output_processor</b></p>
+<p>The fields which don't specify the output processor are the only ones for which default_output_processors are used.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>default_selector_class</b></p>
+<p>It is a class used to construct the selector, if it is not given in the constructor.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>selector</b></p>
+<p>It is an object that can be used to extract the data from sites.</p>
+</td>
+</tr>
+</table>
+<h2>Nested Loaders</h2>
+<p>It is used to create nested loaders while parsing the values from the subsection of a document. If you don't create nested loaders, you need to specify full XPath or CSS for each value that you want to extract.</p>
+<p>For instance, assume that the data is being extracted from a header page &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;header&gt;
+   &lt;a class = "social" href = "http://facebook.com/whatever"&gt;facebook&lt;/a&gt;
+   &lt;a class = "social" href = "http://twitter.com/whatever"&gt;twitter&lt;/a&gt;
+   &lt;a class = "email" href = "mailto:someone@example.com"&gt;send mail&lt;/a&gt;
+&lt;/header&gt;
+</pre>
+<p>Next, you can create a nested loader with header selector by adding related values to the header &minus;</p>
+<pre class="prettyprint notranslate">
+loader = ItemLoader(item = Item())
+header_loader = loader.nested_xpath('//header')
+header_loader.add_xpath('social', 'a[@class = "social"]/@href')
+header_loader.add_xpath('email', 'a[@class = "email"]/@href')
+loader.load_item()
+</pre>
+<h2>Reusing and extending Item Loaders</h2>
+<p>Item Loaders are designed to relieve the maintenance which becomes a fundamental problem when your project acquires more spiders.</p>
+<p>For instance, assume that a site has their product name enclosed in three dashes (e.g. --DVD---). You can remove those dashes by reusing the default Product Item Loader, if you don’t want it in the final product names as shown in the following code &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.loader.processors import MapCompose 
+from demoproject.ItemLoaders import DemoLoader  
+
+def strip_dashes(x): 
+   return x.strip('-')  
+
+class SiteSpecificLoader(DemoLoader): 
+   title_in = MapCompose(strip_dashes, DemoLoader.title_in)
+</pre>
+<h2>Available Built-in Processors</h2>
+<p>Following are some of the commonly used built-in processors &minus;</p>
+<h3>class scrapy.loader.processors.Identity</h3>
+<p>It returns the original value without altering it. For example &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; from scrapy.loader.processors import Identity
+&gt;&gt;&gt; proc = Identity()
+&gt;&gt;&gt; proc(['a', 'b', 'c'])
+['a', 'b', 'c']
+</pre>
+<h3>class scrapy.loader.processors.TakeFirst</h3>
+<p>It returns the first value that is non-null/non-empty from the list of received values. For example &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; from scrapy.loader.processors import TakeFirst
+&gt;&gt;&gt; proc = TakeFirst()
+&gt;&gt;&gt; proc(['', 'a', 'b', 'c'])
+'a'
+</pre>
+<h3>class scrapy.loader.processors.Join(separator = u' ')</h3>
+<p>It returns the value attached to the separator. The default separator is u' ' and it is equivalent to the function <b>u' '.join</b>. For example &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; from scrapy.loader.processors import Join
+&gt;&gt;&gt; proc = Join()
+&gt;&gt;&gt; proc(['a', 'b', 'c'])
+u'a b c'
+&gt;&gt;&gt; proc = Join('&lt;br&gt;')
+&gt;&gt;&gt; proc(['a', 'b', 'c'])
+u'a&lt;br&gt;b&lt;br&gt;c'
+</pre>
+<h3>class scrapy.loader.processors.Compose(*functions, **default_loader_context)</h3>
+<p>It is defined by a processor where each of its input value is passed to the first function, and the result of that function is passed to the second function and so on, till lthe ast function returns the final value as output.</p>
+<p>For example &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; from scrapy.loader.processors import Compose
+&gt;&gt;&gt; proc = Compose(lambda v: v[0], str.upper)
+&gt;&gt;&gt; proc(['python', 'scrapy'])
+'PYTHON'
+</pre>
+<h3>class scrapy.loader.processors.MapCompose(*functions, **default_loader_context)</h3>
+<p>It is a processor where the input value is iterated and the first function is applied to each element. Next, the result of these function calls are concatenated to build new iterable that is then applied to the second function and so on, till the last function.</p>
+<p>For example &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; def filter_scrapy(x): 
+   return None if x == 'scrapy' else x  
+
+&gt;&gt;&gt; from scrapy.loader.processors import MapCompose 
+&gt;&gt;&gt; proc = MapCompose(filter_scrapy, unicode.upper) 
+&gt;&gt;&gt; proc([u'hi', u'everyone', u'im', u'pythonscrapy']) 
+[u'HI, u'IM', u'PYTHONSCRAPY'] 
+</pre>
+<h3>class scrapy.loader.processors.SelectJmes(json_path)</h3>
+<p>This class queries the value using the provided json path and returns the output.</p>
+<p>For example &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; from scrapy.loader.processors import SelectJmes, Compose, MapCompose
+&gt;&gt;&gt; proc = SelectJmes("hello")
+&gt;&gt;&gt; proc({'hello': 'scrapy'})
+'scrapy'
+&gt;&gt;&gt; proc({'hello': {'scrapy': 'world'}})
+{'scrapy': 'world'}
+</pre>
+<p>Following is the code, which queries the value by importing json &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; import json
+&gt;&gt;&gt; proc_single_json_str = Compose(json.loads, SelectJmes("hello"))
+&gt;&gt;&gt; proc_single_json_str('{"hello": "scrapy"}')
+u'scrapy'
+&gt;&gt;&gt; proc_json_list = Compose(json.loads, MapCompose(SelectJmes('hello')))
+&gt;&gt;&gt; proc_json_list('[{"hello":"scrapy"}, {"world":"env"}]')
+[u'scrapy']
+</pre>
+<h1>Scrapy - Shell</h1>
+<h3>Description</h3>
+<p>Scrapy shell can be used to scrap the data with error free code, without the use of spider. The main purpose of Scrapy shell is to test the extracted code, XPath, or CSS expressions. It also helps specify the web pages from which you are scraping the data.</p>
+<h2>Configuring the Shell</h2>
+<p>The shell can be configured by installing the <a href="https://ipython.org/" rel="nofollow" target="_blank">IPython</a> (used for interactive computing) console, which is a powerful interactive shell that gives the auto completion, colorized output, etc.</p>
+<p>If you are working on the Unix platform, then it's better to install the IPython. You can also use <a href="https://www.bpython-interpreter.org/" rel="nofollow" target="_blank">bpython</a>, if IPython is inaccessible.</p>
+<p>You can configure the shell by setting the environment variable called SCRAPY_PYTHON_SHELL or by defining the scrapy.cfg file as follows &minus;</p>
+<pre class="result notranslate">
+[settings]
+shell = bpython
+</pre>
+<h2>Launching the Shell</h2>
+<p>Scrapy shell can be launched using the following command &minus;</p>
+<pre class="result notranslate">
+scrapy shell &lt;url&gt;
+</pre>
+<p>The <i>url</i> specifies the URL for which the data needs to be scraped.</p>
+<h2>Using the Shell</h2>
+<p>The shell provides some additional shortcuts and Scrapy objects as described in the following table &minus;</p>
+<h3>Available Shortcuts</h3>
+<p>Shell provides the following available shortcuts in the project &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Shortcut &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>shelp()</b></p>
+<p>It provides the available objects and shortcuts with the help option.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>fetch(request_or_url)</b></p>
+<p>It collects the response from the request or URL and associated objects will get updated properly.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>view(response)</b></p>
+<p>You can view the response for the given request in the local browser for observation and to display the external link correctly, it appends a base tag to the response body.</p>
+</td>
+</tr>
+</table>
+<h3>Available Scrapy Objects</h3>
+<p>Shell provides the following available Scrapy objects in the project &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Object &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>crawler</b></p>
+<p>It specifies the current crawler object.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>spider</b></p>
+<p>If there is no spider for present URL, then it will handle the URL or spider object by defining the new spider.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>request</b></p>
+<p>It specifies the request object for the last collected page.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>response</b></p>
+<p>It specifies the response object for the last collected page.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>settings</b></p>
+<p>It provides the current Scrapy settings.</p>
+</td>
+</tr>
+</table>
+<h3>Example of Shell Session</h3>
+<p>Let us try scraping scrapy.org site and then begin to scrap the data from reddit.com as described.</p>
+<p>Before moving ahead, first we will launch the shell as shown in the following command &minus;</p>
+<pre class="result notranslate">
+scrapy shell 'http://scrapy.org' --nolog
+</pre>
+<p>Scrapy will display the available objects while using the above URL &minus;</p>
+<pre class="result notranslate">
+[s] Available Scrapy objects:
+[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x1e16b50&gt;
+[s]   item       {}
+[s]   request    &lt;GET http://scrapy.org &gt;
+[s]   response   &lt;200 http://scrapy.org &gt;
+[s]   settings   &lt;scrapy.settings.Settings object at 0x2bfd650&gt;
+[s]   spider     &lt;Spider 'default' at 0x20c6f50&gt;
+[s] Useful shortcuts:
+[s]   shelp()           Provides available objects and shortcuts with help option
+[s]   fetch(req_or_url) Collects the response from the request or URL and associated 
+objects will get update
+[s]   view(response)    View the response for the given request
+</pre>
+<p>Next, begin with the working of objects, shown as follows &minus;</p>
+<pre class="result notranslate">
+&gt;&gt; response.xpath('//title/text()').extract_first() 
+u'Scrapy | A Fast and Powerful Scraping and Web Crawling Framework'  
+&gt;&gt; fetch("http://reddit.com") 
+[s] Available Scrapy objects: 
+[s]   crawler     
+[s]   item       {} 
+[s]   request     
+[s]   response   &lt;200 https://www.reddit.com/&gt; 
+[s]   settings    
+[s]   spider      
+[s] Useful shortcuts: 
+[s]   shelp()           Shell help (print this help) 
+[s]   fetch(req_or_url) Fetch request (or URL) and update local objects 
+[s]   view(response)    View response in a browser  
+&gt;&gt; response.xpath('//title/text()').extract() 
+[u'reddit: the front page of the internet']  
+&gt;&gt; request = request.replace(method="POST")  
+&gt;&gt; fetch(request) 
+[s] Available Scrapy objects: 
+[s]   crawler     
+... 
+</pre>
+<h2>Invoking the Shell from Spiders to Inspect Responses</h2>
+<p>You can inspect the responses which are processed from the spider, only if you are expecting to get that response.</p>
+<p>For instance &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy 
+
+class SpiderDemo(scrapy.Spider): 
+   name = "spiderdemo" 
+   start_urls = [ 
+      "http://mysite.com", 
+      "http://mysite1.org", 
+      "http://mysite2.net", 
+   ]  
+   
+   def parse(self, response): 
+      # You can inspect one specific response 
+      if ".net" in response.url: 
+         from scrapy.shell import inspect_response 
+         inspect_response(response, self)
+</pre>
+<p>As shown in the above code, you can invoke the shell from spiders to inspect the responses using the following function &minus;</p>
+<pre class="result notranslate">
+scrapy.shell.inspect_response
+</pre>
+<p>Now run the spider, and you will get the following screen &minus;</p>
+<pre class="result notranslate">
+2016-02-08 18:15:20-0400 [scrapy] DEBUG: Crawled (200)  (referer: None) 
+2016-02-08 18:15:20-0400 [scrapy] DEBUG: Crawled (200)  (referer: None) 
+2016-02-08 18:15:20-0400 [scrapy] DEBUG: Crawled (200)  (referer: None) 
+[s] Available Scrapy objects: 
+[s]   crawler     
+...  
+&gt;&gt; response.url 
+'http://mysite2.org' 
+</pre>
+<p>You can examine whether the extracted code is working using the following code &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt; response.xpath('//div[@class = "val"]')
+</pre>
+<p>It displays the output as</p>
+<pre class="result notranslate">
+[]
+</pre>
+<p>The above line has displayed only a blank output. Now you can invoke the shell to inspect the response as follows &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt; view(response)
+</pre>
+<p>It displays the response as</p>
+<pre class="result notranslate">
+True
+</pre>
+<h1>Scrapy - Item Pipeline</h1>
+<h3>Description</h3>
+<p><b>Item Pipeline</b> is a method where the scrapped items are processed. When an item is sent to the Item Pipeline, it is scraped by a spider and processed using several components, which are executed sequentially.</p>
+<p>Whenever an item is received, it decides either of the following action &minus;</p> 
+<ul class="list">
+<li>Keep processing the item.</li>
+<li>Drop it from pipeline.</li>
+<li>Stop processing the item.</li>
+</ul>
+<p>Item pipelines are generally used for the following purposes &minus;</p>   
+<ul class="list">
+<li>Storing scraped items in database.</li>
+<li>If the received item is repeated, then it will drop the repeated item.</li>
+<li>It will check whether the item is with targeted fields.</li>
+<li>Clearing HTML data.</li>
+</ul>
+<h2>Syntax</h2>
+<p>You can write the Item Pipeline using the following method &minus;</p>
+<pre class="result notranslate">
+process_item(self, item, spider) 
+</pre>
+<p>The above method contains following parameters &minus;</p> 
+<ul class="list">
+<li>Item (item object or dictionary) &minus; It specifies the scraped item.</li>
+<li>spider (spider object) &minus; The spider which scraped the item.</li>
+</ul>
+<p>You can use additional methods given in the following table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+<th style="text-align:center;">Parameters</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>open_spider(<i>self, spider</i>)</b></p>
+<p>It is selected when spider is opened.</p>
+</td>
+<td><p>spider (spider object) &minus; It refers to the spider which was opened.</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>close_spider(<i>self, spider</i>)</b></p>
+<p>It is selected when spider is closed.</p>
+</td>
+<td><p>spider (spider object) &minus; It refers to the spider which was closed.</p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>from_crawler(<i>cls, crawler</i>)</b></p>
+<p>With the help of crawler, the pipeline can access the core components such as signals and settings of Scrapy.</p>
+</td>
+<td><p>crawler (Crawler object) &minus; It refers to the crawler that uses this pipeline.</p></td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>Following are the examples of item pipeline used in different concepts.</p>
+<h3>Dropping Items with No Tag</h3>
+<p>In the following code, the pipeline balances the <i>(price)</i> attribute for those items that do not include VAT <i>(excludes_vat attribute)</i> and ignore those items which do not have a price tag &minus;</p>
+<pre class="prettyprint notranslate">
+from Scrapy.exceptions import DropItem  
+class PricePipeline(object): 
+   vat = 2.25 
+
+   def process_item(self, item, spider): 
+      if item['price']: 
+         if item['excludes_vat']: 
+            item['price'] = item['price'] * self.vat 
+            return item 
+         else: 
+            raise DropItem("Missing price in %s" % item) 
+</pre>
+<h3>Writing Items to a JSON File</h3>
+<p>The following code will store all the scraped items from all spiders into a single <b>items.jl</b> file, which contains one item per line in a serialized form in JSON format. The <b>JsonWriterPipeline</b> class is used in the code to show how to write item pipeline &minus;</p>
+<pre class="prettyprint notranslate">
+import json  
+
+class JsonWriterPipeline(object): 
+   def __init__(self): 
+      self.file = open('items.jl', 'wb') 
+
+   def process_item(self, item, spider): 
+      line = json.dumps(dict(item)) + "\n" 
+      self.file.write(line) 
+      return item
+</pre>
+<h3>Writing Items to MongoDB</h3>
+<p>You can specify the MongoDB address and database name in Scrapy settings and MongoDB collection can be named after the item class. The following code describes how to use <b>from_crawler()</b> method to collect the resources properly &minus;</p>
+<pre class="prettyprint notranslate">
+import pymongo  
+
+class MongoPipeline(object):  
+   collection_name = 'Scrapy_list' 
+
+   def __init__(self, mongo_uri, mongo_db): 
+      self.mongo_uri = mongo_uri 
+      self.mongo_db = mongo_db 
+
+   @classmethod 
+   def from_crawler(cls, crawler): 
+      return cls( 
+         mongo_uri = crawler.settings.get('MONGO_URI'), 
+         mongo_db = crawler.settings.get('MONGO_DB', 'lists') 
+      ) 
+  
+   def open_spider(self, spider): 
+      self.client = pymongo.MongoClient(self.mongo_uri) 
+      self.db = self.client[self.mongo_db] 
+
+   def close_spider(self, spider): 
+      self.client.close() 
+
+   def process_item(self, item, spider): 
+      self.db[self.collection_name].insert(dict(item)) 
+      return item
+</pre>
+<h3>Duplicating Filters</h3>
+<p>A filter will check for the repeated items and it will drop the already processed items. In the following code, we have used a unique id for our items, but spider returns many items with the same id &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.exceptions import DropItem  
+
+class DuplicatesPipeline(object):  
+   def __init__(self): 
+      self.ids_seen = set() 
+
+   def process_item(self, item, spider): 
+      if item['id'] in self.ids_seen: 
+         raise DropItem("Repeated items found: %s" % item) 
+      else: 
+         self.ids_seen.add(item['id']) 
+         return item
+</pre>
+<h3>Activating an Item Pipeline</h3>
+<p>You can activate an Item Pipeline component by adding its class to the <i>ITEM_PIPELINES</i> setting as shown in the following code. You can assign integer values to the classes in the order in which they run (the order can be lower valued to higher valued classes) and values will be in the 0-1000 range.</p>
+<pre class="prettyprint notranslate">
+ITEM_PIPELINES = {
+   'myproject.pipelines.PricePipeline': 100,
+   'myproject.pipelines.JsonWriterPipeline': 600,
+}
+</pre>
+<h1>Scrapy - Feed exports</h1>
+<h3>Description</h3>
+<p>Feed exports is a method of storing the data scraped from the sites, that is generating a <b>"export file"</b>.</p>
+<h2>Serialization Formats</h2>
+<p>Using multiple serialization formats and storage backends, Feed Exports use Item exporters and generates a feed with scraped items.</p>
+<p>The following table shows the supported formats&minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Format &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>JSON</b></p>
+<p>FEED_FORMAT is <i>json</i></p>
+<p>Exporter used is <i>class scrapy.exporters.JsonItemExporter</i></p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>JSON lines</b></p>
+<p>FEED_FROMAT is <i>jsonlines</i></p>
+<p>Exporter used is <i>class scrapy.exporters.JsonLinesItemExporter</i></p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>CSV</b></p>
+<p>FEED_FORMAT is <i>CSV</i></p>
+<p>Exporter used is <i>class scrapy.exporters.CsvItemExporter</i></p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>XML</b></p>
+<p>FEED_FORMAT is <i>xml</i></p>
+<p>Exporter used is <i>class scrapy.exporters.XmlItemExporter</i></p>
+</td>
+</tr>
+</table>
+<p>Using <b>FEED_EXPORTERS</b> settings, the supported formats can also be extended &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Format &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>Pickle</b></p>
+<p>FEED_FORMAT is pickel</p>
+<p>Exporter used is <i>class scrapy.exporters.PickleItemExporter</i></p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>Marshal</b></p>
+<p>FEED_FORMAT is marshal</p>
+<p>Exporter used is <i>class scrapy.exporters.MarshalItemExporter</i></p>
+</td>
+</tr>
+</table>
+<h2>Storage Backends</h2>
+<p>Storage backend defines where to store the feed using URI.</p>
+<p>Following table shows the supported storage backends &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Storage Backend &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>Local filesystem</b></p>
+<p>URI scheme is <i>file</i> and it is used to store the feeds.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>FTP</b></p>
+<p>URI scheme is <i>ftp</i> and it is used to store the feeds.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>S3</b></p>
+<p>URI scheme is <i>S3</i> and the feeds are stored on Amazon S3. External libraries <a href="https://github.com/boto/botocore" target="_blank" rel="nofollow">botocore</a> or <a href="https://github.com/boto/boto" target="_blank" rel="nofollow">boto</a> are required.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>Standard output</b></p>
+<p>URI scheme is <i>stdout</i> and the feeds are stored to the standard output.</p>
+</td>
+</tr>
+</table>
+<h2>Storage URI Parameters</h2>
+<p>Following are the parameters of storage URL, which gets replaced while the feed is being created &minus;</p>
+<ul class="list">
+<li>%(time)s: This parameter gets replaced by a timestamp.</li>
+<li>%(name)s: This parameter gets replaced by spider name.</li>
+</ul>
+<h2>Settings</h2>
+<p>Following table shows the settings using which Feed exports can be configured &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Setting &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>FEED_URI</b></p>
+<p>It is the URI of the export feed used to enable feed exports.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>FEED_FORMAT</b></p>
+<p>It is a serialization format used for the feed.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>FEED_EXPORT_FIELDS</b></p>
+<p>It is used for defining fields which needs to be exported.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>FEED_STORE_EMPTY</b></p>
+<p>It defines whether to export feeds with no items.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>FEED_STORAGES</b></p>
+<p>It is a dictionary with additional feed storage backends.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>FEED_STORAGES_BASE</b></p>
+<p>It is a dictionary with built-in feed storage backends.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>FEED_EXPORTERS</b></p>
+<p>It is a dictionary with additional feed exporters.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>FEED_EXPORTERS_BASE</b></p>
+<p>It is a dictionary with built-in feed exporters.</p>
+</td>
+</tr>
+</table>
+<h1>Scrapy - Requests and Responses</h1>
+<h3>Description</h3>
+<p>Scrapy can crawl websites using the <b>Request</b> and <b>Response</b> objects. The request objects pass over the system, uses the spiders to execute the request and get back to the request when it returns a response object.</p>
+<h2>Request Objects</h2>
+<p>The request object is a HTTP request that generates a response. It has the following class &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.http.Request(url[, callback, method = 'GET', headers, body, cookies, meta,
+   encoding = 'utf-8', priority = 0, dont_filter = False, errback])
+</pre>
+<p>Following table shows the parameters of Request objects &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>url</b></p>
+<p>It is a string that specifies the URL request.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>callback</b></p>
+<p>It is a callable function which uses the response of the request as first parameter.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>method</b></p>
+<p>It is a string that specifies the HTTP method request.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>headers</b></p>
+<p>It is a dictionary with request headers.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>body</b></p>
+<p>It is a string or unicode that has a request body.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>cookies</b></p>
+<p>It is a list containing request cookies.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>meta</b></p>
+<p>It is a dictionary that contains values for metadata of the request.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>encoding</b></p>
+<p>It is a string containing utf-8 encoding used to encode URL.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>priority</b></p>
+<p>It is an integer where the scheduler uses priority to define the order to process requests.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>dont_filter</b></p>
+<p>It is a boolean specifying that the scheduler should not filter the request.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>errback</b></p>
+<p>It is a callable function to be called when an exception while processing a request is raised.</p>
+</td>
+</tr>
+</table>
+<h3>Passing Additional Data to Callback Functions</h3>
+<p>The callback function of a request is called when the response is downloaded as its first parameter.</p>
+<p>For example &minus;</p>
+<pre class="prettyprint notranslate">
+def parse_page1(self, response): 
+   return scrapy.Request("http://www.something.com/some_page.html", 
+      callback = self.parse_page2)  
+
+def parse_page2(self, response): 
+   self.logger.info("%s page visited", response.url) 
+</pre>
+<p>You can use <b>Request.meta</b> attribute, if you want to pass arguments to callable functions and receive those arguments in the second callback as shown in the following example &minus;</p>
+<pre class="prettyprint notranslate">
+def parse_page1(self, response): 
+   item = DemoItem() 
+   item['foremost_link'] = response.url 
+   request = scrapy.Request("http://www.something.com/some_page.html", 
+      callback = self.parse_page2) 
+   request.meta['item'] = item 
+   return request  
+
+def parse_page2(self, response): 
+   item = response.meta['item'] 
+   item['other_link'] = response.url 
+   return item
+</pre>
+<h3>Using errbacks to Catch Exceptions in Request Processing</h3>
+<p>The errback is a callable function to be called when an exception while processing a request is raised.</p>
+<p>The following example demonstrates this &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy  
+
+from scrapy.spidermiddlewares.httperror import HttpError 
+from twisted.internet.error import DNSLookupError 
+from twisted.internet.error import TimeoutError, TCPTimedOutError  
+
+class DemoSpider(scrapy.Spider): 
+   name = "demo" 
+   start_urls = [ 
+      "http://www.httpbin.org/",              # HTTP 200 expected 
+      "http://www.httpbin.org/status/404",    # Webpage not found  
+      "http://www.httpbin.org/status/500",    # Internal server error 
+      "http://www.httpbin.org:12345/",        # timeout expected 
+      "http://www.httphttpbinbin.org/",       # DNS error expected 
+   ]  
+   
+   def start_requests(self): 
+      for u in self.start_urls: 
+         yield scrapy.Request(u, callback = self.parse_httpbin, 
+         errback = self.errback_httpbin, 
+         dont_filter=True)  
+   
+   def parse_httpbin(self, response): 
+      self.logger.info('Recieved response from {}'.format(response.url)) 
+      # ...  
+   
+   def errback_httpbin(self, failure): 
+      # logs failures 
+      self.logger.error(repr(failure))  
+      
+      if failure.check(HttpError): 
+         response = failure.value.response 
+         self.logger.error("HttpError occurred on %s", response.url)  
+      
+      elif failure.check(DNSLookupError): 
+         request = failure.request 
+         self.logger.error("DNSLookupError occurred on %s", request.url) 
+
+      elif failure.check(TimeoutError, TCPTimedOutError): 
+         request = failure.request 
+         self.logger.error("TimeoutError occurred on %s", request.url) 
+</pre>
+<h2>Request.meta Special Keys</h2>
+<p>The request.meta special keys is a list of special meta keys identified by Scrapy.</p>
+<p>Following table shows some of the keys of Request.meta &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Key &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>dont_redirect</b></p>
+<p>It is a key when set to true, does not redirect the request based on the status of the response.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>dont_retry</b></p>
+<p>It is a key when set to true, does not retry the failed requests and will be ignored by the middleware.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>handle_httpstatus_list</b></p>
+<p>It is a key that defines which response codes per-request basis can be allowed.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>handle_httpstatus_all</b></p>
+<p>It is a key used to allow any response code for a request by setting it to <i>true</i>.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>dont_merge_cookies</b></p>
+<p>It is a key used to avoid merging with the existing cookies by setting it to <i>true</i>.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>cookiejar</b></p>
+<p>It is a key used to keep multiple cookie sessions per spider.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>dont_cache</b></p>
+<p>It is a key used to avoid caching HTTP requests and response on each policy.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>redirect_urls</b></p>
+<p>It is a key which contains URLs through which the requests pass.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>bindaddress</b></p>
+<p>It is the IP of the outgoing IP address that can be used to perform the request.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>dont_obey_robotstxt</b></p>
+<p>It is a key when set to true, does not filter the requests prohibited by the robots.txt exclusion standard, even if ROBOTSTXT_OBEY is enabled.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>download_timeout</b></p>
+<p>It is used to set timeout (in secs) per spider for which the downloader will wait before it times out.</p>
+</td>
+</tr><tr>
+<td class="ts">12</td>
+<td><p><b>download_maxsize</b></p>
+<p>It is used to set maximum size (in bytes) per spider, which the downloader will download.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">13</td>
+<td><p><b>proxy</b></p>
+<p>Proxy can be set for Request objects to set HTTP proxy for the use of requests.</p>
+</td>
+</tr>
+</table>
+<h2>Request Subclasses</h2>
+<p>You can implement your own custom functionality by subclassing the request class. The built-in request subclasses are as follows &minus;</p>
+<h3>FormRequest Objects</h3>
+<p>The FormRequest class deals with HTML forms by extending the base request. It has the following class &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.http.FormRequest(url[,formdata, callback, method = 'GET', headers, body, 
+   cookies, meta, encoding = 'utf-8', priority = 0, dont_filter = False, errback])
+</pre>
+<p>Following is the parameter &minus;</p>
+<p><b>formdata</b> &minus; It is a dictionary having HTML form data that is assigned to the body of the request.</p>
+<p><b>Note</b> &minus; Remaining parameters are the same as request class and is explained in <b>Request Objects</b> section.</p>
+<p>The following class methods are supported by <b>FormRequest</b> objects in addition to request methods &minus;</p>
+<pre class="prettyprint notranslate">
+classmethod from_response(response[, formname = None, formnumber = 0, formdata = None, 
+   formxpath = None, formcss = None, clickdata = None, dont_click = False, ...])
+</pre>
+<p>The following table shows the parameters of the above class &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>response</b></p>
+<p>It is an object used to pre-populate the form fields using HTML form of response.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>formname</b></p>
+<p>It is a string where the form having name attribute will be used, if specified.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>formnumber</b></p>
+<p>It is an integer of forms to be used when there are multiple forms in the response.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>formdata</b></p>
+<p>It is a dictionary of fields in the form data used to override.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>formxpath</b></p>
+<p>It is a string when specified, the form matching the xpath is used.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>formcss</b></p>
+<p>It is a string when specified, the form matching the css selector is used.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>clickdata</b></p>
+<p>It is a dictionary of attributes used to observe the clicked control.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>dont_click</b></p>
+<p>The data from the form will be submitted without clicking any element, when set to true.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+<p>Following are some of the request usage examples &minus;</p>
+<p><b>Using FormRequest to send data via HTTP POST</b></p>
+<p>The following code demonstrates how to return FormRequest object when you want to duplicate HTML form POST in your spider &minus;</p>
+<pre class="prettyprint notranslate">
+return [FormRequest(url = "http://www.something.com/post/action", 
+   formdata = {'firstname': 'John', 'lastname': 'dave'}, 
+   callback = self.after_post)]
+</pre>
+<p><b>Using FormRequest.from_response() to simulate a user login</b></p>
+<p>Normally, websites use elements through which it provides pre-populated form fields. The <b>FormRequest.form_response()</b> method can be used when you want these fields to be automatically populate while scraping.</p> 
+<p>The following example demonstrates this.</p>
+<pre class="prettyprint notranslate">
+import scrapy  
+class DemoSpider(scrapy.Spider): 
+   name = 'demo' 
+   start_urls = ['http://www.something.com/users/login.php']  
+   def parse(self, response): 
+      return scrapy.FormRequest.from_response( 
+         response, 
+         formdata = {'username': 'admin', 'password': 'confidential'}, 
+         callback = self.after_login 
+      )  
+   
+   def after_login(self, response): 
+      if "authentication failed" in response.body: 
+         self.logger.error("Login failed") 
+         return  
+      # You can continue scraping here
+</pre>
+<h3>Response Objects</h3>
+<p>It is an object indicating HTTP response that is fed to the spiders to process. It has the following class &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.http.Response(url[, status = 200, headers, body, flags])
+</pre>
+<p>The following table shows the parameters of Response objects &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>url</b></p>
+<p>It is a string that specifies the URL response.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>status</b></p>
+<p>It is an integer that contains HTTP status response.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>headers</b></p>
+<p>It is a dictionary containing response headers.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>body</b></p>
+<p>It is a string with response body.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>flags</b></p>
+<p>It is a list containing flags of response.</p>
+</td>
+</tr>
+</table>
+<h3>Response Subclasses</h3>
+<p>You can implement your own custom functionality by subclassing the response class. The built-in response subclasses are as follows &minus;</p>
+<p><b>TextResponse objects</b></p>
+<p>TextResponse objects are used for binary data such as images, sounds, etc. which has the ability to encode the base Response class. It has the following class &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.http.TextResponse(url[, encoding[,status = 200, headers, body, flags]])
+</pre>
+<p><b>encoding</b> &minus; It is a string with encoding that is used to encode a response.</p>
+<p><b>Note</b> &minus; Remaining parameters are same as response class and is explained in <b>Response Objects</b> section.</p>
+<p>The following table shows the attributes supported by TextResponse object in addition to response methods &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Attribute &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>text</b></p>
+<p>It is a response body, where response.text can be accessed multiple times.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>encoding</b></p>
+<p>It is a string containing encoding for response.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>selector</b></p>
+<p>It is an attribute instantiated on first access and uses response as target.</p>
+</td>
+</tr>
+</table>
+<p>The following table shows the methods supported by <i>TextResponse</i> objects in addition to <i>response</i> methods &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>xpath (query)</b></p>
+<p>It is a shortcut to TextResponse.selector.xpath(query).</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>css (query)</b></p>
+<p>It is a shortcut to TextResponse.selector.css(query).</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>body_as_unicode()</b></p>
+<p>It is a response body available as a method, where response.text can be accessed multiple times.</p>
+</td>
+</tr>
+</table>
+<h3>HtmlResponse Objects</h3>
+<p>It is an object that supports encoding and auto-discovering by looking at the <i>meta httpequiv</i> attribute of HTML. Its parameters are the same as response class and is explained in Response objects section. It has the following class &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.http.HtmlResponse(url[,status = 200, headers, body, flags])
+</pre>
+<h3>XmlResponse Objects</h3>
+<p>It is an object that supports encoding and auto-discovering by looking at the XML line. Its parameters are the same as response class and is explained in Response objects section. It has the following class &minus;</p>
+<pre class="prettyprint notranslate">
+class scrapy.http.XmlResponse(url[, status = 200, headers, body, flags])
+</pre>
+<h1>Scrapy - Link Extractors</h1>
+<h3>Description</h3>
+<p>As the name itself indicates, Link Extractors are the objects that are used to extract links from web pages using <b>scrapy.http.Response</b> objects. In Scrapy, there are built-in extractors such as <b>scrapy.linkextractors</b> import <b>LinkExtractor</b>. You can customize your own link extractor according to your needs by implementing a simple interface.</p>
+<p>Every link extractor has a public method called <b>extract_links</b> which includes a Response object and returns a list of scrapy.link.Link objects. You can instantiate the link extractors only once and call the extract_links method various times to extract links with different responses. The CrawlSpiderclass uses link extractors with a set of rules whose main purpose is to extract links.</p>
+<h2>Built-in Link Extractor's Reference</h2>
+<p>Normally link extractors are grouped with Scrapy and are provided in scrapy.linkextractors module. By default, the link extractor will be LinkExtractor which is equal in functionality with LxmlLinkExtractor &minus;</p>
+<pre class="result notranslate">
+from scrapy.linkextractors import LinkExtractor
+</pre>
+<h3>LxmlLinkExtractor</h3>
+<pre class="prettyprint notranslate">
+class scrapy.linkextractors.lxmlhtml.LxmlLinkExtractor(allow = (), deny = (), 
+   allow_domains = (), deny_domains = (), deny_extensions = None, restrict_xpaths = (), 
+   restrict_css = (), tags = ('a', 'area'), attrs = ('href', ), 
+   canonicalize = True, unique = True, process_value = None)
+</pre>
+<p>The <i>LxmlLinkExtractor</i> is a highly recommended link extractor, because it has handy filtering options and it is used with lxml’s robust HTMLParser.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td style="vertical-align:middle;"><p><b>allow</b> (a regular expression (or list of))</p>
+<p>It allows a single expression or group of expressions that should match the url which is to be extracted. If it is not mentioned, it will match all the links.</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td style="vertical-align:middle;"><p><b>deny</b> (a regular expression (or list of))</p>
+<p>It blocks or excludes a single expression or group of expressions that should match the url which is not to be extracted. If it is not mentioned or left empty, then it will not eliminate the undesired links.</p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td style="vertical-align:middle;"><p><b>allow_domains</b> (str or list)</p>
+<p>It allows a single string or list of strings that should match the domains from which the links are to be extracted.</p></td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td style="vertical-align:middle;"><p><b>deny_domains</b> (str or list)</p>
+<p>It blocks or excludes a single string or list of strings that should match the domains from which the links are not to be extracted.</p></td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td style="vertical-align:middle;"><p><b>deny_extensions</b> (list)</p>
+<p>It blocks the list of strings with the extensions when extracting the links. If it is not set, then by default it will be set to <i>IGNORED_EXTENSIONS</i> which contains predefined list in <i>scrapy.linkextractors</i> package.</p></td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td style="vertical-align:middle;"><p><b>restrict_xpaths</b> (str or list)</p>
+<p>It is an XPath list region from where the links are to be extracted from the response. If given, the links will be extracted only from the text, which is selected by XPath.</p></td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td style="vertical-align:middle;"><p><b>restrict_css</b> (str or list)</p>
+<p>It behaves similar to restrict_xpaths parameter which will extract the links from the CSS selected regions inside the response.</p></td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td style="vertical-align:middle;"><p><b>tags</b> (str or list)</p>
+<p>A single tag or a list of tags that should be considered when extracting the links. By default, it will be (’a’, ’area’).</p></td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td style="vertical-align:middle;"><p><b>attrs</b> (list)</p>
+<p>A single attribute or list of attributes should be considered while extracting links. By default, it will be (’href’,).</p></td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td style="vertical-align:middle;"><p><b>canonicalize</b> (boolean)</p>
+<p>The extracted url is brought to standard form using <i>scrapy.utils.url.canonicalize_url</i>. By default, it will be True.</p></td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td style="vertical-align:middle;"><p><b>unique</b> (boolean)</p>
+<p>It will be used if the extracted links are repeated.</p></td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td style="vertical-align:middle;"><p><b>process_value</b> (callable)</p>
+<p>It is a function which receives a value from scanned tags and attributes. The value received may be altered and returned or else nothing will be returned to reject the link. If not used, by default it will be lambda x: x.</p></td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>The following code is used to extract the links &minus;</p>
+<pre class="prettyprint notranslate">
+&lt;a href = "javascript:goToPage('../other/page.html'); return false"&gt;Link text&lt;/a&gt;
+</pre>
+<p>The following code function can be used in process_value &minus;</p>
+<pre class="prettyprint notranslate">
+def process_value(val): 
+   m = re.search("javascript:goToPage\('(.*?)'", val) 
+   if m: 
+      return m.group(1) 
+</pre>
+<h1>Scrapy - Settings</h1>
+<h3>Description</h3>
+<p>The behavior of Scrapy components can be modified using Scrapy settings. The settings can also select the Scrapy project that is currently active, in case you have multiple Scrapy projects.</p>
+<h2>Designating the Settings</h2>
+<p>You must notify Scrapy which setting you are using when you scrap a website. For this, environment variable <b>SCRAPY_SETTINGS_MODULE</b> should be used and its value should be in Python path syntax.</p>
+<h2>Populating the Settings</h2>
+<p>The following table shows some of the mechanisms by which you can populate the settings &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Mechanism &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>Command line options</b></p>
+<p>Here, the arguments that are passed takes highest precedence by overriding other options. The -s is used to override one or more settings.</p>
+<pre class="prettyprint notranslate">
+scrapy crawl myspider -s LOG_FILE = scrapy.log
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>Settings per-spider</b></p>
+<p>Spiders can have their own settings that overrides the project ones by using attribute custom_settings.</p>
+<pre class="prettyprint notranslate">
+class DemoSpider(scrapy.Spider): 
+   name = 'demo'  
+   custom_settings = { 
+      'SOME_SETTING': 'some value', 
+   }
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>Project settings module</b></p>
+<p>Here, you can populate your custom settings such as adding or modifying the settings in the settings.py file.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>Default settings per-command</b></p>
+<p>Each Scrapy tool command defines its own settings in the default_settings attribute, to override the global default settings.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>Default global settings</b></p>
+<p>These settings are found in the scrapy.settings.default_settings module.</p>
+</td>
+</tr>
+</table>
+<h2>Access Settings</h2>
+<p>They are available through self.settings and set in the base spider after it is initialized.</p>
+<p>The following example demonstrates this.</p>
+<pre class="prettyprint notranslate">
+class DemoSpider(scrapy.Spider): 
+   name = 'demo' 
+   start_urls = ['http://example.com']  
+   def parse(self, response): 
+      print("Existing settings: %s" % self.settings.attributes.keys()) 
+</pre>
+<p>To use settings before initializing the spider, you must override <i>from_crawler</i> method in the <i>_init_()</i> method of your spider. You can access settings through attribute <i>scrapy.crawler.Crawler.settings</i> passed to <i>from_crawler</i> method.</p>
+<p>The following example demonstrates this.</p>
+<pre class="prettyprint notranslate">
+class MyExtension(object): 
+   def __init__(self, log_is_enabled = False): 
+      if log_is_enabled: 
+         print("Enabled log") 
+         @classmethod 
+   def from_crawler(cls, crawler): 
+      settings = crawler.settings 
+      return cls(settings.getbool('LOG_ENABLED')) 
+</pre>
+<h3>Rationale for Setting Names</h3>
+<p>Setting names are added as a prefix to the component they configure. For example, for robots.txt extension, the setting names can be ROBOTSTXT_ENABLED, ROBOTSTXT_OBEY, ROBOTSTXT_CACHEDIR, etc.</p>
+<h3>Built-in Settings Reference</h3>
+<p>The following table shows the built-in settings of Scrapy &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Setting &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>AWS_ACCESS_KEY_ID</b></p>
+<p>It is used to access Amazon Web Services.</p>
+<p>Default value: None</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>AWS_SECRET_ACCESS_KEY</b></p>
+<p>It is used to access Amazon Web Services.</p>
+<p>Default value: None</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>BOT_NAME</b></p>
+<p>It is the name of bot that can be used for constructing User-Agent.</p>
+<p>Default value: 'scrapybot'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>CONCURRENT_ITEMS</b></p>
+<p>Maximum number of existing items in the Item Processor used to process parallely.</p>
+<p>Default value: 100</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>CONCURRENT_REQUESTS</b></p>
+<p>Maximum number of existing requests which Scrapy downloader performs.</p>
+<p>Default value: 16</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>CONCURRENT_REQUESTS_PER_DOMAIN</b></p>
+<p>Maximum number of existing requests that perform simultaneously for any single domain.</p>
+<p>Default value: 8</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>CONCURRENT_REQUESTS_PER_IP</b></p>
+<p>Maximum number of existing requests that performs simultaneously to any single IP.</p>
+<p>Default value: 0</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>DEFAULT_ITEM_CLASS</b></p>
+<p>It is a class used to represent items.</p>
+<p>Default value: 'scrapy.item.Item'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>DEFAULT_REQUEST_HEADERS</b></p>
+<p>It is a default header used for HTTP requests of Scrapy.</p>
+<p>Default value &minus;</p>
+<pre class="prettyprint notranslate">
+{  
+   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en',  
+} 
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>DEPTH_LIMIT</b></p>
+<p>The maximum depth for a spider to crawl any site.</p>
+<p>Default value: 0</p>
+</td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>DEPTH_PRIORITY</b></p>
+<p>It is an integer used to alter the priority of request according to the depth.</p>
+<p>Default value: 0</p>
+</td>
+</tr>
+<tr>
+<td class="ts">12</td>
+<td><p><b>DEPTH_STATS</b></p>
+<p>It states whether to collect depth stats or not.</p>
+<p>Default value: True</p>
+</td>
+</tr>
+<tr>
+<td class="ts">13</td>
+<td><p><b>DEPTH_STATS_VERBOSE</b></p>
+<p>This setting when enabled, the number of requests is collected in stats for each verbose depth.</p>
+<p>Default value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">14</td>
+<td><p><b>DNSCACHE_ENABLED</b></p>
+<p>It is used to enable DNS in memory cache.</p>
+<p>Default value: True</p>
+</td>
+</tr>
+<tr>
+<td class="ts">15</td>
+<td><p><b>DNSCACHE_SIZE</b></p>
+<p>It defines the size of DNS in memory cache.</p>
+<p>Default value: 10000</p>
+</td>
+</tr>
+<tr>
+<td class="ts">16</td>
+<td><p><b>DNS_TIMEOUT</b></p>
+<p>It is used to set timeout for DNS to process the queries.</p>
+<p>Default value: 60</p>
+</td>
+</tr>
+<tr>
+<td class="ts">17</td>
+<td><p><b>DOWNLOADER</b></p>
+<p>It is a downloader used for the crawling process.</p>
+<p>Default value: 'scrapy.core.downloader.Downloader'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">18</td>
+<td><p><b>DOWNLOADER_MIDDLEWARES</b></p>
+<p>It is a dictionary holding downloader middleware and their orders.</p>
+<p>Default value: {}</p>
+</td>
+</tr>
+<tr>
+<td class="ts">19</td>
+<td><p><b>DOWNLOADER_MIDDLEWARES_BASE</b></p>
+<p>It is a dictionary holding downloader middleware that is enabled by default.</p>
+<p>Default value &minus;</p>
+<pre class="prettyprint notranslate">
+{ 'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware': 100, }
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">20</td>
+<td><p><b>DOWNLOADER_STATS</b></p>
+<p>This setting is used to enable the downloader stats.</p>
+<p>Default value: True</p>
+</td>
+</tr>
+<tr>
+<td class="ts">21</td>
+<td><p><b>DOWNLOAD_DELAY</b></p>
+<p>It defines the total time for downloader before it downloads the pages from the site.</p>
+<p>Default value: 0</p>
+</td>
+</tr>
+<tr>
+<td class="ts">22</td>
+<td><p><b>DOWNLOAD_HANDLERS</b></p>
+<p>It is a dictionary with download handlers.</p>
+<p>Default value: {}</p>
+</td>
+</tr>
+<tr>
+<td class="ts">23</td>
+<td><p><b>DOWNLOAD_HANDLERS_BASE</b></p>
+<p>It is a dictionary with download handlers that is enabled by default.</p>
+<p>Default value &minus;</p>
+<pre class="prettyprint notranslate">
+{ 'file': 'scrapy.core.downloader.handlers.file.FileDownloadHandler', }
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">24</td>
+<td><p><b>DOWNLOAD_TIMEOUT</b></p>
+<p>It is the total time for downloader to wait before it times out.</p>
+<p>Default value: 180</p>
+</td>
+</tr>
+<tr>
+<td class="ts">25</td>
+<td><p><b>DOWNLOAD_MAXSIZE</b></p>
+<p>It is the maximum size of response for the downloader to download.</p>
+<p>Default value: 1073741824 (1024MB)</p>
+</td>
+</tr>
+<tr>
+<td class="ts">26</td>
+<td><p><b>DOWNLOAD_WARNSIZE</b></p>
+<p>It defines the size of response for downloader to warn.</p>
+<p>Default value: 33554432 (32MB)</p>
+</td>
+</tr>
+<tr>
+<td class="ts">27</td>
+<td><p><b>DUPEFILTER_CLASS</b></p>
+<p>It is a class used for detecting and filtering of requests that are duplicate.</p>
+<p>Default value: 'scrapy.dupefilters.RFPDupeFilter'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">28</td>
+<td><p><b>DUPEFILTER_DEBUG</b></p>
+<p>This setting logs all duplicate filters when set to true.</p>
+<p>Default value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">29</td>
+<td><p><b>EDITOR</b></p>
+<p>It is used to edit spiders using the edit command.</p>
+<p>Default value: Depends on the environment</p>
+</td>
+</tr>
+<tr>
+<td class="ts">30</td>
+<td><p><b>EXTENSIONS</b></p>
+<p>It is a dictionary having extensions that are enabled in the project.</p>
+<p>Default value: {}</p>
+</td>
+</tr>
+<tr>
+<td class="ts">31</td>
+<td><p><b>EXTENSIONS_BASE</b></p>
+<p>It is a dictionary having built-in extensions.</p>
+<p>Default value: { 'scrapy.extensions.corestats.CoreStats': 0, }</p>
+</td>
+</tr>
+<tr>
+<td class="ts">32</td>
+<td><p><b>FEED_TEMPDIR</b></p>
+<p>It is a directory used to set the custom folder where crawler temporary files can be stored.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">33</td>
+<td><p><b>ITEM_PIPELINES</b></p>
+<p>It is a dictionary having pipelines.</p>
+<p>Default value: {}</p>
+</td>
+</tr>
+<tr>
+<td class="ts">34</td>
+<td><p><b>LOG_ENABLED</b></p>
+<p>It defines if the logging is to be enabled.</p>
+<p>Default value: True</p>
+</td>
+</tr>
+<tr>
+<td class="ts">35</td>
+<td><p><b>LOG_ENCODING</b></p>
+<p>It defines the type of encoding to be used for logging.</p>
+<p>Default value: 'utf-8'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">36</td>
+<td><p><b>LOG_FILE</b></p>
+<p>It is the name of the file to be used for the output of logging.</p>
+<p>Default value: None</p>
+</td>
+</tr>
+<tr>
+<td class="ts">37</td>
+<td><p><b>LOG_FORMAT</b></p>
+<p>It is a string using which the log messages can be formatted.</p>
+<p>Default value: '%(asctime)s [%(name)s] %(levelname)s: %(message)s'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">38</td>
+<td><p><b>LOG_DATEFORMAT</b></p>
+<p>It is a string using which date/time can be formatted.</p>
+<p>Default value: '%Y-%m-%d %H:%M:%S'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">39</td>
+<td><p><b>LOG_LEVEL</b></p>
+<p>It defines minimum log level.</p>
+<p>Default value: 'DEBUG'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">40</td>
+<td><p><b>LOG_STDOUT</b></p>
+<p>This setting if set to true, all your process output will appear in the log.</p>
+<p>Default value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">41</td>
+<td><p><b>MEMDEBUG_ENABLED</b></p>
+<p>It defines if the memory debugging is to be enabled.</p>
+<p>Default Value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">42</td>
+<td><p><b>MEMDEBUG_NOTIFY</b></p>
+<p>It defines the memory report that is sent to a particular address when memory debugging is enabled.</p>
+<p>Default value: []</p>
+</td>
+</tr>
+<tr>
+<td class="ts">43</td>
+<td><p><b>MEMUSAGE_ENABLED</b></p>
+<p>It defines if the memory usage is to be enabled when a Scrapy process exceeds a memory limit.</p>
+<p>Default value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">44</td>
+<td><p><b>MEMUSAGE_LIMIT_MB</b></p>
+<p>It defines the maximum limit for the memory (in megabytes) to be allowed.</p>
+<p>Default value: 0</p>
+</td>
+</tr>
+<tr>
+<td class="ts">45</td>
+<td><p><b>MEMUSAGE_CHECK_INTERVAL_SECONDS</b></p>
+<p>It is used to check the present memory usage by setting the length of the intervals.</p>
+<p>Default value: 60.0</p>
+</td>
+</tr>
+<tr>
+<td class="ts">46</td>
+<td><p><b>MEMUSAGE_NOTIFY_MAIL</b></p>
+<p>It is used to notify with a list of emails when the memory reaches the limit.</p>
+<p>Default value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">47</td>
+<td><p><b>MEMUSAGE_REPORT</b></p>
+<p>It defines if the memory usage report is to be sent on closing each spider.</p>
+<p>Default value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">48</td>
+<td><p><b>MEMUSAGE_WARNING_MB</b></p>
+<p>It defines a total memory to be allowed before a warning is sent.</p>
+<p>Default value: 0</p>
+</td>
+</tr>
+<tr>
+<td class="ts">49</td>
+<td><p><b>NEWSPIDER_MODULE</b></p>
+<p>It is a module where a new spider is created using genspider command.</p>
+<p>Default value: ''</p>
+</td>
+</tr>
+<tr>
+<td class="ts">50</td>
+<td><p><b>RANDOMIZE_DOWNLOAD_DELAY</b></p>
+<p>It defines a random amount of time for a Scrapy to wait while downloading the requests from the site.</p>
+<p>Default value: True</p>
+</td>
+</tr>
+<tr>
+<td class="ts">51</td>
+<td><p><b>REACTOR_THREADPOOL_MAXSIZE</b></p>
+<p>It defines a maximum size for the reactor threadpool.</p>
+<p>Default value: 10</p>
+</td>
+</tr>
+<tr>
+<td class="ts">52</td>
+<td><p><b>REDIRECT_MAX_TIMES</b></p>
+<p>It defines how many times a request can be redirected.</p>
+<p>Default value: 20</p>
+</td>
+</tr>
+<tr>
+<td class="ts">53</td>
+<td><p><b>REDIRECT_PRIORITY_ADJUST</b></p>
+<p>This setting when set, adjusts the redirect priority of a request.</p>
+<p>Default value: +2</p>
+</td>
+</tr>
+<tr>
+<td class="ts">54</td>
+<td><p><b>RETRY_PRIORITY_ADJUST</b></p>
+<p>This setting when set, adjusts the retry priority of a request.</p>
+<p>Default value: -1</p>
+</td>
+</tr>
+<tr>
+<td class="ts">55</td>
+<td><p><b>ROBOTSTXT_OBEY</b></p>
+<p>Scrapy obeys robots.txt policies when set to <i>true</i>.</p>
+<p>Default value: False</p>
+</td>
+</tr>
+<tr>
+<td class="ts">56</td>
+<td><p><b>SCHEDULER</b></p>
+<p>It defines the scheduler to be used for crawl purpose.</p>
+<p>Default value: 'scrapy.core.scheduler.Scheduler'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">57</td>
+<td><p><b>SPIDER_CONTRACTS</b></p>
+<p>It is a dictionary in the project having spider contracts to test the spiders.</p>
+<p>Default value: {}</p>
+</td>
+</tr>
+<tr>
+<td class="ts">58</td>
+<td><p><b>SPIDER_CONTRACTS_BASE</b></p>
+<p>It is a dictionary holding Scrapy contracts which is enabled in Scrapy by default.</p>
+<p>Default value &minus;</p>
+<pre class="prettyprint notranslate">
+{ 
+   'scrapy.contracts.default.UrlContract' : 1, 
+   'scrapy.contracts.default.ReturnsContract': 2, 
+} 
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">59</td>
+<td><p><b>SPIDER_LOADER_CLASS</b></p>
+<p>It defines a class which implements <i>SpiderLoader API</i> to load spiders.</p>
+<p>Default value: 'scrapy.spiderloader.SpiderLoader'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">60</td>
+<td><p><b>SPIDER_MIDDLEWARES</b></p>
+<p>It is a dictionary holding spider middlewares.</p>
+<p>Default value: {}</p>
+</td>
+</tr>
+<tr>
+<td class="ts">61</td>
+<td><p><b>SPIDER_MIDDLEWARES_BASE</b></p>
+<p>It is a dictionary holding spider middlewares that is enabled in Scrapy by default.</p>
+<p>Default value &minus;</p>
+<pre class="prettyprint notranslate">
+{ 
+   'scrapy.spidermiddlewares.httperror.HttpErrorMiddleware': 50, 
+}
+</pre>
+</td>
+</tr>
+<tr>
+<td class="ts">62</td>
+<td><p><b>SPIDER_MODULES</b></p>
+<p>It is a list of modules containing spiders which Scrapy will look for.</p>
+<p>Default value: []</p>
+</td>
+</tr>
+<tr>
+<td class="ts">63</td>
+<td><p><b>STATS_CLASS</b></p>
+<p>It is a class which implements <i>Stats Collector</i> API to collect stats.</p>
+<p>Default value: 'scrapy.statscollectors.MemoryStatsCollector'</p>
+</td>
+</tr>
+<tr>
+<td class="ts">64</td>
+<td><p><b>STATS_DUMP</b></p>
+<p>This setting when set to true, dumps the stats to the log.</p>
+<p>Default value: True</p>
+</td>
+</tr>
+<tr>
+<td class="ts">65</td>
+<td><p><b>STATSMAILER_RCPTS</b></p>
+<p>Once the spiders finish scraping, Scrapy uses this setting to send the stats.</p>
+<p>Default value: []</p>
+</td>
+</tr>
+<tr>
+<td class="ts">66</td>
+<td><p><b>TELNETCONSOLE_ENABLED</b></p>
+<p>It defines whether to enable the telnetconsole.</p>
+<p>Default value: True</p>
+</td>
+</tr>
+<tr>
+<td class="ts">67</td>
+<td><p><b>TELNETCONSOLE_PORT</b></p>
+<p>It defines a port for telnet console. </p>
+<p>Default value: [6023, 6073]</p>
+</td>
+</tr>
+<tr>
+<td class="ts">68</td>
+<td><p><b>TEMPLATES_DIR</b></p>
+<p>It is a directory containing templates that can be used while creating new projects.</p>
+<p>Default value: templates directory inside scrapy module</p>
+</td>
+</tr>
+<tr>
+<td class="ts">69</td>
+<td><p><b>URLLENGTH_LIMIT</b></p>
+<p>It defines the maximum limit of the length for URL to be allowed for crawled URLs.</p>
+<p>Default value: 2083</p>
+</td>
+</tr>
+<tr>
+<td class="ts">70</td>
+<td><p><b>USER_AGENT</b></p>
+<p>It defines the user agent to be used while crawling a site.</p>
+<p>Default value: "Scrapy/VERSION (+http://scrapy.org)"</p>
+</td>
+</tr>
+</table>
+<p>For other Scrapy settings, go to this <a href="https://www.tutorialspoint.com/scrapy/scrapy_other_settings.htm" rel="nofollow">link</a>.</p>
+<h1>Scrapy - Exceptions</h1>
+<h2>Description</h2>
+<p>The irregular events are referred to as exceptions. In Scrapy, exceptions are raised due to reasons such as missing configuration, dropping item from the item pipeline, etc. Following is the list of exceptions mentioned in Scrapy and their application.</p>
+<h2>DropItem</h2>
+<p>Item Pipeline utilizes this exception to stop processing of the item at any stage. It can be written as &minus;</p>
+<pre class="result notranslate">
+exception (scrapy.exceptions.DropItem)
+</pre>
+<h2>CloseSpider</h2>
+<p>This exception is used to stop the spider using the callback request. It can be written as &minus;</p>
+<pre class="result notranslate">
+exception (scrapy.exceptions.CloseSpider)(reason = 'cancelled')
+</pre>
+<p>It contains parameter called <i>reason (str)</i> which specifies the reason for closing.</p>
+<p>For instance, the following code shows this exception usage &minus;</p>
+<pre class="prettyprint notranslate">
+def parse_page(self, response): 
+   if 'Bandwidth exceeded' in response.body: 
+      raise CloseSpider('bandwidth_exceeded') 
+</pre>
+<h2>IgnoreRequest</h2>
+<p>This exception is used by scheduler or downloader middleware to ignore a request. It can be written as &minus;</p>
+<pre class="result notranslate">
+exception (scrapy.exceptions.IgnoreRequest)
+</pre>
+<h2>NotConfigured</h2>
+<p>It indicates a missing configuration situation and should be raised in a component constructor.</p>
+<pre class="result notranslate">
+exception (scrapy.exceptions.NotConfigured)
+</pre>
+<p>This exception can be raised, if any of the following components are disabled.</p>
+<ul class="list">
+<li>Extensions</li>
+<li>Item pipelines</li>
+<li>Downloader middlewares</li>
+<li>Spider middlewares </li>
+</ul>
+<h2>NotSupported</h2>
+<p>This exception is raised when any feature or method is not supported. It can be written as &minus;</p>
+<pre class="result notranslate">
+exception (scrapy.exceptions.NotSupported)
+</pre>
+<h1>Scrapy - Create a Project</h1>
+<h2>Description</h2>
+<p>To scrap the data from web pages, first you need to create the Scrapy project where you will be storing the code. To create a new directory, run the following command &minus;</p>
+<pre class="result notranslate">
+scrapy startproject first_scrapy
+</pre>
+<p>The above code will create a directory with name first_scrapy and it will contain the following structure &minus;</p>
+<pre class="result notranslate">
+first_scrapy/
+scrapy.cfg            # deploy configuration file
+first_scrapy/         # project's Python module, you'll import your code from here
+__init__.py
+items.py              # project items file
+pipelines.py          # project pipelines file
+settings.py           # project settings file
+spiders/              # a directory where you'll later put your spiders
+__init__.py
+</pre>
+<h1>Scrapy - Define an Item</h1>
+<h2>Description</h2>
+<p>Items are the containers used to collect the data that is scrapped from the websites. You must start your spider by defining your Item. To define items, edit <b>items.py</b> file found under directory <b>first_scrapy</b> (custom directory). The <i>items.py</i> looks like the following &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy  
+
+class First_scrapyItem(scrapy.Item): 
+   # define the fields for your item here like: 
+      # name = scrapy.Field()
+</pre>
+<p>The <i>MyItem</i> class inherits from <i>Item</i> containing a number of pre-defined objects that Scrapy has already built for us. For instance, if you want to extract the name, URL, and description from the sites, you need to define the fields for each of these three attributes.</p>
+<p>Hence, let's add those items that we want to collect &minus;</p>
+<pre class="prettyprint notranslate">
+from scrapy.item import Item, Field  
+
+class First_scrapyItem(scrapy.Item): 
+   name = scrapy.Field() 
+   url = scrapy.Field() 
+   desc = scrapy.Field() 
+</pre>
+<h1>Scrapy - First Spider</h1>
+<h2>Description</h2>
+<p>Spider is a class that defines initial URL to extract the data from, how to follow pagination links and how to extract and parse the fields defined in the <b>items.py</b>. Scrapy provides different types of spiders each of which gives a specific purpose.</p>
+<p>Create a file called <b>"first_spider.py"</b> under the first_scrapy/spiders directory, where we can tell Scrapy how to find the exact data we're looking for. For this, you must define some attributes</p>
+<ul class="list">
+<li><p><b>name</b> &minus; It defines the unique name for the spider.</p></li>
+<li><p><b>allowed_domains</b> &minus; It contains the base URLs for the spider to crawl.</p></li>
+<li><p><b>start-urls</b> &minus; A list of URLs from where the spider starts crawling.</p></li>
+<li><p><b>parse()</b> &minus; It is a method that extracts and parses the scraped data.</p></li>
+</ul>
+<p>The following code demonstrates how a spider code looks like &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy  
+
+class firstSpider(scrapy.Spider): 
+   name = "first" 
+   allowed_domains = ["dmoz.org"] 
+   
+   start_urls = [ 
+      "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/", 
+      "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" 
+   ]  
+   def parse(self, response): 
+      filename = response.url.split("/")[-2] + '.html' 
+      with open(filename, 'wb') as f: 
+         f.write(response.body)
+</pre>
+<h1>Scrapy - Crawling</h1>
+<h2>Description</h2>
+<p>To execute your spider, run the following command within your <i>first_scrapy</i> directory &minus;</p>
+<pre class="result notranslate">
+scrapy crawl first
+</pre>
+<p>Where, <b>first</b> is the name of the spider specified while creating the spider.</p>
+<p>Once the spider crawls, you can see the following output &minus;</p>
+<pre class="result notranslate">
+2016-08-09 18:13:07-0400 [scrapy] INFO: Scrapy started (bot: tutorial)
+2016-08-09 18:13:07-0400 [scrapy] INFO: Optional features available: ...
+2016-08-09 18:13:07-0400 [scrapy] INFO: Overridden settings: {}
+2016-08-09 18:13:07-0400 [scrapy] INFO: Enabled extensions: ...
+2016-08-09 18:13:07-0400 [scrapy] INFO: Enabled downloader middlewares: ...
+2016-08-09 18:13:07-0400 [scrapy] INFO: Enabled spider middlewares: ...
+2016-08-09 18:13:07-0400 [scrapy] INFO: Enabled item pipelines: ...
+2016-08-09 18:13:07-0400 [scrapy] INFO: Spider opened
+2016-08-09 18:13:08-0400 [scrapy] DEBUG: Crawled (200) 
+&lt;GET http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/&gt; (referer: None)
+2016-08-09 18:13:09-0400 [scrapy] DEBUG: Crawled (200) 
+&lt;GET http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt; (referer: None)
+2016-08-09 18:13:09-0400 [scrapy] INFO: Closing spider (finished)
+</pre>
+<p>As you can see in the output, for each URL there is a log line which <i>(referer: None)</i> states that the URLs are start URLs and they have no referrers. Next, you should see two new files named <i>Books.html</i> and <i>Resources.html</i> are created in your <i>first_scrapy</i> directory.</p>
+<h1>Scrapy - Extracting Items</h1>
+<h3>Description</h3>
+<p>For extracting data from web pages, Scrapy uses a technique called selectors based on <a href="https://www.w3.org/TR/xpath/" rel="nofollow" target="_blank">XPath</a> and <a href="https://www.w3.org/TR/selectors/" rel="nofollow" target="_blank">CSS</a> expressions. Following are some examples of XPath expressions &minus;</p>
+<ul class="list">
+<li><p><b>/html/head/title</b> &minus; This will select the &lt;title&gt; element, inside the &lt;head&gt; element of an HTML document.</p></li>
+<li><p><b>/html/head/title/text()</b> &minus; This will select the text within the same &lt;title&gt; element.</p></li>
+<li><p><b>//td</b> &minus; This will select all the elements from &lt;td&gt;.</p></li>
+<li><p><b>//div[@class = "slice"]</b> &minus; This will select all elements from <i>div</i> which contain an attribute class = "slice"</p></li>
+</ul>
+<p>Selectors have four basic methods as shown in the following table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>extract()</b></p>
+<p>It returns a unicode string along with the selected data.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>re()</b></p>
+<p>It returns a list of unicode strings, extracted when the regular expression was given as argument.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>xpath()</b></p>
+<p>It returns a list of selectors, which represents the nodes selected by the xpath expression given as an argument.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>css()</b></p>
+<p>It returns a list of selectors, which represents the nodes selected by the CSS expression given as an argument.</p>
+</td>
+</tr>
+</table>   
+<h2>Using Selectors in the Shell</h2>
+<p>To demonstrate the selectors with the built-in Scrapy shell, you need to have <a href="https://ipython.org/" rel="nofollow" target="_blank">IPython</a> installed in your system. The important thing here is, the URLs should be included within the quotes while running Scrapy; otherwise the URLs with '&amp;' characters won't work. You can start a shell by using the following command in the project's top level directory &minus;</p>
+<pre class="result notranslate">
+scrapy shell "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"
+</pre>
+<p>A shell will look like the following &minus;</p>
+<pre class="result notranslate">
+[ ... Scrapy log here ... ]
+
+2014-01-23 17:11:42-0400 [scrapy] DEBUG: Crawled (200) 
+&lt;GET http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;(referer: None)
+[s] Available Scrapy objects:
+[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x3636b50&gt;
+[s]   item       {}
+[s]   request    &lt;GET http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+[s]   response   &lt;200 http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+[s]   settings   &lt;scrapy.settings.Settings object at 0x3fadc50&gt;
+[s]   spider     &lt;Spider 'default' at 0x3cebf50&gt;
+[s] Useful shortcuts:
+[s]   shelp()           Shell help (print this help)
+[s]   fetch(req_or_url) Fetch request (or URL) and update local objects
+[s]   view(response)    View response in a browser
+
+In [1]:
+</pre>
+<p>When shell loads, you can access the body or header by using <i>response.body</i> and <i>response.header</i> respectively. Similarly, you can run queries on the response using <i>response.selector.xpath()</i> or <i>response.selector.css()</i>.</p>
+<p>For instance &minus;</p>
+<pre class="prettyprint notranslate">
+In [1]: response.xpath('//title')
+Out[1]: [&lt;Selector xpath = '//title' data = u'&lt;title&gt;My Book - Scrapy'&gt;]
+
+In [2]: response.xpath('//title').extract()
+Out[2]: [u'&lt;title&gt;My Book - Scrapy: Index: Chapters&lt;/title&gt;']
+
+In [3]: response.xpath('//title/text()')
+Out[3]: [&lt;Selector xpath = '//title/text()' data = u'My Book - Scrapy: Index:'&gt;]
+
+In [4]: response.xpath('//title/text()').extract()
+Out[4]: [u'My Book - Scrapy: Index: Chapters']
+
+In [5]: response.xpath('//title/text()').re('(\w+):')
+Out[5]: [u'Scrapy', u'Index', u'Chapters']
+</pre>
+<h2>Extracting the Data</h2>
+<p>To extract data from a normal HTML site, we have to inspect the source code of the site to get XPaths. After inspecting, you can see that the data will be in the <b>ul</b> tag. Select the elements within <b>li</b> tag.</p>
+<p>The following lines of code shows extraction of different types of data &minus;</p>
+<p>For selecting data within li tag &minus;</p>
+<pre class="prettyprint notranslate">
+response.xpath('//ul/li')
+</pre>
+<p>For selecting descriptions &minus;</p>
+<pre class="prettyprint notranslate">
+response.xpath('//ul/li/text()').extract()
+</pre>
+<p>For selecting site titles &minus;</p>
+<pre class="prettyprint notranslate">
+response.xpath('//ul/li/a/text()').extract()
+</pre>
+<p>For selecting site links &minus;</p>
+<pre class="prettyprint notranslate">
+response.xpath('//ul/li/a/@href').extract()
+</pre>
+<p>The following code demonstrates the use of above extractors &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy
+
+class MyprojectSpider(scrapy.Spider):
+   name = "project"
+   allowed_domains = ["dmoz.org"]
+   
+   start_urls = [
+      "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
+      "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
+   ]
+   def parse(self, response):
+      for sel in response.xpath('//ul/li'):
+         title = sel.xpath('a/text()').extract()
+         link = sel.xpath('a/@href').extract()
+         desc = sel.xpath('text()').extract()
+         print title, link, desc
+</pre>
+<h1>Scrapy - Using an Item</h1>
+<h2>Description</h2>
+<p><b>Item</b> objects are the regular dicts of Python. We can use the following syntax to access the attributes of the class &minus;</p>
+<pre class="prettyprint notranslate">
+&gt;&gt;&gt; item = DmozItem()
+&gt;&gt;&gt; item['title'] = 'sample title'
+&gt;&gt;&gt; item['title']
+'sample title'
+</pre>
+<p>Add the above code to the following example &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy
+
+from tutorial.items import DmozItem
+
+class MyprojectSpider(scrapy.Spider):
+   name = "project"
+   allowed_domains = ["dmoz.org"]
+   
+   start_urls = [
+      "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
+      "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
+   ]
+   def parse(self, response):
+      for sel in response.xpath('//ul/li'):
+         item = DmozItem()
+         item['title'] = sel.xpath('a/text()').extract()
+         item['link'] = sel.xpath('a/@href').extract()
+         item['desc'] = sel.xpath('text()').extract()
+         yield item
+</pre>
+<p>The output of the above spider will be &minus;</p>
+<pre class="result notranslate">
+[scrapy] DEBUG: Scraped from &lt;200 
+http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+   {'desc': [u' - By David Mertz; Addison Wesley. Book in progress, full text, 
+      ASCII format. Asks for feedback. [author website, Gnosis Software, Inc.\n],
+   'link': [u'http://gnosis.cx/TPiP/'],
+   'title': [u'Text Processing in Python']}
+[scrapy] DEBUG: Scraped from &lt;200 
+http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+   {'desc': [u' - By Sean McGrath; Prentice Hall PTR, 2000, ISBN 0130211192, 
+      has CD-ROM. Methods to build XML applications fast, Python tutorial, DOM and 
+      SAX, new Pyxie open source XML processing library. [Prentice Hall PTR]\n'],
+   'link': [u'http://www.informit.com/store/product.aspx?isbn=0130211192'],
+   'title': [u'XML Processing with Python']}
+</pre>
+<h1>Scrapy - Following Links</h1>
+<h2>Description</h2>
+<p>In this chapter, we'll study how to extract the links of the pages of our interest, follow them and extract data from that page. For this, we need to make the following changes in our <a href="https://www.tutorialspoint.com/scrapy/scrapy_using_item.htm" >previous code</a> shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy
+from tutorial.items import DmozItem
+
+class MyprojectSpider(scrapy.Spider):
+   name = "project"
+   allowed_domains = ["dmoz.org"]
+   
+   start_urls = [
+      "http://www.dmoz.org/Computers/Programming/Languages/Python/",
+   ]
+   def parse(self, response):
+      for href in response.css("ul.directory.dir-col &gt; li &gt; a::attr('href')"):
+         url = response.urljoin(href.extract())
+            yield scrapy.Request(url, callback = self.parse_dir_contents)
+
+   def parse_dir_contents(self, response):
+      for sel in response.xpath('//ul/li'):
+         item = DmozItem()
+         item['title'] = sel.xpath('a/text()').extract()
+         item['link'] = sel.xpath('a/@href').extract()
+         item['desc'] = sel.xpath('text()').extract()
+         yield item
+</pre>
+<p>The above code contains the following methods &minus;</p>
+<ul class="list">
+<li><p><b>parse()</b> &minus; It will extract the links of our interest.</p></li>
+<li><p><b>response.urljoin</b> &minus; The parse() method will use this method to build a new url and provide a new request, which will be sent later to callback.</p></li>
+<li><p><b>parse_dir_contents()</b> &minus; This is a callback which will actually scrape the data of interest.</p></li>
+</ul>
+<p>Here, Scrapy uses a callback mechanism to follow links. Using this mechanism, the bigger crawler can be designed and can follow links of interest to scrape the desired data from different pages. The regular method will be callback method, which will extract the items, look for links to follow the next page, and then provide a request for the same callback.</p>
+<p>The following example produces a loop, which will follow the links to the next page.</p>
+<pre class="prettyprint notranslate">
+def parse_articles_follow_next_page(self, response):
+   for article in response.xpath("//article"):
+      item = ArticleItem()
+    
+      ... extract article data here
+
+      yield item
+
+   next_page = response.css("ul.navigation &gt; li.next-page &gt; a::attr('href')")
+   if next_page:
+      url = response.urljoin(next_page[0].extract())
+      yield scrapy.Request(url, self.parse_articles_follow_next_page)
+</pre>
+<h1>Scrapy - Scraped Data</h1>
+<h2>Description</h2>
+<p>The best way to store scraped data is by using Feed exports, which makes sure that data is being stored properly using multiple serialization formats. JSON, JSON lines, CSV, XML are the formats supported readily in serialization formats. The data can be stored with the following command &minus;</p>
+<pre class="result notranslate">
+scrapy crawl dmoz -o data.json
+</pre>
+<p>This command will create a <b>data.json</b> file containing scraped data in JSON. This technique holds good for small amount of data. If large amount of data has to be handled, then we can use Item Pipeline. Just like data.json file, a reserved file is set up when the project is created in <b>tutorial/pipelines.py</b>.</p>
+<h1>Scrapy - Logging</h1>
+<h3>Description</h3>
+<p><b>Logging</b> means tracking of events, which uses built-in logging system and defines functions and classes to implement applications and libraries. Logging is a ready-to-use material, which can work with Scrapy settings listed in Logging settings. Scrapy will set some default settings and handle those settings with the help of scrapy.utils.log.configure_logging() when running commands.</p>
+<h2>Log levels</h2>
+<p>In Python, there are five different levels of severity on a log message. The following list shows the standard log messages in an ascending order &minus;</p>
+<ul class="list">
+<li><p><b>logging.DEBUG</b> &minus; for debugging messages (lowest severity)</p></li>
+<li><p><b>logging.INFO</b> &minus; for informational messages</p></li>
+<li><p><b>logging.WARNING</b> &minus; for warning messages</p></li>
+<li><p><b>logging.ERROR</b> &minus; for regular errors</p></li>
+<li><p><b>logging.CRITICAL</b> &minus; for critical errors (highest severity)</p></li>
+</ul>
+<h2>How to Log Messages</h2>
+<p>The following code shows logging a message using <b>logging.info</b> level.</p>
+<pre class="prettyprint notranslate">
+import logging 
+logging.info("This is an information")
+</pre>
+<p>The above logging message can be passed as an argument using <b>logging.log</b> shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+import logging 
+logging.log(logging.INFO, "This is an information")
+</pre>
+<p>Now, you can also use loggers to enclose the message using the logging helpers logging to get the logging message clearly shown as follows &minus;</p> 
+<pre class="prettyprint notranslate">
+import logging
+logger = logging.getLogger()
+logger.info("This is an information")
+</pre>
+<p>There can be multiple loggers and those can be accessed by getting their names with the use of <b>logging.getLogger</b> function shown as follows.</p>
+<pre class="prettyprint notranslate">
+import logging
+logger = logging.getLogger('mycustomlogger')
+logger.info("This is an information")
+</pre>
+<p>A customized logger can be used for any module using the <i>__name__</i> variable which contains the module path shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+import logging
+logger = logging.getLogger(__name__)
+logger.info("This is an information")
+</pre>
+<h2>Logging from Spiders</h2>
+<p>Every spider instance has a <b>logger</b> within it and can used as follows &minus;</p>
+<pre class="prettyprint notranslate">
+import scrapy 
+
+class LogSpider(scrapy.Spider):  
+   name = 'logspider' 
+   start_urls = ['http://dmoz.com']  
+   def parse(self, response): 
+      self.logger.info('Parse function called on %s', response.url)
+</pre>
+<p>In the above code, the logger is created using the Spider’s name, but you can use any customized logger provided by Python as shown in the following code &minus;</p>  
+<pre class="prettyprint notranslate">
+import logging
+import scrapy
+
+logger = logging.getLogger('customizedlogger')
+class LogSpider(scrapy.Spider):
+   name = 'logspider'
+   start_urls = ['http://dmoz.com']
+
+   def parse(self, response):
+      logger.info('Parse function called on %s', response.url)
+</pre>
+<h2>Logging Configuration</h2>
+<p>Loggers are not able to display messages sent by them on their own. So they require "handlers" for displaying those messages and handlers will be redirecting these messages to their respective destinations such as files, emails, and standard output.</p> 
+<p>Depending on the following settings, Scrapy will configure the handler for logger.</p>
+<h3>Logging Settings</h3>
+<p>The following settings are used to configure the logging &minus;</p>
+<ul class="list">
+<li><p>The <b>LOG_FILE</b> and <b>LOG_ENABLED</b> decide the destination for log messages.</p></li>
+<li><p>When you set the <b>LOG_ENCODING</b> to false, it won't display the log output messages.</p></li>
+<li><p>The <b>LOG_LEVEL</b> will determine the severity order of the message; those messages with less severity will be filtered out.</p></li>
+<li><p>The <b>LOG_FORMAT</b> and <b>LOG_DATEFORMAT</b> are used to specify the layouts for all messages.</p></li>
+<li><p>When you set the <b>LOG_STDOUT</b> to true, all the standard output and error messages of your process will be redirected to log.</p></li>
+</ul> 
+<h3>Command-line Options</h3>
+<p>Scrapy settings can be overridden by passing command-line arguments as shown in the following table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;width:5%">Sr.No</th>
+<th style="text-align:center;">Command &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>--logfile FILE</b></p>
+<p>Overrides <i>LOG_FILE</i></p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>--loglevel/-L LEVEL</b></p>
+<p>Overrides <i>LOG_LEVEL</i></p></td>
+</tr> 
+<tr>
+<td class="ts">3</td>
+<td><p><b>--nolog</b></p>
+<p>Sets <i>LOG_ENABLED</i> to False</p></td>
+</tr>
+</table>
+<h3>scrapy.utils.log module</h3>
+<p>This function can be used to initialize logging defaults for Scrapy.</p>
+<pre class="result notranslate">
+scrapy.utils.log.configure_logging(settings = None, install_root_handler = True)
+</pre>
+<p></p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>settings (dict, None)</b></p>
+<p>It creates and configures the handler for root logger. By default, it is <i>None</i>.</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>install_root_handler (bool)</b></p>
+<p>It specifies to install root logging handler. By default, it is <i>True</i>.</p></td>
+</tr>
+</table> 
+<p>The above function &minus;</p>
+<ul class="list">
+<li>Routes warnings and twisted loggings through Python standard logging.</li>
+<li>Assigns DEBUG to Scrapy and ERROR level to Twisted loggers.</li>
+<li>Routes stdout to log, if LOG_STDOUT setting is true.</li>
+</ul>
+<p>Default options can be overridden using the <b>settings</b> argument. When settings are not specified, then defaults are used. The handler can be created for root logger, when install_root_handler is set to true. If it is set to false, then there will not be any log output set. When using Scrapy commands, the configure_logging will be called automatically and it can run explicitly, while running the custom scripts.</p>
+<p>To configure logging's output manually, you can use <b>logging.basicConfig()</b> shown as follows &minus;</p>
+<pre class="prettyprint notranslate">
+import logging 
+from scrapy.utils.log import configure_logging  
+
+configure_logging(install_root_handler = False) 
+logging.basicConfig ( 
+   filename = 'logging.txt', 
+   format = '%(levelname)s: %(your_message)s', 
+   level = logging.INFO 
+)
+</pre>
+<h1>Scrapy - Stats Collection</h1>
+<h3>Description</h3>
+<p>Stats Collector is a facility provided by Scrapy to collect the stats in the form of key/values and it is accessed using the Crawler API (Crawler provides access to all Scrapy core components). The stats collector provides one stats table per spider in which the stats collector opens automatically when spider is opening and closes the stats collector when spider is closed.</p>
+<h2>Common Stats Collector Uses</h2>
+<p>The following code accesses the stats collector using <b>stats</b> attribute.</p>
+<pre class="prettyprint notranslate">
+class ExtensionThatAccessStats(object): 
+   def __init__(self, stats): 
+      self.stats = stats  
+   
+   @classmethod 
+   def from_crawler(cls, crawler): 
+      return cls(crawler.stats)
+</pre>
+<p>The following table shows various options can be used with stats collector &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameters</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td style="vertical-align:middle;">
+<pre class="prettyprint notranslate">
+stats.set_value('hostname', socket.gethostname())
+</pre>
+</td>
+<td style="vertical-align:middle;">It is used to set the stats value.</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td style="vertical-align:middle;">
+<pre class="prettyprint notranslate">
+stats.inc_value('customized_count')
+</pre>
+</td>
+<td style="vertical-align:middle;">It increments the stat value.</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td style="vertical-align:middle;">
+<pre class="prettyprint notranslate">
+stats.max_value('max_items_scraped', value)
+</pre>
+</td>
+<td style="vertical-align:middle;">You can set the stat value, only if greater than previous value.</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td style="vertical-align:middle;">
+<pre class="prettyprint notranslate">
+stats.min_value('min_free_memory_percent', value)
+</pre>
+</td>
+<td style="vertical-align:middle;">You can set the stat value, only if lower than previous value.</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td style="vertical-align:middle;">
+<pre class="prettyprint notranslate">
+stats.get_value('customized_count')
+</pre>
+</td>
+<td style="vertical-align:middle;">It fetches the stat value.</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td style="vertical-align:middle;">
+<pre class="prettyprint notranslate">
+stats.get_stats() {'custom_count': 1, 'start_time': datetime.datetime(2009, 7, 14, 21, 47, 28, 977139)} 
+</pre>
+</td>
+<td style="vertical-align:middle;">It fetches all the stats</td>
+</tr>
+</table>
+<h2>Available Stats Collectors</h2>
+<p>Scrapy provides different types of stats collector which can be accessed using the <b>STATS_CLASS</b> setting.</p>
+<h3>MemoryStatsCollector</h3>
+<p>It is the default Stats collector that maintains the stats of every spider which was used for scraping and the data will be stored in the memory.</p>
+<pre class="result notranslate">
+class scrapy.statscollectors.MemoryStatsCollector
+</pre>
+<h3>DummyStatsCollector</h3>
+<p>This stats collector is very efficient which does nothing. This can be set using the <i>STATS_CLASS</i> setting and can be used to disable the stats collection in order to improve the performance.</p>
+<pre class="result notranslate">
+class scrapy.statscollectors.DummyStatsCollector
+</pre>
+<h1>Scrapy - Sending an E-mail</h1>
+<h2>Description</h2>
+<p>Scrapy can send e-mails using its own facility called as <a href="https://twistedmatrix.com/documents/current/core/howto/defer-intro.html" rel="nofollow" target="_blank">Twisted non-blocking IO</a> which keeps away from non-blocking IO of the crawler. You can configure the few settings of sending emails and provide simple API for sending attachments.</p>
+<p>There are two ways to instantiate the MailSender as shown in the following table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameters</th>
+<th style="text-align:center;">Method</th>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">1</td>
+<td style="vertical-align:middle;">from scrapy.mail import MailSender mailer = MailSender()</td>
+<td style="vertical-align:middle;">By using a standard constructor.</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align:middle">2</td>
+<td style="vertical-align:middle;">mailer = MailSender.from_settings(settings)</td>
+<td style="vertical-align:middle;">By using Scrapy settings object.</td>
+</tr>
+</table>
+<p>The following line sends an e-mail without attachments &minus;</p>
+<pre class="prettyprint notranslate">
+mailer.send(to = ["receiver@example.com"], subject = "subject data", body = "body data", 
+   cc = ["list@example.com"])
+</pre>
+<h2>MailSender Class Reference</h2>
+<p>The MailSender class uses <a href="https://twistedmatrix.com/documents/current/core/howto/defer-intro.html" rel="nofollow" target="_blank">Twisted non-blocking IO</a> for sending e-mails from Scrapy.</p>
+<pre class="prettyprint notranslate">
+class scrapy.mail.MailSender(smtphost = None, mailfrom = None, smtpuser = None, 
+   smtppass = None, smtpport = None)
+</pre>
+<p>The following table shows the parameters used in <i>MailSender</i> class &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>smtphost (str)</b></p>
+<p>The SMTP host is used for sending the emails. If not, then <i>MAIL_HOST</i> setting will be used.</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>mailfrom (str)</b></p>
+<p>The address of receiver is used to send the emails. If not, then <i>MAIL_FROM</i> setting will be used.</p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>smtpuser</b></p>
+<p>It specifies the SMTP user. If it is not used, then <i>MAIL_USER</i> setting will be used and there will be no SMTP validation if is not mentioned.</p></td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>smtppass (str)</b></p>
+<p>It specifies the SMTP pass for validation.</p></td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>smtpport (int)</b></p>
+<p>It specifies the SMTP port for connection.</p></td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>smtptls (boolean)</b></p>
+<p>It implements using the SMTP STARTTLS.</p></td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>smtpssl (boolean)</b></p>
+<p>It administers using a safe SSL connection.</p></td>
+</tr>
+</table>
+<p>Following two methods are there in the MailSender class reference as specified. First method,</p>
+<pre class="prettyprint notranslate">
+classmethod from_settings(settings)
+</pre>
+<p>It incorporates by using the Scrapy settings object. It contains the following parameter &minus;</p>
+<p><b>settings (scrapy.settings.Settings object)</b> &minus; It is treated as e-mail receiver.</p>
+<p>Another method,</p>
+<pre class="prettyprint notranslate">
+send(to, subject, body, cc = None, attachs = (), mimetype = 'text/plain', charset = None)
+</pre>
+<p>The following table contains the parameters of the above method &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Parameter &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>to (list)</b></p>
+<p>It refers to the email receiver.</p></td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>subject (str)</b></p>
+<p>It specifies the subject of the email.</p></td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>cc (list)</b></p>
+<p>It refers to the list of receivers.</p></td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>body (str)</b></p>
+<p>It refers to email body data.</p></td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>attachs (iterable)</b></p>
+<p>It refers to the email's attachment, mimetype of the attachment and name of the attachment.</p></td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>mimetype (str)</b></p>
+<p>It represents the MIME type of the e-mail.</p></td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>charset (str)</b></p>
+<p>It specifies the character encoding used for email contents.</p></td>
+</tr>
+</table>
+<h2>Mail Settings</h2>
+<p>The following settings ensure that without writing any code, we can configure an e-mail using the MailSender class in the project.</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Settings &amp; Description</th>
+<th style="text-align:center;">Default Value</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>MAIL_FROM</b></p>
+<p>It refers to sender email for sending emails.</p>
+</td>
+<td class="ts">'scrapy@localhost'</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>MAIL_HOST</b></p>
+<p>It refers to SMTP host used for sending emails.</p>
+</td>
+<td class="ts">'localhost'</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>MAIL_PORT</b></p>
+<p>It specifies SMTP port to be used for sending emails.</p>
+</td>
+<td class="ts">25</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>MAIL_USER</b></p>
+<p>It refers to SMTP validation. There will be no validation, if this setting is set to disable.</p>
+</td>
+<td class="ts">None</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>MAIL_PASS</b></p>
+<p>It provides the password used for SMTP validation.</p>
+</td>
+<td class="ts">None</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>MAIL_TLS</b></p>
+<p>It provides the method of upgrading an insecure connection to a secure connection using SSL/TLS.</p>
+</td>
+<td class="ts">False</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>MAIL_SSL</b></p>
+<p>It implements the connection using a SSL encrypted connection.</p>
+</td>
+<td class="ts">False</td>
+</tr>
+</table>
+<h1>Scrapy - Telnet Console</h1>
+<h3>Description</h3>
+<p>Telnet console is a Python shell which runs inside Scrapy process and is used for inspecting and controlling a Scrapy running process.</p>
+<h2>Access Telnet Console</h2>
+<p>The telnet console can be accessed using the following command &minus;</p>
+<pre class="result notranslate">
+telnet localhost 6023
+</pre>
+<p>Basically, telnet console is listed in TCP port, which is described in <b>TELNETCONSOLE_PORT</b> settings.</p>
+<h2>Variables</h2>
+<p>Some of the default variables given in the following table are used as shortcuts &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">Sr.No</th>
+<th style="text-align:center;">Shortcut &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>crawler</b></p>
+<p>This refers to the Scrapy Crawler (scrapy.crawler.Crawler) object.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>engine</b></p>
+<p>This refers to Crawler.engine attribute.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>spider</b></p>
+<p>This refers to the spider which is active.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>slot</b></p>
+<p>This refers to the engine slot.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td><p><b>extensions</b></p>
+<p>This refers to the Extension Manager (Crawler.extensions) attribute.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td><p><b>stats</b></p>
+<p>This refers to the Stats Collector (Crawler.stats) attribute.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td><p><b>setting</b></p>
+<p>This refers to the Scrapy settings object (Crawler.settings) attribute.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td><p><b>est</b></p>
+<p>This refers to print a report of the engine status.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">9</td>
+<td><p><b>prefs</b></p>
+<p>This refers to the memory for debugging.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">10</td>
+<td><p><b>p</b></p>
+<p>This refers to a shortcut to the <a href="https://docs.python.org/3/library/pprint.html#pprint.pprint" rel="nofollow" target="_blank">pprint.pprint</a> function.</p>
+</td>
+</tr>
+<tr>
+<td class="ts">11</td>
+<td><p><b>hpy</b></p>
+<p>This refers to memory debugging.</p>
+</td>
+</tr>
+</table>
+<h2>Examples</h2>
+<p>Following are some examples illustrated using Telnet Console.</p>
+<h3>Pause, Resume and Stop the Scrapy Engine</h3>
+<p>To pause Scrapy engine, use the following command &minus;</p>
+<pre class="prettyprint notranslate">
+telnet localhost 6023
+&gt;&gt;&gt; engine.pause()
+&gt;&gt;&gt;
+</pre>
+<p>To resume Scrapy engine, use the following command &minus;</p>
+<pre class="prettyprint notranslate">
+telnet localhost 6023
+&gt;&gt;&gt; engine.unpause()
+&gt;&gt;&gt;
+</pre>
+<p>To stop Scrapy engine, use the following command &minus;</p>
+<pre class="prettyprint notranslate">
+telnet localhost 6023
+&gt;&gt;&gt; engine.stop()
+Connection closed by foreign host.
+</pre>
+<h3>View Engine Status</h3>
+<p>Telnet console uses <b>est()</b> method to check the status of Scrapy engine as shown in the following code &minus;</p>
+<pre class="prettyprint notranslate">
+telnet localhost 6023
+&gt;&gt;&gt; est()
+Execution engine status
+
+time()-engine.start_time                        : 8.62972998619
+engine.has_capacity()                           : False
+len(engine.downloader.active)                   : 16
+engine.scraper.is_idle()                        : False
+engine.spider.name                              : followall
+engine.spider_is_idle(engine.spider)            : False
+engine.slot.closing                             : False
+len(engine.slot.inprogress)                     : 16
+len(engine.slot.scheduler.dqs or [])            : 0
+len(engine.slot.scheduler.mqs)                  : 92
+len(engine.scraper.slot.queue)                  : 0
+len(engine.scraper.slot.active)                 : 0
+engine.scraper.slot.active_size                 : 0
+engine.scraper.slot.itemproc_size               : 0
+engine.scraper.slot.needs_backout()             : False
+</pre>
+<h2>Telnet Console Signals</h2>
+<p>You can use the telnet console signals to add, update, or delete the variables in the telnet local namespace. To perform this action, you need to add the telnet_vars dict in your handler.</p>
+<pre class="result notranslate">
+scrapy.extensions.telnet.update_telnet_vars(telnet_vars)
+</pre>
+<p>Parameters &minus;</p>
+<pre class="result notranslate">
+telnet_vars (dict)
+</pre>
+<p>Where, dict is a dictionary containing telnet variables.</p>
+<h2>Telnet Settings</h2>
+<p>The following table shows the settings that control the behavior of Telnet Console &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th class="ts">Sr.No</th>
+<th class="ts">Settings &amp; Description </th>
+<th class="ts">Default Value</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>TELNETCONSOLE_PORT</b></p>
+<p>This refers to port range for telnet console. If it is set to none, then the port will be dynamically assigned.</p>
+</td>
+<td style="vertical-align:middle;">[6023, 6073]</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>TELNETCONSOLE_HOST</b></p>
+<p>This refers to the interface on which the telnet console should listen.</p>
+</td>
+<td style="vertical-align:middle;">'127.0.0.1'</td>
+</tr>
+</table>
+<h1>Scrapy - Web Services</h1>
+<h2>Description</h2>
+<p>A running Scrapy web crawler can be controlled via <b>JSON-RPC</b>. It is enabled by JSONRPC_ENABLED setting. This service provides access to the main crawler object via <a href="http://www.jsonrpc.org/" rel="nofollow" target="_blank">JSON-RPC 2.0</a> protocol. The endpoint for accessing the crawler object is &minus;</p>
+<pre class="result notranslate">
+http://localhost:6080/crawler
+</pre>
+<p>The following table contains some of the settings which show the behavior of web service &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th class="ts">Sr.No</th>
+<th class="ts">Setting &amp; Description</th>
+<th class="ts">Default Value</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td><p><b>JSONRPC_ENABLED</b></p>
+<p>This refers to the boolean, which decides the web service along with its extension will be enabled or not.</p>
+</td>
+<td class="ts">True</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td><p><b>JSONRPC_LOGFILE</b></p>
+<p>This refers to the file used for logging HTTP requests made to the web service. If it is not set the standard Scrapy log will be used.</p>
+</td>
+<td class="ts">None</td>  
+</tr>
+<tr>
+<td class="ts">3</td>
+<td><p><b>JSONRPC_PORT</b></p>
+<p>This refers to the port range for the web service. If it is set to none, then the port will be dynamically assigned.</p>
+</td>
+<td class="ts">[6080, 7030]</td> 
+</tr>
+<tr>
+<td class="ts">4</td>
+<td><p><b>JSONRPC_HOST</b></p> 
+<p>This refers to the interface the web service should listen on.</p>
+</td>
+<td class="ts">'127.0.0.1'</td>  
+</tr>
+</table>
+<hr />
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/scrapy/scrapy_web_services.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/scrapy/scrapy_useful_resources.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="https://www.tutorialspoint.com/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="https://www.tutorialspoint.com/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_helping.htm">Helping</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/custom-min.js?v=4"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+</div>
+</body>
+
+<!-- Mirrored from www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 16 Aug 2017 18:34:41 GMT -->
+</html>
